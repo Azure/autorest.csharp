@@ -51,7 +51,8 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -125,7 +126,8 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "16",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -190,7 +192,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

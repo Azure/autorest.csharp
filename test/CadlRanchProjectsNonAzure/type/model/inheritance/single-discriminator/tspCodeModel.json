@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Bird",
    "Usage": "Input,Output,Json",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "3",
     "Name": "kind",
@@ -18,11 +19,13 @@
     "Description": "Discriminator",
     "Type": {
      "$id": "4",
-     "Kind": "string"
+     "Kind": "string",
+     "Decorators": []
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -35,10 +38,12 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ],
    "DiscriminatedSubtypes": {
@@ -51,6 +56,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "seagull",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -65,13 +71,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "seagull"
+        "Value": "seagull",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     },
@@ -83,6 +92,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "sparrow",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -97,13 +107,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "15",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "sparrow"
+        "Value": "sparrow",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     },
@@ -115,6 +128,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "goose",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -129,13 +143,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "goose"
+        "Value": "goose",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     },
@@ -147,6 +164,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
      "DiscriminatorValue": "eagle",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -161,13 +179,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "eagle"
+        "Value": "eagle",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       },
       {
        "$id": "24",
@@ -181,10 +202,12 @@
         "ValueType": {
          "$ref": "2"
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       },
       {
        "$id": "26",
@@ -196,14 +219,17 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       },
       {
        "$id": "29",
@@ -214,7 +240,8 @@
         "$ref": "2"
        },
        "IsRequired": false,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       }
      ]
     }
@@ -239,6 +266,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Dinosaur",
    "Usage": "Output,Json",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "31",
     "Name": "kind",
@@ -246,11 +274,13 @@
     "Description": "Discriminator property for Dinosaur.",
     "Type": {
      "$id": "32",
-     "Kind": "string"
+     "Kind": "string",
+     "Decorators": []
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -263,10 +293,12 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ],
    "DiscriminatedSubtypes": {
@@ -279,6 +311,7 @@
      "Usage": "Output,Json",
      "Description": "The second level legacy model in polymorphic single level inheritance.",
      "DiscriminatorValue": "t-rex",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "30"
      },
@@ -293,13 +326,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "39",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "t-rex"
+        "Value": "t-rex",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     }
@@ -845,7 +881,8 @@
     {
      "$ref": "42"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

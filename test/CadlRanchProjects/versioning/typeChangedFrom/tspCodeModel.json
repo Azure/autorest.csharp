@@ -13,25 +13,29 @@
    "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1",
      "Value": "v1",
-     "Description": "The version v1."
+     "Description": "The version v1.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "v2",
      "Value": "v2",
-     "Description": "The version v2."
+     "Description": "The version v2.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -41,6 +45,7 @@
    "Name": "TestModel",
    "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.TestModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "7",
@@ -49,10 +54,12 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "9",
@@ -61,10 +68,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -124,7 +133,8 @@
        "NameInRequest": "param",
        "Type": {
         "$id": "17",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -243,7 +253,8 @@
     {
      "$ref": "15"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -10,22 +10,26 @@
    "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "accepted",
-     "Value": "accepted"
+     "Value": "accepted",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "rejected",
-     "Value": "rejected"
+     "Value": "rejected",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -75,7 +79,8 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -97,8 +102,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "16",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -173,7 +180,8 @@
     {
      "$ref": "8"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

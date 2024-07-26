@@ -41,7 +41,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -68,9 +69,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "12",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -147,9 +150,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "20",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -227,9 +232,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -307,9 +314,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -387,9 +396,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -456,7 +467,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "50",
@@ -483,9 +495,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -552,7 +566,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

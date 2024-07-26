@@ -12,25 +12,29 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "First",
      "Value": "First",
-     "Description": "The first enum value."
+     "Description": "The first enum value.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Second",
      "Value": "Second",
-     "Description": "The second enum value."
+     "Description": "The second enum value.",
+     "Decorators": []
     }
    ],
    "Description": "An extensible enum input parameter.",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -39,19 +43,22 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -62,6 +69,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -70,10 +78,12 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "12",
@@ -82,10 +92,12 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "14",
@@ -103,6 +115,7 @@
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "Usage": "Input,Output,Json",
        "Description": "UserOrder for testing list with expand.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "17",
@@ -111,10 +124,12 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "18",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "19",
@@ -123,10 +138,12 @@
          "Description": "The user's id.",
          "Type": {
           "$id": "20",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "21",
@@ -135,17 +152,21 @@
          "Description": "The user's order detail",
          "Type": {
           "$id": "22",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "23",
@@ -155,10 +176,12 @@
      "Type": {
       "$id": "24",
       "Kind": "eTag",
-      "Encode": "string"
+      "Encode": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     }
    ]
   },
@@ -172,6 +195,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of User items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
@@ -185,10 +209,12 @@
       "ValueType": {
        "$ref": "9"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "28",
@@ -197,10 +223,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "29",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -211,6 +239,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
    "Usage": "Input,Json",
    "Description": "The body of the input.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "31",
@@ -219,10 +248,12 @@
      "Description": "The name of the input.",
      "Type": {
       "$id": "32",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -232,6 +263,7 @@
    "Name": "UserListResults",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "34",
@@ -245,10 +277,12 @@
       "ValueType": {
        "$ref": "9"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "36",
@@ -257,10 +291,12 @@
      "Description": "Link to fetch more items.",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -271,6 +307,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of FirstItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -288,6 +325,7 @@
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
        "Usage": "Output,Json",
        "Description": "First item.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "42",
@@ -296,17 +334,21 @@
          "Description": "The id of the item.",
          "Type": {
           "$id": "43",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "44",
@@ -315,10 +357,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "45",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -332,6 +376,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of SecondItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "47",
@@ -349,6 +394,7 @@
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
        "Usage": "Output,Json",
        "Description": "Second item.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "50",
@@ -357,17 +403,21 @@
          "Description": "The name of the item.",
          "Type": {
           "$id": "51",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "52",
@@ -376,10 +426,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "53",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -435,7 +487,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "61",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -462,7 +515,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "65",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -484,9 +538,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "68",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -610,7 +666,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "78",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -632,7 +689,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "80",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -774,7 +832,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "92",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -796,7 +855,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "94",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -877,7 +937,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "101",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -899,7 +960,8 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "103",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -918,7 +980,8 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "105",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -937,7 +1000,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "107",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -960,9 +1024,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "110",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -981,7 +1047,8 @@
        "Description": "Filter the result list using the given expression.",
        "Type": {
         "$id": "112",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1004,9 +1071,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "115",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1029,9 +1098,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "118",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1116,7 +1187,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "126",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1204,7 +1276,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "134",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1356,7 +1429,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "147",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1445,7 +1519,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "155",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1467,7 +1542,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "157",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1542,7 +1618,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "164",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1564,7 +1641,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "166",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1583,7 +1661,8 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "168",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1654,7 +1733,8 @@
     {
      "$ref": "56"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "174",
@@ -1678,7 +1758,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "177",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1766,7 +1847,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "185",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1846,7 +1928,8 @@
     {
      "$ref": "56"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -12,43 +12,50 @@
    "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "PT5S",
      "Value": "PT5S",
-     "Description": "5 seconds, available only if test run duration is less than 10 minutes"
+     "Description": "5 seconds, available only if test run duration is less than 10 minutes",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "PT10S",
      "Value": "PT10S",
-     "Description": "10 seconds, available only if test run duration is less than 10 minutes"
+     "Description": "10 seconds, available only if test run duration is less than 10 minutes",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "PT1M",
      "Value": "PT1M",
-     "Description": "1 minute"
+     "Description": "1 minute",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "PT5M",
      "Value": "PT5M",
-     "Description": "5 minutes, available only if test run duration is greater than 1 minute"
+     "Description": "5 minutes, available only if test run duration is greater than 1 minute",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "PT1H",
      "Value": "PT1H",
-     "Description": "1 hour, available only if test run duration is greater than 1 minute"
+     "Description": "1 hour, available only if test run duration is greater than 1 minute",
+     "Decorators": []
     }
    ],
    "Description": "The interval",
    "IsExtensible": true,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   },
   {
    "$id": "9",
@@ -57,17 +64,20 @@
    "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "11",
      "Name": "2022-05-13",
-     "Value": "2022-05-13"
+     "Value": "2022-05-13",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -78,6 +88,7 @@
    "CrossLanguageDefinitionId": "Pagination.ListLedgerEntryInputBody",
    "Usage": "Input,Json",
    "Description": "Type for input model body",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -86,10 +97,12 @@
      "Description": "Required string",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "15",
@@ -98,10 +111,12 @@
      "Description": "Required int",
      "Type": {
       "$id": "16",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -112,6 +127,7 @@
    "CrossLanguageDefinitionId": "Pagination.PagedLedgerEntries",
    "Usage": "Output,Json",
    "Description": "Paginated ledger entries",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -128,6 +144,7 @@
        "Name": "LedgerEntry",
        "CrossLanguageDefinitionId": "Pagination.LedgerEntry",
        "Usage": "Output,Json",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "21",
@@ -136,10 +153,12 @@
          "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "22",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "23",
@@ -148,10 +167,12 @@
          "Description": "",
          "Type": {
           "$id": "24",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "25",
@@ -160,17 +181,21 @@
          "Description": "",
          "Type": {
           "$id": "26",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -179,10 +204,12 @@
      "Description": "Path to retrieve next page of ledger entries",
      "Type": {
       "$id": "28",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -196,6 +223,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of DimensionValueListItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -212,6 +240,7 @@
        "Name": "DimensionValueListItem",
        "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
        "Usage": "Output,Json",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "33",
@@ -224,19 +253,24 @@
           "Name": "Array",
           "ValueType": {
            "$id": "35",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "36",
@@ -245,10 +279,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "37",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -262,6 +298,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of LedgerEntry items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -275,10 +312,12 @@
       "ValueType": {
        "$ref": "20"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "41",
@@ -287,10 +326,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "42",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -301,6 +342,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of TextBlocklist items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "44",
@@ -318,6 +360,7 @@
        "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
        "Usage": "Output,Json",
        "Description": "Text Blocklist.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "47",
@@ -326,10 +369,12 @@
          "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
          "Type": {
           "$id": "48",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "49",
@@ -338,17 +383,21 @@
          "Description": "Text blocklist description.",
          "Type": {
           "$id": "50",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "51",
@@ -357,10 +406,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "52",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -374,6 +425,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of TextBlockItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -391,6 +443,7 @@
        "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
        "Usage": "Output,Json",
        "Description": "Item in TextBlocklist.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "57",
@@ -399,10 +452,12 @@
          "Description": "Block Item Id. It will be uuid.",
          "Type": {
           "$id": "58",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "59",
@@ -411,10 +466,12 @@
          "Description": "Block item description.",
          "Type": {
           "$id": "60",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "61",
@@ -423,17 +480,21 @@
          "Description": "Block item content.",
          "Type": {
           "$id": "62",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "63",
@@ -442,10 +503,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "64",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -459,6 +522,7 @@
    "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
    "Usage": "Output,Json",
    "Description": "The result of listing the Pools in an Account.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -476,6 +540,7 @@
        "CrossLanguageDefinitionId": "Pagination.BatchPool",
        "Usage": "Output,Json",
        "Description": "A Pool in the Azure Batch service.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "69",
@@ -484,10 +549,12 @@
          "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
          "Type": {
           "$id": "70",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "71",
@@ -496,10 +563,12 @@
          "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
          "Type": {
           "$id": "72",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "73",
@@ -508,17 +577,21 @@
          "Description": "The URL of the Pool.",
          "Type": {
           "$id": "74",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "75",
@@ -527,10 +600,12 @@
      "Description": "The URL to get the next set of results.",
      "Type": {
       "$id": "76",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -544,6 +619,7 @@
    "CrossLanguageDefinitionId": "Pagination.BatchError",
    "Usage": "Output,Error,Json",
    "Description": "An error response received from the Azure Batch service.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "78",
@@ -552,10 +628,12 @@
      "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
       "$id": "79",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -599,7 +677,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "85",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -729,7 +808,8 @@
     {
      "$ref": "82"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "98",
@@ -754,7 +834,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "101",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -776,7 +857,8 @@
        "Description": "Unique test run name as identifier",
        "Type": {
         "$id": "103",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -795,7 +877,8 @@
        "Description": "Dimension name",
        "Type": {
         "$id": "105",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -832,7 +915,8 @@
        "Description": "Metric name",
        "Type": {
         "$id": "108",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -851,7 +935,8 @@
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
         "$id": "110",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -870,7 +955,8 @@
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
         "$id": "112",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -947,7 +1033,8 @@
     {
      "$ref": "82"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "119",
@@ -971,7 +1058,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "122",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1051,7 +1139,8 @@
     {
      "$ref": "82"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "129",
@@ -1076,7 +1165,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "132",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1165,7 +1255,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "140",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1187,7 +1278,8 @@
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
         "$id": "142",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1206,7 +1298,8 @@
        "Description": "The number of result items to return.",
        "Type": {
         "$id": "144",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1225,7 +1318,8 @@
        "Description": "The number of result items to skip.",
        "Type": {
         "$id": "146",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1244,7 +1338,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "148",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1321,7 +1416,8 @@
     {
      "$ref": "82"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "155",
@@ -1345,7 +1441,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "158",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1367,7 +1464,8 @@
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
         "$id": "160",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1390,9 +1488,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "163",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1416,9 +1516,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "166",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1496,7 +1598,8 @@
     {
      "$ref": "82"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ],
  "Auth": {

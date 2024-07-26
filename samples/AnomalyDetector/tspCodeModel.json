@@ -12,17 +12,20 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1_1",
-     "Value": "v1.1"
+     "Value": "v1.1",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -31,58 +34,69 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeGranularity",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "7",
      "Name": "Yearly",
-     "Value": "yearly"
+     "Value": "yearly",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Monthly",
-     "Value": "monthly"
+     "Value": "monthly",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Weekly",
-     "Value": "weekly"
+     "Value": "weekly",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Daily",
-     "Value": "daily"
+     "Value": "daily",
+     "Decorators": []
     },
     {
      "$id": "11",
      "Name": "Hourly",
-     "Value": "hourly"
+     "Value": "hourly",
+     "Decorators": []
     },
     {
      "$id": "12",
      "Name": "PerMinute",
-     "Value": "minutely"
+     "Value": "minutely",
+     "Decorators": []
     },
     {
      "$id": "13",
      "Name": "PerSecond",
-     "Value": "secondly"
+     "Value": "secondly",
+     "Decorators": []
     },
     {
      "$id": "14",
      "Name": "Microsecond",
-     "Value": "microsecond"
+     "Value": "microsecond",
+     "Decorators": []
     },
     {
      "$id": "15",
      "Name": "None",
-     "Value": "none"
+     "Value": "none",
+     "Decorators": []
     }
    ],
    "Description": "the time granularity of the data points.",
    "IsExtensible": false,
-   "Usage": "Input,Json"
+   "Usage": "Input,Json",
+   "Decorators": []
   },
   {
    "$id": "16",
@@ -91,43 +105,51 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.ImputeMode",
    "ValueType": {
     "$id": "17",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "18",
      "Name": "Auto",
-     "Value": "auto"
+     "Value": "auto",
+     "Decorators": []
     },
     {
      "$id": "19",
      "Name": "Previous",
-     "Value": "previous"
+     "Value": "previous",
+     "Decorators": []
     },
     {
      "$id": "20",
      "Name": "Linear",
-     "Value": "linear"
+     "Value": "linear",
+     "Decorators": []
     },
     {
      "$id": "21",
      "Name": "Fixed",
-     "Value": "fixed"
+     "Value": "fixed",
+     "Decorators": []
     },
     {
      "$id": "22",
      "Name": "Zero",
-     "Value": "zero"
+     "Value": "zero",
+     "Decorators": []
     },
     {
      "$id": "23",
      "Name": "NotFill",
-     "Value": "notFill"
+     "Value": "notFill",
+     "Decorators": []
     }
    ],
    "Description": "The impute mode.",
    "IsExtensible": true,
-   "Usage": "Input,Json"
+   "Usage": "Input,Json",
+   "Decorators": []
   },
   {
    "$id": "24",
@@ -136,33 +158,39 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionStatus",
    "ValueType": {
     "$id": "25",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "26",
      "Name": "Created",
-     "Value": "CREATED"
+     "Value": "CREATED",
+     "Decorators": []
     },
     {
      "$id": "27",
      "Name": "Running",
-     "Value": "RUNNING"
+     "Value": "RUNNING",
+     "Decorators": []
     },
     {
      "$id": "28",
      "Name": "Ready",
-     "Value": "READY"
+     "Value": "READY",
+     "Decorators": []
     },
     {
      "$id": "29",
      "Name": "Failed",
-     "Value": "FAILED"
+     "Value": "FAILED",
+     "Decorators": []
     }
    ],
    "Description": "The batch detection status.",
    "IsExtensible": false,
-   "Usage": "Output,Json"
+   "Usage": "Output,Json",
+   "Decorators": []
   },
   {
    "$id": "30",
@@ -171,25 +199,29 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DataSchema",
    "ValueType": {
     "$id": "31",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "32",
      "Name": "OneTable",
      "Value": "OneTable",
-     "Description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable."
+     "Description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.",
+     "Decorators": []
     },
     {
      "$id": "33",
      "Name": "MultiTable",
      "Value": "MultiTable",
-     "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
+     "Description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.",
+     "Decorators": []
     }
    ],
    "Description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "34",
@@ -198,23 +230,27 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignMode",
    "ValueType": {
     "$id": "35",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "36",
      "Name": "Inner",
-     "Value": "Inner"
+     "Value": "Inner",
+     "Decorators": []
     },
     {
      "$id": "37",
      "Name": "Outer",
-     "Value": "Outer"
+     "Value": "Outer",
+     "Decorators": []
     }
    ],
    "Description": "The alignment mode.",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "38",
@@ -223,38 +259,45 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.FillNAMethod",
    "ValueType": {
     "$id": "39",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "40",
      "Name": "Previous",
-     "Value": "Previous"
+     "Value": "Previous",
+     "Decorators": []
     },
     {
      "$id": "41",
      "Name": "Subsequent",
-     "Value": "Subsequent"
+     "Value": "Subsequent",
+     "Decorators": []
     },
     {
      "$id": "42",
      "Name": "Linear",
-     "Value": "Linear"
+     "Value": "Linear",
+     "Decorators": []
     },
     {
      "$id": "43",
      "Name": "Zero",
-     "Value": "Zero"
+     "Value": "Zero",
+     "Decorators": []
     },
     {
      "$id": "44",
      "Name": "Fixed",
-     "Value": "Fixed"
+     "Value": "Fixed",
+     "Decorators": []
     }
    ],
    "Description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "45",
@@ -263,33 +306,39 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelStatus",
    "ValueType": {
     "$id": "46",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "47",
      "Name": "Created",
-     "Value": "CREATED"
+     "Value": "CREATED",
+     "Decorators": []
     },
     {
      "$id": "48",
      "Name": "Running",
-     "Value": "RUNNING"
+     "Value": "RUNNING",
+     "Decorators": []
     },
     {
      "$id": "49",
      "Name": "Ready",
-     "Value": "READY"
+     "Value": "READY",
+     "Decorators": []
     },
     {
      "$id": "50",
      "Name": "Failed",
-     "Value": "FAILED"
+     "Value": "FAILED",
+     "Decorators": []
     }
    ],
    "Description": "the model status.",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "51",
@@ -298,67 +347,80 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorErrorCodes",
    "ValueType": {
     "$id": "52",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "53",
      "Name": "InvalidCustomInterval",
-     "Value": "InvalidCustomInterval"
+     "Value": "InvalidCustomInterval",
+     "Decorators": []
     },
     {
      "$id": "54",
      "Name": "BadArgument",
-     "Value": "BadArgument"
+     "Value": "BadArgument",
+     "Decorators": []
     },
     {
      "$id": "55",
      "Name": "InvalidGranularity",
-     "Value": "InvalidGranularity"
+     "Value": "InvalidGranularity",
+     "Decorators": []
     },
     {
      "$id": "56",
      "Name": "InvalidPeriod",
-     "Value": "InvalidPeriod"
+     "Value": "InvalidPeriod",
+     "Decorators": []
     },
     {
      "$id": "57",
      "Name": "InvalidModelArgument",
-     "Value": "InvalidModelArgument"
+     "Value": "InvalidModelArgument",
+     "Decorators": []
     },
     {
      "$id": "58",
      "Name": "InvalidSeries",
-     "Value": "InvalidSeries"
+     "Value": "InvalidSeries",
+     "Decorators": []
     },
     {
      "$id": "59",
      "Name": "InvalidJsonFormat",
-     "Value": "InvalidJsonFormat"
+     "Value": "InvalidJsonFormat",
+     "Decorators": []
     },
     {
      "$id": "60",
      "Name": "RequiredGranularity",
-     "Value": "RequiredGranularity"
+     "Value": "RequiredGranularity",
+     "Decorators": []
     },
     {
      "$id": "61",
      "Name": "RequiredSeries",
-     "Value": "RequiredSeries"
+     "Value": "RequiredSeries",
+     "Decorators": []
     },
     {
      "$id": "62",
      "Name": "InvalidImputeMode",
-     "Value": "InvalidImputeMode"
+     "Value": "InvalidImputeMode",
+     "Decorators": []
     },
     {
      "$id": "63",
      "Name": "InvalidImputeFixedValue",
-     "Value": "InvalidImputeFixedValue"
+     "Value": "InvalidImputeFixedValue",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Output,Json"
+   "Usage": "Output,Json",
+   "Decorators": []
   },
   {
    "$id": "64",
@@ -367,17 +429,20 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "ValueType": {
     "$id": "65",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "66",
      "Name": "v1_1",
-     "Value": "v1.1"
+     "Value": "v1.1",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -388,6 +453,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions",
    "Usage": "Input,Json",
    "Description": "The request of entire or last anomaly detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "68",
@@ -405,6 +471,7 @@
        "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint",
        "Usage": "Input,Json",
        "Description": "The definition of input timeseries points.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "71",
@@ -417,11 +484,14 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "73",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "74",
@@ -430,17 +500,21 @@
          "Description": "The measurement of that point, should be float.",
          "Type": {
           "$id": "75",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "76",
@@ -451,7 +525,8 @@
       "$ref": "5"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "77",
@@ -460,10 +535,12 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "78",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "79",
@@ -472,10 +549,12 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "80",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "81",
@@ -484,10 +563,12 @@
      "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
       "$id": "82",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "83",
@@ -496,10 +577,12 @@
      "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "84",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "85",
@@ -510,7 +593,8 @@
       "$ref": "16"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "86",
@@ -519,10 +603,12 @@
      "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "87",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -536,6 +622,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult",
    "Usage": "Output,Json",
    "Description": "The response of entire anomaly detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "89",
@@ -544,10 +631,12 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "90",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "91",
@@ -560,12 +649,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "93",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "94",
@@ -578,12 +670,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "96",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "97",
@@ -596,12 +691,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "99",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "100",
@@ -614,12 +712,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "102",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "103",
@@ -632,12 +733,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "105",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "106",
@@ -650,12 +754,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "108",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "109",
@@ -668,12 +775,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "111",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -684,6 +794,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult",
    "Usage": "Output,Json",
    "Description": "The response of last anomaly detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "113",
@@ -692,10 +803,12 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "114",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "115",
@@ -704,10 +817,12 @@
      "Description": "Suggested input series points needed for detecting the latest point.",
      "Type": {
       "$id": "116",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "117",
@@ -716,10 +831,12 @@
      "Description": "Expected value of the latest point.",
      "Type": {
       "$id": "118",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "119",
@@ -728,10 +845,12 @@
      "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "Type": {
       "$id": "120",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "121",
@@ -740,10 +859,12 @@
      "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "122",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "123",
@@ -752,10 +873,12 @@
      "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "Type": {
       "$id": "124",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "125",
@@ -764,10 +887,12 @@
      "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "Type": {
       "$id": "126",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "127",
@@ -776,10 +901,12 @@
      "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "Type": {
       "$id": "128",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "129",
@@ -788,10 +915,12 @@
      "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "130",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -802,6 +931,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions",
    "Usage": "Input,Json",
    "Description": "The request of change point detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "132",
@@ -815,10 +945,12 @@
       "ValueType": {
        "$ref": "70"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "134",
@@ -829,7 +961,8 @@
       "$ref": "5"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "135",
@@ -838,10 +971,12 @@
      "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "136",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "137",
@@ -850,10 +985,12 @@
      "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "138",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "139",
@@ -862,10 +999,12 @@
      "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
       "$id": "140",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "141",
@@ -874,10 +1013,12 @@
      "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
       "$id": "142",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -888,6 +1029,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult",
    "Usage": "Output,Json",
    "Description": "The response of change point detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "144",
@@ -896,10 +1038,12 @@
      "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "145",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "146",
@@ -912,12 +1056,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "148",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "149",
@@ -930,12 +1077,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "151",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -946,6 +1096,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult",
    "Usage": "Output,Json",
    "Description": "Detection results for the given resultId.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "153",
@@ -955,10 +1106,12 @@
      "Type": {
       "$id": "154",
       "Kind": "uuid",
-      "Encode": "string"
+      "Encode": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "155",
@@ -972,6 +1125,7 @@
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary",
       "Usage": "Output,Json",
       "Description": "Multivariate anomaly detection status.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "157",
@@ -982,7 +1136,8 @@
          "$ref": "24"
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "158",
@@ -1000,6 +1155,7 @@
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
           "Usage": "Output,Error,Json",
           "Description": "ErrorResponse contains code and message that shows the error information.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "161",
@@ -1008,10 +1164,12 @@
             "Description": "The error code.",
             "Type": {
              "$id": "162",
-             "Kind": "string"
+             "Kind": "string",
+             "Decorators": []
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "163",
@@ -1020,17 +1178,21 @@
             "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "164",
-             "Kind": "string"
+             "Kind": "string",
+             "Decorators": []
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            }
           ]
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "165",
@@ -1048,6 +1210,7 @@
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
           "Usage": "Input,Output,Json",
           "Description": "Variable Status.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "168",
@@ -1056,10 +1219,12 @@
             "Description": "Variable name in variable states.",
             "Type": {
              "$id": "169",
-             "Kind": "string"
+             "Kind": "string",
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "170",
@@ -1068,10 +1233,12 @@
             "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "Type": {
              "$id": "171",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "172",
@@ -1080,10 +1247,12 @@
             "Description": "Number of effective data points before applying fillNAMethod.",
             "Type": {
              "$id": "173",
-             "Kind": "int32"
+             "Kind": "int32",
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "174",
@@ -1096,11 +1265,14 @@
              "Encode": "rfc3339",
              "WireType": {
               "$id": "176",
-              "Kind": "string"
-             }
+              "Kind": "string",
+              "Decorators": []
+             },
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "177",
@@ -1113,18 +1285,23 @@
              "Encode": "rfc3339",
              "WireType": {
               "$id": "179",
-              "Kind": "string"
-             }
+              "Kind": "string",
+              "Decorators": []
+             },
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            }
           ]
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "180",
@@ -1138,6 +1315,7 @@
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
          "Usage": "Input,Output,Json",
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "182",
@@ -1146,10 +1324,12 @@
            "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "183",
-            "Kind": "url"
+            "Kind": "url",
+            "Decorators": []
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "184",
@@ -1158,10 +1338,12 @@
            "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
             "$id": "185",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "186",
@@ -1174,11 +1356,14 @@
             "Encode": "rfc3339",
             "WireType": {
              "$id": "188",
-             "Kind": "string"
-            }
+             "Kind": "string",
+             "Decorators": []
+            },
+            "Decorators": []
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "189",
@@ -1191,21 +1376,26 @@
             "Encode": "rfc3339",
             "WireType": {
              "$id": "191",
-             "Kind": "string"
-            }
+             "Kind": "string",
+             "Decorators": []
+            },
+            "Decorators": []
            },
            "IsRequired": true,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           }
          ]
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "192",
@@ -1223,6 +1413,7 @@
        "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState",
        "Usage": "Output,Json",
        "Description": "Anomaly status and information.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "195",
@@ -1235,11 +1426,14 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "197",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "198",
@@ -1253,6 +1447,7 @@
           "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue",
           "Usage": "Output,Json",
           "Description": "Detailed information of the anomalous timestamp.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "200",
@@ -1261,10 +1456,12 @@
             "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
              "$id": "201",
-             "Kind": "boolean"
+             "Kind": "boolean",
+             "Decorators": []
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "202",
@@ -1273,10 +1470,12 @@
             "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
              "$id": "203",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "204",
@@ -1285,10 +1484,12 @@
             "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
              "$id": "205",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
             "IsRequired": true,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            },
            {
             "$id": "206",
@@ -1306,6 +1507,7 @@
               "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation",
               "Usage": "Output,Json",
               "Description": "Interpretation of the anomalous timestamp.",
+              "Decorators": [],
               "Properties": [
                {
                 "$id": "209",
@@ -1314,10 +1516,12 @@
                 "Description": "Variable.",
                 "Type": {
                  "$id": "210",
-                 "Kind": "string"
+                 "Kind": "string",
+                 "Decorators": []
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "Decorators": []
                },
                {
                 "$id": "211",
@@ -1326,10 +1530,12 @@
                 "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
                  "$id": "212",
-                 "Kind": "float32"
+                 "Kind": "float32",
+                 "Decorators": []
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "Decorators": []
                },
                {
                 "$id": "213",
@@ -1343,6 +1549,7 @@
                  "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges",
                  "Usage": "Output,Json",
                  "Description": "Correlation changes among the anomalous variables",
+                 "Decorators": [],
                  "Properties": [
                   {
                    "$id": "215",
@@ -1355,29 +1562,36 @@
                     "Name": "Array",
                     "ValueType": {
                      "$id": "217",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Decorators": []
                     },
-                    "CrossLanguageDefinitionId": "TypeSpec.Array"
+                    "CrossLanguageDefinitionId": "TypeSpec.Array",
+                    "Decorators": []
                    },
                    "IsRequired": false,
-                   "IsReadOnly": false
+                   "IsReadOnly": false,
+                   "Decorators": []
                   }
                  ]
                 },
                 "IsRequired": false,
-                "IsReadOnly": false
+                "IsReadOnly": false,
+                "Decorators": []
                }
               ]
              },
-             "CrossLanguageDefinitionId": "TypeSpec.Array"
+             "CrossLanguageDefinitionId": "TypeSpec.Array",
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": false
+            "IsReadOnly": false,
+            "Decorators": []
            }
           ]
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "218",
@@ -1391,17 +1605,21 @@
           "ValueType": {
            "$ref": "160"
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          },
          "IsRequired": false,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1436,6 +1654,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
    "Usage": "Input,Output,Json",
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "221",
@@ -1444,10 +1663,12 @@
      "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
       "$id": "222",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "223",
@@ -1458,7 +1679,8 @@
       "$ref": "30"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "224",
@@ -1471,11 +1693,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "226",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "227",
@@ -1488,11 +1713,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "229",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "230",
@@ -1501,10 +1729,12 @@
      "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
       "$id": "231",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "232",
@@ -1513,10 +1743,12 @@
      "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
       "$id": "233",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "234",
@@ -1530,6 +1762,7 @@
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
       "Usage": "Input,Output,Json",
       "Description": "An optional field, indicating the manner to align multiple variables.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "236",
@@ -1540,7 +1773,8 @@
          "$ref": "34"
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "237",
@@ -1551,7 +1785,8 @@
          "$ref": "38"
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "238",
@@ -1560,15 +1795,18 @@
         "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
          "$id": "239",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "240",
@@ -1579,7 +1817,8 @@
       "$ref": "45"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "241",
@@ -1593,10 +1832,12 @@
       "ValueType": {
        "$ref": "160"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "243",
@@ -1610,6 +1851,7 @@
       "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
       "Usage": "Input,Output,Json",
       "Description": "Diagnostics information to help inspect the states of model or variable.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "245",
@@ -1623,6 +1865,7 @@
          "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
          "Usage": "Input,Output,Json",
          "Description": "Model status.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "247",
@@ -1635,12 +1878,15 @@
             "Name": "Array",
             "ValueType": {
              "$id": "249",
-             "Kind": "int32"
+             "Kind": "int32",
+             "Decorators": []
             },
-            "CrossLanguageDefinitionId": "TypeSpec.Array"
+            "CrossLanguageDefinitionId": "TypeSpec.Array",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "250",
@@ -1653,12 +1899,15 @@
             "Name": "Array",
             "ValueType": {
              "$id": "252",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
-            "CrossLanguageDefinitionId": "TypeSpec.Array"
+            "CrossLanguageDefinitionId": "TypeSpec.Array",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "253",
@@ -1671,12 +1920,15 @@
             "Name": "Array",
             "ValueType": {
              "$id": "255",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
-            "CrossLanguageDefinitionId": "TypeSpec.Array"
+            "CrossLanguageDefinitionId": "TypeSpec.Array",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "256",
@@ -1689,17 +1941,21 @@
             "Name": "Array",
             "ValueType": {
              "$id": "258",
-             "Kind": "float32"
+             "Kind": "float32",
+             "Decorators": []
             },
-            "CrossLanguageDefinitionId": "TypeSpec.Array"
+            "CrossLanguageDefinitionId": "TypeSpec.Array",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           }
          ]
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "259",
@@ -1713,15 +1969,18 @@
          "ValueType": {
           "$ref": "167"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1741,6 +2000,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel",
    "Usage": "Output,Json",
    "Description": "Response of getting a model.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "262",
@@ -1750,10 +2010,12 @@
      "Type": {
       "$id": "263",
       "Kind": "uuid",
-      "Encode": "string"
+      "Encode": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "264",
@@ -1766,11 +2028,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "266",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "267",
@@ -1783,11 +2048,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "269",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "270",
@@ -1798,7 +2066,8 @@
       "$ref": "220"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1809,6 +2078,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList",
    "Usage": "Output,Json",
    "Description": "Response of listing models.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "272",
@@ -1822,10 +2092,12 @@
       "ValueType": {
        "$ref": "261"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "274",
@@ -1834,10 +2106,12 @@
      "Description": "Number of trained multivariate models.",
      "Type": {
       "$id": "275",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "276",
@@ -1846,10 +2120,12 @@
      "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
       "$id": "277",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "278",
@@ -1858,10 +2134,12 @@
      "Description": "The link to fetch more models.",
      "Type": {
       "$id": "279",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1872,6 +2150,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions",
    "Usage": "Input,Json",
    "Description": "Request of last detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "281",
@@ -1889,6 +2168,7 @@
        "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues",
        "Usage": "Input,Json",
        "Description": "Variable values.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "284",
@@ -1897,10 +2177,12 @@
          "Description": "Variable name of last detection request.",
          "Type": {
           "$id": "285",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "286",
@@ -1913,12 +2195,15 @@
           "Name": "Array",
           "ValueType": {
            "$id": "288",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "289",
@@ -1931,19 +2216,24 @@
           "Name": "Array",
           "ValueType": {
            "$id": "291",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "292",
@@ -1952,10 +2242,12 @@
      "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
       "$id": "293",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1969,6 +2261,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult",
    "Usage": "Output,Json",
    "Description": "Results of last detection.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "295",
@@ -1982,10 +2275,12 @@
       "ValueType": {
        "$ref": "167"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "297",
@@ -1999,10 +2294,12 @@
       "ValueType": {
        "$ref": "194"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -2013,6 +2310,7 @@
    "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
    "Usage": "Output,Error,Json",
    "Description": "Error information returned by the API.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "300",
@@ -2023,7 +2321,8 @@
       "$ref": "51"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "301",
@@ -2032,10 +2331,12 @@
      "Description": "A message explaining the error reported by the service.",
      "Type": {
       "$id": "302",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -2095,7 +2396,8 @@
       "Value": "v1.1"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "310",
@@ -2447,7 +2749,8 @@
     {
      "$ref": "307"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "339",
@@ -2476,7 +2779,8 @@
        "Type": {
         "$id": "342",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2640,7 +2944,8 @@
          "Description": "Location and ID of the model.",
          "Type": {
           "$id": "357",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         }
        ],
@@ -2682,7 +2987,8 @@
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
         "$id": "360",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2701,7 +3007,8 @@
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
         "$id": "362",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -2790,7 +3097,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "370",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2868,7 +3176,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "377",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2952,7 +3261,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "384",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3051,7 +3361,8 @@
          "Description": "Id of the detection result.",
          "Type": {
           "$id": "394",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -3061,7 +3372,8 @@
          "Description": "Location of the detection result.",
          "Type": {
           "$id": "396",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         }
        ],
@@ -3103,7 +3415,8 @@
        "Description": "Model identifier.",
        "Type": {
         "$id": "399",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -3224,7 +3537,8 @@
     {
      "$ref": "307"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ],
  "Auth": {

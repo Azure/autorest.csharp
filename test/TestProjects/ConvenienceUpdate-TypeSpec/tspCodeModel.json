@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "Usage": "Input,Output,Json",
    "Description": "A model.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -104,7 +107,8 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "13",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -749,7 +753,8 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "72",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -825,7 +830,8 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "79",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1095,7 +1101,8 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "104",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1171,7 +1178,8 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "111",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1247,7 +1255,8 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "118",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1323,7 +1332,8 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "125",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1690,7 +1700,8 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "159",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1795,7 +1806,8 @@
    ],
    "Protocol": {
     "$id": "168"
-   }
+   },
+   "Decorators": []
   }
  ]
 }

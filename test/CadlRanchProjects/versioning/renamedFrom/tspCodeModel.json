@@ -13,25 +13,29 @@
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1",
      "Value": "v1",
-     "Description": "The version v1."
+     "Description": "The version v1.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "v2",
      "Value": "v2",
-     "Description": "The version v2."
+     "Description": "The version v2.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -40,17 +44,20 @@
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewEnum",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "newEnumMember",
-     "Value": "newEnumMember"
+     "Value": "newEnumMember",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -60,6 +67,7 @@
    "Name": "NewModel",
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -68,10 +76,12 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "12",
@@ -82,7 +92,8 @@
       "$ref": "6"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "13",
@@ -96,16 +107,20 @@
       "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        {
         "$id": "16",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        }
-      ]
+      ],
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -165,7 +180,8 @@
        "NameInRequest": "newQuery",
        "Type": {
         "$id": "23",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -284,7 +300,8 @@
     {
      "$ref": "21"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "33",
@@ -411,7 +428,8 @@
     {
      "$ref": "21"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

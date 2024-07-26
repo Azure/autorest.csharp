@@ -10,27 +10,32 @@
    "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "a",
-     "Value": "a"
+     "Value": "a",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "b",
-     "Value": "b"
+     "Value": "b",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "c",
-     "Value": "c"
+     "Value": "c",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "7",
@@ -39,22 +44,26 @@
    "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "8",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "9",
      "Name": "b",
-     "Value": "b"
+     "Value": "b",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "c",
-     "Value": "c"
+     "Value": "c",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -63,22 +72,26 @@
    "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamedUnion",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "13",
      "Name": "OptionB",
-     "Value": "b"
+     "Value": "b",
+     "Decorators": []
     },
     {
      "$id": "14",
      "Name": "c",
-     "Value": "c"
+     "Value": "c",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "15",
@@ -87,27 +100,32 @@
    "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "16",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "17",
      "Name": "1",
-     "Value": 1
+     "Value": 1,
+     "Decorators": []
     },
     {
      "$id": "18",
      "Name": "2",
-     "Value": 2
+     "Value": 2,
+     "Decorators": []
     },
     {
      "$id": "19",
      "Name": "3",
-     "Value": 3
+     "Value": 3,
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "20",
@@ -116,27 +134,32 @@
    "CrossLanguageDefinitionId": "get.Response.prop.anonymous",
    "ValueType": {
     "$id": "21",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "22",
      "Name": "1.1",
-     "Value": 1.1
+     "Value": 1.1,
+     "Decorators": []
     },
     {
      "$id": "23",
      "Name": "2.2",
-     "Value": 2.2
+     "Value": 2.2,
+     "Decorators": []
     },
     {
      "$id": "24",
      "Name": "3.3",
-     "Value": 3.3
+     "Value": 3.3,
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "25",
@@ -145,32 +168,38 @@
    "CrossLanguageDefinitionId": "EnumsOnlyCases.lr.anonymous",
    "ValueType": {
     "$id": "26",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "27",
      "Name": "left",
-     "Value": "left"
+     "Value": "left",
+     "Decorators": []
     },
     {
      "$id": "28",
      "Name": "right",
-     "Value": "right"
+     "Value": "right",
+     "Decorators": []
     },
     {
      "$id": "29",
      "Name": "up",
-     "Value": "up"
+     "Value": "up",
+     "Decorators": []
     },
     {
      "$id": "30",
      "Name": "down",
-     "Value": "down"
+     "Value": "down",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "31",
@@ -179,22 +208,26 @@
    "CrossLanguageDefinitionId": "EnumsOnlyCases.ud.anonymous",
    "ValueType": {
     "$id": "32",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "33",
      "Name": "up",
-     "Value": "up"
+     "Value": "up",
+     "Decorators": []
     },
     {
      "$id": "34",
      "Name": "down",
-     "Value": "down"
+     "Value": "down",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -204,6 +237,7 @@
    "Name": "GetResponse9",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -214,7 +248,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -224,6 +259,7 @@
    "Name": "SendRequest9",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -234,7 +270,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -244,6 +281,7 @@
    "Name": "GetResponse8",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "40",
@@ -254,7 +292,8 @@
       "$ref": "7"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -264,6 +303,7 @@
    "Name": "SendRequest8",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -274,7 +314,8 @@
       "$ref": "7"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -284,6 +325,7 @@
    "Name": "GetResponse7",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "44",
@@ -294,7 +336,8 @@
       "$ref": "11"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -304,6 +347,7 @@
    "Name": "SendRequest7",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "46",
@@ -314,7 +358,8 @@
       "$ref": "11"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -324,6 +369,7 @@
    "Name": "GetResponse6",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -334,7 +380,8 @@
       "$ref": "15"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -344,6 +391,7 @@
    "Name": "SendRequest6",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "50",
@@ -354,7 +402,8 @@
       "$ref": "15"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -364,6 +413,7 @@
    "Name": "GetResponse5",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "52",
@@ -374,7 +424,8 @@
       "$ref": "20"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -384,6 +435,7 @@
    "Name": "SendRequest5",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -394,7 +446,8 @@
       "$ref": "20"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -404,6 +457,7 @@
    "Name": "GetResponse4",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "56",
@@ -421,6 +475,7 @@
         "Name": "Cat",
         "CrossLanguageDefinitionId": "Type.Union.Cat",
         "Usage": "Input,Output,Json",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "59",
@@ -429,10 +484,12 @@
           "Description": "",
           "Type": {
            "$id": "60",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "IsRequired": true,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          }
         ]
        },
@@ -442,6 +499,7 @@
         "Name": "Dog",
         "CrossLanguageDefinitionId": "Type.Union.Dog",
         "Usage": "Input,Output,Json",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "62",
@@ -450,17 +508,21 @@
           "Description": "",
           "Type": {
            "$id": "63",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "IsRequired": true,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          }
         ]
        }
-      ]
+      ],
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -476,6 +538,7 @@
    "Name": "SendRequest4",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "65",
@@ -493,10 +556,12 @@
        {
         "$ref": "61"
        }
-      ]
+      ],
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -506,6 +571,7 @@
    "Name": "GetResponse3",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "68",
@@ -518,6 +584,7 @@
       "Name": "EnumsOnlyCases",
       "CrossLanguageDefinitionId": "Type.Union.EnumsOnlyCases",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "70",
@@ -528,7 +595,8 @@
          "$ref": "25"
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "71",
@@ -539,12 +607,14 @@
          "$ref": "31"
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -557,6 +627,7 @@
    "Name": "SendRequest3",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "73",
@@ -567,7 +638,8 @@
       "$ref": "69"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -577,6 +649,7 @@
    "Name": "GetResponse2",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "75",
@@ -589,6 +662,7 @@
       "Name": "StringAndArrayCases",
       "CrossLanguageDefinitionId": "Type.Union.StringAndArrayCases",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "77",
@@ -602,7 +676,8 @@
          "VariantTypes": [
           {
            "$id": "79",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           {
            "$id": "80",
@@ -610,14 +685,18 @@
            "Name": "Array",
            "ValueType": {
             "$id": "81",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "CrossLanguageDefinitionId": "TypeSpec.Array"
+           "CrossLanguageDefinitionId": "TypeSpec.Array",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "82",
@@ -631,7 +710,8 @@
          "VariantTypes": [
           {
            "$id": "84",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           {
            "$id": "85",
@@ -639,19 +719,24 @@
            "Name": "Array",
            "ValueType": {
             "$id": "86",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "CrossLanguageDefinitionId": "TypeSpec.Array"
+           "CrossLanguageDefinitionId": "TypeSpec.Array",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -664,6 +749,7 @@
    "Name": "SendRequest2",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "88",
@@ -674,7 +760,8 @@
       "$ref": "76"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -684,6 +771,7 @@
    "Name": "GetResponse1",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "90",
@@ -696,6 +784,7 @@
       "Name": "MixedLiteralsCases",
       "CrossLanguageDefinitionId": "Type.Union.MixedLiteralsCases",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "92",
@@ -712,41 +801,51 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "95",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "96",
            "Kind": "constant",
            "ValueType": {
             "$id": "97",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
-           "Value": 2
+           "Value": 2,
+           "Decorators": []
           },
           {
            "$id": "98",
            "Kind": "constant",
            "ValueType": {
             "$id": "99",
-            "Kind": "float32"
+            "Kind": "float32",
+            "Decorators": []
            },
-           "Value": 3.3
+           "Value": 3.3,
+           "Decorators": []
           },
           {
            "$id": "100",
            "Kind": "constant",
            "ValueType": {
             "$id": "101",
-            "Kind": "boolean"
+            "Kind": "boolean",
+            "Decorators": []
            },
-           "Value": true
+           "Value": true,
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "102",
@@ -763,41 +862,51 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "105",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "106",
            "Kind": "constant",
            "ValueType": {
             "$id": "107",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
-           "Value": 2
+           "Value": 2,
+           "Decorators": []
           },
           {
            "$id": "108",
            "Kind": "constant",
            "ValueType": {
             "$id": "109",
-            "Kind": "float32"
+            "Kind": "float32",
+            "Decorators": []
            },
-           "Value": 3.3
+           "Value": 3.3,
+           "Decorators": []
           },
           {
            "$id": "110",
            "Kind": "constant",
            "ValueType": {
             "$id": "111",
-            "Kind": "boolean"
+            "Kind": "boolean",
+            "Decorators": []
            },
-           "Value": true
+           "Value": true,
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "112",
@@ -814,41 +923,51 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "115",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "116",
            "Kind": "constant",
            "ValueType": {
             "$id": "117",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
-           "Value": 2
+           "Value": 2,
+           "Decorators": []
           },
           {
            "$id": "118",
            "Kind": "constant",
            "ValueType": {
             "$id": "119",
-            "Kind": "float32"
+            "Kind": "float32",
+            "Decorators": []
            },
-           "Value": 3.3
+           "Value": 3.3,
+           "Decorators": []
           },
           {
            "$id": "120",
            "Kind": "constant",
            "ValueType": {
             "$id": "121",
-            "Kind": "boolean"
+            "Kind": "boolean",
+            "Decorators": []
            },
-           "Value": true
+           "Value": true,
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "122",
@@ -865,46 +984,57 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "125",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "126",
            "Kind": "constant",
            "ValueType": {
             "$id": "127",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
-           "Value": 2
+           "Value": 2,
+           "Decorators": []
           },
           {
            "$id": "128",
            "Kind": "constant",
            "ValueType": {
             "$id": "129",
-            "Kind": "float32"
+            "Kind": "float32",
+            "Decorators": []
            },
-           "Value": 3.3
+           "Value": 3.3,
+           "Decorators": []
           },
           {
            "$id": "130",
            "Kind": "constant",
            "ValueType": {
             "$id": "131",
-            "Kind": "boolean"
+            "Kind": "boolean",
+            "Decorators": []
            },
-           "Value": true
+           "Value": true,
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -917,6 +1047,7 @@
    "Name": "SendRequest1",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "133",
@@ -927,7 +1058,8 @@
       "$ref": "91"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -937,6 +1069,7 @@
    "Name": "GetResponse",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "135",
@@ -949,6 +1082,7 @@
       "Name": "MixedTypesCases",
       "CrossLanguageDefinitionId": "Type.Union.MixedTypesCases",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "137",
@@ -968,22 +1102,28 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "140",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "141",
-           "Kind": "int32"
+           "Kind": "int32",
+           "Decorators": []
           },
           {
            "$id": "142",
-           "Kind": "boolean"
+           "Kind": "boolean",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "143",
@@ -1003,22 +1143,28 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "146",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "147",
-           "Kind": "int32"
+           "Kind": "int32",
+           "Decorators": []
           },
           {
            "$id": "148",
-           "Kind": "boolean"
+           "Kind": "boolean",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "149",
@@ -1038,22 +1184,28 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "152",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "153",
-           "Kind": "int32"
+           "Kind": "int32",
+           "Decorators": []
           },
           {
            "$id": "154",
-           "Kind": "boolean"
+           "Kind": "boolean",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "155",
@@ -1073,22 +1225,28 @@
            "Kind": "constant",
            "ValueType": {
             "$id": "158",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
-           "Value": "a"
+           "Value": "a",
+           "Decorators": []
           },
           {
            "$id": "159",
-           "Kind": "int32"
+           "Kind": "int32",
+           "Decorators": []
           },
           {
            "$id": "160",
-           "Kind": "boolean"
+           "Kind": "boolean",
+           "Decorators": []
           }
-         ]
+         ],
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "161",
@@ -1112,29 +1270,37 @@
             "Kind": "constant",
             "ValueType": {
              "$id": "165",
-             "Kind": "string"
+             "Kind": "string",
+             "Decorators": []
             },
-            "Value": "a"
+            "Value": "a",
+            "Decorators": []
            },
            {
             "$id": "166",
-            "Kind": "int32"
+            "Kind": "int32",
+            "Decorators": []
            },
            {
             "$id": "167",
-            "Kind": "boolean"
+            "Kind": "boolean",
+            "Decorators": []
            }
-          ]
+          ],
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1147,6 +1313,7 @@
    "Name": "SendRequest",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "169",
@@ -1157,7 +1324,8 @@
       "$ref": "136"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -1199,7 +1367,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "176",
@@ -1374,7 +1543,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "192",
@@ -1549,7 +1719,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "208",
@@ -1724,7 +1895,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "224",
@@ -1899,7 +2071,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "240",
@@ -2074,7 +2247,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "256",
@@ -2249,7 +2423,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "272",
@@ -2424,7 +2599,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "288",
@@ -2599,7 +2775,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "304",
@@ -2774,7 +2951,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "320",
@@ -2949,7 +3127,8 @@
     {
      "$ref": "172"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -9,7 +9,8 @@
    "Name": "WidgetData0_kind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -22,7 +23,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData0_kind",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -30,7 +32,8 @@
    "Name": "WidgetData1_kind",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -43,7 +46,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData1_kind",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -51,7 +55,8 @@
    "Name": "WidgetData2_kind",
    "ValueType": {
     "$id": "9",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -64,7 +69,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The WidgetData2_kind",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -75,9 +81,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<unknown> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "12",
-    "Kind": "any"
+    "Kind": "any",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -87,10 +95,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -101,6 +111,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a type that extends from Record<unknown>.",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "11"
    },
@@ -112,10 +123,12 @@
      "Description": "The index property",
      "Type": {
       "$id": "17",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "18",
@@ -124,10 +137,12 @@
      "Description": "The age property",
      "Type": {
       "$id": "19",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -138,9 +153,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDiscriminated",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<unknown> with a discriminator.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "21",
-    "Kind": "any"
+    "Kind": "any",
+    "Decorators": []
    },
    "DiscriminatorProperty": {
     "$id": "22",
@@ -149,11 +166,13 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "23",
-     "Kind": "string"
+     "Kind": "string",
+     "Decorators": []
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -163,10 +182,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$ref": "22"
@@ -182,6 +203,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The derived discriminated type",
      "DiscriminatorValue": "derived",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "20"
      },
@@ -196,13 +218,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "derived"
+        "Value": "derived",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       },
       {
        "$id": "31",
@@ -211,10 +236,12 @@
        "Description": "The index property",
        "Type": {
         "$id": "32",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "IsRequired": true,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       },
       {
        "$id": "33",
@@ -223,10 +250,12 @@
        "Description": "The age property",
        "Type": {
         "$id": "34",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       }
      ]
     }
@@ -242,9 +271,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model is from Record<unknown> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "36",
-    "Kind": "any"
+    "Kind": "any",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -254,10 +285,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "38",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -268,6 +301,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a type that is Record<unknown> type",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "35"
    },
@@ -279,10 +313,12 @@
      "Description": "The index property",
      "Type": {
       "$id": "41",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "42",
@@ -291,10 +327,12 @@
      "Description": "The age property",
      "Type": {
       "$id": "43",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -305,9 +343,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDiscriminated",
    "Usage": "Input,Output,Json",
    "Description": "The model is Record<unknown> with a discriminator.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "45",
-    "Kind": "any"
+    "Kind": "any",
+    "Decorators": []
    },
    "DiscriminatorProperty": {
     "$id": "46",
@@ -316,11 +356,13 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "47",
-     "Kind": "string"
+     "Kind": "string",
+     "Decorators": []
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -330,10 +372,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$ref": "46"
@@ -349,6 +393,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The derived discriminated type",
      "DiscriminatorValue": "derived",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "44"
      },
@@ -363,13 +408,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "derived"
+        "Value": "derived",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       },
       {
        "$id": "55",
@@ -378,10 +426,12 @@
        "Description": "The index property",
        "Type": {
         "$id": "56",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "IsRequired": true,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       },
       {
        "$id": "57",
@@ -390,10 +440,12 @@
        "Description": "The age property",
        "Type": {
         "$id": "58",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       }
      ]
     }
@@ -409,9 +461,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsStringAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<string> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "60",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -421,10 +475,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "62",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -435,9 +491,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsStringAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model is from Record<string> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "64",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -447,10 +505,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "66",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -461,9 +521,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadStringRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string> with the same known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "68",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -473,10 +535,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "70",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -487,9 +551,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloatAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<float32> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "72",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -499,10 +565,12 @@
      "Description": "The id property",
      "Type": {
       "$id": "74",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -513,9 +581,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloatAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model is from Record<float32> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "76",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -525,10 +595,12 @@
      "Description": "The id property",
      "Type": {
       "$id": "78",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -539,9 +611,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloatRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<float32> with the same known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "80",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -551,10 +625,12 @@
      "Description": "The id property",
      "Type": {
       "$id": "82",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -565,6 +641,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<ModelForRecord> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "84",
     "Kind": "model",
@@ -572,6 +649,7 @@
     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ModelForRecord",
     "Usage": "Input,Output,Json",
     "Description": "model for record",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "85",
@@ -580,10 +658,12 @@
       "Description": "The state property",
       "Type": {
        "$id": "86",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       },
       "IsRequired": true,
-      "IsReadOnly": false
+      "IsReadOnly": false,
+      "Decorators": []
      }
     ]
    },
@@ -597,7 +677,8 @@
       "$ref": "84"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -611,6 +692,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model is from Record<ModelForRecord> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$ref": "84"
    },
@@ -624,7 +706,8 @@
       "$ref": "84"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -635,6 +718,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<ModelForRecord> with the same known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$ref": "84"
    },
@@ -648,7 +732,8 @@
       "$ref": "84"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -659,6 +744,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArrayAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from Record<ModelForRecord[]> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "93",
     "Kind": "array",
@@ -666,7 +752,8 @@
     "ValueType": {
      "$ref": "84"
     },
-    "CrossLanguageDefinitionId": "TypeSpec.Array"
+    "CrossLanguageDefinitionId": "TypeSpec.Array",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -681,10 +768,12 @@
       "ValueType": {
        "$ref": "84"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -695,6 +784,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArrayAdditionalProperties",
    "Usage": "Input,Output,Json",
    "Description": "The model is from Record<ModelForRecord[]> type.",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "97",
     "Kind": "array",
@@ -702,7 +792,8 @@
     "ValueType": {
      "$ref": "84"
     },
-    "CrossLanguageDefinitionId": "TypeSpec.Array"
+    "CrossLanguageDefinitionId": "TypeSpec.Array",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -717,10 +808,12 @@
       "ValueType": {
        "$ref": "84"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -730,6 +823,7 @@
    "Name": "SpreadModelArrayRecord",
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArrayRecord",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "101",
     "Kind": "array",
@@ -737,7 +831,8 @@
     "ValueType": {
      "$ref": "84"
     },
-    "CrossLanguageDefinitionId": "TypeSpec.Array"
+    "CrossLanguageDefinitionId": "TypeSpec.Array",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -752,10 +847,12 @@
       "ValueType": {
        "$ref": "84"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -766,9 +863,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadStringRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string> with the different known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "105",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -778,10 +877,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "107",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -792,9 +893,11 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadFloatRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<float32> with the different known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "109",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -804,10 +907,12 @@
      "Description": "The id property",
      "Type": {
       "$id": "111",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -818,6 +923,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<ModelForRecord> with the different known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$ref": "84"
    },
@@ -829,10 +935,12 @@
      "Description": "",
      "Type": {
       "$id": "114",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -843,6 +951,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelArrayRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<ModelForRecord[]> with the different known property type",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "116",
     "Kind": "array",
@@ -850,7 +959,8 @@
     "ValueType": {
      "$ref": "84"
     },
-    "CrossLanguageDefinitionId": "TypeSpec.Array"
+    "CrossLanguageDefinitionId": "TypeSpec.Array",
+    "Decorators": []
    },
    "Properties": [
     {
@@ -860,10 +970,12 @@
      "Description": "",
      "Type": {
       "$id": "118",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -874,6 +986,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadStringDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<string> with the different known property type",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "104"
    },
@@ -885,10 +998,12 @@
      "Description": "The index property",
      "Type": {
       "$id": "121",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -899,6 +1014,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadFloatDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<float32> with the different known property type",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "108"
    },
@@ -910,10 +1026,12 @@
      "Description": "The index property",
      "Type": {
       "$id": "124",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -924,6 +1042,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<ModelForRecord> with the different known property type",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "112"
    },
@@ -937,7 +1056,8 @@
       "$ref": "84"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -948,6 +1068,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.DifferentSpreadModelArrayDerived",
    "Usage": "Input,Output,Json",
    "Description": "The model extends from a model that spread Record<ModelForRecord[]> with the different known property type",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "115"
    },
@@ -964,10 +1085,12 @@
       "ValueType": {
        "$ref": "84"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -978,6 +1101,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpreadRecord",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string> and Record<float32>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "131",
     "Kind": "union",
@@ -985,13 +1109,16 @@
     "VariantTypes": [
      {
       "$id": "132",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      {
       "$id": "133",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1001,10 +1128,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "135",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1015,6 +1144,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForUnion",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<string | float32>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "137",
     "Kind": "union",
@@ -1022,13 +1152,16 @@
     "VariantTypes": [
      {
       "$id": "138",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      {
       "$id": "139",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Decorators": []
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1038,10 +1171,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "141",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1052,6 +1187,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForDiscriminatedUnion",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "143",
     "Kind": "union",
@@ -1063,6 +1199,7 @@
       "Name": "WidgetData0",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData0",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "145",
@@ -1075,10 +1212,12 @@
          "ValueType": {
           "$ref": "2"
          },
-         "Value": "kind0"
+         "Value": "kind0",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "147",
@@ -1087,10 +1226,12 @@
         "Description": "",
         "Type": {
          "$id": "148",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
@@ -1100,6 +1241,7 @@
       "Name": "WidgetData1",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData1",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "150",
@@ -1112,10 +1254,12 @@
          "ValueType": {
           "$ref": "5"
          },
-         "Value": "kind1"
+         "Value": "kind1",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "152",
@@ -1128,11 +1272,14 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "154",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "155",
@@ -1145,15 +1292,19 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "157",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1163,10 +1314,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "159",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1183,6 +1336,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData0 | WidgetData1>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "161",
     "Kind": "union",
@@ -1194,7 +1348,8 @@
      {
       "$ref": "149"
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1204,10 +1359,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "163",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1218,6 +1375,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion2",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData2 | WidgetData1>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "165",
     "Kind": "union",
@@ -1229,6 +1387,7 @@
       "Name": "WidgetData2",
       "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.WidgetData2",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "167",
@@ -1241,10 +1400,12 @@
          "ValueType": {
           "$ref": "8"
          },
-         "Value": "kind1"
+         "Value": "kind1",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "169",
@@ -1253,17 +1414,20 @@
         "Description": "",
         "Type": {
          "$id": "170",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      {
       "$ref": "149"
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1273,10 +1437,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "172",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -1290,6 +1456,7 @@
    "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordForNonDiscriminatedUnion3",
    "Usage": "Input,Output,Json",
    "Description": "The model spread Record<WidgetData2[] | WidgetData1>",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "174",
     "Kind": "union",
@@ -1302,12 +1469,14 @@
       "ValueType": {
        "$ref": "166"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      {
       "$ref": "149"
      }
-    ]
+    ],
+    "Decorators": []
    },
    "Properties": [
     {
@@ -1317,10 +1486,12 @@
      "Description": "The name property",
      "Type": {
       "$id": "177",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -1362,7 +1533,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "184",
@@ -1540,7 +1712,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "200",
@@ -1718,7 +1891,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "216",
@@ -1896,7 +2070,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "232",
@@ -2074,7 +2249,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "248",
@@ -2252,7 +2428,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "264",
@@ -2430,7 +2607,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "280",
@@ -2608,7 +2786,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "296",
@@ -2786,7 +2965,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "312",
@@ -2964,7 +3144,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "328",
@@ -3142,7 +3323,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "344",
@@ -3320,7 +3502,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "360",
@@ -3498,7 +3681,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "376",
@@ -3676,7 +3860,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "392",
@@ -3854,7 +4039,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "408",
@@ -4032,7 +4218,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "424",
@@ -4210,7 +4397,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "440",
@@ -4388,7 +4576,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "456",
@@ -4566,7 +4755,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "472",
@@ -4744,7 +4934,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "488",
@@ -4922,7 +5113,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "504",
@@ -5100,7 +5292,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "520",
@@ -5278,7 +5471,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "536",
@@ -5456,7 +5650,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "552",
@@ -5634,7 +5829,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "568",
@@ -5812,7 +6008,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "584",
@@ -5990,7 +6187,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "600",
@@ -6168,7 +6366,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "616",
@@ -6346,7 +6545,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "632",
@@ -6524,7 +6724,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "648",
@@ -6702,7 +6903,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "664",
@@ -6880,7 +7082,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "680",
@@ -7058,7 +7261,8 @@
     {
      "$ref": "180"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

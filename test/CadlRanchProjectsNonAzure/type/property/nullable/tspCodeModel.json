@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
    "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "5",
@@ -34,11 +37,13 @@
       "Kind": "nullable",
       "Type": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -49,6 +54,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
    "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -57,10 +63,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "11",
@@ -73,11 +81,13 @@
       "Type": {
        "$id": "13",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Encode": "base64",
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -88,6 +98,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
    "Usage": "Output,Json",
    "Description": "Model with a datetime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -96,10 +107,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "17",
@@ -115,12 +128,15 @@
        "Encode": "rfc3339",
        "WireType": {
         "$id": "20",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Decorators": []
+       },
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -131,6 +147,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
    "Usage": "Output,Json",
    "Description": "Model with a duration property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
@@ -139,10 +156,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "23",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "24",
@@ -158,12 +177,15 @@
        "Encode": "ISO8601",
        "WireType": {
         "$id": "27",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Decorators": []
+       },
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -174,6 +196,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
    "Usage": "Output,Json",
    "Description": "Model with collection bytes properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "29",
@@ -182,10 +205,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "30",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "31",
@@ -202,13 +227,16 @@
        "ValueType": {
         "$id": "34",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -219,6 +247,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
    "Usage": "Output,Json",
    "Description": "Model with collection models properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -227,10 +256,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "38",
@@ -251,6 +282,7 @@
         "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
         "Usage": "Output,Json",
         "Description": "Inner model used in collections model property",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "42",
@@ -259,18 +291,22 @@
           "Description": "Inner model property",
           "Type": {
            "$id": "43",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "IsRequired": true,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          }
         ]
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -284,6 +320,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
    "Usage": "Input,Output,JsonMergePatch,Json",
    "Description": "Model with collection string properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "45",
@@ -292,10 +329,12 @@
      "Description": "Required property",
      "Type": {
       "$id": "46",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "47",
@@ -311,13 +350,16 @@
        "Name": "Array",
        "ValueType": {
         "$id": "50",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -359,7 +401,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "57",
@@ -508,9 +551,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "71",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -614,9 +659,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "81",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -709,7 +756,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "89",
@@ -858,9 +906,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "103",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -964,9 +1014,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "113",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1059,7 +1111,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "121",
@@ -1208,9 +1261,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "135",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1314,9 +1369,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "145",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1409,7 +1466,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "153",
@@ -1558,9 +1616,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "167",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1664,9 +1724,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "177",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1759,7 +1821,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "185",
@@ -1908,9 +1971,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "199",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2014,9 +2079,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "209",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2109,7 +2176,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "217",
@@ -2258,9 +2326,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "231",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2364,9 +2434,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "241",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2459,7 +2531,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "249",
@@ -2608,9 +2681,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "263",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2714,9 +2789,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "273",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/merge-patch+json"
+        "Value": "application/merge-patch+json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -2809,7 +2886,8 @@
     {
      "$ref": "53"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

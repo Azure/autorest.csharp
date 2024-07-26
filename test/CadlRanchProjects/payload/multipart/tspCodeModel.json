@@ -10,6 +10,7 @@
    "Name": "MultiPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -18,10 +19,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "5",
@@ -31,10 +34,12 @@
      "Type": {
       "$id": "6",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -44,6 +49,7 @@
    "Name": "ComplexPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "8",
@@ -52,10 +58,12 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "10",
@@ -68,6 +76,7 @@
       "Name": "Address",
       "CrossLanguageDefinitionId": "Payload.MultiPart.Address",
       "Usage": "Input",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "12",
@@ -76,15 +85,18 @@
         "Description": "",
         "Type": {
          "$id": "13",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "14",
@@ -94,10 +106,12 @@
      "Type": {
       "$id": "15",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "16",
@@ -111,10 +125,12 @@
       "ValueType": {
        "$ref": "11"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "18",
@@ -128,12 +144,15 @@
       "ValueType": {
        "$id": "20",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Encode": "base64",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -146,6 +165,7 @@
    "Name": "JsonPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
@@ -156,7 +176,8 @@
       "$ref": "11"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "23",
@@ -166,10 +187,12 @@
      "Type": {
       "$id": "24",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -179,6 +202,7 @@
    "Name": "BinaryArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
@@ -187,10 +211,12 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "28",
@@ -204,12 +230,15 @@
       "ValueType": {
        "$id": "30",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Encode": "base64",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -219,6 +248,7 @@
    "Name": "JsonArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "32",
@@ -228,10 +258,12 @@
      "Type": {
       "$id": "33",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "34",
@@ -245,10 +277,12 @@
       "ValueType": {
        "$ref": "11"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -258,6 +292,7 @@
    "Name": "MultiBinaryPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "37",
@@ -267,10 +302,12 @@
      "Type": {
       "$id": "38",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "39",
@@ -280,10 +317,12 @@
      "Type": {
       "$id": "40",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -293,6 +332,7 @@
    "Name": "AnonymousModelRequest",
    "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
    "Usage": "MultipartFormData,Spread",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -302,10 +342,12 @@
      "Type": {
       "$id": "43",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -347,7 +389,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "50",
@@ -373,9 +416,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -478,9 +523,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "64",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -583,9 +630,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "74",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -688,9 +737,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "84",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -793,9 +844,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -898,9 +951,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "104",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1003,9 +1058,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "114",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1108,9 +1165,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "124",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1203,7 +1262,8 @@
     {
      "$ref": "46"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -12,19 +12,22 @@
    "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1_0",
      "Value": "v1.0",
-     "Description": "Version 1.0"
+     "Description": "Version 1.0",
+     "Decorators": []
     }
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -148,7 +151,8 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "18",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -216,7 +220,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

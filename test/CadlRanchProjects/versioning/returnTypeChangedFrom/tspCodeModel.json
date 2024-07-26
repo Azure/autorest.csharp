@@ -13,25 +13,29 @@
    "CrossLanguageDefinitionId": "Versioning.ReturnTypeChangedFrom.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1",
      "Value": "v1",
-     "Description": "The version v1."
+     "Description": "The version v1.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "v2",
      "Value": "v2",
-     "Description": "The version v2."
+     "Description": "The version v2.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -90,7 +94,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "12",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -161,7 +166,8 @@
        ],
        "BodyType": {
         "$id": "20",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -193,7 +199,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

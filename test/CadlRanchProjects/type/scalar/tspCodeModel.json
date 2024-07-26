@@ -41,7 +41,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -92,7 +93,8 @@
        ],
        "BodyType": {
         "$id": "14",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -127,7 +129,8 @@
        "Description": "_",
        "Type": {
         "$id": "17",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -221,7 +224,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "26",
@@ -272,7 +276,8 @@
        ],
        "BodyType": {
         "$id": "32",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -307,7 +312,8 @@
        "Description": "_",
        "Type": {
         "$id": "35",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -401,7 +407,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "44",
@@ -452,7 +459,8 @@
        ],
        "BodyType": {
         "$id": "50",
-        "Kind": "any"
+        "Kind": "any",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -487,7 +495,8 @@
        "Description": "_",
        "Type": {
         "$id": "53",
-        "Kind": "any"
+        "Kind": "any",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -581,7 +590,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "62",
@@ -631,7 +641,8 @@
        ],
        "BodyType": {
         "$id": "68",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -664,7 +675,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "71",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -764,7 +776,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "81",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -830,7 +843,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "87",
@@ -880,7 +894,8 @@
        ],
        "BodyType": {
         "$id": "93",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -913,7 +928,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "96",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1013,7 +1029,8 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "106",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1079,7 +1096,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "112",
@@ -1133,9 +1151,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "119",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1168,7 +1188,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "122",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1262,7 +1283,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "131",
@@ -1316,9 +1338,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "138",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1351,7 +1375,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "141",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1445,7 +1470,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

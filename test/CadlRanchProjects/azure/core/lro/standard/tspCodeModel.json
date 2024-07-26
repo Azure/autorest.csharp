@@ -12,43 +12,50 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "NotStarted",
      "Value": "NotStarted",
-     "Description": "The operation has not started."
+     "Description": "The operation has not started.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Running",
      "Value": "Running",
-     "Description": "The operation is in progress."
+     "Description": "The operation is in progress.",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "Succeeded",
      "Value": "Succeeded",
-     "Description": "The operation has completed successfully."
+     "Description": "The operation has completed successfully.",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "Failed",
      "Value": "Failed",
-     "Description": "The operation has failed."
+     "Description": "The operation has failed.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Canceled",
      "Value": "Canceled",
-     "Description": "The operation has been canceled by the user."
+     "Description": "The operation has been canceled by the user.",
+     "Decorators": []
     }
    ],
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   },
   {
    "$id": "9",
@@ -57,19 +64,22 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "11",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The 2022-12-01-preview version."
+     "Description": "The 2022-12-01-preview version.",
+     "Decorators": []
     }
    ],
    "Description": "The API version.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -80,6 +90,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
    "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -88,10 +99,12 @@
      "Description": "The name of user.",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "15",
@@ -100,10 +113,12 @@
      "Description": "The role of user",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -114,6 +129,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -122,10 +138,12 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "20",
@@ -136,7 +154,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "21",
@@ -150,6 +169,7 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "23",
@@ -158,10 +178,12 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "25",
@@ -170,10 +192,12 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "27",
@@ -182,10 +206,12 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "29",
@@ -199,10 +225,12 @@
          "ValueType": {
           "$ref": "22"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "31",
@@ -216,6 +244,7 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "33",
@@ -224,10 +253,12 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "34",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "35",
@@ -238,17 +269,20 @@
             "$ref": "32"
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           }
          ]
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -265,6 +299,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "37",
@@ -273,10 +308,12 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "38",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "39",
@@ -287,7 +324,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "40",
@@ -298,7 +336,8 @@
       "$ref": "22"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "41",
@@ -312,6 +351,7 @@
       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
       "Usage": "Output,Json",
       "Description": "The exported user data.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "43",
@@ -320,10 +360,12 @@
         "Description": "The name of user.",
         "Type": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "45",
@@ -332,15 +374,18 @@
         "Description": "The exported URI.",
         "Type": {
          "$id": "46",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -354,6 +399,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -362,10 +408,12 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "50",
@@ -376,7 +424,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "51",
@@ -387,7 +436,8 @@
       "$ref": "22"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "52",
@@ -398,7 +448,8 @@
       "$ref": "42"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -451,7 +502,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -478,7 +530,8 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "64",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -577,7 +630,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "74",
-          "Kind": "url"
+          "Kind": "url",
+          "Decorators": []
          }
         }
        ],
@@ -603,7 +657,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "77",
-          "Kind": "url"
+          "Kind": "url",
+          "Decorators": []
          }
         }
        ],
@@ -656,7 +711,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "82",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -678,7 +734,8 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "84",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -734,7 +791,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "90",
-          "Kind": "url"
+          "Kind": "url",
+          "Decorators": []
          }
         }
        ],
@@ -781,7 +839,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "95",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -803,7 +862,8 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "97",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -822,7 +882,8 @@
        "Description": "The format of the data.",
        "Type": {
         "$id": "99",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -878,7 +939,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "105",
-          "Kind": "url"
+          "Kind": "url",
+          "Decorators": []
          }
         }
        ],
@@ -919,7 +981,8 @@
     {
      "$ref": "55"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

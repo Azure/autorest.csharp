@@ -10,6 +10,7 @@
    "Name": "DefaultDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.DefaultDatetimeProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -22,11 +23,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "5",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -36,6 +40,7 @@
    "Name": "Rfc3339DatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.Rfc3339DatetimeProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "7",
@@ -48,11 +53,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "9",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -62,6 +70,7 @@
    "Name": "Rfc7231DatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.Rfc7231DatetimeProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "11",
@@ -74,11 +83,14 @@
       "Encode": "rfc7231",
       "WireType": {
        "$id": "13",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -88,6 +100,7 @@
    "Name": "UnixTimestampDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampDatetimeProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -100,11 +113,14 @@
       "Encode": "unixTimestamp",
       "WireType": {
        "$id": "17",
-       "Kind": "int64"
-      }
+       "Kind": "int64",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -114,6 +130,7 @@
    "Name": "UnixTimestampArrayDatetimeProperty",
    "CrossLanguageDefinitionId": "Encode.Datetime.UnixTimestampArrayDatetimeProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "19",
@@ -130,13 +147,17 @@
        "Encode": "unixTimestamp",
        "WireType": {
         "$id": "22",
-        "Kind": "int64"
-       }
+        "Kind": "int64",
+        "Decorators": []
+       },
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -178,7 +199,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "29",
@@ -204,8 +226,10 @@
         "Encode": "rfc3339",
         "WireType": {
          "$id": "33",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -281,8 +305,10 @@
         "Encode": "rfc3339",
         "WireType": {
          "$id": "41",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -358,8 +384,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "49",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -435,8 +463,10 @@
         "Encode": "unixTimestamp",
         "WireType": {
          "$id": "57",
-         "Kind": "int64"
-        }
+         "Kind": "int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -516,10 +546,13 @@
          "Encode": "unixTimestamp",
          "WireType": {
           "$id": "66",
-          "Kind": "int64"
-         }
+          "Kind": "int64",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -586,7 +619,8 @@
     {
      "$ref": "25"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "72",
@@ -1127,7 +1161,8 @@
     {
      "$ref": "25"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "119",
@@ -1153,8 +1188,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "123",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1230,8 +1267,10 @@
         "Encode": "rfc3339",
         "WireType": {
          "$id": "131",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1307,8 +1346,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "139",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1384,8 +1425,10 @@
         "Encode": "unixTimestamp",
         "WireType": {
          "$id": "147",
-         "Kind": "int64"
-        }
+         "Kind": "int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1465,10 +1508,13 @@
          "Encode": "unixTimestamp",
          "WireType": {
           "$id": "156",
-          "Kind": "int64"
-         }
+          "Kind": "int64",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1535,7 +1581,8 @@
     {
      "$ref": "25"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "162",
@@ -1596,8 +1643,10 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "170",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -1666,8 +1715,10 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "178",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -1736,8 +1787,10 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "186",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -1806,8 +1859,10 @@
           "Encode": "rfc3339",
           "WireType": {
            "$id": "194",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -1831,7 +1886,8 @@
     {
      "$ref": "25"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

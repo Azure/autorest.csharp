@@ -9,7 +9,8 @@
    "Name": "StringLiteralProperty_property",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -22,7 +23,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -30,7 +32,8 @@
    "Name": "IntLiteralProperty_property",
    "ValueType": {
     "$id": "6",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -43,7 +46,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -51,7 +55,8 @@
    "Name": "FloatLiteralProperty_property",
    "ValueType": {
     "$id": "9",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -64,7 +69,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -73,22 +79,26 @@
    "CrossLanguageDefinitionId": "UnionStringLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "13",
      "Name": "hello",
-     "Value": "hello"
+     "Value": "hello",
+     "Decorators": []
     },
     {
      "$id": "14",
      "Name": "world",
-     "Value": "world"
+     "Value": "world",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "15",
@@ -97,22 +107,26 @@
    "CrossLanguageDefinitionId": "UnionIntLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "16",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "17",
      "Name": "1",
-     "Value": 1
+     "Value": 1,
+     "Decorators": []
     },
     {
      "$id": "18",
      "Name": "2",
-     "Value": 2
+     "Value": 2,
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "19",
@@ -121,22 +135,26 @@
    "CrossLanguageDefinitionId": "UnionFloatLiteralProperty.property.anonymous",
    "ValueType": {
     "$id": "20",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "21",
      "Name": "1.25",
-     "Value": 1.25
+     "Value": 1.25,
+     "Decorators": []
     },
     {
      "$id": "22",
      "Name": "2.375",
-     "Value": 2.375
+     "Value": 2.375,
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -147,6 +165,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
    "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -155,10 +174,12 @@
      "Description": "Property",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -169,6 +190,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
    "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -178,10 +200,12 @@
      "Type": {
       "$id": "28",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -192,6 +216,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -204,11 +229,14 @@
       "Encode": "rfc3339",
       "WireType": {
        "$id": "32",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -219,6 +247,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "34",
@@ -231,11 +260,14 @@
       "Encode": "ISO8601",
       "WireType": {
        "$id": "36",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -246,6 +278,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a plainDate property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -254,10 +287,12 @@
      "Description": "Property",
      "Type": {
       "$id": "39",
-      "Kind": "plainDate"
+      "Kind": "plainDate",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -268,6 +303,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a plainTime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "41",
@@ -276,10 +312,12 @@
      "Description": "Property",
      "Type": {
       "$id": "42",
-      "Kind": "plainTime"
+      "Kind": "plainTime",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -290,6 +328,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection bytes properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "44",
@@ -303,12 +342,15 @@
       "ValueType": {
        "$id": "46",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Encode": "base64",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -319,6 +361,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection models properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -332,10 +375,12 @@
       "ValueType": {
        "$ref": "23"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -346,6 +391,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with string literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "51",
@@ -358,10 +404,12 @@
       "ValueType": {
        "$ref": "2"
       },
-      "Value": "hello"
+      "Value": "hello",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -372,6 +420,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with int literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -384,10 +433,12 @@
       "ValueType": {
        "$ref": "5"
       },
-      "Value": 1
+      "Value": 1,
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -398,6 +449,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with float literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "57",
@@ -410,10 +462,12 @@
       "ValueType": {
        "$ref": "8"
       },
-      "Value": 1.25
+      "Value": 1.25,
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -424,6 +478,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with boolean literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "60",
@@ -435,12 +490,15 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "62",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Decorators": []
       },
-      "Value": true
+      "Value": true,
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -451,6 +509,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of string literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "64",
@@ -461,7 +520,8 @@
       "$ref": "11"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -472,6 +532,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of int literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -482,7 +543,8 @@
       "$ref": "15"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -493,6 +555,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of float literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "68",
@@ -503,7 +566,8 @@
       "$ref": "19"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -514,6 +578,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with required and optional properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "70",
@@ -522,10 +587,12 @@
      "Description": "optional string property",
      "Type": {
       "$id": "71",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "72",
@@ -534,10 +601,12 @@
      "Description": "required int property",
      "Type": {
       "$id": "73",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -579,7 +648,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "80",
@@ -917,7 +987,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "110",
@@ -1255,7 +1326,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "140",
@@ -1593,7 +1665,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "170",
@@ -1931,7 +2004,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "200",
@@ -2269,7 +2343,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "230",
@@ -2607,7 +2682,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "260",
@@ -2945,7 +3021,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "290",
@@ -3283,7 +3360,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "320",
@@ -3621,7 +3699,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "350",
@@ -3959,7 +4038,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "380",
@@ -4297,7 +4377,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "410",
@@ -4635,7 +4716,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "440",
@@ -4973,7 +5055,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "470",
@@ -5311,7 +5394,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "500",
@@ -5649,7 +5733,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "530",
@@ -5987,7 +6072,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }
