@@ -17,37 +17,6 @@ namespace MgmtTest.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtTestModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="MgmtTest.PrivateEndpointConnectionResourceData"/>. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="resourceType"> The resourceType. </param>
-        /// <param name="systemData"> The systemData. </param>
-        /// <param name="properties"> The resource-specific properties for this resource. </param>
-        /// <returns> A new <see cref="MgmtTest.PrivateEndpointConnectionResourceData"/> instance for mocking. </returns>
-        public static PrivateEndpointConnectionResourceData PrivateEndpointConnectionResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PrivateEndpointConnectionProperties properties = null)
-        {
-            return new PrivateEndpointConnectionResourceData(
-                id,
-                name,
-                resourceType,
-                systemData,
-                properties,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpointConnectionProperties"/>. </summary>
-        /// <param name="groupIds"> The group ids for the private endpoint resource. </param>
-        /// <param name="privateEndpointId"> The private endpoint resource. </param>
-        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
-        /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
-        /// <returns> A new <see cref="Models.PrivateEndpointConnectionProperties"/> instance for mocking. </returns>
-        public static PrivateEndpointConnectionProperties PrivateEndpointConnectionProperties(IEnumerable<string> groupIds = null, ResourceIdentifier privateEndpointId = null, MgmtTestPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtTestPrivateEndpointConnectionProvisioningState? provisioningState = null)
-        {
-            groupIds ??= new List<string>();
-
-            return new PrivateEndpointConnectionProperties(groupIds?.ToList(), privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.MgmtTestPrivateLinkResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

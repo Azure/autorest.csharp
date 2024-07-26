@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.MgmtTest;
+namespace MgmtTest;
 
 /** The available API versions. */
 enum Versions {

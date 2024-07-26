@@ -45,7 +45,7 @@ namespace MgmtTest
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.MgmtTest/privateLinkResources", false);
+            uri.AppendPath("/providers/MgmtTest/privateLinkResources", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             return uri;
         }
@@ -61,7 +61,7 @@ namespace MgmtTest
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.MgmtTest/privateLinkResources", false);
+            uri.AppendPath("/providers/MgmtTest/privateLinkResources", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
