@@ -7,6 +7,7 @@
   <PropertyGroup>
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
+    <IsMgmtLibrary Condition="!$(MSBuildProjectName.EndsWith('.Tests')) and $(MSBuildProjectName.StartsWith('Mgmt'))">true</IsMgmtLibrary>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationTestProject)' == 'true'">net7.0;net6.0;net462</RequiredTargetFrameworks>
   </PropertyGroup>
