@@ -315,18 +315,18 @@ extends:
                 IncludeOperationsSharedSource = true,
                 IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
-            // only branded library will add these shared code compilation lines
-            builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));
             if (_needAzureKeyAuth)
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
-            foreach (var packages in _brandedDependencyPackages)
+            if (!Configuration.AzureArm)
             {
-                builder.PackageReferences.Add(packages);
+                // only branded library will add these shared code compilation lines
+                builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));
+                foreach (var packages in _brandedDependencyPackages)
+                {
+                    builder.PackageReferences.Add(packages);
+                }
             }
-            if (Configuration.AzureArm)
-            {
-                builder.PackageReferences.Add(new("Azure.ResourceManager"));
-            }
+
             if (_includeDfe)
             {
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));

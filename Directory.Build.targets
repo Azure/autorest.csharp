@@ -67,6 +67,16 @@
     <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(IsMgmtLibrary)' == 'true'">
+    <PackageReference Include="Azure.Core" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="System.ClientModel" />
+    <PackageReference Include="Azure.ResourceManager" />
+
+    <!-- TODO: Review these file references-->
+    <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared" />
+  </ItemGroup>
+
   <Target Name="_ValidateSourceFileNames"
           BeforeTargets="CoreBuild">
     <ItemGroup>
