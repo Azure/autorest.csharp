@@ -47,7 +47,7 @@ namespace Scm.Parameters.Spread.Models
         /// <param name="requiredString"> required string. </param>
         /// <param name="requiredIntList"> required int. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredIntList"/> is null. </exception>
-        public SpreadWithMultipleParametersRequest(string requiredString, IEnumerable<int> requiredIntList)
+        internal SpreadWithMultipleParametersRequest(string requiredString, IEnumerable<int> requiredIntList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
@@ -63,7 +63,7 @@ namespace Scm.Parameters.Spread.Models
         /// <param name="requiredIntList"> required int. </param>
         /// <param name="optionalStringList"> optional string. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SpreadWithMultipleParametersRequest(string requiredString, int? optionalInt, IList<int> requiredIntList, IList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal SpreadWithMultipleParametersRequest(string requiredString, int? optionalInt, IReadOnlyList<int> requiredIntList, IReadOnlyList<string> optionalStringList, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             RequiredString = requiredString;
             OptionalInt = optionalInt;
@@ -80,10 +80,10 @@ namespace Scm.Parameters.Spread.Models
         /// <summary> required string. </summary>
         public string RequiredString { get; }
         /// <summary> optional int. </summary>
-        public int? OptionalInt { get; set; }
+        public int? OptionalInt { get; }
         /// <summary> required int. </summary>
-        public IList<int> RequiredIntList { get; }
+        public IReadOnlyList<int> RequiredIntList { get; }
         /// <summary> optional string. </summary>
-        public IList<string> OptionalStringList { get; }
+        public IReadOnlyList<string> OptionalStringList { get; }
     }
 }

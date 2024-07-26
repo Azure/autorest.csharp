@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         [TestCaseSource(nameof(RoundTripDictionaryPropertiesCase))]
         public void RoundTripDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
-            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.RoundTrip,
+            var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                 DictionaryProperties, null, new List<InputModelType>(), null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", new List<string>(),

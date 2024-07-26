@@ -8,8 +8,8 @@ using System.Linq;
 
 namespace OpenAI.Models
 {
-    /// <summary> The CreateChatCompletionRequest. </summary>
-    internal partial class CreateChatCompletionRequest
+    /// <summary> The CreateRequest1. </summary>
+    internal partial class CreateRequest1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// </para>
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -52,7 +52,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="messages"/> is null. </exception>
-        public CreateChatCompletionRequest(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages)
+        internal CreateRequest1(CreateRequestModel1 model, IEnumerable<ChatCompletionRequestMessage> messages)
         {
             Argument.AssertNotNull(messages, nameof(messages));
 
@@ -62,7 +62,7 @@ namespace OpenAI.Models
             LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -137,7 +137,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateChatCompletionRequest(CreateRequestModel1 model, IList<ChatCompletionRequestMessage> messages, IList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateRequest1(CreateRequestModel1 model, IReadOnlyList<ChatCompletionRequestMessage> messages, IReadOnlyList<ChatCompletionFunctions> functions, BinaryData functionCall, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IReadOnlyDictionary<string, long> logitBias, string user, bool? stream, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Messages = messages;
@@ -156,8 +156,8 @@ namespace OpenAI.Models
             SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/> for deserialization. </summary>
-        internal CreateChatCompletionRequest()
+        /// <summary> Initializes a new instance of <see cref="CreateRequest1"/> for deserialization. </summary>
+        internal CreateRequest1()
         {
         }
 
@@ -170,9 +170,9 @@ namespace OpenAI.Models
         /// A list of messages comprising the conversation so far.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
         /// </summary>
-        public IList<ChatCompletionRequestMessage> Messages { get; }
+        public IReadOnlyList<ChatCompletionRequestMessage> Messages { get; }
         /// <summary> A list of functions the model may generate JSON inputs for. </summary>
-        public IList<ChatCompletionFunctions> Functions { get; }
+        public IReadOnlyList<ChatCompletionFunctions> Functions { get; }
         /// <summary>
         /// Controls how the model responds to function calls. `none` means the model does not call a
         /// function, and responds to the end-user. `auto` means the model can pick between an end-user or
@@ -221,14 +221,14 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData FunctionCall { get; set; }
+        public BinaryData FunctionCall { get; }
         /// <summary>
         /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
         /// more random, while lower values like 0.2 will make it more focused and deterministic.
         ///
         /// We generally recommend altering this or `top_p` but not both.
         /// </summary>
-        public double? Temperature { get; set; }
+        public double? Temperature { get; }
         /// <summary>
         /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
         /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
@@ -236,13 +236,13 @@ namespace OpenAI.Models
         ///
         /// We generally recommend altering this or `temperature` but not both.
         /// </summary>
-        public double? TopP { get; set; }
+        public double? TopP { get; }
         /// <summary>
         /// How many completions to generate for each prompt.
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </summary>
-        public long? N { get; set; }
+        public long? N { get; }
         /// <summary>
         /// The maximum number of [tokens](/tokenizer) to generate in the completion.
         ///
@@ -250,7 +250,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
         /// for counting tokens.
         /// </summary>
-        public long? MaxTokens { get; set; }
+        public long? MaxTokens { get; }
         /// <summary>
         /// Up to 4 sequences where the API will stop generating further tokens.
         /// <para>
@@ -292,14 +292,14 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData Stop { get; set; }
+        public BinaryData Stop { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
         /// in the text so far, increasing the model's likelihood to talk about new topics.
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? PresencePenalty { get; set; }
+        public double? PresencePenalty { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
         /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
@@ -307,7 +307,7 @@ namespace OpenAI.Models
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? FrequencyPenalty { get; set; }
+        public double? FrequencyPenalty { get; }
         /// <summary>
         /// Modify the likelihood of specified tokens appearing in the completion.
         /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
@@ -316,18 +316,18 @@ namespace OpenAI.Models
         /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
         /// should result in a ban or exclusive selection of the relevant token.
         /// </summary>
-        public IDictionary<string, long> LogitBias { get; set; }
+        public IReadOnlyDictionary<string, long> LogitBias { get; }
         /// <summary>
         /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
         /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
         /// </summary>
-        public string User { get; set; }
+        public string User { get; }
         /// <summary>
         /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
         /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </summary>
-        public bool? Stream { get; set; }
+        public bool? Stream { get; }
     }
 }

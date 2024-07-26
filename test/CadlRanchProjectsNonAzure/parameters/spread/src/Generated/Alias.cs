@@ -128,8 +128,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            InnerModel innerModel = new InnerModel(name, null);
-            ClientResult result = await SpreadParameterWithInnerModelAsync(id, xMsTestHeader, innerModel.ToBinaryContent(), null).ConfigureAwait(false);
+            SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequest = new SpreadParameterWithInnerModelRequest(name, null);
+            ClientResult result = await SpreadParameterWithInnerModelAsync(id, xMsTestHeader, spreadParameterWithInnerModelRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -145,8 +145,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            InnerModel innerModel = new InnerModel(name, null);
-            ClientResult result = SpreadParameterWithInnerModel(id, xMsTestHeader, innerModel.ToBinaryContent(), null);
+            SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequest = new SpreadParameterWithInnerModelRequest(name, null);
+            ClientResult result = SpreadParameterWithInnerModel(id, xMsTestHeader, spreadParameterWithInnerModelRequest.ToBinaryContent(), null);
             return result;
         }
 
@@ -332,7 +332,7 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             ClientResult result = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
@@ -353,7 +353,7 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             ClientResult result = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToBinaryContent(), null);
             return result;
         }

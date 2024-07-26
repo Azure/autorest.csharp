@@ -5,10 +5,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scm.Parameters.Spread.Models
+namespace CustomizedTypeSpec.Models
 {
-    /// <summary> The InnerModel. </summary>
-    internal partial class InnerModel
+    /// <summary> The ProjectedNameModelRequest. </summary>
+    internal partial class ProjectedNameModelRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -42,31 +42,31 @@ namespace Scm.Parameters.Spread.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="name"></param>
+        /// <summary> Initializes a new instance of <see cref="ProjectedNameModelRequest"/>. </summary>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public InnerModel(string name)
+        internal ProjectedNameModelRequest(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="name"></param>
+        /// <summary> Initializes a new instance of <see cref="ProjectedNameModelRequest"/>. </summary>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal InnerModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ProjectedNameModelRequest(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="InnerModel"/> for deserialization. </summary>
-        internal InnerModel()
+        /// <summary> Initializes a new instance of <see cref="ProjectedNameModelRequest"/> for deserialization. </summary>
+        internal ProjectedNameModelRequest()
         {
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> name of the ModelWithProjectedName. </summary>
         public string Name { get; }
     }
 }
