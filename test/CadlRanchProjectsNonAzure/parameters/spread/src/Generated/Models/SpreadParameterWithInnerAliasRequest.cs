@@ -46,7 +46,7 @@ namespace Scm.Parameters.Spread.Models
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public SpreadParameterWithInnerAliasRequest(string name, int age)
+        internal SpreadParameterWithInnerAliasRequest(string name, int age)
         {
             Argument.AssertNotNull(name, nameof(name));
 

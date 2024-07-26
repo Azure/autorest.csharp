@@ -48,7 +48,7 @@
    ],
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "None"
   },
   {
    "$id": "9",
@@ -67,7 +67,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -76,7 +76,7 @@
    "Kind": "model",
    "Name": "ResourceOperationStatusResourceExportedResourceError",
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Provides status details for long running operations.",
    "Properties": [
     {
@@ -112,7 +112,7 @@
       "Kind": "model",
       "Name": "Error",
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
-      "Usage": "Output",
+      "Usage": "None",
       "Description": "The error object.",
       "Properties": [
        {
@@ -178,7 +178,7 @@
          "Kind": "model",
          "Name": "InnerError",
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
-         "Usage": "Output",
+         "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
@@ -224,7 +224,7 @@
       "Kind": "model",
       "Name": "ExportedResource",
       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "33",
@@ -295,7 +295,7 @@
    "Kind": "model",
    "Name": "PagedResource",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "Output",
+   "Usage": "None",
    "Description": "Paged collection of Resource items",
    "Properties": [
     {
@@ -312,7 +312,7 @@
        "Kind": "model",
        "Name": "Resource",
        "CrossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource",
-       "Usage": "RoundTrip",
+       "Usage": "Input,Output,Json",
        "Properties": [
         {
          "$id": "45",

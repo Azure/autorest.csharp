@@ -22,7 +22,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -43,7 +43,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -64,7 +64,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -88,7 +88,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "15",
@@ -112,7 +112,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "19",
@@ -136,7 +136,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -145,7 +145,7 @@
    "Kind": "model",
    "Name": "StringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -167,7 +167,7 @@
    "Kind": "model",
    "Name": "BytesProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -190,7 +190,7 @@
    "Kind": "model",
    "Name": "DatetimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
    "Properties": [
     {
@@ -217,7 +217,7 @@
    "Kind": "model",
    "Name": "DurationProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
    "Properties": [
     {
@@ -244,7 +244,7 @@
    "Kind": "model",
    "Name": "PlainDateProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a plainDate property",
    "Properties": [
     {
@@ -266,7 +266,7 @@
    "Kind": "model",
    "Name": "PlainTimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a plainTime property",
    "Properties": [
     {
@@ -288,7 +288,7 @@
    "Kind": "model",
    "Name": "CollectionsByteProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection bytes properties",
    "Properties": [
     {
@@ -317,7 +317,7 @@
    "Kind": "model",
    "Name": "CollectionsModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection models properties",
    "Properties": [
     {
@@ -344,7 +344,7 @@
    "Kind": "model",
    "Name": "StringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with string literal property",
    "Properties": [
     {
@@ -370,7 +370,7 @@
    "Kind": "model",
    "Name": "IntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with int literal property",
    "Properties": [
     {
@@ -396,7 +396,7 @@
    "Kind": "model",
    "Name": "FloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with float literal property",
    "Properties": [
     {
@@ -422,7 +422,7 @@
    "Kind": "model",
    "Name": "BooleanLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with boolean literal property",
    "Properties": [
     {
@@ -449,7 +449,7 @@
    "Kind": "model",
    "Name": "UnionStringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of string literal property",
    "Properties": [
     {
@@ -470,7 +470,7 @@
    "Kind": "model",
    "Name": "UnionIntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of int literal property",
    "Properties": [
     {
@@ -491,7 +491,7 @@
    "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of float literal property",
    "Properties": [
     {
@@ -512,7 +512,7 @@
    "Kind": "model",
    "Name": "RequiredAndOptionalProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Model with required and optional properties",
    "Properties": [
     {

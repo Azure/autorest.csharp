@@ -50,7 +50,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -59,7 +59,7 @@
    "Kind": "model",
    "Name": "NewModel",
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "10",

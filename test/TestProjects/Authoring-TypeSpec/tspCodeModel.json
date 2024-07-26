@@ -36,7 +36,7 @@
    ],
    "Description": "Represents the project kind.",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "Json"
   },
   {
    "$id": "7",
@@ -131,7 +131,7 @@
    ],
    "Description": "Represents the job status values.",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "23",
@@ -150,7 +150,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -159,7 +159,7 @@
    "Kind": "model",
    "Name": "Project",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Project",
-   "Usage": "None",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "27",
@@ -206,7 +206,7 @@
       "Kind": "model",
       "Name": "ProjectSettings",
       "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
-      "Usage": "None",
+      "Usage": "Json",
       "Description": "Represents the settings used to define the project behavior.",
       "AdditionalProperties": {
        "$id": "34",
@@ -367,7 +367,7 @@
       "Kind": "model",
       "Name": "Error",
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
-      "Usage": "Output",
+      "Usage": "None",
       "Description": "The error object.",
       "Properties": [
        {
@@ -433,7 +433,7 @@
          "Kind": "model",
          "Name": "InnerError",
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
-         "Usage": "Output",
+         "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
@@ -543,7 +543,7 @@
    "Kind": "model",
    "Name": "Deployment",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
-   "Usage": "None",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "81",
@@ -636,7 +636,7 @@
    "Kind": "model",
    "Name": "DeploymentJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "94",
@@ -726,7 +726,7 @@
        "Kind": "model",
        "Name": "JobWarning",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
-       "Usage": "Output",
+       "Usage": "Output,Json",
        "Description": "Represents a warning that was encountered while executing the request.",
        "Properties": [
         {
@@ -793,7 +793,7 @@
    "Kind": "model",
    "Name": "SwapDeploymentsJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "117",
@@ -916,7 +916,7 @@
    "Kind": "model",
    "Name": "SupportedLanguages",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
-   "Usage": "None",
+   "Usage": "Json",
    "Description": "Paged collection of SupportedLanguage items",
    "Properties": [
     {
@@ -933,7 +933,7 @@
        "Kind": "model",
        "Name": "SupportedLanguage",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
-       "Usage": "None",
+       "Usage": "Json",
        "Description": "Represents a supported language.",
        "Properties": [
         {
@@ -989,7 +989,7 @@
    "Kind": "model",
    "Name": "TrainingConfigVersions",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
-   "Usage": "None",
+   "Usage": "Json",
    "Description": "Paged collection of TrainingConfigVersion items",
    "Properties": [
     {
@@ -1006,7 +1006,7 @@
        "Kind": "model",
        "Name": "TrainingConfigVersion",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
-       "Usage": "None",
+       "Usage": "Json",
        "Description": "Represents a training config version.",
        "Properties": [
         {

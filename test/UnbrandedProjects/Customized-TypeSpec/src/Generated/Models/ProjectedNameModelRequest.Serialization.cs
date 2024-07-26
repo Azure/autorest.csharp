@@ -8,16 +8,16 @@ using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace Scm.Parameters.Spread.Models
+namespace CustomizedTypeSpec.Models
 {
-    internal partial class InnerModel : IJsonModel<InnerModel>
+    internal partial class ProjectedNameModelRequest : IJsonModel<ProjectedNameModelRequest>
     {
-        void IJsonModel<InnerModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ProjectedNameModelRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -41,19 +41,19 @@ namespace Scm.Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        InnerModel IJsonModel<InnerModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProjectedNameModelRequest IJsonModel<ProjectedNameModelRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeInnerModel(document.RootElement, options);
+            return DeserializeProjectedNameModelRequest(document.RootElement, options);
         }
 
-        internal static InnerModel DeserializeInnerModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ProjectedNameModelRequest DeserializeProjectedNameModelRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -77,46 +77,46 @@ namespace Scm.Parameters.Spread.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new InnerModel(name, serializedAdditionalRawData);
+            return new ProjectedNameModelRequest(name, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<InnerModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProjectedNameModelRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(InnerModel)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        InnerModel IPersistableModel<InnerModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ProjectedNameModelRequest IPersistableModel<ProjectedNameModelRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<InnerModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ProjectedNameModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeInnerModel(document.RootElement, options);
+                        return DeserializeProjectedNameModelRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(InnerModel)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ProjectedNameModelRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<InnerModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProjectedNameModelRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
-        internal static InnerModel FromResponse(PipelineResponse response)
+        internal static ProjectedNameModelRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInnerModel(document.RootElement);
+            return DeserializeProjectedNameModelRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="BinaryContent"/>. </summary>

@@ -168,9 +168,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            InnerModel innerModel = new InnerModel(name, null);
+            SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequest = new SpreadParameterWithInnerModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadParameterWithInnerModelAsync(id, xMsTestHeader, innerModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadParameterWithInnerModelAsync(id, xMsTestHeader, spreadParameterWithInnerModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -188,9 +188,9 @@ namespace Parameters.Spread
             Argument.AssertNotNull(xMsTestHeader, nameof(xMsTestHeader));
             Argument.AssertNotNull(name, nameof(name));
 
-            InnerModel innerModel = new InnerModel(name, null);
+            SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequest = new SpreadParameterWithInnerModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadParameterWithInnerModel(id, xMsTestHeader, innerModel.ToRequestContent(), context);
+            Response response = SpreadParameterWithInnerModel(id, xMsTestHeader, spreadParameterWithInnerModelRequest.ToRequestContent(), context);
             return response;
         }
 
@@ -428,7 +428,7 @@ namespace Parameters.Spread
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
@@ -452,7 +452,7 @@ namespace Parameters.Spread
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredIntList, nameof(requiredIntList));
 
-            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IList<string> ?? new ChangeTrackingList<string>(), null);
+            SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(requiredString, optionalInt, requiredIntList.ToList(), optionalStringList?.ToList() as IReadOnlyList<string> ?? new ChangeTrackingList<string>(), null);
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context);
             return response;
