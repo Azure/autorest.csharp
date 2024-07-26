@@ -1,0 +1,1661 @@
+{
+ "$id": "1",
+ "Name": "Microsoft.MgmtTest",
+ "ApiVersions": [
+  "v1"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "PrivateEndpointServiceConnectionStatus",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "Pending",
+     "Value": "Pending",
+     "Description": "Connectionaiting for approval or rejection"
+    },
+    {
+     "$id": "5",
+     "Name": "Approved",
+     "Value": "Approved",
+     "Description": "Connection approved"
+    },
+    {
+     "$id": "6",
+     "Name": "Rejected",
+     "Value": "Rejected",
+     "Description": "Connection Rejected"
+    }
+   ],
+   "Description": "The private endpoint connection status.",
+   "IsExtensible": true,
+   "Usage": "Input,Output,Json"
+  },
+  {
+   "$id": "7",
+   "Kind": "enum",
+   "Name": "PrivateEndpointConnectionProvisioningState",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState",
+   "ValueType": {
+    "$id": "8",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "9",
+     "Name": "Succeeded",
+     "Value": "Succeeded",
+     "Description": "Connection has been provisioned"
+    },
+    {
+     "$id": "10",
+     "Name": "Creating",
+     "Value": "Creating",
+     "Description": "Connection is being created"
+    },
+    {
+     "$id": "11",
+     "Name": "Deleting",
+     "Value": "Deleting",
+     "Description": "Connection is being deleted"
+    },
+    {
+     "$id": "12",
+     "Name": "Failed",
+     "Value": "Failed",
+     "Description": "Connection provisioning has failed"
+    }
+   ],
+   "Description": "The current provisioning state.",
+   "IsExtensible": true,
+   "Usage": "Output,Json"
+  },
+  {
+   "$id": "13",
+   "Kind": "enum",
+   "Name": "createdByType",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.createdByType",
+   "ValueType": {
+    "$id": "14",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "15",
+     "Name": "User",
+     "Value": "User",
+     "Description": "The entity was created by a user."
+    },
+    {
+     "$id": "16",
+     "Name": "Application",
+     "Value": "Application",
+     "Description": "The entity was created by an application."
+    },
+    {
+     "$id": "17",
+     "Name": "ManagedIdentity",
+     "Value": "ManagedIdentity",
+     "Description": "The entity was created by a managed identity."
+    },
+    {
+     "$id": "18",
+     "Name": "Key",
+     "Value": "Key",
+     "Description": "The entity was created by a key."
+    }
+   ],
+   "Description": "The kind of entity that created the resource.",
+   "IsExtensible": true,
+   "Usage": "Output,Json"
+  },
+  {
+   "$id": "19",
+   "Kind": "enum",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "Microsoft.MgmtTest.Versions",
+   "ValueType": {
+    "$id": "20",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "21",
+     "Name": "v1",
+     "Value": "v1",
+     "Description": "Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview."
+    }
+   ],
+   "Description": "The available API versions.",
+   "IsExtensible": false,
+   "Usage": "ApiVersionEnum"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "22",
+   "Kind": "model",
+   "Name": "PrivateEndpointConnectionResourceListResult",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
+   "Usage": "Output,Json",
+   "Description": "The response of a PrivateEndpointConnectionResource list operation.",
+   "Properties": [
+    {
+     "$id": "23",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The PrivateEndpointConnectionResource items on this page",
+     "Type": {
+      "$id": "24",
+      "Kind": "array",
+      "Name": "ArrayPrivateEndpointConnectionResource",
+      "ValueType": {
+       "$id": "25",
+       "Kind": "model",
+       "Name": "PrivateEndpointConnectionResource",
+       "CrossLanguageDefinitionId": "Microsoft.MgmtTest.PrivateEndpointConnectionResource",
+       "Usage": "Input,Output,Json",
+       "Description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+       "BaseModel": {
+        "$id": "26",
+        "Kind": "model",
+        "Name": "ProxyResource",
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
+        "Usage": "Input,Output,Json",
+        "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+        "BaseModel": {
+         "$id": "27",
+         "Kind": "model",
+         "Name": "Resource",
+         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
+         "Usage": "Input,Output,Json",
+         "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+         "Properties": [
+          {
+           "$id": "28",
+           "Name": "id",
+           "SerializedName": "id",
+           "Description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+           "Type": {
+            "$id": "29",
+            "Kind": "armId",
+            "Encode": "string"
+           },
+           "IsRequired": false,
+           "IsReadOnly": true
+          },
+          {
+           "$id": "30",
+           "Name": "name",
+           "SerializedName": "name",
+           "Description": "The name of the resource",
+           "Type": {
+            "$id": "31",
+            "Kind": "string"
+           },
+           "IsRequired": false,
+           "IsReadOnly": true
+          },
+          {
+           "$id": "32",
+           "Name": "type",
+           "SerializedName": "type",
+           "Description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+           "Type": {
+            "$id": "33",
+            "Kind": "string"
+           },
+           "IsRequired": false,
+           "IsReadOnly": true
+          },
+          {
+           "$id": "34",
+           "Name": "systemData",
+           "SerializedName": "systemData",
+           "Description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+           "Type": {
+            "$id": "35",
+            "Kind": "model",
+            "Name": "SystemData",
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
+            "Usage": "Output,Json",
+            "Description": "Metadata pertaining to creation and last modification of the resource.",
+            "Properties": [
+             {
+              "$id": "36",
+              "Name": "createdBy",
+              "SerializedName": "createdBy",
+              "Description": "The identity that created the resource.",
+              "Type": {
+               "$id": "37",
+               "Kind": "string"
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             },
+             {
+              "$id": "38",
+              "Name": "createdByType",
+              "SerializedName": "createdByType",
+              "Description": "The type of identity that created the resource.",
+              "Type": {
+               "$ref": "13"
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             },
+             {
+              "$id": "39",
+              "Name": "createdAt",
+              "SerializedName": "createdAt",
+              "Description": "The timestamp of resource creation (UTC).",
+              "Type": {
+               "$id": "40",
+               "Kind": "utcDateTime",
+               "Encode": "rfc3339",
+               "WireType": {
+                "$id": "41",
+                "Kind": "string"
+               }
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             },
+             {
+              "$id": "42",
+              "Name": "lastModifiedBy",
+              "SerializedName": "lastModifiedBy",
+              "Description": "The identity that last modified the resource.",
+              "Type": {
+               "$id": "43",
+               "Kind": "string"
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             },
+             {
+              "$id": "44",
+              "Name": "lastModifiedByType",
+              "SerializedName": "lastModifiedByType",
+              "Description": "The type of identity that last modified the resource.",
+              "Type": {
+               "$ref": "13"
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             },
+             {
+              "$id": "45",
+              "Name": "lastModifiedAt",
+              "SerializedName": "lastModifiedAt",
+              "Description": "The timestamp of resource last modification (UTC)",
+              "Type": {
+               "$id": "46",
+               "Kind": "utcDateTime",
+               "Encode": "rfc3339",
+               "WireType": {
+                "$id": "47",
+                "Kind": "string"
+               }
+              },
+              "IsRequired": false,
+              "IsReadOnly": false
+             }
+            ]
+           },
+           "IsRequired": false,
+           "IsReadOnly": true
+          }
+         ]
+        },
+        "Properties": []
+       },
+       "Properties": [
+        {
+         "$id": "48",
+         "Name": "properties",
+         "SerializedName": "properties",
+         "Description": "The resource-specific properties for this resource.",
+         "Type": {
+          "$id": "49",
+          "Kind": "model",
+          "Name": "PrivateEndpointConnectionProperties",
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties",
+          "Usage": "Input,Output,Json",
+          "Description": "Properties of the private endpoint connection.",
+          "Properties": [
+           {
+            "$id": "50",
+            "Name": "groupIds",
+            "SerializedName": "groupIds",
+            "Description": "The group ids for the private endpoint resource.",
+            "Type": {
+             "$id": "51",
+             "Kind": "array",
+             "Name": "Array",
+             "ValueType": {
+              "$id": "52",
+              "Kind": "string"
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           },
+           {
+            "$id": "53",
+            "Name": "privateEndpoint",
+            "SerializedName": "privateEndpoint",
+            "Description": "The private endpoint resource.",
+            "Type": {
+             "$id": "54",
+             "Kind": "model",
+             "Name": "PrivateEndpoint",
+             "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateEndpoint",
+             "Usage": "Input,Output,Json",
+             "Description": "The Private Endpoint resource.",
+             "Properties": [
+              {
+               "$id": "55",
+               "Name": "id",
+               "SerializedName": "id",
+               "Description": "The resource identifier for private endpoint",
+               "Type": {
+                "$id": "56",
+                "Kind": "armId",
+                "Encode": "string"
+               },
+               "IsRequired": false,
+               "IsReadOnly": true
+              }
+             ]
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "57",
+            "Name": "privateLinkServiceConnectionState",
+            "SerializedName": "privateLinkServiceConnectionState",
+            "Description": "A collection of information about the state of the connection between service consumer and provider.",
+            "Type": {
+             "$id": "58",
+             "Kind": "model",
+             "Name": "PrivateLinkServiceConnectionState",
+             "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState",
+             "Usage": "Input,Output,Json",
+             "Description": "A collection of information about the state of the connection between service consumer and provider.",
+             "Properties": [
+              {
+               "$id": "59",
+               "Name": "status",
+               "SerializedName": "status",
+               "Description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+               "Type": {
+                "$ref": "2"
+               },
+               "IsRequired": false,
+               "IsReadOnly": false
+              },
+              {
+               "$id": "60",
+               "Name": "description",
+               "SerializedName": "description",
+               "Description": "The reason for approval/rejection of the connection.",
+               "Type": {
+                "$id": "61",
+                "Kind": "string"
+               },
+               "IsRequired": false,
+               "IsReadOnly": false
+              },
+              {
+               "$id": "62",
+               "Name": "actionsRequired",
+               "SerializedName": "actionsRequired",
+               "Description": "A message indicating if changes on the service provider require any updates on the consumer.",
+               "Type": {
+                "$id": "63",
+                "Kind": "string"
+               },
+               "IsRequired": false,
+               "IsReadOnly": false
+              }
+             ]
+            },
+            "IsRequired": true,
+            "IsReadOnly": false
+           },
+           {
+            "$id": "64",
+            "Name": "provisioningState",
+            "SerializedName": "provisioningState",
+            "Description": "The provisioning state of the private endpoint connection resource.",
+            "Type": {
+             "$ref": "7"
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           }
+          ]
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        }
+       ]
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "65",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "66",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "25"
+  },
+  {
+   "$ref": "49"
+  },
+  {
+   "$ref": "54"
+  },
+  {
+   "$ref": "58"
+  },
+  {
+   "$ref": "26"
+  },
+  {
+   "$ref": "27"
+  },
+  {
+   "$ref": "35"
+  },
+  {
+   "$id": "67",
+   "Kind": "model",
+   "Name": "PrivateLinkResourceListResult",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
+   "Usage": "Output,Json",
+   "Description": "The response of a PrivateLinkResource list operation.",
+   "Properties": [
+    {
+     "$id": "68",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The PrivateLinkResource items on this page",
+     "Type": {
+      "$id": "69",
+      "Kind": "array",
+      "Name": "ArrayPrivateLinkResource",
+      "ValueType": {
+       "$id": "70",
+       "Kind": "model",
+       "Name": "PrivateLinkResource",
+       "CrossLanguageDefinitionId": "Microsoft.MgmtTest.PrivateLinkResource",
+       "Usage": "Output,Json",
+       "Description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+       "BaseModel": {
+        "$ref": "26"
+       },
+       "Properties": [
+        {
+         "$id": "71",
+         "Name": "properties",
+         "SerializedName": "properties",
+         "Description": "The resource-specific properties for this resource.",
+         "Type": {
+          "$id": "72",
+          "Kind": "model",
+          "Name": "PrivateLinkResourceProperties",
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
+          "Usage": "Output,Json",
+          "Description": "Properties of a private link resource.",
+          "Properties": [
+           {
+            "$id": "73",
+            "Name": "groupId",
+            "SerializedName": "groupId",
+            "Description": "The private link resource group id.",
+            "Type": {
+             "$id": "74",
+             "Kind": "string"
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           },
+           {
+            "$id": "75",
+            "Name": "requiredMembers",
+            "SerializedName": "requiredMembers",
+            "Description": "The private link resource required member names.",
+            "Type": {
+             "$id": "76",
+             "Kind": "array",
+             "Name": "Array",
+             "ValueType": {
+              "$id": "77",
+              "Kind": "string"
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           },
+           {
+            "$id": "78",
+            "Name": "requiredZoneNames",
+            "SerializedName": "requiredZoneNames",
+            "Description": "The private link resource private link DNS zone name.",
+            "Type": {
+             "$id": "79",
+             "Kind": "array",
+             "Name": "Array",
+             "ValueType": {
+              "$id": "80",
+              "Kind": "string"
+             },
+             "CrossLanguageDefinitionId": "TypeSpec.Array"
+            },
+            "IsRequired": false,
+            "IsReadOnly": false
+           }
+          ]
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        }
+       ]
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "81",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "82",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "70"
+  },
+  {
+   "$ref": "72"
+  },
+  {
+   "$id": "83",
+   "Kind": "model",
+   "Name": "ErrorResponse",
+   "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
+   "Usage": "Output,Error,Json",
+   "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "Properties": [
+    {
+     "$id": "84",
+     "Name": "error",
+     "SerializedName": "error",
+     "Description": "The error object.",
+     "Type": {
+      "$id": "85",
+      "Kind": "model",
+      "Name": "ErrorDetail",
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
+      "Usage": "Output,Json",
+      "Description": "The error detail.",
+      "Properties": [
+       {
+        "$id": "86",
+        "Name": "code",
+        "SerializedName": "code",
+        "Description": "The error code.",
+        "Type": {
+         "$id": "87",
+         "Kind": "string"
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "88",
+        "Name": "message",
+        "SerializedName": "message",
+        "Description": "The error message.",
+        "Type": {
+         "$id": "89",
+         "Kind": "string"
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "90",
+        "Name": "target",
+        "SerializedName": "target",
+        "Description": "The error target.",
+        "Type": {
+         "$id": "91",
+         "Kind": "string"
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "92",
+        "Name": "details",
+        "SerializedName": "details",
+        "Description": "The error details.",
+        "Type": {
+         "$id": "93",
+         "Kind": "array",
+         "Name": "ArrayErrorDetail",
+         "ValueType": {
+          "$ref": "85"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       },
+       {
+        "$id": "94",
+        "Name": "additionalInfo",
+        "SerializedName": "additionalInfo",
+        "Description": "The error additional info.",
+        "Type": {
+         "$id": "95",
+         "Kind": "array",
+         "Name": "ArrayErrorAdditionalInfo",
+         "ValueType": {
+          "$id": "96",
+          "Kind": "model",
+          "Name": "ErrorAdditionalInfo",
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
+          "Usage": "Output,Json",
+          "Description": "The resource management error additional info.",
+          "Properties": [
+           {
+            "$id": "97",
+            "Name": "type",
+            "SerializedName": "type",
+            "Description": "The additional info type.",
+            "Type": {
+             "$id": "98",
+             "Kind": "string"
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           },
+           {
+            "$id": "99",
+            "Name": "info",
+            "SerializedName": "info",
+            "Description": "The additional info.",
+            "Type": {
+             "$id": "100",
+             "Kind": "model",
+             "Name": "ErrorAdditionalInfoInfo",
+             "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
+             "Usage": "Output,Json",
+             "Properties": []
+            },
+            "IsRequired": false,
+            "IsReadOnly": true
+           }
+          ]
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.Array"
+        },
+        "IsRequired": false,
+        "IsReadOnly": true
+       }
+      ]
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "85"
+  },
+  {
+   "$ref": "96"
+  },
+  {
+   "$ref": "100"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "101",
+   "Name": "MgmtTestClient",
+   "Description": "",
+   "Operations": [],
+   "Protocol": {
+    "$id": "102"
+   },
+   "Parameters": [
+    {
+     "$id": "103",
+     "Name": "host",
+     "NameInRequest": "host",
+     "Description": "Azure Resource Manager url.",
+     "Type": {
+      "$id": "104",
+      "Kind": "string"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "105",
+      "Type": {
+       "$id": "106",
+       "Kind": "string"
+      },
+      "Value": "https://management.azure.com"
+     }
+    }
+   ]
+  },
+  {
+   "$id": "107",
+   "Name": "PrivateEndpointConnections",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "108",
+     "Name": "listByMongoCluster",
+     "ResourceName": "PrivateEndpointConnectionResource",
+     "Description": "List existing private connections",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "103"
+      },
+      {
+       "$id": "109",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "110",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$id": "111",
+        "Type": {
+         "$id": "112",
+         "Kind": "string"
+        },
+        "Value": "v1"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "113",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "114",
+        "Kind": "uuid",
+        "Encode": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "115",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "116",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "117",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "118",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "119",
+        "Type": {
+         "$ref": "118"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "120",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "22"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtTest/privateEndpointConnections",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "121",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "122",
+     "Name": "get",
+     "ResourceName": "PrivateEndpointConnections",
+     "Description": "Get a specific private connection",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "103"
+      },
+      {
+       "$id": "123",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "124",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "111"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "125",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "126",
+        "Kind": "uuid",
+        "Encode": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "127",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "128",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "129",
+       "Name": "privateEndpointConnectionName",
+       "NameInRequest": "privateEndpointConnectionName",
+       "Description": "The name of the private endpoint connection associated with the Azure resource.",
+       "Type": {
+        "$id": "130",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "131",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "132",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "133",
+        "Type": {
+         "$ref": "132"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "134",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "25"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtTest/privateEndpointConnections/{privateEndpointConnectionName}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "135",
+     "Name": "create",
+     "ResourceName": "PrivateEndpointConnections",
+     "Description": "Create a Private endpoint connection",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "103"
+      },
+      {
+       "$id": "136",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "137",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "111"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "138",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "139",
+        "Kind": "uuid",
+        "Encode": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "140",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "141",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "142",
+       "Name": "privateEndpointConnectionName",
+       "NameInRequest": "privateEndpointConnectionName",
+       "Description": "The name of the private endpoint connection associated with the Azure resource.",
+       "Type": {
+        "$id": "143",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "144",
+       "Name": "resource",
+       "NameInRequest": "resource",
+       "Description": "Resource create parameters.",
+       "Type": {
+        "$ref": "25"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "145",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "146",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "147",
+        "Type": {
+         "$ref": "146"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "148",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "149",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "150",
+        "Type": {
+         "$ref": "149"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "151",
+       "StatusCodes": [
+        202
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "152",
+         "Name": "Location",
+         "NameInResponse": "location",
+         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Type": {
+          "$id": "153",
+          "Kind": "string"
+         }
+        },
+        {
+         "$id": "154",
+         "Name": "Retry-After",
+         "NameInResponse": "retryAfter",
+         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Type": {
+          "$id": "155",
+          "Kind": "int32"
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "156",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "25"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      },
+      {
+       "$id": "157",
+       "StatusCodes": [
+        201
+       ],
+       "BodyType": {
+        "$ref": "25"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtTest/privateEndpointConnections/{privateEndpointConnectionName}",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "LongRunning": {
+      "$id": "158",
+      "FinalStateVia": 0,
+      "FinalResponse": {
+       "$id": "159",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "25"
+       },
+       "BodyMediaType": "Json"
+      }
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "160",
+     "Name": "delete",
+     "ResourceName": "PrivateEndpointConnections",
+     "Description": "Delete the private endpoint connection",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "103"
+      },
+      {
+       "$id": "161",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "162",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "111"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "163",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "164",
+        "Kind": "uuid",
+        "Encode": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "165",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "166",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "167",
+       "Name": "privateEndpointConnectionName",
+       "NameInRequest": "privateEndpointConnectionName",
+       "Description": "The name of the private endpoint connection associated with the Azure resource.",
+       "Type": {
+        "$id": "168",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "169",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "170",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "171",
+        "Type": {
+         "$ref": "170"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "172",
+       "StatusCodes": [
+        202
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "173",
+         "Name": "Location",
+         "NameInResponse": "location",
+         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Type": {
+          "$id": "174",
+          "Kind": "string"
+         }
+        },
+        {
+         "$id": "175",
+         "Name": "Retry-After",
+         "NameInResponse": "retryAfter",
+         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Type": {
+          "$id": "176",
+          "Kind": "int32"
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      },
+      {
+       "$id": "177",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "DELETE",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtTest/privateEndpointConnections/{privateEndpointConnectionName}",
+     "BufferResponse": true,
+     "LongRunning": {
+      "$id": "178",
+      "FinalStateVia": 1,
+      "FinalResponse": {
+       "$id": "179",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json"
+      }
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "180"
+   },
+   "Parent": "MgmtTestClient",
+   "Parameters": [
+    {
+     "$ref": "103"
+    }
+   ]
+  },
+  {
+   "$id": "181",
+   "Name": "PrivateLinks",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "182",
+     "Name": "listByMongoCluster",
+     "ResourceName": "PrivateLinkResource",
+     "Description": "list private links on the given resource",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "103"
+      },
+      {
+       "$id": "183",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "184",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "111"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "185",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "186",
+        "Kind": "uuid",
+        "Encode": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "187",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "188",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "189",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "190",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "191",
+        "Type": {
+         "$ref": "190"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "192",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "67"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtTest/privateLinkResources",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "193",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "194"
+   },
+   "Parent": "MgmtTestClient",
+   "Parameters": [
+    {
+     "$ref": "103"
+    }
+   ]
+  }
+ ],
+ "Auth": {
+  "$id": "195",
+  "OAuth2": {
+   "$id": "196",
+   "Scopes": [
+    "user_impersonation"
+   ]
+  }
+ }
+}

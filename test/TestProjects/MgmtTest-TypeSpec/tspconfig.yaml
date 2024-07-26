@@ -1,0 +1,5 @@
+options:
+  "@azure-tools/typespec-csharp":
+    flavor: "azure"
+    namespace: "MgmtTest"
+    clear-output-folder: true
