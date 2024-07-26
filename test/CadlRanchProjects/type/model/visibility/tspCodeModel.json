@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "VisibilityModel",
    "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Output model with visibility properties.",
    "Properties": [
     {
@@ -91,7 +91,7 @@
    "Kind": "model",
    "Name": "ReadOnlyModel",
    "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "RoundTrip model with readonly optional properties.",
    "Properties": [
     {
