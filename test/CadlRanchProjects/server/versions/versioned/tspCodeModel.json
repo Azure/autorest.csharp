@@ -340,10 +340,94 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "37",
+     "Name": "withQueryUnknownApiVersion",
+     "ResourceName": "Versioned",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "8"
+      },
+      {
+       "$id": "38",
+       "Name": "apiVersion",
+       "NameInRequest": "apiVersion",
+       "Type": {
+        "$id": "39",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "40",
+         "Kind": "string"
+        },
+        "Value": "2022-07-09"
+       },
+       "Location": "Path",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "39"
+        },
+        "Value": "2022-07-09"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "42",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "43",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "45",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "HEAD",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/server/versions/versioned/with-query-unknown-api-version/{apiVersion}",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "37"
+    "$id": "46"
    },
    "Parameters": [
     {

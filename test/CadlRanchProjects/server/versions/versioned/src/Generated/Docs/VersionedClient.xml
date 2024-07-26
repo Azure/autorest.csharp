@@ -169,5 +169,47 @@ Response response = client.WithQueryOldApiVersion();
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="WithQueryUnknownApiVersionAsync(RequestContext)">
+      <example>
+This sample shows how to call WithQueryUnknownApiVersionAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = await client.WithQueryUnknownApiVersionAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call WithQueryUnknownApiVersionAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = await client.WithQueryUnknownApiVersionAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="WithQueryUnknownApiVersion(RequestContext)">
+      <example>
+This sample shows how to call WithQueryUnknownApiVersion.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = client.WithQueryUnknownApiVersion();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call WithQueryUnknownApiVersion with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+VersionedClient client = new VersionedClient(endpoint);
+
+Response response = client.WithQueryUnknownApiVersion();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>
