@@ -59,7 +59,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DisplayData", false)]
         public void ValidateResourceData(string resourceData, bool isExists)
         {
-            var all = FindAllResourceData().ToList();
             var resourceTypeExists = FindAllResourceData().Any(o => o.Name == resourceData);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
