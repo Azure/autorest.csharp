@@ -10,9 +10,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtTypeSpecTests() : base("MgmtTypeSpec") { }
 
         [TestCase("MgmtTypeSpecPrivateLinkResourceData", true)]
-        public void ValidateType(string typeName, bool isExists)
+        public void ValidateType(string typeName, bool isExisted)
         {
-            Assert.AreEqual(isExists, GetType(typeName) != null);
+            Assert.AreEqual(isExisted, GetType(typeName) != null);
         }
     }
 }
