@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
-            string suffix = name.Equals("Resource") ? "Data" : string.Empty;
+            string suffix = name.EndsWith("Resource") ? "Data" : string.Empty;
             newName = $"{prefix}{name}{suffix}";
             return true;
         }
