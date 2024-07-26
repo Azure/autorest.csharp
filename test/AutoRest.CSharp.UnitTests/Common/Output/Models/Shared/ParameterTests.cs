@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                AdditionalProperties: null);
+                AdditionalProperties: null,
+                Decorators: Array.Empty<InputDecoratorInfo>());
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -102,8 +103,9 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                AdditionalProperties: null);
-            InputNullableType nullableInputModel = new InputNullableType(inputModel);
+                AdditionalProperties: null,
+                Decorators: Array.Empty<InputDecoratorInfo>());
+            InputNullableType nullableInputModel = new InputNullableType(inputModel, Array.Empty<InputDecoratorInfo>());
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -149,7 +151,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         public void TestCreateDescription_NonInputModelType()
         {
             InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
-            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, Array.Empty<InputDecoratorInfo>());
             InputParameter opParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -200,8 +202,9 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
                 Properties: modelProps,
                 BaseModel: null,
                 DerivedModels: derivedModels,
-                AdditionalProperties: null);
-            InputNullableType nullableInputModel = new InputNullableType(inputModel);
+                AdditionalProperties: null,
+                Decorators: Array.Empty<InputDecoratorInfo>());
+            InputNullableType nullableInputModel = new InputNullableType(inputModel, Array.Empty<InputDecoratorInfo>());
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",
@@ -246,7 +249,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Shared
         public void TestFromInputParameter_NonInputModelType()
         {
             InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
-            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, Array.Empty<InputDecoratorInfo>());
             InputParameter inputParam = new InputParameter(
                 Name: "testParam",
                 NameInRequest: "testParam",

@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientPrefix = inputModel.Name;
         }
 
-        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, string.Empty, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null));
+        public static ResourceData Empty = new ResourceData(new InputModelType(string.Empty, string.Empty, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, Array.Empty<InputDecoratorInfo>()));
 
         protected override bool IsResourceType => true;
 

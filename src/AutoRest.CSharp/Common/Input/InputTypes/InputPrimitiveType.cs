@@ -1,11 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
+
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputPrimitiveTypeKind Kind) : InputType(Kind.ToString())
+internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType(Kind.ToString(), Decorators)
 {
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string? encode) : this(kind)
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind) : this(kind, Array.Empty<InputDecoratorInfo>())
+    {
+    }
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string? encode, IReadOnlyList<InputDecoratorInfo> decorators) : this(kind, decorators)
     {
         Encode = encode;
     }
@@ -14,8 +20,8 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind) : InputType(Kind
 
     public static InputPrimitiveType AzureLocation { get; } = new(InputPrimitiveTypeKind.AzureLocation);
     public static InputPrimitiveType Boolean { get; } = new(InputPrimitiveTypeKind.Boolean);
-    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64);
-    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url);
+    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64, Array.Empty<InputDecoratorInfo>());
+    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url, Array.Empty<InputDecoratorInfo>());
     public static InputPrimitiveType Char { get; } = new(InputPrimitiveTypeKind.Char);
     public static InputPrimitiveType ContentType { get; } = new(InputPrimitiveTypeKind.ContentType);
     public static InputPrimitiveType PlainDate { get; } = new(InputPrimitiveTypeKind.PlainDate);

@@ -362,7 +362,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
                     new Dictionary<string, InputModelType>(),
-                    null)
+                    null,
+                    Array.Empty<InputDecoratorInfo>())
                 {
                     IsUnknownDiscriminatorModel = true,
                 };

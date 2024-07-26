@@ -138,7 +138,8 @@ namespace AutoRest.CSharp.Output.Models
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
                     new Dictionary<string, InputModelType>(),
-                    null)
+                    null,
+                    Array.Empty<InputDecoratorInfo>())
                 {
                     IsUnknownDiscriminatorModel = true
                 };

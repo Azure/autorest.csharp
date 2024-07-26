@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
@@ -26,10 +27,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L67-L75
             var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Round-trip model with enum properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false, Array.Empty<InputDecoratorInfo>()),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false, Array.Empty<InputDecoratorInfo>())
                     },
-                    null, new List<InputModelType>(), null, null, null, null);
+                    null, new List<InputModelType>(), null, null, null, null, Array.Empty<InputDecoratorInfo>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -42,10 +43,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L47-L55
             var modelType = new InputModelType("InputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Input model with enum properties", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false, Array.Empty<InputDecoratorInfo>()),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false, Array.Empty < InputDecoratorInfo >())
                     },
-                    null, new List<InputModelType>(), null, null, null, null);
+                    null, new List<InputModelType>(), null, null, null, null, Array.Empty<InputDecoratorInfo>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -58,10 +59,10 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L57-L65
             var modelType = new InputModelType("OutputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Output model with enum properties", InputModelTypeUsage.Output,
                     new List<InputModelProperty>{
-                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
-                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
+                        new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false, Array.Empty < InputDecoratorInfo >()),
+                        new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false, Array.Empty < InputDecoratorInfo >())
                     },
-                    null, new List<InputModelType>(), null, null, null, null);
+                    null, new List<InputModelType>(), null, null, null, null, Array.Empty<InputDecoratorInfo>());
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -104,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Spanish", "Spanish", "Translate to Spanish"),
                         new("Mandarin", "Mandarin", "Translate to Mandarin"),
                         new("Undocumented", "Undocumented", null)
-                    }, true);
+                    }, true, Array.Empty<InputDecoratorInfo>());
 
         private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
@@ -115,7 +116,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Friday", "Friday", null),
                         new("Saturday", "Saturday", null),
                         new("Sunday", "Sunday", null)
-                    }, false);
+                    }, false, Array.Empty<InputDecoratorInfo>());
 
         private static readonly object[] ExtensibleEnumCase =
         {

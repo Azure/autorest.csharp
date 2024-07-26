@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,11 +28,14 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             InputType? keyType = null;
             InputType? valueType = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadWithConverter(nameof(InputDictionaryType.KeyType), options, ref keyType)
-                    || reader.TryReadWithConverter(nameof(InputDictionaryType.ValueType), options, ref valueType);
+                    || reader.TryReadWithConverter(nameof(InputDictionaryType.ValueType), options, ref valueType)
+                    || reader.TryReadWithConverter(nameof(InputDictionaryType.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -42,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
             keyType = keyType ?? throw new JsonException("Dictionary must have key type");
             valueType = valueType ?? throw new JsonException("Dictionary must have value type");
 
-            var dictType = new InputDictionaryType("Dictionary", keyType, valueType);
+            var dictType = new InputDictionaryType("Dictionary", keyType, valueType, decorators ?? Array.Empty<InputDecoratorInfo>());
             if (id != null)
             {
                 resolver.AddReference(id, dictType);

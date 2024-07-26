@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input.InputTypes.Serialization;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -34,6 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             string? name = null;
             InputType? result = null;
             var isFirstProperty = true;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isIdOrNameOrKind = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -73,18 +75,21 @@ namespace AutoRest.CSharp.Common.Input
             NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, options, _referenceHandler.CurrentResolver),
             DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, options, _referenceHandler.CurrentResolver),
-            _ => ReadPrimitiveType(ref reader, id, kind, _referenceHandler.CurrentResolver),
+            _ => ReadPrimitiveType(ref reader, id, kind, options, _referenceHandler.CurrentResolver),
         };
 
-        private static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? kind, ReferenceResolver resolver)
+        private static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
             string? encode = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref kind)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Encode), ref encode);
+                    || reader.TryReadString(nameof(InputPrimitiveType.Encode), ref encode)
+                    || reader.TryReadWithConverter(nameof(InputPrimitiveType.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -92,7 +97,7 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            var primitiveType = CreatePrimitiveType(kind, encode);
+            var primitiveType = CreatePrimitiveType(kind, encode, decorators ?? Array.Empty<InputDecoratorInfo>());
             if (id != null)
             {
                 resolver.AddReference(id, primitiveType);
@@ -101,14 +106,14 @@ namespace AutoRest.CSharp.Common.Input
             return primitiveType;
         }
 
-        public static InputPrimitiveType CreatePrimitiveType(string? primitiveKind, string? encode)
+        public static InputPrimitiveType CreatePrimitiveType(string? primitiveKind, string? encode, IReadOnlyList<InputDecoratorInfo> decorators)
         {
             if (primitiveKind == null)
             {
                 throw new ArgumentNullException(nameof(primitiveKind));
             }
             return Enum.TryParse<InputPrimitiveTypeKind>(primitiveKind, ignoreCase: true, out var kind)
-                ? new InputPrimitiveType(kind, encode)
+                ? new InputPrimitiveType(kind, encode, decorators)
                 : throw new JsonException($"{primitiveKind} type is unknown.");
         }
     }

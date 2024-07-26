@@ -7,8 +7,8 @@ using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string CrossLanguageDefinitionId, string? Access, string? Deprecation, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, IReadOnlyList<InputType>? ArgumentTypes = null)
-        : InputType(Name)
+    internal record InputModelType(string Name, string CrossLanguageDefinitionId, string? Access, string? Deprecation, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, InputModelProperty? DiscriminatorProperty, IReadOnlyDictionary<string, InputModelType> DiscriminatedSubtypes, InputType? AdditionalProperties, IReadOnlyList<InputDecoratorInfo> Decorators, IReadOnlyList<InputType>? ArgumentTypes = null)
+        : InputType(Name, Decorators)
     {
         /// <summary>
         /// Indicates if this model is the Unknown derived version of a model with discriminator
