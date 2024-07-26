@@ -452,9 +452,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSupersetInheritance\\src\\Generated -n"
     },
-    "MgmtTest-TypeSpec": {
+    "MgmtTypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtTest-TypeSpec\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtTypeSpec\\src\\Generated -n"
     },
     "MgmtXmlDeserialization": {
       "commandName": "Project",
