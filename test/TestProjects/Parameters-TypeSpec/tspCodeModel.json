@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "ParametersCadl.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -31,7 +33,7 @@
    "Kind": "model",
    "Name": "Result",
    "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Properties": [
     {
      "$id": "6",
@@ -40,7 +42,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -75,7 +79,27 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "13",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "14",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "15",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "16",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -88,12 +112,32 @@
        "Kind": "Method"
       },
       {
-       "$id": "14",
+       "$id": "17",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "15",
-        "Kind": "int32"
+        "$id": "18",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "19",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "20",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "21",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -106,19 +150,23 @@
        "Kind": "Method"
       },
       {
-       "$id": "16",
+       "$id": "22",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "17",
-        "Kind": "string"
+        "$id": "23",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "24",
         "Type": {
-         "$id": "19",
-         "Kind": "string"
+         "$id": "25",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-15-preview"
        },
@@ -132,12 +180,14 @@
        "Kind": "Client"
       },
       {
-       "$id": "20",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
-        "Kind": "string"
+        "$id": "27",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -149,9 +199,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "28",
         "Type": {
-         "$ref": "21"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
@@ -159,7 +209,7 @@
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -183,18 +233,38 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "24",
+     "$id": "30",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "31",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "26",
-        "Kind": "int32"
+        "$id": "32",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "33",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "34",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "35",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -207,12 +277,32 @@
        "Kind": "Method"
       },
       {
-       "$id": "27",
+       "$id": "36",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "28",
-        "Kind": "int32"
+        "$id": "37",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "38",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "39",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "40",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": true,
@@ -225,12 +315,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "29",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
-        "Kind": "string"
+        "$id": "42",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -242,9 +334,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "43",
         "Type": {
-         "$ref": "30"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
@@ -252,7 +344,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
@@ -277,7 +369,7 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "45"
    },
    "Parent": "ParametersCadlClient"
   }

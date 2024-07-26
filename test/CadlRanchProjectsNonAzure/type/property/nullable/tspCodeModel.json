@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "StringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -19,7 +19,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -34,7 +36,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -47,7 +51,7 @@
    "Kind": "model",
    "Name": "BytesProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -57,7 +61,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -73,7 +79,9 @@
       "Type": {
        "$id": "13",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Name": "bytes",
+       "Encode": "base64",
+       "CrossLanguageDefinitionId": "TypeSpec.bytes"
       }
      },
      "IsRequired": true,
@@ -86,7 +94,7 @@
    "Kind": "model",
    "Name": "DatetimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Model with a datetime property",
    "Properties": [
     {
@@ -96,7 +104,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -112,11 +122,15 @@
       "Type": {
        "$id": "19",
        "Kind": "utcDateTime",
+       "Name": "utcDateTime",
        "Encode": "rfc3339",
        "WireType": {
         "$id": "20",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
       }
      },
      "IsRequired": true,
@@ -129,7 +143,7 @@
    "Kind": "model",
    "Name": "DurationProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Model with a duration property",
    "Properties": [
     {
@@ -139,7 +153,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "23",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -155,11 +171,15 @@
       "Type": {
        "$id": "26",
        "Kind": "duration",
+       "Name": "duration",
        "Encode": "ISO8601",
        "WireType": {
         "$id": "27",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.duration"
       }
      },
      "IsRequired": true,
@@ -172,7 +192,7 @@
    "Kind": "model",
    "Name": "CollectionsByteProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Model with collection bytes properties",
    "Properties": [
     {
@@ -182,7 +202,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "30",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -202,7 +224,9 @@
        "ValueType": {
         "$id": "34",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -217,7 +241,7 @@
    "Kind": "model",
    "Name": "CollectionsModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Model with collection models properties",
    "Properties": [
     {
@@ -227,7 +251,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -249,7 +275,7 @@
         "Kind": "model",
         "Name": "InnerModel",
         "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
-        "Usage": "Output,Json",
+        "Usage": "Output,Xml",
         "Description": "Inner model used in collections model property",
         "Properties": [
          {
@@ -259,7 +285,9 @@
           "Description": "Inner model property",
           "Type": {
            "$id": "43",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -282,7 +310,7 @@
    "Kind": "model",
    "Name": "CollectionsStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
-   "Usage": "Input,Output,JsonMergePatch,Json",
+   "Usage": "Input,Output,JsonMergePatch,Xml",
    "Description": "Model with collection string properties",
    "Properties": [
     {
@@ -292,7 +320,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "46",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -311,7 +341,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "50",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -339,7 +371,9 @@
      "Description": "TestServer endpoint",
      "Type": {
       "$id": "54",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -354,7 +388,9 @@
       "$id": "55",
       "Type": {
        "$id": "56",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -382,7 +418,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -443,7 +481,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -508,7 +548,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "71",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -552,7 +594,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "75",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -614,7 +658,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "81",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -658,7 +704,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "85",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -732,7 +780,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "92",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -793,7 +843,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "97",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -858,7 +910,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "103",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -902,7 +956,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "107",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -964,7 +1020,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "113",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1008,7 +1066,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "117",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1082,7 +1142,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "124",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1143,7 +1205,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1208,7 +1272,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "135",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1252,7 +1318,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "139",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1314,7 +1382,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "145",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1358,7 +1428,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "149",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1432,7 +1504,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "156",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1493,7 +1567,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "161",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1558,7 +1634,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "167",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1602,7 +1680,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "171",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1664,7 +1744,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "177",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1708,7 +1790,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "181",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1782,7 +1866,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "188",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1843,7 +1929,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "193",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1908,7 +1996,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "199",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1952,7 +2042,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "203",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2014,7 +2106,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "209",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2058,7 +2152,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "213",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2132,7 +2228,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "220",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2193,7 +2291,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "225",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2258,7 +2358,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "231",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2302,7 +2404,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "235",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2364,7 +2468,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "241",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2408,7 +2514,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "245",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2482,7 +2590,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "252",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2543,7 +2653,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "257",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2608,7 +2720,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "263",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2652,7 +2766,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "267",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2714,7 +2830,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "273",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2758,7 +2876,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "277",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

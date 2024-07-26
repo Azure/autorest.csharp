@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -47,7 +49,9 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "8",
-        "Kind": "url"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -80,7 +84,9 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "v1.0"
        }
@@ -91,7 +97,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -148,7 +156,9 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "18",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -166,7 +176,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

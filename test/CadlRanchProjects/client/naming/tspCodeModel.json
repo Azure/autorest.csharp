@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -20,7 +22,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Json"
+   "Usage": "Input,Xml"
   },
   {
    "$id": "5",
@@ -29,7 +31,9 @@
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -44,7 +48,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Json"
+   "Usage": "Input,Xml"
   }
  ],
  "Models": [
@@ -53,7 +57,7 @@
    "Kind": "model",
    "Name": "ClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Properties": [
     {
      "$id": "10",
@@ -62,7 +66,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "11",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -74,7 +80,7 @@
    "Kind": "model",
    "Name": "LanguageClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Properties": [
     {
      "$id": "13",
@@ -83,7 +89,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "14",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -95,7 +103,7 @@
    "Kind": "model",
    "Name": "ClientNameAndJsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Properties": [
     {
      "$id": "16",
@@ -104,7 +112,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "17",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -116,7 +126,7 @@
    "Kind": "model",
    "Name": "ClientModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Properties": [
     {
      "$id": "19",
@@ -125,7 +135,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "20",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -137,7 +149,7 @@
    "Kind": "model",
    "Name": "CSModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Properties": [
     {
      "$id": "22",
@@ -146,7 +158,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "23",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -173,7 +187,9 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "27",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -188,7 +204,9 @@
         "$id": "28",
         "Type": {
          "$id": "29",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -199,7 +217,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "31",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -253,7 +273,9 @@
        "NameInRequest": "defaultName",
        "Type": {
         "$id": "36",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -271,7 +293,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "38",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -342,7 +366,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "44",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -367,7 +393,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "47",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -441,7 +469,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "53",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -466,7 +496,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "56",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -540,7 +572,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "62",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -565,7 +599,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "65",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -622,7 +658,9 @@
        "NameInRequest": "default-name",
        "Type": {
         "$id": "70",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsRequired": true,
@@ -640,7 +678,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "72",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -694,7 +734,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "77",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -729,7 +771,9 @@
          "Description": "",
          "Type": {
           "$id": "81",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         }
        ],
@@ -791,7 +835,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "87",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -816,7 +862,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "90",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -890,7 +938,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "96",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -915,7 +965,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "99",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1005,7 +1057,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "107",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1030,7 +1084,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "110",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1104,7 +1160,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "116",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1129,7 +1187,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "119",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

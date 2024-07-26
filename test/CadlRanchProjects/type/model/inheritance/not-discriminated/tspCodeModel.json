@@ -9,21 +9,21 @@
    "Kind": "model",
    "Name": "Siamese",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
-   "Usage": "Input,Output,Json",
+   "Usage": "Input,Output,Xml",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Cat",
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
-    "Usage": "Input,Output,Json",
+    "Usage": "Input,Output,Xml",
     "Description": "The second level model in the normal multiple levels inheritance.",
     "BaseModel": {
      "$id": "4",
      "Kind": "model",
      "Name": "Pet",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
-     "Usage": "Input,Output,Json",
+     "Usage": "Input,Output,Xml",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "Properties": [
       {
@@ -33,7 +33,9 @@
        "Description": "",
        "Type": {
         "$id": "6",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -48,7 +50,27 @@
       "Description": "",
       "Type": {
        "$id": "8",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32",
+       "BaseType": {
+        "$id": "9",
+        "Kind": "int32",
+        "Name": "int64",
+        "CrossLanguageDefinitionId": "TypeSpec.int64",
+        "BaseType": {
+         "$id": "10",
+         "Kind": "int32",
+         "Name": "integer",
+         "CrossLanguageDefinitionId": "TypeSpec.integer",
+         "BaseType": {
+          "$id": "11",
+          "Kind": "int32",
+          "Name": "numeric",
+          "CrossLanguageDefinitionId": "TypeSpec.numeric"
+         }
+        }
+       }
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -57,13 +79,15 @@
    },
    "Properties": [
     {
-     "$id": "9",
+     "$id": "12",
      "Name": "smart",
      "SerializedName": "smart",
      "Description": "",
      "Type": {
-      "$id": "10",
-      "Kind": "boolean"
+      "$id": "13",
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -79,24 +103,26 @@
  ],
  "Clients": [
   {
-   "$id": "11",
+   "$id": "14",
    "Name": "NotDiscriminatedClient",
    "Description": "Illustrates not-discriminated inheritance model.",
    "Operations": [
     {
-     "$id": "12",
+     "$id": "15",
      "Name": "postValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "13",
+       "$id": "16",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "14",
-        "Kind": "string"
+        "$id": "17",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -108,16 +134,18 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "15",
+        "$id": "18",
         "Type": {
-         "$id": "16",
-         "Kind": "string"
+         "$id": "19",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "17",
+       "$id": "20",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -134,42 +162,19 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "21",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "19",
-        "Kind": "string"
+        "$id": "22",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$ref": "19"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "21",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "22",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -182,11 +187,38 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "24",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "25",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "26",
+        "Type": {
+         "$ref": "25"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -207,21 +239,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "28",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "16"
       },
       {
-       "$id": "26",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
-        "Kind": "string"
+        "$id": "30",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -233,9 +267,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "31",
         "Type": {
-         "$ref": "27"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
@@ -243,7 +277,7 @@
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -267,16 +301,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "30",
+     "$id": "33",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "16"
       },
       {
-       "$id": "31",
+       "$id": "34",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -293,42 +327,19 @@
        "Kind": "Method"
       },
       {
-       "$id": "32",
+       "$id": "35",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
-        "Kind": "string"
+        "$id": "36",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "34",
-        "Type": {
-         "$ref": "33"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "35",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "36",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -341,11 +352,38 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$id": "38",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "39",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "40",
+        "Type": {
+         "$ref": "39"
+        },
+        "Value": "application/json"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
@@ -373,11 +411,11 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "42"
    },
    "Parameters": [
     {
-     "$ref": "13"
+     "$ref": "16"
     }
    ]
   }

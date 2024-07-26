@@ -22,7 +22,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "5",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputRecord",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Description": "Record used in operation parameters",
    "Properties": [
     {
@@ -19,7 +19,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -31,7 +33,7 @@
    "Kind": "model",
    "Name": "OutputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.OutputRecord",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Record used in operation return type",
    "Properties": [
     {
@@ -41,7 +43,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -53,7 +57,7 @@
    "Kind": "model",
    "Name": "InputOutputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
-   "Usage": "Input,Output,Json",
+   "Usage": "Input,Output,Xml",
    "Description": "Record used both as operation parameter and return type",
    "Properties": [
     {
@@ -63,7 +67,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -90,7 +96,9 @@
        "Description": "TestServer endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -105,7 +113,9 @@
         "$id": "15",
         "Type": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -133,7 +143,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "19",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -158,7 +170,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "22",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -215,7 +229,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "27",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -292,7 +308,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "33",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -317,7 +335,9 @@
        "NameInRequest": "Content-Type",
        "Type": {
         "$id": "36",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Pagination.Interval",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -57,7 +59,9 @@
    "CrossLanguageDefinitionId": "Pagination.Versions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -76,7 +80,7 @@
    "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
    "CrossLanguageDefinitionId": "Pagination.ListLedgerEntryInputBody",
-   "Usage": "Input,Json",
+   "Usage": "Input,Xml",
    "Description": "Type for input model body",
    "Properties": [
     {
@@ -86,7 +90,9 @@
      "Description": "Required string",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,7 +104,27 @@
      "Description": "Required int",
      "Type": {
       "$id": "16",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
+      "BaseType": {
+       "$id": "17",
+       "Kind": "int32",
+       "Name": "int64",
+       "CrossLanguageDefinitionId": "TypeSpec.int64",
+       "BaseType": {
+        "$id": "18",
+        "Kind": "int32",
+        "Name": "integer",
+        "CrossLanguageDefinitionId": "TypeSpec.integer",
+        "BaseType": {
+         "$id": "19",
+         "Kind": "int32",
+         "Name": "numeric",
+         "CrossLanguageDefinitionId": "TypeSpec.numeric"
+        }
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -106,61 +132,67 @@
    ]
   },
   {
-   "$id": "17",
+   "$id": "20",
    "Kind": "model",
    "Name": "PagedLedgerEntries",
    "CrossLanguageDefinitionId": "Pagination.PagedLedgerEntries",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Paginated ledger entries",
    "Properties": [
     {
-     "$id": "18",
+     "$id": "21",
      "Name": "entries",
      "SerializedName": "entries",
      "Description": "Array of ledger entries",
      "Type": {
-      "$id": "19",
+      "$id": "22",
       "Kind": "array",
       "Name": "ArrayLedgerEntry",
       "ValueType": {
-       "$id": "20",
+       "$id": "23",
        "Kind": "model",
        "Name": "LedgerEntry",
        "CrossLanguageDefinitionId": "Pagination.LedgerEntry",
-       "Usage": "Output,Json",
+       "Usage": "Output,Xml",
        "Properties": [
         {
-         "$id": "21",
+         "$id": "24",
          "Name": "contents",
          "SerializedName": "contents",
          "Description": "Contents of the ledger entry.",
          "Type": {
-          "$id": "22",
-          "Kind": "string"
+          "$id": "25",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "23",
+         "$id": "26",
          "Name": "collectionId",
          "SerializedName": "collectionId",
          "Description": "",
          "Type": {
-          "$id": "24",
-          "Kind": "string"
+          "$id": "27",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": true
         },
         {
-         "$id": "25",
+         "$id": "28",
          "Name": "transactionId",
          "SerializedName": "transactionId",
          "Description": "",
          "Type": {
-          "$id": "26",
-          "Kind": "string"
+          "$id": "29",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": true
@@ -173,13 +205,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "27",
+     "$id": "30",
      "Name": "customNextLink",
      "SerializedName": "customNextLink",
      "Description": "Path to retrieve next page of ledger entries",
      "Type": {
-      "$id": "28",
-      "Kind": "url"
+      "$id": "31",
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "32",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "BaseType": {
+        "$id": "33",
+        "Kind": "url",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -187,10 +233,10 @@
    ]
   },
   {
-   "$ref": "20"
+   "$ref": "23"
   },
   {
-   "$id": "29",
+   "$id": "34",
    "Kind": "model",
    "Name": "PagedDimensionValueListItem",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -198,33 +244,35 @@
    "Description": "Paged collection of DimensionValueListItem items",
    "Properties": [
     {
-     "$id": "30",
+     "$id": "35",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The DimensionValueListItem items on this page",
      "Type": {
-      "$id": "31",
+      "$id": "36",
       "Kind": "array",
       "Name": "ArrayDimensionValueListItem",
       "ValueType": {
-       "$id": "32",
+       "$id": "37",
        "Kind": "model",
        "Name": "DimensionValueListItem",
        "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
-       "Usage": "Output,Json",
+       "Usage": "Output,Xml",
        "Properties": [
         {
-         "$id": "33",
+         "$id": "38",
          "Name": "value",
          "SerializedName": "value",
          "Description": "",
          "Type": {
-          "$id": "34",
+          "$id": "39",
           "Kind": "array",
           "Name": "Array",
           "ValueType": {
-           "$id": "35",
-           "Kind": "string"
+           "$id": "40",
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
@@ -239,13 +287,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "36",
+     "$id": "41",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "37",
-      "Kind": "url"
+      "$id": "42",
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "43",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "BaseType": {
+        "$id": "44",
+        "Kind": "url",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -253,10 +315,10 @@
    ]
   },
   {
-   "$ref": "32"
+   "$ref": "37"
   },
   {
-   "$id": "38",
+   "$id": "45",
    "Kind": "model",
    "Name": "PagedLedgerEntry",
    "CrossLanguageDefinitionId": "Azure.Core.Page",
@@ -264,16 +326,16 @@
    "Description": "Paged collection of LedgerEntry items",
    "Properties": [
     {
-     "$id": "39",
+     "$id": "46",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The LedgerEntry items on this page",
      "Type": {
-      "$id": "40",
+      "$id": "47",
       "Kind": "array",
       "Name": "ArrayLedgerEntry",
       "ValueType": {
-       "$ref": "20"
+       "$ref": "23"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -281,13 +343,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "41",
+     "$id": "48",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "42",
-      "Kind": "url"
+      "$id": "49",
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "50",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "BaseType": {
+        "$id": "51",
+        "Kind": "url",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -295,7 +371,7 @@
    ]
   },
   {
-   "$id": "43",
+   "$id": "52",
    "Kind": "model",
    "Name": "PagedTextBlocklist",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -303,42 +379,46 @@
    "Description": "Paged collection of TextBlocklist items",
    "Properties": [
     {
-     "$id": "44",
+     "$id": "53",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TextBlocklist items on this page",
      "Type": {
-      "$id": "45",
+      "$id": "54",
       "Kind": "array",
       "Name": "ArrayTextBlocklist",
       "ValueType": {
-       "$id": "46",
+       "$id": "55",
        "Kind": "model",
        "Name": "TextBlocklist",
        "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
-       "Usage": "Output,Json",
+       "Usage": "Output,Xml",
        "Description": "Text Blocklist.",
        "Properties": [
         {
-         "$id": "47",
+         "$id": "56",
          "Name": "blocklistName",
          "SerializedName": "blocklistName",
          "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
          "Type": {
-          "$id": "48",
-          "Kind": "string"
+          "$id": "57",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "49",
+         "$id": "58",
          "Name": "description",
          "SerializedName": "description",
          "Description": "Text blocklist description.",
          "Type": {
-          "$id": "50",
-          "Kind": "string"
+          "$id": "59",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -351,13 +431,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "51",
+     "$id": "60",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "52",
-      "Kind": "url"
+      "$id": "61",
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "62",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "BaseType": {
+        "$id": "63",
+        "Kind": "url",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -365,10 +459,10 @@
    ]
   },
   {
-   "$ref": "46"
+   "$ref": "55"
   },
   {
-   "$id": "53",
+   "$id": "64",
    "Kind": "model",
    "Name": "PagedTextBlockItem",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -376,54 +470,60 @@
    "Description": "Paged collection of TextBlockItem items",
    "Properties": [
     {
-     "$id": "54",
+     "$id": "65",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TextBlockItem items on this page",
      "Type": {
-      "$id": "55",
+      "$id": "66",
       "Kind": "array",
       "Name": "ArrayTextBlockItem",
       "ValueType": {
-       "$id": "56",
+       "$id": "67",
        "Kind": "model",
        "Name": "TextBlockItem",
        "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
-       "Usage": "Output,Json",
+       "Usage": "Output,Xml",
        "Description": "Item in TextBlocklist.",
        "Properties": [
         {
-         "$id": "57",
+         "$id": "68",
          "Name": "blockItemId",
          "SerializedName": "blockItemId",
          "Description": "Block Item Id. It will be uuid.",
          "Type": {
-          "$id": "58",
-          "Kind": "string"
+          "$id": "69",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
         },
         {
-         "$id": "59",
+         "$id": "70",
          "Name": "description",
          "SerializedName": "description",
          "Description": "Block item description.",
          "Type": {
-          "$id": "60",
-          "Kind": "string"
+          "$id": "71",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
         },
         {
-         "$id": "61",
+         "$id": "72",
          "Name": "text",
          "SerializedName": "text",
          "Description": "Block item content.",
          "Type": {
-          "$id": "62",
-          "Kind": "string"
+          "$id": "73",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -436,13 +536,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "63",
+     "$id": "74",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "64",
-      "Kind": "url"
+      "$id": "75",
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "76",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "BaseType": {
+        "$id": "77",
+        "Kind": "url",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       }
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -450,65 +564,71 @@
    ]
   },
   {
-   "$ref": "56"
+   "$ref": "67"
   },
   {
-   "$id": "65",
+   "$id": "78",
    "Kind": "model",
    "Name": "BatchPoolListResult",
    "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "The result of listing the Pools in an Account.",
    "Properties": [
     {
-     "$id": "66",
+     "$id": "79",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The list of Pools.",
      "Type": {
-      "$id": "67",
+      "$id": "80",
       "Kind": "array",
       "Name": "ArrayBatchPool",
       "ValueType": {
-       "$id": "68",
+       "$id": "81",
        "Kind": "model",
        "Name": "BatchPool",
        "CrossLanguageDefinitionId": "Pagination.BatchPool",
-       "Usage": "Output,Json",
+       "Usage": "Output,Xml",
        "Description": "A Pool in the Azure Batch service.",
        "Properties": [
         {
-         "$id": "69",
+         "$id": "82",
          "Name": "id",
          "SerializedName": "id",
          "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
          "Type": {
-          "$id": "70",
-          "Kind": "string"
+          "$id": "83",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
         },
         {
-         "$id": "71",
+         "$id": "84",
          "Name": "displayName",
          "SerializedName": "displayName",
          "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
          "Type": {
-          "$id": "72",
-          "Kind": "string"
+          "$id": "85",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
         },
         {
-         "$id": "73",
+         "$id": "86",
          "Name": "url",
          "SerializedName": "url",
          "Description": "The URL of the Pool.",
          "Type": {
-          "$id": "74",
-          "Kind": "string"
+          "$id": "87",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": true
@@ -521,13 +641,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "75",
+     "$id": "88",
      "Name": "odata.nextLink",
      "SerializedName": "odata.nextLink",
      "Description": "The URL to get the next set of results.",
      "Type": {
-      "$id": "76",
-      "Kind": "string"
+      "$id": "89",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -535,24 +657,26 @@
    ]
   },
   {
-   "$ref": "68"
+   "$ref": "81"
   },
   {
-   "$id": "77",
+   "$id": "90",
    "Kind": "model",
    "Name": "BatchError",
    "CrossLanguageDefinitionId": "Pagination.BatchError",
-   "Usage": "Output,Error,Json",
+   "Usage": "Output,Error,Xml",
    "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {
-     "$id": "78",
+     "$id": "91",
      "Name": "code",
      "SerializedName": "code",
      "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
-      "$id": "79",
-      "Kind": "string"
+      "$id": "92",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -562,12 +686,12 @@
  ],
  "Clients": [
   {
-   "$id": "80",
+   "$id": "93",
    "Name": "PaginationClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "81",
+     "$id": "94",
      "Name": "ListPaginationLedgerEntries",
      "ResourceName": "LedgerEntry",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -575,12 +699,14 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "82",
+       "$id": "95",
        "Name": "pagnationUri",
        "NameInRequest": "pagnationUri",
        "Type": {
-        "$id": "83",
-        "Kind": "url"
+        "$id": "96",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -593,20 +719,24 @@
        "Kind": "Client"
       },
       {
-       "$id": "84",
+       "$id": "97",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "85",
-        "Kind": "string"
+        "$id": "98",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "99",
         "Type": {
-         "$id": "87",
-         "Kind": "string"
+         "$id": "100",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        },
@@ -620,7 +750,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "88",
+       "$id": "101",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "Body parameter",
@@ -638,12 +768,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "89",
+       "$id": "102",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
-        "Kind": "string"
+        "$id": "103",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -655,20 +787,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "104",
         "Type": {
-         "$ref": "90"
+         "$ref": "103"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "92",
+       "$id": "105",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "93",
-        "Kind": "string"
+        "$id": "106",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -680,9 +814,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "94",
+        "$id": "107",
         "Type": {
-         "$ref": "93"
+         "$ref": "106"
         },
         "Value": "application/json"
        }
@@ -690,12 +824,12 @@
      ],
      "Responses": [
       {
-       "$id": "95",
+       "$id": "108",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "20"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -714,7 +848,7 @@
      ],
      "BufferResponse": true,
      "Paging": {
-      "$id": "96",
+      "$id": "109",
       "NextLinkName": "customNextLink",
       "ItemName": "entries"
      },
@@ -723,21 +857,21 @@
     }
    ],
    "Protocol": {
-    "$id": "97"
+    "$id": "110"
    },
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "95"
     }
    ]
   },
   {
-   "$id": "98",
+   "$id": "111",
    "Name": "AdditionalParameter",
    "Description": "",
    "Operations": [
     {
-     "$id": "99",
+     "$id": "112",
      "Name": "ListMetricDimensionValues",
      "ResourceName": "DimensionValueListItem",
      "Summary": "List the dimension values for the given metric dimension name.",
@@ -745,20 +879,22 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
+       "$ref": "95"
       },
       {
-       "$id": "100",
+       "$id": "113",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "101",
-        "Kind": "string"
+        "$id": "114",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "86"
+        "$ref": "99"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -770,13 +906,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "102",
+       "$id": "115",
        "Name": "testRunId",
        "NameInRequest": "testRunId",
        "Description": "Unique test run name as identifier",
        "Type": {
-        "$id": "103",
-        "Kind": "string"
+        "$id": "116",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -789,13 +927,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "104",
+       "$id": "117",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "Dimension name",
        "Type": {
-        "$id": "105",
-        "Kind": "string"
+        "$id": "118",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -808,7 +948,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "106",
+       "$id": "119",
        "Name": "interval",
        "NameInRequest": "interval",
        "Description": "The interval (i.e. timegrain) of the query.",
@@ -826,13 +966,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "107",
+       "$id": "120",
        "Name": "metricName",
        "NameInRequest": "metricName",
        "Description": "Metric name",
        "Type": {
-        "$id": "108",
-        "Kind": "string"
+        "$id": "121",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -845,13 +987,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "109",
+       "$id": "122",
        "Name": "metricNamespace",
        "NameInRequest": "metricNamespace",
        "Description": "Metric namespace to query metric definitions for.",
        "Type": {
-        "$id": "110",
-        "Kind": "string"
+        "$id": "123",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -864,13 +1008,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "111",
+       "$id": "124",
        "Name": "timespan",
        "NameInRequest": "timespan",
        "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
        "Type": {
-        "$id": "112",
-        "Kind": "string"
+        "$id": "125",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -883,12 +1029,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "113",
+       "$id": "126",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "114",
-        "Kind": "string"
+        "$id": "127",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -900,9 +1048,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "115",
+        "$id": "128",
         "Type": {
-         "$ref": "114"
+         "$ref": "127"
         },
         "Value": "application/json"
        }
@@ -910,12 +1058,12 @@
      ],
      "Responses": [
       {
-       "$id": "116",
+       "$id": "129",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "34"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -931,7 +1079,7 @@
      "Path": "/app/test-runs/{testRunId}/metric-dimensions/{name}/values",
      "BufferResponse": true,
      "Paging": {
-      "$id": "117",
+      "$id": "130",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -940,42 +1088,44 @@
     }
    ],
    "Protocol": {
-    "$id": "118"
+    "$id": "131"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "95"
     }
    ]
   },
   {
-   "$id": "119",
+   "$id": "132",
    "Name": "UseFoundationsResourceList",
    "Description": "",
    "Operations": [
     {
-     "$id": "120",
+     "$id": "133",
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
+       "$ref": "95"
       },
       {
-       "$id": "121",
+       "$id": "134",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "122",
-        "Kind": "string"
+        "$id": "135",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "86"
+        "$ref": "99"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -987,12 +1137,14 @@
        "Kind": "Client"
       },
       {
-       "$id": "123",
+       "$id": "136",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "124",
-        "Kind": "string"
+        "$id": "137",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1004,9 +1156,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "138",
         "Type": {
-         "$ref": "124"
+         "$ref": "137"
         },
         "Value": "application/json"
        }
@@ -1014,12 +1166,12 @@
      ],
      "Responses": [
       {
-       "$id": "126",
+       "$id": "139",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "38"
+        "$ref": "45"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1035,7 +1187,7 @@
      "Path": "/app/adp/transactions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "127",
+      "$id": "140",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1044,22 +1196,22 @@
     }
    ],
    "Protocol": {
-    "$id": "128"
+    "$id": "141"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "95"
     }
    ]
   },
   {
-   "$id": "129",
+   "$id": "142",
    "Name": "TwoTypesItem",
    "Description": "",
    "Operations": [
     {
-     "$id": "130",
+     "$id": "143",
      "Name": "listTextBlocklists",
      "ResourceName": "TextBlocklist",
      "Summary": "Get All Text Blocklists",
@@ -1067,20 +1219,22 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
+       "$ref": "95"
       },
       {
-       "$id": "131",
+       "$id": "144",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "132",
-        "Kind": "string"
+        "$id": "145",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "86"
+        "$ref": "99"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1092,12 +1246,14 @@
        "Kind": "Client"
       },
       {
-       "$id": "133",
+       "$id": "146",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "134",
-        "Kind": "string"
+        "$id": "147",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1109,9 +1265,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "135",
+        "$id": "148",
         "Type": {
-         "$ref": "134"
+         "$ref": "147"
         },
         "Value": "application/json"
        }
@@ -1119,12 +1275,12 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "149",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "43"
+        "$ref": "52"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1140,7 +1296,7 @@
      "Path": "/app/text/blocklists",
      "BufferResponse": true,
      "Paging": {
-      "$id": "137",
+      "$id": "150",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1148,7 +1304,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "138",
+     "$id": "151",
      "Name": "listTextBlocklistItems",
      "ResourceName": "TextBlockItem",
      "Summary": "Get All BlockItems By blocklistName",
@@ -1156,20 +1312,22 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
+       "$ref": "95"
       },
       {
-       "$id": "139",
+       "$id": "152",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "140",
-        "Kind": "string"
+        "$id": "153",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "86"
+        "$ref": "99"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1181,13 +1339,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "141",
+       "$id": "154",
        "Name": "blocklistName",
        "NameInRequest": "blocklistName",
        "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
        "Type": {
-        "$id": "142",
-        "Kind": "string"
+        "$id": "155",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1200,13 +1360,33 @@
        "Kind": "Method"
       },
       {
-       "$id": "143",
+       "$id": "156",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "The number of result items to return.",
        "Type": {
-        "$id": "144",
-        "Kind": "int32"
+        "$id": "157",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "158",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "159",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "160",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1219,13 +1399,33 @@
        "Kind": "Method"
       },
       {
-       "$id": "145",
+       "$id": "161",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "The number of result items to skip.",
        "Type": {
-        "$id": "146",
-        "Kind": "int32"
+        "$id": "162",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "163",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "164",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "165",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1238,13 +1438,33 @@
        "Kind": "Method"
       },
       {
-       "$id": "147",
+       "$id": "166",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "148",
-        "Kind": "int32"
+        "$id": "167",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "168",
+         "Kind": "int32",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "169",
+          "Kind": "int32",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "170",
+           "Kind": "int32",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1257,12 +1477,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "149",
+       "$id": "171",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "150",
-        "Kind": "string"
+        "$id": "172",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1274,9 +1496,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "151",
+        "$id": "173",
         "Type": {
-         "$ref": "150"
+         "$ref": "172"
         },
         "Value": "application/json"
        }
@@ -1284,12 +1506,12 @@
      ],
      "Responses": [
       {
-       "$id": "152",
+       "$id": "174",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "53"
+        "$ref": "64"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1305,7 +1527,7 @@
      "Path": "/app/text/blocklists/{blocklistName}/blockItems",
      "BufferResponse": true,
      "Paging": {
-      "$id": "153",
+      "$id": "175",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -1314,42 +1536,44 @@
     }
    ],
    "Protocol": {
-    "$id": "154"
+    "$id": "176"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "95"
     }
    ]
   },
   {
-   "$id": "155",
+   "$id": "177",
    "Name": "Pools",
    "Description": "",
    "Operations": [
     {
-     "$id": "156",
+     "$id": "178",
      "Name": "listPools",
      "ResourceName": "Pools",
      "Description": "Lists all of the Pools in the specified Account.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
+       "$ref": "95"
       },
       {
-       "$id": "157",
+       "$id": "179",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "158",
-        "Kind": "string"
+        "$id": "180",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$ref": "86"
+        "$ref": "99"
        },
        "IsRequired": true,
        "IsApiVersion": true,
@@ -1361,13 +1585,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "159",
+       "$id": "181",
        "Name": "$filter",
        "NameInRequest": "$filter",
        "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
        "Type": {
-        "$id": "160",
-        "Kind": "string"
+        "$id": "182",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -1380,17 +1606,19 @@
        "Kind": "Method"
       },
       {
-       "$id": "161",
+       "$id": "183",
        "Name": "$select",
        "NameInRequest": "$select",
        "Description": "An OData $select clause.",
        "Type": {
-        "$id": "162",
+        "$id": "184",
         "Kind": "array",
         "Name": "Array",
         "ValueType": {
-         "$id": "163",
-         "Kind": "string"
+         "$id": "185",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1406,17 +1634,19 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "164",
+       "$id": "186",
        "Name": "$expand",
        "NameInRequest": "$expand",
        "Description": "An OData $expand clause.",
        "Type": {
-        "$id": "165",
+        "$id": "187",
         "Kind": "array",
         "Name": "Array",
         "ValueType": {
-         "$id": "166",
-         "Kind": "string"
+         "$id": "188",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1432,12 +1662,14 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "167",
+       "$id": "189",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "168",
-        "Kind": "string"
+        "$id": "190",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1449,9 +1681,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "169",
+        "$id": "191",
         "Type": {
-         "$ref": "168"
+         "$ref": "190"
         },
         "Value": "application/json"
        }
@@ -1459,12 +1691,12 @@
      ],
      "Responses": [
       {
-       "$id": "170",
+       "$id": "192",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "65"
+        "$ref": "78"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1480,7 +1712,7 @@
      "Path": "/app/pools",
      "BufferResponse": true,
      "Paging": {
-      "$id": "171",
+      "$id": "193",
       "NextLinkName": "odata.nextLink",
       "ItemName": "value"
      },
@@ -1489,20 +1721,20 @@
     }
    ],
    "Protocol": {
-    "$id": "172"
+    "$id": "194"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "95"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "173",
+  "$id": "195",
   "OAuth2": {
-   "$id": "174",
+   "$id": "196",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]

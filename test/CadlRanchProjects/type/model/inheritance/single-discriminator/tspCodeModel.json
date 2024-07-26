@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "Bird",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Bird",
-   "Usage": "Input,Output,Json",
+   "Usage": "Input,Output,Xml",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
    "DiscriminatorProperty": {
     "$id": "3",
@@ -18,7 +18,9 @@
     "Description": "Discriminator",
     "Type": {
      "$id": "4",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -35,20 +37,40 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
+      "BaseType": {
+       "$id": "7",
+       "Kind": "int32",
+       "Name": "int64",
+       "CrossLanguageDefinitionId": "TypeSpec.int64",
+       "BaseType": {
+        "$id": "8",
+        "Kind": "int32",
+        "Name": "integer",
+        "CrossLanguageDefinitionId": "TypeSpec.integer",
+        "BaseType": {
+         "$id": "9",
+         "Kind": "int32",
+         "Name": "numeric",
+         "CrossLanguageDefinitionId": "TypeSpec.numeric"
+        }
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
    ],
    "DiscriminatedSubtypes": {
-    "$id": "7",
+    "$id": "10",
     "seagull": {
-     "$id": "8",
+     "$id": "11",
      "Kind": "model",
      "Name": "SeaGull",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.SeaGull",
-     "Usage": "Input,Output,Json",
+     "Usage": "Input,Output,Xml",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "seagull",
      "BaseModel": {
@@ -56,16 +78,18 @@
      },
      "Properties": [
       {
-       "$id": "9",
+       "$id": "12",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "10",
+        "$id": "13",
         "Kind": "constant",
         "ValueType": {
-         "$id": "11",
-         "Kind": "string"
+         "$id": "14",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "seagull"
        },
@@ -76,11 +100,11 @@
      ]
     },
     "sparrow": {
-     "$id": "12",
+     "$id": "15",
      "Kind": "model",
      "Name": "Sparrow",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Sparrow",
-     "Usage": "Input,Output,Json",
+     "Usage": "Input,Output,Xml",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "sparrow",
      "BaseModel": {
@@ -88,16 +112,18 @@
      },
      "Properties": [
       {
-       "$id": "13",
+       "$id": "16",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "14",
+        "$id": "17",
         "Kind": "constant",
         "ValueType": {
-         "$id": "15",
-         "Kind": "string"
+         "$id": "18",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "sparrow"
        },
@@ -108,11 +134,11 @@
      ]
     },
     "goose": {
-     "$id": "16",
+     "$id": "19",
      "Kind": "model",
      "Name": "Goose",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Goose",
-     "Usage": "Input,Output,Json",
+     "Usage": "Input,Output,Xml",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "goose",
      "BaseModel": {
@@ -120,16 +146,18 @@
      },
      "Properties": [
       {
-       "$id": "17",
+       "$id": "20",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "18",
+        "$id": "21",
         "Kind": "constant",
         "ValueType": {
-         "$id": "19",
-         "Kind": "string"
+         "$id": "22",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "goose"
        },
@@ -140,11 +168,11 @@
      ]
     },
     "eagle": {
-     "$id": "20",
+     "$id": "23",
      "Kind": "model",
      "Name": "Eagle",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Eagle",
-     "Usage": "Input,Output,Json",
+     "Usage": "Input,Output,Xml",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
      "DiscriminatorValue": "eagle",
      "BaseModel": {
@@ -152,16 +180,18 @@
      },
      "Properties": [
       {
-       "$id": "21",
+       "$id": "24",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "22",
+        "$id": "25",
         "Kind": "constant",
         "ValueType": {
-         "$id": "23",
-         "Kind": "string"
+         "$id": "26",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "eagle"
        },
@@ -170,12 +200,12 @@
        "IsDiscriminator": true
       },
       {
-       "$id": "24",
+       "$id": "27",
        "Name": "friends",
        "SerializedName": "friends",
        "Description": "",
        "Type": {
-        "$id": "25",
+        "$id": "28",
         "Kind": "array",
         "Name": "ArrayBird",
         "ValueType": {
@@ -187,16 +217,18 @@
        "IsReadOnly": false
       },
       {
-       "$id": "26",
+       "$id": "29",
        "Name": "hate",
        "SerializedName": "hate",
        "Description": "",
        "Type": {
-        "$id": "27",
+        "$id": "30",
         "Kind": "dict",
         "KeyType": {
-         "$id": "28",
-         "Kind": "string"
+         "$id": "31",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$ref": "2"
@@ -206,7 +238,7 @@
        "IsReadOnly": false
       },
       {
-       "$id": "29",
+       "$id": "32",
        "Name": "partner",
        "SerializedName": "partner",
        "Description": "",
@@ -221,32 +253,34 @@
    }
   },
   {
-   "$ref": "8"
+   "$ref": "11"
   },
   {
-   "$ref": "12"
+   "$ref": "15"
   },
   {
-   "$ref": "16"
+   "$ref": "19"
   },
   {
-   "$ref": "20"
+   "$ref": "23"
   },
   {
-   "$id": "30",
+   "$id": "33",
    "Kind": "model",
    "Name": "Dinosaur",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Dinosaur",
-   "Usage": "Output,Json",
+   "Usage": "Output,Xml",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
    "DiscriminatorProperty": {
-    "$id": "31",
+    "$id": "34",
     "Name": "kind",
     "SerializedName": "kind",
     "Description": "Discriminator property for Dinosaur.",
     "Type": {
-     "$id": "32",
-     "Kind": "string"
+     "$id": "35",
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -254,46 +288,68 @@
    },
    "Properties": [
     {
-     "$ref": "31"
+     "$ref": "34"
     },
     {
-     "$id": "33",
+     "$id": "36",
      "Name": "size",
      "SerializedName": "size",
      "Description": "",
      "Type": {
-      "$id": "34",
-      "Kind": "int32"
+      "$id": "37",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
+      "BaseType": {
+       "$id": "38",
+       "Kind": "int32",
+       "Name": "int64",
+       "CrossLanguageDefinitionId": "TypeSpec.int64",
+       "BaseType": {
+        "$id": "39",
+        "Kind": "int32",
+        "Name": "integer",
+        "CrossLanguageDefinitionId": "TypeSpec.integer",
+        "BaseType": {
+         "$id": "40",
+         "Kind": "int32",
+         "Name": "numeric",
+         "CrossLanguageDefinitionId": "TypeSpec.numeric"
+        }
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
    ],
    "DiscriminatedSubtypes": {
-    "$id": "35",
+    "$id": "41",
     "t-rex": {
-     "$id": "36",
+     "$id": "42",
      "Kind": "model",
      "Name": "TRex",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.TRex",
-     "Usage": "Output,Json",
+     "Usage": "Output,Xml",
      "Description": "The second level legacy model in polymorphic single level inheritance.",
      "DiscriminatorValue": "t-rex",
      "BaseModel": {
-      "$ref": "30"
+      "$ref": "33"
      },
      "Properties": [
       {
-       "$id": "37",
+       "$id": "43",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "38",
+        "$id": "44",
         "Kind": "constant",
         "ValueType": {
-         "$id": "39",
-         "Kind": "string"
+         "$id": "45",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "t-rex"
        },
@@ -306,29 +362,31 @@
    }
   },
   {
-   "$ref": "36"
+   "$ref": "42"
   }
  ],
  "Clients": [
   {
-   "$id": "40",
+   "$id": "46",
    "Name": "SingleDiscriminatorClient",
    "Description": "Illustrates inheritance with single discriminator.",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "47",
      "Name": "getModel",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "42",
+       "$id": "48",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "43",
-        "Kind": "string"
+        "$id": "49",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -340,103 +398,30 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "44",
+        "$id": "50",
         "Type": {
-         "$id": "45",
-         "Kind": "string"
+         "$id": "51",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "46",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "48",
-        "Type": {
-         "$ref": "47"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "49",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/type/model/inheritance/single-discriminator/model",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "50",
-     "Name": "putModel",
-     "ResourceName": "SingleDiscriminator",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "42"
-      },
-      {
-       "$id": "51",
-       "Name": "input",
-       "NameInRequest": "input",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "52",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
         "$id": "53",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": true,
+       "IsContentType": false,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -449,14 +434,95 @@
         },
         "Value": "application/json"
        }
-      },
+      }
+     ],
+     "Responses": [
       {
        "$id": "55",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/type/model/inheritance/single-discriminator/model",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "56",
+     "Name": "putModel",
+     "ResourceName": "SingleDiscriminator",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "57",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "58",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "59",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "60",
+        "Type": {
+         "$ref": "59"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "56",
-        "Kind": "string"
+        "$id": "62",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -468,9 +534,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "63",
         "Type": {
-         "$ref": "56"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
@@ -478,7 +544,7 @@
      ],
      "Responses": [
       {
-       "$id": "58",
+       "$id": "64",
        "StatusCodes": [
         204
        ],
@@ -499,21 +565,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "59",
+     "$id": "65",
      "Name": "getRecursiveModel",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "48"
       },
       {
-       "$id": "60",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "61",
-        "Kind": "string"
+        "$id": "67",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -525,9 +593,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "68",
         "Type": {
-         "$ref": "61"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -535,7 +603,7 @@
      ],
      "Responses": [
       {
-       "$id": "63",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
@@ -559,16 +627,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "64",
+     "$id": "70",
      "Name": "putRecursiveModel",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "48"
       },
       {
-       "$id": "65",
+       "$id": "71",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -585,12 +653,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "72",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "67",
-        "Kind": "string"
+        "$id": "73",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -602,20 +672,22 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "74",
         "Type": {
-         "$ref": "67"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "69",
+       "$id": "75",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "70",
-        "Kind": "string"
+        "$id": "76",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -627,9 +699,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "77",
         "Type": {
-         "$ref": "70"
+         "$ref": "76"
         },
         "Value": "application/json"
        }
@@ -637,7 +709,7 @@
      ],
      "Responses": [
       {
-       "$id": "72",
+       "$id": "78",
        "StatusCodes": [
         204
        ],
@@ -658,21 +730,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "73",
+     "$id": "79",
      "Name": "getMissingDiscriminator",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "48"
       },
       {
-       "$id": "74",
+       "$id": "80",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "75",
-        "Kind": "string"
+        "$id": "81",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -684,9 +758,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "82",
         "Type": {
-         "$ref": "75"
+         "$ref": "81"
         },
         "Value": "application/json"
        }
@@ -694,7 +768,7 @@
      ],
      "Responses": [
       {
-       "$id": "77",
+       "$id": "83",
        "StatusCodes": [
         200
        ],
@@ -718,21 +792,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "78",
+     "$id": "84",
      "Name": "getWrongDiscriminator",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "48"
       },
       {
-       "$id": "79",
+       "$id": "85",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
-        "Kind": "string"
+        "$id": "86",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -744,9 +820,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "81",
+        "$id": "87",
         "Type": {
-         "$ref": "80"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
@@ -754,7 +830,7 @@
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "88",
        "StatusCodes": [
         200
        ],
@@ -778,21 +854,23 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "83",
+     "$id": "89",
      "Name": "getLegacyModel",
      "ResourceName": "SingleDiscriminator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "42"
+       "$ref": "48"
       },
       {
-       "$id": "84",
+       "$id": "90",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
-        "Kind": "string"
+        "$id": "91",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -804,9 +882,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "86",
+        "$id": "92",
         "Type": {
-         "$ref": "85"
+         "$ref": "91"
         },
         "Value": "application/json"
        }
@@ -814,12 +892,12 @@
      ],
      "Responses": [
       {
-       "$id": "87",
+       "$id": "93",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "30"
+        "$ref": "33"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -839,11 +917,11 @@
     }
    ],
    "Protocol": {
-    "$id": "88"
+    "$id": "94"
    },
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "48"
     }
    ]
   }

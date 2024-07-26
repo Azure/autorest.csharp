@@ -9,14 +9,14 @@
    "Kind": "model",
    "Name": "Extension",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
-   "Usage": "Input,Output,Json",
+   "Usage": "Input,Output,Xml",
    "Description": "extension",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Element",
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
-    "Usage": "Input,Output,Json",
+    "Usage": "Input,Output,Xml",
     "Description": "element",
     "Properties": [
      {
@@ -46,7 +46,39 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "int8"
+      "Kind": "int8",
+      "Name": "int8",
+      "CrossLanguageDefinitionId": "TypeSpec.int8",
+      "BaseType": {
+       "$id": "8",
+       "Kind": "int8",
+       "Name": "int16",
+       "CrossLanguageDefinitionId": "TypeSpec.int16",
+       "BaseType": {
+        "$id": "9",
+        "Kind": "int8",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "BaseType": {
+         "$id": "10",
+         "Kind": "int8",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "BaseType": {
+          "$id": "11",
+          "Kind": "int8",
+          "Name": "integer",
+          "CrossLanguageDefinitionId": "TypeSpec.integer",
+          "BaseType": {
+           "$id": "12",
+           "Kind": "int8",
+           "Name": "numeric",
+           "CrossLanguageDefinitionId": "TypeSpec.numeric"
+          }
+         }
+        }
+       }
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -59,24 +91,26 @@
  ],
  "Clients": [
   {
-   "$id": "8",
+   "$id": "13",
    "Name": "RecursiveClient",
    "Description": "Illustrates inheritance recursion",
    "Operations": [
     {
-     "$id": "9",
+     "$id": "14",
      "Name": "put",
      "ResourceName": "Recursive",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "10",
+       "$id": "15",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "11",
-        "Kind": "string"
+        "$id": "16",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -88,16 +122,18 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "12",
+        "$id": "17",
         "Type": {
-         "$id": "13",
-         "Kind": "string"
+         "$id": "18",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "14",
+       "$id": "19",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -114,12 +150,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "15",
+       "$id": "20",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "16",
-        "Kind": "string"
+        "$id": "21",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -131,69 +169,12 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "17",
+        "$id": "22",
         "Type": {
-         "$ref": "16"
+         "$ref": "21"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "18",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "19",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$ref": "19"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "21",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
-     "Path": "/type/model/inheritance/recursive",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "22",
-     "Name": "get",
-     "ResourceName": "Recursive",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "10"
       },
       {
        "$id": "23",
@@ -201,7 +182,9 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "24",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -224,6 +207,65 @@
      "Responses": [
       {
        "$id": "26",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/model/inheritance/recursive",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "27",
+     "Name": "get",
+     "ResourceName": "Recursive",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "15"
+      },
+      {
+       "$id": "28",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "29",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "30",
+        "Type": {
+         "$ref": "29"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "31",
        "StatusCodes": [
         200
        ],
@@ -248,11 +290,11 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "32"
    },
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "15"
     }
    ]
   }

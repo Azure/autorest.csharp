@@ -3,37 +3,66 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputPrimitiveTypeKind Kind) : InputType(Kind.ToString())
+internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, string CrossLanguageDefinitionId) : InputType(Name)
 {
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string? encode) : this(kind)
+    #region Scalars defined in typespec-azure-core
+    internal const string UuidId = "Azure.Core.uuid";
+    internal const string IPv4AddressId = "Azure.Core.ipV4Address";
+    internal const string IPv6AddressId = "Azure.Core.ipV6Address";
+    internal const string ETagId = "Azure.Core.eTag";
+    internal const string AzureLocationId = "Azure.Core.azureLocation";
+    internal const string ArmIdId = "Azure.Core.armResourceIdentifier";
+    #endregion
+
+    #region Types we supported but not yet added to typespec-azure-core
+    internal const string CharId = "Azure.Core.char";
+    internal const string ContentTypeId = "Azure.Core.contentType";
+    internal const string ResourceTypeId = "Azure.Core.resourceType";
+
+    internal const string ObjectId = "Obsolete.object";
+    internal const string RequestMethodId = "Azure.Core.requestMethod";
+
+    internal const string IPAddressId = "Temp.ipAddress";
+    #endregion
+
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode) : this(kind, name, crossLanguageDefinitionId)
     {
         Encode = encode;
     }
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode, InputPrimitiveType? baseType) : this(kind, name, crossLanguageDefinitionId)
+    {
+        Encode = encode;
+        BaseType = baseType;
+    }
 
     public string? Encode { get; init; }
+    public InputPrimitiveType? BaseType { get; init; }
 
-    public static InputPrimitiveType AzureLocation { get; } = new(InputPrimitiveTypeKind.AzureLocation);
-    public static InputPrimitiveType Boolean { get; } = new(InputPrimitiveTypeKind.Boolean);
-    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64);
-    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, BytesKnownEncoding.Base64Url);
-    public static InputPrimitiveType Char { get; } = new(InputPrimitiveTypeKind.Char);
-    public static InputPrimitiveType ContentType { get; } = new(InputPrimitiveTypeKind.ContentType);
-    public static InputPrimitiveType PlainDate { get; } = new(InputPrimitiveTypeKind.PlainDate);
-    public static InputPrimitiveType ETag { get; } = new(InputPrimitiveTypeKind.ETag);
-    public static InputPrimitiveType Float32 { get; } = new(InputPrimitiveTypeKind.Float32);
-    public static InputPrimitiveType Float64 { get; } = new(InputPrimitiveTypeKind.Float64);
-    public static InputPrimitiveType Float128 { get; } = new(InputPrimitiveTypeKind.Float128);
-    public static InputPrimitiveType Guid { get; } = new(InputPrimitiveTypeKind.Guid);
-    public static InputPrimitiveType Int32 { get; } = new(InputPrimitiveTypeKind.Int32);
-    public static InputPrimitiveType Int64 { get; } = new(InputPrimitiveTypeKind.Int64);
-    public static InputPrimitiveType IPAddress { get; } = new(InputPrimitiveTypeKind.IPAddress);
-    public static InputPrimitiveType ResourceIdentifier { get; } = new(InputPrimitiveTypeKind.ArmId);
-    public static InputPrimitiveType ResourceType { get; } = new(InputPrimitiveTypeKind.ResourceType);
-    public static InputPrimitiveType Stream { get; } = new(InputPrimitiveTypeKind.Stream);
-    public static InputPrimitiveType String { get; } = new(InputPrimitiveTypeKind.String);
-    public static InputPrimitiveType PlainTime { get; } = new(InputPrimitiveTypeKind.PlainTime);
-    public static InputPrimitiveType Uri { get; } = new(InputPrimitiveTypeKind.Uri);
-    public static InputPrimitiveType Any { get; } = new(InputPrimitiveTypeKind.Any);
+    public static InputPrimitiveType AzureLocation { get; } = new(InputPrimitiveTypeKind.String, "azureLocation", AzureLocationId);
+    public static InputPrimitiveType Boolean { get; } = new(InputPrimitiveTypeKind.Boolean, "boolean", "TypeSpec.boolean");
+    public static InputPrimitiveType Base64 { get; } = new(InputPrimitiveTypeKind.Bytes, "bytes", "TypeSpec.bytes", BytesKnownEncoding.Base64);
+    public static InputPrimitiveType Base64Url { get; } = new(InputPrimitiveTypeKind.Bytes, "bytes", "TypeSpec.bytes", BytesKnownEncoding.Base64Url);
+    public static InputPrimitiveType Char { get; } = new(InputPrimitiveTypeKind.String, "char", CharId);
+    public static InputPrimitiveType ContentType { get; } = new(InputPrimitiveTypeKind.String, "contentType", ContentTypeId);
+    public static InputPrimitiveType PlainDate { get; } = new(InputPrimitiveTypeKind.PlainDate, "plainDate", "TypeSpec.plainDate");
+    public static InputPrimitiveType ETag { get; } = new(InputPrimitiveTypeKind.String, "eTag", ETagId);
+    public static InputPrimitiveType Float32 { get; } = new(InputPrimitiveTypeKind.Float32, "float32", "TypeSpec.float32");
+    public static InputPrimitiveType Float64 { get; } = new(InputPrimitiveTypeKind.Float64, "float64", "TypeSpec.float64");
+    public static InputPrimitiveType Decimal128 { get; } = new(InputPrimitiveTypeKind.Decimal128, "decimal128", "TypeSpec.decimal128");
+    public static InputPrimitiveType Uuid { get; } = new(InputPrimitiveTypeKind.String, "uuid", UuidId);
+    public static InputPrimitiveType Int32 { get; } = new(InputPrimitiveTypeKind.Int32, "int32", "TypeSpec.int32");
+    public static InputPrimitiveType Int64 { get; } = new(InputPrimitiveTypeKind.Int64, "int64", "TypeSpec.int64");
+    public static InputPrimitiveType ResourceIdentifier { get; } = new(InputPrimitiveTypeKind.String, "armResourceIdentifier", ArmIdId);
+    public static InputPrimitiveType ResourceType { get; } = new(InputPrimitiveTypeKind.String, "resourceType", ResourceTypeId);
+    public static InputPrimitiveType RequestMethod { get; } = new(InputPrimitiveTypeKind.String, "requestMethod", RequestMethodId);
+    public static InputPrimitiveType Stream { get; } = new(InputPrimitiveTypeKind.Stream, "stream", "TypeSpec.Stream"); // TODO -- this is not a builtin type
+    public static InputPrimitiveType String { get; } = new(InputPrimitiveTypeKind.String, "string", "TypeSpec.string");
+    public static InputPrimitiveType PlainTime { get; } = new(InputPrimitiveTypeKind.PlainTime, "plainTime", "TypeSpec.plainTime");
+    public static InputPrimitiveType Url { get; } = new(InputPrimitiveTypeKind.Url, "url", "TypeSpec.url");
+    public static InputPrimitiveType Any { get; } = new(InputPrimitiveTypeKind.Any, "any", string.Empty);
+    public static InputPrimitiveType Object { get; } = new(InputPrimitiveTypeKind.Any, "object", ObjectId);
 
-    public bool IsNumber => Kind is InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.Float32 or InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float128;
+    public static InputPrimitiveType IPAddress { get; } = new(InputPrimitiveTypeKind.String, "ipAddress", IPAddressId);
+
+    public bool IsNumber => Kind is InputPrimitiveTypeKind.Integer or InputPrimitiveTypeKind.Float or InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.Float32 or InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 or InputPrimitiveTypeKind.Numeric;
 }

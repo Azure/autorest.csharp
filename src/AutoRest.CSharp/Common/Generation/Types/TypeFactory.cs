@@ -52,21 +52,35 @@ namespace AutoRest.CSharp.Generation.Types
             InputModelType { CrossLanguageDefinitionId: "Azure.Core.Resources.DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
             InputModelType model => _library.ResolveModel(model),
             InputNullableType nullableType => CreateType(nullableType.Type).WithNullable(true),
-            InputPrimitiveType primitiveType => primitiveType.Kind switch
+            InputPrimitiveType primitiveType => CreatePrimitiveType(primitiveType),
+            InputDateTimeType dateTimeType => new CSharpType(typeof(DateTimeOffset)),
+            InputDurationType durationType => new CSharpType(typeof(TimeSpan)),
+            _ => throw new InvalidOperationException($"Unknown type: {inputType}")
+        };
+
+        private CSharpType CreatePrimitiveType(in InputPrimitiveType inputType)
+        {
+            InputPrimitiveType? primitiveType = inputType;
+            while (primitiveType != null)
             {
-                InputPrimitiveTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation)),
+                if (_knownPrimitiveTypes.TryGetValue(primitiveType.CrossLanguageDefinitionId, out var knownType))
+                {
+                    return knownType;
+                }
+
+                primitiveType = primitiveType.BaseType;
+            }
+
+            return inputType.Kind switch
+            {
                 InputPrimitiveTypeKind.Boolean => new CSharpType(typeof(bool)),
                 InputPrimitiveTypeKind.Bytes => Configuration.ShouldTreatBase64AsBinaryData ? new CSharpType(typeof(BinaryData)) : new CSharpType(typeof(byte[])),
-                InputPrimitiveTypeKind.ContentType => new CSharpType(typeof(ContentType)),
                 InputPrimitiveTypeKind.PlainDate => new CSharpType(typeof(DateTimeOffset)),
                 InputPrimitiveTypeKind.Decimal => new CSharpType(typeof(decimal)),
                 InputPrimitiveTypeKind.Decimal128 => new CSharpType(typeof(decimal)),
                 InputPrimitiveTypeKind.PlainTime => new CSharpType(typeof(TimeSpan)),
-                InputPrimitiveTypeKind.ETag => new CSharpType(typeof(ETag)),
                 InputPrimitiveTypeKind.Float32 => new CSharpType(typeof(float)),
                 InputPrimitiveTypeKind.Float64 => new CSharpType(typeof(double)),
-                InputPrimitiveTypeKind.Float128 => new CSharpType(typeof(decimal)),
-                InputPrimitiveTypeKind.Guid or InputPrimitiveTypeKind.Uuid => new CSharpType(typeof(Guid)),
                 InputPrimitiveTypeKind.Int8 => new CSharpType(typeof(sbyte)),
                 InputPrimitiveTypeKind.UInt8 => new CSharpType(typeof(byte)),
                 InputPrimitiveTypeKind.Int32 => new CSharpType(typeof(int)),
@@ -75,23 +89,30 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Integer => new CSharpType(typeof(long)), // in typespec, integer is the base type of int related types, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.Float => new CSharpType(typeof(double)), // in typespec, float is the base type of float32 and float64, see type relation: https://typespec.io/docs/language-basics/type-relations
                 InputPrimitiveTypeKind.Numeric => new CSharpType(typeof(double)), // in typespec, numeric is the base type of number types, see type relation: https://typespec.io/docs/language-basics/type-relations
-                InputPrimitiveTypeKind.IPAddress => new CSharpType(typeof(IPAddress)),
-                InputPrimitiveTypeKind.ArmId => new CSharpType(typeof(ResourceIdentifier)),
-                InputPrimitiveTypeKind.ResourceType => new CSharpType(typeof(ResourceType)),
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),
-                InputPrimitiveTypeKind.Uri or InputPrimitiveTypeKind.Url => new CSharpType(typeof(Uri)),
-                InputPrimitiveTypeKind.Char => new CSharpType(typeof(char)),
+                InputPrimitiveTypeKind.Url => new CSharpType(typeof(Uri)),
                 InputPrimitiveTypeKind.Any => UnknownType,
-#pragma warning disable CS0618 // Type or member is obsolete
-                InputPrimitiveTypeKind.RequestMethod => new CSharpType(typeof(RequestMethod)),
-                InputPrimitiveTypeKind.Object => new CSharpType(typeof(object)),
-#pragma warning restore CS0618 // Type or member is obsolete
                 _ => new CSharpType(typeof(object)),
-            },
-            InputDateTimeType dateTimeType => new CSharpType(typeof(DateTimeOffset)),
-            InputDurationType durationType => new CSharpType(typeof(TimeSpan)),
-            _ => throw new InvalidOperationException($"Unknown type: {inputType}")
+            };
+        }
+
+        private static readonly IReadOnlyDictionary<string, CSharpType> _knownPrimitiveTypes = new Dictionary<string, CSharpType>
+        {
+            [InputPrimitiveType.UuidId] = typeof(Guid),
+            [InputPrimitiveType.IPv4AddressId] = typeof(IPAddress),
+            [InputPrimitiveType.IPv6AddressId] = typeof(IPAddress),
+            [InputPrimitiveType.ETagId] = typeof(ETag),
+            [InputPrimitiveType.AzureLocationId] = typeof(AzureLocation),
+            [InputPrimitiveType.ArmIdId] = typeof(ResourceIdentifier),
+
+            [InputPrimitiveType.CharId] = typeof(char),
+            [InputPrimitiveType.ContentTypeId] = typeof(ContentType),
+            [InputPrimitiveType.ResourceTypeId] = typeof(ResourceType),
+
+            [InputPrimitiveType.ObjectId] = typeof(object),
+            [InputPrimitiveType.RequestMethodId] = typeof(RequestMethod),
+            [InputPrimitiveType.IPAddressId] = typeof(IPAddress),
         };
 
         /// <summary>
