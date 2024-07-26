@@ -42,7 +42,7 @@
    ],
    "Description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "8",
@@ -81,7 +81,7 @@
    ],
    "Description": "The kind of entity that created the resource.",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "14",
@@ -102,7 +102,7 @@
    ],
    "Description": "Azure API versions.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
@@ -111,21 +111,21 @@
    "Kind": "model",
    "Name": "ManagedIdentityTrackedResource",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.ManagedIdentityTrackedResource",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "BaseModel": {
     "$id": "18",
     "Kind": "model",
     "Name": "TrackedResource",
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "BaseModel": {
      "$id": "19",
      "Kind": "model",
      "Name": "Resource",
      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "Properties": [
       {
@@ -174,7 +174,7 @@
         "Kind": "model",
         "Name": "SystemData",
         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
-        "Usage": "Output",
+        "Usage": "Output,Json",
         "Description": "Metadata pertaining to creation and last modification of the resource.",
         "Properties": [
          {
@@ -310,7 +310,7 @@
       "Kind": "model",
       "Name": "ManagedIdentityTrackedResourceProperties",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.CommonTypes.ManagedIdentity.ManagedIdentityTrackedResourceProperties",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Managed Identity Arm Resource Properties.",
       "Properties": [
        {
@@ -340,7 +340,7 @@
       "Kind": "model",
       "Name": "ManagedServiceIdentity",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Managed service identity (system assigned and/or user assigned identities)",
       "Properties": [
        {
@@ -397,7 +397,7 @@
           "Kind": "model",
           "Name": "UserAssignedIdentity",
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
-          "Usage": "RoundTrip",
+          "Usage": "Input,Output,Json",
           "Description": "User assigned identity properties",
           "Properties": [
            {
@@ -462,7 +462,7 @@
    "Kind": "model",
    "Name": "ErrorResponse",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
-   "Usage": "Output",
+   "Usage": "Output,Error,Json",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "Properties": [
     {
@@ -475,7 +475,7 @@
       "Kind": "model",
       "Name": "ErrorDetail",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
-      "Usage": "Output",
+      "Usage": "Output,Json",
       "Description": "The error detail.",
       "Properties": [
        {
@@ -545,7 +545,7 @@
           "Kind": "model",
           "Name": "ErrorAdditionalInfo",
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
-          "Usage": "Output",
+          "Usage": "Output,Json",
           "Description": "The resource management error additional info.",
           "Properties": [
            {
@@ -570,7 +570,7 @@
              "Kind": "model",
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "Usage": "Output",
+             "Usage": "Output,Json",
              "Properties": []
             },
             "IsRequired": false,

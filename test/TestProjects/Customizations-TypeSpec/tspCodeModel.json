@@ -28,7 +28,7 @@
    ],
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "6",
@@ -58,7 +58,7 @@
    ],
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -88,7 +88,7 @@
    ],
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "16",
@@ -118,7 +118,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "21",
@@ -143,7 +143,7 @@
    ],
    "Description": "A normal enum",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -152,7 +152,7 @@
    "Kind": "model",
    "Name": "RootModel",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "Properties": [
     {
@@ -176,7 +176,7 @@
       "Kind": "model",
       "Name": "ModelToMakeInternal",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Public model made internal",
       "Properties": [
        {
@@ -206,7 +206,7 @@
       "Kind": "model",
       "Name": "ModelToRename",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Renamed model (original name: ModelToRename)",
       "Properties": [
        {
@@ -248,7 +248,7 @@
       "Kind": "model",
       "Name": "ModelToChangeNamespace",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Model moved into custom namespace",
       "Properties": [
        {
@@ -278,7 +278,7 @@
       "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Model with customized properties",
       "Properties": [
        {
@@ -678,7 +678,7 @@
       "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Model to add additional serializable property",
       "BaseModel": {
        "$ref": "32"
@@ -722,7 +722,7 @@
       "Kind": "model",
       "Name": "ModelStruct",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "Model to make to a struct",
       "Properties": [
        {
@@ -791,7 +791,7 @@
    "Kind": "model",
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
-   "Usage": "Input",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "121",
@@ -1041,11 +1041,10 @@
      "Parameters": [
       {
        "$id": "145",
-       "Name": "ModelToRename",
-       "NameInRequest": "ModelToRename",
-       "Description": "Renamed model (original name: ModelToRename)",
+       "Name": "BarRequest",
+       "NameInRequest": "",
        "Type": {
-        "$ref": "32"
+        "$ref": "120"
        },
        "Location": "Body",
        "IsRequired": true,

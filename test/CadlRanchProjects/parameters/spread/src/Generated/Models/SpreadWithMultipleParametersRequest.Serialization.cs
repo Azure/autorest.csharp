@@ -91,8 +91,8 @@ namespace Parameters.Spread.Models
             }
             string requiredString = default;
             int? optionalInt = default;
-            IList<int> requiredIntList = default;
-            IList<string> optionalStringList = default;
+            IReadOnlyList<int> requiredIntList = default;
+            IReadOnlyList<string> optionalStringList = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())

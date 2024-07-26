@@ -7,8 +7,8 @@ using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
-    /// <summary> The CreateCompletionRequest. </summary>
-    internal partial class CreateCompletionRequest
+    /// <summary> The CreateRequest. </summary>
+    internal partial class CreateRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -41,7 +41,7 @@ namespace OpenAI.Models
         /// </para>
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
@@ -54,14 +54,14 @@ namespace OpenAI.Models
         /// Note that &lt;|endoftext|&gt; is the document separator that the model sees during training, so if a
         /// prompt is not specified the model will generate as if from the beginning of a new document.
         /// </param>
-        public CreateCompletionRequest(CreateRequestModel model, BinaryData prompt)
+        internal CreateRequest(CreateRequestModel model, BinaryData prompt)
         {
             Model = model;
             Prompt = prompt;
             LogitBias = new ChangeTrackingDictionary<string, long>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to
         /// see all of your available models, or see our [Model overview](/docs/models/overview) for
@@ -152,7 +152,7 @@ namespace OpenAI.Models
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateCompletionRequest(CreateRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateRequest(CreateRequestModel model, BinaryData prompt, string suffix, double? temperature, double? topP, long? n, long? maxTokens, BinaryData stop, double? presencePenalty, double? frequencyPenalty, IReadOnlyDictionary<string, long> logitBias, string user, bool? stream, long? logprobs, bool? echo, long? bestOf, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Model = model;
             Prompt = prompt;
@@ -173,8 +173,8 @@ namespace OpenAI.Models
             SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CreateCompletionRequest"/> for deserialization. </summary>
-        internal CreateCompletionRequest()
+        /// <summary> Initializes a new instance of <see cref="CreateRequest"/> for deserialization. </summary>
+        internal CreateRequest()
         {
         }
 
@@ -237,14 +237,14 @@ namespace OpenAI.Models
         /// </summary>
         public BinaryData Prompt { get; }
         /// <summary> The suffix that comes after a completion of inserted text. </summary>
-        public string Suffix { get; set; }
+        public string Suffix { get; }
         /// <summary>
         /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
         /// more random, while lower values like 0.2 will make it more focused and deterministic.
         ///
         /// We generally recommend altering this or `top_p` but not both.
         /// </summary>
-        public double? Temperature { get; set; }
+        public double? Temperature { get; }
         /// <summary>
         /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
         /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
@@ -252,13 +252,13 @@ namespace OpenAI.Models
         ///
         /// We generally recommend altering this or `temperature` but not both.
         /// </summary>
-        public double? TopP { get; set; }
+        public double? TopP { get; }
         /// <summary>
         /// How many completions to generate for each prompt.
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </summary>
-        public long? N { get; set; }
+        public long? N { get; }
         /// <summary>
         /// The maximum number of [tokens](/tokenizer) to generate in the completion.
         ///
@@ -266,7 +266,7 @@ namespace OpenAI.Models
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
         /// for counting tokens.
         /// </summary>
-        public long? MaxTokens { get; set; }
+        public long? MaxTokens { get; }
         /// <summary>
         /// Up to 4 sequences where the API will stop generating further tokens.
         /// <para>
@@ -308,14 +308,14 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData Stop { get; set; }
+        public BinaryData Stop { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear
         /// in the text so far, increasing the model's likelihood to talk about new topics.
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? PresencePenalty { get; set; }
+        public double? PresencePenalty { get; }
         /// <summary>
         /// Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing
         /// frequency in the text so far, decreasing the model's likelihood to repeat the same line
@@ -323,7 +323,7 @@ namespace OpenAI.Models
         ///
         /// [See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)
         /// </summary>
-        public double? FrequencyPenalty { get; set; }
+        public double? FrequencyPenalty { get; }
         /// <summary>
         /// Modify the likelihood of specified tokens appearing in the completion.
         /// Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an
@@ -332,19 +332,19 @@ namespace OpenAI.Models
         /// between -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100
         /// should result in a ban or exclusive selection of the relevant token.
         /// </summary>
-        public IDictionary<string, long> LogitBias { get; set; }
+        public IReadOnlyDictionary<string, long> LogitBias { get; }
         /// <summary>
         /// A unique identifier representing your end-user, which can help OpenAI to monitor and detect
         /// abuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).
         /// </summary>
-        public string User { get; set; }
+        public string User { get; }
         /// <summary>
         /// If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only
         /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
         /// as they become available, with the stream terminated by a `data: [DONE]` message.
         /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
         /// </summary>
-        public bool? Stream { get; set; }
+        public bool? Stream { get; }
         /// <summary>
         /// Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.
         /// For example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The
@@ -353,9 +353,9 @@ namespace OpenAI.Models
         ///
         /// The maximum value for `logprobs` is 5.
         /// </summary>
-        public long? Logprobs { get; set; }
+        public long? Logprobs { get; }
         /// <summary> Echo back the prompt in addition to the completion. </summary>
-        public bool? Echo { get; set; }
+        public bool? Echo { get; }
         /// <summary>
         /// Generates `best_of` completions server-side and returns the "best" (the one with the highest
         /// log probability per token). Results cannot be streamed.
@@ -366,6 +366,6 @@ namespace OpenAI.Models
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </summary>
-        public long? BestOf { get; set; }
+        public long? BestOf { get; }
     }
 }
