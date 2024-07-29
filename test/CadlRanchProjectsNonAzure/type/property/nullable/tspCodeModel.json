@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "StringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -51,7 +51,7 @@
    "Kind": "model",
    "Name": "BytesProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -94,7 +94,7 @@
    "Kind": "model",
    "Name": "DatetimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Model with a datetime property",
    "Properties": [
     {
@@ -143,7 +143,7 @@
    "Kind": "model",
    "Name": "DurationProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Model with a duration property",
    "Properties": [
     {
@@ -192,7 +192,7 @@
    "Kind": "model",
    "Name": "CollectionsByteProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Model with collection bytes properties",
    "Properties": [
     {
@@ -241,7 +241,7 @@
    "Kind": "model",
    "Name": "CollectionsModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Model with collection models properties",
    "Properties": [
     {
@@ -275,7 +275,7 @@
         "Kind": "model",
         "Name": "InnerModel",
         "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
-        "Usage": "Output,Xml",
+        "Usage": "Output,Json",
         "Description": "Inner model used in collections model property",
         "Properties": [
          {
@@ -310,7 +310,7 @@
    "Kind": "model",
    "Name": "CollectionsStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
-   "Usage": "Input,Output,JsonMergePatch,Xml",
+   "Usage": "Input,Output,JsonMergePatch,Json",
    "Description": "Model with collection string properties",
    "Properties": [
     {

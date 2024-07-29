@@ -57,7 +57,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   },
   {
    "$id": "11",
@@ -98,7 +98,7 @@
    ],
    "Description": "The kind of entity that created the resource.",
    "IsExtensible": true,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   },
   {
    "$id": "17",
@@ -130,21 +130,21 @@
    "Kind": "model",
    "Name": "TopLevelTrackedResource",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "BaseModel": {
     "$id": "21",
     "Kind": "model",
     "Name": "TrackedResource",
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
-    "Usage": "Input,Output,Xml",
+    "Usage": "Input,Output,Json",
     "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "BaseModel": {
      "$id": "22",
      "Kind": "model",
      "Name": "Resource",
      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
-     "Usage": "Input,Output,Xml",
+     "Usage": "Input,Output,Json",
      "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "Properties": [
       {
@@ -205,7 +205,7 @@
         "Kind": "model",
         "Name": "SystemData",
         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
-        "Usage": "Output,Xml",
+        "Usage": "Output,Json",
         "Description": "Metadata pertaining to creation and last modification of the resource.",
         "Properties": [
          {
@@ -359,7 +359,7 @@
       "Kind": "model",
       "Name": "TopLevelTrackedResourceProperties",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Top Level Arm Resource Properties.",
       "Properties": [
        {
@@ -411,7 +411,7 @@
    "Kind": "model",
    "Name": "TopLevelTrackedResourceListResult",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "The response of a TopLevelTrackedResource list operation.",
    "Properties": [
     {
@@ -464,14 +464,14 @@
    "Kind": "model",
    "Name": "NestedProxyResource",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Nested child of Top Level Tracked Resource.",
    "BaseModel": {
     "$id": "63",
     "Kind": "model",
     "Name": "ProxyResource",
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
-    "Usage": "Input,Output,Xml",
+    "Usage": "Input,Output,Json",
     "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
     "BaseModel": {
      "$ref": "22"
@@ -489,7 +489,7 @@
       "Kind": "model",
       "Name": "NestedProxyResourceProperties",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Nested Proxy Resource Properties.",
       "Properties": [
        {
@@ -535,7 +535,7 @@
    "Kind": "model",
    "Name": "NestedProxyResourceListResult",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "The response of a NestedProxyResource list operation.",
    "Properties": [
     {
@@ -588,7 +588,7 @@
    "Kind": "model",
    "Name": "ErrorResponse",
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
-   "Usage": "Output,Error,Xml",
+   "Usage": "Output,Error,Json",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "Properties": [
     {
@@ -601,7 +601,7 @@
       "Kind": "model",
       "Name": "ErrorDetail",
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
-      "Usage": "Output,Xml",
+      "Usage": "Output,Json",
       "Description": "The error detail.",
       "Properties": [
        {
@@ -677,7 +677,7 @@
           "Kind": "model",
           "Name": "ErrorAdditionalInfo",
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
-          "Usage": "Output,Xml",
+          "Usage": "Output,Json",
           "Description": "The resource management error additional info.",
           "Properties": [
            {
@@ -704,7 +704,7 @@
              "Kind": "model",
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "Usage": "Output,Xml",
+             "Usage": "Output,Json",
              "Properties": []
             },
             "IsRequired": false,

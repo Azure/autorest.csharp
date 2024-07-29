@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "Result",
    "CrossLanguageDefinitionId": "ParametersCadl.ParameterOrders.Result",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "6",

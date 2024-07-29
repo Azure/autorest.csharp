@@ -59,7 +59,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "10",
@@ -80,7 +80,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -89,7 +89,7 @@
    "Kind": "model",
    "Name": "ModelV1",
    "CrossLanguageDefinitionId": "Versioning.Added.ModelV1",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "14",
@@ -174,7 +174,7 @@
    "Kind": "model",
    "Name": "ModelV2",
    "CrossLanguageDefinitionId": "Versioning.Added.ModelV2",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "26",

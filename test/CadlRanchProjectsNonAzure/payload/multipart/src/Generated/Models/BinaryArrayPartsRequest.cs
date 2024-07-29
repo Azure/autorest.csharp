@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace Payload.MultiPart.Models
 {
@@ -48,20 +47,20 @@ namespace Payload.MultiPart.Models
         /// <param name="id"></param>
         /// <param name="pictures"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="pictures"/> is null. </exception>
-        public BinaryArrayPartsRequest(string id, IEnumerable<Stream> pictures)
+        public BinaryArrayPartsRequest(string id, Stream pictures)
         {
             Argument.AssertNotNull(id, nameof(id));
             Argument.AssertNotNull(pictures, nameof(pictures));
 
             Id = id;
-            Pictures = pictures.ToList();
+            Pictures = pictures;
         }
 
         /// <summary> Initializes a new instance of <see cref="BinaryArrayPartsRequest"/>. </summary>
         /// <param name="id"></param>
         /// <param name="pictures"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BinaryArrayPartsRequest(string id, IList<Stream> pictures, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BinaryArrayPartsRequest(string id, Stream pictures, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Pictures = pictures;
@@ -76,6 +75,6 @@ namespace Payload.MultiPart.Models
         /// <summary> Gets the id. </summary>
         public string Id { get; }
         /// <summary> Gets the pictures. </summary>
-        public IList<Stream> Pictures { get; }
+        public Stream Pictures { get; }
     }
 }

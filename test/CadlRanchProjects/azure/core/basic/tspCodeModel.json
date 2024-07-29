@@ -64,7 +64,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
    "Properties": [
     {
@@ -127,7 +127,7 @@
        "Kind": "model",
        "Name": "UserOrder",
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
-       "Usage": "Input,Output,Xml",
+       "Usage": "Input,Output,Json",
        "Description": "UserOrder for testing list with expand.",
        "Properties": [
         {
@@ -298,7 +298,7 @@
    "Kind": "model",
    "Name": "ListItemInputBody",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
-   "Usage": "Input,Xml",
+   "Usage": "Input,Json",
    "Description": "The body of the input.",
    "Properties": [
     {
@@ -322,7 +322,7 @@
    "Kind": "model",
    "Name": "UserListResults",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "46",
@@ -379,7 +379,7 @@
        "Kind": "model",
        "Name": "FirstItem",
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "First item.",
        "Properties": [
         {
@@ -474,7 +474,7 @@
        "Kind": "model",
        "Name": "SecondItem",
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "Second item.",
        "Properties": [
         {

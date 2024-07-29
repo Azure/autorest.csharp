@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "Model",
    "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "A model.",
    "Properties": [
     {

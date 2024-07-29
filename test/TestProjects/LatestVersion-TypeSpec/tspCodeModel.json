@@ -250,7 +250,7 @@
       "Kind": "model",
       "Name": "ExportedResource",
       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.ExportedResource",
-      "Usage": "Output,Xml",
+      "Usage": "Output,Json",
       "Properties": [
        {
         "$id": "35",
@@ -332,7 +332,7 @@
        "Kind": "model",
        "Name": "Resource",
        "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.Resource",
-       "Usage": "Input,Output,Xml",
+       "Usage": "Input,Output,Json",
        "Properties": [
         {
          "$id": "45",

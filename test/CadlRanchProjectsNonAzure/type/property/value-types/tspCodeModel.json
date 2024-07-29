@@ -30,7 +30,7 @@
    ],
    "Description": "Enum that will be used as a property for model EnumProperty. Non-extensible.",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "6",
@@ -59,7 +59,7 @@
    ],
    "Description": "Enum that will be used as a property for model EnumProperty. Extensible.",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "10",
@@ -82,7 +82,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "13",
@@ -123,7 +123,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "19",
@@ -164,7 +164,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "25",
@@ -190,7 +190,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "29",
@@ -234,7 +234,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "36",
@@ -278,7 +278,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "43",
@@ -299,7 +299,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -308,7 +308,7 @@
    "Kind": "model",
    "Name": "BooleanProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a boolean property",
    "Properties": [
     {
@@ -332,7 +332,7 @@
    "Kind": "model",
    "Name": "StringProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a string property",
    "Properties": [
     {
@@ -356,7 +356,7 @@
    "Kind": "model",
    "Name": "BytesProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a bytes property",
    "Properties": [
     {
@@ -381,7 +381,7 @@
    "Kind": "model",
    "Name": "IntProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a int property",
    "Properties": [
     {
@@ -423,7 +423,7 @@
    "Kind": "model",
    "Name": "FloatProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a float property",
    "Properties": [
     {
@@ -465,7 +465,7 @@
    "Kind": "model",
    "Name": "DecimalProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DecimalProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a decimal property",
    "Properties": [
     {
@@ -495,7 +495,7 @@
    "Kind": "model",
    "Name": "Decimal128Property",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal128Property",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a decimal128 property",
    "Properties": [
     {
@@ -531,7 +531,7 @@
    "Kind": "model",
    "Name": "DatetimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DatetimeProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
    "Properties": [
     {
@@ -562,7 +562,7 @@
    "Kind": "model",
    "Name": "DurationProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DurationProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
    "Properties": [
     {
@@ -593,7 +593,7 @@
    "Kind": "model",
    "Name": "EnumProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.EnumProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with enum properties",
    "Properties": [
     {
@@ -614,7 +614,7 @@
    "Kind": "model",
    "Name": "ExtensibleEnumProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtensibleEnumProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with extensible enum properties",
    "Properties": [
     {
@@ -635,7 +635,7 @@
    "Kind": "model",
    "Name": "ModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ModelProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with model properties",
    "Properties": [
     {
@@ -648,7 +648,7 @@
       "Kind": "model",
       "Name": "InnerModel",
       "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerModel",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Inner model. Will be a property type for ModelWithModelProperties",
       "Properties": [
        {
@@ -680,7 +680,7 @@
    "Kind": "model",
    "Name": "CollectionsStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsStringProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection string properties",
    "Properties": [
     {
@@ -710,7 +710,7 @@
    "Kind": "model",
    "Name": "CollectionsIntProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsIntProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection int properties",
    "Properties": [
     {
@@ -758,7 +758,7 @@
    "Kind": "model",
    "Name": "CollectionsModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsModelProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection model properties",
    "Properties": [
     {
@@ -785,7 +785,7 @@
    "Kind": "model",
    "Name": "DictionaryStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DictionaryStringProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with dictionary string properties",
    "Properties": [
     {
@@ -819,7 +819,7 @@
    "Kind": "model",
    "Name": "NeverProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.NeverProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a property never. (This property should not be included).",
    "Properties": []
   },
@@ -828,7 +828,7 @@
    "Kind": "model",
    "Name": "UnknownStringProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownStringProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a string.",
    "Properties": [
     {
@@ -852,7 +852,7 @@
    "Kind": "model",
    "Name": "UnknownIntProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownIntProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a int32.",
    "Properties": [
     {
@@ -876,7 +876,7 @@
    "Kind": "model",
    "Name": "UnknownDictProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownDictProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a dictionnary.",
    "Properties": [
     {
@@ -900,7 +900,7 @@
    "Kind": "model",
    "Name": "UnknownArrayProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownArrayProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is an array.",
    "Properties": [
     {
@@ -924,7 +924,7 @@
    "Kind": "model",
    "Name": "StringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a string literal property.",
    "Properties": [
     {
@@ -950,7 +950,7 @@
    "Kind": "model",
    "Name": "IntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a int literal property.",
    "Properties": [
     {
@@ -976,7 +976,7 @@
    "Kind": "model",
    "Name": "FloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a float literal property.",
    "Properties": [
     {
@@ -1002,7 +1002,7 @@
    "Kind": "model",
    "Name": "BooleanLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a boolean literal property.",
    "Properties": [
     {
@@ -1031,7 +1031,7 @@
    "Kind": "model",
    "Name": "UnionStringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionStringLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a union of string literal as property.",
    "Properties": [
     {
@@ -1052,7 +1052,7 @@
    "Kind": "model",
    "Name": "UnionIntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionIntLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a union of int literal as property.",
    "Properties": [
     {
@@ -1073,7 +1073,7 @@
    "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionFloatLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a union of float literal as property.",
    "Properties": [
     {
@@ -1094,7 +1094,7 @@
    "Kind": "model",
    "Name": "UnionEnumValueProperty",
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionEnumValueProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
    "Properties": [
     {

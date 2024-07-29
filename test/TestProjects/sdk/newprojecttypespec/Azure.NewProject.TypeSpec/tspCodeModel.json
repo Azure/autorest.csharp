@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -65,7 +65,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -106,7 +106,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -129,7 +129,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -170,7 +170,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "26",
@@ -211,7 +211,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "32",
@@ -234,7 +234,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "35",
@@ -275,7 +275,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "41",
@@ -316,7 +316,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "47",
@@ -339,7 +339,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "50",
@@ -380,7 +380,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "56",
@@ -421,7 +421,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Spread,Xml"
+   "Usage": "Spread,Json"
   },
   {
    "$id": "62",
@@ -453,7 +453,7 @@
    ],
    "Description": "Simple enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "67",
@@ -485,7 +485,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "72",
@@ -535,7 +535,7 @@
    ],
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "80",
@@ -585,7 +585,7 @@
    ],
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "88",
@@ -635,7 +635,7 @@
    ],
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "96",
@@ -685,7 +685,7 @@
    ],
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "104",
@@ -745,7 +745,7 @@
    "Kind": "model",
    "Name": "Thing",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.Thing",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
    "Properties": [
     {
@@ -974,7 +974,7 @@
    "Kind": "model",
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.anonymousBody.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "146",
@@ -1202,7 +1202,7 @@
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.friendlyModel.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "178",
@@ -1225,7 +1225,7 @@
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.NotFriend",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
@@ -1249,7 +1249,7 @@
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "NewProjectTypeSpec.RoundTripModel",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
    "Properties": [
     {

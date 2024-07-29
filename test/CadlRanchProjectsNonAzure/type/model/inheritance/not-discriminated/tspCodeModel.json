@@ -9,21 +9,21 @@
    "Kind": "model",
    "Name": "Siamese",
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "The third level model in the normal multiple levels inheritance.",
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
     "Name": "Cat",
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
-    "Usage": "Input,Output,Xml",
+    "Usage": "Input,Output,Json",
     "Description": "The second level model in the normal multiple levels inheritance.",
     "BaseModel": {
      "$id": "4",
      "Kind": "model",
      "Name": "Pet",
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
-     "Usage": "Input,Output,Xml",
+     "Usage": "Input,Output,Json",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
      "Properties": [
       {

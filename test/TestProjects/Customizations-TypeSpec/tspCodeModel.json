@@ -30,7 +30,7 @@
    ],
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "6",
@@ -62,7 +62,7 @@
    ],
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -94,7 +94,7 @@
    ],
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "16",
@@ -126,7 +126,7 @@
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "21",
@@ -153,7 +153,7 @@
    ],
    "Description": "A normal enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -162,7 +162,7 @@
    "Kind": "model",
    "Name": "RootModel",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "Properties": [
     {
@@ -186,7 +186,7 @@
       "Kind": "model",
       "Name": "ModelToMakeInternal",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Public model made internal",
       "Properties": [
        {
@@ -236,7 +236,7 @@
       "Kind": "model",
       "Name": "ModelToRename",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Renamed model (original name: ModelToRename)",
       "Properties": [
        {
@@ -318,7 +318,7 @@
       "Kind": "model",
       "Name": "ModelToChangeNamespace",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Model moved into custom namespace",
       "Properties": [
        {
@@ -368,7 +368,7 @@
       "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Model with customized properties",
       "Properties": [
        {
@@ -1030,7 +1030,7 @@
       "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Model to add additional serializable property",
       "BaseModel": {
        "$ref": "35"
@@ -1094,7 +1094,7 @@
       "Kind": "model",
       "Name": "ModelStruct",
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "Model to make to a struct",
       "Properties": [
        {
@@ -1205,7 +1205,7 @@
    "Kind": "model",
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "178",

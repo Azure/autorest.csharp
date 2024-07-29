@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputRecord",
-   "Usage": "Input,Xml",
+   "Usage": "Input,Json",
    "Description": "Record used in operation parameters",
    "Properties": [
     {
@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "OutputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.OutputRecord",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Record used in operation return type",
    "Properties": [
     {
@@ -57,7 +57,7 @@
    "Kind": "model",
    "Name": "InputOutputRecord",
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Record used both as operation parameter and return type",
    "Properties": [
     {

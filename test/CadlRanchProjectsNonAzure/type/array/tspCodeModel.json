@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "InnerModel",
    "CrossLanguageDefinitionId": "Type.Array.InnerModel",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Array inner model",
    "Properties": [
     {

@@ -9,7 +9,7 @@
    "Kind": "model",
    "Name": "DefaultBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.DefaultBytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "3",
@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "Base64BytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64BytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "6",
@@ -57,7 +57,7 @@
    "Kind": "model",
    "Name": "Base64urlBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlBytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "9",
@@ -81,7 +81,7 @@
    "Kind": "model",
    "Name": "Base64urlArrayBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlArrayBytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "12",

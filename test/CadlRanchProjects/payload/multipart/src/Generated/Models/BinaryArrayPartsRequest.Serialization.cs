@@ -31,24 +31,14 @@ namespace Payload.MultiPart.Models
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("pictures"u8);
-            writer.WriteStartArray();
-            foreach (var item in Pictures)
-            {
-                if (item == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
 #if NET6_0_OR_GREATER
-				writer.WriteRawValue(global::System.BinaryData.FromStream(item));
+				writer.WriteRawValue(global::System.BinaryData.FromStream(Pictures));
 #else
-                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(item)))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
+            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Pictures)))
+            {
+                JsonSerializer.Serialize(writer, document.RootElement);
             }
-            writer.WriteEndArray();
+#endif
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -88,7 +78,7 @@ namespace Payload.MultiPart.Models
                 return null;
             }
             string id = default;
-            IList<Stream> pictures = default;
+            Stream pictures = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -100,19 +90,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("pictures"u8))
                 {
-                    List<Stream> array = new List<Stream>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        if (item.ValueKind == JsonValueKind.Null)
-                        {
-                            array.Add(null);
-                        }
-                        else
-                        {
-                            array.Add(BinaryData.FromString(item.GetRawText()).ToStream());
-                        }
-                    }
-                    pictures = array;
+                    pictures = BinaryData.FromString(property.Value.GetRawText()).ToStream();
                     continue;
                 }
                 if (options.Format != "W")
@@ -143,10 +121,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(Id, "id");
-            foreach (Stream item in Pictures)
-            {
-                content.Add(item, "pictures", "pictures", "application/octet-stream");
-            }
+            content.Add(Pictures, "pictures", "pictures", "application/octet-stream");
             return content;
         }
 

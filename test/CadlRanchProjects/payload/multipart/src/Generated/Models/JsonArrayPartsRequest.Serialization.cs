@@ -38,12 +38,7 @@ namespace Payload.MultiPart.Models
             }
 #endif
             writer.WritePropertyName("previousAddresses"u8);
-            writer.WriteStartArray();
-            foreach (var item in PreviousAddresses)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
+            writer.WriteObjectValue(PreviousAddresses, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -83,7 +78,7 @@ namespace Payload.MultiPart.Models
                 return null;
             }
             Stream profileImage = default;
-            IList<Address> previousAddresses = default;
+            Address previousAddresses = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -95,12 +90,7 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("previousAddresses"u8))
                 {
-                    List<Address> array = new List<Address>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(Address.DeserializeAddress(item, options));
-                    }
-                    previousAddresses = array;
+                    previousAddresses = Address.DeserializeAddress(property.Value, options);
                     continue;
                 }
                 if (options.Format != "W")
@@ -131,10 +121,7 @@ namespace Payload.MultiPart.Models
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
             content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
-            foreach (Address item in PreviousAddresses)
-            {
-                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
-            }
+            content.Add(ModelReaderWriter.Write(PreviousAddresses, ModelSerializationExtensions.WireOptions), "previousAddresses");
             return content;
         }
 

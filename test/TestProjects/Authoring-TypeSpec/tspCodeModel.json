@@ -38,7 +38,7 @@
    ],
    "Description": "Represents the project kind.",
    "IsExtensible": true,
-   "Usage": "Xml"
+   "Usage": "Json"
   },
   {
    "$id": "7",
@@ -137,7 +137,7 @@
    ],
    "Description": "Represents the job status values.",
    "IsExtensible": true,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   },
   {
    "$id": "23",
@@ -167,7 +167,7 @@
    "Kind": "model",
    "Name": "Project",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Project",
-   "Usage": "Xml",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "27",
@@ -218,7 +218,7 @@
       "Kind": "model",
       "Name": "ProjectSettings",
       "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
-      "Usage": "Xml",
+      "Usage": "Json",
       "Description": "Represents the settings used to define the project behavior.",
       "AdditionalProperties": {
        "$id": "34",
@@ -605,7 +605,7 @@
    "Kind": "model",
    "Name": "Deployment",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
-   "Usage": "Xml",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "83",
@@ -718,7 +718,7 @@
    "Kind": "model",
    "Name": "DeploymentJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "98",
@@ -822,7 +822,7 @@
        "Kind": "model",
        "Name": "JobWarning",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "Represents a warning that was encountered while executing the request.",
        "Properties": [
         {
@@ -895,7 +895,7 @@
    "Kind": "model",
    "Name": "SwapDeploymentsJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "121",
@@ -1034,7 +1034,7 @@
    "Kind": "model",
    "Name": "SupportedLanguages",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
-   "Usage": "Xml",
+   "Usage": "Json",
    "Description": "Paged collection of SupportedLanguage items",
    "Properties": [
     {
@@ -1051,7 +1051,7 @@
        "Kind": "model",
        "Name": "SupportedLanguage",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
-       "Usage": "Xml",
+       "Usage": "Json",
        "Description": "Represents a supported language.",
        "Properties": [
         {
@@ -1125,7 +1125,7 @@
    "Kind": "model",
    "Name": "TrainingConfigVersions",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
-   "Usage": "Xml",
+   "Usage": "Json",
    "Description": "Paged collection of TrainingConfigVersion items",
    "Properties": [
     {
@@ -1142,7 +1142,7 @@
        "Kind": "model",
        "Name": "TrainingConfigVersion",
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
-       "Usage": "Xml",
+       "Usage": "Json",
        "Description": "Represents a training config version.",
        "Properties": [
         {

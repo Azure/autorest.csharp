@@ -54,7 +54,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -63,7 +63,7 @@
    "Kind": "model",
    "Name": "ModelV2",
    "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "10",

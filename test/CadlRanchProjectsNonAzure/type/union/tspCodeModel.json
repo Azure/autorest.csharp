@@ -32,7 +32,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "7",
@@ -58,7 +58,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -84,7 +84,7 @@
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "15",
@@ -133,7 +133,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "23",
@@ -182,7 +182,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "31",
@@ -218,7 +218,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "37",
@@ -244,7 +244,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -253,7 +253,7 @@
    "Kind": "model",
    "Name": "GetResponse9",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "42",
@@ -273,7 +273,7 @@
    "Kind": "model",
    "Name": "SendRequest9",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "44",
@@ -293,7 +293,7 @@
    "Kind": "model",
    "Name": "GetResponse8",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "46",
@@ -313,7 +313,7 @@
    "Kind": "model",
    "Name": "SendRequest8",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "48",
@@ -333,7 +333,7 @@
    "Kind": "model",
    "Name": "GetResponse7",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "50",
@@ -353,7 +353,7 @@
    "Kind": "model",
    "Name": "SendRequest7",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "52",
@@ -373,7 +373,7 @@
    "Kind": "model",
    "Name": "GetResponse6",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "54",
@@ -393,7 +393,7 @@
    "Kind": "model",
    "Name": "SendRequest6",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "56",
@@ -413,7 +413,7 @@
    "Kind": "model",
    "Name": "GetResponse5",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "58",
@@ -433,7 +433,7 @@
    "Kind": "model",
    "Name": "SendRequest5",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "60",
@@ -453,7 +453,7 @@
    "Kind": "model",
    "Name": "GetResponse4",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "62",
@@ -470,7 +470,7 @@
         "Kind": "model",
         "Name": "Cat",
         "CrossLanguageDefinitionId": "Type.Union.Cat",
-        "Usage": "Input,Output,Xml",
+        "Usage": "Input,Output,Json",
         "Properties": [
          {
           "$id": "65",
@@ -493,7 +493,7 @@
         "Kind": "model",
         "Name": "Dog",
         "CrossLanguageDefinitionId": "Type.Union.Dog",
-        "Usage": "Input,Output,Xml",
+        "Usage": "Input,Output,Json",
         "Properties": [
          {
           "$id": "68",
@@ -529,7 +529,7 @@
    "Kind": "model",
    "Name": "SendRequest4",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "71",
@@ -559,7 +559,7 @@
    "Kind": "model",
    "Name": "GetResponse3",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "74",
@@ -571,7 +571,7 @@
       "Kind": "model",
       "Name": "EnumsOnlyCases",
       "CrossLanguageDefinitionId": "Type.Union.EnumsOnlyCases",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "76",
@@ -610,7 +610,7 @@
    "Kind": "model",
    "Name": "SendRequest3",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "79",
@@ -630,7 +630,7 @@
    "Kind": "model",
    "Name": "GetResponse2",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "81",
@@ -642,7 +642,7 @@
       "Kind": "model",
       "Name": "StringAndArrayCases",
       "CrossLanguageDefinitionId": "Type.Union.StringAndArrayCases",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "83",
@@ -725,7 +725,7 @@
    "Kind": "model",
    "Name": "SendRequest2",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "94",
@@ -745,7 +745,7 @@
    "Kind": "model",
    "Name": "GetResponse1",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "96",
@@ -757,7 +757,7 @@
       "Kind": "model",
       "Name": "MixedLiteralsCases",
       "CrossLanguageDefinitionId": "Type.Union.MixedLiteralsCases",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "98",
@@ -1154,7 +1154,7 @@
    "Kind": "model",
    "Name": "SendRequest1",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "163",
@@ -1174,7 +1174,7 @@
    "Kind": "model",
    "Name": "GetResponse",
    "CrossLanguageDefinitionId": "Type.Union.get.Response.anonymous",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "165",
@@ -1186,7 +1186,7 @@
       "Kind": "model",
       "Name": "MixedTypesCases",
       "CrossLanguageDefinitionId": "Type.Union.MixedTypesCases",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "167",
@@ -1504,7 +1504,7 @@
    "Kind": "model",
    "Name": "SendRequest",
    "CrossLanguageDefinitionId": "Type.Union.send.Request.anonymous",
-   "Usage": "Spread,Xml",
+   "Usage": "Spread,Json",
    "Properties": [
     {
      "$id": "214",

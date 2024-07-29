@@ -24,7 +24,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The StringLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "5",
@@ -65,7 +65,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The IntLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "11",
@@ -106,7 +106,7 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The FloatLiteralProperty_property",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "17",
@@ -132,7 +132,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "21",
@@ -176,7 +176,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "28",
@@ -220,7 +220,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -229,7 +229,7 @@
    "Kind": "model",
    "Name": "StringProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -253,7 +253,7 @@
    "Kind": "model",
    "Name": "BytesProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
    "Properties": [
     {
@@ -278,7 +278,7 @@
    "Kind": "model",
    "Name": "DatetimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
    "Properties": [
     {
@@ -309,7 +309,7 @@
    "Kind": "model",
    "Name": "DurationProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
    "Properties": [
     {
@@ -340,7 +340,7 @@
    "Kind": "model",
    "Name": "PlainDateProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a plainDate property",
    "Properties": [
     {
@@ -364,7 +364,7 @@
    "Kind": "model",
    "Name": "PlainTimeProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with a plainTime property",
    "Properties": [
     {
@@ -388,7 +388,7 @@
    "Kind": "model",
    "Name": "CollectionsByteProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection bytes properties",
    "Properties": [
     {
@@ -419,7 +419,7 @@
    "Kind": "model",
    "Name": "CollectionsModelProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with collection models properties",
    "Properties": [
     {
@@ -446,7 +446,7 @@
    "Kind": "model",
    "Name": "StringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with string literal property",
    "Properties": [
     {
@@ -472,7 +472,7 @@
    "Kind": "model",
    "Name": "IntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with int literal property",
    "Properties": [
     {
@@ -498,7 +498,7 @@
    "Kind": "model",
    "Name": "FloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with float literal property",
    "Properties": [
     {
@@ -524,7 +524,7 @@
    "Kind": "model",
    "Name": "BooleanLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with boolean literal property",
    "Properties": [
     {
@@ -553,7 +553,7 @@
    "Kind": "model",
    "Name": "UnionStringLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of string literal property",
    "Properties": [
     {
@@ -574,7 +574,7 @@
    "Kind": "model",
    "Name": "UnionIntLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of int literal property",
    "Properties": [
     {
@@ -595,7 +595,7 @@
    "Kind": "model",
    "Name": "UnionFloatLiteralProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with union of float literal property",
    "Properties": [
     {
@@ -616,7 +616,7 @@
    "Kind": "model",
    "Name": "RequiredAndOptionalProperty",
    "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "Model with required and optional properties",
    "Properties": [
     {

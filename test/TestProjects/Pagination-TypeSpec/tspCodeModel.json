@@ -80,7 +80,7 @@
    "Kind": "model",
    "Name": "ListLedgerEntryInputBody",
    "CrossLanguageDefinitionId": "Pagination.ListLedgerEntryInputBody",
-   "Usage": "Input,Xml",
+   "Usage": "Input,Json",
    "Description": "Type for input model body",
    "Properties": [
     {
@@ -136,7 +136,7 @@
    "Kind": "model",
    "Name": "PagedLedgerEntries",
    "CrossLanguageDefinitionId": "Pagination.PagedLedgerEntries",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Paginated ledger entries",
    "Properties": [
     {
@@ -153,7 +153,7 @@
        "Kind": "model",
        "Name": "LedgerEntry",
        "CrossLanguageDefinitionId": "Pagination.LedgerEntry",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "24",
@@ -257,7 +257,7 @@
        "Kind": "model",
        "Name": "DimensionValueListItem",
        "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "38",
@@ -392,7 +392,7 @@
        "Kind": "model",
        "Name": "TextBlocklist",
        "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "Text Blocklist.",
        "Properties": [
         {
@@ -483,7 +483,7 @@
        "Kind": "model",
        "Name": "TextBlockItem",
        "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "Item in TextBlocklist.",
        "Properties": [
         {
@@ -571,7 +571,7 @@
    "Kind": "model",
    "Name": "BatchPoolListResult",
    "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "The result of listing the Pools in an Account.",
    "Properties": [
     {
@@ -588,7 +588,7 @@
        "Kind": "model",
        "Name": "BatchPool",
        "CrossLanguageDefinitionId": "Pagination.BatchPool",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Description": "A Pool in the Azure Batch service.",
        "Properties": [
         {
@@ -664,7 +664,7 @@
    "Kind": "model",
    "Name": "BatchError",
    "CrossLanguageDefinitionId": "Pagination.BatchError",
-   "Usage": "Output,Error,Xml",
+   "Usage": "Output,Error,Json",
    "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {

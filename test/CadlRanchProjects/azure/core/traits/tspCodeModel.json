@@ -64,7 +64,7 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "Sample Model",
    "Properties": [
     {
@@ -120,7 +120,7 @@
    "Kind": "model",
    "Name": "UserActionParam",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
-   "Usage": "Input,Xml",
+   "Usage": "Input,Json",
    "Description": "User action param",
    "Properties": [
     {
@@ -144,7 +144,7 @@
    "Kind": "model",
    "Name": "UserActionResponse",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "User action response",
    "Properties": [
     {

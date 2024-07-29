@@ -35,7 +35,7 @@
    "Kind": "model",
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "6",

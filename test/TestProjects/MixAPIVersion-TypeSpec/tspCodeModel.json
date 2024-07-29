@@ -33,7 +33,7 @@
    "Kind": "model",
    "Name": "Pet",
    "CrossLanguageDefinitionId": "MixApiVersion.Pet",
-   "Usage": "Xml",
+   "Usage": "Json",
    "Description": "Pet",
    "Properties": [
     {
@@ -120,7 +120,7 @@
        "Kind": "model",
        "Name": "Toy",
        "CrossLanguageDefinitionId": "MixApiVersion.Toy",
-       "Usage": "Xml",
+       "Usage": "Json",
        "Properties": [
         {
          "$id": "19",
@@ -231,7 +231,7 @@
    "Kind": "model",
    "Name": "Error",
    "CrossLanguageDefinitionId": "MixApiVersion.Error",
-   "Usage": "Error,Xml",
+   "Usage": "Error,Json",
    "Description": "Error",
    "Properties": [
     {

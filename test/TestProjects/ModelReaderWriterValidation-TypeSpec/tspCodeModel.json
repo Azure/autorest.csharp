@@ -30,7 +30,7 @@
    ],
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   },
   {
    "$id": "6",
@@ -95,7 +95,7 @@
    ],
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "16",
@@ -124,7 +124,7 @@
    ],
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "Usage": "Input,Output,Xml"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -159,7 +159,7 @@
    ],
    "Description": "The type of the alias.",
    "IsExtensible": false,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   },
   {
    "$id": "25",
@@ -200,7 +200,7 @@
    ],
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
-   "Usage": "Output,Xml"
+   "Usage": "Output,Json"
   }
  ],
  "Models": [
@@ -209,7 +209,7 @@
    "Kind": "model",
    "Name": "ModelAsStruct",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "The model to change to struct.",
    "Properties": [
     {
@@ -251,7 +251,7 @@
    "Kind": "model",
    "Name": "ModelWithPersistableOnly",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "38",
@@ -382,7 +382,7 @@
    "Kind": "model",
    "Name": "BaseModel",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "The BaseModel in the discriminated set",
    "DiscriminatorProperty": {
     "$id": "58",
@@ -425,7 +425,7 @@
      "Kind": "model",
      "Name": "ModelX",
      "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX",
-     "Usage": "Input,Output,Xml",
+     "Usage": "Input,Output,Json",
      "Description": "The ModelX in the discriminated set",
      "DiscriminatorValue": "X",
      "BaseModel": {
@@ -567,7 +567,7 @@
      "Kind": "model",
      "Name": "ModelY",
      "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY",
-     "Usage": "Input,Output,Xml",
+     "Usage": "Input,Output,Json",
      "Description": "The ModelY in the discriminated set",
      "DiscriminatorValue": "Y",
      "BaseModel": {
@@ -623,14 +623,14 @@
    "Kind": "model",
    "Name": "AvailabilitySetData",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "Description": "The availability set data",
    "BaseModel": {
     "$id": "91",
     "Kind": "model",
     "Name": "TrackedResourceData",
     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData",
-    "Usage": "Input,Output,Xml",
+    "Usage": "Input,Output,Json",
     "Description": "The tracked resource data",
     "Properties": [
      {
@@ -726,7 +726,7 @@
       "Kind": "model",
       "Name": "ComputeSku",
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Properties": [
        {
         "$id": "106",
@@ -797,7 +797,7 @@
       "Kind": "model",
       "Name": "AvailabilitySetProperties",
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties",
-      "Usage": "Input,Output,Xml",
+      "Usage": "Input,Output,Json",
       "Description": "The availability set properties",
       "Properties": [
        {
@@ -814,7 +814,7 @@
           "Kind": "model",
           "Name": "WritableSubResource",
           "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource",
-          "Usage": "Input,Output,Xml",
+          "Usage": "Input,Output,Json",
           "Description": "The writable sub resource",
           "Properties": [
            {
@@ -926,7 +926,7 @@
    "Kind": "model",
    "Name": "ResourceProviderData",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData",
-   "Usage": "Output,Xml",
+   "Usage": "Output,Json",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
    "Properties": [
     {
@@ -999,7 +999,7 @@
        "Kind": "model",
        "Name": "ProviderResourceType",
        "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType",
-       "Usage": "Output,Xml",
+       "Usage": "Output,Json",
        "Properties": [
         {
          "$id": "143",
@@ -1049,7 +1049,7 @@
            "Kind": "model",
            "Name": "ProviderExtendedLocation",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation",
-           "Usage": "Output,Xml",
+           "Usage": "Output,Json",
            "Description": "The provider extended location.",
            "Properties": [
             {
@@ -1121,7 +1121,7 @@
            "Kind": "model",
            "Name": "ResourceTypeAlias",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias",
-           "Usage": "Output,Xml",
+           "Usage": "Output,Json",
            "Description": "The alias type.",
            "Properties": [
             {
@@ -1152,7 +1152,7 @@
                "Kind": "model",
                "Name": "ResourceTypeAliasPath",
                "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath",
-               "Usage": "Output,Xml",
+               "Usage": "Output,Json",
                "Description": "The type of the paths for alias.",
                "Properties": [
                 {
@@ -1199,7 +1199,7 @@
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPattern",
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern",
-                  "Usage": "Output,Xml",
+                  "Usage": "Output,Json",
                   "Description": "The type of the pattern for an alias path.",
                   "Properties": [
                    {
@@ -1256,7 +1256,7 @@
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPathMetadata",
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata",
-                  "Usage": "Input,Output,Xml",
+                  "Usage": "Input,Output,Json",
                   "Description": "The ResourceTypeAliasPathMetadata.",
                   "Properties": [
                    {
@@ -1395,7 +1395,7 @@
            "Kind": "model",
            "Name": "ZoneMapping",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping",
-           "Usage": "Output,Xml",
+           "Usage": "Output,Json",
            "Description": "The ZoneMapping.",
            "Properties": [
             {
@@ -1453,7 +1453,7 @@
            "Kind": "model",
            "Name": "ApiProfile",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile",
-           "Usage": "Output,Xml",
+           "Usage": "Output,Json",
            "Properties": [
             {
              "$id": "203",
@@ -1577,7 +1577,7 @@
    "Kind": "model",
    "Name": "ModelWithStringAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "AdditionalProperties": {
     "$id": "215",
     "Kind": "string",
@@ -1652,7 +1652,7 @@
    "Kind": "model",
    "Name": "ModelWithArrayAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "AdditionalProperties": {
     "$id": "226",
     "Kind": "array",
@@ -1730,7 +1730,7 @@
    "Kind": "model",
    "Name": "ModelWithUnknownAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties",
-   "Usage": "Input,Output,Xml",
+   "Usage": "Input,Output,Json",
    "AdditionalProperties": {
     "$id": "237",
     "Kind": "any",
