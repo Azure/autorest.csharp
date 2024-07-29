@@ -10,169 +10,337 @@
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ServerExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "EnumValue1",
-     "Value": "value1"
+     "Value": "value1",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Json"
+   "Usage": "Input,Json",
+   "Decorators": [
+    {
+     "$id": "5",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "6",
+      "rename": "ClientExtensibleEnum"
+     }
+    }
+   ]
   },
   {
-   "$id": "5",
+   "$id": "7",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
    "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.ExtensibleEnum",
    "ValueType": {
-    "$id": "6",
-    "Kind": "string"
+    "$id": "8",
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
-     "$id": "7",
+     "$id": "9",
      "Name": "ClientEnumValue1",
-     "Value": "value1"
+     "Value": "value1",
+     "Decorators": [
+      {
+       "$id": "10",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "11",
+        "rename": "ClientEnumValue1"
+       }
+      }
+     ]
     },
     {
-     "$id": "8",
+     "$id": "12",
      "Name": "ClientEnumValue2",
-     "Value": "value2"
+     "Value": "value2",
+     "Decorators": [
+      {
+       "$id": "13",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "14",
+        "rename": "ClientEnumValue2"
+       }
+      }
+     ]
     }
    ],
    "IsExtensible": true,
-   "Usage": "Input,Json"
+   "Usage": "Input,Json",
+   "Decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "9",
+   "$id": "15",
    "Kind": "model",
    "Name": "ClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
    "Usage": "Input,Json",
-   "Properties": [
-    {
-     "$id": "10",
-     "Name": "clientName",
-     "SerializedName": "defaultName",
-     "Description": "Pass in true",
-     "Type": {
-      "$id": "11",
-      "Kind": "boolean"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "12",
-   "Kind": "model",
-   "Name": "LanguageClientNameModel",
-   "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
-   "Usage": "Input,Json",
-   "Properties": [
-    {
-     "$id": "13",
-     "Name": "CSName",
-     "SerializedName": "defaultName",
-     "Description": "Pass in true",
-     "Type": {
-      "$id": "14",
-      "Kind": "boolean"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "15",
-   "Kind": "model",
-   "Name": "ClientNameAndJsonEncodedNameModel",
-   "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
-   "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "16",
      "Name": "clientName",
-     "SerializedName": "wireName",
+     "SerializedName": "defaultName",
      "Description": "Pass in true",
      "Type": {
       "$id": "17",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": [
+      {
+       "$id": "18",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "19",
+        "rename": "clientName"
+       }
+      }
+     ]
     }
    ]
   },
   {
-   "$id": "18",
+   "$id": "20",
+   "Kind": "model",
+   "Name": "LanguageClientNameModel",
+   "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
+   "Usage": "Input,Json",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "21",
+     "Name": "CSName",
+     "SerializedName": "defaultName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "22",
+      "Kind": "boolean",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": [
+      {
+       "$id": "23",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "24",
+        "rename": "python_name",
+        "scope": "python"
+       }
+      },
+      {
+       "$id": "25",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "26",
+        "rename": "TSName",
+        "scope": "javascript"
+       }
+      },
+      {
+       "$id": "27",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "28",
+        "rename": "JavaName",
+        "scope": "java"
+       }
+      },
+      {
+       "$id": "29",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "30",
+        "rename": "GoName",
+        "scope": "go"
+       }
+      },
+      {
+       "$id": "31",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "32",
+        "rename": "CSName",
+        "scope": "csharp"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "$id": "33",
+   "Kind": "model",
+   "Name": "ClientNameAndJsonEncodedNameModel",
+   "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
+   "Usage": "Input,Json",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "34",
+     "Name": "clientName",
+     "SerializedName": "wireName",
+     "Description": "Pass in true",
+     "Type": {
+      "$id": "35",
+      "Kind": "boolean",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": [
+      {
+       "$id": "36",
+       "name": "Azure.ClientGenerator.Core.@clientName",
+       "arguments": {
+        "$id": "37",
+        "rename": "clientName"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "$id": "38",
    "Kind": "model",
    "Name": "ClientModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
    "Usage": "Input,Json",
+   "Decorators": [
+    {
+     "$id": "39",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "40",
+      "rename": "ClientModel"
+     }
+    }
+   ],
    "Properties": [
     {
-     "$id": "19",
+     "$id": "41",
      "Name": "defaultName",
      "SerializedName": "defaultName",
      "Description": "Pass in true",
      "Type": {
-      "$id": "20",
-      "Kind": "boolean"
+      "$id": "42",
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
   {
-   "$id": "21",
+   "$id": "43",
    "Kind": "model",
    "Name": "CSModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
    "Usage": "Input,Json",
+   "Decorators": [
+    {
+     "$id": "44",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "45",
+      "rename": "PythonModel",
+      "scope": "python"
+     }
+    },
+    {
+     "$id": "46",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "47",
+      "rename": "TSModel",
+      "scope": "javascript"
+     }
+    },
+    {
+     "$id": "48",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "49",
+      "rename": "JavaModel",
+      "scope": "java"
+     }
+    },
+    {
+     "$id": "50",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "51",
+      "rename": "GoModel",
+      "scope": "go"
+     }
+    },
+    {
+     "$id": "52",
+     "name": "Azure.ClientGenerator.Core.@clientName",
+     "arguments": {
+      "$id": "53",
+      "rename": "CSModel",
+      "scope": "csharp"
+     }
+    }
+   ],
    "Properties": [
     {
-     "$id": "22",
+     "$id": "54",
      "Name": "defaultName",
      "SerializedName": "defaultName",
      "Description": "Pass in true",
      "Type": {
-      "$id": "23",
-      "Kind": "boolean"
+      "$id": "55",
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "24",
+   "$id": "56",
    "Name": "NamingClient",
    "Description": "Describe changing names of types in a client with `@clientName`",
    "Operations": [
     {
-     "$id": "25",
+     "$id": "57",
      "Name": "clientName",
      "ResourceName": "Naming",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "26",
+       "$id": "58",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "27",
+        "$id": "59",
         "Kind": "string"
        },
        "Location": "Uri",
@@ -185,20 +353,20 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "60",
         "Type": {
-         "$id": "29",
+         "$id": "61",
          "Kind": "string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "30",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "63",
         "Kind": "string"
        },
        "Location": "Header",
@@ -211,9 +379,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "64",
         "Type": {
-         "$ref": "31"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
@@ -221,7 +389,7 @@
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "65",
        "StatusCodes": [
         204
        ],
@@ -239,21 +407,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "66",
      "Name": "parameter",
      "ResourceName": "Naming",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "35",
+       "$id": "67",
        "Name": "clientName",
        "NameInRequest": "defaultName",
        "Type": {
-        "$id": "36",
-        "Kind": "string"
+        "$id": "68",
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -266,11 +435,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "37",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "38",
+        "$id": "70",
         "Kind": "string"
        },
        "Location": "Header",
@@ -283,9 +452,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "71",
         "Type": {
-         "$ref": "38"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
@@ -293,7 +462,7 @@
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "72",
        "StatusCodes": [
         204
        ],
@@ -311,20 +480,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "41",
+     "$id": "73",
      "Name": "client",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "42",
+       "$id": "74",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "9"
+        "$ref": "15"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -337,11 +506,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "75",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "44",
+        "$id": "76",
         "Kind": "string"
        },
        "Location": "Header",
@@ -354,19 +523,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "77",
         "Type": {
-         "$ref": "44"
+         "$ref": "76"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "46",
+       "$id": "78",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
+        "$id": "79",
         "Kind": "string"
        },
        "Location": "Header",
@@ -379,9 +548,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "48",
+        "$id": "80",
         "Type": {
-         "$ref": "47"
+         "$ref": "79"
         },
         "Value": "application/json"
        }
@@ -389,7 +558,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "81",
        "StatusCodes": [
         204
        ],
@@ -410,20 +579,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "50",
+     "$id": "82",
      "Name": "language",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "51",
+       "$id": "83",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "12"
+        "$ref": "20"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -436,11 +605,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "52",
+       "$id": "84",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "53",
+        "$id": "85",
         "Kind": "string"
        },
        "Location": "Header",
@@ -453,19 +622,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "86",
         "Type": {
-         "$ref": "53"
+         "$ref": "85"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "55",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "56",
+        "$id": "88",
         "Kind": "string"
        },
        "Location": "Header",
@@ -478,9 +647,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "89",
         "Type": {
-         "$ref": "56"
+         "$ref": "88"
         },
         "Value": "application/json"
        }
@@ -488,7 +657,7 @@
      ],
      "Responses": [
       {
-       "$id": "58",
+       "$id": "90",
        "StatusCodes": [
         204
        ],
@@ -509,20 +678,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "59",
+     "$id": "91",
      "Name": "compatibleWithEncodedName",
      "ResourceName": "Property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "60",
+       "$id": "92",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "15"
+        "$ref": "33"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -535,11 +704,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "93",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "62",
+        "$id": "94",
         "Kind": "string"
        },
        "Location": "Header",
@@ -552,19 +721,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "95",
         "Type": {
-         "$ref": "62"
+         "$ref": "94"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "64",
+       "$id": "96",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "65",
+        "$id": "97",
         "Kind": "string"
        },
        "Location": "Header",
@@ -577,9 +746,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "98",
         "Type": {
-         "$ref": "65"
+         "$ref": "97"
         },
         "Value": "application/json"
        }
@@ -587,7 +756,7 @@
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "99",
        "StatusCodes": [
         204
        ],
@@ -608,21 +777,22 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "68",
+     "$id": "100",
      "Name": "request",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "69",
+       "$id": "101",
        "Name": "clientName",
        "NameInRequest": "default-name",
        "Type": {
-        "$id": "70",
-        "Kind": "string"
+        "$id": "102",
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -635,11 +805,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "71",
+       "$id": "103",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "72",
+        "$id": "104",
         "Kind": "string"
        },
        "Location": "Header",
@@ -652,9 +822,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "73",
+        "$id": "105",
         "Type": {
-         "$ref": "72"
+         "$ref": "104"
         },
         "Value": "application/json"
        }
@@ -662,7 +832,7 @@
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "106",
        "StatusCodes": [
         204
        ],
@@ -680,20 +850,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "75",
+     "$id": "107",
      "Name": "response",
      "ResourceName": "Header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "76",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "109",
         "Kind": "string"
        },
        "Location": "Header",
@@ -706,9 +876,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "110",
         "Type": {
-         "$ref": "77"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
@@ -716,20 +886,21 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "111",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "80",
+         "$id": "112",
          "Name": "default-name",
          "NameInResponse": "default-name",
          "Description": "",
          "Type": {
-          "$id": "81",
-          "Kind": "string"
+          "$id": "113",
+          "Kind": "string",
+          "Decorators": []
          }
         }
        ],
@@ -746,34 +917,35 @@
     }
    ],
    "Protocol": {
-    "$id": "82"
+    "$id": "114"
    },
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "58"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
-   "$id": "83",
+   "$id": "115",
    "Name": "ClientModel",
    "Description": "",
    "Operations": [
     {
-     "$id": "84",
+     "$id": "116",
      "Name": "client",
      "ResourceName": "Model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "85",
+       "$id": "117",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "18"
+        "$ref": "38"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -786,11 +958,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "86",
+       "$id": "118",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "87",
+        "$id": "119",
         "Kind": "string"
        },
        "Location": "Header",
@@ -803,19 +975,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "88",
+        "$id": "120",
         "Type": {
-         "$ref": "87"
+         "$ref": "119"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "89",
+       "$id": "121",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
+        "$id": "122",
         "Kind": "string"
        },
        "Location": "Header",
@@ -828,9 +1000,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "123",
         "Type": {
-         "$ref": "90"
+         "$ref": "122"
         },
         "Value": "application/json"
        }
@@ -838,7 +1010,7 @@
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "124",
        "StatusCodes": [
         204
        ],
@@ -859,20 +1031,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "93",
+     "$id": "125",
      "Name": "language",
      "ResourceName": "Model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "94",
+       "$id": "126",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "21"
+        "$ref": "43"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -885,11 +1057,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "95",
+       "$id": "127",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "96",
+        "$id": "128",
         "Kind": "string"
        },
        "Location": "Header",
@@ -902,19 +1074,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "97",
+        "$id": "129",
         "Type": {
-         "$ref": "96"
+         "$ref": "128"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "98",
+       "$id": "130",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "99",
+        "$id": "131",
         "Kind": "string"
        },
        "Location": "Header",
@@ -927,9 +1099,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "100",
+        "$id": "132",
         "Type": {
-         "$ref": "99"
+         "$ref": "131"
         },
         "Value": "application/json"
        }
@@ -937,7 +1109,7 @@
      ],
      "Responses": [
       {
-       "$id": "101",
+       "$id": "133",
        "StatusCodes": [
         204
        ],
@@ -959,31 +1131,32 @@
     }
    ],
    "Protocol": {
-    "$id": "102"
+    "$id": "134"
    },
    "Parent": "NamingClient",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "58"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
-   "$id": "103",
+   "$id": "135",
    "Name": "UnionEnum",
    "Description": "",
    "Operations": [
     {
-     "$id": "104",
+     "$id": "136",
      "Name": "unionEnumName",
      "ResourceName": "UnionEnum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "105",
+       "$id": "137",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1000,11 +1173,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "106",
+       "$id": "138",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "107",
+        "$id": "139",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1017,19 +1190,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "108",
+        "$id": "140",
         "Type": {
-         "$ref": "107"
+         "$ref": "139"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "109",
+       "$id": "141",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "110",
+        "$id": "142",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1042,9 +1215,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "111",
+        "$id": "143",
         "Type": {
-         "$ref": "110"
+         "$ref": "142"
         },
         "Value": "application/json"
        }
@@ -1052,7 +1225,7 @@
      ],
      "Responses": [
       {
-       "$id": "112",
+       "$id": "144",
        "StatusCodes": [
         204
        ],
@@ -1073,20 +1246,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "113",
+     "$id": "145",
      "Name": "unionEnumMemberName",
      "ResourceName": "UnionEnum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "26"
+       "$ref": "58"
       },
       {
-       "$id": "114",
+       "$id": "146",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "5"
+        "$ref": "7"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1099,11 +1272,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "115",
+       "$id": "147",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "116",
+        "$id": "148",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1116,19 +1289,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "117",
+        "$id": "149",
         "Type": {
-         "$ref": "116"
+         "$ref": "148"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "118",
+       "$id": "150",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "119",
+        "$id": "151",
         "Kind": "string"
        },
        "Location": "Header",
@@ -1141,9 +1314,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "152",
         "Type": {
-         "$ref": "119"
+         "$ref": "151"
         },
         "Value": "application/json"
        }
@@ -1151,7 +1324,7 @@
      ],
      "Responses": [
       {
-       "$id": "121",
+       "$id": "153",
        "StatusCodes": [
         204
        ],
@@ -1173,14 +1346,15 @@
     }
    ],
    "Protocol": {
-    "$id": "122"
+    "$id": "154"
    },
    "Parent": "NamingClient",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "58"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

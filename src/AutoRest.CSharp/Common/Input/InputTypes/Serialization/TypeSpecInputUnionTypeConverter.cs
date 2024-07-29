@@ -26,11 +26,14 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null;
             var variantTypes = new List<InputType>();
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputUnionType.Name), ref name)
-                    || reader.TryReadWithConverter(nameof(InputUnionType.VariantTypes), options, ref variantTypes);
+                    || reader.TryReadWithConverter(nameof(InputUnionType.VariantTypes), options, ref variantTypes)
+                    || reader.TryReadWithConverter(nameof(InputUnionType.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -44,7 +47,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Union must have variant types.");
             }
 
-            var unionType = new InputUnionType(name, variantTypes);
+            var unionType = new InputUnionType(name, variantTypes, decorators ?? Array.Empty<InputDecoratorInfo>());
             if (id != null)
             {
                 resolver.AddReference(id, unionType);

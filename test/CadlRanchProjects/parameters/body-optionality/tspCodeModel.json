@@ -10,6 +10,7 @@
    "Name": "BodyModel",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -18,10 +19,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -31,6 +34,7 @@
    "Name": "RequiredImplicitRequest",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -39,10 +43,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -283,7 +289,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "32",
@@ -497,7 +504,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

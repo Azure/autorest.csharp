@@ -41,7 +41,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -66,9 +67,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "12",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "text/plain"
+        "Value": "text/plain",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -93,7 +96,8 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -196,7 +200,8 @@
        ],
        "BodyType": {
         "$id": "25",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -232,9 +237,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "29",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -259,7 +266,8 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "32",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -362,7 +370,8 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -389,7 +398,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

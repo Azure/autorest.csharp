@@ -95,7 +95,8 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "12",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -167,7 +168,8 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "19",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -232,7 +234,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

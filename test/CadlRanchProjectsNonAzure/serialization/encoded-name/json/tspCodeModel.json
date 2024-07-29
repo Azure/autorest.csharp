@@ -10,6 +10,7 @@
    "Name": "JsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -18,10 +19,12 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "4",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -63,7 +66,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -238,7 +242,8 @@
     {
      "$ref": "7"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

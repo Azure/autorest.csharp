@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic",
    "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -34,6 +37,7 @@
    "Access": "public",
    "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -42,10 +46,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -56,6 +62,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -64,10 +71,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -79,6 +88,7 @@
    "Access": "internal",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -87,10 +97,12 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -102,6 +114,7 @@
    "Access": "public",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -110,10 +123,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -124,6 +139,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel",
    "Usage": "Output,Json",
    "Description": "Used by both public and internal operation. It should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -132,10 +148,12 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -146,6 +164,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel",
    "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "21",
     "Kind": "model",
@@ -153,6 +172,7 @@
     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel",
     "Usage": "Output,Json",
     "Description": "Used in internal operations, should be generated but not exported.",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "22",
@@ -161,10 +181,12 @@
       "Description": "",
       "Type": {
        "$id": "23",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       },
       "IsRequired": true,
-      "IsReadOnly": false
+      "IsReadOnly": false,
+      "Decorators": []
      }
     ]
    },
@@ -181,6 +203,7 @@
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel",
       "Usage": "Output,Json",
       "Description": "Used in internal operations, should be generated but not exported.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "26",
@@ -189,15 +212,18 @@
         "Description": "",
         "Type": {
          "$id": "27",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -214,6 +240,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel",
    "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "29",
     "Name": "kind",
@@ -221,11 +248,13 @@
     "Description": "Discriminator property for AbstractModel.",
     "Type": {
      "$id": "30",
-     "Kind": "string"
+     "Kind": "string",
+     "Decorators": []
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -238,10 +267,12 @@
      "Description": "",
      "Type": {
       "$id": "32",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ],
    "DiscriminatedSubtypes": {
@@ -254,6 +285,7 @@
      "Usage": "Output,Json",
      "Description": "Used in internal operations, should be generated but not exported.",
      "DiscriminatorValue": "real",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "28"
      },
@@ -268,13 +300,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "37",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "real"
+        "Value": "real",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     }
@@ -321,7 +356,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "44",
@@ -343,7 +379,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "47",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -421,7 +458,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "54",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -493,7 +531,8 @@
     {
      "$ref": "40"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "60",
@@ -515,7 +554,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "63",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -593,7 +633,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "70",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -671,7 +712,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "77",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -743,7 +785,8 @@
     {
      "$ref": "40"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "83",
@@ -765,7 +808,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "86",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -843,7 +887,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "93",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -915,7 +960,8 @@
     {
      "$ref": "40"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "99",
@@ -938,7 +984,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "102",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1017,7 +1064,8 @@
        "NameInRequest": "kind",
        "Type": {
         "$id": "109",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -1089,7 +1137,8 @@
     {
      "$ref": "40"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

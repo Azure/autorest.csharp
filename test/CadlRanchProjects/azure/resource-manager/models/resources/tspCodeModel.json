@@ -12,50 +12,59 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.ProvisioningState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Succeeded",
      "Value": "Succeeded",
-     "Description": "Resource has been created."
+     "Description": "Resource has been created.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Failed",
      "Value": "Failed",
-     "Description": "Resource creation failed."
+     "Description": "Resource creation failed.",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "Canceled",
      "Value": "Canceled",
-     "Description": "Resource creation was canceled."
+     "Description": "Resource creation was canceled.",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "Provisioning",
-     "Value": "Provisioning"
+     "Value": "Provisioning",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Updating",
-     "Value": "Updating"
+     "Value": "Updating",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Deleting",
-     "Value": "Deleting"
+     "Value": "Deleting",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Accepted",
-     "Value": "Accepted"
+     "Value": "Accepted",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "Output,Json"
+   "Usage": "Output,Json",
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -64,37 +73,43 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.createdByType",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "13",
      "Name": "User",
      "Value": "User",
-     "Description": "The entity was created by a user."
+     "Description": "The entity was created by a user.",
+     "Decorators": []
     },
     {
      "$id": "14",
      "Name": "Application",
      "Value": "Application",
-     "Description": "The entity was created by an application."
+     "Description": "The entity was created by an application.",
+     "Decorators": []
     },
     {
      "$id": "15",
      "Name": "ManagedIdentity",
      "Value": "ManagedIdentity",
-     "Description": "The entity was created by a managed identity."
+     "Description": "The entity was created by a managed identity.",
+     "Decorators": []
     },
     {
      "$id": "16",
      "Name": "Key",
      "Value": "Key",
-     "Description": "The entity was created by a key."
+     "Description": "The entity was created by a key.",
+     "Decorators": []
     }
    ],
    "Description": "The kind of entity that created the resource.",
    "IsExtensible": true,
-   "Usage": "Output,Json"
+   "Usage": "Output,Json",
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -103,19 +118,22 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.Versions",
    "ValueType": {
     "$id": "18",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "19",
      "Name": "v2023_12_01_preview",
      "Value": "2023-12-01-preview",
-     "Description": "Preview API version 2023-12-01-preview."
+     "Description": "Preview API version 2023-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "Azure API versions.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -126,6 +144,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource",
    "Usage": "Input,Output,Json",
    "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "21",
     "Kind": "model",
@@ -133,6 +152,7 @@
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "Usage": "Input,Output,Json",
     "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "Decorators": [],
     "BaseModel": {
      "$id": "22",
      "Kind": "model",
@@ -140,6 +160,7 @@
      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "Usage": "Input,Output,Json",
      "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "Decorators": [],
      "Properties": [
       {
        "$id": "23",
@@ -149,10 +170,12 @@
        "Type": {
         "$id": "24",
         "Kind": "armId",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": true
+       "IsReadOnly": true,
+       "Decorators": []
       },
       {
        "$id": "25",
@@ -161,10 +184,12 @@
        "Description": "The name of the resource",
        "Type": {
         "$id": "26",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": true
+       "IsReadOnly": true,
+       "Decorators": []
       },
       {
        "$id": "27",
@@ -173,10 +198,12 @@
        "Description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "Type": {
         "$id": "28",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "IsRequired": false,
-       "IsReadOnly": true
+       "IsReadOnly": true,
+       "Decorators": []
       },
       {
        "$id": "29",
@@ -190,6 +217,7 @@
         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "Usage": "Output,Json",
         "Description": "Metadata pertaining to creation and last modification of the resource.",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "31",
@@ -198,10 +226,12 @@
           "Description": "The identity that created the resource.",
           "Type": {
            "$id": "32",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          },
          {
           "$id": "33",
@@ -212,7 +242,8 @@
            "$ref": "11"
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          },
          {
           "$id": "34",
@@ -225,11 +256,14 @@
            "Encode": "rfc3339",
            "WireType": {
             "$id": "36",
-            "Kind": "string"
-           }
+            "Kind": "string",
+            "Decorators": []
+           },
+           "Decorators": []
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          },
          {
           "$id": "37",
@@ -238,10 +272,12 @@
           "Description": "The identity that last modified the resource.",
           "Type": {
            "$id": "38",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          },
          {
           "$id": "39",
@@ -252,7 +288,8 @@
            "$ref": "11"
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          },
          {
           "$id": "40",
@@ -265,16 +302,20 @@
            "Encode": "rfc3339",
            "WireType": {
             "$id": "42",
-            "Kind": "string"
-           }
+            "Kind": "string",
+            "Decorators": []
+           },
+           "Decorators": []
           },
           "IsRequired": false,
-          "IsReadOnly": false
+          "IsReadOnly": false,
+          "Decorators": []
          }
         ]
        },
        "IsRequired": false,
-       "IsReadOnly": true
+       "IsReadOnly": true,
+       "Decorators": []
       }
      ]
     },
@@ -289,15 +330,19 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "45",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "ValueType": {
         "$id": "46",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Decorators": []
+       },
+       "Decorators": []
       },
       "IsRequired": false,
-      "IsReadOnly": false
+      "IsReadOnly": false,
+      "Decorators": []
      },
      {
       "$id": "47",
@@ -306,10 +351,12 @@
       "Description": "The geo-location where the resource lives",
       "Type": {
        "$id": "48",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       },
       "IsRequired": true,
-      "IsReadOnly": false
+      "IsReadOnly": false,
+      "Decorators": []
      }
     ]
    },
@@ -326,6 +373,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties",
       "Usage": "Input,Output,Json",
       "Description": "Top Level Arm Resource Properties.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "51",
@@ -336,7 +384,8 @@
          "$ref": "2"
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "52",
@@ -345,15 +394,18 @@
         "Description": "The description of the resource.",
         "Type": {
          "$id": "53",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -376,6 +428,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output,Json",
    "Description": "The response of a TopLevelTrackedResource list operation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "55",
@@ -389,10 +442,12 @@
       "ValueType": {
        "$ref": "20"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "57",
@@ -401,10 +456,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "58",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -415,6 +472,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource",
    "Usage": "Input,Output,Json",
    "Description": "Nested child of Top Level Tracked Resource.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "60",
     "Kind": "model",
@@ -422,6 +480,7 @@
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "Usage": "Input,Output,Json",
     "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "Decorators": [],
     "BaseModel": {
      "$ref": "22"
     },
@@ -440,6 +499,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties",
       "Usage": "Input,Output,Json",
       "Description": "Nested Proxy Resource Properties.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "63",
@@ -450,7 +510,8 @@
          "$ref": "2"
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "64",
@@ -459,15 +520,18 @@
         "Description": "Nested resource description.",
         "Type": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -484,6 +548,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output,Json",
    "Description": "The response of a NestedProxyResource list operation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "67",
@@ -497,10 +562,12 @@
       "ValueType": {
        "$ref": "59"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "69",
@@ -509,10 +576,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "70",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -523,6 +592,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "Usage": "Output,Error,Json",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "72",
@@ -536,6 +606,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "Usage": "Output,Json",
       "Description": "The error detail.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "74",
@@ -544,10 +615,12 @@
         "Description": "The error code.",
         "Type": {
          "$id": "75",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "76",
@@ -556,10 +629,12 @@
         "Description": "The error message.",
         "Type": {
          "$id": "77",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "78",
@@ -568,10 +643,12 @@
         "Description": "The error target.",
         "Type": {
          "$id": "79",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "80",
@@ -585,10 +662,12 @@
          "ValueType": {
           "$ref": "73"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "82",
@@ -606,6 +685,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "Usage": "Output,Json",
           "Description": "The resource management error additional info.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "85",
@@ -614,10 +694,12 @@
             "Description": "The additional info type.",
             "Type": {
              "$id": "86",
-             "Kind": "string"
+             "Kind": "string",
+             "Decorators": []
             },
             "IsRequired": false,
-            "IsReadOnly": true
+            "IsReadOnly": true,
+            "Decorators": []
            },
            {
             "$id": "87",
@@ -630,22 +712,27 @@
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "Usage": "Output,Json",
+             "Decorators": [],
              "Properties": []
             },
             "IsRequired": false,
-            "IsReadOnly": true
+            "IsReadOnly": true,
+            "Decorators": []
            }
           ]
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -696,7 +783,8 @@
       "Value": "https://management.azure.com"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "95",
@@ -720,7 +808,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "98",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -748,7 +837,8 @@
        "Type": {
         "$id": "102",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -767,7 +857,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "104",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -786,7 +877,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "106",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -866,7 +958,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "113",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -889,7 +982,8 @@
        "Type": {
         "$id": "115",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -908,7 +1002,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "117",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -927,7 +1022,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "119",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1041,7 +1137,8 @@
          "Description": "A link to the status monitor",
          "Type": {
           "$id": "130",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -1051,7 +1148,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "132",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -1103,7 +1201,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "137",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1126,7 +1225,8 @@
        "Type": {
         "$id": "139",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1145,7 +1245,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "141",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1164,7 +1265,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "143",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1275,7 +1377,8 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "154",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -1285,7 +1388,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "156",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -1334,7 +1438,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "161",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1357,7 +1462,8 @@
        "Type": {
         "$id": "163",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1376,7 +1482,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "165",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1395,7 +1502,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "167",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1448,7 +1556,8 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "173",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -1458,7 +1567,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "175",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -1510,7 +1620,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "181",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1533,7 +1644,8 @@
        "Type": {
         "$id": "183",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1552,7 +1664,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "185",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1637,7 +1750,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "193",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1660,7 +1774,8 @@
        "Type": {
         "$id": "195",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1737,7 +1852,8 @@
     {
      "$ref": "91"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "202",
@@ -1761,7 +1877,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "205",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1784,7 +1901,8 @@
        "Type": {
         "$id": "207",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1803,7 +1921,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "209",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1822,7 +1941,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "211",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1841,7 +1961,8 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "213",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1921,7 +2042,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "220",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -1944,7 +2066,8 @@
        "Type": {
         "$id": "222",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1963,7 +2086,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "224",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1982,7 +2106,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "226",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2001,7 +2126,8 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "228",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2115,7 +2241,8 @@
          "Description": "A link to the status monitor",
          "Type": {
           "$id": "239",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -2125,7 +2252,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "241",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -2177,7 +2305,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "246",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2200,7 +2329,8 @@
        "Type": {
         "$id": "248",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2219,7 +2349,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "250",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2238,7 +2369,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "252",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2257,7 +2389,8 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "254",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2368,7 +2501,8 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "265",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -2378,7 +2512,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "267",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -2427,7 +2562,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "272",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2450,7 +2586,8 @@
        "Type": {
         "$id": "274",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2469,7 +2606,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "276",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2488,7 +2626,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "278",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2507,7 +2646,8 @@
        "Description": "Name of the nested resource.",
        "Type": {
         "$id": "280",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2560,7 +2700,8 @@
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "286",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -2570,7 +2711,8 @@
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "288",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         }
        ],
@@ -2622,7 +2764,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "294",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -2645,7 +2788,8 @@
        "Type": {
         "$id": "296",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2664,7 +2808,8 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "298",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2683,7 +2828,8 @@
        "Description": "arm resource name for path",
        "Type": {
         "$id": "300",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -2760,7 +2906,8 @@
     {
      "$ref": "91"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ],
  "Auth": {

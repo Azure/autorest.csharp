@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
    "Usage": "Input,Output,Json",
    "Description": "The third level model in the normal multiple levels inheritance.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
@@ -18,6 +19,7 @@
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
     "Usage": "Input,Output,Json",
     "Description": "The second level model in the normal multiple levels inheritance.",
+    "Decorators": [],
     "BaseModel": {
      "$id": "4",
      "Kind": "model",
@@ -25,6 +27,7 @@
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
      "Usage": "Input,Output,Json",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
+     "Decorators": [],
      "Properties": [
       {
        "$id": "5",
@@ -33,10 +36,12 @@
        "Description": "",
        "Type": {
         "$id": "6",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "IsRequired": true,
-       "IsReadOnly": false
+       "IsReadOnly": false,
+       "Decorators": []
       }
      ]
     },
@@ -48,10 +53,12 @@
       "Description": "",
       "Type": {
        "$id": "8",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Decorators": []
       },
       "IsRequired": true,
-      "IsReadOnly": false
+      "IsReadOnly": false,
+      "Decorators": []
      }
     ]
    },
@@ -63,10 +70,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -379,7 +388,8 @@
     {
      "$ref": "13"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

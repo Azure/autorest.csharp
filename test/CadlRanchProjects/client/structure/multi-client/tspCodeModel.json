@@ -10,32 +10,38 @@
    "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Default",
-     "Value": "default"
+     "Value": "default",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "MultiClient",
-     "Value": "multi-client"
+     "Value": "multi-client",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "RenamedOperation",
-     "Value": "renamed-operation"
+     "Value": "renamed-operation",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "TwoOperationGroup",
-     "Value": "two-operation-group"
+     "Value": "two-operation-group",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -258,7 +264,8 @@
     {
      "$ref": "12"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "28",
@@ -447,7 +454,8 @@
     {
      "$ref": "12"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType
+internal abstract record InputType: InputDecoratedType
 {
-    protected InputType(string name)
+    protected InputType(string name, IReadOnlyList<InputDecoratorInfo> decorators) : base(decorators)
     {
         Name = name;
         SpecName = name;
@@ -23,12 +24,14 @@ internal abstract record InputType
                 return new InputListType(
                     listType.Name,
                     listType.CrossLanguageDefinitionId,
-                    listType.ValueType.GetCollectionEquivalent(inputType));
+                    listType.ValueType.GetCollectionEquivalent(inputType),
+                    listType.Decorators);
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
                     dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType));
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType),
+                    dictionaryType.Decorators);
             default:
                 return inputType;
         }
@@ -42,7 +45,7 @@ internal abstract record InputType
     public InputType WithNullable(bool isNullable)
     {
         if (isNullable)
-            return new InputNullableType(this);
+            return new InputNullableType(this, this.Decorators);
         return this;
     }
     public InputType GetImplementType() => this switch

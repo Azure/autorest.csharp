@@ -10,6 +10,7 @@
    "Name": "PngImageAsJson",
    "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -64,7 +67,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -115,7 +119,8 @@
        "BodyType": {
         "$id": "17",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -177,7 +182,8 @@
        "BodyType": {
         "$id": "23",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -204,7 +210,8 @@
     {
      "$ref": "7"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "25",
@@ -255,7 +262,8 @@
        "BodyType": {
         "$id": "31",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -342,7 +350,8 @@
     {
      "$ref": "7"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

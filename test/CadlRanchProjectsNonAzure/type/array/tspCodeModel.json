@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Array.InnerModel",
    "Usage": "Input,Output,Json",
    "Description": "Array inner model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "5",
@@ -36,10 +39,12 @@
       "ValueType": {
        "$ref": "2"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -81,7 +86,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "13",
@@ -135,9 +141,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "20",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -174,9 +182,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "24",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -270,7 +280,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "33",
@@ -324,9 +335,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "40",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -363,9 +376,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "44",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -459,7 +474,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "53",
@@ -513,9 +529,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "60",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -552,9 +570,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "64",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -648,7 +668,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "73",
@@ -702,9 +723,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "80",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -741,9 +764,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "84",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -837,7 +862,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "93",
@@ -891,9 +917,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "100",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -930,9 +958,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "104",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1026,7 +1056,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "113",
@@ -1084,10 +1115,13 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "121",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1128,10 +1162,13 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "126",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1225,7 +1262,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "135",
@@ -1283,10 +1321,13 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "143",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1327,10 +1368,13 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "148",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1424,7 +1468,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "157",
@@ -1478,9 +1523,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "164",
-         "Kind": "any"
+         "Kind": "any",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1517,9 +1564,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "168",
-         "Kind": "any"
+         "Kind": "any",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1613,7 +1662,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "177",
@@ -1668,7 +1718,8 @@
         "ValueType": {
          "$ref": "2"
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1706,7 +1757,8 @@
         "ValueType": {
          "$ref": "2"
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1800,7 +1852,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "195",
@@ -1857,10 +1910,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "203",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1900,10 +1955,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "208",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1997,7 +2054,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "217",
@@ -2054,10 +2112,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "225",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2097,10 +2157,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "230",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2194,7 +2256,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "239",
@@ -2251,10 +2314,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "247",
-          "Kind": "boolean"
+          "Kind": "boolean",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2294,10 +2359,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "252",
-          "Kind": "boolean"
+          "Kind": "boolean",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2391,7 +2458,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "261",
@@ -2448,10 +2516,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "269",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2491,10 +2561,12 @@
          "Kind": "nullable",
          "Type": {
           "$id": "274",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2588,7 +2660,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "283",
@@ -2647,7 +2720,8 @@
           "$ref": "2"
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2689,7 +2763,8 @@
           "$ref": "2"
          }
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2783,7 +2858,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

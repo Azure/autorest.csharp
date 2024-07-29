@@ -10,25 +10,29 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.ExtensibleEnumWithOperator",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Monday",
      "Value": "Monday",
-     "Description": "Monday."
+     "Description": "Monday.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Tuesday",
      "Value": "Tuesday",
-     "Description": "Tuesday."
+     "Description": "Tuesday.",
+     "Decorators": []
     }
    ],
    "Description": "Extensible enum to customize operator",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -37,28 +41,33 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToRename",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "One",
-     "Value": "1"
+     "Value": "1",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Two",
-     "Value": "2"
+     "Value": "2",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Three",
-     "Value": "3"
+     "Value": "3",
+     "Decorators": []
     }
    ],
    "Description": "Renamed enum (original name: EnumToRename)",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -67,28 +76,33 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumWithValueToRename",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "13",
      "Name": "One",
-     "Value": "1"
+     "Value": "1",
+     "Decorators": []
     },
     {
      "$id": "14",
      "Name": "Two",
-     "Value": "2"
+     "Value": "2",
+     "Decorators": []
     },
     {
      "$id": "15",
      "Name": "ValueToRename",
-     "Value": "3"
+     "Value": "3",
+     "Decorators": []
     }
    ],
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "16",
@@ -97,28 +111,33 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.EnumToBeMadeExtensible",
    "ValueType": {
     "$id": "17",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "18",
      "Name": "ExOne",
-     "Value": "1"
+     "Value": "1",
+     "Decorators": []
     },
     {
      "$id": "19",
      "Name": "ExTwo",
-     "Value": "2"
+     "Value": "2",
+     "Decorators": []
     },
     {
      "$id": "20",
      "Name": "ExThree",
-     "Value": "3"
+     "Value": "3",
+     "Decorators": []
     }
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "21",
@@ -127,23 +146,27 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.NormalEnum",
    "ValueType": {
     "$id": "22",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "23",
      "Name": "A",
-     "Value": "a"
+     "Value": "a",
+     "Decorators": []
     },
     {
      "$id": "24",
      "Name": "B",
-     "Value": "b"
+     "Value": "b",
+     "Decorators": []
     }
    ],
    "Description": "A normal enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -154,6 +177,7 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "Usage": "Input,Output,Json",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
@@ -164,7 +188,8 @@
       "$ref": "2"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -178,6 +203,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "Usage": "Input,Output,Json",
       "Description": "Public model made internal",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "29",
@@ -186,15 +212,18 @@
         "Description": "Required int",
         "Type": {
          "$id": "30",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "31",
@@ -208,6 +237,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "Usage": "Input,Output,Json",
       "Description": "Renamed model (original name: ModelToRename)",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "33",
@@ -216,10 +246,12 @@
         "Description": "Required int",
         "Type": {
          "$id": "34",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "35",
@@ -228,15 +260,18 @@
         "Description": "Optional int",
         "Type": {
          "$id": "36",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "37",
@@ -250,6 +285,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "Usage": "Input,Output,Json",
       "Description": "Model moved into custom namespace",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "39",
@@ -258,15 +294,18 @@
         "Description": "Required int",
         "Type": {
          "$id": "40",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "41",
@@ -280,6 +319,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "Usage": "Input,Output,Json",
       "Description": "Model with customized properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "43",
@@ -288,10 +328,12 @@
         "Description": "Public property made internal",
         "Type": {
          "$id": "44",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "45",
@@ -300,10 +342,12 @@
         "Description": "Renamed property (original name: PropertyToRename)",
         "Type": {
          "$id": "46",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "47",
@@ -312,10 +356,12 @@
         "Description": "Property with type changed to float (original type: int)",
         "Type": {
          "$id": "48",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "49",
@@ -324,10 +370,12 @@
         "Description": "Property with type changed to int (original type: float)",
         "Type": {
          "$id": "50",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "51",
@@ -336,10 +384,12 @@
         "Description": "Property with type changed to duration (original type: string)",
         "Type": {
          "$id": "52",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "53",
@@ -352,11 +402,14 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "55",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "56",
@@ -365,10 +418,12 @@
         "Description": "Property with type changed to JsonElement (original type: string)",
         "Type": {
          "$id": "57",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "58",
@@ -377,10 +432,12 @@
         "Description": "Field that replaces property (original name: PropertyToField)",
         "Type": {
          "$id": "59",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "60",
@@ -393,12 +450,15 @@
          "Name": "Array",
          "ValueType": {
           "$id": "62",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "63",
@@ -410,15 +470,19 @@
          "Kind": "dict",
          "KeyType": {
           "$id": "65",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "ValueType": {
           "$id": "66",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "67",
@@ -435,14 +499,18 @@
           "Name": "Array",
           "ValueType": {
            "$id": "70",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "71",
@@ -458,17 +526,22 @@
           "Kind": "dict",
           "KeyType": {
            "$id": "74",
-           "Kind": "string"
+           "Kind": "string",
+           "Decorators": []
           },
           "ValueType": {
            "$id": "75",
-           "Kind": "string"
-          }
+           "Kind": "string",
+           "Decorators": []
+          },
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "76",
@@ -481,12 +554,15 @@
          "Name": "Array",
          "ValueType": {
           "$id": "78",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "79",
@@ -499,12 +575,15 @@
          "Name": "Array",
          "ValueType": {
           "$id": "81",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "82",
@@ -520,13 +599,16 @@
           "Name": "Array",
           "ValueType": {
            "$id": "85",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          }
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "86",
@@ -542,13 +624,16 @@
           "Name": "Array",
           "ValueType": {
            "$id": "89",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          }
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "90",
@@ -561,12 +646,15 @@
          "Name": "Array",
          "ValueType": {
           "$id": "92",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "93",
@@ -579,12 +667,15 @@
          "Name": "Array",
          "ValueType": {
           "$id": "95",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "96",
@@ -600,13 +691,16 @@
           "Name": "Array",
           "ValueType": {
            "$id": "99",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          }
         },
         "IsRequired": true,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "100",
@@ -622,18 +716,22 @@
           "Name": "Array",
           "ValueType": {
            "$id": "103",
-           "Kind": "float32"
+           "Kind": "float32",
+           "Decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "CrossLanguageDefinitionId": "TypeSpec.Array",
+          "Decorators": []
          }
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "104",
@@ -644,7 +742,8 @@
       "$ref": "6"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "105",
@@ -655,7 +754,8 @@
       "$ref": "11"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "106",
@@ -666,7 +766,8 @@
       "$ref": "16"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "107",
@@ -680,6 +781,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "Usage": "Input,Output,Json",
       "Description": "Model to add additional serializable property",
+      "Decorators": [],
       "BaseModel": {
        "$ref": "32"
       },
@@ -691,15 +793,18 @@
         "Description": "Required int",
         "Type": {
          "$id": "110",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "111",
@@ -710,7 +815,8 @@
       "$ref": "21"
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "112",
@@ -724,6 +830,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "Usage": "Input,Output,Json",
       "Description": "Model to make to a struct",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "114",
@@ -732,10 +839,12 @@
         "Description": "Required int",
         "Type": {
          "$id": "115",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "116",
@@ -744,10 +853,12 @@
         "Description": "Optional int",
         "Type": {
          "$id": "117",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "118",
@@ -756,15 +867,18 @@
         "Description": "Optional string",
         "Type": {
          "$id": "119",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -792,6 +906,7 @@
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "121",
@@ -800,10 +915,12 @@
      "Description": "Required int",
      "Type": {
       "$id": "122",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "123",
@@ -812,10 +929,12 @@
      "Description": "Optional int",
      "Type": {
       "$id": "124",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -1138,7 +1257,8 @@
    ],
    "Protocol": {
     "$id": "153"
-   }
+   },
+   "Decorators": []
   }
  ]
 }

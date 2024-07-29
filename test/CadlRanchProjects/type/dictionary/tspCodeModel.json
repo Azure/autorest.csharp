@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "Input,Output,Json",
    "Description": "Dictionary inner model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "5",
@@ -34,14 +37,17 @@
       "Kind": "dict",
       "KeyType": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       },
       "ValueType": {
        "$ref": "2"
-      }
+      },
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -83,7 +89,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "14",
@@ -136,12 +143,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "21",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "22",
-         "Kind": "int32"
-        }
+         "Kind": "int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -177,12 +187,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "27",
-         "Kind": "int32"
-        }
+         "Kind": "int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -276,7 +289,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "36",
@@ -329,12 +343,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "43",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "44",
-         "Kind": "int64"
-        }
+         "Kind": "int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -370,12 +387,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "48",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "49",
-         "Kind": "int64"
-        }
+         "Kind": "int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -469,7 +489,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "58",
@@ -522,12 +543,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "66",
-         "Kind": "boolean"
-        }
+         "Kind": "boolean",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -563,12 +587,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "70",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "71",
-         "Kind": "boolean"
-        }
+         "Kind": "boolean",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -662,7 +689,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "80",
@@ -715,12 +743,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "87",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "88",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -756,12 +787,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "92",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "93",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -855,7 +889,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "102",
@@ -908,12 +943,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "109",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "110",
-         "Kind": "float32"
-        }
+         "Kind": "float32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -949,12 +987,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "114",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "115",
-         "Kind": "float32"
-        }
+         "Kind": "float32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1048,7 +1089,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "124",
@@ -1101,7 +1143,8 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "131",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "132",
@@ -1109,9 +1152,12 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "133",
-          "Kind": "string"
-         }
-        }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1147,7 +1193,8 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "137",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "138",
@@ -1155,9 +1202,12 @@
          "Encode": "rfc3339",
          "WireType": {
           "$id": "139",
-          "Kind": "string"
-         }
-        }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1251,7 +1301,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "148",
@@ -1304,7 +1355,8 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "155",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "156",
@@ -1312,9 +1364,12 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "157",
-          "Kind": "string"
-         }
-        }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1350,7 +1405,8 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "161",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "162",
@@ -1358,9 +1414,12 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "163",
-          "Kind": "string"
-         }
-        }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1454,7 +1513,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "172",
@@ -1507,12 +1567,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "179",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "180",
-         "Kind": "any"
-        }
+         "Kind": "any",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1548,12 +1611,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "184",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "185",
-         "Kind": "any"
-        }
+         "Kind": "any",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1647,7 +1713,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "194",
@@ -1700,11 +1767,13 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "201",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1740,11 +1809,13 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "205",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1838,7 +1909,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "214",
@@ -1891,11 +1963,13 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "221",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1931,11 +2005,13 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "225",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2029,7 +2105,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "234",
@@ -2082,16 +2159,19 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "241",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "242",
          "Kind": "nullable",
          "Type": {
           "$id": "243",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          }
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2127,16 +2207,19 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "247",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "248",
          "Kind": "nullable",
          "Type": {
           "$id": "249",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Decorators": []
          }
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2230,7 +2313,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

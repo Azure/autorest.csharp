@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Common.Input
             bool isReadOnly = false;
             bool isRequired = false;
             bool isDiscriminator = false;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
             IReadOnlyList<string>? flattenedNames = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -46,6 +47,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsReadOnly), ref isReadOnly)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsRequired), ref isRequired)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsDiscriminator), ref isDiscriminator)
+                    || reader.TryReadWithConverter(nameof(InputModelProperty.Decorators), options, ref decorators)
                     || reader.TryReadStringArray(nameof(InputModelProperty.FlattenedNames), ref flattenedNames);
 
                 if (!isKnownProperty)
@@ -65,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, flattenedNames);
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, decorators ?? Array.Empty<InputDecoratorInfo>(), flattenedNames);
             if (id != null)
             {
                 resolver.AddReference(id, property);

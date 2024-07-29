@@ -68,7 +68,8 @@
        ],
        "BodyType": {
         "$id": "10",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -129,7 +130,8 @@
        ],
        "BodyType": {
         "$id": "16",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -155,7 +157,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "18",
@@ -205,7 +208,8 @@
        ],
        "BodyType": {
         "$id": "24",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -266,7 +270,8 @@
        ],
        "BodyType": {
         "$id": "30",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -293,7 +298,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "32",
@@ -343,7 +349,8 @@
        ],
        "BodyType": {
         "$id": "38",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -404,7 +411,8 @@
        ],
        "BodyType": {
         "$id": "44",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -431,7 +439,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

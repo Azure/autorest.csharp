@@ -10,55 +10,64 @@
    "CrossLanguageDefinitionId": "Type.Enum.Extensible.DaysOfWeekExtensibleEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Monday",
      "Value": "Monday",
-     "Description": "Monday."
+     "Description": "Monday.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Tuesday",
      "Value": "Tuesday",
-     "Description": "Tuesday."
+     "Description": "Tuesday.",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "Wednesday",
      "Value": "Wednesday",
-     "Description": "Wednesday."
+     "Description": "Wednesday.",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "Thursday",
      "Value": "Thursday",
-     "Description": "Thursday."
+     "Description": "Thursday.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Friday",
      "Value": "Friday",
-     "Description": "Friday."
+     "Description": "Friday.",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Saturday",
      "Value": "Saturday",
-     "Description": "Saturday."
+     "Description": "Saturday.",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Sunday",
      "Value": "Sunday",
-     "Description": "Sunday."
+     "Description": "Sunday.",
+     "Decorators": []
     }
    ],
    "Description": "Days of the week",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -99,7 +108,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -433,7 +443,8 @@
     {
      "$ref": "13"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

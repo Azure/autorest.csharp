@@ -10,19 +10,22 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.DogKind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Golden",
      "Value": "golden",
-     "Description": "Species golden"
+     "Description": "Species golden",
+     "Decorators": []
     }
    ],
    "Description": "extensible enum type for discriminator",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -31,19 +34,22 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.SnakeKind",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "7",
      "Name": "Cobra",
      "Value": "cobra",
-     "Description": "Species cobra"
+     "Description": "Species cobra",
+     "Decorators": []
     }
    ],
    "Description": "fixed enum type for discriminator",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -54,6 +60,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
    "Usage": "Input,Output,Json",
    "Description": "Test extensible enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "9",
     "Name": "kind",
@@ -64,7 +71,8 @@
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -77,10 +85,12 @@
      "Description": "Weight of the dog",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ],
    "DiscriminatedSubtypes": {
@@ -93,6 +103,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Golden dog model",
      "DiscriminatorValue": "golden",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "8"
      },
@@ -107,13 +118,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "golden"
+        "Value": "golden",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     }
@@ -129,6 +143,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
    "Usage": "Input,Output,Json",
    "Description": "Test fixed enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "18",
     "Name": "kind",
@@ -139,7 +154,8 @@
     },
     "IsRequired": true,
     "IsReadOnly": false,
-    "IsDiscriminator": true
+    "IsDiscriminator": true,
+    "Decorators": []
    },
    "Properties": [
     {
@@ -152,10 +168,12 @@
      "Description": "Length of the snake",
      "Type": {
       "$id": "20",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ],
    "DiscriminatedSubtypes": {
@@ -168,6 +186,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Cobra model",
      "DiscriminatorValue": "cobra",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "17"
      },
@@ -182,13 +201,16 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "cobra"
+        "Value": "cobra",
+        "Decorators": []
        },
        "IsRequired": true,
        "IsReadOnly": false,
-       "IsDiscriminator": true
+       "IsDiscriminator": true,
+       "Decorators": []
       }
      ]
     }
@@ -804,7 +826,8 @@
     {
      "$ref": "28"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

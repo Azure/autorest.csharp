@@ -10,22 +10,26 @@
    "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "application/json; serialization=Avro",
-     "Value": "application/json; serialization=Avro"
+     "Value": "application/json; serialization=Avro",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
+     "Value": "application/octet-stream",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -34,27 +38,32 @@
    "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "application/json",
-     "Value": "application/json"
+     "Value": "application/json",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
+     "Value": "application/octet-stream",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "text/plain",
-     "Value": "text/plain"
+     "Value": "text/plain",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -64,6 +73,7 @@
    "Name": "Body",
    "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -72,10 +82,12 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -134,7 +146,8 @@
        "Type": {
         "$id": "20",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -227,7 +240,8 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "28",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -307,9 +321,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -401,7 +417,8 @@
     {
      "$ref": "16"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

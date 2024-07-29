@@ -13,43 +13,50 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "NotStarted",
      "Value": "NotStarted",
-     "Description": "The operation has not started."
+     "Description": "The operation has not started.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Running",
      "Value": "Running",
-     "Description": "The operation is in progress."
+     "Description": "The operation is in progress.",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "Succeeded",
      "Value": "Succeeded",
-     "Description": "The operation has completed successfully."
+     "Description": "The operation has completed successfully.",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "Failed",
      "Value": "Failed",
-     "Description": "The operation has failed."
+     "Description": "The operation has failed.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Canceled",
      "Value": "Canceled",
-     "Description": "The operation has been canceled by the user."
+     "Description": "The operation has been canceled by the user.",
+     "Decorators": []
     }
    ],
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   },
   {
    "$id": "9",
@@ -58,17 +65,20 @@
    "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "ValueType": {
     "$id": "10",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "11",
      "Name": "v2022_09_01",
-     "Value": "2022-09-01"
+     "Value": "2022-09-01",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -79,6 +89,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -87,10 +98,12 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "15",
@@ -101,7 +114,8 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "16",
@@ -115,6 +129,7 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "18",
@@ -123,10 +138,12 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "20",
@@ -135,10 +152,12 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "21",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "22",
@@ -147,10 +166,12 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "24",
@@ -164,10 +185,12 @@
          "ValueType": {
           "$ref": "17"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "26",
@@ -181,6 +204,7 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "28",
@@ -189,10 +213,12 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "29",
-            "Kind": "string"
+            "Kind": "string",
+            "Decorators": []
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           },
           {
            "$id": "30",
@@ -203,17 +229,20 @@
             "$ref": "27"
            },
            "IsRequired": false,
-           "IsReadOnly": false
+           "IsReadOnly": false,
+           "Decorators": []
           }
          ]
         },
         "IsRequired": false,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "31",
@@ -226,6 +255,7 @@
       "Name": "ExportedResource",
       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
       "Usage": "Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "33",
@@ -234,10 +264,12 @@
         "Description": "",
         "Type": {
          "$id": "34",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        },
        {
         "$id": "35",
@@ -246,15 +278,18 @@
         "Description": "",
         "Type": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -274,6 +309,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Resource items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -290,6 +326,7 @@
        "Name": "Resource",
        "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
        "Usage": "Input,Output,Json",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "41",
@@ -298,10 +335,12 @@
          "Description": "",
          "Type": {
           "$id": "42",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "43",
@@ -310,10 +349,12 @@
          "Description": "",
          "Type": {
           "$id": "44",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": true
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "45",
@@ -322,17 +363,21 @@
          "Description": "",
          "Type": {
           "$id": "46",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "47",
@@ -341,10 +386,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "48",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -360,7 +407,8 @@
    "Operations": [],
    "Protocol": {
     "$id": "50"
-   }
+   },
+   "Decorators": []
   },
   {
    "$id": "51",
@@ -370,7 +418,8 @@
    "Protocol": {
     "$id": "52"
    },
-   "Parent": "SpecificClient"
+   "Parent": "SpecificClient",
+   "Decorators": []
   },
   {
    "$id": "53",
@@ -391,7 +440,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "56",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -417,7 +467,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -435,7 +486,8 @@
        "NameInRequest": "projectFileVersion",
        "Type": {
         "$id": "62",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -491,7 +543,8 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "68",
-          "Kind": "url"
+          "Kind": "url",
+          "Decorators": []
          }
         }
        ],
@@ -538,7 +591,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "73",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -564,9 +618,11 @@
         "Name": "Array",
         "ValueType": {
          "$id": "76",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -584,7 +640,8 @@
        "NameInRequest": "expand",
        "Type": {
         "$id": "78",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -666,7 +723,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "86",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -687,7 +745,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "88",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -815,7 +874,8 @@
    "Protocol": {
     "$id": "98"
    },
-   "Parent": "SpecificClient"
+   "Parent": "SpecificClient",
+   "Decorators": []
   }
  ]
 }

@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputRecord",
    "Usage": "Input,Json",
    "Description": "Record used in operation parameters",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -33,6 +36,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.OutputRecord",
    "Usage": "Output,Json",
    "Description": "Record used in operation return type",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -41,10 +45,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -55,6 +61,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
    "Usage": "Input,Output,Json",
    "Description": "Record used both as operation parameter and return type",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -63,10 +70,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -373,7 +382,8 @@
     {
      "$ref": "13"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

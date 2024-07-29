@@ -10,6 +10,7 @@
    "Name": "DefaultDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -22,11 +23,14 @@
       "Encode": "ISO8601",
       "WireType": {
        "$id": "5",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -36,6 +40,7 @@
    "Name": "ISO8601DurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "7",
@@ -48,11 +53,14 @@
       "Encode": "ISO8601",
       "WireType": {
        "$id": "9",
-       "Kind": "string"
-      }
+       "Kind": "string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -62,6 +70,7 @@
    "Name": "Int32SecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "11",
@@ -74,11 +83,14 @@
       "Encode": "seconds",
       "WireType": {
        "$id": "13",
-       "Kind": "int32"
-      }
+       "Kind": "int32",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -88,6 +100,7 @@
    "Name": "FloatSecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -100,11 +113,14 @@
       "Encode": "seconds",
       "WireType": {
        "$id": "17",
-       "Kind": "float"
-      }
+       "Kind": "float",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -114,6 +130,7 @@
    "Name": "Float64SecondsDurationProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "19",
@@ -126,11 +143,14 @@
       "Encode": "seconds",
       "WireType": {
        "$id": "21",
-       "Kind": "float64"
-      }
+       "Kind": "float64",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -140,6 +160,7 @@
    "Name": "FloatSecondsDurationArrayProperty",
    "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "23",
@@ -156,13 +177,17 @@
        "Encode": "seconds",
        "WireType": {
         "$id": "26",
-        "Kind": "float32"
-       }
+        "Kind": "float32",
+        "Decorators": []
+       },
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -204,7 +229,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "33",
@@ -230,8 +256,10 @@
         "Encode": "ISO8601",
         "WireType": {
          "$id": "37",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -307,8 +335,10 @@
         "Encode": "ISO8601",
         "WireType": {
          "$id": "45",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -384,8 +414,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "53",
-         "Kind": "int32"
-        }
+         "Kind": "int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -461,8 +493,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "61",
-         "Kind": "float"
-        }
+         "Kind": "float",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -538,8 +572,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "69",
-         "Kind": "float64"
-        }
+         "Kind": "float64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -619,10 +655,13 @@
          "Encode": "seconds",
          "WireType": {
           "$id": "78",
-          "Kind": "int32"
-         }
+          "Kind": "int32",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -689,7 +728,8 @@
     {
      "$ref": "29"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "84",
@@ -1335,7 +1375,8 @@
     {
      "$ref": "29"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "140",
@@ -1361,8 +1402,10 @@
         "Encode": "ISO8601",
         "WireType": {
          "$id": "144",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1438,8 +1481,10 @@
         "Encode": "ISO8601",
         "WireType": {
          "$id": "152",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1519,10 +1564,13 @@
          "Encode": "ISO8601",
          "WireType": {
           "$id": "161",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Decorators": []
+         },
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1599,8 +1647,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "169",
-         "Kind": "int32"
-        }
+         "Kind": "int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1676,8 +1726,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "177",
-         "Kind": "float"
-        }
+         "Kind": "float",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1753,8 +1805,10 @@
         "Encode": "seconds",
         "WireType": {
          "$id": "185",
-         "Kind": "float64"
-        }
+         "Kind": "float64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1820,7 +1874,8 @@
     {
      "$ref": "29"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

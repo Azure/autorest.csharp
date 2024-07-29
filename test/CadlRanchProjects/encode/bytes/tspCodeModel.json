@@ -10,6 +10,7 @@
    "Name": "DefaultBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.DefaultBytesProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -32,6 +35,7 @@
    "Name": "Base64BytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64BytesProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -41,10 +45,12 @@
      "Type": {
       "$id": "7",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Encode": "base64",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -54,6 +60,7 @@
    "Name": "Base64urlBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlBytesProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -63,10 +70,12 @@
      "Type": {
       "$id": "10",
       "Kind": "bytes",
-      "Encode": "base64url"
+      "Encode": "base64url",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -76,6 +85,7 @@
    "Name": "Base64urlArrayBytesProperty",
    "CrossLanguageDefinitionId": "Encode.Bytes.Base64urlArrayBytesProperty",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -89,12 +99,15 @@
       "ValueType": {
        "$id": "14",
        "Kind": "bytes",
-       "Encode": "base64url"
+       "Encode": "base64url",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -136,7 +149,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "21",
@@ -159,7 +173,8 @@
        "Type": {
         "$id": "24",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -232,7 +247,8 @@
        "Type": {
         "$id": "31",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -305,7 +321,8 @@
        "Type": {
         "$id": "38",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Encode": "base64url",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -382,9 +399,11 @@
         "ValueType": {
          "$id": "46",
          "Kind": "bytes",
-         "Encode": "base64url"
+         "Encode": "base64url",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -451,7 +470,8 @@
     {
      "$ref": "17"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "52",
@@ -887,7 +907,8 @@
     {
      "$ref": "17"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "90",
@@ -910,7 +931,8 @@
        "Type": {
         "$id": "93",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -983,7 +1005,8 @@
        "Type": {
         "$id": "100",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1056,7 +1079,8 @@
        "Type": {
         "$id": "107",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Encode": "base64url",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1133,9 +1157,11 @@
         "ValueType": {
          "$id": "115",
          "Kind": "bytes",
-         "Encode": "base64url"
+         "Encode": "base64url",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1202,7 +1228,8 @@
     {
      "$ref": "17"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "121",
@@ -1225,7 +1252,8 @@
        "Type": {
         "$id": "124",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1328,9 +1356,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "135",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "application/octet-stream"
+        "Value": "application/octet-stream",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1356,7 +1386,8 @@
        "Type": {
         "$id": "138",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1434,9 +1465,11 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
-        "Value": "image/png"
+        "Value": "image/png",
+        "Decorators": []
        },
        "Location": "Header",
        "DefaultValue": {
@@ -1462,7 +1495,8 @@
        "Type": {
         "$id": "149",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1538,7 +1572,8 @@
        "Type": {
         "$id": "156",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1639,7 +1674,8 @@
        "Type": {
         "$id": "166",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Encode": "base64url",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1733,7 +1769,8 @@
     {
      "$ref": "17"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "175",
@@ -1784,7 +1821,8 @@
        "BodyType": {
         "$id": "181",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1846,7 +1884,8 @@
        "BodyType": {
         "$id": "187",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1908,7 +1947,8 @@
        "BodyType": {
         "$id": "193",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1970,7 +2010,8 @@
        "BodyType": {
         "$id": "199",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Encode": "base64",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2032,7 +2073,8 @@
        "BodyType": {
         "$id": "205",
         "Kind": "bytes",
-        "Encode": "base64url"
+        "Encode": "base64url",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2059,7 +2101,8 @@
     {
      "$ref": "17"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -13,25 +13,29 @@
    "CrossLanguageDefinitionId": "Server.Versions.Versioned.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2021_01_01_preview",
      "Value": "2021-01-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -126,7 +130,8 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "16",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -206,7 +211,8 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "25",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "DefaultValue": {
@@ -281,7 +287,8 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "32",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -349,7 +356,8 @@
     {
      "$ref": "8"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

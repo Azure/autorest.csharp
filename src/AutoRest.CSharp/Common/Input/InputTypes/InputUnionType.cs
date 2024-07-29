@@ -5,4 +5,4 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputUnionType(string Name, IReadOnlyList<InputType> VariantTypes) : InputType(Name);
+internal record InputUnionType(string Name, IReadOnlyList<InputType> VariantTypes, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType(Name, Decorators);

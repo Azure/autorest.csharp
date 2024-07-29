@@ -50,7 +50,8 @@
        "NameInRequest": "x-ms-client-request-id",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -115,7 +116,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

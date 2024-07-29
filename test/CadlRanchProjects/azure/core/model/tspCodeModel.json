@@ -12,19 +12,22 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -34,6 +37,7 @@
    "Name": "AzureEmbeddingModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -46,12 +50,15 @@
       "Name": "EmbeddingVector",
       "ValueType": {
        "$id": "8",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+      "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -93,7 +100,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "15",
@@ -148,9 +156,11 @@
         "Name": "EmbeddingVector",
         "ValueType": {
          "$id": "22",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -189,9 +199,11 @@
         "Name": "EmbeddingVector",
         "ValueType": {
          "$id": "26",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -392,7 +404,8 @@
     {
      "$ref": "11"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

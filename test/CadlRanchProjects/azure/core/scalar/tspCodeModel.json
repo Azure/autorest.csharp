@@ -12,19 +12,22 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -34,6 +37,7 @@
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -43,10 +47,12 @@
      "Type": {
       "$id": "7",
       "Kind": "azureLocation",
-      "Encode": "string"
+      "Encode": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -88,7 +94,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "14",
@@ -140,7 +147,8 @@
        "BodyType": {
         "$id": "20",
         "Kind": "azureLocation",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -176,7 +184,8 @@
        "Type": {
         "$id": "23",
         "Kind": "azureLocation",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsRequired": true,
@@ -386,7 +395,8 @@
        "Type": {
         "$id": "42",
         "Kind": "azureLocation",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -461,7 +471,8 @@
        "Type": {
         "$id": "49",
         "Kind": "azureLocation",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -527,7 +538,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

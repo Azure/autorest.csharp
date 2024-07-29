@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,10 +20,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -33,6 +36,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -41,10 +45,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -54,6 +60,7 @@
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -66,6 +73,7 @@
       "Name": "ResultModel",
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "Usage": "Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "11",
@@ -74,15 +82,18 @@
         "Description": "",
         "Type": {
          "$id": "12",
-         "Kind": "string"
+         "Kind": "string",
+         "Decorators": []
         },
         "IsRequired": true,
-        "IsReadOnly": false
+        "IsReadOnly": false,
+        "Decorators": []
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     }
    ]
   },
@@ -97,6 +108,7 @@
    "Access": "public",
    "Usage": "Input",
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "14",
@@ -105,10 +117,12 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -150,7 +164,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "22",
@@ -433,7 +448,8 @@
     {
      "$ref": "18"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

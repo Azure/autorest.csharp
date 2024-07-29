@@ -10,6 +10,7 @@
    "Name": "SpreadAsRequestBodyRequest1",
    "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadAsRequestBody.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -18,10 +19,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -32,6 +35,7 @@
    "CrossLanguageDefinitionId": "Parameters.Spread.Model.BodyParameter",
    "Usage": "Input,Json",
    "Description": "This is a simple model.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -40,10 +44,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -53,6 +59,7 @@
    "Name": "SpreadCompositeRequestMixRequest",
    "CrossLanguageDefinitionId": "spreadCompositeRequestMix.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -61,10 +68,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -74,6 +83,7 @@
    "Name": "SpreadAsRequestBodyRequest",
    "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestBody.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -82,10 +92,12 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -95,6 +107,7 @@
    "Name": "SpreadParameterWithInnerModelRequest",
    "CrossLanguageDefinitionId": "spreadParameterWithInnerModel.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -103,10 +116,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -116,6 +131,7 @@
    "Name": "SpreadAsRequestParameterRequest",
    "CrossLanguageDefinitionId": "spreadAsRequestParameter.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -124,10 +140,12 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -137,6 +155,7 @@
    "Name": "SpreadWithMultipleParametersRequest",
    "CrossLanguageDefinitionId": "spreadWithMultipleParameters.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -145,10 +164,12 @@
      "Description": "required string",
      "Type": {
       "$id": "22",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "23",
@@ -157,10 +178,12 @@
      "Description": "optional int",
      "Type": {
       "$id": "24",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "25",
@@ -173,12 +196,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "27",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "28",
@@ -191,12 +217,15 @@
       "Name": "Array",
       "ValueType": {
        "$id": "30",
-       "Kind": "string"
+       "Kind": "string",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -206,6 +235,7 @@
    "Name": "SpreadParameterWithInnerAliasRequest",
    "CrossLanguageDefinitionId": "spreadParameterWithInnerAlias.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "32",
@@ -214,10 +244,12 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "33",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "34",
@@ -226,10 +258,12 @@
      "Description": "age of the Thing",
      "Type": {
       "$id": "35",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -271,7 +305,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "42",
@@ -491,7 +526,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "63",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -509,7 +545,8 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "65",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -581,7 +618,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "72",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -599,7 +637,8 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "74",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -716,7 +755,8 @@
        "NameInRequest": "name",
        "Type": {
         "$id": "85",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -734,7 +774,8 @@
        "NameInRequest": "test-header",
        "Type": {
         "$id": "87",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -845,7 +886,8 @@
     {
      "$ref": "38"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "97",
@@ -966,7 +1008,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "109",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -984,7 +1027,8 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "111",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1101,7 +1145,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "122",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1119,7 +1164,8 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "124",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1236,7 +1282,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "135",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1254,7 +1301,8 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "137",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1372,7 +1420,8 @@
        "NameInRequest": "id",
        "Type": {
         "$id": "148",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -1390,7 +1439,8 @@
        "NameInRequest": "x-ms-test-header",
        "Type": {
         "$id": "150",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -1501,7 +1551,8 @@
     {
      "$ref": "38"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

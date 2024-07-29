@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of User items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -28,6 +29,7 @@
        "CrossLanguageDefinitionId": "Payload.Pageable.User",
        "Usage": "Output,Json",
        "Description": "User model",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "6",
@@ -36,17 +38,21 @@
          "Description": "User name",
          "Type": {
           "$id": "7",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          },
          "IsRequired": true,
-         "IsReadOnly": false
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "8",
@@ -55,10 +61,12 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Kind": "url"
+      "Kind": "url",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -113,7 +121,8 @@
        "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "17",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": false,
@@ -189,7 +198,8 @@
     {
      "$ref": "12"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

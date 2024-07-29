@@ -12,25 +12,29 @@
    "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "accepted",
      "Value": "accepted",
-     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "rejected",
      "Value": "rejected",
-     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server.",
+     "Decorators": []
     }
    ],
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -39,19 +43,22 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "2022-12-01-preview"
+     "Description": "2022-12-01-preview",
+     "Decorators": []
     }
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -62,6 +69,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "Usage": "Output,Json",
    "Description": "Sample Model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -70,10 +78,12 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": true
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "12",
@@ -82,10 +92,12 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -96,6 +108,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "Usage": "Input,Json",
    "Description": "User action param",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -104,10 +117,12 @@
      "Description": "User action value.",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -118,6 +133,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "Usage": "Output,Json",
    "Description": "User action response",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -126,10 +142,12 @@
      "Description": "User action result.",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -181,7 +199,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "27",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -208,7 +227,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "31",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -227,7 +247,8 @@
        "Description": "header in request",
        "Type": {
         "$id": "33",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": true,
@@ -246,7 +267,8 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "35",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -265,7 +287,8 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "37",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -288,8 +311,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "40",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -312,8 +337,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "43",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -333,7 +360,8 @@
        "Type": {
         "$id": "45",
         "Kind": "uuid",
-        "Encode": "string"
+        "Encode": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -389,7 +417,8 @@
          "Description": "",
          "Type": {
           "$id": "51",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -399,7 +428,8 @@
          "Description": "The entity tag for the response.",
          "Type": {
           "$id": "53",
-          "Kind": "string"
+          "Kind": "string",
+          "Decorators": []
          }
         },
         {
@@ -410,7 +440,8 @@
          "Type": {
           "$id": "55",
           "Kind": "uuid",
-          "Encode": "string"
+          "Encode": "string",
+          "Decorators": []
          }
         }
        ],
@@ -445,7 +476,8 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "58",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "DefaultValue": {
@@ -467,7 +499,8 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "60",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsRequired": true,
@@ -486,7 +519,8 @@
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
         "$id": "62",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -509,8 +543,10 @@
         "Encode": "rfc7231",
         "WireType": {
          "$id": "65",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsRequired": false,
@@ -637,7 +673,8 @@
     {
      "$ref": "22"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

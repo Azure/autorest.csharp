@@ -64,7 +64,8 @@
    ],
    "Protocol": {
     "$id": "8"
-   }
+   },
+   "Decorators": []
   }
  ]
 }

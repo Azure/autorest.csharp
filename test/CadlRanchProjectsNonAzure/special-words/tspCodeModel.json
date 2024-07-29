@@ -10,6 +10,7 @@
    "Name": "and",
    "CrossLanguageDefinitionId": "SpecialWords.Models.and",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -18,10 +19,12 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -31,6 +34,7 @@
    "Name": "as",
    "CrossLanguageDefinitionId": "SpecialWords.Models.as",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -39,10 +43,12 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -52,6 +58,7 @@
    "Name": "assert",
    "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -60,10 +67,12 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -73,6 +82,7 @@
    "Name": "async",
    "CrossLanguageDefinitionId": "SpecialWords.Models.async",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -81,10 +91,12 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -94,6 +106,7 @@
    "Name": "await",
    "CrossLanguageDefinitionId": "SpecialWords.Models.await",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -102,10 +115,12 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -115,6 +130,7 @@
    "Name": "break",
    "CrossLanguageDefinitionId": "SpecialWords.Models.break",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -123,10 +139,12 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -136,6 +154,7 @@
    "Name": "class",
    "CrossLanguageDefinitionId": "SpecialWords.Models.class",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -144,10 +163,12 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -157,6 +178,7 @@
    "Name": "constructor",
    "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -165,10 +187,12 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -178,6 +202,7 @@
    "Name": "continue",
    "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -186,10 +211,12 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -199,6 +226,7 @@
    "Name": "def",
    "CrossLanguageDefinitionId": "SpecialWords.Models.def",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -207,10 +235,12 @@
      "Description": "",
      "Type": {
       "$id": "31",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -220,6 +250,7 @@
    "Name": "del",
    "CrossLanguageDefinitionId": "SpecialWords.Models.del",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -228,10 +259,12 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -241,6 +274,7 @@
    "Name": "elif",
    "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -249,10 +283,12 @@
      "Description": "",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -262,6 +298,7 @@
    "Name": "else",
    "CrossLanguageDefinitionId": "SpecialWords.Models.else",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -270,10 +307,12 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -283,6 +322,7 @@
    "Name": "except",
    "CrossLanguageDefinitionId": "SpecialWords.Models.except",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -291,10 +331,12 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -304,6 +346,7 @@
    "Name": "exec",
    "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "45",
@@ -312,10 +355,12 @@
      "Description": "",
      "Type": {
       "$id": "46",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -325,6 +370,7 @@
    "Name": "finally",
    "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -333,10 +379,12 @@
      "Description": "",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -346,6 +394,7 @@
    "Name": "for",
    "CrossLanguageDefinitionId": "SpecialWords.Models.for",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "51",
@@ -354,10 +403,12 @@
      "Description": "",
      "Type": {
       "$id": "52",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -367,6 +418,7 @@
    "Name": "from",
    "CrossLanguageDefinitionId": "SpecialWords.Models.from",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -375,10 +427,12 @@
      "Description": "",
      "Type": {
       "$id": "55",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -388,6 +442,7 @@
    "Name": "global",
    "CrossLanguageDefinitionId": "SpecialWords.Models.global",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "57",
@@ -396,10 +451,12 @@
      "Description": "",
      "Type": {
       "$id": "58",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -409,6 +466,7 @@
    "Name": "if",
    "CrossLanguageDefinitionId": "SpecialWords.Models.if",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "60",
@@ -417,10 +475,12 @@
      "Description": "",
      "Type": {
       "$id": "61",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -430,6 +490,7 @@
    "Name": "import",
    "CrossLanguageDefinitionId": "SpecialWords.Models.import",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "63",
@@ -438,10 +499,12 @@
      "Description": "",
      "Type": {
       "$id": "64",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -451,6 +514,7 @@
    "Name": "in",
    "CrossLanguageDefinitionId": "SpecialWords.Models.in",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -459,10 +523,12 @@
      "Description": "",
      "Type": {
       "$id": "67",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -472,6 +538,7 @@
    "Name": "is",
    "CrossLanguageDefinitionId": "SpecialWords.Models.is",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "69",
@@ -480,10 +547,12 @@
      "Description": "",
      "Type": {
       "$id": "70",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -493,6 +562,7 @@
    "Name": "lambda",
    "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "72",
@@ -501,10 +571,12 @@
      "Description": "",
      "Type": {
       "$id": "73",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -514,6 +586,7 @@
    "Name": "not",
    "CrossLanguageDefinitionId": "SpecialWords.Models.not",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "75",
@@ -522,10 +595,12 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -535,6 +610,7 @@
    "Name": "or",
    "CrossLanguageDefinitionId": "SpecialWords.Models.or",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "78",
@@ -543,10 +619,12 @@
      "Description": "",
      "Type": {
       "$id": "79",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -556,6 +634,7 @@
    "Name": "pass",
    "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "81",
@@ -564,10 +643,12 @@
      "Description": "",
      "Type": {
       "$id": "82",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -577,6 +658,7 @@
    "Name": "raise",
    "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "84",
@@ -585,10 +667,12 @@
      "Description": "",
      "Type": {
       "$id": "85",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -598,6 +682,7 @@
    "Name": "return",
    "CrossLanguageDefinitionId": "SpecialWords.Models.return",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "87",
@@ -606,10 +691,12 @@
      "Description": "",
      "Type": {
       "$id": "88",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -619,6 +706,7 @@
    "Name": "try",
    "CrossLanguageDefinitionId": "SpecialWords.Models.try",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "90",
@@ -627,10 +715,12 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -640,6 +730,7 @@
    "Name": "while",
    "CrossLanguageDefinitionId": "SpecialWords.Models.while",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "93",
@@ -648,10 +739,12 @@
      "Description": "",
      "Type": {
       "$id": "94",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -661,6 +754,7 @@
    "Name": "with",
    "CrossLanguageDefinitionId": "SpecialWords.Models.with",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "96",
@@ -669,10 +763,12 @@
      "Description": "",
      "Type": {
       "$id": "97",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -682,6 +778,7 @@
    "Name": "yield",
    "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "99",
@@ -690,10 +787,12 @@
      "Description": "",
      "Type": {
       "$id": "100",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -703,6 +802,7 @@
    "Name": "SameAsModel",
    "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "102",
@@ -711,10 +811,12 @@
      "Description": "",
      "Type": {
       "$id": "103",
-      "Kind": "string"
+      "Kind": "string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -756,7 +858,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "110",
@@ -4039,7 +4142,8 @@
     {
      "$ref": "106"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "409",
@@ -4154,7 +4258,8 @@
     {
      "$ref": "106"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "420",
@@ -5952,7 +6057,8 @@
     {
      "$ref": "106"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "587",
@@ -5974,7 +6080,8 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "590",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6046,7 +6153,8 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "597",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6118,7 +6226,8 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "604",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6190,7 +6299,8 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "611",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6262,7 +6372,8 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "618",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6334,7 +6445,8 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "625",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6406,7 +6518,8 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "632",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6478,7 +6591,8 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "639",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6550,7 +6664,8 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "646",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6622,7 +6737,8 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "653",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6694,7 +6810,8 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "660",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6766,7 +6883,8 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "667",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6838,7 +6956,8 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "674",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6910,7 +7029,8 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "681",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -6982,7 +7102,8 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "688",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7054,7 +7175,8 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "695",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7126,7 +7248,8 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "702",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7198,7 +7321,8 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "709",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7270,7 +7394,8 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "716",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7342,7 +7467,8 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "723",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7414,7 +7540,8 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "730",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7486,7 +7613,8 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "737",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7558,7 +7686,8 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "744",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7630,7 +7759,8 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "751",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7702,7 +7832,8 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "758",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7774,7 +7905,8 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "765",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7846,7 +7978,8 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "772",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7918,7 +8051,8 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "779",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -7990,7 +8124,8 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "786",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8062,7 +8197,8 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "793",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8134,7 +8270,8 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "800",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8206,7 +8343,8 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "807",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8278,7 +8416,8 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "814",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8350,7 +8489,8 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "821",
-        "Kind": "string"
+        "Kind": "string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsRequired": true,
@@ -8416,7 +8556,8 @@
     {
      "$ref": "106"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }
