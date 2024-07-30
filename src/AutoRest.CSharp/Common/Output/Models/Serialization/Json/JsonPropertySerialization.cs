@@ -20,7 +20,22 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             ObjectTypeProperty property,
             CustomSerializationHooks? serializationHooks = null,
             TypedValueExpression? enumerableExpression = null)
-            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, property, enumerableExpression, serializationHooks)
+            : this(parameterName, value, serializedName, serializedType, valueSerialization, isRequired, shouldExcludeInWireSerialization, shouldExcludeInWireSerialization, property, serializationHooks, enumerableExpression)
+        { }
+
+        public JsonPropertySerialization(
+            string parameterName,
+            TypedValueExpression value,
+            string serializedName,
+            CSharpType? serializedType,
+            JsonSerialization valueSerialization,
+            bool isRequired,
+            bool shouldExcludeInWireSerialization,
+            bool shouldExcludeInWireDeserialization,
+            ObjectTypeProperty property,
+            CustomSerializationHooks? serializationHooks = null,
+            TypedValueExpression? enumerableExpression = null)
+            : base(parameterName, value, serializedName, serializedType, isRequired, shouldExcludeInWireSerialization, shouldExcludeInWireDeserialization, property, enumerableExpression, serializationHooks)
         {
             ValueSerialization = valueSerialization;
             CustomSerializationMethodName = serializationHooks?.JsonSerializationMethodName;

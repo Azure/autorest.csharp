@@ -448,6 +448,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSupersetInheritance\\src\\Generated -n"
     },
+    "MgmtTypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtTypeSpec\\src\\Generated -n"
+    },
     "MgmtXmlDeserialization": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\src\\Generated -n"
@@ -556,10 +560,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PublicClientCtor\\Generated"
     },
-    "RenameGetList-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\RenameGetList-TypeSpec\\src\\Generated -n"
-    },
     "required-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"
@@ -595,10 +595,6 @@
     "SpecificVersion-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SpecificVersion-TypeSpec\\src\\Generated -n"
-    },
-    "Spread-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-TypeSpec\\src\\Generated -n"
     },
     "SubClients-LowLevel": {
       "commandName": "Project",
@@ -655,6 +651,10 @@
     "typespec-azure/core/traits": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
+    },
+    "typespec-azure/resource-manager/models/common-types/managed-identity": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\models\\common-types\\managed-identity\\src\\Generated -n"
     },
     "typespec-azure/resource-manager/models/resources": {
       "commandName": "Project",
