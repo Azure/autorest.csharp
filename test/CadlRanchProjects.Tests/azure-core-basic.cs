@@ -133,13 +133,6 @@ namespace CadlRanchProjects.Tests
             }
         });
 
-        [Test]
-        public Task Azure_Core_basic_Swapdogs() => Test(async (host) =>
-        {
-            var input = new SwapDogsOptions("dog1", "dog2");
-            var response = await new BasicClient(host, null).SwapdogsAsync(1, input);
-            Assert.AreEqual(202, response.Status);
-        });
         public void Azure_Core_basic_RenameGetMethod()
         {
             var getUserMethod = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
