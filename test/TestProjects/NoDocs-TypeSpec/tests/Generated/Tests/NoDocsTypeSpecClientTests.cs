@@ -135,7 +135,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -179,7 +179,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, ThingRequiredLiteralString.Accept, ThingRequiredLiteralInt._123, ThingRequiredLiteralFloat._123, false, optionalLiteralString: ThingOptionalLiteralString.Reject, optionalLiteralInt: ThingOptionalLiteralInt._456, optionalLiteralFloat: ThingOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
         }
 
         [Test]

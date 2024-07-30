@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
         internal FineTuningJobError()
         {
@@ -60,7 +59,7 @@ namespace OpenAI.Models
             Message = message;
             Code = code;
             Param = param;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> A human-readable error message. </summary>

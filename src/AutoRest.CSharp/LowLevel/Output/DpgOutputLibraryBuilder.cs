@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models
                     "internal",
                     null,
                     $"Unknown version of {actualBase.Name}",
-                    model.Usage.HasFlag(InputModelTypeUsage.Input) ? InputModelTypeUsage.RoundTrip : InputModelTypeUsage.Output,
+                    model.Usage.HasFlag(InputModelTypeUsage.Input) ? InputModelTypeUsage.Input | InputModelTypeUsage.Output : InputModelTypeUsage.Output,
                     Array.Empty<InputModelProperty>(),
                     actualBase,
                     Array.Empty<InputModelType>(),

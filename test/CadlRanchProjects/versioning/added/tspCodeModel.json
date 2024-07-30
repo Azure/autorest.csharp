@@ -55,7 +55,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "10",
@@ -74,7 +74,7 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   }
  ],
  "Models": [
@@ -83,7 +83,7 @@
    "Kind": "model",
    "Name": "ModelV1",
    "CrossLanguageDefinitionId": "Versioning.Added.ModelV1",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "14",
@@ -138,7 +138,7 @@
    "Kind": "model",
    "Name": "ModelV2",
    "CrossLanguageDefinitionId": "Versioning.Added.ModelV2",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Properties": [
     {
      "$id": "22",

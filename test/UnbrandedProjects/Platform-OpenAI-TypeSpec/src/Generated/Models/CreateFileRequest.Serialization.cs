@@ -22,21 +22,31 @@ namespace OpenAI.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("file"u8);
+            if (SerializedAdditionalRawData?.ContainsKey("file") != true)
+            {
+                writer.WritePropertyName("file"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(global::System.BinaryData.FromStream(File));
 #else
-            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File)))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
-            writer.WritePropertyName("purpose"u8);
-            writer.WriteStringValue(Purpose);
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(File)))
                 {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (SerializedAdditionalRawData?.ContainsKey("purpose") != true)
+            {
+                writer.WritePropertyName("purpose"u8);
+                writer.WriteStringValue(Purpose);
+            }
+            if (SerializedAdditionalRawData != null)
+            {
+                foreach (var item in SerializedAdditionalRawData)
+                {
+                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
+                    {
+                        continue;
+                    }
                     writer.WritePropertyName(item.Key);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item.Value);
@@ -89,6 +99,7 @@ namespace OpenAI.Models
                 }
                 if (options.Format != "W")
                 {
+                    rawDataDictionary ??= new Dictionary<string, BinaryData>();
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
