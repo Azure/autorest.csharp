@@ -14,6 +14,8 @@ namespace CadlRanchProjectsNonAzure.Tests
 {
     public class TypePropertyOptionalTests : CadlRanchNonAzureTestBase
     {
+        private static readonly DateTimeOffset PlainDateData = new DateTimeOffset(2022, 12, 12, 0, 0, 0, 0, new TimeSpan());
+        private static readonly TimeSpan PlainTimeData = new TimeSpan(13, 06, 12);
         [Test]
         public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
         {
@@ -139,6 +141,71 @@ namespace CadlRanchProjectsNonAzure.Tests
         public Task Type_Property_Optional_Datetime_putDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDatetimeClient().PutDefaultAsync(new DatetimeProperty());
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().GetAllAsync();
+            var expectedDate = new DateTimeOffset(2022, 12, 12, 8, 0, 0, TimeSpan.FromHours(8));
+            Assert.AreEqual(expectedDate, response.Value.Property.Value.ToOffset(TimeSpan.FromHours(8)));
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putAll() => Test(async (host) =>
+        {
+            PlainDateProperty data = new()
+            {
+                Property = DateTimeOffset.Parse("2022-12-12")
+            };
+            var response = await new OptionalClient(host, null).GetPlainDateClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().PutDefaultAsync(new PlainDateProperty());
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().GetAllAsync();
+            Assert.AreEqual(TimeSpan.Parse("13:06:12"), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putAll() => Test(async (host) =>
+        {
+            PlainTimeProperty data = new()
+            {
+                Property = TimeSpan.Parse("13:06:12")
+            };
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.GetRawResponse().Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().PutDefaultAsync(new PlainTimeProperty());
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });
 
