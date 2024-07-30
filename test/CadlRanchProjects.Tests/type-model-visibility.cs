@@ -20,9 +20,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_ReadOnlyRoundTrip() => Test(async (host) =>
         {
-            var response = await new VisibilityClient(host, null).PutReadOnlyModelAsync(new ReadOnlyModel()
-            {
-            });
+            var response = await new VisibilityClient(host, null).PutReadOnlyModelAsync(new ReadOnlyModel());
             Assert.AreEqual(3, response.Value.OptionalNullableIntList.Count);
             Assert.AreEqual(1, response.Value.OptionalNullableIntList[0]);
             Assert.AreEqual(2, response.Value.OptionalNullableIntList[1]);

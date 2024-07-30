@@ -15,8 +15,6 @@ namespace CadlRanchProjects.Tests
 {
     public class TypePropertyOptionalTests : CadlRanchTestBase
     {
-        private static readonly DateTimeOffset PlainDateData = new DateTimeOffset(2022, 12, 12, 0, 0, 0, 0, new TimeSpan());
-        private static readonly TimeSpan PlainTimeData = new TimeSpan(13, 06, 12);
         [Test]
         public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
         {
