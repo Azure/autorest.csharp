@@ -50,25 +50,7 @@
        "$id": "8",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "9",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "10",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "11",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
      },
@@ -80,21 +62,21 @@
  ],
  "Clients": [
   {
-   "$id": "12",
+   "$id": "9",
    "Name": "ModelClient",
    "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "13"
+    "$id": "10"
    },
    "Parameters": [
     {
-     "$id": "14",
+     "$id": "11",
      "Name": "host",
      "NameInRequest": "host",
      "Description": "TestServer endpoint",
      "Type": {
-      "$id": "15",
+      "$id": "12",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -109,9 +91,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "16",
+      "$id": "13",
       "Type": {
-       "$id": "17",
+       "$id": "14",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -122,26 +104,26 @@
    ]
   },
   {
-   "$id": "18",
+   "$id": "15",
    "Name": "AzureCoreEmbeddingVector",
    "Description": "",
    "Operations": [
     {
-     "$id": "19",
+     "$id": "16",
      "Name": "get",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "get an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "11"
       },
       {
-       "$id": "20",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
+        "$id": "18",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -156,9 +138,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "19",
         "Type": {
-         "$ref": "21"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
@@ -166,37 +148,19 @@
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "24",
+        "$id": "21",
         "Kind": "array",
         "Name": "EmbeddingVector",
         "ValueType": {
-         "$id": "25",
+         "$id": "22",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "26",
-          "Kind": "int32",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "27",
-           "Kind": "int32",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "28",
-            "Kind": "int32",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
        },
@@ -217,47 +181,29 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "29",
+     "$id": "23",
      "Name": "put",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "put an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "11"
       },
       {
-       "$id": "30",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "31",
+        "$id": "25",
         "Kind": "array",
         "Name": "EmbeddingVector",
         "ValueType": {
-         "$id": "32",
+         "$id": "26",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "33",
-          "Kind": "int32",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "34",
-           "Kind": "int32",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "35",
-            "Kind": "int32",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
        },
@@ -272,11 +218,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "27",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "37",
+        "$id": "28",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -291,19 +237,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "29",
         "Type": {
-         "$ref": "37"
+         "$ref": "28"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "39",
+       "$id": "30",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "31",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -318,9 +264,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "32",
         "Type": {
-         "$ref": "40"
+         "$ref": "31"
         },
         "Value": "application/json"
        }
@@ -328,7 +274,7 @@
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -349,17 +295,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "43",
+     "$id": "34",
      "Name": "post",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "post a model which has an embeddingVector property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "14"
+       "$ref": "11"
       },
       {
-       "$id": "44",
+       "$id": "35",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -377,11 +323,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "37",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -396,19 +342,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "38",
         "Type": {
-         "$ref": "46"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "48",
+       "$id": "39",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "49",
+        "$id": "40",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -423,9 +369,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "41",
         "Type": {
-         "$ref": "49"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
@@ -433,7 +379,7 @@
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "42",
        "StatusCodes": [
         200
        ],
@@ -461,12 +407,12 @@
     }
    ],
    "Protocol": {
-    "$id": "52"
+    "$id": "43"
    },
    "Parent": "ModelClient",
    "Parameters": [
     {
-     "$ref": "14"
+     "$ref": "11"
     }
    ]
   }

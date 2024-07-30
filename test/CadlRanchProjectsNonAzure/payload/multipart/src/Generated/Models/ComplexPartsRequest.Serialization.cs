@@ -36,16 +36,31 @@ namespace Payload.MultiPart.Models
             }
 #endif
             writer.WritePropertyName("previousAddresses"u8);
-            writer.WriteObjectValue(PreviousAddresses, options);
-            writer.WritePropertyName("pictures"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(global::System.BinaryData.FromStream(Pictures));
-#else
-            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(Pictures)))
+            writer.WriteStartArray();
+            foreach (var item in PreviousAddresses)
             {
-                JsonSerializer.Serialize(writer, document.RootElement);
+                writer.WriteObjectValue(item, options);
             }
+            writer.WriteEndArray();
+            writer.WritePropertyName("pictures"u8);
+            writer.WriteStartArray();
+            foreach (var item in Pictures)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(global::System.BinaryData.FromStream(item));
+#else
+                using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(item)))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
 #endif
+            }
+            writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -87,8 +102,8 @@ namespace Payload.MultiPart.Models
             string id = default;
             Address address = default;
             Stream profileImage = default;
-            Address previousAddresses = default;
-            Stream pictures = default;
+            IList<Address> previousAddresses = default;
+            IList<Stream> pictures = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -110,12 +125,29 @@ namespace Payload.MultiPart.Models
                 }
                 if (property.NameEquals("previousAddresses"u8))
                 {
-                    previousAddresses = Address.DeserializeAddress(property.Value, options);
+                    List<Address> array = new List<Address>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(Address.DeserializeAddress(item, options));
+                    }
+                    previousAddresses = array;
                     continue;
                 }
                 if (property.NameEquals("pictures"u8))
                 {
-                    pictures = BinaryData.FromString(property.Value.GetRawText()).ToStream();
+                    List<Stream> array = new List<Stream>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()).ToStream());
+                        }
+                    }
+                    pictures = array;
                     continue;
                 }
                 if (options.Format != "W")
@@ -154,8 +186,14 @@ namespace Payload.MultiPart.Models
             content.Add(Id, "id");
             content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
             content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
-            content.Add(ModelReaderWriter.Write(PreviousAddresses, ModelSerializationExtensions.WireOptions), "previousAddresses");
-            content.Add(Pictures, "pictures", "pictures", "application/octet-stream");
+            foreach (Address item in PreviousAddresses)
+            {
+                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
+            }
+            foreach (Stream item in Pictures)
+            {
+                content.Add(item, "pictures", "pictures", "application/octet-stream");
+            }
             return content;
         }
 

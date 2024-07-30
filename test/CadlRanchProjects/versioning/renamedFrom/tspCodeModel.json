@@ -115,25 +115,7 @@
          "$id": "17",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "18",
-          "Kind": "int32",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "19",
-           "Kind": "int32",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "20",
-            "Kind": "int32",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         }
        }
       ]
@@ -146,23 +128,23 @@
  ],
  "Clients": [
   {
-   "$id": "21",
+   "$id": "18",
    "Name": "RenamedFromClient",
    "Description": "Test for the `@renamedFrom` decorator.",
    "Operations": [
     {
-     "$id": "22",
+     "$id": "19",
      "Name": "newOp",
      "ResourceName": "RenamedFrom",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "23",
+       "$id": "20",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "24",
+        "$id": "21",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -178,7 +160,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "25",
+       "$id": "22",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -196,11 +178,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "26",
+       "$id": "23",
        "Name": "newQuery",
        "NameInRequest": "newQuery",
        "Type": {
-        "$id": "27",
+        "$id": "24",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -216,7 +198,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "28",
+       "$id": "25",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -233,11 +215,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "29",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "27",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -252,19 +234,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "28",
         "Type": {
-         "$ref": "30"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "32",
+       "$id": "29",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "33",
+        "$id": "30",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -279,9 +261,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "31",
         "Type": {
-         "$ref": "33"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
@@ -289,7 +271,7 @@
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -317,36 +299,36 @@
     }
    ],
    "Protocol": {
-    "$id": "36"
+    "$id": "33"
    },
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "20"
     },
     {
-     "$ref": "25"
+     "$ref": "22"
     }
    ]
   },
   {
-   "$id": "37",
+   "$id": "34",
    "Name": "NewInterface",
    "Description": "",
    "Operations": [
     {
-     "$id": "38",
+     "$id": "35",
      "Name": "newOpInNewInterface",
      "ResourceName": "NewInterface",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "23"
+       "$ref": "20"
       },
       {
-       "$ref": "25"
+       "$ref": "22"
       },
       {
-       "$id": "39",
+       "$id": "36",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -363,11 +345,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
+        "$id": "38",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -382,19 +364,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "39",
         "Type": {
-         "$ref": "41"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "43",
+       "$id": "40",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "44",
+        "$id": "41",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -409,9 +391,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "42",
         "Type": {
-         "$ref": "44"
+         "$ref": "41"
         },
         "Value": "application/json"
        }
@@ -419,7 +401,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "43",
        "StatusCodes": [
         200
        ],
@@ -447,15 +429,15 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "44"
    },
    "Parent": "RenamedFromClient",
    "Parameters": [
     {
-     "$ref": "23"
+     "$ref": "20"
     },
     {
-     "$ref": "25"
+     "$ref": "22"
     }
    ]
   }

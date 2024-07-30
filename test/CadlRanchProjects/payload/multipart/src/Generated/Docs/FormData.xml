@@ -99,14 +99,20 @@ This sample shows how to call ComplexAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, default, null);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
+{
+    default
+}, new Stream[] { null });
 Response response = await client.ComplexAsync(body);
 ]]></code>
 This sample shows how to call ComplexAsync with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, default, null);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
+{
+    default
+}, new Stream[] { null });
 Response response = await client.ComplexAsync(body);
 ]]></code></example>
     </member>
@@ -116,14 +122,20 @@ This sample shows how to call Complex.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, default, null);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
+{
+    default
+}, new Stream[] { null });
 Response response = client.Complex(body);
 ]]></code>
 This sample shows how to call Complex with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, default, null);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
+{
+    default
+}, new Stream[] { null });
 Response response = client.Complex(body);
 ]]></code></example>
     </member>
@@ -141,7 +153,14 @@ using RequestContent content = RequestContent.Create(new
         city = "<city>",
     },
     profileImage = File.OpenRead("<filePath>"),
-    pictures = File.OpenRead("<filePath>"),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = await client.ComplexAsync(content, "multipart/form-data");
 
@@ -159,7 +178,14 @@ using RequestContent content = RequestContent.Create(new
         city = "<city>",
     },
     profileImage = File.OpenRead("<filePath>"),
-    pictures = File.OpenRead("<filePath>"),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = await client.ComplexAsync(content, "multipart/form-data");
 
@@ -180,7 +206,14 @@ using RequestContent content = RequestContent.Create(new
         city = "<city>",
     },
     profileImage = File.OpenRead("<filePath>"),
-    pictures = File.OpenRead("<filePath>"),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = client.Complex(content, "multipart/form-data");
 
@@ -198,7 +231,14 @@ using RequestContent content = RequestContent.Create(new
         city = "<city>",
     },
     profileImage = File.OpenRead("<filePath>"),
-    pictures = File.OpenRead("<filePath>"),
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = client.Complex(content, "multipart/form-data");
 
@@ -315,14 +355,14 @@ This sample shows how to call BinaryArrayPartsAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", null);
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new Stream[] { null });
 Response response = await client.BinaryArrayPartsAsync(body);
 ]]></code>
 This sample shows how to call BinaryArrayPartsAsync with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", null);
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new Stream[] { null });
 Response response = await client.BinaryArrayPartsAsync(body);
 ]]></code></example>
     </member>
@@ -332,14 +372,14 @@ This sample shows how to call BinaryArrayParts.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", null);
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new Stream[] { null });
 Response response = client.BinaryArrayParts(body);
 ]]></code>
 This sample shows how to call BinaryArrayParts with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", null);
+BinaryArrayPartsRequest body = new BinaryArrayPartsRequest("<id>", new Stream[] { null });
 Response response = client.BinaryArrayParts(body);
 ]]></code></example>
     </member>
@@ -352,7 +392,10 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    pictures = File.OpenRead("<filePath>"),
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
 
@@ -365,7 +408,10 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    pictures = File.OpenRead("<filePath>"),
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
 
@@ -381,7 +427,10 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    pictures = File.OpenRead("<filePath>"),
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = client.BinaryArrayParts(content, "multipart/form-data");
 
@@ -394,7 +443,10 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    pictures = File.OpenRead("<filePath>"),
+    pictures = new object[]
+    {
+        File.OpenRead("<filePath>")
+    },
 });
 Response response = client.BinaryArrayParts(content, "multipart/form-data");
 
@@ -407,14 +459,20 @@ This sample shows how to call JsonArrayPartsAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address("<city>"));
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
+{
+    new Address("<city>")
+});
 Response response = await client.JsonArrayPartsAsync(body);
 ]]></code>
 This sample shows how to call JsonArrayPartsAsync with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address("<city>"));
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
+{
+    new Address("<city>")
+});
 Response response = await client.JsonArrayPartsAsync(body);
 ]]></code></example>
     </member>
@@ -424,14 +482,20 @@ This sample shows how to call JsonArrayParts.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address("<city>"));
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
+{
+    new Address("<city>")
+});
 Response response = client.JsonArrayParts(body);
 ]]></code>
 This sample shows how to call JsonArrayParts with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address("<city>"));
+JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
+{
+    new Address("<city>")
+});
 Response response = client.JsonArrayParts(body);
 ]]></code></example>
     </member>
@@ -444,9 +508,12 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new
+    previousAddresses = new object[]
     {
-        city = "<city>",
+        new
+        {
+            city = "<city>",
+        }
     },
 });
 Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
@@ -460,9 +527,12 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new
+    previousAddresses = new object[]
     {
-        city = "<city>",
+        new
+        {
+            city = "<city>",
+        }
     },
 });
 Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
@@ -479,9 +549,12 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new
+    previousAddresses = new object[]
     {
-        city = "<city>",
+        new
+        {
+            city = "<city>",
+        }
     },
 });
 Response response = client.JsonArrayParts(content, "multipart/form-data");
@@ -495,9 +568,12 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new
+    previousAddresses = new object[]
     {
-        city = "<city>",
+        new
+        {
+            city = "<city>",
+        }
     },
 });
 Response response = client.JsonArrayParts(content, "multipart/form-data");

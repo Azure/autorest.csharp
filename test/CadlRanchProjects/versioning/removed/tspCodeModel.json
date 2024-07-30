@@ -110,25 +110,7 @@
         "$id": "16",
         "Kind": "float32",
         "Name": "float32",
-        "CrossLanguageDefinitionId": "TypeSpec.float32",
-        "BaseType": {
-         "$id": "17",
-         "Kind": "float32",
-         "Name": "float64",
-         "CrossLanguageDefinitionId": "TypeSpec.float64",
-         "BaseType": {
-          "$id": "18",
-          "Kind": "float32",
-          "Name": "float",
-          "CrossLanguageDefinitionId": "TypeSpec.float",
-          "BaseType": {
-           "$id": "19",
-           "Kind": "float32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        }
       ]
      },
@@ -140,23 +122,23 @@
  ],
  "Clients": [
   {
-   "$id": "20",
+   "$id": "17",
    "Name": "RemovedClient",
    "Description": "Test for the `@removed` decorator.",
    "Operations": [
     {
-     "$id": "21",
+     "$id": "18",
      "Name": "v2",
      "ResourceName": "Removed",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "22",
+       "$id": "19",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "23",
+        "$id": "20",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -172,7 +154,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "24",
+       "$id": "21",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -190,7 +172,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "25",
+       "$id": "22",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -207,11 +189,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "26",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "24",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -226,19 +208,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "25",
         "Type": {
-         "$ref": "27"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "29",
+       "$id": "26",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "30",
+        "$id": "27",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -253,9 +235,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "28",
         "Type": {
-         "$ref": "30"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
@@ -263,7 +245,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -291,14 +273,14 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "30"
    },
    "Parameters": [
     {
-     "$ref": "22"
+     "$ref": "19"
     },
     {
-     "$ref": "24"
+     "$ref": "21"
     }
    ]
   }

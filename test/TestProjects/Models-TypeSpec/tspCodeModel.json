@@ -46,39 +46,21 @@
     "$id": "8",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32",
-    "BaseType": {
-     "$id": "9",
-     "Kind": "int32",
-     "Name": "int64",
-     "CrossLanguageDefinitionId": "TypeSpec.int64",
-     "BaseType": {
-      "$id": "10",
-      "Kind": "int32",
-      "Name": "integer",
-      "CrossLanguageDefinitionId": "TypeSpec.integer",
-      "BaseType": {
-       "$id": "11",
-       "Kind": "int32",
-       "Name": "numeric",
-       "CrossLanguageDefinitionId": "TypeSpec.numeric"
-      }
-     }
-    }
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
-     "$id": "12",
+     "$id": "9",
      "Name": "One",
      "Value": 1
     },
     {
-     "$id": "13",
+     "$id": "10",
      "Name": "Two",
      "Value": 2
     },
     {
-     "$id": "14",
+     "$id": "11",
      "Name": "Four",
      "Value": 4
     }
@@ -89,29 +71,29 @@
    "Usage": "Input,Output,Json"
   },
   {
-   "$id": "15",
+   "$id": "12",
    "Kind": "enum",
    "Name": "ExtensibleEnum",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleEnum",
    "ValueType": {
-    "$id": "16",
+    "$id": "13",
     "Kind": "string",
     "Name": "string",
     "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
-     "$id": "17",
+     "$id": "14",
      "Name": "One",
      "Value": "1"
     },
     {
-     "$id": "18",
+     "$id": "15",
      "Name": "Two",
      "Value": "2"
     },
     {
-     "$id": "19",
+     "$id": "16",
      "Name": "Four",
      "Value": "4"
     }
@@ -122,47 +104,29 @@
    "Usage": "Input,Output,Json"
   },
   {
-   "$id": "20",
+   "$id": "17",
    "Kind": "enum",
    "Name": "FixedFloatEnum",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.FixedFloatEnum",
    "ValueType": {
-    "$id": "21",
+    "$id": "18",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32",
-    "BaseType": {
-     "$id": "22",
-     "Kind": "float32",
-     "Name": "float64",
-     "CrossLanguageDefinitionId": "TypeSpec.float64",
-     "BaseType": {
-      "$id": "23",
-      "Kind": "float32",
-      "Name": "float",
-      "CrossLanguageDefinitionId": "TypeSpec.float",
-      "BaseType": {
-       "$id": "24",
-       "Kind": "float32",
-       "Name": "numeric",
-       "CrossLanguageDefinitionId": "TypeSpec.numeric"
-      }
-     }
-    }
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Values": [
     {
-     "$id": "25",
+     "$id": "19",
      "Name": "One",
      "Value": 1.1
     },
     {
-     "$id": "26",
+     "$id": "20",
      "Name": "Two",
      "Value": 2.1
     },
     {
-     "$id": "27",
+     "$id": "21",
      "Name": "Four",
      "Value": 4
     }
@@ -173,47 +137,29 @@
    "Usage": "Input"
   },
   {
-   "$id": "28",
+   "$id": "22",
    "Kind": "enum",
    "Name": "ExtensibleIntEnum",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.ExtensibleIntEnum",
    "ValueType": {
-    "$id": "29",
+    "$id": "23",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32",
-    "BaseType": {
-     "$id": "30",
-     "Kind": "int32",
-     "Name": "int64",
-     "CrossLanguageDefinitionId": "TypeSpec.int64",
-     "BaseType": {
-      "$id": "31",
-      "Kind": "int32",
-      "Name": "integer",
-      "CrossLanguageDefinitionId": "TypeSpec.integer",
-      "BaseType": {
-       "$id": "32",
-       "Kind": "int32",
-       "Name": "numeric",
-       "CrossLanguageDefinitionId": "TypeSpec.numeric"
-      }
-     }
-    }
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
-     "$id": "33",
+     "$id": "24",
      "Name": "One",
      "Value": 1
     },
     {
-     "$id": "34",
+     "$id": "25",
      "Name": "Two",
      "Value": 2
     },
     {
-     "$id": "35",
+     "$id": "26",
      "Name": "Four",
      "Value": 4
     }
@@ -224,18 +170,18 @@
    "Usage": "Input"
   },
   {
-   "$id": "36",
+   "$id": "27",
    "Kind": "enum",
    "Name": "Int32ValuesFacet_kind",
    "ValueType": {
-    "$id": "37",
+    "$id": "28",
     "Kind": "string",
     "Name": "string",
     "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
-     "$id": "38",
+     "$id": "29",
      "Name": "Int32Values",
      "Value": "Int32Values",
      "Description": "Int32Values"
@@ -247,19 +193,19 @@
    "Usage": "Input,Json"
   },
   {
-   "$id": "39",
+   "$id": "30",
    "Kind": "enum",
    "Name": "Versions",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.Versions",
    "ValueType": {
-    "$id": "40",
+    "$id": "31",
     "Kind": "string",
     "Name": "string",
     "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
-     "$id": "41",
+     "$id": "32",
      "Name": "0.1.0",
      "Value": "0.1.0"
     }
@@ -270,19 +216,19 @@
  ],
  "Models": [
   {
-   "$id": "42",
+   "$id": "33",
    "Kind": "model",
    "Name": "BaseModelWithDiscriminatorDefinedOnBase",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorDefinedOnBase",
    "Usage": "Input,Output,Json",
    "Description": "A base model in the discriminated set inheriting from a base with the predefined discriminator property",
    "DiscriminatorProperty": {
-    "$id": "43",
+    "$id": "34",
     "Name": "kind",
     "SerializedName": "kind",
     "Description": "Discriminator property for BaseModelWithDiscriminatorDefinedOnBase.",
     "Type": {
-     "$id": "44",
+     "$id": "35",
      "Kind": "string",
      "Name": "string",
      "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -292,7 +238,7 @@
     "IsDiscriminator": true
    },
    "BaseModel": {
-    "$id": "45",
+    "$id": "36",
     "Kind": "model",
     "Name": "BaseModelWithARequiredProperty",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithARequiredProperty",
@@ -300,12 +246,12 @@
     "Description": "A base model with a required property",
     "Properties": [
      {
-      "$id": "46",
+      "$id": "37",
       "Name": "kind",
       "SerializedName": "kind",
       "Description": "Required kind",
       "Type": {
-       "$id": "47",
+       "$id": "38",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -317,15 +263,15 @@
    },
    "Properties": [
     {
-     "$ref": "43"
+     "$ref": "34"
     },
     {
-     "$id": "48",
+     "$id": "39",
      "Name": "optionalString",
      "SerializedName": "optionalString",
      "Description": "Optional string.",
      "Type": {
-      "$id": "49",
+      "$id": "40",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -335,9 +281,9 @@
     }
    ],
    "DiscriminatedSubtypes": {
-    "$id": "50",
+    "$id": "41",
     "A": {
-     "$id": "51",
+     "$id": "42",
      "Kind": "model",
      "Name": "DerivedWithDiscriminatorDefinedOnBase",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorDefinedOnBase",
@@ -345,19 +291,19 @@
      "Description": "A derived class in the discriminated set inheriting from a base with the predefined discriminator property",
      "DiscriminatorValue": "A",
      "BaseModel": {
-      "$ref": "42"
+      "$ref": "33"
      },
      "Properties": [
       {
-       "$id": "52",
+       "$id": "43",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "53",
+        "$id": "44",
         "Kind": "constant",
         "ValueType": {
-         "$id": "54",
+         "$id": "45",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -369,12 +315,12 @@
        "IsDiscriminator": true
       },
       {
-       "$id": "55",
+       "$id": "46",
        "Name": "requiredString",
        "SerializedName": "requiredString",
        "Description": "Required string.",
        "Type": {
-        "$id": "56",
+        "$id": "47",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -383,33 +329,15 @@
        "IsReadOnly": false
       },
       {
-       "$id": "57",
+       "$id": "48",
        "Name": "optionalInt",
        "SerializedName": "optionalInt",
        "Description": "Optional int",
        "Type": {
-        "$id": "58",
+        "$id": "49",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "59",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "60",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "61",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -419,25 +347,25 @@
    }
   },
   {
-   "$ref": "45"
+   "$ref": "36"
   },
   {
-   "$ref": "51"
+   "$ref": "42"
   },
   {
-   "$id": "62",
+   "$id": "50",
    "Kind": "model",
    "Name": "OutputBaseModelWithDiscriminator",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputBaseModelWithDiscriminator",
    "Usage": "Output,Json",
    "Description": "Output model with a discriminator",
    "DiscriminatorProperty": {
-    "$id": "63",
+    "$id": "51",
     "Name": "kind",
     "SerializedName": "kind",
     "Description": "Discriminator property for OutputBaseModelWithDiscriminator.",
     "Type": {
-     "$id": "64",
+     "$id": "52",
      "Kind": "string",
      "Name": "string",
      "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -448,13 +376,13 @@
    },
    "Properties": [
     {
-     "$ref": "63"
+     "$ref": "51"
     }
    ],
    "DiscriminatedSubtypes": {
-    "$id": "65",
+    "$id": "53",
     "first": {
-     "$id": "66",
+     "$id": "54",
      "Kind": "model",
      "Name": "FirstDerivedOutputModel",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.FirstDerivedOutputModel",
@@ -462,19 +390,19 @@
      "Description": "First derived model as an output",
      "DiscriminatorValue": "first",
      "BaseModel": {
-      "$ref": "62"
+      "$ref": "50"
      },
      "Properties": [
       {
-       "$id": "67",
+       "$id": "55",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "68",
+        "$id": "56",
         "Kind": "constant",
         "ValueType": {
-         "$id": "69",
+         "$id": "57",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -486,12 +414,12 @@
        "IsDiscriminator": true
       },
       {
-       "$id": "70",
+       "$id": "58",
        "Name": "first",
        "SerializedName": "first",
        "Description": "",
        "Type": {
-        "$id": "71",
+        "$id": "59",
         "Kind": "boolean",
         "Name": "boolean",
         "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -502,7 +430,7 @@
      ]
     },
     "second": {
-     "$id": "72",
+     "$id": "60",
      "Kind": "model",
      "Name": "SecondDerivedOutputModel",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.SecondDerivedOutputModel",
@@ -510,19 +438,19 @@
      "Description": "Second derived model as an output",
      "DiscriminatorValue": "second",
      "BaseModel": {
-      "$ref": "62"
+      "$ref": "50"
      },
      "Properties": [
       {
-       "$id": "73",
+       "$id": "61",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Discriminator",
        "Type": {
-        "$id": "74",
+        "$id": "62",
         "Kind": "constant",
         "ValueType": {
-         "$id": "75",
+         "$id": "63",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -534,12 +462,12 @@
        "IsDiscriminator": true
       },
       {
-       "$id": "76",
+       "$id": "64",
        "Name": "second",
        "SerializedName": "second",
        "Description": "",
        "Type": {
-        "$id": "77",
+        "$id": "65",
         "Kind": "boolean",
         "Name": "boolean",
         "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -552,13 +480,13 @@
    }
   },
   {
-   "$ref": "66"
+   "$ref": "54"
   },
   {
-   "$ref": "72"
+   "$ref": "60"
   },
   {
-   "$id": "78",
+   "$id": "66",
    "Kind": "model",
    "Name": "InputModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.InputModel",
@@ -566,12 +494,12 @@
    "Description": "Model used only as input",
    "Properties": [
     {
-     "$id": "79",
+     "$id": "67",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string",
      "Type": {
-      "$id": "80",
+      "$id": "68",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -580,83 +508,47 @@
      "IsReadOnly": false
     },
     {
-     "$id": "81",
+     "$id": "69",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int",
      "Type": {
-      "$id": "82",
+      "$id": "70",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "83",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "84",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "85",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "86",
+     "$id": "71",
      "Name": "requiredNullableInt",
      "SerializedName": "requiredNullableInt",
      "Description": "Required nullable int",
      "Type": {
-      "$id": "87",
+      "$id": "72",
       "Kind": "nullable",
       "Type": {
-       "$id": "88",
+       "$id": "73",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "89",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "90",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "91",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "92",
+     "$id": "74",
      "Name": "requiredNullableString",
      "SerializedName": "requiredNullableString",
      "Description": "Required nullable string",
      "Type": {
-      "$id": "93",
+      "$id": "75",
       "Kind": "nullable",
       "Type": {
-       "$id": "94",
+       "$id": "76",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -666,51 +558,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "95",
+     "$id": "77",
      "Name": "nonRequiredNullableInt",
      "SerializedName": "nonRequiredNullableInt",
      "Description": "Optional nullable int",
      "Type": {
-      "$id": "96",
+      "$id": "78",
       "Kind": "nullable",
       "Type": {
-       "$id": "97",
+       "$id": "79",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "98",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "99",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "100",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "101",
+     "$id": "80",
      "Name": "nonRequiredNullableString",
      "SerializedName": "nonRequiredNullableString",
      "Description": "Optional nullable string",
      "Type": {
-      "$id": "102",
+      "$id": "81",
       "Kind": "nullable",
       "Type": {
-       "$id": "103",
+       "$id": "82",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -720,12 +594,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "104",
+     "$id": "83",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
      "Type": {
-      "$id": "105",
+      "$id": "84",
       "Kind": "model",
       "Name": "BaseModel",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModel",
@@ -737,48 +611,30 @@
      "IsReadOnly": false
     },
     {
-     "$id": "106",
+     "$id": "85",
      "Name": "requiredModel2",
      "SerializedName": "requiredModel2",
      "Description": "Required model",
      "Type": {
-      "$ref": "105"
+      "$ref": "84"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "107",
+     "$id": "86",
      "Name": "requiredIntList",
      "SerializedName": "requiredIntList",
      "Description": "Required primitive value type collection",
      "Type": {
-      "$id": "108",
+      "$id": "87",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "109",
+       "$id": "88",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "110",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "111",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "112",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -786,16 +642,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "113",
+     "$id": "89",
      "Name": "requiredStringList",
      "SerializedName": "requiredStringList",
      "Description": "Required primitive reference type collection",
      "Type": {
-      "$id": "114",
+      "$id": "90",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "115",
+       "$id": "91",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -806,16 +662,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "116",
+     "$id": "92",
      "Name": "requiredModelList",
      "SerializedName": "requiredModelList",
      "Description": "Required model collection",
      "Type": {
-      "$id": "117",
+      "$id": "93",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$id": "118",
+       "$id": "94",
        "Kind": "model",
        "Name": "CollectionItem",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.CollectionItem",
@@ -823,48 +679,48 @@
        "Description": "Collection item model",
        "Properties": [
         {
-         "$id": "119",
+         "$id": "95",
          "Name": "requiredModelRecord",
          "SerializedName": "requiredModelRecord",
          "Description": "Required model record",
          "Type": {
-          "$id": "120",
+          "$id": "96",
           "Kind": "dict",
           "KeyType": {
-           "$id": "121",
+           "$id": "97",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "ValueType": {
-           "$id": "122",
+           "$id": "98",
            "Kind": "model",
            "Name": "RecordItem",
            "CrossLanguageDefinitionId": "ModelsTypeSpec.RecordItem",
            "Usage": "Input,Output,Json",
            "Description": "Record item model",
            "BaseModel": {
-            "$id": "123",
+            "$id": "99",
             "Kind": "model",
             "Name": "DerivedModel",
             "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModel",
             "Usage": "Input,Output,Json",
             "Description": "Derived model",
             "BaseModel": {
-             "$ref": "105"
+             "$ref": "84"
             },
             "Properties": [
              {
-              "$id": "124",
+              "$id": "100",
               "Name": "requiredList",
               "SerializedName": "requiredList",
               "Description": "Required collection",
               "Type": {
-               "$id": "125",
+               "$id": "101",
                "Kind": "array",
                "Name": "ArrayCollectionItem",
                "ValueType": {
-                "$ref": "118"
+                "$ref": "94"
                },
                "CrossLanguageDefinitionId": "TypeSpec.Array"
               },
@@ -887,61 +743,43 @@
      "IsReadOnly": false
     },
     {
-     "$id": "126",
+     "$id": "102",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "127",
+      "$id": "103",
       "Kind": "dict",
       "KeyType": {
-       "$id": "128",
+       "$id": "104",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "129",
+     "$id": "105",
      "Name": "requiredCollectionWithNullableFloatElement",
      "SerializedName": "requiredCollectionWithNullableFloatElement",
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
-      "$id": "130",
+      "$id": "106",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "131",
+       "$id": "107",
        "Kind": "nullable",
        "Type": {
-        "$id": "132",
+        "$id": "108",
         "Kind": "float32",
         "Name": "float32",
-        "CrossLanguageDefinitionId": "TypeSpec.float32",
-        "BaseType": {
-         "$id": "133",
-         "Kind": "float32",
-         "Name": "float64",
-         "CrossLanguageDefinitionId": "TypeSpec.float64",
-         "BaseType": {
-          "$id": "134",
-          "Kind": "float32",
-          "Name": "float",
-          "CrossLanguageDefinitionId": "TypeSpec.float",
-          "BaseType": {
-           "$id": "135",
-           "Kind": "float32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        }
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -950,19 +788,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "136",
+     "$id": "109",
      "Name": "requiredCollectionWithNullableBooleanElement",
      "SerializedName": "requiredCollectionWithNullableBooleanElement",
      "Description": "Required collection of which the element is a nullable boolean",
      "Type": {
-      "$id": "137",
+      "$id": "110",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "138",
+       "$id": "111",
        "Kind": "nullable",
        "Type": {
-        "$id": "139",
+        "$id": "112",
         "Kind": "boolean",
         "Name": "boolean",
         "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -974,19 +812,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "140",
+     "$id": "113",
      "Name": "requiredNullableModelList",
      "SerializedName": "requiredNullableModelList",
      "Description": "Required model nullable collection",
      "Type": {
-      "$id": "141",
+      "$id": "114",
       "Kind": "nullable",
       "Type": {
-       "$id": "142",
+       "$id": "115",
        "Kind": "array",
        "Name": "ArrayCollectionItem",
        "ValueType": {
-        "$ref": "118"
+        "$ref": "94"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -995,19 +833,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "143",
+     "$id": "116",
      "Name": "requiredNullableStringList",
      "SerializedName": "requiredNullableStringList",
      "Description": "Required string nullable collection",
      "Type": {
-      "$id": "144",
+      "$id": "117",
       "Kind": "nullable",
       "Type": {
-       "$id": "145",
+       "$id": "118",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "146",
+        "$id": "119",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1019,40 +857,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "147",
+     "$id": "120",
      "Name": "requiredNullableIntList",
      "SerializedName": "requiredNullableIntList",
      "Description": "Required int nullable collection",
      "Type": {
-      "$id": "148",
+      "$id": "121",
       "Kind": "nullable",
       "Type": {
-       "$id": "149",
+       "$id": "122",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "150",
+        "$id": "123",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "151",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "152",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "153",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -1061,16 +881,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "154",
+     "$id": "124",
      "Name": "nonRequiredModelList",
      "SerializedName": "nonRequiredModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "155",
+      "$id": "125",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1078,16 +898,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "156",
+     "$id": "126",
      "Name": "nonRequiredStringList",
      "SerializedName": "nonRequiredStringList",
      "Description": "Optional string collection",
      "Type": {
-      "$id": "157",
+      "$id": "127",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "158",
+       "$id": "128",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1098,37 +918,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "159",
+     "$id": "129",
      "Name": "nonRequiredIntList",
      "SerializedName": "nonRequiredIntList",
      "Description": "Optional int collection",
      "Type": {
-      "$id": "160",
+      "$id": "130",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "161",
+       "$id": "131",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "162",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "163",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "164",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1136,19 +938,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "165",
+     "$id": "132",
      "Name": "nonRequiredNullableModelList",
      "SerializedName": "nonRequiredNullableModelList",
      "Description": "Optional model nullable collection",
      "Type": {
-      "$id": "166",
+      "$id": "133",
       "Kind": "nullable",
       "Type": {
-       "$id": "167",
+       "$id": "134",
        "Kind": "array",
        "Name": "ArrayCollectionItem",
        "ValueType": {
-        "$ref": "118"
+        "$ref": "94"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -1157,19 +959,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "168",
+     "$id": "135",
      "Name": "nonRequiredNullableStringList",
      "SerializedName": "nonRequiredNullableStringList",
      "Description": "Optional string nullable collection",
      "Type": {
-      "$id": "169",
+      "$id": "136",
       "Kind": "nullable",
       "Type": {
-       "$id": "170",
+       "$id": "137",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "171",
+        "$id": "138",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1181,40 +983,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "172",
+     "$id": "139",
      "Name": "nonRequiredNullableIntList",
      "SerializedName": "nonRequiredNullableIntList",
      "Description": "Optional int nullable collection",
      "Type": {
-      "$id": "173",
+      "$id": "140",
       "Kind": "nullable",
       "Type": {
-       "$id": "174",
+       "$id": "141",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "175",
+        "$id": "142",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "176",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "177",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "178",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -1225,35 +1009,35 @@
    ]
   },
   {
-   "$ref": "105"
+   "$ref": "84"
   },
   {
-   "$ref": "118"
+   "$ref": "94"
   },
   {
-   "$ref": "122"
+   "$ref": "98"
   },
   {
-   "$ref": "123"
+   "$ref": "99"
   },
   {
-   "$id": "179",
+   "$id": "143",
    "Kind": "model",
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripModel",
    "Usage": "Input,Output,Json",
    "Description": "Model used both as input and output",
    "BaseModel": {
-    "$ref": "105"
+    "$ref": "84"
    },
    "Properties": [
     {
-     "$id": "180",
+     "$id": "144",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "181",
+      "$id": "145",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1262,44 +1046,26 @@
      "IsReadOnly": false
     },
     {
-     "$id": "182",
+     "$id": "146",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "183",
+      "$id": "147",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "184",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "185",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "186",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "187",
+     "$id": "148",
      "Name": "nonRequiredString",
      "SerializedName": "nonRequiredString",
      "Description": "Optional string",
      "Type": {
-      "$id": "188",
+      "$id": "149",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1308,83 +1074,47 @@
      "IsReadOnly": false
     },
     {
-     "$id": "189",
+     "$id": "150",
      "Name": "nonRequiredInt",
      "SerializedName": "nonRequiredInt",
      "Description": "Optional int",
      "Type": {
-      "$id": "190",
+      "$id": "151",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "191",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "192",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "193",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "194",
+     "$id": "152",
      "Name": "requiredNullableInt",
      "SerializedName": "requiredNullableInt",
      "Description": "Required nullable int",
      "Type": {
-      "$id": "195",
+      "$id": "153",
       "Kind": "nullable",
       "Type": {
-       "$id": "196",
+       "$id": "154",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "197",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "198",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "199",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "200",
+     "$id": "155",
      "Name": "requiredNullableString",
      "SerializedName": "requiredNullableString",
      "Description": "Required nullable string",
      "Type": {
-      "$id": "201",
+      "$id": "156",
       "Kind": "nullable",
       "Type": {
-       "$id": "202",
+       "$id": "157",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1394,51 +1124,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "203",
+     "$id": "158",
      "Name": "nonRequiredNullableInt",
      "SerializedName": "nonRequiredNullableInt",
      "Description": "Optional nullable int",
      "Type": {
-      "$id": "204",
+      "$id": "159",
       "Kind": "nullable",
       "Type": {
-       "$id": "205",
+       "$id": "160",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "206",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "207",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "208",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "209",
+     "$id": "161",
      "Name": "nonRequiredNullableString",
      "SerializedName": "nonRequiredNullableString",
      "Description": "Optional nullable string",
      "Type": {
-      "$id": "210",
+      "$id": "162",
       "Kind": "nullable",
       "Type": {
-       "$id": "211",
+       "$id": "163",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1448,88 +1160,52 @@
      "IsReadOnly": false
     },
     {
-     "$id": "212",
+     "$id": "164",
      "Name": "requiredReadonlyInt",
      "SerializedName": "requiredReadonlyInt",
      "Description": "Required readonly int",
      "Type": {
-      "$id": "213",
+      "$id": "165",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "214",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "215",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "216",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "217",
+     "$id": "166",
      "Name": "nonRequiredReadonlyInt",
      "SerializedName": "nonRequiredReadonlyInt",
      "Description": "Optional readonly int",
      "Type": {
-      "$id": "218",
+      "$id": "167",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "219",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "220",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "221",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "222",
+     "$id": "168",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model with discriminator",
      "Type": {
-      "$id": "223",
+      "$id": "169",
       "Kind": "model",
       "Name": "BaseModelWithDiscriminator",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminator",
       "Usage": "Input,Output,Json",
       "Description": "Base model with discriminator property.",
       "DiscriminatorProperty": {
-       "$id": "224",
+       "$id": "170",
        "Name": "discriminatorProperty",
        "SerializedName": "discriminatorProperty",
        "Description": "Discriminator property for BaseModelWithDiscriminator.",
        "Type": {
-        "$id": "225",
+        "$id": "171",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1540,15 +1216,15 @@
       },
       "Properties": [
        {
-        "$ref": "224"
+        "$ref": "170"
        },
        {
-        "$id": "226",
+        "$id": "172",
         "Name": "optionalPropertyOnBase",
         "SerializedName": "optionalPropertyOnBase",
         "Description": "Optional property on base",
         "Type": {
-         "$id": "227",
+         "$id": "173",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1557,42 +1233,24 @@
         "IsReadOnly": false
        },
        {
-        "$id": "228",
+        "$id": "174",
         "Name": "requiredPropertyOnBase",
         "SerializedName": "requiredPropertyOnBase",
         "Description": "Required property on base",
         "Type": {
-         "$id": "229",
+         "$id": "175",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "230",
-          "Kind": "int32",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "231",
-           "Kind": "int32",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "232",
-            "Kind": "int32",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "IsRequired": true,
         "IsReadOnly": false
        }
       ],
       "DiscriminatedSubtypes": {
-       "$id": "233",
+       "$id": "176",
        "A": {
-        "$id": "234",
+        "$id": "177",
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorA",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorA",
@@ -1600,19 +1258,19 @@
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "A",
         "BaseModel": {
-         "$ref": "223"
+         "$ref": "169"
         },
         "Properties": [
          {
-          "$id": "235",
+          "$id": "178",
           "Name": "discriminatorProperty",
           "SerializedName": "discriminatorProperty",
           "Description": "Discriminator",
           "Type": {
-           "$id": "236",
+           "$id": "179",
            "Kind": "constant",
            "ValueType": {
-            "$id": "237",
+            "$id": "180",
             "Kind": "string",
             "Name": "string",
             "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1624,12 +1282,12 @@
           "IsDiscriminator": true
          },
          {
-          "$id": "238",
+          "$id": "181",
           "Name": "requiredString",
           "SerializedName": "requiredString",
           "Description": "Required string.",
           "Type": {
-           "$id": "239",
+           "$id": "182",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1640,7 +1298,7 @@
         ]
        },
        "B": {
-        "$id": "240",
+        "$id": "183",
         "Kind": "model",
         "Name": "DerivedModelWithDiscriminatorB",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithDiscriminatorB",
@@ -1648,19 +1306,19 @@
         "Description": "Deriver model with discriminator property.",
         "DiscriminatorValue": "B",
         "BaseModel": {
-         "$ref": "223"
+         "$ref": "169"
         },
         "Properties": [
          {
-          "$id": "241",
+          "$id": "184",
           "Name": "discriminatorProperty",
           "SerializedName": "discriminatorProperty",
           "Description": "Discriminator",
           "Type": {
-           "$id": "242",
+           "$id": "185",
            "Kind": "constant",
            "ValueType": {
-            "$id": "243",
+            "$id": "186",
             "Kind": "string",
             "Name": "string",
             "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1672,33 +1330,15 @@
           "IsDiscriminator": true
          },
          {
-          "$id": "244",
+          "$id": "187",
           "Name": "requiredInt",
           "SerializedName": "requiredInt",
           "Description": "Required int.",
           "Type": {
-           "$id": "245",
+           "$id": "188",
            "Kind": "int32",
            "Name": "int32",
-           "CrossLanguageDefinitionId": "TypeSpec.int32",
-           "BaseType": {
-            "$id": "246",
-            "Kind": "int32",
-            "Name": "int64",
-            "CrossLanguageDefinitionId": "TypeSpec.int64",
-            "BaseType": {
-             "$id": "247",
-             "Kind": "int32",
-             "Name": "integer",
-             "CrossLanguageDefinitionId": "TypeSpec.integer",
-             "BaseType": {
-              "$id": "248",
-              "Kind": "int32",
-              "Name": "numeric",
-              "CrossLanguageDefinitionId": "TypeSpec.numeric"
-             }
-            }
-           }
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -1711,7 +1351,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "249",
+     "$id": "189",
      "Name": "requiredFixedStringEnum",
      "SerializedName": "requiredFixedStringEnum",
      "Description": "Required fixed string enum",
@@ -1722,7 +1362,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "250",
+     "$id": "190",
      "Name": "requiredFixedIntEnum",
      "SerializedName": "requiredFixedIntEnum",
      "Description": "Required fixed int enum",
@@ -1733,27 +1373,27 @@
      "IsReadOnly": false
     },
     {
-     "$id": "251",
+     "$id": "191",
      "Name": "requiredExtensibleEnum",
      "SerializedName": "requiredExtensibleEnum",
      "Description": "Required extensible enum",
      "Type": {
-      "$ref": "15"
+      "$ref": "12"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "252",
+     "$id": "192",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "253",
+      "$id": "193",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1761,63 +1401,45 @@
      "IsReadOnly": false
     },
     {
-     "$id": "254",
+     "$id": "194",
      "Name": "requiredIntRecord",
      "SerializedName": "requiredIntRecord",
      "Description": "Required int record",
      "Type": {
-      "$id": "255",
+      "$id": "195",
       "Kind": "dict",
       "KeyType": {
-       "$id": "256",
+       "$id": "196",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "257",
+       "$id": "197",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "258",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "259",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "260",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "261",
+     "$id": "198",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
      "Description": "Required string record",
      "Type": {
-      "$id": "262",
+      "$id": "199",
       "Kind": "dict",
       "KeyType": {
-       "$id": "263",
+       "$id": "200",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "264",
+       "$id": "201",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -1827,33 +1449,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "265",
+     "$id": "202",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required Model Record",
      "Type": {
-      "$id": "266",
+      "$id": "203",
       "Kind": "dict",
       "KeyType": {
-       "$id": "267",
+       "$id": "204",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "268",
+     "$id": "205",
      "Name": "requiredBytes",
      "SerializedName": "requiredBytes",
      "Description": "Required bytes",
      "Type": {
-      "$id": "269",
+      "$id": "206",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
@@ -1863,12 +1485,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "270",
+     "$id": "207",
      "Name": "optionalBytes",
      "SerializedName": "optionalBytes",
      "Description": "Optional bytes",
      "Type": {
-      "$id": "271",
+      "$id": "208",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
@@ -1878,49 +1500,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "272",
+     "$id": "209",
      "Name": "requiredUint8Array",
      "SerializedName": "requiredUint8Array",
      "Description": "Required uint8[]",
      "Type": {
-      "$id": "273",
+      "$id": "210",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "274",
+       "$id": "211",
        "Kind": "uint8",
        "Name": "uint8",
-       "CrossLanguageDefinitionId": "TypeSpec.uint8",
-       "BaseType": {
-        "$id": "275",
-        "Kind": "uint8",
-        "Name": "uint16",
-        "CrossLanguageDefinitionId": "TypeSpec.uint16",
-        "BaseType": {
-         "$id": "276",
-         "Kind": "uint8",
-         "Name": "uint32",
-         "CrossLanguageDefinitionId": "TypeSpec.uint32",
-         "BaseType": {
-          "$id": "277",
-          "Kind": "uint8",
-          "Name": "uint64",
-          "CrossLanguageDefinitionId": "TypeSpec.uint64",
-          "BaseType": {
-           "$id": "278",
-           "Kind": "uint8",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "279",
-            "Kind": "uint8",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.uint8"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1928,49 +1520,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "280",
+     "$id": "212",
      "Name": "optionalUint8Array",
      "SerializedName": "optionalUint8Array",
      "Description": "Optional uint8[]",
      "Type": {
-      "$id": "281",
+      "$id": "213",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "282",
+       "$id": "214",
        "Kind": "uint8",
        "Name": "uint8",
-       "CrossLanguageDefinitionId": "TypeSpec.uint8",
-       "BaseType": {
-        "$id": "283",
-        "Kind": "uint8",
-        "Name": "uint16",
-        "CrossLanguageDefinitionId": "TypeSpec.uint16",
-        "BaseType": {
-         "$id": "284",
-         "Kind": "uint8",
-         "Name": "uint32",
-         "CrossLanguageDefinitionId": "TypeSpec.uint32",
-         "BaseType": {
-          "$id": "285",
-          "Kind": "uint8",
-          "Name": "uint64",
-          "CrossLanguageDefinitionId": "TypeSpec.uint64",
-          "BaseType": {
-           "$id": "286",
-           "Kind": "uint8",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "287",
-            "Kind": "uint8",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.uint8"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -1978,12 +1540,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "288",
+     "$id": "215",
      "Name": "requiredUnknown",
      "SerializedName": "requiredUnknown",
      "Description": "Required unknown",
      "Type": {
-      "$id": "289",
+      "$id": "216",
       "Kind": "any",
       "Name": "unknown",
       "CrossLanguageDefinitionId": ""
@@ -1992,12 +1554,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "290",
+     "$id": "217",
      "Name": "optionalUnknown",
      "SerializedName": "optionalUnknown",
      "Description": "Optional unknown",
      "Type": {
-      "$id": "291",
+      "$id": "218",
       "Kind": "any",
       "Name": "unknown",
       "CrossLanguageDefinitionId": ""
@@ -2006,49 +1568,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "292",
+     "$id": "219",
      "Name": "requiredInt8Array",
      "SerializedName": "requiredInt8Array",
      "Description": "Required int8[]",
      "Type": {
-      "$id": "293",
+      "$id": "220",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "294",
+       "$id": "221",
        "Kind": "int8",
        "Name": "int8",
-       "CrossLanguageDefinitionId": "TypeSpec.int8",
-       "BaseType": {
-        "$id": "295",
-        "Kind": "int8",
-        "Name": "int16",
-        "CrossLanguageDefinitionId": "TypeSpec.int16",
-        "BaseType": {
-         "$id": "296",
-         "Kind": "int8",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "297",
-          "Kind": "int8",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "298",
-           "Kind": "int8",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "299",
-            "Kind": "int8",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int8"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -2056,49 +1588,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "300",
+     "$id": "222",
      "Name": "optionalInt8Array",
      "SerializedName": "optionalInt8Array",
      "Description": "Optional int8[]",
      "Type": {
-      "$id": "301",
+      "$id": "223",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "302",
+       "$id": "224",
        "Kind": "int8",
        "Name": "int8",
-       "CrossLanguageDefinitionId": "TypeSpec.int8",
-       "BaseType": {
-        "$id": "303",
-        "Kind": "int8",
-        "Name": "int16",
-        "CrossLanguageDefinitionId": "TypeSpec.int16",
-        "BaseType": {
-         "$id": "304",
-         "Kind": "int8",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32",
-         "BaseType": {
-          "$id": "305",
-          "Kind": "int8",
-          "Name": "int64",
-          "CrossLanguageDefinitionId": "TypeSpec.int64",
-          "BaseType": {
-           "$id": "306",
-           "Kind": "int8",
-           "Name": "integer",
-           "CrossLanguageDefinitionId": "TypeSpec.integer",
-           "BaseType": {
-            "$id": "307",
-            "Kind": "int8",
-            "Name": "numeric",
-            "CrossLanguageDefinitionId": "TypeSpec.numeric"
-           }
-          }
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int8"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -2106,40 +1608,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "308",
+     "$id": "225",
      "Name": "requiredNullableIntList",
      "SerializedName": "requiredNullableIntList",
      "Description": "Required nullable int list",
      "Type": {
-      "$id": "309",
+      "$id": "226",
       "Kind": "nullable",
       "Type": {
-       "$id": "310",
+       "$id": "227",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "311",
+        "$id": "228",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "312",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "313",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "314",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -2148,19 +1632,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "315",
+     "$id": "229",
      "Name": "requiredNullableStringList",
      "SerializedName": "requiredNullableStringList",
      "Description": "Required nullable string list",
      "Type": {
-      "$id": "316",
+      "$id": "230",
       "Kind": "nullable",
       "Type": {
-       "$id": "317",
+       "$id": "231",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "318",
+        "$id": "232",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2172,40 +1656,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "319",
+     "$id": "233",
      "Name": "nonRequiredNullableIntList",
      "SerializedName": "nonRequiredNullableIntList",
      "Description": "Optional nullable model list",
      "Type": {
-      "$id": "320",
+      "$id": "234",
       "Kind": "nullable",
       "Type": {
-       "$id": "321",
+       "$id": "235",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "322",
+        "$id": "236",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "323",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "324",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "325",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -2214,19 +1680,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "326",
+     "$id": "237",
      "Name": "nonRequiredNullableStringList",
      "SerializedName": "nonRequiredNullableStringList",
      "Description": "Optional nullable string list",
      "Type": {
-      "$id": "327",
+      "$id": "238",
       "Kind": "nullable",
       "Type": {
-       "$id": "328",
+       "$id": "239",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "329",
+        "$id": "240",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2238,24 +1704,24 @@
      "IsReadOnly": false
     },
     {
-     "$id": "330",
+     "$id": "241",
      "Name": "optionalModel",
      "SerializedName": "optionalModel",
      "Description": "optional model with discriminator",
      "Type": {
-      "$id": "331",
+      "$id": "242",
       "Kind": "model",
       "Name": "BaseModelWithDiscriminatorFromIsKeyword",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithDiscriminatorFromIsKeyword",
       "Usage": "Input,Output,Json",
       "Description": "A base model in the discriminated set but its discriminator propery comes with the is keyword",
       "DiscriminatorProperty": {
-       "$id": "332",
+       "$id": "243",
        "Name": "kind",
        "SerializedName": "kind",
        "Description": "Required kind",
        "Type": {
-        "$id": "333",
+        "$id": "244",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2266,15 +1732,15 @@
       },
       "Properties": [
        {
-        "$ref": "332"
+        "$ref": "243"
        },
        {
-        "$id": "334",
+        "$id": "245",
         "Name": "optionalString",
         "SerializedName": "optionalString",
         "Description": "Optional string.",
         "Type": {
-         "$id": "335",
+         "$id": "246",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2284,9 +1750,9 @@
        }
       ],
       "DiscriminatedSubtypes": {
-       "$id": "336",
+       "$id": "247",
        "A": {
-        "$id": "337",
+        "$id": "248",
         "Kind": "model",
         "Name": "DerivedWithDiscriminatorFromIsKeyword",
         "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedWithDiscriminatorFromIsKeyword",
@@ -2294,19 +1760,19 @@
         "Description": "A derived class in the discriminated set inheriting from a base whose discriminator property comes from is keyword",
         "DiscriminatorValue": "A",
         "BaseModel": {
-         "$ref": "331"
+         "$ref": "242"
         },
         "Properties": [
          {
-          "$id": "338",
+          "$id": "249",
           "Name": "kind",
           "SerializedName": "kind",
           "Description": "Discriminator",
           "Type": {
-           "$id": "339",
+           "$id": "250",
            "Kind": "constant",
            "ValueType": {
-            "$id": "340",
+            "$id": "251",
             "Kind": "string",
             "Name": "string",
             "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2318,12 +1784,12 @@
           "IsDiscriminator": true
          },
          {
-          "$id": "341",
+          "$id": "252",
           "Name": "requiredString",
           "SerializedName": "requiredString",
           "Description": "Required string.",
           "Type": {
-           "$id": "342",
+           "$id": "253",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2332,33 +1798,15 @@
           "IsReadOnly": false
          },
          {
-          "$id": "343",
+          "$id": "254",
           "Name": "optionalInt",
           "SerializedName": "optionalInt",
           "Description": "Optional int",
           "Type": {
-           "$id": "344",
+           "$id": "255",
            "Kind": "int32",
            "Name": "int32",
-           "CrossLanguageDefinitionId": "TypeSpec.int32",
-           "BaseType": {
-            "$id": "345",
-            "Kind": "int32",
-            "Name": "int64",
-            "CrossLanguageDefinitionId": "TypeSpec.int64",
-            "BaseType": {
-             "$id": "346",
-             "Kind": "int32",
-             "Name": "integer",
-             "CrossLanguageDefinitionId": "TypeSpec.integer",
-             "BaseType": {
-              "$id": "347",
-              "Kind": "int32",
-              "Name": "numeric",
-              "CrossLanguageDefinitionId": "TypeSpec.numeric"
-             }
-            }
-           }
+           "CrossLanguageDefinitionId": "TypeSpec.int32"
           },
           "IsRequired": false,
           "IsReadOnly": false
@@ -2373,38 +1821,38 @@
    ]
   },
   {
-   "$ref": "223"
+   "$ref": "169"
   },
   {
-   "$ref": "234"
+   "$ref": "177"
   },
   {
-   "$ref": "240"
+   "$ref": "183"
   },
   {
-   "$ref": "331"
+   "$ref": "242"
   },
   {
-   "$ref": "337"
+   "$ref": "248"
   },
   {
-   "$id": "348",
+   "$id": "256",
    "Kind": "model",
    "Name": "RoundTripPrimitiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripPrimitiveModel",
    "Usage": "Output,Json",
    "Description": "Model used both as input and output with primitive types",
    "BaseModel": {
-    "$ref": "105"
+    "$ref": "84"
    },
    "Properties": [
     {
-     "$id": "349",
+     "$id": "257",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "350",
+      "$id": "258",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2413,160 +1861,82 @@
      "IsReadOnly": false
     },
     {
-     "$id": "351",
+     "$id": "259",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "352",
+      "$id": "260",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "353",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "354",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "355",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "356",
+     "$id": "261",
      "Name": "requiredInt64",
      "SerializedName": "requiredInt64",
      "Description": "Required int64, illustrating a value type property.",
      "Type": {
-      "$id": "357",
+      "$id": "262",
       "Kind": "int64",
       "Name": "int64",
-      "CrossLanguageDefinitionId": "TypeSpec.int64",
-      "BaseType": {
-       "$id": "358",
-       "Kind": "int64",
-       "Name": "integer",
-       "CrossLanguageDefinitionId": "TypeSpec.integer",
-       "BaseType": {
-        "$id": "359",
-        "Kind": "int64",
-        "Name": "numeric",
-        "CrossLanguageDefinitionId": "TypeSpec.numeric"
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int64"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "360",
+     "$id": "263",
      "Name": "requiredSafeInt",
      "SerializedName": "requiredSafeInt",
      "Description": "Required safeint, illustrating a value type property.",
      "Type": {
-      "$id": "361",
+      "$id": "264",
       "Kind": "safeint",
       "Name": "safeint",
-      "CrossLanguageDefinitionId": "TypeSpec.safeint",
-      "BaseType": {
-       "$id": "362",
-       "Kind": "safeint",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "363",
-        "Kind": "safeint",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "364",
-         "Kind": "safeint",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.safeint"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "365",
+     "$id": "265",
      "Name": "requiredFloat",
      "SerializedName": "requiredFloat",
      "Description": "Required float, illustrating a value type property.",
      "Type": {
-      "$id": "366",
+      "$id": "266",
       "Kind": "float32",
       "Name": "float32",
-      "CrossLanguageDefinitionId": "TypeSpec.float32",
-      "BaseType": {
-       "$id": "367",
-       "Kind": "float32",
-       "Name": "float64",
-       "CrossLanguageDefinitionId": "TypeSpec.float64",
-       "BaseType": {
-        "$id": "368",
-        "Kind": "float32",
-        "Name": "float",
-        "CrossLanguageDefinitionId": "TypeSpec.float",
-        "BaseType": {
-         "$id": "369",
-         "Kind": "float32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "370",
+     "$id": "267",
      "Name": "required_Double",
      "SerializedName": "required_Double",
      "Description": "Required double, illustrating a value type property.",
      "Type": {
-      "$id": "371",
+      "$id": "268",
       "Kind": "float64",
       "Name": "float64",
-      "CrossLanguageDefinitionId": "TypeSpec.float64",
-      "BaseType": {
-       "$id": "372",
-       "Kind": "float64",
-       "Name": "float",
-       "CrossLanguageDefinitionId": "TypeSpec.float",
-       "BaseType": {
-        "$id": "373",
-        "Kind": "float64",
-        "Name": "numeric",
-        "CrossLanguageDefinitionId": "TypeSpec.numeric"
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.float64"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "374",
+     "$id": "269",
      "Name": "requiredBoolean",
      "SerializedName": "requiredBoolean",
      "Description": "Required bolean, illustrating a value type property.",
      "Type": {
-      "$id": "375",
+      "$id": "270",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -2575,17 +1945,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "376",
+     "$id": "271",
      "Name": "requiredDateTimeOffset",
      "SerializedName": "requiredDateTimeOffset",
      "Description": "Required date time offset, illustrating a reference type property.",
      "Type": {
-      "$id": "377",
+      "$id": "272",
       "Kind": "utcDateTime",
       "Name": "utcDateTime",
       "Encode": "rfc3339",
       "WireType": {
-       "$id": "378",
+       "$id": "273",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2596,17 +1966,17 @@
      "IsReadOnly": false
     },
     {
-     "$id": "379",
+     "$id": "274",
      "Name": "requiredTimeSpan",
      "SerializedName": "requiredTimeSpan",
      "Description": "Required time span, illustrating a value type property.",
      "Type": {
-      "$id": "380",
+      "$id": "275",
       "Kind": "duration",
       "Name": "duration",
       "Encode": "ISO8601",
       "WireType": {
-       "$id": "381",
+       "$id": "276",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2617,40 +1987,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "382",
+     "$id": "277",
      "Name": "requiredCollectionWithNullableFloatElement",
      "SerializedName": "requiredCollectionWithNullableFloatElement",
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
-      "$id": "383",
+      "$id": "278",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "384",
+       "$id": "279",
        "Kind": "nullable",
        "Type": {
-        "$id": "385",
+        "$id": "280",
         "Kind": "float32",
         "Name": "float32",
-        "CrossLanguageDefinitionId": "TypeSpec.float32",
-        "BaseType": {
-         "$id": "386",
-         "Kind": "float32",
-         "Name": "float64",
-         "CrossLanguageDefinitionId": "TypeSpec.float64",
-         "BaseType": {
-          "$id": "387",
-          "Kind": "float32",
-          "Name": "float",
-          "CrossLanguageDefinitionId": "TypeSpec.float",
-          "BaseType": {
-           "$id": "388",
-           "Kind": "float32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        }
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2661,7 +2013,7 @@
    ]
   },
   {
-   "$id": "389",
+   "$id": "281",
    "Kind": "model",
    "Name": "RoundTripOptionalModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOptionalModel",
@@ -2670,12 +2022,12 @@
    "Description": "RoundTrip model with optional properties.",
    "Properties": [
     {
-     "$id": "390",
+     "$id": "282",
      "Name": "optionalString",
      "SerializedName": "optionalString",
      "Description": "Optional string, illustrating an optional reference type property.",
      "Type": {
-      "$id": "391",
+      "$id": "283",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2684,48 +2036,30 @@
      "IsReadOnly": false
     },
     {
-     "$id": "392",
+     "$id": "284",
      "Name": "optionalInt",
      "SerializedName": "optionalInt",
      "Description": "Optional int, illustrating an optional value type property.",
      "Type": {
-      "$id": "393",
+      "$id": "285",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "394",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "395",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "396",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "397",
+     "$id": "286",
      "Name": "optionalStringList",
      "SerializedName": "optionalStringList",
      "Description": "Optional string collection.",
      "Type": {
-      "$id": "398",
+      "$id": "287",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "399",
+       "$id": "288",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2736,37 +2070,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "400",
+     "$id": "289",
      "Name": "optionalIntList",
      "SerializedName": "optionalIntList",
      "Description": "Optional int collection.",
      "Type": {
-      "$id": "401",
+      "$id": "290",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "402",
+       "$id": "291",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "403",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "404",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "405",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -2774,16 +2090,16 @@
      "IsReadOnly": false
     },
     {
-     "$id": "406",
+     "$id": "292",
      "Name": "optionalModelList",
      "SerializedName": "optionalModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "407",
+      "$id": "293",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -2791,30 +2107,30 @@
      "IsReadOnly": false
     },
     {
-     "$id": "408",
+     "$id": "294",
      "Name": "optionalModel",
      "SerializedName": "optionalModel",
      "Description": "Optional model.",
      "Type": {
-      "$ref": "123"
+      "$ref": "99"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "409",
+     "$id": "295",
      "Name": "optionalModelWithPropertiesOnBase",
      "SerializedName": "optionalModelWithPropertiesOnBase",
      "Description": "Optional model with properties on base",
      "Type": {
-      "$id": "410",
+      "$id": "296",
       "Kind": "model",
       "Name": "DerivedModelWithProperties",
       "CrossLanguageDefinitionId": "ModelsTypeSpec.DerivedModelWithProperties",
       "Usage": "Input,Output,Json",
       "Description": "Derived model with properties",
       "BaseModel": {
-       "$id": "411",
+       "$id": "297",
        "Kind": "model",
        "Name": "BaseModelWithProperties",
        "CrossLanguageDefinitionId": "ModelsTypeSpec.BaseModelWithProperties",
@@ -2822,12 +2138,12 @@
        "Description": "Base model with properties",
        "Properties": [
         {
-         "$id": "412",
+         "$id": "298",
          "Name": "optionalPropertyOnBase",
          "SerializedName": "optionalPropertyOnBase",
          "Description": "Optional properties on base",
          "Type": {
-          "$id": "413",
+          "$id": "299",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2839,16 +2155,16 @@
       },
       "Properties": [
        {
-        "$id": "414",
+        "$id": "300",
         "Name": "requiredList",
         "SerializedName": "requiredList",
         "Description": "Required collection",
         "Type": {
-         "$id": "415",
+         "$id": "301",
          "Kind": "array",
          "Name": "ArrayCollectionItem",
          "ValueType": {
-          "$ref": "118"
+          "$ref": "94"
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
@@ -2861,7 +2177,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "416",
+     "$id": "302",
      "Name": "optionalFixedStringEnum",
      "SerializedName": "optionalFixedStringEnum",
      "Description": "Optional fixed string enum",
@@ -2872,74 +2188,56 @@
      "IsReadOnly": false
     },
     {
-     "$id": "417",
+     "$id": "303",
      "Name": "optionalExtensibleEnum",
      "SerializedName": "optionalExtensibleEnum",
      "Description": "Optional extensible enum",
      "Type": {
-      "$ref": "15"
+      "$ref": "12"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "418",
+     "$id": "304",
      "Name": "optionalIntRecord",
      "SerializedName": "optionalIntRecord",
      "Description": "Optional int record",
      "Type": {
-      "$id": "419",
+      "$id": "305",
       "Kind": "dict",
       "KeyType": {
-       "$id": "420",
+       "$id": "306",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "421",
+       "$id": "307",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "422",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "423",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "424",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "425",
+     "$id": "308",
      "Name": "optionalStringRecord",
      "SerializedName": "optionalStringRecord",
      "Description": "Optional string record",
      "Type": {
-      "$id": "426",
+      "$id": "309",
       "Kind": "dict",
       "KeyType": {
-       "$id": "427",
+       "$id": "310",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "428",
+       "$id": "311",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2949,33 +2247,33 @@
      "IsReadOnly": false
     },
     {
-     "$id": "429",
+     "$id": "312",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "430",
+      "$id": "313",
       "Kind": "dict",
       "KeyType": {
-       "$id": "431",
+       "$id": "314",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "432",
+     "$id": "315",
      "Name": "optionalPlainDate",
      "SerializedName": "optionalPlainDate",
      "Description": "Optional plainDate",
      "Type": {
-      "$id": "433",
+      "$id": "316",
       "Kind": "plainDate",
       "Name": "plainDate",
       "CrossLanguageDefinitionId": "TypeSpec.plainDate"
@@ -2984,12 +2282,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "434",
+     "$id": "317",
      "Name": "optionalPlainTime",
      "SerializedName": "optionalPlainTime",
      "Description": "Optional plainTime",
      "Type": {
-      "$id": "435",
+      "$id": "318",
       "Kind": "plainTime",
       "Name": "plainTime",
       "CrossLanguageDefinitionId": "TypeSpec.plainTime"
@@ -2998,40 +2296,22 @@
      "IsReadOnly": false
     },
     {
-     "$id": "436",
+     "$id": "319",
      "Name": "optionalCollectionWithNullableIntElement",
      "SerializedName": "optionalCollectionWithNullableIntElement",
      "Description": "Optional collection of which the element is a nullable int",
      "Type": {
-      "$id": "437",
+      "$id": "320",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "438",
+       "$id": "321",
        "Kind": "nullable",
        "Type": {
-        "$id": "439",
+        "$id": "322",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "440",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "441",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "442",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        }
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -3042,13 +2322,13 @@
    ]
   },
   {
-   "$ref": "410"
+   "$ref": "296"
   },
   {
-   "$ref": "411"
+   "$ref": "297"
   },
   {
-   "$id": "443",
+   "$id": "323",
    "Kind": "model",
    "Name": "RoundTripReadOnlyModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripReadOnlyModel",
@@ -3056,12 +2336,12 @@
    "Description": "Output model with readonly properties.",
    "Properties": [
     {
-     "$id": "444",
+     "$id": "324",
      "Name": "requiredReadonlyString",
      "SerializedName": "requiredReadonlyString",
      "Description": "Required string, illustrating a readonly reference type property.",
      "Type": {
-      "$id": "445",
+      "$id": "325",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3070,44 +2350,26 @@
      "IsReadOnly": true
     },
     {
-     "$id": "446",
+     "$id": "326",
      "Name": "requiredReadonlyInt",
      "SerializedName": "requiredReadonlyInt",
      "Description": "Required int, illustrating a readonly value type property.",
      "Type": {
-      "$id": "447",
+      "$id": "327",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "448",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "449",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "450",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "451",
+     "$id": "328",
      "Name": "optionalReadonlyString",
      "SerializedName": "optionalReadonlyString",
      "Description": "Optional string, illustrating a readonly reference type property.",
      "Type": {
-      "$id": "452",
+      "$id": "329",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3116,61 +2378,43 @@
      "IsReadOnly": true
     },
     {
-     "$id": "453",
+     "$id": "330",
      "Name": "optionalReadonlyInt",
      "SerializedName": "optionalReadonlyInt",
      "Description": "Optional int, illustrating a readonly value type property.",
      "Type": {
-      "$id": "454",
+      "$id": "331",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "455",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "456",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "457",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "458",
+     "$id": "332",
      "Name": "requiredReadonlyModel",
      "SerializedName": "requiredReadonlyModel",
      "Description": "Required readonly model.",
      "Type": {
-      "$ref": "123"
+      "$ref": "99"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "459",
+     "$id": "333",
      "Name": "optionalReadonlyModel",
      "SerializedName": "optionalReadonlyModel",
      "Description": "Optional readonly model.",
      "Type": {
-      "$ref": "123"
+      "$ref": "99"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "460",
+     "$id": "334",
      "Name": "requiredReadonlyFixedStringEnum",
      "SerializedName": "requiredReadonlyFixedStringEnum",
      "Description": "Required readonly fixed string enum",
@@ -3181,18 +2425,18 @@
      "IsReadOnly": true
     },
     {
-     "$id": "461",
+     "$id": "335",
      "Name": "requiredReadonlyExtensibleEnum",
      "SerializedName": "requiredReadonlyExtensibleEnum",
      "Description": "Required readonly extensible enum",
      "Type": {
-      "$ref": "15"
+      "$ref": "12"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "462",
+     "$id": "336",
      "Name": "optionalReadonlyFixedStringEnum",
      "SerializedName": "optionalReadonlyFixedStringEnum",
      "Description": "Optional readonly fixed string enum",
@@ -3203,27 +2447,27 @@
      "IsReadOnly": true
     },
     {
-     "$id": "463",
+     "$id": "337",
      "Name": "optionalReadonlyExtensibleEnum",
      "SerializedName": "optionalReadonlyExtensibleEnum",
      "Description": "Optional readonly extensible enum",
      "Type": {
-      "$ref": "15"
+      "$ref": "12"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "464",
+     "$id": "338",
      "Name": "requiredReadonlyStringList",
      "SerializedName": "requiredReadonlyStringList",
      "Description": "Required readonly string collection.",
      "Type": {
-      "$id": "465",
+      "$id": "339",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "466",
+       "$id": "340",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3234,37 +2478,19 @@
      "IsReadOnly": true
     },
     {
-     "$id": "467",
+     "$id": "341",
      "Name": "requiredReadonlyIntList",
      "SerializedName": "requiredReadonlyIntList",
      "Description": "Required readonly int collection.",
      "Type": {
-      "$id": "468",
+      "$id": "342",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "469",
+       "$id": "343",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "470",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "471",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "472",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3272,16 +2498,16 @@
      "IsReadOnly": true
     },
     {
-     "$id": "473",
+     "$id": "344",
      "Name": "requiredReadOnlyModelList",
      "SerializedName": "requiredReadOnlyModelList",
      "Description": "Required model collection",
      "Type": {
-      "$id": "474",
+      "$id": "345",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3289,63 +2515,45 @@
      "IsReadOnly": true
     },
     {
-     "$id": "475",
+     "$id": "346",
      "Name": "requiredReadOnlyIntRecord",
      "SerializedName": "requiredReadOnlyIntRecord",
      "Description": "Required int record",
      "Type": {
-      "$id": "476",
+      "$id": "347",
       "Kind": "dict",
       "KeyType": {
-       "$id": "477",
+       "$id": "348",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "478",
+       "$id": "349",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "479",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "480",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "481",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "482",
+     "$id": "350",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
      "Description": "Required string record",
      "Type": {
-      "$id": "483",
+      "$id": "351",
       "Kind": "dict",
       "KeyType": {
-       "$id": "484",
+       "$id": "352",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "485",
+       "$id": "353",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3355,37 +2563,37 @@
      "IsReadOnly": true
     },
     {
-     "$id": "486",
+     "$id": "354",
      "Name": "requiredReadOnlyModelRecord",
      "SerializedName": "requiredReadOnlyModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "487",
+      "$id": "355",
       "Kind": "dict",
       "KeyType": {
-       "$id": "488",
+       "$id": "356",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "489",
+     "$id": "357",
      "Name": "optionalReadonlyStringList",
      "SerializedName": "optionalReadonlyStringList",
      "Description": "Optional readonly string collection.",
      "Type": {
-      "$id": "490",
+      "$id": "358",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "491",
+       "$id": "359",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3396,37 +2604,19 @@
      "IsReadOnly": true
     },
     {
-     "$id": "492",
+     "$id": "360",
      "Name": "optionalReadonlyIntList",
      "SerializedName": "optionalReadonlyIntList",
      "Description": "Optional readonly int collection.",
      "Type": {
-      "$id": "493",
+      "$id": "361",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "494",
+       "$id": "362",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "495",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "496",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "497",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3434,16 +2624,16 @@
      "IsReadOnly": true
     },
     {
-     "$id": "498",
+     "$id": "363",
      "Name": "optionalReadOnlyModelList",
      "SerializedName": "optionalReadOnlyModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "499",
+      "$id": "364",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3451,63 +2641,45 @@
      "IsReadOnly": true
     },
     {
-     "$id": "500",
+     "$id": "365",
      "Name": "optionalReadOnlyIntRecord",
      "SerializedName": "optionalReadOnlyIntRecord",
      "Description": "Optional int record",
      "Type": {
-      "$id": "501",
+      "$id": "366",
       "Kind": "dict",
       "KeyType": {
-       "$id": "502",
+       "$id": "367",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "503",
+       "$id": "368",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "504",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "505",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "506",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "507",
+     "$id": "369",
      "Name": "optionalReadOnlyStringRecord",
      "SerializedName": "optionalReadOnlyStringRecord",
      "Description": "Optional string record",
      "Type": {
-      "$id": "508",
+      "$id": "370",
       "Kind": "dict",
       "KeyType": {
-       "$id": "509",
+       "$id": "371",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$id": "510",
+       "$id": "372",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3517,61 +2689,43 @@
      "IsReadOnly": false
     },
     {
-     "$id": "511",
+     "$id": "373",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "512",
+      "$id": "374",
       "Kind": "dict",
       "KeyType": {
-       "$id": "513",
+       "$id": "375",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "514",
+     "$id": "376",
      "Name": "requiredCollectionWithNullableIntElement",
      "SerializedName": "requiredCollectionWithNullableIntElement",
      "Description": "Required collection of which the element is a nullable int",
      "Type": {
-      "$id": "515",
+      "$id": "377",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "516",
+       "$id": "378",
        "Kind": "nullable",
        "Type": {
-        "$id": "517",
+        "$id": "379",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "518",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "519",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "520",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        }
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -3580,19 +2734,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "521",
+     "$id": "380",
      "Name": "optionalCollectionWithNullableBooleanElement",
      "SerializedName": "optionalCollectionWithNullableBooleanElement",
      "Description": "Optional collection of which the element is a nullable boolean",
      "Type": {
-      "$id": "522",
+      "$id": "381",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "523",
+       "$id": "382",
        "Kind": "nullable",
        "Type": {
-        "$id": "524",
+        "$id": "383",
         "Kind": "boolean",
         "Name": "boolean",
         "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -3606,7 +2760,7 @@
    ]
   },
   {
-   "$id": "525",
+   "$id": "384",
    "Kind": "model",
    "Name": "OutputModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.OutputModel",
@@ -3614,12 +2768,12 @@
    "Description": "Model used only as output",
    "Properties": [
     {
-     "$id": "526",
+     "$id": "385",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string",
      "Type": {
-      "$id": "527",
+      "$id": "386",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3628,59 +2782,41 @@
      "IsReadOnly": false
     },
     {
-     "$id": "528",
+     "$id": "387",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int",
      "Type": {
-      "$id": "529",
+      "$id": "388",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "BaseType": {
-       "$id": "530",
-       "Kind": "int32",
-       "Name": "int64",
-       "CrossLanguageDefinitionId": "TypeSpec.int64",
-       "BaseType": {
-        "$id": "531",
-        "Kind": "int32",
-        "Name": "integer",
-        "CrossLanguageDefinitionId": "TypeSpec.integer",
-        "BaseType": {
-         "$id": "532",
-         "Kind": "int32",
-         "Name": "numeric",
-         "CrossLanguageDefinitionId": "TypeSpec.numeric"
-        }
-       }
-      }
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "533",
+     "$id": "389",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
      "Type": {
-      "$ref": "123"
+      "$ref": "99"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "534",
+     "$id": "390",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "535",
+      "$id": "391",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3688,37 +2824,37 @@
      "IsReadOnly": false
     },
     {
-     "$id": "536",
+     "$id": "392",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "537",
+      "$id": "393",
       "Kind": "dict",
       "KeyType": {
-       "$id": "538",
+       "$id": "394",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "539",
+     "$id": "395",
      "Name": "optionalList",
      "SerializedName": "optionalList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "540",
+      "$id": "396",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3726,19 +2862,19 @@
      "IsReadOnly": false
     },
     {
-     "$id": "541",
+     "$id": "397",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "Optional model nullable collection",
      "Type": {
-      "$id": "542",
+      "$id": "398",
       "Kind": "nullable",
       "Type": {
-       "$id": "543",
+       "$id": "399",
        "Kind": "array",
        "Name": "ArrayCollectionItem",
        "ValueType": {
-        "$ref": "118"
+        "$ref": "94"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -3747,45 +2883,45 @@
      "IsReadOnly": false
     },
     {
-     "$id": "544",
+     "$id": "400",
      "Name": "optionalRecord",
      "SerializedName": "optionalRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "545",
+      "$id": "401",
       "Kind": "dict",
       "KeyType": {
-       "$id": "546",
+       "$id": "402",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
-       "$ref": "122"
+       "$ref": "98"
       }
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "547",
+     "$id": "403",
      "Name": "optionalNullableRecord",
      "SerializedName": "optionalNullableRecord",
      "Description": "Optional model nullable record",
      "Type": {
-      "$id": "548",
+      "$id": "404",
       "Kind": "nullable",
       "Type": {
-       "$id": "549",
+       "$id": "405",
        "Kind": "dict",
        "KeyType": {
-        "$id": "550",
+        "$id": "406",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
-        "$ref": "122"
+        "$ref": "98"
        }
       }
      },
@@ -3795,7 +2931,7 @@
    ]
   },
   {
-   "$id": "551",
+   "$id": "407",
    "Kind": "model",
    "Name": "InputRecursiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.InputRecursiveModel",
@@ -3803,12 +2939,12 @@
    "Description": "Input model that has property of its own type",
    "Properties": [
     {
-     "$id": "552",
+     "$id": "408",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Message",
      "Type": {
-      "$id": "553",
+      "$id": "409",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3817,12 +2953,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "554",
+     "$id": "410",
      "Name": "inner",
      "SerializedName": "inner",
      "Description": "Required Record",
      "Type": {
-      "$ref": "551"
+      "$ref": "407"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -3830,7 +2966,7 @@
    ]
   },
   {
-   "$id": "555",
+   "$id": "411",
    "Kind": "model",
    "Name": "RoundTripRecursiveModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripRecursiveModel",
@@ -3838,12 +2974,12 @@
    "Description": "Roundtrip model that has property of its own type",
    "Properties": [
     {
-     "$id": "556",
+     "$id": "412",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Message",
      "Type": {
-      "$id": "557",
+      "$id": "413",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3852,12 +2988,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "558",
+     "$id": "414",
      "Name": "inner",
      "SerializedName": "inner",
      "Description": "Required Record",
      "Type": {
-      "$ref": "555"
+      "$ref": "411"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -3865,7 +3001,7 @@
    ]
   },
   {
-   "$id": "559",
+   "$id": "415",
    "Kind": "model",
    "Name": "ErrorModel",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.ErrorModel",
@@ -3873,12 +3009,12 @@
    "Description": "Output model that has property of its own type",
    "Properties": [
     {
-     "$id": "560",
+     "$id": "416",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Error message",
      "Type": {
-      "$id": "561",
+      "$id": "417",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3887,12 +3023,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "562",
+     "$id": "418",
      "Name": "innerError",
      "SerializedName": "innerError",
      "Description": "Required Record",
      "Type": {
-      "$ref": "559"
+      "$ref": "415"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -3900,14 +3036,14 @@
    ]
   },
   {
-   "$id": "563",
+   "$id": "419",
    "Kind": "model",
    "Name": "RoundTripOnNoUse",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.RoundTripOnNoUse",
    "Usage": "Input,Output,Json",
    "Description": "Derived model",
    "BaseModel": {
-    "$id": "564",
+    "$id": "420",
     "Kind": "model",
     "Name": "NoUseBase",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NoUseBase",
@@ -3915,12 +3051,12 @@
     "Description": "Base model",
     "Properties": [
      {
-      "$id": "565",
+      "$id": "421",
       "Name": "baseModelProp",
       "SerializedName": "baseModelProp",
       "Description": "base model property",
       "Type": {
-       "$id": "566",
+       "$id": "422",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3932,16 +3068,16 @@
    },
    "Properties": [
     {
-     "$id": "567",
+     "$id": "423",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "568",
+      "$id": "424",
       "Kind": "array",
       "Name": "ArrayCollectionItem",
       "ValueType": {
-       "$ref": "118"
+       "$ref": "94"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -3951,23 +3087,23 @@
    ]
   },
   {
-   "$ref": "564"
+   "$ref": "420"
   },
   {
-   "$id": "569",
+   "$id": "425",
    "Kind": "model",
    "Name": "Int32ValuesFacet",
    "CrossLanguageDefinitionId": "ModelsTypeSpec.Int32ValuesFacet",
    "Usage": "Input,Json",
    "Description": "Facets an int32 field by the specified value ranges.",
    "BaseModel": {
-    "$id": "570",
+    "$id": "426",
     "Kind": "model",
     "Name": "NumericValuesFacet",
     "CrossLanguageDefinitionId": "ModelsTypeSpec.NumericValuesFacet",
     "Usage": "Input,Json",
     "BaseModel": {
-     "$id": "571",
+     "$id": "427",
      "Kind": "model",
      "Name": "Facet",
      "CrossLanguageDefinitionId": "ModelsTypeSpec.Facet",
@@ -3975,12 +3111,12 @@
      "Description": "Facet",
      "Properties": [
       {
-       "$id": "572",
+       "$id": "428",
        "Name": "field",
        "SerializedName": "field",
        "Description": "A field to facet by, where the field is attributed as 'facetable'",
        "Type": {
-        "$id": "573",
+        "$id": "429",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3992,37 +3128,19 @@
     },
     "Properties": [
      {
-      "$id": "574",
+      "$id": "430",
       "Name": "values",
       "SerializedName": "values",
       "Description": "The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher.",
       "Type": {
-       "$id": "575",
+       "$id": "431",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "576",
+        "$id": "432",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "577",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "578",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "579",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       },
@@ -4030,33 +3148,15 @@
       "IsReadOnly": false
      },
      {
-      "$id": "580",
+      "$id": "433",
       "Name": "value",
       "SerializedName": "value",
       "Description": "",
       "Type": {
-       "$id": "581",
+       "$id": "434",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "582",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "583",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "584",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -4065,15 +3165,15 @@
    },
    "Properties": [
     {
-     "$id": "585",
+     "$id": "435",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "The facet type.",
      "Type": {
-      "$id": "586",
+      "$id": "436",
       "Kind": "constant",
       "ValueType": {
-       "$ref": "36"
+       "$ref": "27"
       },
       "Value": "Int32Values"
      },
@@ -4083,30 +3183,30 @@
    ]
   },
   {
-   "$ref": "570"
+   "$ref": "426"
   },
   {
-   "$ref": "571"
+   "$ref": "427"
   }
  ],
  "Clients": [
   {
-   "$id": "587",
+   "$id": "437",
    "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "588",
+     "$id": "438",
      "Name": "putBaseModelWithDiscriminatorDefinedOnBase",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "589",
+       "$id": "439",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "590",
+        "$id": "440",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -4122,11 +3222,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "591",
+       "$id": "441",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "42"
+        "$ref": "33"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4139,11 +3239,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "592",
+       "$id": "442",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "593",
+        "$id": "443",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4158,19 +3258,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "594",
+        "$id": "444",
         "Type": {
-         "$ref": "593"
+         "$ref": "443"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "595",
+       "$id": "445",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "596",
+        "$id": "446",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4185,9 +3285,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "597",
+        "$id": "447",
         "Type": {
-         "$ref": "596"
+         "$ref": "446"
         },
         "Value": "application/json"
        }
@@ -4195,12 +3295,12 @@
      ],
      "Responses": [
       {
-       "$id": "598",
+       "$id": "448",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "42"
+        "$ref": "33"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4222,20 +3322,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "599",
+     "$id": "449",
      "Name": "getOutputDiscriminatorModel",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "600",
+       "$id": "450",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "601",
+        "$id": "451",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4250,9 +3350,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "602",
+        "$id": "452",
         "Type": {
-         "$ref": "601"
+         "$ref": "451"
         },
         "Value": "application/json"
        }
@@ -4260,12 +3360,12 @@
      ],
      "Responses": [
       {
-       "$id": "603",
+       "$id": "453",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "62"
+        "$ref": "50"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4284,21 +3384,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "604",
+     "$id": "454",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "605",
+       "$id": "455",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "78"
+        "$ref": "66"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4311,11 +3411,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "606",
+       "$id": "456",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "607",
+        "$id": "457",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4330,19 +3430,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "608",
+        "$id": "458",
         "Type": {
-         "$ref": "607"
+         "$ref": "457"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "609",
+       "$id": "459",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "610",
+        "$id": "460",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4357,9 +3457,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "611",
+        "$id": "461",
         "Type": {
-         "$ref": "610"
+         "$ref": "460"
         },
         "Value": "application/json"
        }
@@ -4367,12 +3467,12 @@
      ],
      "Responses": [
       {
-       "$id": "612",
+       "$id": "462",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "179"
+        "$ref": "143"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4394,21 +3494,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "613",
+     "$id": "463",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "614",
+       "$id": "464",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "78"
+        "$ref": "66"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4421,11 +3521,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "615",
+       "$id": "465",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "616",
+        "$id": "466",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4440,19 +3540,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "617",
+        "$id": "467",
         "Type": {
-         "$ref": "616"
+         "$ref": "466"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "618",
+       "$id": "468",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "619",
+        "$id": "469",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4467,9 +3567,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "620",
+        "$id": "470",
         "Type": {
-         "$ref": "619"
+         "$ref": "469"
         },
         "Value": "application/json"
        }
@@ -4477,12 +3577,12 @@
      ],
      "Responses": [
       {
-       "$id": "621",
+       "$id": "471",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "348"
+        "$ref": "256"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4504,21 +3604,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "622",
+     "$id": "472",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "623",
+       "$id": "473",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "389"
+        "$ref": "281"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4531,11 +3631,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "624",
+       "$id": "474",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "625",
+        "$id": "475",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4550,19 +3650,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "626",
+        "$id": "476",
         "Type": {
-         "$ref": "625"
+         "$ref": "475"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "627",
+       "$id": "477",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "628",
+        "$id": "478",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4577,9 +3677,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "629",
+        "$id": "479",
         "Type": {
-         "$ref": "628"
+         "$ref": "478"
         },
         "Value": "application/json"
        }
@@ -4587,12 +3687,12 @@
      ],
      "Responses": [
       {
-       "$id": "630",
+       "$id": "480",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "389"
+        "$ref": "281"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4614,7 +3714,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "631",
+     "$id": "481",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
@@ -4622,14 +3722,14 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "632",
+       "$id": "482",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "78"
+        "$ref": "66"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4642,11 +3742,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "633",
+       "$id": "483",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "634",
+        "$id": "484",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4661,19 +3761,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "635",
+        "$id": "485",
         "Type": {
-         "$ref": "634"
+         "$ref": "484"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "636",
+       "$id": "486",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "637",
+        "$id": "487",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4688,9 +3788,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "638",
+        "$id": "488",
         "Type": {
-         "$ref": "637"
+         "$ref": "487"
         },
         "Value": "application/json"
        }
@@ -4698,12 +3798,12 @@
      ],
      "Responses": [
       {
-       "$id": "639",
+       "$id": "489",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "443"
+        "$ref": "323"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4725,21 +3825,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "640",
+     "$id": "490",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "641",
+       "$id": "491",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "179"
+        "$ref": "143"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4752,11 +3852,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "642",
+       "$id": "492",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "643",
+        "$id": "493",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4771,19 +3871,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "644",
+        "$id": "494",
         "Type": {
-         "$ref": "643"
+         "$ref": "493"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "645",
+       "$id": "495",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "646",
+        "$id": "496",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4798,9 +3898,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "647",
+        "$id": "497",
         "Type": {
-         "$ref": "646"
+         "$ref": "496"
         },
         "Value": "application/json"
        }
@@ -4808,12 +3908,12 @@
      ],
      "Responses": [
       {
-       "$id": "648",
+       "$id": "498",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "525"
+        "$ref": "384"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -4835,21 +3935,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "649",
+     "$id": "499",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "650",
+       "$id": "500",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "551"
+        "$ref": "407"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4862,11 +3962,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "651",
+       "$id": "501",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "652",
+        "$id": "502",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4881,19 +3981,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "653",
+        "$id": "503",
         "Type": {
-         "$ref": "652"
+         "$ref": "502"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "654",
+       "$id": "504",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "655",
+        "$id": "505",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4908,9 +4008,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "656",
+        "$id": "506",
         "Type": {
-         "$ref": "655"
+         "$ref": "505"
         },
         "Value": "application/json"
        }
@@ -4918,7 +4018,7 @@
      ],
      "Responses": [
       {
-       "$id": "657",
+       "$id": "507",
        "StatusCodes": [
         200
        ],
@@ -4939,21 +4039,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "658",
+     "$id": "508",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "659",
+       "$id": "509",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "555"
+        "$ref": "411"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -4966,11 +4066,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "660",
+       "$id": "510",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "661",
+        "$id": "511",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -4985,19 +4085,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "662",
+        "$id": "512",
         "Type": {
-         "$ref": "661"
+         "$ref": "511"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "663",
+       "$id": "513",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "664",
+        "$id": "514",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5012,9 +4112,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "665",
+        "$id": "515",
         "Type": {
-         "$ref": "664"
+         "$ref": "514"
         },
         "Value": "application/json"
        }
@@ -5022,12 +4122,12 @@
      ],
      "Responses": [
       {
-       "$id": "666",
+       "$id": "516",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "555"
+        "$ref": "411"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5049,21 +4149,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "667",
+     "$id": "517",
      "Name": "selfReference",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "668",
+       "$id": "518",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "669",
+        "$id": "519",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5078,9 +4178,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "670",
+        "$id": "520",
         "Type": {
-         "$ref": "669"
+         "$ref": "519"
         },
         "Value": "application/json"
        }
@@ -5088,12 +4188,12 @@
      ],
      "Responses": [
       {
-       "$id": "671",
+       "$id": "521",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "559"
+        "$ref": "415"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5112,21 +4212,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "672",
+     "$id": "522",
      "Name": "fixedFloatEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "673",
+       "$id": "523",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "20"
+        "$ref": "17"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -5139,11 +4239,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "674",
+       "$id": "524",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "675",
+        "$id": "525",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5158,9 +4258,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "676",
+        "$id": "526",
         "Type": {
-         "$ref": "675"
+         "$ref": "525"
         },
         "Value": "application/json"
        }
@@ -5168,12 +4268,12 @@
      ],
      "Responses": [
       {
-       "$id": "677",
+       "$id": "527",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "525"
+        "$ref": "384"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5192,21 +4292,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "678",
+     "$id": "528",
      "Name": "extenisbleIntEnum",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "679",
+       "$id": "529",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "28"
+        "$ref": "22"
        },
        "Location": "Query",
        "IsRequired": true,
@@ -5219,11 +4319,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "680",
+       "$id": "530",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "681",
+        "$id": "531",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5238,9 +4338,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "682",
+        "$id": "532",
         "Type": {
-         "$ref": "681"
+         "$ref": "531"
         },
         "Value": "application/json"
        }
@@ -5248,12 +4348,12 @@
      ],
      "Responses": [
       {
-       "$id": "683",
+       "$id": "533",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "525"
+        "$ref": "384"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5272,21 +4372,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "684",
+     "$id": "534",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "685",
+       "$id": "535",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "563"
+        "$ref": "419"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5299,11 +4399,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "686",
+       "$id": "536",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "687",
+        "$id": "537",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5318,19 +4418,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "688",
+        "$id": "538",
         "Type": {
-         "$ref": "687"
+         "$ref": "537"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "689",
+       "$id": "539",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "690",
+        "$id": "540",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5345,9 +4445,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "691",
+        "$id": "541",
         "Type": {
-         "$ref": "690"
+         "$ref": "540"
         },
         "Value": "application/json"
        }
@@ -5355,12 +4455,12 @@
      ],
      "Responses": [
       {
-       "$id": "692",
+       "$id": "542",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "563"
+        "$ref": "419"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5382,31 +4482,31 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "693",
+     "$id": "543",
      "Name": "analyzeConversation",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Resource collection action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "694",
+       "$id": "544",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "695",
+        "$id": "545",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "696",
+        "$id": "546",
         "Type": {
-         "$id": "697",
+         "$id": "547",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5423,11 +4523,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "698",
+       "$id": "548",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "699",
+        "$id": "549",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5442,9 +4542,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "700",
+        "$id": "550",
         "Type": {
-         "$ref": "699"
+         "$ref": "549"
         },
         "Value": "application/json"
        }
@@ -5452,12 +4552,12 @@
      ],
      "Responses": [
       {
-       "$id": "701",
+       "$id": "551",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "223"
+        "$ref": "169"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5476,20 +4576,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "702",
+     "$id": "552",
      "Name": "genericType",
      "ResourceName": "ModelsTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "439"
       },
       {
-       "$id": "703",
+       "$id": "553",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "569"
+        "$ref": "425"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -5502,11 +4602,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "704",
+       "$id": "554",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "705",
+        "$id": "555",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5521,19 +4621,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "706",
+        "$id": "556",
         "Type": {
-         "$ref": "705"
+         "$ref": "555"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "707",
+       "$id": "557",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "708",
+        "$id": "558",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -5548,9 +4648,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "709",
+        "$id": "559",
         "Type": {
-         "$ref": "708"
+         "$ref": "558"
         },
         "Value": "application/json"
        }
@@ -5558,7 +4658,7 @@
      ],
      "Responses": [
       {
-       "$id": "710",
+       "$id": "560",
        "StatusCodes": [
         204
        ],
@@ -5580,11 +4680,11 @@
     }
    ],
    "Protocol": {
-    "$id": "711"
+    "$id": "561"
    },
    "Parameters": [
     {
-     "$ref": "589"
+     "$ref": "439"
     }
    ]
   }

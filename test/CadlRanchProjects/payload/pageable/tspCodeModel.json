@@ -64,13 +64,7 @@
        "$id": "10",
        "Kind": "url",
        "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url",
-       "BaseType": {
-        "$id": "11",
-        "Kind": "url",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.url"
       }
      },
      "IsRequired": false,
@@ -84,24 +78,24 @@
  ],
  "Clients": [
   {
-   "$id": "12",
+   "$id": "11",
    "Name": "PageableClient",
    "Description": "Test describing pageable.",
    "Operations": [
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "list",
      "ResourceName": "Pageable",
      "Description": "List users",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "14",
+       "$id": "13",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "15",
+        "$id": "14",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -116,9 +110,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "15",
         "Type": {
-         "$id": "17",
+         "$id": "16",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -127,33 +121,15 @@
        }
       },
       {
-       "$id": "18",
+       "$id": "17",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "19",
+        "$id": "18",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "BaseType": {
-         "$id": "20",
-         "Kind": "int32",
-         "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64",
-         "BaseType": {
-          "$id": "21",
-          "Kind": "int32",
-          "Name": "integer",
-          "CrossLanguageDefinitionId": "TypeSpec.integer",
-          "BaseType": {
-           "$id": "22",
-           "Kind": "int32",
-           "Name": "numeric",
-           "CrossLanguageDefinitionId": "TypeSpec.numeric"
-          }
-         }
-        }
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsRequired": false,
@@ -166,11 +142,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "23",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "20",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -185,9 +161,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "21",
         "Type": {
-         "$ref": "24"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
@@ -195,7 +171,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
@@ -216,7 +192,7 @@
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
-      "$id": "27",
+      "$id": "23",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -225,11 +201,11 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "24"
    },
    "Parameters": [
     {
-     "$ref": "14"
+     "$ref": "13"
     }
    ]
   }

@@ -52,25 +52,7 @@
        "$id": "8",
        "Kind": "int32",
        "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "BaseType": {
-        "$id": "9",
-        "Kind": "int32",
-        "Name": "int64",
-        "CrossLanguageDefinitionId": "TypeSpec.int64",
-        "BaseType": {
-         "$id": "10",
-         "Kind": "int32",
-         "Name": "integer",
-         "CrossLanguageDefinitionId": "TypeSpec.integer",
-         "BaseType": {
-          "$id": "11",
-          "Kind": "int32",
-          "Name": "numeric",
-          "CrossLanguageDefinitionId": "TypeSpec.numeric"
-         }
-        }
-       }
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -79,12 +61,12 @@
    },
    "Properties": [
     {
-     "$id": "12",
+     "$id": "9",
      "Name": "smart",
      "SerializedName": "smart",
      "Description": "",
      "Type": {
-      "$id": "13",
+      "$id": "10",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean"
@@ -103,23 +85,23 @@
  ],
  "Clients": [
   {
-   "$id": "14",
+   "$id": "11",
    "Name": "NotDiscriminatedClient",
    "Description": "Illustrates not-discriminated inheritance model.",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "12",
      "Name": "postValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "16",
+       "$id": "13",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "17",
+        "$id": "14",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -134,9 +116,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "18",
+        "$id": "15",
         "Type": {
-         "$id": "19",
+         "$id": "16",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -145,7 +127,7 @@
        }
       },
       {
-       "$id": "20",
+       "$id": "17",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -162,11 +144,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "21",
+       "$id": "18",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "22",
+        "$id": "19",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -181,19 +163,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "20",
         "Type": {
-         "$ref": "22"
+         "$ref": "19"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "24",
+       "$id": "21",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "22",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -208,9 +190,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "23",
         "Type": {
-         "$ref": "25"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
@@ -218,7 +200,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -239,20 +221,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "28",
+     "$id": "25",
      "Name": "getValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "13"
       },
       {
-       "$id": "29",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "30",
+        "$id": "27",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -267,9 +249,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "31",
+        "$id": "28",
         "Type": {
-         "$ref": "30"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
@@ -277,7 +259,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -301,16 +283,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "33",
+     "$id": "30",
      "Name": "putValid",
      "ResourceName": "NotDiscriminated",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "13"
       },
       {
-       "$id": "34",
+       "$id": "31",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -327,11 +309,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "35",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "33",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -346,19 +328,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "34",
         "Type": {
-         "$ref": "36"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "38",
+       "$id": "35",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "39",
+        "$id": "36",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -373,9 +355,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "37",
         "Type": {
-         "$ref": "39"
+         "$ref": "36"
         },
         "Value": "application/json"
        }
@@ -383,7 +365,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "38",
        "StatusCodes": [
         200
        ],
@@ -411,11 +393,11 @@
     }
    ],
    "Protocol": {
-    "$id": "42"
+    "$id": "39"
    },
    "Parameters": [
     {
-     "$ref": "16"
+     "$ref": "13"
     }
    ]
   }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Payload.MultiPart.Models
 {
@@ -47,20 +48,20 @@ namespace Payload.MultiPart.Models
         /// <param name="profileImage"></param>
         /// <param name="previousAddresses"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> or <paramref name="previousAddresses"/> is null. </exception>
-        public JsonArrayPartsRequest(Stream profileImage, Address previousAddresses)
+        public JsonArrayPartsRequest(Stream profileImage, IEnumerable<Address> previousAddresses)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
             Argument.AssertNotNull(previousAddresses, nameof(previousAddresses));
 
             ProfileImage = profileImage;
-            PreviousAddresses = previousAddresses;
+            PreviousAddresses = previousAddresses.ToList();
         }
 
         /// <summary> Initializes a new instance of <see cref="JsonArrayPartsRequest"/>. </summary>
         /// <param name="profileImage"></param>
         /// <param name="previousAddresses"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal JsonArrayPartsRequest(Stream profileImage, Address previousAddresses, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal JsonArrayPartsRequest(Stream profileImage, IList<Address> previousAddresses, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProfileImage = profileImage;
             PreviousAddresses = previousAddresses;
@@ -75,6 +76,6 @@ namespace Payload.MultiPart.Models
         /// <summary> Gets the profile image. </summary>
         public Stream ProfileImage { get; }
         /// <summary> Gets the previous addresses. </summary>
-        public Address PreviousAddresses { get; }
+        public IList<Address> PreviousAddresses { get; }
     }
 }
