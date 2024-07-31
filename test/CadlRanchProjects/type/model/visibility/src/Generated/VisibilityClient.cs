@@ -34,7 +34,7 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Initializes a new instance of VisibilityClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public VisibilityClient(Uri endpoint, VisibilityClientOptions options)
@@ -787,7 +787,6 @@ namespace _Type.Model.Visibility
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/visibility", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -802,7 +801,6 @@ namespace _Type.Model.Visibility
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/visibility", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -817,7 +815,6 @@ namespace _Type.Model.Visibility
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/visibility", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -832,7 +829,6 @@ namespace _Type.Model.Visibility
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/visibility", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -847,7 +843,6 @@ namespace _Type.Model.Visibility
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/visibility", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
