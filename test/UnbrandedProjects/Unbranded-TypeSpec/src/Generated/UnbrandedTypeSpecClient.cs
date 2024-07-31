@@ -1529,7 +1529,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
             message.Apply(options);
             return message;
@@ -1577,7 +1576,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -1611,7 +1609,6 @@ namespace UnbrandedTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1627,7 +1624,6 @@ namespace UnbrandedTypeSpec
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

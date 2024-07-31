@@ -28,7 +28,7 @@ namespace Scm.Parameters.Spread
 
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Model(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -459,7 +459,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -476,7 +475,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -495,7 +493,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -512,7 +509,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -531,7 +527,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

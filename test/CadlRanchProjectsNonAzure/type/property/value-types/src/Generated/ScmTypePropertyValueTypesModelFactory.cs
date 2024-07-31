@@ -7,28 +7,12 @@ namespace Scm._Type.Property.ValueTypes.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ScmTypePropertyValueTypesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.StringLiteralProperty"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UnionEnumValueProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        /// <returns> A new <see cref="Models.StringLiteralProperty"/> instance for mocking. </returns>
-        public static StringLiteralProperty StringLiteralProperty(StringLiteralPropertyProperty property = default)
+        /// <returns> A new <see cref="Models.UnionEnumValueProperty"/> instance for mocking. </returns>
+        public static UnionEnumValueProperty UnionEnumValueProperty(ExtendedEnum property = default)
         {
-            return new StringLiteralProperty(property, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.IntLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
-        /// <returns> A new <see cref="Models.IntLiteralProperty"/> instance for mocking. </returns>
-        public static IntLiteralProperty IntLiteralProperty(IntLiteralPropertyProperty property = default)
-        {
-            return new IntLiteralProperty(property, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.FloatLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
-        /// <returns> A new <see cref="Models.FloatLiteralProperty"/> instance for mocking. </returns>
-        public static FloatLiteralProperty FloatLiteralProperty(FloatLiteralPropertyProperty property = default)
-        {
-            return new FloatLiteralProperty(property, serializedAdditionalRawData: null);
+            return new UnionEnumValueProperty(property, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BooleanLiteralProperty"/>. </summary>
@@ -39,12 +23,28 @@ namespace Scm._Type.Property.ValueTypes.Models
             return new BooleanLiteralProperty(property, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.UnionEnumValueProperty"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FloatLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
-        /// <returns> A new <see cref="Models.UnionEnumValueProperty"/> instance for mocking. </returns>
-        public static UnionEnumValueProperty UnionEnumValueProperty(ExtendedEnum property = default)
+        /// <returns> A new <see cref="Models.FloatLiteralProperty"/> instance for mocking. </returns>
+        public static FloatLiteralProperty FloatLiteralProperty(FloatLiteralPropertyProperty property = default)
         {
-            return new UnionEnumValueProperty(property, serializedAdditionalRawData: null);
+            return new FloatLiteralProperty(property, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.IntLiteralProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <returns> A new <see cref="Models.IntLiteralProperty"/> instance for mocking. </returns>
+        public static IntLiteralProperty IntLiteralProperty(IntLiteralPropertyProperty property = default)
+        {
+            return new IntLiteralProperty(property, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.StringLiteralProperty"/>. </summary>
+        /// <param name="property"> Property. </param>
+        /// <returns> A new <see cref="Models.StringLiteralProperty"/> instance for mocking. </returns>
+        public static StringLiteralProperty StringLiteralProperty(StringLiteralPropertyProperty property = default)
+        {
+            return new StringLiteralProperty(property, serializedAdditionalRawData: null);
         }
     }
 }

@@ -192,60 +192,79 @@
   {
    "$id": "29",
    "Kind": "model",
-   "Name": "PagedDimensionValueListItem",
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "None",
-   "Description": "Paged collection of DimensionValueListItem items",
+   "Name": "BatchPoolListResult",
+   "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
+   "Usage": "Output,Json",
+   "Description": "The result of listing the Pools in an Account.",
    "Properties": [
     {
      "$id": "30",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "The DimensionValueListItem items on this page",
+     "Description": "The list of Pools.",
      "Type": {
       "$id": "31",
       "Kind": "array",
-      "Name": "ArrayDimensionValueListItem",
+      "Name": "ArrayBatchPool",
       "ValueType": {
        "$id": "32",
        "Kind": "model",
-       "Name": "DimensionValueListItem",
-       "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
+       "Name": "BatchPool",
+       "CrossLanguageDefinitionId": "Pagination.BatchPool",
        "Usage": "Output,Json",
+       "Description": "A Pool in the Azure Batch service.",
        "Properties": [
         {
          "$id": "33",
-         "Name": "value",
-         "SerializedName": "value",
-         "Description": "",
+         "Name": "id",
+         "SerializedName": "id",
+         "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
          "Type": {
           "$id": "34",
-          "Kind": "array",
-          "Name": "Array",
-          "ValueType": {
-           "$id": "35",
-           "Kind": "string"
-          },
-          "CrossLanguageDefinitionId": "TypeSpec.Array"
+          "Kind": "string"
          },
-         "IsRequired": true,
-         "IsReadOnly": false
+         "IsRequired": false,
+         "IsReadOnly": true
+        },
+        {
+         "$id": "35",
+         "Name": "displayName",
+         "SerializedName": "displayName",
+         "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
+         "Type": {
+          "$id": "36",
+          "Kind": "string"
+         },
+         "IsRequired": false,
+         "IsReadOnly": true
+        },
+        {
+         "$id": "37",
+         "Name": "url",
+         "SerializedName": "url",
+         "Description": "The URL of the Pool.",
+         "Type": {
+          "$id": "38",
+          "Kind": "string"
+         },
+         "IsRequired": false,
+         "IsReadOnly": true
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
-     "IsRequired": true,
+     "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "36",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
+     "$id": "39",
+     "Name": "odata.nextLink",
+     "SerializedName": "odata.nextLink",
+     "Description": "The URL to get the next set of results.",
      "Type": {
-      "$id": "37",
-      "Kind": "url"
+      "$id": "40",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -256,38 +275,55 @@
    "$ref": "32"
   },
   {
-   "$id": "38",
+   "$id": "41",
    "Kind": "model",
-   "Name": "PagedLedgerEntry",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "None",
-   "Description": "Paged collection of LedgerEntry items",
+   "Name": "BatchError",
+   "CrossLanguageDefinitionId": "Pagination.BatchError",
+   "Usage": "Output,Error,Json",
+   "Description": "An error response received from the Azure Batch service.",
    "Properties": [
     {
-     "$id": "39",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The LedgerEntry items on this page",
+     "$id": "42",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
      "Type": {
-      "$id": "40",
-      "Kind": "array",
-      "Name": "ArrayLedgerEntry",
-      "ValueType": {
-       "$ref": "20"
-      },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "$id": "43",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "44",
+   "Kind": "model",
+   "Name": "TextBlocklist",
+   "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
+   "Usage": "Output,Json",
+   "Description": "Text Blocklist.",
+   "Properties": [
+    {
+     "$id": "45",
+     "Name": "blocklistName",
+     "SerializedName": "blocklistName",
+     "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
+     "Type": {
+      "$id": "46",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "41",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
+     "$id": "47",
+     "Name": "description",
+     "SerializedName": "description",
+     "Description": "Text blocklist description.",
      "Type": {
-      "$id": "42",
-      "Kind": "url"
+      "$id": "48",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -295,140 +331,97 @@
    ]
   },
   {
-   "$id": "43",
+   "$id": "49",
    "Kind": "model",
-   "Name": "PagedTextBlocklist",
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "None",
-   "Description": "Paged collection of TextBlocklist items",
+   "Name": "TextBlockItem",
+   "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
+   "Usage": "Output,Json",
+   "Description": "Item in TextBlocklist.",
    "Properties": [
     {
-     "$id": "44",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The TextBlocklist items on this page",
+     "$id": "50",
+     "Name": "blockItemId",
+     "SerializedName": "blockItemId",
+     "Description": "Block Item Id. It will be uuid.",
      "Type": {
-      "$id": "45",
-      "Kind": "array",
-      "Name": "ArrayTextBlocklist",
-      "ValueType": {
-       "$id": "46",
-       "Kind": "model",
-       "Name": "TextBlocklist",
-       "CrossLanguageDefinitionId": "Pagination.TextBlocklist",
-       "Usage": "Output,Json",
-       "Description": "Text Blocklist.",
-       "Properties": [
-        {
-         "$id": "47",
-         "Name": "blocklistName",
-         "SerializedName": "blocklistName",
-         "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
-         "Type": {
-          "$id": "48",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "49",
-         "Name": "description",
-         "SerializedName": "description",
-         "Description": "Text blocklist description.",
-         "Type": {
-          "$id": "50",
-          "Kind": "string"
-         },
-         "IsRequired": false,
-         "IsReadOnly": false
-        }
-       ]
-      },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "$id": "51",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "51",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
+     "$id": "52",
+     "Name": "description",
+     "SerializedName": "description",
+     "Description": "Block item description.",
      "Type": {
-      "$id": "52",
-      "Kind": "url"
+      "$id": "53",
+      "Kind": "string"
      },
      "IsRequired": false,
      "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "46"
-  },
-  {
-   "$id": "53",
-   "Kind": "model",
-   "Name": "PagedTextBlockItem",
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "Usage": "None",
-   "Description": "Paged collection of TextBlockItem items",
-   "Properties": [
+    },
     {
      "$id": "54",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The TextBlockItem items on this page",
+     "Name": "text",
+     "SerializedName": "text",
+     "Description": "Block item content.",
      "Type": {
       "$id": "55",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "56",
+   "Kind": "model",
+   "Name": "DimensionValueListItem",
+   "CrossLanguageDefinitionId": "Pagination.DimensionValueListItem",
+   "Usage": "Output,Json",
+   "Properties": [
+    {
+     "$id": "57",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "",
+     "Type": {
+      "$id": "58",
       "Kind": "array",
-      "Name": "ArrayTextBlockItem",
+      "Name": "Array",
       "ValueType": {
-       "$id": "56",
-       "Kind": "model",
-       "Name": "TextBlockItem",
-       "CrossLanguageDefinitionId": "Pagination.TextBlockItem",
-       "Usage": "Output,Json",
-       "Description": "Item in TextBlocklist.",
-       "Properties": [
-        {
-         "$id": "57",
-         "Name": "blockItemId",
-         "SerializedName": "blockItemId",
-         "Description": "Block Item Id. It will be uuid.",
-         "Type": {
-          "$id": "58",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "59",
-         "Name": "description",
-         "SerializedName": "description",
-         "Description": "Block item description.",
-         "Type": {
-          "$id": "60",
-          "Kind": "string"
-         },
-         "IsRequired": false,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "61",
-         "Name": "text",
-         "SerializedName": "text",
-         "Description": "Block item content.",
-         "Type": {
-          "$id": "62",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$id": "59",
+       "Kind": "string"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "60",
+   "Kind": "model",
+   "Name": "PagedDimensionValueListItem",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
+   "Usage": "None",
+   "Description": "Paged collection of DimensionValueListItem items",
+   "Properties": [
+    {
+     "$id": "61",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The DimensionValueListItem items on this page",
+     "Type": {
+      "$id": "62",
+      "Kind": "array",
+      "Name": "ArrayDimensionValueListItem",
+      "ValueType": {
+       "$ref": "56"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -450,84 +443,38 @@
    ]
   },
   {
-   "$ref": "56"
-  },
-  {
    "$id": "65",
    "Kind": "model",
-   "Name": "BatchPoolListResult",
-   "CrossLanguageDefinitionId": "Pagination.BatchPoolListResult",
-   "Usage": "Output,Json",
-   "Description": "The result of listing the Pools in an Account.",
+   "Name": "PagedLedgerEntry",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of LedgerEntry items",
    "Properties": [
     {
      "$id": "66",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "The list of Pools.",
+     "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "67",
       "Kind": "array",
-      "Name": "ArrayBatchPool",
+      "Name": "ArrayLedgerEntry",
       "ValueType": {
-       "$id": "68",
-       "Kind": "model",
-       "Name": "BatchPool",
-       "CrossLanguageDefinitionId": "Pagination.BatchPool",
-       "Usage": "Output,Json",
-       "Description": "A Pool in the Azure Batch service.",
-       "Properties": [
-        {
-         "$id": "69",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case).",
-         "Type": {
-          "$id": "70",
-          "Kind": "string"
-         },
-         "IsRequired": false,
-         "IsReadOnly": true
-        },
-        {
-         "$id": "71",
-         "Name": "displayName",
-         "SerializedName": "displayName",
-         "Description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.",
-         "Type": {
-          "$id": "72",
-          "Kind": "string"
-         },
-         "IsRequired": false,
-         "IsReadOnly": true
-        },
-        {
-         "$id": "73",
-         "Name": "url",
-         "SerializedName": "url",
-         "Description": "The URL of the Pool.",
-         "Type": {
-          "$id": "74",
-          "Kind": "string"
-         },
-         "IsRequired": false,
-         "IsReadOnly": true
-        }
-       ]
+       "$ref": "20"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
-     "IsRequired": false,
+     "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "75",
-     "Name": "odata.nextLink",
-     "SerializedName": "odata.nextLink",
-     "Description": "The URL to get the next set of results.",
+     "$id": "68",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
      "Type": {
-      "$id": "76",
-      "Kind": "string"
+      "$id": "69",
+      "Kind": "url"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -535,26 +482,79 @@
    ]
   },
   {
-   "$ref": "68"
-  },
-  {
-   "$id": "77",
+   "$id": "70",
    "Kind": "model",
-   "Name": "BatchError",
-   "CrossLanguageDefinitionId": "Pagination.BatchError",
-   "Usage": "Output,Error,Json",
-   "Description": "An error response received from the Azure Batch service.",
+   "Name": "PagedTextBlocklist",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
+   "Usage": "None",
+   "Description": "Paged collection of TextBlocklist items",
    "Properties": [
     {
-     "$id": "78",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+     "$id": "71",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The TextBlocklist items on this page",
      "Type": {
-      "$id": "79",
-      "Kind": "string"
+      "$id": "72",
+      "Kind": "array",
+      "Name": "ArrayTextBlocklist",
+      "ValueType": {
+       "$ref": "44"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
      "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "73",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "74",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "75",
+   "Kind": "model",
+   "Name": "PagedTextBlockItem",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
+   "Usage": "None",
+   "Description": "Paged collection of TextBlockItem items",
+   "Properties": [
+    {
+     "$id": "76",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The TextBlockItem items on this page",
+     "Type": {
+      "$id": "77",
+      "Kind": "array",
+      "Name": "ArrayTextBlockItem",
+      "ValueType": {
+       "$ref": "49"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "78",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "79",
+      "Kind": "url"
+     },
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]
@@ -564,7 +564,6 @@
   {
    "$id": "80",
    "Name": "PaginationClient",
-   "Description": "",
    "Operations": [
     {
      "$id": "81",
@@ -580,7 +579,7 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "83",
-        "Kind": "url"
+        "Kind": "uri"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -602,6 +601,12 @@
         "Kind": "string"
        },
        "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "86",
         "Type": {
@@ -609,18 +614,53 @@
          "Kind": "string"
         },
         "Value": "2022-05-13"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       }
       },
       {
        "$id": "88",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "89",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "90",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "91",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "92",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "93",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "94",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "Body parameter",
@@ -628,64 +668,12 @@
         "$ref": "12"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "89",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "90",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "91",
-        "Type": {
-         "$ref": "90"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "92",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "93",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "94",
-        "Type": {
-         "$ref": "93"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -715,8 +703,8 @@
      "BufferResponse": true,
      "Paging": {
       "$id": "96",
-      "NextLinkName": "customNextLink",
-      "ItemName": "entries"
+      "ItemName": "entries",
+      "NextLinkName": "customNextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
@@ -734,7 +722,6 @@
   {
    "$id": "98",
    "Name": "AdditionalParameter",
-   "Description": "",
    "Operations": [
     {
      "$id": "99",
@@ -745,70 +732,84 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
-      },
-      {
        "$id": "100",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Name": "pagnationUri",
+       "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "101",
-        "Kind": "string"
+        "Kind": "uri"
        },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "86"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
       },
       {
        "$id": "102",
-       "Name": "testRunId",
-       "NameInRequest": "testRunId",
-       "Description": "Unique test run name as identifier",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "103",
         "Kind": "string"
        },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
+       "Location": "Query",
+       "IsApiVersion": true,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "104",
+        "Type": {
+         "$id": "105",
+         "Kind": "string"
+        },
+        "Value": "2022-05-13"
+       }
+      },
+      {
+       "$id": "106",
+       "Name": "testRunId",
+       "NameInRequest": "testRunId",
+       "Description": "Unique test run name as identifier",
+       "Type": {
+        "$id": "107",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "104",
+       "$id": "108",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "Dimension name",
        "Type": {
-        "$id": "105",
+        "$id": "109",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "106",
+       "$id": "110",
        "Name": "interval",
        "NameInRequest": "interval",
        "Description": "The interval (i.e. timegrain) of the query.",
@@ -816,106 +817,94 @@
         "$ref": "2"
        },
        "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
        "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "107",
-       "Name": "metricName",
-       "NameInRequest": "metricName",
-       "Description": "Metric name",
-       "Type": {
-        "$id": "108",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "109",
-       "Name": "metricNamespace",
-       "NameInRequest": "metricNamespace",
-       "Description": "Metric namespace to query metric definitions for.",
-       "Type": {
-        "$id": "110",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
        "Kind": "Method"
       },
       {
        "$id": "111",
-       "Name": "timespan",
-       "NameInRequest": "timespan",
-       "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
+       "Name": "metricName",
+       "NameInRequest": "metricName",
+       "Description": "Metric name",
        "Type": {
         "$id": "112",
         "Kind": "string"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
        "$id": "113",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "metricNamespace",
+       "NameInRequest": "metricNamespace",
+       "Description": "Metric namespace to query metric definitions for.",
        "Type": {
         "$id": "114",
         "Kind": "string"
        },
-       "Location": "Header",
+       "Location": "Query",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "115",
-        "Type": {
-         "$ref": "114"
+       "IsRequired": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "115",
+       "Name": "timespan",
+       "NameInRequest": "timespan",
+       "Description": "The timespan of the query. It is a string with the following format\n'startDateTime_ISO/endDateTime_ISO'.",
+       "Type": {
+        "$id": "116",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "117",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "118",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "119",
+         "Kind": "string"
         },
         "Value": "application/json"
-       }
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "116",
+       "$id": "120",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "60"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -931,535 +920,103 @@
      "Path": "/app/test-runs/{testRunId}/metric-dimensions/{name}/values",
      "BufferResponse": true,
      "Paging": {
-      "$id": "117",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "$id": "121",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "118"
+    "$id": "122"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "100"
     }
    ]
   },
   {
-   "$id": "119",
+   "$id": "123",
    "Name": "UseFoundationsResourceList",
-   "Description": "",
    "Operations": [
     {
-     "$id": "120",
+     "$id": "124",
      "Name": "list",
      "ResourceName": "LedgerEntry",
      "Description": "List upload detail for the discovery resource.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "82"
-      },
-      {
-       "$id": "121",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "$id": "125",
+       "Name": "pagnationUri",
+       "NameInRequest": "pagnationUri",
        "Type": {
-        "$id": "122",
-        "Kind": "string"
+        "$id": "126",
+        "Kind": "uri"
        },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "86"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
       },
       {
-       "$id": "123",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "$id": "127",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "124",
+        "$id": "128",
         "Kind": "string"
        },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
+       "Location": "Query",
+       "IsApiVersion": true,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
+       "IsRequired": true,
+       "Kind": "Client",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "129",
         "Type": {
-         "$ref": "124"
+         "$id": "130",
+         "Kind": "string"
         },
-        "Value": "application/json"
+        "Value": "2022-05-13"
        }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "126",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "38"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{pagnationUri}",
-     "Path": "/app/adp/transactions",
-     "BufferResponse": true,
-     "Paging": {
-      "$id": "127",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "128"
-   },
-   "Parent": "PaginationClient",
-   "Parameters": [
-    {
-     "$ref": "82"
-    }
-   ]
-  },
-  {
-   "$id": "129",
-   "Name": "TwoTypesItem",
-   "Description": "",
-   "Operations": [
-    {
-     "$id": "130",
-     "Name": "listTextBlocklists",
-     "ResourceName": "TextBlocklist",
-     "Summary": "Get All Text Blocklists",
-     "Description": "Get all text blocklists details.",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "82"
       },
       {
        "$id": "131",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "132",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "86"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "133",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "134",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "135",
-        "Type": {
-         "$ref": "134"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "136",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "43"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{pagnationUri}",
-     "Path": "/app/text/blocklists",
-     "BufferResponse": true,
-     "Paging": {
-      "$id": "137",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "138",
-     "Name": "listTextBlocklistItems",
-     "ResourceName": "TextBlockItem",
-     "Summary": "Get All BlockItems By blocklistName",
-     "Description": "Get all blockItems in a text blocklist",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "82"
-      },
-      {
-       "$id": "139",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
-       "Type": {
-        "$id": "140",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "86"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "141",
-       "Name": "blocklistName",
-       "NameInRequest": "blocklistName",
-       "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
-       "Type": {
-        "$id": "142",
-        "Kind": "string"
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "143",
-       "Name": "top",
-       "NameInRequest": "top",
-       "Description": "The number of result items to return.",
-       "Type": {
-        "$id": "144",
-        "Kind": "int32"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "145",
-       "Name": "skip",
-       "NameInRequest": "skip",
-       "Description": "The number of result items to skip.",
-       "Type": {
-        "$id": "146",
-        "Kind": "int32"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "147",
-       "Name": "maxpagesize",
-       "NameInRequest": "maxpagesize",
-       "Description": "The maximum number of result items per page.",
-       "Type": {
-        "$id": "148",
-        "Kind": "int32"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "149",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "150",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "151",
-        "Type": {
-         "$ref": "150"
-        },
-        "Value": "application/json"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "152",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "53"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{pagnationUri}",
-     "Path": "/app/text/blocklists/{blocklistName}/blockItems",
-     "BufferResponse": true,
-     "Paging": {
-      "$id": "153",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
-     },
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    }
-   ],
-   "Protocol": {
-    "$id": "154"
-   },
-   "Parent": "PaginationClient",
-   "Parameters": [
-    {
-     "$ref": "82"
-    }
-   ]
-  },
-  {
-   "$id": "155",
-   "Name": "Pools",
-   "Description": "",
-   "Operations": [
-    {
-     "$id": "156",
-     "Name": "listPools",
-     "ResourceName": "Pools",
-     "Description": "Lists all of the Pools in the specified Account.",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "82"
-      },
-      {
-       "$id": "157",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
-       "Type": {
-        "$id": "158",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "86"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "159",
-       "Name": "$filter",
-       "NameInRequest": "$filter",
-       "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
-       "Type": {
-        "$id": "160",
-        "Kind": "string"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "161",
-       "Name": "$select",
-       "NameInRequest": "$select",
-       "Description": "An OData $select clause.",
-       "Type": {
-        "$id": "162",
-        "Kind": "array",
-        "Name": "Array",
+        "Kind": "constant",
         "ValueType": {
-         "$id": "163",
+         "$id": "133",
          "Kind": "string"
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method",
-       "ArraySerializationDelimiter": ","
-      },
-      {
-       "$id": "164",
-       "Name": "$expand",
-       "NameInRequest": "$expand",
-       "Description": "An OData $expand clause.",
-       "Type": {
-        "$id": "165",
-        "Kind": "array",
-        "Name": "Array",
-        "ValueType": {
-         "$id": "166",
-         "Kind": "string"
-        },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
-       },
-       "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method",
-       "ArraySerializationDelimiter": ","
-      },
-      {
-       "$id": "167",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "168",
-        "Kind": "string"
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "169",
-        "Type": {
-         "$ref": "168"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "170",
+       "$id": "134",
        "StatusCodes": [
         200
        ],
@@ -1477,32 +1034,488 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{pagnationUri}",
-     "Path": "/app/pools",
+     "Path": "/app/adp/transactions",
      "BufferResponse": true,
      "Paging": {
-      "$id": "171",
-      "NextLinkName": "odata.nextLink",
-      "ItemName": "value"
+      "$id": "135",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "172"
+    "$id": "136"
    },
    "Parent": "PaginationClient",
    "Parameters": [
     {
-     "$ref": "82"
+     "$ref": "125"
+    }
+   ]
+  },
+  {
+   "$id": "137",
+   "Name": "TwoTypesItem",
+   "Operations": [
+    {
+     "$id": "138",
+     "Name": "listTextBlocklists",
+     "ResourceName": "TextBlocklist",
+     "Summary": "Get All Text Blocklists",
+     "Description": "Get all text blocklists details.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "139",
+       "Name": "pagnationUri",
+       "NameInRequest": "pagnationUri",
+       "Type": {
+        "$id": "140",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "141",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "142",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "143",
+        "Type": {
+         "$id": "144",
+         "Kind": "string"
+        },
+        "Value": "2022-05-13"
+       }
+      },
+      {
+       "$id": "145",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "146",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "147",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "148",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "70"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{pagnationUri}",
+     "Path": "/app/text/blocklists",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "149",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "150",
+     "Name": "listTextBlocklistItems",
+     "ResourceName": "TextBlockItem",
+     "Summary": "Get All BlockItems By blocklistName",
+     "Description": "Get all blockItems in a text blocklist",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "139"
+      },
+      {
+       "$id": "151",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "152",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "153",
+        "Type": {
+         "$id": "154",
+         "Kind": "string"
+        },
+        "Value": "2022-05-13"
+       }
+      },
+      {
+       "$id": "155",
+       "Name": "blocklistName",
+       "NameInRequest": "blocklistName",
+       "Description": "Text blocklist name. Only supports the following characters: 0-9  A-Z  a-z  -  .  _  ~",
+       "Type": {
+        "$id": "156",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "157",
+       "Name": "top",
+       "NameInRequest": "top",
+       "Description": "The number of result items to return.",
+       "Type": {
+        "$id": "158",
+        "Kind": "int32"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "159",
+       "Name": "skip",
+       "NameInRequest": "skip",
+       "Description": "The number of result items to skip.",
+       "Type": {
+        "$id": "160",
+        "Kind": "int32"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "161",
+       "Name": "maxpagesize",
+       "NameInRequest": "maxpagesize",
+       "Description": "The maximum number of result items per page.",
+       "Type": {
+        "$id": "162",
+        "Kind": "int32"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "163",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "164",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "165",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "166",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "75"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{pagnationUri}",
+     "Path": "/app/text/blocklists/{blocklistName}/blockItems",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "167",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "168"
+   },
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "139"
+    }
+   ]
+  },
+  {
+   "$id": "169",
+   "Name": "Pools",
+   "Operations": [
+    {
+     "$id": "170",
+     "Name": "listPools",
+     "ResourceName": "Pools",
+     "Description": "Lists all of the Pools in the specified Account.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "171",
+       "Name": "pagnationUri",
+       "NameInRequest": "pagnationUri",
+       "Type": {
+        "$id": "172",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "173",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "174",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "175",
+        "Type": {
+         "$id": "176",
+         "Kind": "string"
+        },
+        "Value": "2022-05-13"
+       }
+      },
+      {
+       "$id": "177",
+       "Name": "$filter",
+       "NameInRequest": "$filter",
+       "Description": "An OData $filter clause. For more information on constructing this filter, see\nhttps://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.",
+       "Type": {
+        "$id": "178",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "179",
+       "Name": "$select",
+       "NameInRequest": "$select",
+       "Description": "An OData $select clause.",
+       "Type": {
+        "$id": "180",
+        "Kind": "array",
+        "Name": "Array",
+        "ValueType": {
+         "$id": "181",
+         "Kind": "string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "ArraySerializationDelimiter": ",",
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "182",
+       "Name": "$expand",
+       "NameInRequest": "$expand",
+       "Description": "An OData $expand clause.",
+       "Type": {
+        "$id": "183",
+        "Kind": "array",
+        "Name": "Array",
+        "ValueType": {
+         "$id": "184",
+         "Kind": "string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.Array"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "ArraySerializationDelimiter": ",",
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "185",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "186",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "187",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "188",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "29"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{pagnationUri}",
+     "Path": "/app/pools",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "189",
+      "ItemName": "value",
+      "NextLinkName": "odata.nextLink"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "190"
+   },
+   "Parent": "PaginationClient",
+   "Parameters": [
+    {
+     "$ref": "171"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "173",
+  "$id": "191",
   "OAuth2": {
-   "$id": "174",
+   "$id": "192",
    "Scopes": [
     "https://pagination.azure.com/.default"
    ]

@@ -311,7 +311,6 @@ namespace Server.Versions.Versioned
             uri.Reset(_endpoint);
             uri.AppendPath("/server/versions/versioned/without-api-version", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -325,7 +324,6 @@ namespace Server.Versions.Versioned
             uri.AppendPath("/server/versions/versioned/with-query-api-version", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -339,7 +337,6 @@ namespace Server.Versions.Versioned
             uri.AppendPath("/server/versions/versioned/with-path-api-version/", false);
             uri.AppendPath(_apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -353,7 +350,6 @@ namespace Server.Versions.Versioned
             uri.AppendPath("/server/versions/versioned/with-query-old-api-version", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

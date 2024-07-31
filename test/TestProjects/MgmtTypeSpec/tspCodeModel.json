@@ -495,7 +495,6 @@
   {
    "$id": "67",
    "Name": "MgmtTypeSpecClient",
-   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "68"
@@ -503,9 +502,8 @@
    "Parameters": [
     {
      "$id": "69",
-     "Name": "host",
-     "NameInRequest": "host",
-     "Description": "Azure Resource Manager url.",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
      "Type": {
       "$id": "70",
       "Kind": "string"
@@ -533,7 +531,6 @@
   {
    "$id": "73",
    "Name": "PrivateLinks",
-   "Description": "",
    "Operations": [
     {
      "$id": "74",
@@ -543,103 +540,116 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "69"
-      },
-      {
        "$id": "75",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "76",
         "Kind": "string"
        },
-       "Location": "Query",
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "77",
         "Type": {
          "$id": "78",
          "Kind": "string"
         },
-        "Value": "v1"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+        "Value": "https://management.azure.com"
+       }
       },
       {
        "$id": "79",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "80",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "81",
+        "Type": {
+         "$id": "82",
+         "Kind": "string"
+        },
+        "Value": "v1"
+       }
+      },
+      {
+       "$id": "83",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "80",
+        "$id": "84",
         "Kind": "uuid",
         "Encode": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "85",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "82",
+        "$id": "86",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
-        "Kind": "string"
+        "$id": "88",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "89",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "85",
-        "Type": {
-         "$ref": "84"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "90",
        "StatusCodes": [
         200
        ],
@@ -656,33 +666,33 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources",
      "BufferResponse": true,
      "Paging": {
-      "$id": "87",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "$id": "91",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "88"
+    "$id": "92"
    },
    "Parent": "MgmtTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "69"
+     "$ref": "75"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "89",
+  "$id": "93",
   "OAuth2": {
-   "$id": "90",
+   "$id": "94",
    "Scopes": [
     "user_impersonation"
    ]
