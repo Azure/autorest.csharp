@@ -128,7 +128,6 @@ namespace Client.Structure.Service
             uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/eight", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

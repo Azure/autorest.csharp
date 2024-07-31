@@ -647,7 +647,7 @@ op roundTripToOutput(@body input: RoundTripModel): OutputModel;
 @doc("Input recursive model")
 @post
 @convenientAPI(true)
-op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
+op InputRecursive(@body input: InputRecursiveModel): Response<200>;
 
 @route("/roundTripRecursive")
 @doc("RoundTrip recursive model")
@@ -689,6 +689,24 @@ model RoundTripOnNoUse extends NoUseBase {
 @get
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
+
+@doc("Model used as internal input and public output")
+model ModelInternalInput {
+  @doc("model property")
+  prop: string;
+}
+
+@route("/internalInput")
+@get
+@convenientAPI(true)
+op getInternalInput(): ModelInternalInput;
+
+@access(Access.internal)
+@route("/internalInput")
+@put
+@convenientAPI(true)
+op putInternalInput(...ModelInternalInput): ModelInternalInput;
+
 
 @doc("This is a model.")
 @resource("items")

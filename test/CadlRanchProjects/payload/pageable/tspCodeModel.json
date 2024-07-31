@@ -7,43 +7,46 @@
   {
    "$id": "2",
    "Kind": "model",
+   "Name": "User",
+   "CrossLanguageDefinitionId": "Payload.Pageable.User",
+   "Usage": "Output,Json",
+   "Description": "User model",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "User name",
+     "Type": {
+      "$id": "4",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Kind": "model",
    "Name": "PagedUser",
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of User items",
    "Properties": [
     {
-     "$id": "3",
+     "$id": "6",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
      "Type": {
-      "$id": "4",
+      "$id": "7",
       "Kind": "array",
       "Name": "ArrayUser",
       "ValueType": {
-       "$id": "5",
-       "Kind": "model",
-       "Name": "User",
-       "CrossLanguageDefinitionId": "Payload.Pageable.User",
-       "Usage": "Output,Json",
-       "Description": "User model",
-       "Properties": [
-        {
-         "$id": "6",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "User name",
-         "Type": {
-          "$id": "7",
-          "Kind": "string",
-          "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$ref": "2"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -71,9 +74,6 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$ref": "5"
   }
  ],
  "Clients": [
@@ -91,9 +91,8 @@
      "Parameters": [
       {
        "$id": "13",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "14",
         "Kind": "string",
@@ -132,13 +131,11 @@
         "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -147,26 +144,22 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "21",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "21",
-        "Type": {
-         "$ref": "20"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
@@ -176,7 +169,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -188,13 +181,13 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
       "$id": "23",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

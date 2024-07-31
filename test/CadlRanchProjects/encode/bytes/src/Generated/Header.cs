@@ -35,7 +35,7 @@ namespace Encode.Bytes
         /// <summary> Initializes a new instance of Header. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Header(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -333,7 +333,6 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/header/default", false);
             request.Uri = uri;
             request.Headers.Add("value", value.ToArray(), "D");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -347,7 +346,6 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/header/base64", false);
             request.Uri = uri;
             request.Headers.Add("value", value.ToArray(), "D");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -361,7 +359,6 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/header/base64url", false);
             request.Uri = uri;
             request.Headers.Add("value", value.ToArray(), "U");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -375,7 +372,6 @@ namespace Encode.Bytes
             uri.AppendPath("/encode/bytes/header/base64url-array", false);
             request.Uri = uri;
             request.Headers.AddDelimited("value", value, ",", "U");
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

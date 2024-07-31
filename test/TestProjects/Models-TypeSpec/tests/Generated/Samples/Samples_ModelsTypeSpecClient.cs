@@ -3023,6 +3023,98 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_GetInternalInput_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.GetInternalInput(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("prop").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_GetInternalInput_ShortVersion_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetInternalInputAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("prop").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_GetInternalInput_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = client.GetInternalInput();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_GetInternalInput_ShortVersion_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_GetInternalInput_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.GetInternalInput(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("prop").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_GetInternalInput_AllParameters_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetInternalInputAsync(null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("prop").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ModelsTypeSpec_GetInternalInput_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = client.GetInternalInput();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ModelsTypeSpec_GetInternalInput_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_ModelsTypeSpec_AnalyzeConversation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
