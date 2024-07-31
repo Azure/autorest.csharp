@@ -1,0 +1,238 @@
+{
+ "$id": "1",
+ "Name": "Type.Model.Generic",
+ "ApiVersions": [],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "Int32Type_kind",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "Int32Values",
+     "Value": "Int32Values",
+     "Description": "Int32Values"
+    }
+   ],
+   "CrossLanguageDefinitionId": "",
+   "Description": "The Int32Type_kind",
+   "IsExtensible": true,
+   "Usage": "Input,Json"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "5",
+   "Kind": "model",
+   "Name": "Int32Type",
+   "CrossLanguageDefinitionId": "Type.Model.Generic.Int32Type",
+   "Usage": "Input,Json",
+   "Description": "Facets an int32 field by the specified value ranges.",
+   "BaseModel": {
+    "$id": "6",
+    "Kind": "model",
+    "Name": "NumericType",
+    "CrossLanguageDefinitionId": "Type.Model.Generic.NumericType",
+    "Usage": "Input,Json",
+    "Properties": [
+     {
+      "$id": "7",
+      "Name": "values",
+      "SerializedName": "values",
+      "Description": "This model is used to perform facet processing on fields based on a specified range of values.",
+      "Type": {
+       "$id": "8",
+       "Kind": "array",
+       "Name": "Array",
+       "ValueType": {
+        "$id": "9",
+        "Kind": "int32"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     },
+     {
+      "$id": "10",
+      "Name": "value",
+      "SerializedName": "value",
+      "Description": "",
+      "Type": {
+       "$id": "11",
+       "Kind": "int32"
+      },
+      "IsRequired": true,
+      "IsReadOnly": false
+     }
+    ]
+   },
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "The facet type.",
+     "Type": {
+      "$id": "13",
+      "Kind": "constant",
+      "ValueType": {
+       "$ref": "2"
+      },
+      "Value": "Int32Values"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "6"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "14",
+   "Name": "GenericClient",
+   "Description": "Illustrates the model generic cases.",
+   "Operations": [
+    {
+     "$id": "15",
+     "Name": "genericType",
+     "ResourceName": "Generic",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "16",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "17",
+        "Kind": "string"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "18",
+        "Type": {
+         "$id": "19",
+         "Kind": "string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "20",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "5"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "21",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "22",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "23",
+        "Type": {
+         "$ref": "22"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "24",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "25",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "26",
+        "Type": {
+         "$ref": "25"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "27",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/type/model/generic/genericType",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "28"
+   },
+   "Parameters": [
+    {
+     "$ref": "16"
+    }
+   ]
+  }
+ ]
+}
