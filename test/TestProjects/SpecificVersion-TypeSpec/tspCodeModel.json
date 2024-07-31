@@ -9,8 +9,8 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "OperationState",
-   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "Name": "ApiVersions",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
    "ValueType": {
     "$id": "3",
     "Kind": "string"
@@ -18,30 +18,49 @@
    "Values": [
     {
      "$id": "4",
+     "Name": "v2022_09_01",
+     "Value": "2022-09-01"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "ApiVersionEnum"
+  },
+  {
+   "$id": "5",
+   "Kind": "enum",
+   "Name": "OperationState",
+   "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "ValueType": {
+    "$id": "6",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "7",
      "Name": "NotStarted",
      "Value": "NotStarted",
      "Description": "The operation has not started."
     },
     {
-     "$id": "5",
+     "$id": "8",
      "Name": "Running",
      "Value": "Running",
      "Description": "The operation is in progress."
     },
     {
-     "$id": "6",
+     "$id": "9",
      "Name": "Succeeded",
      "Value": "Succeeded",
      "Description": "The operation has completed successfully."
     },
     {
-     "$id": "7",
+     "$id": "10",
      "Name": "Failed",
      "Value": "Failed",
      "Description": "The operation has failed."
     },
     {
-     "$id": "8",
+     "$id": "11",
      "Name": "Canceled",
      "Value": "Canceled",
      "Description": "The operation has been canceled by the user."
@@ -50,41 +69,21 @@
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
    "Usage": "None"
-  },
-  {
-   "$id": "9",
-   "Kind": "enum",
-   "Name": "ApiVersions",
-   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ApiVersions",
-   "ValueType": {
-    "$id": "10",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "11",
-     "Name": "v2022_09_01",
-     "Value": "2022-09-01"
-    }
-   ],
-   "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
   {
    "$id": "12",
    "Kind": "model",
-   "Name": "ResourceOperationStatusResourceExportedResourceError",
-   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
-   "Usage": "None",
-   "Description": "Provides status details for long running operations.",
+   "Name": "ExportedResource",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
+   "Usage": "Output,Json",
    "Properties": [
     {
      "$id": "13",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "The unique ID of the operation.",
+     "Description": "",
      "Type": {
       "$id": "14",
       "Kind": "string"
@@ -94,22 +93,101 @@
     },
     {
      "$id": "15",
-     "Name": "status",
-     "SerializedName": "status",
-     "Description": "The status of the operation",
+     "Name": "resourceUri",
+     "SerializedName": "resourceUri",
+     "Description": "",
      "Type": {
-      "$ref": "2"
+      "$id": "16",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "17",
+   "Kind": "model",
+   "Name": "Resource",
+   "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
+   "Usage": "Input,Output,Json",
+   "Properties": [
+    {
+     "$id": "18",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "19",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "20",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "22",
+     "Name": "type",
+     "SerializedName": "type",
+     "Description": "",
+     "Type": {
+      "$id": "23",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "24",
+   "Kind": "model",
+   "Name": "ResourceOperationStatusResourceExportedResourceError",
+   "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
+   "Usage": "None",
+   "Description": "Provides status details for long running operations.",
+   "Properties": [
+    {
+     "$id": "25",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The unique ID of the operation.",
+     "Type": {
+      "$id": "26",
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "27",
+     "Name": "status",
+     "SerializedName": "status",
+     "Description": "The status of the operation",
+     "Type": {
+      "$ref": "5"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "28",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
-      "$id": "17",
+      "$id": "29",
       "Kind": "model",
       "Name": "Error",
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
@@ -117,52 +195,52 @@
       "Description": "The error object.",
       "Properties": [
        {
-        "$id": "18",
+        "$id": "30",
         "Name": "code",
         "SerializedName": "code",
         "Description": "One of a server-defined set of error codes.",
         "Type": {
-         "$id": "19",
+         "$id": "31",
          "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "20",
+        "$id": "32",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable representation of the error.",
         "Type": {
-         "$id": "21",
+         "$id": "33",
          "Kind": "string"
         },
         "IsRequired": true,
         "IsReadOnly": false
        },
        {
-        "$id": "22",
+        "$id": "34",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The target of the error.",
         "Type": {
-         "$id": "23",
+         "$id": "35",
          "Kind": "string"
         },
         "IsRequired": false,
         "IsReadOnly": false
        },
        {
-        "$id": "24",
+        "$id": "36",
         "Name": "details",
         "SerializedName": "details",
         "Description": "An array of details about specific errors that led to this reported error.",
         "Type": {
-         "$id": "25",
+         "$id": "37",
          "Kind": "array",
          "Name": "ArrayError",
          "ValueType": {
-          "$ref": "17"
+          "$ref": "29"
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array"
         },
@@ -170,12 +248,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "26",
+        "$id": "38",
         "Name": "innererror",
         "SerializedName": "innererror",
         "Description": "An object containing more specific information than the current object about the error.",
         "Type": {
-         "$id": "27",
+         "$id": "39",
          "Kind": "model",
          "Name": "InnerError",
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
@@ -183,24 +261,24 @@
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "Properties": [
           {
-           "$id": "28",
+           "$id": "40",
            "Name": "code",
            "SerializedName": "code",
            "Description": "One of a server-defined set of error codes.",
            "Type": {
-            "$id": "29",
+            "$id": "41",
             "Kind": "string"
            },
            "IsRequired": false,
            "IsReadOnly": false
           },
           {
-           "$id": "30",
+           "$id": "42",
            "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
-            "$ref": "27"
+            "$ref": "39"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -216,42 +294,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "31",
+     "$id": "43",
      "Name": "result",
      "SerializedName": "result",
      "Description": "The result of the operation.",
      "Type": {
-      "$id": "32",
-      "Kind": "model",
-      "Name": "ExportedResource",
-      "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource",
-      "Usage": "Output,Json",
-      "Properties": [
-       {
-        "$id": "33",
-        "Name": "id",
-        "SerializedName": "id",
-        "Description": "",
-        "Type": {
-         "$id": "34",
-         "Kind": "string"
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       },
-       {
-        "$id": "35",
-        "Name": "resourceUri",
-        "SerializedName": "resourceUri",
-        "Description": "",
-        "Type": {
-         "$id": "36",
-         "Kind": "string"
-        },
-        "IsRequired": true,
-        "IsReadOnly": false
-       }
-      ]
+      "$ref": "12"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -259,16 +307,13 @@
    ]
   },
   {
-   "$ref": "17"
+   "$ref": "29"
   },
   {
-   "$ref": "27"
+   "$ref": "39"
   },
   {
-   "$ref": "32"
-  },
-  {
-   "$id": "37",
+   "$id": "44",
    "Kind": "model",
    "Name": "PagedResource",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -276,58 +321,16 @@
    "Description": "Paged collection of Resource items",
    "Properties": [
     {
-     "$id": "38",
+     "$id": "45",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Resource items on this page",
      "Type": {
-      "$id": "39",
+      "$id": "46",
       "Kind": "array",
       "Name": "ArrayResource",
       "ValueType": {
-       "$id": "40",
-       "Kind": "model",
-       "Name": "Resource",
-       "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource",
-       "Usage": "Input,Output,Json",
-       "Properties": [
-        {
-         "$id": "41",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "",
-         "Type": {
-          "$id": "42",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": true
-        },
-        {
-         "$id": "43",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "",
-         "Type": {
-          "$id": "44",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": true
-        },
-        {
-         "$id": "45",
-         "Name": "type",
-         "SerializedName": "type",
-         "Description": "",
-         "Type": {
-          "$id": "46",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$ref": "17"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -347,150 +350,192 @@
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$ref": "40"
   }
  ],
  "Clients": [
   {
    "$id": "49",
    "Name": "SpecificClient",
-   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "50"
-   }
-  },
-  {
-   "$id": "51",
-   "Name": "ResourceOperations",
-   "Description": "",
-   "Operations": [],
-   "Protocol": {
-    "$id": "52"
    },
-   "Parent": "SpecificClient"
+   "Parameters": [
+    {
+     "$id": "51",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "52",
+      "Kind": "uri"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
   },
   {
    "$id": "53",
+   "Name": "ResourceOperations",
+   "Operations": [],
+   "Protocol": {
+    "$id": "54"
+   },
+   "Parent": "SpecificClient",
+   "Parameters": [
+    {
+     "$id": "55",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "56",
+      "Kind": "uri"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
+  },
+  {
+   "$id": "57",
    "Name": "VersioningOp",
-   "Description": "",
    "Operations": [
     {
-     "$id": "54",
+     "$id": "58",
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "55",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "$id": "59",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
-        "$id": "56",
-        "Kind": "string"
+        "$id": "60",
+        "Kind": "uri"
        },
-       "Location": "Query",
-       "DefaultValue": {
-        "$id": "57",
-        "Type": {
-         "$id": "58",
-         "Kind": "string"
-        },
-        "Value": "2022-09-01"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
       },
       {
-       "$id": "59",
-       "Name": "name",
-       "NameInRequest": "name",
-       "Type": {
-        "$id": "60",
-        "Kind": "string"
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
        "$id": "61",
-       "Name": "projectFileVersion",
-       "NameInRequest": "projectFileVersion",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "62",
         "Kind": "string"
        },
        "Location": "Query",
-       "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
+       "IsApiVersion": true,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "63",
+        "Type": {
+         "$id": "64",
+         "Kind": "string"
+        },
+        "Value": "2022-09-01"
+       }
+      },
+      {
+       "$id": "65",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Type": {
+        "$id": "66",
+        "Kind": "string"
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "67",
+       "Name": "projectFileVersion",
+       "NameInRequest": "projectFileVersion",
+       "Type": {
+        "$id": "68",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
-        "Kind": "string"
+        "$id": "70",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "71",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "65",
-        "Type": {
-         "$ref": "64"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "72",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "24"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "67",
-         "Name": "Operation-Location",
-         "NameInResponse": "operationLocation",
+         "$id": "73",
+         "Name": "operationLocation",
+         "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "68",
+          "$id": "74",
           "Kind": "url"
          }
         }
@@ -503,19 +548,19 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "",
+     "Uri": "{endpoint}",
      "Path": "/versioning/resources/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "69",
+      "$id": "75",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "70",
+       "$id": "76",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "24"
        },
        "BodyMediaType": "Json"
       },
@@ -525,111 +570,109 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "71",
+     "$id": "77",
      "Name": "list",
      "ResourceName": "Resource",
      "Description": "Resource list operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "72",
+       "$ref": "59"
+      },
+      {
+       "$id": "78",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "73",
+        "$id": "79",
         "Kind": "string"
        },
        "Location": "Query",
-       "DefaultValue": {
-        "$ref": "57"
-       },
-       "IsRequired": true,
        "IsApiVersion": true,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "80",
+        "Type": {
+         "$id": "81",
+         "Kind": "string"
+        },
+        "Value": "2022-09-01"
+       }
       },
       {
-       "$id": "74",
+       "$id": "82",
        "Name": "select",
        "NameInRequest": "select",
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
-        "$id": "75",
+        "$id": "83",
         "Kind": "array",
         "Name": "Array",
         "ValueType": {
-         "$id": "76",
+         "$id": "84",
          "Kind": "string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": true,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "77",
+       "$id": "85",
        "Name": "expand",
        "NameInRequest": "expand",
        "Type": {
-        "$id": "78",
+        "$id": "86",
         "Kind": "string"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "79",
+       "$id": "87",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "80",
-        "Kind": "string"
+        "$id": "88",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "89",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "81",
-        "Type": {
-         "$ref": "80"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "82",
+       "$id": "90",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "37"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -641,141 +684,136 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "",
+     "Uri": "{endpoint}",
      "Path": "/versioning/resources",
      "BufferResponse": true,
      "Paging": {
-      "$id": "83",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "$id": "91",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "84",
+     "$id": "92",
      "Name": "create",
      "ResourceName": "Resource",
      "Description": "Create or replace operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "85",
+       "$ref": "59"
+      },
+      {
+       "$id": "93",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "86",
+        "$id": "94",
         "Kind": "string"
        },
        "Location": "Query",
-       "DefaultValue": {
-        "$ref": "57"
-       },
-       "IsRequired": true,
        "IsApiVersion": true,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "95",
+        "Type": {
+         "$id": "96",
+         "Kind": "string"
+        },
+        "Value": "2022-09-01"
+       }
       },
       {
-       "$id": "87",
+       "$id": "97",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "88",
+        "$id": "98",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "89",
+       "$id": "99",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "100",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "101",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "102",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "103",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "104",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "105",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
        "Type": {
-        "$ref": "40"
+        "$ref": "17"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "90",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "91",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "92",
-        "Type": {
-         "$ref": "91"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "93",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "94",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "95",
-        "Type": {
-         "$ref": "94"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "106",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -785,12 +823,12 @@
        ]
       },
       {
-       "$id": "97",
+       "$id": "107",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "17"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -802,7 +840,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "",
+     "Uri": "{endpoint}",
      "Path": "/versioning/resources/{name}",
      "RequestMediaTypes": [
       "application/json"
@@ -813,9 +851,14 @@
     }
    ],
    "Protocol": {
-    "$id": "98"
+    "$id": "108"
    },
-   "Parent": "SpecificClient"
+   "Parent": "SpecificClient",
+   "Parameters": [
+    {
+     "$ref": "59"
+    }
+   ]
   }
  ]
 }

@@ -978,6 +978,46 @@ default
 
         [Test]
         [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_GetInternalInput_ShortVersion()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetInternalInputAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_GetInternalInput_ShortVersion_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_GetInternalInput_AllParameters()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response response = await client.GetInternalInputAsync(null);
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
+        public async Task ModelsTypeSpec_GetInternalInput_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ModelsTypeSpecClient client = CreateModelsTypeSpecClient(endpoint);
+
+            Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+        }
+
+        [Test]
+        [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task ModelsTypeSpec_AnalyzeConversation_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

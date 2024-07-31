@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Pipeline;
 
 namespace TypeSpec.Versioning.Latest
@@ -14,6 +15,7 @@ namespace TypeSpec.Versioning.Latest
     public partial class Resource
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,10 +31,12 @@ namespace TypeSpec.Versioning.Latest
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline)
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
+            _endpoint = endpoint;
         }
     }
 }

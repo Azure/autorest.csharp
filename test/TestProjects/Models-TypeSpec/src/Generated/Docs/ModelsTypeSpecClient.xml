@@ -2023,6 +2023,86 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 ]]></code></example>
     </member>
+    <member name="GetInternalInputAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetInternalInputAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+]]></code>
+This sample shows how to call GetInternalInputAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<ModelInternalInput> response = await client.GetInternalInputAsync();
+]]></code></example>
+    </member>
+    <member name="GetInternalInput(CancellationToken)">
+      <example>
+This sample shows how to call GetInternalInput.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<ModelInternalInput> response = client.GetInternalInput();
+]]></code>
+This sample shows how to call GetInternalInput with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response<ModelInternalInput> response = client.GetInternalInput();
+]]></code></example>
+    </member>
+    <member name="GetInternalInputAsync(RequestContext)">
+      <example>
+This sample shows how to call GetInternalInputAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.GetInternalInputAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code>
+This sample shows how to call GetInternalInputAsync with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.GetInternalInputAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code></example>
+    </member>
+    <member name="GetInternalInput(RequestContext)">
+      <example>
+This sample shows how to call GetInternalInput and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.GetInternalInput(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code>
+This sample shows how to call GetInternalInput with all parameters and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.GetInternalInput(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code></example>
+    </member>
     <member name="AnalyzeConversationAsync(CancellationToken)">
       <example>
 This sample shows how to call AnalyzeConversationAsync.
