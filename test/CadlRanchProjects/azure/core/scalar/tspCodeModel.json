@@ -55,7 +55,6 @@
   {
    "$id": "8",
    "Name": "ScalarClient",
-   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "9"
@@ -63,9 +62,8 @@
    "Parameters": [
     {
      "$id": "10",
-     "Name": "host",
-     "NameInRequest": "host",
-     "Description": "TestServer endpoint",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
      "Type": {
       "$id": "11",
       "Kind": "string"
@@ -93,7 +91,6 @@
   {
    "$id": "14",
    "Name": "AzureLocationScalar",
-   "Description": "",
    "Operations": [
     {
      "$id": "15",
@@ -103,42 +100,61 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
-      },
-      {
        "$id": "16",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
         "Kind": "string"
        },
-       "Location": "Header",
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "18",
         "Type": {
-         "$ref": "17"
+         "$id": "19",
+         "Kind": "string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "22",
+         "Kind": "string"
         },
         "Value": "application/json"
-       }
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "20",
+        "$id": "24",
         "Kind": "azureLocation",
         "Encode": "string"
        },
@@ -152,96 +168,66 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/scalar/azureLocation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "21",
+     "$id": "25",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "16"
       },
       {
-       "$id": "22",
+       "$id": "26",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "27",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "28",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "29",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "23",
+        "$id": "30",
         "Kind": "azureLocation",
         "Encode": "string"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "24",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "25",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "26",
-        "Type": {
-         "$ref": "25"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "27",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "28",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$ref": "28"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -252,7 +238,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/scalar/azureLocation",
      "RequestMediaTypes": [
       "application/json"
@@ -262,17 +248,60 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "16"
       },
       {
-       "$id": "32",
+       "$id": "33",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "34",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "35",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "36",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "37",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "38",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -280,69 +309,17 @@
         "$ref": "5"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "33",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "34",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "35",
-        "Type": {
-         "$ref": "34"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "36",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "37",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "38",
-        "Type": {
-         "$ref": "37"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -359,7 +336,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/scalar/azureLocation",
      "RequestMediaTypes": [
       "application/json"
@@ -369,64 +346,37 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "40",
+     "$id": "41",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "16"
       },
       {
-       "$id": "41",
+       "$id": "42",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "42",
+        "$id": "43",
         "Kind": "azureLocation",
         "Encode": "string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "43",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "44",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "45",
-        "Type": {
-         "$ref": "44"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -437,71 +387,44 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/scalar/azureLocation/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "45",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "16"
       },
       {
-       "$id": "48",
+       "$id": "46",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "49",
+        "$id": "47",
         "Kind": "azureLocation",
         "Encode": "string"
        },
        "Location": "Query",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "50",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "51",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "52",
-        "Type": {
-         "$ref": "51"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "48",
        "StatusCodes": [
         204
        ],
@@ -512,7 +435,7 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/scalar/azureLocation/query",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -520,12 +443,12 @@
     }
    ],
    "Protocol": {
-    "$id": "54"
+    "$id": "49"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "16"
     }
    ]
   }

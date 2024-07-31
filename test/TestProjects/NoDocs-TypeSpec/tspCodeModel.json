@@ -500,8 +500,8 @@
   {
    "$id": "78",
    "Kind": "enum",
-   "Name": "DaysOfWeekExtensibleEnum",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
    "ValueType": {
     "$id": "79",
     "Kind": "string"
@@ -509,61 +509,61 @@
    "Values": [
     {
      "$id": "80",
-     "Name": "Monday",
-     "Value": "Monday"
-    },
-    {
-     "$id": "81",
-     "Name": "Tuesday",
-     "Value": "Tuesday"
-    },
-    {
-     "$id": "82",
-     "Name": "Wednesday",
-     "Value": "Wednesday"
-    },
-    {
-     "$id": "83",
-     "Name": "Thursday",
-     "Value": "Thursday"
-    },
-    {
-     "$id": "84",
-     "Name": "Friday",
-     "Value": "Friday"
-    },
-    {
-     "$id": "85",
-     "Name": "Saturday",
-     "Value": "Saturday"
-    },
-    {
-     "$id": "86",
-     "Name": "Sunday",
-     "Value": "Sunday"
-    }
-   ],
-   "IsExtensible": true,
-   "Usage": "None"
-  },
-  {
-   "$id": "87",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "NoDocsTypeSpec.Versions",
-   "ValueType": {
-    "$id": "88",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "89",
      "Name": "2022-05-15-preview",
      "Value": "2022-05-15-preview"
     }
    ],
    "IsExtensible": false,
    "Usage": "ApiVersionEnum"
+  },
+  {
+   "$id": "81",
+   "Kind": "enum",
+   "Name": "DaysOfWeekExtensibleEnum",
+   "CrossLanguageDefinitionId": "NoDocsTypeSpec.DaysOfWeekExtensibleEnum",
+   "ValueType": {
+    "$id": "82",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "83",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "84",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "85",
+     "Name": "Wednesday",
+     "Value": "Wednesday"
+    },
+    {
+     "$id": "86",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "87",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "88",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "89",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": true,
+   "Usage": "None"
   }
  ],
  "Models": [
@@ -1858,7 +1858,7 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "272",
-        "Kind": "url"
+        "Kind": "uri"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1876,24 +1876,20 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "274",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "275",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "275",
-        "Type": {
-         "$ref": "274"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
@@ -1933,70 +1929,61 @@
       },
       {
        "$id": "278",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "279",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "280",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "281",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "282",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "283",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "284",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "90"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "279",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "280",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "281",
-        "Type": {
-         "$ref": "280"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "282",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "283",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "284",
-        "Type": {
-         "$ref": "283"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2039,70 +2026,61 @@
       },
       {
        "$id": "287",
-       "Name": "AnonymousBodyRequest",
-       "NameInRequest": "",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "288",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "289",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "290",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "291",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "292",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "293",
+       "Name": "anonymousBodyRequest",
+       "NameInRequest": "anonymousBodyRequest",
        "Type": {
         "$ref": "127"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Spread"
-      },
-      {
-       "$id": "288",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "289",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "290",
-        "Type": {
-         "$ref": "289"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "291",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "292",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "293",
-        "Type": {
-         "$ref": "292"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2145,70 +2123,61 @@
       },
       {
        "$id": "296",
-       "Name": "FriendlyModelRequest",
-       "NameInRequest": "",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "297",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "298",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "299",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "300",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "301",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "302",
+       "Name": "friendlyModelRequest",
+       "NameInRequest": "friendlyModelRequest",
        "Type": {
         "$ref": "164"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Spread"
-      },
-      {
-       "$id": "297",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "298",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "299",
-        "Type": {
-         "$ref": "298"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "300",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "301",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "302",
-        "Type": {
-         "$ref": "301"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2262,44 +2231,17 @@
         }
        },
        "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
        "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "308",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "309",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "310",
-        "Type": {
-         "$ref": "309"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "311",
+       "$id": "308",
        "StatusCodes": [
         204
        ],
@@ -2317,7 +2259,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "312",
+     "$id": "309",
      "Name": "projectedNameModel",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "Model can have its projected name",
@@ -2327,76 +2269,67 @@
        "$ref": "271"
       },
       {
+       "$id": "310",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "311",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "312",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
        "$id": "313",
-       "Name": "ProjectedNameModelRequest",
-       "NameInRequest": "",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "314",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "315",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "316",
+       "Name": "projectedNameModelRequest",
+       "NameInRequest": "projectedNameModelRequest",
        "Type": {
         "$ref": "170"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Spread"
-      },
-      {
-       "$id": "314",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "315",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "316",
-        "Type": {
-         "$ref": "315"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "317",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "318",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "319",
-        "Type": {
-         "$ref": "318"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "320",
+       "$id": "317",
        "StatusCodes": [
         200
        ],
@@ -2423,7 +2356,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "321",
+     "$id": "318",
      "Name": "returnsAnonymousModel",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "return anonymous model",
@@ -2433,34 +2366,30 @@
        "$ref": "271"
       },
       {
-       "$id": "322",
+       "$id": "319",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "323",
-        "Kind": "string"
+        "$id": "320",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "321",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "324",
-        "Type": {
-         "$ref": "323"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "325",
+       "$id": "322",
        "StatusCodes": [
         200
        ],
@@ -2484,7 +2413,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "326",
+     "$id": "323",
      "Name": "headAsBoolean",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "head as boolean.",
@@ -2494,52 +2423,25 @@
        "$ref": "271"
       },
       {
-       "$id": "327",
+       "$id": "324",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "328",
+        "$id": "325",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "329",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "330",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "331",
-        "Type": {
-         "$ref": "330"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "332",
+       "$id": "326",
        "StatusCodes": [
         204
        ],
@@ -2557,7 +2459,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "333",
+     "$id": "327",
      "Name": "stringBody",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "The body parameter type is string.",
@@ -2567,77 +2469,47 @@
        "$ref": "271"
       },
       {
-       "$id": "334",
+       "$id": "328",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "329",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "330",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "331",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "335",
+        "$id": "332",
         "Kind": "string"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "336",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "337",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "338",
-        "Type": {
-         "$ref": "337"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "339",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "340",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "341",
-        "Type": {
-         "$ref": "340"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "342",
+       "$id": "333",
        "StatusCodes": [
         204
        ],
@@ -2647,7 +2519,7 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "None",
+     "RequestBodyMediaType": "Text",
      "Uri": "{endpoint}",
      "Path": "/stringBody",
      "RequestMediaTypes": [
@@ -2658,7 +2530,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "343",
+     "$id": "334",
      "Name": "boolBody",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "The body parameter type is bool.",
@@ -2668,77 +2540,47 @@
        "$ref": "271"
       },
       {
-       "$id": "344",
+       "$id": "335",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "336",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "337",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "338",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "345",
+        "$id": "339",
         "Kind": "boolean"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "346",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "347",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "348",
-        "Type": {
-         "$ref": "347"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "349",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "350",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "351",
-        "Type": {
-         "$ref": "350"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "352",
+       "$id": "340",
        "StatusCodes": [
         204
        ],
@@ -2759,7 +2601,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "353",
+     "$id": "341",
      "Name": "dateTimeBody",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "The body parameter type is datetime.",
@@ -2769,82 +2611,52 @@
        "$ref": "271"
       },
       {
-       "$id": "354",
+       "$id": "342",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "343",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "344",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "345",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "355",
+        "$id": "346",
         "Kind": "utcDateTime",
         "Encode": "rfc3339",
         "WireType": {
-         "$id": "356",
+         "$id": "347",
          "Kind": "string"
         }
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "357",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "358",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "359",
-        "Type": {
-         "$ref": "358"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "360",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "361",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "362",
-        "Type": {
-         "$ref": "361"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "363",
+       "$id": "348",
        "StatusCodes": [
         204
        ],
@@ -2865,7 +2677,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "364",
+     "$id": "349",
      "Name": "returnString",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "The return type is datetime.",
@@ -2875,39 +2687,35 @@
        "$ref": "271"
       },
       {
-       "$id": "365",
+       "$id": "350",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "366",
-        "Kind": "string"
+        "$id": "351",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "352",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "367",
-        "Type": {
-         "$ref": "366"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "368",
+       "$id": "353",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "369",
+        "$id": "354",
         "Kind": "string"
        },
        "BodyMediaType": "Json",
@@ -2927,7 +2735,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "370",
+     "$id": "355",
      "Name": "returnUnknown",
      "ResourceName": "NoDocsTypeSpec",
      "Accessibility": "public",
@@ -2936,39 +2744,35 @@
        "$ref": "271"
       },
       {
-       "$id": "371",
+       "$id": "356",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "372",
-        "Kind": "string"
+        "$id": "357",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "358",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "373",
-        "Type": {
-         "$ref": "372"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "374",
+       "$id": "359",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "375",
+        "$id": "360",
         "Kind": "any"
        },
        "BodyMediaType": "Json",
@@ -2988,7 +2792,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "376",
+     "$id": "361",
      "Name": "recursiveExtension",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test parent reference child",
@@ -2998,76 +2802,46 @@
        "$ref": "271"
       },
       {
-       "$id": "377",
+       "$id": "362",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "363",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "364",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "365",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
         "$ref": "177"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "378",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "379",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "380",
-        "Type": {
-         "$ref": "379"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "381",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "382",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "383",
-        "Type": {
-         "$ref": "382"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "384",
+       "$id": "366",
        "StatusCodes": [
         204
        ],
@@ -3088,7 +2862,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "385",
+     "$id": "367",
      "Name": "threeLevelRecursive",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test three level recursive extension",
@@ -3098,76 +2872,46 @@
        "$ref": "271"
       },
       {
-       "$id": "386",
+       "$id": "368",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "369",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "370",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "371",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
         "$ref": "183"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "387",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "388",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "389",
-        "Type": {
-         "$ref": "388"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "390",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "391",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "392",
-        "Type": {
-         "$ref": "391"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "393",
+       "$id": "372",
        "StatusCodes": [
         204
        ],
@@ -3188,7 +2932,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "394",
+     "$id": "373",
      "Name": "recursiveModels",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test child reference parent",
@@ -3198,76 +2942,46 @@
        "$ref": "271"
       },
       {
-       "$id": "395",
+       "$id": "374",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "375",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "376",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "377",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
         "$ref": "192"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "396",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "397",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "398",
-        "Type": {
-         "$ref": "397"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "399",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "400",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "401",
-        "Type": {
-         "$ref": "400"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "402",
+       "$id": "378",
        "StatusCodes": [
         204
        ],
@@ -3288,7 +3002,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "403",
+     "$id": "379",
      "Name": "ContainSelfModels",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test contain self models",
@@ -3298,76 +3012,46 @@
        "$ref": "271"
       },
       {
-       "$id": "404",
+       "$id": "380",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "381",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "382",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "383",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
         "$ref": "198"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "405",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "406",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "407",
-        "Type": {
-         "$ref": "406"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "408",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "409",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "410",
-        "Type": {
-         "$ref": "409"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "411",
+       "$id": "384",
        "StatusCodes": [
         204
        ],
@@ -3388,7 +3072,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "412",
+     "$id": "385",
      "Name": "enumParameter",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test enum parameter.",
@@ -3398,51 +3082,24 @@
        "$ref": "271"
       },
       {
-       "$id": "413",
+       "$id": "386",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
         "$ref": "38"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "414",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "415",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "416",
-        "Type": {
-         "$ref": "415"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "417",
+       "$id": "387",
        "StatusCodes": [
         204
        ],
@@ -3460,7 +3117,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "418",
+     "$id": "388",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test enum parameter.",
@@ -3470,76 +3127,46 @@
        "$ref": "271"
       },
       {
-       "$id": "419",
+       "$id": "389",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "390",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "391",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "392",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "200"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "420",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "421",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "422",
-        "Type": {
-         "$ref": "421"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "423",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "424",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "425",
-        "Type": {
-         "$ref": "424"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "426",
+       "$id": "393",
        "StatusCodes": [
         204
        ],
@@ -3560,7 +3187,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "427",
+     "$id": "394",
      "Name": "optionalDictionary",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test optional dictionary.",
@@ -3570,85 +3197,55 @@
        "$ref": "271"
       },
       {
-       "$id": "428",
+       "$id": "395",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "396",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "397",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "398",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "429",
+        "$id": "399",
         "Kind": "dict",
         "KeyType": {
-         "$id": "430",
+         "$id": "400",
          "Kind": "string"
         },
         "ValueType": {
-         "$id": "431",
+         "$id": "401",
          "Kind": "int32"
         }
        },
        "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
        "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "432",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "433",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "434",
-        "Type": {
-         "$ref": "433"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "435",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "436",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "437",
-        "Type": {
-         "$ref": "436"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "438",
+       "$id": "402",
        "StatusCodes": [
         204
        ],
@@ -3658,7 +3255,7 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
      "Path": "/optionalDictionary",
      "RequestMediaTypes": [
@@ -3669,7 +3266,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "439",
+     "$id": "403",
      "Name": "azureLocationOp",
      "ResourceName": "NoDocsTypeSpec",
      "Description": "test optional dictionary.",
@@ -3679,114 +3276,80 @@
        "$ref": "271"
       },
       {
-       "$id": "440",
+       "$id": "404",
        "Name": "location",
        "NameInRequest": "location",
        "Type": {
-        "$id": "441",
+        "$id": "405",
         "Kind": "azureLocation",
         "Encode": "string"
        },
        "Location": "Query",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "442",
+       "$id": "406",
        "Name": "regenLocation",
        "NameInRequest": "regen-location",
        "Type": {
-        "$id": "443",
+        "$id": "407",
         "Kind": "azureLocation",
         "Encode": "string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "444",
+       "$id": "408",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "409",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "410",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "411",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "202"
        },
        "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
        "IsRequired": false,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
        "Kind": "Method"
-      },
-      {
-       "$id": "445",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "446",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "447",
-        "Type": {
-         "$ref": "446"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "448",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "449",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "450",
-        "Type": {
-         "$ref": "449"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "451",
+       "$id": "412",
        "StatusCodes": [
         204
        ],
@@ -3808,7 +3371,7 @@
     }
    ],
    "Protocol": {
-    "$id": "452"
+    "$id": "413"
    },
    "Parameters": [
     {
@@ -3817,118 +3380,137 @@
    ]
   },
   {
-   "$id": "453",
+   "$id": "414",
    "Name": "Hello",
-   "Description": "",
    "Operations": [],
    "Protocol": {
-    "$id": "454"
+    "$id": "415"
    },
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "271"
+     "$id": "416",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "417",
+      "Kind": "uri"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ]
   },
   {
-   "$id": "455",
+   "$id": "418",
    "Name": "HelloDemo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "456",
+     "$id": "419",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$id": "420",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "421",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "457",
+       "$id": "422",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "458",
+        "$id": "423",
         "Kind": "string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "459",
+       "$id": "424",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "460",
+        "$id": "425",
         "Kind": "string"
        },
        "Location": "Query",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "461",
+       "$id": "426",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "462",
+        "$id": "427",
         "Kind": "string"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "463",
+       "$id": "428",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "464",
-        "Kind": "string"
+        "$id": "429",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "430",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "465",
-        "Type": {
-         "$ref": "464"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "466",
+       "$id": "431",
        "StatusCodes": [
         200
        ],
@@ -3953,142 +3535,137 @@
     }
    ],
    "Protocol": {
-    "$id": "467"
+    "$id": "432"
    },
    "Parent": "Hello",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "420"
     }
    ]
   },
   {
-   "$id": "468",
+   "$id": "433",
    "Name": "HelloDemo2",
-   "Description": "",
    "Operations": [
     {
-     "$id": "469",
+     "$id": "434",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
-      },
-      {
-       "$id": "470",
-       "Name": "p1",
-       "NameInRequest": "p1",
+       "$id": "435",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
-        "$id": "471",
-        "Kind": "string"
+        "$id": "436",
+        "Kind": "uri"
        },
-       "Location": "Header",
-       "IsRequired": true,
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "437",
+       "Name": "p1",
+       "NameInRequest": "p1",
+       "Type": {
+        "$id": "438",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "472",
+       "$id": "439",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "473",
+        "$id": "440",
         "Kind": "constant",
         "ValueType": {
-         "$id": "474",
+         "$id": "441",
          "Kind": "string"
         },
         "Value": "text/plain"
        },
        "Location": "Header",
-       "DefaultValue": {
-        "$id": "475",
-        "Type": {
-         "$ref": "473"
-        },
-        "Value": "text/plain"
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant"
       },
       {
-       "$id": "476",
+       "$id": "442",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "477",
+        "$id": "443",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "478",
+       "$id": "444",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "445",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "446",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "447",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
         "$ref": "205"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "479",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "480",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "481",
-        "Type": {
-         "$ref": "480"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "482",
+       "$id": "448",
        "StatusCodes": [
         200
        ],
@@ -4115,122 +3692,109 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "483",
+     "$id": "449",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$ref": "435"
       },
       {
-       "$id": "484",
+       "$id": "450",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "485",
+        "$id": "451",
         "Kind": "string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "486",
+       "$id": "452",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "487",
+        "$id": "453",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "488",
+       "$id": "454",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "455",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "456",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "457",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "458",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "459",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "460",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
         "$ref": "205"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "489",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "490",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "491",
-        "Type": {
-         "$ref": "490"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "492",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "493",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "494",
-        "Type": {
-         "$ref": "493"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "495",
+       "$id": "461",
        "StatusCodes": [
         200
        ],
@@ -4257,44 +3821,40 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "496",
+     "$id": "462",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$ref": "435"
       },
       {
-       "$id": "497",
+       "$id": "463",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "498",
-        "Kind": "string"
+        "$id": "464",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "465",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "499",
-        "Type": {
-         "$ref": "498"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "500",
+       "$id": "466",
        "StatusCodes": [
         200
        ],
@@ -4318,86 +3878,77 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "501",
+     "$id": "467",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$ref": "435"
       },
       {
-       "$id": "502",
+       "$id": "468",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "469",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "470",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "471",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "472",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "473",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "474",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "90"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "503",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "504",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "505",
-        "Type": {
-         "$ref": "504"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "506",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "507",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "508",
-        "Type": {
-         "$ref": "507"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "509",
+       "$id": "475",
        "StatusCodes": [
         200
        ],
@@ -4424,134 +3975,103 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "510",
+     "$id": "476",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$ref": "435"
       },
       {
-       "$id": "511",
+       "$id": "477",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "512",
+        "$id": "478",
         "Kind": "constant",
         "ValueType": {
-         "$id": "513",
+         "$id": "479",
          "Kind": "string"
         },
         "Value": "test"
        },
        "Location": "Header",
-       "DefaultValue": {
-        "$id": "514",
-        "Type": {
-         "$ref": "512"
-        },
-        "Value": "test"
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant"
       },
       {
-       "$id": "515",
+       "$id": "480",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "516",
+        "$id": "481",
         "Kind": "constant",
         "ValueType": {
-         "$id": "517",
+         "$id": "482",
          "Kind": "int32"
         },
         "Value": 123
        },
        "Location": "Path",
-       "DefaultValue": {
-        "$id": "518",
-        "Type": {
-         "$ref": "516"
-        },
-        "Value": 123
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant"
       },
       {
-       "$id": "519",
+       "$id": "483",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "520",
+        "$id": "484",
         "Kind": "constant",
         "ValueType": {
-         "$id": "521",
+         "$id": "485",
          "Kind": "boolean"
         },
         "Value": true
        },
        "Location": "Query",
-       "DefaultValue": {
-        "$id": "522",
-        "Type": {
-         "$ref": "520"
-        },
-        "Value": true
-       },
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant"
       },
       {
-       "$id": "523",
+       "$id": "486",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "524",
-        "Kind": "string"
+        "$id": "487",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "488",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "525",
-        "Type": {
-         "$ref": "524"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "526",
+       "$id": "489",
        "StatusCodes": [
         200
        ],
@@ -4576,101 +4096,85 @@
     }
    ],
    "Protocol": {
-    "$id": "527"
+    "$id": "490"
    },
    "Parent": "Hello",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "435"
     }
    ]
   },
   {
-   "$id": "528",
+   "$id": "491",
    "Name": "EnumTest",
-   "Description": "",
    "Operations": [
     {
-     "$id": "529",
+     "$id": "492",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$id": "493",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "494",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "530",
+       "$id": "495",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "496",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "497",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "498",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "78"
+        "$ref": "81"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "531",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "532",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "533",
-        "Type": {
-         "$ref": "532"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "534",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "535",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "536",
-        "Type": {
-         "$ref": "535"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "537",
+       "$id": "499",
        "StatusCodes": [
         204
        ],
@@ -4692,101 +4196,106 @@
     }
    ],
    "Protocol": {
-    "$id": "538"
+    "$id": "500"
    },
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "493"
     }
    ]
   },
   {
-   "$id": "539",
+   "$id": "501",
    "Name": "ProtocolAndConvenient",
-   "Description": "",
    "Operations": [
     {
-     "$id": "540",
+     "$id": "502",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$id": "503",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "504",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "541",
+       "$id": "505",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "506",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "507",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "508",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "509",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "510",
+         "Kind": "string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "511",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "90"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "542",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "543",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "544",
-        "Type": {
-         "$ref": "543"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "545",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "546",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "547",
-        "Type": {
-         "$ref": "546"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "548",
+       "$id": "512",
        "StatusCodes": [
         200
        ],
@@ -4813,44 +4322,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "549",
+     "$id": "513",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
-      },
-      {
-       "$id": "550",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "551",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "552",
-        "Type": {
-         "$ref": "551"
-        },
-        "Value": "application/json"
-       }
+       "$ref": "503"
       }
      ],
      "Responses": [
       {
-       "$id": "553",
+       "$id": "514",
        "StatusCodes": [
         204
        ],
@@ -4869,77 +4353,85 @@
     }
    ],
    "Protocol": {
-    "$id": "554"
+    "$id": "515"
    },
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "503"
     }
    ]
   },
   {
-   "$id": "555",
+   "$id": "516",
    "Name": "Entity",
-   "Description": "",
    "Operations": [
     {
-     "$id": "556",
+     "$id": "517",
      "Name": "doSomething",
      "ResourceName": "Entity",
      "Description": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$id": "518",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "519",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "557",
+       "$id": "520",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "558",
+        "$id": "521",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "559",
+       "$id": "522",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "560",
-        "Kind": "string"
+        "$id": "523",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "524",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "561",
-        "Type": {
-         "$ref": "560"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "562",
+       "$id": "525",
        "StatusCodes": [
         200
        ],
@@ -4964,95 +4456,101 @@
     }
    ],
    "Protocol": {
-    "$id": "563"
+    "$id": "526"
    },
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "518"
     }
    ]
   },
   {
-   "$id": "564",
+   "$id": "527",
    "Name": "Glossary",
-   "Description": "",
    "Operations": [
     {
-     "$id": "565",
+     "$id": "528",
      "Name": "doSomething",
      "ResourceName": "Glossary",
      "Description": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "271"
+       "$id": "529",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "530",
+        "Kind": "uri"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
       },
       {
-       "$id": "566",
+       "$id": "531",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "567",
+        "$id": "532",
         "Kind": "string"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "568",
+       "$id": "533",
        "Name": "h1",
        "NameInRequest": "h1",
        "Type": {
-        "$id": "569",
+        "$id": "534",
         "Kind": "string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "570",
+       "$id": "535",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "571",
-        "Kind": "string"
+        "$id": "536",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "537",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "572",
-        "Type": {
-         "$ref": "571"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "573",
+       "$id": "538",
        "StatusCodes": [
         200
        ],
@@ -5077,27 +4575,27 @@
     }
    ],
    "Protocol": {
-    "$id": "574"
+    "$id": "539"
    },
    "Parent": "NoDocsTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "271"
+     "$ref": "529"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "575",
-  "ApiKey": {
-   "$id": "576",
-   "Name": "x-ms-api-key"
-  },
+  "$id": "540",
   "OAuth2": {
-   "$id": "577",
+   "$id": "541",
    "Scopes": [
     "https://api.example.com/.default"
    ]
+  },
+  "ApiKey": {
+   "$id": "542",
+   "Name": "x-ms-api-key"
   }
  }
 }

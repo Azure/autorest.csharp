@@ -23,7 +23,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "5",
-        "Kind": "url"
+        "Kind": "uri"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -34,36 +34,11 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
-      },
-      {
-       "$id": "6",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "7",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$ref": "7"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "9",
+       "$id": "6",
        "StatusCodes": [
         200
        ],
@@ -82,7 +57,7 @@
     }
    ],
    "Protocol": {
-    "$id": "10"
+    "$id": "7"
    },
    "Parameters": [
     {

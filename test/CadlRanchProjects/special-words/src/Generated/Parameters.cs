@@ -34,7 +34,7 @@ namespace SpecialWords
         /// <summary> Initializes a new instance of Parameters. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Parameters(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -2432,7 +2432,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/and", false);
             uri.AppendQuery("and", and, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2446,7 +2445,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/as", false);
             uri.AppendQuery("as", @as, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2460,7 +2458,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/assert", false);
             uri.AppendQuery("assert", assert, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2474,7 +2471,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/async", false);
             uri.AppendQuery("async", @async, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2488,7 +2484,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/await", false);
             uri.AppendQuery("await", @await, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2502,7 +2497,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/break", false);
             uri.AppendQuery("break", @break, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2516,7 +2510,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/class", false);
             uri.AppendQuery("class", @class, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2530,7 +2523,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/constructor", false);
             uri.AppendQuery("constructor", constructor, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2544,7 +2536,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/continue", false);
             uri.AppendQuery("continue", @continue, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2558,7 +2549,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/def", false);
             uri.AppendQuery("def", def, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2572,7 +2562,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/del", false);
             uri.AppendQuery("del", del, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2586,7 +2575,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/elif", false);
             uri.AppendQuery("elif", elif, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2600,7 +2588,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/else", false);
             uri.AppendQuery("else", @else, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2614,7 +2601,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/except", false);
             uri.AppendQuery("except", except, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2628,7 +2614,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/exec", false);
             uri.AppendQuery("exec", exec, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2642,7 +2627,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/finally", false);
             uri.AppendQuery("finally", @finally, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2656,7 +2640,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/for", false);
             uri.AppendQuery("for", @for, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2670,7 +2653,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/from", false);
             uri.AppendQuery("from", @from, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2684,7 +2666,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/global", false);
             uri.AppendQuery("global", @global, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2698,7 +2679,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/if", false);
             uri.AppendQuery("if", @if, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2712,7 +2692,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/import", false);
             uri.AppendQuery("import", import, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2726,7 +2705,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/in", false);
             uri.AppendQuery("in", @in, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2740,7 +2718,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/is", false);
             uri.AppendQuery("is", @is, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2754,7 +2731,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/lambda", false);
             uri.AppendQuery("lambda", lambda, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2768,7 +2744,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/not", false);
             uri.AppendQuery("not", not, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2782,7 +2757,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/or", false);
             uri.AppendQuery("or", or, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2796,7 +2770,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/pass", false);
             uri.AppendQuery("pass", pass, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2810,7 +2783,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/raise", false);
             uri.AppendQuery("raise", raise, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2824,7 +2796,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/return", false);
             uri.AppendQuery("return", @return, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2838,7 +2809,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/try", false);
             uri.AppendQuery("try", @try, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2852,7 +2822,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/while", false);
             uri.AppendQuery("while", @while, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2866,7 +2835,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/with", false);
             uri.AppendQuery("with", with, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2880,7 +2848,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/yield", false);
             uri.AppendQuery("yield", @yield, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -2894,7 +2861,6 @@ namespace SpecialWords
             uri.AppendPath("/special-words/parameters/cancellationToken", false);
             uri.AppendQuery("cancellationToken", cancellationToken, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
