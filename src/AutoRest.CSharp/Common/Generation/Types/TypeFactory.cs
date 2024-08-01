@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Types
             InputPrimitiveType? primitiveType = inputType;
             while (primitiveType != null)
             {
-                if (_knownPrimitiveTypes.TryGetValue(primitiveType.CrossLanguageDefinitionId, out var knownType))
+                if (_knownAzureTypes.TryGetValue(primitiveType.CrossLanguageDefinitionId, out var knownType))
                 {
                     return knownType;
                 }
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Types
             };
         }
 
-        private static readonly IReadOnlyDictionary<string, CSharpType> _knownPrimitiveTypes = new Dictionary<string, CSharpType>
+        private static readonly IReadOnlyDictionary<string, CSharpType> _knownAzureTypes = new Dictionary<string, CSharpType>
         {
             [InputPrimitiveType.UuidId] = typeof(Guid),
             [InputPrimitiveType.IPv4AddressId] = typeof(IPAddress),
