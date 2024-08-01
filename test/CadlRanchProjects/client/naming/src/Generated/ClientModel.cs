@@ -16,8 +16,8 @@ using Client.Naming.Models;
 namespace Client.Naming
 {
     // Data plane generated sub-client.
-    /// <summary> The Model sub-client. </summary>
-    public partial class Model
+    /// <summary> The ClientModel sub-client. </summary>
+    public partial class ClientModel
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -28,16 +28,16 @@ namespace Client.Naming
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Model for mocking. </summary>
-        protected Model()
+        /// <summary> Initializes a new instance of ClientModel for mocking. </summary>
+        protected ClientModel()
         {
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Initializes a new instance of ClientModel. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The <see cref="string"/> to use. </param>
-        internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
+        internal ClientModel(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -45,11 +45,11 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="body"> The <see cref="ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='ClientAsync(ClientModel,CancellationToken)']/*" />
-        public virtual async Task<Response> ClientAsync(ClientModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='ClientAsync(ClientModel,CancellationToken)']/*" />
+        public virtual async Task<Response> ClientAsync(Models.ClientModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -60,11 +60,11 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="body"> The <see cref="ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='Client(ClientModel,CancellationToken)']/*" />
-        public virtual Response Client(ClientModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Client(ClientModel,CancellationToken)']/*" />
+        public virtual Response Client(Models.ClientModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -84,7 +84,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(Models.ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -94,12 +94,12 @@ namespace Client.Naming
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Model.Client");
+            using var scope = ClientDiagnostics.CreateScope("ClientModel.Client");
             scope.Start();
             try
             {
@@ -123,7 +123,7 @@ namespace Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(Models.ClientModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -133,12 +133,12 @@ namespace Client.Naming
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Model.Client");
+            using var scope = ClientDiagnostics.CreateScope("ClientModel.Client");
             scope.Start();
             try
             {
@@ -156,7 +156,7 @@ namespace Client.Naming
         /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='LanguageAsync(CSModel,CancellationToken)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(CSModel,CancellationToken)']/*" />
         public virtual async Task<Response> LanguageAsync(CSModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -171,7 +171,7 @@ namespace Client.Naming
         /// <param name="body"> The <see cref="CSModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='Language(CSModel,CancellationToken)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(CSModel,CancellationToken)']/*" />
         public virtual Response Language(CSModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -202,12 +202,12 @@ namespace Client.Naming
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Model.Language");
+            using var scope = ClientDiagnostics.CreateScope("ClientModel.Language");
             scope.Start();
             try
             {
@@ -241,12 +241,12 @@ namespace Client.Naming
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Model.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ClientModel.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("Model.Language");
+            using var scope = ClientDiagnostics.CreateScope("ClientModel.Language");
             scope.Start();
             try
             {
