@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -34,7 +36,9 @@
    "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -72,7 +76,9 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -98,7 +104,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -132,7 +140,9 @@
        "Type": {
         "$id": "20",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -196,7 +206,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "25",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -249,7 +261,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
