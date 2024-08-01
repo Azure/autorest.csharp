@@ -22,50 +22,49 @@
     }
    ],
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "ApiVersionEnum"
   }
  ],
  "Models": [
   {
    "$id": "5",
    "Kind": "model",
-   "Name": "Pet",
-   "CrossLanguageDefinitionId": "MixApiVersion.Pet",
-   "Usage": "None",
-   "Description": "Pet",
+   "Name": "Toy",
+   "CrossLanguageDefinitionId": "MixApiVersion.Toy",
+   "Usage": "Json",
    "Properties": [
     {
      "$id": "6",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "pet name",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "int64"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
      "$id": "8",
-     "Name": "tag",
-     "SerializedName": "tag",
+     "Name": "petId",
+     "SerializedName": "petId",
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "string"
+      "Kind": "int64"
      },
-     "IsRequired": false,
+     "IsRequired": true,
      "IsReadOnly": false
     },
     {
      "$id": "10",
-     "Name": "age",
-     "SerializedName": "age",
+     "Name": "name",
+     "SerializedName": "name",
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -75,64 +74,102 @@
   {
    "$id": "12",
    "Kind": "model",
+   "Name": "Pet",
+   "CrossLanguageDefinitionId": "MixApiVersion.Pet",
+   "Usage": "Json",
+   "Description": "Pet",
+   "Properties": [
+    {
+     "$id": "13",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "pet name",
+     "Type": {
+      "$id": "14",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": true
+    },
+    {
+     "$id": "15",
+     "Name": "tag",
+     "SerializedName": "tag",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Kind": "string"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "17",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "18",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "19",
+   "Kind": "model",
+   "Name": "Error",
+   "CrossLanguageDefinitionId": "MixApiVersion.Error",
+   "Usage": "Error,Json",
+   "Description": "Error",
+   "Properties": [
+    {
+     "$id": "20",
+     "Name": "code",
+     "SerializedName": "code",
+     "Description": "",
+     "Type": {
+      "$id": "21",
+      "Kind": "int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "22",
+     "Name": "message",
+     "SerializedName": "message",
+     "Description": "",
+     "Type": {
+      "$id": "23",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "24",
+   "Kind": "model",
    "Name": "PagedToy",
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Toy items",
    "Properties": [
     {
-     "$id": "13",
+     "$id": "25",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Toy items on this page",
      "Type": {
-      "$id": "14",
+      "$id": "26",
       "Kind": "array",
       "Name": "ArrayToy",
       "ValueType": {
-       "$id": "15",
-       "Kind": "model",
-       "Name": "Toy",
-       "CrossLanguageDefinitionId": "MixApiVersion.Toy",
-       "Usage": "None",
-       "Properties": [
-        {
-         "$id": "16",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "",
-         "Type": {
-          "$id": "17",
-          "Kind": "int64"
-         },
-         "IsRequired": true,
-         "IsReadOnly": true
-        },
-        {
-         "$id": "18",
-         "Name": "petId",
-         "SerializedName": "petId",
-         "Description": "",
-         "Type": {
-          "$id": "19",
-          "Kind": "int64"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        },
-        {
-         "$id": "20",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "",
-         "Type": {
-          "$id": "21",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$ref": "5"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -140,52 +177,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "22",
+     "$id": "27",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
      "Type": {
-      "$id": "23",
+      "$id": "28",
       "Kind": "url"
      },
      "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "15"
-  },
-  {
-   "$id": "24",
-   "Kind": "model",
-   "Name": "Error",
-   "CrossLanguageDefinitionId": "MixApiVersion.Error",
-   "Usage": "None",
-   "Description": "Error",
-   "Properties": [
-    {
-     "$id": "25",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "",
-     "Type": {
-      "$id": "26",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "27",
-     "Name": "message",
-     "SerializedName": "message",
-     "Description": "",
-     "Type": {
-      "$id": "28",
-      "Kind": "string"
-     },
-     "IsRequired": true,
      "IsReadOnly": false
     }
    ]
@@ -195,7 +195,7 @@
   {
    "$id": "29",
    "Name": "MixApiVersionClient",
-   "Description": "",
+   "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
    "Operations": [],
    "Protocol": {
     "$id": "30"
@@ -207,7 +207,7 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "32",
-      "Kind": "url"
+      "Kind": "uri"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -224,7 +224,7 @@
   {
    "$id": "33",
    "Name": "Pets",
-   "Description": "Manage your pets. You can delete or get the Pet from pet store.",
+   "Description": "Manage your pets.",
    "Operations": [
     {
      "$id": "34",
@@ -235,83 +235,90 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "31"
-      },
-      {
        "$id": "35",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Name": "petStoreUrl",
+       "NameInRequest": "petStoreUrl",
        "Type": {
         "$id": "36",
-        "Kind": "string"
+        "Kind": "uri"
        },
-       "Location": "Query",
-       "DefaultValue": {
-        "$id": "37",
-        "Type": {
-         "$id": "38",
-         "Kind": "string"
-        },
-        "Value": "2022-11-30-preview"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
       },
       {
-       "$id": "39",
+       "$id": "37",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "38",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "39",
+        "Type": {
+         "$id": "40",
+         "Kind": "string"
+        },
+        "Value": "2022-11-30-preview"
+       }
+      },
+      {
+       "$id": "41",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "pet name",
        "Type": {
-        "$id": "40",
-        "Kind": "string"
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "41",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
         "$id": "42",
         "Kind": "string"
        },
-       "Location": "Header",
+       "Location": "Path",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "43",
-        "Type": {
-         "$ref": "42"
+       "IsRequired": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "43",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "44",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "45",
+         "Kind": "string"
         },
         "Value": "application/json"
-       }
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "46",
        "StatusCodes": [
         204
        ],
@@ -329,68 +336,62 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "45",
+     "$id": "47",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "35"
       },
       {
-       "$id": "46",
+       "$id": "48",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "47",
+        "$id": "49",
         "Kind": "int32"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "48",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
-        "Kind": "string"
+        "$id": "51",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "52",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "50",
-        "Type": {
-         "$ref": "49"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "53",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -400,12 +401,12 @@
        ]
       },
       {
-       "$id": "52",
+       "$id": "54",
        "StatusCodes": [
         304
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -424,120 +425,102 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "53",
+     "$id": "55",
      "Name": "create",
      "ResourceName": "Pets",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "31"
+       "$ref": "35"
       },
       {
-       "$id": "54",
+       "$id": "56",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "55",
+        "$id": "57",
         "Kind": "constant",
         "ValueType": {
-         "$id": "56",
+         "$id": "58",
          "Kind": "string"
         },
         "Value": "2022-07-09"
        },
        "Location": "Query",
-       "DefaultValue": {
-        "$id": "57",
-        "Type": {
-         "$ref": "55"
-        },
-        "Value": "2022-07-09"
-       },
-       "IsRequired": true,
        "IsApiVersion": true,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant"
       },
       {
-       "$id": "58",
-       "Name": "pet",
-       "NameInRequest": "pet",
-       "Type": {
-        "$ref": "5"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
        "$id": "59",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "61",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
+       "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "61",
-        "Type": {
-         "$ref": "60"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       },
       {
        "$id": "62",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "Name": "accept",
+       "NameInRequest": "Accept",
        "Type": {
         "$id": "63",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "64",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
+       "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "64",
-        "Type": {
-         "$ref": "63"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "65",
+       "Name": "pet",
+       "NameInRequest": "pet",
+       "Type": {
+        "$ref": "12"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
       }
      ],
      "Responses": [
       {
-       "$id": "65",
+       "$id": "66",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -560,22 +543,21 @@
     }
    ],
    "Protocol": {
-    "$id": "66"
+    "$id": "67"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "31"
+     "$ref": "35"
     }
    ]
   },
   {
-   "$id": "67",
+   "$id": "68",
    "Name": "ListPetToysResponse",
-   "Description": "",
    "Operations": [
     {
-     "$id": "68",
+     "$id": "69",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -583,64 +565,78 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "31"
-      },
-      {
-       "$id": "69",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "$id": "70",
+       "Name": "petStoreUrl",
+       "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "70",
-        "Kind": "string"
+        "$id": "71",
+        "Kind": "uri"
        },
-       "Location": "Query",
-       "DefaultValue": {
-        "$ref": "37"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
+       "Location": "Uri",
+       "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
-       "IsEndpoint": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
       },
       {
-       "$id": "71",
+       "$id": "72",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "73",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "74",
+        "Type": {
+         "$id": "75",
+         "Kind": "string"
+        },
+        "Value": "2022-11-30-preview"
+       }
+      },
+      {
+       "$id": "76",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "72",
-        "Kind": "string"
+        "$id": "77",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "78",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "73",
-        "Type": {
-         "$ref": "72"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "24"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -656,21 +652,21 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "75",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "$id": "80",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "76"
+    "$id": "81"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "31"
+     "$ref": "70"
     }
    ]
   }

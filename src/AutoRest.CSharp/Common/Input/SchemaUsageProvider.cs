@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Input
     internal enum SchemaTypeUsage
     {
         None = 0,
-        Input = 1,
+        Input = 1 << 1,
         Output = Input << 1,
         RoundTrip = Input | Output,
         Model = Output << 1,

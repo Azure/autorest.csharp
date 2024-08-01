@@ -48,7 +48,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="SendRequest4"/>. </summary>
         /// <param name="prop"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public SendRequest4(BinaryData prop)
+        internal SendRequest4(BinaryData prop)
         {
             Argument.AssertNotNull(prop, nameof(prop));
 

@@ -31,7 +31,7 @@
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "Input,ApiVersionEnum"
   }
  ],
  "Models": [],
@@ -54,7 +54,7 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "9",
-        "Kind": "url"
+        "Kind": "uri"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -86,71 +86,62 @@
       },
       {
        "$id": "11",
-       "Name": "body",
-       "NameInRequest": "body",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "12",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "13",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
-       "Location": "Body",
-       "IsRequired": true,
+       "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "IsRequired": true,
+       "Kind": "Constant"
       },
       {
-       "$id": "13",
+       "$id": "14",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "14",
-        "Kind": "string"
+        "$id": "15",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "16",
+         "Kind": "string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "15",
-        "Type": {
-         "$ref": "14"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       },
       {
-       "$id": "16",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "$id": "17",
+       "Name": "body",
+       "NameInRequest": "body",
        "Type": {
-        "$id": "17",
+        "$id": "18",
         "Kind": "string"
        },
-       "Location": "Header",
+       "Location": "Body",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
+       "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "18",
-        "Type": {
-         "$ref": "17"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Method"
       }
      ],
      "Responses": [
@@ -172,7 +163,7 @@
       }
      ],
      "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
+     "RequestBodyMediaType": "Text",
      "Uri": "{endpoint}/versioning/return-type-changed-from/api-version:{version}",
      "Path": "/test",
      "RequestMediaTypes": [

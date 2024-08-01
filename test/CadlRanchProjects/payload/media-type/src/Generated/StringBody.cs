@@ -35,7 +35,7 @@ namespace Payload.MediaType
         /// <summary> Initializes a new instance of StringBody. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal StringBody(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -452,7 +452,6 @@ namespace Payload.MediaType
             uri.Reset(_endpoint);
             uri.AppendPath("/payload/media-type/string-body/sendAsText", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
@@ -480,7 +479,6 @@ namespace Payload.MediaType
             uri.Reset(_endpoint);
             uri.AppendPath("/payload/media-type/string-body/sendAsJson", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

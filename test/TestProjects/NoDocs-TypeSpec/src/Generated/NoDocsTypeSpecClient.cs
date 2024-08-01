@@ -135,13 +135,13 @@ namespace NoDocsTypeSpec
             }
         }
 
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            Thing thing = new Thing(
+            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -153,21 +153,21 @@ namespace NoDocsTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await AnonymousBodyAsync(anonymousBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            Thing thing = new Thing(
+            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -179,11 +179,11 @@ namespace NoDocsTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousBody(thing.ToRequestContent(), context);
+            Response response = AnonymousBody(anonymousBodyRequest.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -227,9 +227,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            Friend friend = new Friend(name, null);
+            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FriendlyModelAsync(friend.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await FriendlyModelAsync(friendlyModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -237,9 +237,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            Friend friend = new Friend(name, null);
+            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FriendlyModel(friend.ToRequestContent(), context);
+            Response response = FriendlyModel(friendlyModelRequest.ToRequestContent(), context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -315,9 +315,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedModel projectedModel = new ProjectedModel(name, null);
+            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProjectedNameModelAsync(projectedModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ProjectedNameModelAsync(projectedNameModelRequest.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -325,9 +325,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedModel projectedModel = new ProjectedModel(name, null);
+            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProjectedNameModel(projectedModel.ToRequestContent(), context);
+            Response response = ProjectedNameModel(projectedNameModelRequest.ToRequestContent(), context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -1223,7 +1223,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             return message;
         }
@@ -1266,7 +1265,6 @@ namespace NoDocsTypeSpec
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1279,7 +1277,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stringBody", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1294,7 +1291,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/boolBody", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1309,7 +1305,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/dateTimeBody", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1350,7 +1345,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/recursiveExtension", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1365,7 +1359,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/threeLevelRecursive", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1380,7 +1373,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/recursiveModels", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1395,7 +1387,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/containSelfModels", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1411,7 +1402,6 @@ namespace NoDocsTypeSpec
             uri.AppendPath("/enumParameter/", false);
             uri.AppendPath(p1, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1424,7 +1414,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/bodyIsModelWithProjectedEnum", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1439,7 +1428,6 @@ namespace NoDocsTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/optionalDictionary", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -1456,7 +1444,6 @@ namespace NoDocsTypeSpec
             uri.AppendQuery("location", location, true);
             request.Uri = uri;
             request.Headers.Add("regen-location", regenLocation);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

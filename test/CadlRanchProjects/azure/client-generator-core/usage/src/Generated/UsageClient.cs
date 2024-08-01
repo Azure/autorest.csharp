@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace _Specs_.Azure.ClientGenerator.Core.Usage
 {
     // Data plane generated client.
-    /// <summary> The Usage service client. </summary>
+    /// <summary> Test for internal decorator. </summary>
     public partial class UsageClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)
