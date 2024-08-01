@@ -18,10 +18,11 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, str
     internal const string CharId = "Azure.Core.char";
     internal const string ContentTypeId = "Azure.Core.contentType";
     internal const string ResourceTypeId = "Azure.Core.resourceType";
-
-    internal const string ObjectId = "Obsolete.object";
     internal const string RequestMethodId = "Azure.Core.requestMethod";
+    #endregion
 
+    #region These types are here only for backward compatibility
+    internal const string ObjectId = "Obsolete.object";
     internal const string IPAddressId = "Temp.ipAddress";
     #endregion
 
