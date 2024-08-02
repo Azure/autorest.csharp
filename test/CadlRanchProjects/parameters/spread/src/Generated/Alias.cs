@@ -38,7 +38,7 @@ namespace Parameters.Spread
         /// <summary> Initializes a new instance of Alias. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Alias(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -685,7 +685,6 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/alias/request-body", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -702,7 +701,6 @@ namespace Parameters.Spread
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -719,7 +717,6 @@ namespace Parameters.Spread
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -736,7 +733,6 @@ namespace Parameters.Spread
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -753,7 +749,6 @@ namespace Parameters.Spread
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("x-ms-test-header", xMsTestHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

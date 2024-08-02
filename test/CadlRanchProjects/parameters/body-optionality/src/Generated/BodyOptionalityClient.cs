@@ -35,7 +35,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary> Initializes a new instance of BodyOptionalityClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BodyOptionalityClient(Uri endpoint, BodyOptionalityClientOptions options)
@@ -281,7 +281,6 @@ namespace Parameters.BodyOptionality
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-explicit", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -296,7 +295,6 @@ namespace Parameters.BodyOptionality
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-implicit", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

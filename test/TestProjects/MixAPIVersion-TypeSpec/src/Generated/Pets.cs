@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace MixApiVersion
 {
     // Data plane generated sub-client.
-    /// <summary> Manage your pets. You can delete or get the Pet from pet store. </summary>
+    /// <summary> Manage your pets. </summary>
     public partial class Pets
     {
         private readonly HttpPipeline _pipeline;

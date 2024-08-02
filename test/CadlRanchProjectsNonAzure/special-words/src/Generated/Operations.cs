@@ -26,7 +26,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of Operations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Operations(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -1363,7 +1363,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/and", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1378,7 +1377,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/as", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1393,7 +1391,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/assert", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1408,7 +1405,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/async", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1423,7 +1419,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/await", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1438,7 +1433,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/break", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1453,7 +1447,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/class", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1468,7 +1461,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/constructor", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1483,7 +1475,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/continue", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1498,7 +1489,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/def", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1513,7 +1503,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/del", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1528,7 +1517,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/elif", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1543,7 +1531,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/else", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1558,7 +1545,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/except", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1573,7 +1559,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/exec", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1588,7 +1573,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/finally", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1603,7 +1587,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/for", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1618,7 +1601,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/from", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1633,7 +1615,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/global", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1648,7 +1629,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/if", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1663,7 +1643,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/import", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1678,7 +1657,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/in", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1693,7 +1671,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/is", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1708,7 +1685,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/lambda", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1723,7 +1699,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/not", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1738,7 +1713,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/or", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1753,7 +1727,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/pass", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1768,7 +1741,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/raise", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1783,7 +1755,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/return", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1798,7 +1769,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/try", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1813,7 +1783,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/while", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1828,7 +1797,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/with", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1843,7 +1811,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/operations/yield", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

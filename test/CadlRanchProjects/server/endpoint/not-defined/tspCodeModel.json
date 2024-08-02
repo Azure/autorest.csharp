@@ -18,33 +18,28 @@
      "Parameters": [
       {
        "$id": "4",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
-       "Location": "Header",
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "6",
-        "Type": {
-         "$ref": "5"
-        },
-        "Value": "application/json"
-       }
+       "Kind": "Client"
       }
      ],
      "Responses": [
       {
-       "$id": "7",
+       "$id": "6",
        "StatusCodes": [
         200
        ],
@@ -55,7 +50,7 @@
      ],
      "HttpMethod": "HEAD",
      "RequestBodyMediaType": "None",
-     "Uri": "",
+     "Uri": "{endpoint}",
      "Path": "/server/endpoint/not-defined/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -63,8 +58,13 @@
     }
    ],
    "Protocol": {
-    "$id": "8"
-   }
+    "$id": "7"
+   },
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
   }
  ]
 }

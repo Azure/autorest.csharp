@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Payload.MultiPart
 {
     // Data plane generated client.
-    /// <summary> The MultiPart service client. </summary>
+    /// <summary> Test for multipart. </summary>
     public partial class MultiPartClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary> Initializes a new instance of MultiPartClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public MultiPartClient(Uri endpoint, MultiPartClientOptions options)

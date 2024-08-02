@@ -78,6 +78,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Client_Naming_Model_client() => Test(async (host) =>
         {
+            // rollback after https://github.com/Azure/typespec-azure/issues/1091 is fixed
             var response = await new NamingClient(host, null).GetClientModelClient().ClientAsync(new Scm.Client.Naming.Models.ClientModel(true));
             Assert.AreEqual(204, response.GetRawResponse().Status);
         });

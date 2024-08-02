@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Common.Input
                         case InputPrimitiveTypeKind.String:
                             value = reader.GetString() ?? throw new JsonException();
                             break;
-                        case InputPrimitiveTypeKind.Uri:
+                        case InputPrimitiveTypeKind.Url:
                             var stringValue = reader.GetString() ?? throw new JsonException();
                             value = new Uri(stringValue);
                             break;

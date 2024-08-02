@@ -357,7 +357,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.PatchAction(content);
 
@@ -410,7 +410,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -555,7 +555,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.AnonymousBody(content);
 
@@ -608,7 +608,7 @@ namespace FirstTestTypeSpec.Samples
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -638,7 +638,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -648,7 +648,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: null);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -2435,7 +2435,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2448,7 +2448,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2460,7 +2460,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AzureLocationOp(default, default);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -2470,7 +2470,7 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -2482,9 +2482,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = client.AzureLocationOp(default, default, content);
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2498,9 +2498,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
 
             Console.WriteLine(response.Status);
         }
@@ -2512,8 +2512,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = client.AzureLocationOp(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = client.AzureLocationOp(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
 
         [Test]
@@ -2523,8 +2523,8 @@ new BaseModel(123)
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
     }
 }

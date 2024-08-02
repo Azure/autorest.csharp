@@ -1022,12 +1022,16 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="accept"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> GetUnknownValueAsync(RequestOptions options)
+        public virtual async Task<ClientResult> GetUnknownValueAsync(string accept, RequestOptions options)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(accept, nameof(accept));
+
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
@@ -1041,12 +1045,16 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="accept"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult GetUnknownValue(RequestOptions options)
+        public virtual ClientResult GetUnknownValue(string accept, RequestOptions options)
         {
-            using PipelineMessage message = CreateGetUnknownValueRequest(options);
+            Argument.AssertNotNull(accept, nameof(accept));
+
+            using PipelineMessage message = CreateGetUnknownValueRequest(accept, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -1425,7 +1433,6 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Repeatability-First-Sent", DateTimeOffset.Now.ToString("R"));
             message.Apply(options);
             return message;
@@ -1463,7 +1470,7 @@ namespace CustomizedTypeSpec.Models
             return message;
         }
 
-        internal PipelineMessage CreateGetUnknownValueRequest(RequestOptions options)
+        internal PipelineMessage CreateGetUnknownValueRequest(string accept, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
@@ -1473,7 +1480,7 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
+            request.Headers.Set("Accept", accept);
             message.Apply(options);
             return message;
         }
@@ -1505,7 +1512,6 @@ namespace CustomizedTypeSpec.Models
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -1521,7 +1527,6 @@ namespace CustomizedTypeSpec.Models
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

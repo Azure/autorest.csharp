@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Type.Enum.Fixed.DaysOfWeekEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -66,7 +68,6 @@
   {
    "$id": "11",
    "Name": "FixedClient",
-   "Description": "",
    "Operations": [],
    "Protocol": {
     "$id": "12"
@@ -74,12 +75,13 @@
    "Parameters": [
     {
      "$id": "13",
-     "Name": "host",
-     "NameInRequest": "host",
-     "Description": "TestServer endpoint",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -94,7 +96,9 @@
       "$id": "15",
       "Type": {
        "$id": "16",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -104,7 +108,6 @@
   {
    "$id": "17",
    "Name": "String",
-   "Description": "",
    "Operations": [
     {
      "$id": "18",
@@ -114,37 +117,62 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
-      },
-      {
        "$id": "19",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "20",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
-       "Location": "Header",
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "21",
         "Type": {
-         "$ref": "20"
+         "$id": "22",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "23",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "24",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "25",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
-       }
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -161,24 +189,48 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/type/enum/fixed/string/known-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "23",
+     "$id": "27",
      "Name": "putKnownValue",
      "ResourceName": "String",
      "Description": "putKnownValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "19"
       },
       {
-       "$id": "24",
+       "$id": "28",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "29",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "30",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "31",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -186,69 +238,17 @@
         "$ref": "2"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "25",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "26",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "27",
-        "Type": {
-         "$ref": "26"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "28",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "29",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "30",
-        "Type": {
-         "$ref": "29"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -259,7 +259,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/type/enum/fixed/string/known-value",
      "RequestMediaTypes": [
       "application/json"
@@ -269,17 +269,41 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "33",
      "Name": "putUnknownValue",
      "ResourceName": "String",
      "Description": "putUnknownValue",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "13"
+       "$ref": "19"
       },
       {
-       "$id": "33",
+       "$id": "34",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "35",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "36",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "37",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
@@ -287,69 +311,17 @@
         "$ref": "2"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "34",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "35",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "36",
-        "Type": {
-         "$ref": "35"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "37",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "38",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "39",
-        "Type": {
-         "$ref": "38"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "40",
+       "$id": "38",
        "StatusCodes": [
         204
        ],
@@ -360,7 +332,7 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/type/enum/fixed/string/unknown-value",
      "RequestMediaTypes": [
       "application/json"
@@ -371,12 +343,12 @@
     }
    ],
    "Protocol": {
-    "$id": "41"
+    "$id": "39"
    },
    "Parent": "FixedClient",
    "Parameters": [
     {
-     "$ref": "13"
+     "$ref": "19"
     }
    ]
   }

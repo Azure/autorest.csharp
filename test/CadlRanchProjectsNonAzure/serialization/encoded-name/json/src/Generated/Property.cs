@@ -27,7 +27,7 @@ namespace Scm.Serialization.EncodedName.Json
 
         /// <summary> Initializes a new instance of Property. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Property(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -186,7 +186,6 @@ namespace Scm.Serialization.EncodedName.Json
             uri.Reset(_endpoint);
             uri.AppendPath("/serialization/encoded-name/json/property", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

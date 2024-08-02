@@ -37,7 +37,7 @@ namespace Parameters.Spread
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -602,7 +602,6 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -617,7 +616,6 @@ namespace Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -634,7 +632,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -649,7 +646,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -666,7 +662,6 @@ namespace Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri;
             request.Headers.Add("test-header", testHeader);
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

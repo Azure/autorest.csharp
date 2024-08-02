@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -43,7 +45,6 @@
   {
    "$id": "8",
    "Name": "ClientAClient",
-   "Description": "",
    "Operations": [
     {
      "$id": "9",
@@ -58,7 +59,9 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "11",
-        "Kind": "url"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -87,36 +90,11 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
-      },
-      {
-       "$id": "13",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "14",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "15",
-        "Type": {
-         "$ref": "14"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -134,7 +112,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "17",
+     "$id": "14",
      "Name": "renamedThree",
      "ResourceName": "ClientA",
      "Accessibility": "public",
@@ -144,36 +122,11 @@
       },
       {
        "$ref": "12"
-      },
-      {
-       "$id": "18",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "19",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$ref": "19"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -191,7 +144,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "16",
      "Name": "renamedFive",
      "ResourceName": "ClientA",
      "Accessibility": "public",
@@ -201,36 +154,11 @@
       },
       {
        "$ref": "12"
-      },
-      {
-       "$id": "23",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "24",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "25",
-        "Type": {
-         "$ref": "24"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -249,7 +177,7 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "18"
    },
    "Parameters": [
     {
@@ -261,31 +189,45 @@
    ]
   },
   {
-   "$id": "28",
+   "$id": "19",
    "Name": "ClientBClient",
-   "Description": "",
    "Operations": [
     {
-     "$id": "29",
+     "$id": "20",
      "Name": "renamedTwo",
      "ResourceName": "ClientB",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
-      },
-      {
-       "$ref": "12"
-      },
-      {
-       "$id": "30",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "$id": "21",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "31",
-        "Kind": "string"
+        "$id": "22",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
-       "Location": "Header",
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "23",
+       "Name": "client",
+       "NameInRequest": "client",
+       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
@@ -293,19 +235,12 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "32",
-        "Type": {
-         "$ref": "31"
-        },
-        "Value": "application/json"
-       }
+       "Kind": "Client"
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -323,46 +258,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "34",
+     "$id": "25",
      "Name": "renamedFour",
      "ResourceName": "ClientB",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "21"
       },
       {
-       "$ref": "12"
-      },
-      {
-       "$id": "35",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "36",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "37",
-        "Type": {
-         "$ref": "36"
-        },
-        "Value": "application/json"
-       }
+       "$ref": "23"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -380,46 +290,21 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "27",
      "Name": "renamedSix",
      "ResourceName": "ClientB",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "21"
       },
       {
-       "$ref": "12"
-      },
-      {
-       "$id": "40",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "41",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "42",
-        "Type": {
-         "$ref": "41"
-        },
-        "Value": "application/json"
-       }
+       "$ref": "23"
       }
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -438,14 +323,14 @@
     }
    ],
    "Protocol": {
-    "$id": "44"
+    "$id": "29"
    },
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "21"
     },
     {
-     "$ref": "12"
+     "$ref": "23"
     }
    ]
   }
