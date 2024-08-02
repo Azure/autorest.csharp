@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private ObjectTypeSerialization? _modelSerialization;
         public ObjectTypeSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        private ObjectTypeSerialization BuildSerialization()
+        protected virtual ObjectTypeSerialization BuildSerialization()
         {
             var json = BuildJsonSerialization();
             var xml = BuildXmlSerialization();
