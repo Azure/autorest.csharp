@@ -648,6 +648,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\model\\src\\Generated -n"
     },
+    "typespec-azure/core/page": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\page\\src\\Generated -n"
+    },
     "typespec-azure/core/scalar": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\scalar\\src\\Generated -n"

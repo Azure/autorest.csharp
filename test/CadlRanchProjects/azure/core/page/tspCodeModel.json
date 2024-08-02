@@ -1,0 +1,956 @@
+{
+ "$id": "1",
+ "Name": "_Specs_.Azure.Core.Page",
+ "ApiVersions": [
+  "2022-12-01-preview"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "ListItemInputExtensibleEnum",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputExtensibleEnum",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "First",
+     "Value": "First",
+     "Description": "The first enum value."
+    },
+    {
+     "$id": "5",
+     "Name": "Second",
+     "Value": "Second",
+     "Description": "The second enum value."
+    }
+   ],
+   "Description": "An extensible enum input parameter.",
+   "IsExtensible": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "6",
+   "Kind": "enum",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.Versions",
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string"
+   },
+   "Values": [
+    {
+     "$id": "8",
+     "Name": "v2022_12_01_preview",
+     "Value": "2022-12-01-preview",
+     "Description": "The version 2022-12-01-preview."
+    }
+   ],
+   "Description": "The version of the API.",
+   "IsExtensible": false,
+   "Usage": "ApiVersionEnum"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "9",
+   "Kind": "model",
+   "Name": "PagedUser",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of User items",
+   "Properties": [
+    {
+     "$id": "10",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The User items on this page",
+     "Type": {
+      "$id": "11",
+      "Kind": "array",
+      "Name": "ArrayUser",
+      "ValueType": {
+       "$id": "12",
+       "Kind": "model",
+       "Name": "User",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User",
+       "Usage": "Output,Json",
+       "Description": "Details about a user.",
+       "Properties": [
+        {
+         "$id": "13",
+         "Name": "id",
+         "SerializedName": "id",
+         "Description": "The user's id.",
+         "Type": {
+          "$id": "14",
+          "Kind": "int32"
+         },
+         "IsRequired": true,
+         "IsReadOnly": true
+        },
+        {
+         "$id": "15",
+         "Name": "name",
+         "SerializedName": "name",
+         "Description": "The user's name.",
+         "Type": {
+          "$id": "16",
+          "Kind": "string"
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "17",
+         "Name": "orders",
+         "SerializedName": "orders",
+         "Description": "The user's order list",
+         "Type": {
+          "$id": "18",
+          "Kind": "array",
+          "Name": "ArrayUserOrder",
+          "ValueType": {
+           "$id": "19",
+           "Kind": "model",
+           "Name": "UserOrder",
+           "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder",
+           "Usage": "Output,Json",
+           "Description": "UserOrder for testing list with expand.",
+           "Properties": [
+            {
+             "$id": "20",
+             "Name": "id",
+             "SerializedName": "id",
+             "Description": "The user's id.",
+             "Type": {
+              "$id": "21",
+              "Kind": "int32"
+             },
+             "IsRequired": true,
+             "IsReadOnly": true
+            },
+            {
+             "$id": "22",
+             "Name": "userId",
+             "SerializedName": "userId",
+             "Description": "The user's id.",
+             "Type": {
+              "$id": "23",
+              "Kind": "int32"
+             },
+             "IsRequired": true,
+             "IsReadOnly": false
+            },
+            {
+             "$id": "24",
+             "Name": "detail",
+             "SerializedName": "detail",
+             "Description": "The user's order detail",
+             "Type": {
+              "$id": "25",
+              "Kind": "string"
+             },
+             "IsRequired": true,
+             "IsReadOnly": false
+            }
+           ]
+          },
+          "CrossLanguageDefinitionId": "TypeSpec.Array"
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "26",
+         "Name": "etag",
+         "SerializedName": "etag",
+         "Description": "The entity tag for this resource.",
+         "Type": {
+          "$id": "27",
+          "Kind": "eTag",
+          "Encode": "string"
+         },
+         "IsRequired": true,
+         "IsReadOnly": true
+        }
+       ]
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "28",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "29",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "12"
+  },
+  {
+   "$ref": "19"
+  },
+  {
+   "$id": "30",
+   "Kind": "model",
+   "Name": "ListItemInputBody",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody",
+   "Usage": "Input,Json",
+   "Description": "The body of the input.",
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "inputName",
+     "SerializedName": "inputName",
+     "Description": "The name of the input.",
+     "Type": {
+      "$id": "32",
+      "Kind": "string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "33",
+   "Kind": "model",
+   "Name": "UserListResults",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel",
+   "Usage": "Output,Json",
+   "Properties": [
+    {
+     "$id": "34",
+     "Name": "items",
+     "SerializedName": "items",
+     "Description": "List of items.",
+     "Type": {
+      "$id": "35",
+      "Kind": "array",
+      "Name": "ArrayUser",
+      "ValueType": {
+       "$ref": "12"
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "36",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "Link to fetch more items.",
+     "Type": {
+      "$id": "37",
+      "Kind": "string"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "38",
+   "Kind": "model",
+   "Name": "PagedFirstItem",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of FirstItem items",
+   "Properties": [
+    {
+     "$id": "39",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The FirstItem items on this page",
+     "Type": {
+      "$id": "40",
+      "Kind": "array",
+      "Name": "ArrayFirstItem",
+      "ValueType": {
+       "$id": "41",
+       "Kind": "model",
+       "Name": "FirstItem",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem",
+       "Usage": "Output,Json",
+       "Description": "First item.",
+       "Properties": [
+        {
+         "$id": "42",
+         "Name": "id",
+         "SerializedName": "id",
+         "Description": "The id of the item.",
+         "Type": {
+          "$id": "43",
+          "Kind": "int32"
+         },
+         "IsRequired": true,
+         "IsReadOnly": true
+        }
+       ]
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "44",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "45",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "41"
+  },
+  {
+   "$id": "46",
+   "Kind": "model",
+   "Name": "PagedSecondItem",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of SecondItem items",
+   "Properties": [
+    {
+     "$id": "47",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The SecondItem items on this page",
+     "Type": {
+      "$id": "48",
+      "Kind": "array",
+      "Name": "ArraySecondItem",
+      "ValueType": {
+       "$id": "49",
+       "Kind": "model",
+       "Name": "SecondItem",
+       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem",
+       "Usage": "Output,Json",
+       "Description": "Second item.",
+       "Properties": [
+        {
+         "$id": "50",
+         "Name": "name",
+         "SerializedName": "name",
+         "Description": "The name of the item.",
+         "Type": {
+          "$id": "51",
+          "Kind": "string"
+         },
+         "IsRequired": true,
+         "IsReadOnly": true
+        }
+       ]
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "52",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "53",
+      "Kind": "url"
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "49"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "54",
+   "Name": "PageClient",
+   "Description": "Illustrates bodies templated with Azure Core with paging support",
+   "Operations": [
+    {
+     "$id": "55",
+     "Name": "listWithPage",
+     "ResourceName": "Page",
+     "Description": "List with Azure.Core.Page<>.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "56",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "57",
+        "Kind": "string"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "58",
+        "Type": {
+         "$id": "59",
+         "Kind": "string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "60",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "61",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$id": "62",
+        "Type": {
+         "$id": "63",
+         "Kind": "string"
+        },
+        "Value": "2022-12-01-preview"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "64",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "65",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "66",
+        "Type": {
+         "$ref": "65"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "67",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "9"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/page/page",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "68",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "69",
+     "Name": "listWithParameters",
+     "ResourceName": "Page",
+     "Description": "List with extensible enum parameter Azure.Core.Page<>.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "56"
+      },
+      {
+       "$id": "70",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "71",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "62"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "72",
+       "Name": "another",
+       "NameInRequest": "another",
+       "Description": "Another query parameter.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "73",
+       "Name": "bodyInput",
+       "NameInRequest": "bodyInput",
+       "Description": "The body of the input.",
+       "Type": {
+        "$ref": "30"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "74",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "75",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "76",
+        "Type": {
+         "$ref": "75"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "77",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "78",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "79",
+        "Type": {
+         "$ref": "78"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "80",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "9"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/azure/core/page/parameters",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "81",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "82",
+     "Name": "listWithCustomPageModel",
+     "ResourceName": "Page",
+     "Description": "List with custom page model.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "56"
+      },
+      {
+       "$id": "83",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "84",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "62"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "85",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "86",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "87",
+        "Type": {
+         "$ref": "86"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "88",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "33"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/page/custom-page",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "89",
+      "NextLinkName": "nextLink",
+      "ItemName": "items"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "90"
+   },
+   "Parameters": [
+    {
+     "$ref": "56"
+    }
+   ]
+  },
+  {
+   "$id": "91",
+   "Name": "TwoModelsAsPageItem",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "92",
+     "Name": "listFirstItem",
+     "ResourceName": "TwoModelsAsPageItem",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "56"
+      },
+      {
+       "$id": "93",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "94",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "62"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "95",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "96",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "97",
+        "Type": {
+         "$ref": "96"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "98",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "38"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/page/first-item",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "99",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "100",
+     "Name": "listSecondItem",
+     "ResourceName": "TwoModelsAsPageItem",
+     "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "56"
+      },
+      {
+       "$id": "101",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "102",
+        "Kind": "string"
+       },
+       "Location": "Query",
+       "DefaultValue": {
+        "$ref": "62"
+       },
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "103",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "104",
+        "Kind": "string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "105",
+        "Type": {
+         "$ref": "104"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "106",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "46"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/azure/core/page/second-item",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "107",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "108"
+   },
+   "Parent": "PageClient",
+   "Parameters": [
+    {
+     "$ref": "56"
+    }
+   ]
+  }
+ ]
+}
