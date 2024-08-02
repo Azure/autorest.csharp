@@ -13,7 +13,9 @@
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -32,7 +34,9 @@
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.Versions",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -68,7 +72,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,11 +102,21 @@
       "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "16",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "NewScalar",
+        "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewScalar",
+        "BaseType": {
+         "$id": "17",
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
+        }
        }
       ]
      },
@@ -112,24 +128,26 @@
  ],
  "Clients": [
   {
-   "$id": "17",
+   "$id": "18",
    "Name": "RenamedFromClient",
    "Description": "Test for the `@renamedFrom` decorator.",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "19",
      "Name": "newOp",
      "ResourceName": "RenamedFrom",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "19",
+       "$id": "20",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "20",
-        "Kind": "uri"
+        "$id": "21",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -142,7 +160,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -160,12 +178,14 @@
        "Kind": "Client"
       },
       {
-       "$id": "22",
+       "$id": "23",
        "Name": "newQuery",
        "NameInRequest": "newQuery",
        "Type": {
-        "$id": "23",
-        "Kind": "string"
+        "$id": "24",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -176,16 +196,18 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "25",
+        "$id": "26",
         "Kind": "constant",
         "ValueType": {
-         "$id": "26",
-         "Kind": "string"
+         "$id": "27",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -198,15 +220,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "27",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "29",
         "Kind": "constant",
         "ValueType": {
-         "$id": "29",
-         "Kind": "string"
+         "$id": "30",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -219,7 +243,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "31",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -236,7 +260,7 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -264,35 +288,37 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "33"
    },
    "Parameters": [
     {
-     "$ref": "19"
+     "$ref": "20"
     },
     {
-     "$ref": "21"
+     "$ref": "22"
     }
    ]
   },
   {
-   "$id": "33",
+   "$id": "34",
    "Name": "NewInterface",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "35",
      "Name": "newOpInNewInterface",
      "ResourceName": "NewInterface",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "36",
-        "Kind": "uri"
+        "$id": "37",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -305,7 +331,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "37",
+       "$id": "38",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -323,16 +349,18 @@
        "Kind": "Client"
       },
       {
-       "$id": "38",
+       "$id": "39",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "39",
+        "$id": "40",
         "Kind": "constant",
         "ValueType": {
-         "$id": "40",
-         "Kind": "string"
+         "$id": "41",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -345,15 +373,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "41",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "43",
         "Kind": "constant",
         "ValueType": {
-         "$id": "43",
-         "Kind": "string"
+         "$id": "44",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -366,7 +396,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "44",
+       "$id": "45",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -383,7 +413,7 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "46",
        "StatusCodes": [
         200
        ],
@@ -411,15 +441,15 @@
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "47"
    },
    "Parent": "RenamedFromClient",
    "Parameters": [
     {
-     "$ref": "35"
+     "$ref": "36"
     },
     {
-     "$ref": "37"
+     "$ref": "38"
     }
    ]
   }
