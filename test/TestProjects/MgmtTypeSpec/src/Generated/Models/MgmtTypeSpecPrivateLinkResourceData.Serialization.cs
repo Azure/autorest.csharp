@@ -32,6 +32,11 @@ namespace MgmtTypeSpec.Models
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties, options);
             }
+            if (Optional.IsDefined(Identity))
+            {
+                writer.WritePropertyName("identity"u8);
+                JsonSerializer.Serialize(writer, Identity);
+            }
             if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
@@ -91,6 +96,7 @@ namespace MgmtTypeSpec.Models
                 return null;
             }
             MgmtTypeSpecPrivateLinkResourceProperties properties = default;
+            ManagedServiceIdentity identity = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -106,6 +112,15 @@ namespace MgmtTypeSpec.Models
                         continue;
                     }
                     properties = MgmtTypeSpecPrivateLinkResourceProperties.DeserializeMgmtTypeSpecPrivateLinkResourceProperties(property.Value, options);
+                    continue;
+                }
+                if (property.NameEquals("identity"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("id"u8))
@@ -144,6 +159,7 @@ namespace MgmtTypeSpec.Models
                 type,
                 systemData,
                 properties,
+                identity,
                 serializedAdditionalRawData);
         }
 
