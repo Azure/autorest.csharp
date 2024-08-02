@@ -507,6 +507,116 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
+        /// <summary> Exports all users. </summary>
+        /// <param name="format"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <remarks> Exports all users. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportallusersAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<UserList>> ExportallusersAsync(string format, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(format, nameof(format));
+
+            ExportallusersRequest exportallusersRequest = new ExportallusersRequest(format, null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ExportallusersAsync(exportallusersRequest.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(UserList.FromResponse(response), response);
+        }
+
+        /// <summary> Exports all users. </summary>
+        /// <param name="format"></param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        /// <remarks> Exports all users. </remarks>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportallusers(string,CancellationToken)']/*" />
+        public virtual Response<UserList> Exportallusers(string format, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(format, nameof(format));
+
+            ExportallusersRequest exportallusersRequest = new ExportallusersRequest(format, null);
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Exportallusers(exportallusersRequest.ToRequestContent(), context);
+            return Response.FromValue(UserList.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Exports all users.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ExportallusersAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportallusersAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ExportallusersAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportallusers");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateExportallusersRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Exports all users.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Exportallusers(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportallusers(RequestContent,RequestContext)']/*" />
+        public virtual Response Exportallusers(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportallusers");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateExportallusersRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Lists all users. </summary>
         /// <param name="maxCount"> The number of result items to return. </param>
         /// <param name="skip"> The number of result items to skip. </param>
@@ -611,258 +721,6 @@ namespace _Specs_.Azure.Core.Basic
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
         }
 
-        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(CancellationToken)']/*" />
-        public virtual AsyncPageable<User> GetWithPageAsync(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
-        }
-
-        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(CancellationToken)']/*" />
-        public virtual Pageable<User> GetWithPage(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithPageAsync(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
-        }
-
-        /// <summary> List with extensible enum parameter Azure.Core.Page&lt;&gt;. </summary>
-        /// <param name="bodyInput"> The body of the input. </param>
-        /// <param name="another"> Another query parameter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
-        public virtual AsyncPageable<User> GetWithParametersAsync(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
-
-            RequestContent content = bodyInput.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another?.ToString(), context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another?.ToString(), context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
-        }
-
-        /// <summary> List with extensible enum parameter Azure.Core.Page&lt;&gt;. </summary>
-        /// <param name="bodyInput"> The body of the input. </param>
-        /// <param name="another"> Another query parameter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
-        public virtual Pageable<User> GetWithParameters(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
-
-            RequestContent content = bodyInput.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another?.ToString(), context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another?.ToString(), context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with extensible enum parameter Azure.Core.Page&lt;&gt;.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="another"> Another query parameter. Allowed values: "First" | "Second". </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParametersAsync(RequestContent,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithParametersAsync(RequestContent content, string another = null, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with extensible enum parameter Azure.Core.Page&lt;&gt;.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="another"> Another query parameter. Allowed values: "First" | "Second". </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParameters(RequestContent,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithParameters(RequestContent content, string another = null, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
-        }
-
-        /// <summary> List with custom page model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(CancellationToken)']/*" />
-        public virtual AsyncPageable<User> GetWithCustomPageModelAsync(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithCustomPageModelNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
-        }
-
-        /// <summary> List with custom page model. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(CancellationToken)']/*" />
-        public virtual Pageable<User> GetWithCustomPageModel(CancellationToken cancellationToken = default)
-        {
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithCustomPageModelNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with custom page model.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithCustomPageModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithCustomPageModelAsync(RequestContext context)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithCustomPageModelNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] List with custom page model.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithCustomPageModel(RequestContext context)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithCustomPageModelNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
-        }
-
-        private TwoModelsAsPageItem _cachedTwoModelsAsPageItem;
-
-        /// <summary> Initializes a new instance of TwoModelsAsPageItem. </summary>
-        public virtual TwoModelsAsPageItem GetTwoModelsAsPageItemClient()
-        {
-            return Volatile.Read(ref _cachedTwoModelsAsPageItem) ?? Interlocked.CompareExchange(ref _cachedTwoModelsAsPageItem, new TwoModelsAsPageItem(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedTwoModelsAsPageItem;
-        }
-
         internal HttpMessage CreateCreateOrUpdateRequest(int id, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
@@ -963,54 +821,6 @@ namespace _Specs_.Azure.Core.Basic
             return message;
         }
 
-        internal HttpMessage CreateGetWithPageRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/page", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithParametersRequest(RequestContent content, string another, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/parameters", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            if (another != null)
-            {
-                uri.AppendQuery("another", another, true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithCustomPageModelRequest(RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/custom-page", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
         internal HttpMessage CreateDeleteRequest(int id, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1043,46 +853,23 @@ namespace _Specs_.Azure.Core.Basic
             return message;
         }
 
+        internal HttpMessage CreateExportallusersRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/azure/core/basic/users:exportallusers", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
         internal HttpMessage CreateGetUsersNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithPageNextPageRequest(string nextLink, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithParametersNextPageRequest(string nextLink, RequestContent content, string another, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        internal HttpMessage CreateGetWithCustomPageModelNextPageRequest(string nextLink, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

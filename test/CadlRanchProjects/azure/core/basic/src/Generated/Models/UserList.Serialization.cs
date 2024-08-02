@@ -14,24 +14,26 @@ using Azure.Core;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    public partial class FirstItem : IUtf8JsonSerializable, IJsonModel<FirstItem>
+    public partial class UserList : IUtf8JsonSerializable, IJsonModel<UserList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstItem>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserList>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<FirstItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<UserList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<UserList>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FirstItem)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(UserList)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            writer.WritePropertyName("collection"u8);
+            writer.WriteStartArray();
+            foreach (var item in Collection)
             {
-                writer.WritePropertyName("id"u8);
-                writer.WriteNumberValue(Id);
+                writer.WriteObjectValue(item, options);
             }
+            writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -50,19 +52,19 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteEndObject();
         }
 
-        FirstItem IJsonModel<FirstItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UserList IJsonModel<UserList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<UserList>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FirstItem)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(UserList)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFirstItem(document.RootElement, options);
+            return DeserializeUserList(document.RootElement, options);
         }
 
-        internal static FirstItem DeserializeFirstItem(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static UserList DeserializeUserList(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -70,14 +72,19 @@ namespace _Specs_.Azure.Core.Basic.Models
             {
                 return null;
             }
-            int id = default;
+            IReadOnlyList<User> collection = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"u8))
+                if (property.NameEquals("collection"u8))
                 {
-                    id = property.Value.GetInt32();
+                    List<User> array = new List<User>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(User.DeserializeUser(item, options));
+                    }
+                    collection = array;
                     continue;
                 }
                 if (options.Format != "W")
@@ -86,46 +93,46 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new FirstItem(id, serializedAdditionalRawData);
+            return new UserList(collection, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<FirstItem>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UserList>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<UserList>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(FirstItem)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UserList)} does not support writing '{options.Format}' format.");
             }
         }
 
-        FirstItem IPersistableModel<FirstItem>.Create(BinaryData data, ModelReaderWriterOptions options)
+        UserList IPersistableModel<UserList>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FirstItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<UserList>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFirstItem(document.RootElement, options);
+                        return DeserializeUserList(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(FirstItem)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(UserList)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<FirstItem>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UserList>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static FirstItem FromResponse(Response response)
+        internal static UserList FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstItem(document.RootElement);
+            return DeserializeUserList(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

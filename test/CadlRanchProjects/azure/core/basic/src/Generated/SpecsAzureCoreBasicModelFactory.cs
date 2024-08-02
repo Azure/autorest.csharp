@@ -38,20 +38,14 @@ namespace _Specs_.Azure.Core.Basic.Models
             return new UserOrder(id, userId, detail, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.FirstItem"/>. </summary>
-        /// <param name="id"> The id of the item. </param>
-        /// <returns> A new <see cref="Models.FirstItem"/> instance for mocking. </returns>
-        public static FirstItem FirstItem(int id = default)
+        /// <summary> Initializes a new instance of <see cref="Models.UserList"/>. </summary>
+        /// <param name="collection"></param>
+        /// <returns> A new <see cref="Models.UserList"/> instance for mocking. </returns>
+        public static UserList UserList(IEnumerable<User> collection = null)
         {
-            return new FirstItem(id, serializedAdditionalRawData: null);
-        }
+            collection ??= new List<User>();
 
-        /// <summary> Initializes a new instance of <see cref="Models.SecondItem"/>. </summary>
-        /// <param name="name"> The name of the item. </param>
-        /// <returns> A new <see cref="Models.SecondItem"/> instance for mocking. </returns>
-        public static SecondItem SecondItem(string name = null)
-        {
-            return new SecondItem(name, serializedAdditionalRawData: null);
+            return new UserList(collection?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }

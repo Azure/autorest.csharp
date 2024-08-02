@@ -14,24 +14,21 @@ using Azure.Core;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    public partial class SecondItem : IUtf8JsonSerializable, IJsonModel<SecondItem>
+    internal partial class ExportallusersRequest : IUtf8JsonSerializable, IJsonModel<ExportallusersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondItem>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExportallusersRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<SecondItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ExportallusersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SecondItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ExportallusersRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondItem)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ExportallusersRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
+            writer.WritePropertyName("format"u8);
+            writer.WriteStringValue(Format);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -50,19 +47,19 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteEndObject();
         }
 
-        SecondItem IJsonModel<SecondItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ExportallusersRequest IJsonModel<ExportallusersRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SecondItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ExportallusersRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SecondItem)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ExportallusersRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSecondItem(document.RootElement, options);
+            return DeserializeExportallusersRequest(document.RootElement, options);
         }
 
-        internal static SecondItem DeserializeSecondItem(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ExportallusersRequest DeserializeExportallusersRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -70,14 +67,14 @@ namespace _Specs_.Azure.Core.Basic.Models
             {
                 return null;
             }
-            string name = default;
+            string format = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
+                if (property.NameEquals("format"u8))
                 {
-                    name = property.Value.GetString();
+                    format = property.Value.GetString();
                     continue;
                 }
                 if (options.Format != "W")
@@ -86,46 +83,46 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new SecondItem(name, serializedAdditionalRawData);
+            return new ExportallusersRequest(format, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<SecondItem>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ExportallusersRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SecondItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ExportallusersRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(SecondItem)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExportallusersRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        SecondItem IPersistableModel<SecondItem>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ExportallusersRequest IPersistableModel<ExportallusersRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SecondItem>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ExportallusersRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSecondItem(document.RootElement, options);
+                        return DeserializeExportallusersRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(SecondItem)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ExportallusersRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<SecondItem>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ExportallusersRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static SecondItem FromResponse(Response response)
+        internal static ExportallusersRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSecondItem(document.RootElement);
+            return DeserializeExportallusersRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

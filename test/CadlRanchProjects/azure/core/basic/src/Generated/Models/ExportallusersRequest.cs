@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    /// <summary> Second item. </summary>
-    public partial class SecondItem
+    /// <summary> The ExportallusersRequest. </summary>
+    internal partial class ExportallusersRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,21 +45,31 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
-        internal SecondItem()
+        /// <summary> Initializes a new instance of <see cref="ExportallusersRequest"/>. </summary>
+        /// <param name="format"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
+        internal ExportallusersRequest(string format)
         {
+            Argument.AssertNotNull(format, nameof(format));
+
+            Format = format;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
-        /// <param name="name"> The name of the item. </param>
+        /// <summary> Initializes a new instance of <see cref="ExportallusersRequest"/>. </summary>
+        /// <param name="format"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SecondItem(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ExportallusersRequest(string format, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            Format = format;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the item. </summary>
-        public string Name { get; }
+        /// <summary> Initializes a new instance of <see cref="ExportallusersRequest"/> for deserialization. </summary>
+        internal ExportallusersRequest()
+        {
+        }
+
+        /// <summary> Gets the format. </summary>
+        public string Format { get; }
     }
 }
