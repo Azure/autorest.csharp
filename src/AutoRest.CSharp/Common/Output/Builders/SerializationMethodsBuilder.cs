@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (model.IncludeSerializer)
                 {
                     bool hasInherits = model.Inherits != null && model.Inherits is { IsFrameworkType: false };
-                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json, serialization.Interfaces, hasInherits))
+                    bool isSealed = model.GetExistingType()?.IsSealed == true;
+                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json, serialization.Interfaces, hasInherits, isSealed))
                     {
                         yield return method;
                     }
