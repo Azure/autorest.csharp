@@ -37,7 +37,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
     setSDKContextOptions({
         // TODO: replace with `@hasJsonConverter` when it is available
-        additionalDecorators: ["Azure\\.ClientGenerator\\.Core\\.@clientName"]
+        additionalDecorators: []
     });
     await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
