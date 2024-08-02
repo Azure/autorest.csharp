@@ -455,13 +455,13 @@ namespace Scm.Client.Naming
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        private Model _cachedModel;
+        private ClientModel _cachedClientModel;
         private UnionEnum _cachedUnionEnum;
 
-        /// <summary> Initializes a new instance of Model. </summary>
-        public virtual Model GetModelClient()
+        /// <summary> Initializes a new instance of ClientModel. </summary>
+        public virtual ClientModel GetClientModelClient()
         {
-            return Volatile.Read(ref _cachedModel) ?? Interlocked.CompareExchange(ref _cachedModel, new Model(_pipeline, _endpoint), null) ?? _cachedModel;
+            return Volatile.Read(ref _cachedClientModel) ?? Interlocked.CompareExchange(ref _cachedClientModel, new ClientModel(_pipeline, _endpoint), null) ?? _cachedClientModel;
         }
 
         /// <summary> Initializes a new instance of UnionEnum. </summary>

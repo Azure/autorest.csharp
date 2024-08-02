@@ -149,7 +149,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
-                    optionalResourceId = new object(),
+                    optionalResourceId = "<optionalResourceId>",
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -220,7 +220,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                     OptionalFloatProperty = (double)default,
-                    OptionalResourceId = null,
+                    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
                 },
                 BinaryData.FromObjectAsJson(new object()),
                 new Dictionary<string, BinaryData>
@@ -348,7 +348,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                     requiredFloatProperty = new object(),
                     optionalFloatProperty = new object(),
-                    optionalResourceId = new object(),
+                    optionalResourceId = "<optionalResourceId>",
                 },
                 intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new object[]
@@ -508,7 +508,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -529,7 +529,7 @@ BinaryData.FromObjectAsJson("<unionList>")
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
                 OptionalFloatProperty = (double)default,
-                OptionalResourceId = null,
+                OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
