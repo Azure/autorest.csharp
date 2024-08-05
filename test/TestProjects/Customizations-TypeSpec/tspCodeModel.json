@@ -839,7 +839,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "128",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

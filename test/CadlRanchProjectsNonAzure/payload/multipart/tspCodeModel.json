@@ -326,7 +326,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "47",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -341,7 +343,9 @@
       "$id": "48",
       "Type": {
        "$id": "49",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -365,7 +369,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "53",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -380,7 +386,9 @@
         "$id": "54",
         "Type": {
          "$id": "55",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }

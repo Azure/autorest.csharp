@@ -1250,7 +1250,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "188",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1753,7 +1755,9 @@
      "NameInRequest": "firstTestTypeSpecUrl",
      "Type": {
       "$id": "237",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1785,7 +1789,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "241",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1920,7 +1926,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "256",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2424,7 +2432,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "309",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2524,7 +2534,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "319",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

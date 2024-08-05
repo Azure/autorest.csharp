@@ -390,7 +390,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "56",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -419,7 +421,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "60",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -450,7 +454,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "64",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -482,7 +488,9 @@
         "$id": "67",
         "Type": {
          "$id": "68",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-06-01-preview"
        }
@@ -654,7 +662,9 @@
         "$id": "88",
         "Type": {
          "$id": "89",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-06-01-preview"
        }
@@ -780,7 +790,9 @@
         "$id": "103",
         "Type": {
          "$id": "104",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-06-01-preview"
        }

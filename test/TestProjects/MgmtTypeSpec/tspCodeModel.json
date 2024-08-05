@@ -506,7 +506,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "70",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -521,7 +523,9 @@
       "$id": "71",
       "Type": {
        "$id": "72",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://management.azure.com"
      }
@@ -545,7 +549,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "76",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -560,7 +566,9 @@
         "$id": "77",
         "Type": {
          "$id": "78",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://management.azure.com"
        }
@@ -585,7 +593,9 @@
         "$id": "81",
         "Type": {
          "$id": "82",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "v1"
        }

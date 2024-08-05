@@ -207,7 +207,9 @@
      "NameInRequest": "petStoreUrl",
      "Type": {
       "$id": "32",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -240,7 +242,9 @@
        "NameInRequest": "petStoreUrl",
        "Type": {
         "$id": "36",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -272,7 +276,9 @@
         "$id": "39",
         "Type": {
          "$id": "40",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-11-30-preview"
        }
@@ -570,7 +576,9 @@
        "NameInRequest": "petStoreUrl",
        "Type": {
         "$id": "71",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -602,7 +610,9 @@
         "$id": "74",
         "Type": {
          "$id": "75",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-11-30-preview"
        }

@@ -63,7 +63,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "11",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -93,7 +95,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "15",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -156,7 +160,9 @@
         "$id": "22",
         "Type": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-15-preview"
        }

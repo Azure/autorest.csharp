@@ -1966,7 +1966,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "289",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3667,7 +3669,9 @@
      "NameInRequest": "firstTestTypeSpecUrl",
      "Type": {
       "$id": "450",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -3699,7 +3703,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "454",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3834,7 +3840,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "469",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4395,7 +4403,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "527",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4495,7 +4505,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "537",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4652,7 +4664,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "552",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4755,7 +4769,9 @@
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
         "$id": "563",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

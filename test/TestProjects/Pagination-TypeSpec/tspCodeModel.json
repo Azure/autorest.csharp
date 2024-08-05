@@ -579,7 +579,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "83",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -611,7 +613,9 @@
         "$id": "86",
         "Type": {
          "$id": "87",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }
@@ -737,7 +741,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "101",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -769,7 +775,9 @@
         "$id": "104",
         "Type": {
          "$id": "105",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }
@@ -955,7 +963,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "126",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -987,7 +997,9 @@
         "$id": "129",
         "Type": {
          "$id": "130",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }
@@ -1073,7 +1085,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "140",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1105,7 +1119,9 @@
         "$id": "143",
         "Type": {
          "$id": "144",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }
@@ -1193,7 +1209,9 @@
         "$id": "153",
         "Type": {
          "$id": "154",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }
@@ -1346,7 +1364,9 @@
        "NameInRequest": "pagnationUri",
        "Type": {
         "$id": "172",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1378,7 +1398,9 @@
         "$id": "175",
         "Type": {
          "$id": "176",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-05-13"
        }

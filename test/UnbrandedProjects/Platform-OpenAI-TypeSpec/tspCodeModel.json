@@ -5257,7 +5257,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "822",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5272,7 +5274,9 @@
       "$id": "823",
       "Type": {
        "$id": "824",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://api.openai.com/v1"
      }
@@ -5294,7 +5298,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "828",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5309,7 +5315,9 @@
       "$id": "829",
       "Type": {
        "$id": "830",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://api.openai.com/v1"
      }
@@ -5333,7 +5341,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "834",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5348,7 +5358,9 @@
         "$id": "835",
         "Type": {
          "$id": "836",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -5467,7 +5479,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "849",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5482,7 +5496,9 @@
         "$id": "850",
         "Type": {
          "$id": "851",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -5599,7 +5615,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "864",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5614,7 +5632,9 @@
       "$id": "865",
       "Type": {
        "$id": "866",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://api.openai.com/v1"
      }
@@ -5637,7 +5657,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "870",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5652,7 +5674,9 @@
         "$id": "871",
         "Type": {
          "$id": "872",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -5770,7 +5794,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "885",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -5785,7 +5811,9 @@
       "$id": "886",
       "Type": {
        "$id": "887",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://api.openai.com/v1"
      }
@@ -5809,7 +5837,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "891",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5824,7 +5854,9 @@
         "$id": "892",
         "Type": {
          "$id": "893",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -6288,7 +6320,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "940",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6303,7 +6337,9 @@
         "$id": "941",
         "Type": {
          "$id": "942",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -6423,7 +6459,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "955",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6438,7 +6476,9 @@
         "$id": "956",
         "Type": {
          "$id": "957",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -6558,7 +6598,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "970",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6573,7 +6615,9 @@
         "$id": "971",
         "Type": {
          "$id": "972",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -6693,7 +6737,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "985",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6708,7 +6754,9 @@
         "$id": "986",
         "Type": {
          "$id": "987",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -7108,7 +7156,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1027",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7123,7 +7173,9 @@
         "$id": "1028",
         "Type": {
          "$id": "1029",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -7543,7 +7595,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1070",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7558,7 +7612,9 @@
         "$id": "1071",
         "Type": {
          "$id": "1072",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -7786,7 +7842,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1095",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7801,7 +7859,9 @@
         "$id": "1096",
         "Type": {
          "$id": "1097",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }
@@ -8113,7 +8173,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1128",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -8128,7 +8190,9 @@
         "$id": "1129",
         "Type": {
          "$id": "1130",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://api.openai.com/v1"
        }

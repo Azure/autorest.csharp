@@ -2986,7 +2986,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "446",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4274,7 +4276,9 @@
         "$id": "563",
         "Type": {
          "$id": "564",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "0.1.0"
        }

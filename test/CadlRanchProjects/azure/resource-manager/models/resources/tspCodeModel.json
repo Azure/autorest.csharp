@@ -675,7 +675,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "92",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -690,7 +692,9 @@
       "$id": "93",
       "Type": {
        "$id": "94",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://management.azure.com"
      }
@@ -714,7 +718,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "98",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -729,7 +735,9 @@
         "$id": "99",
         "Type": {
          "$id": "100",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://management.azure.com"
        }
@@ -754,7 +762,9 @@
         "$id": "103",
         "Type": {
          "$id": "104",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -888,7 +898,9 @@
         "$id": "118",
         "Type": {
          "$id": "119",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1113,7 +1125,9 @@
         "$id": "144",
         "Type": {
          "$id": "145",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1332,7 +1346,9 @@
         "$id": "170",
         "Type": {
          "$id": "171",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1501,7 +1517,9 @@
         "$id": "192",
         "Type": {
          "$id": "193",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1623,7 +1641,9 @@
         "$id": "206",
         "Type": {
          "$id": "207",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1726,7 +1746,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "219",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1741,7 +1763,9 @@
         "$id": "220",
         "Type": {
          "$id": "221",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://management.azure.com"
        }
@@ -1766,7 +1790,9 @@
         "$id": "224",
         "Type": {
          "$id": "225",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1917,7 +1943,9 @@
         "$id": "241",
         "Type": {
          "$id": "242",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -2159,7 +2187,9 @@
         "$id": "269",
         "Type": {
          "$id": "270",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -2395,7 +2425,9 @@
         "$id": "297",
         "Type": {
          "$id": "298",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -2581,7 +2613,9 @@
         "$id": "321",
         "Type": {
          "$id": "322",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }

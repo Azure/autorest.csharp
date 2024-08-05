@@ -407,7 +407,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "57",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -422,7 +424,9 @@
         "$id": "58",
         "Type": {
          "$id": "59",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -447,7 +451,9 @@
         "$id": "62",
         "Type": {
          "$id": "63",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -603,7 +609,9 @@
         "$id": "78",
         "Type": {
          "$id": "79",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -759,7 +767,9 @@
         "$id": "94",
         "Type": {
          "$id": "95",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -859,7 +869,9 @@
         "$id": "105",
         "Type": {
          "$id": "106",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1083,7 +1095,9 @@
         "$id": "132",
         "Type": {
          "$id": "133",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1170,7 +1184,9 @@
         "$id": "142",
         "Type": {
          "$id": "143",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1314,7 +1330,9 @@
         "$id": "157",
         "Type": {
          "$id": "158",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1402,7 +1420,9 @@
         "$id": "167",
         "Type": {
          "$id": "168",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1496,7 +1516,9 @@
         "$id": "178",
         "Type": {
          "$id": "179",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1609,7 +1631,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "192",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1624,7 +1648,9 @@
         "$id": "193",
         "Type": {
          "$id": "194",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1649,7 +1675,9 @@
         "$id": "197",
         "Type": {
          "$id": "198",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -1736,7 +1764,9 @@
         "$id": "207",
         "Type": {
          "$id": "208",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }

@@ -616,7 +616,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "86",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -631,7 +633,9 @@
       "$id": "87",
       "Type": {
        "$id": "88",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "https://management.azure.com"
      }
@@ -655,7 +659,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "92",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -670,7 +676,9 @@
         "$id": "93",
         "Type": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "https://management.azure.com"
        }
@@ -695,7 +703,9 @@
         "$id": "97",
         "Type": {
          "$id": "98",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -828,7 +838,9 @@
         "$id": "112",
         "Type": {
          "$id": "113",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }
@@ -1017,7 +1029,9 @@
         "$id": "132",
         "Type": {
          "$id": "133",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2023-12-01-preview"
        }

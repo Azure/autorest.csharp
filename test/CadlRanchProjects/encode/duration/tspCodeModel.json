@@ -183,7 +183,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "30",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -198,7 +200,9 @@
       "$id": "31",
       "Type": {
        "$id": "32",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -221,7 +225,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "36",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -236,7 +242,9 @@
         "$id": "37",
         "Type": {
          "$id": "38",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -566,7 +574,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "73",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -581,7 +591,9 @@
         "$id": "74",
         "Type": {
          "$id": "75",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1180,7 +1192,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "133",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1195,7 +1209,9 @@
         "$id": "134",
         "Type": {
          "$id": "135",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
