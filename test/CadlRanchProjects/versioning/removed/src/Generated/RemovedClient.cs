@@ -166,7 +166,7 @@ namespace Versioning.Removed
             }
         }
 
-        /// <summary> This operation should not be generated with old version. </summary>
+        /// <summary> This operation should be generated with the signatures of both the latest and the original versions, rather than beta version. </summary>
         /// <param name="body"> The <see cref="ModelV3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -181,7 +181,7 @@ namespace Versioning.Removed
             return Response.FromValue(ModelV3.FromResponse(response), response);
         }
 
-        /// <summary> This operation should not be generated with old version. </summary>
+        /// <summary> This operation should be generated with the signatures of both the latest and the original versions, rather than beta version. </summary>
         /// <param name="body"> The <see cref="ModelV3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -197,7 +197,7 @@ namespace Versioning.Removed
         }
 
         /// <summary>
-        /// [Protocol Method] This operation should not be generated with old version
+        /// [Protocol Method] This operation should be generated with the signatures of both the latest and the original versions, rather than beta version
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -236,7 +236,7 @@ namespace Versioning.Removed
         }
 
         /// <summary>
-        /// [Protocol Method] This operation should not be generated with old version
+        /// [Protocol Method] This operation should be generated with the signatures of both the latest and the original versions, rather than beta version
         /// <list type="bullet">
         /// <item>
         /// <description>

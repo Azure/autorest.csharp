@@ -14,6 +14,7 @@ namespace Versioning.Removed.Models
         public static string ToSerialString(this Versions value) => value switch
         {
             Versions.V1 => "v1",
+            Versions.Beta => "beta",
             Versions.V2 => "v2",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Versions value.")
         };
@@ -21,6 +22,7 @@ namespace Versioning.Removed.Models
         public static Versions ToVersions(this string value)
         {
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "v1")) return Versions.V1;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "beta")) return Versions.Beta;
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "v2")) return Versions.V2;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Versions value.");
         }
