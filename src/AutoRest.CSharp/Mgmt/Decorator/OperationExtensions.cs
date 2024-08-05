@@ -64,8 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
 
-            // TODO -- do we need a check for it is tsp input or not
-            if (IsNameChanged(operation))
+            if (operation.IsNameChanged)
             {
                 name = operation.Name;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
@@ -76,23 +75,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return false;
-
-            static bool IsNameChanged(InputOperation operation)
-            {
-                var span = operation.CrossLanguageDefinitionId.AsSpan();
-                int lastDotIndex = span.LastIndexOf('.');
-                if (lastDotIndex < 0)
-                {
-                    return false;
-                }
-                var nameSpan = operation.Name.AsSpan();
-                if (nameSpan.Equals(span.Slice(lastDotIndex + 1), StringComparison.Ordinal))
-                {
-                    return false;
-                }
-
-                return true;
-            }
         }
 
         public static RequestPath GetRequestPath(this InputOperation operation, ResourceTypeSegment? hint = null)

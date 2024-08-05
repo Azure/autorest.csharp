@@ -93,12 +93,32 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue);
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue)
+            {
+                IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
+            };
             if (id != null)
             {
                 resolver.AddReference(id, inputOperation);
             }
             return inputOperation;
+
+            static bool IsNameChanged(string crossLanguageDefinitionId, string name)
+            {
+                var span = crossLanguageDefinitionId.AsSpan();
+                int lastDotIndex = span.LastIndexOf('.');
+                if (lastDotIndex < 0)
+                {
+                    return false;
+                }
+                var nameSpan = name.AsSpan();
+                if (nameSpan.Equals(span.Slice(lastDotIndex + 1), StringComparison.Ordinal))
+                {
+                    return false;
+                }
+
+                return true;
+            }
         }
     }
 }
