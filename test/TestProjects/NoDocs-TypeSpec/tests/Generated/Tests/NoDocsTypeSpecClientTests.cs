@@ -135,8 +135,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 });
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -180,15 +179,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 });
         }
 
         [Test]
@@ -214,8 +205,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -241,8 +231,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -290,8 +279,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -317,8 +305,7 @@ namespace NoDocsTypeSpec.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -1022,7 +1009,7 @@ new BaseModel(123)
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
         }
 
         [Test]
@@ -1033,7 +1020,7 @@ new BaseModel(123)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -1046,9 +1033,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
         }
 
         [Test]
@@ -1059,8 +1046,8 @@ new BaseModel(123)
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NoDocsTypeSpecClient client = CreateNoDocsTypeSpecClient(endpoint, credential);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
     }
 }

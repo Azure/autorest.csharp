@@ -1,0 +1,389 @@
+{
+ "$id": "1",
+ "Name": "Client.Structure.Service",
+ "ApiVersions": [],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "ClientType",
+   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "Default",
+     "Value": "default"
+    },
+    {
+     "$id": "5",
+     "Name": "MultiClient",
+     "Value": "multi-client"
+    },
+    {
+     "$id": "6",
+     "Name": "RenamedOperation",
+     "Value": "renamed-operation"
+    },
+    {
+     "$id": "7",
+     "Name": "TwoOperationGroup",
+     "Value": "two-operation-group"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "Input"
+  }
+ ],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "8",
+   "Name": "TwoOperationGroupClient",
+   "Operations": [],
+   "Protocol": {
+    "$id": "9"
+   },
+   "Parameters": [
+    {
+     "$id": "10",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
+     "Type": {
+      "$id": "11",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    },
+    {
+     "$id": "12",
+     "Name": "client",
+     "NameInRequest": "client",
+     "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+     "Type": {
+      "$ref": "2"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": false,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
+    }
+   ]
+  },
+  {
+   "$id": "13",
+   "Name": "Group1",
+   "Operations": [
+    {
+     "$id": "14",
+     "Name": "one",
+     "ResourceName": "Group1",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "15",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
+       "Type": {
+        "$id": "16",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "17",
+       "Name": "client",
+       "NameInRequest": "client",
+       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "18",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/one",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "19",
+     "Name": "three",
+     "ResourceName": "Group1",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "15"
+      },
+      {
+       "$ref": "17"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "20",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/three",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "21",
+     "Name": "four",
+     "ResourceName": "Group1",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "15"
+      },
+      {
+       "$ref": "17"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "22",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/four",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "23"
+   },
+   "Parent": "TwoOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "15"
+    },
+    {
+     "$ref": "17"
+    }
+   ]
+  },
+  {
+   "$id": "24",
+   "Name": "Group2",
+   "Operations": [
+    {
+     "$id": "25",
+     "Name": "two",
+     "ResourceName": "Group2",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "26",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
+       "Type": {
+        "$id": "27",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "28",
+       "Name": "client",
+       "NameInRequest": "client",
+       "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "29",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/two",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "30",
+     "Name": "five",
+     "ResourceName": "Group2",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$ref": "28"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "31",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/five",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "32",
+     "Name": "six",
+     "ResourceName": "Group2",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "26"
+      },
+      {
+       "$ref": "28"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "33",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/six",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "34"
+   },
+   "Parent": "TwoOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "26"
+    },
+    {
+     "$ref": "28"
+    }
+   ]
+  }
+ ]
+}

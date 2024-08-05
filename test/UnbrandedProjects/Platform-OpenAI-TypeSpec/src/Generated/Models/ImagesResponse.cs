@@ -41,8 +41,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
@@ -63,7 +62,7 @@ namespace OpenAI.Models
         {
             Created = created;
             Data = data;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ImagesResponse"/> for deserialization. </summary>

@@ -27,7 +27,7 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)
@@ -128,25 +128,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(ClientNameModel clientNameModel)
+        /// <param name="body"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> ClientAsync(ClientNameModel body)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await ClientAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
-        public virtual ClientResult Client(ClientNameModel clientNameModel)
+        /// <param name="body"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Client(ClientNameModel body)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Client(content, null);
             return result;
         }
@@ -208,25 +208,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> LanguageAsync(LanguageClientNameModel languageClientNameModel)
+        /// <param name="body"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> LanguageAsync(LanguageClientNameModel body)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = languageClientNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await LanguageAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
-        public virtual ClientResult Language(LanguageClientNameModel languageClientNameModel)
+        /// <param name="body"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult Language(LanguageClientNameModel body)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = languageClientNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = Language(content, null);
             return result;
         }
@@ -288,25 +288,25 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        public virtual async Task<ClientResult> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel)
+        /// <param name="body"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<ClientResult> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel body)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientNameAndJsonEncodedNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = await CompatibleWithEncodedNameAsync(content, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
-        public virtual ClientResult CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel)
+        /// <param name="body"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual ClientResult CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel body)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using BinaryContent content = clientNameAndJsonEncodedNameModel.ToBinaryContent();
+            using BinaryContent content = body.ToBinaryContent();
             ClientResult result = CompatibleWithEncodedName(content, null);
             return result;
         }
@@ -480,7 +480,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/operation", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -496,7 +495,6 @@ namespace Scm.Client.Naming
             uri.AppendPath("/client/naming/parameter", false);
             uri.AppendQuery("defaultName", clientName, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -511,7 +509,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/client", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -528,7 +525,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/language", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -545,7 +541,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/compatible-with-encoded-name", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -563,7 +558,6 @@ namespace Scm.Client.Naming
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("default-name", clientName);
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -578,7 +572,6 @@ namespace Scm.Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

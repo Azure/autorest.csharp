@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         internal static TypeFactory CadlTypeFactory => new TypeFactory(null, typeof(BinaryData));
 
         internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
-            "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
+            "Simple model that will appear in a collection.", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
             null, new List<InputModelType>(), null, null, null, null);
 
@@ -54,6 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
                 enableBicepSerialization: true,
+                enableInternalRawData: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 keepNonOverloadableProtocolSignature: false,

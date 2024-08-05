@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
             string? usageString = null;
             bool isExtendable = false;
             InputType? valueType = null;
@@ -64,9 +63,9 @@ namespace AutoRest.CSharp.Common.Input
                 description = $"The {name}.";
             }
 
-            if (usageString != null)
+            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
             {
-                Enum.TryParse(usageString, ignoreCase: true, out usage);
+                throw new JsonException($"Cannot parse usage {usageString}");
             }
 
             if (values == null || values.Count == 0)

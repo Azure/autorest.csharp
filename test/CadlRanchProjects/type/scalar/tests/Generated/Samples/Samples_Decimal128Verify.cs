@@ -108,7 +108,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = client.Verify(content);
 
             Console.WriteLine(response.Status);
@@ -120,7 +120,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = await client.VerifyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -132,7 +132,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            Response response = client.Verify((decimal)default);
+            Response response = client.Verify(123.45M);
         }
 
         [Test]
@@ -141,7 +141,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            Response response = await client.VerifyAsync((decimal)default);
+            Response response = await client.VerifyAsync(123.45M);
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = client.Verify(content);
 
             Console.WriteLine(response.Status);
@@ -162,7 +162,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = await client.VerifyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -174,7 +174,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            Response response = client.Verify((decimal)default);
+            Response response = client.Verify(123.45M);
         }
 
         [Test]
@@ -183,7 +183,7 @@ namespace _Type.Scalar.Samples
         {
             Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-            Response response = await client.VerifyAsync((decimal)default);
+            Response response = await client.VerifyAsync(123.45M);
         }
     }
 }

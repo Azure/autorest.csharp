@@ -48,7 +48,7 @@ namespace _Type.Union.Models
         /// <summary> Initializes a new instance of <see cref="SendRequest2"/>. </summary>
         /// <param name="prop"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
-        public SendRequest2(StringAndArrayCases prop)
+        internal SendRequest2(StringAndArrayCases prop)
         {
             Argument.AssertNotNull(prop, nameof(prop));
 

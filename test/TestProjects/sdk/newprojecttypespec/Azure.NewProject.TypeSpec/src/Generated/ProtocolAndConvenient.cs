@@ -265,7 +265,6 @@ namespace Azure.NewProject.TypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

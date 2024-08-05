@@ -1,0 +1,327 @@
+{
+ "$id": "1",
+ "Name": "MultipleMediaTypes",
+ "ApiVersions": [],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "application/json; serialization=Avro",
+     "Value": "application/json; serialization=Avro"
+    },
+    {
+     "$id": "5",
+     "Name": "application/octet-stream",
+     "Value": "application/octet-stream"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "6",
+   "Kind": "enum",
+   "Name": "OneStringBodyThreeContentTypesRequestContentType",
+   "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+   "ValueType": {
+    "$id": "7",
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
+   },
+   "Values": [
+    {
+     "$id": "8",
+     "Name": "application/json",
+     "Value": "application/json"
+    },
+    {
+     "$id": "9",
+     "Name": "application/octet-stream",
+     "Value": "application/octet-stream"
+    },
+    {
+     "$id": "10",
+     "Name": "text/plain",
+     "Value": "text/plain"
+    }
+   ],
+   "IsExtensible": false,
+   "Usage": "Input"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "11",
+   "Kind": "model",
+   "Name": "Body",
+   "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
+   "Usage": "Input,Json",
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "14",
+   "Name": "MultipleMediaTypesClient",
+   "Description": "Play with produces/consumes and media-types in general.",
+   "Operations": [
+    {
+     "$id": "15",
+     "Name": "oneBinaryBodyTwoContentTypes",
+     "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "16",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "17",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "18",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "19",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "20",
+        "Kind": "bytes",
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "21",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Binary",
+     "Uri": "{endpoint}",
+     "Path": "/oneBinaryBodyTwoContentTypes",
+     "RequestMediaTypes": [
+      "application/json; serialization=Avro",
+      "application/octet-stream"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "22",
+     "Name": "oneStringBodyThreeContentTypes",
+     "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "23",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$ref": "6"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "24",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "25",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "26",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Text",
+     "Uri": "{endpoint}",
+     "Path": "/oneStringBodyThreeContentTypes",
+     "RequestMediaTypes": [
+      "application/json",
+      "application/octet-stream",
+      "text/plain"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "27",
+     "Name": "oneModelBodyOneContentType",
+     "ResourceName": "MultipleMediaTypes",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "16"
+      },
+      {
+       "$id": "28",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "29",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "30",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "31",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "32",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/oneModelBodyOneContentType",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "33"
+   },
+   "Parameters": [
+    {
+     "$ref": "16"
+    }
+   ]
+  }
+ ]
+}

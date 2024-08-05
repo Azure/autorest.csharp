@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripEnumProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L67-L75
-            var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Round-trip model with enum properties", InputModelTypeUsage.RoundTrip,
+            var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Round-trip model with enum properties", InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                     new List<InputModelProperty>{
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, null, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, null, true, false, false)
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             internal EnumWrapper(EnumType enumType) => this.EnumType = enumType;
         }
 
-        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
+        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("English", "English", "Translate to English"),
                         new("Spanish", "Spanish", "Translate to Spanish"),
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Undocumented", "Undocumented", null)
                     }, true);
 
-        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
+        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("Monday", "Monday", null),
                         new("Tuesday", "Tuesday", null),

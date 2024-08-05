@@ -1,0 +1,235 @@
+{
+ "$id": "1",
+ "Name": "Type.Model.Inheritance.Recursive",
+ "ApiVersions": [],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Kind": "model",
+   "Name": "Extension",
+   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
+   "Usage": "Input,Output,Json",
+   "Description": "extension",
+   "BaseModel": {
+    "$id": "3",
+    "Kind": "model",
+    "Name": "Element",
+    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
+    "Usage": "Input,Output,Json",
+    "Description": "element",
+    "Properties": [
+     {
+      "$id": "4",
+      "Name": "extension",
+      "SerializedName": "extension",
+      "Description": "",
+      "Type": {
+       "$id": "5",
+       "Kind": "array",
+       "Name": "ArrayExtension",
+       "ValueType": {
+        "$ref": "2"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.Array"
+      },
+      "IsRequired": false,
+      "IsReadOnly": false
+     }
+    ]
+   },
+   "Properties": [
+    {
+     "$id": "6",
+     "Name": "level",
+     "SerializedName": "level",
+     "Description": "",
+     "Type": {
+      "$id": "7",
+      "Kind": "int8",
+      "Name": "int8",
+      "CrossLanguageDefinitionId": "TypeSpec.int8"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$ref": "3"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "8",
+   "Name": "RecursiveClient",
+   "Description": "Illustrates inheritance recursion",
+   "Operations": [
+    {
+     "$id": "9",
+     "Name": "put",
+     "ResourceName": "Recursive",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "10",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "11",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "12",
+        "Type": {
+         "$id": "13",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "14",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "15",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "16",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "17",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "18",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/type/model/inheritance/recursive",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "19",
+     "Name": "get",
+     "ResourceName": "Recursive",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "10"
+      },
+      {
+       "$id": "20",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "21",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "22",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "23",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/type/model/inheritance/recursive",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "24"
+   },
+   "Parameters": [
+    {
+     "$ref": "10"
+    }
+   ]
+  }
+ ]
+}

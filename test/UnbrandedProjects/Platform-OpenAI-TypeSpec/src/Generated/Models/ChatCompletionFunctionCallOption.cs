@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace OpenAI.Models
 {
     /// <summary> The ChatCompletionFunctionCallOption. </summary>
-    public partial class ChatCompletionFunctionCallOption
+    internal partial class ChatCompletionFunctionCallOption
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionCallOption"/>. </summary>
         /// <param name="name"> The name of the function to call. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -58,7 +57,7 @@ namespace OpenAI.Models
         internal ChatCompletionFunctionCallOption(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Name = name;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionCallOption"/> for deserialization. </summary>
