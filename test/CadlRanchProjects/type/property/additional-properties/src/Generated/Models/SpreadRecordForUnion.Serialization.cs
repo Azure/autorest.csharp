@@ -20,13 +20,21 @@ namespace _Type.Property.AdditionalProperties.Models
 
         void IJsonModel<SpreadRecordForUnion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<SpreadRecordForUnion>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(SpreadRecordForUnion)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("flag"u8);
             writer.WriteBooleanValue(Flag);
             foreach (var item in AdditionalProperties)
@@ -41,7 +49,6 @@ namespace _Type.Property.AdditionalProperties.Models
                 }
 #endif
             }
-            writer.WriteEndObject();
         }
 
         SpreadRecordForUnion IJsonModel<SpreadRecordForUnion>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

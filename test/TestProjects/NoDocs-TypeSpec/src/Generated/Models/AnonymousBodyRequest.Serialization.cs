@@ -20,13 +20,19 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<AnonymousBodyRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<AnonymousBodyRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(AnonymousBodyRequest)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
@@ -114,7 +120,6 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         AnonymousBodyRequest IJsonModel<AnonymousBodyRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

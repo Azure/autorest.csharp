@@ -22,13 +22,21 @@ namespace MgmtDiscriminator.Models
 
         void IJsonModel<RemoteAddressMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<RemoteAddressMatchConditionParameters>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(RemoteAddressMatchConditionParameters)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
@@ -73,7 +81,6 @@ namespace MgmtDiscriminator.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         RemoteAddressMatchConditionParameters IJsonModel<RemoteAddressMatchConditionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

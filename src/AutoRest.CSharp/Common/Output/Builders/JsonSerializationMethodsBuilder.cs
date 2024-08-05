@@ -34,6 +34,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -43,6 +44,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
+        private static string _jsonModelWriteCoreMethodName = "JsonModelWriteCore";
+
         public static IEnumerable<Method> BuildResourceJsonSerializationMethods(Resource resource)
         {
             var resourceDataType = resource.ResourceData.Type;
@@ -85,7 +88,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MemberExpression(This, "Data").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
         }
 
-        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces, bool hasInherits, bool isSealed)
         {
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
@@ -115,19 +118,29 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
+            if (iJsonModelInterface == null && iPersistableModelTInterface == null && Configuration.UseModelReaderWriter)
+            {
+                // void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+                yield return BuildJsonModelWriteCoreMethod(json, null, hasInherits, isSealed);
+            }
+
             if (iJsonModelInterface is not null && iPersistableModelTInterface is not null)
             {
                 var typeOfT = iJsonModelInterface.Arguments[0];
                 var model = typeOfT.Implementation as SerializableObjectType;
                 Debug.Assert(model != null, $"{typeOfT} should be a SerializableObjectType");
 
+                // void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+                var jsonModelWriteCore = BuildJsonModelWriteCoreMethod(json, iPersistableModelTInterface, hasInherits, isSealed);
+
                 // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
-                    WriteObject(json, writer, options, iPersistableModelTInterface)
+                    BuildJsonModelWriteMethodBody(jsonModelWriteCore, writer)
                 );
+                yield return jsonModelWriteCore;
 
                 // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                 var reader = KnownParameters.Serializations.Utf8JsonReader;
@@ -194,6 +207,61 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true),
                 utf8JsonWriter.WriteEndObject()
             };
+
+        private static MethodBodyStatement[] BuildJsonModelWriteMethodBody(Method jsonModelWriteCoreMethod, Utf8JsonWriterExpression utf8JsonWriter)
+        {
+            var coreMethodSignature = jsonModelWriteCoreMethod.Signature;
+
+            return new[]
+            {
+                utf8JsonWriter.WriteStartObject(),
+                This.Invoke(coreMethodSignature.Name, coreMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList()).ToStatement(),
+                utf8JsonWriter.WriteEndObject(),
+            };
+        }
+
+        // void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        private static Method BuildJsonModelWriteCoreMethod(JsonObjectSerialization serialization, CSharpType? iPersistableModelTInterface, bool hasInherits, bool isSealed)
+        {
+            MethodSignatureModifiers modifiers = hasInherits ? MethodSignatureModifiers.Protected | MethodSignatureModifiers.Override : MethodSignatureModifiers.Protected | MethodSignatureModifiers.Virtual;
+            if (serialization.Type.IsValueType || isSealed)
+                modifiers = MethodSignatureModifiers.Private;
+
+            var writerParameter = new Parameter("writer", $"The JSON writer.", typeof(Utf8JsonWriter), null, ValidationType.None, null);
+            var optionsParameter = new Parameter("options", $"The client options for reading and writing models.", typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
+            var utf8JsonWriter = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+
+            return new Method
+            (
+                new MethodSignature(_jsonModelWriteCoreMethodName, null, null, modifiers, null, null, new[] { writerParameter, optionsParameter }),
+                BuildJsonModelWriteCoreMethodBody(serialization, utf8JsonWriter, options, iPersistableModelTInterface, hasInherits)
+            );
+        }
+
+        private static MethodBodyStatement[] BuildJsonModelWriteCoreMethodBody(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, CSharpType? iPersistableModelTInterface, bool hasInherits)
+        {
+            var body = new List<MethodBodyStatement>()
+            {
+                Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
+                CallBaseJsonModelWriteCore(utf8JsonWriter, options, hasInherits),
+                WriteProperties(utf8JsonWriter, serialization.Properties, serialization.RawDataField?.Value, options).ToArray(),
+                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties, false),
+            };
+            if (!hasInherits)
+            {
+                body.Add(SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true));
+            }
+            return body.ToArray();
+        }
+
+        private static MethodBodyStatement CallBaseJsonModelWriteCore(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)
+        {
+            // base.<JsonModelWriteCore>()
+            return hasInherits ?
+                new KeywordExpression("base", null).Invoke(_jsonModelWriteCoreMethodName, utf8JsonWriter, options).ToStatement()
+                : EmptyStatement;
+        }
 
         // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
         private static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties, ValueExpression? rawData, ModelReaderWriterOptionsExpression? options)

@@ -20,13 +20,21 @@ namespace _Type.Model.Usage.Models
 
         void IJsonModel<InputRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<InputRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(InputRecord)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +52,6 @@ namespace _Type.Model.Usage.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         InputRecord IJsonModel<InputRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

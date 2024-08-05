@@ -21,13 +21,21 @@ namespace TypeSchemaMapping.Models
 
         void IJsonModel<SecondModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<SecondModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(SecondModel)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("StringProperty"u8);
             writer.WriteNumberValue(IntProperty);
             if (Optional.IsCollectionDefined(DictionaryProperty))
@@ -61,7 +69,6 @@ namespace TypeSchemaMapping.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         SecondModel IJsonModel<SecondModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

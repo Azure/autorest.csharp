@@ -20,13 +20,19 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<BaseModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<BaseModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(BaseModel)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +50,6 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         BaseModel IJsonModel<BaseModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

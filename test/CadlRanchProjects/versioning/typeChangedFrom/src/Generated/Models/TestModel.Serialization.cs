@@ -20,13 +20,21 @@ namespace Versioning.TypeChangedFrom.Models
 
         void IJsonModel<TestModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<TestModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(TestModel)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
             writer.WriteStringValue(Prop);
             writer.WritePropertyName("changedProp"u8);
@@ -46,7 +54,6 @@ namespace Versioning.TypeChangedFrom.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         TestModel IJsonModel<TestModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

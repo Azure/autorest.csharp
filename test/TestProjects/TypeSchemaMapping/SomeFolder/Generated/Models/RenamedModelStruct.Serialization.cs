@@ -22,13 +22,21 @@ namespace CustomNamespace
 
         void IJsonModel<RenamedModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        private void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<RenamedModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(CustomizedFlattenedStringProperty))
@@ -67,7 +75,6 @@ namespace CustomNamespace
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         RenamedModelStruct IJsonModel<RenamedModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

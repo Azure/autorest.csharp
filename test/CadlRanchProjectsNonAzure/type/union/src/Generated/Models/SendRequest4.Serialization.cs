@@ -14,13 +14,21 @@ namespace Scm._Type.Union.Models
     {
         void IJsonModel<SendRequest4>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<SendRequest4>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(SendRequest4)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Prop);
@@ -45,7 +53,6 @@ namespace Scm._Type.Union.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         SendRequest4 IJsonModel<SendRequest4>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

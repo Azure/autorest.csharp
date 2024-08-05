@@ -20,13 +20,21 @@ namespace Client.Naming.Models
 
         void IJsonModel<ClientNameAndJsonEncodedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ClientNameAndJsonEncodedNameModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ClientNameAndJsonEncodedNameModel)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("wireName"u8);
             writer.WriteBooleanValue(ClientName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +52,6 @@ namespace Client.Naming.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ClientNameAndJsonEncodedNameModel IJsonModel<ClientNameAndJsonEncodedNameModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

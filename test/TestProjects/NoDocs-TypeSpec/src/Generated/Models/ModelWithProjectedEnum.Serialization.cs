@@ -20,13 +20,19 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<ModelWithProjectedEnum>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithProjectedEnum>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ModelWithProjectedEnum)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("enumProperty"u8);
             writer.WriteNumberValue(EnumProperty.ToSerialSingle());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +50,6 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ModelWithProjectedEnum IJsonModel<ModelWithProjectedEnum>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

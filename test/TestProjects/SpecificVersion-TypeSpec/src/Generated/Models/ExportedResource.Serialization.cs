@@ -20,13 +20,21 @@ namespace TypeSpec.Versioning.Specific.Models
 
         void IJsonModel<ExportedResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ExportedResource>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ExportedResource)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("resourceUri"u8);
@@ -46,7 +54,6 @@ namespace TypeSpec.Versioning.Specific.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ExportedResource IJsonModel<ExportedResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

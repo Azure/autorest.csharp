@@ -20,13 +20,21 @@ namespace Encode.Duration.Models
 
         void IJsonModel<FloatSecondsDurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<FloatSecondsDurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(FloatSecondsDurationProperty)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Convert.ToDouble(Value.ToString("s\\.FFF")));
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +52,6 @@ namespace Encode.Duration.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         FloatSecondsDurationProperty IJsonModel<FloatSecondsDurationProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -15,13 +15,21 @@ namespace OpenAI.Models
     {
         void IJsonModel<CreateTranslationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<CreateTranslationRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(CreateTranslationRequest)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (SerializedAdditionalRawData?.ContainsKey("file") != true)
             {
                 writer.WritePropertyName("file"u8);
@@ -73,7 +81,6 @@ namespace OpenAI.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         CreateTranslationRequest IJsonModel<CreateTranslationRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
