@@ -427,114 +427,90 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code></example>
     </member>
-    <member name="SwapUsersAsync(SwapUsersOptions,CancellationToken)">
+    <member name="ExportAllUsersAsync(string,CancellationToken)">
       <example>
-This sample shows how to call SwapUsersAsync.
+This sample shows how to call ExportAllUsersAsync.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
-Response<User> response = await client.SwapUsersAsync(body);
+Response<UserList> response = await client.ExportAllUsersAsync("<format>");
 ]]></code>
-This sample shows how to call SwapUsersAsync with all parameters.
+This sample shows how to call ExportAllUsersAsync with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
-Response<User> response = await client.SwapUsersAsync(body);
+Response<UserList> response = await client.ExportAllUsersAsync("<format>");
 ]]></code></example>
     </member>
-    <member name="SwapUsers(SwapUsersOptions,CancellationToken)">
+    <member name="ExportAllUsers(string,CancellationToken)">
       <example>
-This sample shows how to call SwapUsers.
+This sample shows how to call ExportAllUsers.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
-Response<User> response = client.SwapUsers(body);
+Response<UserList> response = client.ExportAllUsers("<format>");
 ]]></code>
-This sample shows how to call SwapUsers with all parameters.
+This sample shows how to call ExportAllUsers with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-SwapUsersOptions body = new SwapUsersOptions(1234, 1234);
-Response<User> response = client.SwapUsers(body);
+Response<UserList> response = client.ExportAllUsers("<format>");
 ]]></code></example>
     </member>
-    <member name="SwapUsersAsync(RequestContent,RequestContext)">
+    <member name="ExportAllUsersAsync(string,RequestContext)">
       <example>
-This sample shows how to call SwapUsersAsync and parse the result.
+This sample shows how to call ExportAllUsersAsync and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    firstUserId = 1234,
-    secondUserId = 1234,
-});
-Response response = await client.SwapUsersAsync(content);
+Response response = await client.ExportAllUsersAsync("<format>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("etag").ToString());
 ]]></code>
-This sample shows how to call SwapUsersAsync with all request content and parse the result.
+This sample shows how to call ExportAllUsersAsync with all parameters and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    firstUserId = 1234,
-    secondUserId = 1234,
-});
-Response response = await client.SwapUsersAsync(content);
+Response response = await client.ExportAllUsersAsync("<format>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("etag").ToString());
 ]]></code></example>
     </member>
-    <member name="SwapUsers(RequestContent,RequestContext)">
+    <member name="ExportAllUsers(string,RequestContext)">
       <example>
-This sample shows how to call SwapUsers and parse the result.
+This sample shows how to call ExportAllUsers and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    firstUserId = 1234,
-    secondUserId = 1234,
-});
-Response response = client.SwapUsers(content);
+Response response = client.ExportAllUsers("<format>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("etag").ToString());
 ]]></code>
-This sample shows how to call SwapUsers with all request content and parse the result.
+This sample shows how to call ExportAllUsers with all parameters and parse the result.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    firstUserId = 1234,
-    secondUserId = 1234,
-});
-Response response = client.SwapUsers(content);
+Response response = client.ExportAllUsers("<format>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-Console.WriteLine(result.GetProperty("etag").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("Users")[0].GetProperty("etag").ToString());
 ]]></code></example>
     </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
@@ -624,320 +600,6 @@ This sample shows how to call GetUsers with all parameters and parse the result.
 BasicClient client = new BasicClient();
 
 foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithPageAsync(CancellationToken)">
-      <example>
-This sample shows how to call GetWithPageAsync.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (User item in client.GetWithPageAsync())
-{
-}
-]]></code>
-This sample shows how to call GetWithPageAsync with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (User item in client.GetWithPageAsync())
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithPage(CancellationToken)">
-      <example>
-This sample shows how to call GetWithPage.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (User item in client.GetWithPage())
-{
-}
-]]></code>
-This sample shows how to call GetWithPage with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (User item in client.GetWithPage())
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithPageAsync(RequestContext)">
-      <example>
-This sample shows how to call GetWithPageAsync and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (BinaryData item in client.GetWithPageAsync(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithPageAsync with all parameters and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (BinaryData item in client.GetWithPageAsync(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithPage(RequestContext)">
-      <example>
-This sample shows how to call GetWithPage and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (BinaryData item in client.GetWithPage(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithPage with all parameters and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (BinaryData item in client.GetWithPage(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)">
-      <example>
-This sample shows how to call GetWithParametersAsync.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
-await foreach (User item in client.GetWithParametersAsync(bodyInput))
-{
-}
-]]></code>
-This sample shows how to call GetWithParametersAsync with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
-await foreach (User item in client.GetWithParametersAsync(bodyInput, another: ListItemInputExtensibleEnum.First))
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)">
-      <example>
-This sample shows how to call GetWithParameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
-foreach (User item in client.GetWithParameters(bodyInput))
-{
-}
-]]></code>
-This sample shows how to call GetWithParameters with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
-foreach (User item in client.GetWithParameters(bodyInput, another: ListItemInputExtensibleEnum.First))
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithParametersAsync(RequestContent,string,RequestContext)">
-      <example>
-This sample shows how to call GetWithParametersAsync and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    inputName = "<inputName>",
-});
-await foreach (BinaryData item in client.GetWithParametersAsync(content))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithParametersAsync with all parameters and request content and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    inputName = "<inputName>",
-});
-await foreach (BinaryData item in client.GetWithParametersAsync(content, another: "First"))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithParameters(RequestContent,string,RequestContext)">
-      <example>
-This sample shows how to call GetWithParameters and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    inputName = "<inputName>",
-});
-foreach (BinaryData item in client.GetWithParameters(content))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithParameters with all parameters and request content and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    inputName = "<inputName>",
-});
-foreach (BinaryData item in client.GetWithParameters(content, another: "First"))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithCustomPageModelAsync(CancellationToken)">
-      <example>
-This sample shows how to call GetWithCustomPageModelAsync.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (User item in client.GetWithCustomPageModelAsync())
-{
-}
-]]></code>
-This sample shows how to call GetWithCustomPageModelAsync with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (User item in client.GetWithCustomPageModelAsync())
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithCustomPageModel(CancellationToken)">
-      <example>
-This sample shows how to call GetWithCustomPageModel.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (User item in client.GetWithCustomPageModel())
-{
-}
-]]></code>
-This sample shows how to call GetWithCustomPageModel with all parameters.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (User item in client.GetWithCustomPageModel())
-{
-}
-]]></code></example>
-    </member>
-    <member name="GetWithCustomPageModelAsync(RequestContext)">
-      <example>
-This sample shows how to call GetWithCustomPageModelAsync and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithCustomPageModelAsync with all parameters and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code></example>
-    </member>
-    <member name="GetWithCustomPageModel(RequestContext)">
-      <example>
-This sample shows how to call GetWithCustomPageModel and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (BinaryData item in client.GetWithCustomPageModel(null))
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetWithCustomPageModel with all parameters and parse the result.
-<code><![CDATA[
-BasicClient client = new BasicClient();
-
-foreach (BinaryData item in client.GetWithCustomPageModel(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
