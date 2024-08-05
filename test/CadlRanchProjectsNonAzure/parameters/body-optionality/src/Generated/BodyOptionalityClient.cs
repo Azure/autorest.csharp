@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Scm.Parameters.BodyOptionality.Models;
@@ -27,7 +28,7 @@ namespace Scm.Parameters.BodyOptionality
         }
 
         /// <summary> Initializes a new instance of BodyOptionalityClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BodyOptionalityClient(Uri endpoint, BodyOptionalityClientOptions options)
@@ -120,26 +121,26 @@ namespace Scm.Parameters.BodyOptionality
         }
 
         /// <summary> Required implicit. </summary>
-        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
-        public virtual async Task<ClientResult> RequiredImplicitAsync(BodyModel bodyModel)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<ClientResult> RequiredImplicitAsync(string name)
         {
-            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyModel.ToBinaryContent();
-            ClientResult result = await RequiredImplicitAsync(content, null).ConfigureAwait(false);
+            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
+            ClientResult result = await RequiredImplicitAsync(requiredImplicitRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Required implicit. </summary>
-        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
-        public virtual ClientResult RequiredImplicit(BodyModel bodyModel)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual ClientResult RequiredImplicit(string name)
         {
-            Argument.AssertNotNull(bodyModel, nameof(bodyModel));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyModel.ToBinaryContent();
-            ClientResult result = RequiredImplicit(content, null);
+            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
+            ClientResult result = RequiredImplicit(requiredImplicitRequest.ToBinaryContent(), null);
             return result;
         }
 
@@ -153,7 +154,7 @@ namespace Scm.Parameters.BodyOptionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RequiredImplicitAsync(BodyModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RequiredImplicitAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -181,7 +182,7 @@ namespace Scm.Parameters.BodyOptionality
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RequiredImplicit(BodyModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RequiredImplicit(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -217,7 +218,6 @@ namespace Scm.Parameters.BodyOptionality
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-explicit", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -234,7 +234,6 @@ namespace Scm.Parameters.BodyOptionality
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-implicit", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

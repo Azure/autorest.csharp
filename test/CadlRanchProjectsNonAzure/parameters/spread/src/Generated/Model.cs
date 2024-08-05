@@ -5,6 +5,7 @@
 using System;
 using System.ClientModel;
 using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Scm.Parameters.Spread.Models;
 
@@ -27,7 +28,7 @@ namespace Scm.Parameters.Spread
 
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         internal Model(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -35,26 +36,26 @@ namespace Scm.Parameters.Spread
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual async Task<ClientResult> SpreadAsRequestBodyAsync(BodyParameter bodyParameter)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<ClientResult> SpreadAsRequestBodyAsync(string name)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
-            ClientResult result = await SpreadAsRequestBodyAsync(content, null).ConfigureAwait(false);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Spread as request body. </summary>
-        /// <param name="bodyParameter"> This is a simple model. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public virtual ClientResult SpreadAsRequestBody(BodyParameter bodyParameter)
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual ClientResult SpreadAsRequestBody(string name)
         {
-            Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
+            Argument.AssertNotNull(name, nameof(name));
 
-            using BinaryContent content = bodyParameter.ToBinaryContent();
-            ClientResult result = SpreadAsRequestBody(content, null);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToBinaryContent(), null);
             return result;
         }
 
@@ -68,7 +69,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(BodyParameter)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +97,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBody(BodyParameter)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBody(string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -351,34 +352,34 @@ namespace Scm.Parameters.Spread
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<ClientResult> SpreadCompositeRequestMixAsync(string name, string testHeader, CompositeRequestMix compositeRequestMix)
+        public virtual async Task<ClientResult> SpreadCompositeRequestMixAsync(string name, string testHeader, string prop)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using BinaryContent content = compositeRequestMix.ToBinaryContent();
-            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, content, null).ConfigureAwait(false);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Spread composite request mix. </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="testHeader"> The <see cref="string"/> to use. </param>
-        /// <param name="compositeRequestMix"> This is a model with non-body http request decorator. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="compositeRequestMix"/> is null. </exception>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="testHeader"/> or <paramref name="prop"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual ClientResult SpreadCompositeRequestMix(string name, string testHeader, CompositeRequestMix compositeRequestMix)
+        public virtual ClientResult SpreadCompositeRequestMix(string name, string testHeader, string prop)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(testHeader, nameof(testHeader));
-            Argument.AssertNotNull(compositeRequestMix, nameof(compositeRequestMix));
+            Argument.AssertNotNull(prop, nameof(prop));
 
-            using BinaryContent content = compositeRequestMix.ToBinaryContent();
-            ClientResult result = SpreadCompositeRequestMix(name, testHeader, content, null);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = SpreadCompositeRequestMix(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null);
             return result;
         }
 
@@ -392,7 +393,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,CompositeRequestMix)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMixAsync(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -425,7 +426,7 @@ namespace Scm.Parameters.Spread
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,CompositeRequestMix)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadCompositeRequestMix(string,string,string)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -458,7 +459,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -475,7 +475,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -494,7 +493,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -511,7 +509,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -530,7 +527,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

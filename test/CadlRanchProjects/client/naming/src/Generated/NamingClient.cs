@@ -34,7 +34,7 @@ namespace Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)
@@ -180,30 +180,30 @@ namespace Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="ClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='ClientAsync(ClientNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> ClientAsync(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ClientAsync(ClientNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="clientNameModel"> The <see cref="ClientNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="ClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Client(ClientNameModel,CancellationToken)']/*" />
-        public virtual Response Client(ClientNameModel clientNameModel, CancellationToken cancellationToken = default)
+        public virtual Response Client(ClientNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameModel, nameof(clientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Client(content, context);
             return response;
@@ -288,30 +288,30 @@ namespace Client.Naming
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="LanguageClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='LanguageAsync(LanguageClientNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> LanguageAsync(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> LanguageAsync(LanguageClientNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = languageClientNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Language. </summary>
-        /// <param name="languageClientNameModel"> The <see cref="LanguageClientNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="LanguageClientNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="languageClientNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='Language(LanguageClientNameModel,CancellationToken)']/*" />
-        public virtual Response Language(LanguageClientNameModel languageClientNameModel, CancellationToken cancellationToken = default)
+        public virtual Response Language(LanguageClientNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(languageClientNameModel, nameof(languageClientNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = languageClientNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Language(content, context);
             return response;
@@ -396,30 +396,30 @@ namespace Client.Naming
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual async Task<Response> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CompatibleWithEncodedNameAsync(ClientNameAndJsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await CompatibleWithEncodedNameAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Compatible with encoded name. </summary>
-        /// <param name="clientNameAndJsonEncodedNameModel"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
+        /// <param name="body"> The <see cref="ClientNameAndJsonEncodedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientNameAndJsonEncodedNameModel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NamingClient.xml" path="doc/members/member[@name='CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel,CancellationToken)']/*" />
-        public virtual Response CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel, CancellationToken cancellationToken = default)
+        public virtual Response CompatibleWithEncodedName(ClientNameAndJsonEncodedNameModel body, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(clientNameAndJsonEncodedNameModel, nameof(clientNameAndJsonEncodedNameModel));
+            Argument.AssertNotNull(body, nameof(body));
 
-            using RequestContent content = clientNameAndJsonEncodedNameModel.ToRequestContent();
+            using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = CompatibleWithEncodedName(content, context);
             return response;
@@ -659,7 +659,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/operation", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -673,7 +672,6 @@ namespace Client.Naming
             uri.AppendPath("/client/naming/parameter", false);
             uri.AppendQuery("defaultName", clientName, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -686,7 +684,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/client", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -701,7 +698,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/language", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -716,7 +712,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/property/compatible-with-encoded-name", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -732,7 +727,6 @@ namespace Client.Naming
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri;
             request.Headers.Add("default-name", clientName);
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -745,7 +739,6 @@ namespace Client.Naming
             uri.Reset(_endpoint);
             uri.AppendPath("/client/naming/header", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

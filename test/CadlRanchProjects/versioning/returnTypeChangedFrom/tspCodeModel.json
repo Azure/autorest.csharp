@@ -1,0 +1,202 @@
+{
+ "$id": "1",
+ "Name": "Versioning.ReturnTypeChangedFrom",
+ "ApiVersions": [
+  "v1",
+  "v2"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Kind": "enum",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "Versioning.ReturnTypeChangedFrom.Versions",
+   "ValueType": {
+    "$id": "3",
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
+   },
+   "Values": [
+    {
+     "$id": "4",
+     "Name": "v1",
+     "Value": "v1",
+     "Description": "The version v1."
+    },
+    {
+     "$id": "5",
+     "Name": "v2",
+     "Value": "v2",
+     "Description": "The version v2."
+    }
+   ],
+   "Description": "The version of the API.",
+   "IsExtensible": false,
+   "Usage": "Input,ApiVersionEnum"
+  }
+ ],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "6",
+   "Name": "ReturnTypeChangedFromClient",
+   "Description": "Test for the `@returnTypeChangedFrom` decorator.",
+   "Operations": [
+    {
+     "$id": "7",
+     "Name": "test",
+     "ResourceName": "ReturnTypeChangedFrom",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "8",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Need to be set as 'http://localhost:3000' in client.",
+       "Type": {
+        "$id": "9",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "10",
+       "Name": "version",
+       "NameInRequest": "version",
+       "Description": "Need to be set as 'v1' or 'v2' in client.",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "11",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "12",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "13",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "14",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "15",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "16",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "17",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "18",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "19",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "20",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Text",
+     "Uri": "{endpoint}/versioning/return-type-changed-from/api-version:{version}",
+     "Path": "/test",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "21"
+   },
+   "Parameters": [
+    {
+     "$ref": "8"
+    },
+    {
+     "$ref": "10"
+    }
+   ]
+  }
+ ]
+}

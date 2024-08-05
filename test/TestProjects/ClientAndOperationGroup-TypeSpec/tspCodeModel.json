@@ -1,0 +1,470 @@
+{
+ "$id": "1",
+ "Name": "ClientAndOperationGroup",
+ "ApiVersions": [],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "ClientAndOperationGroupClient",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "zero",
+     "ResourceName": "ClientAndOperationGroup",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
+       "Type": {
+        "$id": "5",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "6",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "7",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "8",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "9",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "10",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/top",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "11",
+     "Name": "one",
+     "ResourceName": "Alpha",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$id": "12",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "13",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "14",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "15",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "16",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Alpha",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "17"
+   },
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
+  },
+  {
+   "$id": "18",
+   "Name": "Beta",
+   "Operations": [
+    {
+     "$id": "19",
+     "Name": "two",
+     "ResourceName": "Beta",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "20",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
+       "Type": {
+        "$id": "21",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "22",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "23",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "24",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "25",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "26",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Beta",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "27",
+     "Name": "three",
+     "ResourceName": "SubBeta",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "20"
+      },
+      {
+       "$id": "28",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "29",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "30",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "31",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "32",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/SubBeta",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "33"
+   },
+   "Parent": "ClientAndOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "20"
+    }
+   ]
+  },
+  {
+   "$id": "34",
+   "Name": "Gamma",
+   "Operations": [
+    {
+     "$id": "35",
+     "Name": "four",
+     "ResourceName": "Gamma",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "36",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
+       "Type": {
+        "$id": "37",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "38",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "39",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "40",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "41",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "42",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Gamma",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "43",
+     "Name": "five",
+     "ResourceName": "Gamma",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "36"
+      },
+      {
+       "$id": "44",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "45",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "46",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "47",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "48",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "None",
+     "Uri": "{operationGroupServiceUrl}",
+     "Path": "/Gamma",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "49"
+   },
+   "Parent": "ClientAndOperationGroupClient",
+   "Parameters": [
+    {
+     "$ref": "36"
+    }
+   ]
+  }
+ ]
+}

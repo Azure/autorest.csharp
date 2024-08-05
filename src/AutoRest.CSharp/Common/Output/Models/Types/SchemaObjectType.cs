@@ -501,7 +501,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
 
                     var csharpType = BuilderHelpers.GetTypeFromExisting(propertyWithSerialization, typeof(object), _typeFactory);
-                    var isReadOnly = BuilderHelpers.IsReadOnlyFromExisting(propertyWithSerialization);
+                    var isReadOnly = BuilderHelpers.IsReadOnly(propertyWithSerialization, csharpType);
                     var accessibility = propertyWithSerialization.DeclaredAccessibility == Accessibility.Public ? "public" : "internal";
                     yield return new ObjectTypeProperty(
                         new MemberDeclarationOptions(accessibility, propertyWithSerialization.Name, csharpType),
@@ -754,7 +754,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            return InputModel.Usage.HasFlag(InputModelTypeUsage.Multipart) ? _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this) : null;
+            return InputModel.Usage.HasFlag(InputModelTypeUsage.MultipartFormData) ? _serializationBuilder.BuildMultipartObjectSerialization(InputModel, this) : null;
         }
         protected override IEnumerable<Method> BuildMethods()
         {

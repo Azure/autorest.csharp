@@ -145,7 +145,7 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.PatchActionAsync(content);
         }
@@ -184,8 +184,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -219,7 +218,7 @@ namespace FirstTestTypeSpec.Tests
             },
                 requiredFloatProperty = new object(),
                 optionalFloatProperty = new object(),
-                optionalResourceId = new object(),
+                optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.AnonymousBodyAsync(content);
         }
@@ -232,17 +231,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList = { 1234 },
-                OptionalFloatProperty = (double)default,
-                OptionalResourceId = null,
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -268,8 +257,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -295,8 +283,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Friend friend = new Friend("<name>");
-            Response<Friend> response = await client.FriendlyModelAsync(friend);
+            Response<Friend> response = await client.FriendlyModelAsync("<name>");
         }
 
         [Test]
@@ -400,8 +387,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -427,8 +413,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            ProjectedModel projectedModel = new ProjectedModel("<name>");
-            Response<ProjectedModel> response = await client.ProjectedNameModelAsync(projectedModel);
+            Response<ProjectedModel> response = await client.ProjectedNameModelAsync("<name>");
         }
 
         [Test]
@@ -1132,7 +1117,7 @@ new BaseModel(123)
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
             using RequestContent content = null;
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
         }
 
         [Test]
@@ -1143,7 +1128,7 @@ new BaseModel(123)
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AzureLocationOpAsync(default, default);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"));
         }
 
         [Test]
@@ -1156,9 +1141,9 @@ new BaseModel(123)
 
             using RequestContent content = RequestContent.Create(new
             {
-                location = new object(),
+                location = "<location>",
             });
-            Response response = await client.AzureLocationOpAsync(default, default, content);
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), content);
         }
 
         [Test]
@@ -1169,8 +1154,8 @@ new BaseModel(123)
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            AzureLocationModel body = new AzureLocationModel(default);
-            Response response = await client.AzureLocationOpAsync(default, default, body: body);
+            AzureLocationModel body = new AzureLocationModel(new AzureLocation("<location>"));
+            Response response = await client.AzureLocationOpAsync(new AzureLocation("<location>"), new AzureLocation("<regenLocation>"), body: body);
         }
     }
 }

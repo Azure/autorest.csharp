@@ -1,0 +1,149 @@
+{
+ "$id": "1",
+ "Name": "SpecialHeaders.ConditionalRequest",
+ "ApiVersions": [],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "ConditionalRequestClient",
+   "Description": "Illustrates conditional request headers",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "postIfMatch",
+     "ResourceName": "ConditionalRequest",
+     "Description": "Check when only If-Match in header is defined.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "5",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "6",
+        "Type": {
+         "$id": "7",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "8",
+       "Name": "ifMatch",
+       "NameInRequest": "If-Match",
+       "Description": "The request should only proceed if an entity matches this string.",
+       "Type": {
+        "$id": "9",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "10",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/special-headers/conditional-request/if-match",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "11",
+     "Name": "postIfNoneMatch",
+     "ResourceName": "ConditionalRequest",
+     "Description": "Check when only If-None-Match in header is defined.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$id": "12",
+       "Name": "ifNoneMatch",
+       "NameInRequest": "If-None-Match",
+       "Description": "The request should only proceed if no entity matches this string.",
+       "Type": {
+        "$id": "13",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/special-headers/conditional-request/if-none-match",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "15"
+   },
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
+  }
+ ]
+}

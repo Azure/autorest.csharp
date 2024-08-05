@@ -333,7 +333,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
+    <member name="AnonymousBodyAsync(string,BinaryData,string,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,CancellationToken)">
       <example>
 This sample shows how to call AnonymousBodyAsync.
 <code><![CDATA[
@@ -341,8 +341,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
-Response<Thing> response = await client.AnonymousBodyAsync(thing);
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
 <code><![CDATA[
@@ -350,17 +349,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-};
-Response<Thing> response = await client.AnonymousBodyAsync(thing);
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true);
 ]]></code></example>
     </member>
-    <member name="AnonymousBody(Thing,CancellationToken)">
+    <member name="AnonymousBody(string,BinaryData,string,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,CancellationToken)">
       <example>
 This sample shows how to call AnonymousBody.
 <code><![CDATA[
@@ -368,8 +360,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>");
-Response<Thing> response = client.AnonymousBody(thing);
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
 <code><![CDATA[
@@ -377,14 +368,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Thing thing = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>")
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-};
-Response<Thing> response = client.AnonymousBody(thing);
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true);
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
@@ -517,7 +501,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code></example>
     </member>
-    <member name="FriendlyModelAsync(Friend,CancellationToken)">
+    <member name="FriendlyModelAsync(string,CancellationToken)">
       <example>
 This sample shows how to call FriendlyModelAsync.
 <code><![CDATA[
@@ -525,8 +509,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Friend friend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(friend);
+Response<Friend> response = await client.FriendlyModelAsync("<name>");
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all parameters.
 <code><![CDATA[
@@ -534,11 +517,10 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Friend friend = new Friend("<name>");
-Response<Friend> response = await client.FriendlyModelAsync(friend);
+Response<Friend> response = await client.FriendlyModelAsync("<name>");
 ]]></code></example>
     </member>
-    <member name="FriendlyModel(Friend,CancellationToken)">
+    <member name="FriendlyModel(string,CancellationToken)">
       <example>
 This sample shows how to call FriendlyModel.
 <code><![CDATA[
@@ -546,8 +528,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Friend friend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(friend);
+Response<Friend> response = client.FriendlyModel("<name>");
 ]]></code>
 This sample shows how to call FriendlyModel with all parameters.
 <code><![CDATA[
@@ -555,8 +536,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Friend friend = new Friend("<name>");
-Response<Friend> response = client.FriendlyModel(friend);
+Response<Friend> response = client.FriendlyModel("<name>");
 ]]></code></example>
     </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">

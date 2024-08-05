@@ -50,7 +50,7 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
+    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 },
 BinaryData.FromObjectAsJson(new object()),
 new Dictionary<string, BinaryData>
@@ -130,7 +130,7 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
+    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 },
 BinaryData.FromObjectAsJson(new object()),
 new Dictionary<string, BinaryData>
@@ -275,7 +275,7 @@ using RequestContent content = RequestContent.Create(new
         },
         requiredFloatProperty = new object(),
         optionalFloatProperty = new object(),
-        optionalResourceId = new object(),
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -477,7 +477,7 @@ using RequestContent content = RequestContent.Create(new
         },
         requiredFloatProperty = new object(),
         optionalFloatProperty = new object(),
-        optionalResourceId = new object(),
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -679,7 +679,7 @@ using RequestContent content = RequestContent.Create(new
         },
         requiredFloatProperty = new object(),
         optionalFloatProperty = new object(),
-        optionalResourceId = new object(),
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -881,7 +881,7 @@ using RequestContent content = RequestContent.Create(new
         },
         requiredFloatProperty = new object(),
         optionalFloatProperty = new object(),
-        optionalResourceId = new object(),
+        optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
     intExtensibleEnumCollection = new object[]
@@ -1118,7 +1118,7 @@ Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"),
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
+    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 };
 Response<Thing> response = await client.CreateLiteralAsync(body);
 ]]></code></example>
@@ -1146,7 +1146,7 @@ Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"),
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
     OptionalFloatProperty = (double)default,
-    OptionalResourceId = null,
+    OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 };
 Response<Thing> response = client.CreateLiteral(body);
 ]]></code></example>
@@ -1214,7 +1214,7 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
-    optionalResourceId = new object(),
+    optionalResourceId = "<optionalResourceId>",
 });
 Response response = await client.CreateLiteralAsync(content);
 
@@ -1300,7 +1300,7 @@ using RequestContent content = RequestContent.Create(new
     },
     requiredFloatProperty = new object(),
     optionalFloatProperty = new object(),
-    optionalResourceId = new object(),
+    optionalResourceId = "<optionalResourceId>",
 });
 Response response = client.CreateLiteral(content);
 

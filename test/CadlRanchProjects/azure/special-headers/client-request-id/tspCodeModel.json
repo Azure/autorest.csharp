@@ -1,0 +1,99 @@
+{
+ "$id": "1",
+ "Name": "Azure.SpecialHeaders.XmsClientRequestId",
+ "ApiVersions": [],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "XmsClientRequestIdClient",
+   "Description": "Azure client request id header configurations.",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "get",
+     "ResourceName": "XmsClientRequestId",
+     "Description": "Get operation with azure `x-ms-client-request-id` header.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "5",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "6",
+        "Type": {
+         "$id": "7",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "8",
+       "Name": "clientRequestId",
+       "NameInRequest": "x-ms-client-request-id",
+       "Type": {
+        "$id": "9",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "10",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/azure/special-headers/x-ms-client-request-id/",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "11"
+   },
+   "Parameters": [
+    {
+     "$ref": "4"
+    }
+   ]
+  }
+ ]
+}

@@ -40,8 +40,7 @@ namespace OpenAI.Models
         /// </list>
         /// </para>
         /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
+        internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionResponseMessageFunctionCall"/>. </summary>
         /// <param name="name"> The name of the function to call. </param>
         /// <param name="arguments">
@@ -71,7 +70,7 @@ namespace OpenAI.Models
         {
             Name = name;
             Arguments = arguments;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
+            SerializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionResponseMessageFunctionCall"/> for deserialization. </summary>

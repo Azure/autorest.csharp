@@ -10,6 +10,22 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Model factory for models. </summary>
     public static partial class SpecsAzureClientGeneratorCoreAccessModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
+        /// <param name="name"></param>
+        /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
+        public static SharedModel SharedModel(string name = null)
+        {
+            return new SharedModel(name, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
+        /// <param name="name"></param>
+        /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
+        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
+        {
+            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.NoDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.NoDecoratorModelInPublic"/> instance for mocking. </returns>
@@ -24,22 +40,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null)
         {
             return new PublicDecoratorModelInPublic(name, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
-        /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
-        public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
-        {
-            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
-        /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
-        public static SharedModel SharedModel(string name = null)
-        {
-            return new SharedModel(name, serializedAdditionalRawData: null);
         }
     }
 }

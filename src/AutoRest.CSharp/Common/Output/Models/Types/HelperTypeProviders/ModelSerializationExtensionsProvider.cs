@@ -42,10 +42,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 InitializationValue = New.Instance(typeof(ModelReaderWriterOptions), Literal("W"))
             };
+
+            if (Configuration.EnableInternalRawData)
+            {
+                // when we have this configuration, we have a sentinel value for raw data values to let us skip values
+                _sentinelBinaryDataField = new FieldDeclaration(
+                    modifiers: FieldModifiers.Internal | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                    type: typeof(BinaryData),
+                    name: _sentinelBinaryDataName)
+                {
+                    InitializationValue = BinaryDataExpression.FromObjectAsJson(Literal("__EMPTY__"))
+                };
+            }
         }
 
         private const string _wireOptionsName = "WireOptions";
         private readonly FieldDeclaration _wireOptionsField;
+        private const string _sentinelBinaryDataName = "SentinelValue";
+        private readonly FieldDeclaration? _sentinelBinaryDataField;
 
         private ModelReaderWriterOptionsExpression? _wireOptions;
         public ModelReaderWriterOptionsExpression WireOptions => _wireOptions ??= new ModelReaderWriterOptionsExpression(new MemberExpression(Type, _wireOptionsName));
@@ -55,6 +69,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<FieldDeclaration> BuildFields()
         {
             yield return _wireOptionsField;
+
+            if (_sentinelBinaryDataField != null)
+            {
+                yield return _sentinelBinaryDataField;
+            }
         }
 
         protected override IEnumerable<Method> BuildMethods()
@@ -79,7 +98,34 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildWriteObjectValueMethodGeneric();
             yield return BuildWriteObjectValueMethod();
             #endregion
+
+            #region Sentinel Value related methods
+            if (_sentinelBinaryDataField != null)
+            {
+                var valueParameter = new Parameter("value", null, typeof(BinaryData), null, ValidationType.None, null);
+                var signature = new MethodSignature(
+                    Name: _isSentinelValueMethodName,
+                    Modifiers: MethodSignatureModifiers.Static | MethodSignatureModifiers.Internal,
+                    ReturnType: typeof(bool),
+                    Parameters: new[] { valueParameter },
+                    Summary: null, Description: null, ReturnDescription: null);
+
+                var sentinelValue = new BinaryDataExpression(_sentinelBinaryDataField);
+                var value = new BinaryDataExpression(valueParameter);
+                var indexer = new VariableReference(typeof(int), "i");
+                var body = new MethodBodyStatement[]
+                {
+                    Declare("sentinelSpan", new TypedValueExpression(typeof(ReadOnlySpan<byte>), sentinelValue.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))), out var sentinelSpan),
+                    Declare("valueSpan", new TypedValueExpression(typeof(ReadOnlySpan<byte>), value.ToMemory().Property(nameof(ReadOnlyMemory<byte>.Span))), out var valueSpan),
+                    Return(new InvokeStaticMethodExpression(typeof(MemoryExtensions), nameof(MemoryExtensions.SequenceEqual), new[] { sentinelSpan, valueSpan }, CallAsExtension: true)),
+                };
+
+                yield return new(signature, body);
+            }
+            #endregion
         }
+
+        private const string _isSentinelValueMethodName = "IsSentinelValue";
 
         #region JsonElementExtensions method builders
         private const string _getBytesFromBase64MethodName = "GetBytesFromBase64";
@@ -621,6 +667,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new InvokeStaticMethodStatement(Type, _writeObjectValueMethodName, parameters, CallAsExtension: true, TypeArguments: new[] { value.Type });
         }
         #endregion
+
+        public BoolExpression IsSentinelValue(ValueExpression value)
+        {
+            return new(new InvokeStaticMethodExpression(Type, _isSentinelValueMethodName, new[] { value }));
+        }
 
         protected override IEnumerable<ExpressionTypeProvider> BuildNestedTypes()
         {

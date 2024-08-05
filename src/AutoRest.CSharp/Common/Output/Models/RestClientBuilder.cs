@@ -379,7 +379,10 @@ namespace AutoRest.CSharp.Output.Models
                 _ => throw new InvalidOperationException($"Unable to find object property for grouped parameter {parameter.Name} in {groupedByParameterType.Name}")
             };
 
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{propertyName}", propertyType);
+            // need to handle case like renaming by [CodeGenModel]
+            var groupedByParameterName = Parameter.FromInputParameter(groupedByParameter, groupedByParameterType, _typeFactory).Name;
+
+            return new Reference($"{groupedByParameterName.ToVariableName()}.{propertyName}", propertyType);
         }
 
         private static ResponseBody? BuildResponseBody(OperationResponse response, TypeFactory typeFactory)

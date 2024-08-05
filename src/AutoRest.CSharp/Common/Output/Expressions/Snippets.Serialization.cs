@@ -5,11 +5,11 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -23,14 +23,38 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression BicepFormat = Literal("bicep");
             public static StringExpression MultipartFormat = Literal("MFD");
 
+            public static MethodBodyStatement WrapInCheckInRawData(ValueExpression? rawDataExpression, string propertyName, MethodBodyStatement statement)
+            {
+                if (rawDataExpression == null || !Configuration.EnableInternalRawData)
+                {
+                    return statement;
+                }
+
+                var rawDataDict = new DictionaryExpression(typeof(string), typeof(BinaryData), new NullConditionalExpression(rawDataExpression));
+                var condition = NotEqual(rawDataDict.ContainsKey(Literal(propertyName)), True);
+
+                if (statement is IfStatement ifStatement)
+                {
+                    return ifStatement with
+                    {
+                        Condition = And(condition, ifStatement.Condition)
+                    };
+                }
+
+                return new IfStatement(condition)
+                {
+                    statement
+                };
+            }
+
             // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
-            public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression? format, MethodBodyStatement statement)
+            public static MethodBodyStatement WrapInCheckNotWire(bool shouldExcludeInWire, ValueExpression? format, MethodBodyStatement statement)
             {
                 // if format is null, indicating the model reader writer is not enabled
                 if (format == null)
                 {
                     // when the model reader writer is not enabled, we just omit the serialization when it should not be included.
-                    if (serialization.ShouldExcludeInWireSerialization)
+                    if (shouldExcludeInWire)
                     {
                         return EmptyStatement;
                     }
@@ -40,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Models
                     }
                 }
 
-                if (!serialization.ShouldExcludeInWireSerialization)
+                if (!shouldExcludeInWire)
                     return statement;
 
                 // we need to wrap a check `format != "W"` around the statement
