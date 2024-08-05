@@ -66,10 +66,30 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Versioning_Removed_v3() => Test(async (host) =>
+        public Task Versioning_Removed_V3_V2() => Test(async (host) =>
         {
             ModelV3 modelV3 = new ModelV3("123", "bar");
             var response = await new RemovedClient(host, Versions.V2).V3Async(modelV3);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("123", response.Value.Id);
+            Assert.AreEqual("bar", response.Value.Type);
+        });
+
+        [Test]
+        public Task Versioning_Removed_V3_V1() => Test(async (host) =>
+        {
+            ModelV3 modelV3 = new ModelV3("123", "bar");
+            var response = await new RemovedClient(host, Versions.V1).V3Async(modelV3);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("123", response.Value.Id);
+            Assert.AreEqual("bar", response.Value.Type);
+        });
+
+        [Test]
+        public Task Versioning_Removed_V3_Beta() => Test(async (host) =>
+        {
+            ModelV3 modelV3 = new ModelV3("123", "bar");
+            var response = await new RemovedClient(host, Versions.Beta).V3Async(modelV3);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
             Assert.AreEqual("bar", response.Value.Type);
