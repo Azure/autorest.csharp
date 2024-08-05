@@ -563,7 +563,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoTestTypeSpec.sayHi"
     },
     {
      "$id": "74",
@@ -664,7 +665,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoTestTypeSpec.sayHello"
     }
    ],
    "Protocol": {

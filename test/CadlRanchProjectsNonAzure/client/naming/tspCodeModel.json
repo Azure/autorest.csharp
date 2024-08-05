@@ -228,7 +228,8 @@
      "Path": "/client/naming/operation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.operation"
     },
     {
      "$id": "31",
@@ -275,7 +276,8 @@
      "Path": "/client/naming/parameter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.parameter"
     },
     {
      "$id": "35",
@@ -346,7 +348,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.client"
     },
     {
      "$id": "41",
@@ -417,7 +420,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.language"
     },
     {
      "$id": "47",
@@ -488,7 +492,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName"
     },
     {
      "$id": "53",
@@ -535,7 +540,8 @@
      "Path": "/client/naming/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Header.request"
     },
     {
      "$id": "57",
@@ -576,7 +582,8 @@
      "Path": "/client/naming/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Header.response"
     }
    ],
    "Protocol": {
@@ -688,7 +695,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Model.client"
     },
     {
      "$id": "73",
@@ -759,7 +767,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Model.language"
     }
    ],
    "Protocol": {
@@ -872,7 +881,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.unionEnumName"
     },
     {
      "$id": "91",
@@ -943,7 +953,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.unionEnumMemberName"
     }
    ],
    "Protocol": {

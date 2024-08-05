@@ -110,7 +110,8 @@
      "Path": "/one",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.one"
     },
     {
      "$id": "14",
@@ -142,7 +143,8 @@
      "Path": "/two",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.two"
     }
    ],
    "Protocol": {
@@ -274,7 +276,8 @@
      "Path": "/seven",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Baz.Foo.seven"
     }
    ],
    "Protocol": {
@@ -357,7 +360,8 @@
      "Path": "/eight",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Qux.eight"
     }
    ],
    "Protocol": {
@@ -440,7 +444,8 @@
      "Path": "/nine",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Qux.Bar.nine"
     }
    ],
    "Protocol": {
@@ -523,7 +528,8 @@
      "Path": "/three",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Foo.three"
     },
     {
      "$id": "49",
@@ -555,7 +561,8 @@
      "Path": "/four",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Foo.four"
     }
    ],
    "Protocol": {
@@ -638,7 +645,8 @@
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Bar.five"
     },
     {
      "$id": "58",
@@ -670,7 +678,8 @@
      "Path": "/six",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Bar.six"
     }
    ],
    "Protocol": {

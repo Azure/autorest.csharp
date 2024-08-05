@@ -1102,7 +1102,8 @@
      "Path": "/type/property/value-types/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Boolean.get"
     },
     {
      "$id": "139",
@@ -1175,7 +1176,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Boolean.put"
     }
    ],
    "Protocol": {
@@ -1276,7 +1278,8 @@
      "Path": "/type/property/value-types/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.String.get"
     },
     {
      "$id": "156",
@@ -1349,7 +1352,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.String.put"
     }
    ],
    "Protocol": {
@@ -1450,7 +1454,8 @@
      "Path": "/type/property/value-types/bytes",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Bytes.get"
     },
     {
      "$id": "173",
@@ -1523,7 +1528,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Bytes.put"
     }
    ],
    "Protocol": {
@@ -1624,7 +1630,8 @@
      "Path": "/type/property/value-types/int",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Int.get"
     },
     {
      "$id": "190",
@@ -1697,7 +1704,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Int.put"
     }
    ],
    "Protocol": {
@@ -1798,7 +1806,8 @@
      "Path": "/type/property/value-types/float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Float.get"
     },
     {
      "$id": "207",
@@ -1871,7 +1880,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Float.put"
     }
    ],
    "Protocol": {
@@ -1972,7 +1982,8 @@
      "Path": "/type/property/value-types/decimal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal.get"
     },
     {
      "$id": "224",
@@ -2045,7 +2056,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal.put"
     }
    ],
    "Protocol": {
@@ -2146,7 +2158,8 @@
      "Path": "/type/property/value-types/decimal128",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal128.get"
     },
     {
      "$id": "241",
@@ -2219,7 +2232,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal128.put"
     }
    ],
    "Protocol": {
@@ -2320,7 +2334,8 @@
      "Path": "/type/property/value-types/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Datetime.get"
     },
     {
      "$id": "258",
@@ -2393,7 +2408,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Datetime.put"
     }
    ],
    "Protocol": {
@@ -2494,7 +2510,8 @@
      "Path": "/type/property/value-types/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Duration.get"
     },
     {
      "$id": "275",
@@ -2567,7 +2584,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Duration.put"
     }
    ],
    "Protocol": {
@@ -2668,7 +2686,8 @@
      "Path": "/type/property/value-types/enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Enum.get"
     },
     {
      "$id": "292",
@@ -2741,7 +2760,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Enum.put"
     }
    ],
    "Protocol": {
@@ -2842,7 +2862,8 @@
      "Path": "/type/property/value-types/extensible-enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtensibleEnum.get"
     },
     {
      "$id": "309",
@@ -2915,7 +2936,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtensibleEnum.put"
     }
    ],
    "Protocol": {
@@ -3016,7 +3038,8 @@
      "Path": "/type/property/value-types/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Model.get"
     },
     {
      "$id": "326",
@@ -3089,7 +3112,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Model.put"
     }
    ],
    "Protocol": {
@@ -3190,7 +3214,8 @@
      "Path": "/type/property/value-types/collections/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsString.get"
     },
     {
      "$id": "343",
@@ -3263,7 +3288,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsString.put"
     }
    ],
    "Protocol": {
@@ -3364,7 +3390,8 @@
      "Path": "/type/property/value-types/collections/int",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsInt.get"
     },
     {
      "$id": "360",
@@ -3437,7 +3464,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsInt.put"
     }
    ],
    "Protocol": {
@@ -3538,7 +3566,8 @@
      "Path": "/type/property/value-types/collections/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsModel.get"
     },
     {
      "$id": "377",
@@ -3611,7 +3640,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsModel.put"
     }
    ],
    "Protocol": {
@@ -3712,7 +3742,8 @@
      "Path": "/type/property/value-types/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DictionaryString.get"
     },
     {
      "$id": "394",
@@ -3785,7 +3816,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DictionaryString.put"
     }
    ],
    "Protocol": {
@@ -3886,7 +3918,8 @@
      "Path": "/type/property/value-types/never",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Never.get"
     },
     {
      "$id": "411",
@@ -3959,7 +3992,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Never.put"
     }
    ],
    "Protocol": {
@@ -4060,7 +4094,8 @@
      "Path": "/type/property/value-types/unknown/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownString.get"
     },
     {
      "$id": "428",
@@ -4133,7 +4168,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownString.put"
     }
    ],
    "Protocol": {
@@ -4234,7 +4270,8 @@
      "Path": "/type/property/value-types/unknown/int",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownInt.get"
     },
     {
      "$id": "445",
@@ -4307,7 +4344,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownInt.put"
     }
    ],
    "Protocol": {
@@ -4408,7 +4446,8 @@
      "Path": "/type/property/value-types/unknown/dict",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownDict.get"
     },
     {
      "$id": "462",
@@ -4481,7 +4520,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownDict.put"
     }
    ],
    "Protocol": {
@@ -4582,7 +4622,8 @@
      "Path": "/type/property/value-types/unknown/array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownArray.get"
     },
     {
      "$id": "479",
@@ -4655,7 +4696,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownArray.put"
     }
    ],
    "Protocol": {
@@ -4756,7 +4798,8 @@
      "Path": "/type/property/value-types/string/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringLiteral.get"
     },
     {
      "$id": "496",
@@ -4829,7 +4872,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringLiteral.put"
     }
    ],
    "Protocol": {
@@ -4930,7 +4974,8 @@
      "Path": "/type/property/value-types/int/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntLiteral.get"
     },
     {
      "$id": "513",
@@ -5003,7 +5048,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntLiteral.put"
     }
    ],
    "Protocol": {
@@ -5104,7 +5150,8 @@
      "Path": "/type/property/value-types/float/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatLiteral.get"
     },
     {
      "$id": "530",
@@ -5177,7 +5224,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatLiteral.put"
     }
    ],
    "Protocol": {
@@ -5278,7 +5326,8 @@
      "Path": "/type/property/value-types/boolean/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanLiteral.get"
     },
     {
      "$id": "547",
@@ -5351,7 +5400,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanLiteral.put"
     }
    ],
    "Protocol": {
@@ -5452,7 +5502,8 @@
      "Path": "/type/property/value-types/union/string/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionStringLiteral.get"
     },
     {
      "$id": "564",
@@ -5525,7 +5576,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionStringLiteral.put"
     }
    ],
    "Protocol": {
@@ -5626,7 +5678,8 @@
      "Path": "/type/property/value-types/union/int/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionIntLiteral.get"
     },
     {
      "$id": "581",
@@ -5699,7 +5752,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionIntLiteral.put"
     }
    ],
    "Protocol": {
@@ -5800,7 +5854,8 @@
      "Path": "/type/property/value-types/union/float/literal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionFloatLiteral.get"
     },
     {
      "$id": "598",
@@ -5873,7 +5928,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionFloatLiteral.put"
     }
    ],
    "Protocol": {
@@ -5974,7 +6030,8 @@
      "Path": "/type/property/value-types/union-enum-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionEnumValue.get"
     },
     {
      "$id": "615",
@@ -6047,7 +6104,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionEnumValue.put"
     }
    ],
    "Protocol": {

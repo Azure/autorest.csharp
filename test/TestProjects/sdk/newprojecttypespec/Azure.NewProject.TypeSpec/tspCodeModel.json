@@ -1432,7 +1432,8 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.topAction"
     },
     {
      "$id": "196",
@@ -1491,7 +1492,8 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.topAction2"
     },
     {
      "$id": "201",
@@ -1592,7 +1594,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.patchAction"
     },
     {
      "$id": "210",
@@ -1693,7 +1696,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.anonymousBody"
     },
     {
      "$id": "219",
@@ -1794,7 +1798,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.friendlyModel"
     },
     {
      "$id": "228",
@@ -1848,7 +1853,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.addTimeHeader"
     }
    ],
    "Protocol": {
@@ -2024,7 +2030,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo.sayHi"
     }
    ],
    "Protocol": {
@@ -2192,7 +2199,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo2.helloAgain"
     },
     {
      "$id": "269",
@@ -2329,7 +2337,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo2.noContentType"
     },
     {
      "$id": "282",
@@ -2430,7 +2439,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo2.createLiteral"
     },
     {
      "$id": "291",
@@ -2558,7 +2568,8 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.Hello.Demo2.helloLiteral"
     }
    ],
    "Protocol": {
@@ -2662,7 +2673,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.EnumTest.getUnknownValue"
     }
    ],
    "Protocol": {
@@ -2795,7 +2807,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.ProtocolAndConvenient.internalProtocol"
     },
     {
      "$id": "328",
@@ -2825,7 +2838,8 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NewProjectTypeSpec.ProtocolAndConvenient.stillConvenient"
     }
    ],
    "Protocol": {

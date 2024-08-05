@@ -84,7 +84,8 @@
      "Path": "/special-headers/conditional-request/if-match",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfMatch"
     },
     {
      "$id": "11",
@@ -133,7 +134,8 @@
      "Path": "/special-headers/conditional-request/if-none-match",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfNoneMatch"
     }
    ],
    "Protocol": {

@@ -193,7 +193,8 @@
      "Path": "/type/enum/fixed/string/known-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Fixed.String.getKnownValue"
     },
     {
      "$id": "27",
@@ -266,7 +267,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Fixed.String.putKnownValue"
     },
     {
      "$id": "33",
@@ -339,7 +341,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Fixed.String.putUnknownValue"
     }
    ],
    "Protocol": {
