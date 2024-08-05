@@ -117,5 +117,113 @@ Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code></example>
     </member>
+    <member name="V3Async(ModelV3,CancellationToken)">
+      <example>
+This sample shows how to call V3Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+ModelV3 body = new ModelV3("<id>", "<type>");
+Response<ModelV3> response = await client.V3Async(body);
+]]></code>
+This sample shows how to call V3Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+ModelV3 body = new ModelV3("<id>", "<type>");
+Response<ModelV3> response = await client.V3Async(body);
+]]></code></example>
+    </member>
+    <member name="V3(ModelV3,CancellationToken)">
+      <example>
+This sample shows how to call V3.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+ModelV3 body = new ModelV3("<id>", "<type>");
+Response<ModelV3> response = client.V3(body);
+]]></code>
+This sample shows how to call V3 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+ModelV3 body = new ModelV3("<id>", "<type>");
+Response<ModelV3> response = client.V3(body);
+]]></code></example>
+    </member>
+    <member name="V3Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V3Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    type = "<type>",
+});
+Response response = await client.V3Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+]]></code>
+This sample shows how to call V3Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    type = "<type>",
+});
+Response response = await client.V3Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+]]></code></example>
+    </member>
+    <member name="V3(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V3 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    type = "<type>",
+});
+Response response = client.V3(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+]]></code>
+This sample shows how to call V3 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    type = "<type>",
+});
+Response response = client.V3(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("type").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>
