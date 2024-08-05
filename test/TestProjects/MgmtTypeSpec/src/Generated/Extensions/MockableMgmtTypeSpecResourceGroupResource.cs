@@ -51,7 +51,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -61,11 +61,11 @@ namespace MgmtTypeSpec.Mocking
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoClusterAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateListByMongoClusterRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateListByMongoClusterNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster", "value", "nextLink", cancellationToken);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -87,11 +87,11 @@ namespace MgmtTypeSpec.Mocking
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoCluster(CancellationToken cancellationToken = default)
+        public virtual Pageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateListByMongoClusterRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateListByMongoClusterNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster", "value", "nextLink", cancellationToken);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
         }
     }
 }
