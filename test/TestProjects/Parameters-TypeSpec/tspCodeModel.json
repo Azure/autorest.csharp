@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "ParametersCadl.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -40,7 +42,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -115,7 +119,9 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "17",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -131,7 +137,9 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "19",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -147,7 +155,9 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "21",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -176,7 +186,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -229,7 +241,9 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "30",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -245,7 +259,9 @@
        "NameInRequest": "end",
        "Type": {
         "$id": "32",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -264,7 +280,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "35",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

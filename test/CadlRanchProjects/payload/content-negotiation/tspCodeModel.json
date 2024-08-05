@@ -19,7 +19,9 @@
      "Type": {
       "$id": "4",
       "Kind": "bytes",
-      "Encode": "base64"
+      "Name": "bytes",
+      "Encode": "base64",
+      "CrossLanguageDefinitionId": "TypeSpec.bytes"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -118,7 +120,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "image/png"
        },
@@ -140,7 +144,9 @@
        "BodyType": {
         "$id": "21",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -153,7 +159,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "24",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "image/png"
          }
@@ -191,7 +199,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "image/jpeg"
        },
@@ -213,7 +223,9 @@
        "BodyType": {
         "$id": "30",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -226,7 +238,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "33",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "image/jpeg"
          }
@@ -306,7 +320,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "43",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "image/png"
        },
@@ -328,7 +344,9 @@
        "BodyType": {
         "$id": "45",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -341,7 +359,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "48",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "image/png"
          }
@@ -379,7 +399,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "52",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -412,7 +434,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "56",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "application/json"
          }

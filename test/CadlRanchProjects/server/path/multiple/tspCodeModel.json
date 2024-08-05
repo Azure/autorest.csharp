@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -126,7 +128,9 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,

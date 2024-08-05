@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -78,7 +80,9 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -95,11 +99,15 @@
        "Type": {
         "$id": "15",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
          "$id": "16",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
        "IsApiVersion": false,

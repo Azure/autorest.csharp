@@ -19,7 +19,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -41,7 +43,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -74,7 +78,9 @@
         "Description": "",
         "Type": {
          "$id": "12",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -105,7 +111,9 @@
      "Description": "",
      "Type": {
       "$id": "15",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -206,7 +214,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -275,7 +285,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -333,7 +345,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "41",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -354,7 +368,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

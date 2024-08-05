@@ -19,7 +19,9 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -34,7 +36,9 @@
       "Kind": "dict",
       "KeyType": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
        "$ref": "2"
@@ -138,7 +142,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "22",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -162,11 +168,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "26",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         }
        },
        "BodyMediaType": "Json",
@@ -204,7 +214,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -225,11 +237,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "33",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "34",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         }
        },
        "Location": "Body",
@@ -324,7 +340,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "45",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -348,11 +366,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "48",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "49",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         }
        },
        "BodyMediaType": "Json",
@@ -390,7 +412,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "53",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -411,11 +435,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "56",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "57",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         }
        },
        "Location": "Body",
@@ -510,7 +538,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "68",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -534,11 +564,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "71",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "72",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         }
        },
        "BodyMediaType": "Json",
@@ -576,7 +610,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "76",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -597,11 +633,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "79",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "80",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         }
        },
        "Location": "Body",
@@ -696,7 +736,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "91",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -720,11 +762,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "95",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "BodyMediaType": "Json",
@@ -762,7 +808,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "99",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -783,11 +831,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "102",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "103",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "Location": "Body",
@@ -882,7 +934,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "114",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -906,11 +960,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "117",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "118",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Name": "float32",
+         "CrossLanguageDefinitionId": "TypeSpec.float32"
         }
        },
        "BodyMediaType": "Json",
@@ -948,7 +1006,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "122",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -969,11 +1029,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "125",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "126",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Name": "float32",
+         "CrossLanguageDefinitionId": "TypeSpec.float32"
         }
        },
        "Location": "Body",
@@ -1068,7 +1132,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "137",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1092,16 +1158,22 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "140",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "141",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "142",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         }
        },
        "BodyMediaType": "Json",
@@ -1139,7 +1211,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1160,16 +1234,22 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "149",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "150",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "151",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         }
        },
        "Location": "Body",
@@ -1264,7 +1344,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "162",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1288,16 +1370,22 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "165",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "166",
          "Kind": "duration",
+         "Name": "duration",
          "Encode": "ISO8601",
          "WireType": {
           "$id": "167",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.duration"
         }
        },
        "BodyMediaType": "Json",
@@ -1335,7 +1423,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "171",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1356,16 +1446,22 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "174",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "175",
          "Kind": "duration",
+         "Name": "duration",
          "Encode": "ISO8601",
          "WireType": {
           "$id": "176",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.duration"
         }
        },
        "Location": "Body",
@@ -1460,7 +1556,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "187",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1484,11 +1582,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "190",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "191",
-         "Kind": "any"
+         "Kind": "any",
+         "Name": "unknown",
+         "CrossLanguageDefinitionId": ""
         }
        },
        "BodyMediaType": "Json",
@@ -1526,7 +1628,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "195",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1547,11 +1651,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "198",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "199",
-         "Kind": "any"
+         "Kind": "any",
+         "Name": "unknown",
+         "CrossLanguageDefinitionId": ""
         }
        },
        "Location": "Body",
@@ -1646,7 +1754,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "210",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1670,7 +1780,9 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "213",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$ref": "2"
@@ -1711,7 +1823,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "217",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1732,7 +1846,9 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "220",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$ref": "2"
@@ -1830,7 +1946,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "231",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1854,7 +1972,9 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "234",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$ref": "2"
@@ -1895,7 +2015,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "238",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1916,7 +2038,9 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "241",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$ref": "2"
@@ -2014,7 +2138,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "252",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2038,14 +2164,18 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "255",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "256",
          "Kind": "nullable",
          "Type": {
           "$id": "257",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Name": "float32",
+          "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
         }
        },
@@ -2084,7 +2214,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "261",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2105,14 +2237,18 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "264",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "265",
          "Kind": "nullable",
          "Type": {
           "$id": "266",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Name": "float32",
+          "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
         }
        },

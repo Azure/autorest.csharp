@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Type.Enum.Fixed.DaysOfWeekEnum",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -153,7 +155,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -211,7 +215,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -282,7 +288,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

@@ -72,7 +72,9 @@
        "NameInRequest": "api-version",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -117,7 +119,9 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": true,

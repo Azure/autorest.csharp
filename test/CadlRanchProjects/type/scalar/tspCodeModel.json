@@ -95,7 +95,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -116,7 +118,9 @@
        ],
        "BodyType": {
         "$id": "18",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -154,7 +158,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "22",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -173,7 +179,9 @@
        "Description": "_",
        "Type": {
         "$id": "24",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -267,7 +275,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "35",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -288,7 +298,9 @@
        ],
        "BodyType": {
         "$id": "37",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Name": "boolean",
+        "CrossLanguageDefinitionId": "TypeSpec.boolean"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -326,7 +338,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "41",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -345,7 +359,9 @@
        "Description": "_",
        "Type": {
         "$id": "43",
-        "Kind": "boolean"
+        "Kind": "boolean",
+        "Name": "boolean",
+        "CrossLanguageDefinitionId": "TypeSpec.boolean"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -439,7 +455,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "54",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -460,7 +478,9 @@
        ],
        "BodyType": {
         "$id": "56",
-        "Kind": "any"
+        "Kind": "any",
+        "Name": "unknown",
+        "CrossLanguageDefinitionId": ""
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -498,7 +518,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "60",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -517,7 +539,9 @@
        "Description": "_",
        "Type": {
         "$id": "62",
-        "Kind": "any"
+        "Kind": "any",
+        "Name": "unknown",
+        "CrossLanguageDefinitionId": ""
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -611,7 +635,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "73",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -632,7 +658,9 @@
        ],
        "BodyType": {
         "$id": "75",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -669,7 +697,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "79",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -687,7 +717,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "81",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -735,7 +767,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "85",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -826,7 +860,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "96",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -847,7 +883,9 @@
        ],
        "BodyType": {
         "$id": "98",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -884,7 +922,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "102",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -902,7 +942,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "104",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -950,7 +992,9 @@
        "NameInRequest": "value",
        "Type": {
         "$id": "108",
-        "Kind": "decimal128"
+        "Kind": "decimal128",
+        "Name": "decimal128",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal128"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1041,7 +1085,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "119",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1066,7 +1112,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "122",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Name": "decimal",
+         "CrossLanguageDefinitionId": "TypeSpec.decimal"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1105,7 +1153,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "126",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1123,7 +1173,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "128",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1217,7 +1269,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "139",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1242,7 +1296,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "142",
-         "Kind": "decimal"
+         "Kind": "decimal",
+         "Name": "decimal",
+         "CrossLanguageDefinitionId": "TypeSpec.decimal"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1281,7 +1337,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1299,7 +1357,9 @@
        "NameInRequest": "body",
        "Type": {
         "$id": "148",
-        "Kind": "decimal"
+        "Kind": "decimal",
+        "Name": "decimal",
+        "CrossLanguageDefinitionId": "TypeSpec.decimal"
        },
        "Location": "Body",
        "IsApiVersion": false,

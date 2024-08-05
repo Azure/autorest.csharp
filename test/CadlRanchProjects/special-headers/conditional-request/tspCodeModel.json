@@ -54,7 +54,9 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -101,7 +103,9 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

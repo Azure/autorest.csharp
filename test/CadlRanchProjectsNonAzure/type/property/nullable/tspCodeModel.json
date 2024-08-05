@@ -19,7 +19,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -38,7 +40,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "8",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -63,7 +67,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -95,7 +101,9 @@
           "Description": "Inner model property",
           "Type": {
            "$id": "17",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -128,7 +136,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "20",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -148,7 +158,9 @@
        "ValueType": {
         "$id": "24",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -173,7 +185,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "27",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -189,11 +203,15 @@
       "Type": {
        "$id": "30",
        "Kind": "duration",
+       "Name": "duration",
        "Encode": "ISO8601",
        "WireType": {
         "$id": "31",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.duration"
       }
      },
      "IsRequired": true,
@@ -216,7 +234,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "34",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -232,11 +252,15 @@
       "Type": {
        "$id": "37",
        "Kind": "utcDateTime",
+       "Name": "utcDateTime",
        "Encode": "rfc3339",
        "WireType": {
         "$id": "38",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
       }
      },
      "IsRequired": true,
@@ -259,7 +283,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "41",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -275,7 +301,9 @@
       "Type": {
        "$id": "44",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Name": "bytes",
+       "Encode": "base64",
+       "CrossLanguageDefinitionId": "TypeSpec.bytes"
       }
      },
      "IsRequired": true,
@@ -298,7 +326,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "47",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -313,7 +343,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "50",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -414,7 +446,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -471,7 +505,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "70",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -529,7 +565,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "75",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -599,7 +637,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "81",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -710,7 +750,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "93",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -767,7 +809,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "98",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -825,7 +869,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "103",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -895,7 +941,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "109",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1006,7 +1054,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "121",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1063,7 +1113,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "126",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1121,7 +1173,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "131",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1191,7 +1245,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "137",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1302,7 +1358,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "149",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1359,7 +1417,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "154",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1417,7 +1477,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "159",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1487,7 +1549,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "165",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1598,7 +1662,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "177",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1655,7 +1721,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "182",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1713,7 +1781,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "187",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1783,7 +1853,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "193",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1894,7 +1966,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "205",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1951,7 +2025,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "210",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2009,7 +2085,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "215",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2079,7 +2157,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "221",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2190,7 +2270,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "233",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2247,7 +2329,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "238",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2305,7 +2389,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "243",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2375,7 +2461,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "249",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },

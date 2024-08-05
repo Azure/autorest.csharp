@@ -18,7 +18,9 @@
      "Description": "Pass in true",
      "Type": {
       "$id": "4",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -118,7 +120,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -186,7 +190,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

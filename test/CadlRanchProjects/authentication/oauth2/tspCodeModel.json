@@ -18,7 +18,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -108,7 +110,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "15",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

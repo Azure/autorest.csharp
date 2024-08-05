@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {

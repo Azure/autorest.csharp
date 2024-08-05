@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -46,7 +48,9 @@
       "Name": "EmbeddingVector",
       "ValueType": {
        "$id": "8",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
      },
@@ -147,7 +151,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -172,7 +178,9 @@
         "Name": "EmbeddingVector",
         "ValueType": {
          "$id": "26",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
        },
@@ -212,7 +220,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -235,7 +245,9 @@
         "Name": "EmbeddingVector",
         "ValueType": {
          "$id": "33",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
        },
@@ -290,7 +302,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "38",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -311,7 +325,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "41",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

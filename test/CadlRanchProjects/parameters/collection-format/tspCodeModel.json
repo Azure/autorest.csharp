@@ -97,7 +97,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -149,7 +151,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "21",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -202,7 +206,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -255,7 +261,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "31",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -308,7 +316,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -403,7 +413,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "47",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },

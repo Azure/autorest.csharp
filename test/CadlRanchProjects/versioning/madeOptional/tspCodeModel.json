@@ -13,7 +13,9 @@
    "CrossLanguageDefinitionId": "Versioning.MadeOptional.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -49,7 +51,9 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -61,7 +65,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -126,7 +132,9 @@
        "NameInRequest": "param",
        "Type": {
         "$id": "17",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -146,7 +154,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "20",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -167,7 +177,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

@@ -53,7 +53,9 @@
        "NameInRequest": "x-ms-client-request-id",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,

@@ -33,7 +33,9 @@
        "Description": "",
        "Type": {
         "$id": "6",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -48,7 +50,9 @@
       "Description": "",
       "Type": {
        "$id": "8",
-       "Kind": "int32"
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -63,7 +67,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -129,7 +135,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -197,7 +205,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -254,7 +264,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -275,7 +287,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "33",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

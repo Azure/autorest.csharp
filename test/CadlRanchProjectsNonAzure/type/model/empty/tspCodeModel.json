@@ -84,7 +84,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "13",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -152,7 +154,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "19",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -209,7 +213,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -230,7 +236,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "27",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

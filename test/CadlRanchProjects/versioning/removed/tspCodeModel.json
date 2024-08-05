@@ -13,7 +13,9 @@
    "CrossLanguageDefinitionId": "Versioning.Removed.EnumV2",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -32,7 +34,9 @@
    "CrossLanguageDefinitionId": "Versioning.Removed.Versions",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -68,7 +72,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,11 +102,15 @@
       "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "16",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        }
       ]
      },
@@ -171,7 +181,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -192,7 +204,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "27",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },

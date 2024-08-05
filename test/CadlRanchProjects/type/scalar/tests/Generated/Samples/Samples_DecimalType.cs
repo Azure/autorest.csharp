@@ -107,7 +107,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = client.RequestBody(content);
 
             Console.WriteLine(response.Status);
@@ -119,7 +119,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = await client.RequestBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -131,7 +131,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = client.RequestBody((decimal)default);
+            Response response = client.RequestBody(123.45M);
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = await client.RequestBodyAsync((decimal)default);
+            Response response = await client.RequestBodyAsync(123.45M);
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = client.RequestBody(content);
 
             Console.WriteLine(response.Status);
@@ -161,7 +161,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(123.45M);
             Response response = await client.RequestBodyAsync(content);
 
             Console.WriteLine(response.Status);
@@ -173,7 +173,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = client.RequestBody((decimal)default);
+            Response response = client.RequestBody(123.45M);
         }
 
         [Test]
@@ -182,7 +182,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = await client.RequestBodyAsync((decimal)default);
+            Response response = await client.RequestBodyAsync(123.45M);
         }
 
         [Test]
@@ -191,7 +191,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = client.RequestParameter(default);
+            Response response = client.RequestParameter(123.45M);
 
             Console.WriteLine(response.Status);
         }
@@ -202,7 +202,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = await client.RequestParameterAsync(default);
+            Response response = await client.RequestParameterAsync(123.45M);
 
             Console.WriteLine(response.Status);
         }
@@ -213,7 +213,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = client.RequestParameter(default);
+            Response response = client.RequestParameter(123.45M);
 
             Console.WriteLine(response.Status);
         }
@@ -224,7 +224,7 @@ namespace _Type.Scalar.Samples
         {
             DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-            Response response = await client.RequestParameterAsync(default);
+            Response response = await client.RequestParameterAsync(123.45M);
 
             Console.WriteLine(response.Status);
         }
