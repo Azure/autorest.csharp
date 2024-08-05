@@ -105,14 +105,14 @@ namespace AutoRest.CSharp.Common.Input
 
             static bool IsNameChanged(string crossLanguageDefinitionId, string name)
             {
-                var span = crossLanguageDefinitionId.AsSpan();
-                int lastDotIndex = span.LastIndexOf('.');
+                int lastDotIndex = crossLanguageDefinitionId.LastIndexOf('.');
                 if (lastDotIndex < 0)
                 {
-                    return false;
+                    throw new JsonException($"The crossLanguageDefinitionId of {crossLanguageDefinitionId} does not contain a dot in it, this should be impossible to happen");
                 }
+                var span = crossLanguageDefinitionId.AsSpan(lastDotIndex + 1);
                 var nameSpan = name.AsSpan();
-                if (nameSpan.Equals(span.Slice(lastDotIndex + 1), StringComparison.Ordinal))
+                if (nameSpan.Equals(span, StringComparison.Ordinal))
                 {
                     return false;
                 }
