@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Common.Input
                 paging: CreateOperationPaging(serviceRequest, operation),
                 generateProtocolMethod: true,
                 generateConvenienceMethod: false,
-                crossLanguageDefinitionId: GetCrossLanguageDefinitionId(operation),
+                crossLanguageDefinitionId: string.Empty, // in typespec input, this is to determine whether an operation has been renamed. We have separated configuration for that in swagger input, therefore we leave it empty here
                 keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId))
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
@@ -742,24 +742,6 @@ namespace AutoRest.CSharp.Common.Input
         {
             var ns = schema.Extensions?.Namespace;
             var name = schema.Language.Default.Name;
-            if (ns == null)
-            {
-                return name;
-            }
-
-            return $"{ns}.{name}";
-        }
-
-        private static string GetCrossLanguageDefinitionId(Operation operation)
-        {
-            if (operation.OperationId != null)
-            {
-                return operation.OperationId.Replace('_', '.'); // borrow the operation id as the cross language definition id here since it should be unique as well across all operations.
-            }
-
-            var ns = operation.Extensions?.Namespace;
-            var name = operation.Language.Default.Name;
-
             if (ns == null)
             {
                 return name;
