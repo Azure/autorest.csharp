@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.Common.Input
             OperationPaging? paging = null;
             bool generateProtocolMethod = false;
             bool generateConvenienceMethod = false;
+            string? crossLanguageDefinitionId = null;
             bool keepClientDefaultValue = false;
 
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -71,6 +72,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadWithConverter(nameof(InputOperation.Paging), options, ref paging)
                     || reader.TryReadBoolean(nameof(InputOperation.GenerateProtocolMethod), ref generateProtocolMethod)
                     || reader.TryReadBoolean(nameof(InputOperation.GenerateConvenienceMethod), ref generateConvenienceMethod)
+                    || reader.TryReadString(nameof(InputOperation.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
                     || reader.TryReadBoolean(nameof(InputOperation.KeepClientDefaultValue), ref keepClientDefaultValue);
 
                 if (!isKnownProperty)
@@ -85,12 +87,13 @@ namespace AutoRest.CSharp.Common.Input
                 Console.Error.WriteLine($"[Warn]: InputOperation '{name}' does not have a description");
                 description = $"{name.Humanize()}.";
             }
+            crossLanguageDefinitionId = crossLanguageDefinitionId ?? throw new JsonException("InputOperation must have crossLanguageDefinitionId");
             uri = uri ?? throw new JsonException("InputOperation must have uri");
             path = path ?? throw new JsonException("InputOperation must have path");
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, keepClientDefaultValue);
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue);
             if (id != null)
             {
                 resolver.AddReference(id, inputOperation);
