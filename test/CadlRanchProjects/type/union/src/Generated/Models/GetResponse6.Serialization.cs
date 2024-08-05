@@ -20,13 +20,21 @@ namespace _Type.Union.Models
 
         void IJsonModel<GetResponse6>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<GetResponse6>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(GetResponse6)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
             writer.WriteNumberValue((int)Prop);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +52,6 @@ namespace _Type.Union.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         GetResponse6 IJsonModel<GetResponse6>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

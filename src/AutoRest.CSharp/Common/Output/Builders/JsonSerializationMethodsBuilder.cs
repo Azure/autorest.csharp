@@ -248,14 +248,20 @@ namespace AutoRest.CSharp.Common.Output.Builders
         }
 
         private static MethodBodyStatement[] BuildJsonModelWriteCoreMethodBody(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, CSharpType? iPersistableModelTInterface, bool hasInherits)
-            => new[]
+        {
+            var body = new List<MethodBodyStatement>()
             {
                 Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
                 CallBaseJsonModelWriteCore(utf8JsonWriter, options, hasInherits),
                 WriteProperties(utf8JsonWriter, serialization.Properties, serialization.RawDataField?.Value, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties, false),
-                SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true),
             };
+            if (!hasInherits)
+            {
+                body.Add(SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true));
+            }
+            return body.ToArray();
+        }
 
         private static MethodBodyStatement CallBaseJsonModelWriteCore(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)
         {

@@ -20,13 +20,22 @@ namespace _Type.Property.AdditionalProperties.Models
 
         void IJsonModel<DifferentSpreadModelDerived>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<DifferentSpreadModelDerived>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DifferentSpreadModelDerived)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
+            base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteObjectValue(DerivedProp, options);
             writer.WritePropertyName("knownProp"u8);
@@ -43,7 +52,6 @@ namespace _Type.Property.AdditionalProperties.Models
                 }
 #endif
             }
-            writer.WriteEndObject();
         }
 
         DifferentSpreadModelDerived IJsonModel<DifferentSpreadModelDerived>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

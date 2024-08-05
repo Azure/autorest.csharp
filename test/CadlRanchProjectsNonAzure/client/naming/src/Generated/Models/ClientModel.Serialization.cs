@@ -14,13 +14,21 @@ namespace Scm.Client.Naming.Models
     {
         void IJsonModel<ClientModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ClientModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ClientModel)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("defaultName"u8);
             writer.WriteBooleanValue(DefaultName);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -38,7 +46,6 @@ namespace Scm.Client.Naming.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ClientModel IJsonModel<ClientModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

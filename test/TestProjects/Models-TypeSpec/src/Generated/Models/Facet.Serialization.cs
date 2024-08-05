@@ -20,13 +20,21 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<Facet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<Facet>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(Facet)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("field"u8);
             writer.WriteStringValue(Field);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +52,6 @@ namespace ModelsTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         Facet IJsonModel<Facet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

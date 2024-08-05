@@ -20,13 +20,21 @@ namespace multiple_inheritance.Models
 
         void IJsonModel<Feline>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(Feline)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (Optional.IsDefined(Meows))
             {
                 writer.WritePropertyName("meows"u8);
@@ -52,7 +60,6 @@ namespace multiple_inheritance.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         Feline IJsonModel<Feline>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -20,13 +20,21 @@ namespace Pagination.Models
 
         void IJsonModel<TextBlockItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<TextBlockItem>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(TextBlockItem)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("blockItemId"u8);
             writer.WriteStringValue(BlockItemId);
             if (Optional.IsDefined(Description))
@@ -51,7 +59,6 @@ namespace Pagination.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         TextBlockItem IJsonModel<TextBlockItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
