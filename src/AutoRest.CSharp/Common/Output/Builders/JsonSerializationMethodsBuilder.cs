@@ -231,19 +231,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var optionsParameter = new Parameter("options", $"The client options for reading and writing models.", typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
             var utf8JsonWriter = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            var methodBody = BuildJsonModelWriteCoreMethodBody(serialization, utf8JsonWriter, options, iPersistableModelTInterface, hasInherits);
 
             return new Method
             (
                 new MethodSignature(_jsonModelWriteCoreMethodName, null, null, modifiers, null, null, new[] { writerParameter, optionsParameter }),
-                iPersistableModelTInterface == null ?
-                new[]
-                {
-                    utf8JsonWriter.WriteStartObject(),
-                    methodBody,
-                    utf8JsonWriter.WriteEndObject(),
-                }
-                : methodBody
+                BuildJsonModelWriteCoreMethodBody(serialization, utf8JsonWriter, options, iPersistableModelTInterface, hasInherits)
             );
         }
 
