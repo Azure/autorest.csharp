@@ -66,6 +66,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -111,6 +112,7 @@
        "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "Usage": "Input,Output,Json",
        "Description": "UserOrder for testing list with expand.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "17",
@@ -193,6 +195,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.ListItemInputBody",
    "Usage": "Input,Json",
    "Description": "The body of the input.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -216,6 +219,7 @@
    "Name": "UserListResults",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.CustomPageModel",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -257,6 +261,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.FirstItem",
    "Usage": "Output,Json",
    "Description": "First item.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "35",
@@ -281,6 +286,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.SecondItem",
    "Usage": "Output,Json",
    "Description": "Second item.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -305,6 +311,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of User items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "41",
@@ -352,6 +359,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of FirstItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "47",
@@ -399,6 +407,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of SecondItem items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "53",

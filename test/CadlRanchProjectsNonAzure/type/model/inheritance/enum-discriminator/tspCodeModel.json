@@ -58,6 +58,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
    "Usage": "Input,Output,Json",
    "Description": "Test extensible enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "9",
     "Name": "kind",
@@ -99,6 +100,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Golden dog model",
      "DiscriminatorValue": "golden",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "8"
      },
@@ -137,6 +139,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
    "Usage": "Input,Output,Json",
    "Description": "Test fixed enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "18",
     "Name": "kind",
@@ -178,6 +181,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Cobra model",
      "DiscriminatorValue": "cobra",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "17"
      },

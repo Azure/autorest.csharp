@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "ConvenienceInCadl.Model",
    "Usage": "Input,Output,Json",
    "Description": "A model.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",

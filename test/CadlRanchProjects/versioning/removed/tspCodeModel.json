@@ -64,6 +64,7 @@
    "Name": "ModelV2",
    "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",

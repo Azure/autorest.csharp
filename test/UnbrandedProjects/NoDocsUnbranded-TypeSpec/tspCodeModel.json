@@ -150,6 +150,7 @@
    "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
    "Usage": "Output,Json",
    "Description": "A model with a few properties of literal types",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",

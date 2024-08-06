@@ -68,6 +68,7 @@
    "Name": "Body",
    "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",

@@ -93,6 +93,7 @@
    "Name": "ExportedResource",
    "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.ExportedResource",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -144,6 +145,7 @@
    "Name": "Resource",
    "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.Resource",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
@@ -196,6 +198,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "29",
@@ -234,6 +237,7 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "34",
@@ -306,6 +310,7 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "44",
@@ -368,6 +373,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Resource items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "49",

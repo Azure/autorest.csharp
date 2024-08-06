@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "Input,Output,Json",
    "Description": "Dictionary inner model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",

@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Flatten.FlattenModel",
    "Usage": "Input,Output,Json",
    "Description": "This is the model with one level of flattening.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -71,6 +72,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel",
    "Usage": "Input,Output,Json",
    "Description": "This is the child model to be flattened.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -109,6 +111,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
    "Usage": "Input,Output,Json",
    "Description": "This is the model with two levels of flattening.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -189,6 +192,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel",
    "Usage": "Input,Output,Json",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",

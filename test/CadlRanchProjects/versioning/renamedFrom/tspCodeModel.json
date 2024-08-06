@@ -64,6 +64,7 @@
    "Name": "NewModel",
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",

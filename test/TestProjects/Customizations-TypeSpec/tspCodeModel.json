@@ -164,6 +164,7 @@
    "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "Usage": "Input,Output,Json",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
@@ -188,6 +189,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "Usage": "Input,Output,Json",
       "Description": "Public model made internal",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "29",
@@ -220,6 +222,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "Usage": "Input,Output,Json",
       "Description": "Renamed model (original name: ModelToRename)",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "33",
@@ -266,6 +269,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "Usage": "Input,Output,Json",
       "Description": "Model moved into custom namespace",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "39",
@@ -298,6 +302,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "Usage": "Input,Output,Json",
       "Description": "Model with customized properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "43",
@@ -744,6 +749,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "Usage": "Input,Output,Json",
       "Description": "Model to add additional serializable property",
+      "Decorators": [],
       "BaseModel": {
        "$ref": "32"
       },
@@ -790,6 +796,7 @@
       "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "Usage": "Input,Output,Json",
       "Description": "Model to make to a struct",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "114",
@@ -864,6 +871,7 @@
    "Name": "BarRequest",
    "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "121",
