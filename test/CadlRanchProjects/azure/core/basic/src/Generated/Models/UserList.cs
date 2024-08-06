@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    /// <summary> First item. </summary>
-    public partial class FirstItem
+    /// <summary> The UserList. </summary>
+    public partial class UserList
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,21 +46,31 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
-        internal FirstItem()
+        /// <summary> Initializes a new instance of <see cref="UserList"/>. </summary>
+        /// <param name="users"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="users"/> is null. </exception>
+        internal UserList(IEnumerable<User> users)
         {
+            Argument.AssertNotNull(users, nameof(users));
+
+            Users = users.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
-        /// <param name="id"> The id of the item. </param>
+        /// <summary> Initializes a new instance of <see cref="UserList"/>. </summary>
+        /// <param name="users"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirstItem(int id, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UserList(IReadOnlyList<User> users, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Id = id;
+            Users = users;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The id of the item. </summary>
-        public int Id { get; }
+        /// <summary> Initializes a new instance of <see cref="UserList"/> for deserialization. </summary>
+        internal UserList()
+        {
+        }
+
+        /// <summary> Gets the users. </summary>
+        public IReadOnlyList<User> Users { get; }
     }
 }
