@@ -6186,7 +6186,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Audio.Transcriptions.create"
     }
    ],
    "Protocol": {
@@ -6328,7 +6329,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Audio.Translations.create"
     }
    ],
    "Protocol": {
@@ -6511,7 +6513,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Chat.Completions.create"
     }
    ],
    "Protocol": {
@@ -6695,7 +6698,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.create"
     },
     {
      "$id": "930",
@@ -6791,7 +6795,8 @@
      "Path": "/fine_tuning/jobs",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listPaginated"
     },
     {
      "$id": "939",
@@ -6868,7 +6873,8 @@
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.retrieve"
     },
     {
      "$id": "946",
@@ -6984,7 +6990,8 @@
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/events",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.listEvents"
     },
     {
      "$id": "957",
@@ -7062,7 +7069,8 @@
      "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/cancel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTuning.Jobs.cancel"
     }
    ],
    "Protocol": {
@@ -7204,7 +7212,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Completions.create"
     }
    ],
    "Protocol": {
@@ -7347,7 +7356,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Edits.create"
     }
    ],
    "Protocol": {
@@ -7490,7 +7500,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Embeddings.create"
     }
    ],
    "Protocol": {
@@ -7591,7 +7602,8 @@
      "Path": "/files",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Files.list"
     },
     {
      "$id": "1020",
@@ -7691,7 +7703,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Files.create"
     },
     {
      "$id": "1029",
@@ -7769,7 +7782,8 @@
      "Path": "/files/files/{file_id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Files.retrieve"
     },
     {
      "$id": "1036",
@@ -7847,7 +7861,8 @@
      "Path": "/files/files/{file_id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Files.delete"
     },
     {
      "$id": "1043",
@@ -7928,7 +7943,8 @@
      "Path": "/files/files/{file_id}/content",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Files.download"
     }
    ],
    "Protocol": {
@@ -8072,7 +8088,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTunes.create"
     },
     {
      "$id": "1066",
@@ -8132,7 +8149,8 @@
      "Path": "/fine-tunes",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTunes.list"
     },
     {
      "$id": "1071",
@@ -8211,7 +8229,8 @@
      "Path": "/fine-tunes/{fine_tune_id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTunes.retrieve"
     },
     {
      "$id": "1078",
@@ -8309,7 +8328,8 @@
      "Path": "/fine-tunes/{fine_tune_id}/events",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTunes.listEvents"
     },
     {
      "$id": "1087",
@@ -8388,7 +8408,8 @@
      "Path": "/fine-tunes/{fine_tune_id}/cancel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.FineTunes.cancel"
     }
    ],
    "Protocol": {
@@ -8489,7 +8510,8 @@
      "Path": "/models",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Models.list"
     },
     {
      "$id": "1105",
@@ -8567,7 +8589,8 @@
      "Path": "/models/{model}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Models.retrieve"
     },
     {
      "$id": "1112",
@@ -8645,7 +8668,8 @@
      "Path": "/models/{model}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Models.delete"
     }
    ],
    "Protocol": {
@@ -8788,7 +8812,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Images.create"
     },
     {
      "$id": "1134",
@@ -8888,7 +8913,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Images.createEdit"
     },
     {
      "$id": "1143",
@@ -8988,7 +9014,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Images.createVariation"
     }
    ],
    "Protocol": {
@@ -9131,7 +9158,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "OpenAI.Moderations.create"
     }
    ],
    "Protocol": {

@@ -408,7 +408,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadAsRequestBody"
     },
     {
      "$id": "53",
@@ -479,7 +480,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadCompositeRequestOnlyWithBody"
     },
     {
      "$id": "59",
@@ -544,7 +546,8 @@
      "Path": "/parameters/spread/model/composite-request-without-body/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadCompositeRequestWithoutBody"
     },
     {
      "$id": "65",
@@ -651,7 +654,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadCompositeRequest"
     },
     {
      "$id": "75",
@@ -758,7 +762,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Model.spreadCompositeRequestMix"
     }
    ],
    "Protocol": {
@@ -871,7 +876,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestBody"
     },
     {
      "$id": "97",
@@ -978,7 +984,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadParameterWithInnerModel"
     },
     {
      "$id": "107",
@@ -1085,7 +1092,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadAsRequestParameter"
     },
     {
      "$id": "117",
@@ -1192,7 +1200,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadWithMultipleParameters"
     },
     {
      "$id": "127",
@@ -1300,7 +1309,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.Spread.Alias.spreadParameterWithInnerAlias"
     }
    ],
    "Protocol": {

@@ -83,7 +83,8 @@
      "Path": "/azure/special-headers/x-ms-client-request-id/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.SpecialHeaders.XmsClientRequestId.get"
     }
    ],
    "Protocol": {

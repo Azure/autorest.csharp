@@ -175,7 +175,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes"
     },
     {
      "$id": "22",
@@ -242,7 +243,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes"
     },
     {
      "$id": "27",
@@ -312,7 +314,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType"
     }
    ],
    "Protocol": {

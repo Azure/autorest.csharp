@@ -375,7 +375,8 @@
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.delete"
     },
     {
      "$id": "48",
@@ -468,7 +469,8 @@
      "Path": "/pets/{petId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.read"
     },
     {
      "$id": "56",
@@ -591,7 +593,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.create"
     }
    ],
    "Protocol": {
@@ -717,7 +720,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.ListPetToysResponse.listPet"
     }
    ],
    "Protocol": {

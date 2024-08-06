@@ -1184,7 +1184,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.sayHi"
     },
     {
      "$id": "157",
@@ -1320,7 +1321,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloAgain"
     },
     {
      "$id": "170",
@@ -1457,7 +1459,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.noContentType"
     },
     {
      "$id": "183",
@@ -1516,7 +1519,8 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloDemo2"
     },
     {
      "$id": "188",
@@ -1617,7 +1621,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.createLiteral"
     },
     {
      "$id": "197",
@@ -1745,7 +1750,8 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloLiteral"
     },
     {
      "$id": "211",
@@ -1829,7 +1835,8 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.topAction"
     },
     {
      "$id": "219",
@@ -1888,7 +1895,8 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.topAction2"
     },
     {
      "$id": "224",
@@ -1989,7 +1997,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.patchAction"
     },
     {
      "$id": "233",
@@ -2090,7 +2099,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody"
     },
     {
      "$id": "242",
@@ -2191,7 +2201,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel"
     },
     {
      "$id": "251",
@@ -2245,7 +2256,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.addTimeHeader"
     },
     {
      "$id": "256",
@@ -2346,7 +2358,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel"
     },
     {
      "$id": "265",
@@ -2405,7 +2418,8 @@
      "Path": "/returnsAnonymousModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel"
     },
     {
      "$id": "270",
@@ -2474,7 +2488,8 @@
      "Path": "/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.getUnknownValue"
     },
     {
      "$id": "276",
@@ -2575,7 +2590,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.internalProtocol"
     },
     {
      "$id": "285",
@@ -2605,7 +2621,8 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.stillConvenient"
     },
     {
      "$id": "287",
@@ -2653,7 +2670,8 @@
      "Path": "/headAsBoolean/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.headAsBoolean"
     }
    ],
    "Protocol": {

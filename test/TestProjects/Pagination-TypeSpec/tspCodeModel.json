@@ -806,7 +806,8 @@
       "NextLinkName": "customNextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.ListPaginationLedgerEntries"
     }
    ],
    "Protocol": {
@@ -1042,7 +1043,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.AdditionalParameter.ListMetricDimensionValues"
     }
    ],
    "Protocol": {
@@ -1167,7 +1169,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.UseFoundationsResourceList.list"
     }
    ],
    "Protocol": {
@@ -1293,7 +1296,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.TwoTypesItem.listTextBlocklists"
     },
     {
      "$id": "155",
@@ -1463,7 +1467,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.TwoTypesItem.listTextBlocklistItems"
     }
    ],
    "Protocol": {
@@ -1659,7 +1664,8 @@
       "NextLinkName": "odata.nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Pagination.Pools.listPools"
     }
    ],
    "Protocol": {

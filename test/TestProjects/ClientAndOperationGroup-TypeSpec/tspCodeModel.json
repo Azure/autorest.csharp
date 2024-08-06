@@ -85,7 +85,8 @@
      "Path": "/top",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.zero"
     },
     {
      "$id": "11",
@@ -146,7 +147,8 @@
      "Path": "/Alpha",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Alpha.one"
     }
    ],
    "Protocol": {
@@ -238,7 +240,8 @@
      "Path": "/Beta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.two"
     },
     {
      "$id": "27",
@@ -299,7 +302,8 @@
      "Path": "/SubBeta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.SubBeta.three"
     }
    ],
    "Protocol": {
@@ -392,7 +396,8 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.four"
     },
     {
      "$id": "43",
@@ -453,7 +458,8 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.five"
     }
    ],
    "Protocol": {

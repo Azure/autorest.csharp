@@ -492,7 +492,8 @@
      "Path": "/type/property/nullable/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.getNonNull"
     },
     {
      "$id": "67",
@@ -551,7 +552,8 @@
      "Path": "/type/property/nullable/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.getNull"
     },
     {
      "$id": "72",
@@ -623,7 +625,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.patchNonNull"
     },
     {
      "$id": "78",
@@ -695,7 +698,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.patchNull"
     }
    ],
    "Protocol": {
@@ -796,7 +800,8 @@
      "Path": "/type/property/nullable/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.getNonNull"
     },
     {
      "$id": "95",
@@ -855,7 +860,8 @@
      "Path": "/type/property/nullable/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.getNull"
     },
     {
      "$id": "100",
@@ -927,7 +933,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.patchNonNull"
     },
     {
      "$id": "106",
@@ -999,7 +1006,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.patchNull"
     }
    ],
    "Protocol": {
@@ -1100,7 +1108,8 @@
      "Path": "/type/property/nullable/datetime/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.getNonNull"
     },
     {
      "$id": "123",
@@ -1159,7 +1168,8 @@
      "Path": "/type/property/nullable/datetime/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.getNull"
     },
     {
      "$id": "128",
@@ -1231,7 +1241,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.patchNonNull"
     },
     {
      "$id": "134",
@@ -1303,7 +1314,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.patchNull"
     }
    ],
    "Protocol": {
@@ -1404,7 +1416,8 @@
      "Path": "/type/property/nullable/duration/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.getNonNull"
     },
     {
      "$id": "151",
@@ -1463,7 +1476,8 @@
      "Path": "/type/property/nullable/duration/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.getNull"
     },
     {
      "$id": "156",
@@ -1535,7 +1549,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.patchNonNull"
     },
     {
      "$id": "162",
@@ -1607,7 +1622,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.patchNull"
     }
    ],
    "Protocol": {
@@ -1708,7 +1724,8 @@
      "Path": "/type/property/nullable/collections/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.getNonNull"
     },
     {
      "$id": "179",
@@ -1767,7 +1784,8 @@
      "Path": "/type/property/nullable/collections/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.getNull"
     },
     {
      "$id": "184",
@@ -1839,7 +1857,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.patchNonNull"
     },
     {
      "$id": "190",
@@ -1911,7 +1930,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.patchNull"
     }
    ],
    "Protocol": {
@@ -2012,7 +2032,8 @@
      "Path": "/type/property/nullable/collections/model/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.getNonNull"
     },
     {
      "$id": "207",
@@ -2071,7 +2092,8 @@
      "Path": "/type/property/nullable/collections/model/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.getNull"
     },
     {
      "$id": "212",
@@ -2143,7 +2165,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.patchNonNull"
     },
     {
      "$id": "218",
@@ -2215,7 +2238,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.patchNull"
     }
    ],
    "Protocol": {
@@ -2316,7 +2340,8 @@
      "Path": "/type/property/nullable/collections/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.getNonNull"
     },
     {
      "$id": "235",
@@ -2375,7 +2400,8 @@
      "Path": "/type/property/nullable/collections/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.getNull"
     },
     {
      "$id": "240",
@@ -2447,7 +2473,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.patchNonNull"
     },
     {
      "$id": "246",
@@ -2519,7 +2546,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.patchNull"
     }
    ],
    "Protocol": {

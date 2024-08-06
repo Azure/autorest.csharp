@@ -285,7 +285,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.newOp"
     }
    ],
    "Protocol": {
@@ -438,7 +439,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewInterface.newOpInNewInterface"
     }
    ],
    "Protocol": {

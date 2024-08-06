@@ -335,7 +335,8 @@
      "Path": "/encode/duration/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.default"
     },
     {
      "$id": "45",
@@ -389,7 +390,8 @@
      "Path": "/encode/duration/query/iso8601",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.iso8601"
     },
     {
      "$id": "50",
@@ -443,7 +445,8 @@
      "Path": "/encode/duration/query/int32-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32Seconds"
     },
     {
      "$id": "55",
@@ -497,7 +500,8 @@
      "Path": "/encode/duration/query/float-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.floatSeconds"
     },
     {
      "$id": "60",
@@ -551,7 +555,8 @@
      "Path": "/encode/duration/query/float64-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.float64Seconds"
     },
     {
      "$id": "65",
@@ -625,7 +630,8 @@
      "Path": "/encode/duration/query/int32-seconds-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32SecondsArray"
     }
    ],
    "Protocol": {
@@ -767,7 +773,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.default"
     },
     {
      "$id": "88",
@@ -867,7 +874,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.iso8601"
     },
     {
      "$id": "97",
@@ -967,7 +975,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.int32Seconds"
     },
     {
      "$id": "106",
@@ -1067,7 +1076,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSeconds"
     },
     {
      "$id": "115",
@@ -1167,7 +1177,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.float64Seconds"
     },
     {
      "$id": "124",
@@ -1267,7 +1278,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSecondsArray"
     }
    ],
    "Protocol": {
@@ -1363,7 +1375,8 @@
      "Path": "/encode/duration/header/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.default"
     },
     {
      "$id": "144",
@@ -1417,7 +1430,8 @@
      "Path": "/encode/duration/header/iso8601",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601"
     },
     {
      "$id": "149",
@@ -1491,7 +1505,8 @@
      "Path": "/encode/duration/header/iso8601-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601Array"
     },
     {
      "$id": "157",
@@ -1545,7 +1560,8 @@
      "Path": "/encode/duration/header/int32-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.int32Seconds"
     },
     {
      "$id": "162",
@@ -1599,7 +1615,8 @@
      "Path": "/encode/duration/header/float-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.floatSeconds"
     },
     {
      "$id": "167",
@@ -1653,7 +1670,8 @@
      "Path": "/encode/duration/header/float64-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.float64Seconds"
     }
    ],
    "Protocol": {

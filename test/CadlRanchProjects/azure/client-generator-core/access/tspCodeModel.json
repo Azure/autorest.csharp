@@ -464,7 +464,8 @@
      "Path": "/azure/client-generator-core/access/publicOperation/noDecoratorInPublic",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.noDecoratorInPublic"
     },
     {
      "$id": "56",
@@ -540,7 +541,8 @@
      "Path": "/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.publicDecoratorInPublic"
     }
    ],
    "Protocol": {
@@ -658,7 +660,8 @@
      "Path": "/azure/client-generator-core/access/internalOperation/noDecoratorInInternal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.noDecoratorInInternal"
     },
     {
      "$id": "76",
@@ -734,7 +737,8 @@
      "Path": "/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.internalDecoratorInInternal"
     },
     {
      "$id": "83",
@@ -810,7 +814,8 @@
      "Path": "/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.publicDecoratorInInternal"
     }
    ],
    "Protocol": {
@@ -928,7 +933,8 @@
      "Path": "/azure/client-generator-core/access/sharedModelInOperation/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.public"
     },
     {
      "$id": "103",
@@ -1004,7 +1010,8 @@
      "Path": "/azure/client-generator-core/access/sharedModelInOperation/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.internal"
     }
    ],
    "Protocol": {
@@ -1123,7 +1130,8 @@
      "Path": "/azure/client-generator-core/access/relativeModelInOperation/operation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.operation"
     },
     {
      "$id": "123",
@@ -1200,7 +1208,8 @@
      "Path": "/azure/client-generator-core/access/relativeModelInOperation/discriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.discriminator"
     }
    ],
    "Protocol": {

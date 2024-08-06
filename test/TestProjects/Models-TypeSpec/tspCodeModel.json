@@ -3390,7 +3390,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.putBaseModelWithDiscriminatorDefinedOnBase"
     },
     {
      "$id": "455",
@@ -3448,7 +3449,8 @@
      "Path": "/pet",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.getOutputDiscriminatorModel"
     },
     {
      "$id": "460",
@@ -3549,7 +3551,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.inputToRoundTrip"
     },
     {
      "$id": "469",
@@ -3650,7 +3653,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.inputToRoundTripPrimitive"
     },
     {
      "$id": "478",
@@ -3751,7 +3755,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.inputToRoundTripOptional"
     },
     {
      "$id": "487",
@@ -3853,7 +3858,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.inputToRoundTripReadOnly"
     },
     {
      "$id": "496",
@@ -3954,7 +3960,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.roundTripToOutput"
     },
     {
      "$id": "505",
@@ -4026,7 +4033,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.InputRecursive"
     },
     {
      "$id": "511",
@@ -4127,7 +4135,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.roundTripRecursive"
     },
     {
      "$id": "520",
@@ -4186,7 +4195,8 @@
      "Path": "/selfReference",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.selfReference"
     },
     {
      "$id": "525",
@@ -4260,7 +4270,8 @@
      "Path": "/fixedFloatEnum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.fixedFloatEnum"
     },
     {
      "$id": "531",
@@ -4334,7 +4345,8 @@
      "Path": "/extenisbleIntEnum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.extenisbleIntEnum"
     },
     {
      "$id": "537",
@@ -4435,7 +4447,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.roundTripToOutputWithNoUseBase"
     },
     {
      "$id": "546",
@@ -4493,7 +4506,8 @@
      "Path": "/internalInput",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.getInternalInput"
     },
     {
      "$id": "551",
@@ -4593,7 +4607,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.putInternalInput"
     },
     {
      "$id": "560",
@@ -4681,7 +4696,8 @@
      "Path": "/items:analyzeConversation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.analyzeConversation"
     },
     {
      "$id": "569",
@@ -4752,7 +4768,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelsTypeSpec.genericType"
     }
    ],
    "Protocol": {

@@ -2241,7 +2241,8 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.topAction"
     },
     {
      "$id": "301",
@@ -2300,7 +2301,8 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.topAction2"
     },
     {
      "$id": "306",
@@ -2401,7 +2403,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.patchAction"
     },
     {
      "$id": "315",
@@ -2502,7 +2505,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody"
     },
     {
      "$id": "324",
@@ -2603,7 +2607,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.friendlyModel"
     },
     {
      "$id": "333",
@@ -2657,7 +2662,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.addTimeHeader"
     },
     {
      "$id": "338",
@@ -2753,7 +2759,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.stringFormat"
     },
     {
      "$id": "347",
@@ -2854,7 +2861,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.projectedNameModel"
     },
     {
      "$id": "356",
@@ -2913,7 +2921,8 @@
      "Path": "/retunsAnonymousModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnsAnonymousModel"
     },
     {
      "$id": "361",
@@ -2961,7 +2970,8 @@
      "Path": "/headAsBoolean/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.headAsBoolean"
     },
     {
      "$id": "365",
@@ -3036,7 +3046,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.stringBody"
     },
     {
      "$id": "372",
@@ -3111,7 +3122,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.boolBody"
     },
     {
      "$id": "379",
@@ -3193,7 +3205,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.dateTimeBody"
     },
     {
      "$id": "387",
@@ -3255,7 +3268,8 @@
      "Path": "/returnString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnString"
     },
     {
      "$id": "393",
@@ -3316,7 +3330,8 @@
      "Path": "/returnUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.returnUnknown"
     },
     {
      "$id": "399",
@@ -3388,7 +3403,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.recursiveExtension"
     },
     {
      "$id": "405",
@@ -3460,7 +3476,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.threeLevelRecursive"
     },
     {
      "$id": "411",
@@ -3532,7 +3549,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.recursiveModels"
     },
     {
      "$id": "417",
@@ -3604,7 +3622,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelfModels"
     },
     {
      "$id": "423",
@@ -3649,7 +3668,8 @@
      "Path": "/enumParameter/{p1}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.enumParameter"
     },
     {
      "$id": "426",
@@ -3721,7 +3741,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.bodyIsModelWithProjectedEnum"
     },
     {
      "$id": "432",
@@ -3806,7 +3827,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.optionalDictionary"
     },
     {
      "$id": "441",
@@ -3926,7 +3948,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.azureLocationOp"
     }
    ],
    "Protocol": {
@@ -4102,7 +4125,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo.sayHi"
     }
    ],
    "Protocol": {
@@ -4270,7 +4294,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2.helloAgain"
     },
     {
      "$id": "489",
@@ -4407,7 +4432,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2.noContentType"
     },
     {
      "$id": "502",
@@ -4466,7 +4492,8 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2.helloDemoAgain"
     },
     {
      "$id": "507",
@@ -4567,7 +4594,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2.createLiteral"
     },
     {
      "$id": "516",
@@ -4695,7 +4723,8 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Hello.Demo2.helloLiteral"
     }
    ],
    "Protocol": {
@@ -4799,7 +4828,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.EnumTest.createUnknownValue"
     }
    ],
    "Protocol": {
@@ -4932,7 +4962,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProtocolAndConvenient.internalProtocol"
     },
     {
      "$id": "553",
@@ -4962,7 +4993,8 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.ProtocolAndConvenient.stillConvenient"
     }
    ],
    "Protocol": {
@@ -5071,7 +5103,8 @@
      "Path": "/entity/doSomething/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Entity.doSomething"
     }
    ],
    "Protocol": {
@@ -5198,7 +5231,8 @@
      "Path": "/glossary/doSomething/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "FirstTestTypeSpec.Glossary.doSomething"
     }
    ],
    "Protocol": {

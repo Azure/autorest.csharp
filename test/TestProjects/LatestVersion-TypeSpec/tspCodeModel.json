@@ -690,7 +690,8 @@
       "ResultPath": "result"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.VersioningOp.export"
     },
     {
      "$id": "87",
@@ -827,7 +828,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.VersioningOp.list"
     },
     {
      "$id": "102",
@@ -1043,7 +1045,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Latest.VersioningOp.createLongRunning"
     }
    ],
    "Protocol": {

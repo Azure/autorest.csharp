@@ -304,7 +304,8 @@
      "Path": "/encode/datetime/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Query.default"
     },
     {
      "$id": "41",
@@ -358,7 +359,8 @@
      "Path": "/encode/datetime/query/rfc3339",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Query.rfc3339"
     },
     {
      "$id": "46",
@@ -412,7 +414,8 @@
      "Path": "/encode/datetime/query/rfc7231",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Query.rfc7231"
     },
     {
      "$id": "51",
@@ -466,7 +469,8 @@
      "Path": "/encode/datetime/query/unix-timestamp",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestamp"
     },
     {
      "$id": "56",
@@ -540,7 +544,8 @@
      "Path": "/encode/datetime/query/unix-timestamp-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Query.unixTimestampArray"
     }
    ],
    "Protocol": {
@@ -682,7 +687,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Property.default"
     },
     {
      "$id": "79",
@@ -782,7 +788,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Property.rfc3339"
     },
     {
      "$id": "88",
@@ -882,7 +889,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Property.rfc7231"
     },
     {
      "$id": "97",
@@ -982,7 +990,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Property.unixTimestamp"
     },
     {
      "$id": "106",
@@ -1082,7 +1091,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Property.unixTimestampArray"
     }
    ],
    "Protocol": {
@@ -1178,7 +1188,8 @@
      "Path": "/encode/datetime/header/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Header.default"
     },
     {
      "$id": "126",
@@ -1232,7 +1243,8 @@
      "Path": "/encode/datetime/header/rfc3339",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Header.rfc3339"
     },
     {
      "$id": "131",
@@ -1286,7 +1298,8 @@
      "Path": "/encode/datetime/header/rfc7231",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Header.rfc7231"
     },
     {
      "$id": "136",
@@ -1340,7 +1353,8 @@
      "Path": "/encode/datetime/header/unix-timestamp",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestamp"
     },
     {
      "$id": "141",
@@ -1414,7 +1428,8 @@
      "Path": "/encode/datetime/header/unix-timestamp-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.Header.unixTimestampArray"
     }
    ],
    "Protocol": {
@@ -1504,7 +1519,8 @@
      "Path": "/encode/datetime/responseheader/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.default"
     },
     {
      "$id": "160",
@@ -1552,7 +1568,8 @@
      "Path": "/encode/datetime/responseheader/rfc3339",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.rfc3339"
     },
     {
      "$id": "165",
@@ -1600,7 +1617,8 @@
      "Path": "/encode/datetime/responseheader/rfc7231",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.rfc7231"
     },
     {
      "$id": "170",
@@ -1648,7 +1666,8 @@
      "Path": "/encode/datetime/responseheader/unix-timestamp",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Datetime.ResponseHeader.unixTimestamp"
     }
    ],
    "Protocol": {

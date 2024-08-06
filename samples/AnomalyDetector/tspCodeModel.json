@@ -2469,7 +2469,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.DetectUnivariateEntireSeries"
     },
     {
      "$id": "327",
@@ -2575,7 +2576,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.DetectUnivariateLastPoint"
     },
     {
      "$id": "336",
@@ -2681,7 +2683,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.DetectUnivariateChangePoint"
     }
    ],
    "Protocol": {
@@ -2830,7 +2833,8 @@
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.GetMultivariateBatchDetectionResult"
     },
     {
      "$id": "360",
@@ -2949,7 +2953,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.TrainMultivariateModel"
     },
     {
      "$id": "371",
@@ -3055,7 +3060,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ListMultivariateModels"
     },
     {
      "$id": "381",
@@ -3131,7 +3137,8 @@
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DeleteMultivariateModel"
     },
     {
      "$id": "388",
@@ -3213,7 +3220,8 @@
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.GetMultivariateModel"
     },
     {
      "$id": "395",
@@ -3363,7 +3371,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DetectMultivariateBatchAnomaly"
     },
     {
      "$id": "410",
@@ -3488,7 +3497,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DetectMultivariateLastAnomaly"
     }
    ],
    "Protocol": {

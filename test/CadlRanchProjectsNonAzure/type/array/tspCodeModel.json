@@ -186,7 +186,8 @@
      "Path": "/type/array/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int32Value.get"
     },
     {
      "$id": "25",
@@ -266,7 +267,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int32Value.put"
     }
    ],
    "Protocol": {
@@ -376,7 +378,8 @@
      "Path": "/type/array/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int64Value.get"
     },
     {
      "$id": "46",
@@ -456,7 +459,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int64Value.put"
     }
    ],
    "Protocol": {
@@ -566,7 +570,8 @@
      "Path": "/type/array/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.BooleanValue.get"
     },
     {
      "$id": "67",
@@ -646,7 +651,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.BooleanValue.put"
     }
    ],
    "Protocol": {
@@ -756,7 +762,8 @@
      "Path": "/type/array/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.StringValue.get"
     },
     {
      "$id": "88",
@@ -836,7 +843,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.StringValue.put"
     }
    ],
    "Protocol": {
@@ -946,7 +954,8 @@
      "Path": "/type/array/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Float32Value.get"
     },
     {
      "$id": "109",
@@ -1026,7 +1035,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Float32Value.put"
     }
    ],
    "Protocol": {
@@ -1143,7 +1153,8 @@
      "Path": "/type/array/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DatetimeValue.get"
     },
     {
      "$id": "131",
@@ -1230,7 +1241,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DatetimeValue.put"
     }
    ],
    "Protocol": {
@@ -1347,7 +1359,8 @@
      "Path": "/type/array/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DurationValue.get"
     },
     {
      "$id": "154",
@@ -1434,7 +1447,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DurationValue.put"
     }
    ],
    "Protocol": {
@@ -1544,7 +1558,8 @@
      "Path": "/type/array/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.UnknownValue.get"
     },
     {
      "$id": "176",
@@ -1624,7 +1639,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.UnknownValue.put"
     }
    ],
    "Protocol": {
@@ -1731,7 +1747,8 @@
      "Path": "/type/array/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.ModelValue.get"
     },
     {
      "$id": "196",
@@ -1808,7 +1825,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.ModelValue.put"
     }
    ],
    "Protocol": {
@@ -1922,7 +1940,8 @@
      "Path": "/type/array/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableFloatValue.get"
     },
     {
      "$id": "217",
@@ -2006,7 +2025,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableFloatValue.put"
     }
    ],
    "Protocol": {
@@ -2120,7 +2140,8 @@
      "Path": "/type/array/nullable-int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableInt32Value.get"
     },
     {
      "$id": "240",
@@ -2204,7 +2225,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableInt32Value.put"
     }
    ],
    "Protocol": {
@@ -2318,7 +2340,8 @@
      "Path": "/type/array/nullable-boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableBooleanValue.get"
     },
     {
      "$id": "263",
@@ -2402,7 +2425,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableBooleanValue.put"
     }
    ],
    "Protocol": {
@@ -2516,7 +2540,8 @@
      "Path": "/type/array/nullable-string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableStringValue.get"
     },
     {
      "$id": "286",
@@ -2600,7 +2625,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableStringValue.put"
     }
    ],
    "Protocol": {
@@ -2711,7 +2737,8 @@
      "Path": "/type/array/nullable-model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableModelValue.get"
     },
     {
      "$id": "308",
@@ -2792,7 +2819,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableModelValue.put"
     }
    ],
    "Protocol": {

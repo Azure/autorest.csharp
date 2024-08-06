@@ -463,7 +463,8 @@
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.smokeTest"
     },
     {
      "$id": "58",
@@ -668,7 +669,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.repeatableAction"
     }
    ],
    "Protocol": {

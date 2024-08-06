@@ -163,7 +163,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.put"
     },
     {
      "$id": "19",
@@ -221,7 +222,8 @@
      "Path": "/type/model/inheritance/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.get"
     }
    ],
    "Protocol": {

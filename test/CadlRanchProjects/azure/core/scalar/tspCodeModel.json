@@ -199,7 +199,8 @@
      "Path": "/azure/core/scalar/azureLocation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.get"
     },
     {
      "$id": "27",
@@ -281,7 +282,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.put"
     },
     {
      "$id": "35",
@@ -383,7 +385,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.post"
     },
     {
      "$id": "44",
@@ -438,7 +441,8 @@
      "Path": "/azure/core/scalar/azureLocation/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.header"
     },
     {
      "$id": "49",
@@ -493,7 +497,8 @@
      "Path": "/azure/core/scalar/azureLocation/query",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.query"
     }
    ],
    "Protocol": {
