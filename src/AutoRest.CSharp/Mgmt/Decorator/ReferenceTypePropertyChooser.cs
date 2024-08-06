@@ -26,12 +26,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
-        private static readonly IReadOnlyDictionary<string, string> _replacements = new Dictionary<string, string>
-        {
-            { "Azure.ResourceManager.CommonTypes.UserAssignedIdentity", "Azure.ResourceManager.Models.UserAssignedIdentity" },
-            { "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity", "Azure.ResourceManager.Models.ManagedServiceIdentity" },
-        };
-
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType)
         {
             return FindSimpleReplacements(originalType, frameworkType);
@@ -49,12 +43,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!typeToReplace.ShouldNotReplaceForProperty())
             {
-                // For TypeSpec input, we can just find the replacement type by CrossLanguageDefinitionId
-                if (_replacements.TryGetValue(typeToReplace.InputModel.CrossLanguageDefinitionId, out var replacementTypeName))
-                {
-                    return ReferenceClassFinder.PropertyReferenceTypes.Single(x => x.FullName == replacementTypeName);
-                }
-
                 foreach (Type replacementType in ReferenceClassFinder.PropertyReferenceTypes)
                 {
                     var typeToReplacePropertyNames = typeToReplace.MyProperties.Select(p => p.Declaration.Name).ToHashSet();
