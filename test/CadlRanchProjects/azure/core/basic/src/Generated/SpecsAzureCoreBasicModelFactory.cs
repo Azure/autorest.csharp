@@ -39,13 +39,13 @@ namespace _Specs_.Azure.Core.Basic.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserList"/>. </summary>
-        /// <param name="collection"></param>
+        /// <param name="users"></param>
         /// <returns> A new <see cref="Models.UserList"/> instance for mocking. </returns>
-        public static UserList UserList(IEnumerable<User> collection = null)
+        public static UserList UserList(IEnumerable<User> users = null)
         {
-            collection ??= new List<User>();
+            users ??= new List<User>();
 
-            return new UserList(collection?.ToList(), serializedAdditionalRawData: null);
+            return new UserList(users?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }

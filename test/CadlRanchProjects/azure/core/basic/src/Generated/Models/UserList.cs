@@ -47,21 +47,21 @@ namespace _Specs_.Azure.Core.Basic.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UserList"/>. </summary>
-        /// <param name="collection"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="collection"/> is null. </exception>
-        internal UserList(IEnumerable<User> collection)
+        /// <param name="users"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="users"/> is null. </exception>
+        internal UserList(IEnumerable<User> users)
         {
-            Argument.AssertNotNull(collection, nameof(collection));
+            Argument.AssertNotNull(users, nameof(users));
 
-            Collection = collection.ToList();
+            Users = users.ToList();
         }
 
         /// <summary> Initializes a new instance of <see cref="UserList"/>. </summary>
-        /// <param name="collection"></param>
+        /// <param name="users"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UserList(IReadOnlyList<User> collection, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UserList(IReadOnlyList<User> users, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Collection = collection;
+            Users = users;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -70,7 +70,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         {
         }
 
-        /// <summary> Gets the collection. </summary>
-        public IReadOnlyList<User> Collection { get; }
+        /// <summary> Gets the users. </summary>
+        public IReadOnlyList<User> Users { get; }
     }
 }

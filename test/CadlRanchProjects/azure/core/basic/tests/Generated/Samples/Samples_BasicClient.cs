@@ -495,116 +495,100 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportallusers_ShortVersion()
+        public void Example_Basic_ExportAllUsers_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                format = "<format>",
-            });
-            Response response = client.Exportallusers(content);
+            Response response = client.ExportAllUsers("<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("etag").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportallusers_ShortVersion_Async()
+        public async Task Example_Basic_ExportAllUsers_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                format = "<format>",
-            });
-            Response response = await client.ExportallusersAsync(content);
+            Response response = await client.ExportAllUsersAsync("<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("etag").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportallusers_ShortVersion_Convenience()
+        public void Example_Basic_ExportAllUsers_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<UserList> response = client.Exportallusers("<format>");
+            Response<UserList> response = client.ExportAllUsers("<format>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportallusers_ShortVersion_Convenience_Async()
+        public async Task Example_Basic_ExportAllUsers_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<UserList> response = await client.ExportallusersAsync("<format>");
+            Response<UserList> response = await client.ExportAllUsersAsync("<format>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportallusers_AllParameters()
+        public void Example_Basic_ExportAllUsers_AllParameters()
         {
             BasicClient client = new BasicClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                format = "<format>",
-            });
-            Response response = client.Exportallusers(content);
+            Response response = client.ExportAllUsers("<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("etag").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportallusers_AllParameters_Async()
+        public async Task Example_Basic_ExportAllUsers_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                format = "<format>",
-            });
-            Response response = await client.ExportallusersAsync(content);
+            Response response = await client.ExportAllUsersAsync("<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("collection")[0].GetProperty("etag").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Basic_Exportallusers_AllParameters_Convenience()
+        public void Example_Basic_ExportAllUsers_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
-            Response<UserList> response = client.Exportallusers("<format>");
+            Response<UserList> response = client.ExportAllUsers("<format>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Basic_Exportallusers_AllParameters_Convenience_Async()
+        public async Task Example_Basic_ExportAllUsers_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
-            Response<UserList> response = await client.ExportallusersAsync("<format>");
+            Response<UserList> response = await client.ExportAllUsersAsync("<format>");
         }
 
         [Test]

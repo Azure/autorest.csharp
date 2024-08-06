@@ -85,9 +85,9 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_exportAllUsers() => Test(async (host) =>
         {
-            var response = await new BasicClient(host, null).ExportallusersAsync("json");
-            Assert.AreEqual("Madge", response.Value.Collection[0].Name);
-            Assert.AreEqual("John", response.Value.Collection[0].Name);
+            var response = await new BasicClient(host, null).ExportAllUsersAsync("json");
+            Assert.AreEqual("Madge", response.Value.Users[0].Name);
+            Assert.AreEqual("John", response.Value.Users[1].Name);
         });
 
         [Test]

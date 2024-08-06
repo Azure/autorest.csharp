@@ -27,9 +27,9 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("collection"u8);
+            writer.WritePropertyName("users"u8);
             writer.WriteStartArray();
-            foreach (var item in Collection)
+            foreach (var item in Users)
             {
                 writer.WriteObjectValue(item, options);
             }
@@ -72,19 +72,19 @@ namespace _Specs_.Azure.Core.Basic.Models
             {
                 return null;
             }
-            IReadOnlyList<User> collection = default;
+            IReadOnlyList<User> users = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("collection"u8))
+                if (property.NameEquals("users"u8))
                 {
                     List<User> array = new List<User>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(User.DeserializeUser(item, options));
                     }
-                    collection = array;
+                    users = array;
                     continue;
                 }
                 if (options.Format != "W")
@@ -93,7 +93,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new UserList(collection, serializedAdditionalRawData);
+            return new UserList(users, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UserList>.Write(ModelReaderWriterOptions options)

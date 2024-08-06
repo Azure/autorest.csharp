@@ -508,34 +508,32 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports all users. </summary>
-        /// <param name="format"></param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports all users. </remarks>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportallusersAsync(string,CancellationToken)']/*" />
-        public virtual async Task<Response<UserList>> ExportallusersAsync(string format, CancellationToken cancellationToken = default)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsersAsync(string,CancellationToken)']/*" />
+        public virtual async Task<Response<UserList>> ExportAllUsersAsync(string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
 
-            ExportallusersRequest exportallusersRequest = new ExportallusersRequest(format, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ExportallusersAsync(exportallusersRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ExportAllUsersAsync(format, context).ConfigureAwait(false);
             return Response.FromValue(UserList.FromResponse(response), response);
         }
 
         /// <summary> Exports all users. </summary>
-        /// <param name="format"></param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports all users. </remarks>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportallusers(string,CancellationToken)']/*" />
-        public virtual Response<UserList> Exportallusers(string format, CancellationToken cancellationToken = default)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsers(string,CancellationToken)']/*" />
+        public virtual Response<UserList> ExportAllUsers(string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
 
-            ExportallusersRequest exportallusersRequest = new ExportallusersRequest(format, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Exportallusers(exportallusersRequest.ToRequestContent(), context);
+            Response response = ExportAllUsers(format, context);
             return Response.FromValue(UserList.FromResponse(response), response);
         }
 
@@ -549,26 +547,26 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ExportallusersAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ExportAllUsersAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportallusersAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ExportallusersAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsersAsync(string,RequestContext)']/*" />
+        public virtual async Task<Response> ExportAllUsersAsync(string format, RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(format, nameof(format));
 
-            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportallusers");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.ExportAllUsers");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportallusersRequest(content, context);
+                using HttpMessage message = CreateExportAllUsersRequest(format, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -588,26 +586,26 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Exportallusers(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ExportAllUsers(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Exportallusers(RequestContent,RequestContext)']/*" />
-        public virtual Response Exportallusers(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsers(string,RequestContext)']/*" />
+        public virtual Response ExportAllUsers(string format, RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(format, nameof(format));
 
-            using var scope = ClientDiagnostics.CreateScope("BasicClient.Exportallusers");
+            using var scope = ClientDiagnostics.CreateScope("BasicClient.ExportAllUsers");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateExportallusersRequest(content, context);
+                using HttpMessage message = CreateExportAllUsersRequest(format, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -853,7 +851,7 @@ namespace _Specs_.Azure.Core.Basic
             return message;
         }
 
-        internal HttpMessage CreateExportallusersRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateExportAllUsersRequest(string format, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -861,11 +859,10 @@ namespace _Specs_.Azure.Core.Basic
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/core/basic/users:exportallusers", false);
+            uri.AppendQuery("format", format, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
             return message;
         }
 
