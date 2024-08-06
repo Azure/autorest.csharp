@@ -55,7 +55,8 @@
      "Path": "/server/versions/not-versioned/without-api-version",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.NotVersioned.withoutApiVersion"
     },
     {
      "$id": "7",
@@ -102,7 +103,8 @@
      "Path": "/server/versions/not-versioned/with-query-api-version",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.NotVersioned.withQueryApiVersion"
     },
     {
      "$id": "11",
@@ -149,7 +151,8 @@
      "Path": "/server/versions/not-versioned/with-path-api-version/{apiVersion}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.NotVersioned.withPathApiVersion"
     }
    ],
    "Protocol": {

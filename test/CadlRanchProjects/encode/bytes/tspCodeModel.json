@@ -233,7 +233,8 @@
      "Path": "/encode/bytes/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Query.default"
     },
     {
      "$id": "31",
@@ -281,7 +282,8 @@
      "Path": "/encode/bytes/query/base64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Query.base64"
     },
     {
      "$id": "35",
@@ -329,7 +331,8 @@
      "Path": "/encode/bytes/query/base64url",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Query.base64url"
     },
     {
      "$id": "39",
@@ -391,7 +394,8 @@
      "Path": "/encode/bytes/query/base64url-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Query.base64urlArray"
     }
    ],
    "Protocol": {
@@ -533,7 +537,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Property.default"
     },
     {
      "$id": "60",
@@ -633,7 +638,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Property.base64"
     },
     {
      "$id": "69",
@@ -733,7 +739,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Property.base64url"
     },
     {
      "$id": "78",
@@ -833,7 +840,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Property.base64urlArray"
     }
    ],
    "Protocol": {
@@ -923,7 +931,8 @@
      "Path": "/encode/bytes/header/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Header.default"
     },
     {
      "$id": "97",
@@ -971,7 +980,8 @@
      "Path": "/encode/bytes/header/base64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Header.base64"
     },
     {
      "$id": "101",
@@ -1019,7 +1029,8 @@
      "Path": "/encode/bytes/header/base64url",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Header.base64url"
     },
     {
      "$id": "105",
@@ -1081,7 +1092,8 @@
      "Path": "/encode/bytes/header/base64url-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.Header.base64urlArray"
     }
    ],
    "Protocol": {
@@ -1198,7 +1210,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.RequestBody.default"
     },
     {
      "$id": "124",
@@ -1272,7 +1285,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.RequestBody.octetStream"
     },
     {
      "$id": "131",
@@ -1346,7 +1360,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.RequestBody.customContentType"
     },
     {
      "$id": "138",
@@ -1421,7 +1436,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.RequestBody.base64"
     },
     {
      "$id": "145",
@@ -1496,7 +1512,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.RequestBody.base64url"
     }
    ],
    "Protocol": {
@@ -1600,7 +1617,8 @@
      "Path": "/encode/bytes/body/response/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.ResponseBody.default"
     },
     {
      "$id": "164",
@@ -1679,7 +1697,8 @@
      "Path": "/encode/bytes/body/response/octet-stream",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.ResponseBody.octetStream"
     },
     {
      "$id": "173",
@@ -1758,7 +1777,8 @@
      "Path": "/encode/bytes/body/response/custom-content-type",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.ResponseBody.customContentType"
     },
     {
      "$id": "182",
@@ -1820,7 +1840,8 @@
      "Path": "/encode/bytes/body/response/base64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.ResponseBody.base64"
     },
     {
      "$id": "188",
@@ -1889,7 +1910,8 @@
      "Path": "/encode/bytes/body/response/base64url",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Encode.Bytes.ResponseBody.base64url"
     }
    ],
    "Protocol": {

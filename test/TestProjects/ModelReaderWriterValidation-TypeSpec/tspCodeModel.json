@@ -1730,7 +1730,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op1"
     },
     {
      "$id": "227",
@@ -1830,7 +1831,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op2"
     },
     {
      "$id": "236",
@@ -1930,7 +1932,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op3"
     },
     {
      "$id": "245",
@@ -2030,7 +2033,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op4"
     },
     {
      "$id": "254",
@@ -2088,7 +2092,8 @@
      "Path": "/api/ResourceProvider",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op5"
     },
     {
      "$id": "259",
@@ -2188,7 +2193,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op6"
     },
     {
      "$id": "268",
@@ -2288,7 +2294,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op7"
     },
     {
      "$id": "277",
@@ -2388,7 +2395,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op8"
     }
    ],
    "Protocol": {

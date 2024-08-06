@@ -185,7 +185,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.postValid"
     },
     {
      "$id": "22",
@@ -243,7 +244,8 @@
      "Path": "/type/model/inheritance/not-discriminated/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.getValid"
     },
     {
      "$id": "27",
@@ -343,7 +345,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.putValid"
     }
    ],
    "Protocol": {
