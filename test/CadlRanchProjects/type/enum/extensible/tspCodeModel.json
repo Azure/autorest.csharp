@@ -192,7 +192,8 @@
      "Path": "/type/enum/extensible/string/known-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getKnownValue"
     },
     {
      "$id": "27",
@@ -250,7 +251,8 @@
      "Path": "/type/enum/extensible/string/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getUnknownValue"
     },
     {
      "$id": "32",
@@ -321,7 +323,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putKnownValue"
     },
     {
      "$id": "38",
@@ -392,7 +395,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putUnknownValue"
     }
    ],
    "Protocol": {

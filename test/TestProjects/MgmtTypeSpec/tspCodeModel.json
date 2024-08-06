@@ -587,7 +587,7 @@
    "Operations": [
     {
      "$id": "76",
-     "Name": "listByMongoCluster",
+     "Name": "GetAllPrivateLinkResources",
      "ResourceName": "PrivateLinkResource",
      "Description": "list private links on the given resource",
      "Accessibility": "public",
@@ -747,7 +747,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster"
     }
    ],
    "Protocol": {

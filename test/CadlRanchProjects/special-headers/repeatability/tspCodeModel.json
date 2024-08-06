@@ -145,7 +145,8 @@
      "Path": "/special-headers/repeatability/immediateSuccess",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialHeaders.Repeatability.immediateSuccess"
     }
    ],
    "Protocol": {

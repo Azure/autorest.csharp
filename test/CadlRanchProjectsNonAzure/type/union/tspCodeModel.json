@@ -1380,7 +1380,8 @@
      "Path": "/type/union/strings-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringsOnly.get"
     },
     {
      "$id": "186",
@@ -1451,7 +1452,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringsOnly.send"
     }
    ],
    "Protocol": {
@@ -1552,7 +1554,8 @@
      "Path": "/type/union/string-extensible",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringExtensible.get"
     },
     {
      "$id": "203",
@@ -1623,7 +1626,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringExtensible.send"
     }
    ],
    "Protocol": {
@@ -1724,7 +1728,8 @@
      "Path": "/type/union/string-extensible-named",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamed.get"
     },
     {
      "$id": "220",
@@ -1795,7 +1800,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringExtensibleNamed.send"
     }
    ],
    "Protocol": {
@@ -1896,7 +1902,8 @@
      "Path": "/type/union/ints-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.IntsOnly.get"
     },
     {
      "$id": "237",
@@ -1967,7 +1974,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.IntsOnly.send"
     }
    ],
    "Protocol": {
@@ -2068,7 +2076,8 @@
      "Path": "/type/union/floats-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.FloatsOnly.get"
     },
     {
      "$id": "254",
@@ -2139,7 +2148,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.FloatsOnly.send"
     }
    ],
    "Protocol": {
@@ -2240,7 +2250,8 @@
      "Path": "/type/union/models-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.ModelsOnly.get"
     },
     {
      "$id": "271",
@@ -2311,7 +2322,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.ModelsOnly.send"
     }
    ],
    "Protocol": {
@@ -2412,7 +2424,8 @@
      "Path": "/type/union/enums-only",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.EnumsOnly.get"
     },
     {
      "$id": "288",
@@ -2483,7 +2496,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.EnumsOnly.send"
     }
    ],
    "Protocol": {
@@ -2584,7 +2598,8 @@
      "Path": "/type/union/string-and-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringAndArray.get"
     },
     {
      "$id": "305",
@@ -2655,7 +2670,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.StringAndArray.send"
     }
    ],
    "Protocol": {
@@ -2756,7 +2772,8 @@
      "Path": "/type/union/mixed-literals",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.MixedLiterals.get"
     },
     {
      "$id": "322",
@@ -2827,7 +2844,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.MixedLiterals.send"
     }
    ],
    "Protocol": {
@@ -2928,7 +2946,8 @@
      "Path": "/type/union/mixed-types",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.MixedTypes.get"
     },
     {
      "$id": "339",
@@ -2999,7 +3018,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Union.MixedTypes.send"
     }
    ],
    "Protocol": {
