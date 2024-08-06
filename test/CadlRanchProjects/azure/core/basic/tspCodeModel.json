@@ -637,7 +637,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.createOrUpdate"
     },
     {
      "$id": "79",
@@ -803,7 +804,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.createOrReplace"
     },
     {
      "$id": "95",
@@ -911,7 +913,8 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.get"
     },
     {
      "$id": "106",
@@ -1156,7 +1159,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.list"
     },
     {
      "$id": "133",
@@ -1249,7 +1253,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.listWithPage"
     },
     {
      "$id": "143",
@@ -1401,7 +1406,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.listWithParameters"
     },
     {
      "$id": "158",
@@ -1494,7 +1500,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.listWithCustomPageModel"
     },
     {
      "$id": "168",
@@ -1596,7 +1603,8 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.delete"
     },
     {
      "$id": "179",
@@ -1723,7 +1731,8 @@
      "Path": "/azure/core/basic/users/{id}:export",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.export"
     }
    ],
    "Protocol": {
@@ -1857,7 +1866,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.TwoModelsAsPageItem.listFirstItem"
     },
     {
      "$id": "208",
@@ -1950,7 +1960,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.TwoModelsAsPageItem.listSecondItem"
     }
    ],
    "Protocol": {

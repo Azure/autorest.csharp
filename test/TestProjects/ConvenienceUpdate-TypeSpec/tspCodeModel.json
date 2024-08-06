@@ -109,7 +109,8 @@
      "Path": "/updateConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.updateConvenience"
     },
     {
      "$id": "13",
@@ -199,7 +200,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalBeforeRequired"
     },
     {
      "$id": "21",
@@ -258,7 +260,8 @@
      "Path": "/noConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenience"
     },
     {
      "$id": "26",
@@ -330,7 +333,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceRequiredBody"
     },
     {
      "$id": "32",
@@ -402,7 +406,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceOptionalBody"
     },
     {
      "$id": "38",
@@ -461,7 +466,8 @@
      "Path": "/protocol",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocol"
     },
     {
      "$id": "43",
@@ -520,7 +526,8 @@
      "Path": "/convenienceWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithOptional"
     },
     {
      "$id": "48",
@@ -579,7 +586,8 @@
      "Path": "/convenienceWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithRequired"
     },
     {
      "$id": "53",
@@ -609,7 +617,8 @@
      "Path": "/convenienceShouldNotGenerate",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceShouldNotGenerate"
     },
     {
      "$id": "55",
@@ -639,7 +648,8 @@
      "Path": "/protocolShouldNotGenerateConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolShouldNotGenerateConvenience"
     },
     {
      "$id": "57",
@@ -716,7 +726,8 @@
      "Path": "/protocolOptionalQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalQuery"
     },
     {
      "$id": "64",
@@ -793,7 +804,8 @@
      "Path": "/protocolRequiredQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredQuery"
     },
     {
      "$id": "71",
@@ -865,7 +877,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalModel"
     },
     {
      "$id": "77",
@@ -937,7 +950,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredModel"
     },
     {
      "$id": "83",
@@ -1014,7 +1028,8 @@
      "Path": "/convenienceOptionalQueryWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithOptional"
     },
     {
      "$id": "90",
@@ -1091,7 +1106,8 @@
      "Path": "/convenienceRequiredQueryWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithOptional"
     },
     {
      "$id": "97",
@@ -1168,7 +1184,8 @@
      "Path": "/convenienceOptionalQueryWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithRequired"
     },
     {
      "$id": "104",
@@ -1245,7 +1262,8 @@
      "Path": "/convenienceRequiredQueryWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithRequired"
     },
     {
      "$id": "111",
@@ -1317,7 +1335,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithOptional"
     },
     {
      "$id": "117",
@@ -1389,7 +1408,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredModelWithOptional"
     },
     {
      "$id": "123",
@@ -1461,7 +1481,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithRequired"
     },
     {
      "$id": "129",
@@ -1551,7 +1572,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalBeforeRequired"
     }
    ],
    "Protocol": {

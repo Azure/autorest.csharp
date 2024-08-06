@@ -478,7 +478,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.basic"
     },
     {
      "$id": "61",
@@ -549,7 +550,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.complex"
     },
     {
      "$id": "67",
@@ -620,7 +622,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.jsonPart"
     },
     {
      "$id": "73",
@@ -691,7 +694,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.binaryArrayParts"
     },
     {
      "$id": "79",
@@ -762,7 +766,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.jsonArrayParts"
     },
     {
      "$id": "85",
@@ -833,7 +838,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.multiBinaryParts"
     },
     {
      "$id": "91",
@@ -904,7 +910,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.checkFileNameAndContentType"
     },
     {
      "$id": "97",
@@ -975,7 +982,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.anonymousModel"
     }
    ],
    "Protocol": {
