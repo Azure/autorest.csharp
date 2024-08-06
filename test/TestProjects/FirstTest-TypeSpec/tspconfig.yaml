@@ -5,3 +5,5 @@ options:
     deserialize-null-collection-as-null-value: true
     head-as-boolean: true
     generate-test-project: true
+    examples-directory: "{project-root}/examples"
+    generate-examples: true
