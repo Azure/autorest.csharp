@@ -179,7 +179,8 @@
      "Path": "/content-negotiation/same-body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsPng"
     },
     {
      "$id": "25",
@@ -258,7 +259,8 @@
      "Path": "/content-negotiation/same-body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.SameBody.getAvatarAsJpeg"
     }
    ],
    "Protocol": {
@@ -379,7 +381,8 @@
      "Path": "/content-negotiation/different-body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsPng"
     },
     {
      "$id": "49",
@@ -454,7 +457,8 @@
      "Path": "/content-negotiation/different-body",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.getAvatarAsJson"
     }
    ],
    "Protocol": {

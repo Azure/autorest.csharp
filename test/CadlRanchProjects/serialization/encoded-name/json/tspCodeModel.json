@@ -170,7 +170,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.send"
     },
     {
      "$id": "22",
@@ -228,7 +229,8 @@
      "Path": "/serialization/encoded-name/json/property",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.get"
     }
    ],
    "Protocol": {

@@ -129,7 +129,8 @@
      "Path": "/parameters/collection-format/query/multi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.multi"
     },
     {
      "$id": "18",
@@ -184,7 +185,8 @@
      "Path": "/parameters/collection-format/query/ssv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.ssv"
     },
     {
      "$id": "23",
@@ -239,7 +241,8 @@
      "Path": "/parameters/collection-format/query/tsv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.tsv"
     },
     {
      "$id": "28",
@@ -294,7 +297,8 @@
      "Path": "/parameters/collection-format/query/pipes",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.pipes"
     },
     {
      "$id": "33",
@@ -349,7 +353,8 @@
      "Path": "/parameters/collection-format/query/csv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.csv"
     }
    ],
    "Protocol": {
@@ -446,7 +451,8 @@
      "Path": "/parameters/collection-format/header/csv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Header.csv"
     }
    ],
    "Protocol": {

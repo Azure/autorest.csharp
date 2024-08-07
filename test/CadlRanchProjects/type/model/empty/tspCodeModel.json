@@ -134,7 +134,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.putEmpty"
     },
     {
      "$id": "16",
@@ -192,7 +193,8 @@
      "Path": "/type/model/empty/alone",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.getEmpty"
     },
     {
      "$id": "21",
@@ -292,7 +294,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.postRoundTripEmpty"
     }
    ],
    "Protocol": {

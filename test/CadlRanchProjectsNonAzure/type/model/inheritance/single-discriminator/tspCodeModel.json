@@ -418,7 +418,8 @@
      "Path": "/type/model/inheritance/single-discriminator/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.getModel"
     },
     {
      "$id": "50",
@@ -489,7 +490,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.putModel"
     },
     {
      "$id": "56",
@@ -547,7 +549,8 @@
      "Path": "/type/model/inheritance/single-discriminator/recursivemodel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.getRecursiveModel"
     },
     {
      "$id": "61",
@@ -618,7 +621,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.putRecursiveModel"
     },
     {
      "$id": "67",
@@ -676,7 +680,8 @@
      "Path": "/type/model/inheritance/single-discriminator/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.getMissingDiscriminator"
     },
     {
      "$id": "72",
@@ -734,7 +739,8 @@
      "Path": "/type/model/inheritance/single-discriminator/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.getWrongDiscriminator"
     },
     {
      "$id": "77",
@@ -792,7 +798,8 @@
      "Path": "/type/model/inheritance/single-discriminator/legacy-model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.getLegacyModel"
     }
    ],
    "Protocol": {
