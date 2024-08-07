@@ -58,14 +58,18 @@ namespace MgmtTypeSpec.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <param name="identity"> The managed service identities assigned to this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, MgmtTypeSpecPrivateLinkResourceProperties properties, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
+        internal MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, MgmtTypeSpecPrivateLinkResourceProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
+            Identity = identity;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> The resource-specific properties for this resource. </summary>
         public MgmtTypeSpecPrivateLinkResourceProperties Properties { get; }
+        /// <summary> The managed service identities assigned to this resource. </summary>
+        public ManagedServiceIdentity Identity { get; }
     }
 }
