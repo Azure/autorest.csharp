@@ -1454,7 +1454,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.createOrUpdate"
     },
     {
      "$id": "189",
@@ -1560,7 +1561,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.get"
     },
     {
      "$id": "200",
@@ -1696,7 +1698,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.delete"
     },
     {
      "$id": "216",
@@ -1789,7 +1792,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.list"
     },
     {
      "$id": "226",
@@ -1937,7 +1941,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.export"
     },
     {
      "$id": "244",
@@ -2067,7 +2072,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.importx"
     },
     {
      "$id": "260",
@@ -2239,7 +2245,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.train"
     }
    ],
    "Protocol": {
@@ -2395,7 +2402,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.getDeployment"
     },
     {
      "$id": "297",
@@ -2629,7 +2637,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.deployProject"
     },
     {
      "$id": "323",
@@ -2783,7 +2792,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.deleteDeployment"
     },
     {
      "$id": "341",
@@ -2894,7 +2904,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.list"
     },
     {
      "$id": "353",
@@ -3067,7 +3078,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.swapDeployments"
     }
    ],
    "Protocol": {
@@ -3241,7 +3253,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Jobs.getDeploymentStatus"
     },
     {
      "$id": "392",
@@ -3383,7 +3396,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Jobs.getSwapDeploymentsStatus"
     }
    ],
    "Protocol": {
@@ -3561,7 +3575,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Global.getSupportedLanguages"
     },
     {
      "$id": "427",
@@ -3707,7 +3722,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Global.listTrainingConfigVersions"
     }
    ],
    "Protocol": {

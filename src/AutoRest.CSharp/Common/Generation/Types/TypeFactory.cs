@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.ResourceManager.Models;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -32,6 +33,8 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         private Type AzureResponseErrorType => typeof(ResponseError);
+        private Type ManagedIdentity => typeof(ManagedServiceIdentity);
+        private Type UserAssignedIdentity => typeof(UserAssignedIdentity);
 
         /// <summary>
         /// This method will attempt to retrieve the <see cref="CSharpType"/> of the input type.
@@ -48,6 +51,8 @@ namespace AutoRest.CSharp.Generation.Types
             InputEnumType enumType => _library.ResolveEnum(enumType),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { CrossLanguageDefinitionId: "Azure.Core.Foundations.Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
+            InputModelType { CrossLanguageDefinitionId: "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity" } => SystemObjectType.Create(ManagedIdentity, ManagedIdentity.Namespace!, null).Type,
+            InputModelType { CrossLanguageDefinitionId: "Azure.ResourceManager.CommonTypes.UserAssignedIdentity" } => SystemObjectType.Create(UserAssignedIdentity, UserAssignedIdentity.Namespace!, null).Type,
             // Handle DataFactoryElement, we are sure that the argument type is not null and contains only 1 element
             InputModelType { CrossLanguageDefinitionId: "Azure.Core.Resources.DataFactoryElement" } inputModel => new CSharpType(typeof(DataFactoryElement<>), CreateTypeForDataFactoryElement(inputModel.ArgumentTypes![0])),
             InputModelType model => _library.ResolveModel(model),

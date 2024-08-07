@@ -1575,7 +1575,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknown.get"
     },
     {
      "$id": "194",
@@ -1648,7 +1649,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknown.put"
     }
    ],
    "Protocol": {
@@ -1749,7 +1751,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordUnknownDerived",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDerived.get"
     },
     {
      "$id": "211",
@@ -1822,7 +1825,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDerived.put"
     }
    ],
    "Protocol": {
@@ -1923,7 +1927,8 @@
      "Path": "/type/property/additionalProperties/extendsUnknownDiscriminated",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.get"
     },
     {
      "$id": "228",
@@ -1996,7 +2001,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.put"
     }
    ],
    "Protocol": {
@@ -2097,7 +2103,8 @@
      "Path": "/type/property/additionalProperties/isRecordUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknown.get"
     },
     {
      "$id": "245",
@@ -2170,7 +2177,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknown.put"
     }
    ],
    "Protocol": {
@@ -2271,7 +2279,8 @@
      "Path": "/type/property/additionalProperties/isRecordUnknownDerived",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDerived.get"
     },
     {
      "$id": "262",
@@ -2344,7 +2353,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDerived.put"
     }
    ],
    "Protocol": {
@@ -2445,7 +2455,8 @@
      "Path": "/type/property/additionalProperties/isUnknownDiscriminated",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDiscriminated.get"
     },
     {
      "$id": "279",
@@ -2518,7 +2529,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDiscriminated.put"
     }
    ],
    "Protocol": {
@@ -2619,7 +2631,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsString.get"
     },
     {
      "$id": "296",
@@ -2692,7 +2705,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsString.put"
     }
    ],
    "Protocol": {
@@ -2793,7 +2807,8 @@
      "Path": "/type/property/additionalProperties/isRecordstring",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsString.get"
     },
     {
      "$id": "313",
@@ -2866,7 +2881,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsString.put"
     }
    ],
    "Protocol": {
@@ -2967,7 +2983,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadString.get"
     },
     {
      "$id": "330",
@@ -3040,7 +3057,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadString.put"
     }
    ],
    "Protocol": {
@@ -3141,7 +3159,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloat.get"
     },
     {
      "$id": "347",
@@ -3214,7 +3233,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloat.put"
     }
    ],
    "Protocol": {
@@ -3315,7 +3335,8 @@
      "Path": "/type/property/additionalProperties/isRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloat.get"
     },
     {
      "$id": "364",
@@ -3388,7 +3409,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloat.put"
     }
    ],
    "Protocol": {
@@ -3489,7 +3511,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloat.get"
     },
     {
      "$id": "381",
@@ -3562,7 +3585,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloat.put"
     }
    ],
    "Protocol": {
@@ -3663,7 +3687,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModel.get"
     },
     {
      "$id": "398",
@@ -3736,7 +3761,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModel.put"
     }
    ],
    "Protocol": {
@@ -3837,7 +3863,8 @@
      "Path": "/type/property/additionalProperties/isRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModel.get"
     },
     {
      "$id": "415",
@@ -3910,7 +3937,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModel.put"
     }
    ],
    "Protocol": {
@@ -4011,7 +4039,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModel.get"
     },
     {
      "$id": "432",
@@ -4084,7 +4113,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModel.put"
     }
    ],
    "Protocol": {
@@ -4185,7 +4215,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArray.get"
     },
     {
      "$id": "449",
@@ -4258,7 +4289,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArray.put"
     }
    ],
    "Protocol": {
@@ -4359,7 +4391,8 @@
      "Path": "/type/property/additionalProperties/isRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArray.get"
     },
     {
      "$id": "466",
@@ -4432,7 +4465,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArray.put"
     }
    ],
    "Protocol": {
@@ -4533,7 +4567,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArray.get"
     },
     {
      "$id": "483",
@@ -4606,7 +4641,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArray.put"
     }
    ],
    "Protocol": {
@@ -4707,7 +4743,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentString.get"
     },
     {
      "$id": "500",
@@ -4780,7 +4817,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentString.put"
     }
    ],
    "Protocol": {
@@ -4881,7 +4919,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentFloat.get"
     },
     {
      "$id": "517",
@@ -4954,7 +4993,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentFloat.put"
     }
    ],
    "Protocol": {
@@ -5055,7 +5095,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModel.get"
     },
     {
      "$id": "534",
@@ -5128,7 +5169,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModel.put"
     }
    ],
    "Protocol": {
@@ -5229,7 +5271,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModelArray.get"
     },
     {
      "$id": "551",
@@ -5302,7 +5345,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModelArray.put"
     }
    ],
    "Protocol": {
@@ -5403,7 +5447,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadString.get"
     },
     {
      "$id": "568",
@@ -5476,7 +5521,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadString.put"
     }
    ],
    "Protocol": {
@@ -5577,7 +5623,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadFloat.get"
     },
     {
      "$id": "585",
@@ -5650,7 +5697,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadFloat.put"
     }
    ],
    "Protocol": {
@@ -5751,7 +5799,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModel.get"
     },
     {
      "$id": "602",
@@ -5824,7 +5873,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModel.put"
     }
    ],
    "Protocol": {
@@ -5925,7 +5975,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModelArray.get"
     },
     {
      "$id": "619",
@@ -5998,7 +6049,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModelArray.put"
     }
    ],
    "Protocol": {
@@ -6099,7 +6151,8 @@
      "Path": "/type/property/additionalProperties/multipleSpreadRecord",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpread.get"
     },
     {
      "$id": "636",
@@ -6172,7 +6225,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpread.put"
     }
    ],
    "Protocol": {
@@ -6273,7 +6327,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordUnion.get"
     },
     {
      "$id": "653",
@@ -6346,7 +6401,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordUnion.put"
     }
    ],
    "Protocol": {
@@ -6447,7 +6503,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordDiscriminatedUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordDiscriminatedUnion.get"
     },
     {
      "$id": "670",
@@ -6520,7 +6577,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordDiscriminatedUnion.put"
     }
    ],
    "Protocol": {
@@ -6621,7 +6679,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion.get"
     },
     {
      "$id": "687",
@@ -6694,7 +6753,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion.put"
     }
    ],
    "Protocol": {
@@ -6795,7 +6855,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion2.get"
     },
     {
      "$id": "704",
@@ -6868,7 +6929,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion2.put"
     }
    ],
    "Protocol": {
@@ -6969,7 +7031,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion3",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion3.get"
     },
     {
      "$id": "721",
@@ -7042,7 +7105,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion3.put"
     }
    ],
    "Protocol": {
