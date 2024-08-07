@@ -6,4 +6,3 @@ options:
     head-as-boolean: true
     generate-test-project: true
     examples-directory: "{project-root}/examples"
-    generate-examples: true
