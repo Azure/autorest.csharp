@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Common.Input
             return result;
         }
 
-        private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
+        private InputTypeExample CreateExampleValue(ExampleValue exampleValue)
         {
             var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, false);
             if (exampleValue.RawValue != null)
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             if (exampleValue.Properties is null)
             {
-                return InputExampleValue.Null(inputType);
+                return InputTypeExample.Null(inputType);
             }
             else
             {

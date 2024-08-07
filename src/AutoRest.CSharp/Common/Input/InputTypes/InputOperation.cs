@@ -33,7 +33,8 @@ internal record InputOperation
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
-    bool keepClientDefaultValue)
+    bool keepClientDefaultValue,
+    IReadOnlyList<InputHttpOperationExample>? examples = null)
     {
         Name = name;
         SpecName = name;
@@ -57,6 +58,7 @@ internal record InputOperation
         GenerateConvenienceMethod = generateConvenienceMethod;
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
+        Examples = examples ?? Array.Empty<InputHttpOperationExample>();
     }
 
     public InputOperation() : this(
@@ -115,8 +117,11 @@ internal record InputOperation
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+
+    public IReadOnlyList<InputHttpOperationExample> Examples { get; }
+
     private readonly Dictionary<string, InputOperationExample> _examples = new();
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
+    public IReadOnlyDictionary<string, InputOperationExample> MockExamples => _examples.Any() ? _examples : EnsureExamples(_examples);
     public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
 
     private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)

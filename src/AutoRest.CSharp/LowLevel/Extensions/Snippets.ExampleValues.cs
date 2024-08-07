@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
 {
     internal static partial class ExampleValueSnippets
     {
-        private static ValueExpression GetExpression(CSharpType type, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpression(CSharpType type, InputTypeExample exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
             => type switch
             {
                 { IsReadOnlyMemory: true } => GetExpressionForList(type, exampleValue, serializationFormat, true),
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 _ => GetExpressionForTypeProvider(type, exampleValue)
             };
 
-        private static ValueExpression GetExpressionForFrameworkType(Type frameworkType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForFrameworkType(Type frameworkType, InputTypeExample exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             // handle objects - we usually do not generate object types, but for some rare cases (such as union type) we generate object
             // and we get this case in the free form object initialization as well
@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 throw new InvalidOperationException("this should never happen");
         }
 
-        private static ValueExpression GetExpressionForRequestContent(InputExampleValue value)
+        private static ValueExpression GetExpressionForRequestContent(InputTypeExample value)
         {
             if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
             {
@@ -214,13 +214,13 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             }
         }
 
-        private static ValueExpression GetExpressionForList(CSharpType listType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForList(CSharpType listType, InputTypeExample exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleListValue = exampleValue as InputExampleListValue;
             var elementType = listType.ElementType;
             var elementExpressions = new List<ValueExpression>();
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            foreach (var itemValue in exampleListValue?.Values ?? Enumerable.Empty<InputExampleValue>())
+            foreach (var itemValue in exampleListValue?.Values ?? Enumerable.Empty<InputTypeExample>())
             {
                 var elementExpression = GetExpression(elementType, itemValue, serializationFormat, includeCollectionInitialization);
                 elementExpressions.Add(elementExpression);
@@ -236,7 +236,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 : new ArrayInitializerExpression(elementExpressions.ToArray());
         }
 
-        private static ValueExpression GetExpressionForDictionary(CSharpType dictionaryType, InputExampleValue exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
+        private static ValueExpression GetExpressionForDictionary(CSharpType dictionaryType, InputTypeExample exampleValue, SerializationFormat serializationFormat, bool includeCollectionInitialization = true)
         {
             var exampleObjectValue = exampleValue as InputExampleObjectValue;
             // since this is a dictionary, we take the first generic argument as the key type
@@ -246,9 +246,9 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             var valueType = dictionaryType.Arguments[1];
             var elementExpressions = new List<(ValueExpression KeyExpression, ValueExpression ValueExpression)>();
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            foreach (var (key, value) in exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>())
+            foreach (var (key, value) in exampleObjectValue?.Values ?? new Dictionary<string, InputTypeExample>())
             {
-                var keyExpression = GetExpression(keyType, InputExampleValue.Value(InputPrimitiveType.String, key), SerializationFormat.Default);
+                var keyExpression = GetExpression(keyType, InputTypeExample.Value(InputPrimitiveType.String, key), SerializationFormat.Default);
                 var valueExpression = GetExpression(valueType, value, serializationFormat, includeCollectionInitialization);
                 elementExpressions.Add((keyExpression, valueExpression));
             }
@@ -258,13 +258,13 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 : new DictionaryInitializerExpression(elementExpressions.ToArray());
         }
 
-        private static ValueExpression GetExpressionForBinaryData(InputExampleValue exampleValue)
+        private static ValueExpression GetExpressionForBinaryData(InputTypeExample exampleValue)
         {
             //always use FromObjectAsJson for BinaryData so that the serialization works correctly.
             return BinaryDataExpression.FromObjectAsJson(GetExpressionForFreeFormObject(exampleValue, true));
         }
 
-        private static ValueExpression GetExpressionForFreeFormObject(InputExampleValue exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
+        private static ValueExpression GetExpressionForFreeFormObject(InputTypeExample exampleValue, bool includeCollectionInitialization = true) => exampleValue switch
         {
             InputExampleRawValue rawValue => rawValue.RawValue == null ?
                             Null :
@@ -280,7 +280,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
         private static ValueExpression GetExpressionForAnonymousObject(InputExampleObjectValue exampleObjectValue, bool includeCollectionInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
-            var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputExampleValue>();
+            var keyValues = exampleObjectValue?.Values ?? new Dictionary<string, InputTypeExample>();
             if (keyValues.Any())
             {
                 var properties = new Dictionary<string, ValueExpression>();
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return true;
         }
 
-        private static ValueExpression GetExpressionForTypeProvider(CSharpType type, InputExampleValue exampleValue)
+        private static ValueExpression GetExpressionForTypeProvider(CSharpType type, InputTypeExample exampleValue)
         {
             return type.Implementation switch
             {
@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             };
         }
 
-        private static ObjectType GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue> valueDict)
+        private static ObjectType GetActualImplementation(ObjectType objectType, IReadOnlyDictionary<string, InputTypeExample> valueDict)
         {
             var discriminator = objectType.Discriminator;
             // check if this has a discriminator
@@ -346,7 +346,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return (ObjectType)implementation.Type.Implementation;
         }
 
-        private static ValueExpression GetExpressionForObjectType(ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
+        private static ValueExpression GetExpressionForObjectType(ObjectType objectType, IReadOnlyDictionary<string, InputTypeExample>? valueDict)
         {
             if (valueDict == null)
                 return Default;
@@ -399,9 +399,9 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return new NewInstanceExpression(objectType.Type, arguments, objectPropertyInitializer);
         }
 
-        private static IReadOnlyDictionary<ObjectTypeProperty, InputExampleValue> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
+        private static IReadOnlyDictionary<ObjectTypeProperty, InputTypeExample> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputTypeExample> valueDict)
         {
-            var propertiesToWrite = new Dictionary<ObjectTypeProperty, InputExampleValue>();
+            var propertiesToWrite = new Dictionary<ObjectTypeProperty, InputTypeExample>();
             foreach (var property in properties)
             {
                 var propertyToDeal = property;
@@ -432,7 +432,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return propertiesToWrite;
         }
 
-        private static InputExampleValue? UnwrapExampleValueFromSinglePropertySchema(InputExampleValue exampleValue, FlattenedObjectTypeProperty flattenedProperty)
+        private static InputTypeExample? UnwrapExampleValueFromSinglePropertySchema(InputTypeExample exampleValue, FlattenedObjectTypeProperty flattenedProperty)
         {
             var hierarchyStack = flattenedProperty.BuildHierarchyStack();
             // reverse the stack because it is a stack, iterating it will start from the innerest property
