@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GenericTypeAsync(Int32Type,CancellationToken)">
+      <example>
+This sample shows how to call GenericTypeAsync.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+Int32Type input = new Int32Type(new int[] { 1234 }, 1234);
+Response response = await client.GenericTypeAsync(input);
+]]></code>
+This sample shows how to call GenericTypeAsync with all parameters.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+Int32Type input = new Int32Type(new int[] { 1234 }, 1234);
+Response response = await client.GenericTypeAsync(input);
+]]></code></example>
+    </member>
+    <member name="GenericType(Int32Type,CancellationToken)">
+      <example>
+This sample shows how to call GenericType.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+Int32Type input = new Int32Type(new int[] { 1234 }, 1234);
+Response response = client.GenericType(input);
+]]></code>
+This sample shows how to call GenericType with all parameters.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+Int32Type input = new Int32Type(new int[] { 1234 }, 1234);
+Response response = client.GenericType(input);
+]]></code></example>
+    </member>
+    <member name="GenericTypeAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call GenericTypeAsync.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    kind = "Int32Values",
+    values = new object[]
+    {
+        1234
+    },
+    value = 1234,
+});
+Response response = await client.GenericTypeAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call GenericTypeAsync with all request content.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    kind = "Int32Values",
+    values = new object[]
+    {
+        1234
+    },
+    value = 1234,
+});
+Response response = await client.GenericTypeAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="GenericType(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call GenericType.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    kind = "Int32Values",
+    values = new object[]
+    {
+        1234
+    },
+    value = 1234,
+});
+Response response = client.GenericType(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call GenericType with all request content.
+<code><![CDATA[
+GenericClient client = new GenericClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    kind = "Int32Values",
+    values = new object[]
+    {
+        1234
+    },
+    value = 1234,
+});
+Response response = client.GenericType(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
