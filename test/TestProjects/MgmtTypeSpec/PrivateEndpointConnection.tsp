@@ -10,6 +10,7 @@ namespace MgmtTypeSpec;
 #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private links"
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   ...PrivateLinkResourceParameter;
+  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations(PrivateLinkResource)
