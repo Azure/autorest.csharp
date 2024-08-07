@@ -404,6 +404,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
           "Usage": "Output,Json",
           "Description": "Managed service identity (system assigned and/or user assigned identities)",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "56",
@@ -480,6 +481,7 @@
                "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
                "Usage": "Output,Json",
                "Description": "User assigned identity properties",
+               "Decorators": [],
                "Properties": [
                 {
                  "$id": "68",
