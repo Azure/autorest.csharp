@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
+param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory)
 
 $AutorestArtifactDirectory = Resolve-Path $AutorestArtifactDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
@@ -69,20 +69,6 @@ try {
     npm publish $file --access public
     
     Write-Host "##vso[task.setvariable variable=TypeSpecEmitterVersion;isoutput=true]$devVersion"
-}
-finally {
-    Pop-Location
-}
-
-Push-Location $RepoRoot
-try {
-    # set the version in the root package.json so coverage can pick it up
-
-    npm version --no-git-tag-version $devVersion | Out-Null;
-   
-    $CoverageDirectory = Resolve-Path $CoverageDirectory
-
-    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=Azure/autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
 finally {
     Pop-Location
