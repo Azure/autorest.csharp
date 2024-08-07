@@ -36,7 +36,8 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity"u8);
-                writer.WriteObjectValue(Identity, options);
+                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -110,7 +111,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                 return null;
             }
             ManagedIdentityTrackedResourceProperties properties = default;
-            Models.ManagedServiceIdentity identity = default;
+            ManagedServiceIdentity identity = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -136,7 +137,8 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
                     {
                         continue;
                     }
-                    identity = Models.ManagedServiceIdentity.DeserializeManagedServiceIdentity(property.Value, options);
+                    var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
                     continue;
                 }
                 if (property.NameEquals("tags"u8))

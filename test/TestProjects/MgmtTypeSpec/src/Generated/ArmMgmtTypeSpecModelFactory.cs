@@ -23,8 +23,9 @@ namespace MgmtTypeSpec.Models
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <param name="identity"> The managed service identities assigned to this resource. </param>
         /// <returns> A new <see cref="Models.MgmtTypeSpecPrivateLinkResourceData"/> instance for mocking. </returns>
-        public static MgmtTypeSpecPrivateLinkResourceData MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, MgmtTypeSpecPrivateLinkResourceProperties properties = null)
+        public static MgmtTypeSpecPrivateLinkResourceData MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, MgmtTypeSpecPrivateLinkResourceProperties properties = null, ManagedServiceIdentity identity = null)
         {
             return new MgmtTypeSpecPrivateLinkResourceData(
                 id,
@@ -32,6 +33,7 @@ namespace MgmtTypeSpec.Models
                 resourceType,
                 systemData,
                 properties,
+                identity,
                 serializedAdditionalRawData: null);
         }
 
