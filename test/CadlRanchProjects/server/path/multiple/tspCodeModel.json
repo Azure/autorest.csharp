@@ -108,7 +108,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.noOperationParams"
     },
     {
      "$id": "13",
@@ -158,7 +159,8 @@
      "Path": "/{keyword}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.withOperationPathParam"
     }
    ],
    "Protocol": {

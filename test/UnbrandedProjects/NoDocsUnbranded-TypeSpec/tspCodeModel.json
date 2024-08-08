@@ -537,7 +537,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.sayHi"
     }
    ],
    "Protocol": {

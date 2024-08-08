@@ -193,7 +193,8 @@
      "Path": "/type/dictionary/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.get"
     },
     {
      "$id": "27",
@@ -277,7 +278,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.put"
     }
    ],
    "Protocol": {
@@ -391,7 +393,8 @@
      "Path": "/type/dictionary/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.get"
     },
     {
      "$id": "50",
@@ -475,7 +478,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.put"
     }
    ],
    "Protocol": {
@@ -589,7 +593,8 @@
      "Path": "/type/dictionary/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.get"
     },
     {
      "$id": "73",
@@ -673,7 +678,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.put"
     }
    ],
    "Protocol": {
@@ -787,7 +793,8 @@
      "Path": "/type/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.get"
     },
     {
      "$id": "96",
@@ -871,7 +878,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.put"
     }
    ],
    "Protocol": {
@@ -985,7 +993,8 @@
      "Path": "/type/dictionary/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.get"
     },
     {
      "$id": "119",
@@ -1069,7 +1078,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.put"
     }
    ],
    "Protocol": {
@@ -1190,7 +1200,8 @@
      "Path": "/type/dictionary/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.get"
     },
     {
      "$id": "143",
@@ -1281,7 +1292,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.put"
     }
    ],
    "Protocol": {
@@ -1402,7 +1414,8 @@
      "Path": "/type/dictionary/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.get"
     },
     {
      "$id": "168",
@@ -1493,7 +1506,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.put"
     }
    ],
    "Protocol": {
@@ -1607,7 +1621,8 @@
      "Path": "/type/dictionary/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.get"
     },
     {
      "$id": "192",
@@ -1691,7 +1706,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.put"
     }
    ],
    "Protocol": {
@@ -1802,7 +1818,8 @@
      "Path": "/type/dictionary/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.get"
     },
     {
      "$id": "214",
@@ -1883,7 +1900,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.put"
     }
    ],
    "Protocol": {
@@ -1994,7 +2012,8 @@
      "Path": "/type/dictionary/model/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.get"
     },
     {
      "$id": "235",
@@ -2075,7 +2094,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.put"
     }
    ],
    "Protocol": {
@@ -2193,7 +2213,8 @@
      "Path": "/type/dictionary/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.get"
     },
     {
      "$id": "258",
@@ -2281,7 +2302,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.put"
     }
    ],
    "Protocol": {

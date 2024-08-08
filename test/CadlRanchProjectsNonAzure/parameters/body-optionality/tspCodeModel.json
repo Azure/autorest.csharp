@@ -153,7 +153,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredExplicit"
     },
     {
      "$id": "19",
@@ -224,7 +225,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit"
     }
    ],
    "Protocol": {
@@ -336,7 +338,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.OptionalExplicit.set"
     },
     {
      "$id": "37",
@@ -407,7 +410,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.OptionalExplicit.omit"
     }
    ],
    "Protocol": {
