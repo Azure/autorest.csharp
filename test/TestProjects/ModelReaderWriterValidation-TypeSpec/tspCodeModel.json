@@ -211,6 +211,7 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct",
    "Usage": "Input,Output,Json",
    "Description": "The model to change to struct.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "32",
@@ -234,6 +235,7 @@
    "Name": "ModelWithPersistableOnly",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "35",
@@ -330,6 +332,7 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel",
    "Usage": "Input,Output,Json",
    "Description": "The BaseModel in the discriminated set",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "49",
     "Name": "kind",
@@ -374,6 +377,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The ModelX in the discriminated set",
      "DiscriminatorValue": "X",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "48"
      },
@@ -480,6 +484,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The ModelY in the discriminated set",
      "DiscriminatorValue": "Y",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "48"
      },
@@ -535,6 +540,7 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData",
    "Usage": "Input,Output,Json",
    "Description": "The availability set data",
+   "Decorators": [],
    "BaseModel": {
     "$id": "76",
     "Kind": "model",
@@ -542,6 +548,7 @@
     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData",
     "Usage": "Input,Output,Json",
     "Description": "The tracked resource data",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "77",
@@ -637,6 +644,7 @@
       "Name": "ComputeSku",
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku",
       "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "91",
@@ -697,6 +705,7 @@
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties",
       "Usage": "Input,Output,Json",
       "Description": "The availability set properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "99",
@@ -714,6 +723,7 @@
           "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource",
           "Usage": "Input,Output,Json",
           "Description": "The writable sub resource",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "102",
@@ -790,6 +800,7 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData",
    "Usage": "Output,Json",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "109",
@@ -862,6 +873,7 @@
        "Name": "ProviderResourceType",
        "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType",
        "Usage": "Output,Json",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "120",
@@ -913,6 +925,7 @@
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation",
            "Usage": "Output,Json",
            "Description": "The provider extended location.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "128",
@@ -985,6 +998,7 @@
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias",
            "Usage": "Output,Json",
            "Description": "The alias type.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "138",
@@ -1016,6 +1030,7 @@
                "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath",
                "Usage": "Output,Json",
                "Description": "The type of the paths for alias.",
+               "Decorators": [],
                "Properties": [
                 {
                  "$id": "143",
@@ -1063,6 +1078,7 @@
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern",
                   "Usage": "Output,Json",
                   "Description": "The type of the pattern for an alias path.",
+                  "Decorators": [],
                   "Properties": [
                    {
                     "$id": "150",
@@ -1120,6 +1136,7 @@
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata",
                   "Usage": "Input,Output,Json",
                   "Description": "The ResourceTypeAliasPathMetadata.",
+                  "Decorators": [],
                   "Properties": [
                    {
                     "$id": "157",
@@ -1259,6 +1276,7 @@
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping",
            "Usage": "Output,Json",
            "Description": "The ZoneMapping.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "172",
@@ -1316,6 +1334,7 @@
            "Name": "ApiProfile",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile",
            "Usage": "Output,Json",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "180",
@@ -1440,6 +1459,7 @@
    "Name": "ModelWithStringAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "192",
     "Kind": "string",
@@ -1497,6 +1517,7 @@
    "Name": "ModelWithArrayAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "200",
     "Kind": "array",
@@ -1557,6 +1578,7 @@
    "Name": "ModelWithUnknownAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "208",
     "Kind": "any",

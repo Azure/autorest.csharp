@@ -10,6 +10,7 @@
    "Name": "PngImageAsJson",
    "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",

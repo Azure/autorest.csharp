@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -35,6 +36,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "Usage": "Input,Output,Json",
    "Description": "Usage override to roundtrip.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -58,6 +60,7 @@
    "Name": "RoundTripModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -70,6 +73,7 @@
       "Name": "ResultModel",
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel",
       "Usage": "Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "11",
@@ -103,6 +107,7 @@
    "Access": "public",
    "Usage": "Input",
    "Description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "14",

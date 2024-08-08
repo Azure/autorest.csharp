@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Payload.Pageable.User",
    "Usage": "Output,Json",
    "Description": "User model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -35,6 +36,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of User items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",

@@ -36,7 +36,8 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputClientConverter(referenceHandler),
                     new TypeSpecInputDateTimeTypeConverter(referenceHandler),
                     new TypeSpecInputDurationTypeConverter(referenceHandler),
-                    new TypeSpecInputPrimitiveTypeConverter(referenceHandler)
+                    new TypeSpecInputPrimitiveTypeConverter(referenceHandler),
+                    new TypeSpecInputDecoratorInfoConverter(referenceHandler),
                 }
             };
 
