@@ -37,12 +37,12 @@ namespace AutoRest.CSharp.Common.Input
             const char r = 'r';
             const char l = 'l';
             newName = null;
-            var span = name.AsSpan();
-            if (span.Length < 3)
+            if (name.Length < 3)
             {
                 return false;
             }
 
+            var span = name.AsSpan();
             // check if this ends with `Url`
             if (span[^3] == u && span[^2] == r && span[^1] == l)
             {
