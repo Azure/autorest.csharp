@@ -11,6 +11,5 @@ public static class AssemblyCleanFixture
     public static void RunOnAssemblyCleanUp()
     {
         CadlRanchServerSession.Start().Server?.Dispose();
-        CadlRanchMockApiServerSession.Start().Server?.Dispose();
     }
 }
