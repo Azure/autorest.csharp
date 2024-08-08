@@ -618,6 +618,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "91",
@@ -876,6 +877,7 @@
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "128",
@@ -1134,6 +1136,7 @@
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.friendlyModel.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "165",
@@ -1158,6 +1161,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "168",
@@ -1181,6 +1185,7 @@
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.projectedNameModel.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "171",
@@ -1205,6 +1210,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "Usage": "Output,Json",
    "Description": "this is a model with a projected name",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "174",
@@ -1228,6 +1234,7 @@
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": []
   },
   {
@@ -1237,6 +1244,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "Usage": "Input,Json",
    "Description": "extension",
+   "Decorators": [],
    "BaseModel": {
     "$id": "178",
     "Kind": "model",
@@ -1244,6 +1252,7 @@
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "Usage": "Input,Json",
     "Description": "element",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "179",
@@ -1291,6 +1300,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "Usage": "Input,Json",
    "Description": "FHIR extendible element",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "184",
@@ -1308,6 +1318,7 @@
        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "Usage": "Input,Json",
        "Description": "extension",
+       "Decorators": [],
        "BaseModel": {
         "$id": "187",
         "Kind": "model",
@@ -1315,6 +1326,7 @@
         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "Usage": "Input,Json",
         "Description": "element",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "188",
@@ -1372,6 +1384,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "Usage": "Input,Json",
    "Description": "ChildModel",
+   "Decorators": [],
    "BaseModel": {
     "$id": "193",
     "Kind": "model",
@@ -1379,6 +1392,7 @@
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "Usage": "Input,Json",
     "Description": "parenetModel",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "194",
@@ -1426,6 +1440,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "Usage": "Input,Json",
    "Description": "containself",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "199",
@@ -1446,6 +1461,7 @@
    "Name": "ModelWithProjectedEnum",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "201",
@@ -1466,6 +1482,7 @@
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "203",
@@ -1496,6 +1513,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "207",
@@ -1833,6 +1851,7 @@
       "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "Input,Output,Json",
       "Description": "A model with a few required nullable properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "252",
@@ -1920,6 +1939,7 @@
          "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "Usage": "Input,Output,Json",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "265",

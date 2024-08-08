@@ -119,6 +119,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output,Json",
    "Description": "The response of a PrivateLinkResource list operation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -136,6 +137,7 @@
        "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource",
        "Usage": "Output,Json",
        "Description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+       "Decorators": [],
        "BaseModel": {
         "$id": "21",
         "Kind": "model",
@@ -143,6 +145,7 @@
         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
         "Usage": "Output,Json",
         "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+        "Decorators": [],
         "BaseModel": {
          "$id": "22",
          "Kind": "model",
@@ -150,6 +153,7 @@
          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
          "Usage": "Output,Json",
          "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "23",
@@ -211,6 +215,7 @@
             "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
             "Usage": "Output,Json",
             "Description": "Metadata pertaining to creation and last modification of the resource.",
+            "Decorators": [],
             "Properties": [
              {
               "$id": "32",
@@ -326,6 +331,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
           "Usage": "Output,Json",
           "Description": "Properties of a private link resource.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "46",
@@ -398,6 +404,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
           "Usage": "Output,Json",
           "Description": "Managed service identity (system assigned and/or user assigned identities)",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "56",
@@ -474,6 +481,7 @@
                "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
                "Usage": "Output,Json",
                "Description": "User assigned identity properties",
+               "Decorators": [],
                "Properties": [
                 {
                  "$id": "68",
@@ -584,6 +592,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "Usage": "Output,Error,Json",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "78",
@@ -597,6 +606,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "Usage": "Output,Json",
       "Description": "The error detail.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "80",
@@ -673,6 +683,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "Usage": "Output,Json",
           "Description": "The resource management error additional info.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "91",
@@ -699,6 +710,7 @@
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "Usage": "Output,Json",
+             "Decorators": [],
              "Properties": []
             },
             "IsRequired": false,

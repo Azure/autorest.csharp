@@ -10,6 +10,7 @@
    "Name": "SameAsModel",
    "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -33,6 +34,7 @@
    "Name": "and",
    "CrossLanguageDefinitionId": "SpecialWords.Models.and",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -56,6 +58,7 @@
    "Name": "as",
    "CrossLanguageDefinitionId": "SpecialWords.Models.as",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -79,6 +82,7 @@
    "Name": "assert",
    "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -102,6 +106,7 @@
    "Name": "async",
    "CrossLanguageDefinitionId": "SpecialWords.Models.async",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -125,6 +130,7 @@
    "Name": "await",
    "CrossLanguageDefinitionId": "SpecialWords.Models.await",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -148,6 +154,7 @@
    "Name": "break",
    "CrossLanguageDefinitionId": "SpecialWords.Models.break",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -171,6 +178,7 @@
    "Name": "class",
    "CrossLanguageDefinitionId": "SpecialWords.Models.class",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -194,6 +202,7 @@
    "Name": "constructor",
    "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -217,6 +226,7 @@
    "Name": "continue",
    "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -240,6 +250,7 @@
    "Name": "def",
    "CrossLanguageDefinitionId": "SpecialWords.Models.def",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -263,6 +274,7 @@
    "Name": "del",
    "CrossLanguageDefinitionId": "SpecialWords.Models.del",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -286,6 +298,7 @@
    "Name": "elif",
    "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -309,6 +322,7 @@
    "Name": "else",
    "CrossLanguageDefinitionId": "SpecialWords.Models.else",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -332,6 +346,7 @@
    "Name": "except",
    "CrossLanguageDefinitionId": "SpecialWords.Models.except",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "45",
@@ -355,6 +370,7 @@
    "Name": "exec",
    "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -378,6 +394,7 @@
    "Name": "finally",
    "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "51",
@@ -401,6 +418,7 @@
    "Name": "for",
    "CrossLanguageDefinitionId": "SpecialWords.Models.for",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -424,6 +442,7 @@
    "Name": "from",
    "CrossLanguageDefinitionId": "SpecialWords.Models.from",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "57",
@@ -447,6 +466,7 @@
    "Name": "global",
    "CrossLanguageDefinitionId": "SpecialWords.Models.global",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "60",
@@ -470,6 +490,7 @@
    "Name": "if",
    "CrossLanguageDefinitionId": "SpecialWords.Models.if",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "63",
@@ -493,6 +514,7 @@
    "Name": "import",
    "CrossLanguageDefinitionId": "SpecialWords.Models.import",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -516,6 +538,7 @@
    "Name": "in",
    "CrossLanguageDefinitionId": "SpecialWords.Models.in",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "69",
@@ -539,6 +562,7 @@
    "Name": "is",
    "CrossLanguageDefinitionId": "SpecialWords.Models.is",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "72",
@@ -562,6 +586,7 @@
    "Name": "lambda",
    "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "75",
@@ -585,6 +610,7 @@
    "Name": "not",
    "CrossLanguageDefinitionId": "SpecialWords.Models.not",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "78",
@@ -608,6 +634,7 @@
    "Name": "or",
    "CrossLanguageDefinitionId": "SpecialWords.Models.or",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "81",
@@ -631,6 +658,7 @@
    "Name": "pass",
    "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "84",
@@ -654,6 +682,7 @@
    "Name": "raise",
    "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "87",
@@ -677,6 +706,7 @@
    "Name": "return",
    "CrossLanguageDefinitionId": "SpecialWords.Models.return",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "90",
@@ -700,6 +730,7 @@
    "Name": "try",
    "CrossLanguageDefinitionId": "SpecialWords.Models.try",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "93",
@@ -723,6 +754,7 @@
    "Name": "while",
    "CrossLanguageDefinitionId": "SpecialWords.Models.while",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "96",
@@ -746,6 +778,7 @@
    "Name": "with",
    "CrossLanguageDefinitionId": "SpecialWords.Models.with",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "99",
@@ -769,6 +802,7 @@
    "Name": "yield",
    "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "102",
