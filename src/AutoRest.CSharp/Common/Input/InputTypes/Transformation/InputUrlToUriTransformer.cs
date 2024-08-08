@@ -33,9 +33,7 @@ namespace AutoRest.CSharp.Common.Input
         internal static bool TryTransformUrlToUri(string name, [MaybeNullWhen(false)] out string newName)
         {
             const char i = 'i';
-            const char u = 'U';
-            const char r = 'r';
-            const char l = 'l';
+            const string UrlSuffix = "Url";
             newName = null;
             if (name.Length < 3)
             {
@@ -44,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input
 
             var span = name.AsSpan();
             // check if this ends with `Url`
-            if (span[^3] == u && span[^2] == r && span[^1] == l)
+            if (span.EndsWith(UrlSuffix.AsSpan(), StringComparison.Ordinal))
             {
                 Span<char> newSpan = span.ToArray();
                 newSpan[^1] = i;
