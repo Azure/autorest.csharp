@@ -84,6 +84,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
    "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -122,6 +123,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
    "Usage": "Output,Json",
    "Description": "The exported user data.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -160,6 +162,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "23",
@@ -198,6 +201,7 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "28",
@@ -270,6 +274,7 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "38",
@@ -321,6 +326,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -378,6 +384,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
