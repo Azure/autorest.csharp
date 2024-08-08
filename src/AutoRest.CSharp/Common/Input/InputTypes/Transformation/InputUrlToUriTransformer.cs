@@ -2,14 +2,12 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal class InputUrlToUriTransformer
+    internal static class InputUrlToUriTransformer
     {
-        private static readonly char LowerCaseI = 'i';
-        private const string UrlSuffix = "Url";
-
         public static void Transform(InputNamespace input)
         {
             foreach (var model in input.Models)
@@ -17,23 +15,45 @@ namespace AutoRest.CSharp.Common.Input
                 if (model is not InputModelType inputModel)
                     continue;
 
-                if (model.Name.AsSpan().EndsWith(UrlSuffix, StringComparison.Ordinal))
+                if (TryTransformUrlToUri(model.Name, out var newModelName))
                 {
-                    var newName = model.Name.ToCharArray().AsSpan();
-                    newName[^1] = LowerCaseI;
-                    model.Name = newName.ToString();
+                    model.Name = newModelName;
                 }
 
                 foreach (var property in inputModel.Properties)
                 {
-                    if (property.Name.AsSpan().EndsWith(UrlSuffix, StringComparison.Ordinal))
+                    if (TryTransformUrlToUri(property.Name, out var newPropertyName))
                     {
-                        var newName = property.Name.ToCharArray().AsSpan();
-                        newName[^1] = LowerCaseI;
-                        property.Name = newName.ToString();
+                        property.Name = newPropertyName;
                     }
                 }
             }
+        }
+
+        internal static bool TryTransformUrlToUri(string name, [MaybeNullWhen(false)] out string newName)
+        {
+            const char i = 'i';
+            const char u = 'U';
+            const char r = 'r';
+            const char l = 'l';
+            newName = null;
+            var span = name.AsSpan();
+            if (span.Length < 3)
+            {
+                return false;
+            }
+
+            // check if this ends with `Url`
+            if (span[^3] == u && span[^2] == r && span[^1] == l)
+            {
+                Span<char> newSpan = span.ToArray();
+                newSpan[^1] = i;
+
+                newName = new string(newSpan);
+                return true;
+            }
+
+            return false;
         }
     }
 }
