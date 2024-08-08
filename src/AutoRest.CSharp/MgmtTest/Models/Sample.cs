@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         protected override string GetMethodName(bool hasSuffix)
             => base.GetMethodName(true); // sample will always use a full name
 
-        protected override InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
+        protected override InputTypeExample ReplacePathParameterValue(string serializedName, CSharpType type, InputTypeExample value)
         {
             // the samples do not override anything
             return value;

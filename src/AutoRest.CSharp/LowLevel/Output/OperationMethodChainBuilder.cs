@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
 
-                if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                if (Operation.MockExamples.TryGetValue(exampleKey, out var operationExample))
                 {
                     // add protocol method sample
                     samples.Add(new(

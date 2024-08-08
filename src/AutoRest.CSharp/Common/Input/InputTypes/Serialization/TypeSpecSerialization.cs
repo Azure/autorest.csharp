@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Input.Examples;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
@@ -36,7 +38,9 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputClientConverter(referenceHandler),
                     new TypeSpecInputDateTimeTypeConverter(referenceHandler),
                     new TypeSpecInputDurationTypeConverter(referenceHandler),
-                    new TypeSpecInputPrimitiveTypeConverter(referenceHandler)
+                    new TypeSpecInputPrimitiveTypeConverter(referenceHandler),
+                    new TypeSpecInputTypeExampleConverter(referenceHandler),
+                    new TypeSpecInputOperationExampleConverter(referenceHandler)
                 }
             };
 
