@@ -12,7 +12,8 @@ import {
     LoggerLevel,
     configurationFileName,
     resolveOutputFolder,
-    tspOutputFileName
+    tspOutputFileName,
+    setSDKContextOptions
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -34,6 +35,10 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
+    setSDKContextOptions({
+        // TODO: replace with `@hasJsonConverter` when it is available
+        additionalDecorators: []
+    });
     await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
     const isSrcFolder = path.basename(outputFolder) === "src";

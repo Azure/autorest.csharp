@@ -10,6 +10,7 @@
    "Name": "BodyModel",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -33,6 +34,7 @@
    "Name": "RequiredImplicitRequest",
    "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
