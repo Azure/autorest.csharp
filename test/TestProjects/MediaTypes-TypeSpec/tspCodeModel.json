@@ -131,7 +131,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method"
       },
       {
        "$id": "19",
@@ -199,7 +199,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method"
       },
       {
        "$id": "24",
