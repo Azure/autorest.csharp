@@ -32,7 +32,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -41,18 +41,18 @@ namespace MgmtTypeSpec
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An async collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoClusterAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
+        public static AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResourcesAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetPrivateLinksByMongoClusterAsync(cancellationToken);
+            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetAllPrivateLinkResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -73,18 +73,18 @@ namespace MgmtTypeSpec
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster(CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> A collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoCluster(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
+        public static Pageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResources(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
 
-            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetPrivateLinksByMongoCluster(cancellationToken);
+            return GetMockableMgmtTypeSpecResourceGroupResource(resourceGroupResource).GetAllPrivateLinkResources(cancellationToken);
         }
     }
 }
