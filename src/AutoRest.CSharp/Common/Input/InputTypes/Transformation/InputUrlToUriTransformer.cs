@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     if (property.Name.AsSpan().EndsWith(UrlSuffix, StringComparison.Ordinal))
                     {
-                        var newName = model.Name.ToCharArray().AsSpan();
+                        var newName = property.Name.ToCharArray().AsSpan();
                         newName[^1] = LowerCaseI;
                         property.Name = newName.ToString();
                     }
