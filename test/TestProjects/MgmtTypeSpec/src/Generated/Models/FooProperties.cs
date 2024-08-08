@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace ModelsTypeSpec.Models
+namespace MgmtTypeSpec.Models
 {
-    /// <summary> Base model with properties. </summary>
-    public partial class BaseModelWithProperties
+    /// <summary> The FooProperties. </summary>
+    public partial class FooProperties
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -43,23 +43,27 @@ namespace ModelsTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
-        public BaseModelWithProperties()
+        /// <summary> Initializes a new instance of <see cref="FooProperties"/>. </summary>
+        public FooProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
-        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
+        /// <summary> Initializes a new instance of <see cref="FooProperties"/>. </summary>
+        /// <param name="serviceUri"> the service url. </param>
+        /// <param name="something"> something. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BaseModelWithProperties(string optionalPropertyOnBase, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FooProperties(Uri serviceUri, string something, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            OptionalPropertyOnBase = optionalPropertyOnBase;
+            ServiceUri = serviceUri;
+            Something = something;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Optional properties on base. </summary>
-        public string OptionalPropertyOnBase { get; set; }
+        /// <summary> the service url. </summary>
+        public Uri ServiceUri { get; set; }
+        /// <summary> something. </summary>
+        public string Something { get; set; }
     }
 }
