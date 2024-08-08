@@ -674,6 +674,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
+            if (DefaultName == "SavingsPlanModelListResult")
+            {
+                Console.WriteLine("SavingsPlanModelListResult");
+            }
             if (!TryGetPropertyForSchemaProperty(p => p.InputModelProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
                 throw new InvalidOperationException($"Unable to find object property with serialized name '{serializedName}' in schema {DefaultName}");

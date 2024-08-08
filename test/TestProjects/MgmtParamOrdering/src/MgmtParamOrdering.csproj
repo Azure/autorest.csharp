@@ -6,6 +6,5 @@
     <PackageTags>MgmtParamOrdering</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
   </PropertyGroup>
 </Project>
