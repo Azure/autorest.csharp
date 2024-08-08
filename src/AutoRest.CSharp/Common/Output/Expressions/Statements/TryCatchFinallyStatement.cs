@@ -10,10 +10,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
     {
         public override void Write(CodeWriter writer)
         {
-            writer.LineRaw("try");
-            writer.LineRaw("{");
+            writer.WriteLineRaw("try");
+            writer.WriteLineRaw("{");
             Try.Write(writer);
-            writer.LineRaw("}");
+            writer.WriteLineRaw("}");
 
             foreach (var catchStatement in Catches)
             {
@@ -22,10 +22,10 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 
             if (Finally != null)
             {
-                writer.LineRaw("finally");
-                writer.LineRaw("{");
+                writer.WriteLineRaw("finally");
+                writer.WriteLineRaw("{");
                 Finally.Write(writer);
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
         }
     }

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
     {
         public sealed override void Write(CodeWriter writer)
         {
-            writer.Line();
+            writer.WriteLine();
         }
     }
 }

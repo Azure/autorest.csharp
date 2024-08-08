@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 extensionWriter.Write();
             }
 
-            _writer.Line();
+            _writer.WriteLine();
         }
     }
 }

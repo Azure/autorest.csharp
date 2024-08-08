@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void Write()
         {
-            using (_writer.Namespace($"{_opSource.Declaration.Namespace}"))
+            using (_writer.SetNamespace($"{_opSource.Declaration.Namespace}"))
             {
                 using (_writer.Scope($"{_opSource.Declaration.Accessibility} class {_opSource.Type:D} : {_opSource.Interface}"))
                 {
@@ -61,17 +61,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             }
                         }
 
-                        _writer.Line();
+                        _writer.WriteLine();
                         using (_writer.WriteMethodDeclaration(_opSource.ArmClientCtor))
                         {
                             _writer.Line($"{_opSource.ArmClientField.Name} = {KnownParameters.ArmClient.Name};");
                         }
                     }
 
-                    _writer.Line();
+                    _writer.WriteLine();
                     WriteCreateResult();
 
-                    _writer.Line();
+                    _writer.WriteLine();
                     WriteCreateResultAsync();
 
                     if (_operationIdMappings is not null)
@@ -79,29 +79,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var resource = _opSource.Resource!;
                         var resourceType = resource.Type;
                         var dataType = resource.ResourceData.Type;
-                        _writer.Line();
+                        _writer.WriteLine();
                         using (_writer.Scope($"private {dataType} ScrubId({dataType} data)"))
                         {
                             _writer.Line($"if (data.Id.ResourceType == {resourceType}.ResourceType)");
                             _writer.Line($"return data;");
-                            _writer.Line();
+                            _writer.WriteLine();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
                             var createIdMethod = resource.CreateResourceIdentifierMethod.Signature;
                             foreach (var param in createIdMethod.Parameters)
                             {
-                                _writer.Line();
+                                _writer.WriteLine();
                                 _writer.Append($"\tGetName(\"{param.Name}\", data.Id),");
                             }
                             _writer.RemoveTrailingComma();
                             _writer.Line($");");
-                            _writer.Line();
+                            _writer.WriteLine();
                             _writer.Line($"return new {dataType}(");
                             _writer.Line($"\tnewId,");
                             _writer.Line($"\tnewId.Name,");
                             _writer.Append($"\tnewId.ResourceType,");
                             foreach (var param in resource.ResourceData.SerializationConstructor.Signature.Parameters.Skip(3))
                             {
-                                _writer.Line();
+                                _writer.WriteLine();
                                 if (param.IsRawData)
                                 {
                                     _writer.Append($"\tnull");
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($");");
                         }
 
-                        _writer.Line();
+                        _writer.WriteLine();
                         using (_writer.Scope($"private string GetName(string param, {typeof(ResourceIdentifier)} id)"))
                         {
                             _writer.Line($"while (id.ResourceType != _idMappings[param])");

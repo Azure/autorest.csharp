@@ -25,11 +25,11 @@ internal class PartialResourceWriter : ResourceWriter
         _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
 
         _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
-        _writer.Line();
+        _writer.WriteLine();
 
         // comparing with the `ResourceWriter`, `PartialResourceWriter` does not write the `public XXXData { get; }` property because partial resources do not have resource data.
 
-        _writer.Line();
+        _writer.WriteLine();
         WriteStaticValidate($"ResourceType");
     }
 }

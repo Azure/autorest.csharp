@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static void WriteClientOptions(CodeWriter writer, ClientOptionsTypeProvider clientOptions)
         {
-            using (writer.Namespace(clientOptions.Type.Namespace))
+            using (writer.SetNamespace(clientOptions.Type.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(clientOptions.Description);
                 using (writer.Scope($"{clientOptions.Declaration.Accessibility} partial class {clientOptions.Type.Name}: {Configuration.ApiTypes.ClientOptionsType}"))
@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (clientOptions.ApiVersions?.Count > 0)
                     {
                         writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{clientOptions.ApiVersions.Last().Name};");
-                        writer.Line();
+                        writer.WriteLine();
                         writer.WriteXmlDocumentationSummary($"The version of the service to use.");
                         using (writer.Scope($"public enum ServiceVersion"))
                         {
@@ -31,10 +31,10 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.Line($"{apiVersion.Name} = {apiVersion.Value:L},");
                             }
                         }
-                        writer.Line();
+                        writer.WriteLine();
 
                         writer.Line($"internal string Version {{ get; }}");
-                        writer.Line();
+                        writer.WriteLine();
 
                         writer.WriteXmlDocumentationSummary($"Initializes new instance of {clientOptions.Type.Name}.");
                         using (writer.Scope($"public {clientOptions.Type.Name}(ServiceVersion version = LatestVersion)"))
@@ -51,14 +51,14 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                         }
 
-                        writer.Line();
+                        writer.WriteLine();
                     }
 
                     foreach (var parameter in clientOptions.AdditionalParameters)
                     {
                         writer.WriteXmlDocumentationSummary(parameter.Description);
                         writer.Line($"public {parameter.Type} {parameter.Name.ToCleanName()} {{ get; set; }}");
-                        writer.Line();
+                        writer.WriteLine();
                     }
                 }
             }

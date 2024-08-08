@@ -14,11 +14,11 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
             If.Write(writer);
             if (Else is not null)
             {
-                writer.LineRaw("#else");
+                writer.WriteLineRaw("#else");
                 Else.Write(writer);
             }
 
-            writer.LineRaw("#endif");
+            writer.WriteLineRaw("#endif");
         }
     }
 }

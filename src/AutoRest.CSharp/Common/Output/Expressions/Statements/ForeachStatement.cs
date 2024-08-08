@@ -62,14 +62,14 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                 writer.Append($"{Item:D} in ");
                 Enumerable.Write(writer);
                 //writer.AppendRawIf(".ConfigureAwait(false)", foreachStatement.IsAsync);
-                writer.LineRaw(")");
+                writer.WriteLineRaw(")");
 
-                writer.LineRaw("{");
+                writer.WriteLineRaw("{");
                 foreach (var bodyStatement in Body)
                 {
                     bodyStatement.Write(writer);
                 }
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
         }
     }

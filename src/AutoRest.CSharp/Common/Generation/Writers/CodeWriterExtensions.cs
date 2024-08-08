@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (condition)
             {
-                writer.LineRaw(str);
+                writer.WriteLineRaw(str);
             }
 
             return writer;
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (field.Description != null)
             {
-                writer.Line().WriteXmlDocumentationSummary(field.Description);
+                writer.WriteLine().WriteXmlDocumentationSummary(field.Description);
             }
 
             var modifiers = field.Modifiers;
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.Line($";");
             }
 
-            return field.WriteAsProperty ? writer.Line() : writer.Line($";");
+            return field.WriteAsProperty ? writer.WriteLine() : writer.Line($";");
         }
 
         public static CodeWriter WriteFieldDeclarations(this CodeWriter writer, IEnumerable<FieldDeclaration> fields)
@@ -132,13 +132,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteField(field, declareInCurrentScope: false);
             }
 
-            return writer.Line();
+            return writer.WriteLine();
         }
 
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             var outerScope = writer.WriteMethodDeclarationNoScope(methodBase, disabledWarnings);
-            writer.Line();
+            writer.WriteLine();
             var innerScope = writer.Scope();
             return Disposable.Create(() =>
             {
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             argument.Write(writer);
                         }
                         writer.RemoveTrailingComma();
-                        writer.LineRaw(")]");
+                        writer.WriteLineRaw(")]");
                     }
                     else
                     {
@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
-                writer.Line();
+                writer.WriteLine();
                 foreach (var constraint in constraints)
                 {
                     constraint.Write(writer);
@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var disabledWarning in disabledWarnings)
             {
-                writer.Line();
+                writer.WriteLine();
                 writer.Append($"#pragma warning restore {disabledWarning}");
             }
 
@@ -353,7 +353,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParameterValidation(parameter);
             }
 
-            writer.Line();
+            writer.WriteLine();
             return writer;
         }
 
@@ -378,7 +378,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteVariableAssignmentWithNullCheck(parameter.Name, parameter);
             }
 
-            writer.Line();
+            writer.WriteLine();
             return writer;
         }
 
@@ -420,7 +420,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static CodeWriter.CodeWriterScope WriteUsingStatement(this CodeWriter writer, string variableName, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, out CodeWriterDeclaration variable)
+        public static CodeWriter.CodeScope WriteUsingStatement(this CodeWriter writer, string variableName, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, out CodeWriterDeclaration variable)
         {
             variable = new CodeWriterDeclaration(variableName);
             return writer.Scope($"using (var {variable:D} = {GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)})");
@@ -673,18 +673,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.AppendRaw(" => ");
                     expression.Write(writer);
-                    writer.LineRaw(";");
+                    writer.WriteLineRaw(";");
                 }
             }
 
-            writer.Line();
+            writer.WriteLine();
         }
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
         {
             if (property.Description is not null)
             {
-                writer.Line().WriteXmlDocumentationSummary(property.Description);
+                writer.WriteLine().WriteXmlDocumentationSummary(property.Description);
             }
 
             if (property.Exceptions is not null)
@@ -738,7 +738,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case MethodPropertyBody(var getter, var setter, var setterModifiers):
-                    writer.LineRaw("{");
+                    writer.WriteLineRaw("{");
                     // write getter
                     WriteMethodPropertyAccessor(writer, "get", getter);
                     // write setter
@@ -752,18 +752,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     throw new InvalidOperationException($"Unhandled property body type {property.PropertyBody}");
             }
 
-            writer.Line();
+            writer.WriteLine();
 
             static void WriteMethodPropertyAccessor(CodeWriter writer, string name, MethodBodyStatement body, MethodSignatureModifiers modifiers = MethodSignatureModifiers.None)
             {
                 WritePropertyAccessorModifiers(writer, modifiers);
-                writer.LineRaw(name)
-                    .LineRaw("{");
+                writer.WriteLineRaw(name)
+                    .WriteLineRaw("{");
                 using (writer.AmbientScope())
                 {
                     body.Write(writer);
                 }
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
 
             static void WritePropertyAccessorModifiers(CodeWriter writer, MethodSignatureModifiers modifiers)
@@ -807,12 +807,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                writer.LineRaw("(");
+                writer.WriteLineRaw("(");
                 foreach (var argument in arguments)
                 {
                     writer.AppendRaw("\t");
                     argument.Write(writer);
-                    writer.LineRaw(",");
+                    writer.WriteLineRaw(",");
                 }
 
                 writer.RemoveTrailingCharacter();

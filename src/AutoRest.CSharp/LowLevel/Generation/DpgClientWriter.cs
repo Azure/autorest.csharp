@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public void WriteClient()
         {
             var clientType = _client.Type;
-            using (_writer.Namespace(clientType.Namespace))
+            using (_writer.SetNamespace(clientType.Namespace))
             {
                 WriteDPGIdentificationComment();
                 _writer.WriteXmlDocumentationSummary($"{_client.Description}");
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var method in _client.ClientMethods.Select(c => c.LongRunningResultRetrievalMethod).WhereNotNull())
             {
-                _writer.Line();
+                _writer.WriteLine();
                 WriteLroResultRetrievalMethod(method);
             }
         }
@@ -172,11 +172,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             //TODO: make this a field??
             _writer
-                .Line()
+                .WriteLine()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
                 .Line($"public virtual {Configuration.ApiTypes.HttpPipelineType} Pipeline => {_client.Fields.PipelineField.Name};");
 
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteConstructors()
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.WriteMethodDeclaration(signature))
             {
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WritePrimaryPublicConstructor(ConstructorSignature signature)
@@ -212,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.WriteMethodDeclaration(signature))
             {
                 _writer.WriteParametersValidation(signature.Parameters);
-                _writer.Line();
+                _writer.WriteLine();
 
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 if (Configuration.IsBranded)
@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteSubClientInternalConstructor(ConstructorSignature signature)
@@ -276,7 +276,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.WriteMethodDeclaration(signature))
             {
                 _writer.WriteParametersValidation(signature.Parameters);
-                _writer.Line();
+                _writer.WriteLine();
 
                 foreach (var parameter in signature.Parameters)
                 {
@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
@@ -299,7 +299,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 statement.Write(_writer);
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private void WriteLroResultRetrievalMethod(LongRunningResultRetrievalMethod method)
@@ -346,7 +346,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                 }
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
@@ -360,7 +360,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (clientMethod.ConditionHeaderFlag != RequestConditionHeaders.None && clientMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
                 {
                     writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.ConditionHeaderFlag);
-                    writer.Line();
+                    writer.WriteLine();
                 }
 
                 if (Configuration.IsBranded)
@@ -375,7 +375,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteStatements(writer, headAsBoolean, restMethod, fields, async);
                 }
             }
-            writer.Line();
+            writer.WriteLine();
 
             static void WriteStatements(CodeWriter writer, bool headAsBoolean, RestClientMethod restMethod, ClientFields fields, bool async)
             {
@@ -404,7 +404,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            _writer.Line();
+            _writer.WriteLine();
 
             foreach (var (methodSignature, field, constructorCallParameters) in _client.SubClients.Select(s => s.FactoryMethod).WhereNotNull())
             {
@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (_writer.WriteMethodDeclaration(methodSignature))
                 {
                     _writer.WriteParametersValidation(methodSignature.Parameters);
-                    _writer.Line();
+                    _writer.WriteLine();
 
                     var references = constructorCallParameters
                         .Select(p => _client.Fields.GetFieldByParameter(p) ?? (Reference)p)
@@ -430,7 +430,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"return new {methodSignature.ReturnType}({references.GetIdentifiersFormattable()});");
                     }
                 }
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
 
@@ -466,7 +466,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                     writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
                                 }
 
-                                writer.LineRaw("_ => true");
+                                writer.WriteLineRaw("_ => true");
                             }
                         }
                     }
@@ -486,11 +486,11 @@ namespace AutoRest.CSharp.Generation.Writers
                                     writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
                                 }
 
-                                writer.LineRaw("_ => true");
+                                writer.WriteLineRaw("_ => true");
                             }
                             writer.Line($"return true;");
                         }
-                        writer.Line();
+                        writer.WriteLine();
                         using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message, {typeof(Exception)} exception, out bool isRetriable)"))
                         {
                             writer.Line($"isRetriable = false;");
@@ -498,7 +498,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
                 }
-                writer.Line();
+                writer.WriteLine();
             }
 
             writer.Line($"private static {Configuration.ApiTypes.ResponseClassifierType} _{responseClassifierTypeName.FirstCharToLowerCase()};");
@@ -625,9 +625,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Line($"return {defaultRequestContext:I};");
                 }
 
-                _writer.Line().Line($"return new {Configuration.ApiTypes.RequestContextType}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+                _writer.WriteLine().Line($"return new {Configuration.ApiTypes.RequestContextType}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Writers
             sb.Append(")");
 
             memberId = sb.ToString();
-            return writer.LineRaw($"/// <include file=\"{filename}\" path=\"doc/members/member[@name='{memberId}']/*\" />");
+            return writer.WriteLineRaw($"/// <include file=\"{filename}\" path=\"doc/members/member[@name='{memberId}']/*\" />");
         }
 
         private static void AppendTypeWithShortNames(CSharpType type, StringBuilder sb)

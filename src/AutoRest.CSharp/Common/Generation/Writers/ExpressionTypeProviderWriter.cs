@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (_provider.DeclaringTypeProvider == null)
             {
-                using (_writer.Namespace(_provider.Declaration.Namespace))
+                using (_writer.SetNamespace(_provider.Declaration.Namespace))
                 {
                     WriteType();
                 }
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.AppendRaw(" = ");
                         field.InitializationValue.Write(_writer);
                     }
-                    _writer.LineRaw(",");
+                    _writer.WriteLineRaw(",");
                 }
                 _writer.RemoveTrailingComma();
             }
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var property in _provider.Properties)
             {
                 _writer.WriteProperty(property);
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
 
@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 _writer.WriteField(field, declareInCurrentScope: true);
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         protected virtual void WriteConstructors()
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 _writer.WriteMethod(method);
             }
 
-            _writer.Line();
+            _writer.WriteLine();
         }
 
         protected virtual void WriteNestedTypes()
@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var nestedWriter = new ExpressionTypeProviderWriter(_writer, nested);
                 nestedWriter.Write();
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
     }

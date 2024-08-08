@@ -28,15 +28,15 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
                 Condition?.Write(writer);
                 writer.AppendRaw("; ");
                 IncrementExpression?.Write(writer);
-                writer.LineRaw(")");
+                writer.WriteLineRaw(")");
 
-                writer.LineRaw("{");
-                writer.LineRaw("");
+                writer.WriteLineRaw("{");
+                writer.WriteLineRaw("");
                 foreach (var bodyStatement in Body)
                 {
                     bodyStatement.Write(writer);
                 }
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
         }
     }

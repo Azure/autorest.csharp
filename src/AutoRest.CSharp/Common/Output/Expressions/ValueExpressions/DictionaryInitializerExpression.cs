@@ -16,19 +16,19 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
                 return;
             }
 
-            writer.Line();
-            writer.LineRaw("{");
+            writer.WriteLine();
+            writer.WriteLineRaw("{");
             foreach (var (key, value) in Values)
             {
                 writer.AppendRaw("[");
                 key.Write(writer);
                 writer.AppendRaw("] = ");
                 value.Write(writer);
-                writer.LineRaw(",");
+                writer.WriteLineRaw(",");
             }
 
             writer.RemoveTrailingComma();
-            writer.Line();
+            writer.WriteLine();
             writer.AppendRaw("}");
         }
     }

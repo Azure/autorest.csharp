@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteClient(CodeWriter writer, MgmtRestClient restClient)
         {
-            using (writer.Namespace(restClient.Type.Namespace))
+            using (writer.SetNamespace(restClient.Type.Namespace))
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
                 {
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {MgmtRestClient.ApplicationIdParameter.Name});");
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, null);
             }
-            writer.Line();
+            writer.WriteLine();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteHeaderModel(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {
-            using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
+            using (writer.SetNamespace(responseHeaderGroup.Declaration.Namespace))
             {
                 if (Configuration.IsBranded)
                     writer.UseNamespace(new CSharpType(typeof(ResponseHeadersExtensions)).Namespace);
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"{ResponseField}.Headers.TryGetValue({header.SerializedName:L}, out {type} value) ? value : null;");
             }
 
-            writer.Line();
+            writer.WriteLine();
         }
     }
 }

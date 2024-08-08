@@ -30,16 +30,16 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             }
             else
             {
-                writer.Line();
-                writer.LineRaw("{");
+                writer.WriteLine();
+                writer.WriteLineRaw("{");
                 foreach (var item in Elements)
                 {
                     item.Write(writer);
-                    writer.LineRaw(",");
+                    writer.WriteLineRaw(",");
                 }
 
                 writer.RemoveTrailingComma();
-                writer.Line();
+                writer.WriteLine();
                 writer.AppendRaw("}");
             }
         }

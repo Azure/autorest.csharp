@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public sealed override void Write(CodeWriter writer)
         {
             new InvokeInstanceMethodExpression(InstanceReference, MethodName, Arguments, null, CallAsAsync).Write(writer);
-            writer.LineRaw(";");
+            writer.WriteLineRaw(";");
         }
     }
 }

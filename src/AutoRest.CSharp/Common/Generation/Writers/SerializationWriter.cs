@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var declaration = resource.Declaration;
 
-            using (writer.Namespace(declaration.Namespace))
+            using (writer.SetNamespace(declaration.Namespace))
             {
                 var resourceDataType = resource.ResourceData.Type;
                 writer.Append($"{declaration.Accessibility} partial class {declaration.Name} : IJsonModel<{resourceDataType}>");
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 return;
             }
-            using (writer.Namespace(declaration.Namespace))
+            using (writer.SetNamespace(declaration.Namespace))
             {
                 var converter = serialization.Json?.JsonConverter;
                 if (converter is not null)
@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.RemoveTrailingComma();
 
-                writer.Line();
+                writer.WriteLine();
                 using (writer.Scope())
                 {
                     foreach (var method in model.Methods)
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
         {
-            using (writer.Namespace(enumType.Declaration.Namespace))
+            using (writer.SetNamespace(enumType.Declaration.Namespace))
             {
                 string declaredTypeName = enumType.Declaration.Name;
 
@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static void WriteEnumDeserializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName, bool isString)
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
             }
-            writer.Line();
+            writer.WriteLine();
         }
     }
 }

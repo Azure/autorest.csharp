@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var cs = operation.Type;
             var @namespace = cs.Namespace;
-            using (writer.Namespace(@namespace))
+            using (writer.SetNamespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{operation.Description}");
                 var interfaceType = GetInterfaceType(operation);
@@ -40,56 +40,56 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     WriteFields(writer, pagingResponse, helperType);
 
-                    writer.Line();
+                    writer.WriteLine();
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name} for mocking.");
                     using (writer.Scope($"protected {cs.Name:D}()"))
                     {
                     }
 
-                    writer.Line();
+                    writer.WriteLine();
 
                     WriteConstructor(writer, operation, pagingResponse, cs, helperType);
-                    writer.Line();
+                    writer.WriteLine();
 
                     writer
                         .WriteXmlDocumentationInheritDoc()
                         .Line($"#pragma warning disable CA1822")
                         .Line($"public override string Id => throw new NotImplementedException();")
                         .Line($"#pragma warning restore CA1822")
-                        .Line();
+                        .WriteLine();
 
                     WriteValueProperty(writer, operation);
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
-                    writer.Line();
+                    writer.WriteLine();
 
                     if (operation.ResultType != null)
                     {
                         writer.WriteXmlDocumentationInheritDoc();
                         writer.Line($"public override bool HasValue => _operation.HasValue;");
-                        writer.Line();
+                        writer.WriteLine();
                     }
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override {Configuration.ApiTypes.ResponseType} {Configuration.ApiTypes.GetRawResponseName}() => _operation.RawResponse;");
-                    writer.Line();
+                    writer.WriteLine();
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override {Configuration.ApiTypes.ResponseType} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
-                    writer.Line();
+                    writer.WriteLine();
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override {Configuration.ApiTypes.GetValueTaskOfResponse()} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
-                    writer.Line();
+                    writer.WriteLine();
 
                     WriteWaitForCompletionVariants(writer, operation);
-                    writer.Line();
+                    writer.WriteLine();
 
                     if (operation.ResultType != null)
                     {
                         WriteCreateResult(writer, operation, pagingResponse, operation.ResultType, interfaceType!);
-                        writer.Line();
+                        writer.WriteLine();
                         WriteCreateResultAsync(writer, operation, pagingResponse, operation.ResultType, interfaceType!);
                     }
                 }
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationInheritDoc();
                 writer.Line($"public override {operation.ResultType} Value => _operation.Value;");
-                writer.Line();
+                writer.WriteLine();
             }
         }
 
@@ -186,11 +186,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationInheritDoc();
             writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(cancellationToken);");
-            writer.Line();
+            writer.WriteLine();
 
             writer.WriteXmlDocumentationInheritDoc();
             writer.Line($"public override {waitForCompletionType} {waitForCompletionMethodName}{(async ? "Async" : string.Empty)}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompletionMethodName}{(async ? "Async" : string.Empty)}(pollingInterval, cancellationToken);");
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType resultType, CSharpType interfaceType)

@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
-            using (writer.Namespace(restClient.Type.Namespace))
+            using (writer.SetNamespace(restClient.Type.Namespace))
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}", scopeDeclarations: restClient.Fields.ScopeDeclarations))
                 {
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         public static void WriteOperation(CodeWriter writer, RestClientMethod operation, string pipelineName, bool async, WriteFuncBody writeFuncBody, string? methodName = null, MethodSignatureModifiers modifiers = MethodSignatureModifiers.Public, WriteStatusCodeImplementation? writeStatusCodeImplementation = null, FieldDeclaration? fieldDeclaration = null)
@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writeStatusCodeImplementation(writer, messageVariable, operation, async, fieldDeclaration);
                 }
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private void WriteFuncBodyWithSend(CodeWriter writer, CodeWriterDeclaration messageVariable, RestClientMethod operation, string pipelineName, bool async)

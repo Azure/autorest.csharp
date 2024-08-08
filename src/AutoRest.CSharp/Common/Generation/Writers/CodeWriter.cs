@@ -16,41 +16,40 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class CodeWriter
+    internal class CodeWriter : IDisposable
     {
-        private const int DefaultLength = 1024;
-        private static readonly string _newLine = "\n";
-        private static readonly string _braceNewLine = "{\n";
+        private const char _newLine = '\n';
+        private const char _space = ' ';
 
         private readonly HashSet<string> _usingNamespaces = new HashSet<string>();
 
-        private readonly Stack<CodeWriterScope> _scopes;
+        private readonly Stack<CodeScope> _scopes;
         private string? _currentNamespace;
+        private UnsafeBufferSequence _builder;
 
-        private char[] _builder;
-        private int _length;
         private bool _writingXmlDocumentation;
+        private bool _atBeginningOfLine;
 
         public CodeWriter()
         {
-            _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
+            _builder = new UnsafeBufferSequence(1024);
 
-            _scopes = new Stack<CodeWriterScope>();
-            _scopes.Push(new CodeWriterScope(this, "", false));
+            _scopes = new Stack<CodeScope>();
+            _scopes.Push(new CodeScope(this, string.Empty, false, 0));
         }
 
-        public CodeWriterScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true, CodeWriterScopeDeclarations? scopeDeclarations = null)
+        public CodeScope Scope(FormattableString line, string start = "{", string end = "}", bool newLine = true, CodeWriterScopeDeclarations? scopeDeclarations = null)
         {
             ValidateDeclarations(scopeDeclarations);
-            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end, newLine);
+            CodeScope codeWriterScope = new CodeScope(this, end, newLine, _scopes.Peek().Depth + 1);
             _scopes.Push(codeWriterScope);
             Line(line);
-            LineRaw(start);
+            WriteLineRaw(start);
             AddDeclarationsToScope(scopeDeclarations);
             return codeWriterScope;
         }
 
-        public CodeWriterScope Scope()
+        public CodeScope Scope()
         {
             return ScopeRaw();
         }
@@ -91,15 +90,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private CodeWriterScope ScopeRaw(string start = "{", string end = "}", bool newLine = true)
+        internal CodeScope ScopeRaw(string start = "{", string end = "}", bool newLine = true)
         {
-            LineRaw(start);
-            CodeWriterScope codeWriterScope = new CodeWriterScope(this, end, newLine);
+            WriteLineRaw(start);
+            CodeScope codeWriterScope = new CodeScope(this, end, newLine, _scopes.Peek().Depth + 1);
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }
 
-        public CodeWriterScope Namespace(string @namespace)
+        public CodeScope SetNamespace(string @namespace)
         {
             _currentNamespace = @namespace;
             Line($"namespace {@namespace}");
@@ -236,7 +235,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var lines = content.ToString().Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
             var xmlLines = string.Join('\n', lines.Select(l => "/// " + l));
             AppendRaw(xmlLines);
-            Line();
+            WriteLine();
             return this;
         }
 
@@ -278,13 +277,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    Line();
+                    WriteLine();
                 }
 
                 return this;
             }
 
-            Line();
+            WriteLine();
             var contentSpan = _builder.AsSpan(contentStart, contentEnd - contentStart);
 
             var lastLineBreak = contentSpan.LastIndexOf(_newLine);
@@ -374,7 +373,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            foreach (CodeWriterScope codeWriterScope in _scopes)
+            foreach (CodeScope codeWriterScope in _scopes)
             {
                 if (codeWriterScope.Identifiers.Contains(s))
                 {
@@ -531,14 +530,14 @@ namespace AutoRest.CSharp.Generation.Writers
         public CodeWriter Line(FormattableString formattableString)
         {
             Append(formattableString);
-            Line();
+            WriteLine();
 
             return this;
         }
 
-        public CodeWriter Line()
+        public CodeWriter WriteLine()
         {
-            LineRaw(string.Empty);
+            WriteLineRaw(string.Empty);
 
             return this;
         }
@@ -596,7 +595,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public CodeWriter LineRaw(string str)
+        public CodeWriter WriteLineRaw(string str)
         {
             AppendRaw(str);
 
@@ -731,7 +730,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return builder.ToString();
         }
 
-        internal class CodeWriterScope : IDisposable
+        internal class CodeScope : IDisposable
         {
             private readonly CodeWriter _writer;
             private readonly string? _end;
@@ -743,11 +742,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
             public List<CodeWriterDeclaration> Declarations { get; } = new();
 
-            public CodeWriterScope(CodeWriter writer, string? end, bool newLine)
+            public int Depth { get; }
+
+            public CodeScope(CodeWriter writer, string? end, bool newLine, int depth)
             {
                 _writer = writer;
                 _end = end;
                 _newLine = newLine;
+                Depth = depth;
             }
 
             public void Dispose()
@@ -764,28 +766,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (_end != null)
                     {
-                        _writer.TrimNewLines();
                         _writer.AppendRaw(_end);
                     }
 
                     if (_newLine)
                     {
-                        _writer.Line();
+                        _writer.WriteLine();
                     }
                 }
             }
         }
 
-        private void TrimNewLines()
-        {
-            while (PreviousLine.SequenceEqual(_newLine) &&
-                CurrentLine.IsEmpty)
-            {
-                _length--;
-            }
-        }
-
-        private void PopScope(CodeWriterScope expected)
+        private void PopScope(CodeScope expected)
         {
             var actual = _scopes.Pop();
             Debug.Assert(actual == expected);
@@ -807,27 +799,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return null;
         }
 
-        public void RemoveTrailingCharacter()
+        public CodeScope AmbientScope()
         {
-            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
-            if (lastCharIndex.HasValue)
-            {
-                _length = lastCharIndex.Value;
-            }
-        }
-
-        public void RemoveTrailingComma()
-        {
-            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
-            if (lastCharIndex.HasValue && WrittenText[lastCharIndex.Value] == ',')
-            {
-                _length = lastCharIndex.Value;
-            }
-        }
-
-        public CodeWriterScope AmbientScope()
-        {
-            var codeWriterScope = new CodeWriterScope(this, null, false);
+            var codeWriterScope = new CodeScope(this, null, false, _scopes.Peek().Depth);
             _scopes.Push(codeWriterScope);
             return codeWriterScope;
         }

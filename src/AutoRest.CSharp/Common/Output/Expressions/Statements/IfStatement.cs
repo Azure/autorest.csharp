@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
             }
             else
             {
-                writer.LineRaw(")");
+                writer.WriteLineRaw(")");
                 using (AddBraces ? writer.Scope() : writer.AmbientScope())
                 {
                     Body.Write(writer);

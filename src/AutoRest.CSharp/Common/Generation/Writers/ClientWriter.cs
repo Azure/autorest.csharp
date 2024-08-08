@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             {
                 writer.Line($"private readonly {Configuration.ApiTypes.HttpPipelineType} {PipelineField};");
             }
-            writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
+            writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").WriteLineRaw(" { get; }");
         }
     }
 }

@@ -40,14 +40,14 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 
                 writer.Append($"{Variable:D} = ");
                 Value.Write(writer);
-                writer.LineRaw(")");
+                writer.WriteLineRaw(")");
 
-                writer.LineRaw("{");
+                writer.WriteLineRaw("{");
                 foreach (var bodyStatement in Body)
                 {
                     bodyStatement.Write(writer);
                 }
-                writer.LineRaw("}");
+                writer.WriteLineRaw("}");
             }
         }
     }

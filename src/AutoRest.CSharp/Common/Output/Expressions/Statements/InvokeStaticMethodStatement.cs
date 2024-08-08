@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public sealed override void Write(CodeWriter writer)
         {
             new InvokeStaticMethodExpression(MethodType, MethodName, Arguments, TypeArguments, CallAsExtension, CallAsAsync).Write(writer);
-            writer.LineRaw(";");
+            writer.WriteLineRaw(";");
         }
     }
 }

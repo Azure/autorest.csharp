@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         public override void Write()
         {
-            using (_writer.Namespace(This.Namespace))
+            using (_writer.SetNamespace(This.Namespace))
             {
                 WriteClassDeclaration();
                 using (_writer.Scope())
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             foreach (var sample in This.Samples)
             {
                 WriteSample(sample);
-                _writer.Line();
+                _writer.WriteLine();
             }
         }
 
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _writer.Line($"// Generated from example definition: {sample.ExampleFilepath}");
             // Write claimers
             _writer.Line($"// this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately.");
-            _writer.Line();
+            _writer.WriteLine();
 
             // Write the ArmClient and authentication
             var clientStepResult = WriteGetArmClient();
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private void WriteResultHandling(CodeWriterVariableDeclaration? result, bool newLine = true)
         {
             if (newLine)
-                _writer.Line();
+                _writer.WriteLine();
 
             if (result == null)
             {
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration WriteGetArmClient()
         {
-            _writer.LineRaw("// get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line");
+            _writer.WriteLineRaw("// get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line");
             var cred = new CodeWriterVariableDeclaration("cred", typeof(TokenCredential));
             _writer.UseNamespace("Azure.Identity");
             _writer.AppendDeclaration(cred)
@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
 
             var collectionResult = WriteGetCollection(clientResult, collection, sample);
             var result = WriteSampleOperation(collectionResult, sample);
@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
 
             var resourceName = GetResourceName(resource);
             _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtension extension, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
 
             var resourceName = GetResourceName(extension);
             if (extension is not ArmResourceExtension)
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var collectionResult = new CodeWriterVariableDeclaration("collection", collection.Type);
 
-            _writer.Line();
+            _writer.WriteLine();
             _writer.Line($"// get the collection of this {collection.Resource.Type.Name}");
 
             var idVar = new CodeWriterDeclaration("scopeId");
@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     _writer.AppendDeclaration(declaration)
                         .AppendRaw(" = ")
                         .AppendExampleParameterValue(value)
-                        .LineRaw(";");
+                        .WriteLineRaw(";");
                 }
             }
             _writer.AppendDeclaration(collectionResult).AppendRaw(" = ");
@@ -328,9 +328,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     .AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
+            _writer.WriteLineRaw(");");
 
-            _writer.Line();
+            _writer.WriteLine();
 
             return collectionResult;
         }
@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
             _writer.Line($"// invoke the operation");
             // if the Lro is an ArmOperation<T>
             var parameters = WriteOperationInvocationParameters(sample);
@@ -378,7 +378,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
             _writer.Line($"// invoke the operation");
             var parameters = WriteOperationInvocationParameters(sample);
             var returnType = sample.Operation.ReturnType;
@@ -436,7 +436,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar, Sample sample)
         {
-            _writer.Line();
+            _writer.WriteLine();
             _writer.Line($"// invoke the operation and iterate over the result");
             var parameters = WriteOperationInvocationParameters(sample);
             // when the operation is pageable, the return type refers to the type of the item T, instead of Pageable<T>
@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
-                        .AppendExampleParameterValue(parameterValue).LineRaw(";");
+                        .AppendExampleParameterValue(parameterValue).WriteLineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
 
@@ -486,7 +486,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
-                        .AppendExamplePropertyBagParamValue(parameter, sample.PropertyBagParamValueMapping).LineRaw(";");
+                        .AppendExamplePropertyBagParamValue(parameter, sample.PropertyBagParamValueMapping).WriteLineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
             }
@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 if (value.Value is not null)
                 {
                     _writer.AppendDeclaration(declaration)
-                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).WriteLineRaw(";");
                 }
                 else
                 {
@@ -543,13 +543,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
                         _writer.AppendDeclaration(parameterDeclaration)
-                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).WriteLineRaw(";");
                     }
                     // then write the scope
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
                         .AppendRaw("$\"")
                         .AppendRaw(value.Scope!.ToString()!)
-                        .LineRaw("\";");
+                        .WriteLineRaw("\";");
                 }
 
                 parameters.Add(declaration);
@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 if (value.Value is not null)
                 {
                     _writer.AppendDeclaration(declaration)
-                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).WriteLineRaw(";");
                 }
                 else
                 {
@@ -581,13 +581,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
                         _writer.AppendDeclaration(parameterDeclaration)
-                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).WriteLineRaw(";");
                     }
                     // then write the scope
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
                         .AppendRaw("$\"")
                         .AppendRaw(value.Scope!.ToString()!)
-                        .LineRaw("\";");
+                        .WriteLineRaw("\";");
                 }
 
                 parameters.Add(declaration);
@@ -610,7 +610,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 _writer.Append($"{parameter.Declaration}").AppendRaw(",");
             }
             _writer.RemoveTrailingComma();
-            _writer.LineRaw("));");
+            _writer.WriteLineRaw("));");
         }
     }
 }

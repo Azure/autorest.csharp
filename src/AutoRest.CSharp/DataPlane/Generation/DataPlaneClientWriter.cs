@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var cs = client.Type;
             var @namespace = cs.Namespace;
-            using (writer.Namespace(@namespace))
+            using (writer.SetNamespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
+            writer.WriteLine();
         }
 
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
@@ -126,12 +126,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientCtors(CodeWriter writer, DataPlaneClient client, DataPlaneOutputLibrary library)
         {
-            writer.Line();
+            writer.WriteLine();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
             {
             }
-            writer.Line();
+            writer.WriteLine();
 
             var clientOptionsName = library.ClientOptions!.Declaration.Name;
 
@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope())
                 {
                     writer.WriteParameterNullChecks(ctorParams);
-                    writer.Line();
+                    writer.WriteLine();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
                     writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
@@ -183,7 +183,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Append($");");
                 }
-                writer.Line();
+                writer.WriteLine();
             }
 
             if (library.Authentication.OAuth2 != null)
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope())
                 {
                     writer.WriteParameterNullChecks(ctorParams);
-                    writer.Line();
+                    writer.WriteLine();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
                     writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Append($");");
                 }
-                writer.Line();
+                writer.WriteLine();
             }
 
             var internalConstructor = BuildInternalConstructor(client);
@@ -256,7 +256,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = {KnownParameters.ClientDiagnostics.Name:I};")
                     .Line($"{PipelineField} = {KnownParameters.Pipeline.Name:I};");
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private void WritePagingOperation(CodeWriter writer, DataPlaneClient client, PagingMethod pagingMethod, bool async)
@@ -350,7 +350,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
             }
-            writer.Line();
+            writer.WriteLine();
         }
 
         private static ConstructorSignature BuildInternalConstructor(DataPlaneClient client)

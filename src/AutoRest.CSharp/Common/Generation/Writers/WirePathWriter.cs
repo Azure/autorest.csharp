@@ -17,18 +17,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void Write()
         {
-            using (_writer.Namespace(Configuration.Namespace))
+            using (_writer.SetNamespace(Configuration.Namespace))
             {
                 _writer.Line($"[{typeof(AttributeUsageAttribute)}({typeof(AttributeTargets)}.{nameof(AttributeTargets.Property)})]");
                 using (_writer.Scope($"internal class WirePathAttribute : {typeof(Attribute)}"))
                 {
                     _writer.Line($"private string _wirePath;");
-                    _writer.Line();
+                    _writer.WriteLine();
                     using (_writer.Scope($"public WirePathAttribute(string wirePath)"))
                     {
                         _writer.Line($"_wirePath = wirePath;");
                     }
-                    _writer.Line();
+                    _writer.WriteLine();
                     using (_writer.Scope($"public override string ToString()"))
                     {
                         _writer.Line($"return _wirePath;");

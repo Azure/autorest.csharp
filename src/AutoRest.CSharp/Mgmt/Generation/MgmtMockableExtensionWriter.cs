@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
-            _writer.Line();
+            _writer.WriteLine();
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
                 _writer.Line($"TryGetApiVersion(resourceType, out string apiVersion);");
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            _writer.Line();
+            _writer.WriteLine();
             foreach (var set in This.UniqueSets)
             {
                 WriterPropertySet(set.RestClient, set.Resource);

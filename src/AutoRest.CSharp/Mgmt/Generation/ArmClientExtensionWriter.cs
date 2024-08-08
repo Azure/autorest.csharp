@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
             }
-            _writer.Line();
+            _writer.WriteLine();
         }
     }
 }

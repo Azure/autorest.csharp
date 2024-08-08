@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.RemoveTrailingComma();
             _writer.AppendRaw(")")
                 .AppendRawIf(".ConfigureAwait(false)", isAsync && !isPaging)
-                .LineRaw(";");
+                .WriteLineRaw(";");
         }
     }
 }
