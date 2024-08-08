@@ -313,7 +313,6 @@ extends:
                 PackageTags = Configuration.Namespace,
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 IncludeOperationsSharedSource = true,
-                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
             if (_needAzureKeyAuth)
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
@@ -399,9 +398,12 @@ extends:
             }
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
             // add the package references
-            foreach (var package in _brandedTestDependencyPackages)
+            if (!Configuration.AzureArm)
             {
-                writer.PackageReferences.Add(package);
+                foreach (var package in _brandedTestDependencyPackages)
+                {
+                    writer.PackageReferences.Add(package);
+                }
             }
 
             return writer.Write();
