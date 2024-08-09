@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -33,7 +35,9 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -88,7 +92,9 @@
      "Description": "The name of user.",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -100,7 +106,9 @@
      "Description": "The role of user",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -122,7 +130,9 @@
      "Description": "The name of user.",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -134,7 +144,9 @@
      "Description": "The exported URI.",
      "Type": {
       "$id": "21",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -156,7 +168,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "24",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -192,7 +206,9 @@
         "Description": "One of a server-defined set of error codes.",
         "Type": {
          "$id": "29",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -204,7 +220,9 @@
         "Description": "A human-readable representation of the error.",
         "Type": {
          "$id": "31",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -216,7 +234,9 @@
         "Description": "The target of the error.",
         "Type": {
          "$id": "33",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -258,7 +278,9 @@
            "Description": "One of a server-defined set of error codes.",
            "Type": {
             "$id": "39",
-            "Kind": "string"
+            "Kind": "string",
+            "Name": "string",
+            "CrossLanguageDefinitionId": "TypeSpec.string"
            },
            "IsRequired": false,
            "IsReadOnly": false
@@ -307,7 +329,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "43",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -362,7 +386,9 @@
      "Description": "The unique ID of the operation.",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -423,7 +449,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "56",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -438,7 +466,9 @@
         "$id": "57",
         "Type": {
          "$id": "58",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -450,7 +480,9 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -463,7 +495,9 @@
         "$id": "61",
         "Type": {
          "$id": "62",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
@@ -475,7 +509,9 @@
        "Description": "The name of user.",
        "Type": {
         "$id": "64",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -495,7 +531,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "67",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -516,7 +554,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "70",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -563,7 +603,15 @@
          "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "74",
-          "Kind": "url"
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+          "BaseType": {
+           "$id": "75",
+           "Kind": "url",
+           "Name": "url",
+           "CrossLanguageDefinitionId": "TypeSpec.url"
+          }
          }
         }
        ],
@@ -573,7 +621,7 @@
        ]
       },
       {
-       "$id": "75",
+       "$id": "76",
        "StatusCodes": [
         200
        ],
@@ -583,13 +631,21 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "76",
+         "$id": "77",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "77",
-          "Kind": "url"
+          "$id": "78",
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+          "BaseType": {
+           "$id": "79",
+           "Kind": "url",
+           "Name": "url",
+           "CrossLanguageDefinitionId": "TypeSpec.url"
+          }
          }
         }
        ],
@@ -608,10 +664,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "78",
+      "$id": "80",
       "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "79",
+       "$id": "81",
        "StatusCodes": [
         200
        ],
@@ -622,10 +678,11 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.createOrReplace"
     },
     {
-     "$id": "80",
+     "$id": "82",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
@@ -636,13 +693,15 @@
        "$ref": "55"
       },
       {
-       "$id": "81",
+       "$id": "83",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "82",
-        "Kind": "string"
+        "$id": "84",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -652,22 +711,26 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "83",
+        "$id": "85",
         "Type": {
-         "$id": "84",
-         "Kind": "string"
+         "$id": "86",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
       },
       {
-       "$id": "85",
+       "$id": "87",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "86",
-        "Kind": "string"
+        "$id": "88",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -678,15 +741,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "87",
+       "$id": "89",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "88",
+        "$id": "90",
         "Kind": "constant",
         "ValueType": {
-         "$id": "89",
-         "Kind": "string"
+         "$id": "91",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -701,7 +766,7 @@
      ],
      "Responses": [
       {
-       "$id": "90",
+       "$id": "92",
        "StatusCodes": [
         202
        ],
@@ -711,13 +776,21 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "91",
+         "$id": "93",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "92",
-          "Kind": "url"
+          "$id": "94",
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+          "BaseType": {
+           "$id": "95",
+           "Kind": "url",
+           "Name": "url",
+           "CrossLanguageDefinitionId": "TypeSpec.url"
+          }
          }
         }
        ],
@@ -733,10 +806,10 @@
      "Path": "/azure/core/lro/standard/users/{name}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "93",
+      "$id": "96",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "94",
+       "$id": "97",
        "StatusCodes": [
         204
        ],
@@ -744,10 +817,11 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.delete"
     },
     {
-     "$id": "95",
+     "$id": "98",
      "Name": "export",
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
@@ -758,13 +832,15 @@
        "$ref": "55"
       },
       {
-       "$id": "96",
+       "$id": "99",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "97",
-        "Kind": "string"
+        "$id": "100",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -774,22 +850,26 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "101",
         "Type": {
-         "$id": "99",
-         "Kind": "string"
+         "$id": "102",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        }
       },
       {
-       "$id": "100",
+       "$id": "103",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "101",
-        "Kind": "string"
+        "$id": "104",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -800,13 +880,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "102",
+       "$id": "105",
        "Name": "format",
        "NameInRequest": "format",
        "Description": "The format of the data.",
        "Type": {
-        "$id": "103",
-        "Kind": "string"
+        "$id": "106",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -817,15 +899,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "104",
+       "$id": "107",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "105",
+        "$id": "108",
         "Kind": "constant",
         "ValueType": {
-         "$id": "106",
-         "Kind": "string"
+         "$id": "109",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -840,7 +924,7 @@
      ],
      "Responses": [
       {
-       "$id": "107",
+       "$id": "110",
        "StatusCodes": [
         202
        ],
@@ -850,13 +934,21 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "108",
+         "$id": "111",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "109",
-          "Kind": "url"
+          "$id": "112",
+          "Kind": "url",
+          "Name": "ResourceLocation",
+          "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+          "BaseType": {
+           "$id": "113",
+           "Kind": "url",
+           "Name": "url",
+           "CrossLanguageDefinitionId": "TypeSpec.url"
+          }
          }
         }
        ],
@@ -872,10 +964,10 @@
      "Path": "/azure/core/lro/standard/users/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "110",
+      "$id": "114",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "111",
+       "$id": "115",
        "StatusCodes": [
         200
        ],
@@ -887,11 +979,12 @@
       "ResultPath": "result"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.export"
     }
    ],
    "Protocol": {
-    "$id": "112"
+    "$id": "116"
    },
    "Parameters": [
     {

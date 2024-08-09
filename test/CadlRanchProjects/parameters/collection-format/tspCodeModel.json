@@ -20,7 +20,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -35,7 +37,9 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -58,7 +62,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -73,7 +79,9 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -89,7 +97,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -119,7 +129,8 @@
      "Path": "/parameters/collection-format/query/multi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.multi"
     },
     {
      "$id": "18",
@@ -141,7 +152,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "21",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -172,7 +185,8 @@
      "Path": "/parameters/collection-format/query/ssv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.ssv"
     },
     {
      "$id": "23",
@@ -194,7 +208,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "26",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -225,7 +241,8 @@
      "Path": "/parameters/collection-format/query/tsv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.tsv"
     },
     {
      "$id": "28",
@@ -247,7 +264,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "31",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -278,7 +297,8 @@
      "Path": "/parameters/collection-format/query/pipes",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.pipes"
     },
     {
      "$id": "33",
@@ -300,7 +320,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "36",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -331,7 +353,8 @@
      "Path": "/parameters/collection-format/query/csv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.csv"
     }
    ],
    "Protocol": {
@@ -360,7 +383,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "42",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -375,7 +400,9 @@
         "$id": "43",
         "Type": {
          "$id": "44",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -391,7 +418,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "47",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -422,7 +451,8 @@
      "Path": "/parameters/collection-format/header/csv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Header.csv"
     }
    ],
    "Protocol": {

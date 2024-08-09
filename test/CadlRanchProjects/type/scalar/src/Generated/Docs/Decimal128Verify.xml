@@ -79,13 +79,13 @@ This sample shows how to call VerifyAsync.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-Response response = await client.VerifyAsync((decimal)default);
+Response response = await client.VerifyAsync(123.45M);
 ]]></code>
 This sample shows how to call VerifyAsync with all parameters.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-Response response = await client.VerifyAsync((decimal)default);
+Response response = await client.VerifyAsync(123.45M);
 ]]></code></example>
     </member>
     <member name="Verify(decimal,CancellationToken)">
@@ -94,13 +94,13 @@ This sample shows how to call Verify.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-Response response = client.Verify((decimal)default);
+Response response = client.Verify(123.45M);
 ]]></code>
 This sample shows how to call Verify with all parameters.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-Response response = client.Verify((decimal)default);
+Response response = client.Verify(123.45M);
 ]]></code></example>
     </member>
     <member name="VerifyAsync(RequestContent,RequestContext)">
@@ -109,7 +109,7 @@ This sample shows how to call VerifyAsync.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = await client.VerifyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -118,7 +118,7 @@ This sample shows how to call VerifyAsync with all request content.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = await client.VerifyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -130,7 +130,7 @@ This sample shows how to call Verify.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = client.Verify(content);
 
 Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ This sample shows how to call Verify with all request content.
 <code><![CDATA[
 Decimal128Verify client = new ScalarClient().GetDecimal128VerifyClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = client.Verify(content);
 
 Console.WriteLine(response.Status);

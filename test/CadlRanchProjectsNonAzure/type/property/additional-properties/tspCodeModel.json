@@ -9,7 +9,9 @@
    "Name": "WidgetData2_kind",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -30,7 +32,9 @@
    "Name": "WidgetData1_kind",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -51,7 +55,9 @@
    "Name": "WidgetData0_kind",
    "ValueType": {
     "$id": "9",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -114,7 +120,9 @@
          "Description": "",
          "Type": {
           "$id": "18",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": true,
          "IsReadOnly": false
@@ -154,11 +162,15 @@
         "Type": {
          "$id": "23",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "24",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -171,11 +183,15 @@
         "Type": {
          "$id": "26",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "27",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -192,7 +208,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "29",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -233,7 +251,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "33",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -282,7 +302,9 @@
         "Description": "",
         "Type": {
          "$id": "40",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -302,7 +324,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "42",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -340,7 +364,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "46",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -361,11 +387,15 @@
     "VariantTypes": [
      {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      {
       "$id": "50",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      }
     ]
    },
@@ -377,7 +407,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "52",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -398,11 +430,15 @@
     "VariantTypes": [
      {
       "$id": "55",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      {
       "$id": "56",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      }
     ]
    },
@@ -414,7 +450,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "58",
-      "Kind": "boolean"
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -454,7 +492,9 @@
         "Description": "The state property",
         "Type": {
          "$id": "64",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": true,
         "IsReadOnly": false
@@ -471,7 +511,9 @@
       "Description": "",
       "Type": {
        "$id": "66",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -529,7 +571,9 @@
       "Description": "",
       "Type": {
        "$id": "72",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -569,7 +613,9 @@
     "Description": "The model spread Record<float32> with the different known property type",
     "AdditionalProperties": {
      "$id": "76",
-     "Kind": "float32"
+     "Kind": "float32",
+     "Name": "float32",
+     "CrossLanguageDefinitionId": "TypeSpec.float32"
     },
     "Properties": [
      {
@@ -579,7 +625,9 @@
       "Description": "The id property",
       "Type": {
        "$id": "78",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -594,7 +642,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "80",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -620,7 +670,9 @@
     "Description": "The model spread Record<string> with the different known property type",
     "AdditionalProperties": {
      "$id": "83",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "Properties": [
      {
@@ -630,7 +682,9 @@
       "Description": "The name property",
       "Type": {
        "$id": "85",
-       "Kind": "float32"
+       "Kind": "float32",
+       "Name": "float32",
+       "CrossLanguageDefinitionId": "TypeSpec.float32"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -645,7 +699,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "87",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -843,7 +899,9 @@
    "Description": "The model spread Record<float32> with the same known property type",
    "AdditionalProperties": {
     "$id": "107",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -853,7 +911,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "109",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -869,7 +929,9 @@
    "Description": "The model is from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "111",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -879,7 +941,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "113",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -895,7 +959,9 @@
    "Description": "The model extends from Record<float32> type.",
    "AdditionalProperties": {
     "$id": "115",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Properties": [
     {
@@ -905,7 +971,9 @@
      "Description": "The id property",
      "Type": {
       "$id": "117",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -921,7 +989,9 @@
    "Description": "The model spread Record<string> with the same known property type",
    "AdditionalProperties": {
     "$id": "119",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -931,7 +1001,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "121",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -947,7 +1019,9 @@
    "Description": "The model is from Record<string> type.",
    "AdditionalProperties": {
     "$id": "123",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -957,7 +1031,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "125",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -973,7 +1049,9 @@
    "Description": "The model extends from Record<string> type.",
    "AdditionalProperties": {
     "$id": "127",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -983,7 +1061,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "129",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -999,7 +1079,9 @@
    "Description": "The model is Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "131",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "DiscriminatorProperty": {
     "$id": "132",
@@ -1008,7 +1090,9 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "133",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -1022,7 +1106,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "135",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1055,7 +1141,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "140",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "derived"
        },
@@ -1070,7 +1158,9 @@
        "Description": "The index property",
        "Type": {
         "$id": "142",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -1082,7 +1172,9 @@
        "Description": "The age property",
        "Type": {
         "$id": "144",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -1110,7 +1202,9 @@
     "Description": "The model is from Record<unknown> type.",
     "AdditionalProperties": {
      "$id": "147",
-     "Kind": "any"
+     "Kind": "any",
+     "Name": "unknown",
+     "CrossLanguageDefinitionId": ""
     },
     "Properties": [
      {
@@ -1120,7 +1214,9 @@
       "Description": "The name property",
       "Type": {
        "$id": "149",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -1135,7 +1231,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "151",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1147,7 +1245,9 @@
      "Description": "The age property",
      "Type": {
       "$id": "153",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1166,7 +1266,9 @@
    "Description": "The model extends from Record<unknown> with a discriminator.",
    "AdditionalProperties": {
     "$id": "155",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "DiscriminatorProperty": {
     "$id": "156",
@@ -1175,7 +1277,9 @@
     "Description": "The discriminator",
     "Type": {
      "$id": "157",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -1189,7 +1293,9 @@
      "Description": "The name property",
      "Type": {
       "$id": "159",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1222,7 +1328,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "164",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "derived"
        },
@@ -1237,7 +1345,9 @@
        "Description": "The index property",
        "Type": {
         "$id": "166",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": false
@@ -1249,7 +1359,9 @@
        "Description": "The age property",
        "Type": {
         "$id": "168",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -1277,7 +1389,9 @@
     "Description": "The model extends from Record<unknown> type.",
     "AdditionalProperties": {
      "$id": "171",
-     "Kind": "any"
+     "Kind": "any",
+     "Name": "unknown",
+     "CrossLanguageDefinitionId": ""
     },
     "Properties": [
      {
@@ -1287,7 +1401,9 @@
       "Description": "The name property",
       "Type": {
        "$id": "173",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -1302,7 +1418,9 @@
      "Description": "The index property",
      "Type": {
       "$id": "175",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1314,7 +1432,9 @@
      "Description": "The age property",
      "Type": {
       "$id": "177",
-      "Kind": "float32"
+      "Kind": "float32",
+      "Name": "float32",
+      "CrossLanguageDefinitionId": "TypeSpec.float32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1341,7 +1461,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "181",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1356,7 +1478,9 @@
       "$id": "182",
       "Type": {
        "$id": "183",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -1380,7 +1504,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "187",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1395,7 +1521,9 @@
         "$id": "188",
         "Type": {
          "$id": "189",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1409,7 +1537,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "192",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1445,7 +1575,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknown.get"
     },
     {
      "$id": "194",
@@ -1467,7 +1598,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "197",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1516,7 +1649,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknown.put"
     }
    ],
    "Protocol": {
@@ -1546,7 +1680,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "204",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1561,7 +1697,9 @@
         "$id": "205",
         "Type": {
          "$id": "206",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1575,7 +1713,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "209",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1611,7 +1751,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordUnknownDerived",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDerived.get"
     },
     {
      "$id": "211",
@@ -1633,7 +1774,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "214",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1682,7 +1825,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDerived.put"
     }
    ],
    "Protocol": {
@@ -1712,7 +1856,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "221",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1727,7 +1873,9 @@
         "$id": "222",
         "Type": {
          "$id": "223",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1741,7 +1889,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "226",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1777,7 +1927,8 @@
      "Path": "/type/property/additionalProperties/extendsUnknownDiscriminated",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.get"
     },
     {
      "$id": "228",
@@ -1799,7 +1950,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "231",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1848,7 +2001,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.put"
     }
    ],
    "Protocol": {
@@ -1878,7 +2032,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "238",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1893,7 +2049,9 @@
         "$id": "239",
         "Type": {
          "$id": "240",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1907,7 +2065,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "243",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1943,7 +2103,8 @@
      "Path": "/type/property/additionalProperties/isRecordUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknown.get"
     },
     {
      "$id": "245",
@@ -1965,7 +2126,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "248",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2014,7 +2177,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknown.put"
     }
    ],
    "Protocol": {
@@ -2044,7 +2208,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "255",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2059,7 +2225,9 @@
         "$id": "256",
         "Type": {
          "$id": "257",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2073,7 +2241,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "260",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2109,7 +2279,8 @@
      "Path": "/type/property/additionalProperties/isRecordUnknownDerived",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDerived.get"
     },
     {
      "$id": "262",
@@ -2131,7 +2302,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "265",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2180,7 +2353,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDerived.put"
     }
    ],
    "Protocol": {
@@ -2210,7 +2384,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "272",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2225,7 +2401,9 @@
         "$id": "273",
         "Type": {
          "$id": "274",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2239,7 +2417,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "277",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2275,7 +2455,8 @@
      "Path": "/type/property/additionalProperties/isUnknownDiscriminated",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDiscriminated.get"
     },
     {
      "$id": "279",
@@ -2297,7 +2478,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "282",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2346,7 +2529,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsUnknownDiscriminated.put"
     }
    ],
    "Protocol": {
@@ -2376,7 +2560,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "289",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2391,7 +2577,9 @@
         "$id": "290",
         "Type": {
          "$id": "291",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2405,7 +2593,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "294",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2441,7 +2631,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsString.get"
     },
     {
      "$id": "296",
@@ -2463,7 +2654,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "299",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2512,7 +2705,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsString.put"
     }
    ],
    "Protocol": {
@@ -2542,7 +2736,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "306",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2557,7 +2753,9 @@
         "$id": "307",
         "Type": {
          "$id": "308",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2571,7 +2769,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "311",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2607,7 +2807,8 @@
      "Path": "/type/property/additionalProperties/isRecordstring",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsString.get"
     },
     {
      "$id": "313",
@@ -2629,7 +2830,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "316",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2678,7 +2881,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsString.put"
     }
    ],
    "Protocol": {
@@ -2708,7 +2912,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "323",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2723,7 +2929,9 @@
         "$id": "324",
         "Type": {
          "$id": "325",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2737,7 +2945,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "328",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2773,7 +2983,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadString.get"
     },
     {
      "$id": "330",
@@ -2795,7 +3006,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "333",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2844,7 +3057,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadString.put"
     }
    ],
    "Protocol": {
@@ -2874,7 +3088,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "340",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2889,7 +3105,9 @@
         "$id": "341",
         "Type": {
          "$id": "342",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2903,7 +3121,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "345",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2939,7 +3159,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloat.get"
     },
     {
      "$id": "347",
@@ -2961,7 +3182,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "350",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3010,7 +3233,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsFloat.put"
     }
    ],
    "Protocol": {
@@ -3040,7 +3264,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "357",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3055,7 +3281,9 @@
         "$id": "358",
         "Type": {
          "$id": "359",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3069,7 +3297,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "362",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3105,7 +3335,8 @@
      "Path": "/type/property/additionalProperties/isRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloat.get"
     },
     {
      "$id": "364",
@@ -3127,7 +3358,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "367",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3176,7 +3409,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsFloat.put"
     }
    ],
    "Protocol": {
@@ -3206,7 +3440,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "374",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3221,7 +3457,9 @@
         "$id": "375",
         "Type": {
          "$id": "376",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3235,7 +3473,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "379",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3271,7 +3511,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloat.get"
     },
     {
      "$id": "381",
@@ -3293,7 +3534,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "384",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3342,7 +3585,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadFloat.put"
     }
    ],
    "Protocol": {
@@ -3372,7 +3616,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "391",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3387,7 +3633,9 @@
         "$id": "392",
         "Type": {
          "$id": "393",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3401,7 +3649,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "396",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3437,7 +3687,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModel.get"
     },
     {
      "$id": "398",
@@ -3459,7 +3710,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "401",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3508,7 +3761,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModel.put"
     }
    ],
    "Protocol": {
@@ -3538,7 +3792,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "408",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3553,7 +3809,9 @@
         "$id": "409",
         "Type": {
          "$id": "410",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3567,7 +3825,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "413",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3603,7 +3863,8 @@
      "Path": "/type/property/additionalProperties/isRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModel.get"
     },
     {
      "$id": "415",
@@ -3625,7 +3886,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "418",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3674,7 +3937,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModel.put"
     }
    ],
    "Protocol": {
@@ -3704,7 +3968,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "425",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3719,7 +3985,9 @@
         "$id": "426",
         "Type": {
          "$id": "427",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3733,7 +4001,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "430",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3769,7 +4039,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModel.get"
     },
     {
      "$id": "432",
@@ -3791,7 +4062,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "435",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3840,7 +4113,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModel.put"
     }
    ],
    "Protocol": {
@@ -3870,7 +4144,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "442",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3885,7 +4161,9 @@
         "$id": "443",
         "Type": {
          "$id": "444",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3899,7 +4177,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "447",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3935,7 +4215,8 @@
      "Path": "/type/property/additionalProperties/extendsRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArray.get"
     },
     {
      "$id": "449",
@@ -3957,7 +4238,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "452",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4006,7 +4289,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsModelArray.put"
     }
    ],
    "Protocol": {
@@ -4036,7 +4320,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "459",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4051,7 +4337,9 @@
         "$id": "460",
         "Type": {
          "$id": "461",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4065,7 +4353,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "464",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4101,7 +4391,8 @@
      "Path": "/type/property/additionalProperties/isRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArray.get"
     },
     {
      "$id": "466",
@@ -4123,7 +4414,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "469",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4172,7 +4465,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.IsModelArray.put"
     }
    ],
    "Protocol": {
@@ -4202,7 +4496,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "476",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4217,7 +4513,9 @@
         "$id": "477",
         "Type": {
          "$id": "478",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4231,7 +4529,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "481",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4267,7 +4567,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArray.get"
     },
     {
      "$id": "483",
@@ -4289,7 +4590,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "486",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4338,7 +4641,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadModelArray.put"
     }
    ],
    "Protocol": {
@@ -4368,7 +4672,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "493",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4383,7 +4689,9 @@
         "$id": "494",
         "Type": {
          "$id": "495",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4397,7 +4705,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "498",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4433,7 +4743,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentString.get"
     },
     {
      "$id": "500",
@@ -4455,7 +4766,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "503",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4504,7 +4817,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentString.put"
     }
    ],
    "Protocol": {
@@ -4534,7 +4848,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "510",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4549,7 +4865,9 @@
         "$id": "511",
         "Type": {
          "$id": "512",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4563,7 +4881,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "515",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4599,7 +4919,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentFloat.get"
     },
     {
      "$id": "517",
@@ -4621,7 +4942,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "520",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4670,7 +4993,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentFloat.put"
     }
    ],
    "Protocol": {
@@ -4700,7 +5024,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "527",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4715,7 +5041,9 @@
         "$id": "528",
         "Type": {
          "$id": "529",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4729,7 +5057,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "532",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4765,7 +5095,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModel.get"
     },
     {
      "$id": "534",
@@ -4787,7 +5118,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "537",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4836,7 +5169,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModel.put"
     }
    ],
    "Protocol": {
@@ -4866,7 +5200,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "544",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4881,7 +5217,9 @@
         "$id": "545",
         "Type": {
          "$id": "546",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4895,7 +5233,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "549",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -4931,7 +5271,8 @@
      "Path": "/type/property/additionalProperties/spreadDifferentRecordModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModelArray.get"
     },
     {
      "$id": "551",
@@ -4953,7 +5294,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "554",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5002,7 +5345,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadDifferentModelArray.put"
     }
    ],
    "Protocol": {
@@ -5032,7 +5376,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "561",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5047,7 +5393,9 @@
         "$id": "562",
         "Type": {
          "$id": "563",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5061,7 +5409,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "566",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5097,7 +5447,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadString.get"
     },
     {
      "$id": "568",
@@ -5119,7 +5470,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "571",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5168,7 +5521,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadString.put"
     }
    ],
    "Protocol": {
@@ -5198,7 +5552,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "578",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5213,7 +5569,9 @@
         "$id": "579",
         "Type": {
          "$id": "580",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5227,7 +5585,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "583",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5263,7 +5623,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadFloat",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadFloat.get"
     },
     {
      "$id": "585",
@@ -5285,7 +5646,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "588",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5334,7 +5697,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadFloat.put"
     }
    ],
    "Protocol": {
@@ -5364,7 +5728,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "595",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5379,7 +5745,9 @@
         "$id": "596",
         "Type": {
          "$id": "597",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5393,7 +5761,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "600",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5429,7 +5799,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModel.get"
     },
     {
      "$id": "602",
@@ -5451,7 +5822,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "605",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5500,7 +5873,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModel.put"
     }
    ],
    "Protocol": {
@@ -5530,7 +5904,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "612",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5545,7 +5921,9 @@
         "$id": "613",
         "Type": {
          "$id": "614",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5559,7 +5937,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "617",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5595,7 +5975,8 @@
      "Path": "/type/property/additionalProperties/extendsDifferentSpreadModelArray",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModelArray.get"
     },
     {
      "$id": "619",
@@ -5617,7 +5998,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "622",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5666,7 +6049,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.ExtendsDifferentSpreadModelArray.put"
     }
    ],
    "Protocol": {
@@ -5696,7 +6080,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "629",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5711,7 +6097,9 @@
         "$id": "630",
         "Type": {
          "$id": "631",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5725,7 +6113,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "634",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5761,7 +6151,8 @@
      "Path": "/type/property/additionalProperties/multipleSpreadRecord",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpread.get"
     },
     {
      "$id": "636",
@@ -5783,7 +6174,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "639",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5832,7 +6225,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.MultipleSpread.put"
     }
    ],
    "Protocol": {
@@ -5862,7 +6256,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "646",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5877,7 +6273,9 @@
         "$id": "647",
         "Type": {
          "$id": "648",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -5891,7 +6289,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "651",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5927,7 +6327,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordUnion.get"
     },
     {
      "$id": "653",
@@ -5949,7 +6350,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "656",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -5998,7 +6401,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordUnion.put"
     }
    ],
    "Protocol": {
@@ -6028,7 +6432,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "663",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6043,7 +6449,9 @@
         "$id": "664",
         "Type": {
          "$id": "665",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -6057,7 +6465,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "668",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6093,7 +6503,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordDiscriminatedUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordDiscriminatedUnion.get"
     },
     {
      "$id": "670",
@@ -6115,7 +6526,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "673",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6164,7 +6577,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordDiscriminatedUnion.put"
     }
    ],
    "Protocol": {
@@ -6194,7 +6608,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "680",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6209,7 +6625,9 @@
         "$id": "681",
         "Type": {
          "$id": "682",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -6223,7 +6641,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "685",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6259,7 +6679,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion.get"
     },
     {
      "$id": "687",
@@ -6281,7 +6702,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "690",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6330,7 +6753,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion.put"
     }
    ],
    "Protocol": {
@@ -6360,7 +6784,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "697",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6375,7 +6801,9 @@
         "$id": "698",
         "Type": {
          "$id": "699",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -6389,7 +6817,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "702",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6425,7 +6855,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion2.get"
     },
     {
      "$id": "704",
@@ -6447,7 +6878,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "707",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6496,7 +6929,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion2.put"
     }
    ],
    "Protocol": {
@@ -6526,7 +6960,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "714",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6541,7 +6977,9 @@
         "$id": "715",
         "Type": {
          "$id": "716",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -6555,7 +6993,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "719",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6591,7 +7031,8 @@
      "Path": "/type/property/additionalProperties/spreadRecordNonDiscriminatedUnion3",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion3.get"
     },
     {
      "$id": "721",
@@ -6613,7 +7054,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "724",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -6662,7 +7105,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.AdditionalProperties.SpreadRecordNonDiscriminatedUnion3.put"
     }
    ],
    "Protocol": {

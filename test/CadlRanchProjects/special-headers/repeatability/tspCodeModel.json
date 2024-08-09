@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "immediateSuccess.ResponseRepeatabilityResult.anonymous",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -48,7 +50,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "9",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -63,7 +67,9 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -74,7 +80,9 @@
        "NameInRequest": "Repeatability-Request-ID",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -91,11 +99,15 @@
        "Type": {
         "$id": "15",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
          "$id": "16",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -133,7 +145,8 @@
      "Path": "/special-headers/repeatability/immediateSuccess",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialHeaders.Repeatability.immediateSuccess"
     }
    ],
    "Protocol": {

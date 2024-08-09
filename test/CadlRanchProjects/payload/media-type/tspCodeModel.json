@@ -20,7 +20,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -35,7 +37,9 @@
       "$id": "6",
       "Type": {
        "$id": "7",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -58,7 +62,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -73,7 +79,9 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -87,7 +95,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "16",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "text/plain"
        },
@@ -105,7 +115,9 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "18",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -136,7 +148,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MediaType.StringBody.sendAsText"
     },
     {
      "$id": "20",
@@ -156,7 +169,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "23",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "text/plain"
        },
@@ -177,7 +192,9 @@
        ],
        "BodyType": {
         "$id": "25",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -190,7 +207,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "28",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "text/plain"
          }
@@ -208,7 +227,8 @@
      "Path": "/payload/media-type/string-body/getAsText",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MediaType.StringBody.getAsText"
     },
     {
      "$id": "29",
@@ -228,7 +248,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "32",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -246,7 +268,9 @@
        "NameInRequest": "text",
        "Type": {
         "$id": "34",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -277,7 +301,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MediaType.StringBody.sendAsJson"
     },
     {
      "$id": "36",
@@ -297,7 +322,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "39",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -318,7 +345,9 @@
        ],
        "BodyType": {
         "$id": "41",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [
@@ -331,7 +360,9 @@
           "Kind": "constant",
           "ValueType": {
            "$id": "44",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "Value": "application/json"
          }
@@ -349,7 +380,8 @@
      "Path": "/payload/media-type/string-body/getAsJson",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MediaType.StringBody.getAsJson"
     }
    ],
    "Protocol": {

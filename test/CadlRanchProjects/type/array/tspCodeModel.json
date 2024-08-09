@@ -19,7 +19,9 @@
      "Description": "Required string property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -60,7 +62,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -75,7 +79,9 @@
       "$id": "11",
       "Type": {
        "$id": "12",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -99,7 +105,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "16",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -114,7 +122,9 @@
         "$id": "17",
         "Type": {
          "$id": "18",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -128,7 +138,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "21",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -153,7 +165,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "24",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -171,7 +185,8 @@
      "Path": "/type/array/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int32Value.get"
     },
     {
      "$id": "25",
@@ -192,7 +207,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "28",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -214,7 +231,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "31",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -247,7 +266,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int32Value.put"
     }
    ],
    "Protocol": {
@@ -277,7 +297,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "37",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -292,7 +314,9 @@
         "$id": "38",
         "Type": {
          "$id": "39",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -306,7 +330,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "42",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -331,7 +357,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "45",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -349,7 +377,8 @@
      "Path": "/type/array/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int64Value.get"
     },
     {
      "$id": "46",
@@ -370,7 +399,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "49",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -392,7 +423,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "52",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -425,7 +458,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Int64Value.put"
     }
    ],
    "Protocol": {
@@ -455,7 +489,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "58",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -470,7 +506,9 @@
         "$id": "59",
         "Type": {
          "$id": "60",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -484,7 +522,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "63",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -509,7 +549,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "66",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -527,7 +569,8 @@
      "Path": "/type/array/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.BooleanValue.get"
     },
     {
      "$id": "67",
@@ -548,7 +591,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "70",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -570,7 +615,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "73",
-         "Kind": "boolean"
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -603,7 +650,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.BooleanValue.put"
     }
    ],
    "Protocol": {
@@ -633,7 +681,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "79",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -648,7 +698,9 @@
         "$id": "80",
         "Type": {
          "$id": "81",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -662,7 +714,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "84",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -687,7 +741,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "87",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -705,7 +761,8 @@
      "Path": "/type/array/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.StringValue.get"
     },
     {
      "$id": "88",
@@ -726,7 +783,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "91",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -748,7 +807,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -781,7 +842,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.StringValue.put"
     }
    ],
    "Protocol": {
@@ -811,7 +873,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "100",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -826,7 +890,9 @@
         "$id": "101",
         "Type": {
          "$id": "102",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -840,7 +906,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "105",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -865,7 +933,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "108",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Name": "float32",
+         "CrossLanguageDefinitionId": "TypeSpec.float32"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -883,7 +953,8 @@
      "Path": "/type/array/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Float32Value.get"
     },
     {
      "$id": "109",
@@ -904,7 +975,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "112",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -926,7 +999,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "115",
-         "Kind": "float32"
+         "Kind": "float32",
+         "Name": "float32",
+         "CrossLanguageDefinitionId": "TypeSpec.float32"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -959,7 +1034,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.Float32Value.put"
     }
    ],
    "Protocol": {
@@ -989,7 +1065,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "121",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1004,7 +1082,9 @@
         "$id": "122",
         "Type": {
          "$id": "123",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1018,7 +1098,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "126",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1044,11 +1126,15 @@
         "ValueType": {
          "$id": "129",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "130",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1066,7 +1152,8 @@
      "Path": "/type/array/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DatetimeValue.get"
     },
     {
      "$id": "131",
@@ -1087,7 +1174,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "134",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1110,11 +1199,15 @@
         "ValueType": {
          "$id": "137",
          "Kind": "utcDateTime",
+         "Name": "utcDateTime",
          "Encode": "rfc3339",
          "WireType": {
           "$id": "138",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1147,7 +1240,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DatetimeValue.put"
     }
    ],
    "Protocol": {
@@ -1177,7 +1271,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "144",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1192,7 +1288,9 @@
         "$id": "145",
         "Type": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1206,7 +1304,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "149",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1232,11 +1332,15 @@
         "ValueType": {
          "$id": "152",
          "Kind": "duration",
+         "Name": "duration",
          "Encode": "ISO8601",
          "WireType": {
           "$id": "153",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.duration"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1254,7 +1358,8 @@
      "Path": "/type/array/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DurationValue.get"
     },
     {
      "$id": "154",
@@ -1275,7 +1380,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "157",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1298,11 +1405,15 @@
         "ValueType": {
          "$id": "160",
          "Kind": "duration",
+         "Name": "duration",
          "Encode": "ISO8601",
          "WireType": {
           "$id": "161",
-          "Kind": "string"
-         }
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
+         },
+         "CrossLanguageDefinitionId": "TypeSpec.duration"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1335,7 +1446,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.DurationValue.put"
     }
    ],
    "Protocol": {
@@ -1365,7 +1477,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "167",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1380,7 +1494,9 @@
         "$id": "168",
         "Type": {
          "$id": "169",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1394,7 +1510,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "172",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1419,7 +1537,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "175",
-         "Kind": "any"
+         "Kind": "any",
+         "Name": "unknown",
+         "CrossLanguageDefinitionId": ""
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1437,7 +1557,8 @@
      "Path": "/type/array/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.UnknownValue.get"
     },
     {
      "$id": "176",
@@ -1458,7 +1579,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "179",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1480,7 +1603,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "182",
-         "Kind": "any"
+         "Kind": "any",
+         "Name": "unknown",
+         "CrossLanguageDefinitionId": ""
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -1513,7 +1638,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.UnknownValue.put"
     }
    ],
    "Protocol": {
@@ -1543,7 +1669,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "188",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1558,7 +1686,9 @@
         "$id": "189",
         "Type": {
          "$id": "190",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1572,7 +1702,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "193",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1614,7 +1746,8 @@
      "Path": "/type/array/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.ModelValue.get"
     },
     {
      "$id": "196",
@@ -1635,7 +1768,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "199",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1689,7 +1824,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.ModelValue.put"
     }
    ],
    "Protocol": {
@@ -1719,7 +1855,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "207",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1734,7 +1872,9 @@
         "$id": "208",
         "Type": {
          "$id": "209",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1748,7 +1888,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "212",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1776,7 +1918,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "216",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Name": "float32",
+          "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -1795,7 +1939,8 @@
      "Path": "/type/array/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableFloatValue.get"
     },
     {
      "$id": "217",
@@ -1816,7 +1961,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "220",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1841,7 +1988,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "224",
-          "Kind": "float32"
+          "Kind": "float32",
+          "Name": "float32",
+          "CrossLanguageDefinitionId": "TypeSpec.float32"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -1875,7 +2024,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableFloatValue.put"
     }
    ],
    "Protocol": {
@@ -1905,7 +2055,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "230",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1920,7 +2072,9 @@
         "$id": "231",
         "Type": {
          "$id": "232",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1934,7 +2088,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "235",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1962,7 +2118,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "239",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -1981,7 +2139,8 @@
      "Path": "/type/array/nullable-int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableInt32Value.get"
     },
     {
      "$id": "240",
@@ -2002,7 +2161,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "243",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2027,7 +2188,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "247",
-          "Kind": "int32"
+          "Kind": "int32",
+          "Name": "int32",
+          "CrossLanguageDefinitionId": "TypeSpec.int32"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2061,7 +2224,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableInt32Value.put"
     }
    ],
    "Protocol": {
@@ -2091,7 +2255,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "253",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2106,7 +2272,9 @@
         "$id": "254",
         "Type": {
          "$id": "255",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2120,7 +2288,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "258",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2148,7 +2318,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "262",
-          "Kind": "boolean"
+          "Kind": "boolean",
+          "Name": "boolean",
+          "CrossLanguageDefinitionId": "TypeSpec.boolean"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2167,7 +2339,8 @@
      "Path": "/type/array/nullable-boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableBooleanValue.get"
     },
     {
      "$id": "263",
@@ -2188,7 +2361,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "266",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2213,7 +2388,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "270",
-          "Kind": "boolean"
+          "Kind": "boolean",
+          "Name": "boolean",
+          "CrossLanguageDefinitionId": "TypeSpec.boolean"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2247,7 +2424,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableBooleanValue.put"
     }
    ],
    "Protocol": {
@@ -2277,7 +2455,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "276",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2292,7 +2472,9 @@
         "$id": "277",
         "Type": {
          "$id": "278",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2306,7 +2488,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "281",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2334,7 +2518,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "285",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2353,7 +2539,8 @@
      "Path": "/type/array/nullable-string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableStringValue.get"
     },
     {
      "$id": "286",
@@ -2374,7 +2561,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "289",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2399,7 +2588,9 @@
          "Kind": "nullable",
          "Type": {
           "$id": "293",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
@@ -2433,7 +2624,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableStringValue.put"
     }
    ],
    "Protocol": {
@@ -2463,7 +2655,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "299",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2478,7 +2672,9 @@
         "$id": "300",
         "Type": {
          "$id": "301",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2492,7 +2688,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "304",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2538,7 +2736,8 @@
      "Path": "/type/array/nullable-model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableModelValue.get"
     },
     {
      "$id": "308",
@@ -2559,7 +2758,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "311",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2617,7 +2818,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Array.NullableModelValue.put"
     }
    ],
    "Protocol": {

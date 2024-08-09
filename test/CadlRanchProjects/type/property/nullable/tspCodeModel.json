@@ -19,7 +19,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -38,7 +40,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "8",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -63,7 +67,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -95,7 +101,9 @@
           "Description": "Inner model property",
           "Type": {
            "$id": "17",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "IsRequired": true,
           "IsReadOnly": false
@@ -128,7 +136,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "20",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -148,7 +158,9 @@
        "ValueType": {
         "$id": "24",
         "Kind": "bytes",
-        "Encode": "base64"
+        "Name": "bytes",
+        "Encode": "base64",
+        "CrossLanguageDefinitionId": "TypeSpec.bytes"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -173,7 +185,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "27",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -189,11 +203,15 @@
       "Type": {
        "$id": "30",
        "Kind": "duration",
+       "Name": "duration",
        "Encode": "ISO8601",
        "WireType": {
         "$id": "31",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.duration"
       }
      },
      "IsRequired": true,
@@ -216,7 +234,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "34",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -232,11 +252,15 @@
       "Type": {
        "$id": "37",
        "Kind": "utcDateTime",
+       "Name": "utcDateTime",
        "Encode": "rfc3339",
        "WireType": {
         "$id": "38",
-        "Kind": "string"
-       }
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
+       },
+       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
       }
      },
      "IsRequired": true,
@@ -259,7 +283,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "41",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -275,7 +301,9 @@
       "Type": {
        "$id": "44",
        "Kind": "bytes",
-       "Encode": "base64"
+       "Name": "bytes",
+       "Encode": "base64",
+       "CrossLanguageDefinitionId": "TypeSpec.bytes"
       }
      },
      "IsRequired": true,
@@ -298,7 +326,9 @@
      "Description": "Required property",
      "Type": {
       "$id": "47",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -313,7 +343,9 @@
       "Kind": "nullable",
       "Type": {
        "$id": "50",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": true,
@@ -338,7 +370,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "54",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -353,7 +387,9 @@
       "$id": "55",
       "Type": {
        "$id": "56",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -377,7 +413,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "60",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -392,7 +430,9 @@
         "$id": "61",
         "Type": {
          "$id": "62",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -406,7 +446,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -442,7 +484,8 @@
      "Path": "/type/property/nullable/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.getNonNull"
     },
     {
      "$id": "67",
@@ -463,7 +506,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "70",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -499,7 +544,8 @@
      "Path": "/type/property/nullable/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.getNull"
     },
     {
      "$id": "72",
@@ -521,7 +567,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "75",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -569,7 +617,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.patchNonNull"
     },
     {
      "$id": "78",
@@ -591,7 +640,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "81",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -639,7 +690,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.String.patchNull"
     }
    ],
    "Protocol": {
@@ -669,7 +721,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "88",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -684,7 +738,9 @@
         "$id": "89",
         "Type": {
          "$id": "90",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -698,7 +754,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "93",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -734,7 +792,8 @@
      "Path": "/type/property/nullable/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.getNonNull"
     },
     {
      "$id": "95",
@@ -755,7 +814,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "98",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -791,7 +852,8 @@
      "Path": "/type/property/nullable/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.getNull"
     },
     {
      "$id": "100",
@@ -813,7 +875,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "103",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -861,7 +925,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.patchNonNull"
     },
     {
      "$id": "106",
@@ -883,7 +948,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "109",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -931,7 +998,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Bytes.patchNull"
     }
    ],
    "Protocol": {
@@ -961,7 +1029,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "116",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -976,7 +1046,9 @@
         "$id": "117",
         "Type": {
          "$id": "118",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -990,7 +1062,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "121",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1026,7 +1100,8 @@
      "Path": "/type/property/nullable/datetime/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.getNonNull"
     },
     {
      "$id": "123",
@@ -1047,7 +1122,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "126",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1083,7 +1160,8 @@
      "Path": "/type/property/nullable/datetime/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.getNull"
     },
     {
      "$id": "128",
@@ -1105,7 +1183,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "131",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1153,7 +1233,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.patchNonNull"
     },
     {
      "$id": "134",
@@ -1175,7 +1256,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "137",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1223,7 +1306,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Datetime.patchNull"
     }
    ],
    "Protocol": {
@@ -1253,7 +1337,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "144",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1268,7 +1354,9 @@
         "$id": "145",
         "Type": {
          "$id": "146",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1282,7 +1370,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "149",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1318,7 +1408,8 @@
      "Path": "/type/property/nullable/duration/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.getNonNull"
     },
     {
      "$id": "151",
@@ -1339,7 +1430,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "154",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1375,7 +1468,8 @@
      "Path": "/type/property/nullable/duration/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.getNull"
     },
     {
      "$id": "156",
@@ -1397,7 +1491,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "159",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1445,7 +1541,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.patchNonNull"
     },
     {
      "$id": "162",
@@ -1467,7 +1564,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "165",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1515,7 +1614,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.Duration.patchNull"
     }
    ],
    "Protocol": {
@@ -1545,7 +1645,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "172",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1560,7 +1662,9 @@
         "$id": "173",
         "Type": {
          "$id": "174",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1574,7 +1678,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "177",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1610,7 +1716,8 @@
      "Path": "/type/property/nullable/collections/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.getNonNull"
     },
     {
      "$id": "179",
@@ -1631,7 +1738,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "182",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1667,7 +1776,8 @@
      "Path": "/type/property/nullable/collections/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.getNull"
     },
     {
      "$id": "184",
@@ -1689,7 +1799,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "187",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1737,7 +1849,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.patchNonNull"
     },
     {
      "$id": "190",
@@ -1759,7 +1872,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "193",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -1807,7 +1922,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByte.patchNull"
     }
    ],
    "Protocol": {
@@ -1837,7 +1953,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "200",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1852,7 +1970,9 @@
         "$id": "201",
         "Type": {
          "$id": "202",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1866,7 +1986,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "205",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1902,7 +2024,8 @@
      "Path": "/type/property/nullable/collections/model/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.getNonNull"
     },
     {
      "$id": "207",
@@ -1923,7 +2046,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "210",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1959,7 +2084,8 @@
      "Path": "/type/property/nullable/collections/model/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.getNull"
     },
     {
      "$id": "212",
@@ -1981,7 +2107,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "215",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2029,7 +2157,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.patchNonNull"
     },
     {
      "$id": "218",
@@ -2051,7 +2180,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "221",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2099,7 +2230,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModel.patchNull"
     }
    ],
    "Protocol": {
@@ -2129,7 +2261,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "228",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2144,7 +2278,9 @@
         "$id": "229",
         "Type": {
          "$id": "230",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -2158,7 +2294,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "233",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2194,7 +2332,8 @@
      "Path": "/type/property/nullable/collections/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.getNonNull"
     },
     {
      "$id": "235",
@@ -2215,7 +2354,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "238",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2251,7 +2392,8 @@
      "Path": "/type/property/nullable/collections/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.getNull"
     },
     {
      "$id": "240",
@@ -2273,7 +2415,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "243",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2321,7 +2465,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.patchNonNull"
     },
     {
      "$id": "246",
@@ -2343,7 +2488,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "249",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/merge-patch+json"
        },
@@ -2391,7 +2538,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsString.patchNull"
     }
    ],
    "Protocol": {

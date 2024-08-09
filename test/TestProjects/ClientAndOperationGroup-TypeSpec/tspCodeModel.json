@@ -21,7 +21,9 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -42,7 +44,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "8",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -63,7 +67,9 @@
        ],
        "BodyType": {
         "$id": "10",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -79,7 +85,8 @@
      "Path": "/top",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.zero"
     },
     {
      "$id": "11",
@@ -99,7 +106,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "14",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -120,7 +129,9 @@
        ],
        "BodyType": {
         "$id": "16",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -136,7 +147,8 @@
      "Path": "/Alpha",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Alpha.one"
     }
    ],
    "Protocol": {
@@ -164,7 +176,9 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "21",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -185,7 +199,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -206,7 +222,9 @@
        ],
        "BodyType": {
         "$id": "26",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -222,7 +240,8 @@
      "Path": "/Beta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.two"
     },
     {
      "$id": "27",
@@ -242,7 +261,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "30",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -263,7 +284,9 @@
        ],
        "BodyType": {
         "$id": "32",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -279,7 +302,8 @@
      "Path": "/SubBeta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.SubBeta.three"
     }
    ],
    "Protocol": {
@@ -308,7 +332,9 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "37",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -329,7 +355,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "40",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -350,7 +378,9 @@
        ],
        "BodyType": {
         "$id": "42",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -366,7 +396,8 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.four"
     },
     {
      "$id": "43",
@@ -386,7 +417,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "46",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -407,7 +440,9 @@
        ],
        "BodyType": {
         "$id": "48",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -423,7 +458,8 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.five"
     }
    ],
    "Protocol": {

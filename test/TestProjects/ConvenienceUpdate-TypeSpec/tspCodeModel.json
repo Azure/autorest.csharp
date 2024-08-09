@@ -19,7 +19,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -46,7 +48,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -67,7 +71,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -103,7 +109,8 @@
      "Path": "/updateConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.updateConvenience"
     },
     {
      "$id": "13",
@@ -121,7 +128,9 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "15",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -141,7 +150,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "18",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -189,7 +200,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalBeforeRequired"
     },
     {
      "$id": "21",
@@ -210,7 +222,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -246,7 +260,8 @@
      "Path": "/noConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenience"
     },
     {
      "$id": "26",
@@ -268,7 +283,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "29",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -316,7 +333,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceRequiredBody"
     },
     {
      "$id": "32",
@@ -338,7 +356,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "35",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -386,7 +406,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.noConvenienceOptionalBody"
     },
     {
      "$id": "38",
@@ -407,7 +428,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "41",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -443,7 +466,8 @@
      "Path": "/protocol",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocol"
     },
     {
      "$id": "43",
@@ -464,7 +488,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "46",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -500,7 +526,8 @@
      "Path": "/convenienceWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithOptional"
     },
     {
      "$id": "48",
@@ -521,7 +548,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "51",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -557,7 +586,8 @@
      "Path": "/convenienceWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceWithRequired"
     },
     {
      "$id": "53",
@@ -587,7 +617,8 @@
      "Path": "/convenienceShouldNotGenerate",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceShouldNotGenerate"
     },
     {
      "$id": "55",
@@ -617,7 +648,8 @@
      "Path": "/protocolShouldNotGenerateConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolShouldNotGenerateConvenience"
     },
     {
      "$id": "57",
@@ -635,7 +667,9 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "59",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -654,7 +688,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "62",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -690,7 +726,8 @@
      "Path": "/protocolOptionalQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalQuery"
     },
     {
      "$id": "64",
@@ -708,7 +745,9 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "66",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -727,7 +766,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "69",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -763,7 +804,8 @@
      "Path": "/protocolRequiredQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredQuery"
     },
     {
      "$id": "71",
@@ -785,7 +827,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "74",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -833,7 +877,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalModel"
     },
     {
      "$id": "77",
@@ -855,7 +900,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "80",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -903,7 +950,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolRequiredModel"
     },
     {
      "$id": "83",
@@ -921,7 +969,9 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "85",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -940,7 +990,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "88",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -976,7 +1028,8 @@
      "Path": "/convenienceOptionalQueryWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithOptional"
     },
     {
      "$id": "90",
@@ -994,7 +1047,9 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "92",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1013,7 +1068,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "95",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1049,7 +1106,8 @@
      "Path": "/convenienceRequiredQueryWithOptional",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithOptional"
     },
     {
      "$id": "97",
@@ -1067,7 +1125,9 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "99",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1086,7 +1146,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "102",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1122,7 +1184,8 @@
      "Path": "/convenienceOptionalQueryWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalQueryWithRequired"
     },
     {
      "$id": "104",
@@ -1140,7 +1203,9 @@
        "NameInRequest": "required",
        "Type": {
         "$id": "106",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1159,7 +1224,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "109",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1195,7 +1262,8 @@
      "Path": "/convenienceRequiredQueryWithRequired",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredQueryWithRequired"
     },
     {
      "$id": "111",
@@ -1217,7 +1285,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "114",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1265,7 +1335,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithOptional"
     },
     {
      "$id": "117",
@@ -1287,7 +1358,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "120",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1335,7 +1408,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceRequiredModelWithOptional"
     },
     {
      "$id": "123",
@@ -1357,7 +1431,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "126",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1405,7 +1481,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.convenienceOptionalModelWithRequired"
     },
     {
      "$id": "129",
@@ -1423,7 +1500,9 @@
        "NameInRequest": "optional",
        "Type": {
         "$id": "131",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1443,7 +1522,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "134",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1491,7 +1572,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.protocolOptionalBeforeRequired"
     }
    ],
    "Protocol": {

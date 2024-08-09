@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -55,7 +57,9 @@
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "11",
-      "Kind": "uri"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -104,7 +108,9 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "16",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -152,7 +158,8 @@
      "Path": "/one",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group1.one"
     },
     {
      "$id": "19",
@@ -184,7 +191,8 @@
      "Path": "/three",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group1.three"
     },
     {
      "$id": "21",
@@ -216,7 +224,8 @@
      "Path": "/four",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group1.four"
     }
    ],
    "Protocol": {
@@ -249,7 +258,9 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "27",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -297,7 +308,8 @@
      "Path": "/two",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group2.two"
     },
     {
      "$id": "30",
@@ -329,7 +341,8 @@
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group2.five"
     },
     {
      "$id": "32",
@@ -361,7 +374,8 @@
      "Path": "/six",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group2.six"
     }
    ],
    "Protocol": {

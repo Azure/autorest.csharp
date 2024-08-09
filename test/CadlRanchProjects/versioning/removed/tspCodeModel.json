@@ -13,7 +13,9 @@
    "CrossLanguageDefinitionId": "Versioning.Removed.EnumV2",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -32,7 +34,9 @@
    "CrossLanguageDefinitionId": "Versioning.Removed.Versions",
    "ValueType": {
     "$id": "6",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -68,7 +72,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -96,11 +102,15 @@
       "VariantTypes": [
        {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "16",
-        "Kind": "float32"
+        "Kind": "float32",
+        "Name": "float32",
+        "CrossLanguageDefinitionId": "TypeSpec.float32"
        }
       ]
      },
@@ -129,7 +139,9 @@
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
         "$id": "20",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -169,7 +181,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "24",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -190,7 +204,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "27",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -244,7 +260,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.Removed.v2"
     }
    ],
    "Protocol": {

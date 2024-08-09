@@ -18,7 +18,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -39,7 +41,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -60,7 +64,9 @@
      "Description": "",
      "Type": {
       "$id": "10",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -81,7 +87,9 @@
      "Description": "",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -102,7 +110,9 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -123,7 +133,9 @@
      "Description": "",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -144,7 +156,9 @@
      "Description": "",
      "Type": {
       "$id": "22",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -165,7 +179,9 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -186,7 +202,9 @@
      "Description": "",
      "Type": {
       "$id": "28",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -207,7 +225,9 @@
      "Description": "",
      "Type": {
       "$id": "31",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -228,7 +248,9 @@
      "Description": "",
      "Type": {
       "$id": "34",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -249,7 +271,9 @@
      "Description": "",
      "Type": {
       "$id": "37",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -270,7 +294,9 @@
      "Description": "",
      "Type": {
       "$id": "40",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -291,7 +317,9 @@
      "Description": "",
      "Type": {
       "$id": "43",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -312,7 +340,9 @@
      "Description": "",
      "Type": {
       "$id": "46",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -333,7 +363,9 @@
      "Description": "",
      "Type": {
       "$id": "49",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -354,7 +386,9 @@
      "Description": "",
      "Type": {
       "$id": "52",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -375,7 +409,9 @@
      "Description": "",
      "Type": {
       "$id": "55",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -396,7 +432,9 @@
      "Description": "",
      "Type": {
       "$id": "58",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -417,7 +455,9 @@
      "Description": "",
      "Type": {
       "$id": "61",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -438,7 +478,9 @@
      "Description": "",
      "Type": {
       "$id": "64",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -459,7 +501,9 @@
      "Description": "",
      "Type": {
       "$id": "67",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -480,7 +524,9 @@
      "Description": "",
      "Type": {
       "$id": "70",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -501,7 +547,9 @@
      "Description": "",
      "Type": {
       "$id": "73",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -522,7 +570,9 @@
      "Description": "",
      "Type": {
       "$id": "76",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -543,7 +593,9 @@
      "Description": "",
      "Type": {
       "$id": "79",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -564,7 +616,9 @@
      "Description": "",
      "Type": {
       "$id": "82",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -585,7 +639,9 @@
      "Description": "",
      "Type": {
       "$id": "85",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -606,7 +662,9 @@
      "Description": "",
      "Type": {
       "$id": "88",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -627,7 +685,9 @@
      "Description": "",
      "Type": {
       "$id": "91",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -648,7 +708,9 @@
      "Description": "",
      "Type": {
       "$id": "94",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -669,7 +731,9 @@
      "Description": "",
      "Type": {
       "$id": "97",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -690,7 +754,9 @@
      "Description": "",
      "Type": {
       "$id": "100",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -711,7 +777,9 @@
      "Description": "",
      "Type": {
       "$id": "103",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -735,7 +803,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "107",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -750,7 +820,9 @@
       "$id": "108",
       "Type": {
        "$id": "109",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -774,7 +846,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "113",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -789,7 +863,9 @@
         "$id": "114",
         "Type": {
          "$id": "115",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -804,7 +880,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "118",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -852,7 +930,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAnd"
     },
     {
      "$id": "121",
@@ -873,7 +952,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "124",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -921,7 +1002,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAs"
     },
     {
      "$id": "127",
@@ -942,7 +1024,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "130",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -990,7 +1074,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAssert"
     },
     {
      "$id": "133",
@@ -1011,7 +1096,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "136",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1059,7 +1146,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAsync"
     },
     {
      "$id": "139",
@@ -1080,7 +1168,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "142",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1128,7 +1218,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAwait"
     },
     {
      "$id": "145",
@@ -1149,7 +1240,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "148",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1197,7 +1290,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withBreak"
     },
     {
      "$id": "151",
@@ -1218,7 +1312,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "154",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1266,7 +1362,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withClass"
     },
     {
      "$id": "157",
@@ -1287,7 +1384,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "160",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1335,7 +1434,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withConstructor"
     },
     {
      "$id": "163",
@@ -1356,7 +1456,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "166",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1404,7 +1506,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withContinue"
     },
     {
      "$id": "169",
@@ -1425,7 +1528,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "172",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1473,7 +1578,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withDef"
     },
     {
      "$id": "175",
@@ -1494,7 +1600,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "178",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1542,7 +1650,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withDel"
     },
     {
      "$id": "181",
@@ -1563,7 +1672,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "184",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1611,7 +1722,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withElif"
     },
     {
      "$id": "187",
@@ -1632,7 +1744,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "190",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1680,7 +1794,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withElse"
     },
     {
      "$id": "193",
@@ -1701,7 +1816,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "196",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1749,7 +1866,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withExcept"
     },
     {
      "$id": "199",
@@ -1770,7 +1888,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "202",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1818,7 +1938,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withExec"
     },
     {
      "$id": "205",
@@ -1839,7 +1960,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "208",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1887,7 +2010,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFinally"
     },
     {
      "$id": "211",
@@ -1908,7 +2032,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "214",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1956,7 +2082,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFor"
     },
     {
      "$id": "217",
@@ -1977,7 +2104,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "220",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2025,7 +2154,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFrom"
     },
     {
      "$id": "223",
@@ -2046,7 +2176,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "226",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2094,7 +2226,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withGlobal"
     },
     {
      "$id": "229",
@@ -2115,7 +2248,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "232",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2163,7 +2298,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIf"
     },
     {
      "$id": "235",
@@ -2184,7 +2320,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "238",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2232,7 +2370,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withImport"
     },
     {
      "$id": "241",
@@ -2253,7 +2392,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "244",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2301,7 +2442,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIn"
     },
     {
      "$id": "247",
@@ -2322,7 +2464,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "250",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2370,7 +2514,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIs"
     },
     {
      "$id": "253",
@@ -2391,7 +2536,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "256",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2439,7 +2586,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withLambda"
     },
     {
      "$id": "259",
@@ -2460,7 +2608,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "262",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2508,7 +2658,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withNot"
     },
     {
      "$id": "265",
@@ -2529,7 +2680,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "268",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2577,7 +2730,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withOr"
     },
     {
      "$id": "271",
@@ -2598,7 +2752,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "274",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2646,7 +2802,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withPass"
     },
     {
      "$id": "277",
@@ -2667,7 +2824,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "280",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2715,7 +2874,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withRaise"
     },
     {
      "$id": "283",
@@ -2736,7 +2896,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "286",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2784,7 +2946,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withReturn"
     },
     {
      "$id": "289",
@@ -2805,7 +2968,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "292",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2853,7 +3018,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withTry"
     },
     {
      "$id": "295",
@@ -2874,7 +3040,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "298",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2922,7 +3090,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withWhile"
     },
     {
      "$id": "301",
@@ -2943,7 +3112,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "304",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2991,7 +3162,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withWith"
     },
     {
      "$id": "307",
@@ -3012,7 +3184,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "310",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3060,7 +3234,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withYield"
     }
    ],
    "Protocol": {
@@ -3090,7 +3265,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "317",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3105,7 +3282,9 @@
         "$id": "318",
         "Type": {
          "$id": "319",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3120,7 +3299,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "322",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -3168,7 +3349,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.sameAsModel"
     }
    ],
    "Protocol": {
@@ -3198,7 +3380,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "329",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3213,7 +3397,9 @@
         "$id": "330",
         "Type": {
          "$id": "331",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -3236,7 +3422,8 @@
      "Path": "/special-words/operations/and",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.and"
     },
     {
      "$id": "333",
@@ -3265,7 +3452,8 @@
      "Path": "/special-words/operations/as",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.as"
     },
     {
      "$id": "335",
@@ -3294,7 +3482,8 @@
      "Path": "/special-words/operations/assert",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.assert"
     },
     {
      "$id": "337",
@@ -3323,7 +3512,8 @@
      "Path": "/special-words/operations/async",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.async"
     },
     {
      "$id": "339",
@@ -3352,7 +3542,8 @@
      "Path": "/special-words/operations/await",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.await"
     },
     {
      "$id": "341",
@@ -3381,7 +3572,8 @@
      "Path": "/special-words/operations/break",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.break"
     },
     {
      "$id": "343",
@@ -3410,7 +3602,8 @@
      "Path": "/special-words/operations/class",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.class"
     },
     {
      "$id": "345",
@@ -3439,7 +3632,8 @@
      "Path": "/special-words/operations/constructor",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.constructor"
     },
     {
      "$id": "347",
@@ -3468,7 +3662,8 @@
      "Path": "/special-words/operations/continue",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.continue"
     },
     {
      "$id": "349",
@@ -3497,7 +3692,8 @@
      "Path": "/special-words/operations/def",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.def"
     },
     {
      "$id": "351",
@@ -3526,7 +3722,8 @@
      "Path": "/special-words/operations/del",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.del"
     },
     {
      "$id": "353",
@@ -3555,7 +3752,8 @@
      "Path": "/special-words/operations/elif",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.elif"
     },
     {
      "$id": "355",
@@ -3584,7 +3782,8 @@
      "Path": "/special-words/operations/else",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.else"
     },
     {
      "$id": "357",
@@ -3613,7 +3812,8 @@
      "Path": "/special-words/operations/except",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.except"
     },
     {
      "$id": "359",
@@ -3642,7 +3842,8 @@
      "Path": "/special-words/operations/exec",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.exec"
     },
     {
      "$id": "361",
@@ -3671,7 +3872,8 @@
      "Path": "/special-words/operations/finally",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.finally"
     },
     {
      "$id": "363",
@@ -3700,7 +3902,8 @@
      "Path": "/special-words/operations/for",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.for"
     },
     {
      "$id": "365",
@@ -3729,7 +3932,8 @@
      "Path": "/special-words/operations/from",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.from"
     },
     {
      "$id": "367",
@@ -3758,7 +3962,8 @@
      "Path": "/special-words/operations/global",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.global"
     },
     {
      "$id": "369",
@@ -3787,7 +3992,8 @@
      "Path": "/special-words/operations/if",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.if"
     },
     {
      "$id": "371",
@@ -3816,7 +4022,8 @@
      "Path": "/special-words/operations/import",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.import"
     },
     {
      "$id": "373",
@@ -3845,7 +4052,8 @@
      "Path": "/special-words/operations/in",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.in"
     },
     {
      "$id": "375",
@@ -3874,7 +4082,8 @@
      "Path": "/special-words/operations/is",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.is"
     },
     {
      "$id": "377",
@@ -3903,7 +4112,8 @@
      "Path": "/special-words/operations/lambda",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.lambda"
     },
     {
      "$id": "379",
@@ -3932,7 +4142,8 @@
      "Path": "/special-words/operations/not",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.not"
     },
     {
      "$id": "381",
@@ -3961,7 +4172,8 @@
      "Path": "/special-words/operations/or",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.or"
     },
     {
      "$id": "383",
@@ -3990,7 +4202,8 @@
      "Path": "/special-words/operations/pass",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.pass"
     },
     {
      "$id": "385",
@@ -4019,7 +4232,8 @@
      "Path": "/special-words/operations/raise",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.raise"
     },
     {
      "$id": "387",
@@ -4048,7 +4262,8 @@
      "Path": "/special-words/operations/return",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.return"
     },
     {
      "$id": "389",
@@ -4077,7 +4292,8 @@
      "Path": "/special-words/operations/try",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.try"
     },
     {
      "$id": "391",
@@ -4106,7 +4322,8 @@
      "Path": "/special-words/operations/while",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.while"
     },
     {
      "$id": "393",
@@ -4135,7 +4352,8 @@
      "Path": "/special-words/operations/with",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.with"
     },
     {
      "$id": "395",
@@ -4164,7 +4382,8 @@
      "Path": "/special-words/operations/yield",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.yield"
     }
    ],
    "Protocol": {
@@ -4194,7 +4413,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "401",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4209,7 +4430,9 @@
         "$id": "402",
         "Type": {
          "$id": "403",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -4220,7 +4443,9 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "405",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4248,7 +4473,8 @@
      "Path": "/special-words/parameters/and",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAnd"
     },
     {
      "$id": "407",
@@ -4265,7 +4491,9 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "409",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4293,7 +4521,8 @@
      "Path": "/special-words/parameters/as",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAs"
     },
     {
      "$id": "411",
@@ -4310,7 +4539,9 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "413",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4338,7 +4569,8 @@
      "Path": "/special-words/parameters/assert",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAssert"
     },
     {
      "$id": "415",
@@ -4355,7 +4587,9 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "417",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4383,7 +4617,8 @@
      "Path": "/special-words/parameters/async",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAsync"
     },
     {
      "$id": "419",
@@ -4400,7 +4635,9 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "421",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4428,7 +4665,8 @@
      "Path": "/special-words/parameters/await",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAwait"
     },
     {
      "$id": "423",
@@ -4445,7 +4683,9 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "425",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4473,7 +4713,8 @@
      "Path": "/special-words/parameters/break",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withBreak"
     },
     {
      "$id": "427",
@@ -4490,7 +4731,9 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "429",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4518,7 +4761,8 @@
      "Path": "/special-words/parameters/class",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withClass"
     },
     {
      "$id": "431",
@@ -4535,7 +4779,9 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "433",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4563,7 +4809,8 @@
      "Path": "/special-words/parameters/constructor",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withConstructor"
     },
     {
      "$id": "435",
@@ -4580,7 +4827,9 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "437",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4608,7 +4857,8 @@
      "Path": "/special-words/parameters/continue",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withContinue"
     },
     {
      "$id": "439",
@@ -4625,7 +4875,9 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "441",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4653,7 +4905,8 @@
      "Path": "/special-words/parameters/def",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withDef"
     },
     {
      "$id": "443",
@@ -4670,7 +4923,9 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "445",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4698,7 +4953,8 @@
      "Path": "/special-words/parameters/del",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withDel"
     },
     {
      "$id": "447",
@@ -4715,7 +4971,9 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "449",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4743,7 +5001,8 @@
      "Path": "/special-words/parameters/elif",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withElif"
     },
     {
      "$id": "451",
@@ -4760,7 +5019,9 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "453",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4788,7 +5049,8 @@
      "Path": "/special-words/parameters/else",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withElse"
     },
     {
      "$id": "455",
@@ -4805,7 +5067,9 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "457",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4833,7 +5097,8 @@
      "Path": "/special-words/parameters/except",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withExcept"
     },
     {
      "$id": "459",
@@ -4850,7 +5115,9 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "461",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4878,7 +5145,8 @@
      "Path": "/special-words/parameters/exec",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withExec"
     },
     {
      "$id": "463",
@@ -4895,7 +5163,9 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "465",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4923,7 +5193,8 @@
      "Path": "/special-words/parameters/finally",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFinally"
     },
     {
      "$id": "467",
@@ -4940,7 +5211,9 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "469",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4968,7 +5241,8 @@
      "Path": "/special-words/parameters/for",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFor"
     },
     {
      "$id": "471",
@@ -4985,7 +5259,9 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "473",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5013,7 +5289,8 @@
      "Path": "/special-words/parameters/from",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFrom"
     },
     {
      "$id": "475",
@@ -5030,7 +5307,9 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "477",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5058,7 +5337,8 @@
      "Path": "/special-words/parameters/global",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withGlobal"
     },
     {
      "$id": "479",
@@ -5075,7 +5355,9 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "481",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5103,7 +5385,8 @@
      "Path": "/special-words/parameters/if",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIf"
     },
     {
      "$id": "483",
@@ -5120,7 +5403,9 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "485",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5148,7 +5433,8 @@
      "Path": "/special-words/parameters/import",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withImport"
     },
     {
      "$id": "487",
@@ -5165,7 +5451,9 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "489",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5193,7 +5481,8 @@
      "Path": "/special-words/parameters/in",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIn"
     },
     {
      "$id": "491",
@@ -5210,7 +5499,9 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "493",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5238,7 +5529,8 @@
      "Path": "/special-words/parameters/is",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIs"
     },
     {
      "$id": "495",
@@ -5255,7 +5547,9 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "497",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5283,7 +5577,8 @@
      "Path": "/special-words/parameters/lambda",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withLambda"
     },
     {
      "$id": "499",
@@ -5300,7 +5595,9 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "501",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5328,7 +5625,8 @@
      "Path": "/special-words/parameters/not",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withNot"
     },
     {
      "$id": "503",
@@ -5345,7 +5643,9 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "505",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5373,7 +5673,8 @@
      "Path": "/special-words/parameters/or",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withOr"
     },
     {
      "$id": "507",
@@ -5390,7 +5691,9 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "509",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5418,7 +5721,8 @@
      "Path": "/special-words/parameters/pass",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withPass"
     },
     {
      "$id": "511",
@@ -5435,7 +5739,9 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "513",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5463,7 +5769,8 @@
      "Path": "/special-words/parameters/raise",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withRaise"
     },
     {
      "$id": "515",
@@ -5480,7 +5787,9 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "517",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5508,7 +5817,8 @@
      "Path": "/special-words/parameters/return",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withReturn"
     },
     {
      "$id": "519",
@@ -5525,7 +5835,9 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "521",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5553,7 +5865,8 @@
      "Path": "/special-words/parameters/try",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withTry"
     },
     {
      "$id": "523",
@@ -5570,7 +5883,9 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "525",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5598,7 +5913,8 @@
      "Path": "/special-words/parameters/while",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withWhile"
     },
     {
      "$id": "527",
@@ -5615,7 +5931,9 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "529",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5643,7 +5961,8 @@
      "Path": "/special-words/parameters/with",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withWith"
     },
     {
      "$id": "531",
@@ -5660,7 +5979,9 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "533",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5688,7 +6009,8 @@
      "Path": "/special-words/parameters/yield",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withYield"
     },
     {
      "$id": "535",
@@ -5705,7 +6027,9 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "537",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5733,7 +6057,8 @@
      "Path": "/special-words/parameters/cancellationToken",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withCancellationToken"
     }
    ],
    "Protocol": {

@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "MixApiVersion.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -40,7 +42,9 @@
      "Description": "",
      "Type": {
       "$id": "7",
-      "Kind": "int64"
+      "Kind": "int64",
+      "Name": "int64",
+      "CrossLanguageDefinitionId": "TypeSpec.int64"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -52,7 +56,9 @@
      "Description": "",
      "Type": {
       "$id": "9",
-      "Kind": "int64"
+      "Kind": "int64",
+      "Name": "int64",
+      "CrossLanguageDefinitionId": "TypeSpec.int64"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -64,7 +70,9 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -86,7 +94,9 @@
      "Description": "pet name",
      "Type": {
       "$id": "14",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -98,7 +108,9 @@
      "Description": "",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -110,7 +122,9 @@
      "Description": "",
      "Type": {
       "$id": "18",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -132,7 +146,9 @@
      "Description": "",
      "Type": {
       "$id": "21",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -144,7 +160,9 @@
      "Description": "",
      "Type": {
       "$id": "23",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -183,7 +201,15 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "28",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "29",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -193,21 +219,23 @@
  ],
  "Clients": [
   {
-   "$id": "29",
+   "$id": "30",
    "Name": "MixApiVersionClient",
    "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
    "Operations": [],
    "Protocol": {
-    "$id": "30"
+    "$id": "31"
    },
    "Parameters": [
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "petStoreUrl",
      "NameInRequest": "petStoreUrl",
      "Type": {
-      "$id": "32",
-      "Kind": "uri"
+      "$id": "33",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -222,12 +250,12 @@
    ]
   },
   {
-   "$id": "33",
+   "$id": "34",
    "Name": "Pets",
    "Description": "Manage your pets.",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "35",
      "Name": "delete",
      "ResourceName": "Pet",
      "Summary": "delete.",
@@ -235,12 +263,14 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "36",
-        "Kind": "uri"
+        "$id": "37",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -253,13 +283,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "37",
+       "$id": "38",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "38",
-        "Kind": "string"
+        "$id": "39",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -269,22 +301,26 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "40",
         "Type": {
-         "$id": "40",
-         "Kind": "string"
+         "$id": "41",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-11-30-preview"
        }
       },
       {
-       "$id": "41",
+       "$id": "42",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "pet name",
        "Type": {
-        "$id": "42",
-        "Kind": "string"
+        "$id": "43",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -295,15 +331,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "45",
         "Kind": "constant",
         "ValueType": {
-         "$id": "45",
-         "Kind": "string"
+         "$id": "46",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -318,7 +356,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "47",
        "StatusCodes": [
         204
        ],
@@ -333,26 +371,29 @@
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.delete"
     },
     {
-     "$id": "47",
+     "$id": "48",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "36"
       },
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "49",
-        "Kind": "int32"
+        "$id": "50",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -363,15 +404,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "50",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "51",
+        "$id": "52",
         "Kind": "constant",
         "ValueType": {
-         "$id": "52",
-         "Kind": "string"
+         "$id": "53",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -386,7 +429,7 @@
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -401,7 +444,7 @@
        ]
       },
       {
-       "$id": "54",
+       "$id": "55",
        "StatusCodes": [
         304
        ],
@@ -422,27 +465,30 @@
      "Path": "/pets/{petId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.read"
     },
     {
-     "$id": "55",
+     "$id": "56",
      "Name": "create",
      "ResourceName": "Pets",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "35"
+       "$ref": "36"
       },
       {
-       "$id": "56",
+       "$id": "57",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "57",
+        "$id": "58",
         "Kind": "constant",
         "ValueType": {
-         "$id": "58",
-         "Kind": "string"
+         "$id": "59",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-07-09"
        },
@@ -455,16 +501,18 @@
        "Kind": "Constant"
       },
       {
-       "$id": "59",
+       "$id": "60",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "60",
+        "$id": "61",
         "Kind": "constant",
         "ValueType": {
-         "$id": "61",
-         "Kind": "string"
+         "$id": "62",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -477,15 +525,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "62",
+       "$id": "63",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "63",
+        "$id": "64",
         "Kind": "constant",
         "ValueType": {
-         "$id": "64",
-         "Kind": "string"
+         "$id": "65",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -498,7 +548,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "65",
+       "$id": "66",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -515,7 +565,7 @@
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
@@ -539,25 +589,26 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.create"
     }
    ],
    "Protocol": {
-    "$id": "67"
+    "$id": "68"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "35"
+     "$ref": "36"
     }
    ]
   },
   {
-   "$id": "68",
+   "$id": "69",
    "Name": "ListPetToysResponse",
    "Operations": [
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -565,12 +616,14 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "70",
+       "$id": "71",
        "Name": "petStoreUrl",
        "NameInRequest": "petStoreUrl",
        "Type": {
-        "$id": "71",
-        "Kind": "uri"
+        "$id": "72",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -583,13 +636,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "72",
+       "$id": "73",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "73",
-        "Kind": "string"
+        "$id": "74",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -599,24 +654,28 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "74",
+        "$id": "75",
         "Type": {
-         "$id": "75",
-         "Kind": "string"
+         "$id": "76",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-11-30-preview"
        }
       },
       {
-       "$id": "76",
+       "$id": "77",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "78",
         "Kind": "constant",
         "ValueType": {
-         "$id": "78",
-         "Kind": "string"
+         "$id": "79",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -631,7 +690,7 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "80",
        "StatusCodes": [
         200
        ],
@@ -652,21 +711,22 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "80",
+      "$id": "81",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.ListPetToysResponse.listPet"
     }
    ],
    "Protocol": {
-    "$id": "81"
+    "$id": "82"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "70"
+     "$ref": "71"
     }
    ]
   }

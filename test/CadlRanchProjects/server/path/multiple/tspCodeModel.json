@@ -12,7 +12,9 @@
    "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -46,7 +48,9 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "8",
-        "Kind": "uri"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -79,7 +83,9 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "v1.0"
        }
@@ -102,7 +108,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.noOperationParams"
     },
     {
      "$id": "13",
@@ -122,7 +129,9 @@
        "NameInRequest": "keyword",
        "Type": {
         "$id": "15",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -150,7 +159,8 @@
      "Path": "/{keyword}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.withOperationPathParam"
     }
    ],
    "Protocol": {

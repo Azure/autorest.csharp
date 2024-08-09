@@ -11,8 +11,8 @@ using Scm.Client.Naming.Models;
 namespace Scm.Client.Naming
 {
     // Data plane generated sub-client.
-    /// <summary> The Model sub-client. </summary>
-    public partial class Model
+    /// <summary> The ClientModel sub-client. </summary>
+    public partial class ClientModel
     {
         private readonly ClientPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -20,24 +20,24 @@ namespace Scm.Client.Naming
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual ClientPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Model for mocking. </summary>
-        protected Model()
+        /// <summary> Initializes a new instance of ClientModel for mocking. </summary>
+        protected ClientModel()
         {
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Initializes a new instance of ClientModel. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The <see cref="string"/> to use. </param>
-        internal Model(ClientPipeline pipeline, Uri endpoint)
+        internal ClientModel(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
         /// <summary> Client. </summary>
-        /// <param name="body"> The <see cref="ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> ClientAsync(ClientModel body)
+        public virtual async Task<ClientResult> ClientAsync(Models.ClientModel body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -47,9 +47,9 @@ namespace Scm.Client.Naming
         }
 
         /// <summary> Client. </summary>
-        /// <param name="body"> The <see cref="ClientModel"/> to use. </param>
+        /// <param name="body"> The <see cref="Models.ClientModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult Client(ClientModel body)
+        public virtual ClientResult Client(Models.ClientModel body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
@@ -68,7 +68,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ClientAsync(ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(Models.ClientModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -96,7 +96,7 @@ namespace Scm.Client.Naming
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(ClientModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Client(Models.ClientModel)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

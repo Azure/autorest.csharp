@@ -11,7 +11,9 @@
    "Name": "Thing_requiredLiteralString",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -32,7 +34,9 @@
    "Name": "Thing_requiredLiteralInt",
    "ValueType": {
     "$id": "6",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Name": "int32",
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
@@ -53,7 +57,9 @@
    "Name": "Thing_requiredLiteralFloat",
    "ValueType": {
     "$id": "9",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Values": [
     {
@@ -74,7 +80,9 @@
    "Name": "Thing_optionalLiteralString",
    "ValueType": {
     "$id": "12",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -95,7 +103,9 @@
    "Name": "Thing_optionalLiteralInt",
    "ValueType": {
     "$id": "15",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Name": "int32",
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
@@ -116,7 +126,9 @@
    "Name": "Thing_optionalLiteralFloat",
    "ValueType": {
     "$id": "18",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Values": [
     {
@@ -137,7 +149,9 @@
    "Name": "AnonymousBodyRequest_requiredLiteralString",
    "ValueType": {
     "$id": "21",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -158,7 +172,9 @@
    "Name": "AnonymousBodyRequest_requiredLiteralInt",
    "ValueType": {
     "$id": "24",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Name": "int32",
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
@@ -179,7 +195,9 @@
    "Name": "AnonymousBodyRequest_requiredLiteralFloat",
    "ValueType": {
     "$id": "27",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Values": [
     {
@@ -200,7 +218,9 @@
    "Name": "AnonymousBodyRequest_optionalLiteralString",
    "ValueType": {
     "$id": "30",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -221,7 +241,9 @@
    "Name": "AnonymousBodyRequest_optionalLiteralInt",
    "ValueType": {
     "$id": "33",
-    "Kind": "int32"
+    "Kind": "int32",
+    "Name": "int32",
+    "CrossLanguageDefinitionId": "TypeSpec.int32"
    },
    "Values": [
     {
@@ -242,7 +264,9 @@
    "Name": "AnonymousBodyRequest_optionalLiteralFloat",
    "ValueType": {
     "$id": "36",
-    "Kind": "float32"
+    "Kind": "float32",
+    "Name": "float32",
+    "CrossLanguageDefinitionId": "TypeSpec.float32"
    },
    "Values": [
     {
@@ -264,7 +288,9 @@
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.Versions",
    "ValueType": {
     "$id": "39",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -293,7 +319,9 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "43",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -310,7 +338,9 @@
       "VariantTypes": [
        {
         "$id": "46",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "47",
@@ -318,13 +348,17 @@
         "Name": "Array",
         "ValueType": {
          "$id": "48",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "49",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        }
       ]
      },
@@ -389,7 +423,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "58",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       },
       "Value": false
      },
@@ -454,7 +490,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "67",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       },
       "Value": true
      },
@@ -468,7 +506,9 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "69",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -487,7 +527,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "73",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -509,7 +551,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "77",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -534,7 +578,9 @@
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "80",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -546,7 +592,9 @@
      "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "82",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -558,7 +606,9 @@
      "Description": "Required readonly int",
      "Type": {
       "$id": "84",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -579,7 +629,9 @@
      "Description": "name of the Thing",
      "Type": {
       "$id": "87",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -596,7 +648,9 @@
       "VariantTypes": [
        {
         "$id": "90",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        {
         "$id": "91",
@@ -604,13 +658,17 @@
         "Name": "Array",
         "ValueType": {
          "$id": "92",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
        {
         "$id": "93",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        }
       ]
      },
@@ -675,7 +733,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "102",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       },
       "Value": false
      },
@@ -740,7 +800,9 @@
       "Kind": "constant",
       "ValueType": {
        "$id": "111",
-       "Kind": "boolean"
+       "Kind": "boolean",
+       "Name": "boolean",
+       "CrossLanguageDefinitionId": "TypeSpec.boolean"
       },
       "Value": true
      },
@@ -754,7 +816,9 @@
      "Description": "description with xml <|endoftext|>",
      "Type": {
       "$id": "113",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -773,7 +837,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "117",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -795,7 +861,9 @@
        "Name": "Array",
        "ValueType": {
         "$id": "121",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "CrossLanguageDefinitionId": "TypeSpec.Array"
       }
@@ -819,7 +887,9 @@
      "Description": "url format",
      "Type": {
       "$id": "124",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -831,8 +901,15 @@
      "Description": "uuid format",
      "Type": {
       "$id": "126",
-      "Kind": "uuid",
-      "Encode": "string"
+      "Kind": "string",
+      "Name": "uuid",
+      "CrossLanguageDefinitionId": "Azure.Core.uuid",
+      "BaseType": {
+       "$id": "127",
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      }
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -840,26 +917,28 @@
    ]
   },
   {
-   "$id": "127",
+   "$id": "128",
    "Kind": "model",
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous",
    "Usage": "Spread,Json",
    "Properties": [
     {
-     "$id": "128",
+     "$id": "129",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the NotFriend",
      "Type": {
-      "$id": "129",
-      "Kind": "string"
+      "$id": "130",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "130",
+     "$id": "131",
      "Name": "format",
      "SerializedName": "format",
      "Description": "",
@@ -872,7 +951,7 @@
    ]
   },
   {
-   "$id": "131",
+   "$id": "132",
    "Kind": "model",
    "Name": "Friend",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
@@ -880,19 +959,21 @@
    "Description": "this is not a friendly model but with a friendly name",
    "Properties": [
     {
-     "$id": "132",
+     "$id": "133",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the NotFriend",
      "Type": {
-      "$id": "133",
-      "Kind": "string"
+      "$id": "134",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "134",
+     "$id": "135",
      "Name": "format",
      "SerializedName": "format",
      "Description": "",
@@ -905,20 +986,22 @@
    ]
   },
   {
-   "$id": "135",
+   "$id": "136",
    "Kind": "model",
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous",
    "Usage": "Spread,Json",
    "Properties": [
     {
-     "$id": "136",
+     "$id": "137",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
      "Type": {
-      "$id": "137",
-      "Kind": "string"
+      "$id": "138",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -926,7 +1009,7 @@
    ]
   },
   {
-   "$id": "138",
+   "$id": "139",
    "Kind": "model",
    "Name": "ProjectedModel",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
@@ -934,13 +1017,15 @@
    "Description": "this is a model with a projected name",
    "Properties": [
     {
-     "$id": "139",
+     "$id": "140",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
      "Type": {
-      "$id": "140",
-      "Kind": "string"
+      "$id": "141",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -948,7 +1033,7 @@
    ]
   },
   {
-   "$id": "141",
+   "$id": "142",
    "Kind": "model",
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel.Response.anonymous",
@@ -958,24 +1043,26 @@
  ],
  "Clients": [
   {
-   "$id": "142",
+   "$id": "143",
    "Name": "CustomizedTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "143",
+     "$id": "144",
      "Name": "sayHi",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "144",
+       "$id": "145",
        "Name": "unbrandedTypeSpecUrl",
        "NameInRequest": "unbrandedTypeSpecUrl",
        "Type": {
-        "$id": "145",
-        "Kind": "uri"
+        "$id": "146",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -988,12 +1075,14 @@
        "Kind": "Client"
       },
       {
-       "$id": "146",
+       "$id": "147",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "147",
-        "Kind": "string"
+        "$id": "148",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1004,12 +1093,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "148",
+       "$id": "149",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "149",
-        "Kind": "string"
+        "$id": "150",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1020,12 +1111,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "150",
+       "$id": "151",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "151",
-        "Kind": "string"
+        "$id": "152",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -1036,15 +1129,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "152",
+       "$id": "153",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "153",
+        "$id": "154",
         "Kind": "constant",
         "ValueType": {
-         "$id": "154",
-         "Kind": "string"
+         "$id": "155",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1059,7 +1154,7 @@
      ],
      "Responses": [
       {
-       "$id": "155",
+       "$id": "156",
        "StatusCodes": [
         200
        ],
@@ -1080,25 +1175,28 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.sayHi"
     },
     {
-     "$id": "156",
+     "$id": "157",
      "Name": "helloAgain",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "157",
+       "$id": "158",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "158",
-        "Kind": "string"
+        "$id": "159",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1109,15 +1207,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "159",
+       "$id": "160",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "160",
+        "$id": "161",
         "Kind": "constant",
         "ValueType": {
-         "$id": "161",
-         "Kind": "string"
+         "$id": "162",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "text/plain"
        },
@@ -1130,12 +1230,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "162",
+       "$id": "163",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "163",
-        "Kind": "string"
+        "$id": "164",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -1146,15 +1248,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "164",
+       "$id": "165",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "165",
+        "$id": "166",
         "Kind": "constant",
         "ValueType": {
-         "$id": "166",
-         "Kind": "string"
+         "$id": "167",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1167,7 +1271,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "167",
+       "$id": "168",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1184,7 +1288,7 @@
      ],
      "Responses": [
       {
-       "$id": "168",
+       "$id": "169",
        "StatusCodes": [
         200
        ],
@@ -1208,25 +1312,28 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloAgain"
     },
     {
-     "$id": "169",
+     "$id": "170",
      "Name": "noContentType",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "170",
+       "$id": "171",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "171",
-        "Kind": "string"
+        "$id": "172",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1237,12 +1344,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "172",
+       "$id": "173",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "173",
-        "Kind": "string"
+        "$id": "174",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -1253,16 +1362,18 @@
        "Kind": "Method"
       },
       {
-       "$id": "174",
+       "$id": "175",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "175",
+        "$id": "176",
         "Kind": "constant",
         "ValueType": {
-         "$id": "176",
-         "Kind": "string"
+         "$id": "177",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1275,15 +1386,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "177",
+       "$id": "178",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "178",
+        "$id": "179",
         "Kind": "constant",
         "ValueType": {
-         "$id": "179",
-         "Kind": "string"
+         "$id": "180",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1296,7 +1409,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "180",
+       "$id": "181",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1313,7 +1426,7 @@
      ],
      "Responses": [
       {
-       "$id": "181",
+       "$id": "182",
        "StatusCodes": [
         200
        ],
@@ -1337,28 +1450,31 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.noContentType"
     },
     {
-     "$id": "182",
+     "$id": "183",
      "Name": "helloDemo2",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "183",
+       "$id": "184",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "184",
+        "$id": "185",
         "Kind": "constant",
         "ValueType": {
-         "$id": "185",
-         "Kind": "string"
+         "$id": "186",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1373,7 +1489,7 @@
      ],
      "Responses": [
       {
-       "$id": "186",
+       "$id": "187",
        "StatusCodes": [
         200
        ],
@@ -1394,29 +1510,32 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloDemo2"
     },
     {
-     "$id": "187",
+     "$id": "188",
      "Name": "createLiteral",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "188",
+       "$id": "189",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "189",
+        "$id": "190",
         "Kind": "constant",
         "ValueType": {
-         "$id": "190",
-         "Kind": "string"
+         "$id": "191",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1429,15 +1548,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "191",
+       "$id": "192",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "192",
+        "$id": "193",
         "Kind": "constant",
         "ValueType": {
-         "$id": "193",
-         "Kind": "string"
+         "$id": "194",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1450,7 +1571,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "194",
+       "$id": "195",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1467,7 +1588,7 @@
      ],
      "Responses": [
       {
-       "$id": "195",
+       "$id": "196",
        "StatusCodes": [
         200
        ],
@@ -1491,28 +1612,31 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.createLiteral"
     },
     {
-     "$id": "196",
+     "$id": "197",
      "Name": "helloLiteral",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "197",
+       "$id": "198",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "198",
+        "$id": "199",
         "Kind": "constant",
         "ValueType": {
-         "$id": "199",
-         "Kind": "string"
+         "$id": "200",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "test"
        },
@@ -1525,15 +1649,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "200",
+       "$id": "201",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "201",
+        "$id": "202",
         "Kind": "constant",
         "ValueType": {
-         "$id": "202",
-         "Kind": "int32"
+         "$id": "203",
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "Value": 123
        },
@@ -1546,15 +1672,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "203",
+       "$id": "204",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "204",
+        "$id": "205",
         "Kind": "constant",
         "ValueType": {
-         "$id": "205",
-         "Kind": "boolean"
+         "$id": "206",
+         "Kind": "boolean",
+         "Name": "boolean",
+         "CrossLanguageDefinitionId": "TypeSpec.boolean"
         },
         "Value": true
        },
@@ -1567,15 +1695,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "206",
+       "$id": "207",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "207",
+        "$id": "208",
         "Kind": "constant",
         "ValueType": {
-         "$id": "208",
-         "Kind": "string"
+         "$id": "209",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1590,7 +1720,7 @@
      ],
      "Responses": [
       {
-       "$id": "209",
+       "$id": "210",
        "StatusCodes": [
         200
        ],
@@ -1611,30 +1741,35 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.helloLiteral"
     },
     {
-     "$id": "210",
+     "$id": "211",
      "Name": "topAction",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "211",
+       "$id": "212",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "212",
+        "$id": "213",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc3339",
         "WireType": {
-         "$id": "213",
-         "Kind": "string"
-        }
+         "$id": "214",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -1645,15 +1780,17 @@
        "Kind": "Method"
       },
       {
-       "$id": "214",
+       "$id": "215",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "215",
+        "$id": "216",
         "Kind": "constant",
         "ValueType": {
-         "$id": "216",
-         "Kind": "string"
+         "$id": "217",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1668,7 +1805,7 @@
      ],
      "Responses": [
       {
-       "$id": "217",
+       "$id": "218",
        "StatusCodes": [
         200
        ],
@@ -1689,28 +1826,31 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.topAction"
     },
     {
-     "$id": "218",
+     "$id": "219",
      "Name": "topAction2",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "219",
+       "$id": "220",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "220",
+        "$id": "221",
         "Kind": "constant",
         "ValueType": {
-         "$id": "221",
-         "Kind": "string"
+         "$id": "222",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1725,7 +1865,7 @@
      ],
      "Responses": [
       {
-       "$id": "222",
+       "$id": "223",
        "StatusCodes": [
         200
        ],
@@ -1746,29 +1886,32 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.topAction2"
     },
     {
-     "$id": "223",
+     "$id": "224",
      "Name": "patchAction",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "224",
+       "$id": "225",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "225",
+        "$id": "226",
         "Kind": "constant",
         "ValueType": {
-         "$id": "226",
-         "Kind": "string"
+         "$id": "227",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1781,15 +1924,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "227",
+       "$id": "228",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "228",
+        "$id": "229",
         "Kind": "constant",
         "ValueType": {
-         "$id": "229",
-         "Kind": "string"
+         "$id": "230",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1802,7 +1947,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "230",
+       "$id": "231",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1819,7 +1964,7 @@
      ],
      "Responses": [
       {
-       "$id": "231",
+       "$id": "232",
        "StatusCodes": [
         200
        ],
@@ -1843,29 +1988,32 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.patchAction"
     },
     {
-     "$id": "232",
+     "$id": "233",
      "Name": "anonymousBody",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "233",
+       "$id": "234",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "234",
+        "$id": "235",
         "Kind": "constant",
         "ValueType": {
-         "$id": "235",
-         "Kind": "string"
+         "$id": "236",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1878,15 +2026,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "236",
+       "$id": "237",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "237",
+        "$id": "238",
         "Kind": "constant",
         "ValueType": {
-         "$id": "238",
-         "Kind": "string"
+         "$id": "239",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1899,7 +2049,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "239",
+       "$id": "240",
        "Name": "anonymousBodyRequest",
        "NameInRequest": "anonymousBodyRequest",
        "Type": {
@@ -1916,7 +2066,7 @@
      ],
      "Responses": [
       {
-       "$id": "240",
+       "$id": "241",
        "StatusCodes": [
         200
        ],
@@ -1940,29 +2090,32 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody"
     },
     {
-     "$id": "241",
+     "$id": "242",
      "Name": "friendlyModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "242",
+       "$id": "243",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "243",
+        "$id": "244",
         "Kind": "constant",
         "ValueType": {
-         "$id": "244",
-         "Kind": "string"
+         "$id": "245",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1975,15 +2128,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "245",
+       "$id": "246",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "246",
+        "$id": "247",
         "Kind": "constant",
         "ValueType": {
-         "$id": "247",
-         "Kind": "string"
+         "$id": "248",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -1996,11 +2151,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "248",
+       "$id": "249",
        "Name": "friendlyModelRequest",
        "NameInRequest": "friendlyModelRequest",
        "Type": {
-        "$ref": "127"
+        "$ref": "128"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2013,12 +2168,12 @@
      ],
      "Responses": [
       {
-       "$id": "249",
+       "$id": "250",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "131"
+        "$ref": "132"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2037,29 +2192,34 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel"
     },
     {
-     "$id": "250",
+     "$id": "251",
      "Name": "addTimeHeader",
      "ResourceName": "CustomizedTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "251",
+       "$id": "252",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "252",
+        "$id": "253",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
-         "$id": "253",
-         "Kind": "string"
-        }
+         "$id": "254",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2072,7 +2232,7 @@
      ],
      "Responses": [
       {
-       "$id": "254",
+       "$id": "255",
        "StatusCodes": [
         204
        ],
@@ -2087,29 +2247,32 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.addTimeHeader"
     },
     {
-     "$id": "255",
+     "$id": "256",
      "Name": "projectedNameModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "256",
+       "$id": "257",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "257",
+        "$id": "258",
         "Kind": "constant",
         "ValueType": {
-         "$id": "258",
-         "Kind": "string"
+         "$id": "259",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2122,15 +2285,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "259",
+       "$id": "260",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "260",
+        "$id": "261",
         "Kind": "constant",
         "ValueType": {
-         "$id": "261",
-         "Kind": "string"
+         "$id": "262",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2143,11 +2308,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "262",
+       "$id": "263",
        "Name": "projectedNameModelRequest",
        "NameInRequest": "projectedNameModelRequest",
        "Type": {
-        "$ref": "135"
+        "$ref": "136"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2160,12 +2325,12 @@
      ],
      "Responses": [
       {
-       "$id": "263",
+       "$id": "264",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "138"
+        "$ref": "139"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2184,28 +2349,31 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel"
     },
     {
-     "$id": "264",
+     "$id": "265",
      "Name": "returnsAnonymousModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "265",
+       "$id": "266",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "266",
+        "$id": "267",
         "Kind": "constant",
         "ValueType": {
-         "$id": "267",
-         "Kind": "string"
+         "$id": "268",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2220,12 +2388,12 @@
      ],
      "Responses": [
       {
-       "$id": "268",
+       "$id": "269",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "141"
+        "$ref": "142"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2241,25 +2409,28 @@
      "Path": "/returnsAnonymousModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.returnsAnonymousModel"
     },
     {
-     "$id": "269",
+     "$id": "270",
      "Name": "getUnknownValue",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "270",
+       "$id": "271",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "271",
-        "Kind": "string"
+        "$id": "272",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2272,16 +2443,18 @@
      ],
      "Responses": [
       {
-       "$id": "272",
+       "$id": "273",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "273",
+        "$id": "274",
         "Kind": "constant",
         "ValueType": {
-         "$id": "274",
-         "Kind": "string"
+         "$id": "275",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "Sunday"
        },
@@ -2306,29 +2479,32 @@
      "Path": "/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.getUnknownValue"
     },
     {
-     "$id": "275",
+     "$id": "276",
      "Name": "internalProtocol",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "276",
+       "$id": "277",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "277",
+        "$id": "278",
         "Kind": "constant",
         "ValueType": {
-         "$id": "278",
-         "Kind": "string"
+         "$id": "279",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2341,15 +2517,17 @@
        "Kind": "Constant"
       },
       {
-       "$id": "279",
+       "$id": "280",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "280",
+        "$id": "281",
         "Kind": "constant",
         "ValueType": {
-         "$id": "281",
-         "Kind": "string"
+         "$id": "282",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "application/json"
        },
@@ -2362,7 +2540,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "282",
+       "$id": "283",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2379,7 +2557,7 @@
      ],
      "Responses": [
       {
-       "$id": "283",
+       "$id": "284",
        "StatusCodes": [
         200
        ],
@@ -2403,22 +2581,23 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.internalProtocol"
     },
     {
-     "$id": "284",
+     "$id": "285",
      "Name": "stillConvenient",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       }
      ],
      "Responses": [
       {
-       "$id": "285",
+       "$id": "286",
        "StatusCodes": [
         204
        ],
@@ -2433,25 +2612,28 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.stillConvenient"
     },
     {
-     "$id": "286",
+     "$id": "287",
      "Name": "headAsBoolean",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "144"
+       "$ref": "145"
       },
       {
-       "$id": "287",
+       "$id": "288",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "288",
-        "Kind": "string"
+        "$id": "289",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -2464,7 +2646,7 @@
      ],
      "Responses": [
       {
-       "$id": "289",
+       "$id": "290",
        "StatusCodes": [
         204
        ],
@@ -2479,23 +2661,24 @@
      "Path": "/headAsBoolean/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.headAsBoolean"
     }
    ],
    "Protocol": {
-    "$id": "290"
+    "$id": "291"
    },
    "Parameters": [
     {
-     "$ref": "144"
+     "$ref": "145"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "291",
+  "$id": "292",
   "ApiKey": {
-   "$id": "292",
+   "$id": "293",
    "Name": "my-api-key"
   }
  }
