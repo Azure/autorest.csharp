@@ -42,6 +42,8 @@ namespace AutoRest.CSharp.Common.Input
             InputType? additionalProperties = null;
             InputModelType? baseModel = null;
             InputModelType? model = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -53,7 +55,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
                     || reader.TryReadWithConverter(nameof(InputModelType.DiscriminatorProperty), options, ref discriminatorProperty)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.AdditionalProperties), options, ref additionalProperties);
+                    || reader.TryReadWithConverter(nameof(InputModelType.AdditionalProperties), options, ref additionalProperties)
+                    || reader.TryReadWithConverter(nameof(InputModelType.Decorators), options, ref decorators);
 
                 if (isKnownProperty)
                 {
@@ -79,7 +82,7 @@ namespace AutoRest.CSharp.Common.Input
                 {
                     model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.Multipart));
+                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.MultipartFormData));
                     continue;
                 }
                 if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
@@ -97,16 +100,17 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+            var result = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, resolver);
+            result.Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
+            return result;
         }
 
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? crossLanguageDefinitionId, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            if (usageString != null)
+            if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
             {
-                Enum.TryParse(usageString, ignoreCase: true, out usage);
+                throw new JsonException($"Cannot parse usage {usageString}");
             }
 
             var derivedModels = new List<InputModelType>();

@@ -276,39 +276,6 @@ model RoundTripModel extends BaseModel {
   optionalModel?: BaseModelWithDiscriminatorFromIsKeyword;
 }
 
-@doc("Model used both as input and output with primitive types")
-model RoundTripPrimitiveModel extends BaseModel {
-  @doc("Required string, illustrating a reference type property.")
-  requiredString: string;
-
-  @doc("Required int, illustrating a value type property.")
-  requiredInt: int32;
-
-  @doc("Required int64, illustrating a value type property.")
-  requiredInt64: int64;
-
-  @doc("Required safeint, illustrating a value type property.")
-  requiredSafeInt: safeint;
-
-  @doc("Required float, illustrating a value type property.")
-  requiredFloat: float32;
-
-  @doc("Required double, illustrating a value type property.")
-  required_Double: float64;
-
-  @doc("Required bolean, illustrating a value type property.")
-  requiredBoolean: boolean;
-
-  @doc("Required date time offset, illustrating a reference type property.")
-  requiredDateTimeOffset: utcDateTime;
-
-  @doc("Required time span, illustrating a value type property.")
-  requiredTimeSpan: duration;
-
-  @doc("Required collection of which the element is a nullable float")
-  requiredCollectionWithNullableFloatElement: (float32 | null) [];
-}
-
 @doc("Model used only as input")
 model InputModel {
   @doc("Required string")
@@ -411,150 +378,6 @@ model OutputModel {
   optionalNullableRecord?: Record<RecordItem> | null;
 }
 
-@doc("RoundTrip model with optional properties.")
-@deprecated("deprecated for test")
-model RoundTripOptionalModel {
-  @doc("Optional string, illustrating an optional reference type property.")
-  optionalString?: string;
-
-  @doc("Optional int, illustrating an optional value type property.")
-  optionalInt?: int32;
-
-  @doc("Optional string collection.")
-  optionalStringList?: string[];
-  
-  @doc("Optional int collection.")
-  optionalIntList?: int32[];
-
-  @doc("Optional model collection")
-  optionalModelList?: CollectionItem[];
-
-  @doc("Optional model.")
-  optionalModel?: DerivedModel;
-
-  @doc("Optional model with properties on base")
-  optionalModelWithPropertiesOnBase?: DerivedModelWithProperties;
-
-  @doc("Optional fixed string enum")
-  optionalFixedStringEnum?: FixedStringEnum;
-
-  @doc("Optional extensible enum")
-  optionalExtensibleEnum?: ExtensibleEnum;
-
-  @doc("Optional int record")
-  optionalIntRecord?: Record<int32>;
-
-  @doc("Optional string record")
-  optionalStringRecord?: Record<string>;
-
-  @doc("Optional model record")
-  optionalModelRecord?: Record<RecordItem>;
-
-  @doc("Optional plainDate")
-  optionalPlainDate?: plainDate;
-
-  @doc("Optional plainTime")
-  optionalPlainTime?: plainTime;
-
-  @doc("Optional collection of which the element is a nullable int")
-  optionalCollectionWithNullableIntElement?: (int32 | null) [];
-}
-
-@doc("Output model with readonly properties.")
-model RoundTripReadOnlyModel {
-  @doc("Required string, illustrating a readonly reference type property.")
-  @visibility("read")
-  requiredReadonlyString: string;
-
-  @doc("Required int, illustrating a readonly value type property.")
-  @visibility("read")
-  requiredReadonlyInt: int32;
-
-  @doc("Optional string, illustrating a readonly reference type property.")
-  @visibility("read")
-  optionalReadonlyString?: string;
-
-  @doc("Optional int, illustrating a readonly value type property.")
-  @visibility("read")
-  optionalReadonlyInt?: int32;
-
-  @doc("Required readonly model.")
-  @visibility("read")
-  requiredReadonlyModel: DerivedModel;
-
-  @doc("Optional readonly model.")
-  @visibility("read")
-  optionalReadonlyModel?: DerivedModel;
-
-  @doc("Required readonly fixed string enum")
-  @visibility("read")
-  requiredReadonlyFixedStringEnum: FixedStringEnum;
-
-  @doc("Required readonly extensible enum")
-  @visibility("read")
-  requiredReadonlyExtensibleEnum: ExtensibleEnum;
-
-  @doc("Optional readonly fixed string enum")
-  @visibility("read")
-  optionalReadonlyFixedStringEnum: FixedStringEnum;
-
-  @doc("Optional readonly extensible enum")
-  @visibility("read")
-  optionalReadonlyExtensibleEnum: ExtensibleEnum;
-
-  @doc("Required readonly string collection.")
-  @visibility("read")
-  requiredReadonlyStringList: string[];
-
-  @doc("Required readonly int collection.")
-  @visibility("read")
-  requiredReadonlyIntList: int32[];
-
-  @doc("Required model collection")
-  @visibility("read")
-  requiredReadOnlyModelList: CollectionItem[];
-
-  @doc("Required int record")
-  @visibility("read")
-  requiredReadOnlyIntRecord: Record<int32>;
-
-  @doc("Required string record")
-  @visibility("read")
-  requiredStringRecord: Record<string>;
-
-  @doc("Required model record")
-  @visibility("read")
-  requiredReadOnlyModelRecord: Record<RecordItem>;
-
-  @doc("Optional readonly string collection.")
-  @visibility("read")
-  optionalReadonlyStringList?: string[];
-
-  @doc("Optional readonly int collection.")
-  @visibility("read")
-  optionalReadonlyIntList?: int32[];
-
-  @doc("Optional model collection")
-  @visibility("read")
-  optionalReadOnlyModelList?: CollectionItem[];
-
-  @doc("Optional int record")
-  optionalReadOnlyIntRecord: Record<int32>;
-
-  @doc("Optional string record")
-  optionalReadOnlyStringRecord: Record<string>;
-
-  @doc("Optional model record")
-  @visibility("read")
-  optionalModelRecord?: Record<RecordItem>;
-
-  @doc("Required collection of which the element is a nullable int")
-  requiredCollectionWithNullableIntElement: (null | int32) [];
-
-  @doc("Optional collection of which the element is a nullable boolean")
-  optionalCollectionWithNullableBooleanElement?: (boolean | null) [];
-}
-
 @doc("Output model that has property of its own type")
 model ErrorModel {
   @doc("Error message")
@@ -618,25 +441,6 @@ op getOutputDiscriminatorModel(): OutputBaseModelWithDiscriminator;
 @convenientAPI(true)
 op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 
-@route("/inputToRoundTripPrimitive")
-@doc("Input to RoundTripPrimitive")
-@get
-@convenientAPI(true)
-op inputToRoundTripPrimitive(@body input: InputModel): RoundTripPrimitiveModel;
-
-@route("/inputToRoundTripOptional")
-@doc("Input to RoundTripOptional")
-@get
-@convenientAPI(true)
-op inputToRoundTripOptional(@body input: RoundTripOptionalModel): RoundTripOptionalModel;
-
-@route("/inputToRoundTripReadOnly")
-@doc("Input to RoundTripReadOnly")
-@get
-@convenientAPI(true)
-@deprecated("deprecated for test")
-op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
-
 @route("/roundTripToOutput")
 @doc("RoundTrip to Output")
 @get
@@ -647,7 +451,7 @@ op roundTripToOutput(@body input: RoundTripModel): OutputModel;
 @doc("Input recursive model")
 @post
 @convenientAPI(true)
-op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
+op InputRecursive(@body input: InputRecursiveModel): Response<200>;
 
 @route("/roundTripRecursive")
 @doc("RoundTrip recursive model")
@@ -689,6 +493,24 @@ model RoundTripOnNoUse extends NoUseBase {
 @get
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
+
+@doc("Model used as internal input and public output")
+model ModelInternalInput {
+  @doc("model property")
+  prop: string;
+}
+
+@route("/internalInput")
+@get
+@convenientAPI(true)
+op getInternalInput(): ModelInternalInput;
+
+@access(Access.internal)
+@route("/internalInput")
+@put
+@convenientAPI(true)
+op putInternalInput(...ModelInternalInput): ModelInternalInput;
+
 
 @doc("This is a model.")
 @resource("items")

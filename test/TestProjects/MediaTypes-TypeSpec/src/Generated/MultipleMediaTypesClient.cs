@@ -397,7 +397,6 @@ namespace MultipleMediaTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/oneBinaryBodyTwoContentTypes", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
@@ -412,7 +411,6 @@ namespace MultipleMediaTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/oneStringBodyThreeContentTypes", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
@@ -427,7 +425,6 @@ namespace MultipleMediaTypes
             uri.Reset(_endpoint);
             uri.AppendPath("/oneModelBodyOneContentType", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

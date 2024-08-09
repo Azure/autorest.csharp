@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated client.
-    /// <summary> The Access service client. </summary>
+    /// <summary> Test for internal decorator. </summary>
     public partial class AccessClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary> Initializes a new instance of AccessClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AccessClient(Uri endpoint, AccessClientOptions options)

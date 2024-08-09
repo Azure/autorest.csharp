@@ -67,6 +67,26 @@
     <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(IsMgmtLibrary)' == 'true' and '$(IsTestGenerationSrcProject)' == 'true'">
+    <PackageReference Include="Azure.Core" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="System.ClientModel" />
+    <PackageReference Include="Azure.ResourceManager" />
+
+    <!-- TODO: Review these file references-->
+    <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared" />
+    <!-- Include management shared code-->
+    <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Management.Shared/**/*.cs" Link="Shared/Management/%(RecursiveDir)/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup Condition ="'$(IsMgmtLibrary)' == 'true' and '$(IsTestGenerationTestProject)' == 'true'">
+    <PackageReference Include="Azure.Identity" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Moq" />
+  </ItemGroup>
+
   <Target Name="_ValidateSourceFileNames"
           BeforeTargets="CoreBuild">
     <ItemGroup>

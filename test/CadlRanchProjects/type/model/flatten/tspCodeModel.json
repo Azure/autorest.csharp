@@ -9,8 +9,9 @@
    "Kind": "model",
    "Name": "FlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.FlattenModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "This is the model with one level of flattening.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -19,7 +20,9 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -31,7 +34,9 @@
      "Description": "",
      "Type": {
       "$id": "6",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -47,7 +52,9 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -61,31 +68,75 @@
   {
    "$id": "9",
    "Kind": "model",
-   "Name": "NestedFlattenModel",
-   "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
-   "Usage": "RoundTrip",
-   "Description": "This is the model with two levels of flattening.",
+   "Name": "ChildModel",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel",
+   "Usage": "Input,Output,Json",
+   "Description": "This is the child model to be flattened.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
-     "Name": "name",
-     "SerializedName": "name",
+     "Name": "description",
+     "SerializedName": "description",
      "Description": "",
      "Type": {
       "$id": "11",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
      "$id": "12",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "",
+     "Type": {
+      "$id": "13",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
+   "Kind": "model",
+   "Name": "NestedFlattenModel",
+   "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
+   "Usage": "Input,Output,Json",
+   "Description": "This is the model with two levels of flattening.",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "15",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "",
+     "Type": {
+      "$id": "16",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "17",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "",
      "Type": {
-      "$id": "13",
-      "Kind": "string"
+      "$id": "18",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -95,13 +146,15 @@
      ]
     },
     {
-     "$id": "14",
+     "$id": "19",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "15",
-      "Kind": "string"
+      "$id": "20",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -112,13 +165,15 @@
      ]
     },
     {
-     "$id": "16",
+     "$id": "21",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "17",
-      "Kind": "int32"
+      "$id": "22",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -131,46 +186,13 @@
    ]
   },
   {
-   "$id": "18",
-   "Kind": "model",
-   "Name": "ChildModel",
-   "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel",
-   "Usage": "RoundTrip",
-   "Description": "This is the child model to be flattened.",
-   "Properties": [
-    {
-     "$id": "19",
-     "Name": "description",
-     "SerializedName": "description",
-     "Description": "",
-     "Type": {
-      "$id": "20",
-      "Kind": "string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "21",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
-      "$id": "22",
-      "Kind": "int32"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
    "$id": "23",
    "Kind": "model",
    "Name": "ChildFlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "This is the child model to be flattened. And it has flattened property as well.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -179,7 +201,9 @@
      "Description": "",
      "Type": {
       "$id": "25",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -191,7 +215,9 @@
      "Description": "",
      "Type": {
       "$id": "27",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -207,7 +233,9 @@
      "Description": "",
      "Type": {
       "$id": "29",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -233,12 +261,13 @@
      "Parameters": [
       {
        "$id": "32",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "33",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -253,77 +282,74 @@
         "$id": "34",
         "Type": {
          "$id": "35",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
        "$id": "36",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "37",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "38",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "39",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "40",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "41",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "42",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
         "$ref": "2"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "37",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "38",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "39",
-        "Type": {
-         "$ref": "38"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "40",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "41",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "42",
-        "Type": {
-         "$ref": "41"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -345,14 +371,15 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/type/model/flatten/flattenModel",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.putFlattenModel"
     },
     {
      "$id": "44",
@@ -365,70 +392,65 @@
       },
       {
        "$id": "45",
-       "Name": "input",
-       "NameInRequest": "input",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$ref": "9"
+        "$id": "46",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "47",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
-       "Location": "Body",
-       "IsRequired": true,
+       "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "IsRequired": true,
+       "Kind": "Constant"
       },
       {
-       "$id": "46",
+       "$id": "48",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
-        "Kind": "string"
+        "$id": "49",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "50",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "48",
-        "Type": {
-         "$ref": "47"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       },
       {
-       "$id": "49",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
+       "$id": "51",
+       "Name": "input",
+       "NameInRequest": "input",
        "Type": {
-        "$id": "50",
-        "Kind": "string"
+        "$ref": "14"
        },
-       "Location": "Header",
+       "Location": "Body",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
+       "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "51",
-        "Type": {
-         "$ref": "50"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Method"
       }
      ],
      "Responses": [
@@ -438,7 +460,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "9"
+        "$ref": "14"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -450,14 +472,15 @@
      ],
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/type/model/flatten/nestedFlattenModel",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.putNestedFlattenModel"
     }
    ],
    "Protocol": {

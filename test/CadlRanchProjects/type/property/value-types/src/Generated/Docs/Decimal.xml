@@ -79,14 +79,14 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Decimal client = new ValueTypesClient().GetDecimalClient();
 
-DecimalProperty body = new DecimalProperty(default);
+DecimalProperty body = new DecimalProperty(123.45M);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Decimal client = new ValueTypesClient().GetDecimalClient();
 
-DecimalProperty body = new DecimalProperty(default);
+DecimalProperty body = new DecimalProperty(123.45M);
 Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
@@ -96,14 +96,14 @@ This sample shows how to call Put.
 <code><![CDATA[
 Decimal client = new ValueTypesClient().GetDecimalClient();
 
-DecimalProperty body = new DecimalProperty(default);
+DecimalProperty body = new DecimalProperty(123.45M);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Decimal client = new ValueTypesClient().GetDecimalClient();
 
-DecimalProperty body = new DecimalProperty(default);
+DecimalProperty body = new DecimalProperty(123.45M);
 Response response = client.Put(body);
 ]]></code></example>
     </member>
@@ -115,7 +115,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = 123.45M,
 });
 Response response = await client.PutAsync(content);
 
@@ -127,7 +127,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = 123.45M,
 });
 Response response = await client.PutAsync(content);
 
@@ -142,7 +142,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = 123.45M,
 });
 Response response = client.Put(content);
 
@@ -154,7 +154,7 @@ Decimal client = new ValueTypesClient().GetDecimalClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = 123.45M,
 });
 Response response = client.Put(content);
 

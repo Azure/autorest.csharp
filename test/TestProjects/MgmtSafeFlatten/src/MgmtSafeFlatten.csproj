@@ -6,16 +6,5 @@
     <PackageTags>MgmtSafeFlatten</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs" LinkBase="Shared/Core" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Azure.Core" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="Azure.ResourceManager" />
-  </ItemGroup>
 </Project>

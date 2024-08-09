@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                         SchemaTypeUsage.Output => InputModelTypeUsage.Output,
-                        SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                        SchemaTypeUsage.RoundTrip => InputModelTypeUsage.Input | InputModelTypeUsage.Output,
                         _ => InputModelTypeUsage.None
                     };
                 }
@@ -562,7 +562,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override MultipartObjectSerialization? BuildMultipartSerialization()
         {
-            if (IncludeSerializer && _inputModel.Usage.HasFlag(InputModelTypeUsage.Multipart))
+            if (IncludeSerializer && _inputModel.Usage.HasFlag(InputModelTypeUsage.MultipartFormData))
             {
                 var additionalProperties = CreateMultipartAdditionalPropertiesSerialization();
                 var properties = SerializationBuilder.CreateMultipartPropertySerializations(this).ToArray();

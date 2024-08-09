@@ -120,19 +120,6 @@ function Invoke-TypeSpecSetup()
     {
         Pop-Location
     }
-
-    # build cadl ranch mock api
-    $cadlRanchMockApiPath = Join-Path $PSScriptRoot ".." "test" "CadlRanchMockApis"
-    $cadlRanchMockApiPath = Resolve-Path -Path $cadlRanchMockApiPath
-    Push-Location $cadlRanchMockApiPath
-    Try
-    {
-        npm run build
-    }
-    Finally
-    {
-        Pop-Location
-    }
 }
 
 function Get-AutoRestProject()
