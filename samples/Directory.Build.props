@@ -2,7 +2,7 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
-    <IsMgmtLibrary Condition="!$(MSBuildProjectName.EndsWith('.Tests')) and ($(MSBuildProjectName.StartsWith('AzureSample.ResourceManager')) or $(MSBuildProjectName.StartsWith('Mgmt')))">true</IsMgmtLibrary>
+    <IsMgmtLibrary Condition="$(MSBuildProjectName.StartsWith('AzureSample.ResourceManager')) or $(MSBuildProjectName.StartsWith('Mgmt'))">true</IsMgmtLibrary>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationTestProject)' == 'true'">net7.0;net6.0;net462</RequiredTargetFrameworks>
