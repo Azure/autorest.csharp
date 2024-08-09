@@ -2,7 +2,6 @@
  "$id": "1",
  "Name": "TypeSpec.Versioning.Specific",
  "ApiVersions": [
-  "2022-06-01-preview",
   "2022-09-01"
  ],
  "Enums": [

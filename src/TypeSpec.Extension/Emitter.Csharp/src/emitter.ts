@@ -20,6 +20,7 @@ import {
     AzureNetEmitterOptions,
     resolveAzureEmitterOptions
 } from "./options.js";
+import { azureSDKContextOptions } from "./sdk-context-options.js";
 
 export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
@@ -35,10 +36,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
-    setSDKContextOptions({
-        // TODO: replace with `@hasJsonConverter` when it is available
-        additionalDecorators: []
-    });
+    setSDKContextOptions(azureSDKContextOptions);
     await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
     const isSrcFolder = path.basename(outputFolder) === "src";

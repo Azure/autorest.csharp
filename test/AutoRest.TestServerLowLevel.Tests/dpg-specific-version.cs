@@ -44,9 +44,9 @@ namespace AutoRest.TestServer.Tests
             var getResourcesOperationParameters = getResourcesOperation.GetParameters().Select(p => (p.Name, p.ParameterType)).ToArray();
             Assert.AreEqual(new (string, Type)[] { ("select", typeof(IEnumerable<string>)), ("expand", typeof(string)), ("cancellationToken", typeof(CancellationToken)) }, getResourcesOperationParameters);
 
-            // 2 versions are defined
+            // 1 versions are defined
             var enumType = typeof(SpecificClientOptions.ServiceVersion);
-            Assert.AreEqual(new string[] { "V2022_06_01_Preview", "V2022_09_01" }, enumType.GetEnumNames());
+            Assert.AreEqual(new string[] { "V2022_09_01" }, enumType.GetEnumNames());
             var optionsType = typeof(SpecificClientOptions);
             var field = optionsType.GetField("LatestVersion", BindingFlags.NonPublic | BindingFlags.Static);
             Assert.AreEqual(SpecificClientOptions.ServiceVersion.V2022_09_01, field.GetValue(null));
