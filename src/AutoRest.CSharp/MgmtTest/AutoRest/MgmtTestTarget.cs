@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 library = new MgmtTestOutputLibrary(inputNamespace);
             }
 
-            if (Configuration.MgmtTestConfiguration.Mock)
+            if (Configuration.GenerateTestProject && Configuration.MgmtTestConfiguration.Mock)
             {
                 WriteMockTests(project, library);
             }
