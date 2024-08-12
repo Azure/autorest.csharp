@@ -547,7 +547,11 @@ namespace AutoRest.CSharp.Output.Builders
             ObjectTypeProperty? additionalPropertiesProperty = null;
             ObjectTypeProperty? rawDataField = null;
 
-            var inheritedDictionarySchema = inputModel.GetSelfAndBaseModels().OfType<InputDictionaryType>().FirstOrDefault();
+            // TODO - The following warning is being reported on L554:
+            // CA2021: Don't call Enumerable.Cast<T> or Enumerable.OfType<T> with incompatible types
+            // See https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2021
+            // "This call will always result in an empty sequence because type 'AutoRest.CSharp.Common.Input.InputModelType' is incompatible with type 'AutoRest.CSharp.Common.Input.InputDictionaryType'"
+            //var inheritedDictionarySchema = inputModel.GetSelfAndBaseModels().OfType<InputDictionaryType>().FirstOrDefault();
             foreach (var obj in objectType.EnumerateHierarchy())
             {
                 additionalPropertiesProperty ??= obj.AdditionalPropertiesProperty;
@@ -560,7 +564,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             // build serialization for additional properties property (if any)
-            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, inheritedDictionarySchema, false);
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, null, false);
             // build serialization for raw data field (if any)
             var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
 
@@ -575,10 +579,10 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
                 JsonSerialization valueSerialization;
-                if (inheritedDictionarySchema is not null)
-                {
-                    valueSerialization = BuildJsonSerialization(inheritedDictionarySchema.ValueType, additionalPropertyValueType, false);
-                }
+                // if (inheritedDictionarySchema is not null) // TODO according to the warning above this will always be null
+                // {
+                //     valueSerialization = BuildJsonSerialization(inheritedDictionarySchema.ValueType, additionalPropertyValueType, false);
+                // }
                 else
                 {
                     valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
