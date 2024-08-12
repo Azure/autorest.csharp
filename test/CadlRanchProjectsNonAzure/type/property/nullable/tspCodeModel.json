@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsStringProperty",
    "Usage": "Input,Output,JsonMergePatch,Json",
    "Description": "Model with collection string properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -59,6 +60,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsModelProperty",
    "Usage": "Output,Json",
    "Description": "Model with collection models properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -93,6 +95,7 @@
         "CrossLanguageDefinitionId": "Type.Property.Nullable.InnerModel",
         "Usage": "Output,Json",
         "Description": "Inner model used in collections model property",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "16",
@@ -128,6 +131,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.CollectionsByteProperty",
    "Usage": "Output,Json",
    "Description": "Model with collection bytes properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "19",
@@ -177,6 +181,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DurationProperty",
    "Usage": "Output,Json",
    "Description": "Model with a duration property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
@@ -226,6 +231,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.DatetimeProperty",
    "Usage": "Output,Json",
    "Description": "Model with a datetime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -275,6 +281,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.BytesProperty",
    "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "40",
@@ -318,6 +325,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Nullable.StringProperty",
    "Usage": "Output,Json",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "46",

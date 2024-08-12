@@ -71,12 +71,6 @@ extends:
               - pwsh: ./eng/SharedCodeCheck.ps1
                 displayName: "Check if shared source code is up-to-date"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              - task: Npm@1
-                displayName: 'Build CADL Ranch Mock Api project'
-                inputs:
-                  command: custom
-                  customCommand: run build
-                  workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
               - script: |
                   dotnet test AutoRest.CSharp.sln --filter Name!~Example_
                 displayName: "Test"
@@ -103,14 +97,11 @@ extends:
                 - pwsh: >
                     ./eng/PublishRelease.ps1
                     -AutorestArtifactDirectory ./artifacts/bin/AutoRest.CSharp/Release/net7.0/
-                    -CoverageDirectory ./artifacts/coverage
                     -TypeSpecEmitterDirectory ./src/TypeSpec.Extension/Emitter.Csharp
                     -GitHubToken $(azuresdk-github-pat)
                     -NpmToken $(azure-sdk-npm-token)
                     -BuildNumber $(Build.BuildNumber)
                     -Sha $(Build.SourceVersion)
-                    -CoverageUser $(storage-coverage-user)
-                    -CoveragePass $(storage-coverage-pass)
                   name: Publish
                   failOnStderr: false
                   displayName: 'Publish to GitHub, npm and coverage report'

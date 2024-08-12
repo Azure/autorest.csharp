@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -224,6 +225,29 @@ namespace AutoRest.CSharp.Common.Input
                 reader.Read();
             }
             reader.Read();
+            value = result;
+            return true;
+        }
+
+        public static bool TryReadStringBinaryDataDictionary(this ref Utf8JsonReader reader, string propertyName, ref IReadOnlyDictionary<string, BinaryData>? value)
+        {
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            if (reader.GetString() != propertyName)
+            {
+                return false;
+            }
+
+            reader.Read();
+            using var document = JsonDocument.ParseValue(ref reader);
+            var result = new Dictionary<string, BinaryData>();
+            foreach (JsonProperty property in document.RootElement.EnumerateObject())
+            {
+                result.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+            }
             value = result;
             return true;
         }
