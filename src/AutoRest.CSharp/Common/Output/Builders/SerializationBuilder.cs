@@ -583,10 +583,10 @@ namespace AutoRest.CSharp.Output.Builders
                 // {
                 //     valueSerialization = BuildJsonSerialization(inheritedDictionarySchema.ValueType, additionalPropertyValueType, false);
                 // }
-                else
-                {
-                    valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
-                }
+                // else
+                // {
+                valueSerialization = new JsonValueSerialization(additionalPropertyValueType, SerializationFormat.Default, true);
+                // }
 
                 return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,
