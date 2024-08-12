@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_PrimitiveType()
         {
             bool isBaseElement = true;
-            InputPrimitiveType type = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputPrimitiveType type = InputPrimitiveType.Boolean;
             CSharpType cSharpType = typeFactory.CreateType(type);
 
             FormattableString result = ObjectTypeProperty.ConstructDetailsForListType(cSharpType, isBaseElement);
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_ListType()
         {
             bool isBaseElement = true;
-            InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputType elementType = InputPrimitiveType.Boolean;
             InputListType type = new InputListType("InputListType", "TypeSpec.Array", elementType, Array.Empty<InputDecoratorInfo>());
 
             CSharpType cSharpType = typeFactory.CreateType(type);
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_NestedListType()
         {
             bool isBaseElement = true;
-            InputType elementType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputType elementType = InputPrimitiveType.Boolean;
             InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", elementType, Array.Empty<InputDecoratorInfo>());
             InputListType type = new InputListType("InputListType2", "TypeSpec.Array", listElementType, Array.Empty<InputDecoratorInfo>());
 
@@ -74,8 +74,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestConstructDetailsForListType_ListOfDictType()
         {
             bool isBaseElement = true;
-            InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
-            InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputType keyType = InputPrimitiveType.String;
+            InputType valueType = InputPrimitiveType.Int32;
             InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, Array.Empty<InputDecoratorInfo>());
             InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", dictionaryType, Array.Empty<InputDecoratorInfo>());
 
@@ -92,24 +92,24 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         public void TestGetUnionTypesDescriptions()
         {
             // dictionary type
-            InputType keyType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
-            InputType valueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputType keyType = InputPrimitiveType.String;
+            InputType valueType = InputPrimitiveType.Int32;
             InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, Array.Empty<InputDecoratorInfo>());
 
             // literal types
-            InputType literalValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Int32);
+            InputType literalValueType = InputPrimitiveType.Int32;
             InputLiteralType literalType = new InputLiteralType(literalValueType, 21, Array.Empty<InputDecoratorInfo>());
 
-            InputType stringLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.String);
+            InputType stringLiteralValueType = InputPrimitiveType.String;
             InputLiteralType stringLiteralType = new InputLiteralType(stringLiteralValueType, "test", Array.Empty<InputDecoratorInfo>());
 
-            InputType boolLiteralValueType = new InputPrimitiveType(InputPrimitiveTypeKind.Boolean);
+            InputType boolLiteralValueType = InputPrimitiveType.Boolean;
             InputLiteralType boolLiteralType = new InputLiteralType(boolLiteralValueType, true, Array.Empty<InputDecoratorInfo>());
 
             var unionItems = new List<CSharpType>
             {
-                typeFactory.CreateType(new InputPrimitiveType(InputPrimitiveTypeKind.Boolean)),
-                typeFactory.CreateType(new InputPrimitiveType(InputPrimitiveTypeKind.Int32)),
+                typeFactory.CreateType(InputPrimitiveType.Boolean),
+                typeFactory.CreateType(InputPrimitiveType.Int32),
                 typeFactory.CreateType(dictionaryType),
                 typeFactory.CreateType(literalType),
                 typeFactory.CreateType(stringLiteralType),

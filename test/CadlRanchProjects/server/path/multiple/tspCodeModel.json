@@ -13,6 +13,8 @@
    "ValueType": {
     "$id": "3",
     "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string",
     "Decorators": []
    },
    "Values": [
@@ -26,7 +28,7 @@
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "None",
+   "Usage": "Input,ApiVersionEnum",
    "Decorators": []
   }
  ],
@@ -35,7 +37,6 @@
   {
    "$id": "5",
    "Name": "MultipleClient",
-   "Description": "",
    "Operations": [
     {
      "$id": "6",
@@ -50,7 +51,9 @@
        "Description": "Pass in http://localhost:3000 for endpoint.",
        "Type": {
         "$id": "8",
-        "Kind": "url"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -83,40 +86,17 @@
         "$id": "10",
         "Type": {
          "$id": "11",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "v1.0"
-       }
-      },
-      {
-       "$id": "12",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "13",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "14",
-        "Type": {
-         "$ref": "13"
-        },
-        "Value": "application/json"
        }
       }
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "12",
        "StatusCodes": [
         204
        ],
@@ -131,10 +111,12 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.noOperationParams",
+     "Decorators": []
     },
     {
-     "$id": "16",
+     "$id": "13",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
      "Accessibility": "public",
@@ -146,53 +128,29 @@
        "$ref": "9"
       },
       {
-       "$id": "17",
+       "$id": "14",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "18",
+        "$id": "15",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "19",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "20",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "21",
-        "Type": {
-         "$ref": "20"
-        },
-        "Value": "application/json"
-       }
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "16",
        "StatusCodes": [
         204
        ],
@@ -207,11 +165,13 @@
      "Path": "/{keyword}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.withOperationPathParam",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "17"
    },
    "Parameters": [
     {

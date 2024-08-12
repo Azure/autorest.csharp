@@ -10,10 +10,10 @@ import {
     $onEmit as $OnMGCEmit,
     Logger,
     LoggerLevel,
-    addAdditionalDecorators,
     configurationFileName,
     resolveOutputFolder,
-    tspOutputFileName
+    tspOutputFileName,
+    setSDKContextOptions
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -36,8 +36,10 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
-    /* set the allowed decorators to emit. */
-    addAdditionalDecorators(AzureDefaultAdditionalDecorators);
+    setSDKContextOptions({
+        // TODO: replace with `@hasJsonConverter` when it is available
+        additionalDecorators: AzureDefaultAdditionalDecorators
+    });
     await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
     const isSrcFolder = path.basename(outputFolder) === "src";
@@ -75,7 +77,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
             options["enable-internal-raw-data"];
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */
-        const sdkContext = createSdkContext(
+        const sdkContext = await createSdkContext(
             context,
             "@azure-tools/typespec-csharp"
         );

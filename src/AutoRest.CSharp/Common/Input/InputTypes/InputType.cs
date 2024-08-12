@@ -1,17 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType: InputDecoratedType
+internal abstract record InputType
 {
-    protected InputType(string name, IReadOnlyList<InputDecoratorInfo> decorators) : base(decorators)
+    protected InputType(string name, IReadOnlyList<InputDecoratorInfo>? decorators = null)
     {
         Name = name;
         SpecName = name;
+        Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
     }
 
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
@@ -39,6 +41,9 @@ internal abstract record InputType: InputDecoratedType
 
     //public bool IsNullable { get; init; }
     public string Name { get; internal set; }
+
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
+
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string? SpecName { get; init; }
 

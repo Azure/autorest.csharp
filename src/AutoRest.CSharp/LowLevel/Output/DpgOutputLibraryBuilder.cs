@@ -186,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     Uri = $"{{{KnownParameters.Endpoint.Name}}}",
                     Parameters = operation.Parameters
-                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", new InputPrimitiveType(InputPrimitiveTypeKind.Uri), RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
+                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", InputPrimitiveType.Url, RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
                         .ToList()
                 };
             }

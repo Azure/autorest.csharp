@@ -8,7 +8,6 @@
   {
    "$id": "2",
    "Name": "ClientAndOperationGroupClient",
-   "Description": "",
    "Operations": [
     {
      "$id": "3",
@@ -22,7 +21,9 @@
        "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "5",
-        "Kind": "url"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -40,24 +41,25 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "7",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "8",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "8",
-        "Type": {
-         "$ref": "7"
-        },
-        "Value": "application/json"
-       }
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -69,6 +71,8 @@
        "BodyType": {
         "$id": "10",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -85,7 +89,9 @@
      "Path": "/top",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.zero",
+     "Decorators": []
     },
     {
      "$id": "11",
@@ -102,24 +108,25 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "13",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "14",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "14",
-        "Type": {
-         "$ref": "13"
-        },
-        "Value": "application/json"
-       }
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -131,6 +138,8 @@
        "BodyType": {
         "$id": "16",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -147,7 +156,9 @@
      "Path": "/Alpha",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Alpha.one",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -163,7 +174,6 @@
   {
    "$id": "18",
    "Name": "Beta",
-   "Description": "",
    "Operations": [
     {
      "$id": "19",
@@ -172,43 +182,63 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "4"
-      },
-      {
        "$id": "20",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
        "Type": {
         "$id": "21",
-        "Kind": "string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
-       "Location": "Header",
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "22",
-        "Type": {
-         "$ref": "21"
+       "Kind": "Client"
+      },
+      {
+       "$id": "22",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "23",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "24",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
-       }
+        "Value": "application/json",
+        "Decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "25",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "24",
+        "$id": "26",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -225,52 +255,57 @@
      "Path": "/Beta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.two",
+     "Decorators": []
     },
     {
-     "$id": "25",
+     "$id": "27",
      "Name": "three",
      "ResourceName": "SubBeta",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "20"
       },
       {
-       "$id": "26",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
-        "Kind": "string"
+        "$id": "29",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "30",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "28",
-        "Type": {
-         "$ref": "27"
-        },
-        "Value": "application/json"
-       }
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "30",
+        "$id": "32",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -287,69 +322,90 @@
      "Path": "/SubBeta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Beta.SubBeta.three",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "33"
    },
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "20"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "32",
+   "$id": "34",
    "Name": "Gamma",
-   "Description": "",
    "Operations": [
     {
-     "$id": "33",
+     "$id": "35",
      "Name": "four",
      "ResourceName": "Gamma",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "4"
-      },
-      {
-       "$id": "34",
-       "Name": "accept",
-       "NameInRequest": "Accept",
+       "$id": "36",
+       "Name": "operationGroupServiceUrl",
+       "NameInRequest": "operationGroupServiceUrl",
        "Type": {
-        "$id": "35",
-        "Kind": "string"
+        "$id": "37",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
-       "Location": "Header",
+       "Location": "Uri",
        "IsApiVersion": false,
        "IsResourceParameter": false,
        "IsContentType": false,
        "IsRequired": true,
-       "IsEndpoint": false,
+       "IsEndpoint": true,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "36",
-        "Type": {
-         "$ref": "35"
+       "Kind": "Client"
+      },
+      {
+       "$id": "38",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "39",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "40",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
-       }
+        "Value": "application/json",
+        "Decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "38",
+        "$id": "42",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -366,52 +422,57 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.four",
+     "Decorators": []
     },
     {
-     "$id": "39",
+     "$id": "43",
      "Name": "five",
      "ResourceName": "Gamma",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "4"
+       "$ref": "36"
       },
       {
-       "$id": "40",
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
-        "Kind": "string"
+        "$id": "45",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "46",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "42",
-        "Type": {
-         "$ref": "41"
-        },
-        "Value": "application/json"
-       }
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "47",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "44",
+        "$id": "48",
         "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
        "BodyMediaType": "Json",
@@ -428,16 +489,18 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "ClientAndOperationGroup.Gamma.five",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "49"
    },
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "4"
+     "$ref": "36"
     }
    ],
    "Decorators": []

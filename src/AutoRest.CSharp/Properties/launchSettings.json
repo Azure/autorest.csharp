@@ -452,6 +452,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSupersetInheritance\\src\\Generated -n"
     },
+    "MgmtTypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtTypeSpec\\src\\Generated -n"
+    },
     "MgmtXmlDeserialization": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\src\\Generated -n"
@@ -907,6 +911,10 @@
     "typespec-type/model/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\usage\\src\\Generated -n"
+    },
+    "typespec-type/model/visibility": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\visibility\\src\\Generated -n"
     },
     "typespec-type/property/additional-properties": {
       "commandName": "Project",

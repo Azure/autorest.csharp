@@ -32,6 +32,7 @@ internal record InputOperation
     OperationPaging? paging,
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
+    string crossLanguageDefinitionId,
     bool keepClientDefaultValue)
     {
         Name = name;
@@ -54,6 +55,7 @@ internal record InputOperation
         Paging = paging;
         GenerateProtocolMethod = generateProtocolMethod;
         GenerateConvenienceMethod = generateConvenienceMethod;
+        CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
     }
 
@@ -77,6 +79,7 @@ internal record InputOperation
         paging: null,
         generateProtocolMethod: true,
         generateConvenienceMethod: false,
+        crossLanguageDefinitionId: string.Empty,
         keepClientDefaultValue: false)
     {
         SpecName = string.Empty;
@@ -104,6 +107,7 @@ internal record InputOperation
             operation.Paging,
             operation.GenerateProtocolMethod,
             operation.GenerateConvenienceMethod,
+            operation.CrossLanguageDefinitionId,
             operation.KeepClientDefaultValue)
         {
             SpecName = operation.SpecName
@@ -142,6 +146,7 @@ internal record InputOperation
     public OperationPaging? Paging { get; init; }
     public bool GenerateProtocolMethod { get; }
     public bool GenerateConvenienceMethod { get; }
+    public string CrossLanguageDefinitionId { get; }
     public bool KeepClientDefaultValue { get; }
     public string? OperationName { get; }
     public string? OperationVersion { get; }
@@ -149,4 +154,6 @@ internal record InputOperation
     public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }
+
+    internal bool IsNameChanged { get; init; }
 }

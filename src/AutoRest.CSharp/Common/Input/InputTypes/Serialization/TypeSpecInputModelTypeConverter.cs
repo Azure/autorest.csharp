@@ -100,7 +100,9 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+            var result = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+            result.Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
+            return result;
         }
 
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? crossLanguageDefinitionId, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, InputModelProperty? discriminatorProperty, InputModelType? baseModel, IReadOnlyList<InputModelProperty> properties, IReadOnlyDictionary<string, InputModelType> discriminatedSubtypes, InputType? additionalProperties, IReadOnlyList<InputDecoratorInfo>? decorators, ReferenceResolver resolver)

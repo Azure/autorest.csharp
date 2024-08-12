@@ -85,6 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             { NameInRequest: var nameInRequest } when RequestHeader.ClientRequestIdHeaders.Contains(nameInRequest) => Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string))),
             { NameInRequest: var nameInRequest } when RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(nameInRequest) => new Constant("true", new CSharpType(typeof(string))),
             { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
+            { Type: InputLiteralType { Value: not null} literalValue } => BuilderHelpers.ParseConstant(literalValue.Value, typeFactory.CreateType(literalValue.ValueType)),
             { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
                 // Guid.NewGuid()
                 Constant.FromExpression($"{nameof(Guid)}.{nameof(Guid.NewGuid)}()", new CSharpType(typeof(string))),
@@ -183,17 +184,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
                     ? description
                     : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues.ToString())}";
             }
-        }
-
-        private static Constant? GetClientDefaultValue(InputParameter parameter, TypeFactory typeFactory)
-        {
-            if (parameter.DefaultValue != null)
-            {
-                CSharpType constantTypeReference = typeFactory.CreateType(parameter.Type);
-                return BuilderHelpers.ParseConstant(parameter.DefaultValue.Value, constantTypeReference);
-            }
-
-            return null;
         }
 
         private static Constant? ParseConstant(InputParameter parameter, TypeFactory typeFactory)

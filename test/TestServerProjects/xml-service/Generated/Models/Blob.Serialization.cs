@@ -34,7 +34,7 @@ namespace xml_service.Models
             {
                 foreach (var pair in Metadata)
                 {
-                    writer.WriteStartElement("String");
+                    writer.WriteStartElement("string");
                     writer.WriteValue(pair.Value);
                     writer.WriteEndElement();
                 }

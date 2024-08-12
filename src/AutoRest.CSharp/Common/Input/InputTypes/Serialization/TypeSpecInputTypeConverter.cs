@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, string? name, JsonSerializerOptions options) => kind switch
         {
-            null => throw new JsonException("InputType must have a 'Kind' property"),
+            null => throw new JsonException($"InputType (id: '{id}', name: '{name}') must have a 'Kind' property"),
             LiteralKind => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             UnionKind => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             ModelKind => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
@@ -75,46 +75,7 @@ namespace AutoRest.CSharp.Common.Input
             NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, options, _referenceHandler.CurrentResolver),
             DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, options, _referenceHandler.CurrentResolver),
-            _ => ReadPrimitiveType(ref reader, id, kind, options, _referenceHandler.CurrentResolver),
+            _ => TypeSpecInputPrimitiveTypeConverter.CreatePrimitiveType(ref reader, id, kind, name, options, _referenceHandler.CurrentResolver),
         };
-
-        private static InputPrimitiveType ReadPrimitiveType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options, ReferenceResolver resolver)
-        {
-            var isFirstProperty = id == null;
-            string? encode = null;
-            IReadOnlyList<InputDecoratorInfo>? decorators = null;
-
-            while (reader.TokenType != JsonTokenType.EndObject)
-            {
-                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref kind)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Encode), ref encode)
-                    || reader.TryReadWithConverter(nameof(InputPrimitiveType.Decorators), options, ref decorators);
-
-                if (!isKnownProperty)
-                {
-                    reader.SkipProperty();
-                }
-            }
-
-            var primitiveType = CreatePrimitiveType(kind, encode, decorators ?? Array.Empty<InputDecoratorInfo>());
-            if (id != null)
-            {
-                resolver.AddReference(id, primitiveType);
-            }
-
-            return primitiveType;
-        }
-
-        public static InputPrimitiveType CreatePrimitiveType(string? primitiveKind, string? encode, IReadOnlyList<InputDecoratorInfo> decorators)
-        {
-            if (primitiveKind == null)
-            {
-                throw new ArgumentNullException(nameof(primitiveKind));
-            }
-            return Enum.TryParse<InputPrimitiveTypeKind>(primitiveKind, ignoreCase: true, out var kind)
-                ? new InputPrimitiveType(kind, encode, decorators)
-                : throw new JsonException($"{primitiveKind} type is unknown.");
-        }
     }
 }

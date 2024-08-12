@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Initializes a new instance of BasicClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BasicClient(Uri endpoint, BasicClientOptions options)

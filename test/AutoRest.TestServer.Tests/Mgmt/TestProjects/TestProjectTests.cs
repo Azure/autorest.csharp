@@ -813,6 +813,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected void ValidateMethodExist(string fullClassName, string methodName, params string[] argTypes)
         {
             var classToCheck = Assembly.GetExecutingAssembly().GetType(fullClassName);
+            Assert.NotNull(classToCheck, $"Can't find class {fullClassName}!");
             var methods = classToCheck.GetMethods().Where(m => m.Name == methodName);
             Assert.Greater(methods.Count(), 0, $"Can't find method {fullClassName}.{methodName}!");
 
