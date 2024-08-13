@@ -221,12 +221,12 @@ If you need to use a locally built generator, you could use the following option
 --option @azure-tools/typespec-csharp.csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll
 ```
 
-Usually you should find the `AutoRest.CSharp.dll` file here: `[Root of autorest.csharp repo]/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll`.
+Usually you should find the `AutoRest.CSharp.dll` file here: `[Root of autorest.csharp repo]/artifacts/bin/AutoRest.CSharp/Debug/net8.0/AutoRest.CSharp.dll`.
 
 ### Debugging the projects in the `azure-sdk-for-net` repo
 
 There is a target defined in `azure-sdk-for-net` repo to generate the library code:
-```bash
+```powershell
 dotnet build /t:GenerateCode
 ```
 

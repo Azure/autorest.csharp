@@ -18,8 +18,10 @@ namespace TypeSpec.Versioning.Specific
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
+            /// <summary> Service version "2022-06-01-preview". </summary>
+            V2022_06_01_Preview = 1,
             /// <summary> Service version "2022-09-01". </summary>
-            V2022_09_01 = 1,
+            V2022_09_01 = 2,
         }
 
         internal string Version { get; }
@@ -29,6 +31,7 @@ namespace TypeSpec.Versioning.Specific
         {
             Version = version switch
             {
+                ServiceVersion.V2022_06_01_Preview => "2022-06-01-preview",
                 ServiceVersion.V2022_09_01 => "2022-09-01",
                 _ => throw new NotSupportedException()
             };
