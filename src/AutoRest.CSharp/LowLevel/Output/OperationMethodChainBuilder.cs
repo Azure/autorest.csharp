@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Output.Models
             // short version samples
             var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
 
-            foreach (var (exampleKey, operationExample) in Operation.Examples)
+            foreach (var (exampleKey, operationExample) in Operation.MockExamples)
             {
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
