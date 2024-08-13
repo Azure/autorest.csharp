@@ -58,7 +58,7 @@ internal record InputOperation
         GenerateConvenienceMethod = generateConvenienceMethod;
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
-        Examples = examples ?? Array.Empty<InputHttpOperationExample>();
+        _examples = examples;
     }
 
     public InputOperation() : this(
@@ -118,7 +118,20 @@ internal record InputOperation
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 
-    public IReadOnlyList<InputHttpOperationExample> Examples { get; }
+    private IReadOnlyList<InputHttpOperationExample>? _examples;
+    public IReadOnlyList<InputHttpOperationExample> Examples => _examples ??= EnsureRealExamples();
+
+    private IReadOnlyList<InputHttpOperationExample> EnsureRealExamples()
+    {
+        // see if we need to generate the mock examples
+        if (Configuration.ExamplesDirectory != null)
+        {
+            return Array.Empty<InputHttpOperationExample>();
+        }
+
+        // build the mock examples
+        return ExampleMockValueBuilder.BuildOperationExamples(this);
+    }
 
     private readonly Dictionary<string, InputOperationExample> _mockExamples = new();
     public IReadOnlyDictionary<string, InputOperationExample> MockExamples => _mockExamples.Any() ? _mockExamples : EnsureExamples(_mockExamples);
