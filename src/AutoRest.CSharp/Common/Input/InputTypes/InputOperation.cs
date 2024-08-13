@@ -120,8 +120,8 @@ internal record InputOperation
 
     public IReadOnlyList<InputHttpOperationExample> Examples { get; }
 
-    private readonly Dictionary<string, InputOperationExample> _examples = new();
-    public IReadOnlyDictionary<string, InputOperationExample> MockExamples => _examples.Any() ? _examples : EnsureExamples(_examples);
+    private readonly Dictionary<string, InputOperationExample> _mockExamples = new();
+    public IReadOnlyDictionary<string, InputOperationExample> MockExamples => _mockExamples.Any() ? _mockExamples : EnsureExamples(_mockExamples);
     public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
 
     private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
