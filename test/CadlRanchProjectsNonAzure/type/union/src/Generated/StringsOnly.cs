@@ -28,7 +28,7 @@ namespace Scm._Type.Union
 
         /// <summary> Initializes a new instance of StringsOnly. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal StringsOnly(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

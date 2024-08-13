@@ -7,7 +7,7 @@ This sample shows how to call GetPaginationLedgerEntriesAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
@@ -18,7 +18,7 @@ This sample shows how to call GetPaginationLedgerEntriesAsync with all parameter
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
@@ -32,7 +32,7 @@ This sample shows how to call GetPaginationLedgerEntries.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
@@ -43,7 +43,7 @@ This sample shows how to call GetPaginationLedgerEntries with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
 foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
@@ -57,7 +57,7 @@ This sample shows how to call GetPaginationLedgerEntriesAsync and parse the resu
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -76,7 +76,7 @@ This sample shows how to call GetPaginationLedgerEntriesAsync with all request c
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -98,7 +98,7 @@ This sample shows how to call GetPaginationLedgerEntries and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -117,7 +117,7 @@ This sample shows how to call GetPaginationLedgerEntries with all request conten
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-PaginationClient client = new PaginationClient(endpoint, credential);
+Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
 using RequestContent content = RequestContent.Create(new
 {

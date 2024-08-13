@@ -31,7 +31,7 @@ namespace _Type._Enum.Extensible
         }
 
         /// <summary> Initializes a new instance of ExtensibleClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ExtensibleClient(Uri endpoint, ExtensibleClientOptions options)
