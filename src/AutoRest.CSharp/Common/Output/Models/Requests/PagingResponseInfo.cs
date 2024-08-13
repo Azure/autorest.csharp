@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             NextLinkPropertyName = nextLinkName;
             ItemPropertyName = itemName ?? "value";
 
-            ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, ItemPropertyName, true);
+            ObjectTypeProperty itemProperty = GetPropertyBySerializedName(type, ItemPropertyName);
             if (!itemProperty.Declaration.Type.IsList)
             {
                 throw new InvalidOperationException($"'{itemName}' property must be be an array schema instead of '{itemProperty.InputModelProperty?.Type}'");
@@ -31,18 +31,18 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType PageType => new CSharpType(typeof(Page<>), ItemType);
         public CSharpType ItemType { get; }
 
-        private ObjectTypeProperty GetPropertyBySerializedName(CSharpType type, string name, bool includeParents = false)
+        private ObjectTypeProperty GetPropertyBySerializedName(CSharpType type, string name)
         {
             TypeProvider implementation = type.Implementation;
 
             if (implementation is SchemaObjectType objectType)
             {
-                return objectType.GetPropertyBySerializedName(name, includeParents);
+                return objectType.GetPropertyBySerializedName(name, true);
             }
 
             if (implementation is ModelTypeProvider modelType)
             {
-                return modelType.GetPropertyBySerializedName(name, includeParents);
+                return modelType.GetPropertyBySerializedName(name, true);
             }
 
             throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");
