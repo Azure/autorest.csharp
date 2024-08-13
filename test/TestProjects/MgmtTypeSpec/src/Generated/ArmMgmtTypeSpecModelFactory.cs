@@ -17,6 +17,30 @@ namespace MgmtTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtTypeSpecModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="MgmtTypeSpec.FooData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="MgmtTypeSpec.FooData"/> instance for mocking. </returns>
+        public static FooData FooData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, FooProperties properties = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new FooData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.MgmtTypeSpecPrivateLinkResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
