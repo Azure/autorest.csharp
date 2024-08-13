@@ -21,7 +21,7 @@ namespace Versioning.Added
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _version;
+        private readonly Versions _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,9 +37,8 @@ namespace Versioning.Added
         /// <summary> Initializes a new instance of AddedClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public AddedClient(Uri endpoint, string version) : this(endpoint, version, new AddedClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public AddedClient(Uri endpoint, Versions version) : this(endpoint, version, new AddedClientOptions())
         {
         }
 
@@ -47,12 +46,10 @@ namespace Versioning.Added
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public AddedClient(Uri endpoint, string version, AddedClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public AddedClient(Uri endpoint, Versions version, AddedClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(version, nameof(version));
             options ??= new AddedClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -301,7 +298,7 @@ namespace Versioning.Added
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/added/api-version:", false);
-            uri.AppendRaw(_version, true);
+            uri.AppendRaw(_version.ToSerialString(), true);
             uri.AppendPath("/v1", false);
             request.Uri = uri;
             request.Headers.Add("header-v2", headerV2);
@@ -319,7 +316,7 @@ namespace Versioning.Added
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/added/api-version:", false);
-            uri.AppendRaw(_version, true);
+            uri.AppendRaw(_version.ToSerialString(), true);
             uri.AppendPath("/v2", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

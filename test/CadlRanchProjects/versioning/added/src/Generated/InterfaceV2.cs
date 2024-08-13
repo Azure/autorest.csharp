@@ -21,7 +21,7 @@ namespace Versioning.Added
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _version;
+        private readonly Versions _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -39,7 +39,7 @@ namespace Versioning.Added
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        internal InterfaceV2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string version)
+        internal InterfaceV2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, Versions version)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -163,7 +163,7 @@ namespace Versioning.Added
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/added/api-version:", false);
-            uri.AppendRaw(_version, true);
+            uri.AppendRaw(_version.ToSerialString(), true);
             uri.AppendPath("/interface-v2/v2", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

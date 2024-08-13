@@ -21,7 +21,7 @@ namespace Versioning.RenamedFrom
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _version;
+        private readonly Versions _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,9 +37,8 @@ namespace Versioning.RenamedFrom
         /// <summary> Initializes a new instance of RenamedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedFromClient(Uri endpoint, string version) : this(endpoint, version, new RenamedFromClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public RenamedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new RenamedFromClientOptions())
         {
         }
 
@@ -47,12 +46,10 @@ namespace Versioning.RenamedFrom
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        public RenamedFromClient(Uri endpoint, string version, RenamedFromClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public RenamedFromClient(Uri endpoint, Versions version, RenamedFromClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNullOrEmpty(version, nameof(version));
             options ??= new RenamedFromClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -193,7 +190,7 @@ namespace Versioning.RenamedFrom
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/renamed-from/api-version:", false);
-            uri.AppendRaw(_version, true);
+            uri.AppendRaw(_version.ToSerialString(), true);
             uri.AppendPath("/test", false);
             uri.AppendQuery("newQuery", newQuery, true);
             request.Uri = uri;

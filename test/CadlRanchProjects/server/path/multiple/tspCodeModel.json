@@ -68,10 +68,7 @@
        "NameInRequest": "apiVersion",
        "Description": "Pass in v1.0 for API version.",
        "Type": {
-        "$id": "10",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": true,
@@ -83,9 +80,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "11",
+        "$id": "10",
         "Type": {
-         "$id": "12",
+         "$id": "11",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -96,7 +93,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "12",
        "StatusCodes": [
         204
        ],
@@ -115,7 +112,7 @@
      "CrossLanguageDefinitionId": "Server.Path.Multiple.noOperationParams"
     },
     {
-     "$id": "14",
+     "$id": "13",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
      "Accessibility": "public",
@@ -127,11 +124,11 @@
        "$ref": "9"
       },
       {
-       "$id": "15",
+       "$id": "14",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "16",
+        "$id": "15",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -147,7 +144,7 @@
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "16",
        "StatusCodes": [
         204
        ],
@@ -167,7 +164,7 @@
     }
    ],
    "Protocol": {
-    "$id": "18"
+    "$id": "17"
    },
    "Parameters": [
     {

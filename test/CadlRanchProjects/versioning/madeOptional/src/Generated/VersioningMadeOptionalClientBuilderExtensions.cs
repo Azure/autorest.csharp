@@ -8,6 +8,7 @@
 using System;
 using Azure.Core.Extensions;
 using Versioning.MadeOptional;
+using Versioning.MadeOptional.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -18,7 +19,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        public static IAzureClientBuilder<MadeOptionalClient, MadeOptionalClientOptions> AddMadeOptionalClient<TBuilder>(this TBuilder builder, Uri endpoint, string version)
+        public static IAzureClientBuilder<MadeOptionalClient, MadeOptionalClientOptions> AddMadeOptionalClient<TBuilder>(this TBuilder builder, Uri endpoint, Versions version)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<MadeOptionalClient, MadeOptionalClientOptions>((options) => new MadeOptionalClient(endpoint, version, options));

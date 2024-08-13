@@ -160,10 +160,7 @@
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
-        "$id": "22",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "5"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -176,15 +173,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "23",
+       "$id": "22",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "24",
+        "$id": "23",
         "Kind": "constant",
         "ValueType": {
-         "$id": "25",
+         "$id": "24",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -200,14 +197,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "26",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "26",
         "Kind": "constant",
         "ValueType": {
-         "$id": "28",
+         "$id": "27",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -223,7 +220,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "29",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -240,7 +237,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -269,7 +266,7 @@
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "30"
    },
    "Parameters": [
     {
