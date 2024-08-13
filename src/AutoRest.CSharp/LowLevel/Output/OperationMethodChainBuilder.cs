@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _clientName;
         private readonly LowLevelClient? _client;
         private readonly ClientFields _fields;
-        private readonly IReadOnlyDictionary<string, InputClientExample>? _clientParameterExamples;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly List<ParameterChain> _orderedParameters;
@@ -54,13 +53,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
+        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             _client = client;
             _namespaceName = namespaceName;
             _clientName = clientName;
             _fields = fields;
-            _clientParameterExamples = clientParameterExamples;
             _typeFactory = typeFactory;
             _sourceInputModel = sourceInputModel;
             _orderedParameters = new List<ParameterChain>();
@@ -126,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             // we do not generate any sample if these variables are null
             // they are only null when HLC calling methods in this class
-            if (_clientParameterExamples == null || _client == null)
+            if (_client == null)
                 return;
             var shouldGenerateSample = DpgOperationSample.ShouldGenerateSample(_client, method.ProtocolMethodSignature);
 
@@ -136,35 +134,30 @@ namespace AutoRest.CSharp.Output.Models
             // short version samples
             var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
 
-            foreach (var (exampleKey, clientExample) in _clientParameterExamples)
+            foreach (var (exampleKey, operationExample) in Operation.Examples)
             {
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
 
-                if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                // add protocol method sample
+                samples.Add(new(
+                    _client,
+                    _typeFactory,
+                    method,
+                    operationExample,
+                    false,
+                    exampleKey));
+
+                // add convenience method sample
+                if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(Public))
                 {
-                    // add protocol method sample
                     samples.Add(new(
                         _client,
                         _typeFactory,
                         method,
-                        clientExample.ClientParameters,
                         operationExample,
-                        false,
+                        true,
                         exampleKey));
-
-                    // add convenience method sample
-                    if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(Public))
-                    {
-                        samples.Add(new(
-                            _client,
-                            _typeFactory,
-                            method,
-                            clientExample.ClientParameters,
-                            operationExample,
-                            true,
-                            exampleKey));
-                    }
                 }
             }
         }
