@@ -547,7 +547,13 @@ namespace AutoRest.CSharp.Output.Builders
             ObjectTypeProperty? additionalPropertiesProperty = null;
             ObjectTypeProperty? rawDataField = null;
 
-            var inheritedDictionarySchema = inputModel.GetSelfAndBaseModels().OfType<InputDictionaryType>().FirstOrDefault();
+            InputType? additionalPropertiesValueType = null;
+            foreach (var model in inputModel.GetSelfAndBaseModels())
+            {
+                additionalPropertiesValueType = model.AdditionalProperties;
+                if (additionalPropertiesValueType != null)
+                    break;
+            }
             foreach (var obj in objectType.EnumerateHierarchy())
             {
                 additionalPropertiesProperty ??= obj.AdditionalPropertiesProperty;
@@ -560,13 +566,13 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             // build serialization for additional properties property (if any)
-            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, inheritedDictionarySchema, false);
+            var additionalPropertiesSerialization = BuildSerializationForAdditionalProperties(additionalPropertiesProperty, additionalPropertiesValueType, false);
             // build serialization for raw data field (if any)
             var rawDataFieldSerialization = BuildSerializationForAdditionalProperties(rawDataField, null, true);
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputDictionaryType? inheritedDictionarySchema, bool shouldExcludeInWireSerialization)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
             {
                 if (additionalPropertiesProperty == null)
                 {
@@ -575,9 +581,9 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
                 JsonSerialization valueSerialization;
-                if (inheritedDictionarySchema is not null)
+                if (additionalPropertiesValueType is not null)
                 {
-                    valueSerialization = BuildJsonSerialization(inheritedDictionarySchema.ValueType, additionalPropertyValueType, false);
+                    valueSerialization = BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false);
                 }
                 else
                 {

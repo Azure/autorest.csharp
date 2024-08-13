@@ -1795,7 +1795,7 @@ namespace Azure.Service.Models
 # autorest-core version
 version: 3.9.7
 save-inputs: true
-use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/net7.0/
+use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/net8.0/
 clear-output-folder: true
 public-clients: true
 skip-csproj-packagereference: true
