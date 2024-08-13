@@ -2294,10 +2294,7 @@
      "NameInRequest": "ApiVersion",
      "Description": "Api Version",
      "Type": {
-      "$id": "310",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "$ref": "61"
      },
      "Location": "Uri",
      "IsApiVersion": true,
@@ -2309,9 +2306,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "311",
+      "$id": "310",
       "Type": {
-       "$id": "312",
+       "$id": "311",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2322,11 +2319,11 @@
    ]
   },
   {
-   "$id": "313",
+   "$id": "312",
    "Name": "Univariate",
    "Operations": [
     {
-     "$id": "314",
+     "$id": "313",
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
@@ -2334,12 +2331,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "315",
+       "$id": "314",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
-        "$id": "316",
+        "$id": "315",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -2355,15 +2352,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "317",
+       "$id": "316",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
        "Type": {
-        "$id": "318",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "61"
        },
        "Location": "Uri",
        "IsApiVersion": true,
@@ -2375,9 +2369,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "319",
+        "$id": "317",
         "Type": {
-         "$id": "320",
+         "$id": "318",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2386,15 +2380,15 @@
        }
       },
       {
-       "$id": "321",
+       "$id": "319",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "322",
+        "$id": "320",
         "Kind": "constant",
         "ValueType": {
-         "$id": "323",
+         "$id": "321",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2410,14 +2404,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "324",
+       "$id": "322",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "325",
+        "$id": "323",
         "Kind": "constant",
         "ValueType": {
-         "$id": "326",
+         "$id": "324",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2433,7 +2427,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "327",
+       "$id": "325",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2451,7 +2445,7 @@
      ],
      "Responses": [
       {
-       "$id": "328",
+       "$id": "326",
        "StatusCodes": [
         200
        ],
@@ -2479,7 +2473,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.DetectUnivariateEntireSeries"
     },
     {
-     "$id": "329",
+     "$id": "327",
      "Name": "DetectUnivariateLastPoint",
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
@@ -2487,21 +2481,21 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "315"
+       "$ref": "314"
       },
       {
-       "$ref": "317"
+       "$ref": "316"
       },
       {
-       "$id": "330",
+       "$id": "328",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "331",
+        "$id": "329",
         "Kind": "constant",
         "ValueType": {
-         "$id": "332",
+         "$id": "330",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2517,14 +2511,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "333",
+       "$id": "331",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "334",
+        "$id": "332",
         "Kind": "constant",
         "ValueType": {
-         "$id": "335",
+         "$id": "333",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2540,7 +2534,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "336",
+       "$id": "334",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2558,7 +2552,7 @@
      ],
      "Responses": [
       {
-       "$id": "337",
+       "$id": "335",
        "StatusCodes": [
         200
        ],
@@ -2586,7 +2580,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Univariate.DetectUnivariateLastPoint"
     },
     {
-     "$id": "338",
+     "$id": "336",
      "Name": "DetectUnivariateChangePoint",
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
@@ -2594,21 +2588,21 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "315"
+       "$ref": "314"
       },
       {
-       "$ref": "317"
+       "$ref": "316"
       },
       {
-       "$id": "339",
+       "$id": "337",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "340",
+        "$id": "338",
         "Kind": "constant",
         "ValueType": {
-         "$id": "341",
+         "$id": "339",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2624,14 +2618,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "342",
+       "$id": "340",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "343",
+        "$id": "341",
         "Kind": "constant",
         "ValueType": {
-         "$id": "344",
+         "$id": "342",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2647,7 +2641,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "345",
+       "$id": "343",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Method of univariate anomaly detection.",
@@ -2665,7 +2659,7 @@
      ],
      "Responses": [
       {
-       "$id": "346",
+       "$id": "344",
        "StatusCodes": [
         200
        ],
@@ -2694,24 +2688,24 @@
     }
    ],
    "Protocol": {
-    "$id": "347"
+    "$id": "345"
    },
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
-     "$ref": "315"
+     "$ref": "314"
     },
     {
-     "$ref": "317"
+     "$ref": "316"
     }
    ]
   },
   {
-   "$id": "348",
+   "$id": "346",
    "Name": "Multivariate",
    "Operations": [
     {
-     "$id": "349",
+     "$id": "347",
      "Name": "GetMultivariateBatchDetectionResult",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
@@ -2719,12 +2713,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "350",
+       "$id": "348",
        "Name": "Endpoint",
        "NameInRequest": "Endpoint",
        "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
        "Type": {
-        "$id": "351",
+        "$id": "349",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -2740,15 +2734,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "352",
+       "$id": "350",
        "Name": "ApiVersion",
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
        "Type": {
-        "$id": "353",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "61"
        },
        "Location": "Uri",
        "IsApiVersion": true,
@@ -2760,9 +2751,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "354",
+        "$id": "351",
         "Type": {
-         "$id": "355",
+         "$id": "352",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2771,17 +2762,17 @@
        }
       },
       {
-       "$id": "356",
+       "$id": "353",
        "Name": "resultId",
        "NameInRequest": "resultId",
        "Description": "ID of a batch detection result.",
        "Type": {
-        "$id": "357",
+        "$id": "354",
         "Kind": "string",
         "Name": "uuid",
         "CrossLanguageDefinitionId": "Azure.Core.uuid",
         "BaseType": {
-         "$id": "358",
+         "$id": "355",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2796,14 +2787,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "359",
+       "$id": "356",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "360",
+        "$id": "357",
         "Kind": "constant",
         "ValueType": {
-         "$id": "361",
+         "$id": "358",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2821,7 +2812,7 @@
      ],
      "Responses": [
       {
-       "$id": "362",
+       "$id": "359",
        "StatusCodes": [
         200
        ],
@@ -2846,7 +2837,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.GetMultivariateBatchDetectionResult"
     },
     {
-     "$id": "363",
+     "$id": "360",
      "Name": "TrainMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Train a Multivariate Anomaly Detection Model",
@@ -2854,21 +2845,21 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "364",
+       "$id": "361",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "365",
+        "$id": "362",
         "Kind": "constant",
         "ValueType": {
-         "$id": "366",
+         "$id": "363",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2884,14 +2875,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "367",
+       "$id": "364",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "368",
+        "$id": "365",
         "Kind": "constant",
         "ValueType": {
-         "$id": "369",
+         "$id": "366",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2907,7 +2898,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "370",
+       "$id": "367",
        "Name": "modelInfo",
        "NameInRequest": "modelInfo",
        "Description": "Model information.",
@@ -2925,7 +2916,7 @@
      ],
      "Responses": [
       {
-       "$id": "371",
+       "$id": "368",
        "StatusCodes": [
         201
        ],
@@ -2935,12 +2926,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "372",
+         "$id": "369",
          "Name": "Location",
          "NameInResponse": "location",
          "Description": "Location and ID of the model.",
          "Type": {
-          "$id": "373",
+          "$id": "370",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -2966,7 +2957,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.TrainMultivariateModel"
     },
     {
-     "$id": "374",
+     "$id": "371",
      "Name": "ListMultivariateModels",
      "ResourceName": "Multivariate",
      "Summary": "List Multivariate Models",
@@ -2974,18 +2965,18 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "375",
+       "$id": "372",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "Skip indicates how many models will be skipped.",
        "Type": {
-        "$id": "376",
+        "$id": "373",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -2999,12 +2990,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "377",
+       "$id": "374",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "Top indicates how many models will be fetched.",
        "Type": {
-        "$id": "378",
+        "$id": "375",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32"
@@ -3018,14 +3009,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "379",
+       "$id": "376",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "380",
+        "$id": "377",
         "Kind": "constant",
         "ValueType": {
-         "$id": "381",
+         "$id": "378",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3043,7 +3034,7 @@
      ],
      "Responses": [
       {
-       "$id": "382",
+       "$id": "379",
        "StatusCodes": [
         200
        ],
@@ -3064,7 +3055,7 @@
      "Path": "/multivariate/models",
      "BufferResponse": true,
      "Paging": {
-      "$id": "383",
+      "$id": "380",
       "ItemName": "models",
       "NextLinkName": "nextLink"
      },
@@ -3073,7 +3064,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.ListMultivariateModels"
     },
     {
-     "$id": "384",
+     "$id": "381",
      "Name": "DeleteMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
@@ -3081,18 +3072,18 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "385",
+       "$id": "382",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "386",
+        "$id": "383",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3106,14 +3097,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "387",
+       "$id": "384",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "388",
+        "$id": "385",
         "Kind": "constant",
         "ValueType": {
-         "$id": "389",
+         "$id": "386",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3131,7 +3122,7 @@
      ],
      "Responses": [
       {
-       "$id": "390",
+       "$id": "387",
        "StatusCodes": [
         204
        ],
@@ -3150,7 +3141,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DeleteMultivariateModel"
     },
     {
-     "$id": "391",
+     "$id": "388",
      "Name": "GetMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
@@ -3158,18 +3149,18 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "392",
+       "$id": "389",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "393",
+        "$id": "390",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3183,14 +3174,14 @@
        "Kind": "Method"
       },
       {
-       "$id": "394",
+       "$id": "391",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "395",
+        "$id": "392",
         "Kind": "constant",
         "ValueType": {
-         "$id": "396",
+         "$id": "393",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3208,7 +3199,7 @@
      ],
      "Responses": [
       {
-       "$id": "397",
+       "$id": "394",
        "StatusCodes": [
         200
        ],
@@ -3233,7 +3224,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.GetMultivariateModel"
     },
     {
-     "$id": "398",
+     "$id": "395",
      "Name": "DetectMultivariateBatchAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
@@ -3241,18 +3232,18 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "399",
+       "$id": "396",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "400",
+        "$id": "397",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3266,15 +3257,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "401",
+       "$id": "398",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "402",
+        "$id": "399",
         "Kind": "constant",
         "ValueType": {
-         "$id": "403",
+         "$id": "400",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3290,14 +3281,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "404",
+       "$id": "401",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "405",
+        "$id": "402",
         "Kind": "constant",
         "ValueType": {
-         "$id": "406",
+         "$id": "403",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3313,7 +3304,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "407",
+       "$id": "404",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of multivariate anomaly detection.",
@@ -3331,7 +3322,7 @@
      ],
      "Responses": [
       {
-       "$id": "408",
+       "$id": "405",
        "StatusCodes": [
         202
        ],
@@ -3341,24 +3332,24 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "409",
+         "$id": "406",
          "Name": "Operation-Id",
          "NameInResponse": "operation-id",
          "Description": "Id of the detection result.",
          "Type": {
-          "$id": "410",
+          "$id": "407",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
-         "$id": "411",
+         "$id": "408",
          "Name": "Operation-Location",
          "NameInResponse": "operation-location",
          "Description": "Location of the detection result.",
          "Type": {
-          "$id": "412",
+          "$id": "409",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3384,7 +3375,7 @@
      "CrossLanguageDefinitionId": "AnomalyDetector.Multivariate.DetectMultivariateBatchAnomaly"
     },
     {
-     "$id": "413",
+     "$id": "410",
      "Name": "DetectMultivariateLastAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
@@ -3392,18 +3383,18 @@
      "Accessibility": "public",
      "Parameters": [
       {
+       "$ref": "348"
+      },
+      {
        "$ref": "350"
       },
       {
-       "$ref": "352"
-      },
-      {
-       "$id": "414",
+       "$id": "411",
        "Name": "modelId",
        "NameInRequest": "modelId",
        "Description": "Model identifier.",
        "Type": {
-        "$id": "415",
+        "$id": "412",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3417,15 +3408,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "416",
+       "$id": "413",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "417",
+        "$id": "414",
         "Kind": "constant",
         "ValueType": {
-         "$id": "418",
+         "$id": "415",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3441,14 +3432,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "419",
+       "$id": "416",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "420",
+        "$id": "417",
         "Kind": "constant",
         "ValueType": {
-         "$id": "421",
+         "$id": "418",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -3464,7 +3455,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "422",
+       "$id": "419",
        "Name": "options",
        "NameInRequest": "options",
        "Description": "Request of last detection.",
@@ -3482,7 +3473,7 @@
      ],
      "Responses": [
       {
-       "$id": "423",
+       "$id": "420",
        "StatusCodes": [
         200
        ],
@@ -3511,23 +3502,23 @@
     }
    ],
    "Protocol": {
-    "$id": "424"
+    "$id": "421"
    },
    "Parent": "AnomalyDetectorClient",
    "Parameters": [
     {
-     "$ref": "350"
+     "$ref": "348"
     },
     {
-     "$ref": "352"
+     "$ref": "350"
     }
    ]
   }
  ],
  "Auth": {
-  "$id": "425",
+  "$id": "422",
   "ApiKey": {
-   "$id": "426",
+   "$id": "423",
    "Name": "Ocp-Apim-Subscription-Key"
   }
  }

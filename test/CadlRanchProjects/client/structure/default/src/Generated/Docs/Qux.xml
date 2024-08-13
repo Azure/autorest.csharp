@@ -6,7 +6,7 @@
 This sample shows how to call EightAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Qux client = new ServiceClient(endpoint, "<client>").GetQuxClient();
+Qux client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient();
 
 Response response = await client.EightAsync();
 
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call EightAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Qux client = new ServiceClient(endpoint, "<client>").GetQuxClient();
+Qux client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient();
 
 Response response = await client.EightAsync();
 
@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Eight.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Qux client = new ServiceClient(endpoint, "<client>").GetQuxClient();
+Qux client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient();
 
 Response response = client.Eight();
 
@@ -36,7 +36,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Eight with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Qux client = new ServiceClient(endpoint, "<client>").GetQuxClient();
+Qux client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient();
 
 Response response = client.Eight();
 

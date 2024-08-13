@@ -77,10 +77,7 @@
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
      "Type": {
-      "$id": "13",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "$ref": "2"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -95,22 +92,22 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "13",
    "Name": "Group1",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "one",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "16",
+       "$id": "15",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "17",
+        "$id": "16",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -126,15 +123,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "18",
+       "$id": "17",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "19",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -149,7 +143,7 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
@@ -168,21 +162,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group1.one"
     },
     {
-     "$id": "21",
+     "$id": "19",
      "Name": "three",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "15"
       },
       {
-       "$ref": "18"
+       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
@@ -201,21 +195,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group1.three"
     },
     {
-     "$id": "23",
+     "$id": "21",
      "Name": "four",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "15"
       },
       {
-       "$ref": "18"
+       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -235,35 +229,35 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "23"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "16"
+     "$ref": "15"
     },
     {
-     "$ref": "18"
+     "$ref": "17"
     }
    ]
   },
   {
-   "$id": "26",
+   "$id": "24",
    "Name": "Group2",
    "Operations": [
     {
-     "$id": "27",
+     "$id": "25",
      "Name": "two",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "28",
+       "$id": "26",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "29",
+        "$id": "27",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -279,15 +273,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "30",
+       "$id": "28",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "31",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -302,7 +293,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -321,21 +312,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group2.two"
     },
     {
-     "$id": "33",
+     "$id": "30",
      "Name": "five",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "28"
+       "$ref": "26"
       },
       {
-       "$ref": "30"
+       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -354,21 +345,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.TwoOperationGroup.Group2.five"
     },
     {
-     "$id": "35",
+     "$id": "32",
      "Name": "six",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "28"
+       "$ref": "26"
       },
       {
-       "$ref": "30"
+       "$ref": "28"
       }
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "33",
        "StatusCodes": [
         204
        ],
@@ -388,15 +379,15 @@
     }
    ],
    "Protocol": {
-    "$id": "37"
+    "$id": "34"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "28"
+     "$ref": "26"
     },
     {
-     "$ref": "30"
+     "$ref": "28"
     }
    ]
   }

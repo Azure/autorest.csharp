@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using Client.Structure.Service.Multiple.Client.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Multiple.Client.Samples
@@ -20,7 +21,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedTwo_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedTwo();
 
@@ -32,7 +33,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedTwo_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedTwoAsync();
 
@@ -44,7 +45,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedTwo_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedTwo();
 
@@ -56,7 +57,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedTwo_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedTwoAsync();
 
@@ -68,7 +69,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedFour_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedFour();
 
@@ -80,7 +81,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedFour_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedFourAsync();
 
@@ -92,7 +93,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedFour_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedFour();
 
@@ -104,7 +105,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedFour_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedFourAsync();
 
@@ -116,7 +117,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedSix_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedSix();
 
@@ -128,7 +129,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedSix_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedSixAsync();
 
@@ -140,7 +141,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public void Example_ClientB_RenamedSix_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = client.RenamedSix();
 
@@ -152,7 +153,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
         public async Task Example_ClientB_RenamedSix_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ClientBClient client = new ClientBClient(endpoint, "<client>");
+            ClientBClient client = new ClientBClient(endpoint, ClientType.Default);
 
             Response response = await client.RenamedSixAsync();
 

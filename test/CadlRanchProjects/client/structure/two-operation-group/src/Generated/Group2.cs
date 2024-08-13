@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Client.Structure.Service.TwoOperationGroup.Models;
 
 namespace Client.Structure.Service.TwoOperationGroup
 {
@@ -19,7 +20,7 @@ namespace Client.Structure.Service.TwoOperationGroup
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _client;
+        private readonly ClientType _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,7 +38,7 @@ namespace Client.Structure.Service.TwoOperationGroup
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
-        internal Group2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client)
+        internal Group2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, ClientType client)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -239,7 +240,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/two", false);
             request.Uri = uri;
             return message;
@@ -253,7 +254,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/five", false);
             request.Uri = uri;
             return message;
@@ -267,7 +268,7 @@ namespace Client.Structure.Service.TwoOperationGroup
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/client/structure/", false);
-            uri.AppendRaw(_client, true);
+            uri.AppendRaw(_client.ToSerialString(), true);
             uri.AppendPath("/six", false);
             request.Uri = uri;
             return message;

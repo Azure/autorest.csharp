@@ -6,7 +6,7 @@
 This sample shows how to call NineAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
 Response response = await client.NineAsync();
 
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call NineAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
 Response response = await client.NineAsync();
 
@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Nine.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
 Response response = client.Nine();
 
@@ -36,7 +36,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Nine with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
 Response response = client.Nine();
 

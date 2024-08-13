@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using Azure.Core.Pipeline;
+using Client.Structure.Service.Models;
 
 namespace Client.Structure.Service
 {
@@ -17,7 +18,7 @@ namespace Client.Structure.Service
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _client;
+        private readonly ClientType _client;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -35,7 +36,7 @@ namespace Client.Structure.Service
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
-        internal Baz(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client)
+        internal Baz(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, ClientType client)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;

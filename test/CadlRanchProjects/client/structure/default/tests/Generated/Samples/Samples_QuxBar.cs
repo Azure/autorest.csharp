@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
+using Client.Structure.Service.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Samples
@@ -20,7 +21,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Nine_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+            QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
             Response response = client.Nine();
 
@@ -32,7 +33,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Nine_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+            QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
             Response response = await client.NineAsync();
 
@@ -44,7 +45,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Nine_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+            QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
             Response response = client.Nine();
 
@@ -56,7 +57,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Nine_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            QuxBar client = new ServiceClient(endpoint, "<client>").GetQuxClient().GetQuxBarClient();
+            QuxBar client = new ServiceClient(endpoint, ClientType.Default).GetQuxClient().GetQuxBarClient();
 
             Response response = await client.NineAsync();
 

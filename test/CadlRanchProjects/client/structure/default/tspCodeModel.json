@@ -80,10 +80,7 @@
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "13",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -98,7 +95,7 @@
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -117,7 +114,7 @@
      "CrossLanguageDefinitionId": "Client.Structure.Service.one"
     },
     {
-     "$id": "15",
+     "$id": "14",
      "Name": "two",
      "ResourceName": "Service",
      "Accessibility": "public",
@@ -131,7 +128,7 @@
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -151,7 +148,7 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "16"
    },
    "Parameters": [
     {
@@ -163,21 +160,21 @@
    ]
   },
   {
-   "$id": "18",
+   "$id": "17",
    "Name": "Baz",
    "Operations": [],
    "Protocol": {
-    "$id": "19"
+    "$id": "18"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$id": "20",
+     "$id": "19",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "21",
+      "$id": "20",
       "Kind": "url",
       "Name": "url",
       "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -193,15 +190,12 @@
      "Kind": "Client"
     },
     {
-     "$id": "22",
+     "$id": "21",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
      "Type": {
-      "$id": "23",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "$ref": "2"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -216,22 +210,22 @@
    ]
   },
   {
-   "$id": "24",
+   "$id": "22",
    "Name": "BazFoo",
    "Operations": [
     {
-     "$id": "25",
+     "$id": "23",
      "Name": "seven",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "26",
+       "$id": "24",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "27",
+        "$id": "25",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -247,15 +241,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "28",
+       "$id": "26",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "29",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -270,7 +261,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -290,35 +281,35 @@
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "28"
    },
    "Parent": "Baz",
    "Parameters": [
     {
-     "$ref": "26"
+     "$ref": "24"
     },
     {
-     "$ref": "28"
+     "$ref": "26"
     }
    ]
   },
   {
-   "$id": "32",
+   "$id": "29",
    "Name": "Qux",
    "Operations": [
     {
-     "$id": "33",
+     "$id": "30",
      "Name": "eight",
      "ResourceName": "Qux",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "34",
+       "$id": "31",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "35",
+        "$id": "32",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -334,15 +325,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "36",
+       "$id": "33",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "37",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -357,7 +345,7 @@
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -377,35 +365,35 @@
     }
    ],
    "Protocol": {
-    "$id": "39"
+    "$id": "35"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "34"
+     "$ref": "31"
     },
     {
-     "$ref": "36"
+     "$ref": "33"
     }
    ]
   },
   {
-   "$id": "40",
+   "$id": "36",
    "Name": "QuxBar",
    "Operations": [
     {
-     "$id": "41",
+     "$id": "37",
      "Name": "nine",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "42",
+       "$id": "38",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "43",
+        "$id": "39",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -421,15 +409,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "44",
+       "$id": "40",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "45",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -444,7 +429,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "41",
        "StatusCodes": [
         204
        ],
@@ -464,35 +449,35 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "42"
    },
    "Parent": "Qux",
    "Parameters": [
     {
-     "$ref": "42"
+     "$ref": "38"
     },
     {
-     "$ref": "44"
+     "$ref": "40"
     }
    ]
   },
   {
-   "$id": "48",
+   "$id": "43",
    "Name": "Foo",
    "Operations": [
     {
-     "$id": "49",
+     "$id": "44",
      "Name": "three",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "50",
+       "$id": "45",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "51",
+        "$id": "46",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -508,15 +493,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "52",
+       "$id": "47",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "53",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -531,7 +513,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "48",
        "StatusCodes": [
         204
        ],
@@ -550,21 +532,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.Service.Foo.three"
     },
     {
-     "$id": "55",
+     "$id": "49",
      "Name": "four",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "50"
+       "$ref": "45"
       },
       {
-       "$ref": "52"
+       "$ref": "47"
       }
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "50",
        "StatusCodes": [
         204
        ],
@@ -584,35 +566,35 @@
     }
    ],
    "Protocol": {
-    "$id": "57"
+    "$id": "51"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "50"
+     "$ref": "45"
     },
     {
-     "$ref": "52"
+     "$ref": "47"
     }
    ]
   },
   {
-   "$id": "58",
+   "$id": "52",
    "Name": "Bar",
    "Operations": [
     {
-     "$id": "59",
+     "$id": "53",
      "Name": "five",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "60",
+       "$id": "54",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "61",
+        "$id": "55",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -628,15 +610,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "62",
+       "$id": "56",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$id": "63",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$ref": "2"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -651,7 +630,7 @@
      ],
      "Responses": [
       {
-       "$id": "64",
+       "$id": "57",
        "StatusCodes": [
         204
        ],
@@ -670,21 +649,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.Service.Bar.five"
     },
     {
-     "$id": "65",
+     "$id": "58",
      "Name": "six",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "60"
+       "$ref": "54"
       },
       {
-       "$ref": "62"
+       "$ref": "56"
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "59",
        "StatusCodes": [
         204
        ],
@@ -704,15 +683,15 @@
     }
    ],
    "Protocol": {
-    "$id": "67"
+    "$id": "60"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "60"
+     "$ref": "54"
     },
     {
-     "$ref": "62"
+     "$ref": "56"
     }
    ]
   }

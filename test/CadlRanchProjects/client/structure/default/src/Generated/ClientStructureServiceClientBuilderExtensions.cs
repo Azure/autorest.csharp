@@ -8,6 +8,7 @@
 using System;
 using Azure.Core.Extensions;
 using Client.Structure.Service;
+using Client.Structure.Service.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -18,7 +19,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
-        public static IAzureClientBuilder<ServiceClient, ServiceClientOptions> AddServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, string client)
+        public static IAzureClientBuilder<ServiceClient, ServiceClientOptions> AddServiceClient<TBuilder>(this TBuilder builder, Uri endpoint, ClientType client)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ServiceClient, ServiceClientOptions>((options) => new ServiceClient(endpoint, client, options));
