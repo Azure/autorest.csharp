@@ -4,7 +4,7 @@
   "library-name": "Scm._Type.Property.AdditionalProperties",
   "use-model-reader-writer": true,
   "shared-source-folders": [
-    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Generator.Shared",
-    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net7.0/Azure.Core.Shared"
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
   ]
 }
