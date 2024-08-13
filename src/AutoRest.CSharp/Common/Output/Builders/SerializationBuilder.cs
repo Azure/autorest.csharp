@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.Output.Builders
 
             return (additionalPropertiesSerialization, rawDataFieldSerialization);
 
-            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? additionalPropertiesValueType, bool shouldExcludeInWireSerialization)
+            static JsonAdditionalPropertiesSerialization? BuildSerializationForAdditionalProperties(ObjectTypeProperty? additionalPropertiesProperty, InputType? inputAdditionalPropertiesValueType, bool shouldExcludeInWireSerialization)
             {
                 if (additionalPropertiesProperty == null)
                 {
@@ -581,9 +581,9 @@ namespace AutoRest.CSharp.Output.Builders
 
                 var additionalPropertyValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
                 JsonSerialization valueSerialization;
-                if (additionalPropertiesValueType is not null)
+                if (inputAdditionalPropertiesValueType is not null)
                 {
-                    valueSerialization = BuildJsonSerialization(additionalPropertiesValueType, additionalPropertyValueType, false);
+                    valueSerialization = BuildJsonSerialization(inputAdditionalPropertiesValueType, additionalPropertyValueType, false);
                 }
                 else
                 {
