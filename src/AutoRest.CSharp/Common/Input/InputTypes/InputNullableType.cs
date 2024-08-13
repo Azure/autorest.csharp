@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input.InputTypes
 {
-    internal sealed record InputNullableType(InputType Type, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType("nullable", Decorators)
+    internal sealed record InputNullableType(InputType Type, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType("nullable", Decorators)
     {
     }
 }

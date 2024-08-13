@@ -5,4 +5,4 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType(Name, Decorators) { }
+internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType(Name, Decorators) { }

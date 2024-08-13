@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputParameter(
@@ -22,7 +24,8 @@ internal record InputParameter(
     bool SkipUrlEncoding,
     bool Explode,
     string? ArraySerializationDelimiter,
-    string? HeaderCollectionPrefix)
+    string? HeaderCollectionPrefix,
+    IReadOnlyList<InputDecoratorInfo>? Decorators = null)
 {
     public InputParameter() : this(
         Name: string.Empty,

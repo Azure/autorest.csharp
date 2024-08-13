@@ -8,7 +8,7 @@ using AutoRest.CSharp.Common.Input.Examples;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent)
+internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent, IReadOnlyList<InputDecoratorInfo>? Decorators = null)
 {
     private readonly string? _key;
 

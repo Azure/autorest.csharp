@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, string CrossLanguageDefinitionId, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType(Name, Decorators)
+internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, string CrossLanguageDefinitionId, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType(Name, Decorators)
 {
     #region Scalars defined in typespec-azure-core
     internal const string UuidId = "Azure.Core.uuid";
@@ -29,7 +29,7 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, str
     internal const string IPAddressId = "Temp.ipAddress";
     #endregion
 
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId): this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId) : this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())
     {
     }
     internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode) : this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())

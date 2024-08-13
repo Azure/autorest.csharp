@@ -5,4 +5,4 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputListType(string Name, string CrossLanguageDefinitionId, InputType ValueType, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType(Name, Decorators);
+internal record InputListType(string Name, string CrossLanguageDefinitionId, InputType ValueType, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType(Name, Decorators);

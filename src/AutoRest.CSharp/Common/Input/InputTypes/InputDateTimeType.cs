@@ -5,4 +5,4 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDateTimeType(DateTimeKnownEncoding Encode, InputPrimitiveType WireType, IReadOnlyList<InputDecoratorInfo> Decorators) : InputType("DateTime", Decorators);
+internal record InputDateTimeType(DateTimeKnownEncoding Encode, InputPrimitiveType WireType, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType("DateTime", Decorators);
