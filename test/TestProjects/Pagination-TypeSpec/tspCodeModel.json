@@ -1065,7 +1065,7 @@
      "$id": "129",
      "Name": "list",
      "ResourceName": "LedgerEntry",
-     "Description": "List upload detail for the discovery resource.",
+     "Summary": "List upload detail for the discovery resource.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1489,7 +1489,7 @@
      "$id": "175",
      "Name": "listPools",
      "ResourceName": "Pools",
-     "Description": "Lists all of the Pools in the specified Account.",
+     "Summary": "Lists all of the Pools in the specified Account.",
      "Accessibility": "public",
      "Parameters": [
       {

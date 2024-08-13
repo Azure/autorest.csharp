@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<StringProperty>> GetStringAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetString(CancellationToken)']/*" />
         public virtual Response<StringProperty> GetString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='PutAsync(StringProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(StringProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='Put(StringProperty,CancellationToken)']/*" />
         public virtual Response Put(StringProperty body, CancellationToken cancellationToken = default)
         {

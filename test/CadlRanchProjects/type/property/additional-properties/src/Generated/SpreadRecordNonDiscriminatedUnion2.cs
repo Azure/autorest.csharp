@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadRecordNonDiscriminatedUnion2.xml" path="doc/members/member[@name='GetSpreadRecordNonDiscriminatedUnion2Async(CancellationToken)']/*" />
         public virtual async Task<Response<SpreadRecordForNonDiscriminatedUnion2>> GetSpreadRecordNonDiscriminatedUnion2Async(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadRecordNonDiscriminatedUnion2.xml" path="doc/members/member[@name='GetSpreadRecordNonDiscriminatedUnion2(CancellationToken)']/*" />
         public virtual Response<SpreadRecordForNonDiscriminatedUnion2> GetSpreadRecordNonDiscriminatedUnion2(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadRecordNonDiscriminatedUnion2.xml" path="doc/members/member[@name='PutAsync(SpreadRecordForNonDiscriminatedUnion2,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(SpreadRecordForNonDiscriminatedUnion2 body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadRecordNonDiscriminatedUnion2.xml" path="doc/members/member[@name='Put(SpreadRecordForNonDiscriminatedUnion2,CancellationToken)']/*" />
         public virtual Response Put(SpreadRecordForNonDiscriminatedUnion2 body, CancellationToken cancellationToken = default)
         {

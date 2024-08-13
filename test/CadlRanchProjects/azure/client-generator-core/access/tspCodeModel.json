@@ -1032,7 +1032,7 @@
      "$id": "112",
      "Name": "operation",
      "ResourceName": "RelativeModelInOperation",
-     "Description": "Expected query parameter: name=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"inner\":\n  {\n    \"name\": <any string>\n  }\n}\n```",
+     "Summary": "Expected query parameter: name=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"inner\":\n  {\n    \"name\": <any string>\n  }\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -1137,7 +1137,7 @@
      "$id": "123",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
-     "Description": "Expected query parameter: kind=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"kind\": \"real\"\n}\n```",
+     "Summary": "Expected query parameter: kind=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"kind\": \"real\"\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {

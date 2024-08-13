@@ -45,6 +45,7 @@ namespace _Type.Scalar
 
         /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBooleanAsync(CancellationToken)']/*" />
         public virtual async Task<Response<bool>> GetBooleanAsync(CancellationToken cancellationToken = default)
         {
@@ -55,6 +56,7 @@ namespace _Type.Scalar
 
         /// <summary> get boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='GetBoolean(CancellationToken)']/*" />
         public virtual Response<bool> GetBoolean(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Scalar
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='PutAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(bool body, CancellationToken cancellationToken = default)
         {
@@ -148,6 +151,7 @@ namespace _Type.Scalar
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Boolean.xml" path="doc/members/member[@name='Put(bool,CancellationToken)']/*" />
         public virtual Response Put(bool body, CancellationToken cancellationToken = default)
         {

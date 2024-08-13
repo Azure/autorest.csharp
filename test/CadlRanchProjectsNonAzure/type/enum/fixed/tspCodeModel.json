@@ -113,7 +113,7 @@
      "$id": "18",
      "Name": "getKnownValue",
      "ResourceName": "String",
-     "Description": "getKnownValue",
+     "Summary": "getKnownValue",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -200,7 +200,7 @@
      "$id": "27",
      "Name": "putKnownValue",
      "ResourceName": "String",
-     "Description": "putKnownValue",
+     "Summary": "putKnownValue",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -274,7 +274,7 @@
      "$id": "33",
      "Name": "putUnknownValue",
      "ResourceName": "String",
-     "Description": "putUnknownValue",
+     "Summary": "putUnknownValue",
      "Accessibility": "public",
      "Parameters": [
       {

@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsString.xml" path="doc/members/member[@name='GetExtendsStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsStringAdditionalProperties>> GetExtendsStringAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsString.xml" path="doc/members/member[@name='GetExtendsString(CancellationToken)']/*" />
         public virtual Response<ExtendsStringAdditionalProperties> GetExtendsString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsString.xml" path="doc/members/member[@name='PutAsync(ExtendsStringAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsStringAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsString.xml" path="doc/members/member[@name='Put(ExtendsStringAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsStringAdditionalProperties body, CancellationToken cancellationToken = default)
         {

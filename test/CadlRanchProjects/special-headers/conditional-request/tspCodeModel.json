@@ -14,7 +14,7 @@
      "$id": "3",
      "Name": "postIfMatch",
      "ResourceName": "ConditionalRequest",
-     "Description": "Check when only If-Match in header is defined.",
+     "Summary": "Check when only If-Match in header is defined.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -91,7 +91,7 @@
      "$id": "11",
      "Name": "postIfNoneMatch",
      "ResourceName": "ConditionalRequest",
-     "Description": "Check when only If-None-Match in header is defined.",
+     "Summary": "Check when only If-None-Match in header is defined.",
      "Accessibility": "public",
      "Parameters": [
       {

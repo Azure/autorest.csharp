@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsDifferentSpreadString.xml" path="doc/members/member[@name='GetExtendsDifferentSpreadStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DifferentSpreadStringDerived>> GetExtendsDifferentSpreadStringAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsDifferentSpreadString.xml" path="doc/members/member[@name='GetExtendsDifferentSpreadString(CancellationToken)']/*" />
         public virtual Response<DifferentSpreadStringDerived> GetExtendsDifferentSpreadString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsDifferentSpreadString.xml" path="doc/members/member[@name='PutAsync(DifferentSpreadStringDerived,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DifferentSpreadStringDerived body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsDifferentSpreadString.xml" path="doc/members/member[@name='Put(DifferentSpreadStringDerived,CancellationToken)']/*" />
         public virtual Response Put(DifferentSpreadStringDerived body, CancellationToken cancellationToken = default)
         {

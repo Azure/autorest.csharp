@@ -35,6 +35,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get non null. </remarks>
         public virtual async Task<ClientResult<CollectionsByteProperty>> GetNonNullAsync()
         {
             ClientResult result = await GetNonNullAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get non null. </remarks>
         public virtual ClientResult<CollectionsByteProperty> GetNonNull()
         {
             ClientResult result = GetNonNull(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get null. </remarks>
         public virtual async Task<ClientResult<CollectionsByteProperty>> GetNullAsync()
         {
             ClientResult result = await GetNullAsync(null).ConfigureAwait(false);
@@ -104,6 +107,7 @@ namespace Scm._Type.Property.Nullable
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get null. </remarks>
         public virtual ClientResult<CollectionsByteProperty> GetNull()
         {
             ClientResult result = GetNull(null);

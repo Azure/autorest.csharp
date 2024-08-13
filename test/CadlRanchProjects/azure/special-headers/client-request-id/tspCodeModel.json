@@ -14,7 +14,7 @@
      "$id": "3",
      "Name": "get",
      "ResourceName": "XmsClientRequestId",
-     "Description": "Get operation with azure `x-ms-client-request-id` header.",
+     "Summary": "Get operation with azure `x-ms-client-request-id` header.",
      "Accessibility": "public",
      "Parameters": [
       {

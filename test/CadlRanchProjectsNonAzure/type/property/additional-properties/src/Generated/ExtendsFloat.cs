@@ -35,6 +35,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<ExtendsFloatAdditionalProperties>> GetExtendsFloatAsync()
         {
             ClientResult result = await GetExtendsFloatAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<ExtendsFloatAdditionalProperties> GetExtendsFloat()
         {
             ClientResult result = GetExtendsFloat(null);
@@ -99,6 +101,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(ExtendsFloatAdditionalProperties body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -111,6 +114,7 @@ namespace Scm._Type.Property.AdditionalProperties
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(ExtendsFloatAdditionalProperties body)
         {
             Argument.AssertNotNull(body, nameof(body));

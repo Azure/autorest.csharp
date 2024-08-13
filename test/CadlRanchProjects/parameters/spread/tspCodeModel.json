@@ -1207,7 +1207,7 @@
      "$id": "127",
      "Name": "spreadParameterWithInnerAlias",
      "ResourceName": "Alias",
-     "Description": "spread an alias with contains another alias property as body.",
+     "Summary": "spread an alias with contains another alias property as body.",
      "Accessibility": "public",
      "Parameters": [
       {

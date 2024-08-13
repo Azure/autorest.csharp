@@ -92,7 +92,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -132,7 +132,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -172,7 +172,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Delete a Foo
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -214,7 +214,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Delete a Foo
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -256,7 +256,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Create a Foo
+        /// Create or update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -302,7 +302,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Create a Foo
+        /// Create or update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

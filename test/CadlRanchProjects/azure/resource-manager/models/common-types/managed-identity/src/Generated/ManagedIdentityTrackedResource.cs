@@ -92,7 +92,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         }
 
         /// <summary>
-        /// Get a ManagedIdentityTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -132,7 +132,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         }
 
         /// <summary>
-        /// Get a ManagedIdentityTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -172,7 +172,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         }
 
         /// <summary>
-        /// Update a ManagedIdentityTrackedResource
+        /// Update with user assigned and system assigned.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -214,7 +214,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         }
 
         /// <summary>
-        /// Update a ManagedIdentityTrackedResource
+        /// Update with user assigned and system assigned.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

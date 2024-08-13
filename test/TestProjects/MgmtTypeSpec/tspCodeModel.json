@@ -952,7 +952,7 @@
      "$id": "122",
      "Name": "GetAllPrivateLinkResources",
      "ResourceName": "PrivateLinkResource",
-     "Description": "list private links on the given resource",
+     "Summary": "list private links on the given resource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1132,7 +1132,7 @@
      "$id": "143",
      "Name": "createOrUpdate",
      "ResourceName": "Foos",
-     "Description": "Create a Foo",
+     "Summary": "Create a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1408,7 +1408,7 @@
      "$id": "174",
      "Name": "get",
      "ResourceName": "Foos",
-     "Description": "Get a Foo",
+     "Summary": "Get a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1560,7 +1560,7 @@
      "$id": "190",
      "Name": "delete",
      "ResourceName": "Foos",
-     "Description": "Delete a Foo",
+     "Summary": "Delete a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1751,7 +1751,7 @@
      "$id": "213",
      "Name": "list",
      "ResourceName": "Foo",
-     "Description": "List Foo resources by resource group",
+     "Summary": "List Foo resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {

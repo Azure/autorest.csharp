@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='GetDictionaryStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DictionaryStringProperty>> GetDictionaryStringAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='GetDictionaryString(CancellationToken)']/*" />
         public virtual Response<DictionaryStringProperty> GetDictionaryString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='PutAsync(DictionaryStringProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DictionaryStringProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='Put(DictionaryStringProperty,CancellationToken)']/*" />
         public virtual Response Put(DictionaryStringProperty body, CancellationToken cancellationToken = default)
         {

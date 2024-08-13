@@ -34,6 +34,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get boolean value. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<bool>> GetBooleanAsync()
         {
             ClientResult result = await GetBooleanAsync(null).ConfigureAwait(false);
@@ -41,6 +42,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary> get boolean value. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<bool> GetBoolean()
         {
             ClientResult result = GetBoolean(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);
@@ -106,6 +109,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> put boolean value. </summary>
         /// <param name="body"> _. </param>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);

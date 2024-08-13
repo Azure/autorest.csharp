@@ -431,6 +431,7 @@ namespace Scm.Parameters.Spread
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread parameter with inner alias. </remarks>
         public virtual async Task<ClientResult> SpreadParameterWithInnerAliasAsync(string id, string xMsTestHeader, string name, int age)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -449,6 +450,7 @@ namespace Scm.Parameters.Spread
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread parameter with inner alias. </remarks>
         public virtual ClientResult SpreadParameterWithInnerAlias(string id, string xMsTestHeader, string name, int age)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));

@@ -75,7 +75,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> Create a Foo. </summary>
+        /// <summary> Create or update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -102,7 +102,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> Create a Foo. </summary>
+        /// <summary> Create or update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -163,7 +163,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> Get a Foo. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -194,7 +194,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> Get a Foo. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -259,7 +259,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> Delete a Foo. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -284,7 +284,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> Delete a Foo. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The name of the Foo. </param>
@@ -341,7 +341,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> List Foo resources by resource group. </summary>
+        /// <summary> List. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -368,7 +368,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> List Foo resources by resource group. </summary>
+        /// <summary> List. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -417,7 +417,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> List Foo resources by resource group. </summary>
+        /// <summary> List. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -446,7 +446,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> List Foo resources by resource group. </summary>
+        /// <summary> List. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>

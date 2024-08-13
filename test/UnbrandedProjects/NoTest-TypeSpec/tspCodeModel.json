@@ -441,7 +441,7 @@
      "$id": "61",
      "Name": "sayHi",
      "ResourceName": "NoTestTypeSpec",
-     "Description": "Return hi",
+     "Summary": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -572,7 +572,7 @@
      "$id": "74",
      "Name": "sayHello",
      "ResourceName": "NoTestTypeSpec",
-     "Description": "Return hello",
+     "Summary": "Return hello",
      "Accessibility": "public",
      "Parameters": [
       {

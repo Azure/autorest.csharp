@@ -54,7 +54,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Create a NestedProxyResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -103,7 +103,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Create a NestedProxyResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -152,7 +152,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -197,7 +197,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -242,7 +242,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// List NestedProxyResource resources by TopLevelTrackedResource
+        /// List by top level tracked resource.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -272,7 +272,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// List NestedProxyResource resources by TopLevelTrackedResource
+        /// List by top level tracked resource.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

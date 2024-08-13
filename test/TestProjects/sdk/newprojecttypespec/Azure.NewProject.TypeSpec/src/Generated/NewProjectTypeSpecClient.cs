@@ -90,6 +90,7 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Top action. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -101,6 +102,7 @@ namespace Azure.NewProject.TypeSpec
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Top action. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -323,6 +325,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, CancellationToken cancellationToken = default)
         {
@@ -362,6 +365,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, CancellationToken cancellationToken = default)
         {
@@ -469,6 +473,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -484,6 +489,7 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(string name, CancellationToken cancellationToken = default)
         {

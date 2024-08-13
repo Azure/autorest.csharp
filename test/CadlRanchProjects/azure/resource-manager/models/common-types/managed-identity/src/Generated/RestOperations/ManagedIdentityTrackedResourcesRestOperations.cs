@@ -70,7 +70,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             return message;
         }
 
-        /// <summary> Get a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
@@ -101,7 +101,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             }
         }
 
-        /// <summary> Get a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
@@ -170,7 +170,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             return message;
         }
 
-        /// <summary> Create a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Create with system assigned. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
@@ -202,7 +202,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             }
         }
 
-        /// <summary> Create a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Create with system assigned. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
@@ -272,7 +272,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             return message;
         }
 
-        /// <summary> Update a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Update with user assigned and system assigned. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>
@@ -303,7 +303,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
             }
         }
 
-        /// <summary> Update a ManagedIdentityTrackedResource. </summary>
+        /// <summary> Update with user assigned and system assigned. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="managedIdentityTrackedResourceName"> arm resource name for path. </param>

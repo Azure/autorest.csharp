@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/IsUnknownDerived.xml" path="doc/members/member[@name='GetIsUnknownDerivedAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IsUnknownAdditionalPropertiesDerived>> GetIsUnknownDerivedAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/IsUnknownDerived.xml" path="doc/members/member[@name='GetIsUnknownDerived(CancellationToken)']/*" />
         public virtual Response<IsUnknownAdditionalPropertiesDerived> GetIsUnknownDerived(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/IsUnknownDerived.xml" path="doc/members/member[@name='PutAsync(IsUnknownAdditionalPropertiesDerived,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IsUnknownAdditionalPropertiesDerived body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/IsUnknownDerived.xml" path="doc/members/member[@name='Put(IsUnknownAdditionalPropertiesDerived,CancellationToken)']/*" />
         public virtual Response Put(IsUnknownAdditionalPropertiesDerived body, CancellationToken cancellationToken = default)
         {

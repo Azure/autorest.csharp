@@ -110,6 +110,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Hello again. </remarks>
         public virtual async Task<ClientResult<SuperRoundTripModel>> HelloAgainAsync(string p2, string p1, SuperRoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -127,6 +128,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Hello again. </remarks>
         public virtual ClientResult<SuperRoundTripModel> HelloAgain(string p2, string p1, SuperRoundTripModel action)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -261,6 +263,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Return hi in demo2. </summary>
+        /// <remarks> Hello demo 2. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
             ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
@@ -268,6 +271,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Return hi in demo2. </summary>
+        /// <remarks> Hello demo 2. </remarks>
         public virtual ClientResult<Thing> HelloDemo2()
         {
             ClientResult result = HelloDemo2(null);
@@ -325,6 +329,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create literal. </remarks>
         public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -337,6 +342,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Create with literal value. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Create literal. </remarks>
         public virtual ClientResult<Thing> CreateLiteral(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -403,6 +409,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Send literal parameters. </summary>
+        /// <remarks> Hello literal. </remarks>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
             ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
@@ -410,6 +417,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Send literal parameters. </summary>
+        /// <remarks> Hello literal. </remarks>
         public virtual ClientResult<Thing> HelloLiteral()
         {
             ClientResult result = HelloLiteral(null);
@@ -466,6 +474,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> Top action. </remarks>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
             ClientResult result = await TopActionAsync(action, null).ConfigureAwait(false);
@@ -474,6 +483,7 @@ namespace CustomizedTypeSpec.Models
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
+        /// <remarks> Top action. </remarks>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
             ClientResult result = TopAction(action, null);
@@ -629,6 +639,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -669,6 +680,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <remarks> Anonymous body. </remarks>
         public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -754,6 +766,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="format"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
         public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(string name, ModelWithFormat format = null)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -767,6 +780,7 @@ namespace CustomizedTypeSpec.Models
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="format"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Friendly model. </remarks>
         public virtual ClientResult<SuperFriend> FriendlyModel(string name, ModelWithFormat format = null)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -873,6 +887,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Model can have its projected name. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Projected name model. </remarks>
         public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -885,6 +900,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> Model can have its projected name. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <remarks> Projected name model. </remarks>
         public virtual ClientResult<ProjectedModel> ProjectedNameModel(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -951,6 +967,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> return anonymous model. </summary>
+        /// <remarks> Returns anonymous model. </remarks>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
             ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
@@ -958,6 +975,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> return anonymous model. </summary>
+        /// <remarks> Returns anonymous model. </remarks>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
             ClientResult result = ReturnsAnonymousModel(null);
@@ -1061,6 +1079,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Internal protocol. </remarks>
         public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1073,6 +1092,7 @@ namespace CustomizedTypeSpec.Models
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Internal protocol. </remarks>
         public virtual ClientResult<Thing> InternalProtocol(Thing body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -1129,6 +1149,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <remarks> Still convenient. </remarks>
         public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
             ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
@@ -1136,6 +1157,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <remarks> Still convenient. </remarks>
         public virtual ClientResult StillConvenientValue()
         {
             ClientResult result = StillConvenient(null);

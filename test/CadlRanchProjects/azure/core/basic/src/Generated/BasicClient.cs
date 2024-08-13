@@ -613,6 +613,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List with page. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithPageAsync(CancellationToken cancellationToken = default)
         {
@@ -624,6 +625,7 @@ namespace _Specs_.Azure.Core.Basic
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List with page. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(CancellationToken)']/*" />
         public virtual Pageable<User> GetWithPage(CancellationToken cancellationToken = default)
         {
@@ -690,6 +692,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="another"> Another query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
+        /// <remarks> List with parameters. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithParametersAsync(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
         {
@@ -707,6 +710,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="another"> Another query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
+        /// <remarks> List with parameters. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
         public virtual Pageable<User> GetWithParameters(ListItemInputBody bodyInput, ListItemInputExtensibleEnum? another = null, CancellationToken cancellationToken = default)
         {

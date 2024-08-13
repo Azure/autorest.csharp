@@ -35,6 +35,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<UnknownArrayProperty>> GetUnknownArrayAsync()
         {
             ClientResult result = await GetUnknownArrayAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<UnknownArrayProperty> GetUnknownArray()
         {
             ClientResult result = GetUnknownArray(null);
@@ -99,6 +101,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(UnknownArrayProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -111,6 +114,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(UnknownArrayProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

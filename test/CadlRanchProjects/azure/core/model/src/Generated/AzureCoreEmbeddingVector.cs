@@ -47,6 +47,7 @@ namespace _Specs_.Azure.Core.Model
 
         /// <summary> get an embedding vector. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='GetAzureCoreEmbeddingVectorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReadOnlyMemory<int>>> GetAzureCoreEmbeddingVectorAsync(CancellationToken cancellationToken = default)
         {
@@ -67,6 +68,7 @@ namespace _Specs_.Azure.Core.Model
 
         /// <summary> get an embedding vector. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='GetAzureCoreEmbeddingVector(CancellationToken)']/*" />
         public virtual Response<ReadOnlyMemory<int>> GetAzureCoreEmbeddingVector(CancellationToken cancellationToken = default)
         {
@@ -158,6 +160,7 @@ namespace _Specs_.Azure.Core.Model
         /// <summary> put an embedding vector. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='PutAsync(ReadOnlyMemory{int},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ReadOnlyMemory<int> body, CancellationToken cancellationToken = default)
         {
@@ -170,6 +173,7 @@ namespace _Specs_.Azure.Core.Model
         /// <summary> put an embedding vector. </summary>
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='Put(ReadOnlyMemory{int},CancellationToken)']/*" />
         public virtual Response Put(ReadOnlyMemory<int> body, CancellationToken cancellationToken = default)
         {
@@ -261,6 +265,7 @@ namespace _Specs_.Azure.Core.Model
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='PostAsync(AzureEmbeddingModel,CancellationToken)']/*" />
         public virtual async Task<Response<AzureEmbeddingModel>> PostAsync(AzureEmbeddingModel body, CancellationToken cancellationToken = default)
         {
@@ -276,6 +281,7 @@ namespace _Specs_.Azure.Core.Model
         /// <param name="body"> _. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Post. </remarks>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='Post(AzureEmbeddingModel,CancellationToken)']/*" />
         public virtual Response<AzureEmbeddingModel> Post(AzureEmbeddingModel body, CancellationToken cancellationToken = default)
         {

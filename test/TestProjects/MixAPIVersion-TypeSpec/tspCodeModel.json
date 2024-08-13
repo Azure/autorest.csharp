@@ -382,7 +382,7 @@
      "$id": "48",
      "Name": "read",
      "ResourceName": "Pets",
-     "Description": "Returns a pet. Supports eTags.",
+     "Summary": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {

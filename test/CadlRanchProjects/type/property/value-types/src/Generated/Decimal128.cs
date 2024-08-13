@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128Async(CancellationToken)']/*" />
         public virtual async Task<Response<Decimal128Property>> GetDecimal128Async(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='GetDecimal128(CancellationToken)']/*" />
         public virtual Response<Decimal128Property> GetDecimal128(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='PutAsync(Decimal128Property,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(Decimal128Property body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Decimal128.xml" path="doc/members/member[@name='Put(Decimal128Property,CancellationToken)']/*" />
         public virtual Response Put(Decimal128Property body, CancellationToken cancellationToken = default)
         {

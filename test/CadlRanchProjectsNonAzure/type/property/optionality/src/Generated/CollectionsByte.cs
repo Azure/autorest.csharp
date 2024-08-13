@@ -35,6 +35,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual async Task<ClientResult<CollectionsByteProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <remarks> Get all. </remarks>
         public virtual ClientResult<CollectionsByteProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -97,6 +99,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get default. </remarks>
         public virtual async Task<ClientResult<CollectionsByteProperty>> GetDefaultAsync()
         {
             ClientResult result = await GetDefaultAsync(null).ConfigureAwait(false);
@@ -104,6 +107,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary> Get models that will return the default object. </summary>
+        /// <remarks> Get default. </remarks>
         public virtual ClientResult<CollectionsByteProperty> GetDefault()
         {
             ClientResult result = GetDefault(null);
@@ -161,6 +165,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual async Task<ClientResult> PutAllAsync(CollectionsByteProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -173,6 +178,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with all properties present. </summary>
         /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         public virtual ClientResult PutAll(CollectionsByteProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -241,6 +247,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         public virtual async Task<ClientResult> PutDefaultAsync(CollectionsByteProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -253,6 +260,7 @@ namespace Scm._Type.Property.Optionality
         /// <summary> Put a body with default properties. </summary>
         /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         public virtual ClientResult PutDefault(CollectionsByteProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

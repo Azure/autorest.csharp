@@ -50,6 +50,7 @@ namespace Payload.Pageable
         /// <summary> List users. </summary>
         /// <param name="maxpagesize"> The maximum number of result items per page. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/PageableClient.xml" path="doc/members/member[@name='GetPageablesAsync(int?,CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetPageablesAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
@@ -62,6 +63,7 @@ namespace Payload.Pageable
         /// <summary> List users. </summary>
         /// <param name="maxpagesize"> The maximum number of result items per page. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/PageableClient.xml" path="doc/members/member[@name='GetPageables(int?,CancellationToken)']/*" />
         public virtual Pageable<User> GetPageables(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {

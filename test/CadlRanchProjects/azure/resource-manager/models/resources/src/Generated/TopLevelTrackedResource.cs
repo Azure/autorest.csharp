@@ -99,7 +99,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -130,7 +130,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -161,7 +161,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -201,7 +201,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -241,7 +241,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Delete a TopLevelTrackedResource
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -283,7 +283,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Delete a TopLevelTrackedResource
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -325,7 +325,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Update a TopLevelTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -371,7 +371,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Update a TopLevelTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

@@ -2006,7 +2006,7 @@
      "$id": "271",
      "Name": "topAction",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "top level method",
+     "Summary": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2083,7 +2083,7 @@
      "$id": "278",
      "Name": "patchAction",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "top level patch",
+     "Summary": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2185,7 +2185,7 @@
      "$id": "287",
      "Name": "anonymousBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "body parameter without body decorator",
+     "Summary": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2287,7 +2287,7 @@
      "$id": "296",
      "Name": "friendlyModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "Model can have its friendly name",
+     "Summary": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2444,7 +2444,7 @@
      "$id": "310",
      "Name": "projectedNameModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "Model can have its projected name",
+     "Summary": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2546,7 +2546,7 @@
      "$id": "319",
      "Name": "returnsAnonymousModel",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "return anonymous model",
+     "Summary": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2606,7 +2606,7 @@
      "$id": "324",
      "Name": "headAsBoolean",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "head as boolean.",
+     "Summary": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2655,7 +2655,7 @@
      "$id": "328",
      "Name": "stringBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is string.",
+     "Summary": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2731,7 +2731,7 @@
      "$id": "335",
      "Name": "boolBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is bool.",
+     "Summary": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2807,7 +2807,7 @@
      "$id": "342",
      "Name": "dateTimeBody",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The body parameter type is datetime.",
+     "Summary": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2890,7 +2890,7 @@
      "$id": "350",
      "Name": "returnString",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "The return type is datetime.",
+     "Summary": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3015,7 +3015,7 @@
      "$id": "362",
      "Name": "recursiveExtension",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test parent reference child",
+     "Summary": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3088,7 +3088,7 @@
      "$id": "368",
      "Name": "threeLevelRecursive",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test three level recursive extension",
+     "Summary": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3161,7 +3161,7 @@
      "$id": "374",
      "Name": "recursiveModels",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test child reference parent",
+     "Summary": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3234,7 +3234,7 @@
      "$id": "380",
      "Name": "ContainSelfModels",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test contain self models",
+     "Summary": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3307,7 +3307,7 @@
      "$id": "386",
      "Name": "enumParameter",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test enum parameter.",
+     "Summary": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3353,7 +3353,7 @@
      "$id": "389",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test enum parameter.",
+     "Summary": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3426,7 +3426,7 @@
      "$id": "395",
      "Name": "optionalDictionary",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test optional dictionary.",
+     "Summary": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3512,7 +3512,7 @@
      "$id": "404",
      "Name": "azureLocationOp",
      "ResourceName": "NoDocsTypeSpec",
-     "Description": "test optional dictionary.",
+     "Summary": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3679,7 +3679,7 @@
      "$id": "422",
      "Name": "sayHi",
      "ResourceName": "Demo",
-     "Description": "Return hi",
+     "Summary": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3825,7 +3825,7 @@
      "$id": "437",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
-     "Description": "Return hi again",
+     "Summary": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3979,7 +3979,7 @@
      "$id": "452",
      "Name": "noContentType",
      "ResourceName": "Demo2",
-     "Description": "Return hi again",
+     "Summary": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4117,7 +4117,7 @@
      "$id": "465",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
-     "Description": "Return hi in demo2",
+     "Summary": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4177,7 +4177,7 @@
      "$id": "470",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
-     "Description": "Create with literal value",
+     "Summary": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4279,7 +4279,7 @@
      "$id": "479",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
-     "Description": "Send literal parameters",
+     "Summary": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4423,7 +4423,7 @@
      "$id": "495",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
-     "Description": "get extensible enum",
+     "Summary": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4528,7 +4528,7 @@
      "$id": "505",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Summary": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4647,7 +4647,7 @@
      "$id": "516",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
-     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Summary": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4693,7 +4693,7 @@
      "$id": "520",
      "Name": "doSomething",
      "ResourceName": "Entity",
-     "Description": "doSomething for entity",
+     "Summary": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4803,7 +4803,7 @@
      "$id": "531",
      "Name": "doSomething",
      "ResourceName": "Glossary",
-     "Description": "doSomething for glossary",
+     "Summary": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {

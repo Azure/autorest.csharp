@@ -67,7 +67,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -105,7 +105,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -143,7 +143,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// list private links on the given resource
+        /// Get all private link resources.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -175,7 +175,7 @@ namespace MgmtTypeSpec
         }
 
         /// <summary>
-        /// list private links on the given resource
+        /// Get all private link resources.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

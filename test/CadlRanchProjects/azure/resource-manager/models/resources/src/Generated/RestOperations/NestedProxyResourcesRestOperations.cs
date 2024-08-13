@@ -75,7 +75,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Get a NestedProxyResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -108,7 +108,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Get a NestedProxyResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -183,7 +183,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Create a NestedProxyResource. </summary>
+        /// <summary> Create or replace. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -212,7 +212,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Create a NestedProxyResource. </summary>
+        /// <summary> Create or replace. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -283,7 +283,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Update a NestedProxyResource. </summary>
+        /// <summary> Update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -312,7 +312,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Update a NestedProxyResource. </summary>
+        /// <summary> Update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -379,7 +379,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Delete a NestedProxyResource. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -406,7 +406,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Delete a NestedProxyResource. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -469,7 +469,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <summary> List by top level tracked resource. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -498,7 +498,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <summary> List by top level tracked resource. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -549,7 +549,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <summary> List by top level tracked resource. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -580,7 +580,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List NestedProxyResource resources by TopLevelTrackedResource. </summary>
+        /// <summary> List by top level tracked resource. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>

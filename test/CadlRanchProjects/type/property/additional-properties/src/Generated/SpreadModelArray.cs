@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadModelArray.xml" path="doc/members/member[@name='GetSpreadModelArrayAsync(CancellationToken)']/*" />
         public virtual async Task<Response<SpreadModelArrayRecord>> GetSpreadModelArrayAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadModelArray.xml" path="doc/members/member[@name='GetSpreadModelArray(CancellationToken)']/*" />
         public virtual Response<SpreadModelArrayRecord> GetSpreadModelArray(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadModelArray.xml" path="doc/members/member[@name='PutAsync(SpreadModelArrayRecord,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(SpreadModelArrayRecord body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadModelArray.xml" path="doc/members/member[@name='Put(SpreadModelArrayRecord,CancellationToken)']/*" />
         public virtual Response Put(SpreadModelArrayRecord body, CancellationToken cancellationToken = default)
         {

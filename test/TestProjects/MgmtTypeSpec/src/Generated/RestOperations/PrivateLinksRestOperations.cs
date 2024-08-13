@@ -69,7 +69,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> list private links on the given resource. </summary>
+        /// <summary> Get all private link resources. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -96,7 +96,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> list private links on the given resource. </summary>
+        /// <summary> Get all private link resources. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,7 +145,7 @@ namespace MgmtTypeSpec
             return message;
         }
 
-        /// <summary> list private links on the given resource. </summary>
+        /// <summary> Get all private link resources. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -174,7 +174,7 @@ namespace MgmtTypeSpec
             }
         }
 
-        /// <summary> list private links on the given resource. </summary>
+        /// <summary> Get all private link resources. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
