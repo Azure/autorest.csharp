@@ -79,7 +79,10 @@
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$ref": "2"
+        "$id": "13",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -94,7 +97,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -113,7 +116,7 @@
      "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedOne"
     },
     {
-     "$id": "14",
+     "$id": "15",
      "Name": "renamedThree",
      "ResourceName": "RenamedOperation",
      "Accessibility": "public",
@@ -127,7 +130,7 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "16",
        "StatusCodes": [
         204
        ],
@@ -146,7 +149,7 @@
      "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedThree"
     },
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "renamedFive",
      "ResourceName": "RenamedOperation",
      "Accessibility": "public",
@@ -160,7 +163,7 @@
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
@@ -180,7 +183,7 @@
     }
    ],
    "Protocol": {
-    "$id": "18"
+    "$id": "19"
    },
    "Parameters": [
     {
@@ -192,22 +195,22 @@
    ]
   },
   {
-   "$id": "19",
+   "$id": "20",
    "Name": "Group",
    "Operations": [
     {
-     "$id": "20",
+     "$id": "21",
      "Name": "renamedTwo",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "22",
+        "$id": "23",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -223,12 +226,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
        "Type": {
-        "$ref": "2"
+        "$id": "25",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -243,7 +249,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -262,21 +268,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedTwo"
     },
     {
-     "$id": "25",
+     "$id": "27",
      "Name": "renamedFour",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
+       "$ref": "22"
       },
       {
-       "$ref": "23"
+       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -295,21 +301,21 @@
      "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedFour"
     },
     {
-     "$id": "27",
+     "$id": "29",
      "Name": "renamedSix",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
+       "$ref": "22"
       },
       {
-       "$ref": "23"
+       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "30",
        "StatusCodes": [
         204
        ],
@@ -329,15 +335,15 @@
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "31"
    },
    "Parent": "RenamedOperationClient",
    "Parameters": [
     {
-     "$ref": "21"
+     "$ref": "22"
     },
     {
-     "$ref": "23"
+     "$ref": "24"
     }
    ]
   }

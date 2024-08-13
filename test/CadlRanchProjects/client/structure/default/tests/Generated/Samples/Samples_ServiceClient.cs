@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Samples
@@ -21,7 +20,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Service_One_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = client.One();
 
@@ -33,7 +32,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Service_One_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = await client.OneAsync();
 
@@ -45,7 +44,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Service_One_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = client.One();
 
@@ -57,7 +56,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Service_One_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = await client.OneAsync();
 
@@ -69,7 +68,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Service_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = client.Two();
 
@@ -81,7 +80,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Service_Two_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = await client.TwoAsync();
 
@@ -93,7 +92,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Service_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = client.Two();
 
@@ -105,7 +104,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Service_Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+            ServiceClient client = new ServiceClient(endpoint, "<client>");
 
             Response response = await client.TwoAsync();
 

@@ -21,7 +21,7 @@ namespace Versioning.TypeChangedFrom
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,8 +37,9 @@ namespace Versioning.TypeChangedFrom
         /// <summary> Initializes a new instance of TypeChangedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TypeChangedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new TypeChangedFromClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public TypeChangedFromClient(Uri endpoint, string version) : this(endpoint, version, new TypeChangedFromClientOptions())
         {
         }
 
@@ -46,10 +47,12 @@ namespace Versioning.TypeChangedFrom
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public TypeChangedFromClient(Uri endpoint, Versions version, TypeChangedFromClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public TypeChangedFromClient(Uri endpoint, string version, TypeChangedFromClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
             options ??= new TypeChangedFromClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -182,7 +185,7 @@ namespace Versioning.TypeChangedFrom
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/type-changed-from/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/test", false);
             uri.AppendQuery("param", param, true);
             request.Uri = uri;

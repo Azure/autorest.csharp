@@ -8,7 +8,6 @@
 using System;
 using Azure.Core.Extensions;
 using Versioning.Removed;
-using Versioning.Removed.Models;
 
 namespace Microsoft.Extensions.Azure
 {
@@ -19,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        public static IAzureClientBuilder<RemovedClient, RemovedClientOptions> AddRemovedClient<TBuilder>(this TBuilder builder, Uri endpoint, Versions version)
+        public static IAzureClientBuilder<RemovedClient, RemovedClientOptions> AddRemovedClient<TBuilder>(this TBuilder builder, Uri endpoint, string version)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<RemovedClient, RemovedClientOptions>((options) => new RemovedClient(endpoint, version, options));

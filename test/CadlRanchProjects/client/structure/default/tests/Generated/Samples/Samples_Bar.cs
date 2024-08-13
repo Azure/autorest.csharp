@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Samples
@@ -21,7 +20,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Five_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = client.Five();
 
@@ -33,7 +32,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Five_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = await client.FiveAsync();
 
@@ -45,7 +44,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Five_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = client.Five();
 
@@ -57,7 +56,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Five_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = await client.FiveAsync();
 
@@ -69,7 +68,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Six_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = client.Six();
 
@@ -81,7 +80,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Six_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = await client.SixAsync();
 
@@ -93,7 +92,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Bar_Six_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = client.Six();
 
@@ -105,7 +104,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Bar_Six_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
+            Bar client = new ServiceClient(endpoint, "<client>").GetBarClient();
 
             Response response = await client.SixAsync();
 

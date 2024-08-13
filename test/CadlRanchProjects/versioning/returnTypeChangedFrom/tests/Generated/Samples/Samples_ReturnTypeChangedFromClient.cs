@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Versioning.ReturnTypeChangedFrom.Models;
 
 namespace Versioning.ReturnTypeChangedFrom.Samples
 {
@@ -23,7 +22,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public void Example_ReturnTypeChangedFrom_Test_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Test(content);
@@ -37,7 +36,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public async Task Example_ReturnTypeChangedFrom_Test_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.TestAsync(content);
@@ -51,7 +50,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public void Example_ReturnTypeChangedFrom_Test_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             Response<string> response = client.Test("<body>");
         }
@@ -61,7 +60,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public async Task Example_ReturnTypeChangedFrom_Test_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             Response<string> response = await client.TestAsync("<body>");
         }
@@ -71,7 +70,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public void Example_ReturnTypeChangedFrom_Test_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Test(content);
@@ -85,7 +84,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public async Task Example_ReturnTypeChangedFrom_Test_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.TestAsync(content);
@@ -99,7 +98,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public void Example_ReturnTypeChangedFrom_Test_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             Response<string> response = client.Test("<body>");
         }
@@ -109,7 +108,7 @@ namespace Versioning.ReturnTypeChangedFrom.Samples
         public async Task Example_ReturnTypeChangedFrom_Test_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, Versions.V1);
+            ReturnTypeChangedFromClient client = new ReturnTypeChangedFromClient(endpoint, "<version>");
 
             Response<string> response = await client.TestAsync("<body>");
         }

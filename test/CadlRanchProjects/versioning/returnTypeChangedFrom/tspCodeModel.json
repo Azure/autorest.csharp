@@ -76,7 +76,10 @@
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
-        "$ref": "2"
+        "$id": "11",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -89,15 +92,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "11",
+       "$id": "12",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "12",
+        "$id": "13",
         "Kind": "constant",
         "ValueType": {
-         "$id": "13",
+         "$id": "14",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -113,14 +116,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "14",
+       "$id": "15",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "15",
+        "$id": "16",
         "Kind": "constant",
         "ValueType": {
-         "$id": "16",
+         "$id": "17",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -136,11 +139,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "18",
+        "$id": "19",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -156,12 +159,12 @@
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "20",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "20",
+        "$id": "21",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -188,7 +191,7 @@
     }
    ],
    "Protocol": {
-    "$id": "21"
+    "$id": "22"
    },
    "Parameters": [
     {

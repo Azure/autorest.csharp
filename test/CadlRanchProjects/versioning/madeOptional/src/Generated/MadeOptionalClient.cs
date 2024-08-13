@@ -21,7 +21,7 @@ namespace Versioning.MadeOptional
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,8 +37,9 @@ namespace Versioning.MadeOptional
         /// <summary> Initializes a new instance of MadeOptionalClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public MadeOptionalClient(Uri endpoint, Versions version) : this(endpoint, version, new MadeOptionalClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public MadeOptionalClient(Uri endpoint, string version) : this(endpoint, version, new MadeOptionalClientOptions())
         {
         }
 
@@ -46,10 +47,12 @@ namespace Versioning.MadeOptional
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public MadeOptionalClient(Uri endpoint, Versions version, MadeOptionalClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public MadeOptionalClient(Uri endpoint, string version, MadeOptionalClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
             options ??= new MadeOptionalClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -178,7 +181,7 @@ namespace Versioning.MadeOptional
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/made-optional/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/test", false);
             if (param != null)
             {

@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.Samples
@@ -21,7 +20,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Seven_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
             Response response = client.Seven();
 
@@ -33,7 +32,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Seven_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
             Response response = await client.SevenAsync();
 
@@ -45,7 +44,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Seven_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
             Response response = client.Seven();
 
@@ -57,7 +56,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Seven_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
             Response response = await client.SevenAsync();
 

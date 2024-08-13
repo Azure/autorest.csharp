@@ -254,7 +254,10 @@
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
-        "$ref": "9"
+        "$id": "35",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -267,11 +270,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "headerV2",
        "NameInRequest": "header-v2",
        "Type": {
-        "$id": "36",
+        "$id": "37",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -285,15 +288,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "37",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "38",
+        "$id": "39",
         "Kind": "constant",
         "ValueType": {
-         "$id": "39",
+         "$id": "40",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -309,14 +312,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "40",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
+        "$id": "42",
         "Kind": "constant",
         "ValueType": {
-         "$id": "42",
+         "$id": "43",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -332,7 +335,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "43",
+       "$id": "44",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -349,7 +352,7 @@
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
@@ -377,7 +380,7 @@
      "CrossLanguageDefinitionId": "Versioning.Added.v1"
     },
     {
-     "$id": "45",
+     "$id": "46",
      "Name": "v2",
      "ResourceName": "Added",
      "Accessibility": "public",
@@ -389,15 +392,15 @@
        "$ref": "34"
       },
       {
-       "$id": "46",
+       "$id": "47",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "47",
+        "$id": "48",
         "Kind": "constant",
         "ValueType": {
-         "$id": "48",
+         "$id": "49",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -413,14 +416,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "49",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "50",
+        "$id": "51",
         "Kind": "constant",
         "ValueType": {
-         "$id": "51",
+         "$id": "52",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -436,7 +439,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "52",
+       "$id": "53",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -453,7 +456,7 @@
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -482,7 +485,7 @@
     }
    ],
    "Protocol": {
-    "$id": "54"
+    "$id": "55"
    },
    "Parameters": [
     {
@@ -494,22 +497,22 @@
    ]
   },
   {
-   "$id": "55",
+   "$id": "56",
    "Name": "InterfaceV2",
    "Operations": [
     {
-     "$id": "56",
+     "$id": "57",
      "Name": "v2InInterface",
      "ResourceName": "InterfaceV2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "57",
+       "$id": "58",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "58",
+        "$id": "59",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -525,12 +528,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "59",
+       "$id": "60",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
        "Type": {
-        "$ref": "9"
+        "$id": "61",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -543,15 +549,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "60",
+       "$id": "62",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "61",
+        "$id": "63",
         "Kind": "constant",
         "ValueType": {
-         "$id": "62",
+         "$id": "64",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -567,14 +573,14 @@
        "Kind": "Constant"
       },
       {
-       "$id": "63",
+       "$id": "65",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "66",
         "Kind": "constant",
         "ValueType": {
-         "$id": "65",
+         "$id": "67",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -590,7 +596,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "66",
+       "$id": "68",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -607,7 +613,7 @@
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
@@ -636,15 +642,15 @@
     }
    ],
    "Protocol": {
-    "$id": "68"
+    "$id": "70"
    },
    "Parent": "AddedClient",
    "Parameters": [
     {
-     "$ref": "57"
+     "$ref": "58"
     },
     {
-     "$ref": "59"
+     "$ref": "60"
     }
    ]
   }

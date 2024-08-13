@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Versioning.ReturnTypeChangedFrom.Models;
 
 namespace Versioning.ReturnTypeChangedFrom
 {
@@ -21,7 +20,7 @@ namespace Versioning.ReturnTypeChangedFrom
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly Versions _version;
+        private readonly string _version;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -37,8 +36,9 @@ namespace Versioning.ReturnTypeChangedFrom
         /// <summary> Initializes a new instance of ReturnTypeChangedFromClient. </summary>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ReturnTypeChangedFromClient(Uri endpoint, Versions version) : this(endpoint, version, new ReturnTypeChangedFromClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public ReturnTypeChangedFromClient(Uri endpoint, string version) : this(endpoint, version, new ReturnTypeChangedFromClientOptions())
         {
         }
 
@@ -46,10 +46,12 @@ namespace Versioning.ReturnTypeChangedFrom
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public ReturnTypeChangedFromClient(Uri endpoint, Versions version, ReturnTypeChangedFromClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="version"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        public ReturnTypeChangedFromClient(Uri endpoint, string version, ReturnTypeChangedFromClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNullOrEmpty(version, nameof(version));
             options ??= new ReturnTypeChangedFromClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -176,7 +178,7 @@ namespace Versioning.ReturnTypeChangedFrom
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/return-type-changed-from/api-version:", false);
-            uri.AppendRaw(_version.ToSerialString(), true);
+            uri.AppendRaw(_version, true);
             uri.AppendPath("/test", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

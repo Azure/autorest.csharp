@@ -9,7 +9,6 @@ using System;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
-using Client.Structure.Service.rename.operation.Models;
 using NUnit.Framework;
 
 namespace Client.Structure.Service.rename.operation.Samples
@@ -21,7 +20,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedOne_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedOne();
 
@@ -33,7 +32,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedOne_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedOneAsync();
 
@@ -45,7 +44,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedOne_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedOne();
 
@@ -57,7 +56,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedOne_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedOneAsync();
 
@@ -69,7 +68,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedThree_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedThree();
 
@@ -81,7 +80,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedThree_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedThreeAsync();
 
@@ -93,7 +92,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedThree_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedThree();
 
@@ -105,7 +104,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedThree_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedThreeAsync();
 
@@ -117,7 +116,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedFive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedFive();
 
@@ -129,7 +128,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedFive_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedFiveAsync();
 
@@ -141,7 +140,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public void Example_RenamedOperation_RenamedFive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = client.RenamedFive();
 
@@ -153,7 +152,7 @@ namespace Client.Structure.Service.rename.operation.Samples
         public async Task Example_RenamedOperation_RenamedFive_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedOperationClient client = new RenamedOperationClient(endpoint, ClientType.Default);
+            RenamedOperationClient client = new RenamedOperationClient(endpoint, "<client>");
 
             Response response = await client.RenamedFiveAsync();
 

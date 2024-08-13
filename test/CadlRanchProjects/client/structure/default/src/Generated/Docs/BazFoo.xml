@@ -6,7 +6,7 @@
 This sample shows how to call SevenAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
 Response response = await client.SevenAsync();
 
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call SevenAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
 Response response = await client.SevenAsync();
 
@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Seven.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
 Response response = client.Seven();
 
@@ -36,7 +36,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Seven with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+BazFoo client = new ServiceClient(endpoint, "<client>").GetBazClient().GetBazFooClient();
 
 Response response = client.Seven();
 
