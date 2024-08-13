@@ -88,7 +88,7 @@
      "$id": "12",
      "Name": "list",
      "ResourceName": "Pageable",
-     "Description": "List users",
+     "Summary": "List users",
      "Accessibility": "public",
      "Parameters": [
       {

@@ -786,7 +786,7 @@
      "$id": "99",
      "Name": "get",
      "ResourceName": "TopLevelTrackedResources",
-     "Description": "Get a TopLevelTrackedResource",
+     "Summary": "Get a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -965,7 +965,7 @@
      "$id": "119",
      "Name": "createOrReplace",
      "ResourceName": "TopLevelTrackedResources",
-     "Description": "Create a TopLevelTrackedResource",
+     "Summary": "Create a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1214,7 +1214,7 @@
      "$id": "146",
      "Name": "update",
      "ResourceName": "TopLevelTrackedResources",
-     "Description": "Update a TopLevelTrackedResource",
+     "Summary": "Update a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1457,7 +1457,7 @@
      "$id": "173",
      "Name": "delete",
      "ResourceName": "TopLevelTrackedResources",
-     "Description": "Delete a TopLevelTrackedResource",
+     "Summary": "Delete a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1648,7 +1648,7 @@
      "$id": "196",
      "Name": "listByResourceGroup",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "List TopLevelTrackedResource resources by resource group",
+     "Summary": "List TopLevelTrackedResource resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1786,7 +1786,7 @@
      "$id": "211",
      "Name": "listBySubscription",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "List TopLevelTrackedResource resources by subscription ID",
+     "Summary": "List TopLevelTrackedResource resources by subscription ID",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1920,7 +1920,7 @@
      "$id": "226",
      "Name": "get",
      "ResourceName": "NestedProxyResources",
-     "Description": "Get a NestedProxyResource",
+     "Summary": "Get a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2118,7 +2118,7 @@
      "$id": "248",
      "Name": "createOrReplace",
      "ResourceName": "NestedProxyResources",
-     "Description": "Create a NestedProxyResource",
+     "Summary": "Create a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2386,7 +2386,7 @@
      "$id": "277",
      "Name": "update",
      "ResourceName": "NestedProxyResources",
-     "Description": "Update a NestedProxyResource",
+     "Summary": "Update a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2648,7 +2648,7 @@
      "$id": "306",
      "Name": "delete",
      "ResourceName": "NestedProxyResources",
-     "Description": "Delete a NestedProxyResource",
+     "Summary": "Delete a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2858,7 +2858,7 @@
      "$id": "331",
      "Name": "listByTopLevelTrackedResource",
      "ResourceName": "NestedProxyResource",
-     "Description": "List NestedProxyResource resources by TopLevelTrackedResource",
+     "Summary": "List NestedProxyResource resources by TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {

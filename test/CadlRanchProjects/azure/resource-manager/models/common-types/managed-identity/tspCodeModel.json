@@ -731,7 +731,7 @@
      "$id": "94",
      "Name": "get",
      "ResourceName": "ManagedIdentityTrackedResources",
-     "Description": "Get a ManagedIdentityTrackedResource",
+     "Summary": "Get a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -904,7 +904,7 @@
      "$id": "113",
      "Name": "createWithSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResources",
-     "Description": "Create a ManagedIdentityTrackedResource",
+     "Summary": "Create a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1108,7 +1108,7 @@
      "$id": "133",
      "Name": "updateWithUserAssignedAndSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResources",
-     "Description": "Update a ManagedIdentityTrackedResource",
+     "Summary": "Update a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {

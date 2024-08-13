@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DifferentSpreadModelRecord>> GetSpreadDifferentModelAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='GetSpreadDifferentModel(CancellationToken)']/*" />
         public virtual Response<DifferentSpreadModelRecord> GetSpreadDifferentModel(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='PutAsync(DifferentSpreadModelRecord,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadDifferentModel.xml" path="doc/members/member[@name='Put(DifferentSpreadModelRecord,CancellationToken)']/*" />
         public virtual Response Put(DifferentSpreadModelRecord body, CancellationToken cancellationToken = default)
         {

@@ -46,6 +46,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get non null. </remarks>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetNonNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<CollectionsByteProperty>> GetNonNullAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get non null. </remarks>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetNonNull(CancellationToken)']/*" />
         public virtual Response<CollectionsByteProperty> GetNonNull(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get null. </remarks>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetNullAsync(CancellationToken)']/*" />
         public virtual async Task<Response<CollectionsByteProperty>> GetNullAsync(CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace _Type.Property.Nullable
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get null. </remarks>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetNull(CancellationToken)']/*" />
         public virtual Response<CollectionsByteProperty> GetNull(CancellationToken cancellationToken = default)
         {

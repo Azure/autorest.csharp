@@ -49,6 +49,7 @@ namespace OpenAI
         /// </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job)
         {
             Argument.AssertNotNull(job, nameof(job));
@@ -68,6 +69,7 @@ namespace OpenAI
         /// </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
+        /// <remarks> Create. </remarks>
         public virtual ClientResult<FineTuningJob> Create(CreateFineTuningJobRequest job)
         {
             Argument.AssertNotNull(job, nameof(job));

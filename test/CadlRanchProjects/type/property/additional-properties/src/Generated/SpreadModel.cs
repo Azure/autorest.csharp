@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadModel.xml" path="doc/members/member[@name='GetSpreadModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<SpreadModelRecord>> GetSpreadModelAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/SpreadModel.xml" path="doc/members/member[@name='GetSpreadModel(CancellationToken)']/*" />
         public virtual Response<SpreadModelRecord> GetSpreadModel(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadModel.xml" path="doc/members/member[@name='PutAsync(SpreadModelRecord,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(SpreadModelRecord body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/SpreadModel.xml" path="doc/members/member[@name='Put(SpreadModelRecord,CancellationToken)']/*" />
         public virtual Response Put(SpreadModelRecord body, CancellationToken cancellationToken = default)
         {

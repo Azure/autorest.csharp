@@ -55,6 +55,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Input to input output. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutputAsync(InputModel,CancellationToken)']/*" />
         public virtual async Task<Response> InputToInputOutputAsync(InputModel body, CancellationToken cancellationToken = default)
         {
@@ -77,6 +78,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Input to input output. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='InputToInputOutput(InputModel,CancellationToken)']/*" />
         public virtual Response InputToInputOutput(InputModel body, CancellationToken cancellationToken = default)
         {
@@ -185,6 +187,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Output to input output. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OutputToInputOutputAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> OutputToInputOutputAsync(CancellationToken cancellationToken = default)
         {
@@ -202,6 +205,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Output to input output. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OutputToInputOutput(CancellationToken)']/*" />
         public virtual Response<OutputModel> OutputToInputOutput(CancellationToken cancellationToken = default)
         {
@@ -311,6 +315,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Model in read only property. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='ModelInReadOnlyPropertyAsync(RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<RoundTripModel>> ModelInReadOnlyPropertyAsync(RoundTripModel body, CancellationToken cancellationToken = default)
         {
@@ -343,6 +348,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Model in read only property. </remarks>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='ModelInReadOnlyProperty(RoundTripModel,CancellationToken)']/*" />
         public virtual Response<RoundTripModel> ModelInReadOnlyProperty(RoundTripModel body, CancellationToken cancellationToken = default)
         {

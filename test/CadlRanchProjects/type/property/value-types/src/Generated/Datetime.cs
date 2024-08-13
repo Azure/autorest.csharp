@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDatetimeAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetDatetimeAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDatetime(CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetDatetime(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAsync(DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='Put(DatetimeProperty,CancellationToken)']/*" />
         public virtual Response Put(DatetimeProperty body, CancellationToken cancellationToken = default)
         {

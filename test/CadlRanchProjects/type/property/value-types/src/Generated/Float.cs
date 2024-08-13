@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='GetFloatAsync(CancellationToken)']/*" />
         public virtual async Task<Response<FloatProperty>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='GetFloat(CancellationToken)']/*" />
         public virtual Response<FloatProperty> GetFloat(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='PutAsync(FloatProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(FloatProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='Put(FloatProperty,CancellationToken)']/*" />
         public virtual Response Put(FloatProperty body, CancellationToken cancellationToken = default)
         {

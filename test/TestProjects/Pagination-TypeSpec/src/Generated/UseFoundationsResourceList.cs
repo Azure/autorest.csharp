@@ -53,6 +53,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/UseFoundationsResourceList.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<LedgerEntry> GetLedgerEntriesAsync(CancellationToken cancellationToken = default)
         {
@@ -64,6 +65,7 @@ namespace Pagination
 
         /// <summary> List upload detail for the discovery resource. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> List. </remarks>
         /// <include file="Docs/UseFoundationsResourceList.xml" path="doc/members/member[@name='GetLedgerEntries(CancellationToken)']/*" />
         public virtual Pageable<LedgerEntry> GetLedgerEntries(CancellationToken cancellationToken = default)
         {

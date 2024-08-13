@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='GetUnionIntLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionIntLiteralProperty>> GetUnionIntLiteralAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='GetUnionIntLiteral(CancellationToken)']/*" />
         public virtual Response<UnionIntLiteralProperty> GetUnionIntLiteral(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='PutAsync(UnionIntLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnionIntLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionIntLiteral.xml" path="doc/members/member[@name='Put(UnionIntLiteralProperty,CancellationToken)']/*" />
         public virtual Response Put(UnionIntLiteralProperty body, CancellationToken cancellationToken = default)
         {

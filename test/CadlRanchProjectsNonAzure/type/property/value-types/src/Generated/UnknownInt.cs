@@ -35,6 +35,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<UnknownIntProperty>> GetUnknownIntAsync()
         {
             ClientResult result = await GetUnknownIntAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<UnknownIntProperty> GetUnknownInt()
         {
             ClientResult result = GetUnknownInt(null);
@@ -99,6 +101,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(UnknownIntProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -111,6 +114,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(UnknownIntProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

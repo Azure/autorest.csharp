@@ -46,6 +46,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetAll(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get default. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DatetimeProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get default. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
         public virtual Response<DatetimeProperty> GetDefault(CancellationToken cancellationToken = default)
         {
@@ -228,6 +232,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAllAsync(DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
@@ -243,6 +248,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutAll(DatetimeProperty,CancellationToken)']/*" />
         public virtual Response PutAll(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
@@ -336,6 +342,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefaultAsync(DatetimeProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutDefaultAsync(DatetimeProperty body, CancellationToken cancellationToken = default)
         {
@@ -351,6 +358,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put default. </remarks>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='PutDefault(DatetimeProperty,CancellationToken)']/*" />
         public virtual Response PutDefault(DatetimeProperty body, CancellationToken cancellationToken = default)
         {

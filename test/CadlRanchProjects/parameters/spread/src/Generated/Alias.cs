@@ -554,6 +554,7 @@ namespace Parameters.Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread parameter with inner alias. </remarks>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadParameterWithInnerAliasAsync(string,string,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadParameterWithInnerAliasAsync(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
         {
@@ -575,6 +576,7 @@ namespace Parameters.Spread
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <remarks> Spread parameter with inner alias. </remarks>
         /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadParameterWithInnerAlias(string,string,string,int,CancellationToken)']/*" />
         public virtual Response SpreadParameterWithInnerAlias(string id, string xMsTestHeader, string name, int age, CancellationToken cancellationToken = default)
         {

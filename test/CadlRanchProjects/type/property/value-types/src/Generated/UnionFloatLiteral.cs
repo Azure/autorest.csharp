@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='GetUnionFloatLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnionFloatLiteralProperty>> GetUnionFloatLiteralAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='GetUnionFloatLiteral(CancellationToken)']/*" />
         public virtual Response<UnionFloatLiteralProperty> GetUnionFloatLiteral(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='PutAsync(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnionFloatLiteral.xml" path="doc/members/member[@name='Put(UnionFloatLiteralProperty,CancellationToken)']/*" />
         public virtual Response Put(UnionFloatLiteralProperty body, CancellationToken cancellationToken = default)
         {

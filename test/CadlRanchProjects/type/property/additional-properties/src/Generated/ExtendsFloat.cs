@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsFloat.xml" path="doc/members/member[@name='GetExtendsFloatAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsFloatAdditionalProperties>> GetExtendsFloatAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsFloat.xml" path="doc/members/member[@name='GetExtendsFloat(CancellationToken)']/*" />
         public virtual Response<ExtendsFloatAdditionalProperties> GetExtendsFloat(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsFloat.xml" path="doc/members/member[@name='PutAsync(ExtendsFloatAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsFloatAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsFloat.xml" path="doc/members/member[@name='Put(ExtendsFloatAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsFloatAdditionalProperties body, CancellationToken cancellationToken = default)
         {

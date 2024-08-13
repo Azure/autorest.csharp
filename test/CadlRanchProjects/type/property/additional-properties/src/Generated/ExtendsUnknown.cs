@@ -46,6 +46,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='GetExtendsUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsUnknownAdditionalProperties>> GetExtendsUnknownAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.AdditionalProperties
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='GetExtendsUnknown(CancellationToken)']/*" />
         public virtual Response<ExtendsUnknownAdditionalProperties> GetExtendsUnknown(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='PutAsync(ExtendsUnknownAdditionalProperties,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ExtendsUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.AdditionalProperties
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/ExtendsUnknown.xml" path="doc/members/member[@name='Put(ExtendsUnknownAdditionalProperties,CancellationToken)']/*" />
         public virtual Response Put(ExtendsUnknownAdditionalProperties body, CancellationToken cancellationToken = default)
         {

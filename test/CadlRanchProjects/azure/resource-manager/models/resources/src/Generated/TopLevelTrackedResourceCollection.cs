@@ -55,7 +55,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Create a TopLevelTrackedResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -104,7 +104,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Create a TopLevelTrackedResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -153,7 +153,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -198,7 +198,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -243,7 +243,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// List TopLevelTrackedResource resources by resource group
+        /// List by resource group.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -273,7 +273,7 @@ namespace _Azure.ResourceManager.Models.Resources
         }
 
         /// <summary>
-        /// List TopLevelTrackedResource resources by resource group
+        /// List by resource group.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

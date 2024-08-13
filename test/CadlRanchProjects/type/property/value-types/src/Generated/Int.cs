@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int.xml" path="doc/members/member[@name='GetIntAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IntProperty>> GetIntAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Int.xml" path="doc/members/member[@name='GetInt(CancellationToken)']/*" />
         public virtual Response<IntProperty> GetInt(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int.xml" path="doc/members/member[@name='PutAsync(IntProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(IntProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Int.xml" path="doc/members/member[@name='Put(IntProperty,CancellationToken)']/*" />
         public virtual Response Put(IntProperty body, CancellationToken cancellationToken = default)
         {

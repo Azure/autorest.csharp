@@ -46,6 +46,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<RequiredAndOptionalProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get all. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<RequiredAndOptionalProperty> GetAll(CancellationToken cancellationToken = default)
         {
@@ -136,6 +138,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get required only. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<RequiredAndOptionalProperty>> GetRequiredOnlyAsync(CancellationToken cancellationToken = default)
         {
@@ -146,6 +149,7 @@ namespace _Type.Property.Optionality
 
         /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get required only. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnly(CancellationToken)']/*" />
         public virtual Response<RequiredAndOptionalProperty> GetRequiredOnly(CancellationToken cancellationToken = default)
         {
@@ -228,6 +232,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAllAsync(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
@@ -243,6 +248,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put all. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual Response PutAll(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
@@ -336,6 +342,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put required only. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutRequiredOnlyAsync(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {
@@ -351,6 +358,7 @@ namespace _Type.Property.Optionality
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put required only. </remarks>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)']/*" />
         public virtual Response PutRequiredOnly(RequiredAndOptionalProperty body, CancellationToken cancellationToken = default)
         {

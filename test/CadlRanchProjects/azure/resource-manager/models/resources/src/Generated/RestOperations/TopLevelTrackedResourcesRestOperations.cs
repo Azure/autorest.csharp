@@ -71,7 +71,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Get a TopLevelTrackedResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -102,7 +102,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Get a TopLevelTrackedResource. </summary>
+        /// <summary> Get. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -171,7 +171,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Create a TopLevelTrackedResource. </summary>
+        /// <summary> Create or replace. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -198,7 +198,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Create a TopLevelTrackedResource. </summary>
+        /// <summary> Create or replace. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -263,7 +263,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Update a TopLevelTrackedResource. </summary>
+        /// <summary> Update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -290,7 +290,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Update a TopLevelTrackedResource. </summary>
+        /// <summary> Update. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -351,7 +351,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> Delete a TopLevelTrackedResource. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -376,7 +376,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> Delete a TopLevelTrackedResource. </summary>
+        /// <summary> Delete. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
@@ -433,7 +433,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -460,7 +460,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -515,7 +515,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -540,7 +540,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -587,7 +587,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -616,7 +616,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -667,7 +667,7 @@ namespace _Azure.ResourceManager.Models.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -694,7 +694,7 @@ namespace _Azure.ResourceManager.Models.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

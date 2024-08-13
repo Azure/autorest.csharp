@@ -176,7 +176,7 @@
      "$id": "23",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
-     "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
+     "Summary": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -276,7 +276,7 @@
      "$id": "33",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
-     "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
+     "Summary": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -336,7 +336,7 @@
      "$id": "38",
      "Name": "modelInReadOnlyProperty",
      "ResourceName": "ModelInOperation",
-     "Description": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": <any string>\n  }\n}\n```",
+     "Summary": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": <any string>\n  }\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {

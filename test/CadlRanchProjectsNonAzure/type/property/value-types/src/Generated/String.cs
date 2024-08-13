@@ -35,6 +35,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual async Task<ClientResult<StringProperty>> GetStringAsync()
         {
             ClientResult result = await GetStringAsync(null).ConfigureAwait(false);
@@ -42,6 +43,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Get call. </summary>
+        /// <remarks> Get. </remarks>
         public virtual ClientResult<StringProperty> GetString()
         {
             ClientResult result = GetString(null);
@@ -99,6 +101,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual async Task<ClientResult> PutAsync(StringProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -111,6 +114,7 @@ namespace Scm._Type.Property.ValueTypes
         /// <summary> Put operation. </summary>
         /// <param name="body"> body. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         public virtual ClientResult Put(StringProperty body)
         {
             Argument.AssertNotNull(body, nameof(body));

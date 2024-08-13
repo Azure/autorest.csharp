@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownString.xml" path="doc/members/member[@name='GetUnknownStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnknownStringProperty>> GetUnknownStringAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownString.xml" path="doc/members/member[@name='GetUnknownString(CancellationToken)']/*" />
         public virtual Response<UnknownStringProperty> GetUnknownString(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownString.xml" path="doc/members/member[@name='PutAsync(UnknownStringProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnknownStringProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownString.xml" path="doc/members/member[@name='Put(UnknownStringProperty,CancellationToken)']/*" />
         public virtual Response Put(UnknownStringProperty body, CancellationToken cancellationToken = default)
         {

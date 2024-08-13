@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownArray.xml" path="doc/members/member[@name='GetUnknownArrayAsync(CancellationToken)']/*" />
         public virtual async Task<Response<UnknownArrayProperty>> GetUnknownArrayAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/UnknownArray.xml" path="doc/members/member[@name='GetUnknownArray(CancellationToken)']/*" />
         public virtual Response<UnknownArrayProperty> GetUnknownArray(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownArray.xml" path="doc/members/member[@name='PutAsync(UnknownArrayProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(UnknownArrayProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/UnknownArray.xml" path="doc/members/member[@name='Put(UnknownArrayProperty,CancellationToken)']/*" />
         public virtual Response Put(UnknownArrayProperty body, CancellationToken cancellationToken = default)
         {

@@ -46,6 +46,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Decimal.xml" path="doc/members/member[@name='GetDecimalAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DecimalProperty>> GetDecimalAsync(CancellationToken cancellationToken = default)
         {
@@ -56,6 +57,7 @@ namespace _Type.Property.ValueTypes
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <remarks> Get. </remarks>
         /// <include file="Docs/Decimal.xml" path="doc/members/member[@name='GetDecimal(CancellationToken)']/*" />
         public virtual Response<DecimalProperty> GetDecimal(CancellationToken cancellationToken = default)
         {
@@ -138,6 +140,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Decimal.xml" path="doc/members/member[@name='PutAsync(DecimalProperty,CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(DecimalProperty body, CancellationToken cancellationToken = default)
         {
@@ -153,6 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <param name="body"> body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <remarks> Put. </remarks>
         /// <include file="Docs/Decimal.xml" path="doc/members/member[@name='Put(DecimalProperty,CancellationToken)']/*" />
         public virtual Response Put(DecimalProperty body, CancellationToken cancellationToken = default)
         {
