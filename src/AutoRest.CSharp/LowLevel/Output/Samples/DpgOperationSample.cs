@@ -24,12 +24,11 @@ namespace AutoRest.CSharp.Output.Samples.Models
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
             _typeFactory = typeFactory;
             _method = method;
-            _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             IsConvenienceSample = isConvenienceSample;
             ExampleKey = exampleKey;
@@ -37,7 +36,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         protected internal readonly InputOperationExample _inputOperationExample;
         protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
@@ -183,9 +181,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
         /// </returns>
         private IEnumerable<InputParameterExample> GetAllParameterExamples()
         {
-            // first we return all the client parameters for reference
-            foreach (var parameter in _inputClientParameterExamples)
-                yield return parameter;
             foreach (var parameter in _inputOperationExample.Parameters)
             {
                 var inputParameter = parameter.Parameter;
@@ -300,10 +295,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public InputTypeExample GetEndpointValue(string parameterName)
         {
-            var clientParameterValue = _inputClientParameterExamples.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
-            if (clientParameterValue != null)
-                return clientParameterValue;
-
             var operationParameterValue = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
             if (operationParameterValue != null)
                 return operationParameterValue;
