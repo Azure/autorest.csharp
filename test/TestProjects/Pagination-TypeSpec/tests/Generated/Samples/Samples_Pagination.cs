@@ -15,7 +15,7 @@ using Pagination.Models;
 
 namespace Pagination.Samples
 {
-    public partial class Samples_PaginationClient
+    public partial class Samples_Pagination
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
@@ -23,7 +23,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -45,7 +45,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -67,7 +67,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
             foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
@@ -81,7 +81,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
             await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))
@@ -95,7 +95,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -117,7 +117,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -139,7 +139,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
             foreach (LedgerEntry item in client.GetPaginationLedgerEntries(bodyInput))
@@ -153,7 +153,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            PaginationClient client = new PaginationClient(endpoint, credential);
+            Pagination client = new PaginationClient(endpoint, credential).GetClient(apiVersion: "2022-05-13");
 
             ListLedgerEntryInputBody bodyInput = new ListLedgerEntryInputBody("<requiredString>", 1234);
             await foreach (LedgerEntry item in client.GetPaginationLedgerEntriesAsync(bodyInput))

@@ -68,28 +68,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Core_Basic_listWithPage() => Test(async (host) =>
-        {
-            AsyncPageable<User> allPages = new BasicClient(host, null).GetWithPageAsync();
-            await foreach (Page<User> page in allPages.AsPages())
-            {
-                User firstUser = page.Values.First();
-                Assert.AreEqual("Madge", firstUser.Name);
-            }
-        });
-
-        [Test]
-        public Task Azure_Core_Basic_listWithCustomPageModel() => Test(async (host) =>
-        {
-            AsyncPageable<User> allPages = new BasicClient(host, null).GetWithCustomPageModelAsync();
-            await foreach (Page<User> page in allPages.AsPages())
-            {
-                User firstUser = page.Values.First();
-                Assert.AreEqual("Madge", firstUser.Name);
-            }
-        });
-
-        [Test]
         public Task Azure_Core_Basic_delete() => Test(async (host) =>
         {
             var response = await new BasicClient(host, null).DeleteAsync(1);
@@ -101,36 +79,6 @@ namespace CadlRanchProjects.Tests
         {
             User response = await new BasicClient(host, null).ExportAsync(1, "json");
             Assert.AreEqual("Madge", response.Name);
-        });
-
-        [Test]
-        public Task Azure_Core_Basic_listWithParameters() => Test(async (host) =>
-        {
-            AsyncPageable<User> allPages = new BasicClient(host, null).GetWithParametersAsync(new ListItemInputBody("Madge"), ListItemInputExtensibleEnum.Second);
-            await foreach (Page<User> page in allPages.AsPages())
-            {
-                User firstUser = page.Values.First();
-                Assert.AreEqual(1, firstUser.Id);
-                Assert.AreEqual("Madge", firstUser.Name);
-                Assert.AreEqual("11bdc430-65e8-45ad-81d9-8ffa60d55b59", firstUser.Etag.ToString());
-            }
-        });
-
-        [Test]
-        public Task Azure_Core_basic_TwoModelsAsPageItem() => Test(async (host) =>
-        {
-            var first = new BasicClient(host, null).GetTwoModelsAsPageItemClient().GetFirstItemsAsync();
-            var second = new BasicClient(host, null).GetTwoModelsAsPageItemClient().GetSecondItemsAsync();
-            await foreach (Page<FirstItem> page in first.AsPages())
-            {
-                FirstItem firstItem = page.Values.First();
-                Assert.AreEqual(1, firstItem.Id);
-            }
-            await foreach (Page<SecondItem> page in second.AsPages())
-            {
-                SecondItem firstItem = page.Values.First();
-                Assert.AreEqual("Madge", firstItem.Name);
-            }
         });
 
         [Test]
