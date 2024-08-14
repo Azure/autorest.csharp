@@ -177,13 +177,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     InputType inputType = InputPrimitiveType.Boolean;
                     if (declarationType.IsDictionary)
                     {
-                        inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean, Array.Empty<InputDecoratorInfo>());
+                        inputType = new InputDictionaryType(string.Empty, InputPrimitiveType.Boolean, InputPrimitiveType.Boolean);
                     }
                     else if (declarationType.IsList)
                     {
-                        inputType = new InputListType(string.Empty, string.Empty, InputPrimitiveType.Boolean, Array.Empty<InputDecoratorInfo>());
+                        inputType = new InputListType(string.Empty, string.Empty, InputPrimitiveType.Boolean);
                     }
-                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, Array.Empty<InputDecoratorInfo>(), null);
+                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false, null);
 
                 }
 

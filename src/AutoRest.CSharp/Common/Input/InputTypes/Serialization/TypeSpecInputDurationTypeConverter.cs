@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Input
             encode = encode ?? throw new JsonException("Duration type must have encoding");
 
             var dateTimeType = Enum.TryParse<DurationKnownEncoding>(encode, ignoreCase: true, out var encodeKind)
-                ? new InputDurationType(encodeKind, wireType, decorators ?? Array.Empty<InputDecoratorInfo>())
+                ? new InputDurationType(encodeKind, wireType) { Decorators = decorators ?? Array.Empty<InputDecoratorInfo>() }
                 : throw new JsonException($"Encoding of Duration type {encode} is unknown.");
 
             if (id != null)

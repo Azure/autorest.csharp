@@ -43,7 +43,10 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
 
             valueType = valueType ?? throw new JsonException("InputNullableType must have value type");
 
-            var nullableType = new InputNullableType(valueType, decorators ?? Array.Empty<InputDecoratorInfo>());
+            var nullableType = new InputNullableType(valueType)
+            {
+                Decorators = decorators ?? Array.Empty<InputDecoratorInfo>()
+            };
             if (id != null)
             {
                 resolver.AddReference(id, nullableType);

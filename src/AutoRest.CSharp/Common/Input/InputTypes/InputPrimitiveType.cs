@@ -1,12 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, string CrossLanguageDefinitionId, IReadOnlyList<InputDecoratorInfo>? Decorators = null) : InputType(Name, Decorators)
+internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, string CrossLanguageDefinitionId) : InputType(Name)
 {
     #region Scalars defined in typespec-azure-core
     internal const string UuidId = "Azure.Core.uuid";
@@ -29,14 +26,11 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, str
     internal const string IPAddressId = "Temp.ipAddress";
     #endregion
 
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId) : this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())
-    {
-    }
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode) : this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode) : this(kind, name, crossLanguageDefinitionId)
     {
         Encode = encode;
     }
-    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode, InputPrimitiveType? baseType) : this(kind, name, crossLanguageDefinitionId, Array.Empty<InputDecoratorInfo>())
+    internal InputPrimitiveType(InputPrimitiveTypeKind kind, string name, string crossLanguageDefinitionId, string? encode, InputPrimitiveType? baseType) : this(kind, name, crossLanguageDefinitionId)
     {
         Encode = encode;
         BaseType = baseType;

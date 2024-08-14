@@ -138,8 +138,7 @@ namespace AutoRest.CSharp.Output.Models
                     "Unknown", //TODO: do we need to support extensible enum / int values?
                     null,
                     new Dictionary<string, InputModelType>(),
-                    null,
-                    Array.Empty<InputDecoratorInfo>())
+                    null)
                 {
                     IsUnknownDiscriminatorModel = true
                 };
@@ -227,7 +226,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (sourcePaging.NextLinkOperation != null && operationsMap.TryGetValue(sourcePaging.NextLinkOperation, out var nextLinkOperationRef))
             {
-                return sourcePaging with {NextLinkOperation = nextLinkOperationRef()};
+                return sourcePaging with { NextLinkOperation = nextLinkOperationRef() };
             }
 
             return sourcePaging;

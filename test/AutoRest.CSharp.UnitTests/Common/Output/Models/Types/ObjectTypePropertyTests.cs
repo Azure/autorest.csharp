@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         {
             bool isBaseElement = true;
             InputType elementType = InputPrimitiveType.Boolean;
-            InputListType type = new InputListType("InputListType", "TypeSpec.Array", elementType, Array.Empty<InputDecoratorInfo>());
+            InputListType type = new InputListType("InputListType", "TypeSpec.Array", elementType);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -58,8 +58,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
         {
             bool isBaseElement = true;
             InputType elementType = InputPrimitiveType.Boolean;
-            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", elementType, Array.Empty<InputDecoratorInfo>());
-            InputListType type = new InputListType("InputListType2", "TypeSpec.Array", listElementType, Array.Empty<InputDecoratorInfo>());
+            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", elementType);
+            InputListType type = new InputListType("InputListType2", "TypeSpec.Array", listElementType);
 
             CSharpType cSharpType = typeFactory.CreateType(type);
 
@@ -76,8 +76,8 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             bool isBaseElement = true;
             InputType keyType = InputPrimitiveType.String;
             InputType valueType = InputPrimitiveType.Int32;
-            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, Array.Empty<InputDecoratorInfo>());
-            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", dictionaryType, Array.Empty<InputDecoratorInfo>());
+            InputDictionaryType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType);
+            InputType listElementType = new InputListType("InputListType1", "TypeSpec.Array", dictionaryType);
 
             CSharpType cSharpType = typeFactory.CreateType(listElementType);
 
@@ -94,17 +94,17 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             // dictionary type
             InputType keyType = InputPrimitiveType.String;
             InputType valueType = InputPrimitiveType.Int32;
-            InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType, Array.Empty<InputDecoratorInfo>());
+            InputType dictionaryType = new InputDictionaryType("InputDictionaryType", keyType, valueType);
 
             // literal types
             InputType literalValueType = InputPrimitiveType.Int32;
-            InputLiteralType literalType = new InputLiteralType(literalValueType, 21, Array.Empty<InputDecoratorInfo>());
+            InputLiteralType literalType = new InputLiteralType(literalValueType, 21);
 
             InputType stringLiteralValueType = InputPrimitiveType.String;
-            InputLiteralType stringLiteralType = new InputLiteralType(stringLiteralValueType, "test", Array.Empty<InputDecoratorInfo>());
+            InputLiteralType stringLiteralType = new InputLiteralType(stringLiteralValueType, "test");
 
             InputType boolLiteralValueType = InputPrimitiveType.Boolean;
-            InputLiteralType boolLiteralType = new InputLiteralType(boolLiteralValueType, true, Array.Empty<InputDecoratorInfo>());
+            InputLiteralType boolLiteralType = new InputLiteralType(boolLiteralValueType, true);
 
             var unionItems = new List<CSharpType>
             {

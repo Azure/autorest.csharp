@@ -115,7 +115,10 @@ namespace AutoRest.CSharp.Common.Input
 
             var derivedModels = new List<InputModelType>();
             decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
-            var model = new InputModelType(name, crossLanguageDefinitionId ?? string.Empty, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorProperty, discriminatedSubtypes, additionalProperties, decorators);
+            var model = new InputModelType(name, crossLanguageDefinitionId ?? string.Empty, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorProperty, discriminatedSubtypes, additionalProperties)
+            {
+                Decorators = decorators
+            };
 
             if (id is not null)
             {
@@ -153,9 +156,18 @@ namespace AutoRest.CSharp.Common.Input
                         return propertyType switch
                         {
                             InputPrimitiveType { Kind: InputPrimitiveTypeKind.Bytes } => InputPrimitiveType.Stream,
-                            InputListType listType => new InputListType(listType.Name, listType.CrossLanguageDefinitionId, ConvertPropertyType(listType.ValueType), listType.Decorators),
-                            InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType), dictionaryType.Decorators),
-                            InputNullableType nullableType => new InputNullableType(ConvertPropertyType(nullableType.Type), nullableType.Decorators),
+                            InputListType listType => new InputListType(listType.Name, listType.CrossLanguageDefinitionId, ConvertPropertyType(listType.ValueType))
+                            {
+                                Decorators = listType.Decorators
+                            },
+                            InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType))
+                            {
+                                Decorators = dictionaryType.Decorators
+                            },
+                            InputNullableType nullableType => new InputNullableType(ConvertPropertyType(nullableType.Type))
+                            {
+                                Decorators = nullableType.Decorators
+                            },
                             _ => propertyType
                         };
                     }
@@ -168,7 +180,6 @@ namespace AutoRest.CSharp.Common.Input
                                                     property.IsRequired,
                                                     property.IsReadOnly,
                                                     property.IsDiscriminator,
-                                                    property.Decorators,
                                                     property.FlattenedNames);
                 }
                 properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));

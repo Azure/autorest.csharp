@@ -33,8 +33,7 @@ internal record InputOperation
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
-    bool keepClientDefaultValue,
-    IReadOnlyList<InputDecoratorInfo>? decorators = null)
+    bool keepClientDefaultValue)
     {
         Name = name;
         SpecName = name;
@@ -58,7 +57,6 @@ internal record InputOperation
         GenerateConvenienceMethod = generateConvenienceMethod;
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
-        Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
     }
 
     public InputOperation() : this(
@@ -154,7 +152,7 @@ internal record InputOperation
     public string? OperationVersion { get; }
     public string? OperationType { get; }
     public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
-    public IReadOnlyList<InputDecoratorInfo>? Decorators { get; }
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }
 

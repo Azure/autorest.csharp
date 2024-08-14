@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, decorators ?? Array.Empty<InputDecoratorInfo>(), flattenedNames);
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, isRequired, isReadOnly, isDiscriminator, flattenedNames) { Decorators = decorators ?? Array.Empty<InputDecoratorInfo>() };
             if (id != null)
             {
                 resolver.AddReference(id, property);

@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
 
             name = name ?? throw new JsonException("Array must have a name");
             valueType = valueType ?? throw new JsonException("Array must have an value type");
-            var listType = new InputListType(name, crossLanguageDefinitionId ?? string.Empty, valueType, decorators ?? Array.Empty<InputDecoratorInfo>());
+            var listType = new InputListType(name, crossLanguageDefinitionId ?? string.Empty, valueType) { Decorators = decorators ?? Array.Empty<InputDecoratorInfo>() };
             if (id != null)
             {
                 resolver.AddReference(id, listType);

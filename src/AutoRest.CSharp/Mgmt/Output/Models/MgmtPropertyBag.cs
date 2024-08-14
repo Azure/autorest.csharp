@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 var inputParameter = _operation.Parameters.First(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
                 var description = !string.IsNullOrEmpty(inputParameter.Description) && parameter.Description is not null ? parameter.Description.ToString() : $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false, Array.Empty<InputDecoratorInfo>());
+                var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -61,8 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 null,
                 new Dictionary<string, InputModelType>(),
-                null,
-                Array.Empty<InputDecoratorInfo>())
+                null)
             {
                 IsPropertyBag = true
             };

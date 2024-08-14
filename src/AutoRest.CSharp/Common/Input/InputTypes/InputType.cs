@@ -9,11 +9,10 @@ namespace AutoRest.CSharp.Common.Input;
 
 internal abstract record InputType
 {
-    protected InputType(string name, IReadOnlyList<InputDecoratorInfo>? decorators = null)
+    protected InputType(string name)
     {
         Name = name;
         SpecName = name;
-        Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
     }
 
     public InputTypeSerialization Serialization { get; init; } = InputTypeSerialization.Default;
@@ -26,14 +25,18 @@ internal abstract record InputType
                 return new InputListType(
                     listType.Name,
                     listType.CrossLanguageDefinitionId,
-                    listType.ValueType.GetCollectionEquivalent(inputType),
-                    listType.Decorators);
+                    listType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = listType.Decorators
+                };
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
                     dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType),
-                    dictionaryType.Decorators);
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = dictionaryType.Decorators
+                };
             default:
                 return inputType;
         }
@@ -50,7 +53,7 @@ internal abstract record InputType
     public InputType WithNullable(bool isNullable)
     {
         if (isNullable)
-            return new InputNullableType(this, this.Decorators);
+            return new InputNullableType(this);
         return this;
     }
     public InputType GetImplementType() => this switch

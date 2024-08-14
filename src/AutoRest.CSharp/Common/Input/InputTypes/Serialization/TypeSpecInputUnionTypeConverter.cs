@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Union must have variant types.");
             }
 
-            var unionType = new InputUnionType(name, variantTypes, decorators ?? Array.Empty<InputDecoratorInfo>());
+            var unionType = new InputUnionType(name, variantTypes) { Decorators = decorators ?? Array.Empty<InputDecoratorInfo>() };
             if (id != null)
             {
                 resolver.AddReference(id, unionType);
