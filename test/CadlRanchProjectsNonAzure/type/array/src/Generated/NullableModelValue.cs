@@ -29,7 +29,7 @@ namespace Scm._Type._Array
 
         /// <summary> Initializes a new instance of NullableModelValue. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal NullableModelValue(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
