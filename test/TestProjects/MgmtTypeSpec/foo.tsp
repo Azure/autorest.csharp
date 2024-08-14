@@ -10,6 +10,8 @@ namespace MgmtTypeSpec;
 @resource("foos")
 model Foo is TrackedResource<FooProperties> {
     ...ResourceNameParameter<Foo, SegmentName = "foos">;
+
+    ...ExtendedLocationProperty;
 }
 
 @useSystemTextJsonConverter("csharp")
