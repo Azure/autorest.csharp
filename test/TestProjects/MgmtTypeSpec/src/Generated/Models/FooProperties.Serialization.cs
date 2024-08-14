@@ -9,10 +9,12 @@ using System;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace MgmtTypeSpec.Models
 {
+    [JsonConverter(typeof(FooPropertiesConverter))]
     public partial class FooProperties : IUtf8JsonSerializable, IJsonModel<FooProperties>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FooProperties>)this).Write(writer, ModelSerializationExtensions.WireOptions);
@@ -133,5 +135,19 @@ namespace MgmtTypeSpec.Models
         }
 
         string IPersistableModel<FooProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+
+        internal partial class FooPropertiesConverter : JsonConverter<FooProperties>
+        {
+            public override void Write(Utf8JsonWriter writer, FooProperties model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model, ModelSerializationExtensions.WireOptions);
+            }
+
+            public override FooProperties Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeFooProperties(document.RootElement);
+            }
+        }
     }
 }

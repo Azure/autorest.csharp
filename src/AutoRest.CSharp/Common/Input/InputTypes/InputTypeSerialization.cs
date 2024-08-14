@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputTypeSerialization(bool Json, InputTypeXmlSerialization? Xml, bool IncludeConverter)
+internal record InputTypeSerialization(bool Json, InputTypeXmlSerialization? Xml)
 {
-    public static InputTypeSerialization Default { get; } = new(true, null, false);
+    public static InputTypeSerialization Default { get; } = new(true, null);
 }
