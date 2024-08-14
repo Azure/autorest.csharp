@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources.Models;
 using MgmtTypeSpec.Models;
 
 namespace MgmtTypeSpec
@@ -32,6 +33,11 @@ namespace MgmtTypeSpec
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties, options);
+            }
+            if (Optional.IsDefined(ExtendedLocation))
+            {
+                writer.WritePropertyName("extendedLocation"u8);
+                JsonSerializer.Serialize(writer, ExtendedLocation);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -105,6 +111,7 @@ namespace MgmtTypeSpec
                 return null;
             }
             FooProperties properties = default;
+            ExtendedLocation extendedLocation = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -122,6 +129,15 @@ namespace MgmtTypeSpec
                         continue;
                     }
                     properties = FooProperties.DeserializeFooProperties(property.Value, options);
+                    continue;
+                }
+                if (property.NameEquals("extendedLocation"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("tags"u8))
@@ -181,6 +197,7 @@ namespace MgmtTypeSpec
                 tags ?? new ChangeTrackingDictionary<string, string>(),
                 location,
                 properties,
+                extendedLocation,
                 serializedAdditionalRawData);
         }
 
