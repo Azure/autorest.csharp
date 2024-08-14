@@ -8,7 +8,7 @@ This sample shows how to call TopActionAsync.
 Uri endpoint = new Uri("<endpoint>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = await client.TopActionAsync(default);
+Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"));
 ]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,CancellationToken)">
@@ -18,7 +18,7 @@ This sample shows how to call TopAction.
 Uri endpoint = new Uri("<endpoint>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = client.TopAction(default);
+Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2024-05-06T12:20-12Z"));
 ]]></code></example>
     </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
@@ -28,7 +28,7 @@ This sample shows how to call TopActionAsync and parse the result.
 Uri endpoint = new Uri("<endpoint>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(default, null);
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -49,7 +49,7 @@ This sample shows how to call TopAction and parse the result.
 Uri endpoint = new Uri("<endpoint>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction(default, null);
+Response response = client.TopAction(DateTimeOffset.Parse("2024-05-06T12:20-12Z"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

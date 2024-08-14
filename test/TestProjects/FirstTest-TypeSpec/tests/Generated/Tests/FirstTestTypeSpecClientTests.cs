@@ -28,7 +28,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopActionAsync(default, null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"), null);
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace FirstTestTypeSpec.Tests
             AzureKeyCredential credential = null;
             FirstTestTypeSpecClient client = CreateFirstTestTypeSpecClient(endpoint, credential);
 
-            Response<Thing> response = await client.TopActionAsync(default);
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"));
         }
     }
 }

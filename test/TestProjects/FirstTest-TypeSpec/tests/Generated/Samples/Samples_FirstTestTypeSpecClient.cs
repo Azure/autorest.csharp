@@ -24,7 +24,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction(default, null);
+            Response response = client.TopAction(DateTimeOffset.Parse("2024-05-06T12:20-12Z"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -45,7 +45,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopActionAsync(default, null);
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -66,7 +66,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.TopAction(default);
+            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2024-05-06T12:20-12Z"));
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<endpoint>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.TopActionAsync(default);
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2024-05-06T12:20-12Z"));
         }
     }
 }

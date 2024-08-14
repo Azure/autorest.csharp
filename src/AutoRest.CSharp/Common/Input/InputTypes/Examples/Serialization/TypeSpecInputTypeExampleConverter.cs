@@ -118,18 +118,29 @@ namespace AutoRest.CSharp.Common.Input.Examples
         {
             bool isFirstProperty = id == null;
             InputType? type = null;
-            object? value = null;
+            JsonElement? rawValue = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadWithConverter("type", options, ref type)
-                    || reader.TryReadWithConverter("value", options, ref value);
+                    || reader.TryReadWithConverter("value", options, ref rawValue);
 
                 if (!isKnownProperty)
                 {
                     reader.SkipProperty();
                 }
             }
+
+            object? value = rawValue?.ValueKind switch
+            {
+                null => throw new JsonException(),
+                JsonValueKind.Null => null,
+                JsonValueKind.String => rawValue.Value.GetString(),
+                JsonValueKind.False => false,
+                JsonValueKind.True => true,
+                JsonValueKind.Number => rawValue.Value.GetDouble(),
+                _ => throw new JsonException($"kind {rawValue?.ValueKind} is not expected here")
+            };
 
             var result = new InputExampleRawValue(type ?? throw new JsonException(), value);
 
