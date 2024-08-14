@@ -3281,7 +3281,7 @@
          "$id": "472",
          "Name": "embedding",
          "SerializedName": "embedding",
-         "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\r\nlisted in the [embedding guide](/docs/guides/embeddings).",
+         "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "Type": {
           "$id": "473",
           "Kind": "array",
@@ -5990,9 +5990,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "850",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -6031,9 +6031,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "856",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -6074,9 +6074,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "862",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6217,9 +6217,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "877",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6358,9 +6358,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "892",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -6400,9 +6400,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "898",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -6542,9 +6542,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "913",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -6585,9 +6585,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "919",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7099,9 +7099,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "968",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7243,9 +7243,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "983",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7387,9 +7387,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "998",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7531,9 +7531,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1013",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -7975,9 +7975,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1055",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -8439,9 +8439,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1098",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -8699,9 +8699,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1123",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -9045,9 +9045,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "1156",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

@@ -24,7 +24,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetLedgerEntries(null))
             {
@@ -41,7 +41,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
@@ -58,7 +58,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             foreach (LedgerEntry item in client.GetLedgerEntries())
             {
@@ -71,7 +71,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
             {
@@ -84,7 +84,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetLedgerEntries(null))
             {
@@ -101,7 +101,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetLedgerEntriesAsync(null))
             {
@@ -118,7 +118,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             foreach (LedgerEntry item in client.GetLedgerEntries())
             {
@@ -131,7 +131,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient();
+            UseFoundationsResourceList client = new PaginationClient(endpoint, credential).GetUseFoundationsResourceListClient(apiVersion: "2022-05-13");
 
             await foreach (LedgerEntry item in client.GetLedgerEntriesAsync())
             {
