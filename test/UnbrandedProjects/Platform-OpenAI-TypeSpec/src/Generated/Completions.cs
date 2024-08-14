@@ -32,7 +32,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of Completions. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Completions(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;

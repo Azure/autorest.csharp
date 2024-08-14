@@ -157,7 +157,7 @@ namespace Pagination
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/app/pools", false);
+            uri.AppendPath("/pools", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (filter != null)
             {
