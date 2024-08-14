@@ -30,7 +30,7 @@ namespace ModelsTypeSpec.Models
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
-            writer.WriteNumberValue(RequiredInt);
+            writer.WriteStringValue(RequiredInt.ToString());
             if (Optional.IsDefined(NonRequiredString))
             {
                 writer.WritePropertyName("nonRequiredString"u8);
@@ -341,7 +341,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredInt"u8))
                 {
-                    requiredInt = property.Value.GetInt32();
+                    requiredInt = int.Parse(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("nonRequiredString"u8))
