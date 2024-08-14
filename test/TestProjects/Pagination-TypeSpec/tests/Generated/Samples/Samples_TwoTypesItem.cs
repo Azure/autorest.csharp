@@ -24,7 +24,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetTextBlocklists(null))
             {
@@ -39,7 +39,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
@@ -54,7 +54,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (TextBlocklist item in client.GetTextBlocklists())
             {
@@ -67,7 +67,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
             {
@@ -80,7 +80,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetTextBlocklists(null))
             {
@@ -96,7 +96,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetTextBlocklistsAsync(null))
             {
@@ -112,7 +112,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (TextBlocklist item in client.GetTextBlocklists())
             {
@@ -125,7 +125,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (TextBlocklist item in client.GetTextBlocklistsAsync())
             {
@@ -138,7 +138,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", null, null, null, null))
             {
@@ -154,7 +154,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", null, null, null, null))
             {
@@ -170,7 +170,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>"))
             {
@@ -183,7 +183,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>"))
             {
@@ -196,7 +196,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetTextBlocklistItems("<blocklistName>", 1234, 1234, 1234, null))
             {
@@ -213,7 +213,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetTextBlocklistItemsAsync("<blocklistName>", 1234, 1234, 1234, null))
             {
@@ -230,7 +230,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             foreach (TextBlockItem item in client.GetTextBlocklistItems("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
@@ -243,7 +243,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient();
+            TwoTypesItem client = new PaginationClient(endpoint, credential).GetTwoTypesItemClient(apiVersion: "2022-05-13");
 
             await foreach (TextBlockItem item in client.GetTextBlocklistItemsAsync("<blocklistName>", maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {

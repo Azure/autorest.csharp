@@ -31,7 +31,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of BytesClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BytesClient(Uri endpoint, BytesClientOptions options)
