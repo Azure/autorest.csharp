@@ -41,7 +41,8 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputPrimitiveTypeConverter(referenceHandler),
                     new TypeSpecInputDecoratorInfoConverter(referenceHandler),
                     new TypeSpecInputTypeExampleConverter(referenceHandler),
-                    new TypeSpecInputOperationExampleConverter(referenceHandler)
+                    new TypeSpecInputOperationExampleConverter(referenceHandler),
+                    new TypeSpecInputParameterExampleConverter(referenceHandler),
                 }
             };
 

@@ -196,7 +196,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
         public virtual async Task<Response> TopAction2Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
@@ -226,7 +225,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
         public virtual Response TopAction2(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
@@ -258,7 +256,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -292,7 +289,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -330,7 +326,6 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -379,7 +374,6 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -429,7 +423,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -468,7 +461,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -491,7 +483,6 @@ namespace FirstTestTypeSpec
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -506,7 +497,6 @@ namespace FirstTestTypeSpec
         /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -537,7 +527,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -576,7 +565,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -608,7 +596,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
@@ -638,7 +625,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(RequestContext)']/*" />
         public virtual Response AddTimeHeader(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
@@ -660,7 +646,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -676,7 +661,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -708,7 +692,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringFormatAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -748,7 +731,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,RequestContent,RequestContext)']/*" />
         public virtual Response StringFormat(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -771,7 +753,6 @@ namespace FirstTestTypeSpec
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -786,7 +767,6 @@ namespace FirstTestTypeSpec
         /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(string,CancellationToken)']/*" />
         public virtual Response<ProjectedModel> ProjectedNameModel(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -817,7 +797,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -856,7 +835,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProjectedNameModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -877,7 +855,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -887,7 +864,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
         public virtual Response<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -913,7 +889,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnsAnonymousModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnsAnonymousModel");
@@ -948,7 +923,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(RequestContext)']/*" />
         public virtual Response ReturnsAnonymousModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnsAnonymousModel");
@@ -982,7 +956,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBooleanAsync(string,RequestContext)']/*" />
         public virtual async Task<Response<bool>> HeadAsBooleanAsync(string id, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -1018,7 +991,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='HeadAsBoolean(string,RequestContext)']/*" />
         public virtual Response<bool> HeadAsBoolean(string id, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -1042,7 +1014,6 @@ namespace FirstTestTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response> StringBodyAsync(string body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -1058,7 +1029,6 @@ namespace FirstTestTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(string,CancellationToken)']/*" />
         public virtual Response StringBody(string body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(body, nameof(body));
@@ -1089,7 +1059,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> StringBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1128,7 +1097,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StringBody(RequestContent,RequestContext)']/*" />
         public virtual Response StringBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1150,7 +1118,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1162,7 +1129,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1191,7 +1157,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BoolBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1230,7 +1195,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(RequestContent,RequestContext)']/*" />
         public virtual Response BoolBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1252,7 +1216,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1264,7 +1227,6 @@ namespace FirstTestTypeSpec
         /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
         {
             using RequestContent content = RequestContentHelper.FromObject(body);
@@ -1293,7 +1255,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1332,7 +1293,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(RequestContent,RequestContext)']/*" />
         public virtual Response DateTimeBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1353,7 +1313,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> ReturnStringAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1363,7 +1322,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(CancellationToken)']/*" />
         public virtual Response<string> ReturnString(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1389,7 +1347,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnString");
@@ -1424,7 +1381,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(RequestContext)']/*" />
         public virtual Response ReturnString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnString");
@@ -1443,7 +1399,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> Return unknown. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknownAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BinaryData>> ReturnUnknownAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1453,7 +1408,6 @@ namespace FirstTestTypeSpec
 
         /// <summary> Return unknown. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknown(CancellationToken)']/*" />
         public virtual Response<BinaryData> ReturnUnknown(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1479,7 +1433,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknownAsync(RequestContext)']/*" />
         public virtual async Task<Response> ReturnUnknownAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnUnknown");
@@ -1514,7 +1467,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnUnknown(RequestContext)']/*" />
         public virtual Response ReturnUnknown(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ReturnUnknown");
@@ -1535,7 +1487,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(Extension,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(Extension input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1550,7 +1501,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(Extension,CancellationToken)']/*" />
         public virtual Response RecursiveExtension(Extension input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1581,7 +1531,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtensionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveExtensionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1620,7 +1569,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveExtension(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveExtension(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1643,7 +1591,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(Extendible,CancellationToken)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1658,7 +1605,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(Extendible,CancellationToken)']/*" />
         public virtual Response ThreeLevelRecursive(Extendible input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1689,7 +1635,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursiveAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ThreeLevelRecursiveAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1728,7 +1673,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ThreeLevelRecursive(RequestContent,RequestContext)']/*" />
         public virtual Response ThreeLevelRecursive(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1751,7 +1695,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(ChildModel,CancellationToken)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(ChildModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1766,7 +1709,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(ChildModel,CancellationToken)']/*" />
         public virtual Response RecursiveModels(ChildModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1797,7 +1739,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RecursiveModelsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1836,7 +1777,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='RecursiveModels(RequestContent,RequestContext)']/*" />
         public virtual Response RecursiveModels(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1859,7 +1799,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(ContainSelf,CancellationToken)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(ContainSelf input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1874,7 +1813,6 @@ namespace FirstTestTypeSpec
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(ContainSelf,CancellationToken)']/*" />
         public virtual Response ContainSelfModels(ContainSelf input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
@@ -1905,7 +1843,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModelsAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ContainSelfModelsAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1944,7 +1881,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ContainSelfModels(RequestContent,RequestContext)']/*" />
         public virtual Response ContainSelfModels(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1966,7 +1902,6 @@ namespace FirstTestTypeSpec
         /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(CsProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> EnumParameterAsync(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -1977,7 +1912,6 @@ namespace FirstTestTypeSpec
         /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(CsProjectedEnum,CancellationToken)']/*" />
         public virtual Response EnumParameter(CsProjectedEnum p1, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -2004,7 +1938,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(float,RequestContext)']/*" />
         public virtual async Task<Response> EnumParameterAsync(float p1, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.EnumParameter");
@@ -2040,7 +1973,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(float,RequestContext)']/*" />
         public virtual Response EnumParameter(float p1, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.EnumParameter");
@@ -2061,7 +1993,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2076,7 +2007,6 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(ModelWithProjectedEnum,CancellationToken)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(ModelWithProjectedEnum body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -2107,7 +2037,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnumAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> BodyIsModelWithProjectedEnumAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2146,7 +2075,6 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BodyIsModelWithProjectedEnum(RequestContent,RequestContext)']/*" />
         public virtual Response BodyIsModelWithProjectedEnum(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2168,7 +2096,6 @@ namespace FirstTestTypeSpec
         /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
@@ -2180,7 +2107,6 @@ namespace FirstTestTypeSpec
         /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
         public virtual Response OptionalDictionary(IDictionary<string, int> body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body != null ? RequestContentHelper.FromDictionary(body) : null;
@@ -2208,7 +2134,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OptionalDictionaryAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.OptionalDictionary");
@@ -2244,7 +2169,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(RequestContent,RequestContext)']/*" />
         public virtual Response OptionalDictionary(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.OptionalDictionary");
@@ -2266,7 +2190,6 @@ namespace FirstTestTypeSpec
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body?.ToRequestContent();
@@ -2280,7 +2203,6 @@ namespace FirstTestTypeSpec
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,AzureLocationModel,CancellationToken)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, AzureLocationModel body = null, CancellationToken cancellationToken = default)
         {
             using RequestContent content = body?.ToRequestContent();
@@ -2310,7 +2232,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOpAsync(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AzureLocationOpAsync(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
@@ -2348,7 +2269,6 @@ namespace FirstTestTypeSpec
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AzureLocationOp(AzureLocation,AzureLocation,RequestContent,RequestContext)']/*" />
         public virtual Response AzureLocationOp(AzureLocation location, AzureLocation regenLocation, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AzureLocationOp");
