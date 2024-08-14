@@ -133,7 +133,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             SkipInitializerConstructor = IsUnknownDerivedType;
 
-            JsonConverter = _inputModel.UseSystemTextJsonConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter =
+                _inputModel.UseSystemTextJsonConverter || (ModelTypeMapping?.UseSystemTextJsonConverter == true)
+                ? new JsonConverterProvider(this, _sourceInputModel)
+                : null;
         }
 
         private static InputModelTypeUsage UpdateInputModelUsage(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
