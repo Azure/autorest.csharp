@@ -37,12 +37,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             if (implementation is SchemaObjectType objectType)
             {
-                return objectType.GetPropertyBySerializedName(name);
+                return objectType.GetPropertyBySerializedName(name, true);
             }
 
             if (implementation is ModelTypeProvider modelType)
             {
-                return modelType.GetPropertyBySerializedName(name);
+                return modelType.GetPropertyBySerializedName(name, true);
             }
 
             throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");

@@ -23,9 +23,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -65,7 +65,8 @@
      "Path": "/authentication/union/validkey",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Authentication.Union.validKey"
     },
     {
      "$id": "9",
@@ -95,7 +96,8 @@
      "Path": "/authentication/union/validtoken",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Authentication.Union.validToken"
     }
    ],
    "Protocol": {

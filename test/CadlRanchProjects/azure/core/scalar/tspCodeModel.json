@@ -36,6 +36,7 @@
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -75,9 +76,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "12",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -118,9 +119,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "18",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -198,7 +199,8 @@
      "Path": "/azure/core/scalar/azureLocation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.get"
     },
     {
      "$id": "27",
@@ -280,7 +282,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.put"
     },
     {
      "$id": "35",
@@ -382,7 +385,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.post"
     },
     {
      "$id": "44",
@@ -437,7 +441,8 @@
      "Path": "/azure/core/scalar/azureLocation/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.header"
     },
     {
      "$id": "49",
@@ -492,7 +497,8 @@
      "Path": "/azure/core/scalar/azureLocation/query",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationScalar.query"
     }
    ],
    "Protocol": {

@@ -169,6 +169,7 @@
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
    "Usage": "Json",
    "Description": "Paged collection of SupportedLanguage items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -186,6 +187,7 @@
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
        "Usage": "Json",
        "Description": "Represents a supported language.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "30",
@@ -254,6 +256,7 @@
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
    "Usage": "Json",
    "Description": "Paged collection of TrainingConfigVersion items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -271,6 +274,7 @@
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
        "Usage": "Json",
        "Description": "Represents a training config version.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "41",
@@ -338,6 +342,7 @@
    "Name": "DeploymentJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.DeploymentJob",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "49",
@@ -443,6 +448,7 @@
        "CrossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
        "Usage": "Output,Json",
        "Description": "Represents a warning that was encountered while executing the request.",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "64",
@@ -491,6 +497,7 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "70",
@@ -563,6 +570,7 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "80",
@@ -630,6 +638,7 @@
    "Name": "SwapDeploymentsJob",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsJob",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "86",
@@ -769,6 +778,7 @@
    "Name": "Deployment",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployment",
    "Usage": "Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "104",
@@ -792,6 +802,7 @@
    "Name": "Project",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.Project",
    "Usage": "Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "107",
@@ -844,6 +855,7 @@
       "CrossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
       "Usage": "Json",
       "Description": "Represents the settings used to define the project behavior.",
+      "Decorators": [],
       "AdditionalProperties": {
        "$id": "114",
        "Kind": "string",
@@ -993,6 +1005,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "134",
@@ -1039,6 +1052,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Project items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "139",
@@ -1086,6 +1100,7 @@
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.TrainingJobOptions",
    "Usage": "None",
    "Description": "Training job parameters.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "145",
@@ -1110,6 +1125,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Deployment items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "148",
@@ -1156,6 +1172,7 @@
    "Name": "SwapDeploymentsOptions",
    "CrossLanguageDefinitionId": "AuthoringTypeSpec.SwapDeploymentsOptions",
    "Usage": "None",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "154",
@@ -1454,7 +1471,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.createOrUpdate"
     },
     {
      "$id": "189",
@@ -1560,7 +1578,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.get"
     },
     {
      "$id": "200",
@@ -1696,7 +1715,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.delete"
     },
     {
      "$id": "216",
@@ -1789,7 +1809,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.list"
     },
     {
      "$id": "226",
@@ -1937,7 +1958,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.export"
     },
     {
      "$id": "244",
@@ -2067,7 +2089,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.importx"
     },
     {
      "$id": "260",
@@ -2239,7 +2262,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Projects.train"
     }
    ],
    "Protocol": {
@@ -2395,7 +2419,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.getDeployment"
     },
     {
      "$id": "297",
@@ -2629,7 +2654,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.deployProject"
     },
     {
      "$id": "323",
@@ -2783,7 +2809,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.deleteDeployment"
     },
     {
      "$id": "341",
@@ -2894,7 +2921,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.list"
     },
     {
      "$id": "353",
@@ -3067,7 +3095,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Deployments.swapDeployments"
     }
    ],
    "Protocol": {
@@ -3241,7 +3270,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Jobs.getDeploymentStatus"
     },
     {
      "$id": "392",
@@ -3383,7 +3413,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/swap/jobs/{jobId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Jobs.getSwapDeploymentsStatus"
     }
    ],
    "Protocol": {
@@ -3561,7 +3592,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Global.getSupportedLanguages"
     },
     {
      "$id": "427",
@@ -3707,7 +3739,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "AuthoringTypeSpec.Global.listTrainingConfigVersions"
     }
    ],
    "Protocol": {

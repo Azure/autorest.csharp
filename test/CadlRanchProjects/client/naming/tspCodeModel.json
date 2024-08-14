@@ -58,6 +58,7 @@
    "Name": "ClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -81,6 +82,7 @@
    "Name": "LanguageClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -104,6 +106,7 @@
    "Name": "ClientNameAndJsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "16",
@@ -127,6 +130,7 @@
    "Name": "ClientModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "19",
@@ -150,6 +154,7 @@
    "Name": "CSModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
@@ -186,9 +191,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -228,7 +233,8 @@
      "Path": "/client/naming/operation",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.operation"
     },
     {
      "$id": "31",
@@ -275,7 +281,8 @@
      "Path": "/client/naming/parameter",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.parameter"
     },
     {
      "$id": "35",
@@ -346,7 +353,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.client"
     },
     {
      "$id": "41",
@@ -417,7 +425,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.language"
     },
     {
      "$id": "47",
@@ -488,7 +497,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Property.compatibleWithEncodedName"
     },
     {
      "$id": "53",
@@ -535,7 +545,8 @@
      "Path": "/client/naming/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Header.request"
     },
     {
      "$id": "57",
@@ -576,7 +587,8 @@
      "Path": "/client/naming/header",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Header.response"
     }
    ],
    "Protocol": {
@@ -604,9 +616,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "65",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -688,7 +700,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Model.client"
     },
     {
      "$id": "73",
@@ -759,7 +772,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.Model.language"
     }
    ],
    "Protocol": {
@@ -788,9 +802,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "83",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -872,7 +886,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.unionEnumName"
     },
     {
      "$id": "91",
@@ -943,7 +958,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Naming.UnionEnum.unionEnumMemberName"
     }
    ],
    "Protocol": {

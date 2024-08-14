@@ -64,6 +64,7 @@
    "Name": "NewModel",
    "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -284,7 +285,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.newOp"
     }
    ],
    "Protocol": {
@@ -437,7 +439,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewInterface.newOpInNewInterface"
     }
    ],
    "Protocol": {

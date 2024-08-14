@@ -132,6 +132,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource",
    "Usage": "Input,Output,Json",
    "Description": "Nested child of Top Level Tracked Resource.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "21",
     "Kind": "model",
@@ -139,6 +140,7 @@
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "Usage": "Input,Output,Json",
     "Description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "Decorators": [],
     "BaseModel": {
      "$id": "22",
      "Kind": "model",
@@ -146,6 +148,7 @@
      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "Usage": "Input,Output,Json",
      "Description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "Decorators": [],
      "Properties": [
       {
        "$id": "23",
@@ -207,6 +210,7 @@
         "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "Usage": "Output,Json",
         "Description": "Metadata pertaining to creation and last modification of the resource.",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "32",
@@ -322,6 +326,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties",
       "Usage": "Input,Output,Json",
       "Description": "Nested Proxy Resource Properties.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "46",
@@ -374,6 +379,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "Usage": "Output,Error,Json",
    "Description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "50",
@@ -387,6 +393,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "Usage": "Output,Json",
       "Description": "The error detail.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "52",
@@ -463,6 +470,7 @@
           "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "Usage": "Output,Json",
           "Description": "The resource management error additional info.",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "63",
@@ -489,6 +497,7 @@
              "Name": "ErrorAdditionalInfoInfo",
              "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
              "Usage": "Output,Json",
+             "Decorators": [],
              "Properties": []
             },
             "IsRequired": false,
@@ -524,6 +533,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output,Json",
    "Description": "The response of a NestedProxyResource list operation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "68",
@@ -571,6 +581,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource",
    "Usage": "Input,Output,Json",
    "Description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "74",
     "Kind": "model",
@@ -578,6 +589,7 @@
     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "Usage": "Input,Output,Json",
     "Description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "Decorators": [],
     "BaseModel": {
      "$ref": "22"
     },
@@ -635,6 +647,7 @@
       "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties",
       "Usage": "Input,Output,Json",
       "Description": "Top Level Arm Resource Properties.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "83",
@@ -681,6 +694,7 @@
    "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "Usage": "Output,Json",
    "Description": "The response of a TopLevelTrackedResource list operation.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "87",
@@ -738,9 +752,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "95",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -781,9 +795,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "101",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -944,7 +958,8 @@
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.get"
     },
     {
      "$id": "119",
@@ -1192,7 +1207,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.createOrReplace"
     },
     {
      "$id": "146",
@@ -1434,7 +1450,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.update"
     },
     {
      "$id": "173",
@@ -1624,7 +1641,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.delete"
     },
     {
      "$id": "196",
@@ -1761,7 +1779,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.listByResourceGroup"
     },
     {
      "$id": "211",
@@ -1879,7 +1898,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResources.listBySubscription"
     }
    ],
    "Protocol": {
@@ -1909,9 +1929,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "228",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2091,7 +2111,8 @@
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResources.get"
     },
     {
      "$id": "248",
@@ -2358,7 +2379,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResources.createOrReplace"
     },
     {
      "$id": "277",
@@ -2619,7 +2641,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResources.update"
     },
     {
      "$id": "306",
@@ -2828,7 +2851,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResources.delete"
     },
     {
      "$id": "331",
@@ -2984,7 +3008,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResources.listByTopLevelTrackedResource"
     }
    ],
    "Protocol": {

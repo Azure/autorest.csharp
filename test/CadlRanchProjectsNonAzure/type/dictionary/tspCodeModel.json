@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "Input,Output,Json",
    "Description": "Dictionary inner model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -66,9 +67,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -109,9 +110,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -193,7 +194,8 @@
      "Path": "/type/dictionary/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.get"
     },
     {
      "$id": "27",
@@ -277,7 +279,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.put"
     }
    ],
    "Protocol": {
@@ -307,9 +310,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "40",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -391,7 +394,8 @@
      "Path": "/type/dictionary/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.get"
     },
     {
      "$id": "50",
@@ -475,7 +479,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.put"
     }
    ],
    "Protocol": {
@@ -505,9 +510,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -589,7 +594,8 @@
      "Path": "/type/dictionary/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.get"
     },
     {
      "$id": "73",
@@ -673,7 +679,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.put"
     }
    ],
    "Protocol": {
@@ -703,9 +710,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "86",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -787,7 +794,8 @@
      "Path": "/type/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.get"
     },
     {
      "$id": "96",
@@ -871,7 +879,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.put"
     }
    ],
    "Protocol": {
@@ -901,9 +910,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "109",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -985,7 +994,8 @@
      "Path": "/type/dictionary/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.get"
     },
     {
      "$id": "119",
@@ -1069,7 +1079,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.put"
     }
    ],
    "Protocol": {
@@ -1099,9 +1110,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "132",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1190,7 +1201,8 @@
      "Path": "/type/dictionary/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.get"
     },
     {
      "$id": "143",
@@ -1281,7 +1293,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.put"
     }
    ],
    "Protocol": {
@@ -1311,9 +1324,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "157",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1402,7 +1415,8 @@
      "Path": "/type/dictionary/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.get"
     },
     {
      "$id": "168",
@@ -1493,7 +1507,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.put"
     }
    ],
    "Protocol": {
@@ -1523,9 +1538,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "182",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1607,7 +1622,8 @@
      "Path": "/type/dictionary/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.get"
     },
     {
      "$id": "192",
@@ -1691,7 +1707,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.put"
     }
    ],
    "Protocol": {
@@ -1721,9 +1738,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "205",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1802,7 +1819,8 @@
      "Path": "/type/dictionary/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.get"
     },
     {
      "$id": "214",
@@ -1883,7 +1901,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.put"
     }
    ],
    "Protocol": {
@@ -1913,9 +1932,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "226",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1994,7 +2013,8 @@
      "Path": "/type/dictionary/model/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.get"
     },
     {
      "$id": "235",
@@ -2075,7 +2095,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.put"
     }
    ],
    "Protocol": {
@@ -2105,9 +2126,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "247",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2193,7 +2214,8 @@
      "Path": "/type/dictionary/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.get"
     },
     {
      "$id": "258",
@@ -2281,7 +2303,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.put"
     }
    ],
    "Protocol": {

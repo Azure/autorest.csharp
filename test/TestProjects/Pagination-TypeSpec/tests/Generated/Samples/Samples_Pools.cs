@@ -25,7 +25,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetPools(null, null, null, null))
             {
@@ -40,7 +40,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetPoolsAsync(null, null, null, null))
             {
@@ -55,7 +55,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             foreach (BatchPool item in client.GetPools())
             {
@@ -68,7 +68,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             await foreach (BatchPool item in client.GetPoolsAsync())
             {
@@ -81,7 +81,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetPools("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
             {
@@ -98,7 +98,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetPoolsAsync("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
             {
@@ -115,7 +115,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             foreach (BatchPool item in client.GetPools(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
             {
@@ -128,7 +128,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+            Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
             await foreach (BatchPool item in client.GetPoolsAsync(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
             {

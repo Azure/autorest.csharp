@@ -159,6 +159,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptionalProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with required and optional properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -197,6 +198,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of float literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "29",
@@ -218,6 +220,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of int literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "31",
@@ -239,6 +242,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with union of string literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -260,6 +264,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with boolean literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "35",
@@ -289,6 +294,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with float literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -315,6 +321,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with int literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -341,6 +348,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with string literal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "45",
@@ -367,6 +375,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModelProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection models properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -384,6 +393,7 @@
        "CrossLanguageDefinitionId": "Type.Property.Optional.StringProperty",
        "Usage": "Input,Output,Json",
        "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "51",
@@ -418,6 +428,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByteProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection bytes properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -449,6 +460,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTimeProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a plainTime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "58",
@@ -473,6 +485,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDateProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a plainDate property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "61",
@@ -497,6 +510,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.DurationProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "64",
@@ -528,6 +542,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.DatetimeProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "68",
@@ -559,6 +574,7 @@
    "CrossLanguageDefinitionId": "Type.Property.Optional.BytesProperty",
    "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with optional property. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "72",
@@ -594,9 +610,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "77",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -637,9 +653,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "83",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -708,7 +724,8 @@
      "Path": "/type/property/optional/string/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.String.getAll"
     },
     {
      "$id": "90",
@@ -767,7 +784,8 @@
      "Path": "/type/property/optional/string/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.String.getDefault"
     },
     {
      "$id": "95",
@@ -839,7 +857,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.String.putAll"
     },
     {
      "$id": "101",
@@ -911,7 +930,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.String.putDefault"
     }
    ],
    "Protocol": {
@@ -941,9 +961,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "111",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1012,7 +1032,8 @@
      "Path": "/type/property/optional/bytes/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Bytes.getAll"
     },
     {
      "$id": "118",
@@ -1071,7 +1092,8 @@
      "Path": "/type/property/optional/bytes/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Bytes.getDefault"
     },
     {
      "$id": "123",
@@ -1143,7 +1165,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Bytes.putAll"
     },
     {
      "$id": "129",
@@ -1215,7 +1238,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Bytes.putDefault"
     }
    ],
    "Protocol": {
@@ -1245,9 +1269,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "139",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1316,7 +1340,8 @@
      "Path": "/type/property/optional/datetime/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Datetime.getAll"
     },
     {
      "$id": "146",
@@ -1375,7 +1400,8 @@
      "Path": "/type/property/optional/datetime/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Datetime.getDefault"
     },
     {
      "$id": "151",
@@ -1447,7 +1473,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Datetime.putAll"
     },
     {
      "$id": "157",
@@ -1519,7 +1546,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Datetime.putDefault"
     }
    ],
    "Protocol": {
@@ -1549,9 +1577,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "167",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1620,7 +1648,8 @@
      "Path": "/type/property/optional/duration/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Duration.getAll"
     },
     {
      "$id": "174",
@@ -1679,7 +1708,8 @@
      "Path": "/type/property/optional/duration/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Duration.getDefault"
     },
     {
      "$id": "179",
@@ -1751,7 +1781,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Duration.putAll"
     },
     {
      "$id": "185",
@@ -1823,7 +1854,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.Duration.putDefault"
     }
    ],
    "Protocol": {
@@ -1853,9 +1885,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "195",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1924,7 +1956,8 @@
      "Path": "/type/property/optional/plainDate/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDate.getAll"
     },
     {
      "$id": "202",
@@ -1983,7 +2016,8 @@
      "Path": "/type/property/optional/plainDate/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDate.getDefault"
     },
     {
      "$id": "207",
@@ -2055,7 +2089,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDate.putAll"
     },
     {
      "$id": "213",
@@ -2127,7 +2162,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainDate.putDefault"
     }
    ],
    "Protocol": {
@@ -2157,9 +2193,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "223",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2228,7 +2264,8 @@
      "Path": "/type/property/optional/plainTime/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTime.getAll"
     },
     {
      "$id": "230",
@@ -2287,7 +2324,8 @@
      "Path": "/type/property/optional/plainTime/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTime.getDefault"
     },
     {
      "$id": "235",
@@ -2359,7 +2397,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTime.putAll"
     },
     {
      "$id": "241",
@@ -2431,7 +2470,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.PlainTime.putDefault"
     }
    ],
    "Protocol": {
@@ -2461,9 +2501,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "251",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2532,7 +2572,8 @@
      "Path": "/type/property/optional/collections/bytes/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByte.getAll"
     },
     {
      "$id": "258",
@@ -2591,7 +2632,8 @@
      "Path": "/type/property/optional/collections/bytes/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByte.getDefault"
     },
     {
      "$id": "263",
@@ -2663,7 +2705,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByte.putAll"
     },
     {
      "$id": "269",
@@ -2735,7 +2778,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsByte.putDefault"
     }
    ],
    "Protocol": {
@@ -2765,9 +2809,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "279",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2836,7 +2880,8 @@
      "Path": "/type/property/optional/collections/model/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModel.getAll"
     },
     {
      "$id": "286",
@@ -2895,7 +2940,8 @@
      "Path": "/type/property/optional/collections/model/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModel.getDefault"
     },
     {
      "$id": "291",
@@ -2967,7 +3013,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModel.putAll"
     },
     {
      "$id": "297",
@@ -3039,7 +3086,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.CollectionsModel.putDefault"
     }
    ],
    "Protocol": {
@@ -3069,9 +3117,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "307",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3140,7 +3188,8 @@
      "Path": "/type/property/optional/string/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteral.getAll"
     },
     {
      "$id": "314",
@@ -3199,7 +3248,8 @@
      "Path": "/type/property/optional/string/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteral.getDefault"
     },
     {
      "$id": "319",
@@ -3271,7 +3321,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteral.putAll"
     },
     {
      "$id": "325",
@@ -3343,7 +3394,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.StringLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -3373,9 +3425,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "335",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3444,7 +3496,8 @@
      "Path": "/type/property/optional/int/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteral.getAll"
     },
     {
      "$id": "342",
@@ -3503,7 +3556,8 @@
      "Path": "/type/property/optional/int/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteral.getDefault"
     },
     {
      "$id": "347",
@@ -3575,7 +3629,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteral.putAll"
     },
     {
      "$id": "353",
@@ -3647,7 +3702,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.IntLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -3677,9 +3733,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "363",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3748,7 +3804,8 @@
      "Path": "/type/property/optional/float/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteral.getAll"
     },
     {
      "$id": "370",
@@ -3807,7 +3864,8 @@
      "Path": "/type/property/optional/float/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteral.getDefault"
     },
     {
      "$id": "375",
@@ -3879,7 +3937,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteral.putAll"
     },
     {
      "$id": "381",
@@ -3951,7 +4010,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.FloatLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -3981,9 +4041,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "391",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4052,7 +4112,8 @@
      "Path": "/type/property/optional/boolean/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteral.getAll"
     },
     {
      "$id": "398",
@@ -4111,7 +4172,8 @@
      "Path": "/type/property/optional/boolean/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteral.getDefault"
     },
     {
      "$id": "403",
@@ -4183,7 +4245,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteral.putAll"
     },
     {
      "$id": "409",
@@ -4255,7 +4318,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.BooleanLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -4285,9 +4349,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "419",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4356,7 +4420,8 @@
      "Path": "/type/property/optional/union/string/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteral.getAll"
     },
     {
      "$id": "426",
@@ -4415,7 +4480,8 @@
      "Path": "/type/property/optional/union/string/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteral.getDefault"
     },
     {
      "$id": "431",
@@ -4487,7 +4553,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteral.putAll"
     },
     {
      "$id": "437",
@@ -4559,7 +4626,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionStringLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -4589,9 +4657,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "447",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4660,7 +4728,8 @@
      "Path": "/type/property/optional/union/int/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteral.getAll"
     },
     {
      "$id": "454",
@@ -4719,7 +4788,8 @@
      "Path": "/type/property/optional/union/int/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteral.getDefault"
     },
     {
      "$id": "459",
@@ -4791,7 +4861,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteral.putAll"
     },
     {
      "$id": "465",
@@ -4863,7 +4934,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionIntLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -4893,9 +4965,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "475",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4964,7 +5036,8 @@
      "Path": "/type/property/optional/union/float/literal/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteral.getAll"
     },
     {
      "$id": "482",
@@ -5023,7 +5096,8 @@
      "Path": "/type/property/optional/union/float/literal/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteral.getDefault"
     },
     {
      "$id": "487",
@@ -5095,7 +5169,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteral.putAll"
     },
     {
      "$id": "493",
@@ -5167,7 +5242,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.UnionFloatLiteral.putDefault"
     }
    ],
    "Protocol": {
@@ -5198,9 +5274,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "503",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5269,7 +5345,8 @@
      "Path": "/type/property/optional/requiredAndOptional/all",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptional.getAll"
     },
     {
      "$id": "510",
@@ -5328,7 +5405,8 @@
      "Path": "/type/property/optional/requiredAndOptional/requiredOnly",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptional.getRequiredOnly"
     },
     {
      "$id": "515",
@@ -5400,7 +5478,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptional.putAll"
     },
     {
      "$id": "521",
@@ -5472,7 +5551,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Property.Optional.RequiredAndOptional.putRequiredOnly"
     }
    ],
    "Protocol": {

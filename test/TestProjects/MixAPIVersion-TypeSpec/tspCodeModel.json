@@ -34,6 +34,7 @@
    "Name": "Toy",
    "CrossLanguageDefinitionId": "MixApiVersion.Toy",
    "Usage": "Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -86,6 +87,7 @@
    "CrossLanguageDefinitionId": "MixApiVersion.Pet",
    "Usage": "Json",
    "Description": "Pet",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -138,6 +140,7 @@
    "CrossLanguageDefinitionId": "MixApiVersion.Error",
    "Usage": "Error,Json",
    "Description": "Error",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "20",
@@ -176,6 +179,7 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "Usage": "None",
    "Description": "Paged collection of Toy items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "25",
@@ -371,7 +375,8 @@
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.delete"
     },
     {
      "$id": "48",
@@ -464,7 +469,8 @@
      "Path": "/pets/{petId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.read"
     },
     {
      "$id": "56",
@@ -587,7 +593,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.Pets.create"
     }
    ],
    "Protocol": {
@@ -713,7 +720,8 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "MixApiVersion.ListPetToysResponse.listPet"
     }
    ],
    "Protocol": {

@@ -150,6 +150,7 @@
    "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
    "Usage": "Output,Json",
    "Description": "A model with a few properties of literal types",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -537,7 +538,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.sayHi"
     }
    ],
    "Protocol": {

@@ -26,15 +26,6 @@ try {
         catch {
             Write-Error 'Shared source files are updated. Please run eng/scripts/Download-SharedSource.ps1'
         }
-        
-        # build CADL Ranch Mock Api project
-        Push-Location "$root/test/CadlRanchMockApis"
-        try {
-            Invoke-LoggedCommand "npm run build" -GroupOutput
-        }
-        finally {
-            Pop-Location
-        }
 
         # test the generator
         Invoke-LoggedCommand "dotnet test AutoRest.CSharp.sln /bl:artifacts/logs/debug.binlog --logger `"trx;LogFileName=$root/artifacts/test-results/debug.trx`"" -GroupOutput

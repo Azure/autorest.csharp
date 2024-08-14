@@ -43,6 +43,7 @@
    "Name": "TestModel",
    "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "7",
@@ -233,7 +234,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.MadeOptional.test"
     }
    ],
    "Protocol": {

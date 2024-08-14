@@ -150,6 +150,7 @@
    "CrossLanguageDefinitionId": "NoTestTypeSpec.Thing",
    "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -408,6 +409,7 @@
    "Name": "DerivedThing",
    "CrossLanguageDefinitionId": "NoTestTypeSpec.DerivedThing",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "BaseModel": {
     "$ref": "20"
    },
@@ -563,7 +565,8 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoTestTypeSpec.sayHi"
     },
     {
      "$id": "74",
@@ -664,7 +667,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoTestTypeSpec.sayHello"
     }
    ],
    "Protocol": {

@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputRecord",
    "Usage": "Input,Json",
    "Description": "Record used in operation parameters",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -35,6 +36,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.OutputRecord",
    "Usage": "Output,Json",
    "Description": "Record used in operation return type",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -59,6 +61,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Usage.InputOutputRecord",
    "Usage": "Input,Output,Json",
    "Description": "Record used both as operation parameter and return type",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -95,9 +98,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -179,7 +182,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Usage.input"
     },
     {
      "$id": "22",
@@ -237,7 +241,8 @@
      "Path": "/type/model/usage/output",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Usage.output"
     },
     {
      "$id": "27",
@@ -337,7 +342,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Usage.inputAndOutput"
     }
    ],
    "Protocol": {

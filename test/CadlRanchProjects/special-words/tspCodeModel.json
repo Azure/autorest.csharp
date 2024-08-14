@@ -10,6 +10,7 @@
    "Name": "SameAsModel",
    "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -33,6 +34,7 @@
    "Name": "and",
    "CrossLanguageDefinitionId": "SpecialWords.Models.and",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
@@ -56,6 +58,7 @@
    "Name": "as",
    "CrossLanguageDefinitionId": "SpecialWords.Models.as",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "9",
@@ -79,6 +82,7 @@
    "Name": "assert",
    "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
@@ -102,6 +106,7 @@
    "Name": "async",
    "CrossLanguageDefinitionId": "SpecialWords.Models.async",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -125,6 +130,7 @@
    "Name": "await",
    "CrossLanguageDefinitionId": "SpecialWords.Models.await",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -148,6 +154,7 @@
    "Name": "break",
    "CrossLanguageDefinitionId": "SpecialWords.Models.break",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -171,6 +178,7 @@
    "Name": "class",
    "CrossLanguageDefinitionId": "SpecialWords.Models.class",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -194,6 +202,7 @@
    "Name": "constructor",
    "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -217,6 +226,7 @@
    "Name": "continue",
    "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -240,6 +250,7 @@
    "Name": "def",
    "CrossLanguageDefinitionId": "SpecialWords.Models.def",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -263,6 +274,7 @@
    "Name": "del",
    "CrossLanguageDefinitionId": "SpecialWords.Models.del",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -286,6 +298,7 @@
    "Name": "elif",
    "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "39",
@@ -309,6 +322,7 @@
    "Name": "else",
    "CrossLanguageDefinitionId": "SpecialWords.Models.else",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -332,6 +346,7 @@
    "Name": "except",
    "CrossLanguageDefinitionId": "SpecialWords.Models.except",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "45",
@@ -355,6 +370,7 @@
    "Name": "exec",
    "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -378,6 +394,7 @@
    "Name": "finally",
    "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "51",
@@ -401,6 +418,7 @@
    "Name": "for",
    "CrossLanguageDefinitionId": "SpecialWords.Models.for",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -424,6 +442,7 @@
    "Name": "from",
    "CrossLanguageDefinitionId": "SpecialWords.Models.from",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "57",
@@ -447,6 +466,7 @@
    "Name": "global",
    "CrossLanguageDefinitionId": "SpecialWords.Models.global",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "60",
@@ -470,6 +490,7 @@
    "Name": "if",
    "CrossLanguageDefinitionId": "SpecialWords.Models.if",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "63",
@@ -493,6 +514,7 @@
    "Name": "import",
    "CrossLanguageDefinitionId": "SpecialWords.Models.import",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -516,6 +538,7 @@
    "Name": "in",
    "CrossLanguageDefinitionId": "SpecialWords.Models.in",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "69",
@@ -539,6 +562,7 @@
    "Name": "is",
    "CrossLanguageDefinitionId": "SpecialWords.Models.is",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "72",
@@ -562,6 +586,7 @@
    "Name": "lambda",
    "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "75",
@@ -585,6 +610,7 @@
    "Name": "not",
    "CrossLanguageDefinitionId": "SpecialWords.Models.not",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "78",
@@ -608,6 +634,7 @@
    "Name": "or",
    "CrossLanguageDefinitionId": "SpecialWords.Models.or",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "81",
@@ -631,6 +658,7 @@
    "Name": "pass",
    "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "84",
@@ -654,6 +682,7 @@
    "Name": "raise",
    "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "87",
@@ -677,6 +706,7 @@
    "Name": "return",
    "CrossLanguageDefinitionId": "SpecialWords.Models.return",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "90",
@@ -700,6 +730,7 @@
    "Name": "try",
    "CrossLanguageDefinitionId": "SpecialWords.Models.try",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "93",
@@ -723,6 +754,7 @@
    "Name": "while",
    "CrossLanguageDefinitionId": "SpecialWords.Models.while",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "96",
@@ -746,6 +778,7 @@
    "Name": "with",
    "CrossLanguageDefinitionId": "SpecialWords.Models.with",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "99",
@@ -769,6 +802,7 @@
    "Name": "yield",
    "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "102",
@@ -803,9 +837,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "107",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -846,9 +880,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "113",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -930,7 +964,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAnd"
     },
     {
      "$id": "121",
@@ -1001,7 +1036,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAs"
     },
     {
      "$id": "127",
@@ -1072,7 +1108,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAssert"
     },
     {
      "$id": "133",
@@ -1143,7 +1180,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAsync"
     },
     {
      "$id": "139",
@@ -1214,7 +1252,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withAwait"
     },
     {
      "$id": "145",
@@ -1285,7 +1324,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withBreak"
     },
     {
      "$id": "151",
@@ -1356,7 +1396,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withClass"
     },
     {
      "$id": "157",
@@ -1427,7 +1468,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withConstructor"
     },
     {
      "$id": "163",
@@ -1498,7 +1540,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withContinue"
     },
     {
      "$id": "169",
@@ -1569,7 +1612,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withDef"
     },
     {
      "$id": "175",
@@ -1640,7 +1684,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withDel"
     },
     {
      "$id": "181",
@@ -1711,7 +1756,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withElif"
     },
     {
      "$id": "187",
@@ -1782,7 +1828,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withElse"
     },
     {
      "$id": "193",
@@ -1853,7 +1900,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withExcept"
     },
     {
      "$id": "199",
@@ -1924,7 +1972,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withExec"
     },
     {
      "$id": "205",
@@ -1995,7 +2044,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFinally"
     },
     {
      "$id": "211",
@@ -2066,7 +2116,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFor"
     },
     {
      "$id": "217",
@@ -2137,7 +2188,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withFrom"
     },
     {
      "$id": "223",
@@ -2208,7 +2260,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withGlobal"
     },
     {
      "$id": "229",
@@ -2279,7 +2332,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIf"
     },
     {
      "$id": "235",
@@ -2350,7 +2404,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withImport"
     },
     {
      "$id": "241",
@@ -2421,7 +2476,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIn"
     },
     {
      "$id": "247",
@@ -2492,7 +2548,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withIs"
     },
     {
      "$id": "253",
@@ -2563,7 +2620,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withLambda"
     },
     {
      "$id": "259",
@@ -2634,7 +2692,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withNot"
     },
     {
      "$id": "265",
@@ -2705,7 +2764,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withOr"
     },
     {
      "$id": "271",
@@ -2776,7 +2836,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withPass"
     },
     {
      "$id": "277",
@@ -2847,7 +2908,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withRaise"
     },
     {
      "$id": "283",
@@ -2918,7 +2980,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withReturn"
     },
     {
      "$id": "289",
@@ -2989,7 +3052,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withTry"
     },
     {
      "$id": "295",
@@ -3060,7 +3124,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withWhile"
     },
     {
      "$id": "301",
@@ -3131,7 +3196,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withWith"
     },
     {
      "$id": "307",
@@ -3202,7 +3268,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Models.withYield"
     }
    ],
    "Protocol": {
@@ -3232,9 +3299,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "317",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3316,7 +3383,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.sameAsModel"
     }
    ],
    "Protocol": {
@@ -3346,9 +3414,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "329",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3388,7 +3456,8 @@
      "Path": "/special-words/operations/and",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.and"
     },
     {
      "$id": "333",
@@ -3417,7 +3486,8 @@
      "Path": "/special-words/operations/as",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.as"
     },
     {
      "$id": "335",
@@ -3446,7 +3516,8 @@
      "Path": "/special-words/operations/assert",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.assert"
     },
     {
      "$id": "337",
@@ -3475,7 +3546,8 @@
      "Path": "/special-words/operations/async",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.async"
     },
     {
      "$id": "339",
@@ -3504,7 +3576,8 @@
      "Path": "/special-words/operations/await",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.await"
     },
     {
      "$id": "341",
@@ -3533,7 +3606,8 @@
      "Path": "/special-words/operations/break",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.break"
     },
     {
      "$id": "343",
@@ -3562,7 +3636,8 @@
      "Path": "/special-words/operations/class",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.class"
     },
     {
      "$id": "345",
@@ -3591,7 +3666,8 @@
      "Path": "/special-words/operations/constructor",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.constructor"
     },
     {
      "$id": "347",
@@ -3620,7 +3696,8 @@
      "Path": "/special-words/operations/continue",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.continue"
     },
     {
      "$id": "349",
@@ -3649,7 +3726,8 @@
      "Path": "/special-words/operations/def",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.def"
     },
     {
      "$id": "351",
@@ -3678,7 +3756,8 @@
      "Path": "/special-words/operations/del",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.del"
     },
     {
      "$id": "353",
@@ -3707,7 +3786,8 @@
      "Path": "/special-words/operations/elif",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.elif"
     },
     {
      "$id": "355",
@@ -3736,7 +3816,8 @@
      "Path": "/special-words/operations/else",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.else"
     },
     {
      "$id": "357",
@@ -3765,7 +3846,8 @@
      "Path": "/special-words/operations/except",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.except"
     },
     {
      "$id": "359",
@@ -3794,7 +3876,8 @@
      "Path": "/special-words/operations/exec",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.exec"
     },
     {
      "$id": "361",
@@ -3823,7 +3906,8 @@
      "Path": "/special-words/operations/finally",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.finally"
     },
     {
      "$id": "363",
@@ -3852,7 +3936,8 @@
      "Path": "/special-words/operations/for",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.for"
     },
     {
      "$id": "365",
@@ -3881,7 +3966,8 @@
      "Path": "/special-words/operations/from",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.from"
     },
     {
      "$id": "367",
@@ -3910,7 +3996,8 @@
      "Path": "/special-words/operations/global",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.global"
     },
     {
      "$id": "369",
@@ -3939,7 +4026,8 @@
      "Path": "/special-words/operations/if",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.if"
     },
     {
      "$id": "371",
@@ -3968,7 +4056,8 @@
      "Path": "/special-words/operations/import",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.import"
     },
     {
      "$id": "373",
@@ -3997,7 +4086,8 @@
      "Path": "/special-words/operations/in",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.in"
     },
     {
      "$id": "375",
@@ -4026,7 +4116,8 @@
      "Path": "/special-words/operations/is",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.is"
     },
     {
      "$id": "377",
@@ -4055,7 +4146,8 @@
      "Path": "/special-words/operations/lambda",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.lambda"
     },
     {
      "$id": "379",
@@ -4084,7 +4176,8 @@
      "Path": "/special-words/operations/not",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.not"
     },
     {
      "$id": "381",
@@ -4113,7 +4206,8 @@
      "Path": "/special-words/operations/or",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.or"
     },
     {
      "$id": "383",
@@ -4142,7 +4236,8 @@
      "Path": "/special-words/operations/pass",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.pass"
     },
     {
      "$id": "385",
@@ -4171,7 +4266,8 @@
      "Path": "/special-words/operations/raise",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.raise"
     },
     {
      "$id": "387",
@@ -4200,7 +4296,8 @@
      "Path": "/special-words/operations/return",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.return"
     },
     {
      "$id": "389",
@@ -4229,7 +4326,8 @@
      "Path": "/special-words/operations/try",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.try"
     },
     {
      "$id": "391",
@@ -4258,7 +4356,8 @@
      "Path": "/special-words/operations/while",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.while"
     },
     {
      "$id": "393",
@@ -4287,7 +4386,8 @@
      "Path": "/special-words/operations/with",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.with"
     },
     {
      "$id": "395",
@@ -4316,7 +4416,8 @@
      "Path": "/special-words/operations/yield",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Operations.yield"
     }
    ],
    "Protocol": {
@@ -4346,9 +4447,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "401",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4406,7 +4507,8 @@
      "Path": "/special-words/parameters/and",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAnd"
     },
     {
      "$id": "407",
@@ -4453,7 +4555,8 @@
      "Path": "/special-words/parameters/as",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAs"
     },
     {
      "$id": "411",
@@ -4500,7 +4603,8 @@
      "Path": "/special-words/parameters/assert",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAssert"
     },
     {
      "$id": "415",
@@ -4547,7 +4651,8 @@
      "Path": "/special-words/parameters/async",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAsync"
     },
     {
      "$id": "419",
@@ -4594,7 +4699,8 @@
      "Path": "/special-words/parameters/await",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withAwait"
     },
     {
      "$id": "423",
@@ -4641,7 +4747,8 @@
      "Path": "/special-words/parameters/break",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withBreak"
     },
     {
      "$id": "427",
@@ -4688,7 +4795,8 @@
      "Path": "/special-words/parameters/class",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withClass"
     },
     {
      "$id": "431",
@@ -4735,7 +4843,8 @@
      "Path": "/special-words/parameters/constructor",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withConstructor"
     },
     {
      "$id": "435",
@@ -4782,7 +4891,8 @@
      "Path": "/special-words/parameters/continue",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withContinue"
     },
     {
      "$id": "439",
@@ -4829,7 +4939,8 @@
      "Path": "/special-words/parameters/def",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withDef"
     },
     {
      "$id": "443",
@@ -4876,7 +4987,8 @@
      "Path": "/special-words/parameters/del",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withDel"
     },
     {
      "$id": "447",
@@ -4923,7 +5035,8 @@
      "Path": "/special-words/parameters/elif",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withElif"
     },
     {
      "$id": "451",
@@ -4970,7 +5083,8 @@
      "Path": "/special-words/parameters/else",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withElse"
     },
     {
      "$id": "455",
@@ -5017,7 +5131,8 @@
      "Path": "/special-words/parameters/except",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withExcept"
     },
     {
      "$id": "459",
@@ -5064,7 +5179,8 @@
      "Path": "/special-words/parameters/exec",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withExec"
     },
     {
      "$id": "463",
@@ -5111,7 +5227,8 @@
      "Path": "/special-words/parameters/finally",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFinally"
     },
     {
      "$id": "467",
@@ -5158,7 +5275,8 @@
      "Path": "/special-words/parameters/for",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFor"
     },
     {
      "$id": "471",
@@ -5205,7 +5323,8 @@
      "Path": "/special-words/parameters/from",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withFrom"
     },
     {
      "$id": "475",
@@ -5252,7 +5371,8 @@
      "Path": "/special-words/parameters/global",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withGlobal"
     },
     {
      "$id": "479",
@@ -5299,7 +5419,8 @@
      "Path": "/special-words/parameters/if",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIf"
     },
     {
      "$id": "483",
@@ -5346,7 +5467,8 @@
      "Path": "/special-words/parameters/import",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withImport"
     },
     {
      "$id": "487",
@@ -5393,7 +5515,8 @@
      "Path": "/special-words/parameters/in",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIn"
     },
     {
      "$id": "491",
@@ -5440,7 +5563,8 @@
      "Path": "/special-words/parameters/is",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withIs"
     },
     {
      "$id": "495",
@@ -5487,7 +5611,8 @@
      "Path": "/special-words/parameters/lambda",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withLambda"
     },
     {
      "$id": "499",
@@ -5534,7 +5659,8 @@
      "Path": "/special-words/parameters/not",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withNot"
     },
     {
      "$id": "503",
@@ -5581,7 +5707,8 @@
      "Path": "/special-words/parameters/or",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withOr"
     },
     {
      "$id": "507",
@@ -5628,7 +5755,8 @@
      "Path": "/special-words/parameters/pass",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withPass"
     },
     {
      "$id": "511",
@@ -5675,7 +5803,8 @@
      "Path": "/special-words/parameters/raise",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withRaise"
     },
     {
      "$id": "515",
@@ -5722,7 +5851,8 @@
      "Path": "/special-words/parameters/return",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withReturn"
     },
     {
      "$id": "519",
@@ -5769,7 +5899,8 @@
      "Path": "/special-words/parameters/try",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withTry"
     },
     {
      "$id": "523",
@@ -5816,7 +5947,8 @@
      "Path": "/special-words/parameters/while",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withWhile"
     },
     {
      "$id": "527",
@@ -5863,7 +5995,8 @@
      "Path": "/special-words/parameters/with",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withWith"
     },
     {
      "$id": "531",
@@ -5910,7 +6043,8 @@
      "Path": "/special-words/parameters/yield",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withYield"
     },
     {
      "$id": "535",
@@ -5957,7 +6091,8 @@
      "Path": "/special-words/parameters/cancellationToken",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialWords.Parameters.withCancellationToken"
     }
    ],
    "Protocol": {

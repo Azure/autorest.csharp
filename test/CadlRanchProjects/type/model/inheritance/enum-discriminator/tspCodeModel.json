@@ -58,6 +58,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Dog",
    "Usage": "Input,Output,Json",
    "Description": "Test extensible enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "9",
     "Name": "kind",
@@ -99,6 +100,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Golden dog model",
      "DiscriminatorValue": "golden",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "8"
      },
@@ -137,6 +139,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.Snake",
    "Usage": "Input,Output,Json",
    "Description": "Test fixed enum type for discriminator",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "18",
     "Name": "kind",
@@ -178,6 +181,7 @@
      "Usage": "Input,Output,Json",
      "Description": "Cobra model",
      "DiscriminatorValue": "cobra",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "17"
      },
@@ -229,9 +233,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "29",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -300,7 +304,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/extensible-enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getExtensibleModel"
     },
     {
      "$id": "36",
@@ -373,7 +378,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.putExtensibleModel"
     },
     {
      "$id": "42",
@@ -432,7 +438,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getExtensibleModelMissingDiscriminator"
     },
     {
      "$id": "47",
@@ -491,7 +498,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getExtensibleModelWrongDiscriminator"
     },
     {
      "$id": "52",
@@ -550,7 +558,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/fixed-enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getFixedModel"
     },
     {
      "$id": "57",
@@ -623,7 +632,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.putFixedModel"
     },
     {
      "$id": "63",
@@ -682,7 +692,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getFixedModelMissingDiscriminator"
     },
     {
      "$id": "68",
@@ -741,7 +752,8 @@
      "Path": "/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.EnumDiscriminator.getFixedModelWrongDiscriminator"
     }
    ],
    "Protocol": {
