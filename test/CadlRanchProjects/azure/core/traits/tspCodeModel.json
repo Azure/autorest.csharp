@@ -8,48 +8,52 @@
   {
    "$id": "2",
    "Kind": "enum",
-   "Name": "RepeatabilityResult",
-   "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
      "$id": "4",
-     "Name": "accepted",
-     "Value": "accepted",
-     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
-    },
-    {
-     "$id": "5",
-     "Name": "rejected",
-     "Value": "rejected",
-     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
-    }
-   ],
-   "Description": "Repeatability Result header options",
-   "IsExtensible": false,
-   "Usage": "Output"
-  },
-  {
-   "$id": "6",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.Versions",
-   "ValueType": {
-    "$id": "7",
-    "Kind": "string"
-   },
-   "Values": [
-    {
-     "$id": "8",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
      "Description": "2022-12-01-preview"
     }
    ],
    "Description": "Service versions",
+   "IsExtensible": false,
+   "Usage": "ApiVersionEnum"
+  },
+  {
+   "$id": "5",
+   "Kind": "enum",
+   "Name": "RepeatabilityResult",
+   "CrossLanguageDefinitionId": "Azure.Core.RepeatabilityResult",
+   "ValueType": {
+    "$id": "6",
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
+   },
+   "Values": [
+    {
+     "$id": "7",
+     "Name": "accepted",
+     "Value": "accepted",
+     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+    },
+    {
+     "$id": "8",
+     "Name": "rejected",
+     "Value": "rejected",
+     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+    }
+   ],
+   "Description": "Repeatability Result header options",
    "IsExtensible": false,
    "Usage": "None"
   }
@@ -60,8 +64,9 @@
    "Kind": "model",
    "Name": "User",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "Sample Model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -70,7 +75,9 @@
      "Description": "The user's id.",
      "Type": {
       "$id": "11",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -82,7 +89,9 @@
      "Description": "The user's name.",
      "Type": {
       "$id": "13",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -94,8 +103,9 @@
    "Kind": "model",
    "Name": "UserActionParam",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
-   "Usage": "Input",
+   "Usage": "Input,Json",
    "Description": "User action param",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -104,7 +114,9 @@
      "Description": "User action value.",
      "Type": {
       "$id": "16",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -116,8 +128,9 @@
    "Kind": "model",
    "Name": "UserActionResponse",
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "User action response",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -126,7 +139,9 @@
      "Description": "User action result.",
      "Type": {
       "$id": "19",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -149,12 +164,13 @@
      "Parameters": [
       {
        "$id": "22",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
         "$id": "23",
-        "Kind": "string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -169,7 +185,9 @@
         "$id": "24",
         "Type": {
          "$id": "25",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -181,25 +199,27 @@
        "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "27",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
        "DefaultValue": {
         "$id": "28",
         "Type": {
          "$id": "29",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       },
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
+       }
       },
       {
        "$id": "30",
@@ -208,16 +228,16 @@
        "Description": "The user's id.",
        "Type": {
         "$id": "31",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
@@ -227,16 +247,16 @@
        "Description": "header in request",
        "Type": {
         "$id": "33",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
@@ -246,16 +266,16 @@
        "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "35",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -265,16 +285,16 @@
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "37",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -285,20 +305,22 @@
        "Type": {
         "$id": "39",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
          "$id": "40",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -309,20 +331,22 @@
        "Type": {
         "$id": "42",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
          "$id": "43",
-         "Kind": "string"
-        }
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
@@ -332,48 +356,51 @@
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
         "$id": "45",
-        "Kind": "uuid",
-        "Encode": "string"
+        "Kind": "string",
+        "Name": "uuid",
+        "CrossLanguageDefinitionId": "Azure.Core.uuid",
+        "BaseType": {
+         "$id": "46",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        }
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "46",
+       "$id": "47",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "47",
-        "Kind": "string"
+        "$id": "48",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "49",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "48",
-        "Type": {
-         "$ref": "47"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "50",
        "StatusCodes": [
         200
        ],
@@ -383,34 +410,44 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "50",
+         "$id": "51",
          "Name": "bar",
          "NameInResponse": "bar",
-         "Description": "",
          "Type": {
-          "$id": "51",
-          "Kind": "string"
+          "$id": "52",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
-         "$id": "52",
-         "Name": "ETag",
-         "NameInResponse": "etagHeader",
+         "$id": "53",
+         "Name": "etagHeader",
+         "NameInResponse": "ETag",
          "Description": "The entity tag for the response.",
          "Type": {
-          "$id": "53",
-          "Kind": "string"
+          "$id": "54",
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          }
         },
         {
-         "$id": "54",
-         "Name": "x-ms-client-request-id",
-         "NameInResponse": "clientRequestId",
+         "$id": "55",
+         "Name": "clientRequestId",
+         "NameInResponse": "x-ms-client-request-id",
          "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
          "Type": {
-          "$id": "55",
-          "Kind": "uuid",
-          "Encode": "string"
+          "$id": "56",
+          "Kind": "string",
+          "Name": "uuid",
+          "CrossLanguageDefinitionId": "Azure.Core.uuid",
+          "BaseType": {
+           "$id": "57",
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
+          }
          }
         }
        ],
@@ -422,14 +459,15 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.smokeTest"
     },
     {
-     "$id": "56",
+     "$id": "58",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
      "Description": "Test for repeatable requests",
@@ -439,91 +477,147 @@
        "$ref": "22"
       },
       {
-       "$id": "57",
+       "$id": "59",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "58",
-        "Kind": "string"
+        "$id": "60",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Query",
-       "DefaultValue": {
-        "$ref": "28"
-       },
-       "IsRequired": true,
        "IsApiVersion": true,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Client"
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "61",
+        "Type": {
+         "$id": "62",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "2022-12-01-preview"
+       }
       },
       {
-       "$id": "59",
+       "$id": "63",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "60",
-        "Kind": "int32"
+        "$id": "64",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Path",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "65",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
        "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
-        "$id": "62",
-        "Kind": "string"
+        "$id": "66",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "63",
+       "$id": "67",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
-        "$id": "64",
+        "$id": "68",
         "Kind": "utcDateTime",
+        "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
-         "$id": "65",
-         "Kind": "string"
-        }
+         "$id": "69",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
        },
        "Location": "Header",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "70",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "71",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "72",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "73",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "74",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "75",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "76",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "The body parameter.",
@@ -531,69 +625,17 @@
         "$ref": "14"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "67",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "68",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "69",
-        "Type": {
-         "$ref": "68"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "70",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "71",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "72",
-        "Type": {
-         "$ref": "71"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "77",
        "StatusCodes": [
         200
        ],
@@ -603,12 +645,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "74",
-         "Name": "Repeatability-Result",
-         "NameInResponse": "repeatabilityResult",
+         "$id": "78",
+         "Name": "repeatabilityResult",
+         "NameInResponse": "Repeatability-Result",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$ref": "2"
+          "$ref": "5"
          }
         }
        ],
@@ -620,18 +662,19 @@
      ],
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/azure/core/traits/user/{id}:repeatableAction",
      "RequestMediaTypes": [
       "application/json"
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.repeatableAction"
     }
    ],
    "Protocol": {
-    "$id": "75"
+    "$id": "79"
    },
    "Parameters": [
     {

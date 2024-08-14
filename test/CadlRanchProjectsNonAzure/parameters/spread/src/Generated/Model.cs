@@ -28,7 +28,7 @@ namespace Scm.Parameters.Spread
 
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Model(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -42,8 +42,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
-            ClientResult result = await SpreadAsRequestBodyAsync(bodyParameter.ToBinaryContent(), null).ConfigureAwait(false);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -54,8 +54,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            BodyParameter bodyParameter = new BodyParameter(name, null);
-            ClientResult result = SpreadAsRequestBody(bodyParameter.ToBinaryContent(), null);
+            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            ClientResult result = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToBinaryContent(), null);
             return result;
         }
 
@@ -361,8 +361,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
-            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, compositeRequestMix.ToBinaryContent(), null).ConfigureAwait(false);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = await SpreadCompositeRequestMixAsync(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -378,8 +378,8 @@ namespace Scm.Parameters.Spread
             Argument.AssertNotNull(testHeader, nameof(testHeader));
             Argument.AssertNotNull(prop, nameof(prop));
 
-            CompositeRequestMix compositeRequestMix = new CompositeRequestMix(prop, null);
-            ClientResult result = SpreadCompositeRequestMix(name, testHeader, compositeRequestMix.ToBinaryContent(), null);
+            SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequest = new SpreadCompositeRequestMixRequest(prop, null);
+            ClientResult result = SpreadCompositeRequestMix(name, testHeader, spreadCompositeRequestMixRequest.ToBinaryContent(), null);
             return result;
         }
 
@@ -459,7 +459,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/request-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -476,7 +475,6 @@ namespace Scm.Parameters.Spread
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/spread/model/composite-request-only-with-body", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -495,7 +493,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }
@@ -512,7 +509,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -531,7 +527,6 @@ namespace Scm.Parameters.Spread
             uri.AppendPath(name, true);
             request.Uri = uri.ToUri();
             request.Headers.Set("test-header", testHeader);
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

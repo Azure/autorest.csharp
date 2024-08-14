@@ -7,41 +7,48 @@
   {
    "$id": "2",
    "Kind": "model",
-   "Name": "PagedUser",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "Output",
-   "Description": "Paged collection of User items",
+   "Name": "User",
+   "CrossLanguageDefinitionId": "Payload.Pageable.User",
+   "Usage": "Output,Json",
+   "Description": "User model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "User name",
+     "Type": {
+      "$id": "4",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "Kind": "model",
+   "Name": "PagedUser",
+   "CrossLanguageDefinitionId": "Azure.Core.Page",
+   "Usage": "None",
+   "Description": "Paged collection of User items",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "6",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
      "Type": {
-      "$id": "4",
+      "$id": "7",
       "Kind": "array",
       "Name": "ArrayUser",
       "ValueType": {
-       "$id": "5",
-       "Kind": "model",
-       "Name": "User",
-       "CrossLanguageDefinitionId": "Payload.Pageable.User",
-       "Usage": "Output",
-       "Description": "User model",
-       "Properties": [
-        {
-         "$id": "6",
-         "Name": "name",
-         "SerializedName": "name",
-         "Description": "User name",
-         "Type": {
-          "$id": "7",
-          "Kind": "string"
-         },
-         "IsRequired": true,
-         "IsReadOnly": false
-        }
-       ]
+       "$ref": "2"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -55,38 +62,44 @@
      "Description": "The link to the next page of items",
      "Type": {
       "$id": "9",
-      "Kind": "url"
+      "Kind": "url",
+      "Name": "ResourceLocation",
+      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "BaseType": {
+       "$id": "10",
+       "Kind": "url",
+       "Name": "url",
+       "CrossLanguageDefinitionId": "TypeSpec.url"
+      }
      },
      "IsRequired": false,
      "IsReadOnly": false
     }
    ]
-  },
-  {
-   "$ref": "5"
   }
  ],
  "Clients": [
   {
-   "$id": "10",
+   "$id": "11",
    "Name": "PageableClient",
    "Description": "Test describing pageable.",
    "Operations": [
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "list",
      "ResourceName": "Pageable",
      "Description": "List users",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "12",
-       "Name": "host",
-       "NameInRequest": "host",
-       "Description": "TestServer endpoint",
+       "$id": "13",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
        "Type": {
-        "$id": "13",
-        "Kind": "string"
+        "$id": "14",
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -98,67 +111,67 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "14",
+        "$id": "15",
         "Type": {
-         "$id": "15",
-         "Kind": "string"
+         "$id": "16",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "16",
+       "$id": "17",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "17",
-        "Kind": "int32"
+        "$id": "18",
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "Location": "Query",
-       "IsRequired": false,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": false,
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
-        "Kind": "string"
+        "$id": "20",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "21",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$ref": "19"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -170,24 +183,25 @@
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
-     "Uri": "{host}",
+     "Uri": "{endpoint}",
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
-      "$id": "22",
-      "NextLinkName": "nextLink",
-      "ItemName": "value"
+      "$id": "23",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.Pageable.list"
     }
    ],
    "Protocol": {
-    "$id": "23"
+    "$id": "24"
    },
    "Parameters": [
     {
-     "$ref": "12"
+     "$ref": "13"
     }
    ]
   }

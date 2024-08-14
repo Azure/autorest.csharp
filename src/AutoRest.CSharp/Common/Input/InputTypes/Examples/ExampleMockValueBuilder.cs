@@ -17,23 +17,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 
-        public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
-        {
-            _cache.Clear();
-            var clientParameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in client.Parameters)
-            {
-                if (!useAllParameters && !parameter.IsRequired)
-                {
-                    continue;
-                }
-                var parameterExample = BuildParameterExample(parameter, useAllParameters);
-                clientParameterExamples.Add(parameterExample);
-            }
-
-            return new(client, clientParameterExamples);
-        }
-
         public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
         {
             _cache.Clear();
@@ -58,7 +41,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
             if (parameter.Kind == InputOperationParameterKind.Constant)
             {
                 InputExampleValue value;
-                if (parameter.DefaultValue != null)
+                if (parameter.Type is InputLiteralType { Value: not null } literalValue)
+                {
+                    value = InputExampleValue.Value(parameter.Type, literalValue.Value);
+                }
+                else if (parameter.DefaultValue != null)
                 {
                     // when it is constant, it could have DefaultValue
                     value = InputExampleValue.Value(parameter.Type, parameter.DefaultValue.Value);
@@ -143,16 +130,19 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputPrimitiveTypeKind.PlainDate => InputExampleValue.Value(primitiveType, "2022-05-10"),
             InputPrimitiveTypeKind.Float32 => InputExampleValue.Value(primitiveType, 123.45f),
             InputPrimitiveTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
-            InputPrimitiveTypeKind.Float128 => InputExampleValue.Value(primitiveType, 123.45m),
-            InputPrimitiveTypeKind.Guid or InputPrimitiveTypeKind.Uuid => InputExampleValue.Value(primitiveType, "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
+            InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 => InputExampleValue.Value(primitiveType, 123.45m),
             InputPrimitiveTypeKind.Int8 => InputExampleValue.Value(primitiveType, (sbyte)123),
             InputPrimitiveTypeKind.UInt8 => InputExampleValue.Value(primitiveType, (byte)123),
             InputPrimitiveTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
             InputPrimitiveTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
             InputPrimitiveTypeKind.SafeInt => InputExampleValue.Value(primitiveType, 1234L),
-            InputPrimitiveTypeKind.String => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>"),
+            InputPrimitiveTypeKind.String => primitiveType.CrossLanguageDefinitionId switch
+            {
+                InputPrimitiveType.UuidId => InputExampleValue.Value(primitiveType, "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"),
+                _ => string.IsNullOrWhiteSpace(hint) ? InputExampleValue.Value(primitiveType, "<String>") : InputExampleValue.Value(primitiveType, $"<{hint}>")
+            },
             InputPrimitiveTypeKind.PlainTime => InputExampleValue.Value(primitiveType, "01:23:45"),
-            InputPrimitiveTypeKind.Uri or InputPrimitiveTypeKind.Url => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
+            InputPrimitiveTypeKind.Url => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 

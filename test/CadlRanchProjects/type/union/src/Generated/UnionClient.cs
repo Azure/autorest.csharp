@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace _Type.Union
 {
     // Data plane generated client.
-    /// <summary> The Union service client. </summary>
+    /// <summary> Describe scenarios for various combinations of unions. </summary>
     public partial class UnionClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UnionClient(Uri endpoint, UnionClientOptions options)

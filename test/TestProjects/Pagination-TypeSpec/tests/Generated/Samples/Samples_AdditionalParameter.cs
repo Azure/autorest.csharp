@@ -24,7 +24,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
@@ -39,7 +39,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", null, null, null, null))
             {
@@ -54,7 +54,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>"))
             {
@@ -67,7 +67,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>"))
             {
@@ -80,7 +80,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             foreach (BinaryData item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
@@ -95,7 +95,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             await foreach (BinaryData item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", "PT5S", "<metricName>", "<timespan>", null))
             {
@@ -110,7 +110,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             foreach (DimensionValueListItem item in client.GetMetricDimensionValues("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
             {
@@ -123,7 +123,7 @@ namespace Pagination.Samples
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
-            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient();
+            AdditionalParameter client = new PaginationClient(endpoint, credential).GetAdditionalParameterClient(apiVersion: "2022-05-13");
 
             await foreach (DimensionValueListItem item in client.GetMetricDimensionValuesAsync("<testRunId>", "<name>", "<metricNamespace>", interval: Interval.PT5S, metricName: "<metricName>", timespan: "<timespan>"))
             {

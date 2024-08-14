@@ -9,7 +9,7 @@ using System.Threading;
 namespace Scm._Type.Property.ValueTypes
 {
     // Data plane generated client.
-    /// <summary> The ValueTypes service client. </summary>
+    /// <summary> Illustrates various property types for models. </summary>
     public partial class ValueTypesClient
     {
         private readonly ClientPipeline _pipeline;
@@ -24,7 +24,7 @@ namespace Scm._Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of ValueTypesClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ValueTypesClient(Uri endpoint, ValueTypesClientOptions options)

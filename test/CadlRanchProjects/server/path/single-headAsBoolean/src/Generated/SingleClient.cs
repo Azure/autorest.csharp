@@ -123,7 +123,6 @@ namespace Server.Path.SingleHeadAsBoolean
             uri.Reset(_endpoint);
             uri.AppendPath("/server/path/single/myOp", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

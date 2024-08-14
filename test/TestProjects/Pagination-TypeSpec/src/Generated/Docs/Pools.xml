@@ -7,7 +7,7 @@ This sample shows how to call GetPoolsAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 await foreach (BatchPool item in client.GetPoolsAsync())
 {
@@ -17,7 +17,7 @@ This sample shows how to call GetPoolsAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 await foreach (BatchPool item in client.GetPoolsAsync(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
 {
@@ -30,7 +30,7 @@ This sample shows how to call GetPools.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 foreach (BatchPool item in client.GetPools())
 {
@@ -40,7 +40,7 @@ This sample shows how to call GetPools with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 foreach (BatchPool item in client.GetPools(filter: "<$filter>", select: new string[] { "<$select>" }, expand: new string[] { "<$expand>" }))
 {
@@ -53,7 +53,7 @@ This sample shows how to call GetPoolsAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 await foreach (BinaryData item in client.GetPoolsAsync(null, null, null, null))
 {
@@ -65,7 +65,7 @@ This sample shows how to call GetPoolsAsync with all parameters and parse the re
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 await foreach (BinaryData item in client.GetPoolsAsync("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
 {
@@ -82,7 +82,7 @@ This sample shows how to call GetPools and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 foreach (BinaryData item in client.GetPools(null, null, null, null))
 {
@@ -94,7 +94,7 @@ This sample shows how to call GetPools with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 TokenCredential credential = new DefaultAzureCredential();
-Pools client = new PaginationClient(endpoint, credential).GetPoolsClient();
+Pools client = new PaginationClient(endpoint, credential).GetPoolsClient(apiVersion: "2022-05-13");
 
 foreach (BinaryData item in client.GetPools("<$filter>", new string[] { "<$select>" }, new string[] { "<$expand>" }, null))
 {

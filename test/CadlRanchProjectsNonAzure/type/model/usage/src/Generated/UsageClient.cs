@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Usage
         }
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)
@@ -270,7 +270,6 @@ namespace Scm._Type.Model.Usage
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/usage/input", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

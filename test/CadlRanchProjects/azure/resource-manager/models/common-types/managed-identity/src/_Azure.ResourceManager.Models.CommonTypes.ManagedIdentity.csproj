@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>This is the _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity for Azure Data Plane</AssemblyTitle>
+    <Version>1.0.0-beta.1</Version>
+    <PackageTags>_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+  </PropertyGroup>
+</Project>

@@ -27,7 +27,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of ModelsOps. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ModelsOps(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -2684,7 +2684,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/and", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2701,7 +2700,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/as", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2718,7 +2716,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/assert", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2735,7 +2732,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/async", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2752,7 +2748,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/await", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2769,7 +2764,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/break", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2786,7 +2780,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/class", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2803,7 +2796,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/constructor", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2820,7 +2812,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/continue", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2837,7 +2828,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/def", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2854,7 +2844,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/del", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2871,7 +2860,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/elif", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2888,7 +2876,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/else", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2905,7 +2892,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/except", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2922,7 +2908,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/exec", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2939,7 +2924,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/finally", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2956,7 +2940,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/for", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2973,7 +2956,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/from", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -2990,7 +2972,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/global", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3007,7 +2988,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/if", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3024,7 +3004,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/import", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3041,7 +3020,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/in", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3058,7 +3036,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/is", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3075,7 +3052,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/lambda", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3092,7 +3068,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/not", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3109,7 +3084,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/or", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3126,7 +3100,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/pass", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3143,7 +3116,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/raise", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3160,7 +3132,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/return", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3177,7 +3148,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/try", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3194,7 +3164,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/while", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3211,7 +3180,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/with", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);
@@ -3228,7 +3196,6 @@ namespace Scm.SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/models/yield", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Accept", "application/json");
             request.Headers.Set("Content-Type", "application/json");
             request.Content = content;
             message.Apply(options);

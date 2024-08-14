@@ -313,20 +313,19 @@ extends:
                 PackageTags = Configuration.Namespace,
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 IncludeOperationsSharedSource = true,
-                IncludeManagementSharedCode = Configuration.AzureArm ? true : null,
             };
-            // only branded library will add these shared code compilation lines
-            builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));
             if (_needAzureKeyAuth)
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
-            foreach (var packages in _brandedDependencyPackages)
+            if (!Configuration.AzureArm)
             {
-                builder.PackageReferences.Add(packages);
+                // only branded library will add these shared code compilation lines
+                builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureResourceProviderNamespaceAttribute.cs", "Shared/Core"));
+                foreach (var packages in _brandedDependencyPackages)
+                {
+                    builder.PackageReferences.Add(packages);
+                }
             }
-            if (Configuration.AzureArm)
-            {
-                builder.PackageReferences.Add(new("Azure.ResourceManager"));
-            }
+
             if (_includeDfe)
             {
                 builder.PackageReferences.Add(new("Azure.Core.Expressions.DataFactory"));
@@ -399,9 +398,12 @@ extends:
             }
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
             // add the package references
-            foreach (var package in _brandedTestDependencyPackages)
+            if (!Configuration.AzureArm)
             {
-                writer.PackageReferences.Add(package);
+                foreach (var package in _brandedTestDependencyPackages)
+                {
+                    writer.PackageReferences.Add(package);
+                }
             }
 
             return writer.Write();
@@ -411,7 +413,7 @@ extends:
         {
             var writer = new CSProjWriter()
             {
-                TargetFramework = "net7.0",
+                TargetFramework = "net8.0",
                 NoWarn = new("$(NoWarn);CS1591", "Ignore XML doc comments on test types and members")
             };
 

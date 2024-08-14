@@ -10,7 +10,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPatternType",
    "ValueType": {
     "$id": "3",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -28,7 +30,7 @@
    ],
    "Description": "The type of alias pattern.",
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "6",
@@ -37,7 +39,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathTokenType",
    "ValueType": {
     "$id": "7",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -91,7 +95,7 @@
    ],
    "Description": "The type of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "16",
@@ -100,7 +104,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathAttributes",
    "ValueType": {
     "$id": "17",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -118,7 +124,7 @@
    ],
    "Description": "The attributes of the token that the alias path is referring to.",
    "IsExtensible": true,
-   "Usage": "RoundTrip"
+   "Usage": "Input,Output,Json"
   },
   {
    "$id": "20",
@@ -127,7 +133,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasType",
    "ValueType": {
     "$id": "21",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -151,7 +159,7 @@
    ],
    "Description": "The type of the alias.",
    "IsExtensible": false,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   },
   {
    "$id": "25",
@@ -160,7 +168,9 @@
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderAuthorizationConsentState",
    "ValueType": {
     "$id": "26",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Values": [
     {
@@ -190,7 +200,7 @@
    ],
    "Description": "The provider authorization consent state.",
    "IsExtensible": true,
-   "Usage": "Output"
+   "Usage": "Output,Json"
   }
  ],
  "Models": [
@@ -199,8 +209,9 @@
    "Kind": "model",
    "Name": "ModelAsStruct",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The model to change to struct.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "32",
@@ -209,7 +220,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "33",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -221,7 +234,8 @@
    "Kind": "model",
    "Name": "ModelWithPersistableOnly",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "35",
@@ -230,7 +244,9 @@
      "Description": "The name.",
      "Type": {
       "$id": "36",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -246,7 +262,9 @@
       "Name": "Array",
       "ValueType": {
        "$id": "39",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array"
      },
@@ -260,7 +278,9 @@
      "Description": "The nullable property.",
      "Type": {
       "$id": "41",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -275,11 +295,15 @@
       "Kind": "dict",
       "KeyType": {
        "$id": "44",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "ValueType": {
        "$id": "45",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       }
      },
      "IsRequired": false,
@@ -292,7 +316,9 @@
      "Description": "The x property.",
      "Type": {
       "$id": "47",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -304,8 +330,9 @@
    "Kind": "model",
    "Name": "BaseModel",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The BaseModel in the discriminated set",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "49",
     "Name": "kind",
@@ -313,7 +340,9 @@
     "Description": "The kind",
     "Type": {
      "$id": "50",
-     "Kind": "string"
+     "Kind": "string",
+     "Name": "string",
+     "CrossLanguageDefinitionId": "TypeSpec.string"
     },
     "IsRequired": true,
     "IsReadOnly": false,
@@ -330,7 +359,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "52",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -343,9 +374,10 @@
      "Kind": "model",
      "Name": "ModelX",
      "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "The ModelX in the discriminated set",
      "DiscriminatorValue": "X",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "48"
      },
@@ -360,7 +392,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "57",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "X"
        },
@@ -379,7 +413,9 @@
         "Name": "Array",
         "ValueType": {
          "$id": "60",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "CrossLanguageDefinitionId": "TypeSpec.Array"
        },
@@ -393,7 +429,9 @@
        "Description": "Nullable integer.",
        "Type": {
         "$id": "62",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": false,
        "IsReadOnly": false
@@ -408,11 +446,15 @@
         "Kind": "dict",
         "KeyType": {
          "$id": "65",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "ValueType": {
          "$id": "66",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         }
        },
        "IsRequired": false,
@@ -425,7 +467,9 @@
        "Description": "The XProperty property.",
        "Type": {
         "$id": "68",
-        "Kind": "int32"
+        "Kind": "int32",
+        "Name": "int32",
+        "CrossLanguageDefinitionId": "TypeSpec.int32"
        },
        "IsRequired": true,
        "IsReadOnly": true
@@ -437,9 +481,10 @@
      "Kind": "model",
      "Name": "ModelY",
      "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY",
-     "Usage": "RoundTrip",
+     "Usage": "Input,Output,Json",
      "Description": "The ModelY in the discriminated set",
      "DiscriminatorValue": "Y",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "48"
      },
@@ -454,7 +499,9 @@
         "Kind": "constant",
         "ValueType": {
          "$id": "72",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "Y"
        },
@@ -469,7 +516,9 @@
        "Description": "The YProperty property.",
        "Type": {
         "$id": "74",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "IsRequired": true,
        "IsReadOnly": true
@@ -489,15 +538,17 @@
    "Kind": "model",
    "Name": "AvailabilitySetData",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
    "Description": "The availability set data",
+   "Decorators": [],
    "BaseModel": {
     "$id": "76",
     "Kind": "model",
     "Name": "TrackedResourceData",
     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData",
-    "Usage": "RoundTrip",
+    "Usage": "Input,Output,Json",
     "Description": "The tracked resource data",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "77",
@@ -506,7 +557,9 @@
       "Description": "The id property.",
       "Type": {
        "$id": "78",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -518,7 +571,9 @@
       "Description": "The name property.",
       "Type": {
        "$id": "80",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -530,7 +585,9 @@
       "Description": "The resource type.",
       "Type": {
        "$id": "82",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": true
@@ -542,7 +599,9 @@
       "Description": "The location property.",
       "Type": {
        "$id": "84",
-       "Kind": "string"
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
       },
       "IsRequired": true,
       "IsReadOnly": false
@@ -557,11 +616,15 @@
        "Kind": "dict",
        "KeyType": {
         "$id": "87",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        },
        "ValueType": {
         "$id": "88",
-        "Kind": "string"
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string"
        }
       },
       "IsRequired": false,
@@ -580,7 +643,8 @@
       "Kind": "model",
       "Name": "ComputeSku",
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "91",
@@ -589,7 +653,9 @@
         "Description": "The sku name.",
         "Type": {
          "$id": "92",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -601,7 +667,9 @@
         "Description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
         "Type": {
          "$id": "94",
-         "Kind": "string"
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -613,7 +681,9 @@
         "Description": "Specifies the number of virtual machines in the scale set.",
         "Type": {
          "$id": "96",
-         "Kind": "int64"
+         "Kind": "int64",
+         "Name": "int64",
+         "CrossLanguageDefinitionId": "TypeSpec.int64"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -633,8 +703,9 @@
       "Kind": "model",
       "Name": "AvailabilitySetProperties",
       "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties",
-      "Usage": "RoundTrip",
+      "Usage": "Input,Output,Json",
       "Description": "The availability set properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "99",
@@ -650,8 +721,9 @@
           "Kind": "model",
           "Name": "WritableSubResource",
           "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource",
-          "Usage": "RoundTrip",
+          "Usage": "Input,Output,Json",
           "Description": "The writable sub resource",
+          "Decorators": [],
           "Properties": [
            {
             "$id": "102",
@@ -660,7 +732,9 @@
             "Description": "The resource id",
             "Type": {
              "$id": "103",
-             "Kind": "string"
+             "Kind": "string",
+             "Name": "string",
+             "CrossLanguageDefinitionId": "TypeSpec.string"
             },
             "IsRequired": false,
             "IsReadOnly": false
@@ -679,7 +753,9 @@
         "Description": "The platform fault domain count property.",
         "Type": {
          "$id": "105",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -691,7 +767,9 @@
         "Description": "The platform update domain count property.",
         "Type": {
          "$id": "107",
-         "Kind": "int32"
+         "Kind": "int32",
+         "Name": "int32",
+         "CrossLanguageDefinitionId": "TypeSpec.int32"
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -720,8 +798,9 @@
    "Kind": "model",
    "Name": "ResourceProviderData",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData",
-   "Usage": "Output",
+   "Usage": "Output,Json",
    "Description": "A class representing the ResourceProvider data model.\nResource provider information.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "109",
@@ -730,7 +809,9 @@
      "Description": "The provider ID.",
      "Type": {
       "$id": "110",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -742,7 +823,9 @@
      "Description": "The namespace of the resource provider.",
      "Type": {
       "$id": "112",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -754,7 +837,9 @@
      "Description": "The registration state of the resource provider.",
      "Type": {
       "$id": "114",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -766,7 +851,9 @@
      "Description": "The registration policy of the resource provider.",
      "Type": {
       "$id": "116",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -785,7 +872,8 @@
        "Kind": "model",
        "Name": "ProviderResourceType",
        "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType",
-       "Usage": "Output",
+       "Usage": "Output,Json",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "120",
@@ -794,7 +882,9 @@
          "Description": "The resource type.",
          "Type": {
           "$id": "121",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -810,7 +900,9 @@
           "Name": "Array",
           "ValueType": {
            "$id": "124",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
@@ -831,8 +923,9 @@
            "Kind": "model",
            "Name": "ProviderExtendedLocation",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation",
-           "Usage": "Output",
+           "Usage": "Output,Json",
            "Description": "The provider extended location.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "128",
@@ -841,7 +934,9 @@
              "Description": "The azure location.",
              "Type": {
               "$id": "129",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -853,7 +948,9 @@
              "Description": "The extended location type.",
              "Type": {
               "$id": "131",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -869,7 +966,9 @@
               "Name": "Array",
               "ValueType": {
                "$id": "134",
-               "Kind": "string"
+               "Kind": "string",
+               "Name": "string",
+               "CrossLanguageDefinitionId": "TypeSpec.string"
               },
               "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
@@ -897,8 +996,9 @@
            "Kind": "model",
            "Name": "ResourceTypeAlias",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias",
-           "Usage": "Output",
+           "Usage": "Output,Json",
            "Description": "The alias type.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "138",
@@ -907,7 +1007,9 @@
              "Description": "The alias name.",
              "Type": {
               "$id": "139",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -926,8 +1028,9 @@
                "Kind": "model",
                "Name": "ResourceTypeAliasPath",
                "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath",
-               "Usage": "Output",
+               "Usage": "Output,Json",
                "Description": "The type of the paths for alias.",
+               "Decorators": [],
                "Properties": [
                 {
                  "$id": "143",
@@ -936,7 +1039,9 @@
                  "Description": "The path of an alias.",
                  "Type": {
                   "$id": "144",
-                  "Kind": "string"
+                  "Kind": "string",
+                  "Name": "string",
+                  "CrossLanguageDefinitionId": "TypeSpec.string"
                  },
                  "IsRequired": false,
                  "IsReadOnly": false
@@ -952,7 +1057,9 @@
                   "Name": "Array",
                   "ValueType": {
                    "$id": "147",
-                   "Kind": "string"
+                   "Kind": "string",
+                   "Name": "string",
+                   "CrossLanguageDefinitionId": "TypeSpec.string"
                   },
                   "CrossLanguageDefinitionId": "TypeSpec.Array"
                  },
@@ -969,8 +1076,9 @@
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPattern",
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern",
-                  "Usage": "Output",
+                  "Usage": "Output,Json",
                   "Description": "The type of the pattern for an alias path.",
+                  "Decorators": [],
                   "Properties": [
                    {
                     "$id": "150",
@@ -979,7 +1087,9 @@
                     "Description": "The alias pattern phrase.",
                     "Type": {
                      "$id": "151",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Name": "string",
+                     "CrossLanguageDefinitionId": "TypeSpec.string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -991,7 +1101,9 @@
                     "Description": "The alias pattern variable.",
                     "Type": {
                      "$id": "153",
-                     "Kind": "string"
+                     "Kind": "string",
+                     "Name": "string",
+                     "CrossLanguageDefinitionId": "TypeSpec.string"
                     },
                     "IsRequired": false,
                     "IsReadOnly": false
@@ -1022,8 +1134,9 @@
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPathMetadata",
                   "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata",
-                  "Usage": "RoundTrip",
+                  "Usage": "Input,Output,Json",
                   "Description": "The ResourceTypeAliasPathMetadata.",
+                  "Decorators": [],
                   "Properties": [
                    {
                     "$id": "157",
@@ -1077,7 +1190,9 @@
              "Description": "The default path for an alias.",
              "Type": {
               "$id": "161",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1122,7 +1237,9 @@
           "Name": "Array",
           "ValueType": {
            "$id": "166",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array"
          },
@@ -1136,7 +1253,9 @@
          "Description": "The default API version.",
          "Type": {
           "$id": "168",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1155,8 +1274,9 @@
            "Kind": "model",
            "Name": "ZoneMapping",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping",
-           "Usage": "Output",
+           "Usage": "Output,Json",
            "Description": "The ZoneMapping.",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "172",
@@ -1165,7 +1285,9 @@
              "Description": "The location of the zone mapping.",
              "Type": {
               "$id": "173",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1181,7 +1303,9 @@
               "Name": "Array",
               "ValueType": {
                "$id": "176",
-               "Kind": "string"
+               "Kind": "string",
+               "Name": "string",
+               "CrossLanguageDefinitionId": "TypeSpec.string"
               },
               "CrossLanguageDefinitionId": "TypeSpec.Array"
              },
@@ -1209,7 +1333,8 @@
            "Kind": "model",
            "Name": "ApiProfile",
            "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile",
-           "Usage": "Output",
+           "Usage": "Output,Json",
+           "Decorators": [],
            "Properties": [
             {
              "$id": "180",
@@ -1218,7 +1343,9 @@
              "Description": "The profile version.",
              "Type": {
               "$id": "181",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1230,7 +1357,9 @@
              "Description": "The API version.",
              "Type": {
               "$id": "183",
-              "Kind": "string"
+              "Kind": "string",
+              "Name": "string",
+              "CrossLanguageDefinitionId": "TypeSpec.string"
              },
              "IsRequired": false,
              "IsReadOnly": false
@@ -1249,7 +1378,9 @@
          "Description": "The additional capabilities offered by this resource type.",
          "Type": {
           "$id": "185",
-          "Kind": "string"
+          "Kind": "string",
+          "Name": "string",
+          "CrossLanguageDefinitionId": "TypeSpec.string"
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1264,11 +1395,15 @@
           "Kind": "dict",
           "KeyType": {
            "$id": "188",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           },
           "ValueType": {
            "$id": "189",
-           "Kind": "string"
+           "Kind": "string",
+           "Name": "string",
+           "CrossLanguageDefinitionId": "TypeSpec.string"
           }
          },
          "IsRequired": false,
@@ -1323,10 +1458,13 @@
    "Kind": "model",
    "Name": "ModelWithStringAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "192",
-    "Kind": "string"
+    "Kind": "string",
+    "Name": "string",
+    "CrossLanguageDefinitionId": "TypeSpec.string"
    },
    "Properties": [
     {
@@ -1336,7 +1474,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "194",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1348,7 +1488,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "196",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1360,7 +1502,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "198",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1372,7 +1516,8 @@
    "Kind": "model",
    "Name": "ModelWithArrayAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "200",
     "Kind": "array",
@@ -1390,7 +1535,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "202",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1402,7 +1549,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "204",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1414,7 +1563,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "206",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1426,10 +1577,13 @@
    "Kind": "model",
    "Name": "ModelWithUnknownAdditionalProperties",
    "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties",
-   "Usage": "RoundTrip",
+   "Usage": "Input,Output,Json",
+   "Decorators": [],
    "AdditionalProperties": {
     "$id": "208",
-    "Kind": "any"
+    "Kind": "any",
+    "Name": "unknown",
+    "CrossLanguageDefinitionId": ""
    },
    "Properties": [
     {
@@ -1439,7 +1593,9 @@
      "Description": "The id property.",
      "Type": {
       "$id": "210",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": true
@@ -1451,7 +1607,9 @@
      "Description": "The name property.",
      "Type": {
       "$id": "212",
-      "Kind": "string"
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string"
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1463,7 +1621,9 @@
      "Description": "The age property.",
      "Type": {
       "$id": "214",
-      "Kind": "int32"
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1489,7 +1649,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "218",
-        "Kind": "url"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1503,70 +1665,65 @@
       },
       {
        "$id": "219",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "220",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "221",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "222",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "223",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "224",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "225",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "31"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "220",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "221",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "222",
-        "Type": {
-         "$ref": "221"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "223",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "224",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "225",
-        "Type": {
-         "$ref": "224"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -1595,7 +1752,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op1"
     },
     {
      "$id": "227",
@@ -1608,70 +1766,65 @@
       },
       {
        "$id": "228",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "229",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "230",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "231",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "232",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "233",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "234",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "34"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "229",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "230",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "231",
-        "Type": {
-         "$ref": "230"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "232",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "233",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "234",
-        "Type": {
-         "$ref": "233"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -1700,7 +1853,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op2"
     },
     {
      "$id": "236",
@@ -1713,70 +1867,65 @@
       },
       {
        "$id": "237",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "238",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "239",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "240",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "241",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "242",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "243",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "48"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "238",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "239",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "240",
-        "Type": {
-         "$ref": "239"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "241",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "242",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "243",
-        "Type": {
-         "$ref": "242"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -1805,7 +1954,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op3"
     },
     {
      "$id": "245",
@@ -1818,70 +1968,65 @@
       },
       {
        "$id": "246",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "247",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "248",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "249",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "250",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "251",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "252",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "75"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "247",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "248",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "249",
-        "Type": {
-         "$ref": "248"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "250",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "251",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "252",
-        "Type": {
-         "$ref": "251"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -1910,7 +2055,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op4"
     },
     {
      "$id": "254",
@@ -1927,24 +2073,22 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "256",
-        "Kind": "string"
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "257",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
        },
        "Location": "Header",
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
-       "IsRequired": true,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "257",
-        "Type": {
-         "$ref": "256"
-        },
-        "Value": "application/json"
-       }
+       "IsRequired": true,
+       "Kind": "Constant"
       }
      ],
      "Responses": [
@@ -1970,7 +2114,8 @@
      "Path": "/api/ResourceProvider",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op5"
     },
     {
      "$id": "259",
@@ -1983,70 +2128,65 @@
       },
       {
        "$id": "260",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "261",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "262",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "263",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "264",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "265",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "266",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "191"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "261",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "262",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "263",
-        "Type": {
-         "$ref": "262"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "264",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "265",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "266",
-        "Type": {
-         "$ref": "265"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2075,7 +2215,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op6"
     },
     {
      "$id": "268",
@@ -2088,70 +2229,65 @@
       },
       {
        "$id": "269",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "270",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "271",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "272",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "273",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "274",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "275",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "199"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "270",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "271",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "272",
-        "Type": {
-         "$ref": "271"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "273",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "274",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "275",
-        "Type": {
-         "$ref": "274"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2180,7 +2316,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op7"
     },
     {
      "$id": "277",
@@ -2193,70 +2330,65 @@
       },
       {
        "$id": "278",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "279",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "280",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "281",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "282",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "283",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "application/json"
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant"
+      },
+      {
+       "$id": "284",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
         "$ref": "207"
        },
        "Location": "Body",
-       "IsRequired": true,
        "IsApiVersion": false,
-       "IsResourceParameter": false,
        "IsContentType": false,
        "IsEndpoint": false,
-       "SkipUrlEncoding": false,
        "Explode": false,
+       "IsRequired": true,
        "Kind": "Method"
-      },
-      {
-       "$id": "279",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "280",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "281",
-        "Type": {
-         "$ref": "280"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "282",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "283",
-        "Kind": "string"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "284",
-        "Type": {
-         "$ref": "283"
-        },
-        "Value": "application/json"
-       }
       }
      ],
      "Responses": [
@@ -2285,7 +2417,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.op8"
     }
    ],
    "Protocol": {

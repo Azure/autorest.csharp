@@ -79,13 +79,13 @@ This sample shows how to call RequestBodyAsync.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = await client.RequestBodyAsync((decimal)default);
+Response response = await client.RequestBodyAsync(123.45M);
 ]]></code>
 This sample shows how to call RequestBodyAsync with all parameters.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = await client.RequestBodyAsync((decimal)default);
+Response response = await client.RequestBodyAsync(123.45M);
 ]]></code></example>
     </member>
     <member name="RequestBody(decimal,CancellationToken)">
@@ -94,13 +94,13 @@ This sample shows how to call RequestBody.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = client.RequestBody((decimal)default);
+Response response = client.RequestBody(123.45M);
 ]]></code>
 This sample shows how to call RequestBody with all parameters.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = client.RequestBody((decimal)default);
+Response response = client.RequestBody(123.45M);
 ]]></code></example>
     </member>
     <member name="RequestBodyAsync(RequestContent,RequestContext)">
@@ -109,7 +109,7 @@ This sample shows how to call RequestBodyAsync.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = await client.RequestBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -118,7 +118,7 @@ This sample shows how to call RequestBodyAsync with all request content.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = await client.RequestBodyAsync(content);
 
 Console.WriteLine(response.Status);
@@ -130,7 +130,7 @@ This sample shows how to call RequestBody.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = client.RequestBody(content);
 
 Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ This sample shows how to call RequestBody with all request content.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(123.45M);
 Response response = client.RequestBody(content);
 
 Console.WriteLine(response.Status);
@@ -151,7 +151,7 @@ This sample shows how to call RequestParameterAsync.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = await client.RequestParameterAsync(default);
+Response response = await client.RequestParameterAsync(123.45M);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -159,7 +159,7 @@ This sample shows how to call RequestParameterAsync with all parameters.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = await client.RequestParameterAsync(default);
+Response response = await client.RequestParameterAsync(123.45M);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -170,7 +170,7 @@ This sample shows how to call RequestParameter.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = client.RequestParameter(default);
+Response response = client.RequestParameter(123.45M);
 
 Console.WriteLine(response.Status);
 ]]></code>
@@ -178,7 +178,7 @@ This sample shows how to call RequestParameter with all parameters.
 <code><![CDATA[
 DecimalType client = new ScalarClient().GetDecimalTypeClient();
 
-Response response = client.RequestParameter(default);
+Response response = client.RequestParameter(123.45M);
 
 Console.WriteLine(response.Status);
 ]]></code></example>

@@ -14,24 +14,14 @@ namespace Pagination.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PaginationModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.LedgerEntry"/>. </summary>
-        /// <param name="contents"> Contents of the ledger entry. </param>
-        /// <param name="collectionId"></param>
-        /// <param name="transactionId"></param>
-        /// <returns> A new <see cref="Models.LedgerEntry"/> instance for mocking. </returns>
-        public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null)
+        /// <summary> Initializes a new instance of <see cref="Models.BatchPool"/>. </summary>
+        /// <param name="id"> A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case). </param>
+        /// <param name="displayName"> The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. </param>
+        /// <param name="url"> The URL of the Pool. </param>
+        /// <returns> A new <see cref="Models.BatchPool"/> instance for mocking. </returns>
+        public static BatchPool BatchPool(string id = null, string displayName = null, string url = null)
         {
-            return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DimensionValueListItem"/>. </summary>
-        /// <param name="value"></param>
-        /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
-        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
-        {
-            value ??= new List<string>();
-
-            return new DimensionValueListItem(value?.ToList(), serializedAdditionalRawData: null);
+            return new BatchPool(id, displayName, url, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TextBlocklist"/>. </summary>
@@ -53,14 +43,24 @@ namespace Pagination.Models
             return new TextBlockItem(blockItemId, description, text, serializedAdditionalRawData: null);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.BatchPool"/>. </summary>
-        /// <param name="id"> A string that uniquely identifies the Pool within the Account. The ID can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 64 characters. The ID is case-preserving and case-insensitive (that is, you may not have two IDs within an Account that differ only by case). </param>
-        /// <param name="displayName"> The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024. </param>
-        /// <param name="url"> The URL of the Pool. </param>
-        /// <returns> A new <see cref="Models.BatchPool"/> instance for mocking. </returns>
-        public static BatchPool BatchPool(string id = null, string displayName = null, string url = null)
+        /// <summary> Initializes a new instance of <see cref="Models.LedgerEntry"/>. </summary>
+        /// <param name="contents"> Contents of the ledger entry. </param>
+        /// <param name="collectionId"></param>
+        /// <param name="transactionId"></param>
+        /// <returns> A new <see cref="Models.LedgerEntry"/> instance for mocking. </returns>
+        public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null)
         {
-            return new BatchPool(id, displayName, url, serializedAdditionalRawData: null);
+            return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.DimensionValueListItem"/>. </summary>
+        /// <param name="value"></param>
+        /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
+        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
+        {
+            value ??= new List<string>();
+
+            return new DimensionValueListItem(value?.ToList(), serializedAdditionalRawData: null);
         }
     }
 }

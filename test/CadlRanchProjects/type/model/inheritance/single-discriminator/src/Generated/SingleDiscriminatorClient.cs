@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary> Initializes a new instance of SingleDiscriminatorClient. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleDiscriminatorClient(Uri endpoint, SingleDiscriminatorClientOptions options)
@@ -735,7 +735,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/model", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
@@ -763,7 +762,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/single-discriminator/recursivemodel", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

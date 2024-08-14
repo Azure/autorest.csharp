@@ -41,7 +41,7 @@ namespace Authentication.OAuth2
         }
 
         /// <summary> Initializes a new instance of OAuth2Client. </summary>
-        /// <param name="endpoint"> TestServer endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -190,7 +190,6 @@ namespace Authentication.OAuth2
             uri.Reset(_endpoint);
             uri.AppendPath("/authentication/oauth2/valid", false);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

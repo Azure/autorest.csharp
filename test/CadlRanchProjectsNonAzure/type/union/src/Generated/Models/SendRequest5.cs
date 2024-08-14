@@ -44,7 +44,7 @@ namespace Scm._Type.Union.Models
 
         /// <summary> Initializes a new instance of <see cref="SendRequest5"/>. </summary>
         /// <param name="prop"></param>
-        public SendRequest5(GetResponseProp1 prop)
+        internal SendRequest5(GetResponseProp1 prop)
         {
             Prop = prop;
         }
