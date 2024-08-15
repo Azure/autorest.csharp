@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             SkipInitializerConstructor = IsUnknownDerivedType;
             IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(InputModel) || MgmtReferenceType.IsReferenceType(InputModel);
 
-            JsonConverter = InputModel.Serialization.IncludeConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter = InputModel.UseSystemTextJsonConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal InputModelType InputModel { get; }
