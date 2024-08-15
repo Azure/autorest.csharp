@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ClientModel.Primitives;
 using System.Xml;
 using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using NUnit.Framework;
+using System.Reflection;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace CadlRanchProjects.Tests
 {
@@ -285,5 +289,175 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void RequiredNullableAreNotWriteable()
+        {
+            var requiredStringList = TypeAsserts.HasProperty(typeof(StringProperty), nameof(StringProperty.NullableProperty), BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredStringList.SetMethod);
+        }
+
+        [Test]
+        public void RequiredNullableAreNotSetable()
+        {
+            var requiredStringList = TypeAsserts.HasProperty(typeof(StringProperty), nameof(StringProperty.NullableProperty), BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredStringList.SetMethod);
+        }
+
+        [Test]
+        public void NotRequiredNullableListsSerializedAsNull()
+        {
+            var inputModel = new CollectionsStringProperty();
+            inputModel.NullableProperty = null;
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void NotRequiredNullableListsSerializedEmptyWhenCleared()
+        {
+            var inputModel = new CollectionsStringProperty("required", new List<string> {"1", "2"});
+            inputModel.NullableProperty.Clear();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesSerializeWhenSet()
+        {
+            var inputModel = new CollectionsStringProperty();
+            inputModel.RequiredProperty = "required";
+            inputModel.NullableProperty = new List<string> { "1", "2" };
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual("2", element.GetProperty("nullableProperty")[1].GetString());
+        }
+
+        [Test]
+        public void NotRequiredNullablePropertiesDeserializedWithNulls()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"NonRequiredNullableString\": null}").RootElement);
+            Assert.Null(model.NullableProperty);
+        }
+
+        [Test]
+        public void NullablePropertiesSerializedAsNulls()
+        {
+            var inputModel = new CollectionsStringProperty("required", null);
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void NullablePropertiesSerializedAsEmptyLists()
+        {
+            var inputModel = new CollectionsStringProperty("required", Array.Empty<string>());
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
+            Assert.AreEqual(0, element.GetProperty("nullableProperty").GetArrayLength());
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsNullsWithUndefined()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{}").RootElement);
+            Assert.IsNull(model.NullableProperty);
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsUndefinedWithNulls()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": null}").RootElement);
+            Assert.IsNotNull(model.NullableProperty);
+            Assert.IsFalse(!(model.NullableProperty is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined));
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsValues()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": [\"a\", \"b\"]}").RootElement);
+            Assert.AreEqual(new[] { "a", "b" }, model.NullableProperty);
+        }
+
+        [Test]
+        public void RequiredNullableCollectionsSerializeAsNull()
+        {
+            var inputModel = new CollectionsStringProperty("required", new List<string> { "1", "2" });
+
+            Assert.NotNull(inputModel.NullableProperty);
+
+            inputModel.NullableProperty = null;
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void CollectionPropertiesCanBeMutatedAfterConstruction()
+        {
+            var inputModel = new CollectionsStringProperty(
+                "string",
+                Array.Empty<string>()
+            );
+
+            inputModel.NullableProperty.Add("1");
+
+            Assert.AreEqual(1, inputModel.NullableProperty.Count);
+        }
+
+        [TestCase("J")]
+        [TestCase("W")]
+        public void ValidateWritenullableModel(string format)
+        {
+            var options = format switch
+            {
+                "W" => new ModelReaderWriterOptions("W"),
+                "J" => ModelReaderWriterOptions.Json,
+                _ => throw new NotSupportedException()
+            };
+            var output = TypePropertyNullableModelFactory.StringProperty(requiredProperty: "requiredProperty");
+
+            var result = ModelReaderWriter.Write(output, options);
+            using var document = JsonDocument.Parse(result);
+
+            foreach (var property in document.RootElement.EnumerateObject())
+            {
+                if (property.NameEquals("requiredProperty"))
+                {
+                    Assert.AreEqual("requiredProperty", property.Value.GetString());
+                    continue;
+                }
+            }
+        }
+
+        [TestCase("J")]
+        [TestCase("W")]
+        public void ValidateReadInputModel(string format)
+        {
+            var options = format switch
+            {
+                "W" => new ModelReaderWriterOptions("W"),
+                "J" => ModelReaderWriterOptions.Json,
+                _ => throw new NotSupportedException()
+            };
+            var json = @"{""requiredProperty"": ""foo""}";
+            var binary = BinaryData.FromString(json);
+            var model = ModelReaderWriter.Read<StringProperty>(binary, options);
+
+            Assert.AreEqual("foo", model.RequiredProperty);
+            if (format == "J")
+            {
+                var field = typeof(StringProperty).GetField("_serializedAdditionalRawData", BindingFlags.Instance | BindingFlags.NonPublic);
+                var rawData = (IDictionary<string, BinaryData>)field.GetValue(model);
+                Assert.AreEqual(0, rawData.Count);
+            }
+        }
     }
 }

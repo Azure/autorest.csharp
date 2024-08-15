@@ -2,15 +2,14 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
-using System.Xml;
 using _Type.Model.Visibility;
 using _Type.Model.Visibility.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -45,6 +44,30 @@ namespace CadlRanchProjects.Tests
             Assert.Null(property.SetMethod);
             Assert.Null(listProperty.SetMethod);
             Assert.AreEqual(typeof(IReadOnlyList<int>), listProperty.PropertyType);
+        }
+
+        [Test]
+        public void RequiredPropertiesAreSetable()
+        {
+            var requiredInt = TypeAsserts.HasProperty(typeof(VisibilityModel), nameof(VisibilityModel.QueryProp), BindingFlags.Public | BindingFlags.Instance);
+            Assert.NotNull(requiredInt.SetMethod);
+        }
+
+        [Test]
+        public void RequiredListsAreReadOnly()
+        {
+            var requiredStringList = TypeAsserts.HasProperty(typeof(VisibilityModel), nameof(VisibilityModel.ReadProp), BindingFlags.Public | BindingFlags.Instance);
+            var requiredIntList = TypeAsserts.HasProperty(typeof(ReadOnlyModel), nameof(ReadOnlyModel.OptionalNullableIntList), BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredIntList.SetMethod);
+            Assert.Null(requiredStringList.SetMethod);
+        }
+
+        [Test]
+        public void ReadonlyPropertiesAreDeserialized()
+        {
+            var model = VisibilityModel.DeserializeVisibilityModel(JsonDocument.Parse("{\"readProp\":\"abc\"}").RootElement);
+            Assert.AreEqual("abc", model.ReadProp);
         }
     }
 }

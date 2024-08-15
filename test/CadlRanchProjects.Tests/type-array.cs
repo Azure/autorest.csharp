@@ -220,5 +220,13 @@ namespace CadlRanchProjects.Tests
             var response = await new ArrayClient(host, null).GetNullableModelValueClient().PutAsync(new List<InnerModel> { new InnerModel("hello"), null, new InnerModel("world") });
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void NotRequiredNullableListsAreNotNullByDefault()
+        {
+            var inputModel = new InnerModel("nonnull");
+
+            Assert.NotNull(inputModel.Property);
+        }
     }
 }
