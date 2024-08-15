@@ -114,6 +114,7 @@ namespace NamedTypeSymbolExtensionsTests
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
+                examplesDirectory: null,
                 helperNamespace: "");
         }
 
