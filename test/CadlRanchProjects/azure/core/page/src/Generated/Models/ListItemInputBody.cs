@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Core.Basic.Models
+namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> Second item. </summary>
-    public partial class SecondItem
+    /// <summary> The body of the input. </summary>
+    public partial class ListItemInputBody
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,21 +45,31 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
-        internal SecondItem()
+        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
+        /// <param name="inputName"> The name of the input. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="inputName"/> is null. </exception>
+        public ListItemInputBody(string inputName)
         {
+            Argument.AssertNotNull(inputName, nameof(inputName));
+
+            InputName = inputName;
         }
 
-        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
-        /// <param name="name"> The name of the item. </param>
+        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
+        /// <param name="inputName"> The name of the input. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SecondItem(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ListItemInputBody(string inputName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Name = name;
+            InputName = inputName;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the item. </summary>
-        public string Name { get; }
+        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/> for deserialization. </summary>
+        internal ListItemInputBody()
+        {
+        }
+
+        /// <summary> The name of the input. </summary>
+        public string InputName { get; }
     }
 }

@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetFirstItemsAsync.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (FirstItem item in client.GetFirstItemsAsync())
 {
@@ -13,7 +13,7 @@ await foreach (FirstItem item in client.GetFirstItemsAsync())
 ]]></code>
 This sample shows how to call GetFirstItemsAsync with all parameters.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (FirstItem item in client.GetFirstItemsAsync())
 {
@@ -24,7 +24,7 @@ await foreach (FirstItem item in client.GetFirstItemsAsync())
       <example>
 This sample shows how to call GetFirstItems.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (FirstItem item in client.GetFirstItems())
 {
@@ -32,7 +32,7 @@ foreach (FirstItem item in client.GetFirstItems())
 ]]></code>
 This sample shows how to call GetFirstItems with all parameters.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (FirstItem item in client.GetFirstItems())
 {
@@ -43,7 +43,7 @@ foreach (FirstItem item in client.GetFirstItems())
       <example>
 This sample shows how to call GetFirstItemsAsync and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
@@ -53,7 +53,7 @@ await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 ]]></code>
 This sample shows how to call GetFirstItemsAsync with all parameters and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
@@ -66,7 +66,7 @@ await foreach (BinaryData item in client.GetFirstItemsAsync(null))
       <example>
 This sample shows how to call GetFirstItems and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetFirstItems(null))
 {
@@ -76,7 +76,7 @@ foreach (BinaryData item in client.GetFirstItems(null))
 ]]></code>
 This sample shows how to call GetFirstItems with all parameters and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetFirstItems(null))
 {
@@ -89,7 +89,7 @@ foreach (BinaryData item in client.GetFirstItems(null))
       <example>
 This sample shows how to call GetSecondItemsAsync.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (SecondItem item in client.GetSecondItemsAsync())
 {
@@ -97,7 +97,7 @@ await foreach (SecondItem item in client.GetSecondItemsAsync())
 ]]></code>
 This sample shows how to call GetSecondItemsAsync with all parameters.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (SecondItem item in client.GetSecondItemsAsync())
 {
@@ -108,7 +108,7 @@ await foreach (SecondItem item in client.GetSecondItemsAsync())
       <example>
 This sample shows how to call GetSecondItems.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (SecondItem item in client.GetSecondItems())
 {
@@ -116,7 +116,7 @@ foreach (SecondItem item in client.GetSecondItems())
 ]]></code>
 This sample shows how to call GetSecondItems with all parameters.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (SecondItem item in client.GetSecondItems())
 {
@@ -127,7 +127,7 @@ foreach (SecondItem item in client.GetSecondItems())
       <example>
 This sample shows how to call GetSecondItemsAsync and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
@@ -137,7 +137,7 @@ await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 ]]></code>
 This sample shows how to call GetSecondItemsAsync with all parameters and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
@@ -150,7 +150,7 @@ await foreach (BinaryData item in client.GetSecondItemsAsync(null))
       <example>
 This sample shows how to call GetSecondItems and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetSecondItems(null))
 {
@@ -160,7 +160,7 @@ foreach (BinaryData item in client.GetSecondItems(null))
 ]]></code>
 This sample shows how to call GetSecondItems with all parameters and parse the result.
 <code><![CDATA[
-TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
 foreach (BinaryData item in client.GetSecondItems(null))
 {

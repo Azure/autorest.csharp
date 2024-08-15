@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Basic.Models;
+using _Specs_.Azure.Core.Page.Models;
 
-namespace _Specs_.Azure.Core.Basic.Samples
+namespace _Specs_.Azure.Core.Page.Samples
 {
     public partial class Samples_TwoModelsAsPageItem
     {
@@ -21,7 +21,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (BinaryData item in client.GetFirstItems(null))
             {
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (BinaryData item in client.GetFirstItemsAsync(null))
             {
@@ -47,7 +47,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Convenience()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (FirstItem item in client.GetFirstItems())
             {
@@ -58,7 +58,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Convenience_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (FirstItem item in client.GetFirstItemsAsync())
             {
@@ -69,7 +69,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetFirstItems_AllParameters()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (BinaryData item in client.GetFirstItems(null))
             {
@@ -82,7 +82,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (BinaryData item in client.GetFirstItemsAsync(null))
             {
@@ -95,7 +95,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Convenience()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (FirstItem item in client.GetFirstItems())
             {
@@ -106,7 +106,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Convenience_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (FirstItem item in client.GetFirstItemsAsync())
             {
@@ -117,7 +117,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (BinaryData item in client.GetSecondItems(null))
             {
@@ -130,7 +130,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (BinaryData item in client.GetSecondItemsAsync(null))
             {
@@ -143,7 +143,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Convenience()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (SecondItem item in client.GetSecondItems())
             {
@@ -154,7 +154,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Convenience_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (SecondItem item in client.GetSecondItemsAsync())
             {
@@ -165,7 +165,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetSecondItems_AllParameters()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (BinaryData item in client.GetSecondItems(null))
             {
@@ -178,7 +178,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (BinaryData item in client.GetSecondItemsAsync(null))
             {
@@ -191,7 +191,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Convenience()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             foreach (SecondItem item in client.GetSecondItems())
             {
@@ -202,7 +202,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Convenience_Async()
         {
-            TwoModelsAsPageItem client = new BasicClient().GetTwoModelsAsPageItemClient();
+            TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 
             await foreach (SecondItem item in client.GetSecondItemsAsync())
             {
