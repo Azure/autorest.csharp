@@ -162,33 +162,6 @@ namespace AutoRest.CSharp.Output.Models
                         example.Name));
                 }
             }
-
-            //foreach (var (exampleKey, operationExample) in Operation.MockExamples)
-            //{
-            //    if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
-            //        continue; // skip the short example when we decide not to generate it
-
-            //    // add protocol method sample
-            //    samples.Add(new(
-            //        _client,
-            //        _typeFactory,
-            //        method,
-            //        operationExample,
-            //        false,
-            //        exampleKey));
-
-            //    // add convenience method sample
-            //    if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(Public))
-            //    {
-            //        samples.Add(new(
-            //            _client,
-            //            _typeFactory,
-            //            method,
-            //            operationExample,
-            //            true,
-            //            exampleKey));
-            //    }
-            //}
         }
 
         private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)

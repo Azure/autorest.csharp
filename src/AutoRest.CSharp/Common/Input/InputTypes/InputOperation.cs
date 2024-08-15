@@ -119,9 +119,9 @@ internal record InputOperation
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 
     private IReadOnlyList<InputHttpOperationExample>? _examples;
-    public IReadOnlyList<InputHttpOperationExample> Examples => _examples ??= EnsureRealExamples();
+    public IReadOnlyList<InputHttpOperationExample> Examples => _examples ??= EnsureExamples();
 
-    private IReadOnlyList<InputHttpOperationExample> EnsureRealExamples()
+    private IReadOnlyList<InputHttpOperationExample> EnsureExamples()
     {
         // see if we need to generate the mock examples
         if (Configuration.ExamplesDirectory != null)
@@ -133,16 +133,7 @@ internal record InputOperation
         return ExampleMockValueBuilder.BuildOperationExamples(this);
     }
 
-    private readonly Dictionary<string, InputOperationExample> _mockExamples = new();
-    public IReadOnlyDictionary<string, InputOperationExample> MockExamples => _mockExamples.Any() ? _mockExamples : EnsureExamples(_mockExamples);
     public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
-
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
-    {
-        examples[ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false);
-        examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
-        return examples;
-    }
 
     public bool IsLongRunning => LongRunning != null;
     public string Name { get; internal set; }
