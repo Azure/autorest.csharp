@@ -11,6 +11,10 @@ $root = (Resolve-Path "$PSScriptRoot/../..").Path.Replace('\', '/')
 . "$root/eng/scripts/CommandInvocation-Helpers.ps1"
 Set-ConsoleEncoding
 
+if ($UseTypeSpecNext) {
+    Write-Host "##vso[build.addbuildtag]typespec_next"
+}
+
 Push-Location $root
 try {
     if (Test-Path "$root/node_modules") {

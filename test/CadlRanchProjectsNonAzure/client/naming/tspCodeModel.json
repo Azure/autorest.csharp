@@ -58,6 +58,7 @@
    "Name": "ClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -81,6 +82,7 @@
    "Name": "LanguageClientNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.LanguageClientNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
@@ -104,6 +106,7 @@
    "Name": "ClientNameAndJsonEncodedNameModel",
    "CrossLanguageDefinitionId": "Client.Naming.Property.ClientNameAndJsonEncodedNameModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "16",
@@ -127,6 +130,7 @@
    "Name": "ClientModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithClientClientName",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "19",
@@ -150,6 +154,7 @@
    "Name": "CSModel",
    "CrossLanguageDefinitionId": "Client.Naming.Model.ModelWithLanguageClientName",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
@@ -186,9 +191,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "27",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -611,9 +616,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "65",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -797,9 +802,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "83",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

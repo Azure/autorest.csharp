@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel",
    "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
@@ -18,6 +19,7 @@
     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel",
     "Usage": "Output,Json",
     "Description": "Used in internal operations, should be generated but not exported.",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "4",
@@ -48,6 +50,7 @@
       "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel",
       "Usage": "Output,Json",
       "Description": "Used in internal operations, should be generated but not exported.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "8",
@@ -83,6 +86,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel",
    "Usage": "Output,Json",
    "Description": "Used in internal operations, should be generated but not exported.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "11",
     "Name": "kind",
@@ -127,6 +131,7 @@
      "Usage": "Output,Json",
      "Description": "Used in internal operations, should be generated but not exported.",
      "DiscriminatorValue": "real",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "10"
      },
@@ -165,6 +170,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel",
    "Usage": "Output,Json",
    "Description": "Used by both public and internal operation. It should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "21",
@@ -189,6 +195,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "24",
@@ -214,6 +221,7 @@
    "Access": "internal",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation, should be generated but not exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "27",
@@ -239,6 +247,7 @@
    "Access": "public",
    "Usage": "Output,Json",
    "Description": "Used in an internal operation but with public decorator, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "30",
@@ -263,6 +272,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic",
    "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "33",
@@ -288,6 +298,7 @@
    "Access": "public",
    "Usage": "Output,Json",
    "Description": "Used in a public operation, should be generated and exported.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "36",
@@ -322,9 +333,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "41",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -364,9 +375,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "47",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -560,9 +571,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "67",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -833,9 +844,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "94",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1030,9 +1041,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "114",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

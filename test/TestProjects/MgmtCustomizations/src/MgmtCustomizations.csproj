@@ -6,7 +6,6 @@
     <PackageTags>MgmtCustomizations</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
     <ApiCompatVersion>1.0.0</ApiCompatVersion>
   </PropertyGroup>
 </Project>

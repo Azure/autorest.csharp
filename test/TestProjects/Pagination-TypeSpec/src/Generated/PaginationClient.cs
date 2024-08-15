@@ -6,12 +6,8 @@
 #nullable disable
 
 using System;
-using System.Threading;
-using Autorest.CSharp.Core;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Pagination.Models;
 
 namespace Pagination
 {
@@ -23,7 +19,6 @@ namespace Pagination
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -59,173 +54,56 @@ namespace Pagination
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="bodyInput"> Body parameter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)']/*" />
-        public virtual AsyncPageable<LedgerEntry> GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
+        /// <summary> Initializes a new instance of Pagination. </summary>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Pagination GetClient(string apiVersion = "2022-05-13")
         {
-            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            RequestContent content = bodyInput.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => LedgerEntry.DeserializeLedgerEntry(e), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
+            return new Pagination(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, apiVersion);
         }
-
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
-        /// <param name="bodyInput"> Body parameter. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
-        /// <remarks> A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned. </remarks>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)']/*" />
-        public virtual Pageable<LedgerEntry> GetPaginationLedgerEntries(ListLedgerEntryInputBody bodyInput, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNull(bodyInput, nameof(bodyInput));
-
-            RequestContent content = bodyInput.ToRequestContent();
-            RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => LedgerEntry.DeserializeLedgerEntry(e), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPaginationLedgerEntriesAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
-        }
-
-        /// <summary>
-        /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(RequestContent,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPaginationLedgerEntries(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationClient.GetPaginationLedgerEntries", "entries", "customNextLink", context);
-        }
-
-        private AdditionalParameter _cachedAdditionalParameter;
-        private UseFoundationsResourceList _cachedUseFoundationsResourceList;
-        private TwoTypesItem _cachedTwoTypesItem;
-        private Pools _cachedPools;
 
         /// <summary> Initializes a new instance of AdditionalParameter. </summary>
-        public virtual AdditionalParameter GetAdditionalParameterClient()
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual AdditionalParameter GetAdditionalParameterClient(string apiVersion = "2022-05-13")
         {
-            return Volatile.Read(ref _cachedAdditionalParameter) ?? Interlocked.CompareExchange(ref _cachedAdditionalParameter, new AdditionalParameter(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedAdditionalParameter;
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new AdditionalParameter(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of UseFoundationsResourceList. </summary>
-        public virtual UseFoundationsResourceList GetUseFoundationsResourceListClient()
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UseFoundationsResourceList GetUseFoundationsResourceListClient(string apiVersion = "2022-05-13")
         {
-            return Volatile.Read(ref _cachedUseFoundationsResourceList) ?? Interlocked.CompareExchange(ref _cachedUseFoundationsResourceList, new UseFoundationsResourceList(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedUseFoundationsResourceList;
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UseFoundationsResourceList(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of TwoTypesItem. </summary>
-        public virtual TwoTypesItem GetTwoTypesItemClient()
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual TwoTypesItem GetTwoTypesItemClient(string apiVersion = "2022-05-13")
         {
-            return Volatile.Read(ref _cachedTwoTypesItem) ?? Interlocked.CompareExchange(ref _cachedTwoTypesItem, new TwoTypesItem(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedTwoTypesItem;
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new TwoTypesItem(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, apiVersion);
         }
 
         /// <summary> Initializes a new instance of Pools. </summary>
-        public virtual Pools GetPoolsClient()
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Pools GetPoolsClient(string apiVersion = "2022-05-13")
         {
-            return Volatile.Read(ref _cachedPools) ?? Interlocked.CompareExchange(ref _cachedPools, new Pools(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPools;
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Pools(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, apiVersion);
         }
-
-        internal HttpMessage CreateGetPaginationLedgerEntriesRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/app/transactions", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateGetPaginationLedgerEntriesNextPageRequest(string nextLink, RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        private static RequestContext DefaultRequestContext = new RequestContext();
-        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
-        {
-            if (!cancellationToken.CanBeCanceled)
-            {
-                return DefaultRequestContext;
-            }
-
-            return new RequestContext() { CancellationToken = cancellationToken };
-        }
-
-        private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

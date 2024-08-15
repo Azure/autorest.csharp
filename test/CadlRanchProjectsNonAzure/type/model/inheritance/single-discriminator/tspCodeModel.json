@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Bird",
    "Usage": "Input,Output,Json",
    "Description": "This is base model for polymorphic single level inheritance with a discriminator.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "3",
     "Name": "kind",
@@ -55,6 +56,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "seagull",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -89,6 +91,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "sparrow",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -123,6 +126,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single level inheritance.",
      "DiscriminatorValue": "goose",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -157,6 +161,7 @@
      "Usage": "Input,Output,Json",
      "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
      "DiscriminatorValue": "eagle",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "2"
      },
@@ -253,6 +258,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.SingleDiscriminator.Dinosaur",
    "Usage": "Output,Json",
    "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
+   "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "31",
     "Name": "kind",
@@ -297,6 +303,7 @@
      "Usage": "Output,Json",
      "Description": "The second level legacy model in polymorphic single level inheritance.",
      "DiscriminatorValue": "t-rex",
+     "Decorators": [],
      "BaseModel": {
       "$ref": "30"
      },
@@ -347,9 +354,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "43",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

@@ -238,6 +238,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionEnumValueProperty",
    "Usage": "Input,Output,Json",
    "Description": "Template type for testing models with specific properties. Pass in the type of the property you are looking for",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "35",
@@ -264,6 +265,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionFloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a union of float literal as property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "38",
@@ -285,6 +287,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionIntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a union of int literal as property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "40",
@@ -306,6 +309,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnionStringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a union of string literal as property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
@@ -327,6 +331,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a boolean literal property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "44",
@@ -356,6 +361,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a float literal property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
@@ -382,6 +388,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a int literal property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "51",
@@ -408,6 +415,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringLiteralProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a string literal property.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "54",
@@ -434,6 +442,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownArrayProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is an array.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "57",
@@ -458,6 +467,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownDictProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a dictionnary.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "60",
@@ -482,6 +492,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownIntProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a int32.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "63",
@@ -506,6 +517,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.UnknownStringProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a property unknown, and the data is a string.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "66",
@@ -530,6 +542,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.NeverProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a property never. (This property should not be included).",
+   "Decorators": [],
    "Properties": []
   },
   {
@@ -539,6 +552,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DictionaryStringProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with dictionary string properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "70",
@@ -573,6 +587,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsModelProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection model properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "75",
@@ -590,6 +605,7 @@
        "CrossLanguageDefinitionId": "Type.Property.ValueTypes.InnerModel",
        "Usage": "Input,Output,Json",
        "Description": "Inner model. Will be a property type for ModelWithModelProperties",
+       "Decorators": [],
        "Properties": [
         {
          "$id": "78",
@@ -624,6 +640,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsIntProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection int properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "81",
@@ -654,6 +671,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.CollectionsStringProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with collection string properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "85",
@@ -684,6 +702,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ModelProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with model properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "89",
@@ -705,6 +724,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.ExtensibleEnumProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with extensible enum properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "91",
@@ -726,6 +746,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.EnumProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with enum properties",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "93",
@@ -747,6 +768,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DurationProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a duration property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "95",
@@ -778,6 +800,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DatetimeProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a datetime property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "99",
@@ -809,6 +832,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.Decimal128Property",
    "Usage": "Input,Output,Json",
    "Description": "Model with a decimal128 property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "103",
@@ -833,6 +857,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.DecimalProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a decimal property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "106",
@@ -857,6 +882,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.FloatProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a float property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "109",
@@ -881,6 +907,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.IntProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a int property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "112",
@@ -905,6 +932,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BytesProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a bytes property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "115",
@@ -930,6 +958,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.StringProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a string property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "118",
@@ -954,6 +983,7 @@
    "CrossLanguageDefinitionId": "Type.Property.ValueTypes.BooleanProperty",
    "Usage": "Input,Output,Json",
    "Description": "Model with a boolean property",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "121",
@@ -988,9 +1018,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "126",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -1031,9 +1061,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "132",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1207,9 +1237,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "149",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1383,9 +1413,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "166",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1559,9 +1589,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "183",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1735,9 +1765,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "200",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1911,9 +1941,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "217",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2087,9 +2117,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "234",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2263,9 +2293,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "251",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2439,9 +2469,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "268",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2615,9 +2645,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "285",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2791,9 +2821,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "302",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2967,9 +2997,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "319",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3143,9 +3173,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "336",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3319,9 +3349,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "353",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3495,9 +3525,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "370",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3671,9 +3701,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "387",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -3847,9 +3877,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "404",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4023,9 +4053,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "421",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4199,9 +4229,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "438",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4375,9 +4405,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "455",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4551,9 +4581,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "472",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4727,9 +4757,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "489",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -4903,9 +4933,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "506",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5079,9 +5109,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "523",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5255,9 +5285,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "540",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5431,9 +5461,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "557",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5607,9 +5637,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "574",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5783,9 +5813,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "591",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -5959,9 +5989,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "608",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

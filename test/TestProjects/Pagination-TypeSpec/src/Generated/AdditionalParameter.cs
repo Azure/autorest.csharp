@@ -192,7 +192,7 @@ namespace Pagination
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/app/test-runs/", false);
+            uri.AppendPath("/test-runs/", false);
             uri.AppendPath(testRunId, true);
             uri.AppendPath("/metric-dimensions/", false);
             uri.AppendPath(name, true);

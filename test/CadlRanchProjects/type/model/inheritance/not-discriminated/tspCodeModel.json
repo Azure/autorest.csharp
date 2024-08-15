@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
    "Usage": "Input,Output,Json",
    "Description": "The third level model in the normal multiple levels inheritance.",
+   "Decorators": [],
    "BaseModel": {
     "$id": "3",
     "Kind": "model",
@@ -18,6 +19,7 @@
     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
     "Usage": "Input,Output,Json",
     "Description": "The second level model in the normal multiple levels inheritance.",
+    "Decorators": [],
     "BaseModel": {
      "$id": "4",
      "Kind": "model",
@@ -25,6 +27,7 @@
      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
      "Usage": "Input,Output,Json",
      "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
+     "Decorators": [],
      "Properties": [
       {
        "$id": "5",
@@ -101,9 +104,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,

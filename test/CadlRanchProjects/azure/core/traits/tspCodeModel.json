@@ -66,6 +66,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "Usage": "Output,Json",
    "Description": "Sample Model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
@@ -104,6 +105,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "Usage": "Input,Json",
    "Description": "User action param",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
@@ -128,6 +130,7 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "Usage": "Output,Json",
    "Description": "User action response",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
@@ -165,9 +168,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
