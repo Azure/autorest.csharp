@@ -568,25 +568,6 @@
         "SerializedName": "code",
         "Description": "The error code.",
         "Type": {
-<<<<<<< HEAD
-         "$id": "66",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
-        },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
-       },
-       {
-        "$id": "67",
-        "Name": "message",
-        "SerializedName": "message",
-        "Description": "The error message.",
-        "Type": {
-=======
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
          "$id": "68",
          "Kind": "string",
          "Name": "string",
@@ -622,10 +603,12 @@
          "$id": "72",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "IsRequired": false,
-        "IsReadOnly": true
+        "IsReadOnly": true,
+        "Decorators": []
        },
        {
         "$id": "73",
@@ -1329,16 +1312,7 @@
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
      "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster",
-     "Decorators": [
-      {
-       "$id": "150",
-       "name": "Azure.ClientGenerator.Core.@clientName",
-       "arguments": {
-        "$id": "151",
-        "rename": "GetAllPrivateLinkResources"
-       }
-      }
-     ]
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1459,7 +1433,6 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "167",
-<<<<<<< HEAD
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1481,8 +1454,6 @@
        "Description": "The name of the Foo",
        "Type": {
         "$id": "169",
-=======
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1498,28 +1469,6 @@
        "Decorators": []
       },
       {
-<<<<<<< HEAD
-=======
-       "$id": "168",
-       "Name": "fooName",
-       "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
-       "Type": {
-        "$id": "169",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method"
-      },
-      {
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
        "$id": "170",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
@@ -1752,7 +1701,6 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "194",
-<<<<<<< HEAD
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1774,8 +1722,6 @@
        "Description": "The name of the Foo",
        "Type": {
         "$id": "196",
-=======
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1791,28 +1737,6 @@
        "Decorators": []
       },
       {
-<<<<<<< HEAD
-=======
-       "$id": "195",
-       "Name": "fooName",
-       "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
-       "Type": {
-        "$id": "196",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method"
-      },
-      {
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
        "$id": "197",
        "Name": "accept",
        "NameInRequest": "Accept",
@@ -1942,7 +1866,6 @@
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "210",
-<<<<<<< HEAD
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1964,8 +1887,6 @@
        "Description": "The name of the Foo",
        "Type": {
         "$id": "212",
-=======
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1981,28 +1902,6 @@
        "Decorators": []
       },
       {
-<<<<<<< HEAD
-=======
-       "$id": "211",
-       "Name": "fooName",
-       "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
-       "Type": {
-        "$id": "212",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method"
-      },
-      {
->>>>>>> 8768ade539b623dfebcdd2d9bd10c983f91600c4
        "$id": "213",
        "Name": "accept",
        "NameInRequest": "Accept",
