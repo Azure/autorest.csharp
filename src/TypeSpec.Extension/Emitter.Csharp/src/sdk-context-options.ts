@@ -5,6 +5,7 @@ import { CreateSdkContextOptions } from "@azure-tools/typespec-client-generator-
 
 export const azureSDKContextOptions: CreateSdkContextOptions = {
     versioning: {},
-    // TODO: replace with `@hasJsonConverter` when it is available
-    additionalDecorators: []
+    additionalDecorators: [
+        "Azure\\.ClientGenerator\\.Core\\.@useSystemTextJsonConverter"
+    ]
 };
