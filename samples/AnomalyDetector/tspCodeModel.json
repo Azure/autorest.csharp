@@ -419,8 +419,8 @@
   {
    "$id": "61",
    "Kind": "enum",
-   "Name": "APIVersion",
-   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
+   "Name": "Versions",
+   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
    "ValueType": {
     "$id": "62",
     "Kind": "string",
@@ -436,15 +436,15 @@
      "Decorators": []
     }
    ],
-   "IsExtensible": true,
-   "Usage": "Input",
+   "IsExtensible": false,
+   "Usage": "ApiVersionEnum",
    "Decorators": []
   },
   {
    "$id": "64",
    "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "AnomalyDetector.Versions",
+   "Name": "APIVersion",
+   "CrossLanguageDefinitionId": "AnomalyDetector.APIVersion",
    "ValueType": {
     "$id": "65",
     "Kind": "string",
@@ -460,8 +460,8 @@
      "Decorators": []
     }
    ],
-   "IsExtensible": false,
-   "Usage": "ApiVersionEnum",
+   "IsExtensible": true,
+   "Usage": "Input",
    "Decorators": []
   }
  ],
@@ -2572,7 +2572,7 @@
      "NameInRequest": "ApiVersion",
      "Description": "Api Version",
      "Type": {
-      "$ref": "61"
+      "$ref": "64"
      },
      "Location": "Uri",
      "IsApiVersion": true,
@@ -2636,7 +2636,7 @@
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
        "Type": {
-        "$ref": "61"
+        "$ref": "64"
        },
        "Location": "Uri",
        "IsApiVersion": true,
@@ -3043,7 +3043,7 @@
        "NameInRequest": "ApiVersion",
        "Description": "Api Version",
        "Type": {
-        "$ref": "61"
+        "$ref": "64"
        },
        "Location": "Uri",
        "IsApiVersion": true,

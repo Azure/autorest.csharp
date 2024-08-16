@@ -2504,7 +2504,7 @@
        "kind": "http",
        "name": "For test topAction",
        "description": "For test topAction",
-       "filePath": "C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/FirstTest-TypeSpec/examples/2022-05-15-preview/FirstTestTypeSpec_TopAction.json",
+       "filePath": "2022-05-15-preview/FirstTestTypeSpec_TopAction.json",
        "rawExample": {
         "$id": "302",
         "operationId": "TopAction",
