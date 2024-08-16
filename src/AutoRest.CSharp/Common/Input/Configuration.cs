@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string Flavor = "flavor";
             public const string GenerateSampleProject = "generate-sample-project";
             public const string GenerateTestProject = "generate-test-project";
-            public const string ExamplesDirectory = "examples-directory";
+            public const string ExamplesDirectory = "examples-dir";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             public const string UseModelReaderWriter = "use-model-reader-writer";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.

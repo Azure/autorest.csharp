@@ -11,5 +11,5 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
   ],
-  "examples-directory": "C:/Users/dapzhang/Documents/workspace/autorest.csharp/test/TestProjects/FirstTest-TypeSpec/examples"
+  "examples-dir": "examples"
 }
