@@ -3,14 +3,18 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace MgmtTypeSpec;
 
 @resource("foos")
 model Foo is TrackedResource<FooProperties> {
     ...ResourceNameParameter<Foo, SegmentName = "foos">;
+
+    ...ExtendedLocationProperty;
 }
 
+@useSystemTextJsonConverter("csharp")
 model FooProperties {
     /** the service url */
     serviceUrl?: url;

@@ -34,7 +34,7 @@ namespace Scm.Authentication.ApiKey
         }
 
         /// <summary> Initializes a new instance of ApiKeyClient. </summary>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>

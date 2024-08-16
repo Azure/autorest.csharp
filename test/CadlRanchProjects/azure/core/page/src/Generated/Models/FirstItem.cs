@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Core.Basic.Models
+namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> The body of the input. </summary>
-    public partial class ListItemInputBody
+    /// <summary> First item. </summary>
+    public partial class FirstItem
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,31 +45,21 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
-        /// <param name="inputName"> The name of the input. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="inputName"/> is null. </exception>
-        public ListItemInputBody(string inputName)
+        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
+        internal FirstItem()
         {
-            Argument.AssertNotNull(inputName, nameof(inputName));
-
-            InputName = inputName;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
-        /// <param name="inputName"> The name of the input. </param>
+        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
+        /// <param name="id"> The id of the item. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ListItemInputBody(string inputName, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FirstItem(int id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            InputName = inputName;
+            Id = id;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/> for deserialization. </summary>
-        internal ListItemInputBody()
-        {
-        }
-
-        /// <summary> The name of the input. </summary>
-        public string InputName { get; }
+        /// <summary> The id of the item. </summary>
+        public int Id { get; }
     }
 }

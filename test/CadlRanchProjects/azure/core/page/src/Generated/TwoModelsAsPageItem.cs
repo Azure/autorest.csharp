@@ -11,9 +11,9 @@ using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using _Specs_.Azure.Core.Basic.Models;
+using _Specs_.Azure.Core.Page.Models;
 
-namespace _Specs_.Azure.Core.Basic
+namespace _Specs_.Azure.Core.Page
 {
     // Data plane generated sub-client.
     /// <summary> The TwoModelsAsPageItem sub-client. </summary>
@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <summary> Initializes a new instance of TwoModelsAsPageItem. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal TwoModelsAsPageItem(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
@@ -202,7 +202,7 @@ namespace _Specs_.Azure.Core.Basic
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/first-item", false);
+            uri.AppendPath("/azure/core/page/first-item", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -216,7 +216,7 @@ namespace _Specs_.Azure.Core.Basic
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/core/basic/second-item", false);
+            uri.AppendPath("/azure/core/page/second-item", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

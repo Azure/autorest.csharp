@@ -17,23 +17,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 
-        public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
-        {
-            _cache.Clear();
-            var clientParameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in client.Parameters)
-            {
-                if (!useAllParameters && !parameter.IsRequired)
-                {
-                    continue;
-                }
-                var parameterExample = BuildParameterExample(parameter, useAllParameters);
-                clientParameterExamples.Add(parameterExample);
-            }
-
-            return new(client, clientParameterExamples);
-        }
-
         public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
         {
             _cache.Clear();

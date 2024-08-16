@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Basic.Models
+namespace _Specs_.Azure.Core.Page.Models
 {
     public partial class SecondItem : IUtf8JsonSerializable, IJsonModel<SecondItem>
     {

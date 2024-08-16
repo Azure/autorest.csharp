@@ -22,10 +22,12 @@
       "$id": "4",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
@@ -50,10 +52,12 @@
       "ValueType": {
        "$ref": "2"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "8",
@@ -69,11 +73,14 @@
        "$id": "10",
        "Kind": "url",
        "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url"
-      }
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "Decorators": []
+      },
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -97,9 +104,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -130,7 +137,8 @@
         "$id": "18",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -138,7 +146,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       },
       {
        "$id": "19",
@@ -151,9 +160,11 @@
          "$id": "21",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -161,7 +172,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -193,7 +205,8 @@
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Payload.Pageable.list"
+     "CrossLanguageDefinitionId": "Payload.Pageable.list",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -203,7 +216,8 @@
     {
      "$ref": "13"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

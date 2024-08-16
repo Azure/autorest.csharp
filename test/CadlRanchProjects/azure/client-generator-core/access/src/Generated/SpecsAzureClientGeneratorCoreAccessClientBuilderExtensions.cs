@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="AccessClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         public static IAzureClientBuilder<AccessClient, AccessClientOptions> AddAccessClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

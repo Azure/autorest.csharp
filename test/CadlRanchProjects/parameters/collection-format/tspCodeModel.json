@@ -20,9 +20,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "5",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -44,7 +44,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -62,9 +63,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -99,9 +100,11 @@
          "$id": "16",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -109,7 +112,8 @@
        "IsEndpoint": false,
        "Explode": true,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -130,7 +134,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.multi"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.multi",
+     "Decorators": []
     },
     {
      "$id": "18",
@@ -154,9 +159,11 @@
          "$id": "21",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -165,7 +172,8 @@
        "Explode": false,
        "ArraySerializationDelimiter": " ",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -186,7 +194,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.ssv"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.ssv",
+     "Decorators": []
     },
     {
      "$id": "23",
@@ -210,9 +219,11 @@
          "$id": "26",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -221,7 +232,8 @@
        "Explode": false,
        "ArraySerializationDelimiter": "\t",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -242,7 +254,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.tsv"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.tsv",
+     "Decorators": []
     },
     {
      "$id": "28",
@@ -266,9 +279,11 @@
          "$id": "31",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -277,7 +292,8 @@
        "Explode": false,
        "ArraySerializationDelimiter": "|",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -298,7 +314,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.pipes"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.pipes",
+     "Decorators": []
     },
     {
      "$id": "33",
@@ -322,9 +339,11 @@
          "$id": "36",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -333,7 +352,8 @@
        "Explode": false,
        "ArraySerializationDelimiter": ",",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -354,7 +374,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.csv"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Query.csv",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -365,7 +386,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "39",
@@ -383,9 +405,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "42",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -420,9 +442,11 @@
          "$id": "47",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -431,7 +455,8 @@
        "Explode": false,
        "ArraySerializationDelimiter": ",",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -452,7 +477,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Header.csv"
+     "CrossLanguageDefinitionId": "Parameters.CollectionFormat.Header.csv",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -463,7 +489,8 @@
     {
      "$ref": "41"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

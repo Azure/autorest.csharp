@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
         private readonly IEnumerable<InputParameter> _clientParameters;
-        private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
 
@@ -60,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models
             return GetTopLevelClient(client.ParentClient);
         }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -73,7 +72,6 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = clientOptions;
 
             _clientParameters = clientParameters;
-            _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
 
@@ -120,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, client?._clientParameterExamples));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

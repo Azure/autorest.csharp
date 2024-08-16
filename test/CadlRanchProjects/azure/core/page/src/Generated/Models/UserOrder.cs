@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Core.Basic.Models
+namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> First item. </summary>
-    public partial class FirstItem
+    /// <summary> UserOrder for testing list with expand. </summary>
+    public partial class UserOrder
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,21 +45,41 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
-        internal FirstItem()
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
+        /// <param name="userId"> The user's id. </param>
+        /// <param name="detail"> The user's order detail. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="detail"/> is null. </exception>
+        internal UserOrder(int userId, string detail)
         {
+            Argument.AssertNotNull(detail, nameof(detail));
+
+            UserId = userId;
+            Detail = detail;
         }
 
-        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
-        /// <param name="id"> The id of the item. </param>
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="userId"> The user's id. </param>
+        /// <param name="detail"> The user's order detail. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FirstItem(int id, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UserOrder(int id, int userId, string detail, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
+            UserId = userId;
+            Detail = detail;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The id of the item. </summary>
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/> for deserialization. </summary>
+        internal UserOrder()
+        {
+        }
+
+        /// <summary> The user's id. </summary>
         public int Id { get; }
+        /// <summary> The user's id. </summary>
+        public int UserId { get; }
+        /// <summary> The user's order detail. </summary>
+        public string Detail { get; }
     }
 }
