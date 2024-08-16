@@ -11,7 +11,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 namespace AutoRest.CSharp.Output.Samples.Models
 {
     /// <summary>
-    /// A <see cref="InputExampleParameterValue"/> represents a value for a parameter, which could either be a <see cref="InputTypeExample"/>, or a <see cref="FormattableString"/> as a literal
+    /// A <see cref="InputExampleParameterValue"/> represents a value for a parameter, which could either be a <see cref="InputExampleValue"/>, or a <see cref="FormattableString"/> as a literal
     /// </summary>
     internal record InputExampleParameterValue
     {
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public CSharpType Type { get; }
 
-        public InputTypeExample? Value { get; }
+        public InputExampleValue? Value { get; }
 
         public ValueExpression? Expression { get; }
 
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Type = type;
         }
 
-        public InputExampleParameterValue(Reference reference, InputTypeExample value) : this(reference.Name, reference.Type)
+        public InputExampleParameterValue(Reference reference, InputExampleValue value) : this(reference.Name, reference.Type)
         {
             Value = value;
         }
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Expression = expression;
         }
 
-        public InputExampleParameterValue(Parameter parameter, InputTypeExample value) : this(parameter.Name, parameter.Type)
+        public InputExampleParameterValue(Parameter parameter, InputExampleValue value) : this(parameter.Name, parameter.Type)
         {
             Value = value;
         }

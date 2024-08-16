@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public CSharpType Type { get; }
 
-        public InputTypeExample? Value { get; }
+        public InputExampleValue? Value { get; }
 
         public FormattableString? Expression { get; }
 
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             Type = type;
         }
 
-        public ExampleParameterValue(Reference reference, InputTypeExample value) : this(reference.Name, reference.Type)
+        public ExampleParameterValue(Reference reference, InputExampleValue value) : this(reference.Name, reference.Type)
         {
             Value = value;
         }
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             Expression = rawValue;
         }
 
-        public ExampleParameterValue(Parameter parameter, InputTypeExample value) : this(parameter.Name, parameter.Type)
+        public ExampleParameterValue(Parameter parameter, InputExampleValue value) : this(parameter.Name, parameter.Type)
         {
             Value = value;
         }

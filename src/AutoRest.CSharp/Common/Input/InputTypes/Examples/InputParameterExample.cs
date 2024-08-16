@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal record InputParameterExample(InputParameter Parameter, InputTypeExample ExampleValue);
+    internal record InputParameterExample(InputParameter Parameter, InputExampleValue ExampleValue);
 }

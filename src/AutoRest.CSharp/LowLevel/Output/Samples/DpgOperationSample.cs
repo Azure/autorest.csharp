@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return false;
         }
 
-        protected InputTypeExample? FindExampleValueBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
+        protected InputExampleValue? FindExampleValueBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
         {
             foreach (var parameterExample in parameterExamples)
             {
@@ -295,14 +295,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return null;
         }
 
-        public InputTypeExample GetEndpointValue(string parameterName)
+        public InputExampleValue GetEndpointValue(string parameterName)
         {
             var operationParameterValue = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
             if (operationParameterValue != null)
                 return operationParameterValue;
 
             // sometimes, especially in swagger projects, the parameter used as endpoint in our client, does not have the `IsEndpoint` flag, we have to fallback here so that we could at least have a value for it.
-            return InputTypeExample.Value(InputPrimitiveType.String, $"<{parameterName}>");
+            return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
         }
 
         private bool NeedsDispose(Parameter parameter)
@@ -333,11 +333,11 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return true;
         }
 
-        private InputTypeExample GetBodyParameterValue()
+        private InputExampleValue GetBodyParameterValue()
         {
             // we have a request body type
             if (_method.RequestBodyType == null)
-                return InputTypeExample.Null(InputPrimitiveType.Any);
+                return InputExampleValue.Null(InputPrimitiveType.Any);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");
@@ -357,7 +357,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return bodyParameterExample.ExampleValue;
             }
 
-            return InputTypeExample.Null(_method.RequestBodyType);
+            return InputExampleValue.Null(_method.RequestBodyType);
         }
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)

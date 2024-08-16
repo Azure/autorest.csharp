@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal sealed class TypeSpecInputTypeExampleConverter : JsonConverter<InputTypeExample>
+    internal sealed class TypeSpecInputTypeExampleConverter : JsonConverter<InputExampleValue>
     {
         private const string KindPropertyName = "kind";
 
@@ -19,19 +19,19 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _referenceHandler = referenceHandler;
         }
 
-        public override InputTypeExample? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override InputExampleValue? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return reader.ReadReferenceAndResolve<InputTypeExample>(_referenceHandler.CurrentResolver) ?? CreateObject(ref reader, options);
+            return reader.ReadReferenceAndResolve<InputExampleValue>(_referenceHandler.CurrentResolver) ?? CreateObject(ref reader, options);
         }
 
-        public override void Write(Utf8JsonWriter writer, InputTypeExample value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, InputExampleValue value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private InputTypeExample CreateObject(ref Utf8JsonReader reader, JsonSerializerOptions options)
+        private InputExampleValue CreateObject(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             string? id = null;
             string? kind = null;
-            InputTypeExample? result = null;
+            InputExampleValue? result = null;
             var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string ArrayKind = "array";
         private const string DictionaryKind = "dict";
 
-        private InputTypeExample CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
+        private InputExampleValue CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
         {
             null => throw new JsonException($"InputTypeExample (id: '{id}') must have a 'kind' property"),
             ArrayKind => CreateArrayExample(ref reader, id, options, _referenceHandler.CurrentResolver),
@@ -60,11 +60,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _ => CreateOtherExample(ref reader, id, options, _referenceHandler.CurrentResolver),
         };
 
-        private InputTypeExample CreateArrayExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateArrayExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
         {
             bool isFirstProperty = id == null;
             InputType? type = null;
-            IReadOnlyList<InputTypeExample>? value = null;
+            IReadOnlyList<InputExampleValue>? value = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -87,11 +87,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
             return result;
         }
 
-        private InputTypeExample CreateObjectExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateObjectExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
         {
             bool isFirstProperty = id == null;
             InputType? type = null;
-            IReadOnlyDictionary<string, InputTypeExample>? value = null;
+            IReadOnlyDictionary<string, InputExampleValue>? value = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             return result;
         }
 
-        private InputTypeExample CreateOtherExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
+        private InputExampleValue CreateOtherExample(ref Utf8JsonReader reader, string? id, JsonSerializerOptions options, ReferenceResolver referenceResolver)
         {
             bool isFirstProperty = id == null;
             InputType? type = null;

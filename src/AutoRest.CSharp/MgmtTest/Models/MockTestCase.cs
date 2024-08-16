@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 // if this parameter is a body parameter, we might have changed it to required, and we cannot tell if we have changed it on the codemodel right now. In this case we just fake an empty body.
                 if (parameter.DefaultValue == null && parameter.RequestLocation == RequestLocation.Body)
                 {
-                    exampleParameter ??= new(new InputParameter(), new InputExampleObjectValue(InputPrimitiveType.Boolean, new Dictionary<string, InputTypeExample>()));
+                    exampleParameter ??= new(new InputParameter(), new InputExampleObjectValue(InputPrimitiveType.Boolean, new Dictionary<string, InputExampleValue>()));
                 }
                 if (exampleParameter == null)
                 {
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         public bool IsPageable => Operation.IsPagingOperation;
 
-        protected override InputTypeExample ReplacePathParameterValue(string serializedName, CSharpType type, InputTypeExample value)
+        protected override InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
         {
             if (serializedName == "subscriptionId")
             {

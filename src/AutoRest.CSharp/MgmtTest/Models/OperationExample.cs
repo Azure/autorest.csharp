@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return new ExampleParameterValue(reference, exampleValue);
         }
 
-        protected virtual InputTypeExample ReplacePathParameterValue(string serializedName, CSharpType type, InputTypeExample value)
+        protected virtual InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
             => value;
 
         private Dictionary<string, string> EnsureParameterSerializedNames()

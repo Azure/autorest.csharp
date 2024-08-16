@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         {
             string? id = null;
             InputParameter? parameter = null;
-            InputTypeExample? value = null;
+            InputExampleValue? value = null;
             var isFirstProperty = true;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
