@@ -740,7 +740,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var xml = isReference ? null : BuildXmlSerialization();
             var bicep = isReference ? null : BuildBicepSerialization(json);
             var multipart = isReference ? null : BuildMultipartSerialization();
-            return new ObjectTypeSerialization(this, json, xml, bicep, multipart, isReference);
+            // select interface model type here
+            var modelType = IsUnknownDerivedType && Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : Type;
+            var interfaces = isReference ? null : new SerializationInterfaces(IncludeSerializer, IsStruct, modelType, json is not null, xml is not null);
+            return new ObjectTypeSerialization(this, json, xml, bicep, multipart, interfaces);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)

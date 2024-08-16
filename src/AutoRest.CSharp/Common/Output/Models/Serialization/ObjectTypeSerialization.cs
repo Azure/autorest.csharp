@@ -15,18 +15,14 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal class ObjectTypeSerialization
     {
-        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart, bool isReference = false)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart, SerializationInterfaces? interfaces)
         {
             Json = json;
             Xml = xml;
             Bicep = bicep;
             Multipart = multipart;
-
             WireFormat = Xml != null ? Serializations.XmlFormat : Multipart != null ? Serializations.MultipartFormat : Serializations.JsonFormat;
-
-            // select interface model type here
-            var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
-            Interfaces = isReference ? null : new SerializationInterfaces(model.IncludeSerializer, model.IsStruct, modelType, json is not null, xml is not null);
+            Interfaces = interfaces;
 
             if (Configuration.UseModelReaderWriter && model.Declaration.IsAbstract && model.Discriminator is { } discriminator)
             {
