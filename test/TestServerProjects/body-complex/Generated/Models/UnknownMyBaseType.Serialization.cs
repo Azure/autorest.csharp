@@ -36,21 +36,6 @@ namespace body_complex.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToString());
-            if (Optional.IsDefined(PropB1))
-            {
-                writer.WritePropertyName("propB1"u8);
-                writer.WriteStringValue(PropB1);
-            }
-            writer.WritePropertyName("helper"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PropBH1))
-            {
-                writer.WritePropertyName("propBH1"u8);
-                writer.WriteStringValue(PropBH1);
-            }
-            writer.WriteEndObject();
         }
 
         MyBaseType IJsonModel<MyBaseType>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

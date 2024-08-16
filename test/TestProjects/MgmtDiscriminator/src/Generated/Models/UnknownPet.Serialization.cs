@@ -37,18 +37,6 @@ namespace MgmtDiscriminator.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(PetType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(PetType);
-            }
         }
 
         Pet IJsonModel<Pet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

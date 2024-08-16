@@ -62,11 +62,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WritePropertyName("exactVersion"u8);
                 writer.WriteStringValue(ExactVersion);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
         }
 
         ImageReference IJsonModel<ImageReference>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

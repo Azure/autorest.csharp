@@ -37,13 +37,6 @@ namespace MgmtDiscriminator.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W" && Optional.IsDefined(Foo))
-            {
-                writer.WritePropertyName("foo"u8);
-                writer.WriteStringValue(Foo);
-            }
         }
 
         DeliveryRuleCondition IJsonModel<DeliveryRuleCondition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -41,18 +41,6 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("friendly"u8);
                 writer.WriteBooleanValue(Friendly.Value);
             }
-            writer.WritePropertyName("id"u8);
-            writer.WriteNumberValue(Id);
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status"u8);
-                writer.WriteBooleanValue(Status.Value);
-            }
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

@@ -53,11 +53,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
         }
 
         VirtualMachineImageResource IJsonModel<VirtualMachineImageResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

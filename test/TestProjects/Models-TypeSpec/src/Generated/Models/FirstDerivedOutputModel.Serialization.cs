@@ -38,8 +38,6 @@ namespace ModelsTypeSpec.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("first"u8);
             writer.WriteBooleanValue(First);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
         }
 
         FirstDerivedOutputModel IJsonModel<FirstDerivedOutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

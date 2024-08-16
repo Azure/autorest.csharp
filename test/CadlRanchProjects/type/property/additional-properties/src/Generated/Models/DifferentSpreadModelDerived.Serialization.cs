@@ -38,8 +38,6 @@ namespace _Type.Property.AdditionalProperties.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteObjectValue(DerivedProp, options);
-            writer.WritePropertyName("knownProp"u8);
-            writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

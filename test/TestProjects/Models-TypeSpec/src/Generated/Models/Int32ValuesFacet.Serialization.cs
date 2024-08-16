@@ -38,17 +38,6 @@ namespace ModelsTypeSpec.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
-            writer.WritePropertyName("values"u8);
-            writer.WriteStartArray();
-            foreach (var item in Values)
-            {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("value"u8);
-            writer.WriteNumberValue(Value);
-            writer.WritePropertyName("field"u8);
-            writer.WriteStringValue(Field);
         }
 
         Int32ValuesFacet IJsonModel<Int32ValuesFacet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -47,18 +47,6 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("dogKind"u8);
                 writer.WriteStringValue(DogKind.Value.ToSerialString());
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(PetType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(PetType);
-            }
         }
 
         Dog IJsonModel<Dog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

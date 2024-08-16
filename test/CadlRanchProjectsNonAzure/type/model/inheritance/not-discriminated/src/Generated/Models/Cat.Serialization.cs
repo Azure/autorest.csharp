@@ -32,8 +32,6 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         Cat IJsonModel<Cat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

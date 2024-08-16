@@ -36,15 +36,6 @@ namespace ModelsTypeSpec.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("discriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
-            if (Optional.IsDefined(OptionalPropertyOnBase))
-            {
-                writer.WritePropertyName("optionalPropertyOnBase"u8);
-                writer.WriteStringValue(OptionalPropertyOnBase);
-            }
-            writer.WritePropertyName("requiredPropertyOnBase"u8);
-            writer.WriteNumberValue(RequiredPropertyOnBase);
         }
 
         BaseModelWithDiscriminator IJsonModel<BaseModelWithDiscriminator>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -48,11 +48,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WritePropertyName("diskEncryptionSet"u8);
                 JsonSerializer.Serialize(writer, DiskEncryptionSet);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
         }
 
         ManagedDiskParameters IJsonModel<ManagedDiskParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

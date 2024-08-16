@@ -36,13 +36,6 @@ namespace model_flattening.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("base_product_id"u8);
-            writer.WriteStringValue(ProductId);
-            if (Optional.IsDefined(Description))
-            {
-                writer.WritePropertyName("base_product_description"u8);
-                writer.WriteStringValue(Description);
-            }
             writer.WritePropertyName("details"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxProductDisplayName))

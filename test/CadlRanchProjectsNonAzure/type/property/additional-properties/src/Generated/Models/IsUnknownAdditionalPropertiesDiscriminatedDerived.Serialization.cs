@@ -37,10 +37,6 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
             }
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

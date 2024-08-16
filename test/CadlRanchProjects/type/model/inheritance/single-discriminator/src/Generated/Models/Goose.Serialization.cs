@@ -36,10 +36,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            writer.WritePropertyName("wingspan"u8);
-            writer.WriteNumberValue(Wingspan);
         }
 
         Goose IJsonModel<Goose>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

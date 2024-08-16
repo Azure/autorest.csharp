@@ -36,8 +36,6 @@ namespace ModelsTypeSpec.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
         }
 
         OutputBaseModelWithDiscriminator IJsonModel<OutputBaseModelWithDiscriminator>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

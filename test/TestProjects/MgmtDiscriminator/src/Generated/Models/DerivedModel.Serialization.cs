@@ -45,11 +45,6 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalString))
-            {
-                writer.WritePropertyName("optionalString"u8);
-                writer.WriteStringValue(OptionalString);
-            }
         }
 
         DerivedModel IJsonModel<DerivedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

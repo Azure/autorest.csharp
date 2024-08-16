@@ -38,16 +38,6 @@ namespace _Type.Model.Inheritance.Recursive.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("level"u8);
             writer.WriteNumberValue(Level);
-            if (Optional.IsCollectionDefined(Extension))
-            {
-                writer.WritePropertyName("extension"u8);
-                writer.WriteStartArray();
-                foreach (var item in Extension)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
         }
 
         Extension IJsonModel<Extension>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

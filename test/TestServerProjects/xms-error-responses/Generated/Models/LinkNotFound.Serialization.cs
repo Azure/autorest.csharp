@@ -41,18 +41,6 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("whatSubAddress"u8);
                 writer.WriteStringValue(WhatSubAddress);
             }
-            if (Optional.IsDefined(Reason))
-            {
-                writer.WritePropertyName("reason"u8);
-                writer.WriteStringValue(Reason);
-            }
-            writer.WritePropertyName("whatNotFound"u8);
-            writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
-            {
-                writer.WritePropertyName("someBaseProp"u8);
-                writer.WriteStringValue(SomeBaseProp);
-            }
         }
 
         LinkNotFound IJsonModel<LinkNotFound>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -45,8 +45,6 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Value);
-            writer.WritePropertyName("field"u8);
-            writer.WriteStringValue(Field);
         }
 
         NumericValuesFacet IJsonModel<NumericValuesFacet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

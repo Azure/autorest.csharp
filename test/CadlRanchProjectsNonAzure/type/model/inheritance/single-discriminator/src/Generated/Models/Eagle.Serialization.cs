@@ -56,10 +56,6 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
                 writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner, options);
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            writer.WritePropertyName("wingspan"u8);
-            writer.WriteNumberValue(Wingspan);
         }
 
         Eagle IJsonModel<Eagle>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

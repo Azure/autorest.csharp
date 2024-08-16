@@ -43,11 +43,6 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("errorMessage"u8);
                 writer.WriteStringValue(ErrorMessage);
             }
-            if (Optional.IsDefined(ActionResponse))
-            {
-                writer.WritePropertyName("actionResponse"u8);
-                writer.WriteStringValue(ActionResponse);
-            }
         }
 
         PetActionError IJsonModel<PetActionError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

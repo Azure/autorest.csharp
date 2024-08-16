@@ -32,10 +32,6 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("smart"u8);
             writer.WriteBooleanValue(Smart);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         Siamese IJsonModel<Siamese>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

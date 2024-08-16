@@ -40,41 +40,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
-            if (Optional.IsDefined(Snapshot))
-            {
-                writer.WritePropertyName("snapshot"u8);
-                JsonSerializer.Serialize(writer, Snapshot);
-            }
-            if (Optional.IsDefined(ManagedDisk))
-            {
-                writer.WritePropertyName("managedDisk"u8);
-                JsonSerializer.Serialize(writer, ManagedDisk);
-            }
-            if (Optional.IsDefined(BlobUri))
-            {
-                writer.WritePropertyName("blobUri"u8);
-                writer.WriteStringValue(BlobUri.AbsoluteUri);
-            }
-            if (Optional.IsDefined(Caching))
-            {
-                writer.WritePropertyName("caching"u8);
-                writer.WriteStringValue(Caching.Value.ToSerialString());
-            }
-            if (Optional.IsDefined(DiskSizeGB))
-            {
-                writer.WritePropertyName("diskSizeGB"u8);
-                writer.WriteNumberValue(DiskSizeGB.Value);
-            }
-            if (Optional.IsDefined(StorageAccountType))
-            {
-                writer.WritePropertyName("storageAccountType"u8);
-                writer.WriteStringValue(StorageAccountType.Value.ToString());
-            }
-            if (Optional.IsDefined(DiskEncryptionSet))
-            {
-                writer.WritePropertyName("diskEncryptionSet"u8);
-                JsonSerializer.Serialize(writer, DiskEncryptionSet);
-            }
         }
 
         ImageDataDisk IJsonModel<ImageDataDisk>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -41,13 +41,6 @@ namespace ModelReaderWriterValidationTypeSpec.Models
                 writer.WritePropertyName("yProperty"u8);
                 writer.WriteStringValue(YProperty);
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
         }
 
         ModelY IJsonModel<ModelY>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

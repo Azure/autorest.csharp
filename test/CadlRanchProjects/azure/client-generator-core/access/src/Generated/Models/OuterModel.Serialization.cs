@@ -38,8 +38,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("inner"u8);
             writer.WriteObjectValue(Inner, options);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         OuterModel IJsonModel<OuterModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

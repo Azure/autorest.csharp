@@ -52,13 +52,6 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
-            writer.WritePropertyName("requiredIntOnBase"u8);
-            WriteRequiredIntOnBaseValue(writer, options);
-            if (Optional.IsDefined(OptionalInt))
-            {
-                writer.WritePropertyName("optionalInt"u8);
-                writer.WriteNumberValue(OptionalInt.Value);
-            }
         }
 
         ModelToAddAdditionalSerializableProperty IJsonModel<ModelToAddAdditionalSerializableProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

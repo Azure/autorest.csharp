@@ -41,11 +41,6 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(AniType))
-            {
-                writer.WritePropertyName("aniType"u8);
-                writer.WriteStringValue(AniType);
-            }
         }
 
         Pet IJsonModel<Pet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

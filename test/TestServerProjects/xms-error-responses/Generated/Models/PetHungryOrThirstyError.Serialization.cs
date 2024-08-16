@@ -41,23 +41,6 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("hungryOrThirsty"u8);
                 writer.WriteStringValue(HungryOrThirsty);
             }
-            if (Optional.IsDefined(Reason))
-            {
-                writer.WritePropertyName("reason"u8);
-                writer.WriteStringValue(Reason);
-            }
-            writer.WritePropertyName("errorType"u8);
-            writer.WriteStringValue(ErrorType);
-            if (Optional.IsDefined(ErrorMessage))
-            {
-                writer.WritePropertyName("errorMessage"u8);
-                writer.WriteStringValue(ErrorMessage);
-            }
-            if (Optional.IsDefined(ActionResponse))
-            {
-                writer.WritePropertyName("actionResponse"u8);
-                writer.WriteStringValue(ActionResponse);
-            }
         }
 
         PetHungryOrThirstyError IJsonModel<PetHungryOrThirstyError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

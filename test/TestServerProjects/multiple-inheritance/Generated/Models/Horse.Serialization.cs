@@ -41,8 +41,6 @@ namespace multiple_inheritance.Models
                 writer.WritePropertyName("isAShowHorse"u8);
                 writer.WriteBooleanValue(IsAShowHorse.Value);
             }
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         Horse IJsonModel<Horse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

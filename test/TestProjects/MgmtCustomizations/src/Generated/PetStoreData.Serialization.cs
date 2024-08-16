@@ -42,26 +42,6 @@ namespace MgmtCustomizations
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties, options);
             }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                WriteId(writer, options);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
         }
 
         PetStoreData IJsonModel<PetStoreData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

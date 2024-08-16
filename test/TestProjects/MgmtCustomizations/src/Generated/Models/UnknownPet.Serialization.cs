@@ -35,39 +35,6 @@ namespace MgmtCustomizations.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            writer.WritePropertyName("size"u8);
-            SerializeSizeProperty(writer, options);
-            if (Optional.IsDefined(DateOfBirth))
-            {
-                writer.WritePropertyName("dateOfBirth"u8);
-                SerializeDateOfBirthProperty(writer, options);
-            }
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Color))
-            {
-                writer.WritePropertyName("color"u8);
-                SerializeColorProperty(writer, options);
-            }
-            writer.WriteEndObject();
         }
 
         Pet IJsonModel<Pet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

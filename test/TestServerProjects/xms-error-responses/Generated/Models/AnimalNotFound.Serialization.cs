@@ -41,18 +41,6 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Reason))
-            {
-                writer.WritePropertyName("reason"u8);
-                writer.WriteStringValue(Reason);
-            }
-            writer.WritePropertyName("whatNotFound"u8);
-            writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
-            {
-                writer.WritePropertyName("someBaseProp"u8);
-                writer.WriteStringValue(SomeBaseProp);
-            }
         }
 
         AnimalNotFound IJsonModel<AnimalNotFound>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

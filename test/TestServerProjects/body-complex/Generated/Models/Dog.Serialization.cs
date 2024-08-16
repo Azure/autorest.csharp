@@ -41,16 +41,6 @@ namespace body_complex.Models
                 writer.WritePropertyName("food"u8);
                 writer.WriteStringValue(Food);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteNumberValue(Id.Value);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
         }
 
         Dog IJsonModel<Dog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -43,8 +43,6 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("baseModelProp"u8);
-            writer.WriteStringValue(BaseModelProp);
         }
 
         RoundTripOnNoUse IJsonModel<RoundTripOnNoUse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

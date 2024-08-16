@@ -41,11 +41,6 @@ namespace httpInfrastructure.Models
                 writer.WritePropertyName("textStatusCode"u8);
                 writer.WriteStringValue(TextStatusCode);
             }
-            if (Optional.IsDefined(StatusCode))
-            {
-                writer.WritePropertyName("statusCode"u8);
-                writer.WriteStringValue(StatusCode);
-            }
         }
 
         B IJsonModel<B>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

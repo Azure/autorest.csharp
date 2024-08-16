@@ -35,17 +35,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            if (Optional.IsCollectionDefined(Tags))
-            {
-                writer.WritePropertyName("tags"u8);
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
-            }
         }
 
         ProximityPlacementGroupPatch IJsonModel<ProximityPlacementGroupPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

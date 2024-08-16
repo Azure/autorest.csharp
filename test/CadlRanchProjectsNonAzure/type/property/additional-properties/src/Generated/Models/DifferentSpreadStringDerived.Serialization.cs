@@ -32,8 +32,6 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("derivedProp"u8);
             writer.WriteStringValue(DerivedProp);
-            writer.WritePropertyName("id"u8);
-            writer.WriteNumberValue(Id);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

@@ -41,31 +41,6 @@ namespace body_complex.Models
                 writer.WritePropertyName("breed"u8);
                 writer.WriteStringValue(Breed);
             }
-            if (Optional.IsDefined(Color))
-            {
-                writer.WritePropertyName("color"u8);
-                writer.WriteStringValue(Color);
-            }
-            if (Optional.IsCollectionDefined(Hates))
-            {
-                writer.WritePropertyName("hates"u8);
-                writer.WriteStartArray();
-                foreach (var item in Hates)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteNumberValue(Id.Value);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
         }
 
         Siamese IJsonModel<Siamese>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

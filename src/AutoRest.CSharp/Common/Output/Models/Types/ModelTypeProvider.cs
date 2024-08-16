@@ -554,8 +554,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
             var properties = SerializationBuilder.GetPropertySerializations(this, _typeFactory);
+            var selfProperties = SerializationBuilder.GetPropertySerializations(this, _typeFactory, true);
             var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization();
-            return new(this, SerializationConstructor.Signature.Parameters, properties, additionalProperties, rawDataField, Discriminator, JsonConverter);
+            return new(this, SerializationConstructor.Signature.Parameters, properties, selfProperties, additionalProperties, rawDataField, Discriminator, JsonConverter);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json) => null;

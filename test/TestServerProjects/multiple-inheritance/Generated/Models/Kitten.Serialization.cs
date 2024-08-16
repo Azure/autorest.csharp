@@ -41,23 +41,6 @@ namespace multiple_inheritance.Models
                 writer.WritePropertyName("eatsMiceYet"u8);
                 writer.WriteBooleanValue(EatsMiceYet.Value);
             }
-            if (Optional.IsDefined(LikesMilk))
-            {
-                writer.WritePropertyName("likesMilk"u8);
-                writer.WriteBooleanValue(LikesMilk.Value);
-            }
-            if (Optional.IsDefined(Meows))
-            {
-                writer.WritePropertyName("meows"u8);
-                writer.WriteBooleanValue(Meows.Value);
-            }
-            if (Optional.IsDefined(Hisses))
-            {
-                writer.WritePropertyName("hisses"u8);
-                writer.WriteBooleanValue(Hisses.Value);
-            }
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         Kitten IJsonModel<Kitten>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

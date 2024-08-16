@@ -36,8 +36,6 @@ namespace TypeSchemaMapping.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("DiscriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
         }
 
         AbstractModel IJsonModel<AbstractModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

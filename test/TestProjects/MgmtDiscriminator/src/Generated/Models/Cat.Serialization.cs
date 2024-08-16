@@ -42,18 +42,6 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("meow"u8);
                 writer.WriteStringValue(Meow);
             }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
-            if (options.Format != "W" && Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(PetType))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(PetType);
-            }
         }
 
         Cat IJsonModel<Cat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -36,13 +36,6 @@ namespace ModelsTypeSpec.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("requiredList"u8);
-            writer.WriteStartArray();
-            foreach (var item in RequiredList)
-            {
-                writer.WriteObjectValue(item, options);
-            }
-            writer.WriteEndArray();
         }
 
         RecordItem IJsonModel<RecordItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

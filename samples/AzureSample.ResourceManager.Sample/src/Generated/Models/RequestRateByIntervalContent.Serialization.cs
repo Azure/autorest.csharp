@@ -37,27 +37,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("intervalLength"u8);
             writer.WriteStringValue(IntervalLength.ToSerialString());
-            writer.WritePropertyName("blobContainerSasUri"u8);
-            writer.WriteStringValue(BlobContainerSasUri.AbsoluteUri);
-            writer.WritePropertyName("fromTime"u8);
-            writer.WriteStringValue(FromTime, "O");
-            writer.WritePropertyName("toTime"u8);
-            writer.WriteStringValue(ToTime, "O");
-            if (Optional.IsDefined(GroupByThrottlePolicy))
-            {
-                writer.WritePropertyName("groupByThrottlePolicy"u8);
-                writer.WriteBooleanValue(GroupByThrottlePolicy.Value);
-            }
-            if (Optional.IsDefined(GroupByOperationName))
-            {
-                writer.WritePropertyName("groupByOperationName"u8);
-                writer.WriteBooleanValue(GroupByOperationName.Value);
-            }
-            if (Optional.IsDefined(GroupByResourceName))
-            {
-                writer.WritePropertyName("groupByResourceName"u8);
-                writer.WriteBooleanValue(GroupByResourceName.Value);
-            }
         }
 
         RequestRateByIntervalContent IJsonModel<RequestRateByIntervalContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

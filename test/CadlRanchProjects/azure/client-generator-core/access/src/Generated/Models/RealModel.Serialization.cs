@@ -36,10 +36,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         RealModel IJsonModel<RealModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

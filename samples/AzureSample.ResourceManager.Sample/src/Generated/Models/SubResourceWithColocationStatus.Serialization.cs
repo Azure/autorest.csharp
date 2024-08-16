@@ -42,11 +42,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WritePropertyName("colocationStatus"u8);
                 writer.WriteObjectValue(ColocationStatus, options);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
         }
 
         SubResourceWithColocationStatus IJsonModel<SubResourceWithColocationStatus>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

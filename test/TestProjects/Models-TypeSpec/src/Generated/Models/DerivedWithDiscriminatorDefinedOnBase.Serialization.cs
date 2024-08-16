@@ -43,13 +43,6 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            if (Optional.IsDefined(OptionalString))
-            {
-                writer.WritePropertyName("optionalString"u8);
-                writer.WriteStringValue(OptionalString);
-            }
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
         }
 
         DerivedWithDiscriminatorDefinedOnBase IJsonModel<DerivedWithDiscriminatorDefinedOnBase>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

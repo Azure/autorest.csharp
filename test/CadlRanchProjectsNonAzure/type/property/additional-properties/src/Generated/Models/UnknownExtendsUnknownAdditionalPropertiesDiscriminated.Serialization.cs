@@ -30,10 +30,6 @@ namespace Scm._Type.Property.AdditionalProperties.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);

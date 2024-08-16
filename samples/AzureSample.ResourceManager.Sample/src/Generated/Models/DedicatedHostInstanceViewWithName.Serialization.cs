@@ -43,26 +43,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W" && Optional.IsDefined(AssetId))
-            {
-                writer.WritePropertyName("assetId"u8);
-                writer.WriteStringValue(AssetId);
-            }
-            if (Optional.IsDefined(AvailableCapacity))
-            {
-                writer.WritePropertyName("availableCapacity"u8);
-                writer.WriteObjectValue(AvailableCapacity, options);
-            }
-            if (Optional.IsCollectionDefined(Statuses))
-            {
-                writer.WritePropertyName("statuses"u8);
-                writer.WriteStartArray();
-                foreach (var item in Statuses)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
-            }
         }
 
         DedicatedHostInstanceViewWithName IJsonModel<DedicatedHostInstanceViewWithName>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

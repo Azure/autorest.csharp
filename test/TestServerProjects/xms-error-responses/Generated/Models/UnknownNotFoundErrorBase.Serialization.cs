@@ -36,18 +36,6 @@ namespace xms_error_responses.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            if (Optional.IsDefined(Reason))
-            {
-                writer.WritePropertyName("reason"u8);
-                writer.WriteStringValue(Reason);
-            }
-            writer.WritePropertyName("whatNotFound"u8);
-            writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
-            {
-                writer.WritePropertyName("someBaseProp"u8);
-                writer.WriteStringValue(SomeBaseProp);
-            }
         }
 
         NotFoundErrorBase IJsonModel<NotFoundErrorBase>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

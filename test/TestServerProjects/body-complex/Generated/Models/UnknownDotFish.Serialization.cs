@@ -36,13 +36,6 @@ namespace body_complex.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("fish.type"u8);
-            writer.WriteStringValue(FishType);
-            if (Optional.IsDefined(Species))
-            {
-                writer.WritePropertyName("species"u8);
-                writer.WriteStringValue(Species);
-            }
         }
 
         DotFish IJsonModel<DotFish>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

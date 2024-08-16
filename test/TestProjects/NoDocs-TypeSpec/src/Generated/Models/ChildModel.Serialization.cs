@@ -41,8 +41,6 @@ namespace NoDocsTypeSpec.Models
                 writer.WriteObjectValue(item, options);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("level"u8);
-            writer.WriteNumberValue(Level);
         }
 
         ChildModel IJsonModel<ChildModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

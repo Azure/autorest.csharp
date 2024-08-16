@@ -38,8 +38,6 @@ namespace ModelsTypeSpec.Models
             base.JsonModelWriteCore(writer, options);
             writer.WritePropertyName("second"u8);
             writer.WriteBooleanValue(Second);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
         }
 
         SecondDerivedOutputModel IJsonModel<SecondDerivedOutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

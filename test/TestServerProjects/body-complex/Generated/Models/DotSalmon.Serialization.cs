@@ -46,13 +46,6 @@ namespace body_complex.Models
                 writer.WritePropertyName("iswild"u8);
                 writer.WriteBooleanValue(Iswild.Value);
             }
-            writer.WritePropertyName("fish.type"u8);
-            writer.WriteStringValue(FishType);
-            if (Optional.IsDefined(Species))
-            {
-                writer.WritePropertyName("species"u8);
-                writer.WriteStringValue(Species);
-            }
         }
 
         DotSalmon IJsonModel<DotSalmon>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

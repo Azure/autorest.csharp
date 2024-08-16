@@ -34,7 +34,6 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Common.Input.Configuration;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using MemberExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.MemberExpression;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
@@ -44,7 +43,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        private static string _jsonModelWriteCoreMethodName = "JsonModelWriteCore";
+        private const string _jsonModelWriteCoreMethodName = "JsonModelWriteCore";
 
         public static IEnumerable<Method> BuildResourceJsonSerializationMethods(Resource resource)
         {
@@ -118,7 +117,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            if (iJsonModelInterface == null && iPersistableModelTInterface == null && Configuration.UseModelReaderWriter)
+            if (iJsonModelInterface is null && iPersistableModelTInterface is null && Configuration.UseModelReaderWriter)
             {
                 // void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 yield return BuildJsonModelWriteCoreMethod(json, null, hasInherits, isSealed);
@@ -241,18 +240,21 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement[] BuildJsonModelWriteCoreMethodBody(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, CSharpType? iPersistableModelTInterface, bool hasInherits)
         {
-            var body = new List<MethodBodyStatement>()
+            return new[]
             {
                 Serializations.ValidateJsonFormat(options, iPersistableModelTInterface, Serializations.ValidationType.Write),
                 CallBaseJsonModelWriteCore(utf8JsonWriter, options, hasInherits),
-                WriteProperties(utf8JsonWriter, serialization.Properties, serialization.RawDataField?.Value, options).ToArray(),
+                WriteProperties(utf8JsonWriter, serialization.SelfProperties, serialization.RawDataField?.Value, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties, false),
+                CallSerializeAdditionalPropertiesForRawdata(serialization, utf8JsonWriter, options, hasInherits)
             };
-            if (!hasInherits)
-            {
-                body.Add(SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true));
-            }
-            return body.ToArray();
+        }
+
+        private static MethodBodyStatement CallSerializeAdditionalPropertiesForRawdata(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)
+        {
+            return hasInherits ?
+                EmptyStatement
+                : SerializeAdditionalProperties(utf8JsonWriter, options, serialization.RawDataField, true);
         }
 
         private static MethodBodyStatement CallBaseJsonModelWriteCore(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)

@@ -41,11 +41,6 @@ namespace model_flattening.Models
                 writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);
             }
-            if (Optional.IsDefined(GenericValue))
-            {
-                writer.WritePropertyName("generic_value"u8);
-                writer.WriteStringValue(GenericValue);
-            }
         }
 
         ProductUrl IJsonModel<ProductUrl>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

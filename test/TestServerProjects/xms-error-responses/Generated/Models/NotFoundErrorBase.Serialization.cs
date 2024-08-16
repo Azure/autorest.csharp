@@ -43,11 +43,6 @@ namespace xms_error_responses.Models
             }
             writer.WritePropertyName("whatNotFound"u8);
             writer.WriteStringValue(WhatNotFound);
-            if (Optional.IsDefined(SomeBaseProp))
-            {
-                writer.WritePropertyName("someBaseProp"u8);
-                writer.WriteStringValue(SomeBaseProp);
-            }
         }
 
         NotFoundErrorBase IJsonModel<NotFoundErrorBase>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

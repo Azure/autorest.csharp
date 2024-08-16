@@ -45,11 +45,6 @@ namespace AzureSample.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsDefined(TempDisk))
-            {
-                writer.WritePropertyName("tempDisk"u8);
-                writer.WriteBooleanValue(TempDisk.Value);
-            }
         }
 
         VirtualMachineScaleSetReimageContent IJsonModel<VirtualMachineScaleSetReimageContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

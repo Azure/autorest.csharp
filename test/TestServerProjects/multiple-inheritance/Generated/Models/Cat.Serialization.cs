@@ -51,8 +51,6 @@ namespace multiple_inheritance.Models
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
         }
 
         Cat IJsonModel<Cat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

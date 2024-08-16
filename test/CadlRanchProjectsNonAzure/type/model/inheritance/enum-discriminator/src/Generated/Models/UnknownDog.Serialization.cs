@@ -30,10 +30,6 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToString());
-            writer.WritePropertyName("weight"u8);
-            writer.WriteNumberValue(Weight);
         }
 
         Dog IJsonModel<Dog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

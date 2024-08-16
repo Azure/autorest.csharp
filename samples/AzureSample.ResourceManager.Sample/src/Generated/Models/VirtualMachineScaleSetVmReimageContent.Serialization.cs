@@ -35,11 +35,6 @@ namespace AzureSample.ResourceManager.Sample.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            if (Optional.IsDefined(TempDisk))
-            {
-                writer.WritePropertyName("tempDisk"u8);
-                writer.WriteBooleanValue(TempDisk.Value);
-            }
         }
 
         VirtualMachineScaleSetVmReimageContent IJsonModel<VirtualMachineScaleSetVmReimageContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

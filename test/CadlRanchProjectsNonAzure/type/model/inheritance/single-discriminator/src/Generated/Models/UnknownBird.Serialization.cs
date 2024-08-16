@@ -30,10 +30,6 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
             }
 
             base.JsonModelWriteCore(writer, options);
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            writer.WritePropertyName("wingspan"u8);
-            writer.WriteNumberValue(Wingspan);
         }
 
         Bird IJsonModel<Bird>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
