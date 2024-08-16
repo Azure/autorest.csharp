@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -26,12 +27,14 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             string? encode = null;
             InputType? type = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputDateTimeType.Encode), ref encode)
-                    || reader.TryReadWithConverter(nameof(InputDateTimeType.WireType), options, ref type);
+                    || reader.TryReadWithConverter(nameof(InputDateTimeType.WireType), options, ref type)
+                    || reader.TryReadWithConverter(nameof(InputDateTimeType.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -48,6 +51,9 @@ namespace AutoRest.CSharp.Common.Input
 
             var dateTimeType = Enum.TryParse<DateTimeKnownEncoding>(encode, ignoreCase: true, out var encodeKind)
                 ? new InputDateTimeType(encodeKind, wireType)
+                {
+                    Decorators = decorators ?? Array.Empty<InputDecoratorInfo>()
+                }
                 : throw new JsonException($"Encoding of DateTime type {encode} is unknown.");
 
             if (id != null)

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input.InputTypes;
 
@@ -24,12 +25,18 @@ internal abstract record InputType
                 return new InputListType(
                     listType.Name,
                     listType.CrossLanguageDefinitionId,
-                    listType.ValueType.GetCollectionEquivalent(inputType));
+                    listType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = listType.Decorators
+                };
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
                     dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType));
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = dictionaryType.Decorators
+                };
             default:
                 return inputType;
         }

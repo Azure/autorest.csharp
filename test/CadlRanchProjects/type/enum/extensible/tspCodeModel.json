@@ -12,55 +12,64 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Monday",
      "Value": "Monday",
-     "Description": "Monday."
+     "Description": "Monday.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "Tuesday",
      "Value": "Tuesday",
-     "Description": "Tuesday."
+     "Description": "Tuesday.",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "Wednesday",
      "Value": "Wednesday",
-     "Description": "Wednesday."
+     "Description": "Wednesday.",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "Thursday",
      "Value": "Thursday",
-     "Description": "Thursday."
+     "Description": "Thursday.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Friday",
      "Value": "Friday",
-     "Description": "Friday."
+     "Description": "Friday.",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Saturday",
      "Value": "Saturday",
-     "Description": "Saturday."
+     "Description": "Saturday.",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Sunday",
      "Value": "Sunday",
-     "Description": "Sunday."
+     "Description": "Sunday.",
+     "Decorators": []
     }
    ],
    "Description": "Days of the week",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -103,7 +112,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -156,9 +166,11 @@
          "$id": "25",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -166,7 +178,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -193,7 +206,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getKnownValue"
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getKnownValue",
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -215,9 +229,11 @@
          "$id": "30",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -225,7 +241,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -252,7 +269,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getUnknownValue"
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.getUnknownValue",
+     "Decorators": []
     },
     {
      "$id": "32",
@@ -275,9 +293,11 @@
          "$id": "35",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -285,7 +305,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "36",
@@ -300,7 +321,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -324,7 +346,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putKnownValue"
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putKnownValue",
+     "Decorators": []
     },
     {
      "$id": "38",
@@ -347,9 +370,11 @@
          "$id": "41",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -357,7 +382,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "42",
@@ -372,7 +398,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -396,7 +423,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putUnknownValue"
+     "CrossLanguageDefinitionId": "Type.Enum.Extensible.String.putUnknownValue",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -407,7 +435,8 @@
     {
      "$ref": "19"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }
