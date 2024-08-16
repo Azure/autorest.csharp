@@ -55,7 +55,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Server.Endpoint.NotDefined.valid"
+     "CrossLanguageDefinitionId": "Server.Endpoint.NotDefined.valid",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -65,7 +66,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

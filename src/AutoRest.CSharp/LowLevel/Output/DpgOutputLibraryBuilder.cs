@@ -226,7 +226,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (sourcePaging.NextLinkOperation != null && operationsMap.TryGetValue(sourcePaging.NextLinkOperation, out var nextLinkOperationRef))
             {
-                return sourcePaging with {NextLinkOperation = nextLinkOperationRef()};
+                return sourcePaging with { NextLinkOperation = nextLinkOperationRef() };
             }
 
             return sourcePaging;
