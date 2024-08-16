@@ -133,7 +133,7 @@ internal record InputOperation
         return ExampleMockValueBuilder.BuildOperationExamples(this);
     }
 
-    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
+    public IReadOnlyList<InputHttpOperationExample> CodeModelExamples { get; internal set; } = Array.Empty<InputHttpOperationExample>();
 
     public bool IsLongRunning => LongRunning != null;
     public string Name { get; internal set; }

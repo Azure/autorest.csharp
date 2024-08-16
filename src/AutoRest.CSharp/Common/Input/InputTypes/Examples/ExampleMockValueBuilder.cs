@@ -42,24 +42,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
             return new(name, null, string.Empty, parameterExamples);
         }
 
-        public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
-        {
-            _cache.Clear();
-
-            var parameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in operation.Parameters)
-            {
-                if (!useAllParameters && !parameter.IsRequired)
-                {
-                    continue;
-                }
-                var parameterExample = BuildParameterExample(parameter, useAllParameters);
-                parameterExamples.Add(parameterExample);
-            }
-
-            return new(operation, parameterExamples);
-        }
-
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)
         {
             // if the parameter is constant, we just put the constant into the example value instead of mocking a new one

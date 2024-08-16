@@ -172,9 +172,9 @@ namespace AutoRest.CSharp.Common.Input
             return operationId.Split('_')[0];
         }
 
-        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation inputOperation, Operation operation)
+        private IReadOnlyList<InputHttpOperationExample> CreateOperationExamples(InputOperation inputOperation, Operation operation)
         {
-            var result = new List<InputOperationExample>();
+            var result = new List<InputHttpOperationExample>();
             var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.Operation == operation);
             if (exampleOperation is null)
             {
@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Common.Input
                 var parameters = example.AllParameters
                     .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
                     .ToList();
-                result.Add(new InputOperationExample(inputOperation, parameters, example.Name, example.OriginalFile));
+                result.Add(new InputHttpOperationExample(example.Name, null, example.OriginalFile!, parameters));
             }
             return result;
         }
