@@ -5,6 +5,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input.InputTypes.Serialization;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -34,6 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             string? name = null;
             InputType? result = null;
             var isFirstProperty = true;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isIdOrNameOrKind = reader.TryReadReferenceId(ref isFirstProperty, ref id)
