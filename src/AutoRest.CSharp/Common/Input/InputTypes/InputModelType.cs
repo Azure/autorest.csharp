@@ -4,6 +4,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text.Json;
+using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -35,6 +38,20 @@ namespace AutoRest.CSharp.Common.Input
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
+
+        // The setter is only used for swagger input
+        private bool? _useSystemTextJsonConverter;
+        public bool UseSystemTextJsonConverter
+        {
+            get
+            {
+                return _useSystemTextJsonConverter ?? Decorators.Any(x => x.Name == "Azure.ClientGenerator.Core.@useSystemTextJsonConverter");
+            }
+            internal set
+            {
+                _useSystemTextJsonConverter = value;
+            }
+        }
 
         private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
         {

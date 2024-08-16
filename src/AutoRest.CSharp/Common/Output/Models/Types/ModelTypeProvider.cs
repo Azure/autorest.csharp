@@ -133,7 +133,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsUnknownDerivedType = inputModel.IsUnknownDiscriminatorModel;
             SkipInitializerConstructor = IsUnknownDerivedType;
 
-            JsonConverter = _inputModelSerialization.IncludeConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter =
+                _inputModel.UseSystemTextJsonConverter || (ModelTypeMapping?.UseSystemTextJsonConverter == true)
+                ? new JsonConverterProvider(this, _sourceInputModel)
+                : null;
         }
 
         private static InputModelTypeUsage UpdateInputModelUsage(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
@@ -174,11 +177,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                         serialization = serialization with { Xml = new InputTypeXmlSerialization(inputModel.Name, false, false, false) };
                     }
                 }
-            }
-
-            if (modelTypeMapping?.Usage is { } usage && usage.Contains(nameof(SchemaTypeUsage.Converter), StringComparer.OrdinalIgnoreCase))
-            {
-                serialization = serialization with { IncludeConverter = true };
             }
 
             return serialization;
