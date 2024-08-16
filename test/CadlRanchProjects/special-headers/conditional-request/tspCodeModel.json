@@ -56,7 +56,8 @@
         "$id": "9",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -64,7 +65,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -85,7 +87,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfMatch"
+     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfMatch",
+     "Decorators": []
     },
     {
      "$id": "11",
@@ -106,7 +109,8 @@
         "$id": "13",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -114,7 +118,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -135,7 +140,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfNoneMatch"
+     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfNoneMatch",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -145,7 +151,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }
