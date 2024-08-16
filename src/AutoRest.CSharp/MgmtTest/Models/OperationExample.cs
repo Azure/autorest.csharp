@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
     {
         private readonly Lazy<IReadOnlyDictionary<string, string>> _parameterNameToSerializedNameMapping;
 
-        internal protected InputHttpOperationExample _example;
+        internal protected InputOperationExample _example;
         internal protected InputOperation _inputOperation;
         public string OperationId { get; }
         public string Name => _example.Name!;
@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private IEnumerable<InputParameterExample>? _pathParameters;
         public IEnumerable<InputParameterExample> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.Location == RequestLocation.Path);
 
-        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputHttpOperationExample example)
+        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example)
         {
             OperationId = operationId;
             _example = example;

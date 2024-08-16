@@ -34,7 +34,7 @@ internal record InputOperation
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
     bool keepClientDefaultValue,
-    IReadOnlyList<InputHttpOperationExample>? examples = null)
+    IReadOnlyList<InputOperationExample>? examples = null)
     {
         Name = name;
         SpecName = name;
@@ -118,22 +118,22 @@ internal record InputOperation
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 
-    private IReadOnlyList<InputHttpOperationExample>? _examples;
-    public IReadOnlyList<InputHttpOperationExample> Examples => _examples ??= EnsureExamples();
+    private IReadOnlyList<InputOperationExample>? _examples;
+    public IReadOnlyList<InputOperationExample> Examples => _examples ??= EnsureExamples();
 
-    private IReadOnlyList<InputHttpOperationExample> EnsureExamples()
+    private IReadOnlyList<InputOperationExample> EnsureExamples()
     {
         // see if we need to generate the mock examples
         if (Configuration.ExamplesDirectory != null)
         {
-            return Array.Empty<InputHttpOperationExample>();
+            return Array.Empty<InputOperationExample>();
         }
 
         // build the mock examples
         return ExampleMockValueBuilder.BuildOperationExamples(this);
     }
 
-    public IReadOnlyList<InputHttpOperationExample> CodeModelExamples { get; internal set; } = Array.Empty<InputHttpOperationExample>();
+    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = Array.Empty<InputOperationExample>();
 
     public bool IsLongRunning => LongRunning != null;
     public string Name { get; internal set; }

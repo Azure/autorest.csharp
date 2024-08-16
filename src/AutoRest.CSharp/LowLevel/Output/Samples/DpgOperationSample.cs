@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperation inputOperation, InputHttpOperationExample operationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperation inputOperation, InputOperationExample operationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
             _typeFactory = typeFactory;
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         }
 
         protected internal readonly InputOperation _inputOperation;
-        protected internal readonly InputHttpOperationExample _inputOperationExample;
+        protected internal readonly InputOperationExample _inputOperationExample;
         protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
         private readonly TypeFactory _typeFactory;

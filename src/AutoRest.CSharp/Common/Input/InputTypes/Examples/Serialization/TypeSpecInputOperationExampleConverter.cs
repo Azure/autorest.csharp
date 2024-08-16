@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal sealed class TypeSpecInputOperationExampleConverter : JsonConverter<InputHttpOperationExample>
+    internal sealed class TypeSpecInputOperationExampleConverter : JsonConverter<InputOperationExample>
     {
         private const string KindPropertyName = "kind";
 
@@ -19,15 +19,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _referenceHandler = referenceHandler;
         }
 
-        public override InputHttpOperationExample? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override InputOperationExample? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return reader.ReadReferenceAndResolve<InputHttpOperationExample>(_referenceHandler.CurrentResolver) ?? CreateInputHttpOperationExample(ref reader, options);
+            return reader.ReadReferenceAndResolve<InputOperationExample>(_referenceHandler.CurrentResolver) ?? CreateInputHttpOperationExample(ref reader, options);
         }
 
-        public override void Write(Utf8JsonWriter writer, InputHttpOperationExample value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, InputOperationExample value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private InputHttpOperationExample CreateInputHttpOperationExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
+        private InputOperationExample CreateInputHttpOperationExample(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             var isFirstProperty = true;
             string? id = null;
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 }
             }
 
-            var result = new InputHttpOperationExample(name ?? throw new JsonException(), description, filePath ?? throw new JsonException(), parameters ?? throw new JsonException());
+            var result = new InputOperationExample(name ?? throw new JsonException(), description, filePath ?? throw new JsonException(), parameters ?? throw new JsonException());
 
             if (id != null)
             {

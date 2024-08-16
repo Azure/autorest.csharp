@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Input
             bool generateConvenienceMethod = false;
             string? crossLanguageDefinitionId = null;
             bool keepClientDefaultValue = false;
-            IReadOnlyList<InputHttpOperationExample>? examples = null;
+            IReadOnlyList<InputOperationExample>? examples = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
