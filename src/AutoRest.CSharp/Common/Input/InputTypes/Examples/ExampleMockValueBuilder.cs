@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         public static IReadOnlyList<InputHttpOperationExample> BuildOperationExamples(InputOperation operation)
         {
+            _cache.Clear();
             return new[]
             {
                 BuildOperationExample(operation, ShortVersionMockExampleKey, false),
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private static InputHttpOperationExample BuildOperationExample(InputOperation operation, string name, bool useAllParameters)
         {
             var parameterExamples = new List<InputParameterExample>(operation.Parameters.Count);
-            foreach (var  parameter in operation.Parameters)
+            foreach (var parameter in operation.Parameters)
             {
                 if (!useAllParameters && !parameter.IsRequired)
                 {
