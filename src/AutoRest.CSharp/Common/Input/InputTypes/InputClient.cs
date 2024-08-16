@@ -17,6 +17,7 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
     }
 
     public IReadOnlyList<InputOperation> Operations { get; internal set; } = Operations ?? Array.Empty<InputOperation>();
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
 
     public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), Array.Empty<InputParameter>(), null) { }
 }
