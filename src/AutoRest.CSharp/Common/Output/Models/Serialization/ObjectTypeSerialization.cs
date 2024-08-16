@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 {
     internal class ObjectTypeSerialization
     {
-        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart, SerializationInterfaces? interfaces = null)
+        public ObjectTypeSerialization(SerializableObjectType model, JsonObjectSerialization? json, XmlObjectSerialization? xml, BicepObjectSerialization? bicep, MultipartObjectSerialization? multipart, bool isReference = false)
         {
             Json = json;
             Xml = xml;
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
-            Interfaces = interfaces ?? new SerializationInterfaces(model.IncludeSerializer, model.IsStruct, modelType, json is not null, xml is not null);
+            Interfaces = isReference ? null : new SerializationInterfaces(model.IncludeSerializer, model.IsStruct, modelType, json is not null, xml is not null);
 
             if (Configuration.UseModelReaderWriter && model.Declaration.IsAbstract && model.Discriminator is { } discriminator)
             {
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization
 
         public ValueExpression WireFormat { get; }
 
-        public SerializationInterfaces Interfaces { get; }
+        public SerializationInterfaces? Interfaces { get; }
 
         public CSharpType? PersistableModelProxyType { get; }
     }

@@ -87,14 +87,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MemberExpression(This, "Data").CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options));
         }
 
-        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces interfaces, bool hasInherits, bool isSealed)
+        public static IEnumerable<Method> BuildJsonSerializationMethods(JsonObjectSerialization json, SerializationInterfaces? interfaces, bool hasInherits, bool isSealed)
         {
             var useModelReaderWriter = Configuration.UseModelReaderWriter;
 
-            var iJsonInterface = interfaces.IJsonInterface;
-            var iJsonModelInterface = interfaces.IJsonModelTInterface;
-            var iPersistableModelTInterface = interfaces.IPersistableModelTInterface;
-            var iJsonModelObjectInterface = interfaces.IJsonModelObjectInterface;
+            var iJsonInterface = interfaces?.IJsonInterface;
+            var iJsonModelInterface = interfaces?.IJsonModelTInterface;
+            var iPersistableModelTInterface = interfaces?.IPersistableModelTInterface;
+            var iJsonModelObjectInterface = interfaces?.IJsonModelObjectInterface;
             var writer = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
             if (iJsonInterface is not null)
             {
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             }
 
-            if (iJsonModelInterface is null && iPersistableModelTInterface is null && Configuration.UseModelReaderWriter)
+            if (interfaces is null && Configuration.UseModelReaderWriter)
             {
                 // void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
                 yield return BuildJsonModelWriteCoreMethod(json, null, hasInherits, isSealed);

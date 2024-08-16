@@ -89,8 +89,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var interfaces = serialization.Interfaces;
 
-            var iModelTInterface = interfaces.IPersistableModelTInterface;
-            var iModelObjectInterface = interfaces.IPersistableModelObjectInterface;
+            var iModelTInterface = interfaces?.IPersistableModelTInterface;
+            var iModelObjectInterface = interfaces?.IPersistableModelObjectInterface;
 
             if (iModelTInterface is not null)
             {

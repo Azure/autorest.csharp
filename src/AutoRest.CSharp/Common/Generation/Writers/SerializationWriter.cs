@@ -83,10 +83,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name}")
-                    .AppendRawIf(" : ", model.IncludeSerializer && serialization.Interfaces.Count() > 0);
-                foreach (var i in serialization.Interfaces)
+                    .AppendRawIf(" : ", model.IncludeSerializer && serialization.Interfaces?.Count() > 0);
+
+                if (serialization.Interfaces is not null)
                 {
-                    writer.Append($"{i}, ");
+                    foreach (var i in serialization.Interfaces)
+                    {
+                        writer.Append($"{i}, ");
+                    }
                 }
 
                 writer.RemoveTrailingComma();
