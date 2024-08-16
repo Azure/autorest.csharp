@@ -91,10 +91,10 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void InputRecursive()
         {
-            var input = new Eagle();
-            input.Partner = new Eagle();
+            var input = new Eagle(32);
+            input.Partner = new Eagle(32);
 
-            JsonAsserts.AssertWireSerialization("{\"kind\":\"eagle\",\"partner\":{\"kind\":\"child\"}}", input);
+            JsonAsserts.AssertWireSerialization("{\"partner\":{\"kind\":\"eagle\",\"wingspan\":32},\"kind\":\"eagle\",\"wingspan\":32}", input);
 
             var output = Eagle.DeserializeEagle(JsonAsserts.AssertWireSerializes(input));
 
