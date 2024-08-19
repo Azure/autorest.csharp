@@ -86,27 +86,19 @@
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "11",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "$ref": "6"
      },
      "IsRequired": true,
      "IsReadOnly": false,
      "Decorators": []
     },
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "13",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+      "$ref": "8"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -115,7 +107,7 @@
    ]
   },
   {
-   "$id": "14",
+   "$id": "12",
    "Kind": "model",
    "Name": "NestedFlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel",
@@ -124,12 +116,12 @@
    "Decorators": [],
    "Properties": [
     {
-     "$id": "15",
+     "$id": "13",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "16",
+      "$id": "14",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -140,12 +132,12 @@
      "Decorators": []
     },
     {
-     "$id": "17",
+     "$id": "15",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "",
      "Type": {
-      "$id": "18",
+      "$id": "16",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -160,16 +152,12 @@
      "Decorators": []
     },
     {
-     "$id": "19",
+     "$id": "17",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "20",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "$ref": "6"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -181,16 +169,12 @@
      "Decorators": []
     },
     {
-     "$id": "21",
+     "$id": "18",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "22",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+      "$ref": "8"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -204,7 +188,7 @@
    ]
   },
   {
-   "$id": "23",
+   "$id": "19",
    "Kind": "model",
    "Name": "ChildFlattenModel",
    "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel",
@@ -213,32 +197,24 @@
    "Decorators": [],
    "Properties": [
     {
-     "$id": "24",
+     "$id": "20",
      "Name": "summary",
      "SerializedName": "summary",
      "Description": "",
      "Type": {
-      "$id": "25",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "$ref": "16"
      },
      "IsRequired": true,
      "IsReadOnly": false,
      "Decorators": []
     },
     {
-     "$id": "26",
+     "$id": "21",
      "Name": "description",
      "SerializedName": "description",
      "Description": "",
      "Type": {
-      "$id": "27",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "$ref": "6"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -249,16 +225,12 @@
      "Decorators": []
     },
     {
-     "$id": "28",
+     "$id": "22",
      "Name": "age",
      "SerializedName": "age",
      "Description": "",
      "Type": {
-      "$id": "29",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+      "$ref": "8"
      },
      "IsRequired": true,
      "IsReadOnly": false,
@@ -273,22 +245,22 @@
  ],
  "Clients": [
   {
-   "$id": "30",
+   "$id": "23",
    "Name": "FlattenClient",
    "Description": "Illustrates the model flatten cases.",
    "Operations": [
     {
-     "$id": "31",
+     "$id": "24",
      "Name": "putFlattenModel",
      "ResourceName": "Flatten",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "32",
+       "$id": "25",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "33",
+        "$id": "26",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -303,9 +275,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "27",
         "Type": {
-         "$id": "35",
+         "$id": "28",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -314,15 +286,15 @@
        }
       },
       {
-       "$id": "36",
+       "$id": "29",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "37",
+        "$id": "30",
         "Kind": "constant",
         "ValueType": {
-         "$id": "38",
+         "$id": "31",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -341,14 +313,14 @@
        "Decorators": []
       },
       {
-       "$id": "39",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "33",
         "Kind": "constant",
         "ValueType": {
-         "$id": "41",
+         "$id": "34",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -367,7 +339,7 @@
        "Decorators": []
       },
       {
-       "$id": "42",
+       "$id": "35",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -385,7 +357,7 @@
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "36",
        "StatusCodes": [
         200
        ],
@@ -414,24 +386,24 @@
      "Decorators": []
     },
     {
-     "$id": "44",
+     "$id": "37",
      "Name": "putNestedFlattenModel",
      "ResourceName": "Flatten",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "32"
+       "$ref": "25"
       },
       {
-       "$id": "45",
+       "$id": "38",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "46",
+        "$id": "39",
         "Kind": "constant",
         "ValueType": {
-         "$id": "47",
+         "$id": "40",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -450,14 +422,14 @@
        "Decorators": []
       },
       {
-       "$id": "48",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "42",
         "Kind": "constant",
         "ValueType": {
-         "$id": "50",
+         "$id": "43",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -476,11 +448,11 @@
        "Decorators": []
       },
       {
-       "$id": "51",
+       "$id": "44",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "14"
+        "$ref": "12"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -494,12 +466,12 @@
      ],
      "Responses": [
       {
-       "$id": "52",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "14"
+        "$ref": "12"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -524,11 +496,11 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "46"
    },
    "Parameters": [
     {
-     "$ref": "32"
+     "$ref": "25"
     }
    ],
    "Decorators": []
