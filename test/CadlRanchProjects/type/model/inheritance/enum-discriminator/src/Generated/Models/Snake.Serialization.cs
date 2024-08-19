@@ -20,21 +20,13 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         void IJsonModel<Snake>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<Snake>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(Snake)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("length"u8);
@@ -54,6 +46,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         Snake IJsonModel<Snake>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
