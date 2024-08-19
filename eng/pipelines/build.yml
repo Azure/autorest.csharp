@@ -104,7 +104,7 @@ extends:
                     -Sha $(Build.SourceVersion)
                   name: Publish
                   failOnStderr: false
-                  displayName: 'Publish to GitHub, npm and coverage report'
+                  displayName: 'Publish to GitHub and npm'
                   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - ${{if eq(variables['System.TeamProject'], 'internal')}}:
                 - task: AzureCLI@2
