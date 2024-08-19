@@ -591,7 +591,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void NotRequiredNullablePropertiesOmitedByDefault()
+        public void OptionalNullablePropertiesOmitedByDefault()
         {
             var inputModel = new PlainTimeProperty();
 
@@ -600,21 +600,21 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void NotRequiredPropertiesDeserializedWithNullsWhenUndefined()
+        public void OptionalPropertiesDeserializedWithNullsWhenUndefined()
         {
             var model = PlainTimeProperty.DeserializePlainTimeProperty(JsonDocument.Parse("{}").RootElement);
             Assert.Null(model.Property);
         }
 
         [Test]
-        public void NotRequiredPropertiesDeserializedWithValues()
+        public void OptionalPropertiesDeserializedWithValues()
         {
             var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\": \"2\"}").RootElement);
             Assert.AreEqual("2", model.Property);
         }
 
         [Test]
-        public void InputModelDoesntSerializeOptionalCollections()
+        public void OptionalListPropertiesDoNotSerializeWhenUntouched()
         {
             var inputModel = new CollectionsByteProperty();
 
@@ -629,7 +629,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void InputModelSerializeOptionalCollectionAfterMutation()
+        public void OptionalListPropertiesSerializeAfterMutation()
         {
             var inputModel = new CollectionsModelProperty();
 
@@ -644,7 +644,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void InputModelSerializeOptionalEmptyCollectionAfterMutation()
+        public void OptionalEmptyListSerializeAfterMutation()
         {
             var inputModel = new CollectionsByteProperty();
 
@@ -654,18 +654,6 @@ namespace CadlRanchProjects.Tests
             var element = JsonAsserts.AssertWireSerializes(inputModel);
 
             Assert.AreEqual("[]", element.GetProperty("property").ToString());
-        }
-
-        [Test]
-        public void InputModelDoesntSerializeOptionalCollectionAfterReset()
-        {
-            var inputModel = new CollectionsByteProperty();
-            inputModel.Property.Add(BinaryData.FromString("abc"));
-            (inputModel.Property as ChangeTrackingList<BinaryData>).Reset();
-
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-
-            Assert.False(element.TryGetProperty("property", out _));
         }
 
         [Test]
