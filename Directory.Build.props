@@ -63,7 +63,7 @@
 
   <PropertyGroup>
     <ImportDefaultReferences>false</ImportDefaultReferences>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
 </Project>
