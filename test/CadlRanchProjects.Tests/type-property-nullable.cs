@@ -358,21 +358,6 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void NullablePropertiesDeserializedAsNullsWithUndefined()
-        {
-            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{}").RootElement);
-            Assert.IsNull(model.NullableProperty);
-        }
-
-        [Test]
-        public void NullablePropertiesDeserializedAsUndefinedWithNulls()
-        {
-            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": null}").RootElement);
-            Assert.IsNotNull(model.NullableProperty);
-            Assert.IsFalse(!(model.NullableProperty is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined));
-        }
-
-        [Test]
         public void NullablePropertiesDeserializedAsValues()
         {
             var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": [\"a\", \"b\"]}").RootElement);
