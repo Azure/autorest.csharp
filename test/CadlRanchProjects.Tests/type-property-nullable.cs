@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using _Type.Property.Nullable;
@@ -285,5 +286,20 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void NullablePropertiesDeserializedAsNullsWithUndefined()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{}").RootElement);
+            Assert.IsNull(model.NullableProperty);
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsUndefinedWithNulls()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": null}").RootElement);
+            Assert.IsNotNull(model.NullableProperty);
+            Assert.IsFalse(!(model.NullableProperty is ChangeTrackingList<string> changeTrackingList1 && changeTrackingList1.IsUndefined));
+        }
     }
 }
