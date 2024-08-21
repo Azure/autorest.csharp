@@ -1,3 +1,4 @@
 options:
   "@azure-tools/typespec-csharp":
     flavor: "azure"
+    examples-dir: "{project-root}/examples"
