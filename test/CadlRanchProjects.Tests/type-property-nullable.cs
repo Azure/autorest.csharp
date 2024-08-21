@@ -326,6 +326,7 @@ namespace CadlRanchProjects.Tests
             var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual("1", element.GetProperty("nullableProperty")[0].GetString());
             Assert.AreEqual("2", element.GetProperty("nullableProperty")[1].GetString());
+            Assert.AreEqual(2, element.GetProperty("nullableProperty").GetArrayLength());
         }
 
         [Test]
