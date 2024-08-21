@@ -65,6 +65,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValueAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -98,6 +99,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/EnumTest.xml" path="doc/members/member[@name='CreateUnknownValue(RequestContent,RequestContext)']/*" />
         public virtual Response CreateUnknownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
