@@ -56,6 +56,6 @@ export function resolveAzureEmitterOptions(
             defaultAzureEmitterOptions["enable-internal-raw-data"],
         "use-write-core":
             context.options["use-write-core"] ??
-            defaultAzureEmitterOptions["use-write-core"],
+            defaultAzureEmitterOptions["use-write-core"]
     };
 }
