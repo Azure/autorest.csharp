@@ -222,7 +222,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public void NotRequiredNullableListsAreNotNullByDefault()
+        public void OptionalNullableListsAreNotNullByDefault()
         {
             var inputModel = new InnerModel("nonnull");
 

@@ -301,8 +301,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void RequiredNullableListsSerializedAsNull()
         {
-            var inputModel = new CollectionsStringProperty();
-            inputModel.NullableProperty = null;
+            var inputModel = new CollectionsStringProperty("required", null);
 
             var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
@@ -322,9 +321,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public void RequiredNullablePropertiesSerializeWhenSet()
         {
-            var inputModel = new CollectionsStringProperty();
-            inputModel.RequiredProperty = "required";
-            inputModel.NullableProperty = new List<string> { "1", "2" };
+            var inputModel = new CollectionsStringProperty("required", new List<string> { "1", "2" });
 
             var element = JsonAsserts.AssertWireSerializes(inputModel);
             Assert.AreEqual("1", element.GetProperty("nullableProperty")[0].GetString());
@@ -332,9 +329,9 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void NotRequiredNullablePropertiesDeserializedWithNulls()
+        public void RequiredNullablePropertiesInputDeserializedWithNulls()
         {
-            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"NonRequiredNullableString\": null}").RootElement);
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"NullableProperty\": null}").RootElement);
             Assert.Null(model.NullableProperty);
         }
 
@@ -362,16 +359,6 @@ namespace CadlRanchProjects.Tests
         {
             var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": [\"a\", \"b\"]}").RootElement);
             CollectionAssert.AreEqual(new List<string> { "a", "b" }, model.NullableProperty);
-        }
-
-        [Test]
-        public void RequiredNullableListsSerializeAsNull()
-        {
-            var inputModel = new CollectionsStringProperty("required", null);
-
-            var element = JsonAsserts.AssertWireSerializes(inputModel);
-
-            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
         }
 
         [Test]

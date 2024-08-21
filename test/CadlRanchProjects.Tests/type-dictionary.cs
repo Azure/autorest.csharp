@@ -248,7 +248,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void RequiredPropertiesAreSetable()
+        public void RequiredPropertiesAreSettable()
         {
             var requiredString = TypeAsserts.HasProperty(typeof(InnerModel), nameof(InnerModel.Property), BindingFlags.Public | BindingFlags.Instance);
             Assert.NotNull(requiredString.SetMethod);

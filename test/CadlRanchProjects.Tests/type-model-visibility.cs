@@ -64,7 +64,7 @@ namespace CadlRanchProjects.Tests
         }
 
         [Test]
-        public void ReadonlyPropertiesAreDeserialized()
+        public void ReadOnlyPropertiesAreDeserialized()
         {
             var model = VisibilityModel.DeserializeVisibilityModel(JsonDocument.Parse("{\"readProp\":\"abc\"}").RootElement);
             Assert.AreEqual("abc", model.ReadProp);
