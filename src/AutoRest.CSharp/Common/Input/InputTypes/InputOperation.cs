@@ -162,7 +162,7 @@ internal record InputOperation
     public string? OperationType { get; }
     public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
-    //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
+    //TODO: Remove this until the SDK nullable is enabled, tracking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }
 
     internal bool IsNameChanged { get; init; }

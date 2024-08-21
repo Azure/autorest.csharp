@@ -10,8 +10,6 @@ namespace AutoRest.CSharp.Common.Input.Examples
 {
     internal sealed class TypeSpecInputOperationExampleConverter : JsonConverter<InputOperationExample>
     {
-        private const string KindPropertyName = "kind";
-
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputOperationExampleConverter(TypeSpecReferenceHandler referenceHandler)

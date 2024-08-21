@@ -11,6 +11,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
     internal sealed class TypeSpecInputTypeExampleConverter : JsonConverter<InputExampleValue>
     {
         private const string KindPropertyName = "kind";
+        private const string TypePropertyName = "type";
+        private const string ValuePropertyName = "value";
 
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
@@ -68,8 +70,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter("type", options, ref type)
-                    || reader.TryReadWithConverter("value", options, ref value);
+                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
+                    || reader.TryReadWithConverter(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
                 {
@@ -95,8 +97,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter("type", options, ref type)
-                    || reader.TryReadWithConverter("value", options, ref value);
+                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
+                    || reader.TryReadWithConverter(ValuePropertyName, options, ref value);
 
                 if (!isKnownProperty)
                 {
@@ -122,8 +124,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter("type", options, ref type)
-                    || reader.TryReadWithConverter("value", options, ref rawValue);
+                    || reader.TryReadWithConverter(TypePropertyName, options, ref type)
+                    || reader.TryReadWithConverter(ValuePropertyName, options, ref rawValue);
 
                 if (!isKnownProperty)
                 {

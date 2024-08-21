@@ -10,7 +10,6 @@ import { dllFilePath } from "@autorest/csharp";
 export interface AzureNetEmitterOptions extends NetEmitterOptions {
     csharpGeneratorPath?: string;
     "enable-internal-raw-data"?: boolean;
-    "generate-mock-examples"?: boolean;
 }
 
 export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions> =
