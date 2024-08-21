@@ -14,21 +14,13 @@ namespace Scm._Type.Property.AdditionalProperties.Models
     {
         void IJsonModel<DifferentSpreadModelArrayRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<DifferentSpreadModelArrayRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DifferentSpreadModelArrayRecord)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("knownProp"u8);
             writer.WriteStringValue(KnownProp);
             foreach (var item in AdditionalProperties)
@@ -68,6 +60,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         DifferentSpreadModelArrayRecord IJsonModel<DifferentSpreadModelArrayRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

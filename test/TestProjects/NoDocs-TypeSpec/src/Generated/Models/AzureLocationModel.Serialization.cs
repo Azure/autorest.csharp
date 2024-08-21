@@ -20,19 +20,13 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<AzureLocationModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<AzureLocationModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(AzureLocationModel)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -50,6 +44,7 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         AzureLocationModel IJsonModel<AzureLocationModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

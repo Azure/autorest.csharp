@@ -20,21 +20,13 @@ namespace FirstTestTypeSpec.Models
 
         void IJsonModel<ModelWithFormat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithFormat>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ModelWithFormat)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("sourceUrl"u8);
             writer.WriteStringValue(SourceUrl.AbsoluteUri);
             writer.WritePropertyName("guid"u8);
@@ -54,6 +46,7 @@ namespace FirstTestTypeSpec.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ModelWithFormat IJsonModel<ModelWithFormat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -20,21 +20,13 @@ namespace httpInfrastructure.Models
 
         void IJsonModel<D>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<D>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(D)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (Optional.IsDefined(HttpStatusCode))
             {
                 writer.WritePropertyName("httpStatusCode"u8);
@@ -55,6 +47,7 @@ namespace httpInfrastructure.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         D IJsonModel<D>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

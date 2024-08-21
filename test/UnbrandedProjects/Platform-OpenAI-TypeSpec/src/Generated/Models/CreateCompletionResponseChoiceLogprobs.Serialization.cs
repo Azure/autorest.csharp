@@ -14,21 +14,13 @@ namespace OpenAI.Models
     {
         void IJsonModel<CreateCompletionResponseChoiceLogprobs>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoiceLogprobs>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(CreateCompletionResponseChoiceLogprobs)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (SerializedAdditionalRawData?.ContainsKey("tokens") != true)
             {
                 writer.WritePropertyName("tokens"u8);
@@ -99,6 +91,7 @@ namespace OpenAI.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         CreateCompletionResponseChoiceLogprobs IJsonModel<CreateCompletionResponseChoiceLogprobs>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

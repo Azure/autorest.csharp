@@ -20,21 +20,13 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<CollectionItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<CollectionItem>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(CollectionItem)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("requiredModelRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredModelRecord)
@@ -58,6 +50,7 @@ namespace ModelsTypeSpec.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         CollectionItem IJsonModel<CollectionItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

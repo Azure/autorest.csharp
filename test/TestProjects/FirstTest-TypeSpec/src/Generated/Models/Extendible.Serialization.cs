@@ -20,21 +20,13 @@ namespace FirstTestTypeSpec.Models
 
         void IJsonModel<Extendible>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<Extendible>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(Extendible)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
@@ -60,6 +52,7 @@ namespace FirstTestTypeSpec.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         Extendible IJsonModel<Extendible>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

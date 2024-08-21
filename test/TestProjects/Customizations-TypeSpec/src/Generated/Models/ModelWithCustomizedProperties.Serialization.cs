@@ -20,21 +20,13 @@ namespace CustomizationsInTsp.Models
 
         void IJsonModel<ModelWithCustomizedProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithCustomizedProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("propertyToMakeInternal"u8);
             writer.WriteNumberValue(PropertyToMakeInternal);
             writer.WritePropertyName("propertyToRename"u8);
@@ -218,6 +210,7 @@ namespace CustomizationsInTsp.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ModelWithCustomizedProperties IJsonModel<ModelWithCustomizedProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -20,21 +20,13 @@ namespace Encode.Datetime.Models
 
         void IJsonModel<Rfc3339DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<Rfc3339DatetimeProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(Rfc3339DatetimeProperty)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value, "O");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -52,6 +44,7 @@ namespace Encode.Datetime.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         Rfc3339DatetimeProperty IJsonModel<Rfc3339DatetimeProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

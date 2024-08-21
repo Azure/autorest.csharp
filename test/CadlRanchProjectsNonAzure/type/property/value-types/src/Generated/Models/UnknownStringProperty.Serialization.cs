@@ -14,21 +14,13 @@ namespace Scm._Type.Property.ValueTypes.Models
     {
         void IJsonModel<UnknownStringProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<UnknownStringProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(UnknownStringProperty)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Property);
@@ -53,6 +45,7 @@ namespace Scm._Type.Property.ValueTypes.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         UnknownStringProperty IJsonModel<UnknownStringProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -15,21 +15,13 @@ namespace Payload.MultiPart.Models
     {
         void IJsonModel<MultiPartRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<MultiPartRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(MultiPartRequest)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
             writer.WritePropertyName("profileImage"u8);
@@ -56,6 +48,7 @@ namespace Payload.MultiPart.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         MultiPartRequest IJsonModel<MultiPartRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

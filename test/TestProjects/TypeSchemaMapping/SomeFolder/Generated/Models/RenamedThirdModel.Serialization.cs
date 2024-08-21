@@ -21,21 +21,13 @@ namespace CustomNamespace
 
         void IJsonModel<RenamedThirdModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<RenamedThirdModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("ETag"u8);
             writer.WriteStringValue(CustomizedETagProperty.ToString());
             writer.WritePropertyName("CreatedAt"u8);
@@ -55,6 +47,7 @@ namespace CustomNamespace
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         RenamedThirdModel IJsonModel<RenamedThirdModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

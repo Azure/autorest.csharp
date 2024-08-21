@@ -21,21 +21,13 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         void IJsonModel<DataDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<DataDisk>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DataDisk)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
             if (Optional.IsDefined(Name))
@@ -105,6 +97,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         DataDisk IJsonModel<DataDisk>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

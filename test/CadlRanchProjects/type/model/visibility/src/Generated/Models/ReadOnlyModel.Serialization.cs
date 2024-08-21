@@ -20,21 +20,13 @@ namespace _Type.Model.Visibility.Models
 
         void IJsonModel<ReadOnlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ReadOnlyModel)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (options.Format != "W" && Optional.IsCollectionDefined(OptionalNullableIntList))
             {
                 if (OptionalNullableIntList != null)
@@ -78,6 +70,7 @@ namespace _Type.Model.Visibility.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ReadOnlyModel IJsonModel<ReadOnlyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -20,21 +20,13 @@ namespace _Azure.Lro.Standard.Models
 
         void IJsonModel<User>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<User>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(User)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
@@ -57,6 +49,7 @@ namespace _Azure.Lro.Standard.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         User IJsonModel<User>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

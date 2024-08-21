@@ -21,21 +21,13 @@ namespace AzureSample.ResourceManager.Sample.Models
 
         void IJsonModel<HardwareProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<HardwareProfile>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(HardwareProfile)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (Optional.IsDefined(VmSize))
             {
                 writer.WritePropertyName("vmSize"u8);
@@ -56,6 +48,7 @@ namespace AzureSample.ResourceManager.Sample.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         HardwareProfile IJsonModel<HardwareProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

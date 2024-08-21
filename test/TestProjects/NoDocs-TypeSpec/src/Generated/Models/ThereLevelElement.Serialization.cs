@@ -20,19 +20,13 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<ThereLevelElement>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ThereLevelElement>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ThereLevelElement)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Extension))
             {
                 writer.WritePropertyName("extension"u8);
@@ -58,6 +52,7 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ThereLevelElement IJsonModel<ThereLevelElement>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

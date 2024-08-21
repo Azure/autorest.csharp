@@ -20,21 +20,13 @@ namespace paging.Models
 
         void IJsonModel<OdataProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(OdataProductResult)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Values))
             {
                 writer.WritePropertyName("values"u8);
@@ -65,6 +57,7 @@ namespace paging.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         OdataProductResult IJsonModel<OdataProductResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

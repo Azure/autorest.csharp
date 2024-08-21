@@ -20,21 +20,13 @@ namespace Encode.Duration.Models
 
         void IJsonModel<ISO8601DurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ISO8601DurationProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ISO8601DurationProperty)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value, "P");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -52,6 +44,7 @@ namespace Encode.Duration.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ISO8601DurationProperty IJsonModel<ISO8601DurationProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

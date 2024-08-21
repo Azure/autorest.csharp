@@ -20,21 +20,13 @@ namespace Pagination.Models
 
         void IJsonModel<DimensionValueListItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<DimensionValueListItem>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DimensionValueListItem)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStartArray();
             foreach (var item in Value)
@@ -57,6 +49,7 @@ namespace Pagination.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         DimensionValueListItem IJsonModel<DimensionValueListItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

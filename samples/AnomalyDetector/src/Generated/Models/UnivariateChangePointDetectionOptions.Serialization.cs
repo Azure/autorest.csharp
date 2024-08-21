@@ -20,21 +20,13 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<UnivariateChangePointDetectionOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<UnivariateChangePointDetectionOptions>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(UnivariateChangePointDetectionOptions)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("series"u8);
             writer.WriteStartArray();
             foreach (var item in Series)
@@ -79,6 +71,7 @@ namespace AnomalyDetector.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         UnivariateChangePointDetectionOptions IJsonModel<UnivariateChangePointDetectionOptions>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

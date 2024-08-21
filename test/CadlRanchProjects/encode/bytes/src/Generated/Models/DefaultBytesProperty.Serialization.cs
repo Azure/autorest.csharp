@@ -20,21 +20,13 @@ namespace Encode.Bytes.Models
 
         void IJsonModel<DefaultBytesProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<DefaultBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DefaultBytesProperty)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteBase64StringValue(Value.ToArray(), "D");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -52,6 +44,7 @@ namespace Encode.Bytes.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         DefaultBytesProperty IJsonModel<DefaultBytesProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

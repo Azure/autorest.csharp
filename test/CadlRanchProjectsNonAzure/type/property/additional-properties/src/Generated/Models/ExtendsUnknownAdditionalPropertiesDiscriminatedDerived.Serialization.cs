@@ -14,22 +14,13 @@ namespace Scm._Type.Property.AdditionalProperties.Models
     {
         void IJsonModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ExtendsUnknownAdditionalPropertiesDiscriminatedDerived)} does not support writing '{format}' format.");
             }
 
-            base.JsonModelWriteCore(writer, options);
+            writer.WriteStartObject();
             writer.WritePropertyName("index"u8);
             writer.WriteNumberValue(Index);
             if (Optional.IsDefined(Age))
@@ -37,6 +28,10 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 writer.WritePropertyName("age"u8);
                 writer.WriteNumberValue(Age.Value);
             }
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
             foreach (var item in AdditionalProperties)
             {
                 writer.WritePropertyName(item.Key);
@@ -49,6 +44,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
                 }
 #endif
             }
+            writer.WriteEndObject();
         }
 
         ExtendsUnknownAdditionalPropertiesDiscriminatedDerived IJsonModel<ExtendsUnknownAdditionalPropertiesDiscriminatedDerived>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

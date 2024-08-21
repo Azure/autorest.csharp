@@ -30,7 +30,7 @@ export const AzureNetEmitterOptionsSchema: JSONSchemaType<AzureNetEmitterOptions
             },
             "use-write-core": {
                 type: "boolean",
-                default: true
+                default: false
             }
         },
         required: []

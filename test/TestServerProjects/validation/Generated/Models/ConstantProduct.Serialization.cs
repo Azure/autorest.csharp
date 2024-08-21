@@ -20,21 +20,13 @@ namespace validation.Models
 
         void IJsonModel<ConstantProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ConstantProduct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ConstantProduct)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty.ToString());
             writer.WritePropertyName("constProperty2"u8);
@@ -54,6 +46,7 @@ namespace validation.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ConstantProduct IJsonModel<ConstantProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

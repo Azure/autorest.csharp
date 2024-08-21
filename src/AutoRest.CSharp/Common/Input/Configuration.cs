@@ -466,7 +466,7 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.UseModelReaderWriter:
                     return false;
                 case Options.UseWriteCore:
-                    return true;
+                    return false;
                 case Options.EnableBicepSerialization:
                     return false;
                 case Options.DisableXmlDocs:

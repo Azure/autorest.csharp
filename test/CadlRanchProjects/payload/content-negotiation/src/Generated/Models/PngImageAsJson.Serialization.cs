@@ -20,21 +20,13 @@ namespace Payload.ContentNegotiation.Models
 
         void IJsonModel<PngImageAsJson>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<PngImageAsJson>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(PngImageAsJson)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("content"u8);
             writer.WriteBase64StringValue(Content.ToArray(), "D");
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -52,6 +44,7 @@ namespace Payload.ContentNegotiation.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         PngImageAsJson IJsonModel<PngImageAsJson>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

@@ -20,21 +20,13 @@ namespace CustomizationsInTsp.Models
 
         void IJsonModel<ModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        private void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<ModelStruct>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ModelStruct)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             if (Optional.IsDefined(OptionalInt))
@@ -62,6 +54,7 @@ namespace CustomizationsInTsp.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         ModelStruct IJsonModel<ModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
