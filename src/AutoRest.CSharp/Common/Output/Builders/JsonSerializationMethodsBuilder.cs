@@ -418,18 +418,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (valueType == typeof(decimal) ||
                 valueType == typeof(double) ||
                 valueType == typeof(float) ||
-                valueType == typeof(long) ||
-                valueType == typeof(int) ||
-                valueType == typeof(short) ||
-                valueType == typeof(sbyte) ||
-                valueType == typeof(byte))
+                IsIntType(valueType))
             {
-                if (valueSerialization.Format is SerializationFormat.String &&
-                    (valueType == typeof(long) ||
-                     valueType == typeof(int) ||
-                     valueType == typeof(short) ||
-                     valueType == typeof(sbyte) ||
-                     valueType == typeof(byte)))
+                if (valueSerialization.Format is SerializationFormat.Int_String &&
+                    IsIntType(valueType))
                 {
                     return utf8JsonWriter.WriteStringValue(value.InvokeToString());
                 }
