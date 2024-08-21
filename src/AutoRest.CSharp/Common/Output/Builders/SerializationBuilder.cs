@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Output.Builders
                 },
                 InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.Int16 or InputPrimitiveTypeKind.Int8
                     or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.UInt32 or InputPrimitiveTypeKind.UInt16 or InputPrimitiveTypeKind.UInt8
-                    or InputPrimitiveTypeKind.Integer or InputPrimitiveTypeKind.SafeInt when primitiveType.Encode is "string" => SerializationFormat.String,
+                    or InputPrimitiveTypeKind.Integer or InputPrimitiveTypeKind.SafeInt when primitiveType.Encode is "string" => SerializationFormat.Int_String,
                 _ => SerializationFormat.Default
             },
             _ => SerializationFormat.Default

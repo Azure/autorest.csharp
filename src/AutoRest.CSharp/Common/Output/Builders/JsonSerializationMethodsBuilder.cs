@@ -1207,7 +1207,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static ValueExpression GetIntTypeDeserializationValueExpression(JsonElementExpression element, Type type, SerializationFormat format) => format switch
         {
-            SerializationFormat.String => new TypeReference(type).Invoke(nameof(int.Parse), new List<ValueExpression> { element.GetString() }),
+            SerializationFormat.Int_String => new TypeReference(type).Invoke(nameof(int.Parse), new List<ValueExpression> { element.GetString() }),
             _ => type switch
             {
                 Type t when t == typeof(sbyte) => element.GetSByte(),
