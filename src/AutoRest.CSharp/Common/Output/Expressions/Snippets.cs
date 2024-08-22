@@ -86,6 +86,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Return() => new("return", null);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
+        public static KeywordExpression Base => new KeywordExpression("base", null);
 
         public static EnumerableExpression InvokeArrayEmpty(CSharpType arrayItemType)
             => new(arrayItemType, new InvokeStaticMethodExpression(typeof(Array), nameof(Array.Empty), Array.Empty<ValueExpression>(), new[] { arrayItemType }));

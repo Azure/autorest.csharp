@@ -231,8 +231,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var writerParameter = new Parameter("writer", $"The JSON writer.", typeof(Utf8JsonWriter), null, ValidationType.None, null);
             var optionsParameter = new Parameter("options", $"The client options for reading and writing models.", typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
-            var utf8JsonWriter = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriter);
-            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            var utf8JsonWriter = new Utf8JsonWriterExpression(writerParameter);
+            var options = new ModelReaderWriterOptionsExpression(optionsParameter);
 
             return new Method
             (
@@ -249,11 +249,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 CallBaseJsonModelWriteCore(utf8JsonWriter, options, hasInherits),
                 WriteProperties(utf8JsonWriter, serialization.SelfProperties, serialization.RawDataField?.Value, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties, false),
-                CallSerializeAdditionalPropertiesForRawdata(serialization, utf8JsonWriter, options, hasInherits)
+                CallSerializeAdditionalPropertiesForRawData(serialization, utf8JsonWriter, options, hasInherits)
             };
         }
 
-        private static MethodBodyStatement CallSerializeAdditionalPropertiesForRawdata(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)
+        private static MethodBodyStatement CallSerializeAdditionalPropertiesForRawData(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, bool hasInherits)
         {
             return hasInherits ?
                 EmptyStatement
@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             // base.<JsonModelWriteCore>()
             return hasInherits ?
-                new KeywordExpression("base", null).Invoke(_jsonModelWriteCoreMethodName, utf8JsonWriter, options).ToStatement()
+                Base.Invoke(_jsonModelWriteCoreMethodName, utf8JsonWriter, options).ToStatement()
                 : EmptyStatement;
         }
 
