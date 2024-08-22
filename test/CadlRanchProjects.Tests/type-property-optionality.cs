@@ -8,7 +8,6 @@ using System.Text.Json;
 using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -589,6 +588,79 @@ namespace CadlRanchProjects.Tests
             using var document = JsonDocument.Parse("{\"property\":\"13:06:12\"}");
             var output = PlainTimeProperty.DeserializePlainTimeProperty(document.RootElement);
             Assert.AreEqual(PlainTimeData, output.Property);
+        }
+
+        [Test]
+        public void OptionalNullablePropertiesOmitedByDefault()
+        {
+            var inputModel = new PlainTimeProperty();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.False(element.TryGetProperty("property", out _));
+        }
+
+        [Test]
+        public void OptionalPropertiesDeserializedWithNullsWhenUndefined()
+        {
+            var model = PlainTimeProperty.DeserializePlainTimeProperty(JsonDocument.Parse("{}").RootElement);
+            Assert.Null(model.Property);
+        }
+
+        [Test]
+        public void OptionalPropertiesDeserializedWithValues()
+        {
+            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\": \"2\"}").RootElement);
+            Assert.AreEqual("2", model.Property);
+        }
+
+        [Test]
+        public void OptionalListPropertiesDoNotSerializeWhenUntouched()
+        {
+            var inputModel = new CollectionsByteProperty();
+
+            // Perform non mutating operations
+            _ = inputModel.Property.Count;
+            _ = inputModel.Property.IsReadOnly;
+            _ = inputModel.Property.Remove(BinaryData.FromString("a"));
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.False(element.TryGetProperty("property", out _));
+        }
+
+        [Test]
+        public void OptionalListPropertiesSerializeAfterMutation()
+        {
+            var inputModel = new CollectionsModelProperty();
+
+            inputModel.Property.Add(new StringProperty()
+            {
+                Property = "abc"
+            });
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.AreEqual("[{\"property\":\"abc\"}]", element.GetProperty("property").ToString());
+        }
+
+        [Test]
+        public void OptionalEmptyListSerializeAfterMutation()
+        {
+            var inputModel = new CollectionsByteProperty();
+
+            inputModel.Property.Add(BinaryData.FromString("abc"));
+            inputModel.Property.Clear();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.AreEqual("[]", element.GetProperty("property").ToString());
+        }
+
+        [Test]
+        public void OptionalPropertyWithNullIsAccepted()
+        {
+            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\":null}").RootElement);
+            Assert.Null(model.Property);
         }
     }
 }
