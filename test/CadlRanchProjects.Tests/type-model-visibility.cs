@@ -11,6 +11,7 @@ using _Type.Model.Visibility;
 using _Type.Model.Visibility.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
+using Azure.Core;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -27,6 +28,62 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(3, response.Value.OptionalNullableIntList[2]);
             Assert.AreEqual("value1", response.Value.OptionalStringRecord["k1"]);
             Assert.AreEqual("value2", response.Value.OptionalStringRecord["k2"]);
+        });
+
+        [Test]
+        public Task Model_HeadModelTest() => Test(async (host) =>
+        {
+            var response = await new VisibilityClient(host, null).HeadModelAsync(new QueryModel(123));
+            Assert.AreEqual(200, response.Status);
+        });
+
+        [Test]
+        public Task Model_GetModelTest() => Test(async (host) =>
+        {
+            var response = await new VisibilityClient(host, null).GetModelAsync(new QueryModel(123));
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("abc", response.Value.ReadProp);
+        });
+
+        [Test]
+        public Task Model_PutModelTest() => Test(async (host) =>
+        {
+            var createProp = new List<string>
+            {
+                "foo", "bar"
+            };
+            var updateProp = new List<int> { 1, 2 };
+            var response = await new VisibilityClient(host, null).PutModelAsync(new VisibilityModel(createProp, updateProp));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Model_PatchModelTest() => Test(async (host) =>
+        {
+            var value = new
+            {
+                updateProp = new[] { 1, 2 }
+            };
+            var response = await new VisibilityClient(host, null).PatchModelAsync(RequestContent.Create(value));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Model_PostModelTest() => Test(async (host) =>
+        {
+            var createProp = new List<string>
+            {
+                "foo", "bar"
+            };
+            var response = await new VisibilityClient(host, null).PostModelAsync(new CreateModel(createProp));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Model_DeleteModelTest() => Test(async (host) =>
+        {
+            var response = await new VisibilityClient(host, null).DeleteModelAsync(new DeleteModel(true));
+            Assert.AreEqual(204, response.Status);
         });
 
         public static PropertyInfo HasProperty(Type type, string name, BindingFlags bindingFlags)

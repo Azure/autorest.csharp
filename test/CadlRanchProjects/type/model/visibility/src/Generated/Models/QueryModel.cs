@@ -7,12 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> Output model with visibility properties. </summary>
-    public partial class VisibilityModel
+    /// <summary> Input model with readonly properties. </summary>
+    public partial class QueryModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,38 +45,28 @@ namespace _Type.Model.Visibility.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createProp"/> or <paramref name="updateProp"/> is null. </exception>
-        public VisibilityModel(IEnumerable<string> createProp, IEnumerable<int> updateProp)
+        /// <summary> Initializes a new instance of <see cref="QueryModel"/>. </summary>
+        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
+        public QueryModel(int queryProp)
         {
-            Argument.AssertNotNull(createProp, nameof(createProp));
-            Argument.AssertNotNull(updateProp, nameof(updateProp));
-
-            CreateProp = createProp.ToList();
-            UpdateProp = updateProp.ToList();
+            QueryProp = queryProp;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
+        /// <summary> Initializes a new instance of <see cref="QueryModel"/>. </summary>
+        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VisibilityModel(IList<string> createProp, IList<int> updateProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal QueryModel(int queryProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            CreateProp = createProp;
-            UpdateProp = updateProp;
+            QueryProp = queryProp;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/> for deserialization. </summary>
-        internal VisibilityModel()
+        /// <summary> Initializes a new instance of <see cref="QueryModel"/> for deserialization. </summary>
+        internal QueryModel()
         {
         }
 
-        /// <summary> Required string[], illustrating a create property. </summary>
-        public IList<string> CreateProp { get; }
-        /// <summary> Required int32[], illustrating a update property. </summary>
-        public IList<int> UpdateProp { get; }
+        /// <summary> Required int32, illustrating a query property. </summary>
+        public int QueryProp { get; }
     }
 }

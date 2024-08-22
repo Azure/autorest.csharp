@@ -48,33 +48,33 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Get model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelAsync(VisibilityModel,CancellationToken)']/*" />
-        public virtual async Task<Response<VisibilityModel>> GetModelAsync(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelAsync(QueryModel,CancellationToken)']/*" />
+        public virtual async Task<Response<ReadModel>> GetModelAsync(QueryModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
             using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetModelAsync(content, context).ConfigureAwait(false);
-            return Response.FromValue(VisibilityModel.FromResponse(response), response);
+            return Response.FromValue(ReadModel.FromResponse(response), response);
         }
 
         /// <summary> Get model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModel(VisibilityModel,CancellationToken)']/*" />
-        public virtual Response<VisibilityModel> GetModel(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModel(QueryModel,CancellationToken)']/*" />
+        public virtual Response<ReadModel> GetModel(QueryModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
             using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetModel(content, context);
-            return Response.FromValue(VisibilityModel.FromResponse(response), response);
+            return Response.FromValue(ReadModel.FromResponse(response), response);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModelAsync(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelAsync(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -126,7 +126,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModel(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModel(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -156,11 +156,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(VisibilityModel,CancellationToken)']/*" />
-        public virtual async Task<Response> HeadModelAsync(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(QueryModel,CancellationToken)']/*" />
+        public virtual async Task<Response> HeadModelAsync(QueryModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -171,11 +171,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(VisibilityModel,CancellationToken)']/*" />
-        public virtual Response HeadModel(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(QueryModel,CancellationToken)']/*" />
+        public virtual Response HeadModel(QueryModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -195,7 +195,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModelAsync(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HeadModelAsync(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -234,7 +234,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModel(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HeadModel(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -440,11 +440,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Post model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="CreateModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='PostModelAsync(VisibilityModel,CancellationToken)']/*" />
-        public virtual async Task<Response> PostModelAsync(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='PostModelAsync(CreateModel,CancellationToken)']/*" />
+        public virtual async Task<Response> PostModelAsync(CreateModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -455,11 +455,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Post model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="CreateModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='PostModel(VisibilityModel,CancellationToken)']/*" />
-        public virtual Response PostModel(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='PostModel(CreateModel,CancellationToken)']/*" />
+        public virtual Response PostModel(CreateModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -479,7 +479,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PostModelAsync(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PostModelAsync(CreateModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -518,7 +518,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PostModel(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PostModel(CreateModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -548,11 +548,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Delete model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="Models.DeleteModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='DeleteModelAsync(VisibilityModel,CancellationToken)']/*" />
-        public virtual async Task<Response> DeleteModelAsync(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='DeleteModelAsync(DeleteModel,CancellationToken)']/*" />
+        public virtual async Task<Response> DeleteModelAsync(DeleteModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -563,11 +563,11 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary> Delete model. </summary>
-        /// <param name="input"> The <see cref="VisibilityModel"/> to use. </param>
+        /// <param name="input"> The <see cref="Models.DeleteModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='DeleteModel(VisibilityModel,CancellationToken)']/*" />
-        public virtual Response DeleteModel(VisibilityModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='DeleteModel(DeleteModel,CancellationToken)']/*" />
+        public virtual Response DeleteModel(DeleteModel input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -587,7 +587,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteModelAsync(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteModelAsync(Models.DeleteModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -626,7 +626,7 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DeleteModel(VisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DeleteModel(Models.DeleteModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

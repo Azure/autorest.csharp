@@ -7,12 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> Output model with visibility properties. </summary>
-    public partial class VisibilityModel
+    /// <summary> Input model with readonly properties. </summary>
+    public partial class DeleteModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,38 +45,28 @@ namespace _Type.Model.Visibility.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createProp"/> or <paramref name="updateProp"/> is null. </exception>
-        public VisibilityModel(IEnumerable<string> createProp, IEnumerable<int> updateProp)
+        /// <summary> Initializes a new instance of <see cref="DeleteModel"/>. </summary>
+        /// <param name="deleteProp"> Required boolean, illustrating a delete property. </param>
+        public DeleteModel(bool deleteProp)
         {
-            Argument.AssertNotNull(createProp, nameof(createProp));
-            Argument.AssertNotNull(updateProp, nameof(updateProp));
-
-            CreateProp = createProp.ToList();
-            UpdateProp = updateProp.ToList();
+            DeleteProp = deleteProp;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
+        /// <summary> Initializes a new instance of <see cref="DeleteModel"/>. </summary>
+        /// <param name="deleteProp"> Required boolean, illustrating a delete property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VisibilityModel(IList<string> createProp, IList<int> updateProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal DeleteModel(bool deleteProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            CreateProp = createProp;
-            UpdateProp = updateProp;
+            DeleteProp = deleteProp;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/> for deserialization. </summary>
-        internal VisibilityModel()
+        /// <summary> Initializes a new instance of <see cref="DeleteModel"/> for deserialization. </summary>
+        internal DeleteModel()
         {
         }
 
-        /// <summary> Required string[], illustrating a create property. </summary>
-        public IList<string> CreateProp { get; }
-        /// <summary> Required int32[], illustrating a update property. </summary>
-        public IList<int> UpdateProp { get; }
+        /// <summary> Required boolean, illustrating a delete property. </summary>
+        public bool DeleteProp { get; }
     }
 }

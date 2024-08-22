@@ -1,0 +1,10 @@
+{
+  "output-folder": ".",
+  "namespace": "Scm._Type.Model.Visibility",
+  "library-name": "Scm._Type.Model.Visibility",
+  "use-model-reader-writer": true,
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
+  ]
+}

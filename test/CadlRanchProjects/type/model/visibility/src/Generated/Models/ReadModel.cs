@@ -7,12 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> Output model with visibility properties. </summary>
-    public partial class VisibilityModel
+    /// <summary> Output model with readonly properties. </summary>
+    public partial class ReadModel
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,38 +45,21 @@ namespace _Type.Model.Visibility.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="createProp"/> or <paramref name="updateProp"/> is null. </exception>
-        public VisibilityModel(IEnumerable<string> createProp, IEnumerable<int> updateProp)
+        /// <summary> Initializes a new instance of <see cref="ReadModel"/>. </summary>
+        internal ReadModel()
         {
-            Argument.AssertNotNull(createProp, nameof(createProp));
-            Argument.AssertNotNull(updateProp, nameof(updateProp));
-
-            CreateProp = createProp.ToList();
-            UpdateProp = updateProp.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/>. </summary>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
+        /// <summary> Initializes a new instance of <see cref="ReadModel"/>. </summary>
+        /// <param name="readProp"> Required string, illustrating a readonly property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal VisibilityModel(IList<string> createProp, IList<int> updateProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ReadModel(string readProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            CreateProp = createProp;
-            UpdateProp = updateProp;
+            ReadProp = readProp;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VisibilityModel"/> for deserialization. </summary>
-        internal VisibilityModel()
-        {
-        }
-
-        /// <summary> Required string[], illustrating a create property. </summary>
-        public IList<string> CreateProp { get; }
-        /// <summary> Required int32[], illustrating a update property. </summary>
-        public IList<int> UpdateProp { get; }
+        /// <summary> Required string, illustrating a readonly property. </summary>
+        public string ReadProp { get; }
     }
 }

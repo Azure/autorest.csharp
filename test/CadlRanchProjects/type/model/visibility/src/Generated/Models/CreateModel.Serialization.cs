@@ -14,16 +14,16 @@ using Azure.Core;
 
 namespace _Type.Model.Visibility.Models
 {
-    public partial class VisibilityModel : IUtf8JsonSerializable, IJsonModel<VisibilityModel>
+    public partial class CreateModel : IUtf8JsonSerializable, IJsonModel<CreateModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VisibilityModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateModel>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<VisibilityModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<CreateModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VisibilityModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VisibilityModel)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateModel)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -32,13 +32,6 @@ namespace _Type.Model.Visibility.Models
             foreach (var item in CreateProp)
             {
                 writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
-            writer.WritePropertyName("updateProp"u8);
-            writer.WriteStartArray();
-            foreach (var item in UpdateProp)
-            {
-                writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -59,19 +52,19 @@ namespace _Type.Model.Visibility.Models
             writer.WriteEndObject();
         }
 
-        VisibilityModel IJsonModel<VisibilityModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateModel IJsonModel<CreateModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VisibilityModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateModel>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VisibilityModel)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(CreateModel)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeVisibilityModel(document.RootElement, options);
+            return DeserializeCreateModel(document.RootElement, options);
         }
 
-        internal static VisibilityModel DeserializeVisibilityModel(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static CreateModel DeserializeCreateModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -80,7 +73,6 @@ namespace _Type.Model.Visibility.Models
                 return null;
             }
             IList<string> createProp = default;
-            IList<int> updateProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -95,62 +87,52 @@ namespace _Type.Model.Visibility.Models
                     createProp = array;
                     continue;
                 }
-                if (property.NameEquals("updateProp"u8))
-                {
-                    List<int> array = new List<int>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetInt32());
-                    }
-                    updateProp = array;
-                    continue;
-                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new VisibilityModel(createProp, updateProp, serializedAdditionalRawData);
+            return new CreateModel(createProp, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<VisibilityModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateModel>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VisibilityModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(VisibilityModel)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateModel)} does not support writing '{options.Format}' format.");
             }
         }
 
-        VisibilityModel IPersistableModel<VisibilityModel>.Create(BinaryData data, ModelReaderWriterOptions options)
+        CreateModel IPersistableModel<CreateModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<VisibilityModel>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CreateModel>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeVisibilityModel(document.RootElement, options);
+                        return DeserializeCreateModel(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(VisibilityModel)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(CreateModel)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<VisibilityModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static VisibilityModel FromResponse(Response response)
+        internal static CreateModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeVisibilityModel(document.RootElement);
+            return DeserializeCreateModel(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

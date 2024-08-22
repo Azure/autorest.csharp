@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetModelAsync(VisibilityModel,CancellationToken)">
+    <member name="GetModelAsync(QueryModel,CancellationToken)">
       <example>
 This sample shows how to call GetModelAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
-Response<VisibilityModel> response = await client.GetModelAsync(input);
+QueryModel input = new QueryModel(1234);
+Response<ReadModel> response = await client.GetModelAsync(input);
 ]]></code>
 This sample shows how to call GetModelAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
-Response<VisibilityModel> response = await client.GetModelAsync(input);
+QueryModel input = new QueryModel(1234);
+Response<ReadModel> response = await client.GetModelAsync(input);
 ]]></code></example>
     </member>
-    <member name="GetModel(VisibilityModel,CancellationToken)">
+    <member name="GetModel(QueryModel,CancellationToken)">
       <example>
 This sample shows how to call GetModel.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
-Response<VisibilityModel> response = client.GetModel(input);
+QueryModel input = new QueryModel(1234);
+Response<ReadModel> response = client.GetModel(input);
 ]]></code>
 This sample shows how to call GetModel with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
-Response<VisibilityModel> response = client.GetModel(input);
+QueryModel input = new QueryModel(1234);
+Response<ReadModel> response = client.GetModel(input);
 ]]></code></example>
     </member>
     <member name="GetModelAsync(RequestContent,RequestContext)">
@@ -44,24 +44,11 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.GetModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("readProp").ToString());
-Console.WriteLine(result.GetProperty("queryProp").ToString());
-Console.WriteLine(result.GetProperty("createProp")[0].ToString());
-Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
-Console.WriteLine(result.GetProperty("deleteProp").ToString());
 ]]></code>
 This sample shows how to call GetModelAsync with all request content and parse the result.
 <code><![CDATA[
@@ -70,24 +57,11 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.GetModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("readProp").ToString());
-Console.WriteLine(result.GetProperty("queryProp").ToString());
-Console.WriteLine(result.GetProperty("createProp")[0].ToString());
-Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
-Console.WriteLine(result.GetProperty("deleteProp").ToString());
 ]]></code></example>
     </member>
     <member name="GetModel(RequestContent,RequestContext)">
@@ -99,24 +73,11 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.GetModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("readProp").ToString());
-Console.WriteLine(result.GetProperty("queryProp").ToString());
-Console.WriteLine(result.GetProperty("createProp")[0].ToString());
-Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
-Console.WriteLine(result.GetProperty("deleteProp").ToString());
 ]]></code>
 This sample shows how to call GetModel with all request content and parse the result.
 <code><![CDATA[
@@ -125,57 +86,44 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.GetModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("readProp").ToString());
-Console.WriteLine(result.GetProperty("queryProp").ToString());
-Console.WriteLine(result.GetProperty("createProp")[0].ToString());
-Console.WriteLine(result.GetProperty("updateProp")[0].ToString());
-Console.WriteLine(result.GetProperty("deleteProp").ToString());
 ]]></code></example>
     </member>
-    <member name="HeadModelAsync(VisibilityModel,CancellationToken)">
+    <member name="HeadModelAsync(QueryModel,CancellationToken)">
       <example>
 This sample shows how to call HeadModelAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+QueryModel input = new QueryModel(1234);
 Response response = await client.HeadModelAsync(input);
 ]]></code>
 This sample shows how to call HeadModelAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+QueryModel input = new QueryModel(1234);
 Response response = await client.HeadModelAsync(input);
 ]]></code></example>
     </member>
-    <member name="HeadModel(VisibilityModel,CancellationToken)">
+    <member name="HeadModel(QueryModel,CancellationToken)">
       <example>
 This sample shows how to call HeadModel.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+QueryModel input = new QueryModel(1234);
 Response response = client.HeadModel(input);
 ]]></code>
 This sample shows how to call HeadModel with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+QueryModel input = new QueryModel(1234);
 Response response = client.HeadModel(input);
 ]]></code></example>
     </member>
@@ -188,15 +136,6 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.HeadModelAsync(content);
 
@@ -209,15 +148,6 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.HeadModelAsync(content);
 
@@ -233,15 +163,6 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.HeadModel(content);
 
@@ -254,15 +175,6 @@ VisibilityClient client = new VisibilityClient();
 using RequestContent content = RequestContent.Create(new
 {
     queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.HeadModel(content);
 
@@ -275,14 +187,14 @@ This sample shows how to call PutModelAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 });
 Response response = await client.PutModelAsync(input);
 ]]></code>
 This sample shows how to call PutModelAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 });
 Response response = await client.PutModelAsync(input);
 ]]></code></example>
     </member>
@@ -292,14 +204,14 @@ This sample shows how to call PutModel.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 });
 Response response = client.PutModel(input);
 ]]></code>
 This sample shows how to call PutModel with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+VisibilityModel input = new VisibilityModel(new string[] { "<createProp>" }, new int[] { 1234 });
 Response response = client.PutModel(input);
 ]]></code></example>
     </member>
@@ -311,7 +223,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
@@ -320,7 +231,6 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = await client.PutModelAsync(content);
 
@@ -332,7 +242,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
@@ -341,7 +250,6 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = await client.PutModelAsync(content);
 
@@ -356,7 +264,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
@@ -365,7 +272,6 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = client.PutModel(content);
 
@@ -377,7 +283,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
@@ -386,7 +291,6 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = client.PutModel(content);
 
@@ -401,16 +305,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
     updateProp = new object[]
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = await client.PatchModelAsync(content);
 
@@ -422,16 +320,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
     updateProp = new object[]
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = await client.PatchModelAsync(content);
 
@@ -446,16 +338,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
     updateProp = new object[]
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = client.PatchModel(content);
 
@@ -467,53 +353,47 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
     updateProp = new object[]
     {
         1234
     },
-    deleteProp = true,
 });
 Response response = client.PatchModel(content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="PostModelAsync(VisibilityModel,CancellationToken)">
+    <member name="PostModelAsync(CreateModel,CancellationToken)">
       <example>
 This sample shows how to call PostModelAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+CreateModel input = new CreateModel(new string[] { "<createProp>" });
 Response response = await client.PostModelAsync(input);
 ]]></code>
 This sample shows how to call PostModelAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+CreateModel input = new CreateModel(new string[] { "<createProp>" });
 Response response = await client.PostModelAsync(input);
 ]]></code></example>
     </member>
-    <member name="PostModel(VisibilityModel,CancellationToken)">
+    <member name="PostModel(CreateModel,CancellationToken)">
       <example>
 This sample shows how to call PostModel.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+CreateModel input = new CreateModel(new string[] { "<createProp>" });
 Response response = client.PostModel(input);
 ]]></code>
 This sample shows how to call PostModel with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+CreateModel input = new CreateModel(new string[] { "<createProp>" });
 Response response = client.PostModel(input);
 ]]></code></example>
     </member>
@@ -525,16 +405,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
     },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.PostModelAsync(content);
 
@@ -546,16 +420,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
     },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = await client.PostModelAsync(content);
 
@@ -570,16 +438,10 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
     },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.PostModel(content);
 
@@ -591,53 +453,47 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
     createProp = new object[]
     {
         "<createProp>"
     },
-    updateProp = new object[]
-    {
-        1234
-    },
-    deleteProp = true,
 });
 Response response = client.PostModel(content);
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="DeleteModelAsync(VisibilityModel,CancellationToken)">
+    <member name="DeleteModelAsync(DeleteModel,CancellationToken)">
       <example>
 This sample shows how to call DeleteModelAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+DeleteModel input = new DeleteModel(true);
 Response response = await client.DeleteModelAsync(input);
 ]]></code>
 This sample shows how to call DeleteModelAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+DeleteModel input = new DeleteModel(true);
 Response response = await client.DeleteModelAsync(input);
 ]]></code></example>
     </member>
-    <member name="DeleteModel(VisibilityModel,CancellationToken)">
+    <member name="DeleteModel(DeleteModel,CancellationToken)">
       <example>
 This sample shows how to call DeleteModel.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+DeleteModel input = new DeleteModel(true);
 Response response = client.DeleteModel(input);
 ]]></code>
 This sample shows how to call DeleteModel with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-VisibilityModel input = new VisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+DeleteModel input = new DeleteModel(true);
 Response response = client.DeleteModel(input);
 ]]></code></example>
     </member>
@@ -649,15 +505,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
     deleteProp = true,
 });
 Response response = await client.DeleteModelAsync(content);
@@ -670,15 +517,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
     deleteProp = true,
 });
 Response response = await client.DeleteModelAsync(content);
@@ -694,15 +532,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
     deleteProp = true,
 });
 Response response = client.DeleteModel(content);
@@ -715,15 +544,6 @@ VisibilityClient client = new VisibilityClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    queryProp = 1234,
-    createProp = new object[]
-    {
-        "<createProp>"
-    },
-    updateProp = new object[]
-    {
-        1234
-    },
     deleteProp = true,
 });
 Response response = client.DeleteModel(content);
