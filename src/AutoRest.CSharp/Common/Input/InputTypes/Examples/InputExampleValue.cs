@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
     internal record InputExampleListValue(InputType Type, IReadOnlyList<InputExampleValue> Values) : InputExampleValue(Type);
 
-    internal record InputExampleObjectValue(InputType Type, IReadOnlyDictionary<string, InputExampleValue> Values): InputExampleValue(Type);
+    internal record InputExampleObjectValue(InputType Type, IReadOnlyDictionary<string, InputExampleValue> Values): InputExampleValue(Type); // TODO -- split this into model and dict
 
     internal record InputExampleStreamValue(InputType Type, string Filename): InputExampleValue(Type);
 }
