@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
-using AutoRest.TestServer.Tests.Infrastructure;
-using NUnit.Framework;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Xml;
 using _Type._Dictionary;
 using _Type._Dictionary.Models;
+using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
+using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
@@ -239,5 +240,18 @@ namespace CadlRanchProjects.Tests
             });
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void InnerModelsHaveOnlyOnePublicCtor()
+        {
+            Assert.AreEqual(1, typeof(InnerModel).GetConstructors().Length);
+        }
+
+        [Test]
+        public void RequiredPropertiesAreSettable()
+        {
+            var requiredString = TypeAsserts.HasProperty(typeof(InnerModel), nameof(InnerModel.Property), BindingFlags.Public | BindingFlags.Instance);
+            Assert.NotNull(requiredString.SetMethod);
+        }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ClientModel.Primitives;
 using System.Xml;
 using _Type.Property.Nullable;
 using _Type.Property.Nullable.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using NUnit.Framework;
+using System.Reflection;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace CadlRanchProjects.Tests
 {
@@ -285,5 +289,90 @@ namespace CadlRanchProjects.Tests
             var response = await new NullableClient(host, null).GetCollectionsStringClient().PatchNullAsync(RequestContent.Create(value));
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void RequiredNullableAreNotSettable()
+        {
+            var requiredStringList = TypeAsserts.HasProperty(typeof(StringProperty), nameof(StringProperty.NullableProperty), BindingFlags.Public | BindingFlags.Instance);
+
+            Assert.Null(requiredStringList.SetMethod);
+        }
+
+        [Test]
+        public void RequiredNullableListsSerializedAsNull()
+        {
+            var inputModel = new CollectionsStringProperty("required", null);
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void RequiredNullableListsSerializedEmptyWhenCleared()
+        {
+            var inputModel = new CollectionsStringProperty("required", new List<string> {"1", "2"});
+            inputModel.NullableProperty.Clear();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
+            Assert.AreEqual(0, element.GetProperty("nullableProperty").GetArrayLength());
+        }
+
+        [Test]
+        public void RequiredNullablePropertiesSerializeWhenSet()
+        {
+            var inputModel = new CollectionsStringProperty("required", new List<string> { "1", "2" });
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual("1", element.GetProperty("nullableProperty")[0].GetString());
+            Assert.AreEqual("2", element.GetProperty("nullableProperty")[1].GetString());
+            Assert.AreEqual(2, element.GetProperty("nullableProperty").GetArrayLength());
+        }
+
+        [Test]
+        public void RequiredNullablePropertiesInputDeserializedWithNulls()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"NullableProperty\": null}").RootElement);
+            Assert.Null(model.NullableProperty);
+        }
+
+        [Test]
+        public void RequiredNullablePropertiesDeserializedWithNulls()
+        {
+            var inputModel = new CollectionsStringProperty("required", null);
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Null, element.GetProperty("nullableProperty").ValueKind);
+        }
+
+        [Test]
+        public void RequiredNullablePropertiesSerializedAsEmptyLists()
+        {
+            var inputModel = new CollectionsStringProperty("required", Array.Empty<string>());
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.AreEqual(JsonValueKind.Array, element.GetProperty("nullableProperty").ValueKind);
+            Assert.AreEqual(0, element.GetProperty("nullableProperty").GetArrayLength());
+        }
+
+        [Test]
+        public void NullablePropertiesDeserializedAsValues()
+        {
+            var model = CollectionsStringProperty.DeserializeCollectionsStringProperty(JsonDocument.Parse("{\"nullableProperty\": [\"a\", \"b\"]}").RootElement);
+            CollectionAssert.AreEqual(new List<string> { "a", "b" }, model.NullableProperty);
+        }
+
+        [Test]
+        public void CollectionPropertiesCanBeMutatedAfterConstruction()
+        {
+            var inputModel = new CollectionsStringProperty(
+                "string",
+                Array.Empty<string>()
+            );
+
+            inputModel.NullableProperty.Add("1");
+
+            Assert.AreEqual(1, inputModel.NullableProperty.Count);
+        }
     }
 }
