@@ -155,38 +155,30 @@ namespace _Type.Model.Visibility
             }
         }
 
-        /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
+        /// <summary> Get model with query. </summary>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(QueryModel,CancellationToken)']/*" />
-        public virtual async Task<Response> HeadModelAsync(QueryModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelWithQueryAsync(int,CancellationToken)']/*" />
+        public virtual async Task<Response<ReadModel>> GetModelWithQueryAsync(int queryProp, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await HeadModelAsync(content, context).ConfigureAwait(false);
-            return response;
+            Response response = await GetModelWithQueryAsync(queryProp, context).ConfigureAwait(false);
+            return Response.FromValue(ReadModel.FromResponse(response), response);
         }
 
-        /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
+        /// <summary> Get model with query. </summary>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(QueryModel,CancellationToken)']/*" />
-        public virtual Response HeadModel(QueryModel input, CancellationToken cancellationToken = default)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelWithQuery(int,CancellationToken)']/*" />
+        public virtual Response<ReadModel> GetModelWithQuery(int queryProp, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using RequestContent content = input.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = HeadModel(content, context);
-            return response;
+            Response response = GetModelWithQuery(queryProp, context);
+            return Response.FromValue(ReadModel.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method] Head model.
+        /// [Protocol Method] Get model with query.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -195,26 +187,23 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModelAsync(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelWithQueryAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> HeadModelAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelWithQueryAsync(int,RequestContext)']/*" />
+        public virtual async Task<Response> GetModelWithQueryAsync(int queryProp, RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.HeadModel");
+            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.GetModelWithQuery");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHeadModelRequest(content, context);
+                using HttpMessage message = CreateGetModelWithQueryRequest(queryProp, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -225,7 +214,7 @@ namespace _Type.Model.Visibility
         }
 
         /// <summary>
-        /// [Protocol Method] Head model.
+        /// [Protocol Method] Get model with query.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -234,26 +223,23 @@ namespace _Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModel(QueryModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelWithQuery(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(RequestContent,RequestContext)']/*" />
-        public virtual Response HeadModel(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='GetModelWithQuery(int,RequestContext)']/*" />
+        public virtual Response GetModelWithQuery(int queryProp, RequestContext context)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.HeadModel");
+            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.GetModelWithQuery");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHeadModelRequest(content, context);
+                using HttpMessage message = CreateGetModelWithQueryRequest(queryProp, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -778,17 +764,17 @@ namespace _Type.Model.Visibility
             return message;
         }
 
-        internal HttpMessage CreateHeadModelRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateGetModelWithQueryRequest(int queryProp, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            request.Method = RequestMethod.Head;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/model/visibility", false);
+            uri.AppendPath("/type/model/visibility/getwithquery", false);
+            uri.AppendQuery("queryProp", queryProp, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
+            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

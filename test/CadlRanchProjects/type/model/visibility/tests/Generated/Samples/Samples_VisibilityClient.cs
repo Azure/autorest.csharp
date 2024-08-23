@@ -124,102 +124,86 @@ namespace _Type.Model.Visibility.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Visibility_HeadModel_ShortVersion()
+        public void Example_Visibility_GetModelWithQuery_ShortVersion()
         {
             VisibilityClient client = new VisibilityClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                queryProp = 1234,
-            });
-            Response response = client.HeadModel(content);
+            Response response = client.GetModelWithQuery(1234, null);
 
-            Console.WriteLine(response.Status);
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("readProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Visibility_HeadModel_ShortVersion_Async()
+        public async Task Example_Visibility_GetModelWithQuery_ShortVersion_Async()
         {
             VisibilityClient client = new VisibilityClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                queryProp = 1234,
-            });
-            Response response = await client.HeadModelAsync(content);
+            Response response = await client.GetModelWithQueryAsync(1234, null);
 
-            Console.WriteLine(response.Status);
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("readProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Visibility_HeadModel_ShortVersion_Convenience()
+        public void Example_Visibility_GetModelWithQuery_ShortVersion_Convenience()
         {
             VisibilityClient client = new VisibilityClient();
 
-            QueryModel input = new QueryModel(1234);
-            Response response = client.HeadModel(input);
+            Response<ReadModel> response = client.GetModelWithQuery(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Visibility_HeadModel_ShortVersion_Convenience_Async()
+        public async Task Example_Visibility_GetModelWithQuery_ShortVersion_Convenience_Async()
         {
             VisibilityClient client = new VisibilityClient();
 
-            QueryModel input = new QueryModel(1234);
-            Response response = await client.HeadModelAsync(input);
+            Response<ReadModel> response = await client.GetModelWithQueryAsync(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Visibility_HeadModel_AllParameters()
+        public void Example_Visibility_GetModelWithQuery_AllParameters()
         {
             VisibilityClient client = new VisibilityClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                queryProp = 1234,
-            });
-            Response response = client.HeadModel(content);
+            Response response = client.GetModelWithQuery(1234, null);
 
-            Console.WriteLine(response.Status);
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("readProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Visibility_HeadModel_AllParameters_Async()
+        public async Task Example_Visibility_GetModelWithQuery_AllParameters_Async()
         {
             VisibilityClient client = new VisibilityClient();
 
-            using RequestContent content = RequestContent.Create(new
-            {
-                queryProp = 1234,
-            });
-            Response response = await client.HeadModelAsync(content);
+            Response response = await client.GetModelWithQueryAsync(1234, null);
 
-            Console.WriteLine(response.Status);
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("readProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Visibility_HeadModel_AllParameters_Convenience()
+        public void Example_Visibility_GetModelWithQuery_AllParameters_Convenience()
         {
             VisibilityClient client = new VisibilityClient();
 
-            QueryModel input = new QueryModel(1234);
-            Response response = client.HeadModel(input);
+            Response<ReadModel> response = client.GetModelWithQuery(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Visibility_HeadModel_AllParameters_Convenience_Async()
+        public async Task Example_Visibility_GetModelWithQuery_AllParameters_Convenience_Async()
         {
             VisibilityClient client = new VisibilityClient();
 
-            QueryModel input = new QueryModel(1234);
-            Response response = await client.HeadModelAsync(input);
+            Response<ReadModel> response = await client.GetModelWithQueryAsync(1234);
         }
 
         [Test]

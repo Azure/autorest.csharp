@@ -93,92 +93,76 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("readProp").ToString());
 ]]></code></example>
     </member>
-    <member name="HeadModelAsync(QueryModel,CancellationToken)">
+    <member name="GetModelWithQueryAsync(int,CancellationToken)">
       <example>
-This sample shows how to call HeadModelAsync.
+This sample shows how to call GetModelWithQueryAsync.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-QueryModel input = new QueryModel(1234);
-Response response = await client.HeadModelAsync(input);
+Response<ReadModel> response = await client.GetModelWithQueryAsync(1234);
 ]]></code>
-This sample shows how to call HeadModelAsync with all parameters.
+This sample shows how to call GetModelWithQueryAsync with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-QueryModel input = new QueryModel(1234);
-Response response = await client.HeadModelAsync(input);
+Response<ReadModel> response = await client.GetModelWithQueryAsync(1234);
 ]]></code></example>
     </member>
-    <member name="HeadModel(QueryModel,CancellationToken)">
+    <member name="GetModelWithQuery(int,CancellationToken)">
       <example>
-This sample shows how to call HeadModel.
+This sample shows how to call GetModelWithQuery.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-QueryModel input = new QueryModel(1234);
-Response response = client.HeadModel(input);
+Response<ReadModel> response = client.GetModelWithQuery(1234);
 ]]></code>
-This sample shows how to call HeadModel with all parameters.
+This sample shows how to call GetModelWithQuery with all parameters.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-QueryModel input = new QueryModel(1234);
-Response response = client.HeadModel(input);
+Response<ReadModel> response = client.GetModelWithQuery(1234);
 ]]></code></example>
     </member>
-    <member name="HeadModelAsync(RequestContent,RequestContext)">
+    <member name="GetModelWithQueryAsync(int,RequestContext)">
       <example>
-This sample shows how to call HeadModelAsync.
+This sample shows how to call GetModelWithQueryAsync and parse the result.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    queryProp = 1234,
-});
-Response response = await client.HeadModelAsync(content);
+Response response = await client.GetModelWithQueryAsync(1234, null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("readProp").ToString());
 ]]></code>
-This sample shows how to call HeadModelAsync with all request content.
+This sample shows how to call GetModelWithQueryAsync with all parameters and parse the result.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    queryProp = 1234,
-});
-Response response = await client.HeadModelAsync(content);
+Response response = await client.GetModelWithQueryAsync(1234, null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("readProp").ToString());
 ]]></code></example>
     </member>
-    <member name="HeadModel(RequestContent,RequestContext)">
+    <member name="GetModelWithQuery(int,RequestContext)">
       <example>
-This sample shows how to call HeadModel.
+This sample shows how to call GetModelWithQuery and parse the result.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    queryProp = 1234,
-});
-Response response = client.HeadModel(content);
+Response response = client.GetModelWithQuery(1234, null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("readProp").ToString());
 ]]></code>
-This sample shows how to call HeadModel with all request content.
+This sample shows how to call GetModelWithQuery with all parameters and parse the result.
 <code><![CDATA[
 VisibilityClient client = new VisibilityClient();
 
-using RequestContent content = RequestContent.Create(new
-{
-    queryProp = 1234,
-});
-Response response = client.HeadModel(content);
+Response response = client.GetModelWithQuery(1234, null);
 
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("readProp").ToString());
 ]]></code></example>
     </member>
     <member name="PutModelAsync(VisibilityModel,CancellationToken)">

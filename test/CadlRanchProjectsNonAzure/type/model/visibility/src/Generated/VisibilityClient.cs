@@ -118,32 +118,24 @@ namespace Scm._Type.Model.Visibility
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual async Task<ClientResult> HeadModelAsync(QueryModel input)
+        /// <summary> Get model with query. </summary>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
+        public virtual async Task<ClientResult<ReadModel>> GetModelWithQueryAsync(int queryProp)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using BinaryContent content = input.ToBinaryContent();
-            ClientResult result = await HeadModelAsync(content, null).ConfigureAwait(false);
-            return result;
+            ClientResult result = await GetModelWithQueryAsync(queryProp, null).ConfigureAwait(false);
+            return ClientResult.FromValue(ReadModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Head model. </summary>
-        /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public virtual ClientResult HeadModel(QueryModel input)
+        /// <summary> Get model with query. </summary>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
+        public virtual ClientResult<ReadModel> GetModelWithQuery(int queryProp)
         {
-            Argument.AssertNotNull(input, nameof(input));
-
-            using BinaryContent content = input.ToBinaryContent();
-            ClientResult result = HeadModel(content, null);
-            return result;
+            ClientResult result = GetModelWithQuery(queryProp, null);
+            return ClientResult.FromValue(ReadModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
         /// <summary>
-        /// [Protocol Method] Head model.
+        /// [Protocol Method] Get model with query.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,26 +144,23 @@ namespace Scm._Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModelAsync(QueryModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelWithQueryAsync(int)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> HeadModelAsync(BinaryContent content, RequestOptions options = null)
+        public virtual async Task<ClientResult> GetModelWithQueryAsync(int queryProp, RequestOptions options)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateHeadModelRequest(content, options);
+            using PipelineMessage message = CreateGetModelWithQueryRequest(queryProp, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
-        /// [Protocol Method] Head model.
+        /// [Protocol Method] Get model with query.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,21 +169,18 @@ namespace Scm._Type.Model.Visibility
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HeadModel(QueryModel)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelWithQuery(int)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="queryProp"> The <see cref="int"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult HeadModel(BinaryContent content, RequestOptions options = null)
+        public virtual ClientResult GetModelWithQuery(int queryProp, RequestOptions options)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateHeadModelRequest(content, options);
+            using PipelineMessage message = CreateGetModelWithQueryRequest(queryProp, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -581,18 +567,18 @@ namespace Scm._Type.Model.Visibility
             return message;
         }
 
-        internal PipelineMessage CreateHeadModelRequest(BinaryContent content, RequestOptions options)
+        internal PipelineMessage CreateGetModelWithQueryRequest(int queryProp, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
             var request = message.Request;
-            request.Method = "HEAD";
+            request.Method = "GET";
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/type/model/visibility", false);
+            uri.AppendPath("/type/model/visibility/getwithquery", false);
+            uri.AppendQuery("queryProp", queryProp, true);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Content-Type", "application/json");
-            request.Content = content;
+            request.Headers.Set("Accept", "application/json");
             message.Apply(options);
             return message;
         }

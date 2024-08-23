@@ -33,8 +33,9 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Model_HeadModelTest() => Test(async (host) =>
         {
-            var response = await new VisibilityClient(host, null).HeadModelAsync(new QueryModel(123));
-            Assert.AreEqual(200, response.Status);
+            var response = await new VisibilityClient(host, null).GetModelWithQueryAsync(123);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("abc", response.Value.ReadProp);
         });
 
         [Test]
