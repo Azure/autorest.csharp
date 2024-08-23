@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>This is the OneModelInTwoResources client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation OneModelInTwoResources for Azure Data Plane</AssemblyTitle>
+    <Version>1.0.0-beta.1</Version>
+    <PackageTags>OneModelInTwoResources</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+    <IsMgmtLibrary>true</IsMgmtLibrary>
+  </PropertyGroup>
+</Project>

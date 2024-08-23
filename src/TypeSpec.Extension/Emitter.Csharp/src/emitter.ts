@@ -21,12 +21,37 @@ import {
     resolveAzureEmitterOptions
 } from "./options.js";
 import { azureSDKContextOptions } from "./sdk-context-options.js";
+import { getArmResources } from "@azure-tools/typespec-azure-resource-manager";
 
 export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
+
+    const details = getArmResources(program);
+    const armResources = [];
+    for (const detail of details) {
+        armResources.push({
+            name: detail.name,
+            kind: detail.kind,
+            armProviderNamespace: detail.armProviderNamespace,
+            keyName: detail.keyName,
+            collectionName: detail.collectionName,
+            resourceModelName: detail.typespecType.name,
+            resourceOperations: {
+                lifecycle: {
+                    "read": detail.operations.lifecycle.read?.path,
+                    "createOrUpdate": detail.operations.lifecycle.createOrUpdate?.path,
+                    "update": detail.operations.lifecycle.update?.path,
+                    "delete": detail.operations.lifecycle.delete?.path
+                },
+                lists: Object.keys(detail.operations.lists).map(key => detail.operations.lists[key].path),
+                actions: Object.keys(detail.operations.actions).map(key => detail.operations.actions[key].path)
+            },
+            resourceTypePath: detail.resourceTypePath,
+        });
+    }
 
     context.options.skipSDKGeneration = true;
     if (
@@ -83,6 +108,10 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))
+        );
+        await program.host.writeFile(
+            resolvePath(outputFolder, "resource.json"),
+            prettierOutput(JSON.stringify(armResources, null, 2))
         );
 
         const csProjFile = resolvePath(
