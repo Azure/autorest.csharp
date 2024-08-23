@@ -72,6 +72,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
+                examplesDirectory: null,
                 helperNamespace: "");
         }
 

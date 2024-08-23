@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Common.Input.Examples;
 using Azure.Core;
 using Humanizer;
 
@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Common.Input
             bool generateConvenienceMethod = false;
             string? crossLanguageDefinitionId = null;
             bool keepClientDefaultValue = false;
+            IReadOnlyList<InputOperationExample>? examples = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -73,7 +74,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean(nameof(InputOperation.GenerateProtocolMethod), ref generateProtocolMethod)
                     || reader.TryReadBoolean(nameof(InputOperation.GenerateConvenienceMethod), ref generateConvenienceMethod)
                     || reader.TryReadString(nameof(InputOperation.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadBoolean(nameof(InputOperation.KeepClientDefaultValue), ref keepClientDefaultValue);
+                    || reader.TryReadBoolean(nameof(InputOperation.KeepClientDefaultValue), ref keepClientDefaultValue)
+                    || reader.TryReadWithConverter(nameof(InputOperation.Examples), options, ref examples);
 
                 if (!isKnownProperty)
                 {
@@ -93,7 +95,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue)
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };
