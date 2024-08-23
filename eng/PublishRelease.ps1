@@ -39,7 +39,7 @@ try {
     $devVersion = "$currentVersion-beta.$BuildNumber"
 
     $attemptCount = 0
-    $maxAttempts = 3
+    $maxAttempts = 4
     while($true) {
         Write-Host "Installing @autorest/csharp@$autorestVersion and updating package.json"
         npm install @autorest/csharp@$autorestVersion --save-exact
@@ -55,7 +55,7 @@ try {
         }
 
         Write-Host "Failed to install @autorest/csharp@$autorestVersion. Retrying in 5 seconds..."
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 15
     }
 
     Write-Host "Setting TypeSpec Emitter version to $devVersion"
