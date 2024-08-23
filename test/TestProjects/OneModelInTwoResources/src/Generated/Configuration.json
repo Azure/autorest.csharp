@@ -1,0 +1,17 @@
+{
+  "output-folder": ".",
+  "namespace": "OneModelInTwoResources",
+  "library-name": "WebAppsAPIClient",
+  "shared-source-folders": [
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net8.0\\Generator.Shared",
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net8.0\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "use-model-reader-writer": true,
+  "flavor": "azure",
+  "generate-test-project": true,
+  "helper-namespace": "OneModelInTwoResources"
+}

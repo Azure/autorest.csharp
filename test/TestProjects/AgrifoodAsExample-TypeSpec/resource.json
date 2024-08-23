@@ -1,0 +1,156 @@
+[
+  {
+    "name": "DataManagerForAgriculture",
+    "kind": "Tracked",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "dataManagerForAgricultureResourceName",
+    "collectionName": "farmBeats",
+    "resourceModelName": "DataManagerForAgriculture",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+        "createOrUpdate": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+        "update": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}",
+        "delete": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats",
+        "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats"
+  },
+  {
+    "name": "PrivateEndpointConnection",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "privateEndpointConnectionName",
+    "collectionName": "privateEndpointConnections",
+    "resourceModelName": "PrivateEndpointConnection",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+        "createOrUpdate": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}",
+        "delete": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections/{privateEndpointConnectionName}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateEndpointConnections"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/privateEndpointConnections"
+  },
+  {
+    "name": "DataConnector",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "dataConnectorName",
+    "collectionName": "dataConnectors",
+    "resourceModelName": "DataConnector",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+        "createOrUpdate": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}",
+        "delete": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors/{dataConnectorName}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/dataConnectors"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/dataConnectors"
+  },
+  {
+    "name": "DataManagerForAgricultureExtension",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "dataManagerForAgricultureExtensionId",
+    "collectionName": "farmBeatsExtensionDefinitions",
+    "resourceModelName": "DataManagerForAgricultureExtension",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions/{dataManagerForAgricultureExtensionId}"
+      },
+      "lists": [
+        "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsExtensionDefinitions"
+      ],
+      "actions": []
+    }
+  },
+  {
+    "name": "Extension",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "extensionId",
+    "collectionName": "extensions",
+    "resourceModelName": "Extension",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+        "createOrUpdate": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}",
+        "delete": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/extensions"
+  },
+  {
+    "name": "PrivateLinkResource",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "subResourceName",
+    "collectionName": "privateLinkResources",
+    "resourceModelName": "PrivateLinkResource",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources/{subResourceName}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/privateLinkResources"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/privateLinkResources"
+  },
+  {
+    "name": "Solution",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "solutionId",
+    "collectionName": "solutions",
+    "resourceModelName": "Solution",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+        "createOrUpdate": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}",
+        "delete": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions/{solutionId}"
+      },
+      "lists": [
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/solutions"
+      ],
+      "actions": []
+    },
+    "resourceTypePath": "/subscriptions/{subscriptionId}/providers/Azure.ResourceManager.AgFoodPlatform/farmBeats/solutions"
+  },
+  {
+    "name": "DataManagerForAgricultureSolution",
+    "kind": "Proxy",
+    "armProviderNamespace": "Azure.ResourceManager.AgFoodPlatform",
+    "keyName": "dataManagerForAgricultureSolutionId",
+    "collectionName": "farmBeatsSolutionDefinitions",
+    "resourceModelName": "DataManagerForAgricultureSolution",
+    "resourceOperations": {
+      "lifecycle": {
+        "read": "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions/{dataManagerForAgricultureSolutionId}"
+      },
+      "lists": [
+        "/providers/Azure.ResourceManager.AgFoodPlatform/farmBeatsSolutionDefinitions"
+      ],
+      "actions": []
+    }
+  }
+]

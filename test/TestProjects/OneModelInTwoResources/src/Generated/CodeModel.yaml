@@ -1,0 +1,1608 @@
+!CodeModel 
+info: !Info 
+  title: WebApps API Client
+schemas: !Schemas 
+  booleans:
+    - !BooleanSchema &ref_26
+      type: boolean
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: Boolean
+          description: ''
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_25
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      maxLength: 90
+      minLength: 1
+      pattern: ^[-\w\._\(\)]+[^\.]$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: SitePropertiesState
+          description: Current state of the app.
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id.
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource Name.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: ResourceKind
+          description: Kind of resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: ResourceLocation
+          description: Resource Location.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: WebAppCollectionNextLink
+          description: Link to next page of resources.
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorCode
+          description: Standardized string to programmatically identify the error.
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorMessage
+          description: Detailed error description and debugging information.
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorTarget
+          description: Detailed error description and debugging information.
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorDetailsItemCode
+          description: Standardized string to programmatically identify the error.
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorDetailsItemMessage
+          description: Detailed error description and debugging information.
+      protocol: !Protocols {}
+    - !StringSchema &ref_17
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorDetailsItemTarget
+          description: Detailed error description and debugging information.
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      language: !Languages 
+        default:
+          name: DefaultErrorResponseErrorInnererror
+          description: More information to debug error.
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_23
+      type: constant
+      value: !ConstantValue 
+        value: '2023-12-01'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20231201
+          description: Api Version (2023-12-01)
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_29
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_36
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_8
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ResourceTags
+          description: Resource tags.
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_32
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_21
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2023-12-01'
+            elementType: !ObjectSchema &ref_2
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2023-12-01'
+              parents: !Relations 
+                all:
+                  - !ObjectSchema &ref_9
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2023-12-01'
+                    children: !Relations 
+                      all:
+                        - *ref_2
+                      immediate:
+                        - *ref_2
+                    properties:
+                      - !Property 
+                        schema: *ref_3
+                        readOnly: true
+                        required: false
+                        serializedName: id
+                        language: !Languages 
+                          default:
+                            name: id
+                            description: Resource Id.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_4
+                        readOnly: true
+                        required: false
+                        serializedName: name
+                        language: !Languages 
+                          default:
+                            name: name
+                            description: Resource Name.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_5
+                        required: false
+                        serializedName: kind
+                        language: !Languages 
+                          default:
+                            name: kind
+                            description: Kind of resource.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_6
+                        required: true
+                        serializedName: location
+                        language: !Languages 
+                          default:
+                            name: location
+                            description: Resource Location.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_7
+                        readOnly: true
+                        required: false
+                        serializedName: type
+                        language: !Languages 
+                          default:
+                            name: type
+                            description: Resource type.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_8
+                        required: false
+                        serializedName: tags
+                        language: !Languages 
+                          default:
+                            name: tags
+                            description: Resource tags.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                      - input
+                    extensions:
+                      x-ms-azure-resource: true
+                    language: !Languages 
+                      default:
+                        name: Resource
+                        description: Azure resource. This resource is tracked in Azure Resource Manager
+                        namespace: ''
+                    protocol: !Protocols {}
+                immediate:
+                  - *ref_9
+              properties:
+                - !Property 
+                  schema: *ref_10
+                  flattenedNames:
+                    - properties
+                    - state
+                  readOnly: true
+                  serializedName: state
+                  language: !Languages 
+                    default:
+                      name: state
+                      description: Current state of the app.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+                - input
+              language: !Languages 
+                default:
+                  name: Site
+                  description: A web app, a mobile app backend, or an API app.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: WebAppCollectionValue
+                description: Collection of resources.
+            protocol: !Protocols {}
+          required: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Collection of resources.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          readOnly: true
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Link to next page of resources.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: WebAppCollection
+          description: Collection of App Service apps.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_2
+    - *ref_9
+    - !ObjectSchema &ref_33
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2023-12-01'
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_19
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2023-12-01'
+            properties:
+              - !Property 
+                schema: *ref_12
+                readOnly: true
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: Standardized string to programmatically identify the error.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_13
+                readOnly: true
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: Detailed error description and debugging information.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_14
+                readOnly: true
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: Detailed error description and debugging information.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_22
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2023-12-01'
+                  elementType: !ObjectSchema &ref_20
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2023-12-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_15
+                        readOnly: true
+                        serializedName: code
+                        language: !Languages 
+                          default:
+                            name: code
+                            description: Standardized string to programmatically identify the error.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_16
+                        readOnly: true
+                        serializedName: message
+                        language: !Languages 
+                          default:
+                            name: message
+                            description: Detailed error description and debugging information.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_17
+                        readOnly: true
+                        serializedName: target
+                        language: !Languages 
+                          default:
+                            name: target
+                            description: Detailed error description and debugging information.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - exception
+                    language: !Languages 
+                      default:
+                        name: DefaultErrorResponseErrorDetailsItem
+                        description: Detailed errors.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  extensions:
+                    x-ms-identifiers: []
+                  language: !Languages 
+                    default:
+                      name: DefaultErrorResponseErrorDetails
+                      description: Array of DefaultErrorResponse-error-detailsItem
+                  protocol: !Protocols {}
+                serializedName: details
+                extensions:
+                  x-ms-identifiers: []
+                language: !Languages 
+                  default:
+                    name: details
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_18
+                readOnly: true
+                serializedName: innererror
+                language: !Languages 
+                  default:
+                    name: innererror
+                    description: More information to debug error.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: DefaultErrorResponseError
+                description: Error model.
+                namespace: ''
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Error model.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language: !Languages 
+        default:
+          name: DefaultErrorResponse
+          description: App Service error response.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_19
+    - *ref_20
+  arrays:
+    - *ref_21
+    - *ref_22
+globalParameters:
+  - !Parameter &ref_27
+    schema: *ref_1
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: SubscriptionId
+        description: Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+        serializedName: subscriptionId
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_24
+    schema: *ref_0
+    clientDefaultValue: https://management.azure.com
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+  - !Parameter &ref_28
+    schema: *ref_23
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language: !Languages 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+operationGroups:
+  - !OperationGroup 
+    $key: WebApps
+    operations:
+      - !Operation 
+        operationId: WebApps_ListByResourceGroup
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_30
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_31
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: includeSlots
+                description: Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.
+                serializedName: includeSlots
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_30
+          - *ref_31
+        responses:
+          - !SchemaResponse 
+            schema: *ref_32
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByResourceGroup
+            description: Description for Gets all web, mobile, and API apps in the specified resource group.
+            paging:
+              nextLinkName: nextLink
+            summary: Gets all web, mobile, and API apps in the specified resource group.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_Get
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_34
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_35
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the app.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_34
+          - *ref_35
+        responses:
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: OK.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !Response 
+            extensions:
+              x-ms-error-response: true
+            language: !Languages 
+              default:
+                name: ''
+                description: Not found.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '404'
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: Description for Gets the details of a web, mobile, or API app.
+            summary: Gets the details of a web, mobile, or API app.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_CreateOrUpdate
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_39
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_40
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Unique name of the app to create or update. To create or update a deployment slot, use the {slot} parameter.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_27
+          - *ref_28
+        requestMediaTypes:
+          application/json: !Request &ref_38
+            parameters:
+              - !Parameter 
+                schema: *ref_36
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_37
+                schema: *ref_2
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: siteEnvelope
+                    description: A JSON representation of the app properties. See example.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_38
+        signatureParameters:
+          - *ref_39
+          - *ref_40
+        responses:
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: OK.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: Asynchronous operation in progress.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+            summary: Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_Delete
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_41
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_42
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the app to delete.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_43
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: deleteMetrics
+                description: If true, web app metrics are also deleted.
+                serializedName: deleteMetrics
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_44
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: deleteEmptyServerFarm
+                description: Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
+                serializedName: deleteEmptyServerFarm
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_41
+          - *ref_42
+          - *ref_43
+          - *ref_44
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully deleted web app.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully deleted web app.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !Response 
+            extensions:
+              x-ms-error-response: true
+            language: !Languages 
+              default:
+                name: ''
+                description: Web app not found.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '404'
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Delete
+            description: Description for Deletes a web, mobile, or API app, or one of the deployment slots.
+            summary: Deletes a web, mobile, or API app, or one of the deployment slots.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_ListSlots
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_45
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_46
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the app.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_45
+          - *ref_46
+        responses:
+          - !SchemaResponse 
+            schema: *ref_32
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListSlots
+            description: Description for Gets an app's deployment slots.
+            paging:
+              nextLinkName: nextLink
+            summary: Gets an app's deployment slots.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_GetSlot
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_47
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the app.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_49
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: slot
+                description: Name of the deployment slot. By default, this API returns the production slot.
+                serializedName: slot
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_47
+          - *ref_48
+          - *ref_49
+        responses:
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: OK.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !Response 
+            extensions:
+              x-ms-error-response: true
+            language: !Languages 
+              default:
+                name: ''
+                description: Not found.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '404'
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetSlot
+            description: Description for Gets the details of a web, mobile, or API app.
+            summary: Gets the details of a web, mobile, or API app.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_CreateOrUpdateSlot
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_52
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_53
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Unique name of the app to create or update. To create or update a deployment slot, use the {slot} parameter.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_54
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: slot
+                description: Name of the deployment slot to create or update. By default, this API attempts to create or modify the production slot.
+                serializedName: slot
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_27
+          - *ref_28
+        requestMediaTypes:
+          application/json: !Request &ref_51
+            parameters:
+              - !Parameter 
+                schema: *ref_36
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_50
+                schema: *ref_2
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: siteEnvelope
+                    description: A JSON representation of the app properties. See example.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_50
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_51
+        signatureParameters:
+          - *ref_52
+          - *ref_53
+          - *ref_54
+        responses:
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: OK.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: Asynchronous operation in progress.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdateSlot
+            description: Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+            summary: Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: WebApps_DeleteSlot
+        apiVersions:
+          - !ApiVersion 
+            version: '2023-12-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_55
+            schema: *ref_25
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: Name of the resource group to which the resource belongs.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_56
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Name of the app to delete.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_57
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: slot
+                description: Name of the deployment slot to delete. By default, the API deletes the production slot.
+                serializedName: slot
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_58
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: deleteMetrics
+                description: If true, web app metrics are also deleted.
+                serializedName: deleteMetrics
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_59
+            schema: *ref_26
+            implementation: Method
+            language: !Languages 
+              default:
+                name: deleteEmptyServerFarm
+                description: Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.
+                serializedName: deleteEmptyServerFarm
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_27
+          - *ref_28
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_55
+          - *ref_56
+          - *ref_57
+          - *ref_58
+          - *ref_59
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully deleted web app.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Successfully deleted web app.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !Response 
+            extensions:
+              x-ms-error-response: true
+            language: !Languages 
+              default:
+                name: ''
+                description: Web app not found.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '404'
+          - !SchemaResponse 
+            schema: *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: App Service error response.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: DeleteSlot
+            description: Description for Deletes a web, mobile, or API app, or one of the deployment slots.
+            summary: Deletes a web, mobile, or API app, or one of the deployment slots.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: WebApps
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !OAuth2SecurityScheme 
+      type: OAuth2
+      scopes:
+        - https://management.azure.com/.default
+language: !Languages 
+  default:
+    name: WebAppsAPIClient
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}

@@ -1,0 +1,653 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2023-12-01",
+        "title": "WebApps API Client"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites": {
+            "get": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Gets all web, mobile, and API apps in the specified resource group.",
+                "description": "Description for Gets all web, mobile, and API apps in the specified resource group.",
+                "operationId": "WebApps_ListByResourceGroup",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "includeSlots",
+                        "in": "query",
+                        "description": "Specify <strong>true</strong> to include deployment slots in results. The default is false, which only gives you the production slot of all apps.",
+                        "type": "boolean"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WebAppCollection"
+                        }
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}": {
+            "get": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Gets the details of a web, mobile, or API app.",
+                "description": "Description for Gets the details of a web, mobile, or API app.",
+                "operationId": "WebApps_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the app.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "x-ms-error-response": true
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.",
+                "description": "Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.",
+                "operationId": "WebApps_CreateOrUpdate",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Unique name of the app to create or update. To create or update a deployment slot, use the {slot} parameter.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "siteEnvelope",
+                        "in": "body",
+                        "description": "A JSON representation of the app properties. See example.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "202": {
+                        "description": "Asynchronous operation in progress.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Deletes a web, mobile, or API app, or one of the deployment slots.",
+                "description": "Description for Deletes a web, mobile, or API app, or one of the deployment slots.",
+                "operationId": "WebApps_Delete",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the app to delete.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deleteMetrics",
+                        "in": "query",
+                        "description": "If true, web app metrics are also deleted.",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "deleteEmptyServerFarm",
+                        "in": "query",
+                        "description": "Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.",
+                        "type": "boolean"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted web app."
+                    },
+                    "204": {
+                        "description": "Successfully deleted web app."
+                    },
+                    "404": {
+                        "description": "Web app not found.",
+                        "x-ms-error-response": true
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots": {
+            "get": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Gets an app's deployment slots.",
+                "description": "Description for Gets an app's deployment slots.",
+                "operationId": "WebApps_ListSlots",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the app.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WebAppCollection"
+                        }
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}": {
+            "get": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Gets the details of a web, mobile, or API app.",
+                "description": "Description for Gets the details of a web, mobile, or API app.",
+                "operationId": "WebApps_GetSlot",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the app.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "slot",
+                        "in": "path",
+                        "description": "Name of the deployment slot. By default, this API returns the production slot.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "404": {
+                        "description": "Not found.",
+                        "x-ms-error-response": true
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.",
+                "description": "Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.",
+                "operationId": "WebApps_CreateOrUpdateSlot",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Unique name of the app to create or update. To create or update a deployment slot, use the {slot} parameter.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "siteEnvelope",
+                        "in": "body",
+                        "description": "A JSON representation of the app properties. See example.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    {
+                        "name": "slot",
+                        "in": "path",
+                        "description": "Name of the deployment slot to create or update. By default, this API attempts to create or modify the production slot.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "202": {
+                        "description": "Asynchronous operation in progress.",
+                        "schema": {
+                            "$ref": "#/definitions/Site"
+                        }
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [
+                    "WebApps"
+                ],
+                "summary": "Deletes a web, mobile, or API app, or one of the deployment slots.",
+                "description": "Description for Deletes a web, mobile, or API app, or one of the deployment slots.",
+                "operationId": "WebApps_DeleteSlot",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the app to delete.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "slot",
+                        "in": "path",
+                        "description": "Name of the deployment slot to delete. By default, the API deletes the production slot.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deleteMetrics",
+                        "in": "query",
+                        "description": "If true, web app metrics are also deleted.",
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "deleteEmptyServerFarm",
+                        "in": "query",
+                        "description": "Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.",
+                        "type": "boolean"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted web app."
+                    },
+                    "204": {
+                        "description": "Successfully deleted web app."
+                    },
+                    "404": {
+                        "description": "Web app not found.",
+                        "x-ms-error-response": true
+                    },
+                    "default": {
+                        "description": "App Service error response.",
+                        "schema": {
+                            "$ref": "#/definitions/DefaultErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Site": {
+            "description": "A web app, a mobile app backend, or an API app.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "description": "Site resource specific properties",
+                    "type": "object",
+                    "properties": {
+                        "state": {
+                            "description": "Current state of the app.",
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    },
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "WebAppCollection": {
+            "description": "Collection of App Service apps.",
+            "required": [
+                "value"
+            ],
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Collection of resources.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Site"
+                    }
+                },
+                "nextLink": {
+                    "description": "Link to next page of resources.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "DefaultErrorResponse": {
+            "description": "App Service error response.",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "Error model.",
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "description": "Standardized string to programmatically identify the error.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "message": {
+                            "description": "Detailed error description and debugging information.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "target": {
+                            "description": "Detailed error description and debugging information.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "details": {
+                            "type": "array",
+                            "items": {
+                                "description": "Detailed errors.",
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "description": "Standardized string to programmatically identify the error.",
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "message": {
+                                        "description": "Detailed error description and debugging information.",
+                                        "type": "string",
+                                        "readOnly": true
+                                    },
+                                    "target": {
+                                        "description": "Detailed error description and debugging information.",
+                                        "type": "string",
+                                        "readOnly": true
+                                    }
+                                },
+                                "readOnly": true
+                            },
+                            "x-ms-identifiers": []
+                        },
+                        "innererror": {
+                            "description": "More information to debug error.",
+                            "type": "string",
+                            "readOnly": true
+                        }
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "Resource": {
+            "description": "Azure resource. This resource is tracked in Azure Resource Manager",
+            "required": [
+                "location"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Resource Id.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Resource Name.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "kind": {
+                    "description": "Kind of resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "Resource Location.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Resource type.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "tags": {
+                    "description": "Resource tags.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            },
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "siteNameParameter": {
+            "name": "name",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "slotNameParameter": {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "subscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client"
+        },
+        "resourceGroupNameParameter": {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Name of the resource group to which the resource belongs.",
+            "required": true,
+            "type": "string",
+            "maxLength": 90,
+            "minLength": 1,
+            "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+            "x-ms-parameter-location": "method"
+        },
+        "apiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "description": "API Version",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "client"
+        }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ]
+}
