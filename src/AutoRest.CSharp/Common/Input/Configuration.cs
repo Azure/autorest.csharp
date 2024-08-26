@@ -55,6 +55,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string Flavor = "flavor";
             public const string GenerateSampleProject = "generate-sample-project";
             public const string GenerateTestProject = "generate-test-project";
+            public const string ExamplesDirectory = "examples-dir";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             public const string UseModelReaderWriter = "use-model-reader-writer";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
@@ -113,6 +114,7 @@ namespace AutoRest.CSharp.Common.Input
             bool disableXmlDocs,
             bool generateSampleProject,
             bool generateTestProject,
+            string? examplesDirectory,
             string? helperNamespace)
         {
             _outputFolder = outputFolder;
@@ -185,6 +187,7 @@ namespace AutoRest.CSharp.Common.Input
             DisableXmlDocs = disableXmlDocs;
             GenerateSampleProject = DisableXmlDocs ? false : generateSampleProject; // turn off the samples if all xml docs are explicitly disabled
             GenerateTestProject = generateTestProject;
+            ExamplesDirectory = examplesDirectory;
             _helperNamespace = helperNamespace ?? Namespace;
         }
 
@@ -248,6 +251,8 @@ namespace AutoRest.CSharp.Common.Input
         public static bool GenerateSampleProject { get; private set; }
 
         public static bool GenerateTestProject { get; private set; }
+
+        public static string? ExamplesDirectory { get; private set; }
 
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
@@ -383,6 +388,7 @@ namespace AutoRest.CSharp.Common.Input
                 flavor: autoRest.GetValue<string?>(Options.Flavor).GetAwaiter().GetResult() ?? "azure", // for autorest input, always branded
                 generateSampleProject: GetOptionBoolValue(autoRest, Options.GenerateSampleProject),
                 generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
+                examplesDirectory: null, // TODO -- what we put here?
                 helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult(),
                 disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs)
             );
@@ -558,6 +564,7 @@ namespace AutoRest.CSharp.Common.Input
 ,
                 generateSampleProject: ReadOption(root, Options.GenerateSampleProject),
                 generateTestProject: ReadOption(root, Options.GenerateTestProject),
+                examplesDirectory: ReadStringOption(root, Options.ExamplesDirectory),
                 helperNamespace: ReadStringOption(root, Options.HelperNamespace));
         }
 

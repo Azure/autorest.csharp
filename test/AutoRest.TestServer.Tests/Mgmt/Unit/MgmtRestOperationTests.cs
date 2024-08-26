@@ -91,6 +91,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
+                examplesDirectory: null,
                 helperNamespace: "");
         }
 

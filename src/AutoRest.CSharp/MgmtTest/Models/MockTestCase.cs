@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class MockTestCase : OperationExample
     {
-        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperationExample example) : base(operationId, carrier, operation, example)
+        public MockTestCase(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
         {
         }
 
