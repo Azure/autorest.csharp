@@ -72,6 +72,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                 : undefined);
         configurations["enable-internal-raw-data"] =
             options["enable-internal-raw-data"];
+        const examplesDir =
+            options["examples-dir"] ?? options["examples-directory"];
+        if (examplesDir) {
+            configurations["examples-dir"] = path.relative(
+                outputFolder,
+                examplesDir
+            );
+        }
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */
         const sdkContext = await createSdkContext(

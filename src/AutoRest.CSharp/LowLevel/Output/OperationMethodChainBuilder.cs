@@ -134,19 +134,20 @@ namespace AutoRest.CSharp.Output.Models
             // short version samples
             var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
 
-            foreach (var (exampleKey, operationExample) in Operation.Examples)
+            foreach (var example in Operation.Examples)
             {
-                if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
-                    continue; // skip the short example when we decide not to generate it
+                if (!shouldGenerateShortVersion && example.Name == ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                    continue;
 
                 // add protocol method sample
                 samples.Add(new(
                     _client,
                     _typeFactory,
                     method,
-                    operationExample,
+                    Operation,
+                    example,
                     false,
-                    exampleKey));
+                    example.Name));
 
                 // add convenience method sample
                 if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(Public))
@@ -155,9 +156,10 @@ namespace AutoRest.CSharp.Output.Models
                         _client,
                         _typeFactory,
                         method,
-                        operationExample,
+                        Operation,
+                        example,
                         true,
-                        exampleKey));
+                        example.Name));
                 }
             }
         }

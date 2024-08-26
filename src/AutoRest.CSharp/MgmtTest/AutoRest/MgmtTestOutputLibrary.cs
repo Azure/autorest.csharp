@@ -44,12 +44,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             var result = new Dictionary<MgmtTypeProvider, List<MockTestCase>>();
             foreach (var client in _inputNamespace.Clients)
             {
-                foreach (var operation in client.Operations)
+                foreach (var inputOperation in client.Operations)
                 {
-                    foreach (var example in operation.CodeModelExamples)
+                    foreach (var example in inputOperation.CodeModelExamples)
                     {
                         // we need to find which resource or resource collection this test case belongs
-                        var operationId = example.Operation.OperationId!;
+                        var operationId = inputOperation.OperationId!;
 
                         // skip this operation if we find it in the `skipped-operations` configuration
                         if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                             // the source code generator will never write them if it is not in arm core
                             if (providerForExample.Carrier is ArmClientExtension)
                                 continue;
-                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
+                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
                             result.AddInList(mockTestCase.Owner, mockTestCase);
                         }
                     }
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             // it is possible that an operationId does not exist in the MgmtOutputLibrary, because some of the operations are removed by design. For instance, `Operations_List`.
             if (EnsureOperationIdToProviders().TryGetValue(operationId, out var result))
                 return result;
-            return Enumerable.Empty<MgmtTypeProviderAndOperation>();
+            return Array.Empty<MgmtTypeProviderAndOperation>();
         }
 
         private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationNameToProviders;

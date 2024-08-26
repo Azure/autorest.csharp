@@ -17,11 +17,19 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 
-        public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
+        public static IReadOnlyList<InputOperationExample> BuildOperationExamples(InputOperation operation)
         {
             _cache.Clear();
+            return new[]
+            {
+                BuildOperationExample(operation, ShortVersionMockExampleKey, false),
+                BuildOperationExample(operation, MockExampleAllParameterKey, true)
+            };
+        }
 
-            var parameterExamples = new List<InputParameterExample>();
+        private static InputOperationExample BuildOperationExample(InputOperation operation, string name, bool useAllParameters)
+        {
+            var parameterExamples = new List<InputParameterExample>(operation.Parameters.Count);
             foreach (var parameter in operation.Parameters)
             {
                 if (!useAllParameters && !parameter.IsRequired)
@@ -32,7 +40,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            return new(operation, parameterExamples);
+            return new(name, null, string.Empty, parameterExamples);
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)
