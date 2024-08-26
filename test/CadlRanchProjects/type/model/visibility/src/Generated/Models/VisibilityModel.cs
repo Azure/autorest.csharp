@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Model.Visibility.Models
 {
-    /// <summary> Output model with visibility properties. </summary>
+    /// <summary> Input model with create/update properties. </summary>
     public partial class VisibilityModel
     {
         /// <summary>

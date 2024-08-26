@@ -38,6 +38,86 @@ namespace Scm._Type.Model.Visibility
             _endpoint = endpoint;
         }
 
+        /// <summary> Head model. </summary>
+        /// <param name="input"> The <see cref="HeadVisibilityModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<ClientResult> HeadModelAsync(HeadVisibilityModel input)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using BinaryContent content = input.ToBinaryContent();
+            ClientResult result = await HeadModelAsync(content, null).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <summary> Head model. </summary>
+        /// <param name="input"> The <see cref="HeadVisibilityModel"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual ClientResult HeadModel(HeadVisibilityModel input)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using BinaryContent content = input.ToBinaryContent();
+            ClientResult result = HeadModel(content, null);
+            return result;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Head model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HeadModelAsync(HeadVisibilityModel)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual async Task<ClientResult> HeadModelAsync(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHeadModelRequest(content, options);
+            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+        }
+
+        /// <summary>
+        /// [Protocol Method] Head model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HeadModel(HeadVisibilityModel)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        public virtual ClientResult HeadModel(BinaryContent content, RequestOptions options = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using PipelineMessage message = CreateHeadModelRequest(content, options);
+            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
+        }
+
         /// <summary> Get model. </summary>
         /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -548,6 +628,22 @@ namespace Scm._Type.Model.Visibility
 
             using PipelineMessage message = CreatePutReadOnlyModelRequest(content, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
+        }
+
+        internal PipelineMessage CreateHeadModelRequest(BinaryContent content, RequestOptions options)
+        {
+            var message = _pipeline.CreateMessage();
+            message.ResponseClassifier = PipelineMessageClassifier200;
+            var request = message.Request;
+            request.Method = "HEAD";
+            var uri = new ClientUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/model/visibility", false);
+            request.Uri = uri.ToUri();
+            request.Headers.Set("Content-Type", "application/json");
+            request.Content = content;
+            message.Apply(options);
+            return message;
         }
 
         internal PipelineMessage CreateGetModelRequest(BinaryContent content, RequestOptions options)

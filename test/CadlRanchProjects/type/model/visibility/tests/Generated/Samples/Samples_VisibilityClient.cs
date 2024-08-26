@@ -20,6 +20,142 @@ namespace _Type.Model.Visibility.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Visibility_HeadModel_ShortVersion()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                queryProp = 1234,
+                createProp = new object[]
+            {
+"<createProp>"
+            },
+                updateProp = new object[]
+            {
+1234
+            },
+                deleteProp = true,
+            });
+            Response response = client.HeadModel(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Visibility_HeadModel_ShortVersion_Async()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                queryProp = 1234,
+                createProp = new object[]
+            {
+"<createProp>"
+            },
+                updateProp = new object[]
+            {
+1234
+            },
+                deleteProp = true,
+            });
+            Response response = await client.HeadModelAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Visibility_HeadModel_ShortVersion_Convenience()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            HeadVisibilityModel input = new HeadVisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            Response response = client.HeadModel(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Visibility_HeadModel_ShortVersion_Convenience_Async()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            HeadVisibilityModel input = new HeadVisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            Response response = await client.HeadModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Visibility_HeadModel_AllParameters()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                queryProp = 1234,
+                createProp = new object[]
+            {
+"<createProp>"
+            },
+                updateProp = new object[]
+            {
+1234
+            },
+                deleteProp = true,
+            });
+            Response response = client.HeadModel(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Visibility_HeadModel_AllParameters_Async()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                queryProp = 1234,
+                createProp = new object[]
+            {
+"<createProp>"
+            },
+                updateProp = new object[]
+            {
+1234
+            },
+                deleteProp = true,
+            });
+            Response response = await client.HeadModelAsync(content);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Visibility_HeadModel_AllParameters_Convenience()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            HeadVisibilityModel input = new HeadVisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            Response response = client.HeadModel(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Visibility_HeadModel_AllParameters_Convenience_Async()
+        {
+            VisibilityClient client = new VisibilityClient();
+
+            HeadVisibilityModel input = new HeadVisibilityModel(1234, new string[] { "<createProp>" }, new int[] { 1234 }, true);
+            Response response = await client.HeadModelAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Visibility_GetModel_ShortVersion()
         {
             VisibilityClient client = new VisibilityClient();

@@ -47,6 +47,114 @@ namespace _Type.Model.Visibility
             _endpoint = endpoint;
         }
 
+        /// <summary> Head model. </summary>
+        /// <param name="input"> The <see cref="HeadVisibilityModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(HeadVisibilityModel,CancellationToken)']/*" />
+        public virtual async Task<Response> HeadModelAsync(HeadVisibilityModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await HeadModelAsync(content, context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Head model. </summary>
+        /// <param name="input"> The <see cref="HeadVisibilityModel"/> to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(HeadVisibilityModel,CancellationToken)']/*" />
+        public virtual Response HeadModel(HeadVisibilityModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            using RequestContent content = input.ToRequestContent();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = HeadModel(content, context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] Head model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HeadModelAsync(HeadVisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModelAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> HeadModelAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.HeadModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHeadModelRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Head model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HeadModel(HeadVisibilityModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/VisibilityClient.xml" path="doc/members/member[@name='HeadModel(RequestContent,RequestContext)']/*" />
+        public virtual Response HeadModel(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("VisibilityClient.HeadModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateHeadModelRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Get model. </summary>
         /// <param name="input"> The <see cref="QueryModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -747,6 +855,20 @@ namespace _Type.Model.Visibility
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        internal HttpMessage CreateHeadModelRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Head;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/model/visibility", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
         }
 
         internal HttpMessage CreateGetModelRequest(RequestContent content, RequestContext context)

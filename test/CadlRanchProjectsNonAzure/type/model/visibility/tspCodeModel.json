@@ -7,10 +7,10 @@
   {
    "$id": "2",
    "Kind": "model",
-   "Name": "QueryModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.QueryModel",
+   "Name": "HeadVisibilityModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.HeadVisibilityModel",
    "Usage": "Input,Json",
-   "Description": "Input model with readonly properties.",
+   "Description": "Input model with visibility properties.",
    "Decorators": [],
    "Properties": [
     {
@@ -28,56 +28,18 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "Decorators": []
-    }
-   ]
-  },
-  {
-   "$id": "5",
-   "Kind": "model",
-   "Name": "ReadModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadModel",
-   "Usage": "Output,Json",
-   "Description": "Output model with readonly properties.",
-   "Decorators": [],
-   "Properties": [
+    },
     {
-     "$id": "6",
-     "Name": "readProp",
-     "SerializedName": "readProp",
-     "Description": "Required string, illustrating a readonly property.",
-     "Type": {
-      "$id": "7",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
-     },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
-    }
-   ]
-  },
-  {
-   "$id": "8",
-   "Kind": "model",
-   "Name": "VisibilityModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel",
-   "Usage": "Input,Json",
-   "Description": "Output model with visibility properties.",
-   "Decorators": [],
-   "Properties": [
-    {
-     "$id": "9",
+     "$id": "5",
      "Name": "createProp",
      "SerializedName": "createProp",
      "Description": "Required string[], illustrating a create property.",
      "Type": {
-      "$id": "10",
+      "$id": "6",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "11",
+       "$id": "7",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -91,16 +53,16 @@
      "Decorators": []
     },
     {
-     "$id": "12",
+     "$id": "8",
      "Name": "updateProp",
      "SerializedName": "updateProp",
      "Description": "Required int32[], illustrating a update property.",
      "Type": {
-      "$id": "13",
+      "$id": "9",
       "Kind": "array",
       "Name": "Array",
       "ValueType": {
-       "$id": "14",
+       "$id": "10",
        "Kind": "int32",
        "Name": "int32",
        "CrossLanguageDefinitionId": "TypeSpec.int32",
@@ -112,39 +74,75 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "Decorators": []
+    },
+    {
+     "$id": "11",
+     "Name": "deleteProp",
+     "SerializedName": "deleteProp",
+     "Description": "Required boolean, illustrating a delete property.",
+     "Type": {
+      "$id": "12",
+      "Kind": "boolean",
+      "Name": "boolean",
+      "CrossLanguageDefinitionId": "TypeSpec.boolean",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
   {
-   "$id": "15",
+   "$id": "13",
    "Kind": "model",
-   "Name": "UpdateModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.UpdateModel",
+   "Name": "QueryModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.QueryModel",
    "Usage": "Input,Json",
    "Description": "Input model with readonly properties.",
    "Decorators": [],
    "Properties": [
     {
-     "$id": "16",
-     "Name": "updateProp",
-     "SerializedName": "updateProp",
-     "Description": "Required int32[], illustrating a update property.",
+     "$id": "14",
+     "Name": "queryProp",
+     "SerializedName": "queryProp",
+     "Description": "Required int32, illustrating a query property.",
      "Type": {
-      "$id": "17",
-      "Kind": "array",
-      "Name": "Array",
-      "ValueType": {
-       "$id": "18",
-       "Kind": "int32",
-       "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "Decorators": []
-      },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "$id": "15",
+      "Kind": "int32",
+      "Name": "int32",
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
      "IsRequired": true,
      "IsReadOnly": false,
+     "Decorators": []
+    }
+   ]
+  },
+  {
+   "$id": "16",
+   "Kind": "model",
+   "Name": "ReadModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadModel",
+   "Usage": "Output,Json",
+   "Description": "Output model with readonly properties.",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "17",
+     "Name": "readProp",
+     "SerializedName": "readProp",
+     "Description": "Required string, illustrating a readonly property.",
+     "Type": {
+      "$id": "18",
+      "Kind": "string",
+      "Name": "string",
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": true,
      "Decorators": []
     }
    ]
@@ -152,10 +150,10 @@
   {
    "$id": "19",
    "Kind": "model",
-   "Name": "CreateModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.CreateModel",
+   "Name": "VisibilityModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel",
    "Usage": "Input,Json",
-   "Description": "Input model with readonly properties.",
+   "Description": "Input model with create/update properties.",
    "Decorators": [],
    "Properties": [
     {
@@ -180,11 +178,102 @@
      "IsRequired": true,
      "IsReadOnly": false,
      "Decorators": []
+    },
+    {
+     "$id": "23",
+     "Name": "updateProp",
+     "SerializedName": "updateProp",
+     "Description": "Required int32[], illustrating a update property.",
+     "Type": {
+      "$id": "24",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "25",
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32",
+       "Decorators": []
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   },
   {
-   "$id": "23",
+   "$id": "26",
+   "Kind": "model",
+   "Name": "UpdateModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.UpdateModel",
+   "Usage": "Input,Json",
+   "Description": "Input model with readonly properties.",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "27",
+     "Name": "updateProp",
+     "SerializedName": "updateProp",
+     "Description": "Required int32[], illustrating a update property.",
+     "Type": {
+      "$id": "28",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "29",
+       "Kind": "int32",
+       "Name": "int32",
+       "CrossLanguageDefinitionId": "TypeSpec.int32",
+       "Decorators": []
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
+    }
+   ]
+  },
+  {
+   "$id": "30",
+   "Kind": "model",
+   "Name": "CreateModel",
+   "CrossLanguageDefinitionId": "Type.Model.Visibility.CreateModel",
+   "Usage": "Input,Json",
+   "Description": "Input model with readonly properties.",
+   "Decorators": [],
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "createProp",
+     "SerializedName": "createProp",
+     "Description": "Required string[], illustrating a create property.",
+     "Type": {
+      "$id": "32",
+      "Kind": "array",
+      "Name": "Array",
+      "ValueType": {
+       "$id": "33",
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
+      },
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
+    }
+   ]
+  },
+  {
+   "$id": "34",
    "Kind": "model",
    "Name": "DeleteModel",
    "CrossLanguageDefinitionId": "Type.Model.Visibility.DeleteModel",
@@ -193,12 +282,12 @@
    "Decorators": [],
    "Properties": [
     {
-     "$id": "24",
+     "$id": "35",
      "Name": "deleteProp",
      "SerializedName": "deleteProp",
      "Description": "Required boolean, illustrating a delete property.",
      "Type": {
-      "$id": "25",
+      "$id": "36",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
@@ -211,7 +300,7 @@
    ]
   },
   {
-   "$id": "26",
+   "$id": "37",
    "Kind": "model",
    "Name": "ReadOnlyModel",
    "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel",
@@ -220,19 +309,19 @@
    "Decorators": [],
    "Properties": [
     {
-     "$id": "27",
+     "$id": "38",
      "Name": "optionalNullableIntList",
      "SerializedName": "optionalNullableIntList",
      "Description": "Optional readonly nullable int list.",
      "Type": {
-      "$id": "28",
+      "$id": "39",
       "Kind": "nullable",
       "Type": {
-       "$id": "29",
+       "$id": "40",
        "Kind": "array",
        "Name": "Array",
        "ValueType": {
-        "$id": "30",
+        "$id": "41",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32",
@@ -247,22 +336,22 @@
      "Decorators": []
     },
     {
-     "$id": "31",
+     "$id": "42",
      "Name": "optionalStringRecord",
      "SerializedName": "optionalStringRecord",
      "Description": "Optional readonly string dictionary.",
      "Type": {
-      "$id": "32",
+      "$id": "43",
       "Kind": "dict",
       "KeyType": {
-       "$id": "33",
+       "$id": "44",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
       "ValueType": {
-       "$id": "34",
+       "$id": "45",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -279,22 +368,22 @@
  ],
  "Clients": [
   {
-   "$id": "35",
+   "$id": "46",
    "Name": "VisibilityClient",
    "Description": "Illustrates models with visibility properties.",
    "Operations": [
     {
-     "$id": "36",
-     "Name": "getModel",
+     "$id": "47",
+     "Name": "headModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "37",
+       "$id": "48",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "38",
+        "$id": "49",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -309,9 +398,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "39",
+        "$id": "50",
         "Type": {
-         "$id": "40",
+         "$id": "51",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -320,15 +409,15 @@
        }
       },
       {
-       "$id": "41",
+       "$id": "52",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "42",
+        "$id": "53",
         "Kind": "constant",
         "ValueType": {
-         "$id": "43",
+         "$id": "54",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -347,14 +436,91 @@
        "Decorators": []
       },
       {
-       "$id": "44",
+       "$id": "55",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": []
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "56",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "HEAD",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/type/model/visibility",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.headModel",
+     "Decorators": []
+    },
+    {
+     "$id": "57",
+     "Name": "getModel",
+     "ResourceName": "Visibility",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "48"
+      },
+      {
+       "$id": "58",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Description": "Body parameter's content type. Known values are application/json",
+       "Type": {
+        "$id": "59",
+        "Kind": "constant",
+        "ValueType": {
+         "$id": "60",
+         "Kind": "string",
+         "Name": "string",
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Value": "application/json",
+        "Decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": true,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": []
+      },
+      {
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "62",
         "Kind": "constant",
         "ValueType": {
-         "$id": "46",
+         "$id": "63",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -373,11 +539,11 @@
        "Decorators": []
       },
       {
-       "$id": "47",
+       "$id": "64",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "2"
+        "$ref": "13"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -391,12 +557,12 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "16"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -420,20 +586,20 @@
      "Decorators": []
     },
     {
-     "$id": "49",
+     "$id": "66",
      "Name": "getModelWithQuery",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "50",
+       "$id": "67",
        "Name": "queryProp",
        "NameInRequest": "queryProp",
        "Type": {
-        "$id": "51",
+        "$id": "68",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32",
@@ -449,14 +615,14 @@
        "Decorators": []
       },
       {
-       "$id": "52",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "70",
         "Kind": "constant",
         "ValueType": {
-         "$id": "54",
+         "$id": "71",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -477,12 +643,12 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "16"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -503,24 +669,24 @@
      "Decorators": []
     },
     {
-     "$id": "56",
+     "$id": "73",
      "Name": "putModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "57",
+       "$id": "74",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "58",
+        "$id": "75",
         "Kind": "constant",
         "ValueType": {
-         "$id": "59",
+         "$id": "76",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -539,11 +705,11 @@
        "Decorators": []
       },
       {
-       "$id": "60",
+       "$id": "77",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "8"
+        "$ref": "19"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -557,7 +723,7 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "78",
        "StatusCodes": [
         204
        ],
@@ -580,24 +746,24 @@
      "Decorators": []
     },
     {
-     "$id": "62",
+     "$id": "79",
      "Name": "patchModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "63",
+       "$id": "80",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "64",
+        "$id": "81",
         "Kind": "constant",
         "ValueType": {
-         "$id": "65",
+         "$id": "82",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -616,11 +782,11 @@
        "Decorators": []
       },
       {
-       "$id": "66",
+       "$id": "83",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "15"
+        "$ref": "26"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -634,7 +800,7 @@
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "84",
        "StatusCodes": [
         204
        ],
@@ -657,24 +823,24 @@
      "Decorators": []
     },
     {
-     "$id": "68",
+     "$id": "85",
      "Name": "postModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "69",
+       "$id": "86",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "70",
+        "$id": "87",
         "Kind": "constant",
         "ValueType": {
-         "$id": "71",
+         "$id": "88",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -693,11 +859,11 @@
        "Decorators": []
       },
       {
-       "$id": "72",
+       "$id": "89",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "19"
+        "$ref": "30"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -711,7 +877,7 @@
      ],
      "Responses": [
       {
-       "$id": "73",
+       "$id": "90",
        "StatusCodes": [
         204
        ],
@@ -734,24 +900,24 @@
      "Decorators": []
     },
     {
-     "$id": "74",
+     "$id": "91",
      "Name": "deleteModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "75",
+       "$id": "92",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "76",
+        "$id": "93",
         "Kind": "constant",
         "ValueType": {
-         "$id": "77",
+         "$id": "94",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -770,11 +936,11 @@
        "Decorators": []
       },
       {
-       "$id": "78",
+       "$id": "95",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "23"
+        "$ref": "34"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -788,7 +954,7 @@
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "96",
        "StatusCodes": [
         204
        ],
@@ -811,24 +977,24 @@
      "Decorators": []
     },
     {
-     "$id": "80",
+     "$id": "97",
      "Name": "putReadOnlyModel",
      "ResourceName": "Visibility",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "37"
+       "$ref": "48"
       },
       {
-       "$id": "81",
+       "$id": "98",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "82",
+        "$id": "99",
         "Kind": "constant",
         "ValueType": {
-         "$id": "83",
+         "$id": "100",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -847,14 +1013,14 @@
        "Decorators": []
       },
       {
-       "$id": "84",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "85",
+        "$id": "102",
         "Kind": "constant",
         "ValueType": {
-         "$id": "86",
+         "$id": "103",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -873,11 +1039,11 @@
        "Decorators": []
       },
       {
-       "$id": "87",
+       "$id": "104",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "26"
+        "$ref": "37"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -891,12 +1057,12 @@
      ],
      "Responses": [
       {
-       "$id": "88",
+       "$id": "105",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "26"
+        "$ref": "37"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -921,11 +1087,11 @@
     }
    ],
    "Protocol": {
-    "$id": "89"
+    "$id": "106"
    },
    "Parameters": [
     {
-     "$ref": "37"
+     "$ref": "48"
     }
    ],
    "Decorators": []

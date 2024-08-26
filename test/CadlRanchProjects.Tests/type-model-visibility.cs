@@ -33,6 +33,18 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Model_HeadModelTest() => Test(async (host) =>
         {
+            var createProp = new List<string>
+            {
+                "foo", "bar"
+            };
+            var updateProp = new List<int> { 1, 2 };
+            var response = await new VisibilityClient(host, null).HeadModelAsync(new HeadVisibilityModel(123, createProp, updateProp, true));
+            Assert.AreEqual(200, response.Status);
+        });
+
+        [Test]
+        public Task Model_GetModelWithQueryTest() => Test(async (host) =>
+        {
             var response = await new VisibilityClient(host, null).GetModelWithQueryAsync(123);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("abc", response.Value.ReadProp);
