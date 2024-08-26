@@ -425,8 +425,8 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             PopulatePropertyBag(selfPropertyBag, 0);
 
-            // properties: all the properties containing the properties from base needed to build the constructor
-            // selfProperties: the properties not containing properties from base just used to do the serialization
+            // properties: all the properties containing the properties from base, these are needed to build the constructor
+            // selfProperties: the properties not containing properties from base, to do the serialization we only need the properties owned by itself
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var selfProperties = GetPropertySerializationsFromBag(selfPropertyBag, objectType).ToArray();
             var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization(inputModel, objectType);

@@ -229,14 +229,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (serialization.Type.IsValueType || isSealed)
                 modifiers = MethodSignatureModifiers.Private;
 
-            var writerParameter = new Parameter("writer", $"The JSON writer.", typeof(Utf8JsonWriter), null, ValidationType.None, null);
-            var optionsParameter = new Parameter("options", $"The client options for reading and writing models.", typeof(ModelReaderWriterOptions), null, ValidationType.None, null);
-            var utf8JsonWriter = new Utf8JsonWriterExpression(writerParameter);
-            var options = new ModelReaderWriterOptionsExpression(optionsParameter);
+            var utf8JsonWriter = new Utf8JsonWriterExpression(KnownParameters.Serializations.Utf8JsonWriterWithDescription);
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.OptionsWithDescription);
 
             return new Method
             (
-                new MethodSignature(_jsonModelWriteCoreMethodName, null, null, modifiers, null, null, new[] { writerParameter, optionsParameter }),
+                new MethodSignature(_jsonModelWriteCoreMethodName, null, null, modifiers, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriterWithDescription, KnownParameters.Serializations.OptionsWithDescription }),
                 BuildJsonModelWriteCoreMethodBody(serialization, utf8JsonWriter, options, iPersistableModelTInterface, hasInherits)
             );
         }
