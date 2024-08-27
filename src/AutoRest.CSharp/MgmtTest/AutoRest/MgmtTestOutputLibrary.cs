@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             {
                 foreach (var inputOperation in client.Operations)
                 {
-                    foreach (var example in inputOperation.CodeModelExamples)
+                    foreach (var example in inputOperation.Examples)
                     {
                         // we need to find which resource or resource collection this test case belongs
                         var operationId = inputOperation.OperationId!;
