@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Common.Input
                 generateConvenienceMethod: false,
                 crossLanguageDefinitionId: string.Empty, // in typespec input, this is to determine whether an operation has been renamed. We have separated configuration for that in swagger input, therefore we leave it empty here
                 keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId),
-                examples: CreateOperationExamples(operation))
+                examples: CreateOperationExamplesFromTestModeler(operation))
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
             };
@@ -172,8 +172,11 @@ namespace AutoRest.CSharp.Common.Input
             return operationId.Split('_')[0];
         }
 
-        private IReadOnlyList<InputOperationExample> CreateOperationExamples(Operation operation)
+        private IReadOnlyList<InputOperationExample>? CreateOperationExamplesFromTestModeler(Operation operation)
         {
+            if (!Configuration.AzureArm)
+                return null;
+
             var result = new List<InputOperationExample>();
             var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.Operation == operation);
             if (exampleOperation is null)
