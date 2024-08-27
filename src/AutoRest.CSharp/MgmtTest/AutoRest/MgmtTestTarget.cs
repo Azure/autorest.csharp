@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
             Debug.Assert(inputNamespace.Clients is not null);
-            //Debug.Assert(Configuration.MgmtTestConfiguration is not null);
             MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
