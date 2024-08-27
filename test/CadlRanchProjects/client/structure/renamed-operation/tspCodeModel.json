@@ -12,32 +12,38 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Default",
-     "Value": "default"
+     "Value": "default",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "MultiClient",
-     "Value": "multi-client"
+     "Value": "multi-client",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "RenamedOperation",
-     "Value": "renamed-operation"
+     "Value": "renamed-operation",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "TwoOperationGroup",
-     "Value": "two-operation-group"
+     "Value": "two-operation-group",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -109,7 +115,9 @@
      "Path": "/one",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedOne",
+     "Decorators": []
     },
     {
      "$id": "14",
@@ -141,7 +149,9 @@
      "Path": "/three",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedThree",
+     "Decorators": []
     },
     {
      "$id": "16",
@@ -173,7 +183,9 @@
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedFive",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -186,7 +198,8 @@
     {
      "$ref": "12"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "19",
@@ -255,7 +268,9 @@
      "Path": "/two",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedTwo",
+     "Decorators": []
     },
     {
      "$id": "25",
@@ -287,7 +302,9 @@
      "Path": "/four",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedFour",
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -319,7 +336,9 @@
      "Path": "/six",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedSix",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -333,7 +352,8 @@
     {
      "$ref": "23"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -14,19 +14,22 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v1_0",
      "Value": "v1.0",
-     "Description": "Version 1.0"
+     "Description": "Version 1.0",
+     "Decorators": []
     }
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "Input,ApiVersionEnum"
+   "Usage": "Input,ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -108,7 +111,9 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.noOperationParams",
+     "Decorators": []
     },
     {
      "$id": "13",
@@ -130,7 +135,8 @@
         "$id": "15",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -138,7 +144,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -158,7 +165,9 @@
      "Path": "/{keyword}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Multiple.withOperationPathParam",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -171,7 +180,8 @@
     {
      "$ref": "9"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

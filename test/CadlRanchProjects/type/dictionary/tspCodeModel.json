@@ -11,6 +11,7 @@
    "CrossLanguageDefinitionId": "Type.Dictionary.InnerModel",
    "Usage": "Input,Output,Json",
    "Description": "Dictionary inner model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
@@ -21,10 +22,12 @@
       "$id": "4",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "5",
@@ -38,14 +41,17 @@
        "$id": "7",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$ref": "2"
-      }
+      },
+      "Decorators": []
      },
      "IsRequired": false,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -66,9 +72,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "11",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -90,7 +96,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "14",
@@ -109,9 +116,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "17",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -144,9 +151,11 @@
          "$id": "22",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -154,7 +163,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -170,14 +180,17 @@
          "$id": "25",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "26",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -193,7 +206,9 @@
      "Path": "/type/dictionary/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.get",
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -216,9 +231,11 @@
          "$id": "30",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -226,7 +243,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "31",
@@ -239,14 +257,17 @@
          "$id": "33",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "34",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -254,7 +275,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -277,7 +299,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int32Value.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -288,7 +312,8 @@
     {
      "$ref": "16"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "37",
@@ -307,9 +332,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "40",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -342,9 +367,11 @@
          "$id": "45",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -352,7 +379,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -368,14 +396,17 @@
          "$id": "48",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "49",
          "Kind": "int64",
          "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -391,7 +422,9 @@
      "Path": "/type/dictionary/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.get",
+     "Decorators": []
     },
     {
      "$id": "50",
@@ -414,9 +447,11 @@
          "$id": "53",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -424,7 +459,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "54",
@@ -437,14 +473,17 @@
          "$id": "56",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "57",
          "Kind": "int64",
          "Name": "int64",
-         "CrossLanguageDefinitionId": "TypeSpec.int64"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.int64",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -452,7 +491,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -475,7 +515,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Int64Value.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -486,7 +528,8 @@
     {
      "$ref": "39"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "60",
@@ -505,9 +548,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "63",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -540,9 +583,11 @@
          "$id": "68",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -550,7 +595,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -566,14 +612,17 @@
          "$id": "71",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "72",
          "Kind": "boolean",
          "Name": "boolean",
-         "CrossLanguageDefinitionId": "TypeSpec.boolean"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.boolean",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -589,7 +638,9 @@
      "Path": "/type/dictionary/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.get",
+     "Decorators": []
     },
     {
      "$id": "73",
@@ -612,9 +663,11 @@
          "$id": "76",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -622,7 +675,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "77",
@@ -635,14 +689,17 @@
          "$id": "79",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "80",
          "Kind": "boolean",
          "Name": "boolean",
-         "CrossLanguageDefinitionId": "TypeSpec.boolean"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.boolean",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -650,7 +707,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -673,7 +731,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.BooleanValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -684,7 +744,8 @@
     {
      "$ref": "62"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "83",
@@ -703,9 +764,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "86",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -738,9 +799,11 @@
          "$id": "91",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -748,7 +811,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -764,14 +828,17 @@
          "$id": "94",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "95",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -787,7 +854,9 @@
      "Path": "/type/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.get",
+     "Decorators": []
     },
     {
      "$id": "96",
@@ -810,9 +879,11 @@
          "$id": "99",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -820,7 +891,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "100",
@@ -833,14 +905,17 @@
          "$id": "102",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "103",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -848,7 +923,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -871,7 +947,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.StringValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -882,7 +960,8 @@
     {
      "$ref": "85"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "106",
@@ -901,9 +980,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "109",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -936,9 +1015,11 @@
          "$id": "114",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -946,7 +1027,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -962,14 +1044,17 @@
          "$id": "117",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "118",
          "Kind": "float32",
          "Name": "float32",
-         "CrossLanguageDefinitionId": "TypeSpec.float32"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.float32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -985,7 +1070,9 @@
      "Path": "/type/dictionary/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.get",
+     "Decorators": []
     },
     {
      "$id": "119",
@@ -1008,9 +1095,11 @@
          "$id": "122",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1018,7 +1107,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "123",
@@ -1031,14 +1121,17 @@
          "$id": "125",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "126",
          "Kind": "float32",
          "Name": "float32",
-         "CrossLanguageDefinitionId": "TypeSpec.float32"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.float32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1046,7 +1139,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1069,7 +1163,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.Float32Value.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1080,7 +1176,8 @@
     {
      "$ref": "108"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "129",
@@ -1099,9 +1196,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "132",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1134,9 +1231,11 @@
          "$id": "137",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1144,7 +1243,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1160,7 +1260,8 @@
          "$id": "140",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "141",
@@ -1171,10 +1272,13 @@
           "$id": "142",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1190,7 +1294,9 @@
      "Path": "/type/dictionary/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.get",
+     "Decorators": []
     },
     {
      "$id": "143",
@@ -1213,9 +1319,11 @@
          "$id": "146",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1223,7 +1331,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "147",
@@ -1236,7 +1345,8 @@
          "$id": "149",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "150",
@@ -1247,10 +1357,13 @@
           "$id": "151",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1258,7 +1371,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1281,7 +1395,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DatetimeValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1292,7 +1408,8 @@
     {
      "$ref": "131"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "154",
@@ -1311,9 +1428,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "157",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1346,9 +1463,11 @@
          "$id": "162",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1356,7 +1475,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1372,7 +1492,8 @@
          "$id": "165",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "166",
@@ -1383,10 +1504,13 @@
           "$id": "167",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.duration"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.duration",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1402,7 +1526,9 @@
      "Path": "/type/dictionary/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.get",
+     "Decorators": []
     },
     {
      "$id": "168",
@@ -1425,9 +1551,11 @@
          "$id": "171",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1435,7 +1563,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "172",
@@ -1448,7 +1577,8 @@
          "$id": "174",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "175",
@@ -1459,10 +1589,13 @@
           "$id": "176",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          },
-         "CrossLanguageDefinitionId": "TypeSpec.duration"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.duration",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1470,7 +1603,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1493,7 +1627,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.DurationValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1504,7 +1640,8 @@
     {
      "$ref": "156"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "179",
@@ -1523,9 +1660,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "182",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1558,9 +1695,11 @@
          "$id": "187",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1568,7 +1707,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1584,14 +1724,17 @@
          "$id": "190",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "191",
          "Kind": "any",
          "Name": "unknown",
-         "CrossLanguageDefinitionId": ""
-        }
+         "CrossLanguageDefinitionId": "",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1607,7 +1750,9 @@
      "Path": "/type/dictionary/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.get",
+     "Decorators": []
     },
     {
      "$id": "192",
@@ -1630,9 +1775,11 @@
          "$id": "195",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1640,7 +1787,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "196",
@@ -1653,14 +1801,17 @@
          "$id": "198",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "199",
          "Kind": "any",
          "Name": "unknown",
-         "CrossLanguageDefinitionId": ""
-        }
+         "CrossLanguageDefinitionId": "",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1668,7 +1819,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1691,7 +1843,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.UnknownValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1702,7 +1856,8 @@
     {
      "$ref": "181"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "202",
@@ -1721,9 +1876,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "205",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1756,9 +1911,11 @@
          "$id": "210",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1766,7 +1923,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1782,11 +1940,13 @@
          "$id": "213",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1802,7 +1962,9 @@
      "Path": "/type/dictionary/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.get",
+     "Decorators": []
     },
     {
      "$id": "214",
@@ -1825,9 +1987,11 @@
          "$id": "217",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1835,7 +1999,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "218",
@@ -1848,11 +2013,13 @@
          "$id": "220",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1860,7 +2027,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1883,7 +2051,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.ModelValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1894,7 +2064,8 @@
     {
      "$ref": "204"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "223",
@@ -1913,9 +2084,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "226",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1948,9 +2119,11 @@
          "$id": "231",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1958,7 +2131,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -1974,11 +2148,13 @@
          "$id": "234",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1994,7 +2170,9 @@
      "Path": "/type/dictionary/model/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.get",
+     "Decorators": []
     },
     {
      "$id": "235",
@@ -2017,9 +2195,11 @@
          "$id": "238",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2027,7 +2207,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "239",
@@ -2040,11 +2221,13 @@
          "$id": "241",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$ref": "2"
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2052,7 +2235,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -2075,7 +2259,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.RecursiveModelValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -2086,7 +2272,8 @@
     {
      "$ref": "225"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "244",
@@ -2105,9 +2292,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "247",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2140,9 +2327,11 @@
          "$id": "252",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2150,7 +2339,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -2166,7 +2356,8 @@
          "$id": "255",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "256",
@@ -2175,9 +2366,11 @@
           "$id": "257",
           "Kind": "float32",
           "Name": "float32",
-          "CrossLanguageDefinitionId": "TypeSpec.float32"
+          "CrossLanguageDefinitionId": "TypeSpec.float32",
+          "Decorators": []
          }
-        }
+        },
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2193,7 +2386,9 @@
      "Path": "/type/dictionary/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.get",
+     "Decorators": []
     },
     {
      "$id": "258",
@@ -2216,9 +2411,11 @@
          "$id": "261",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2226,7 +2423,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
        "$id": "262",
@@ -2239,7 +2437,8 @@
          "$id": "264",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "265",
@@ -2248,9 +2447,11 @@
           "$id": "266",
           "Kind": "float32",
           "Name": "float32",
-          "CrossLanguageDefinitionId": "TypeSpec.float32"
+          "CrossLanguageDefinitionId": "TypeSpec.float32",
+          "Decorators": []
          }
-        }
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2258,7 +2459,8 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
@@ -2281,7 +2483,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Dictionary.NullableFloatValue.put",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -2292,7 +2496,8 @@
     {
      "$ref": "246"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

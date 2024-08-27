@@ -3,7 +3,6 @@
  "Name": "Versioning.Removed",
  "ApiVersions": [
   "v1",
-  "beta",
   "v2"
  ],
  "Enums": [
@@ -16,17 +15,20 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "enumMemberV2",
-     "Value": "enumMemberV2"
+     "Value": "enumMemberV2",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -37,57 +39,58 @@
     "$id": "6",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "7",
      "Name": "v1",
      "Value": "v1",
-     "Description": "The original version v1."
+     "Description": "The version v1.",
+     "Decorators": []
     },
     {
      "$id": "8",
-     "Name": "beta",
-     "Value": "beta",
-     "Description": "The beta version."
-    },
-    {
-     "$id": "9",
      "Name": "v2",
      "Value": "v2",
-     "Description": "The latest version v2."
+     "Description": "The version v2.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "Input,ApiVersionEnum"
+   "Usage": "Input,ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "10",
+   "$id": "9",
    "Kind": "model",
    "Name": "ModelV2",
    "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2",
    "Usage": "Input,Output,Json",
+   "Decorators": [],
    "Properties": [
     {
-     "$id": "11",
+     "$id": "10",
      "Name": "prop",
      "SerializedName": "prop",
      "Description": "",
      "Type": {
-      "$id": "12",
+      "$id": "11",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "enumProp",
      "SerializedName": "enumProp",
      "Description": "",
@@ -95,94 +98,62 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
-     "$id": "14",
+     "$id": "13",
      "Name": "unionProp",
      "SerializedName": "unionProp",
      "Description": "",
      "Type": {
-      "$id": "15",
+      "$id": "14",
       "Kind": "union",
       "Name": "UnionV2",
       "VariantTypes": [
        {
-        "$id": "16",
+        "$id": "15",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        {
-        "$id": "17",
+        "$id": "16",
         "Kind": "float32",
         "Name": "float32",
-        "CrossLanguageDefinitionId": "TypeSpec.float32"
+        "CrossLanguageDefinitionId": "TypeSpec.float32",
+        "Decorators": []
        }
-      ]
+      ],
+      "Decorators": []
      },
      "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "18",
-   "Kind": "model",
-   "Name": "ModelV3",
-   "CrossLanguageDefinitionId": "Versioning.Removed.ModelV3",
-   "Usage": "Input,Output,Json",
-   "Properties": [
-    {
-     "$id": "19",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
-      "$id": "20",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "21",
-     "Name": "type",
-     "SerializedName": "type",
-     "Description": "",
-     "Type": {
-      "$id": "22",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "17",
    "Name": "RemovedClient",
    "Description": "Test for the `@removed` decorator.",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "18",
      "Name": "v2",
      "ResourceName": "Removed",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "19",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "26",
+        "$id": "20",
         "Kind": "url",
         "Name": "url",
         "CrossLanguageDefinitionId": "TypeSpec.url"
@@ -198,7 +169,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "27",
+       "$id": "21",
        "Name": "version",
        "NameInRequest": "version",
        "Description": "Need to be set as 'v1' or 'v2' in client.",
@@ -216,20 +187,22 @@
        "Kind": "Client"
       },
       {
-       "$id": "28",
+       "$id": "22",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "29",
+        "$id": "23",
         "Kind": "constant",
         "ValueType": {
-         "$id": "30",
+         "$id": "24",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -237,22 +210,25 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
-       "$id": "31",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "26",
         "Kind": "constant",
         "ValueType": {
-         "$id": "33",
+         "$id": "27",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -260,14 +236,15 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": []
       },
       {
-       "$id": "34",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -275,17 +252,18 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": []
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "10"
+        "$ref": "9"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -304,124 +282,23 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "36",
-     "Name": "v3",
-     "ResourceName": "Removed",
-     "Description": "This operation should be generated with the signatures of both the latest and the original versions, rather than beta version",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "25"
-      },
-      {
-       "$ref": "27"
-      },
-      {
-       "$id": "37",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
-       "Type": {
-        "$id": "38",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "39",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "40",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "41",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "42",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "application/json"
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "43",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$ref": "18"
-       },
-       "Location": "Body",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "44",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "18"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}/versioning/removed/api-version:{version}",
-     "Path": "/v3",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Versioning.Removed.v2",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "30"
    },
    "Parameters": [
     {
-     "$ref": "25"
+     "$ref": "19"
     },
     {
-     "$ref": "27"
+     "$ref": "21"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -24,20 +24,20 @@ namespace AutoRest.CSharp.Output.Samples.Models
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperation inputOperation, InputOperationExample operationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
             _typeFactory = typeFactory;
             _method = method;
-            _inputClientParameterExamples = inputClientParameterExamples;
-            _inputOperationExample = inputOperationExample;
+            _inputOperation = inputOperation;
+            _inputOperationExample = operationExample;
             IsConvenienceSample = isConvenienceSample;
-            ExampleKey = exampleKey;
+            ExampleKey = exampleKey.ToCleanName();
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
+        protected internal readonly InputOperation _inputOperation;
         protected internal readonly InputOperationExample _inputOperationExample;
         protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
@@ -46,8 +46,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsAllParametersUsed { get; }
         public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
-        public string? ResourceName => _inputOperationExample.Operation.ResourceName;
-        public string InputOperationName => _inputOperationExample.Operation.Name;
+        public string? ResourceName => _inputOperation.ResourceName;
+        public string InputOperationName => _inputOperation.Name;
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
@@ -183,9 +183,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
         /// </returns>
         private IEnumerable<InputParameterExample> GetAllParameterExamples()
         {
-            // first we return all the client parameters for reference
-            foreach (var parameter in _inputClientParameterExamples)
-                yield return parameter;
             foreach (var parameter in _inputOperationExample.Parameters)
             {
                 var inputParameter = parameter.Parameter;
@@ -300,10 +297,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public InputExampleValue GetEndpointValue(string parameterName)
         {
-            var clientParameterValue = _inputClientParameterExamples.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
-            if (clientParameterValue != null)
-                return clientParameterValue;
-
             var operationParameterValue = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
             if (operationParameterValue != null)
                 return operationParameterValue;

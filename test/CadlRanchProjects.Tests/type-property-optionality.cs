@@ -4,16 +4,18 @@
 using System;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Text.Json;
 using _Type.Property.Optionality;
 using _Type.Property.Optionality.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
     public class TypePropertyOptionalTests : CadlRanchTestBase
     {
+        private static readonly DateTimeOffset PlainDateData = new DateTimeOffset(2022, 12, 12, 0, 0, 0, 0, new TimeSpan());
+        private static readonly TimeSpan PlainTimeData = new TimeSpan(13, 06, 12);
         [Test]
         public Task Type_Property_Optional_BooleanLiteral_getAll() => Test(async (host) =>
         {
@@ -139,6 +141,71 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_Datetime_putDefault() => Test(async (host) =>
         {
             var response = await new OptionalClient(host, null).GetDatetimeClient().PutDefaultAsync(new DatetimeProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().GetAllAsync();
+            var expectedDate = new DateTimeOffset(2022, 12, 12, 8, 0, 0, TimeSpan.FromHours(8));
+            Assert.AreEqual(expectedDate, response.Value.Property.Value.ToOffset(TimeSpan.FromHours(8)));
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putAll() => Test(async (host) =>
+        {
+            PlainDateProperty data = new()
+            {
+                Property = DateTimeOffset.Parse("2022-12-12")
+            };
+            var response = await new OptionalClient(host, null).GetPlainDateClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaindate_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainDateClient().PutDefaultAsync(new PlainDateProperty());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getAll() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().GetAllAsync();
+            Assert.AreEqual(TimeSpan.Parse("13:06:12"), response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_getDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().GetDefaultAsync();
+            Assert.AreEqual(null, response.Value.Property);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putAll() => Test(async (host) =>
+        {
+            PlainTimeProperty data = new()
+            {
+                Property = TimeSpan.Parse("13:06:12")
+            };
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().PutAllAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Type_Property_Optional_Plaintime_putDefault() => Test(async (host) =>
+        {
+            var response = await new OptionalClient(host, null).GetPlainTimeClient().PutDefaultAsync(new PlainTimeProperty());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -477,5 +544,123 @@ namespace CadlRanchProjects.Tests
             var response = await new OptionalClient(host, null).GetUnionStringLiteralClient().PutDefaultAsync(new UnionStringLiteralProperty());
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public void PlainDateTime()
+        {
+            var input = new PlainDateProperty();
+            input.Property = PlainDateData;
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12\"}");
+            var output = PlainDateProperty.DeserializePlainDateProperty(document.RootElement);
+            Assert.AreEqual(PlainDateData, output.Property);
+        }
+
+        [Test]
+        public void PlainDateTimeOmittingTime()
+        {
+            var input = new PlainDateProperty();
+            input.Property = new DateTimeOffset(2022, 12, 12, 13, 06, 0, 0, new TimeSpan());
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"2022-12-12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"2022-12-12T13:06:00\"}");
+            var output = PlainDateProperty.DeserializePlainDateProperty(document.RootElement);
+            Assert.IsNotNull(output.Property.Value);
+            Assert.AreEqual(2022, output.Property.Value.Year);
+            Assert.AreEqual(12, output.Property.Value.Month);
+            Assert.AreEqual(12, output.Property.Value.Day);
+            Assert.AreEqual(13, output.Property.Value.Hour);
+            Assert.AreEqual(06, output.Property.Value.Minute);
+            Assert.AreEqual(0, output.Property.Value.Millisecond);
+        }
+
+        [Test]
+        public void PlainTime()
+        {
+            var input = new PlainTimeProperty();
+            input.Property = PlainTimeData;
+
+            JsonAsserts.AssertWireSerialization("{\"property\":\"13:06:12\"}", input);
+
+            using var document = JsonDocument.Parse("{\"property\":\"13:06:12\"}");
+            var output = PlainTimeProperty.DeserializePlainTimeProperty(document.RootElement);
+            Assert.AreEqual(PlainTimeData, output.Property);
+        }
+
+        [Test]
+        public void OptionalNullablePropertiesOmitedByDefault()
+        {
+            var inputModel = new PlainTimeProperty();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+            Assert.False(element.TryGetProperty("property", out _));
+        }
+
+        [Test]
+        public void OptionalPropertiesDeserializedWithNullsWhenUndefined()
+        {
+            var model = PlainTimeProperty.DeserializePlainTimeProperty(JsonDocument.Parse("{}").RootElement);
+            Assert.Null(model.Property);
+        }
+
+        [Test]
+        public void OptionalPropertiesDeserializedWithValues()
+        {
+            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\": \"2\"}").RootElement);
+            Assert.AreEqual("2", model.Property);
+        }
+
+        [Test]
+        public void OptionalListPropertiesDoNotSerializeWhenUntouched()
+        {
+            var inputModel = new CollectionsByteProperty();
+
+            // Perform non mutating operations
+            _ = inputModel.Property.Count;
+            _ = inputModel.Property.IsReadOnly;
+            _ = inputModel.Property.Remove(BinaryData.FromString("a"));
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.False(element.TryGetProperty("property", out _));
+        }
+
+        [Test]
+        public void OptionalListPropertiesSerializeAfterMutation()
+        {
+            var inputModel = new CollectionsModelProperty();
+
+            inputModel.Property.Add(new StringProperty()
+            {
+                Property = "abc"
+            });
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.AreEqual("[{\"property\":\"abc\"}]", element.GetProperty("property").ToString());
+        }
+
+        [Test]
+        public void OptionalEmptyListSerializeAfterMutation()
+        {
+            var inputModel = new CollectionsByteProperty();
+
+            inputModel.Property.Add(BinaryData.FromString("abc"));
+            inputModel.Property.Clear();
+
+            var element = JsonAsserts.AssertWireSerializes(inputModel);
+
+            Assert.AreEqual("[]", element.GetProperty("property").ToString());
+        }
+
+        [Test]
+        public void OptionalPropertyWithNullIsAccepted()
+        {
+            var model = StringProperty.DeserializeStringProperty(JsonDocument.Parse("{\"property\":null}").RootElement);
+            Assert.Null(model.Property);
+        }
     }
 }

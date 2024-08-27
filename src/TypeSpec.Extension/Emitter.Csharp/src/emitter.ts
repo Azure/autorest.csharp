@@ -12,13 +12,15 @@ import {
     LoggerLevel,
     configurationFileName,
     resolveOutputFolder,
-    tspOutputFileName
+    tspOutputFileName,
+    setSDKContextOptions
 } from "@typespec/http-client-csharp";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import {
     AzureNetEmitterOptions,
     resolveAzureEmitterOptions
 } from "./options.js";
+import { azureSDKContextOptions } from "./sdk-context-options.js";
 
 export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
@@ -34,6 +36,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         context.emitterOutputDir = path.dirname(context.emitterOutputDir);
     }
     Logger.getInstance().info("Starting Microsoft Generator Csharp emitter.");
+    setSDKContextOptions(azureSDKContextOptions);
     await $OnMGCEmit(context);
     const outputFolder = resolveOutputFolder(context);
     const isSrcFolder = path.basename(outputFolder) === "src";
@@ -69,6 +72,14 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
                 : undefined);
         configurations["enable-internal-raw-data"] =
             options["enable-internal-raw-data"];
+        const examplesDir =
+            options["examples-dir"] ?? options["examples-directory"];
+        if (examplesDir) {
+            configurations["examples-dir"] = path.relative(
+                outputFolder,
+                examplesDir
+            );
+        }
         /* TODO: when we support to emit decorator list https://github.com/Azure/autorest.csharp/issues/4887, we will update to use emitted decorator to identify if it is azure-arm */
         /* set azure-arm */
         const sdkContext = await createSdkContext(

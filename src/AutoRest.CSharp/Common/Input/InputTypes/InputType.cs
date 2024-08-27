@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input.InputTypes;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -23,12 +25,18 @@ internal abstract record InputType
                 return new InputListType(
                     listType.Name,
                     listType.CrossLanguageDefinitionId,
-                    listType.ValueType.GetCollectionEquivalent(inputType));
+                    listType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = listType.Decorators
+                };
             case InputDictionaryType dictionaryType:
                 return new InputDictionaryType(
                     dictionaryType.Name,
                     dictionaryType.KeyType,
-                    dictionaryType.ValueType.GetCollectionEquivalent(inputType));
+                    dictionaryType.ValueType.GetCollectionEquivalent(inputType))
+                {
+                    Decorators = dictionaryType.Decorators
+                };
             default:
                 return inputType;
         }
@@ -36,6 +44,9 @@ internal abstract record InputType
 
     //public bool IsNullable { get; init; }
     public string Name { get; internal set; }
+
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
+
     //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string? SpecName { get; init; }
 

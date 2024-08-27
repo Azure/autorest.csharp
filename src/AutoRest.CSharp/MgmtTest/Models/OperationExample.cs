@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private readonly Lazy<IReadOnlyDictionary<string, string>> _parameterNameToSerializedNameMapping;
 
         internal protected InputOperationExample _example;
+        internal protected InputOperation _inputOperation;
         public string OperationId { get; }
         public string Name => _example.Name!;
 
@@ -43,10 +44,11 @@ namespace AutoRest.CSharp.MgmtTest.Models
         private IEnumerable<InputParameterExample>? _pathParameters;
         public IEnumerable<InputParameterExample> PathParameters => _pathParameters ??= AllParameters.Where(p => p.Parameter.Location == RequestLocation.Path);
 
-        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperationExample example)
+        protected OperationExample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example)
         {
             OperationId = operationId;
             _example = example;
+            _inputOperation = inputOperation;
             Carrier = carrier;
             Operation = operation;
             _parameterNameToSerializedNameMapping = new Lazy<IReadOnlyDictionary<string, string>>(EnsureParameterSerializedNames);
@@ -60,7 +62,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                     return operation;
             }
 
-            throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_example.Operation.Name}");
+            throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_inputOperation.Name}");
         }
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            foreach (var requestParameter in _example.Operation.Parameters)
+            foreach (var requestParameter in _inputOperation.Parameters)
             {
                 result.Add(requestParameter.Name, requestParameter.NameInRequest ?? requestParameter.Name);
             }
@@ -153,7 +155,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
             // we throw exceptions here because path parameter cannot be optional, therefore if we do not find a parameter in the example, there must be an issue in the example
             if (parameter == null)
-                throw new InvalidOperationException($"Cannot find a parameter in test case {_example.Operation.Name} with the name of {serializedName}");
+                throw new InvalidOperationException($"Cannot find a parameter in test case {_inputOperation.Name} with the name of {serializedName}");
 
             return parameter;
         }
