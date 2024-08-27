@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            if (Configuration.MgmtTestConfiguration?.ClearOutputFolder ?? true)
+            if (Configuration.MgmtTestConfiguration?.ClearOutputFolder ?? false)
             {
                 ClearOutputFolder();
             }
