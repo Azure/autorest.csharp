@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -18,11 +17,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private readonly InputNamespace _inputNamespace;
-        private readonly MgmtTestConfiguration _mgmtTestConfiguration;
+        private readonly HashSet<string> _skippedOperations;
+
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
             _inputNamespace = inputNamespace;
-            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration ?? new MgmtTestConfiguration([]);
+            _skippedOperations = new HashSet<string>(Configuration.MgmtTestConfiguration?.SkippedOperations ?? []);
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         var operationId = inputOperation.OperationId!;
 
                         // skip this operation if we find it in the `skipped-operations` configuration
-                        if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                        if (_skippedOperations.Contains(operationId))
                             continue;
 
                         var providerAndOperations = FindCarriersFromOperationId(operationId);
