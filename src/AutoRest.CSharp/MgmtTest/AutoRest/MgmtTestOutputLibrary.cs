@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
             _inputNamespace = inputNamespace;
-            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
+            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration ?? new MgmtTestConfiguration([]);
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;

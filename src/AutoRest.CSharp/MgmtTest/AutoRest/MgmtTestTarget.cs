@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.AutoRest;
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
             Debug.Assert(inputNamespace.Clients is not null);
-            Debug.Assert(Configuration.MgmtTestConfiguration is not null);
+            //Debug.Assert(Configuration.MgmtTestConfiguration is not null);
             MgmtTestOutputLibrary library;
             if (sourceInputModel == null)
             {
@@ -43,12 +42,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 library = new MgmtTestOutputLibrary(inputNamespace);
             }
 
-            if (Configuration.MgmtTestConfiguration.Mock)
+            if (Configuration.MgmtTestConfiguration?.Mock ?? false)
             {
                 WriteMockTests(project, library);
             }
 
-            if (Configuration.MgmtTestConfiguration.Sample)
+            if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)
             {
                 WriteSamples(project, library);
             }
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            if (Configuration.MgmtTestConfiguration.ClearOutputFolder)
+            if (Configuration.MgmtTestConfiguration?.ClearOutputFolder ?? true)
             {
                 ClearOutputFolder();
             }
@@ -172,7 +171,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
             //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
             if (folder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return FormatPath(Path.Combine(folder, $"../..", defaultOutputPath));
+                return FormatPath(Path.Combine(folder, $"../../{defaultOutputPath}"));
             else if (folder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || folder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
                 return folder;
             else
