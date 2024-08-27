@@ -418,12 +418,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (valueType == typeof(decimal) ||
                 valueType == typeof(double) ||
                 valueType == typeof(float) ||
-                valueType == typeof(long) ||
-                valueType == typeof(int) ||
-                valueType == typeof(short) ||
-                valueType == typeof(sbyte) ||
-                valueType == typeof(byte))
+                IsIntType(valueType))
             {
+                if (valueSerialization.Format is SerializationFormat.Int_String &&
+                    IsIntType(valueType))
+                {
+                    return utf8JsonWriter.WriteStringValue(value.InvokeToString());
+                }
                 return utf8JsonWriter.WriteNumberValue(value);
             }
 
@@ -1154,17 +1155,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetBoolean();
             if (frameworkType == typeof(char))
                 return element.GetChar();
-
-            if (frameworkType == typeof(sbyte))
-                return element.GetSByte();
-            if (frameworkType == typeof(byte))
-                return element.GetByte();
-            if (frameworkType == typeof(short))
-                return element.GetInt16();
-            if (frameworkType == typeof(int))
-                return element.GetInt32();
-            if (frameworkType == typeof(long))
-                return element.GetInt64();
+            if (IsIntType(frameworkType))
+                return GetIntTypeDeserializationValueExpression(element, frameworkType, format);
             if (frameworkType == typeof(float))
                 return element.GetSingle();
             if (frameworkType == typeof(double))
@@ -1204,6 +1196,27 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             throw new NotSupportedException($"Framework type {frameworkType} is not supported, please add `CodeGenMemberSerializationHooks` to specify the serialization of this type with the customized property");
         }
+
+        private static ValueExpression GetIntTypeDeserializationValueExpression(JsonElementExpression element, Type type, SerializationFormat format) => format switch
+        {
+            SerializationFormat.Int_String => new TypeReference(type).Invoke(nameof(int.Parse), new List<ValueExpression> { element.GetString() }),
+            _ => type switch
+            {
+                Type t when t == typeof(sbyte) => element.GetSByte(),
+                Type t when t == typeof(byte) => element.GetByte(),
+                Type t when t == typeof(short) => element.GetInt16(),
+                Type t when t == typeof(int) => element.GetInt32(),
+                Type t when t == typeof(long) => element.GetInt64(),
+                _ => throw new NotSupportedException($"Framework type {type} is not int.")
+            }
+        };
+
+        private static bool IsIntType(Type frameworkType) =>
+            frameworkType == typeof(sbyte) ||
+            frameworkType == typeof(byte) ||
+            frameworkType == typeof(short) ||
+            frameworkType == typeof(int) ||
+            frameworkType == typeof(long);
 
         private static MethodBodyStatement InvokeListAdd(ValueExpression list, ValueExpression value)
             => new InvokeInstanceMethodStatement(list, nameof(List<object>.Add), value);
