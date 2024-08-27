@@ -17,7 +17,7 @@
     "@azure-tools/typespec-azure-resource-manager": "0.45.0",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
-    "@microsoft.azure/autorest.testserver": "3.3.49",
+    "@microsoft.azure/autorest.testserver": "3.3.50",
     "autorest": "3.7.1"
   }
 }
