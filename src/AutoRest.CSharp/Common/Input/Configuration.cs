@@ -58,6 +58,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string ExamplesDirectory = "examples-dir";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             public const string UseModelReaderWriter = "use-model-reader-writer";
+            public const string UseWriteCore = "use-write-core";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             // It is only respected if UseModelReaderWriter is true.
             public const string EnableBicepSerialization = "enable-bicep-serialization";
@@ -95,6 +96,7 @@ namespace AutoRest.CSharp.Common.Input
             bool deserializeNullCollectionAsNullValue,
             bool useCoreDataFactoryReplacements,
             bool useModelReaderWriter,
+            bool useWriteCore,
             bool enableBicepSerialization,
             bool enableInternalRawData,
             IReadOnlyList<string> modelFactoryForHlc,
@@ -143,6 +145,7 @@ namespace AutoRest.CSharp.Common.Input
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
+            UseWriteCore = useWriteCore;
             EnableBicepSerialization = enableBicepSerialization;
             EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;
@@ -265,6 +268,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public static bool UseModelReaderWriter { get; private set; }
 
+        public static bool UseWriteCore { get; private set; }
+
         public static bool EnableBicepSerialization { get; private set; }
 
         public static bool EnableInternalRawData { get; private set; }
@@ -373,6 +378,7 @@ namespace AutoRest.CSharp.Common.Input
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: GetOptionBoolValue(autoRest, Options.UseModelReaderWriter),
+                useWriteCore: GetOptionBoolValue(autoRest, Options.UseWriteCore),
                 enableBicepSerialization: GetOptionBoolValue(autoRest, Options.EnableBicepSerialization),
                 enableInternalRawData: GetOptionBoolValue(autoRest, Options.EnableInternalRawData),
                 projectFolder: GetProjectFolderOption(autoRest),
@@ -465,6 +471,8 @@ namespace AutoRest.CSharp.Common.Input
                     return false;
                 case Options.UseModelReaderWriter:
                     return false;
+                case Options.UseWriteCore:
+                    return false;
                 case Options.EnableBicepSerialization:
                     return false;
                 case Options.DisableXmlDocs:
@@ -544,6 +552,7 @@ namespace AutoRest.CSharp.Common.Input
                 deserializeNullCollectionAsNullValue: ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 useCoreDataFactoryReplacements: ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: ReadOption(root, Options.UseModelReaderWriter),
+                useWriteCore: ReadOption(root, Options.UseWriteCore),
                 enableBicepSerialization: ReadOption(root, Options.EnableBicepSerialization),
                 enableInternalRawData: ReadOption(root, Options.EnableInternalRawData),
                 modelFactoryForHlc: oldModelFactoryEntries,
@@ -611,6 +620,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             WriteIfNotDefault(writer, Options.UseModelReaderWriter, UseModelReaderWriter);
+            WriteIfNotDefault(writer, Options.UseWriteCore, UseWriteCore);
             WriteIfNotDefault(writer, Options.EnableBicepSerialization, EnableBicepSerialization);
             WriteNonEmptyArray(writer, Options.ProtocolMethodList, ProtocolMethodList);
             WriteNonEmptyArray(writer, Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
