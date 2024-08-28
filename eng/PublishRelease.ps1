@@ -42,7 +42,7 @@ try {
     $maxAttempts = 4
     while($true) {
         Write-Host "Installing @autorest/csharp@$autorestVersion and updating package.json"
-        npm install @autorest/csharp@$autorestVersion --save-exact
+        npm install @autorest/csharp@$autorestVersion --save-exact --prefer-online
         $attemptCount += 1
 
         if($LASTEXITCODE -eq 0) {

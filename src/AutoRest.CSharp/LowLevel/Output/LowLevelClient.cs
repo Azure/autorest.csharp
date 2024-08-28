@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? subClientName[libraryName.Length..]
                 : subClientName;
 
-            if (!IsResourceClient)
+            if (!IsResourceClient && !methodName.EndsWith(ClientBuilder.GetClientSuffix()))
             {
                 methodName += ClientBuilder.GetClientSuffix();
             }
