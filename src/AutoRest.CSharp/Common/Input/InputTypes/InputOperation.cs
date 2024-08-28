@@ -124,7 +124,7 @@ internal record InputOperation
     private IReadOnlyList<InputOperationExample> EnsureExamples()
     {
         // see if we need to generate the mock examples
-        if (Configuration.ExamplesDirectory != null)
+        if (Configuration.ExamplesDirectory != null || Configuration.AzureArm)
         {
             return Array.Empty<InputOperationExample>();
         }
@@ -132,8 +132,6 @@ internal record InputOperation
         // build the mock examples
         return ExampleMockValueBuilder.BuildOperationExamples(this);
     }
-
-    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = Array.Empty<InputOperationExample>();
 
     public bool IsLongRunning => LongRunning != null;
     public string Name { get; internal set; }

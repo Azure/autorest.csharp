@@ -64,7 +64,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -95,7 +95,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -126,7 +126,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -152,7 +152,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// </list>
         /// </summary>
