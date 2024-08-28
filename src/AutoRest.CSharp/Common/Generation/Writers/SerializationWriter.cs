@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name}")
-                    .AppendRawIf(" : ", model.IncludeSerializer && serialization.Interfaces?.Count() > 0);
+                    .AppendRawIf(" : ", serialization.Interfaces?.Any() ?? false);
 
                 if (serialization.Interfaces is not null)
                 {

@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return new[]
             {
                 utf8JsonWriter.WriteStartObject(),
-                This.Invoke(coreMethodSignature.Name, coreMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList()).ToStatement(),
+                This.Invoke((MethodSignature)coreMethodSignature).ToStatement(),
                 utf8JsonWriter.WriteEndObject(),
             };
         }
