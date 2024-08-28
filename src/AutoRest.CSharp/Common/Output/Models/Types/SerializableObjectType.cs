@@ -38,13 +38,16 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private ObjectTypeSerialization? _modelSerialization;
         public ObjectTypeSerialization Serialization => _modelSerialization ??= BuildSerialization();
 
-        private ObjectTypeSerialization BuildSerialization()
+        protected virtual ObjectTypeSerialization BuildSerialization()
         {
             var json = BuildJsonSerialization();
             var xml = BuildXmlSerialization();
             var bicep = BuildBicepSerialization(json);
             var multipart = BuildMultipartSerialization();
-            return new ObjectTypeSerialization(this, json, xml, bicep, multipart);
+            // select interface model type here
+            var modelType = IsUnknownDerivedType && Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : Type;
+            var interfaces = new SerializationInterfaces(IncludeSerializer, IsStruct, modelType, json is not null, xml is not null);
+            return new ObjectTypeSerialization(this, json, xml, bicep, multipart, interfaces);
         }
 
         protected abstract JsonObjectSerialization? BuildJsonSerialization();

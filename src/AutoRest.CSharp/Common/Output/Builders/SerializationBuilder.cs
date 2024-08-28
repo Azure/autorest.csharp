@@ -15,6 +15,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -409,6 +410,7 @@ namespace AutoRest.CSharp.Output.Builders
         public JsonObjectSerialization BuildJsonObjectSerialization(InputModelType inputModel, SchemaObjectType objectType)
         {
             var propertyBag = new SerializationPropertyBag();
+            var selfPropertyBag = new SerializationPropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
@@ -416,16 +418,26 @@ namespace AutoRest.CSharp.Output.Builders
                     if (objectTypeProperty == objectTypeLevel.AdditionalPropertiesProperty)
                         continue;
                     propertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
+
+                    if (objectTypeLevel == objectType)
+                    {
+                        selfPropertyBag.Properties.Add(objectTypeProperty, objectType.GetForMemberSerialization(objectTypeProperty.Declaration.Name));
+                    }
                 }
             }
             PopulatePropertyBag(propertyBag, 0);
+            PopulatePropertyBag(selfPropertyBag, 0);
+
+            // properties: all the properties containing the properties from base, these are needed to build the constructor
+            // selfProperties: the properties not containing properties from base, to do the serialization we only need the properties owned by itself
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
+            var selfProperties = GetPropertySerializationsFromBag(selfPropertyBag, objectType).ToArray();
             var (additionalProperties, rawDataField) = CreateAdditionalPropertiesSerialization(inputModel, objectType);
-            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, rawDataField, objectType.Discriminator, objectType.JsonConverter);
+            return new JsonObjectSerialization(objectType, objectType.SerializationConstructor.Signature.Parameters, properties, selfProperties, additionalProperties, rawDataField, objectType.Discriminator, objectType.JsonConverter);
         }
 
-        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model, TypeFactory typeFactory)
-            => GetPropertySerializationsFromBag(PopulatePropertyBag(model), p => CreateJsonPropertySerializationFromInputModelProperty(model, p, typeFactory)).ToArray();
+        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model, TypeFactory typeFactory, bool onlySelf = false)
+            => GetPropertySerializationsFromBag(PopulatePropertyBag(model, onlySelf), p => CreateJsonPropertySerializationFromInputModelProperty(model, p, typeFactory)).ToArray();
 
         private class SerializationPropertyBag
         {
@@ -466,10 +478,11 @@ namespace AutoRest.CSharp.Output.Builders
             public List<T> Properties { get; } = new();
         }
 
-        private static PropertyBag<ObjectTypeProperty> PopulatePropertyBag(SerializableObjectType objectType)
+        private static PropertyBag<ObjectTypeProperty> PopulatePropertyBag(SerializableObjectType objectType, bool onlySelf = false)
         {
             var propertyBag = new PropertyBag<ObjectTypeProperty>();
-            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
+            var objectTypeLevels = onlySelf ? objectType.AsIEnumerable() : objectType.EnumerateHierarchy();
+            foreach (var objectTypeLevel in objectTypeLevels)
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
                 {
