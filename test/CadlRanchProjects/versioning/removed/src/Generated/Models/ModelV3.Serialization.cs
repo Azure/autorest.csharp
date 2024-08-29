@@ -29,8 +29,6 @@ namespace Versioning.Removed.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
-            writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(Type);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -70,7 +68,6 @@ namespace Versioning.Removed.Models
                 return null;
             }
             string id = default;
-            string type = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -80,18 +77,13 @@ namespace Versioning.Removed.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"u8))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ModelV3(id, type, serializedAdditionalRawData);
+            return new ModelV3(id, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelV3>.Write(ModelReaderWriterOptions options)
