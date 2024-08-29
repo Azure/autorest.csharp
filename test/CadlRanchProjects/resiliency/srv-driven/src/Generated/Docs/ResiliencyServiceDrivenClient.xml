@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="AddOperationAsync(RequestContext)">
+      <example>
+This sample shows how to call AddOperationAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.AddOperationAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call AddOperationAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.AddOperationAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="AddOperation(RequestContext)">
+      <example>
+This sample shows how to call AddOperation.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.AddOperation();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call AddOperation with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.AddOperation();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromNoneAsync(string,RequestContext)">
+      <example>
+This sample shows how to call FromNoneAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromNoneAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromNoneAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromNoneAsync(newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromNone(string,RequestContext)">
+      <example>
+This sample shows how to call FromNone.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromNone();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromNone with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromNone(newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOneRequiredAsync(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOneRequiredAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromOneRequiredAsync("<parameter>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneRequiredAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromOneRequiredAsync("<parameter>", newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOneRequired(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOneRequired.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromOneRequired("<parameter>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneRequired with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromOneRequired("<parameter>", newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOneOptionalAsync(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOneOptionalAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromOneOptionalAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneOptionalAsync with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = await client.FromOneOptionalAsync(parameter: "<parameter>", newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOneOptional(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOneOptional.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromOneOptional();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOneOptional with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+ResiliencyServiceDrivenClient client = new ResiliencyServiceDrivenClient(endpoint, "<serviceDeploymentVersion>");
+
+Response response = client.FromOneOptional(parameter: "<parameter>", newParameter: "<new-parameter>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
