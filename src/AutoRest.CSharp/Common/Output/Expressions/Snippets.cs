@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static ValueExpression DefaultOf(CSharpType type) => type is { IsValueType: true, IsNullable: false } ? Default.CastTo(type) : Null.CastTo(type);
         public static ValueExpression This { get; } = new KeywordExpression("this", null);
+        public static KeywordExpression Base => new KeywordExpression("base", null);
         public static BoolExpression True { get; } = new(new KeywordExpression("true", null));
         public static BoolExpression False { get; } = new(new KeywordExpression("false", null));
 

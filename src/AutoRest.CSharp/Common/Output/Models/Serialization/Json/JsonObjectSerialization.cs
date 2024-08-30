@@ -11,11 +11,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal record JsonObjectSerialization
     {
-        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, JsonAdditionalPropertiesSerialization? additionalProperties, JsonAdditionalPropertiesSerialization? rawDataField, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter)
+        public JsonObjectSerialization(SerializableObjectType model, IReadOnlyList<Parameter> constructorParameters, IReadOnlyList<JsonPropertySerialization> properties, IReadOnlyList<JsonPropertySerialization> selfProperties, JsonAdditionalPropertiesSerialization? additionalProperties, JsonAdditionalPropertiesSerialization? rawDataField, ObjectTypeDiscriminator? discriminator, JsonConverterProvider? jsonConverter)
         {
             Type = model.Type;
             ConstructorParameters = constructorParameters;
             Properties = properties;
+            SelfProperties = selfProperties;
             AdditionalProperties = additionalProperties;
             RawDataField = rawDataField;
             Discriminator = discriminator;
@@ -25,6 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public CSharpType Type { get; }
         public IReadOnlyList<Parameter> ConstructorParameters { get; }
         public IReadOnlyList<JsonPropertySerialization> Properties { get; }
+        public IReadOnlyList<JsonPropertySerialization> SelfProperties { get; }
         public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
         public JsonAdditionalPropertiesSerialization? RawDataField { get; }
         public ObjectTypeDiscriminator? Discriminator { get; }

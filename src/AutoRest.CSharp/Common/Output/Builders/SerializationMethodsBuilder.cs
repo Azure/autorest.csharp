@@ -45,7 +45,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (model.IncludeSerializer)
                 {
-                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json, serialization.Interfaces))
+                    bool hasInherits = model.Inherits is { IsFrameworkType: false };
+                    bool isSealed = model.GetExistingType()?.IsSealed == true;
+                    foreach (var method in JsonSerializationMethodsBuilder.BuildJsonSerializationMethods(json, serialization.Interfaces, hasInherits, isSealed))
                     {
                         yield return method;
                     }
@@ -87,8 +89,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             var interfaces = serialization.Interfaces;
 
-            var iModelTInterface = interfaces.IPersistableModelTInterface;
-            var iModelObjectInterface = interfaces.IPersistableModelObjectInterface;
+            var iModelTInterface = interfaces?.IPersistableModelTInterface;
+            var iModelObjectInterface = interfaces?.IPersistableModelObjectInterface;
 
             if (iModelTInterface is not null)
             {
