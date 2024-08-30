@@ -36,7 +36,28 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Service_Driven_AddOptionalParam_FromOneRequired_NewVersion() => Test(async (host) =>
         {
-            var resopnse = await new ResiliencyServiceDrivenClient(host, "v2", new ResiliencyServiceDrivenClientOptions(ResiliencyServiceDrivenClientOptions.ServiceVersion.V1)).FromNoneAsync();
+            var resopnse = await new ResiliencyServiceDrivenClient(host, "v2").FromOneRequiredAsync("required", "new");
+            Assert.AreEqual(204, resopnse.Status);
+        });
+
+        [Test]
+        public Task Service_Driven_AddOptionalParam_FromOneRequired_OldVersion() => Test(async (host) =>
+        {
+            var resopnse = await new ResiliencyServiceDrivenClient(host, "v2", new ResiliencyServiceDrivenClientOptions(ResiliencyServiceDrivenClientOptions.ServiceVersion.V1)).FromOneRequiredAsync("required");
+            Assert.AreEqual(204, resopnse.Status);
+        });
+
+        [Test]
+        public Task Service_Driven_AddOptionalParam_FromOneOptional_NewVersion() => Test(async (host) =>
+        {
+            var resopnse = await new ResiliencyServiceDrivenClient(host, "v2").FromOneOptionalAsync("optional", "new");
+            Assert.AreEqual(204, resopnse.Status);
+        });
+
+        [Test]
+        public Task Service_Driven_AddOptionalParam_FromOneOptional_OldVersion() => Test(async (host) =>
+        {
+            var resopnse = await new ResiliencyServiceDrivenClient(host, "v2", new ResiliencyServiceDrivenClientOptions(ResiliencyServiceDrivenClientOptions.ServiceVersion.V1)).FromOneOptionalAsync("optional");
             Assert.AreEqual(204, resopnse.Status);
         });
     }
