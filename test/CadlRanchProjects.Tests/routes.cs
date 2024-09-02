@@ -2,7 +2,6 @@
 using AutoRest.TestServer.Tests.Infrastructure;
 using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
-using Routes;
 
 namespace CadlRanchProjects.Tests
 {
