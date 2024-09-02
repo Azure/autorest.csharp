@@ -29,6 +29,8 @@ namespace Versioning.Removed.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
+            writer.WritePropertyName("enumProp"u8);
+            writer.WriteStringValue(EnumProp.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -68,6 +70,7 @@ namespace Versioning.Removed.Models
                 return null;
             }
             string id = default;
+            EnumV3 enumProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -77,13 +80,18 @@ namespace Versioning.Removed.Models
                     id = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("enumProp"u8))
+                {
+                    enumProp = property.Value.GetString().ToEnumV3();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ModelV3(id, serializedAdditionalRawData);
+            return new ModelV3(id, enumProp, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelV3>.Write(ModelReaderWriterOptions options)

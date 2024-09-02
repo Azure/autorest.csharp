@@ -148,7 +148,7 @@ namespace Versioning.Removed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV1_ShortVersion()
+        public void Example_Removed_ModelV3_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -156,16 +156,18 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = client.ModelV3InVersionV1(content);
+            Response response = client.ModelV3(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV1_ShortVersion_Async()
+        public async Task Example_Removed_ModelV3_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -173,38 +175,40 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = await client.ModelV3InVersionV1Async(content);
+            Response response = await client.ModelV3Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV1_ShortVersion_Convenience()
+        public void Example_Removed_ModelV3_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV3InVersionV1(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = client.ModelV3(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV1_ShortVersion_Convenience_Async()
+        public async Task Example_Removed_ModelV3_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV3InVersionV1Async(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = await client.ModelV3Async(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV1_AllParameters()
+        public void Example_Removed_ModelV3_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -212,16 +216,18 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = client.ModelV3InVersionV1(content);
+            Response response = client.ModelV3(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV1_AllParameters_Async()
+        public async Task Example_Removed_ModelV3_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -229,38 +235,40 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = await client.ModelV3InVersionV1Async(content);
+            Response response = await client.ModelV3Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV1_AllParameters_Convenience()
+        public void Example_Removed_ModelV3_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV3InVersionV1(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = client.ModelV3(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV1_AllParameters_Convenience_Async()
+        public async Task Example_Removed_ModelV3_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV3InVersionV1Async(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = await client.ModelV3Async(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV2InVersionBeta_ShortVersion()
+        public void Example_Removed_ModelV3InVersionBeta_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -268,16 +276,18 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = client.ModelV2InVersionBeta(content);
+            Response response = client.ModelV3InVersionBeta(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV2InVersionBeta_ShortVersion_Async()
+        public async Task Example_Removed_ModelV3InVersionBeta_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -285,38 +295,40 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = await client.ModelV2InVersionBetaAsync(content);
+            Response response = await client.ModelV3InVersionBetaAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV2InVersionBeta_ShortVersion_Convenience()
+        public void Example_Removed_ModelV3InVersionBeta_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV2InVersionBeta(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = client.ModelV3InVersionBeta(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV2InVersionBeta_ShortVersion_Convenience_Async()
+        public async Task Example_Removed_ModelV3InVersionBeta_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV2InVersionBetaAsync(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = await client.ModelV3InVersionBetaAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV2InVersionBeta_AllParameters()
+        public void Example_Removed_ModelV3InVersionBeta_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -324,16 +336,18 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = client.ModelV2InVersionBeta(content);
+            Response response = client.ModelV3InVersionBeta(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV2InVersionBeta_AllParameters_Async()
+        public async Task Example_Removed_ModelV3InVersionBeta_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
@@ -341,145 +355,35 @@ namespace Versioning.Removed.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
+                enumProp = "enumMemberV1",
             });
-            Response response = await client.ModelV2InVersionBetaAsync(content);
+            Response response = await client.ModelV3InVersionBetaAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("enumProp").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV2InVersionBeta_AllParameters_Convenience()
+        public void Example_Removed_ModelV3InVersionBeta_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV2InVersionBeta(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = client.ModelV3InVersionBeta(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV2InVersionBeta_AllParameters_Convenience_Async()
+        public async Task Example_Removed_ModelV3InVersionBeta_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             RemovedClient client = new RemovedClient(endpoint, Versions.V1);
 
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV2InVersionBetaAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV2_ShortVersion()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                id = "<id>",
-            });
-            Response response = client.ModelV3InVersionV2(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV2_ShortVersion_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                id = "<id>",
-            });
-            Response response = await client.ModelV3InVersionV2Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV2_ShortVersion_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV3InVersionV2(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV2_ShortVersion_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV3InVersionV2Async(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV2_AllParameters()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                id = "<id>",
-            });
-            Response response = client.ModelV3InVersionV2(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV2_AllParameters_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                id = "<id>",
-            });
-            Response response = await client.ModelV3InVersionV2Async(content);
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Removed_ModelV3InVersionV2_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = client.ModelV3InVersionV2(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Removed_ModelV3InVersionV2_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
-
-            ModelV3 body = new ModelV3("<id>");
-            Response<ModelV3> response = await client.ModelV3InVersionV2Async(body);
+            ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+            Response<ModelV3> response = await client.ModelV3InVersionBetaAsync(body);
         }
     }
 }

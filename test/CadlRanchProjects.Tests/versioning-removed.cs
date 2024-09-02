@@ -69,7 +69,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_V3_V2() => Test(async (host) =>
         {
             ModelV3 modelV3 = new ModelV3("123", EnumV3.EnumMemberV1);
-            var response = await new RemovedClient(host, Versions.V2).ModelV3WithV1Async(modelV3);
+            var response = await new RemovedClient(host, Versions.V2).ModelV3Async(modelV3);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
             Assert.AreEqual(EnumV3.EnumMemberV1, response.Value.EnumProp);
@@ -79,7 +79,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_V3_V1() => Test(async (host) =>
         {
             ModelV3 modelV3 = new ModelV3("123", EnumV3.EnumMemberV1);
-            var response = await new RemovedClient(host, Versions.V1).ModelV3WithV1Async(modelV3);
+            var response = await new RemovedClient(host, Versions.V1).ModelV3Async(modelV3);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
             Assert.AreEqual(EnumV3.EnumMemberV1, response.Value.EnumProp);
@@ -89,7 +89,7 @@ namespace CadlRanchProjects.Tests
         public Task Versioning_Removed_V3_Beta() => Test(async (host) =>
         {
             ModelV3 modelV3 = new ModelV3("123", EnumV3.EnumMemberBeta);
-            var response = await new RemovedClient(host, Versions.Beta).ModelV3WithBetaAsync(modelV3);
+            var response = await new RemovedClient(host, Versions.Beta).ModelV3InVersionBetaAsync(modelV3);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("123", response.Value.Id);
             Assert.AreEqual(EnumV3.EnumMemberBeta, response.Value.EnumProp);
