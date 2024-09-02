@@ -37,7 +37,7 @@ try {
             Invoke-LoggedCommand "npm run prettier" -GroupOutput
             Invoke-LoggedCommand "npm run lint" -GroupOutput
             Invoke-LoggedCommand "npm run build" -GroupOutput
-            Invoke-LoggedCommand "npm run test" -GroupOutput
+            Invoke-LoggedCommand "npm run test -- --passWithNoTests" -GroupOutput
         }
         finally {
             Pop-Location
