@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal record OperationResponseExample(OperationResponse Response, InputExampleObjectValue BodyValue);
+    internal record OperationResponseExample(OperationResponse Response, InputExampleValue? BodyValue);
 }

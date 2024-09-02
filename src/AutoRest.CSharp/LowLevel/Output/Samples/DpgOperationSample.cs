@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _method = method;
             _inputOperation = inputOperation;
             _inputOperationExample = operationExample;
+            _responseExample = new(FindOperationResponseExample);
             IsConvenienceSample = isConvenienceSample;
             ExampleKey = exampleKey.ToCleanName();
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
@@ -363,28 +364,36 @@ namespace AutoRest.CSharp.Output.Samples.Models
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
 
-        public bool HasResponseBody => _method.ResponseBodyType != null;
         public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream };
 
-        private InputType? _resultType;
-        public InputType? ResultType => _resultType ??= GetEffectiveResponseType();
+        private readonly Lazy<OperationResponseExample?> _responseExample;
+        public OperationResponseExample? Response => _responseExample.Value;
 
-        /// <summary>
-        /// This method returns the Type we would like to deal with in the sample code.
-        /// For normal operation and long running operation, it is just the InputType of the response
-        /// For pageable operation, it is the InputType of the item
-        /// </summary>
-        /// <returns></returns>
-        private InputType? GetEffectiveResponseType()
+        private OperationResponseExample? FindOperationResponseExample()
         {
-            var responseType = _method.ResponseBodyType;
-            if (_method.PagingInfo == null)
-                return responseType;
+            if (_inputOperationExample.Responses.Count == 0)
+            {
+                return null;
+            }
+            // finds the first response with 200
+            foreach (var responseExample in _inputOperationExample.Responses)
+            {
+                if (responseExample.Response.StatusCodes.Any(code => code == 200))
+                {
+                    return responseExample;
+                }
+            }
 
-            var pagingItemName = _method.PagingInfo.ItemName;
-            var listResultType = responseType as InputModelType;
-            var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-            return (itemsArrayProperty?.Type as InputListType)?.ValueType;
+            // if none has 200, we returns the first 2xx
+            foreach (var responseExample in _inputOperationExample.Responses)
+            {
+                if (responseExample.Response.StatusCodes.Any(code => code >= 200 && code < 300))
+                {
+                    return responseExample;
+                }
+            }
+
+            return null;
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370
@@ -448,10 +457,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var methodName = methodSignature.Name;
             if (IsAllParametersUsed)
             {
-                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(HasResponseBody ? " and parse the result" : "")}.";
+                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(Response?.BodyValue != null ? " and parse the result" : "")}.";
             }
 
-            return $"This sample shows how to call {methodName}{(HasResponseBody ? " and parse the result" : string.Empty)}.";
+            return $"This sample shows how to call {methodName}{(Response?.BodyValue != null ? " and parse the result" : string.Empty)}.";
         }
 
         // RequestContext is excluded

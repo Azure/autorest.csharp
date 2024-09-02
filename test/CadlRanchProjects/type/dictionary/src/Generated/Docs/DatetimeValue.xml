@@ -40,7 +40,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 Response response = await client.GetDatetimeValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 Response response = await client.GetDatetimeValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="GetDatetimeValue(RequestContext)">
@@ -61,7 +61,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 Response response = client.GetDatetimeValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetDatetimeValue with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +70,7 @@ DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 Response response = client.GetDatetimeValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,DateTimeOffset},CancellationToken)">

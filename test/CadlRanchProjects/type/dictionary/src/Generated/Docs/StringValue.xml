@@ -40,7 +40,7 @@ StringValue client = new DictionaryClient().GetStringValueClient();
 Response response = await client.GetStringValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetStringValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ StringValue client = new DictionaryClient().GetStringValueClient();
 Response response = await client.GetStringValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="GetStringValue(RequestContext)">
@@ -61,7 +61,7 @@ StringValue client = new DictionaryClient().GetStringValueClient();
 Response response = client.GetStringValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetStringValue with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +70,7 @@ StringValue client = new DictionaryClient().GetStringValueClient();
 Response response = client.GetStringValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,string},CancellationToken)">

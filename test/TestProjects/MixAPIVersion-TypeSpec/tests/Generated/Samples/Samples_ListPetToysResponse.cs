@@ -26,9 +26,9 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("petId").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
             }
         }
 
@@ -42,9 +42,9 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("petId").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
             }
         }
 
@@ -58,9 +58,10 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("petId").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -74,9 +75,10 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("petId").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
     }

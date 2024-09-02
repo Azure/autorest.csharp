@@ -79,14 +79,14 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
 Response response = await client.PutAsync(body);
 ]]></code></example>
     </member>
@@ -96,14 +96,14 @@ This sample shows how to call Put.
 <code><![CDATA[
 UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
 Response response = client.Put(body);
 ]]></code></example>
     </member>
@@ -115,7 +115,7 @@ UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "<unknown value>",
 });
 Response response = await client.PutAsync(content);
 
@@ -127,7 +127,7 @@ UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "<unknown value>",
 });
 Response response = await client.PutAsync(content);
 
@@ -142,7 +142,7 @@ UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "<unknown value>",
 });
 Response response = client.Put(content);
 
@@ -154,7 +154,7 @@ UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    property = new object(),
+    property = "<unknown value>",
 });
 Response response = client.Put(content);
 

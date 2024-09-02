@@ -40,7 +40,6 @@ Bytes client = new ValueTypesClient().GetBytesClient();
 Response response = await client.GetByteAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByteAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +48,6 @@ Bytes client = new ValueTypesClient().GetBytesClient();
 Response response = await client.GetByteAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="GetByte(RequestContext)">
@@ -61,7 +59,6 @@ Bytes client = new ValueTypesClient().GetBytesClient();
 Response response = client.GetByte(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetByte with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +67,6 @@ Bytes client = new ValueTypesClient().GetBytesClient();
 Response response = client.GetByte(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(BytesProperty,CancellationToken)">

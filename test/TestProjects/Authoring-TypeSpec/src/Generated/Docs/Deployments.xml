@@ -57,7 +57,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetDeploymentsAsync with all parameters and parse the result.
@@ -68,7 +68,8 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("nextLink").ToString());
 }
 ]]></code></example>
     </member>
@@ -82,7 +83,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetDeployments with all parameters and parse the result.
@@ -93,7 +94,8 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("nextLink").ToString());
 }
 ]]></code></example>
     </member>
@@ -153,14 +155,14 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="DeleteDeploymentAsync(WaitUntil,string,string,RequestContext)">
       <example>
-This sample shows how to call DeleteDeploymentAsync.
+This sample shows how to call DeleteDeploymentAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
 Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code>
-This sample shows how to call DeleteDeploymentAsync with all parameters.
+This sample shows how to call DeleteDeploymentAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
@@ -170,14 +172,14 @@ Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<
     </member>
     <member name="DeleteDeployment(WaitUntil,string,string,RequestContext)">
       <example>
-This sample shows how to call DeleteDeployment.
+This sample shows how to call DeleteDeployment and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
 Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
 ]]></code>
-This sample shows how to call DeleteDeployment with all parameters.
+This sample shows how to call DeleteDeployment with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");

@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 }
             }
 
-            var result = new OperationResponseExample(response ?? throw new JsonException(), bodyValue as InputExampleObjectValue ?? throw new JsonException());
+            var result = new OperationResponseExample(response ?? throw new JsonException(), bodyValue);
 
             if (id != null)
             {

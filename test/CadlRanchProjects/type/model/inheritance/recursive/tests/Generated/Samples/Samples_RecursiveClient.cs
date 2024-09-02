@@ -184,7 +184,7 @@ null
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
-            Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
+            Console.WriteLine(result.GetProperty("extension")[0].ToString());
         }
 
         [Test]
@@ -197,7 +197,7 @@ null
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("level").ToString());
-            Console.WriteLine(result.GetProperty("extension")[0].GetProperty("level").ToString());
+            Console.WriteLine(result.GetProperty("extension")[0].ToString());
         }
 
         [Test]

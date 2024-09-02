@@ -27,7 +27,7 @@ namespace _Type._Dictionary.Samples
             Response response = client.GetNullableFloatValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type._Dictionary.Samples
             Response response = await client.GetNullableFloatValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type._Dictionary.Samples
             Response response = client.GetNullableFloatValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type._Dictionary.Samples
             Response response = await client.GetNullableFloatValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]

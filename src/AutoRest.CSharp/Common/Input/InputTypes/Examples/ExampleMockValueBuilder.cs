@@ -20,11 +20,12 @@ namespace AutoRest.CSharp.Common.Input.Examples
         public static IReadOnlyList<InputOperationExample> BuildOperationExamples(InputOperation operation)
         {
             _cache.Clear();
-            return new[]
-            {
+            // TODO -- maybe we could deduplicate the sample here?
+            return
+            [
                 BuildOperationExample(operation, ShortVersionMockExampleKey, false),
                 BuildOperationExample(operation, MockExampleAllParameterKey, true)
-            };
+            ];
         }
 
         private static InputOperationExample BuildOperationExample(InputOperation operation, string name, bool useAllParameters)
@@ -40,8 +41,18 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            // TODO -- making up mock responses
-            return new(name, null, string.Empty, parameterExamples, []);
+            var responseExamples = new List<OperationResponseExample>();
+            foreach (var response in operation.Responses)
+            {
+                // TODO -- fix the LRO cases
+                // we only make up the succeeded response examples
+                if (response.IsErrorResponse)
+                    continue;
+                var responseExample = BuildResponseExample(response, useAllParameters);
+                responseExamples.Add(responseExample);
+            }
+
+            return new(name, null, string.Empty, parameterExamples, responseExamples);
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)
@@ -90,35 +101,46 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 return new(parameter, value);
             }
 
-            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, useAllParameters, new HashSet<InputModelType>());
+            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, useAllParameters, new HashSet<InputModelType>(), false);
             return new(parameter, exampleValue);
         }
 
-        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels) => type switch
+        private static OperationResponseExample BuildResponseExample(OperationResponse response, bool useAllParameters)
         {
-            InputListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels),
-            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels),
+            var bodyType = response.BodyType;
+            InputExampleValue? bodyValue = null;
+            if (bodyType != null)
+            {
+                bodyValue = BuildExampleValue(bodyType, "response", useAllParameters, new HashSet<InputModelType>(), true);
+            }
+            return new(response, bodyValue);
+        }
+
+        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse) => type switch
+        {
+            InputListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels, isResponse),
+            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels, isResponse),
             InputEnumType enumType => BuildEnumExampleValue(enumType),
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
-            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
-            InputUnionType unionType => BuildExampleValue(unionType.VariantTypes[0], hint, useAllParameters, visitedModels),
-            InputNullableType nullableType => BuildExampleValue(nullableType.Type, hint, useAllParameters, visitedModels),
+            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels, isResponse),
+            InputUnionType unionType => BuildExampleValue(unionType.VariantTypes[0], hint, useAllParameters, visitedModels, isResponse),
+            InputNullableType nullableType => BuildExampleValue(nullableType.Type, hint, useAllParameters, visitedModels, isResponse),
             InputDateTimeType dateTimeType => BuildDateTimeExampleValue(dateTimeType),
             InputDurationType durationType => BuildDurationExampleValue(durationType),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse)
         {
-            var exampleElementValue = BuildExampleValue(listType.ValueType, hint, useAllParameters, visitedModels);
+            var exampleElementValue = BuildExampleValue(listType.ValueType, hint, useAllParameters, visitedModels, isResponse);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }
 
-        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse)
         {
-            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, useAllParameters, visitedModels);
+            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, useAllParameters, visitedModels, isResponse);
 
             return InputExampleValue.Object(dictionaryType, new Dictionary<string, InputExampleValue>
             {
@@ -138,12 +160,12 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputPrimitiveTypeKind.Boolean => InputExampleValue.Value(primitiveType, true),
             InputPrimitiveTypeKind.PlainDate => InputExampleValue.Value(primitiveType, "2022-05-10"),
             InputPrimitiveTypeKind.Float32 => InputExampleValue.Value(primitiveType, 123.45f),
-            InputPrimitiveTypeKind.Float64 => InputExampleValue.Value(primitiveType, 123.45d),
+            InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float => InputExampleValue.Value(primitiveType, 123.45d),
             InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 => InputExampleValue.Value(primitiveType, 123.45m),
             InputPrimitiveTypeKind.Int8 => InputExampleValue.Value(primitiveType, (sbyte)123),
             InputPrimitiveTypeKind.UInt8 => InputExampleValue.Value(primitiveType, (byte)123),
             InputPrimitiveTypeKind.Int32 => InputExampleValue.Value(primitiveType, 1234),
-            InputPrimitiveTypeKind.Int64 => InputExampleValue.Value(primitiveType, 1234L),
+            InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.Integer => InputExampleValue.Value(primitiveType, 1234L),
             InputPrimitiveTypeKind.SafeInt => InputExampleValue.Value(primitiveType, 1234L),
             InputPrimitiveTypeKind.String => primitiveType.CrossLanguageDefinitionId switch
             {
@@ -152,6 +174,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             },
             InputPrimitiveTypeKind.PlainTime => InputExampleValue.Value(primitiveType, "01:23:45"),
             InputPrimitiveTypeKind.Url => InputExampleValue.Value(primitiveType, "http://localhost:3000"),
+            InputPrimitiveTypeKind.Any => InputExampleValue.Value(primitiveType, "<unknown value>"),
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 
@@ -175,7 +198,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _ => InputExampleValue.Null(durationType)
         };
 
-        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse)
         {
             if (visitedModels.Contains(model))
                 return InputExampleValue.Null(model);
@@ -201,7 +224,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             {
                 foreach (var property in modelOrBase.Properties)
                 {
-                    if (property.IsReadOnly)
+                    if (!isResponse && property.IsReadOnly)
                         continue;
 
                     if (!useAllParameters && !property.IsRequired)
@@ -223,7 +246,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     }
                     else
                     {
-                        exampleValue = BuildExampleValue(property.Type, property.SerializedName, useAllParameters, visitedModels);
+                        exampleValue = BuildExampleValue(property.Type, property.SerializedName, useAllParameters, visitedModels, isResponse);
                     }
 
                     dict.Add(property.SerializedName, exampleValue);

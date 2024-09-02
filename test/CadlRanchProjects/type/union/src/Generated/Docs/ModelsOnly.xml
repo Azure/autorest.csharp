@@ -40,7 +40,7 @@ ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 Response response = await client.GetModelsOnlyAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetModelsOnlyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 Response response = await client.GetModelsOnlyAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetModelsOnly(RequestContext)">
@@ -61,7 +61,7 @@ ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 Response response = client.GetModelsOnly(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call GetModelsOnly with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +70,7 @@ ModelsOnly client = new UnionClient().GetModelsOnlyClient();
 Response response = client.GetModelsOnly(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="SendAsync(BinaryData,CancellationToken)">

@@ -31,7 +31,6 @@ namespace CustomizationsInTsp.Samples
             Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -45,7 +44,6 @@ namespace CustomizationsInTsp.Samples
             Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -176,9 +174,9 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
@@ -305,9 +303,9 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());

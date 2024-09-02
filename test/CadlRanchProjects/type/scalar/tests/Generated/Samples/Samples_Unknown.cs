@@ -107,7 +107,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create("<unknown value>");
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -119,7 +119,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create("<unknown value>");
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -131,7 +131,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
+            Response response = client.Put(BinaryData.FromObjectAsJson("<unknown value>"));
         }
 
         [Test]
@@ -140,7 +140,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
+            Response response = await client.PutAsync(BinaryData.FromObjectAsJson("<unknown value>"));
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create("<unknown value>");
             Response response = client.Put(content);
 
             Console.WriteLine(response.Status);
@@ -161,7 +161,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create("<unknown value>");
             Response response = await client.PutAsync(content);
 
             Console.WriteLine(response.Status);
@@ -173,7 +173,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
+            Response response = client.Put(BinaryData.FromObjectAsJson("<unknown value>"));
         }
 
         [Test]
@@ -182,7 +182,7 @@ namespace _Type.Scalar.Samples
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
-            Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
+            Response response = await client.PutAsync(BinaryData.FromObjectAsJson("<unknown value>"));
         }
     }
 }

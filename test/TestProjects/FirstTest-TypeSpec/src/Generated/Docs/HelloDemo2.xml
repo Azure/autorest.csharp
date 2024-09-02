@@ -16,11 +16,11 @@ new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
-new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
-BinaryData.FromObjectAsJson(new object()),
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
 new BinaryData[]
@@ -42,20 +42,20 @@ new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
-new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
+    OptionalFloatProperty = 123.45,
     OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 },
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
 new BinaryData[]
@@ -72,10 +72,10 @@ new BinaryData[]
     IntFixedEnum = IntFixedEnum.One,
     IntFixedEnumCollection = { IntFixedEnum.One },
     StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
     OptionalRecordUnknown =
     {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
+        ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
     },
 };
 Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
@@ -96,11 +96,11 @@ new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
-new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
-BinaryData.FromObjectAsJson(new object()),
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
 new BinaryData[]
@@ -122,20 +122,20 @@ new Dictionary<string, StringExtensibleEnum>
 {
     ["key"] = StringExtensibleEnum.One
 },
-new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
+    OptionalFloatProperty = 123.45,
     OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 },
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
 new BinaryData[]
@@ -152,10 +152,10 @@ new BinaryData[]
     IntFixedEnum = IntFixedEnum.One,
     IntFixedEnumCollection = { IntFixedEnum.One },
     StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
     OptionalRecordUnknown =
     {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
+        ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
     },
 };
 Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
@@ -193,12 +193,12 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -217,7 +217,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -228,8 +228,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDe
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -273,8 +273,8 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
-        optionalFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
+        optionalFloatProperty = 123.45,
         optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
@@ -298,15 +298,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -325,7 +325,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -353,10 +353,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -395,12 +395,12 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -419,7 +419,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -430,8 +430,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDe
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -475,8 +475,8 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
-        optionalFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
+        optionalFloatProperty = 123.45,
         optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
@@ -500,15 +500,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -527,7 +527,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -555,10 +555,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -597,12 +597,12 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -621,7 +621,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -632,8 +632,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDe
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -677,8 +677,8 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
-        optionalFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
+        optionalFloatProperty = 123.45,
         optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
@@ -702,15 +702,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -729,7 +729,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -757,10 +757,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -799,12 +799,12 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -823,7 +823,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -834,8 +834,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDe
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredFloatProperty").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -879,8 +879,8 @@ using RequestContent content = RequestContent.Create(new
         {
             1234
         },
-        requiredFloatProperty = new object(),
-        optionalFloatProperty = new object(),
+        requiredFloatProperty = 123.45,
+        optionalFloatProperty = 123.45,
         optionalResourceId = "<optionalResourceId>",
     },
     intExtensibleEnum = 1,
@@ -904,15 +904,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     modelWithRequiredNullable = new
     {
@@ -931,7 +931,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -959,10 +959,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
@@ -1102,7 +1102,7 @@ This sample shows how to call CreateLiteralAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45);
 Response<Thing> response = await client.CreateLiteralAsync(body);
 ]]></code>
 This sample shows how to call CreateLiteralAsync with all parameters.
@@ -1110,14 +1110,14 @@ This sample shows how to call CreateLiteralAsync with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
+    OptionalFloatProperty = 123.45,
     OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 };
 Response<Thing> response = await client.CreateLiteralAsync(body);
@@ -1130,7 +1130,7 @@ This sample shows how to call CreateLiteral.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45);
 Response<Thing> response = client.CreateLiteral(body);
 ]]></code>
 This sample shows how to call CreateLiteral with all parameters.
@@ -1138,14 +1138,14 @@ This sample shows how to call CreateLiteral with all parameters.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
-Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
     OptionalNullableList = { 1234 },
-    OptionalFloatProperty = (double)default,
+    OptionalFloatProperty = 123.45,
     OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
 };
 Response<Thing> response = client.CreateLiteral(body);
@@ -1171,7 +1171,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = await client.CreateLiteralAsync(content);
 
@@ -1212,8 +1212,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = await client.CreateLiteralAsync(content);
@@ -1257,7 +1257,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = client.CreateLiteral(content);
 
@@ -1298,8 +1298,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = client.CreateLiteral(content);

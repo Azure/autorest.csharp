@@ -25,8 +25,8 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetSupportedLanguages())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("languageName").ToString());
-                Console.WriteLine(result.GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageName").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageCode").ToString());
             }
         }
 
@@ -40,8 +40,8 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("languageName").ToString());
-                Console.WriteLine(result.GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageName").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageCode").ToString());
             }
         }
 
@@ -55,8 +55,9 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetSupportedLanguages(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("languageName").ToString());
-                Console.WriteLine(result.GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageName").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -70,8 +71,9 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("languageName").ToString());
-                Console.WriteLine(result.GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageName").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("languageCode").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -85,8 +87,8 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetTrainingConfigVersions())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("trainingConfigVersionStr").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("modelExpirationDate").ToString());
             }
         }
 
@@ -100,8 +102,8 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("trainingConfigVersionStr").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("modelExpirationDate").ToString());
             }
         }
 
@@ -115,8 +117,9 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetTrainingConfigVersions(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("trainingConfigVersionStr").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -130,8 +133,9 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-                Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("trainingConfigVersionStr").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("modelExpirationDate").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
     }

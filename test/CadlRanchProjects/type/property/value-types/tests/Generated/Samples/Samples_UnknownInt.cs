@@ -110,7 +110,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = new object(),
+                property = "<unknown value>",
             });
             Response response = client.Put(content);
 
@@ -125,7 +125,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = new object(),
+                property = "<unknown value>",
             });
             Response response = await client.PutAsync(content);
 
@@ -138,7 +138,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
             Response response = client.Put(body);
         }
 
@@ -148,7 +148,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
             Response response = await client.PutAsync(body);
         }
 
@@ -160,7 +160,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = new object(),
+                property = "<unknown value>",
             });
             Response response = client.Put(content);
 
@@ -175,7 +175,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                property = new object(),
+                property = "<unknown value>",
             });
             Response response = await client.PutAsync(content);
 
@@ -188,7 +188,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
             Response response = client.Put(body);
         }
 
@@ -198,7 +198,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
-            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
+            UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson("<unknown value>"));
             Response response = await client.PutAsync(body);
         }
     }

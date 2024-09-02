@@ -149,9 +149,9 @@ namespace TypeSpec.Versioning.Specific.Samples
             foreach (BinaryData item in client.GetResources(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
             }
         }
 
@@ -165,9 +165,9 @@ namespace TypeSpec.Versioning.Specific.Samples
             await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
             }
         }
 
@@ -205,9 +205,10 @@ namespace TypeSpec.Versioning.Specific.Samples
             foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<expand>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -221,9 +222,10 @@ namespace TypeSpec.Versioning.Specific.Samples
             await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<select>" }, "<expand>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -263,7 +265,7 @@ namespace TypeSpec.Versioning.Specific.Samples
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
         }
 
         [Test]
@@ -278,7 +280,7 @@ namespace TypeSpec.Versioning.Specific.Samples
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
         }
 
         [Test]
@@ -315,7 +317,15 @@ namespace TypeSpec.Versioning.Specific.Samples
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("innererror").ToString());
+            Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("result").GetProperty("resourceUri").ToString());
         }
 
         [Test]
@@ -330,7 +340,15 @@ namespace TypeSpec.Versioning.Specific.Samples
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("innererror").ToString());
+            Console.WriteLine(result.GetProperty("result").GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("result").GetProperty("resourceUri").ToString());
         }
 
         [Test]

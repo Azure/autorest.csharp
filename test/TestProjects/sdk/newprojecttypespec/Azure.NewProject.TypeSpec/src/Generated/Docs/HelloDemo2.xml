@@ -18,10 +18,10 @@ new Dictionary<string, StringExtensibleEnum>
     ["key"] = StringExtensibleEnum.One
 },
 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
 ]]></code>
@@ -46,10 +46,10 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 },
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 })
 {
     IntExtensibleEnum = IntExtensibleEnum.One,
@@ -61,10 +61,10 @@ new Dictionary<string, BinaryData>
     IntFixedEnum = IntFixedEnum.One,
     IntFixedEnumCollection = { IntFixedEnum.One },
     StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
     OptionalRecordUnknown =
     {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
+        ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
     },
 };
 Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
@@ -87,10 +87,10 @@ new Dictionary<string, StringExtensibleEnum>
     ["key"] = StringExtensibleEnum.One
 },
 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
 ]]></code>
@@ -115,10 +115,10 @@ new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBa
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
 },
-BinaryData.FromObjectAsJson(new object()),
+BinaryData.FromObjectAsJson("<unknown value>"),
 new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 })
 {
     IntExtensibleEnum = IntExtensibleEnum.One,
@@ -130,10 +130,10 @@ new Dictionary<string, BinaryData>
     IntFixedEnum = IntFixedEnum.One,
     IntFixedEnumCollection = { IntFixedEnum.One },
     StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+    OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
     OptionalRecordUnknown =
     {
-        ["key"] = BinaryData.FromObjectAsJson(new object())
+        ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
     },
 };
 Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
@@ -169,10 +169,10 @@ using RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -181,7 +181,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -190,8 +190,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call HelloAgainAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -246,15 +246,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -263,7 +263,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -286,10 +286,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="HelloAgain(string,string,RequestContent,RequestContext)">
@@ -322,10 +322,10 @@ using RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -334,7 +334,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -343,8 +343,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call HelloAgain with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -399,15 +399,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -416,7 +416,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -439,10 +439,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
@@ -475,10 +475,10 @@ using RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -487,7 +487,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -496,8 +496,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call NoContentTypeAsync with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -552,15 +552,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -569,7 +569,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -592,10 +592,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="NoContentType(string,string,RequestContent,RequestContext)">
@@ -628,10 +628,10 @@ using RequestContent content = RequestContent.Create(new
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
     },
-    requiredUnknown = new object(),
+    requiredUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -640,7 +640,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -649,8 +649,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call NoContentType with all parameters and request content and parse the result.
 <code><![CDATA[
@@ -705,15 +705,15 @@ using RequestContent content = RequestContent.Create(new
         1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new object(),
-    optionalUnknown = new object(),
+    requiredUnknown = "<unknown value>",
+    optionalUnknown = "<unknown value>",
     requiredRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
     optionalRecordUnknown = new
     {
-        key = new object(),
+        key = "<unknown value>",
     },
 });
 Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -722,7 +722,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -745,10 +745,10 @@ Console.WriteLine(result.GetProperty("intFixedEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="CreateLiteralAsync(Thing,CancellationToken)">

@@ -27,7 +27,7 @@ namespace _Type.Union.Samples
             Response response = client.GetModelsOnly(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type.Union.Samples
             Response response = await client.GetModelsOnlyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type.Union.Samples
             Response response = client.GetModelsOnly(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type.Union.Samples
             Response response = await client.GetModelsOnlyAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("name").ToString());
         }
 
         [Test]

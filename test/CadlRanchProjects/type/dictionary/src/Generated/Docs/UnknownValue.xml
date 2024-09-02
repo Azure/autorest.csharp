@@ -40,7 +40,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 Response response = await client.GetUnknownValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 Response response = await client.GetUnknownValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
@@ -61,7 +61,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 Response response = client.GetUnknownValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetUnknownValue with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +70,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 Response response = client.GetUnknownValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(IDictionary{string,BinaryData},CancellationToken)">
@@ -81,7 +81,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 Response response = await client.PutAsync(new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
@@ -90,7 +90,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 Response response = await client.PutAsync(new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 Response response = client.Put(new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code>
 This sample shows how to call Put with all parameters.
@@ -111,7 +111,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 Response response = client.Put(new Dictionary<string, BinaryData>
 {
-    ["key"] = BinaryData.FromObjectAsJson(new object())
+    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code></example>
     </member>
@@ -123,7 +123,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new object(),
+    key = "<unknown value>",
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +135,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new object(),
+    key = "<unknown value>",
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +150,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new object(),
+    key = "<unknown value>",
 });
 Response response = client.Put(content);
 
@@ -162,7 +162,7 @@ UnknownValue client = new DictionaryClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    key = new object(),
+    key = "<unknown value>",
 });
 Response response = client.Put(content);
 

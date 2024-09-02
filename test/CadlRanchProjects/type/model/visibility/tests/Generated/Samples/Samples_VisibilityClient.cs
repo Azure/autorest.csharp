@@ -824,7 +824,6 @@ namespace _Type.Model.Visibility.Samples
             Response response = client.PutReadOnlyModel(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -837,7 +836,6 @@ namespace _Type.Model.Visibility.Samples
             Response response = await client.PutReadOnlyModelAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -871,7 +869,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("key").ToString());
         }
 
         [Test]
@@ -885,7 +883,7 @@ namespace _Type.Model.Visibility.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("key").ToString());
         }
 
         [Test]

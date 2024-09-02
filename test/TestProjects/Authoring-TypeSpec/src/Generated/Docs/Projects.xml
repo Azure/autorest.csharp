@@ -31,7 +31,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -71,7 +70,6 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -91,14 +89,14 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
 This sample shows how to call GetProjectsAsync with all request content and parse the result.
@@ -109,17 +107,17 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 await foreach (BinaryData item in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("multilingual").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("nextLink").ToString());
 }
 ]]></code></example>
     </member>
@@ -133,14 +131,14 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 foreach (BinaryData item in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
 }
 ]]></code>
 This sample shows how to call GetProjects with all request content and parse the result.
@@ -151,17 +149,17 @@ Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVer
 foreach (BinaryData item in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("multilingual").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("description").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result.GetProperty("nextLink").ToString());
 }
 ]]></code></example>
     </member>
@@ -212,7 +210,6 @@ JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -269,7 +266,6 @@ JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -281,14 +277,14 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
     </member>
     <member name="DeleteAsync(WaitUntil,string,RequestContext)">
       <example>
-This sample shows how to call DeleteAsync.
+This sample shows how to call DeleteAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
 Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
 ]]></code>
-This sample shows how to call DeleteAsync with all parameters.
+This sample shows how to call DeleteAsync with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
@@ -298,14 +294,14 @@ Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectNam
     </member>
     <member name="Delete(WaitUntil,string,RequestContext)">
       <example>
-This sample shows how to call Delete.
+This sample shows how to call Delete and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
 Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
 ]]></code>
-This sample shows how to call Delete with all parameters.
+This sample shows how to call Delete with all parameters and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");

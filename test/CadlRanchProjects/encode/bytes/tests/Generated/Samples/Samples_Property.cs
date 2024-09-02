@@ -31,7 +31,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Default(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -47,7 +46,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.DefaultAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -83,7 +81,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Default(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -99,7 +96,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.DefaultAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -135,7 +131,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -151,7 +146,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -187,7 +181,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -203,7 +196,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64Async(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -239,7 +231,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64url(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -255,7 +246,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64urlAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -291,7 +281,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64url(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -307,7 +296,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64urlAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value").ToString());
         }
 
         [Test]
@@ -346,7 +334,6 @@ new object()
             Response response = client.Base64urlArray(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -365,7 +352,6 @@ new object()
             Response response = await client.Base64urlArrayAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -410,7 +396,6 @@ new object()
             Response response = client.Base64urlArray(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
@@ -429,7 +414,6 @@ new object()
             Response response = await client.Base64urlArrayAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("value")[0].ToString());
         }
 
         [Test]
