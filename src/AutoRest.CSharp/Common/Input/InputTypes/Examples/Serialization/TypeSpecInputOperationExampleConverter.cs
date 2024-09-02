@@ -33,13 +33,15 @@ namespace AutoRest.CSharp.Common.Input.Examples
             string? description = null;
             string? filePath = null;
             IReadOnlyList<InputParameterExample>? parameters = null;
+            IReadOnlyList<OperationResponseExample>? responses = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("description", ref description)
                     || reader.TryReadString("filePath", ref filePath)
-                    || reader.TryReadWithConverter("parameters", options, ref parameters);
+                    || reader.TryReadWithConverter("parameters", options, ref parameters)
+                    || reader.TryReadWithConverter("responses", options, ref responses);
 
                 if (!isKnownProperty)
                 {
@@ -47,7 +49,12 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 }
             }
 
-            var result = new InputOperationExample(name ?? throw new JsonException(), description, filePath ?? throw new JsonException(), parameters ?? throw new JsonException());
+            var result = new InputOperationExample(
+                name ?? throw new JsonException(),
+                description,
+                filePath ?? throw new JsonException(),
+                parameters ?? throw new JsonException(),
+                responses ?? throw new JsonException());
 
             if (id != null)
             {

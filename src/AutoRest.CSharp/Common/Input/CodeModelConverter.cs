@@ -188,7 +188,8 @@ namespace AutoRest.CSharp.Common.Input
                 var parameters = example.AllParameters
                     .Select(p => new InputParameterExample(_parametersCache[p.Parameter](), CreateExampleValue(p.ExampleValue)))
                     .ToList();
-                result.Add(new InputOperationExample(example.Name, null, example.OriginalFile!, parameters));
+                // TODO -- convert the responses as well
+                result.Add(new InputOperationExample(example.Name, null, example.OriginalFile!, parameters, []));
             }
             return result;
         }

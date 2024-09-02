@@ -40,7 +40,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            return new(name, null, string.Empty, parameterExamples);
+            // TODO -- making up mock responses
+            return new(name, null, string.Empty, parameterExamples, []);
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)
