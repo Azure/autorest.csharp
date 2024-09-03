@@ -27,9 +27,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -42,9 +42,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -79,13 +79,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -98,13 +97,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -143,9 +141,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithParameters(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -162,9 +160,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithParametersAsync(content))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -205,13 +203,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithParameters(content, another: "First"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -228,13 +225,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithParametersAsync(content, another: "First"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -271,9 +267,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -286,9 +282,9 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("etag").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -323,13 +319,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 
@@ -342,13 +337,12 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("items")[0].GetProperty("etag").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
 

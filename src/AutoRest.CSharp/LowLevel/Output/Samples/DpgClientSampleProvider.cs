@@ -136,26 +136,21 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             else
                 yield break;
 
-            var bodyValue = sample.Response?.BodyValue;
+            var returnValue = sample.ReturnValue;
 
-            if (bodyValue != null)
+            if (returnValue != null)
             {
                 var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
                 yield return Declare(resultVar, JsonDocumentExpression.Parse(new StreamExpression(streamVar)).RootElement);
 
-                // if this is a pageable operation, we need to get the actual item out
-                if (sample.IsPageable)
+                var responseParsingStatements = new List<MethodBodyStatement>();
+                if (sample.IsPageable && returnValue is InputExampleListValue listValue)
                 {
-                    var pageableBodyValue = bodyValue as InputExampleObjectValue;
-                    Debug.Assert(pageableBodyValue is not null);
-                    var itemName = sample._method.PagingInfo!.ItemName;
-                    bodyValue = pageableBodyValue.Values[itemName];
-                    Debug.Assert(bodyValue is InputExampleListValue);
-                    bodyValue = ((InputExampleListValue)bodyValue).Values.FirstOrDefault() ?? InputExampleValue.Null(bodyValue.Type);
+                    // for pageable operations, this return value is an array value, but we are writing them in a foreach, therefore here we just take the first item
+                    returnValue = listValue.Values.FirstOrDefault() ?? InputExampleValue.Null(returnValue.Type);
                 }
 
-                var responseParsingStatements = new List<MethodBodyStatement>();
-                BuildResponseStatements(bodyValue, resultVar, responseParsingStatements);
+                BuildResponseStatements(returnValue, resultVar, responseParsingStatements);
 
                 yield return responseParsingStatements;
             }

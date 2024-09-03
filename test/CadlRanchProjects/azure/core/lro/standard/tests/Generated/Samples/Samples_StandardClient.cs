@@ -180,8 +180,8 @@ namespace _Azure.Lro.Standard.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
 
         [Test]
@@ -194,8 +194,8 @@ namespace _Azure.Lro.Standard.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
 
         [Test]
@@ -228,16 +228,8 @@ namespace _Azure.Lro.Standard.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("innererror").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
 
         [Test]
@@ -250,16 +242,8 @@ namespace _Azure.Lro.Standard.Samples
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("status").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("details")[0].ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("innererror").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("result").GetProperty("resourceUri").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("resourceUri").ToString());
         }
 
         [Test]

@@ -26,7 +26,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetFirstItems(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -39,7 +39,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetFirstItemsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -74,8 +74,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetFirstItems(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -88,8 +87,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetFirstItemsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
             }
         }
 
@@ -124,7 +122,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetSecondItems(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -137,7 +135,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetSecondItemsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -172,8 +170,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             foreach (BinaryData item in client.GetSecondItems(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -186,8 +183,7 @@ namespace _Specs_.Azure.Core.Page.Samples
             await foreach (BinaryData item in client.GetSecondItemsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 

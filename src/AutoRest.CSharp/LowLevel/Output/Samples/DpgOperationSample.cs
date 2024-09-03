@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.LowLevel.Extensions;
+using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _method = method;
             _inputOperation = inputOperation;
             _inputOperationExample = operationExample;
-            _responseExample = new(FindOperationResponseExample);
+            _returnValue = new(FindReturnTypeValue);
             IsConvenienceSample = isConvenienceSample;
             ExampleKey = exampleKey.ToCleanName();
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
@@ -366,8 +367,40 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsResponseStream => _method.ResponseBodyType is InputPrimitiveType { Kind: InputPrimitiveTypeKind.Stream };
 
-        private readonly Lazy<OperationResponseExample?> _responseExample;
-        public OperationResponseExample? Response => _responseExample.Value;
+        private readonly Lazy<InputExampleValue?> _returnValue;
+        public InputExampleValue? ReturnValue => _returnValue.Value;
+
+        private InputExampleValue? FindReturnTypeValue()
+        {
+            var response = FindOperationResponseExample();
+            var bodyValue = response?.BodyValue;
+            if (bodyValue == null)
+            {
+                return null;
+            }
+            if (IsPageable)
+            {
+                // retrieve the item types as a list
+                var pagingInfo = _method.PagingInfo!;
+                var itemName = pagingInfo.ItemName;
+                Debug.Assert(bodyValue is InputExampleObjectValue);
+                return ((InputExampleObjectValue)bodyValue).Values[itemName];
+            }
+            if (IsLongRunning)
+            {
+                // return the body value if no result path configured
+                var longRunning = _method.LongRunning!;
+                if (longRunning.ResultPath == null)
+                {
+                    return bodyValue;
+                }
+                // retrieve the final return type value via ResultPath if any
+                Debug.Assert(bodyValue is InputExampleObjectValue);
+                return ((InputExampleObjectValue)bodyValue).Values[longRunning.ResultPath];
+            }
+
+            return bodyValue;
+        }
 
         private OperationResponseExample? FindOperationResponseExample()
         {
@@ -457,10 +490,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
             var methodName = methodSignature.Name;
             if (IsAllParametersUsed)
             {
-                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(Response?.BodyValue != null ? " and parse the result" : "")}.";
+                return $"This sample shows how to call {methodName} with all {GenerateParameterAndRequestContentDescription(methodSignature.Parameters)}{(ReturnValue != null ? " and parse the result" : "")}.";
             }
 
-            return $"This sample shows how to call {methodName}{(Response?.BodyValue != null ? " and parse the result" : string.Empty)}.";
+            return $"This sample shows how to call {methodName}{(ReturnValue != null ? " and parse the result" : string.Empty)}.";
         }
 
         // RequestContext is excluded

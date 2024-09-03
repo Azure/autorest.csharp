@@ -48,7 +48,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
 This sample shows how to call GetFirstItemsAsync with all parameters and parse the result.
@@ -58,8 +58,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 await foreach (BinaryData item in client.GetFirstItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code></example>
     </member>
@@ -72,7 +71,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 foreach (BinaryData item in client.GetFirstItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code>
 This sample shows how to call GetFirstItems with all parameters and parse the result.
@@ -82,8 +81,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 foreach (BinaryData item in client.GetFirstItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
 }
 ]]></code></example>
     </member>
@@ -134,7 +132,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetSecondItemsAsync with all parameters and parse the result.
@@ -144,8 +142,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 await foreach (BinaryData item in client.GetSecondItemsAsync(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -158,7 +155,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 foreach (BinaryData item in client.GetSecondItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetSecondItems with all parameters and parse the result.
@@ -168,8 +165,7 @@ TwoModelsAsPageItem client = new PageClient().GetTwoModelsAsPageItemClient();
 foreach (BinaryData item in client.GetSecondItems(null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

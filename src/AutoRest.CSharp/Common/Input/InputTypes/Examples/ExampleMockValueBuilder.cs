@@ -42,14 +42,27 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
 
             var responseExamples = new List<OperationResponseExample>();
-            foreach (var response in operation.Responses)
+            if (operation.LongRunning != null)
             {
-                // TODO -- fix the LRO cases
-                // we only make up the succeeded response examples
-                if (response.IsErrorResponse)
-                    continue;
-                var responseExample = BuildResponseExample(response, useAllParameters);
+                var finalResponse = operation.LongRunning.FinalResponse;
+                HashSet<string>? includedProperties = null;
+                if (operation.LongRunning.ResultPath != null)
+                {
+                    includedProperties = [operation.LongRunning.ResultPath];
+                }
+                var responseExample = BuildResponseExample(finalResponse, useAllParameters, includedProperties);
                 responseExamples.Add(responseExample);
+            }
+            else
+            {
+                foreach (var response in operation.Responses)
+                {
+                    // we only make up the succeeded response examples
+                    if (response.IsErrorResponse)
+                        continue;
+                    var responseExample = BuildResponseExample(response, useAllParameters);
+                    responseExamples.Add(responseExample);
+                }
             }
 
             return new(name, null, string.Empty, parameterExamples, responseExamples);
@@ -105,25 +118,25 @@ namespace AutoRest.CSharp.Common.Input.Examples
             return new(parameter, exampleValue);
         }
 
-        private static OperationResponseExample BuildResponseExample(OperationResponse response, bool useAllParameters)
+        private static OperationResponseExample BuildResponseExample(OperationResponse response, bool useAllParameters, HashSet<string>? includedProperties = null)
         {
             var bodyType = response.BodyType;
             InputExampleValue? bodyValue = null;
             if (bodyType != null)
             {
-                bodyValue = BuildExampleValue(bodyType, "response", useAllParameters, new HashSet<InputModelType>(), true);
+                bodyValue = BuildExampleValue(bodyType, "response", useAllParameters, new HashSet<InputModelType>(), true, includedProperties);
             }
             return new(response, bodyValue);
         }
 
-        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse) => type switch
+        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse, HashSet<string>? includedProperties = null) => type switch
         {
             InputListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels, isResponse),
             InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels, isResponse),
             InputEnumType enumType => BuildEnumExampleValue(enumType),
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
-            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels, isResponse),
+            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels, isResponse, includedProperties),
             InputUnionType unionType => BuildExampleValue(unionType.VariantTypes[0], hint, useAllParameters, visitedModels, isResponse),
             InputNullableType nullableType => BuildExampleValue(nullableType.Type, hint, useAllParameters, visitedModels, isResponse),
             InputDateTimeType dateTimeType => BuildDateTimeExampleValue(dateTimeType),
@@ -198,7 +211,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _ => InputExampleValue.Null(durationType)
         };
 
-        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse)
+        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels, bool isResponse, HashSet<string>? includedProperties = null)
         {
             if (visitedModels.Contains(model))
                 return InputExampleValue.Null(model);
@@ -224,11 +237,14 @@ namespace AutoRest.CSharp.Common.Input.Examples
             {
                 foreach (var property in modelOrBase.Properties)
                 {
-                    if (!isResponse && property.IsReadOnly)
-                        continue;
+                    if (!ShouldAlwaysBeIncluded(includedProperties, property.SerializedName))
+                    {
+                        if (!isResponse && property.IsReadOnly)
+                            continue;
 
-                    if (!useAllParameters && !property.IsRequired)
-                        continue;
+                        if (!useAllParameters && !property.IsRequired)
+                            continue;
+                    }
 
                     // this means a property is defined both on the base and derived type, we skip other occurrences only keep the first
                     // which means we only keep the property defined in the lowest layer (derived types)
@@ -254,6 +270,11 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
 
             return result;
+
+            static bool ShouldAlwaysBeIncluded(HashSet<string>? includedProperties, string propertySerializedName)
+            {
+                return includedProperties?.Contains(propertySerializedName) ?? false;
+            }
         }
     }
 }
