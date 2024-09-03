@@ -65,7 +65,8 @@
        "Explode": false,
        "IsRequired": false,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
