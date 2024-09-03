@@ -111,14 +111,14 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetProjects())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -132,14 +132,14 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetProjectsAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -153,17 +153,16 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetProjects())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("multilingual").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 
@@ -177,17 +176,16 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetProjectsAsync())
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("projectKind").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("storageInputContainerName").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("multilingual").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("language").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("createdDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastModifiedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastTrainedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("lastDeployedDateTime").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("projectName").ToString());
+                Console.WriteLine(result.GetProperty("projectKind").ToString());
+                Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
+                Console.WriteLine(result.GetProperty("multilingual").ToString());
+                Console.WriteLine(result.GetProperty("description").ToString());
+                Console.WriteLine(result.GetProperty("language").ToString());
+                Console.WriteLine(result.GetProperty("createdDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
+                Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
             }
         }
 

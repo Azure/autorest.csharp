@@ -29,9 +29,9 @@ namespace TypeSpec.Versioning.Latest.Samples
             foreach (BinaryData item in client.GetResources(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("type").ToString());
             }
         }
 
@@ -45,9 +45,9 @@ namespace TypeSpec.Versioning.Latest.Samples
             await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("type").ToString());
             }
         }
 
@@ -85,10 +85,9 @@ namespace TypeSpec.Versioning.Latest.Samples
             foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("type").ToString());
             }
         }
 
@@ -102,10 +101,9 @@ namespace TypeSpec.Versioning.Latest.Samples
             await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<select>" }, "<filter>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("type").ToString());
             }
         }
 

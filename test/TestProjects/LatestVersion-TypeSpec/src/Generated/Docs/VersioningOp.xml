@@ -53,9 +53,9 @@ VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersio
 await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code>
 This sample shows how to call GetResourcesAsync with all parameters and parse the result.
@@ -66,10 +66,9 @@ VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersio
 await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<select>" }, "<filter>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>
@@ -83,9 +82,9 @@ VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersio
 foreach (BinaryData item in client.GetResources(null, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code>
 This sample shows how to call GetResources with all parameters and parse the result.
@@ -96,10 +95,9 @@ VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersio
 foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<filter>", null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("type").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("type").ToString());
 }
 ]]></code></example>
     </member>

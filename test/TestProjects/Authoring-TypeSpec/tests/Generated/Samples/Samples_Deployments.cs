@@ -79,7 +79,7 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -93,7 +93,7 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -107,8 +107,7 @@ namespace AuthoringTypeSpec.Samples
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
@@ -122,8 +121,7 @@ namespace AuthoringTypeSpec.Samples
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("nextLink").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 

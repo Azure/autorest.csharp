@@ -57,7 +57,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetDeploymentsAsync with all parameters and parse the result.
@@ -68,8 +68,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -83,7 +82,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code>
 This sample shows how to call GetDeployments with all parameters and parse the result.
@@ -94,8 +93,7 @@ Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(
 foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("nextLink").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
