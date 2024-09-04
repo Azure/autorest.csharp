@@ -2683,7 +2683,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "322",
@@ -2709,7 +2710,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "325",
@@ -2726,7 +2728,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4738,7 +4741,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "587",
@@ -4764,7 +4768,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "590",
@@ -4781,7 +4786,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -6460,7 +6466,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "853",
@@ -6486,7 +6493,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "856",
@@ -6503,7 +6511,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -15234,7 +15243,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2171",
@@ -15260,7 +15270,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -15491,7 +15502,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2207",
@@ -15517,7 +15529,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2210",
@@ -15534,7 +15547,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -15799,7 +15813,8 @@
        "Explode": false,
        "IsRequired": false,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2246",
@@ -15820,7 +15835,8 @@
        "Explode": false,
        "IsRequired": false,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2248",
@@ -15846,7 +15862,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -16151,7 +16168,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2285",
@@ -16177,7 +16195,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -16297,7 +16316,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2304",
@@ -16323,7 +16343,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -16600,7 +16621,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2337",
@@ -16627,7 +16649,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2340",
@@ -16653,7 +16676,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2343",
@@ -16670,7 +16694,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -16900,7 +16925,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2375",
@@ -16927,7 +16953,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2378",
@@ -16953,7 +16980,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "2381",
@@ -16970,7 +16998,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
