@@ -22,7 +22,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateEntireSeries_UnivariateDetectEntireSeries()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -292,7 +292,7 @@ value = 843,
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateEntireSeries_UnivariateDetectEntireSeries_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -562,7 +562,7 @@ value = 843,
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateEntireSeries_UnivariateDetectEntireSeries_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -774,7 +774,7 @@ Timestamp = DateTimeOffset.Parse("1975-12-01T00:00:00Z"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateEntireSeries_UnivariateDetectEntireSeries_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -986,7 +986,7 @@ Timestamp = DateTimeOffset.Parse("1975-12-01T00:00:00Z"),
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateLastPoint_DetectUnivariateLastPoint()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -1258,7 +1258,7 @@ value = 843,
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateLastPoint_DetectUnivariateLastPoint_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -1530,7 +1530,7 @@ value = 843,
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateLastPoint_DetectUnivariateLastPoint_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -1743,7 +1743,7 @@ Timestamp = DateTimeOffset.Parse("1975-12-01T00:00:00Z"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateLastPoint_DetectUnivariateLastPoint_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -1956,7 +1956,7 @@ Timestamp = DateTimeOffset.Parse("1975-12-01T00:00:00Z"),
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateChangePoint_UnivariateDetectionOfAChangePoint()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -3266,7 +3266,7 @@ value = 3233500,
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateChangePoint_UnivariateDetectionOfAChangePoint_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -4576,7 +4576,7 @@ value = 3233500,
         [Ignore("Only validating compilation of examples")]
         public void Example_Univariate_DetectUnivariateChangePoint_UnivariateDetectionOfAChangePoint_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 
@@ -5624,7 +5624,7 @@ Timestamp = DateTimeOffset.Parse("2017-01-02T04:05:00Z"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Univariate_DetectUnivariateChangePoint_UnivariateDetectionOfAChangePoint_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Univariate client = new AnomalyDetectorClient(endpoint, credential).GetUnivariateClient();
 

@@ -43,60 +43,10 @@
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
      "Accessibility": "public",
-     "Parameters": [
-      {
-       "$id": "7",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Pass in http://localhost:3000 for endpoint.",
-       "Type": {
-        "$id": "8",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "9",
-       "Name": "apiVersion",
-       "NameInRequest": "apiVersion",
-       "Description": "Pass in v1.0 for API version.",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Uri",
-       "IsApiVersion": true,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "10",
-        "Type": {
-         "$id": "11",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "v1.0"
-       }
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "12",
+       "$id": "7",
        "StatusCodes": [
         204
        ],
@@ -116,23 +66,17 @@
      "Decorators": []
     },
     {
-     "$id": "13",
+     "$id": "8",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "7"
-      },
-      {
-       "$ref": "9"
-      },
-      {
-       "$id": "14",
+       "$id": "9",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "15",
+        "$id": "10",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -150,7 +94,7 @@
      ],
      "Responses": [
       {
-       "$id": "16",
+       "$id": "11",
        "StatusCodes": [
         204
        ],
@@ -171,14 +115,57 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "12"
    },
    "Parameters": [
     {
-     "$ref": "7"
+     "$id": "13",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Pass in http://localhost:3000 for endpoint.",
+     "Type": {
+      "$id": "14",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     },
     {
-     "$ref": "9"
+     "$id": "15",
+     "Name": "apiVersion",
+     "NameInRequest": "apiVersion",
+     "Description": "Pass in v1.0 for API version.",
+     "Type": {
+      "$ref": "2"
+     },
+     "Location": "Uri",
+     "IsApiVersion": true,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": false,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "16",
+      "Type": {
+       "$id": "17",
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "v1.0"
+     }
     }
    ],
    "Decorators": []

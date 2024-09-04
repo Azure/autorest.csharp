@@ -25,7 +25,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollection_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -36,7 +36,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollection_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -47,7 +47,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateCollection_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -59,7 +59,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateCollection_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -79,7 +79,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteCollection_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -90,7 +90,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteCollection_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -101,7 +101,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollectionPath_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -112,7 +112,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollectionPath_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -123,7 +123,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollections_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
@@ -136,7 +136,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetCollections_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
@@ -149,7 +149,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetChildCollectionNames_ShortVersion()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
@@ -162,7 +162,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetChildCollectionNames_AllParameters()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountCollections client = CreatePurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 

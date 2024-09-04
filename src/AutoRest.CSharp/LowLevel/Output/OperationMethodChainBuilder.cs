@@ -52,8 +52,9 @@ namespace AutoRest.CSharp.Output.Models
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
         private InputOperation Operation { get; }
+        private IEnumerable<InputParameter> ClientParameters { get; }
 
-        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, IEnumerable<InputParameter> clientParameters, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             _client = client;
             _namespaceName = namespaceName;
@@ -65,6 +66,7 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts = new List<RequestPartSource>();
 
             Operation = operation;
+            ClientParameters = clientParameters;
             _returnType = BuildReturnTypes();
             BuildParameters();
             _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
@@ -437,7 +439,11 @@ namespace AutoRest.CSharp.Output.Models
 
         private void BuildParameters()
         {
-            var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters);
+            var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters)
+                                      .Concat(ClientParameters)
+                                      .DistinctBy(p => p.NameInRequest);
+            //operationParameters = operationParameters.Concat(ClientParameters);
+            //operationParameters= operationParameters.DistinctBy(p => p.NameInRequest);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();

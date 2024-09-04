@@ -258,7 +258,7 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null, null);
+            Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, default, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -275,7 +275,7 @@ namespace TypeSpec.Versioning.Oldest.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             VersioningOp client = new OldestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-06-01-preview");
 
-            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null, null);
+            Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, default, null);
             BinaryData responseData = operation.Value;
 
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

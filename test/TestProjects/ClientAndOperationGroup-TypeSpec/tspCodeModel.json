@@ -17,33 +17,13 @@
      "Parameters": [
       {
        "$id": "4",
-       "Name": "operationGroupServiceUrl",
-       "NameInRequest": "operationGroupServiceUrl",
-       "Type": {
-        "$id": "5",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "6",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "7",
+        "$id": "5",
         "Kind": "constant",
         "ValueType": {
-         "$id": "8",
+         "$id": "6",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -64,12 +44,12 @@
      ],
      "Responses": [
       {
-       "$id": "9",
+       "$id": "7",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "10",
+        "$id": "8",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -94,23 +74,20 @@
      "Decorators": []
     },
     {
-     "$id": "11",
+     "$id": "9",
      "Name": "one",
      "ResourceName": "Alpha",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "4"
-      },
-      {
-       "$id": "12",
+       "$id": "10",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "13",
+        "$id": "11",
         "Kind": "constant",
         "ValueType": {
-         "$id": "14",
+         "$id": "12",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -131,12 +108,12 @@
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "13",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "16",
+        "$id": "14",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -162,11 +139,28 @@
     }
    ],
    "Protocol": {
-    "$id": "17"
+    "$id": "15"
    },
    "Parameters": [
     {
-     "$ref": "4"
+     "$id": "16",
+     "Name": "operationGroupServiceUrl",
+     "NameInRequest": "operationGroupServiceUrl",
+     "Type": {
+      "$id": "17",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []
@@ -183,33 +177,13 @@
      "Parameters": [
       {
        "$id": "20",
-       "Name": "operationGroupServiceUrl",
-       "NameInRequest": "operationGroupServiceUrl",
-       "Type": {
-        "$id": "21",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "23",
+        "$id": "21",
         "Kind": "constant",
         "ValueType": {
-         "$id": "24",
+         "$id": "22",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -230,12 +204,12 @@
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "26",
+        "$id": "24",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -260,23 +234,20 @@
      "Decorators": []
     },
     {
-     "$id": "27",
+     "$id": "25",
      "Name": "three",
      "ResourceName": "SubBeta",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "20"
-      },
-      {
-       "$id": "28",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "27",
         "Kind": "constant",
         "ValueType": {
-         "$id": "30",
+         "$id": "28",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -297,12 +268,12 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "32",
+        "$id": "30",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -328,12 +299,29 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "31"
    },
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "20"
+     "$id": "32",
+     "Name": "operationGroupServiceUrl",
+     "NameInRequest": "operationGroupServiceUrl",
+     "Type": {
+      "$id": "33",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []
@@ -350,33 +338,13 @@
      "Parameters": [
       {
        "$id": "36",
-       "Name": "operationGroupServiceUrl",
-       "NameInRequest": "operationGroupServiceUrl",
-       "Type": {
-        "$id": "37",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "38",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "37",
         "Kind": "constant",
         "ValueType": {
-         "$id": "40",
+         "$id": "38",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -397,12 +365,12 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "39",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "42",
+        "$id": "40",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -427,23 +395,20 @@
      "Decorators": []
     },
     {
-     "$id": "43",
+     "$id": "41",
      "Name": "five",
      "ResourceName": "Gamma",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
-      },
-      {
-       "$id": "44",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "43",
         "Kind": "constant",
         "ValueType": {
-         "$id": "46",
+         "$id": "44",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -464,12 +429,12 @@
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "48",
+        "$id": "46",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -495,12 +460,29 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "47"
    },
    "Parent": "ClientAndOperationGroupClient",
    "Parameters": [
     {
-     "$ref": "36"
+     "$id": "48",
+     "Name": "operationGroupServiceUrl",
+     "NameInRequest": "operationGroupServiceUrl",
+     "Type": {
+      "$id": "49",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

@@ -45,7 +45,7 @@ This sample shows how to call GetPageablesAsync and parse the result.
 <code><![CDATA[
 PageableClient client = new PageableClient();
 
-await foreach (BinaryData item in client.GetPageablesAsync(null, null))
+await foreach (BinaryData item in client.GetPageablesAsync(default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());
@@ -68,7 +68,7 @@ This sample shows how to call GetPageables and parse the result.
 <code><![CDATA[
 PageableClient client = new PageableClient();
 
-foreach (BinaryData item in client.GetPageables(null, null))
+foreach (BinaryData item in client.GetPageables(default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("name").ToString());

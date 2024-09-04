@@ -1347,7 +1347,7 @@ namespace ConvenienceInCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
-            Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
+            Response response = client.ConvenienceOptionalQueryWithRequired(default, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -1360,7 +1360,7 @@ namespace ConvenienceInCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
-            Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
+            Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(default, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());

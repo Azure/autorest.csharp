@@ -19,39 +19,59 @@
      "Parameters": [
       {
        "$id": "4",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Type": {
-        "$id": "5",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "6",
-        "Type": {
-         "$id": "7",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "8",
        "Name": "ifMatch",
        "NameInRequest": "If-Match",
        "Description": "The request should only proceed if an entity matches this string.",
+       "Type": {
+        "$id": "5",
+        "Kind": "string",
+        "Name": "string",
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method",
+       "Decorators": []
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "6",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/special-headers/conditional-request/if-match",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfMatch",
+     "Decorators": []
+    },
+    {
+     "$id": "7",
+     "Name": "postIfNoneMatch",
+     "ResourceName": "ConditionalRequest",
+     "Description": "Check when only If-None-Match in header is defined.",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "8",
+       "Name": "ifNoneMatch",
+       "NameInRequest": "If-None-Match",
+       "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "9",
         "Kind": "string",
@@ -83,59 +103,6 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
-     "Path": "/special-headers/conditional-request/if-match",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "SpecialHeaders.ConditionalRequest.postIfMatch",
-     "Decorators": []
-    },
-    {
-     "$id": "11",
-     "Name": "postIfNoneMatch",
-     "ResourceName": "ConditionalRequest",
-     "Description": "Check when only If-None-Match in header is defined.",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "4"
-      },
-      {
-       "$id": "12",
-       "Name": "ifNoneMatch",
-       "NameInRequest": "If-None-Match",
-       "Description": "The request should only proceed if no entity matches this string.",
-       "Type": {
-        "$id": "13",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": []
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "14",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}",
      "Path": "/special-headers/conditional-request/if-none-match",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -145,11 +112,38 @@
     }
    ],
    "Protocol": {
-    "$id": "15"
+    "$id": "11"
    },
    "Parameters": [
     {
-     "$ref": "4"
+     "$id": "12",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "13",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "14",
+      "Type": {
+       "$id": "15",
+       "Kind": "string",
+       "Name": "string",
+       "CrossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "http://localhost:3000"
+     }
     }
    ],
    "Decorators": []

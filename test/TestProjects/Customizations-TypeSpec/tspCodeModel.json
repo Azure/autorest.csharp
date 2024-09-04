@@ -1030,34 +1030,14 @@
      "Parameters": [
       {
        "$id": "127",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Type": {
-        "$id": "128",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "129",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "130",
+        "$id": "128",
         "Kind": "constant",
         "ValueType": {
-         "$id": "131",
+         "$id": "129",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1076,14 +1056,14 @@
        "Decorators": []
       },
       {
-       "$id": "132",
+       "$id": "130",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "133",
+        "$id": "131",
         "Kind": "constant",
         "ValueType": {
-         "$id": "134",
+         "$id": "132",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1102,7 +1082,7 @@
        "Decorators": []
       },
       {
-       "$id": "135",
+       "$id": "133",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1120,7 +1100,7 @@
      ],
      "Responses": [
       {
-       "$id": "136",
+       "$id": "134",
        "StatusCodes": [
         200
        ],
@@ -1149,25 +1129,22 @@
      "Decorators": []
     },
     {
-     "$id": "137",
+     "$id": "135",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "127"
-      },
-      {
-       "$id": "138",
+       "$id": "136",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "139",
+        "$id": "137",
         "Kind": "constant",
         "ValueType": {
-         "$id": "140",
+         "$id": "138",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1186,14 +1163,14 @@
        "Decorators": []
       },
       {
-       "$id": "141",
+       "$id": "139",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "142",
+        "$id": "140",
         "Kind": "constant",
         "ValueType": {
-         "$id": "143",
+         "$id": "141",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1212,7 +1189,7 @@
        "Decorators": []
       },
       {
-       "$id": "144",
+       "$id": "142",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1230,7 +1207,7 @@
      ],
      "Responses": [
       {
-       "$id": "145",
+       "$id": "143",
        "StatusCodes": [
         200
        ],
@@ -1259,25 +1236,22 @@
      "Decorators": []
     },
     {
-     "$id": "146",
+     "$id": "144",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "127"
-      },
-      {
-       "$id": "147",
+       "$id": "145",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "148",
+        "$id": "146",
         "Kind": "constant",
         "ValueType": {
-         "$id": "149",
+         "$id": "147",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1296,14 +1270,14 @@
        "Decorators": []
       },
       {
-       "$id": "150",
+       "$id": "148",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "151",
+        "$id": "149",
         "Kind": "constant",
         "ValueType": {
-         "$id": "152",
+         "$id": "150",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1322,7 +1296,7 @@
        "Decorators": []
       },
       {
-       "$id": "153",
+       "$id": "151",
        "Name": "barRequest",
        "NameInRequest": "barRequest",
        "Type": {
@@ -1340,7 +1314,7 @@
      ],
      "Responses": [
       {
-       "$id": "154",
+       "$id": "152",
        "StatusCodes": [
         200
        ],
@@ -1370,11 +1344,28 @@
     }
    ],
    "Protocol": {
-    "$id": "155"
+    "$id": "153"
    },
    "Parameters": [
     {
-     "$ref": "127"
+     "$id": "154",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "155",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

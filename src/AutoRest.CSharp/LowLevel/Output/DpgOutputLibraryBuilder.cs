@@ -179,17 +179,6 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (!operation.Parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
-            {
-                operation = operation with
-                {
-                    Uri = $"{{{KnownParameters.Endpoint.Name}}}",
-                    Parameters = operation.Parameters
-                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", InputPrimitiveType.Url, RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
-                        .ToList()
-                };
-            }
-
             return operation with
             {
                 Name = name,

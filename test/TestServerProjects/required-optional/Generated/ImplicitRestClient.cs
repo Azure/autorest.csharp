@@ -54,6 +54,11 @@ namespace required_optional
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/implicit/required/path/", false);
             uri.AppendPath(pathParameter, true);
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -115,6 +120,11 @@ namespace required_optional
             {
                 uri.AppendQuery("queryParameter", queryParameter, true);
             }
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -160,6 +170,11 @@ namespace required_optional
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/implicit/optional/header", false);
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             if (queryParameter != null)
             {
@@ -209,6 +224,11 @@ namespace required_optional
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/implicit/optional/body", false);
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             if (bodyParameter != null)
@@ -261,6 +281,11 @@ namespace required_optional
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/implicit/optional/binary-body", false);
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             if (bodyParameter != null)
@@ -312,6 +337,11 @@ namespace required_optional
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/global/required/path/", false);
             uri.AppendPath(_requiredGlobalPath, true);
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -356,6 +386,10 @@ namespace required_optional
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/global/required/query", false);
             uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
+            if (_optionalGlobalQuery != null)
+            {
+                uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -403,6 +437,7 @@ namespace required_optional
             {
                 uri.AppendQuery("optional-global-query", _optionalGlobalQuery.Value, true);
             }
+            uri.AppendQuery("required-global-query", _requiredGlobalQuery, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

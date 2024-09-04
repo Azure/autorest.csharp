@@ -8,7 +8,7 @@ This sample shows how to call GetPaginationParamsAsync and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
+await foreach (BinaryData item in client.GetPaginationParamsAsync(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -35,7 +35,7 @@ This sample shows how to call GetPaginationParams and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-foreach (BinaryData item in client.GetPaginationParams(null, null, null, null))
+foreach (BinaryData item in client.GetPaginationParams(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -62,7 +62,7 @@ This sample shows how to call Get2sAsync and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
+await foreach (BinaryData item in client.Get2sAsync(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -89,7 +89,7 @@ This sample shows how to call Get2s and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-foreach (BinaryData item in client.Get2s(null, null, null, null))
+foreach (BinaryData item in client.Get2s(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -116,7 +116,7 @@ This sample shows how to call Get3sAsync and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
+await foreach (BinaryData item in client.Get3sAsync(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -143,7 +143,7 @@ This sample shows how to call Get3s and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-foreach (BinaryData item in client.Get3s(null, null, null, null))
+foreach (BinaryData item in client.Get3s(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -170,7 +170,7 @@ This sample shows how to call Get4sAsync and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
+await foreach (BinaryData item in client.Get4sAsync(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -197,7 +197,7 @@ This sample shows how to call Get4s and parse the result.
 TokenCredential credential = new DefaultAzureCredential();
 PaginationParamsClient client = new PaginationParamsClient(credential);
 
-foreach (BinaryData item in client.Get4s(null, null, null, null))
+foreach (BinaryData item in client.Get4s(default, default, default, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());

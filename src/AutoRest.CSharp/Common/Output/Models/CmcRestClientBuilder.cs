@@ -45,11 +45,13 @@ namespace AutoRest.CSharp.Output.Models
         protected readonly BuildContext _context;
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
+        protected readonly IEnumerable<InputParameter> _clientParameters;
 
         public CmcRestClientBuilder(IEnumerable<InputParameter> clientParameters, BuildContext context)
         {
             _context = context;
             _library = context.BaseLibrary!;
+            _clientParameters = clientParameters;
             _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
         }
 
@@ -64,9 +66,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private static string GetRequestParameterName(InputParameter requestParameter) => requestParameter.NameInRequest ?? requestParameter.Name;
 
-        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters)
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters, IEnumerable<InputParameter> clientParameters)
         {
-            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            var allParameters = GetOperationAllParameters(operation, requestParameters, clientParameters);
             return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
         }
 
@@ -80,12 +82,12 @@ namespace AutoRest.CSharp.Output.Models
         /// <param name="accessibility"></param>
         /// <param name="returnNullOn404Func"></param>
         /// <returns></returns>
-        public RestClientMethod BuildMethod(InputOperation operation, IEnumerable<InputParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        public RestClientMethod BuildMethod(InputOperation operation, IEnumerable<InputParameter> requestParameters, IEnumerable<InputParameter> clientParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
-            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            var allParameters = GetOperationAllParameters(operation, requestParameters, clientParameters);
             var methodParameters = BuildMethodParameters(allParameters);
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
-            var request = BuildRequest(operation, new RequestMethodBuildContext(methodParameters, references));
+            var request = BuildRequest(operation, clientParameters, new RequestMethodBuildContext(methodParameters, references));
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
@@ -105,11 +107,20 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters)
+        private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters, IEnumerable<InputParameter> clientParameters)
         {
-            var parameters = operation.Parameters
+            /*
+            var parameters = clientParameters
+                .Concat(operation.Parameters)
                 .Concat(requestParameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .ToArray();
+            */
+            var parameters = operation.Parameters
+                .Concat(clientParameters)
+                .Concat(requestParameters)
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .DistinctBy(p => p.NameInRequest ?? p.Name)
                 .ToArray();
 
             // TODO: why are there duplicates in the list?
@@ -154,7 +165,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private Request BuildRequest(InputOperation operation, RequestMethodBuildContext buildContext)
+        private Request BuildRequest(InputOperation operation, IEnumerable<InputParameter> clientParameters, RequestMethodBuildContext buildContext)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();

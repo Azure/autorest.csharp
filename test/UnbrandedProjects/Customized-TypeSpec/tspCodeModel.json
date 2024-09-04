@@ -1181,30 +1181,10 @@
      "Parameters": [
       {
        "$id": "145",
-       "Name": "unbrandedTypeSpecUrl",
-       "NameInRequest": "unbrandedTypeSpecUrl",
-       "Type": {
-        "$id": "146",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "147",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "148",
+        "$id": "146",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1220,11 +1200,11 @@
        "Decorators": []
       },
       {
-       "$id": "149",
+       "$id": "147",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "150",
+        "$id": "148",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1240,11 +1220,11 @@
        "Decorators": []
       },
       {
-       "$id": "151",
+       "$id": "149",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "152",
+        "$id": "150",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1260,14 +1240,14 @@
        "Decorators": []
       },
       {
-       "$id": "153",
+       "$id": "151",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "154",
+        "$id": "152",
         "Kind": "constant",
         "ValueType": {
-         "$id": "155",
+         "$id": "153",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1288,7 +1268,7 @@
      ],
      "Responses": [
       {
-       "$id": "156",
+       "$id": "154",
        "StatusCodes": [
         200
        ],
@@ -1314,21 +1294,18 @@
      "Decorators": []
     },
     {
-     "$id": "157",
+     "$id": "155",
      "Name": "helloAgain",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "158",
+       "$id": "156",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "159",
+        "$id": "157",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1344,14 +1321,14 @@
        "Decorators": []
       },
       {
-       "$id": "160",
+       "$id": "158",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "161",
+        "$id": "159",
         "Kind": "constant",
         "ValueType": {
-         "$id": "162",
+         "$id": "160",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1370,11 +1347,11 @@
        "Decorators": []
       },
       {
-       "$id": "163",
+       "$id": "161",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "164",
+        "$id": "162",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1390,14 +1367,14 @@
        "Decorators": []
       },
       {
-       "$id": "165",
+       "$id": "163",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "166",
+        "$id": "164",
         "Kind": "constant",
         "ValueType": {
-         "$id": "167",
+         "$id": "165",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1416,7 +1393,7 @@
        "Decorators": []
       },
       {
-       "$id": "168",
+       "$id": "166",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1434,7 +1411,7 @@
      ],
      "Responses": [
       {
-       "$id": "169",
+       "$id": "167",
        "StatusCodes": [
         200
        ],
@@ -1463,21 +1440,18 @@
      "Decorators": []
     },
     {
-     "$id": "170",
+     "$id": "168",
      "Name": "noContentType",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "171",
+       "$id": "169",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "172",
+        "$id": "170",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1493,11 +1467,11 @@
        "Decorators": []
       },
       {
-       "$id": "173",
+       "$id": "171",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "174",
+        "$id": "172",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1513,15 +1487,15 @@
        "Decorators": []
       },
       {
-       "$id": "175",
+       "$id": "173",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "176",
+        "$id": "174",
         "Kind": "constant",
         "ValueType": {
-         "$id": "177",
+         "$id": "175",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1540,14 +1514,14 @@
        "Decorators": []
       },
       {
-       "$id": "178",
+       "$id": "176",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "179",
+        "$id": "177",
         "Kind": "constant",
         "ValueType": {
-         "$id": "180",
+         "$id": "178",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1566,7 +1540,7 @@
        "Decorators": []
       },
       {
-       "$id": "181",
+       "$id": "179",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -1584,7 +1558,7 @@
      ],
      "Responses": [
       {
-       "$id": "182",
+       "$id": "180",
        "StatusCodes": [
         200
        ],
@@ -1613,24 +1587,21 @@
      "Decorators": []
     },
     {
-     "$id": "183",
+     "$id": "181",
      "Name": "helloDemo2",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "184",
+       "$id": "182",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "185",
+        "$id": "183",
         "Kind": "constant",
         "ValueType": {
-         "$id": "186",
+         "$id": "184",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1651,7 +1622,7 @@
      ],
      "Responses": [
       {
-       "$id": "187",
+       "$id": "185",
        "StatusCodes": [
         200
        ],
@@ -1677,25 +1648,22 @@
      "Decorators": []
     },
     {
-     "$id": "188",
+     "$id": "186",
      "Name": "createLiteral",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "189",
+       "$id": "187",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "190",
+        "$id": "188",
         "Kind": "constant",
         "ValueType": {
-         "$id": "191",
+         "$id": "189",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1714,14 +1682,14 @@
        "Decorators": []
       },
       {
-       "$id": "192",
+       "$id": "190",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "193",
+        "$id": "191",
         "Kind": "constant",
         "ValueType": {
-         "$id": "194",
+         "$id": "192",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1740,7 +1708,7 @@
        "Decorators": []
       },
       {
-       "$id": "195",
+       "$id": "193",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -1758,7 +1726,7 @@
      ],
      "Responses": [
       {
-       "$id": "196",
+       "$id": "194",
        "StatusCodes": [
         200
        ],
@@ -1787,24 +1755,21 @@
      "Decorators": []
     },
     {
-     "$id": "197",
+     "$id": "195",
      "Name": "helloLiteral",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "198",
+       "$id": "196",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "199",
+        "$id": "197",
         "Kind": "constant",
         "ValueType": {
-         "$id": "200",
+         "$id": "198",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1823,14 +1788,14 @@
        "Decorators": []
       },
       {
-       "$id": "201",
+       "$id": "199",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "202",
+        "$id": "200",
         "Kind": "constant",
         "ValueType": {
-         "$id": "203",
+         "$id": "201",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
@@ -1849,14 +1814,14 @@
        "Decorators": []
       },
       {
-       "$id": "204",
+       "$id": "202",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "205",
+        "$id": "203",
         "Kind": "constant",
         "ValueType": {
-         "$id": "206",
+         "$id": "204",
          "Kind": "boolean",
          "Name": "boolean",
          "CrossLanguageDefinitionId": "TypeSpec.boolean",
@@ -1875,14 +1840,14 @@
        "Decorators": []
       },
       {
-       "$id": "207",
+       "$id": "205",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "208",
+        "$id": "206",
         "Kind": "constant",
         "ValueType": {
-         "$id": "209",
+         "$id": "207",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1903,7 +1868,7 @@
      ],
      "Responses": [
       {
-       "$id": "210",
+       "$id": "208",
        "StatusCodes": [
         200
        ],
@@ -1929,26 +1894,23 @@
      "Decorators": []
     },
     {
-     "$id": "211",
+     "$id": "209",
      "Name": "topAction",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "212",
+       "$id": "210",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "213",
+        "$id": "211",
         "Kind": "utcDateTime",
         "Name": "utcDateTime",
         "Encode": "rfc3339",
         "WireType": {
-         "$id": "214",
+         "$id": "212",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1967,14 +1929,14 @@
        "Decorators": []
       },
       {
-       "$id": "215",
+       "$id": "213",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "216",
+        "$id": "214",
         "Kind": "constant",
         "ValueType": {
-         "$id": "217",
+         "$id": "215",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -1995,7 +1957,7 @@
      ],
      "Responses": [
       {
-       "$id": "218",
+       "$id": "216",
        "StatusCodes": [
         200
        ],
@@ -2021,24 +1983,21 @@
      "Decorators": []
     },
     {
-     "$id": "219",
+     "$id": "217",
      "Name": "topAction2",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "220",
+       "$id": "218",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "221",
+        "$id": "219",
         "Kind": "constant",
         "ValueType": {
-         "$id": "222",
+         "$id": "220",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2059,7 +2018,7 @@
      ],
      "Responses": [
       {
-       "$id": "223",
+       "$id": "221",
        "StatusCodes": [
         200
        ],
@@ -2085,25 +2044,22 @@
      "Decorators": []
     },
     {
-     "$id": "224",
+     "$id": "222",
      "Name": "patchAction",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "225",
+       "$id": "223",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "226",
+        "$id": "224",
         "Kind": "constant",
         "ValueType": {
-         "$id": "227",
+         "$id": "225",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2122,14 +2078,14 @@
        "Decorators": []
       },
       {
-       "$id": "228",
+       "$id": "226",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "229",
+        "$id": "227",
         "Kind": "constant",
         "ValueType": {
-         "$id": "230",
+         "$id": "228",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2148,7 +2104,7 @@
        "Decorators": []
       },
       {
-       "$id": "231",
+       "$id": "229",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2166,7 +2122,7 @@
      ],
      "Responses": [
       {
-       "$id": "232",
+       "$id": "230",
        "StatusCodes": [
         200
        ],
@@ -2195,25 +2151,22 @@
      "Decorators": []
     },
     {
-     "$id": "233",
+     "$id": "231",
      "Name": "anonymousBody",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "234",
+       "$id": "232",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "235",
+        "$id": "233",
         "Kind": "constant",
         "ValueType": {
-         "$id": "236",
+         "$id": "234",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2232,14 +2185,14 @@
        "Decorators": []
       },
       {
-       "$id": "237",
+       "$id": "235",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "238",
+        "$id": "236",
         "Kind": "constant",
         "ValueType": {
-         "$id": "239",
+         "$id": "237",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2258,7 +2211,7 @@
        "Decorators": []
       },
       {
-       "$id": "240",
+       "$id": "238",
        "Name": "anonymousBodyRequest",
        "NameInRequest": "anonymousBodyRequest",
        "Type": {
@@ -2276,7 +2229,7 @@
      ],
      "Responses": [
       {
-       "$id": "241",
+       "$id": "239",
        "StatusCodes": [
         200
        ],
@@ -2305,25 +2258,22 @@
      "Decorators": []
     },
     {
-     "$id": "242",
+     "$id": "240",
      "Name": "friendlyModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "243",
+       "$id": "241",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "244",
+        "$id": "242",
         "Kind": "constant",
         "ValueType": {
-         "$id": "245",
+         "$id": "243",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2342,14 +2292,14 @@
        "Decorators": []
       },
       {
-       "$id": "246",
+       "$id": "244",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "247",
+        "$id": "245",
         "Kind": "constant",
         "ValueType": {
-         "$id": "248",
+         "$id": "246",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2368,7 +2318,7 @@
        "Decorators": []
       },
       {
-       "$id": "249",
+       "$id": "247",
        "Name": "friendlyModelRequest",
        "NameInRequest": "friendlyModelRequest",
        "Type": {
@@ -2386,7 +2336,7 @@
      ],
      "Responses": [
       {
-       "$id": "250",
+       "$id": "248",
        "StatusCodes": [
         200
        ],
@@ -2415,25 +2365,22 @@
      "Decorators": []
     },
     {
-     "$id": "251",
+     "$id": "249",
      "Name": "addTimeHeader",
      "ResourceName": "CustomizedTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "252",
+       "$id": "250",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "253",
+        "$id": "251",
         "Kind": "utcDateTime",
         "Name": "utcDateTime",
         "Encode": "rfc7231",
         "WireType": {
-         "$id": "254",
+         "$id": "252",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2454,7 +2401,7 @@
      ],
      "Responses": [
       {
-       "$id": "255",
+       "$id": "253",
        "StatusCodes": [
         204
        ],
@@ -2474,25 +2421,22 @@
      "Decorators": []
     },
     {
-     "$id": "256",
+     "$id": "254",
      "Name": "projectedNameModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "257",
+       "$id": "255",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "258",
+        "$id": "256",
         "Kind": "constant",
         "ValueType": {
-         "$id": "259",
+         "$id": "257",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2511,14 +2455,14 @@
        "Decorators": []
       },
       {
-       "$id": "260",
+       "$id": "258",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "261",
+        "$id": "259",
         "Kind": "constant",
         "ValueType": {
-         "$id": "262",
+         "$id": "260",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2537,7 +2481,7 @@
        "Decorators": []
       },
       {
-       "$id": "263",
+       "$id": "261",
        "Name": "projectedNameModelRequest",
        "NameInRequest": "projectedNameModelRequest",
        "Type": {
@@ -2555,7 +2499,7 @@
      ],
      "Responses": [
       {
-       "$id": "264",
+       "$id": "262",
        "StatusCodes": [
         200
        ],
@@ -2584,24 +2528,21 @@
      "Decorators": []
     },
     {
-     "$id": "265",
+     "$id": "263",
      "Name": "returnsAnonymousModel",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "266",
+       "$id": "264",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "267",
+        "$id": "265",
         "Kind": "constant",
         "ValueType": {
-         "$id": "268",
+         "$id": "266",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2622,7 +2563,7 @@
      ],
      "Responses": [
       {
-       "$id": "269",
+       "$id": "267",
        "StatusCodes": [
         200
        ],
@@ -2648,21 +2589,18 @@
      "Decorators": []
     },
     {
-     "$id": "270",
+     "$id": "268",
      "Name": "getUnknownValue",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "271",
+       "$id": "269",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "272",
+        "$id": "270",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2680,15 +2618,15 @@
      ],
      "Responses": [
       {
-       "$id": "273",
+       "$id": "271",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "274",
+        "$id": "272",
         "Kind": "constant",
         "ValueType": {
-         "$id": "275",
+         "$id": "273",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2723,25 +2661,22 @@
      "Decorators": []
     },
     {
-     "$id": "276",
+     "$id": "274",
      "Name": "internalProtocol",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "277",
+       "$id": "275",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "278",
+        "$id": "276",
         "Kind": "constant",
         "ValueType": {
-         "$id": "279",
+         "$id": "277",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2760,14 +2695,14 @@
        "Decorators": []
       },
       {
-       "$id": "280",
+       "$id": "278",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "281",
+        "$id": "279",
         "Kind": "constant",
         "ValueType": {
-         "$id": "282",
+         "$id": "280",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2786,7 +2721,7 @@
        "Decorators": []
       },
       {
-       "$id": "283",
+       "$id": "281",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2804,7 +2739,7 @@
      ],
      "Responses": [
       {
-       "$id": "284",
+       "$id": "282",
        "StatusCodes": [
         200
        ],
@@ -2833,19 +2768,15 @@
      "Decorators": []
     },
     {
-     "$id": "285",
+     "$id": "283",
      "Name": "stillConvenient",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "145"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "286",
+       "$id": "284",
        "StatusCodes": [
         204
        ],
@@ -2865,21 +2796,18 @@
      "Decorators": []
     },
     {
-     "$id": "287",
+     "$id": "285",
      "Name": "headAsBoolean",
      "ResourceName": "CustomizedTypeSpec",
      "Description": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "145"
-      },
-      {
-       "$id": "288",
+       "$id": "286",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "289",
+        "$id": "287",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -2897,7 +2825,7 @@
      ],
      "Responses": [
       {
-       "$id": "290",
+       "$id": "288",
        "StatusCodes": [
         204
        ],
@@ -2918,11 +2846,28 @@
     }
    ],
    "Protocol": {
-    "$id": "291"
+    "$id": "289"
    },
    "Parameters": [
     {
-     "$ref": "145"
+     "$id": "290",
+     "Name": "unbrandedTypeSpecUrl",
+     "NameInRequest": "unbrandedTypeSpecUrl",
+     "Type": {
+      "$id": "291",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

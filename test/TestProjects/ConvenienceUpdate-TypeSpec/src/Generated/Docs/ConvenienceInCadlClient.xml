@@ -1202,7 +1202,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync and pars
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
-Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
+Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -1225,7 +1225,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequired and parse the
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
-Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
+Response response = client.ConvenienceOptionalQueryWithRequired(default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

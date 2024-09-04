@@ -293,31 +293,11 @@
      "Parameters": [
       {
        "$id": "36",
-       "Name": "petStoreUrl",
-       "NameInRequest": "petStoreUrl",
-       "Type": {
-        "$id": "37",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "38",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "39",
+        "$id": "37",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -331,9 +311,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "38",
         "Type": {
-         "$id": "41",
+         "$id": "39",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -343,12 +323,12 @@
        "Decorators": []
       },
       {
-       "$id": "42",
+       "$id": "40",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "pet name",
        "Type": {
-        "$id": "43",
+        "$id": "41",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -364,14 +344,14 @@
        "Decorators": []
       },
       {
-       "$id": "44",
+       "$id": "42",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "45",
+        "$id": "43",
         "Kind": "constant",
         "ValueType": {
-         "$id": "46",
+         "$id": "44",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -392,7 +372,7 @@
      ],
      "Responses": [
       {
-       "$id": "47",
+       "$id": "45",
        "StatusCodes": [
         204
        ],
@@ -412,22 +392,19 @@
      "Decorators": []
     },
     {
-     "$id": "48",
+     "$id": "46",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
-      },
-      {
-       "$id": "49",
+       "$id": "47",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "50",
+        "$id": "48",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32",
@@ -443,14 +420,14 @@
        "Decorators": []
       },
       {
-       "$id": "51",
+       "$id": "49",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "52",
+        "$id": "50",
         "Kind": "constant",
         "ValueType": {
-         "$id": "53",
+         "$id": "51",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -471,7 +448,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "52",
        "StatusCodes": [
         200
        ],
@@ -486,7 +463,7 @@
        ]
       },
       {
-       "$id": "55",
+       "$id": "53",
        "StatusCodes": [
         304
        ],
@@ -512,23 +489,20 @@
      "Decorators": []
     },
     {
-     "$id": "56",
+     "$id": "54",
      "Name": "create",
      "ResourceName": "Pets",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "36"
-      },
-      {
-       "$id": "57",
+       "$id": "55",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "58",
+        "$id": "56",
         "Kind": "constant",
         "ValueType": {
-         "$id": "59",
+         "$id": "57",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -547,15 +521,15 @@
        "Decorators": []
       },
       {
-       "$id": "60",
+       "$id": "58",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "61",
+        "$id": "59",
         "Kind": "constant",
         "ValueType": {
-         "$id": "62",
+         "$id": "60",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -574,14 +548,14 @@
        "Decorators": []
       },
       {
-       "$id": "63",
+       "$id": "61",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "62",
         "Kind": "constant",
         "ValueType": {
-         "$id": "65",
+         "$id": "63",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -600,7 +574,7 @@
        "Decorators": []
       },
       {
-       "$id": "66",
+       "$id": "64",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -618,7 +592,7 @@
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -648,12 +622,29 @@
     }
    ],
    "Protocol": {
-    "$id": "68"
+    "$id": "66"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "36"
+     "$id": "67",
+     "Name": "petStoreUrl",
+     "NameInRequest": "petStoreUrl",
+     "Type": {
+      "$id": "68",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []
@@ -672,31 +663,11 @@
      "Parameters": [
       {
        "$id": "71",
-       "Name": "petStoreUrl",
-       "NameInRequest": "petStoreUrl",
-       "Type": {
-        "$id": "72",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "73",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "74",
+        "$id": "72",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -710,9 +681,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "73",
         "Type": {
-         "$id": "76",
+         "$id": "74",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string"
@@ -722,14 +693,14 @@
        "Decorators": []
       },
       {
-       "$id": "77",
+       "$id": "75",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "78",
+        "$id": "76",
         "Kind": "constant",
         "ValueType": {
-         "$id": "79",
+         "$id": "77",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
@@ -750,7 +721,7 @@
      ],
      "Responses": [
       {
-       "$id": "80",
+       "$id": "78",
        "StatusCodes": [
         200
        ],
@@ -771,7 +742,7 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "81",
+      "$id": "79",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -782,12 +753,29 @@
     }
    ],
    "Protocol": {
-    "$id": "82"
+    "$id": "80"
    },
    "Parent": "MixApiVersionClient",
    "Parameters": [
     {
-     "$ref": "71"
+     "$id": "81",
+     "Name": "petStoreUrl",
+     "NameInRequest": "petStoreUrl",
+     "Type": {
+      "$id": "82",
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

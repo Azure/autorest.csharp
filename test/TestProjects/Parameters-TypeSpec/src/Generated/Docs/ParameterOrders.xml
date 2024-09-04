@@ -42,7 +42,7 @@ This sample shows how to call OperationAsync and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
-Response response = await client.OperationAsync(1234, null, null);
+Response response = await client.OperationAsync(1234, default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -65,7 +65,7 @@ This sample shows how to call Operation and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
-Response response = client.Operation(1234, null, null);
+Response response = client.Operation(1234, default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -122,7 +122,7 @@ This sample shows how to call Operation2Async and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
-Response response = await client.Operation2Async(1234, null, null);
+Response response = await client.Operation2Async(1234, default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -145,7 +145,7 @@ This sample shows how to call Operation2 and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
-Response response = client.Operation2(1234, null, null);
+Response response = client.Operation2(1234, default, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

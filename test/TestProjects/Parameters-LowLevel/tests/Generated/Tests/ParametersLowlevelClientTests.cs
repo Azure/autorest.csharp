@@ -28,7 +28,7 @@ namespace Parameters_LowLevel.Tests
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = CreateParametersLowlevelClient(endpoint, credential);
 
-            Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
+            Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, default, null, null);
         }
 
         [Test]

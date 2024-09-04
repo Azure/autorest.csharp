@@ -22,7 +22,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateBatchDetectionResult_GetMultivariateBatchDetectionResult()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -42,7 +42,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_GetMultivariateBatchDetectionResult_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -62,7 +62,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateBatchDetectionResult_GetMultivariateBatchDetectionResult_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -73,7 +73,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_GetMultivariateBatchDetectionResult_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -84,7 +84,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_TrainMultivariateModel_CreateAndTrainMultivariateModel()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -115,7 +115,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_TrainMultivariateModel_CreateAndTrainMultivariateModel_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -146,7 +146,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_TrainMultivariateModel_CreateAndTrainMultivariateModel_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -169,7 +169,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_TrainMultivariateModel_CreateAndTrainMultivariateModel_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -192,7 +192,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_DeleteMultivariateModel_DeleteMultivariateModel()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -205,7 +205,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_DeleteMultivariateModel_DeleteMultivariateModel_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -218,7 +218,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateModel_GetAMultivariateModel()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -234,7 +234,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateModel_GetAMultivariateModel_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -250,7 +250,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateModel_GetAMultivariateModel_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -261,7 +261,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateModel_GetAMultivariateModel_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -272,7 +272,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_DetectMultivariateBatchAnomaly_DetectMultivariateBatchAnomaly()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -299,7 +299,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_DetectMultivariateBatchAnomaly_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -326,7 +326,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_DetectMultivariateBatchAnomaly_DetectMultivariateBatchAnomaly_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -338,7 +338,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_DetectMultivariateBatchAnomaly_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -350,7 +350,7 @@ namespace AnomalyDetector.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_DetectMultivariateLastAnomaly_DetectMultivariateLastAnomaly()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -581,7 +581,7 @@ values = new object[]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_DetectMultivariateLastAnomaly_DetectMultivariateLastAnomaly_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -812,7 +812,7 @@ values = new object[]
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_DetectMultivariateLastAnomaly_DetectMultivariateLastAnomaly_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -829,7 +829,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_DetectMultivariateLastAnomaly_DetectMultivariateLastAnomaly_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -846,11 +846,11 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateModels_ListMultivariateModels()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            foreach (BinaryData item in client.GetMultivariateModels(0, null, null))
+            foreach (BinaryData item in client.GetMultivariateModels(0, default, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -863,11 +863,11 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateModels_ListMultivariateModels_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, null, null))
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, default, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -880,7 +880,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
         [Ignore("Only validating compilation of examples")]
         public void Example_Multivariate_GetMultivariateModels_ListMultivariateModels_Convenience()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
@@ -893,7 +893,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Multivariate_GetMultivariateModels_ListMultivariateModels_Convenience_Async()
         {
-            Uri endpoint = new Uri("<endpoint>");
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 

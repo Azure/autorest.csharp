@@ -499,7 +499,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, null, null))
+            foreach (BinaryData item in client.GetUsers(default, default, default, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -514,7 +514,7 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
+            await foreach (BinaryData item in client.GetUsersAsync(default, default, default, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());

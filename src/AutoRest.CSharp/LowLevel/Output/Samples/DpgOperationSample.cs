@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (!parameter.IsOptionalInSignature)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type)));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -302,7 +302,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return operationParameterValue;
 
             // sometimes, especially in swagger projects, the parameter used as endpoint in our client, does not have the `IsEndpoint` flag, we have to fallback here so that we could at least have a value for it.
-            return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
+            return InputExampleValue.Value(InputPrimitiveType.Url, Configuration.ApiTypes.EndPointSampleValue);
         }
 
         private bool NeedsDispose(Parameter parameter)
