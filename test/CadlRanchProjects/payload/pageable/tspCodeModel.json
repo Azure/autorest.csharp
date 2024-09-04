@@ -15,19 +15,21 @@
    "Properties": [
     {
      "$id": "3",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "User name",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "User name",
+     "type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.Pageable.User.name"
     }
    ]
   },
@@ -42,10 +44,10 @@
    "Properties": [
     {
      "$id": "6",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The User items on this page",
-     "Type": {
+     "name": "value",
+     "serializedName": "value",
+     "description": "The User items on this page",
+     "type": {
       "$id": "7",
       "Kind": "array",
       "Name": "ArrayUser",
@@ -55,16 +57,18 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
     {
      "$id": "8",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
       "$id": "9",
       "Kind": "url",
       "Name": "ResourceLocation",
@@ -78,9 +82,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
   }

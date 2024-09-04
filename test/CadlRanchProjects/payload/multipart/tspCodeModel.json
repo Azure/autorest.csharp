@@ -14,26 +14,26 @@
    "Properties": [
     {
      "$id": "3",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest.id"
     },
     {
      "$id": "5",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "6",
       "Kind": "bytes",
       "Name": "bytes",
@@ -41,9 +41,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest.profileImage"
     }
    ]
   },
@@ -57,26 +59,26 @@
    "Properties": [
     {
      "$id": "8",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "type": {
       "$id": "9",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.id"
     },
     {
      "$id": "10",
-     "Name": "address",
-     "SerializedName": "address",
-     "Description": "",
-     "Type": {
+     "name": "address",
+     "serializedName": "address",
+     "type": {
       "$id": "11",
       "Kind": "model",
       "Name": "Address",
@@ -86,32 +88,34 @@
       "Properties": [
        {
         "$id": "12",
-        "Name": "city",
-        "SerializedName": "city",
-        "Description": "",
-        "Type": {
+        "name": "city",
+        "serializedName": "city",
+        "type": {
          "$id": "13",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "Payload.MultiPart.Address.city"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.address"
     },
     {
      "$id": "14",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "15",
       "Kind": "bytes",
       "Name": "bytes",
@@ -119,16 +123,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.profileImage"
     },
     {
      "$id": "16",
-     "Name": "previousAddresses",
-     "SerializedName": "previousAddresses",
-     "Description": "",
-     "Type": {
+     "name": "previousAddresses",
+     "serializedName": "previousAddresses",
+     "type": {
       "$id": "17",
       "Kind": "array",
       "Name": "ArrayAddress",
@@ -138,16 +143,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.previousAddresses"
     },
     {
      "$id": "18",
-     "Name": "pictures",
-     "SerializedName": "pictures",
-     "Description": "",
-     "Type": {
+     "name": "pictures",
+     "serializedName": "pictures",
+     "type": {
       "$id": "19",
       "Kind": "array",
       "Name": "Array",
@@ -162,9 +168,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.pictures"
     }
    ]
   },
@@ -181,22 +189,22 @@
    "Properties": [
     {
      "$id": "22",
-     "Name": "address",
-     "SerializedName": "address",
-     "Description": "",
-     "Type": {
+     "name": "address",
+     "serializedName": "address",
+     "type": {
       "$ref": "11"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest.address"
     },
     {
      "$id": "23",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "24",
       "Kind": "bytes",
       "Name": "bytes",
@@ -204,9 +212,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest.profileImage"
     }
    ]
   },
@@ -220,26 +230,26 @@
    "Properties": [
     {
      "$id": "26",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "type": {
       "$id": "27",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest.id"
     },
     {
      "$id": "28",
-     "Name": "pictures",
-     "SerializedName": "pictures",
-     "Description": "",
-     "Type": {
+     "name": "pictures",
+     "serializedName": "pictures",
+     "type": {
       "$id": "29",
       "Kind": "array",
       "Name": "Array",
@@ -254,9 +264,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest.pictures"
     }
    ]
   },
@@ -270,10 +282,9 @@
    "Properties": [
     {
      "$id": "32",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "33",
       "Kind": "bytes",
       "Name": "bytes",
@@ -281,16 +292,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest.profileImage"
     },
     {
      "$id": "34",
-     "Name": "previousAddresses",
-     "SerializedName": "previousAddresses",
-     "Description": "",
-     "Type": {
+     "name": "previousAddresses",
+     "serializedName": "previousAddresses",
+     "type": {
       "$id": "35",
       "Kind": "array",
       "Name": "ArrayAddress",
@@ -300,9 +312,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest.previousAddresses"
     }
    ]
   },
@@ -316,10 +330,9 @@
    "Properties": [
     {
      "$id": "37",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "38",
       "Kind": "bytes",
       "Name": "bytes",
@@ -327,16 +340,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest.profileImage"
     },
     {
      "$id": "39",
-     "Name": "picture",
-     "SerializedName": "picture",
-     "Description": "",
-     "Type": {
+     "name": "picture",
+     "serializedName": "picture",
+     "type": {
       "$id": "40",
       "Kind": "bytes",
       "Name": "bytes",
@@ -344,9 +358,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest.picture"
     }
    ]
   },
@@ -360,10 +376,9 @@
    "Properties": [
     {
      "$id": "42",
-     "Name": "profileImage",
-     "SerializedName": "profileImage",
-     "Description": "",
-     "Type": {
+     "name": "profileImage",
+     "serializedName": "profileImage",
+     "type": {
       "$id": "43",
       "Kind": "bytes",
       "Name": "bytes",
@@ -371,9 +386,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "anonymousModel.Request.anonymous.profileImage"
     }
    ]
   }

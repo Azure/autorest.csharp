@@ -41,51 +41,54 @@
    "Properties": [
     {
      "$id": "6",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "type": {
       "$id": "7",
       "Kind": "int64",
       "Name": "int64",
       "CrossLanguageDefinitionId": "TypeSpec.int64",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Toy.id"
     },
     {
      "$id": "8",
-     "Name": "petId",
-     "SerializedName": "petId",
-     "Description": "",
-     "Type": {
+     "name": "petId",
+     "serializedName": "petId",
+     "type": {
       "$id": "9",
       "Kind": "int64",
       "Name": "int64",
       "CrossLanguageDefinitionId": "TypeSpec.int64",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Toy.petId"
     },
     {
      "$id": "10",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "11",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Toy.name"
     }
    ]
   },
@@ -100,51 +103,55 @@
    "Properties": [
     {
      "$id": "13",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "pet name",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "pet name",
+     "type": {
       "$id": "14",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Pet.name"
     },
     {
      "$id": "15",
-     "Name": "tag",
-     "SerializedName": "tag",
-     "Description": "",
-     "Type": {
+     "name": "tag",
+     "serializedName": "tag",
+     "type": {
       "$id": "16",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Pet.tag"
     },
     {
      "$id": "17",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "",
-     "Type": {
+     "name": "age",
+     "serializedName": "age",
+     "type": {
       "$id": "18",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Pet.age"
     }
    ]
   },
@@ -159,35 +166,37 @@
    "Properties": [
     {
      "$id": "20",
-     "Name": "code",
-     "SerializedName": "code",
-     "Description": "",
-     "Type": {
+     "name": "code",
+     "serializedName": "code",
+     "type": {
       "$id": "21",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Error.code"
     },
     {
      "$id": "22",
-     "Name": "message",
-     "SerializedName": "message",
-     "Description": "",
-     "Type": {
+     "name": "message",
+     "serializedName": "message",
+     "type": {
       "$id": "23",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MixApiVersion.Error.message"
     }
    ]
   },
@@ -202,10 +211,10 @@
    "Properties": [
     {
      "$id": "25",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The Toy items on this page",
-     "Type": {
+     "name": "value",
+     "serializedName": "value",
+     "description": "The Toy items on this page",
+     "type": {
       "$id": "26",
       "Kind": "array",
       "Name": "ArrayToy",
@@ -215,16 +224,18 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
     },
     {
      "$id": "27",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
       "$id": "28",
       "Kind": "url",
       "Name": "ResourceLocation",
@@ -238,9 +249,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
     }
    ]
   }

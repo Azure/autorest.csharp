@@ -43,10 +43,9 @@
    "Properties": [
     {
      "$id": "6",
-     "Name": "location",
-     "SerializedName": "location",
-     "Description": "",
-     "Type": {
+     "name": "location",
+     "serializedName": "location",
+     "type": {
       "$id": "7",
       "Kind": "string",
       "Name": "azureLocation",
@@ -60,9 +59,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel.location"
     }
    ]
   }

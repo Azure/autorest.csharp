@@ -23,29 +23,29 @@
     "Properties": [
      {
       "$id": "4",
-      "Name": "name",
-      "SerializedName": "name",
-      "Description": "",
-      "Type": {
+      "name": "name",
+      "serializedName": "name",
+      "type": {
        "$id": "5",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel.name"
      }
     ]
    },
    "Properties": [
     {
      "$id": "6",
-     "Name": "inner",
-     "SerializedName": "inner",
-     "Description": "",
-     "Type": {
+     "name": "inner",
+     "serializedName": "inner",
+     "type": {
       "$id": "7",
       "Kind": "model",
       "Name": "InnerModel",
@@ -56,25 +56,28 @@
       "Properties": [
        {
         "$id": "8",
-        "Name": "name",
-        "SerializedName": "name",
-        "Description": "",
-        "Type": {
+        "name": "name",
+        "serializedName": "name",
+        "type": {
          "$id": "9",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel.name"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel.inner"
     }
    ]
   },
@@ -94,20 +97,21 @@
    "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "11",
-    "Name": "kind",
-    "SerializedName": "kind",
-    "Description": "Discriminator property for AbstractModel.",
-    "Type": {
+    "name": "kind",
+    "serializedName": "kind",
+    "description": "Discriminator property for AbstractModel.",
+    "type": {
      "$id": "12",
      "Kind": "string",
      "Name": "string",
      "CrossLanguageDefinitionId": "TypeSpec.string",
      "Decorators": []
     },
-    "IsRequired": true,
-    "IsReadOnly": false,
-    "IsDiscriminator": true,
-    "Decorators": []
+    "optional": false,
+    "readOnly": false,
+    "discriminator": true,
+    "decorators": [],
+    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel.kind"
    },
    "Properties": [
     {
@@ -115,19 +119,20 @@
     },
     {
      "$id": "13",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "14",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel.name"
     }
    ],
    "DiscriminatedSubtypes": {
@@ -147,10 +152,9 @@
      "Properties": [
       {
        "$id": "17",
-       "Name": "kind",
-       "SerializedName": "kind",
-       "Description": "Discriminator",
-       "Type": {
+       "name": "kind",
+       "serializedName": "kind",
+       "type": {
         "$id": "18",
         "Kind": "constant",
         "ValueType": {
@@ -163,10 +167,11 @@
         "Value": "real",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": false,
-       "IsDiscriminator": true,
-       "Decorators": []
+       "optional": false,
+       "readOnly": false,
+       "discriminator": true,
+       "decorators": [],
+       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.RealModel.kind"
       }
      ]
     }
@@ -186,19 +191,20 @@
    "Properties": [
     {
      "$id": "21",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "22",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel.name"
     }
    ]
   },
@@ -213,19 +219,20 @@
    "Properties": [
     {
      "$id": "24",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "25",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal.name"
     }
    ]
   },
@@ -241,19 +248,20 @@
    "Properties": [
     {
      "$id": "27",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "28",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.InternalDecoratorModelInInternal.name"
     }
    ]
   },
@@ -269,19 +277,20 @@
    "Properties": [
     {
      "$id": "30",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "31",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.PublicDecoratorModelInInternal.name"
     }
    ]
   },
@@ -296,19 +305,20 @@
    "Properties": [
     {
      "$id": "33",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "34",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic.name"
     }
    ]
   },
@@ -324,19 +334,20 @@
    "Properties": [
     {
      "$id": "36",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "37",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.PublicDecoratorModelInPublic.name"
     }
    ]
   }

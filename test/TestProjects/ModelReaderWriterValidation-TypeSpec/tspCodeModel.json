@@ -244,19 +244,21 @@
    "Properties": [
     {
      "$id": "32",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "description": "The id property.",
+     "type": {
       "$id": "33",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct.id"
     }
    ]
   },
@@ -270,26 +272,28 @@
    "Properties": [
     {
      "$id": "35",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name.",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name.",
+     "type": {
       "$id": "36",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.name"
     },
     {
      "$id": "37",
-     "Name": "fields",
-     "SerializedName": "fields",
-     "Description": "The fields property.",
-     "Type": {
+     "name": "fields",
+     "serializedName": "fields",
+     "description": "The fields property.",
+     "type": {
       "$id": "38",
       "Kind": "array",
       "Name": "Array",
@@ -303,32 +307,36 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.fields"
     },
     {
      "$id": "40",
-     "Name": "nullProperty",
-     "SerializedName": "nullProperty",
-     "Description": "The nullable property.",
-     "Type": {
+     "name": "nullProperty",
+     "serializedName": "nullProperty",
+     "description": "The nullable property.",
+     "type": {
       "$id": "41",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.nullProperty"
     },
     {
      "$id": "42",
-     "Name": "keyValuePairs",
-     "SerializedName": "keyValuePairs",
-     "Description": "The key value pairs property.",
-     "Type": {
+     "name": "keyValuePairs",
+     "serializedName": "keyValuePairs",
+     "description": "The key value pairs property.",
+     "type": {
       "$id": "43",
       "Kind": "dict",
       "KeyType": {
@@ -347,25 +355,29 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.keyValuePairs"
     },
     {
      "$id": "46",
-     "Name": "xProperty",
-     "SerializedName": "xProperty",
-     "Description": "The x property.",
-     "Type": {
+     "name": "xProperty",
+     "serializedName": "xProperty",
+     "description": "The x property.",
+     "type": {
       "$id": "47",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithPersistableOnly.xProperty"
     }
    ]
   },
@@ -379,20 +391,21 @@
    "Decorators": [],
    "DiscriminatorProperty": {
     "$id": "49",
-    "Name": "kind",
-    "SerializedName": "kind",
-    "Description": "The kind",
-    "Type": {
+    "name": "kind",
+    "serializedName": "kind",
+    "description": "The kind",
+    "type": {
      "$id": "50",
      "Kind": "string",
      "Name": "string",
      "CrossLanguageDefinitionId": "TypeSpec.string",
      "Decorators": []
     },
-    "IsRequired": true,
-    "IsReadOnly": false,
-    "IsDiscriminator": true,
-    "Decorators": []
+    "optional": false,
+    "readOnly": false,
+    "discriminator": true,
+    "decorators": [],
+    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.kind"
    },
    "Properties": [
     {
@@ -400,19 +413,21 @@
     },
     {
      "$id": "51",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name property.",
+     "type": {
       "$id": "52",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel.name"
     }
    ],
    "DiscriminatedSubtypes": {
@@ -432,10 +447,9 @@
      "Properties": [
       {
        "$id": "55",
-       "Name": "kind",
-       "SerializedName": "kind",
-       "Description": "Discriminator",
-       "Type": {
+       "name": "kind",
+       "serializedName": "kind",
+       "type": {
         "$id": "56",
         "Kind": "constant",
         "ValueType": {
@@ -448,17 +462,18 @@
         "Value": "X",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": false,
-       "IsDiscriminator": true,
-       "Decorators": []
+       "optional": false,
+       "readOnly": false,
+       "discriminator": true,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.kind"
       },
       {
        "$id": "58",
-       "Name": "fields",
-       "SerializedName": "fields",
-       "Description": "Optional list.",
-       "Type": {
+       "name": "fields",
+       "serializedName": "fields",
+       "description": "Optional list.",
+       "type": {
         "$id": "59",
         "Kind": "array",
         "Name": "Array",
@@ -472,32 +487,36 @@
         "CrossLanguageDefinitionId": "TypeSpec.Array",
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": false,
-       "Decorators": []
+       "optional": true,
+       "readOnly": false,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.fields"
       },
       {
        "$id": "61",
-       "Name": "nullProperty",
-       "SerializedName": "nullProperty",
-       "Description": "Nullable integer.",
-       "Type": {
+       "name": "nullProperty",
+       "serializedName": "nullProperty",
+       "description": "Nullable integer.",
+       "type": {
         "$id": "62",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32",
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": false,
-       "Decorators": []
+       "optional": true,
+       "readOnly": false,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.nullProperty"
       },
       {
        "$id": "63",
-       "Name": "keyValuePairs",
-       "SerializedName": "keyValuePairs",
-       "Description": "Optional dictionary.",
-       "Type": {
+       "name": "keyValuePairs",
+       "serializedName": "keyValuePairs",
+       "description": "Optional dictionary.",
+       "type": {
         "$id": "64",
         "Kind": "dict",
         "KeyType": {
@@ -516,25 +535,29 @@
         },
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": false,
-       "Decorators": []
+       "optional": true,
+       "readOnly": false,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.keyValuePairs"
       },
       {
        "$id": "67",
-       "Name": "xProperty",
-       "SerializedName": "xProperty",
-       "Description": "The XProperty property.",
-       "Type": {
+       "name": "xProperty",
+       "serializedName": "xProperty",
+       "description": "The XProperty property.",
+       "type": {
         "$id": "68",
         "Kind": "int32",
         "Name": "int32",
         "CrossLanguageDefinitionId": "TypeSpec.int32",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": true,
-       "Decorators": []
+       "optional": false,
+       "readOnly": true,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX.xProperty"
       }
      ]
     },
@@ -553,10 +576,9 @@
      "Properties": [
       {
        "$id": "70",
-       "Name": "kind",
-       "SerializedName": "kind",
-       "Description": "Discriminator",
-       "Type": {
+       "name": "kind",
+       "serializedName": "kind",
+       "type": {
         "$id": "71",
         "Kind": "constant",
         "ValueType": {
@@ -569,26 +591,29 @@
         "Value": "Y",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": false,
-       "IsDiscriminator": true,
-       "Decorators": []
+       "optional": false,
+       "readOnly": false,
+       "discriminator": true,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.kind"
       },
       {
        "$id": "73",
-       "Name": "yProperty",
-       "SerializedName": "yProperty",
-       "Description": "The YProperty property.",
-       "Type": {
+       "name": "yProperty",
+       "serializedName": "yProperty",
+       "description": "The YProperty property.",
+       "type": {
         "$id": "74",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": true,
-       "Decorators": []
+       "optional": false,
+       "readOnly": true,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY.yProperty"
       }
      ]
     }
@@ -619,74 +644,82 @@
     "Properties": [
      {
       "$id": "77",
-      "Name": "id",
-      "SerializedName": "id",
-      "Description": "The id property.",
-      "Type": {
+      "name": "id",
+      "serializedName": "id",
+      "description": "The id property.",
+      "type": {
        "$id": "78",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "Decorators": []
+      "optional": false,
+      "readOnly": true,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.id"
      },
      {
       "$id": "79",
-      "Name": "name",
-      "SerializedName": "name",
-      "Description": "The name property.",
-      "Type": {
+      "name": "name",
+      "serializedName": "name",
+      "description": "The name property.",
+      "type": {
        "$id": "80",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "Decorators": []
+      "optional": false,
+      "readOnly": true,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.name"
      },
      {
       "$id": "81",
-      "Name": "resourceType",
-      "SerializedName": "type",
-      "Description": "The resource type.",
-      "Type": {
+      "name": "resourceType",
+      "serializedName": "type",
+      "description": "The resource type.",
+      "type": {
        "$id": "82",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": true,
-      "Decorators": []
+      "optional": false,
+      "readOnly": true,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.type"
      },
      {
       "$id": "83",
-      "Name": "location",
-      "SerializedName": "location",
-      "Description": "The location property.",
-      "Type": {
+      "name": "location",
+      "serializedName": "location",
+      "description": "The location property.",
+      "type": {
        "$id": "84",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.location"
      },
      {
       "$id": "85",
-      "Name": "tags",
-      "SerializedName": "tags",
-      "Description": "The tags property.",
-      "Type": {
+      "name": "tags",
+      "serializedName": "tags",
+      "description": "The tags property.",
+      "type": {
        "$id": "86",
        "Kind": "dict",
        "KeyType": {
@@ -705,19 +738,21 @@
        },
        "Decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData.tags"
      }
     ]
    },
    "Properties": [
     {
      "$id": "89",
-     "Name": "sku",
-     "SerializedName": "sku",
-     "Description": "The sku.",
-     "Type": {
+     "name": "sku",
+     "serializedName": "sku",
+     "description": "The sku.",
+     "type": {
       "$id": "90",
       "Kind": "model",
       "Name": "ComputeSku",
@@ -727,64 +762,72 @@
       "Properties": [
        {
         "$id": "91",
-        "Name": "name",
-        "SerializedName": "name",
-        "Description": "The sku name.",
-        "Type": {
+        "name": "name",
+        "serializedName": "name",
+        "description": "The sku name.",
+        "type": {
          "$id": "92",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.name"
        },
        {
         "$id": "93",
-        "Name": "tier",
-        "SerializedName": "tier",
-        "Description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
-        "Type": {
+        "name": "tier",
+        "serializedName": "tier",
+        "description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
+        "type": {
          "$id": "94",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.tier"
        },
        {
         "$id": "95",
-        "Name": "capacity",
-        "SerializedName": "capacity",
-        "Description": "Specifies the number of virtual machines in the scale set.",
-        "Type": {
+        "name": "capacity",
+        "serializedName": "capacity",
+        "description": "Specifies the number of virtual machines in the scale set.",
+        "type": {
          "$id": "96",
          "Kind": "int64",
          "Name": "int64",
          "CrossLanguageDefinitionId": "TypeSpec.int64",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ComputeSku.capacity"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.sku"
     },
     {
      "$id": "97",
-     "Name": "properties",
-     "SerializedName": "properties",
-     "Description": "The properties property.",
-     "Type": {
+     "name": "properties",
+     "serializedName": "properties",
+     "description": "The properties property.",
+     "type": {
       "$id": "98",
       "Kind": "model",
       "Name": "AvailabilitySetProperties",
@@ -795,10 +838,10 @@
       "Properties": [
        {
         "$id": "99",
-        "Name": "virtualMachines",
-        "SerializedName": "virtualMachines",
-        "Description": "The virtual machines.",
-        "Type": {
+        "name": "virtualMachines",
+        "serializedName": "virtualMachines",
+        "description": "The virtual machines.",
+        "type": {
          "$id": "100",
          "Kind": "array",
          "Name": "ArrayWritableSubResource",
@@ -813,66 +856,76 @@
           "Properties": [
            {
             "$id": "102",
-            "Name": "id",
-            "SerializedName": "id",
-            "Description": "The resource id",
-            "Type": {
+            "name": "id",
+            "serializedName": "id",
+            "description": "The resource id",
+            "type": {
              "$id": "103",
              "Kind": "string",
              "Name": "string",
              "CrossLanguageDefinitionId": "TypeSpec.string",
              "Decorators": []
             },
-            "IsRequired": false,
-            "IsReadOnly": false,
-            "Decorators": []
+            "optional": true,
+            "readOnly": false,
+            "discriminator": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource.id"
            }
           ]
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.virtualMachines"
        },
        {
         "$id": "104",
-        "Name": "platformFaultDomainCount",
-        "SerializedName": "platformFaultDomainCount",
-        "Description": "The platform fault domain count property.",
-        "Type": {
+        "name": "platformFaultDomainCount",
+        "serializedName": "platformFaultDomainCount",
+        "description": "The platform fault domain count property.",
+        "type": {
          "$id": "105",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformFaultDomainCount"
        },
        {
         "$id": "106",
-        "Name": "platformUpdateDomainCount",
-        "SerializedName": "platformUpdateDomainCount",
-        "Description": "The platform update domain count property.",
-        "Type": {
+        "name": "platformUpdateDomainCount",
+        "serializedName": "platformUpdateDomainCount",
+        "description": "The platform update domain count property.",
+        "type": {
          "$id": "107",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": true,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties.platformUpdateDomainCount"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData.properties"
     }
    ]
   },
@@ -899,74 +952,82 @@
    "Properties": [
     {
      "$id": "109",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The provider ID.",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "description": "The provider ID.",
+     "type": {
       "$id": "110",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.id"
     },
     {
      "$id": "111",
-     "Name": "namespace",
-     "SerializedName": "namespace",
-     "Description": "The namespace of the resource provider.",
-     "Type": {
+     "name": "namespace",
+     "serializedName": "namespace",
+     "description": "The namespace of the resource provider.",
+     "type": {
       "$id": "112",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.namespace"
     },
     {
      "$id": "113",
-     "Name": "registrationState",
-     "SerializedName": "registrationState",
-     "Description": "The registration state of the resource provider.",
-     "Type": {
+     "name": "registrationState",
+     "serializedName": "registrationState",
+     "description": "The registration state of the resource provider.",
+     "type": {
       "$id": "114",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationState"
     },
     {
      "$id": "115",
-     "Name": "registrationPolicy",
-     "SerializedName": "registrationPolicy",
-     "Description": "The registration policy of the resource provider.",
-     "Type": {
+     "name": "registrationPolicy",
+     "serializedName": "registrationPolicy",
+     "description": "The registration policy of the resource provider.",
+     "type": {
       "$id": "116",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.registrationPolicy"
     },
     {
      "$id": "117",
-     "Name": "resourceTypes",
-     "SerializedName": "resourceTypes",
-     "Description": "The collection of provider resource types.",
-     "Type": {
+     "name": "resourceTypes",
+     "serializedName": "resourceTypes",
+     "description": "The collection of provider resource types.",
+     "type": {
       "$id": "118",
       "Kind": "array",
       "Name": "ArrayProviderResourceType",
@@ -980,26 +1041,28 @@
        "Properties": [
         {
          "$id": "120",
-         "Name": "resourceType",
-         "SerializedName": "resourceType",
-         "Description": "The resource type.",
-         "Type": {
+         "name": "resourceType",
+         "serializedName": "resourceType",
+         "description": "The resource type.",
+         "type": {
           "$id": "121",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.resourceType"
         },
         {
          "$id": "122",
-         "Name": "locations",
-         "SerializedName": "locations",
-         "Description": "The collection of locations where this resource type can be created.",
-         "Type": {
+         "name": "locations",
+         "serializedName": "locations",
+         "description": "The collection of locations where this resource type can be created.",
+         "type": {
           "$id": "123",
           "Kind": "array",
           "Name": "Array",
@@ -1013,16 +1076,18 @@
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locations"
         },
         {
          "$id": "125",
-         "Name": "locationMappings",
-         "SerializedName": "locationMappings",
-         "Description": "The location mappings that are supported by this resource type.",
-         "Type": {
+         "name": "locationMappings",
+         "serializedName": "locationMappings",
+         "description": "The location mappings that are supported by this resource type.",
+         "type": {
           "$id": "126",
           "Kind": "array",
           "Name": "ArrayProviderExtendedLocation",
@@ -1037,42 +1102,46 @@
            "Properties": [
             {
              "$id": "128",
-             "Name": "location",
-             "SerializedName": "location",
-             "Description": "The azure location.",
-             "Type": {
+             "name": "location",
+             "serializedName": "location",
+             "description": "The azure location.",
+             "type": {
               "$id": "129",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.location"
             },
             {
              "$id": "130",
-             "Name": "providerExtendedLocationType",
-             "SerializedName": "type",
-             "Description": "The extended location type.",
-             "Type": {
+             "name": "providerExtendedLocationType",
+             "serializedName": "type",
+             "description": "The extended location type.",
+             "type": {
               "$id": "131",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.type"
             },
             {
              "$id": "132",
-             "Name": "extendedLocations",
-             "SerializedName": "extendedLocations",
-             "Description": "The extended locations for the azure location.",
-             "Type": {
+             "name": "extendedLocations",
+             "serializedName": "extendedLocations",
+             "description": "The extended locations for the azure location.",
+             "type": {
               "$id": "133",
               "Kind": "array",
               "Name": "Array",
@@ -1086,25 +1155,29 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation.extendedLocations"
             }
            ]
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.locationMappings"
         },
         {
          "$id": "135",
-         "Name": "aliases",
-         "SerializedName": "aliases",
-         "Description": "The aliases that are supported by this resource type.",
-         "Type": {
+         "name": "aliases",
+         "serializedName": "aliases",
+         "description": "The aliases that are supported by this resource type.",
+         "type": {
           "$id": "136",
           "Kind": "array",
           "Name": "ArrayResourceTypeAlias",
@@ -1119,26 +1192,28 @@
            "Properties": [
             {
              "$id": "138",
-             "Name": "name",
-             "SerializedName": "name",
-             "Description": "The alias name.",
-             "Type": {
+             "name": "name",
+             "serializedName": "name",
+             "description": "The alias name.",
+             "type": {
               "$id": "139",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.name"
             },
             {
              "$id": "140",
-             "Name": "paths",
-             "SerializedName": "paths",
-             "Description": "The paths for an alias.",
-             "Type": {
+             "name": "paths",
+             "serializedName": "paths",
+             "description": "The paths for an alias.",
+             "type": {
               "$id": "141",
               "Kind": "array",
               "Name": "ArrayResourceTypeAliasPath",
@@ -1153,26 +1228,28 @@
                "Properties": [
                 {
                  "$id": "143",
-                 "Name": "path",
-                 "SerializedName": "path",
-                 "Description": "The path of an alias.",
-                 "Type": {
+                 "name": "path",
+                 "serializedName": "path",
+                 "description": "The path of an alias.",
+                 "type": {
                   "$id": "144",
                   "Kind": "string",
                   "Name": "string",
                   "CrossLanguageDefinitionId": "TypeSpec.string",
                   "Decorators": []
                  },
-                 "IsRequired": false,
-                 "IsReadOnly": false,
-                 "Decorators": []
+                 "optional": true,
+                 "readOnly": false,
+                 "discriminator": false,
+                 "decorators": [],
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.path"
                 },
                 {
                  "$id": "145",
-                 "Name": "apiVersions",
-                 "SerializedName": "apiVersions",
-                 "Description": "The API versions.",
-                 "Type": {
+                 "name": "apiVersions",
+                 "serializedName": "apiVersions",
+                 "description": "The API versions.",
+                 "type": {
                   "$id": "146",
                   "Kind": "array",
                   "Name": "Array",
@@ -1186,16 +1263,18 @@
                   "CrossLanguageDefinitionId": "TypeSpec.Array",
                   "Decorators": []
                  },
-                 "IsRequired": false,
-                 "IsReadOnly": false,
-                 "Decorators": []
+                 "optional": true,
+                 "readOnly": false,
+                 "discriminator": false,
+                 "decorators": [],
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.apiVersions"
                 },
                 {
                  "$id": "148",
-                 "Name": "pattern",
-                 "SerializedName": "pattern",
-                 "Description": "The pattern for an alias path.",
-                 "Type": {
+                 "name": "pattern",
+                 "serializedName": "pattern",
+                 "description": "The pattern for an alias path.",
+                 "type": {
                   "$id": "149",
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPattern",
@@ -1206,60 +1285,68 @@
                   "Properties": [
                    {
                     "$id": "150",
-                    "Name": "phrase",
-                    "SerializedName": "phrase",
-                    "Description": "The alias pattern phrase.",
-                    "Type": {
+                    "name": "phrase",
+                    "serializedName": "phrase",
+                    "description": "The alias pattern phrase.",
+                    "type": {
                      "$id": "151",
                      "Kind": "string",
                      "Name": "string",
                      "CrossLanguageDefinitionId": "TypeSpec.string",
                      "Decorators": []
                     },
-                    "IsRequired": false,
-                    "IsReadOnly": false,
-                    "Decorators": []
+                    "optional": true,
+                    "readOnly": false,
+                    "discriminator": false,
+                    "decorators": [],
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.phrase"
                    },
                    {
                     "$id": "152",
-                    "Name": "variable",
-                    "SerializedName": "variable",
-                    "Description": "The alias pattern variable.",
-                    "Type": {
+                    "name": "variable",
+                    "serializedName": "variable",
+                    "description": "The alias pattern variable.",
+                    "type": {
                      "$id": "153",
                      "Kind": "string",
                      "Name": "string",
                      "CrossLanguageDefinitionId": "TypeSpec.string",
                      "Decorators": []
                     },
-                    "IsRequired": false,
-                    "IsReadOnly": false,
-                    "Decorators": []
+                    "optional": true,
+                    "readOnly": false,
+                    "discriminator": false,
+                    "decorators": [],
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.variable"
                    },
                    {
                     "$id": "154",
-                    "Name": "patternType",
-                    "SerializedName": "patternType",
-                    "Description": "The type of alias pattern.",
-                    "Type": {
+                    "name": "patternType",
+                    "serializedName": "patternType",
+                    "description": "The type of alias pattern.",
+                    "type": {
                      "$ref": "2"
                     },
-                    "IsRequired": false,
-                    "IsReadOnly": false,
-                    "Decorators": []
+                    "optional": true,
+                    "readOnly": false,
+                    "discriminator": false,
+                    "decorators": [],
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern.patternType"
                    }
                   ]
                  },
-                 "IsRequired": false,
-                 "IsReadOnly": false,
-                 "Decorators": []
+                 "optional": true,
+                 "readOnly": false,
+                 "discriminator": false,
+                 "decorators": [],
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.pattern"
                 },
                 {
                  "$id": "155",
-                 "Name": "metadata",
-                 "SerializedName": "metadata",
-                 "Description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
-                 "Type": {
+                 "name": "metadata",
+                 "serializedName": "metadata",
+                 "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
+                 "type": {
                   "$id": "156",
                   "Kind": "model",
                   "Name": "ResourceTypeAliasPathMetadata",
@@ -1270,110 +1357,128 @@
                   "Properties": [
                    {
                     "$id": "157",
-                    "Name": "tokenType",
-                    "SerializedName": "tokenType",
-                    "Description": "The type of the token that the alias path is referring to.",
-                    "Type": {
+                    "name": "tokenType",
+                    "serializedName": "tokenType",
+                    "description": "The type of the token that the alias path is referring to.",
+                    "type": {
                      "$ref": "6"
                     },
-                    "IsRequired": false,
-                    "IsReadOnly": false,
-                    "Decorators": []
+                    "optional": true,
+                    "readOnly": false,
+                    "discriminator": false,
+                    "decorators": [],
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.tokenType"
                    },
                    {
                     "$id": "158",
-                    "Name": "attributes",
-                    "SerializedName": "attributes",
-                    "Description": "The attributes of the token that the alias path is referring to.",
-                    "Type": {
+                    "name": "attributes",
+                    "serializedName": "attributes",
+                    "description": "The attributes of the token that the alias path is referring to.",
+                    "type": {
                      "$ref": "16"
                     },
-                    "IsRequired": false,
-                    "IsReadOnly": false,
-                    "Decorators": []
+                    "optional": true,
+                    "readOnly": false,
+                    "discriminator": false,
+                    "decorators": [],
+                    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata.attributes"
                    }
                   ]
                  },
-                 "IsRequired": false,
-                 "IsReadOnly": false,
-                 "Decorators": []
+                 "optional": true,
+                 "readOnly": false,
+                 "discriminator": false,
+                 "decorators": [],
+                 "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath.metadata"
                 }
                ]
               },
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.paths"
             },
             {
              "$id": "159",
-             "Name": "aliasType",
-             "SerializedName": "aliasType",
-             "Description": "The type of the alias.",
-             "Type": {
+             "name": "aliasType",
+             "serializedName": "aliasType",
+             "description": "The type of the alias.",
+             "type": {
               "$ref": "20"
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.aliasType"
             },
             {
              "$id": "160",
-             "Name": "defaultPath",
-             "SerializedName": "defaultPath",
-             "Description": "The default path for an alias.",
-             "Type": {
+             "name": "defaultPath",
+             "serializedName": "defaultPath",
+             "description": "The default path for an alias.",
+             "type": {
               "$id": "161",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPath"
             },
             {
              "$id": "162",
-             "Name": "defaultPattern",
-             "SerializedName": "defaultPattern",
-             "Description": "The default pattern for an alias.",
-             "Type": {
+             "name": "defaultPattern",
+             "serializedName": "defaultPattern",
+             "description": "The default pattern for an alias.",
+             "type": {
               "$ref": "149"
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultPattern"
             },
             {
              "$id": "163",
-             "Name": "defaultMetadata",
-             "SerializedName": "defaultMetadata",
-             "Description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
-             "Type": {
+             "name": "defaultMetadata",
+             "serializedName": "defaultMetadata",
+             "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
+             "type": {
               "$ref": "156"
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias.defaultMetadata"
             }
            ]
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.aliases"
         },
         {
          "$id": "164",
-         "Name": "apiVersions",
-         "SerializedName": "apiVersions",
-         "Description": "The API version.",
-         "Type": {
+         "name": "apiVersions",
+         "serializedName": "apiVersions",
+         "description": "The API version.",
+         "type": {
           "$id": "165",
           "Kind": "array",
           "Name": "Array",
@@ -1387,32 +1492,36 @@
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiVersions"
         },
         {
          "$id": "167",
-         "Name": "defaultApiVersion",
-         "SerializedName": "defaultApiVersion",
-         "Description": "The default API version.",
-         "Type": {
+         "name": "defaultApiVersion",
+         "serializedName": "defaultApiVersion",
+         "description": "The default API version.",
+         "type": {
           "$id": "168",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.defaultApiVersion"
         },
         {
          "$id": "169",
-         "Name": "zoneMappings",
-         "SerializedName": "zoneMappings",
-         "Description": "Gets the zone mappings.",
-         "Type": {
+         "name": "zoneMappings",
+         "serializedName": "zoneMappings",
+         "description": "Gets the zone mappings.",
+         "type": {
           "$id": "170",
           "Kind": "array",
           "Name": "ArrayZoneMapping",
@@ -1427,26 +1536,28 @@
            "Properties": [
             {
              "$id": "172",
-             "Name": "location",
-             "SerializedName": "location",
-             "Description": "The location of the zone mapping.",
-             "Type": {
+             "name": "location",
+             "serializedName": "location",
+             "description": "The location of the zone mapping.",
+             "type": {
               "$id": "173",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.location"
             },
             {
              "$id": "174",
-             "Name": "zones",
-             "SerializedName": "zones",
-             "Description": "The zones.",
-             "Type": {
+             "name": "zones",
+             "serializedName": "zones",
+             "description": "The zones.",
+             "type": {
               "$id": "175",
               "Kind": "array",
               "Name": "Array",
@@ -1460,25 +1571,29 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping.zones"
             }
            ]
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.zoneMappings"
         },
         {
          "$id": "177",
-         "Name": "apiProfiles",
-         "SerializedName": "apiProfiles",
-         "Description": "The API profiles for the resource provider.",
-         "Type": {
+         "name": "apiProfiles",
+         "serializedName": "apiProfiles",
+         "description": "The API profiles for the resource provider.",
+         "type": {
           "$id": "178",
           "Kind": "array",
           "Name": "ArrayApiProfile",
@@ -1492,67 +1607,75 @@
            "Properties": [
             {
              "$id": "180",
-             "Name": "profileVersion",
-             "SerializedName": "profileVersion",
-             "Description": "The profile version.",
-             "Type": {
+             "name": "profileVersion",
+             "serializedName": "profileVersion",
+             "description": "The profile version.",
+             "type": {
               "$id": "181",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.profileVersion"
             },
             {
              "$id": "182",
-             "Name": "apiVersion",
-             "SerializedName": "apiVersion",
-             "Description": "The API version.",
-             "Type": {
+             "name": "apiVersion",
+             "serializedName": "apiVersion",
+             "description": "The API version.",
+             "type": {
               "$id": "183",
               "Kind": "string",
               "Name": "string",
               "CrossLanguageDefinitionId": "TypeSpec.string",
               "Decorators": []
              },
-             "IsRequired": false,
-             "IsReadOnly": false,
-             "Decorators": []
+             "optional": true,
+             "readOnly": false,
+             "discriminator": false,
+             "decorators": [],
+             "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ApiProfile.apiVersion"
             }
            ]
           },
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.apiProfiles"
         },
         {
          "$id": "184",
-         "Name": "capabilities",
-         "SerializedName": "capabilities",
-         "Description": "The additional capabilities offered by this resource type.",
-         "Type": {
+         "name": "capabilities",
+         "serializedName": "capabilities",
+         "description": "The additional capabilities offered by this resource type.",
+         "type": {
           "$id": "185",
           "Kind": "string",
           "Name": "string",
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.capabilities"
         },
         {
          "$id": "186",
-         "Name": "properties",
-         "SerializedName": "properties",
-         "Description": "The properties.",
-         "Type": {
+         "name": "properties",
+         "serializedName": "properties",
+         "description": "The properties.",
+         "type": {
           "$id": "187",
           "Kind": "dict",
           "KeyType": {
@@ -1571,30 +1694,36 @@
           },
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderResourceType.properties"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.resourceTypes"
     },
     {
      "$id": "190",
-     "Name": "providerAuthorizationConsentState",
-     "SerializedName": "providerAuthorizationConsentState",
-     "Description": "The provider authorization consent state.",
-     "Type": {
+     "name": "providerAuthorizationConsentState",
+     "serializedName": "providerAuthorizationConsentState",
+     "description": "The provider authorization consent state.",
+     "type": {
       "$ref": "25"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData.providerAuthorizationConsentState"
     }
    ]
   },
@@ -1639,51 +1768,57 @@
    "Properties": [
     {
      "$id": "193",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "description": "The id property.",
+     "type": {
       "$id": "194",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.id"
     },
     {
      "$id": "195",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name property.",
+     "type": {
       "$id": "196",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.name"
     },
     {
      "$id": "197",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age property.",
-     "Type": {
+     "name": "age",
+     "serializedName": "age",
+     "description": "The age property.",
+     "type": {
       "$id": "198",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithStringAdditionalProperties.age"
     }
    ]
   },
@@ -1707,51 +1842,57 @@
    "Properties": [
     {
      "$id": "201",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "description": "The id property.",
+     "type": {
       "$id": "202",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.id"
     },
     {
      "$id": "203",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name property.",
+     "type": {
       "$id": "204",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.name"
     },
     {
      "$id": "205",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age property.",
-     "Type": {
+     "name": "age",
+     "serializedName": "age",
+     "description": "The age property.",
+     "type": {
       "$id": "206",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithArrayAdditionalProperties.age"
     }
    ]
   },
@@ -1772,51 +1913,57 @@
    "Properties": [
     {
      "$id": "209",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id property.",
-     "Type": {
+     "name": "id",
+     "serializedName": "id",
+     "description": "The id property.",
+     "type": {
       "$id": "210",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.id"
     },
     {
      "$id": "211",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name property.",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name property.",
+     "type": {
       "$id": "212",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.name"
     },
     {
      "$id": "213",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age property.",
-     "Type": {
+     "name": "age",
+     "serializedName": "age",
+     "description": "The age property.",
+     "type": {
       "$id": "214",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelWithUnknownAdditionalProperties.age"
     }
    ]
   }

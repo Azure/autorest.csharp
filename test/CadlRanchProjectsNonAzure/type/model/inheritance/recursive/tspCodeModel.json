@@ -23,10 +23,9 @@
     "Properties": [
      {
       "$id": "4",
-      "Name": "extension",
-      "SerializedName": "extension",
-      "Description": "",
-      "Type": {
+      "name": "extension",
+      "serializedName": "extension",
+      "type": {
        "$id": "5",
        "Kind": "array",
        "Name": "ArrayExtension",
@@ -36,28 +35,31 @@
        "CrossLanguageDefinitionId": "TypeSpec.Array",
        "Decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element.extension"
      }
     ]
    },
    "Properties": [
     {
      "$id": "6",
-     "Name": "level",
-     "SerializedName": "level",
-     "Description": "",
-     "Type": {
+     "name": "level",
+     "serializedName": "level",
+     "type": {
       "$id": "7",
       "Kind": "int8",
       "Name": "int8",
       "CrossLanguageDefinitionId": "TypeSpec.int8",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension.level"
     }
    ]
   },

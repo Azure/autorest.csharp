@@ -31,57 +31,60 @@
      "Properties": [
       {
        "$id": "5",
-       "Name": "name",
-       "SerializedName": "name",
-       "Description": "",
-       "Type": {
+       "name": "name",
+       "serializedName": "name",
+       "type": {
         "$id": "6",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": false,
-       "Decorators": []
+       "optional": false,
+       "readOnly": false,
+       "discriminator": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
       }
      ]
     },
     "Properties": [
      {
       "$id": "7",
-      "Name": "age",
-      "SerializedName": "age",
-      "Description": "",
-      "Type": {
+      "name": "age",
+      "serializedName": "age",
+      "type": {
        "$id": "8",
        "Kind": "int32",
        "Name": "int32",
        "CrossLanguageDefinitionId": "TypeSpec.int32",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
      }
     ]
    },
    "Properties": [
     {
      "$id": "9",
-     "Name": "smart",
-     "SerializedName": "smart",
-     "Description": "",
-     "Type": {
+     "name": "smart",
+     "serializedName": "smart",
+     "type": {
       "$id": "10",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
     }
    ]
   },
