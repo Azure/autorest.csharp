@@ -2,6 +2,7 @@
 
 #nullable disable
 
+using System;
 using System.IO;
 
 namespace Payload.MultiPart.Models
@@ -16,6 +17,46 @@ namespace Payload.MultiPart.Models
         public static MultiBinaryPartsRequest MultiBinaryPartsRequest(Stream profileImage = null, Stream picture = null)
         {
             return new MultiBinaryPartsRequest(profileImage, picture, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FileRequiredMetaData"/>. </summary>
+        /// <param name="contentType"></param>
+        /// <param name="filename"></param>
+        /// <param name="contents"></param>
+        /// <returns> A new <see cref="Models.FileRequiredMetaData"/> instance for mocking. </returns>
+        public static FileRequiredMetaData FileRequiredMetaData(string contentType = null, string filename = null, BinaryData contents = null)
+        {
+            return new FileRequiredMetaData(contentType, filename, contents, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.File"/>. </summary>
+        /// <param name="contentType"></param>
+        /// <param name="filename"></param>
+        /// <param name="contents"></param>
+        /// <returns> A new <see cref="Models.File"/> instance for mocking. </returns>
+        public static File File(string contentType = null, string filename = null, BinaryData contents = null)
+        {
+            return new File(contentType, filename, contents, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FileSpecificContentType"/>. </summary>
+        /// <param name="contentType"></param>
+        /// <param name="filename"></param>
+        /// <param name="contents"></param>
+        /// <returns> A new <see cref="Models.FileSpecificContentType"/> instance for mocking. </returns>
+        public static FileSpecificContentType FileSpecificContentType(string contentType = null, string filename = null, BinaryData contents = null)
+        {
+            return new FileSpecificContentType(contentType, filename, contents, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FileOptionalContentType"/>. </summary>
+        /// <param name="contentType"></param>
+        /// <param name="filename"></param>
+        /// <param name="contents"></param>
+        /// <returns> A new <see cref="Models.FileOptionalContentType"/> instance for mocking. </returns>
+        public static FileOptionalContentType FileOptionalContentType(string contentType = null, string filename = null, BinaryData contents = null)
+        {
+            return new FileOptionalContentType(contentType, filename, contents, serializedAdditionalRawData: null);
         }
     }
 }
