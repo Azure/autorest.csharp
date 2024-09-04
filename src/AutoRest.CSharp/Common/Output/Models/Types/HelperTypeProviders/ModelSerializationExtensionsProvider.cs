@@ -52,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     name: _sentinelBinaryDataName)
                 {
                     InitializationValue = BinaryDataExpression.FromBytes(
+                        // since this is a hard-coded value, we can just hard-code the bytes directly instead of
+                        // using the BinaryData.FromObjectAsJson method
                         new InvokeInstanceMethodExpression(
                             LiteralU8("\"__EMPTY__\""), "ToArray", [], null, false))
                 };
