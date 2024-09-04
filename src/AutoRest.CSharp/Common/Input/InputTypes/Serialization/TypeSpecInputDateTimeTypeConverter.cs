@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString("name", ref name)
-                    || reader.TryReadString("crossLanguagueDefinitionId", ref crossLanguagueDefinitionId)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguagueDefinitionId)
                     || reader.TryReadString("encode", ref encode)
                     || reader.TryReadWithConverter("wireType", options, ref wireType)
                     || reader.TryReadWithConverter("baseType", options, ref baseType)

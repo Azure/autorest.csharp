@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("deprecation", ref deprecation)
                     || reader.TryReadString("description", ref description)
                     || reader.TryReadString("usage", ref usageString)
-                    || reader.TryReadBoolean("isFixes", ref isFixed)
+                    || reader.TryReadBoolean("isFixed", ref isFixed)
                     || reader.TryReadWithConverter("valueType", options, ref valueType)
                     || reader.TryReadWithConverter("values", options, ref values)
                     || reader.TryReadWithConverter("decorators", options, ref decorators);
