@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputEnumTypeValue(string Name, object Value, string? Description)
+internal record InputEnumTypeValue(string Name, object Value, InputPrimitiveType ValueType, string? Description)
 {
     public virtual string GetJsonValueString() => GetValueString();
     public string GetValueString() => (Value.ToString() ?? string.Empty);

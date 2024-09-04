@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputEnumTypeFloatValue(string Name, float FloatValue, string? Description) : InputEnumTypeValue(Name, FloatValue, Description);
+internal record InputEnumTypeFloatValue(string Name, float FloatValue, InputPrimitiveType ValueType, string? Description) : InputEnumTypeValue(Name, FloatValue, ValueType, Description);
