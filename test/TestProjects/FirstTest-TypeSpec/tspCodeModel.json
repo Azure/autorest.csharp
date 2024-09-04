@@ -698,26 +698,28 @@
    "Properties": [
     {
      "$id": "91",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the Thing",
+     "type": {
       "$id": "92",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.name"
     },
     {
      "$id": "93",
-     "Name": "requiredUnion",
-     "SerializedName": "requiredUnion",
-     "Description": "required Union",
-     "Type": {
+     "name": "requiredUnion",
+     "serializedName": "requiredUnion",
+     "description": "required Union",
+     "type": {
       "$id": "94",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
@@ -753,16 +755,18 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredUnion"
     },
     {
      "$id": "99",
-     "Name": "requiredLiteralString",
-     "SerializedName": "requiredLiteralString",
-     "Description": "required literal string",
-     "Type": {
+     "name": "requiredLiteralString",
+     "serializedName": "requiredLiteralString",
+     "description": "required literal string",
+     "type": {
       "$id": "100",
       "Kind": "constant",
       "ValueType": {
@@ -771,16 +775,18 @@
       "Value": "accept",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredLiteralString"
     },
     {
      "$id": "101",
-     "Name": "requiredLiteralInt",
-     "SerializedName": "requiredLiteralInt",
-     "Description": "required literal int",
-     "Type": {
+     "name": "requiredLiteralInt",
+     "serializedName": "requiredLiteralInt",
+     "description": "required literal int",
+     "type": {
       "$id": "102",
       "Kind": "constant",
       "ValueType": {
@@ -789,16 +795,18 @@
       "Value": 123,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredLiteralInt"
     },
     {
      "$id": "103",
-     "Name": "requiredLiteralFloat",
-     "SerializedName": "requiredLiteralFloat",
-     "Description": "required literal float",
-     "Type": {
+     "name": "requiredLiteralFloat",
+     "serializedName": "requiredLiteralFloat",
+     "description": "required literal float",
+     "type": {
       "$id": "104",
       "Kind": "constant",
       "ValueType": {
@@ -807,16 +815,18 @@
       "Value": 1.23,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredLiteralFloat"
     },
     {
      "$id": "105",
-     "Name": "requiredLiteralBool",
-     "SerializedName": "requiredLiteralBool",
-     "Description": "required literal bool",
-     "Type": {
+     "name": "requiredLiteralBool",
+     "serializedName": "requiredLiteralBool",
+     "description": "required literal bool",
+     "type": {
       "$id": "106",
       "Kind": "constant",
       "ValueType": {
@@ -829,16 +839,18 @@
       "Value": false,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredLiteralBool"
     },
     {
      "$id": "108",
-     "Name": "optionalLiteralString",
-     "SerializedName": "optionalLiteralString",
-     "Description": "optional literal string",
-     "Type": {
+     "name": "optionalLiteralString",
+     "serializedName": "optionalLiteralString",
+     "description": "optional literal string",
+     "type": {
       "$id": "109",
       "Kind": "constant",
       "ValueType": {
@@ -847,16 +859,18 @@
       "Value": "reject",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalLiteralString"
     },
     {
      "$id": "110",
-     "Name": "optionalLiteralInt",
-     "SerializedName": "optionalLiteralInt",
-     "Description": "optional literal int",
-     "Type": {
+     "name": "optionalLiteralInt",
+     "serializedName": "optionalLiteralInt",
+     "description": "optional literal int",
+     "type": {
       "$id": "111",
       "Kind": "constant",
       "ValueType": {
@@ -865,16 +879,18 @@
       "Value": 456,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalLiteralInt"
     },
     {
      "$id": "112",
-     "Name": "optionalLiteralFloat",
-     "SerializedName": "optionalLiteralFloat",
-     "Description": "optional literal float",
-     "Type": {
+     "name": "optionalLiteralFloat",
+     "serializedName": "optionalLiteralFloat",
+     "description": "optional literal float",
+     "type": {
       "$id": "113",
       "Kind": "constant",
       "ValueType": {
@@ -883,16 +899,18 @@
       "Value": 4.56,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalLiteralFloat"
     },
     {
      "$id": "114",
-     "Name": "optionalLiteralBool",
-     "SerializedName": "optionalLiteralBool",
-     "Description": "optional literal bool",
-     "Type": {
+     "name": "optionalLiteralBool",
+     "serializedName": "optionalLiteralBool",
+     "description": "optional literal bool",
+     "type": {
       "$id": "115",
       "Kind": "constant",
       "ValueType": {
@@ -905,32 +923,36 @@
       "Value": true,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalLiteralBool"
     },
     {
      "$id": "117",
-     "Name": "requiredBadDescription",
-     "SerializedName": "requiredBadDescription",
-     "Description": "description with xml <|endoftext|>",
-     "Type": {
+     "name": "requiredBadDescription",
+     "serializedName": "requiredBadDescription",
+     "description": "description with xml <|endoftext|>",
+     "type": {
       "$id": "118",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredBadDescription"
     },
     {
      "$id": "119",
-     "Name": "optionalNullableList",
-     "SerializedName": "optionalNullableList",
-     "Description": "optional nullable collection",
-     "Type": {
+     "name": "optionalNullableList",
+     "serializedName": "optionalNullableList",
+     "description": "optional nullable collection",
+     "type": {
       "$id": "120",
       "Kind": "nullable",
       "Type": {
@@ -948,16 +970,18 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalNullableList"
     },
     {
      "$id": "123",
-     "Name": "requiredNullableList",
-     "SerializedName": "requiredNullableList",
-     "Description": "required nullable collection",
-     "Type": {
+     "name": "requiredNullableList",
+     "serializedName": "requiredNullableList",
+     "description": "required nullable collection",
+     "type": {
       "$id": "124",
       "Kind": "nullable",
       "Type": {
@@ -975,48 +999,54 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredNullableList"
     },
     {
      "$id": "127",
-     "Name": "requiredFloatProperty",
-     "SerializedName": "requiredFloatProperty",
-     "Description": "required float property",
-     "Type": {
+     "name": "requiredFloatProperty",
+     "serializedName": "requiredFloatProperty",
+     "description": "required float property",
+     "type": {
       "$id": "128",
       "Kind": "float",
       "Name": "float",
       "CrossLanguageDefinitionId": "TypeSpec.float",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.requiredFloatProperty"
     },
     {
      "$id": "129",
-     "Name": "optionalFloatProperty",
-     "SerializedName": "optionalFloatProperty",
-     "Description": "optional float property",
-     "Type": {
+     "name": "optionalFloatProperty",
+     "serializedName": "optionalFloatProperty",
+     "description": "optional float property",
+     "type": {
       "$id": "130",
       "Kind": "float",
       "Name": "float",
       "CrossLanguageDefinitionId": "TypeSpec.float",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalFloatProperty"
     },
     {
      "$id": "131",
-     "Name": "optionalResourceId",
-     "SerializedName": "optionalResourceId",
-     "Description": "optional arm id.",
-     "Type": {
+     "name": "optionalResourceId",
+     "serializedName": "optionalResourceId",
+     "description": "optional arm id.",
+     "type": {
       "$id": "132",
       "Kind": "string",
       "Name": "armResourceIdentifier",
@@ -1030,9 +1060,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing.optionalResourceId"
     }
    ]
   },
@@ -1046,26 +1078,28 @@
    "Properties": [
     {
      "$id": "135",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the Thing",
+     "type": {
       "$id": "136",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.name"
     },
     {
      "$id": "137",
-     "Name": "requiredUnion",
-     "SerializedName": "requiredUnion",
-     "Description": "required Union",
-     "Type": {
+     "name": "requiredUnion",
+     "serializedName": "requiredUnion",
+     "description": "required Union",
+     "type": {
       "$id": "138",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
@@ -1101,16 +1135,18 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredUnion"
     },
     {
      "$id": "143",
-     "Name": "requiredLiteralString",
-     "SerializedName": "requiredLiteralString",
-     "Description": "required literal string",
-     "Type": {
+     "name": "requiredLiteralString",
+     "serializedName": "requiredLiteralString",
+     "description": "required literal string",
+     "type": {
       "$id": "144",
       "Kind": "constant",
       "ValueType": {
@@ -1119,16 +1155,18 @@
       "Value": "accept",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredLiteralString"
     },
     {
      "$id": "145",
-     "Name": "requiredLiteralInt",
-     "SerializedName": "requiredLiteralInt",
-     "Description": "required literal int",
-     "Type": {
+     "name": "requiredLiteralInt",
+     "serializedName": "requiredLiteralInt",
+     "description": "required literal int",
+     "type": {
       "$id": "146",
       "Kind": "constant",
       "ValueType": {
@@ -1137,16 +1175,18 @@
       "Value": 123,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredLiteralInt"
     },
     {
      "$id": "147",
-     "Name": "requiredLiteralFloat",
-     "SerializedName": "requiredLiteralFloat",
-     "Description": "required literal float",
-     "Type": {
+     "name": "requiredLiteralFloat",
+     "serializedName": "requiredLiteralFloat",
+     "description": "required literal float",
+     "type": {
       "$id": "148",
       "Kind": "constant",
       "ValueType": {
@@ -1155,16 +1195,18 @@
       "Value": 1.23,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredLiteralFloat"
     },
     {
      "$id": "149",
-     "Name": "requiredLiteralBool",
-     "SerializedName": "requiredLiteralBool",
-     "Description": "required literal bool",
-     "Type": {
+     "name": "requiredLiteralBool",
+     "serializedName": "requiredLiteralBool",
+     "description": "required literal bool",
+     "type": {
       "$id": "150",
       "Kind": "constant",
       "ValueType": {
@@ -1177,16 +1219,18 @@
       "Value": false,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredLiteralBool"
     },
     {
      "$id": "152",
-     "Name": "optionalLiteralString",
-     "SerializedName": "optionalLiteralString",
-     "Description": "optional literal string",
-     "Type": {
+     "name": "optionalLiteralString",
+     "serializedName": "optionalLiteralString",
+     "description": "optional literal string",
+     "type": {
       "$id": "153",
       "Kind": "constant",
       "ValueType": {
@@ -1195,16 +1239,18 @@
       "Value": "reject",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalLiteralString"
     },
     {
      "$id": "154",
-     "Name": "optionalLiteralInt",
-     "SerializedName": "optionalLiteralInt",
-     "Description": "optional literal int",
-     "Type": {
+     "name": "optionalLiteralInt",
+     "serializedName": "optionalLiteralInt",
+     "description": "optional literal int",
+     "type": {
       "$id": "155",
       "Kind": "constant",
       "ValueType": {
@@ -1213,16 +1259,18 @@
       "Value": 456,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalLiteralInt"
     },
     {
      "$id": "156",
-     "Name": "optionalLiteralFloat",
-     "SerializedName": "optionalLiteralFloat",
-     "Description": "optional literal float",
-     "Type": {
+     "name": "optionalLiteralFloat",
+     "serializedName": "optionalLiteralFloat",
+     "description": "optional literal float",
+     "type": {
       "$id": "157",
       "Kind": "constant",
       "ValueType": {
@@ -1231,16 +1279,18 @@
       "Value": 4.56,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalLiteralFloat"
     },
     {
      "$id": "158",
-     "Name": "optionalLiteralBool",
-     "SerializedName": "optionalLiteralBool",
-     "Description": "optional literal bool",
-     "Type": {
+     "name": "optionalLiteralBool",
+     "serializedName": "optionalLiteralBool",
+     "description": "optional literal bool",
+     "type": {
       "$id": "159",
       "Kind": "constant",
       "ValueType": {
@@ -1253,32 +1303,36 @@
       "Value": true,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalLiteralBool"
     },
     {
      "$id": "161",
-     "Name": "requiredBadDescription",
-     "SerializedName": "requiredBadDescription",
-     "Description": "description with xml <|endoftext|>",
-     "Type": {
+     "name": "requiredBadDescription",
+     "serializedName": "requiredBadDescription",
+     "description": "description with xml <|endoftext|>",
+     "type": {
       "$id": "162",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredBadDescription"
     },
     {
      "$id": "163",
-     "Name": "optionalNullableList",
-     "SerializedName": "optionalNullableList",
-     "Description": "optional nullable collection",
-     "Type": {
+     "name": "optionalNullableList",
+     "serializedName": "optionalNullableList",
+     "description": "optional nullable collection",
+     "type": {
       "$id": "164",
       "Kind": "nullable",
       "Type": {
@@ -1296,16 +1350,18 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalNullableList"
     },
     {
      "$id": "167",
-     "Name": "requiredNullableList",
-     "SerializedName": "requiredNullableList",
-     "Description": "required nullable collection",
-     "Type": {
+     "name": "requiredNullableList",
+     "serializedName": "requiredNullableList",
+     "description": "required nullable collection",
+     "type": {
       "$id": "168",
       "Kind": "nullable",
       "Type": {
@@ -1323,48 +1379,54 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredNullableList"
     },
     {
      "$id": "171",
-     "Name": "requiredFloatProperty",
-     "SerializedName": "requiredFloatProperty",
-     "Description": "required float property",
-     "Type": {
+     "name": "requiredFloatProperty",
+     "serializedName": "requiredFloatProperty",
+     "description": "required float property",
+     "type": {
       "$id": "172",
       "Kind": "float",
       "Name": "float",
       "CrossLanguageDefinitionId": "TypeSpec.float",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.requiredFloatProperty"
     },
     {
      "$id": "173",
-     "Name": "optionalFloatProperty",
-     "SerializedName": "optionalFloatProperty",
-     "Description": "optional float property",
-     "Type": {
+     "name": "optionalFloatProperty",
+     "serializedName": "optionalFloatProperty",
+     "description": "optional float property",
+     "type": {
       "$id": "174",
       "Kind": "float",
       "Name": "float",
       "CrossLanguageDefinitionId": "TypeSpec.float",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalFloatProperty"
     },
     {
      "$id": "175",
-     "Name": "optionalResourceId",
-     "SerializedName": "optionalResourceId",
-     "Description": "optional arm id.",
-     "Type": {
+     "name": "optionalResourceId",
+     "serializedName": "optionalResourceId",
+     "description": "optional arm id.",
+     "type": {
       "$id": "176",
       "Kind": "string",
       "Name": "armResourceIdentifier",
@@ -1378,9 +1440,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.anonymousBody.Request.anonymous.optionalResourceId"
     }
    ]
   },
@@ -1394,19 +1458,21 @@
    "Properties": [
     {
      "$id": "179",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the NotFriend",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the NotFriend",
+     "type": {
       "$id": "180",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.friendlyModel.Request.anonymous.name"
     }
    ]
   },
@@ -1421,19 +1487,21 @@
    "Properties": [
     {
      "$id": "182",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the NotFriend",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the NotFriend",
+     "type": {
       "$id": "183",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend.name"
     }
    ]
   },
@@ -1447,26 +1515,28 @@
    "Properties": [
     {
      "$id": "185",
-     "Name": "sourceUrl",
-     "SerializedName": "sourceUrl",
-     "Description": "url format",
-     "Type": {
+     "name": "sourceUrl",
+     "serializedName": "sourceUrl",
+     "description": "url format",
+     "type": {
       "$id": "186",
       "Kind": "url",
       "Name": "url",
       "CrossLanguageDefinitionId": "TypeSpec.url",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat.sourceUrl"
     },
     {
      "$id": "187",
-     "Name": "guid",
-     "SerializedName": "guid",
-     "Description": "uuid format",
-     "Type": {
+     "name": "guid",
+     "serializedName": "guid",
+     "description": "uuid format",
+     "type": {
       "$id": "188",
       "Kind": "string",
       "Name": "uuid",
@@ -1480,9 +1550,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithFormat.guid"
     }
    ]
   },
@@ -1496,19 +1568,21 @@
    "Properties": [
     {
      "$id": "191",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the ModelWithProjectedName",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the ModelWithProjectedName",
+     "type": {
       "$id": "192",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.projectedNameModel.Request.anonymous.name"
     }
    ]
   },
@@ -1523,19 +1597,21 @@
    "Properties": [
     {
      "$id": "194",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the ModelWithProjectedName",
-     "Type": {
+     "name": "name",
+     "serializedName": "name",
+     "description": "name of the ModelWithProjectedName",
+     "type": {
       "$id": "195",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName.name"
     }
    ]
   },
@@ -1567,10 +1643,9 @@
     "Properties": [
      {
       "$id": "199",
-      "Name": "extension",
-      "SerializedName": "extension",
-      "Description": "",
-      "Type": {
+      "name": "extension",
+      "serializedName": "extension",
+      "type": {
        "$id": "200",
        "Kind": "array",
        "Name": "ArrayExtension",
@@ -1580,28 +1655,31 @@
        "CrossLanguageDefinitionId": "TypeSpec.Array",
        "Decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "FirstTestTypeSpec.Element.extension"
      }
     ]
    },
    "Properties": [
     {
      "$id": "201",
-     "Name": "level",
-     "SerializedName": "level",
-     "Description": "",
-     "Type": {
+     "name": "level",
+     "serializedName": "level",
+     "type": {
       "$id": "202",
       "Kind": "int8",
       "Name": "int8",
       "CrossLanguageDefinitionId": "TypeSpec.int8",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Extension.level"
     }
    ]
   },
@@ -1619,10 +1697,10 @@
    "Properties": [
     {
      "$id": "204",
-     "Name": "extension",
-     "SerializedName": "extension",
-     "Description": "Additional Content defined by implementations",
-     "Type": {
+     "name": "extension",
+     "serializedName": "extension",
+     "description": "Additional Content defined by implementations",
+     "type": {
       "$id": "205",
       "Kind": "array",
       "Name": "ArrayThereLevelExtension",
@@ -1645,10 +1723,9 @@
         "Properties": [
          {
           "$id": "208",
-          "Name": "extension",
-          "SerializedName": "extension",
-          "Description": "",
-          "Type": {
+          "name": "extension",
+          "serializedName": "extension",
+          "type": {
            "$id": "209",
            "Kind": "array",
            "Name": "ArrayThereLevelExtension",
@@ -1658,37 +1735,42 @@
            "CrossLanguageDefinitionId": "TypeSpec.Array",
            "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "optional": true,
+          "readOnly": false,
+          "discriminator": false,
+          "decorators": [],
+          "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement.extension"
          }
         ]
        },
        "Properties": [
         {
          "$id": "210",
-         "Name": "level",
-         "SerializedName": "level",
-         "Description": "",
-         "Type": {
+         "name": "level",
+         "serializedName": "level",
+         "type": {
           "$id": "211",
           "Kind": "int8",
           "Name": "int8",
           "CrossLanguageDefinitionId": "TypeSpec.int8",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension.level"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.Extendible.extension"
     }
    ]
   },
@@ -1717,29 +1799,29 @@
     "Properties": [
      {
       "$id": "214",
-      "Name": "level",
-      "SerializedName": "level",
-      "Description": "",
-      "Type": {
+      "name": "level",
+      "serializedName": "level",
+      "type": {
        "$id": "215",
        "Kind": "int8",
        "Name": "int8",
        "CrossLanguageDefinitionId": "TypeSpec.int8",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel.level"
      }
     ]
    },
    "Properties": [
     {
      "$id": "216",
-     "Name": "parent",
-     "SerializedName": "parent",
-     "Description": "",
-     "Type": {
+     "name": "parent",
+     "serializedName": "parent",
+     "type": {
       "$id": "217",
       "Kind": "array",
       "Name": "ArrayBaseModel",
@@ -1749,9 +1831,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel.parent"
     }
    ]
   },
@@ -1769,15 +1853,16 @@
    "Properties": [
     {
      "$id": "219",
-     "Name": "self",
-     "SerializedName": "self",
-     "Description": "",
-     "Type": {
+     "name": "self",
+     "serializedName": "self",
+     "type": {
       "$ref": "218"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf.self"
     }
    ]
   },
@@ -1791,15 +1876,17 @@
    "Properties": [
     {
      "$id": "221",
-     "Name": "enumProperty",
-     "SerializedName": "enumProperty",
-     "Description": "enum with projected name used in a model",
-     "Type": {
+     "name": "enumProperty",
+     "serializedName": "enumProperty",
+     "description": "enum with projected name used in a model",
+     "type": {
       "$ref": "43"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedEnum.enumProperty"
     }
    ]
   },
@@ -1813,10 +1900,9 @@
    "Properties": [
     {
      "$id": "223",
-     "Name": "location",
-     "SerializedName": "location",
-     "Description": "",
-     "Type": {
+     "name": "location",
+     "serializedName": "location",
+     "type": {
       "$id": "224",
       "Kind": "string",
       "Name": "azureLocation",
@@ -1830,9 +1916,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.AzureLocationModel.location"
     }
    ]
   },
@@ -1847,42 +1935,46 @@
    "Properties": [
     {
      "$id": "227",
-     "Name": "requiredString",
-     "SerializedName": "requiredString",
-     "Description": "Required string, illustrating a reference type property.",
-     "Type": {
+     "name": "requiredString",
+     "serializedName": "requiredString",
+     "description": "Required string, illustrating a reference type property.",
+     "type": {
       "$id": "228",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredString"
     },
     {
      "$id": "229",
-     "Name": "requiredInt",
-     "SerializedName": "requiredInt",
-     "Description": "Required int, illustrating a value type property.",
-     "Type": {
+     "name": "requiredInt",
+     "serializedName": "requiredInt",
+     "description": "Required int, illustrating a value type property.",
+     "type": {
       "$id": "230",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredInt"
     },
     {
      "$id": "231",
-     "Name": "requiredCollection",
-     "SerializedName": "requiredCollection",
-     "Description": "Required collection of enums",
-     "Type": {
+     "name": "requiredCollection",
+     "serializedName": "requiredCollection",
+     "description": "Required collection of enums",
+     "type": {
       "$id": "232",
       "Kind": "array",
       "Name": "ArrayStringFixedEnum",
@@ -1892,16 +1984,18 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredCollection"
     },
     {
      "$id": "233",
-     "Name": "requiredDictionary",
-     "SerializedName": "requiredDictionary",
-     "Description": "Required dictionary of enums",
-     "Type": {
+     "name": "requiredDictionary",
+     "serializedName": "requiredDictionary",
+     "description": "Required dictionary of enums",
+     "type": {
       "$id": "234",
       "Kind": "dict",
       "KeyType": {
@@ -1916,40 +2010,46 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredDictionary"
     },
     {
      "$id": "236",
-     "Name": "requiredModel",
-     "SerializedName": "requiredModel",
-     "Description": "Required model",
-     "Type": {
+     "name": "requiredModel",
+     "serializedName": "requiredModel",
+     "description": "Required model",
+     "type": {
       "$ref": "90"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredModel"
     },
     {
      "$id": "237",
-     "Name": "intExtensibleEnum",
-     "SerializedName": "intExtensibleEnum",
-     "Description": "this is an int based extensible enum",
-     "Type": {
+     "name": "intExtensibleEnum",
+     "serializedName": "intExtensibleEnum",
+     "description": "this is an int based extensible enum",
+     "type": {
       "$ref": "58"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnum"
     },
     {
      "$id": "238",
-     "Name": "intExtensibleEnumCollection",
-     "SerializedName": "intExtensibleEnumCollection",
-     "Description": "this is a collection of int based extensible enum",
-     "Type": {
+     "name": "intExtensibleEnumCollection",
+     "serializedName": "intExtensibleEnumCollection",
+     "description": "this is a collection of int based extensible enum",
+     "type": {
       "$id": "239",
       "Kind": "array",
       "Name": "ArrayIntExtensibleEnum",
@@ -1959,28 +2059,32 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnumCollection"
     },
     {
      "$id": "240",
-     "Name": "floatExtensibleEnum",
-     "SerializedName": "floatExtensibleEnum",
-     "Description": "this is a float based extensible enum",
-     "Type": {
+     "name": "floatExtensibleEnum",
+     "serializedName": "floatExtensibleEnum",
+     "description": "this is a float based extensible enum",
+     "type": {
       "$ref": "63"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnum"
     },
     {
      "$id": "241",
-     "Name": "floatExtensibleEnumCollection",
-     "SerializedName": "floatExtensibleEnumCollection",
-     "Description": "this is a collection of float based extensible enum",
-     "Type": {
+     "name": "floatExtensibleEnumCollection",
+     "serializedName": "floatExtensibleEnumCollection",
+     "description": "this is a collection of float based extensible enum",
+     "type": {
       "$id": "242",
       "Kind": "array",
       "Name": "ArrayFloatExtensibleEnum",
@@ -1990,28 +2094,32 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnumCollection"
     },
     {
      "$id": "243",
-     "Name": "floatFixedEnum",
-     "SerializedName": "floatFixedEnum",
-     "Description": "this is a float based fixed enum",
-     "Type": {
+     "name": "floatFixedEnum",
+     "serializedName": "floatFixedEnum",
+     "description": "this is a float based fixed enum",
+     "type": {
       "$ref": "68"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnum"
     },
     {
      "$id": "244",
-     "Name": "floatFixedEnumCollection",
-     "SerializedName": "floatFixedEnumCollection",
-     "Description": "this is a collection of float based fixed enum",
-     "Type": {
+     "name": "floatFixedEnumCollection",
+     "serializedName": "floatFixedEnumCollection",
+     "description": "this is a collection of float based fixed enum",
+     "type": {
       "$id": "245",
       "Kind": "array",
       "Name": "ArrayFloatFixedEnum",
@@ -2021,28 +2129,32 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnumCollection"
     },
     {
      "$id": "246",
-     "Name": "intFixedEnum",
-     "SerializedName": "intFixedEnum",
-     "Description": "this is a int based fixed enum",
-     "Type": {
+     "name": "intFixedEnum",
+     "serializedName": "intFixedEnum",
+     "description": "this is a int based fixed enum",
+     "type": {
       "$ref": "73"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnum"
     },
     {
      "$id": "247",
-     "Name": "intFixedEnumCollection",
-     "SerializedName": "intFixedEnumCollection",
-     "Description": "this is a collection of int based fixed enum",
-     "Type": {
+     "name": "intFixedEnumCollection",
+     "serializedName": "intFixedEnumCollection",
+     "description": "this is a collection of int based fixed enum",
+     "type": {
       "$id": "248",
       "Kind": "array",
       "Name": "ArrayIntFixedEnum",
@@ -2052,60 +2164,68 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnumCollection"
     },
     {
      "$id": "249",
-     "Name": "stringFixedEnum",
-     "SerializedName": "stringFixedEnum",
-     "Description": "this is a string based fixed enum",
-     "Type": {
+     "name": "stringFixedEnum",
+     "serializedName": "stringFixedEnum",
+     "description": "this is a string based fixed enum",
+     "type": {
       "$ref": "48"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.stringFixedEnum"
     },
     {
      "$id": "250",
-     "Name": "requiredUnknown",
-     "SerializedName": "requiredUnknown",
-     "Description": "required unknown",
-     "Type": {
+     "name": "requiredUnknown",
+     "serializedName": "requiredUnknown",
+     "description": "required unknown",
+     "type": {
       "$id": "251",
       "Kind": "any",
       "Name": "unknown",
       "CrossLanguageDefinitionId": "",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredUnknown"
     },
     {
      "$id": "252",
-     "Name": "optionalUnknown",
-     "SerializedName": "optionalUnknown",
-     "Description": "optional unknown",
-     "Type": {
+     "name": "optionalUnknown",
+     "serializedName": "optionalUnknown",
+     "description": "optional unknown",
+     "type": {
       "$id": "253",
       "Kind": "any",
       "Name": "unknown",
       "CrossLanguageDefinitionId": "",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalUnknown"
     },
     {
      "$id": "254",
-     "Name": "requiredRecordUnknown",
-     "SerializedName": "requiredRecordUnknown",
-     "Description": "required record of unknown",
-     "Type": {
+     "name": "requiredRecordUnknown",
+     "serializedName": "requiredRecordUnknown",
+     "description": "required record of unknown",
+     "type": {
       "$id": "255",
       "Kind": "dict",
       "KeyType": {
@@ -2124,16 +2244,18 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredRecordUnknown"
     },
     {
      "$id": "258",
-     "Name": "optionalRecordUnknown",
-     "SerializedName": "optionalRecordUnknown",
-     "Description": "optional record of unknown",
-     "Type": {
+     "name": "optionalRecordUnknown",
+     "serializedName": "optionalRecordUnknown",
+     "description": "optional record of unknown",
+     "type": {
       "$id": "259",
       "Kind": "dict",
       "KeyType": {
@@ -2152,16 +2274,18 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalRecordUnknown"
     },
     {
      "$id": "262",
-     "Name": "readOnlyRequiredRecordUnknown",
-     "SerializedName": "readOnlyRequiredRecordUnknown",
-     "Description": "required readonly record of unknown",
-     "Type": {
+     "name": "readOnlyRequiredRecordUnknown",
+     "serializedName": "readOnlyRequiredRecordUnknown",
+     "description": "required readonly record of unknown",
+     "type": {
       "$id": "263",
       "Kind": "dict",
       "KeyType": {
@@ -2180,16 +2304,18 @@
       },
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyRequiredRecordUnknown"
     },
     {
      "$id": "266",
-     "Name": "readOnlyOptionalRecordUnknown",
-     "SerializedName": "readOnlyOptionalRecordUnknown",
-     "Description": "optional readonly record of unknown",
-     "Type": {
+     "name": "readOnlyOptionalRecordUnknown",
+     "serializedName": "readOnlyOptionalRecordUnknown",
+     "description": "optional readonly record of unknown",
+     "type": {
       "$id": "267",
       "Kind": "dict",
       "KeyType": {
@@ -2208,16 +2334,18 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": true,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyOptionalRecordUnknown"
     },
     {
      "$id": "270",
-     "Name": "modelWithRequiredNullable",
-     "SerializedName": "modelWithRequiredNullable",
-     "Description": "this is a model with required nullable properties",
-     "Type": {
+     "name": "modelWithRequiredNullable",
+     "serializedName": "modelWithRequiredNullable",
+     "description": "this is a model with required nullable properties",
+     "type": {
       "$id": "271",
       "Kind": "model",
       "Name": "ModelWithRequiredNullableProperties",
@@ -2228,10 +2356,10 @@
       "Properties": [
        {
         "$id": "272",
-        "Name": "requiredNullablePrimitive",
-        "SerializedName": "requiredNullablePrimitive",
-        "Description": "required nullable primitive type",
-        "Type": {
+        "name": "requiredNullablePrimitive",
+        "serializedName": "requiredNullablePrimitive",
+        "description": "required nullable primitive type",
+        "type": {
          "$id": "273",
          "Kind": "nullable",
          "Type": {
@@ -2242,54 +2370,62 @@
           "Decorators": []
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredNullablePrimitive"
        },
        {
         "$id": "275",
-        "Name": "requiredExtensibleEnum",
-        "SerializedName": "requiredExtensibleEnum",
-        "Description": "required nullable extensible enum type",
-        "Type": {
+        "name": "requiredExtensibleEnum",
+        "serializedName": "requiredExtensibleEnum",
+        "description": "required nullable extensible enum type",
+        "type": {
          "$id": "276",
          "Kind": "nullable",
          "Type": {
           "$ref": "53"
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredExtensibleEnum"
        },
        {
         "$id": "277",
-        "Name": "requiredFixedEnum",
-        "SerializedName": "requiredFixedEnum",
-        "Description": "required nullable fixed enum type",
-        "Type": {
+        "name": "requiredFixedEnum",
+        "serializedName": "requiredFixedEnum",
+        "description": "required nullable fixed enum type",
+        "type": {
          "$id": "278",
          "Kind": "nullable",
          "Type": {
           "$ref": "48"
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredFixedEnum"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.modelWithRequiredNullable"
     },
     {
      "$id": "279",
-     "Name": "unionList",
-     "SerializedName": "unionList",
-     "Description": "this is a list of union types",
-     "Type": {
+     "name": "unionList",
+     "serializedName": "unionList",
+     "description": "this is a list of union types",
+     "type": {
       "$id": "280",
       "Kind": "array",
       "Name": "Array",
@@ -2323,35 +2459,39 @@
          "Properties": [
           {
            "$id": "285",
-           "Name": "name",
-           "SerializedName": "name",
-           "Description": "name of the ModelForUnion",
-           "Type": {
+           "name": "name",
+           "serializedName": "name",
+           "description": "name of the ModelForUnion",
+           "type": {
             "$id": "286",
             "Kind": "string",
             "Name": "string",
             "CrossLanguageDefinitionId": "TypeSpec.string",
             "Decorators": []
            },
-           "IsRequired": true,
-           "IsReadOnly": false,
-           "Decorators": []
+           "optional": false,
+           "readOnly": false,
+           "discriminator": false,
+           "decorators": [],
+           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.name"
           },
           {
            "$id": "287",
-           "Name": "age",
-           "SerializedName": "age",
-           "Description": "age of the ModelForUnion",
-           "Type": {
+           "name": "age",
+           "serializedName": "age",
+           "description": "age of the ModelForUnion",
+           "type": {
             "$id": "288",
             "Kind": "int32",
             "Name": "int32",
             "CrossLanguageDefinitionId": "TypeSpec.int32",
             "Decorators": []
            },
-           "IsRequired": false,
-           "IsReadOnly": false,
-           "Decorators": []
+           "optional": true,
+           "readOnly": false,
+           "discriminator": false,
+           "decorators": [],
+           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.age"
           }
          ]
         },
@@ -2371,9 +2511,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.unionList"
     }
    ]
   },
