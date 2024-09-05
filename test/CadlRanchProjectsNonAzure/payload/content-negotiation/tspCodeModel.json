@@ -14,9 +14,9 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "content",
      "SerializedName": "content",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "bytes",
@@ -25,9 +25,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.content"
     }
    ]
   }

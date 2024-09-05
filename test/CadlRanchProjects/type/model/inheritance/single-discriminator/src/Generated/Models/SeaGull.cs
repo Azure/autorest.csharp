@@ -21,7 +21,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SeaGull"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SeaGull(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, wingspan, serializedAdditionalRawData)

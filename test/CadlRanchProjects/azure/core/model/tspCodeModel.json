@@ -43,9 +43,9 @@
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "embedding",
      "SerializedName": "embedding",
-     "Description": "",
      "Type": {
       "$id": "7",
       "Kind": "array",
@@ -60,9 +60,11 @@
       "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel.embedding"
     }
    ]
   }
