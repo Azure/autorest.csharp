@@ -27,7 +27,7 @@ namespace _Type._Dictionary.Samples
             Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -39,7 +39,7 @@ namespace _Type._Dictionary.Samples
             Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace _Type._Dictionary.Samples
             Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace _Type._Dictionary.Samples
             Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("key").ToString());
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object(),
+                key = "<unknown value>",
             });
             Response response = client.Put(content);
 
@@ -125,7 +125,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object(),
+                key = "<unknown value>",
             });
             Response response = await client.PutAsync(content);
 
@@ -140,7 +140,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, BinaryData>
             {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
+                ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -152,7 +152,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, BinaryData>
             {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
+                ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -164,7 +164,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object(),
+                key = "<unknown value>",
             });
             Response response = client.Put(content);
 
@@ -179,7 +179,7 @@ namespace _Type._Dictionary.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
-                key = new object(),
+                key = "<unknown value>",
             });
             Response response = await client.PutAsync(content);
 
@@ -194,7 +194,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = client.Put(new Dictionary<string, BinaryData>
             {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
+                ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -206,7 +206,7 @@ namespace _Type._Dictionary.Samples
 
             Response response = await client.PutAsync(new Dictionary<string, BinaryData>
             {
-                ["key"] = BinaryData.FromObjectAsJson(new object())
+                ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
     }

@@ -26,7 +26,7 @@ namespace Payload.Pageable.Samples
             foreach (BinaryData item in client.GetPageables(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
             }
         }
 
@@ -39,7 +39,7 @@ namespace Payload.Pageable.Samples
             await foreach (BinaryData item in client.GetPageablesAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
             }
         }
 
@@ -74,7 +74,8 @@ namespace Payload.Pageable.Samples
             foreach (BinaryData item in client.GetPageables(1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 
@@ -87,7 +88,8 @@ namespace Payload.Pageable.Samples
             await foreach (BinaryData item in client.GetPageablesAsync(1234, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("value")[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("nextLink").ToString());
             }
         }
 

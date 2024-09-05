@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal sealed class TypeSpecInputTypeExampleConverter : JsonConverter<InputExampleValue>
+    internal sealed class TypeSpecInputExampleValueConverter : JsonConverter<InputExampleValue>
     {
         private const string KindPropertyName = "kind";
         private const string TypePropertyName = "type";
@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
-        public TypeSpecInputTypeExampleConverter(TypeSpecReferenceHandler referenceHandler)
+        public TypeSpecInputExampleValueConverter(TypeSpecReferenceHandler referenceHandler)
         {
             _referenceHandler = referenceHandler;
         }

@@ -28,7 +28,7 @@ namespace _Type.Union.Samples
             Response response = client.GetMixedType(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("model").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
@@ -44,7 +44,7 @@ namespace _Type.Union.Samples
             Response response = await client.GetMixedTypeAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("model").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
@@ -78,7 +78,7 @@ namespace _Type.Union.Samples
             Response response = client.GetMixedType(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("model").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());
@@ -94,7 +94,7 @@ namespace _Type.Union.Samples
             Response response = await client.GetMixedTypeAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("prop").GetProperty("model").ToString());
+            Console.WriteLine(result.GetProperty("prop").GetProperty("model").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("literal").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("int").ToString());
             Console.WriteLine(result.GetProperty("prop").GetProperty("boolean").ToString());

@@ -71,7 +71,7 @@ namespace _Type._Array.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("property").ToString());
-            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
+            Console.WriteLine(result[0].GetProperty("children")[0].ToString());
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace _Type._Array.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("property").ToString());
-            Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").ToString());
+            Console.WriteLine(result[0].GetProperty("children")[0].ToString());
         }
 
         [Test]

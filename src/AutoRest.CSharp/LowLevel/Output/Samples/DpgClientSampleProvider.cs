@@ -3,17 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Input.InputTypes;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -137,13 +136,21 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             else
                 yield break;
 
-            if (sample.ResultType != null)
+            var returnValue = sample.ReturnValue;
+
+            if (returnValue != null)
             {
                 var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
                 yield return Declare(resultVar, JsonDocumentExpression.Parse(new StreamExpression(streamVar)).RootElement);
 
                 var responseParsingStatements = new List<MethodBodyStatement>();
-                BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<InputType>());
+                if (sample.IsPageable && returnValue is InputExampleListValue listValue)
+                {
+                    // for pageable operations, this return value is an array value, but we are writing them in a foreach, therefore here we just take the first item
+                    returnValue = listValue.Values.FirstOrDefault() ?? InputExampleValue.Null(returnValue.Type);
+                }
+
+                BuildResponseStatements(returnValue, resultVar, responseParsingStatements);
 
                 yield return responseParsingStatements;
             }
@@ -158,64 +165,43 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private static void BuildResponseParseStatements(bool useAllProperties, InputType type, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseStatements(InputExampleValue responseValue, ValueExpression invocation, List<MethodBodyStatement> statements)
         {
-            switch (type)
+            switch (responseValue)
             {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ValueType))
-                        return;
-                    // <invocation>[0]
-                    invocation = new IndexerExpression(invocation, Literal(0));
-                    BuildResponseParseStatements(useAllProperties, listType.ValueType, invocation, statements, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                        return;
-                    // <invocation>.GetProperty("<key>")
-                    invocation = invocation.Invoke("GetProperty", Literal("<key>"));
-                    BuildResponseParseStatements(useAllProperties, dictionaryType.ValueType, invocation, statements, visitedTypes);
-                    return;
-                case InputNullableType nullableType:
-                    if (visitedTypes.Contains(nullableType.Type))
-                        return;
-                    BuildResponseParseStatements(useAllProperties, nullableType.Type, invocation, statements, visitedTypes);
-                    return;
-                case InputModelType modelType:
-                    BuildResponseParseStatementsForModelType(useAllProperties, modelType, invocation, statements, visitedTypes);
-                    return;
+                case InputExampleListValue listValue:
+                    BuildResponseStatementsForList(listValue, invocation, statements);
+                    break;
+                case InputExampleObjectValue objOrModelValue:
+                    BuildResponseStatementsForModelOrDict(objOrModelValue, invocation, statements);
+                    break;
+                default:
+                    BuildResponseStatementsForInlineValue(responseValue, invocation, statements);
+                    break;
             }
-            // we get primitive types, return the statement
-            var statement = InvokeConsoleWriteLine(invocation.InvokeToString());
-            statements.Add(statement);
         }
 
-        private static void BuildResponseParseStatementsForModelType(bool useAllProperties, InputModelType model, ValueExpression invocation, List<MethodBodyStatement> statements, HashSet<InputType> visitedTypes)
+        private static void BuildResponseStatementsForList(InputExampleListValue listValue, ValueExpression invocation, List<MethodBodyStatement> statements)
         {
-            var allProperties = model.GetSelfAndBaseModels().SelectMany(m => m.Properties);
-            var propertiesToExplore = useAllProperties
-                ? allProperties
-                : allProperties.Where(p => p.IsRequired);
-
-            if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
+            for (int i = 0; i < listValue.Values.Count; i++)
             {
-                // return the object
-                statements.Add(InvokeConsoleWriteLine(invocation.InvokeToString()));
-                return;
+                // recursively handle the result of this
+                BuildResponseStatements(listValue.Values[i], new IndexerExpression(invocation, Literal(i)), statements);
             }
+        }
 
-            foreach (var property in propertiesToExplore)
+        private static void BuildResponseStatementsForModelOrDict(InputExampleObjectValue objectValue, ValueExpression invocation, List<MethodBodyStatement> statements)
+        {
+            foreach (var (key, value) in objectValue.Values)
             {
-                if (!visitedTypes.Contains(property.Type))
-                {
-                    // <invocation>.GetProperty("<propertyName>");
-                    InputType type = property.Type.GetImplementType();
-                    visitedTypes.Add(type);
-                    var next = invocation.Invoke("GetProperty", Literal(property.SerializedName));
-                    BuildResponseParseStatements(useAllProperties, type, next, statements, visitedTypes);
-                    visitedTypes.Remove(type);
-                }
+                // recursively handle the result of this
+                BuildResponseStatements(value, invocation.Invoke("GetProperty", Literal(key)), statements);
             }
+        }
+
+        private static void BuildResponseStatementsForInlineValue(InputExampleValue value, ValueExpression invocation, List<MethodBodyStatement> statements)
+        {
+            statements.Add(InvokeConsoleWriteLine(invocation.InvokeToString()));
         }
     }
 }

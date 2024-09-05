@@ -48,10 +48,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -60,7 +60,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -69,8 +69,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -103,10 +103,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -115,7 +115,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -124,8 +124,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -145,10 +145,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["key"] = StringExtensibleEnum.One
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 });
             Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
         }
@@ -170,10 +170,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     ["key"] = StringExtensibleEnum.One
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>"),
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 });
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
         }
@@ -233,15 +233,15 @@ namespace Azure.NewProject.TypeSpec.Samples
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = client.HelloAgain("<p2>", "<p1>", content);
@@ -250,7 +250,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -273,10 +273,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -334,15 +334,15 @@ namespace Azure.NewProject.TypeSpec.Samples
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
@@ -351,7 +351,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -374,10 +374,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -403,10 +403,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                 },
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
@@ -418,10 +418,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                 IntFixedEnum = IntFixedEnum.One,
                 IntFixedEnumCollection = { IntFixedEnum.One },
                 StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
                 OptionalRecordUnknown =
 {
-["key"] = BinaryData.FromObjectAsJson(new object())
+["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
             };
             Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
@@ -450,10 +450,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                 },
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 })
             {
                 IntExtensibleEnum = IntExtensibleEnum.One,
@@ -465,10 +465,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                 IntFixedEnum = IntFixedEnum.One,
                 IntFixedEnumCollection = { IntFixedEnum.One },
                 StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
                 OptionalRecordUnknown =
 {
-["key"] = BinaryData.FromObjectAsJson(new object())
+["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
             };
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
@@ -504,10 +504,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -516,7 +516,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -525,8 +525,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -559,10 +559,10 @@ namespace Azure.NewProject.TypeSpec.Samples
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -571,7 +571,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -580,8 +580,8 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -639,15 +639,15 @@ namespace Azure.NewProject.TypeSpec.Samples
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = client.NoContentType("<p2>", "<p1>", content);
@@ -656,7 +656,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -679,10 +679,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]
@@ -740,15 +740,15 @@ namespace Azure.NewProject.TypeSpec.Samples
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
             });
             Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
@@ -757,7 +757,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -780,10 +780,10 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("key").ToString());
         }
 
         [Test]

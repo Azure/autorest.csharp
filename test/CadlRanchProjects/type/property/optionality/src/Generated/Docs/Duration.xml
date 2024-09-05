@@ -40,7 +40,6 @@ Duration client = new OptionalClient().GetDurationClient();
 Response response = await client.GetAllAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAllAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -61,7 +60,6 @@ Duration client = new OptionalClient().GetDurationClient();
 Response response = client.GetAll(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetAll with all parameters and parse the result.
 <code><![CDATA[
@@ -112,7 +110,6 @@ Duration client = new OptionalClient().GetDurationClient();
 Response response = await client.GetDefaultAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefaultAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -133,7 +130,6 @@ Duration client = new OptionalClient().GetDurationClient();
 Response response = client.GetDefault(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetDefault with all parameters and parse the result.
 <code><![CDATA[

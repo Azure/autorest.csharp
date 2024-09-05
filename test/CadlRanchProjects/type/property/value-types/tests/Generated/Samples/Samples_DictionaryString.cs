@@ -28,7 +28,7 @@ namespace _Type.Property.ValueTypes.Samples
             Response response = client.GetDictionaryString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace _Type.Property.ValueTypes.Samples
             Response response = await client.GetDictionaryStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace _Type.Property.ValueTypes.Samples
             Response response = client.GetDictionaryString(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
         }
 
         [Test]
@@ -82,7 +82,7 @@ namespace _Type.Property.ValueTypes.Samples
             Response response = await client.GetDictionaryStringAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
         }
 
         [Test]

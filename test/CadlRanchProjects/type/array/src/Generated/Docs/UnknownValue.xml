@@ -81,7 +81,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 Response response = await client.PutAsync(new BinaryData[]
 {
-    BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
@@ -90,7 +90,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 Response response = await client.PutAsync(new BinaryData[]
 {
-    BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code></example>
     </member>
@@ -102,7 +102,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 Response response = client.Put(new BinaryData[]
 {
-    BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code>
 This sample shows how to call Put with all parameters.
@@ -111,7 +111,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 Response response = client.Put(new BinaryData[]
 {
-    BinaryData.FromObjectAsJson(new object())
+    BinaryData.FromObjectAsJson("<unknown value>")
 });
 ]]></code></example>
     </member>
@@ -123,7 +123,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    new object()
+    "<unknown value>"
 });
 Response response = await client.PutAsync(content);
 
@@ -135,7 +135,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    new object()
+    "<unknown value>"
 });
 Response response = await client.PutAsync(content);
 
@@ -150,7 +150,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    new object()
+    "<unknown value>"
 });
 Response response = client.Put(content);
 
@@ -162,7 +162,7 @@ UnknownValue client = new ArrayClient().GetUnknownValueClient();
 
 using RequestContent content = RequestContent.Create(new object[]
 {
-    new object()
+    "<unknown value>"
 });
 Response response = client.Put(content);
 

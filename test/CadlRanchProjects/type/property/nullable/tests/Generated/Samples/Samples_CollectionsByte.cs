@@ -28,7 +28,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -41,7 +40,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -72,7 +70,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -85,7 +82,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -116,7 +112,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -129,7 +124,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -160,7 +154,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]
@@ -173,7 +166,6 @@ namespace _Type.Property.Nullable.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
-            Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
         }
 
         [Test]

@@ -775,7 +775,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutReadOnlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutReadOnlyModelAsync with all request content and parse the result.
 <code><![CDATA[
@@ -786,7 +785,7 @@ Response response = await client.PutReadOnlyModelAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="PutReadOnlyModel(RequestContent,RequestContext)">
@@ -799,7 +798,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = client.PutReadOnlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PutReadOnlyModel with all request content and parse the result.
 <code><![CDATA[
@@ -810,7 +808,7 @@ Response response = client.PutReadOnlyModel(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalNullableIntList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("key").ToString());
 ]]></code></example>
     </member>
   </members>

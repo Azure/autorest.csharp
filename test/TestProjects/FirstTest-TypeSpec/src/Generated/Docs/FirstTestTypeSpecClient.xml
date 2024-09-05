@@ -239,7 +239,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = await client.PatchActionAsync(content);
 
@@ -280,8 +280,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = await client.PatchActionAsync(content);
@@ -325,7 +325,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = client.PatchAction(content);
 
@@ -366,8 +366,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = client.PatchAction(content);
@@ -398,14 +398,14 @@ This sample shows how to call AnonymousBodyAsync.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: 123.45, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
 ]]></code></example>
     </member>
     <member name="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)">
@@ -415,14 +415,14 @@ This sample shows how to call AnonymousBody.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: 123.45, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
 ]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
@@ -445,7 +445,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = await client.AnonymousBodyAsync(content);
 
@@ -486,8 +486,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = await client.AnonymousBodyAsync(content);
@@ -531,7 +531,7 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
 });
 Response response = client.AnonymousBody(content);
 
@@ -572,8 +572,8 @@ using RequestContent content = RequestContent.Create(new
     {
         1234
     },
-    requiredFloatProperty = new object(),
-    optionalFloatProperty = new object(),
+    requiredFloatProperty = 123.45,
+    optionalFloatProperty = 123.45,
     optionalResourceId = "<optionalResourceId>",
 });
 Response response = client.AnonymousBody(content);
@@ -975,7 +975,6 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 Response response = await client.ReturnsAnonymousModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ReturnsAnonymousModelAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -985,7 +984,6 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 Response response = await client.ReturnsAnonymousModelAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="ReturnsAnonymousModel(RequestContext)">
@@ -998,7 +996,6 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 Response response = client.ReturnsAnonymousModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call ReturnsAnonymousModel with all parameters and parse the result.
 <code><![CDATA[
@@ -1008,7 +1005,6 @@ FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 Response response = client.ReturnsAnonymousModel(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">

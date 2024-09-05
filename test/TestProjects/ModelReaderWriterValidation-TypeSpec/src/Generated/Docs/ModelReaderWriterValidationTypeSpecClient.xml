@@ -194,7 +194,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("fields")[0].ToString());
 Console.WriteLine(result.GetProperty("nullProperty").ToString());
-Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code></example>
     </member>
@@ -235,7 +235,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("fields")[0].ToString());
 Console.WriteLine(result.GetProperty("nullProperty").ToString());
-Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code></example>
     </member>
@@ -310,6 +310,7 @@ Response response = await client.Op3Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code>
 This sample shows how to call Op3Async with all request content and parse the result.
 <code><![CDATA[
@@ -334,6 +335,10 @@ Response response = await client.Op3Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("fields")[0].ToString());
+Console.WriteLine(result.GetProperty("nullProperty").ToString());
+Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -352,6 +357,7 @@ Response response = client.Op3(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code>
 This sample shows how to call Op3 with all request content and parse the result.
 <code><![CDATA[
@@ -376,6 +382,10 @@ Response response = client.Op3(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("fields")[0].ToString());
+Console.WriteLine(result.GetProperty("nullProperty").ToString());
+Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
+Console.WriteLine(result.GetProperty("xProperty").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
@@ -522,7 +532,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="Op4(RequestContent,RequestContext)">
@@ -588,7 +598,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("type").ToString());
 Console.WriteLine(result.GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("tags").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="Op5Async(CancellationToken)">
@@ -635,7 +645,6 @@ ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidati
 Response response = await client.Op5Async(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Op5Async with all parameters and parse the result.
 <code><![CDATA[
@@ -664,11 +673,8 @@ Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
@@ -676,7 +682,7 @@ Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappin
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
 ]]></code></example>
     </member>
@@ -690,7 +696,6 @@ ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidati
 Response response = client.Op5(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Op5 with all parameters and parse the result.
 <code><![CDATA[
@@ -719,11 +724,8 @@ Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
@@ -731,7 +733,7 @@ Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappin
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
 Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
-Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("key").ToString());
 Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
 ]]></code></example>
     </member>

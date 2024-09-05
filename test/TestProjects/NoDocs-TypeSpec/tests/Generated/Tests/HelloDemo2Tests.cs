@@ -56,10 +56,10 @@ namespace NoDocsTypeSpec.Tests
 1234
             },
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -92,10 +92,10 @@ namespace NoDocsTypeSpec.Tests
                     ["key"] = StringExtensibleEnum.One
                 },
                 new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }),
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 },
                 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
                 new BinaryData[]
@@ -168,15 +168,15 @@ BinaryData.FromObjectAsJson("<unionList>")
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -216,10 +216,10 @@ BinaryData.FromObjectAsJson("<unionList>")
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
                 },
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 },
                 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
                 new BinaryData[]
@@ -236,10 +236,10 @@ BinaryData.FromObjectAsJson("<unionList>")
                 IntFixedEnum = IntFixedEnum.One,
                 IntFixedEnumCollection = { IntFixedEnum.One },
                 StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
                 OptionalRecordUnknown =
 {
-["key"] = BinaryData.FromObjectAsJson(new object())
+["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
             };
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
@@ -279,10 +279,10 @@ BinaryData.FromObjectAsJson("<unionList>")
 1234
             },
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -361,15 +361,15 @@ BinaryData.FromObjectAsJson("<unionList>")
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {

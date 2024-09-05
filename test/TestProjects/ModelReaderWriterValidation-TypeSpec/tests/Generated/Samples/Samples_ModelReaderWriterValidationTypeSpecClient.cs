@@ -206,7 +206,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
-            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
@@ -236,7 +236,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("fields")[0].ToString());
             Console.WriteLine(result.GetProperty("nullProperty").ToString());
-            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
@@ -295,6 +295,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
         [Test]
@@ -312,6 +313,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
         }
 
         [Test]
@@ -361,6 +363,10 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("fields")[0].ToString());
+            Console.WriteLine(result.GetProperty("nullProperty").ToString());
+            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -389,6 +395,10 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("fields")[0].ToString());
+            Console.WriteLine(result.GetProperty("nullProperty").ToString());
+            Console.WriteLine(result.GetProperty("keyValuePairs").GetProperty("key").ToString());
+            Console.WriteLine(result.GetProperty("xProperty").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
@@ -540,7 +550,7 @@ id = "<id>",
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("key").ToString());
         }
 
         [Test]
@@ -589,7 +599,7 @@ id = "<id>",
             Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("type").ToString());
             Console.WriteLine(result.GetProperty("location").ToString());
-            Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("tags").GetProperty("key").ToString());
         }
 
         [Test]
@@ -666,7 +676,6 @@ Id = new ResourceIdentifier("<id>"),
             Response response = client.Op5(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -679,7 +688,6 @@ Id = new ResourceIdentifier("<id>"),
             Response response = await client.Op5Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -731,11 +739,8 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
@@ -743,7 +748,7 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
         }
 
@@ -776,11 +781,8 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("paths")[0].GetProperty("metadata").GetProperty("attributes").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("aliasType").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPath").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("phrase").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("variable").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").GetProperty("patternType").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("tokenType").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").GetProperty("attributes").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultPattern").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("aliases")[0].GetProperty("defaultMetadata").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiVersions")[0].ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("defaultApiVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("zoneMappings")[0].GetProperty("location").ToString());
@@ -788,7 +790,7 @@ Id = new ResourceIdentifier("<id>"),
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("profileVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("apiProfiles")[0].GetProperty("apiVersion").ToString());
             Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("capabilities").ToString());
-            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("resourceTypes")[0].GetProperty("properties").GetProperty("key").ToString());
             Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToString());
         }
 

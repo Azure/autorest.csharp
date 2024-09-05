@@ -275,7 +275,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
             });
             Response response = client.PatchAction(content);
 
@@ -311,7 +311,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
             });
             Response response = await client.PatchActionAsync(content);
 
@@ -355,8 +355,8 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
-                optionalFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
+                optionalFloatProperty = 123.45,
                 optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.PatchAction(content);
@@ -408,8 +408,8 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
-                optionalFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
+                optionalFloatProperty = 123.45,
                 optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.PatchActionAsync(content);
@@ -453,7 +453,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
             });
             Response response = client.AnonymousBody(content);
 
@@ -489,7 +489,7 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
             });
             Response response = await client.AnonymousBodyAsync(content);
 
@@ -512,7 +512,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -522,7 +522,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false);
         }
 
         [Test]
@@ -553,8 +553,8 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
-                optionalFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
+                optionalFloatProperty = 123.45,
                 optionalResourceId = "<optionalResourceId>",
             });
             Response response = client.AnonymousBody(content);
@@ -606,8 +606,8 @@ namespace FirstTestTypeSpec.Samples
             {
 1234
             },
-                requiredFloatProperty = new object(),
-                optionalFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
+                optionalFloatProperty = 123.45,
                 optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -638,7 +638,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+            Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: 123.45, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -648,7 +648,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: (double)default, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
+            Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45, AnonymousBodyRequestRequiredLiteralString.Accept, AnonymousBodyRequestRequiredLiteralInt._123, AnonymousBodyRequestRequiredLiteralFloat._123, false, optionalLiteralString: AnonymousBodyRequestOptionalLiteralString.Reject, optionalLiteralInt: AnonymousBodyRequestOptionalLiteralInt._456, optionalLiteralFloat: AnonymousBodyRequestOptionalLiteralFloat._456, optionalLiteralBool: true, optionalNullableList: new int[] { 1234 }, optionalFloatProperty: 123.45, optionalResourceId: new ResourceIdentifier("<optionalResourceId>"));
         }
 
         [Test]
@@ -1037,7 +1037,6 @@ namespace FirstTestTypeSpec.Samples
             Response response = client.ReturnsAnonymousModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1050,7 +1049,6 @@ namespace FirstTestTypeSpec.Samples
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1083,7 +1081,6 @@ namespace FirstTestTypeSpec.Samples
             Response response = client.ReturnsAnonymousModel(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -1096,7 +1093,6 @@ namespace FirstTestTypeSpec.Samples
             Response response = await client.ReturnsAnonymousModelAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]

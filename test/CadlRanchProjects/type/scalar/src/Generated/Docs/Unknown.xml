@@ -79,13 +79,13 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
+Response response = await client.PutAsync(BinaryData.FromObjectAsJson("<unknown value>"));
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
+Response response = await client.PutAsync(BinaryData.FromObjectAsJson("<unknown value>"));
 ]]></code></example>
     </member>
     <member name="Put(BinaryData,CancellationToken)">
@@ -94,13 +94,13 @@ This sample shows how to call Put.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
+Response response = client.Put(BinaryData.FromObjectAsJson("<unknown value>"));
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
+Response response = client.Put(BinaryData.FromObjectAsJson("<unknown value>"));
 ]]></code></example>
     </member>
     <member name="PutAsync(RequestContent,RequestContext)">
@@ -109,7 +109,7 @@ This sample shows how to call PutAsync.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<unknown value>");
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -118,7 +118,7 @@ This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<unknown value>");
 Response response = await client.PutAsync(content);
 
 Console.WriteLine(response.Status);
@@ -130,7 +130,7 @@ This sample shows how to call Put.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<unknown value>");
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);
@@ -139,7 +139,7 @@ This sample shows how to call Put with all request content.
 <code><![CDATA[
 Unknown client = new ScalarClient().GetUnknownClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create("<unknown value>");
 Response response = client.Put(content);
 
 Console.WriteLine(response.Status);

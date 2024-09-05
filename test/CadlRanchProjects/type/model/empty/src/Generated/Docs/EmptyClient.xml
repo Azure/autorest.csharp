@@ -116,7 +116,6 @@ EmptyClient client = new EmptyClient();
 Response response = await client.GetEmptyAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmptyAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -125,7 +124,6 @@ EmptyClient client = new EmptyClient();
 Response response = await client.GetEmptyAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="GetEmpty(RequestContext)">
@@ -137,7 +135,6 @@ EmptyClient client = new EmptyClient();
 Response response = client.GetEmpty(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetEmpty with all parameters and parse the result.
 <code><![CDATA[
@@ -146,7 +143,6 @@ EmptyClient client = new EmptyClient();
 Response response = client.GetEmpty(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PostRoundTripEmptyAsync(EmptyInputOutput,CancellationToken)">
@@ -193,7 +189,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostRoundTripEmptyAsync with all request content and parse the result.
 <code><![CDATA[
@@ -203,7 +198,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PostRoundTripEmptyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
     <member name="PostRoundTripEmpty(RequestContent,RequestContext)">
@@ -216,7 +210,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call PostRoundTripEmpty with all request content and parse the result.
 <code><![CDATA[
@@ -226,7 +219,6 @@ using RequestContent content = RequestContent.Create(new object());
 Response response = client.PostRoundTripEmpty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
   </members>

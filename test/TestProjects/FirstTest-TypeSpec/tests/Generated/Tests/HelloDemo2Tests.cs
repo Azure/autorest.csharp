@@ -55,12 +55,12 @@ namespace FirstTestTypeSpec.Tests
             {
 1234
             },
-                    requiredFloatProperty = new object(),
+                    requiredFloatProperty = 123.45,
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -92,11 +92,11 @@ namespace FirstTestTypeSpec.Tests
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default),
-                BinaryData.FromObjectAsJson(new object()),
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 },
                 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
                 new BinaryData[]
@@ -147,8 +147,8 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                    requiredFloatProperty = new object(),
-                    optionalFloatProperty = new object(),
+                    requiredFloatProperty = 123.45,
+                    optionalFloatProperty = 123.45,
                     optionalResourceId = "<optionalResourceId>",
                 },
                 intExtensibleEnum = 1,
@@ -172,15 +172,15 @@ BinaryData.FromObjectAsJson("<unionList>")
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -212,20 +212,20 @@ BinaryData.FromObjectAsJson("<unionList>")
                 {
                     ["key"] = StringExtensibleEnum.One
                 },
-                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+                new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
                 {
                     OptionalLiteralString = ThingOptionalLiteralString.Reject,
                     OptionalLiteralInt = ThingOptionalLiteralInt._456,
                     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                     OptionalLiteralBool = true,
                     OptionalNullableList = { 1234 },
-                    OptionalFloatProperty = (double)default,
+                    OptionalFloatProperty = 123.45,
                     OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
                 },
-                BinaryData.FromObjectAsJson(new object()),
+                BinaryData.FromObjectAsJson("<unknown value>"),
                 new Dictionary<string, BinaryData>
                 {
-                    ["key"] = BinaryData.FromObjectAsJson(new object())
+                    ["key"] = BinaryData.FromObjectAsJson("<unknown value>")
                 },
                 new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One),
                 new BinaryData[]
@@ -242,10 +242,10 @@ BinaryData.FromObjectAsJson("<unionList>")
                 IntFixedEnum = IntFixedEnum.One,
                 IntFixedEnumCollection = { IntFixedEnum.One },
                 StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new object()),
+                OptionalUnknown = BinaryData.FromObjectAsJson("<unknown value>"),
                 OptionalRecordUnknown =
 {
-["key"] = BinaryData.FromObjectAsJson(new object())
+["key"] = BinaryData.FromObjectAsJson("<unknown value>")
 },
             };
             Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
@@ -284,12 +284,12 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                    requiredFloatProperty = new object(),
+                    requiredFloatProperty = 123.45,
                 },
-                requiredUnknown = new object(),
+                requiredUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -346,8 +346,8 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                    requiredFloatProperty = new object(),
-                    optionalFloatProperty = new object(),
+                    requiredFloatProperty = 123.45,
+                    optionalFloatProperty = 123.45,
                     optionalResourceId = "<optionalResourceId>",
                 },
                 intExtensibleEnum = 1,
@@ -371,15 +371,15 @@ BinaryData.FromObjectAsJson("<unionList>")
 1
             },
                 stringFixedEnum = "1",
-                requiredUnknown = new object(),
-                optionalUnknown = new object(),
+                requiredUnknown = "<unknown value>",
+                optionalUnknown = "<unknown value>",
                 requiredRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new object(),
+                    key = "<unknown value>",
                 },
                 modelWithRequiredNullable = new
                 {
@@ -460,7 +460,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                requiredFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
             });
             Response response = await client.CreateLiteralAsync(content);
         }
@@ -473,7 +473,7 @@ BinaryData.FromObjectAsJson("<unionList>")
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45);
             Response<Thing> response = await client.CreateLiteralAsync(body);
         }
 
@@ -506,8 +506,8 @@ BinaryData.FromObjectAsJson("<unionList>")
             {
 1234
             },
-                requiredFloatProperty = new object(),
-                optionalFloatProperty = new object(),
+                requiredFloatProperty = 123.45,
+                optionalFloatProperty = 123.45,
                 optionalResourceId = "<optionalResourceId>",
             });
             Response response = await client.CreateLiteralAsync(content);
@@ -521,14 +521,14 @@ BinaryData.FromObjectAsJson("<unionList>")
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
-            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
+            Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, 123.45)
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
                 OptionalNullableList = { 1234 },
-                OptionalFloatProperty = (double)default,
+                OptionalFloatProperty = 123.45,
                 OptionalResourceId = new ResourceIdentifier("<optionalResourceId>"),
             };
             Response<Thing> response = await client.CreateLiteralAsync(body);

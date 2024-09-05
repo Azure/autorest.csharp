@@ -110,7 +110,7 @@ namespace _Type._Array.Samples
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-new object()
+"<unknown value>"
             });
             Response response = client.Put(content);
 
@@ -125,7 +125,7 @@ new object()
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-new object()
+"<unknown value>"
             });
             Response response = await client.PutAsync(content);
 
@@ -140,7 +140,7 @@ new object()
 
             Response response = client.Put(new BinaryData[]
             {
-BinaryData.FromObjectAsJson(new object())
+BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -152,7 +152,7 @@ BinaryData.FromObjectAsJson(new object())
 
             Response response = await client.PutAsync(new BinaryData[]
             {
-BinaryData.FromObjectAsJson(new object())
+BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -164,7 +164,7 @@ BinaryData.FromObjectAsJson(new object())
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-new object()
+"<unknown value>"
             });
             Response response = client.Put(content);
 
@@ -179,7 +179,7 @@ new object()
 
             using RequestContent content = RequestContent.Create(new object[]
             {
-new object()
+"<unknown value>"
             });
             Response response = await client.PutAsync(content);
 
@@ -194,7 +194,7 @@ new object()
 
             Response response = client.Put(new BinaryData[]
             {
-BinaryData.FromObjectAsJson(new object())
+BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
 
@@ -206,7 +206,7 @@ BinaryData.FromObjectAsJson(new object())
 
             Response response = await client.PutAsync(new BinaryData[]
             {
-BinaryData.FromObjectAsJson(new object())
+BinaryData.FromObjectAsJson("<unknown value>")
             });
         }
     }

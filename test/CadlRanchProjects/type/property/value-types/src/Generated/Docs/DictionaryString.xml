@@ -40,7 +40,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 Response response = await client.GetDictionaryStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryStringAsync with all parameters and parse the result.
 <code><![CDATA[
@@ -49,7 +49,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 Response response = await client.GetDictionaryStringAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="GetDictionaryString(RequestContext)">
@@ -61,7 +61,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 Response response = client.GetDictionaryString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
 ]]></code>
 This sample shows how to call GetDictionaryString with all parameters and parse the result.
 <code><![CDATA[
@@ -70,7 +70,7 @@ DictionaryString client = new ValueTypesClient().GetDictionaryStringClient();
 Response response = client.GetDictionaryString(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("property").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("property").GetProperty("key").ToString());
 ]]></code></example>
     </member>
     <member name="PutAsync(DictionaryStringProperty,CancellationToken)">

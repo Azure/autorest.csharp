@@ -25,7 +25,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Default(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -37,7 +36,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.DefaultAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -67,7 +65,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Default(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -79,7 +76,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.DefaultAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -109,7 +105,6 @@ namespace Encode.Bytes.Samples
             Response response = client.OctetStream(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -121,7 +116,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.OctetStreamAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -151,7 +145,6 @@ namespace Encode.Bytes.Samples
             Response response = client.OctetStream(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -163,7 +156,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.OctetStreamAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -193,7 +185,6 @@ namespace Encode.Bytes.Samples
             Response response = client.CustomContentType(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -205,7 +196,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.CustomContentTypeAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -235,7 +225,6 @@ namespace Encode.Bytes.Samples
             Response response = client.CustomContentType(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -247,7 +236,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.CustomContentTypeAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -277,7 +265,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -289,7 +276,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -319,7 +305,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -331,7 +316,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -361,7 +345,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64url(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -373,7 +356,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64urlAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -403,7 +385,6 @@ namespace Encode.Bytes.Samples
             Response response = client.Base64url(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -415,7 +396,6 @@ namespace Encode.Bytes.Samples
             Response response = await client.Base64urlAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
         }
 
         [Test]
