@@ -105,9 +105,9 @@
    "Properties": [
     {
      "$id": "14",
+     "Kind": "property",
      "Name": "prop",
      "SerializedName": "prop",
-     "Description": "",
      "Type": {
       "$id": "15",
       "Kind": "string",
@@ -115,27 +115,31 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.prop"
     },
     {
      "$id": "16",
+     "Kind": "property",
      "Name": "enumProp",
      "SerializedName": "enumProp",
-     "Description": "",
      "Type": {
       "$ref": "2"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.enumProp"
     },
     {
      "$id": "17",
+     "Kind": "property",
      "Name": "unionProp",
      "SerializedName": "unionProp",
-     "Description": "",
      "Type": {
       "$id": "18",
       "Kind": "union",
@@ -165,9 +169,11 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.unionProp"
     }
    ]
   },
@@ -181,9 +187,9 @@
    "Properties": [
     {
      "$id": "23",
+     "Kind": "property",
      "Name": "prop",
      "SerializedName": "prop",
-     "Description": "",
      "Type": {
       "$id": "24",
       "Kind": "string",
@@ -191,27 +197,31 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.prop"
     },
     {
      "$id": "25",
+     "Kind": "property",
      "Name": "enumProp",
      "SerializedName": "enumProp",
-     "Description": "",
      "Type": {
       "$ref": "6"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.enumProp"
     },
     {
      "$id": "26",
+     "Kind": "property",
      "Name": "unionProp",
      "SerializedName": "unionProp",
-     "Description": "",
      "Type": {
       "$id": "27",
       "Kind": "union",
@@ -234,9 +244,11 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.unionProp"
     }
    ]
   }

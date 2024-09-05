@@ -75,9 +75,9 @@
    "Properties": [
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "newProp",
      "SerializedName": "newProp",
-     "Description": "",
      "Type": {
       "$id": "11",
       "Kind": "string",
@@ -85,27 +85,31 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.newProp"
     },
     {
      "$id": "12",
+     "Kind": "property",
      "Name": "enumProp",
      "SerializedName": "enumProp",
-     "Description": "",
      "Type": {
       "$ref": "2"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.enumProp"
     },
     {
      "$id": "13",
+     "Kind": "property",
      "Name": "unionProp",
      "SerializedName": "unionProp",
-     "Description": "",
      "Type": {
       "$id": "14",
       "Kind": "union",
@@ -135,9 +139,11 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.unionProp"
     }
    ]
   }

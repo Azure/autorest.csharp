@@ -170,6 +170,7 @@
      "Properties": [
       {
        "$id": "23",
+       "Kind": "property",
        "Name": "id",
        "SerializedName": "id",
        "Description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
@@ -187,12 +188,15 @@
         },
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": true,
-       "Decorators": []
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.id"
       },
       {
        "$id": "26",
+       "Kind": "property",
        "Name": "name",
        "SerializedName": "name",
        "Description": "The name of the resource",
@@ -203,12 +207,15 @@
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": true,
-       "Decorators": []
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.name"
       },
       {
        "$id": "28",
+       "Kind": "property",
        "Name": "type",
        "SerializedName": "type",
        "Description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
@@ -219,12 +226,15 @@
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "IsRequired": false,
-       "IsReadOnly": true,
-       "Decorators": []
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.type"
       },
       {
        "$id": "30",
+       "Kind": "property",
        "Name": "systemData",
        "SerializedName": "systemData",
        "Description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
@@ -239,6 +249,7 @@
         "Properties": [
          {
           "$id": "32",
+          "Kind": "property",
           "Name": "createdBy",
           "SerializedName": "createdBy",
           "Description": "The identity that created the resource.",
@@ -249,24 +260,30 @@
            "CrossLanguageDefinitionId": "TypeSpec.string",
            "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdBy"
          },
          {
           "$id": "34",
+          "Kind": "property",
           "Name": "createdByType",
           "SerializedName": "createdByType",
           "Description": "The type of identity that created the resource.",
           "Type": {
            "$ref": "11"
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdByType"
          },
          {
           "$id": "35",
+          "Kind": "property",
           "Name": "createdAt",
           "SerializedName": "createdAt",
           "Description": "The timestamp of resource creation (UTC).",
@@ -285,12 +302,15 @@
            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
            "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdAt"
          },
          {
           "$id": "38",
+          "Kind": "property",
           "Name": "lastModifiedBy",
           "SerializedName": "lastModifiedBy",
           "Description": "The identity that last modified the resource.",
@@ -301,24 +321,30 @@
            "CrossLanguageDefinitionId": "TypeSpec.string",
            "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedBy"
          },
          {
           "$id": "40",
+          "Kind": "property",
           "Name": "lastModifiedByType",
           "SerializedName": "lastModifiedByType",
           "Description": "The type of identity that last modified the resource.",
           "Type": {
            "$ref": "11"
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedByType"
          },
          {
           "$id": "41",
+          "Kind": "property",
           "Name": "lastModifiedAt",
           "SerializedName": "lastModifiedAt",
           "Description": "The timestamp of resource last modification (UTC)",
@@ -337,15 +363,19 @@
            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
            "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false,
-          "Decorators": []
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedAt"
          }
         ]
        },
-       "IsRequired": false,
-       "IsReadOnly": true,
-       "Decorators": []
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.systemData"
       }
      ]
     },
@@ -354,6 +384,7 @@
    "Properties": [
     {
      "$id": "44",
+     "Kind": "property",
      "Name": "properties",
      "SerializedName": "properties",
      "Description": "The resource-specific properties for this resource.",
@@ -368,18 +399,22 @@
       "Properties": [
        {
         "$id": "46",
+        "Kind": "property",
         "Name": "provisioningState",
         "SerializedName": "provisioningState",
         "Description": "Provisioning State of the nested child Resource",
         "Type": {
          "$ref": "2"
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties.provisioningState"
        },
        {
         "$id": "47",
+        "Kind": "property",
         "Name": "description",
         "SerializedName": "description",
         "Description": "Nested resource description.",
@@ -390,15 +425,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties.description"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource.properties"
     }
    ]
   },
@@ -425,6 +464,7 @@
    "Properties": [
     {
      "$id": "50",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
      "Description": "The error object.",
@@ -439,6 +479,7 @@
       "Properties": [
        {
         "$id": "52",
+        "Kind": "property",
         "Name": "code",
         "SerializedName": "code",
         "Description": "The error code.",
@@ -449,12 +490,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code"
        },
        {
         "$id": "54",
+        "Kind": "property",
         "Name": "message",
         "SerializedName": "message",
         "Description": "The error message.",
@@ -465,12 +509,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message"
        },
        {
         "$id": "56",
+        "Kind": "property",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The error target.",
@@ -481,12 +528,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target"
        },
        {
         "$id": "58",
+        "Kind": "property",
         "Name": "details",
         "SerializedName": "details",
         "Description": "The error details.",
@@ -500,12 +550,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details"
        },
        {
         "$id": "60",
+        "Kind": "property",
         "Name": "additionalInfo",
         "SerializedName": "additionalInfo",
         "Description": "The error additional info.",
@@ -524,6 +577,7 @@
           "Properties": [
            {
             "$id": "63",
+            "Kind": "property",
             "Name": "type",
             "SerializedName": "type",
             "Description": "The additional info type.",
@@ -534,12 +588,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.string",
              "Decorators": []
             },
-            "IsRequired": false,
-            "IsReadOnly": true,
-            "Decorators": []
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type"
            },
            {
             "$id": "65",
+            "Kind": "property",
             "Name": "info",
             "SerializedName": "info",
             "Description": "The additional info.",
@@ -552,24 +609,30 @@
              "Decorators": [],
              "Properties": []
             },
-            "IsRequired": false,
-            "IsReadOnly": true,
-            "Decorators": []
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info"
            }
           ]
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error"
     }
    ]
   },
@@ -593,6 +656,7 @@
    "Properties": [
     {
      "$id": "68",
+     "Kind": "property",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The NestedProxyResource items on this page",
@@ -606,12 +670,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
      "$id": "70",
+     "Kind": "property",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -629,9 +696,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
    ]
   },
@@ -657,6 +726,7 @@
     "Properties": [
      {
       "$id": "75",
+      "Kind": "property",
       "Name": "tags",
       "SerializedName": "tags",
       "Description": "Resource tags.",
@@ -679,12 +749,15 @@
        },
        "Decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false,
-      "Decorators": []
+      "Optional": true,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags"
      },
      {
       "$id": "79",
+      "Kind": "property",
       "Name": "location",
       "SerializedName": "location",
       "Description": "The geo-location where the resource lives",
@@ -695,15 +768,18 @@
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "Optional": false,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location"
      }
     ]
    },
    "Properties": [
     {
      "$id": "81",
+     "Kind": "property",
      "Name": "properties",
      "SerializedName": "properties",
      "Description": "The resource-specific properties for this resource.",
@@ -718,18 +794,22 @@
       "Properties": [
        {
         "$id": "83",
+        "Kind": "property",
         "Name": "provisioningState",
         "SerializedName": "provisioningState",
         "Description": "The status of the last operation.",
         "Type": {
          "$ref": "2"
         },
-        "IsRequired": false,
-        "IsReadOnly": true,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties.provisioningState"
        },
        {
         "$id": "84",
+        "Kind": "property",
         "Name": "description",
         "SerializedName": "description",
         "Description": "The description of the resource.",
@@ -740,15 +820,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties.description"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource.properties"
     }
    ]
   },
@@ -769,6 +853,7 @@
    "Properties": [
     {
      "$id": "87",
+     "Kind": "property",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The TopLevelTrackedResource items on this page",
@@ -782,12 +867,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
      "$id": "89",
+     "Kind": "property",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -805,9 +893,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
    ]
   }
