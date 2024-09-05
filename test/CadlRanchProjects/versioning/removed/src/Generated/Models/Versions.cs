@@ -10,9 +10,11 @@ namespace Versioning.Removed.Models
     /// <summary> The version of the API. </summary>
     public enum Versions
     {
-        /// <summary> The version v1. </summary>
+        /// <summary> The original version v1. </summary>
         V1,
-        /// <summary> The version v2. </summary>
+        /// <summary> The beta version. </summary>
+        Beta,
+        /// <summary> The latest version v2. </summary>
         V2
     }
 }

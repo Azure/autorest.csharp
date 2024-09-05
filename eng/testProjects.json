@@ -6,7 +6,6 @@
         "type/enum/fixed",
         "type/model/usage",
         "type/model/empty",
-        "type/model/flatten",
         "type/model/visibility",
         "type/model/inheritance/single-discriminator",
         "type/model/inheritance/not-discriminated",

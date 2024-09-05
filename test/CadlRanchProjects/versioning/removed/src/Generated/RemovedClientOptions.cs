@@ -20,8 +20,10 @@ namespace Versioning.Removed
         {
             /// <summary> Service version "v1". </summary>
             V1 = 1,
+            /// <summary> Service version "beta". </summary>
+            Vbeta = 2,
             /// <summary> Service version "v2". </summary>
-            V2 = 2,
+            V2 = 3,
         }
 
         internal string Version { get; }
@@ -32,6 +34,7 @@ namespace Versioning.Removed
             Version = version switch
             {
                 ServiceVersion.V1 => "v1",
+                ServiceVersion.Vbeta => "beta",
                 ServiceVersion.V2 => "v2",
                 _ => throw new NotSupportedException()
             };
