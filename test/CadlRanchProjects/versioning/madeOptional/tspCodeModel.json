@@ -51,37 +51,39 @@
    "Properties": [
     {
      "$id": "7",
-     "name": "prop",
-     "serializedName": "prop",
-     "type": {
+     "Kind": "property",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Type": {
       "$id": "8",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.prop"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.prop"
     },
     {
      "$id": "9",
-     "name": "changedProp",
-     "serializedName": "changedProp",
-     "type": {
+     "Kind": "property",
+     "Name": "changedProp",
+     "SerializedName": "changedProp",
+     "Type": {
       "$id": "10",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.changedProp"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.changedProp"
     }
    ]
   }

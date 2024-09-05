@@ -14,20 +14,21 @@
    "Properties": [
     {
      "$id": "3",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.BodyModel.name"
     }
    ]
   },
@@ -41,20 +42,21 @@
    "Properties": [
     {
      "$id": "6",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "7",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Parameters.BodyOptionality.requiredImplicit.Request.anonymous.name"
     }
    ]
   }

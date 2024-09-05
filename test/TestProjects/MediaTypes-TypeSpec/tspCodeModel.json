@@ -81,20 +81,21 @@
    "Properties": [
     {
      "$id": "12",
-     "name": "id",
-     "serializedName": "id",
-     "type": {
+     "Kind": "property",
+     "Name": "id",
+     "SerializedName": "id",
+     "Type": {
       "$id": "13",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.Body.id"
     }
    ]
   }

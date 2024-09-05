@@ -15,46 +15,49 @@
    "Properties": [
     {
      "$id": "3",
-     "name": "readProp",
-     "serializedName": "readProp",
-     "description": "Required string, illustrating a readonly property.",
-     "type": {
+     "Kind": "property",
+     "Name": "readProp",
+     "SerializedName": "readProp",
+     "Description": "Required string, illustrating a readonly property.",
+     "Type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.readProp"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.readProp"
     },
     {
      "$id": "5",
-     "name": "queryProp",
-     "serializedName": "queryProp",
-     "description": "Required int32, illustrating a query property.",
-     "type": {
+     "Kind": "property",
+     "Name": "queryProp",
+     "SerializedName": "queryProp",
+     "Description": "Required int32, illustrating a query property.",
+     "Type": {
       "$id": "6",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.queryProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.queryProp"
     },
     {
      "$id": "7",
-     "name": "createProp",
-     "serializedName": "createProp",
-     "description": "Required string[], illustrating a create property.",
-     "type": {
+     "Kind": "property",
+     "Name": "createProp",
+     "SerializedName": "createProp",
+     "Description": "Required string[], illustrating a create property.",
+     "Type": {
       "$id": "8",
       "Kind": "array",
       "Name": "Array",
@@ -68,18 +71,19 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.createProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.createProp"
     },
     {
      "$id": "10",
-     "name": "updateProp",
-     "serializedName": "updateProp",
-     "description": "Required int32[], illustrating a update property.",
-     "type": {
+     "Kind": "property",
+     "Name": "updateProp",
+     "SerializedName": "updateProp",
+     "Description": "Required int32[], illustrating a update property.",
+     "Type": {
       "$id": "11",
       "Kind": "array",
       "Name": "Array",
@@ -93,29 +97,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.updateProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.updateProp"
     },
     {
      "$id": "13",
-     "name": "deleteProp",
-     "serializedName": "deleteProp",
-     "description": "Required bool, illustrating a delete property.",
-     "type": {
+     "Kind": "property",
+     "Name": "deleteProp",
+     "SerializedName": "deleteProp",
+     "Description": "Required bool, illustrating a delete property.",
+     "Type": {
       "$id": "14",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.deleteProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.deleteProp"
     }
    ]
   },
@@ -130,10 +135,11 @@
    "Properties": [
     {
      "$id": "16",
-     "name": "optionalNullableIntList",
-     "serializedName": "optionalNullableIntList",
-     "description": "Optional readonly nullable int list.",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalNullableIntList",
+     "SerializedName": "optionalNullableIntList",
+     "Description": "Optional readonly nullable int list.",
+     "Type": {
       "$id": "17",
       "Kind": "nullable",
       "Type": {
@@ -151,18 +157,19 @@
        "Decorators": []
       }
      },
-     "optional": true,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalNullableIntList"
+     "Optional": true,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalNullableIntList"
     },
     {
      "$id": "20",
-     "name": "optionalStringRecord",
-     "serializedName": "optionalStringRecord",
-     "description": "Optional readonly string dictionary.",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalStringRecord",
+     "SerializedName": "optionalStringRecord",
+     "Description": "Optional readonly string dictionary.",
+     "Type": {
       "$id": "21",
       "Kind": "dict",
       "KeyType": {
@@ -181,11 +188,11 @@
       },
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalStringRecord"
+     "Optional": true,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalStringRecord"
     }
    ]
   }

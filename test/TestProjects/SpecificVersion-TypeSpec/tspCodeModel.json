@@ -95,37 +95,39 @@
    "Properties": [
     {
      "$id": "13",
-     "name": "id",
-     "serializedName": "id",
-     "type": {
+     "Kind": "property",
+     "Name": "id",
+     "SerializedName": "id",
+     "Type": {
       "$id": "14",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.id"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.id"
     },
     {
      "$id": "15",
-     "name": "resourceUri",
-     "serializedName": "resourceUri",
-     "type": {
+     "Kind": "property",
+     "Name": "resourceUri",
+     "SerializedName": "resourceUri",
+     "Type": {
       "$id": "16",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.resourceUri"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.resourceUri"
     }
    ]
   },
@@ -139,54 +141,57 @@
    "Properties": [
     {
      "$id": "18",
-     "name": "id",
-     "serializedName": "id",
-     "type": {
+     "Kind": "property",
+     "Name": "id",
+     "SerializedName": "id",
+     "Type": {
       "$id": "19",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.id"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.id"
     },
     {
      "$id": "20",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "21",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.name"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.name"
     },
     {
      "$id": "22",
-     "name": "type",
-     "serializedName": "type",
-     "type": {
+     "Kind": "property",
+     "Name": "type",
+     "SerializedName": "type",
+     "Type": {
       "$id": "23",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.type"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.type"
     }
    ]
   },
@@ -201,42 +206,45 @@
    "Properties": [
     {
      "$id": "25",
-     "name": "id",
-     "serializedName": "id",
-     "description": "The unique ID of the operation.",
-     "type": {
+     "Kind": "property",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The unique ID of the operation.",
+     "Type": {
       "$id": "26",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
     },
     {
      "$id": "27",
-     "name": "status",
-     "serializedName": "status",
-     "description": "The status of the operation",
-     "type": {
+     "Kind": "property",
+     "Name": "status",
+     "SerializedName": "status",
+     "Description": "The status of the operation",
+     "Type": {
       "$ref": "5"
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
     },
     {
      "$id": "28",
-     "name": "error",
-     "serializedName": "error",
-     "description": "Error object that describes the error when status is \"Failed\".",
-     "type": {
+     "Kind": "property",
+     "Name": "error",
+     "SerializedName": "error",
+     "Description": "Error object that describes the error when status is \"Failed\".",
+     "Type": {
       "$id": "29",
       "Kind": "model",
       "Name": "Error",
@@ -247,64 +255,68 @@
       "Properties": [
        {
         "$id": "30",
-        "name": "code",
-        "serializedName": "code",
-        "description": "One of a server-defined set of error codes.",
-        "type": {
+        "Kind": "property",
+        "Name": "code",
+        "SerializedName": "code",
+        "Description": "One of a server-defined set of error codes.",
+        "Type": {
          "$id": "31",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
        },
        {
         "$id": "32",
-        "name": "message",
-        "serializedName": "message",
-        "description": "A human-readable representation of the error.",
-        "type": {
+        "Kind": "property",
+        "Name": "message",
+        "SerializedName": "message",
+        "Description": "A human-readable representation of the error.",
+        "Type": {
          "$id": "33",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
        },
        {
         "$id": "34",
-        "name": "target",
-        "serializedName": "target",
-        "description": "The target of the error.",
-        "type": {
+        "Kind": "property",
+        "Name": "target",
+        "SerializedName": "target",
+        "Description": "The target of the error.",
+        "Type": {
          "$id": "35",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
        },
        {
         "$id": "36",
-        "name": "details",
-        "serializedName": "details",
-        "description": "An array of details about specific errors that led to this reported error.",
-        "type": {
+        "Kind": "property",
+        "Name": "details",
+        "SerializedName": "details",
+        "Description": "An array of details about specific errors that led to this reported error.",
+        "Type": {
          "$id": "37",
          "Kind": "array",
          "Name": "ArrayError",
@@ -314,18 +326,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
        },
        {
         "$id": "38",
-        "name": "innererror",
-        "serializedName": "innererror",
-        "description": "An object containing more specific information than the current object about the error.",
-        "type": {
+        "Kind": "property",
+        "Name": "innererror",
+        "SerializedName": "innererror",
+        "Description": "An object containing more specific information than the current object about the error.",
+        "Type": {
          "$id": "39",
          "Kind": "model",
          "Name": "InnerError",
@@ -336,65 +349,68 @@
          "Properties": [
           {
            "$id": "40",
-           "name": "code",
-           "serializedName": "code",
-           "description": "One of a server-defined set of error codes.",
-           "type": {
+           "Kind": "property",
+           "Name": "code",
+           "SerializedName": "code",
+           "Description": "One of a server-defined set of error codes.",
+           "Type": {
             "$id": "41",
             "Kind": "string",
             "Name": "string",
             "CrossLanguageDefinitionId": "TypeSpec.string",
             "Decorators": []
            },
-           "optional": true,
-           "readOnly": false,
-           "discriminator": false,
-           "decorators": [],
-           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
+           "Optional": true,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
           },
           {
            "$id": "42",
-           "name": "innererror",
-           "serializedName": "innererror",
-           "description": "Inner error.",
-           "type": {
+           "Kind": "property",
+           "Name": "innererror",
+           "SerializedName": "innererror",
+           "Description": "Inner error.",
+           "Type": {
             "$ref": "39"
            },
-           "optional": true,
-           "readOnly": false,
-           "discriminator": false,
-           "decorators": [],
-           "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror"
+           "Optional": true,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror"
           }
          ]
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
     },
     {
      "$id": "43",
-     "name": "result",
-     "serializedName": "result",
-     "description": "The result of the operation.",
-     "type": {
+     "Kind": "property",
+     "Name": "result",
+     "SerializedName": "result",
+     "Description": "The result of the operation.",
+     "Type": {
       "$ref": "12"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result"
     }
    ]
   },
@@ -415,10 +431,11 @@
    "Properties": [
     {
      "$id": "45",
-     "name": "value",
-     "serializedName": "value",
-     "description": "The Resource items on this page",
-     "type": {
+     "Kind": "property",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The Resource items on this page",
+     "Type": {
       "$id": "46",
       "Kind": "array",
       "Name": "ArrayResource",
@@ -428,18 +445,19 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
     },
     {
      "$id": "47",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "description": "The link to the next page of items",
-     "type": {
+     "Kind": "property",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
       "$id": "48",
       "Kind": "url",
       "Name": "ResourceLocation",
@@ -453,11 +471,11 @@
       },
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
     }
    ]
   }

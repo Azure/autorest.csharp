@@ -15,20 +15,21 @@
    "Properties": [
     {
      "$id": "3",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel.name"
     }
    ]
   },
@@ -43,20 +44,21 @@
    "Properties": [
     {
      "$id": "6",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "7",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel.name"
     }
    ]
   },
@@ -70,9 +72,10 @@
    "Properties": [
     {
      "$id": "9",
-     "name": "result",
-     "serializedName": "result",
-     "type": {
+     "Kind": "property",
+     "Name": "result",
+     "SerializedName": "result",
+     "Type": {
       "$id": "10",
       "Kind": "model",
       "Name": "ResultModel",
@@ -82,28 +85,29 @@
       "Properties": [
        {
         "$id": "11",
-        "name": "name",
-        "serializedName": "name",
-        "type": {
+        "Kind": "property",
+        "Name": "name",
+        "SerializedName": "name",
+        "Type": {
          "$id": "12",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel.name"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel.name"
        }
       ]
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel.result"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel.result"
     }
    ]
   },
@@ -122,20 +126,21 @@
    "Properties": [
     {
      "$id": "14",
-     "name": "name",
-     "serializedName": "name",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Type": {
       "$id": "15",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.name"
     }
    ]
   }

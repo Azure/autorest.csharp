@@ -31,60 +31,63 @@
      "Properties": [
       {
        "$id": "5",
-       "name": "name",
-       "serializedName": "name",
-       "type": {
+       "Kind": "property",
+       "Name": "name",
+       "SerializedName": "name",
+       "Type": {
         "$id": "6",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "optional": false,
-       "readOnly": false,
-       "discriminator": false,
-       "decorators": [],
-       "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
+       "Optional": false,
+       "ReadOnly": false,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
       }
      ]
     },
     "Properties": [
      {
       "$id": "7",
-      "name": "age",
-      "serializedName": "age",
-      "type": {
+      "Kind": "property",
+      "Name": "age",
+      "SerializedName": "age",
+      "Type": {
        "$id": "8",
        "Kind": "int32",
        "Name": "int32",
        "CrossLanguageDefinitionId": "TypeSpec.int32",
        "Decorators": []
       },
-      "optional": false,
-      "readOnly": false,
-      "discriminator": false,
-      "decorators": [],
-      "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
+      "Optional": false,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
      }
     ]
    },
    "Properties": [
     {
      "$id": "9",
-     "name": "smart",
-     "serializedName": "smart",
-     "type": {
+     "Kind": "property",
+     "Name": "smart",
+     "SerializedName": "smart",
+     "Type": {
       "$id": "10",
       "Kind": "boolean",
       "Name": "boolean",
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
     }
    ]
   },

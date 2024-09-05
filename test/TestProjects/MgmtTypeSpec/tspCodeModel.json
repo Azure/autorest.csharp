@@ -187,10 +187,11 @@
      "Properties": [
       {
        "$id": "24",
-       "name": "id",
-       "serializedName": "id",
-       "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-       "type": {
+       "Kind": "property",
+       "Name": "id",
+       "SerializedName": "id",
+       "Description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+       "Type": {
         "$id": "25",
         "Kind": "string",
         "Name": "armResourceIdentifier",
@@ -204,54 +205,57 @@
         },
         "Decorators": []
        },
-       "optional": true,
-       "readOnly": true,
-       "discriminator": false,
-       "decorators": [],
-       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.id"
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.id"
       },
       {
        "$id": "27",
-       "name": "name",
-       "serializedName": "name",
-       "description": "The name of the resource",
-       "type": {
+       "Kind": "property",
+       "Name": "name",
+       "SerializedName": "name",
+       "Description": "The name of the resource",
+       "Type": {
         "$id": "28",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "optional": true,
-       "readOnly": true,
-       "discriminator": false,
-       "decorators": [],
-       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.name"
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.name"
       },
       {
        "$id": "29",
-       "name": "type",
-       "serializedName": "type",
-       "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-       "type": {
+       "Kind": "property",
+       "Name": "type",
+       "SerializedName": "type",
+       "Description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+       "Type": {
         "$id": "30",
         "Kind": "string",
         "Name": "string",
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "optional": true,
-       "readOnly": true,
-       "discriminator": false,
-       "decorators": [],
-       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.type"
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.type"
       },
       {
        "$id": "31",
-       "name": "systemData",
-       "serializedName": "systemData",
-       "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-       "type": {
+       "Kind": "property",
+       "Name": "systemData",
+       "SerializedName": "systemData",
+       "Description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+       "Type": {
         "$id": "32",
         "Kind": "model",
         "Name": "SystemData",
@@ -262,42 +266,45 @@
         "Properties": [
          {
           "$id": "33",
-          "name": "createdBy",
-          "serializedName": "createdBy",
-          "description": "The identity that created the resource.",
-          "type": {
+          "Kind": "property",
+          "Name": "createdBy",
+          "SerializedName": "createdBy",
+          "Description": "The identity that created the resource.",
+          "Type": {
            "$id": "34",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string",
            "Decorators": []
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdBy"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdBy"
          },
          {
           "$id": "35",
-          "name": "createdByType",
-          "serializedName": "createdByType",
-          "description": "The type of identity that created the resource.",
-          "type": {
+          "Kind": "property",
+          "Name": "createdByType",
+          "SerializedName": "createdByType",
+          "Description": "The type of identity that created the resource.",
+          "Type": {
            "$ref": "6"
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdByType"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdByType"
          },
          {
           "$id": "36",
-          "name": "createdAt",
-          "serializedName": "createdAt",
-          "description": "The timestamp of resource creation (UTC).",
-          "type": {
+          "Kind": "property",
+          "Name": "createdAt",
+          "SerializedName": "createdAt",
+          "Description": "The timestamp of resource creation (UTC).",
+          "Type": {
            "$id": "37",
            "Kind": "utcDateTime",
            "Name": "utcDateTime",
@@ -312,50 +319,53 @@
            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
            "Decorators": []
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdAt"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdAt"
          },
          {
           "$id": "39",
-          "name": "lastModifiedBy",
-          "serializedName": "lastModifiedBy",
-          "description": "The identity that last modified the resource.",
-          "type": {
+          "Kind": "property",
+          "Name": "lastModifiedBy",
+          "SerializedName": "lastModifiedBy",
+          "Description": "The identity that last modified the resource.",
+          "Type": {
            "$id": "40",
            "Kind": "string",
            "Name": "string",
            "CrossLanguageDefinitionId": "TypeSpec.string",
            "Decorators": []
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedBy"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedBy"
          },
          {
           "$id": "41",
-          "name": "lastModifiedByType",
-          "serializedName": "lastModifiedByType",
-          "description": "The type of identity that last modified the resource.",
-          "type": {
+          "Kind": "property",
+          "Name": "lastModifiedByType",
+          "SerializedName": "lastModifiedByType",
+          "Description": "The type of identity that last modified the resource.",
+          "Type": {
            "$ref": "6"
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedByType"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedByType"
          },
          {
           "$id": "42",
-          "name": "lastModifiedAt",
-          "serializedName": "lastModifiedAt",
-          "description": "The timestamp of resource last modification (UTC)",
-          "type": {
+          "Kind": "property",
+          "Name": "lastModifiedAt",
+          "SerializedName": "lastModifiedAt",
+          "Description": "The timestamp of resource last modification (UTC)",
+          "Type": {
            "$id": "43",
            "Kind": "utcDateTime",
            "Name": "utcDateTime",
@@ -370,29 +380,30 @@
            "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
            "Decorators": []
           },
-          "optional": true,
-          "readOnly": false,
-          "discriminator": false,
-          "decorators": [],
-          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedAt"
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedAt"
          }
         ]
        },
-       "optional": true,
-       "readOnly": true,
-       "discriminator": false,
-       "decorators": [],
-       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.systemData"
+       "Optional": true,
+       "ReadOnly": true,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.systemData"
       }
      ]
     },
     "Properties": [
      {
       "$id": "45",
-      "name": "tags",
-      "serializedName": "tags",
-      "description": "Resource tags.",
-      "type": {
+      "Kind": "property",
+      "Name": "tags",
+      "SerializedName": "tags",
+      "Description": "Resource tags.",
+      "Type": {
        "$id": "46",
        "Kind": "dict",
        "KeyType": {
@@ -411,39 +422,41 @@
        },
        "Decorators": []
       },
-      "optional": true,
-      "readOnly": false,
-      "discriminator": false,
-      "decorators": [],
-      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags"
+      "Optional": true,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags"
      },
      {
       "$id": "49",
-      "name": "location",
-      "serializedName": "location",
-      "description": "The geo-location where the resource lives",
-      "type": {
+      "Kind": "property",
+      "Name": "location",
+      "SerializedName": "location",
+      "Description": "The geo-location where the resource lives",
+      "Type": {
        "$id": "50",
        "Kind": "string",
        "Name": "string",
        "CrossLanguageDefinitionId": "TypeSpec.string",
        "Decorators": []
       },
-      "optional": false,
-      "readOnly": false,
-      "discriminator": false,
-      "decorators": [],
-      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location"
+      "Optional": false,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location"
      }
     ]
    },
    "Properties": [
     {
      "$id": "51",
-     "name": "properties",
-     "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
-     "type": {
+     "Kind": "property",
+     "Name": "properties",
+     "SerializedName": "properties",
+     "Description": "The resource-specific properties for this resource.",
+     "Type": {
       "$id": "52",
       "Kind": "model",
       "Name": "FooProperties",
@@ -462,53 +475,56 @@
       "Properties": [
        {
         "$id": "55",
-        "name": "serviceUrl",
-        "serializedName": "serviceUrl",
-        "description": "the service url",
-        "type": {
+        "Kind": "property",
+        "Name": "serviceUrl",
+        "SerializedName": "serviceUrl",
+        "Description": "the service url",
+        "Type": {
          "$id": "56",
          "Kind": "url",
          "Name": "url",
          "CrossLanguageDefinitionId": "TypeSpec.url",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.serviceUrl"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.serviceUrl"
        },
        {
         "$id": "57",
-        "name": "something",
-        "serializedName": "something",
-        "description": "something",
-        "type": {
+        "Kind": "property",
+        "Name": "something",
+        "SerializedName": "something",
+        "Description": "something",
+        "Type": {
          "$id": "58",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.something"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.something"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "MgmtTypeSpec.Foo.properties"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MgmtTypeSpec.Foo.properties"
     },
     {
      "$id": "59",
-     "name": "extendedLocation",
-     "serializedName": "extendedLocation",
-     "type": {
+     "Kind": "property",
+     "Name": "extendedLocation",
+     "SerializedName": "extendedLocation",
+     "Type": {
       "$id": "60",
       "Kind": "model",
       "Name": "ExtendedLocation",
@@ -519,43 +535,45 @@
       "Properties": [
        {
         "$id": "61",
-        "name": "name",
-        "serializedName": "name",
-        "description": "The name of the extended location.",
-        "type": {
+        "Kind": "property",
+        "Name": "name",
+        "SerializedName": "name",
+        "Description": "The name of the extended location.",
+        "Type": {
          "$id": "62",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation.name"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation.name"
        },
        {
         "$id": "63",
-        "name": "type",
-        "serializedName": "type",
-        "description": "The type of the extended location.",
-        "type": {
+        "Kind": "property",
+        "Name": "type",
+        "SerializedName": "type",
+        "Description": "The type of the extended location.",
+        "Type": {
          "$ref": "2"
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation.type"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation.type"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "MgmtTypeSpec.Foo.extendedLocation"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MgmtTypeSpec.Foo.extendedLocation"
     }
    ]
   },
@@ -585,10 +603,11 @@
    "Properties": [
     {
      "$id": "65",
-     "name": "error",
-     "serializedName": "error",
-     "description": "The error object.",
-     "type": {
+     "Kind": "property",
+     "Name": "error",
+     "SerializedName": "error",
+     "Description": "The error object.",
+     "Type": {
       "$id": "66",
       "Kind": "model",
       "Name": "ErrorDetail",
@@ -599,64 +618,68 @@
       "Properties": [
        {
         "$id": "67",
-        "name": "code",
-        "serializedName": "code",
-        "description": "The error code.",
-        "type": {
+        "Kind": "property",
+        "Name": "code",
+        "SerializedName": "code",
+        "Description": "The error code.",
+        "Type": {
          "$id": "68",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code"
        },
        {
         "$id": "69",
-        "name": "message",
-        "serializedName": "message",
-        "description": "The error message.",
-        "type": {
+        "Kind": "property",
+        "Name": "message",
+        "SerializedName": "message",
+        "Description": "The error message.",
+        "Type": {
          "$id": "70",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message"
        },
        {
         "$id": "71",
-        "name": "target",
-        "serializedName": "target",
-        "description": "The error target.",
-        "type": {
+        "Kind": "property",
+        "Name": "target",
+        "SerializedName": "target",
+        "Description": "The error target.",
+        "Type": {
          "$id": "72",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target"
        },
        {
         "$id": "73",
-        "name": "details",
-        "serializedName": "details",
-        "description": "The error details.",
-        "type": {
+        "Kind": "property",
+        "Name": "details",
+        "SerializedName": "details",
+        "Description": "The error details.",
+        "Type": {
          "$id": "74",
          "Kind": "array",
          "Name": "ArrayErrorDetail",
@@ -666,18 +689,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details"
        },
        {
         "$id": "75",
-        "name": "additionalInfo",
-        "serializedName": "additionalInfo",
-        "description": "The error additional info.",
-        "type": {
+        "Kind": "property",
+        "Name": "additionalInfo",
+        "SerializedName": "additionalInfo",
+        "Description": "The error additional info.",
+        "Type": {
          "$id": "76",
          "Kind": "array",
          "Name": "ArrayErrorAdditionalInfo",
@@ -692,28 +716,30 @@
           "Properties": [
            {
             "$id": "78",
-            "name": "type",
-            "serializedName": "type",
-            "description": "The additional info type.",
-            "type": {
+            "Kind": "property",
+            "Name": "type",
+            "SerializedName": "type",
+            "Description": "The additional info type.",
+            "Type": {
              "$id": "79",
              "Kind": "string",
              "Name": "string",
              "CrossLanguageDefinitionId": "TypeSpec.string",
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type"
            },
            {
             "$id": "80",
-            "name": "info",
-            "serializedName": "info",
-            "description": "The additional info.",
-            "type": {
+            "Kind": "property",
+            "Name": "info",
+            "SerializedName": "info",
+            "Description": "The additional info.",
+            "Type": {
              "$id": "81",
              "Kind": "model",
              "Name": "ErrorAdditionalInfoInfo",
@@ -722,30 +748,30 @@
              "Decorators": [],
              "Properties": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info"
            }
           ]
          },
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error"
     }
    ]
   },
@@ -769,10 +795,11 @@
    "Properties": [
     {
      "$id": "83",
-     "name": "value",
-     "serializedName": "value",
-     "description": "The Foo items on this page",
-     "type": {
+     "Kind": "property",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The Foo items on this page",
+     "Type": {
       "$id": "84",
       "Kind": "array",
       "Name": "ArrayFoo",
@@ -782,18 +809,19 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
      "$id": "85",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "description": "The link to the next page of items",
-     "type": {
+     "Kind": "property",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
       "$id": "86",
       "Kind": "url",
       "Name": "ResourceLocation",
@@ -807,11 +835,11 @@
       },
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
    ]
   },
@@ -826,10 +854,11 @@
    "Properties": [
     {
      "$id": "89",
-     "name": "value",
-     "serializedName": "value",
-     "description": "The PrivateLinkResource items on this page",
-     "type": {
+     "Kind": "property",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The PrivateLinkResource items on this page",
+     "Type": {
       "$id": "90",
       "Kind": "array",
       "Name": "ArrayPrivateLinkResource",
@@ -857,10 +886,11 @@
        "Properties": [
         {
          "$id": "93",
-         "name": "properties",
-         "serializedName": "properties",
-         "description": "The resource-specific properties for this resource.",
-         "type": {
+         "Kind": "property",
+         "Name": "properties",
+         "SerializedName": "properties",
+         "Description": "The resource-specific properties for this resource.",
+         "Type": {
           "$id": "94",
           "Kind": "model",
           "Name": "PrivateLinkResourceProperties",
@@ -871,28 +901,30 @@
           "Properties": [
            {
             "$id": "95",
-            "name": "groupId",
-            "serializedName": "groupId",
-            "description": "The private link resource group id.",
-            "type": {
+            "Kind": "property",
+            "Name": "groupId",
+            "SerializedName": "groupId",
+            "Description": "The private link resource group id.",
+            "Type": {
              "$id": "96",
              "Kind": "string",
              "Name": "string",
              "CrossLanguageDefinitionId": "TypeSpec.string",
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.groupId"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.groupId"
            },
            {
             "$id": "97",
-            "name": "requiredMembers",
-            "serializedName": "requiredMembers",
-            "description": "The private link resource required member names.",
-            "type": {
+            "Kind": "property",
+            "Name": "requiredMembers",
+            "SerializedName": "requiredMembers",
+            "Description": "The private link resource required member names.",
+            "Type": {
              "$id": "98",
              "Kind": "array",
              "Name": "Array",
@@ -906,18 +938,19 @@
              "CrossLanguageDefinitionId": "TypeSpec.Array",
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.requiredMembers"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.requiredMembers"
            },
            {
             "$id": "100",
-            "name": "requiredZoneNames",
-            "serializedName": "requiredZoneNames",
-            "description": "The private link resource private link DNS zone name.",
-            "type": {
+            "Kind": "property",
+            "Name": "requiredZoneNames",
+            "SerializedName": "requiredZoneNames",
+            "Description": "The private link resource private link DNS zone name.",
+            "Type": {
              "$id": "101",
              "Kind": "array",
              "Name": "Array",
@@ -931,26 +964,27 @@
              "CrossLanguageDefinitionId": "TypeSpec.Array",
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": false,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.requiredZoneNames"
+            "Optional": true,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.requiredZoneNames"
            }
           ]
          },
-         "optional": true,
-         "readOnly": false,
-         "discriminator": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.properties"
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.properties"
         },
         {
          "$id": "103",
-         "name": "identity",
-         "serializedName": "identity",
-         "description": "The managed service identities assigned to this resource.",
-         "type": {
+         "Kind": "property",
+         "Name": "identity",
+         "SerializedName": "identity",
+         "Description": "The managed service identities assigned to this resource.",
+         "Type": {
           "$id": "104",
           "Kind": "model",
           "Name": "ManagedServiceIdentity",
@@ -961,10 +995,11 @@
           "Properties": [
            {
             "$id": "105",
-            "name": "principalId",
-            "serializedName": "principalId",
-            "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-            "type": {
+            "Kind": "property",
+            "Name": "principalId",
+            "SerializedName": "principalId",
+            "Description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+            "Type": {
              "$id": "106",
              "Kind": "string",
              "Name": "uuid",
@@ -978,18 +1013,19 @@
              },
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.principalId"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.principalId"
            },
            {
             "$id": "108",
-            "name": "tenantId",
-            "serializedName": "tenantId",
-            "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-            "type": {
+            "Kind": "property",
+            "Name": "tenantId",
+            "SerializedName": "tenantId",
+            "Description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+            "Type": {
              "$id": "109",
              "Kind": "string",
              "Name": "uuid",
@@ -1003,32 +1039,34 @@
              },
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": true,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.tenantId"
+            "Optional": true,
+            "ReadOnly": true,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.tenantId"
            },
            {
             "$id": "111",
-            "name": "type",
-            "serializedName": "type",
-            "description": "The type of managed identity assigned to this resource.",
-            "type": {
+            "Kind": "property",
+            "Name": "type",
+            "SerializedName": "type",
+            "Description": "The type of managed identity assigned to this resource.",
+            "Type": {
              "$ref": "12"
             },
-            "optional": false,
-            "readOnly": false,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.type"
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.type"
            },
            {
             "$id": "112",
-            "name": "userAssignedIdentities",
-            "serializedName": "userAssignedIdentities",
-            "description": "The identities assigned to this resource by the user.",
-            "type": {
+            "Kind": "property",
+            "Name": "userAssignedIdentities",
+            "SerializedName": "userAssignedIdentities",
+            "Description": "The identities assigned to this resource by the user.",
+            "Type": {
              "$id": "113",
              "Kind": "dict",
              "KeyType": {
@@ -1052,10 +1090,11 @@
                "Properties": [
                 {
                  "$id": "117",
-                 "name": "principalId",
-                 "serializedName": "principalId",
-                 "description": "The principal ID of the assigned identity.",
-                 "type": {
+                 "Kind": "property",
+                 "Name": "principalId",
+                 "SerializedName": "principalId",
+                 "Description": "The principal ID of the assigned identity.",
+                 "Type": {
                   "$id": "118",
                   "Kind": "string",
                   "Name": "uuid",
@@ -1069,18 +1108,19 @@
                   },
                   "Decorators": []
                  },
-                 "optional": true,
-                 "readOnly": true,
-                 "discriminator": false,
-                 "decorators": [],
-                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId"
+                 "Optional": true,
+                 "ReadOnly": true,
+                 "Discriminator": false,
+                 "Decorators": [],
+                 "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId"
                 },
                 {
                  "$id": "120",
-                 "name": "clientId",
-                 "serializedName": "clientId",
-                 "description": "The client ID of the assigned identity.",
-                 "type": {
+                 "Kind": "property",
+                 "Name": "clientId",
+                 "SerializedName": "clientId",
+                 "Description": "The client ID of the assigned identity.",
+                 "Type": {
                   "$id": "121",
                   "Kind": "string",
                   "Name": "uuid",
@@ -1094,48 +1134,49 @@
                   },
                   "Decorators": []
                  },
-                 "optional": true,
-                 "readOnly": true,
-                 "discriminator": false,
-                 "decorators": [],
-                 "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.clientId"
+                 "Optional": true,
+                 "ReadOnly": true,
+                 "Discriminator": false,
+                 "Decorators": [],
+                 "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.clientId"
                 }
                ]
               }
              },
              "Decorators": []
             },
-            "optional": true,
-            "readOnly": false,
-            "discriminator": false,
-            "decorators": [],
-            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.userAssignedIdentities"
+            "Optional": true,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.userAssignedIdentities"
            }
           ]
          },
-         "optional": true,
-         "readOnly": false,
-         "discriminator": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.identity"
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.identity"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
      "$id": "123",
-     "name": "nextLink",
-     "serializedName": "nextLink",
-     "description": "The link to the next page of items",
-     "type": {
+     "Kind": "property",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
       "$id": "124",
       "Kind": "url",
       "Name": "ResourceLocation",
@@ -1149,11 +1190,11 @@
       },
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
    ]
   },

@@ -75,39 +75,42 @@
    "Properties": [
     {
      "$id": "10",
-     "name": "newProp",
-     "serializedName": "newProp",
-     "type": {
+     "Kind": "property",
+     "Name": "newProp",
+     "SerializedName": "newProp",
+     "Type": {
       "$id": "11",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.newProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.newProp"
     },
     {
      "$id": "12",
-     "name": "enumProp",
-     "serializedName": "enumProp",
-     "type": {
+     "Kind": "property",
+     "Name": "enumProp",
+     "SerializedName": "enumProp",
+     "Type": {
       "$ref": "2"
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.enumProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.enumProp"
     },
     {
      "$id": "13",
-     "name": "unionProp",
-     "serializedName": "unionProp",
-     "type": {
+     "Kind": "property",
+     "Name": "unionProp",
+     "SerializedName": "unionProp",
+     "Type": {
       "$id": "14",
       "Kind": "union",
       "Name": "NewUnion",
@@ -136,11 +139,11 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.unionProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.unionProp"
     }
    ]
   }

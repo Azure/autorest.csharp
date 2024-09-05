@@ -191,24 +191,26 @@
    "Properties": [
     {
      "$id": "26",
-     "name": "propertyExtensibleEnum",
-     "serializedName": "propertyExtensibleEnum",
-     "description": "ExtensibleEnumWithOperator",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyExtensibleEnum",
+     "SerializedName": "propertyExtensibleEnum",
+     "Description": "ExtensibleEnumWithOperator",
+     "Type": {
       "$ref": "2"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyExtensibleEnum"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyExtensibleEnum"
     },
     {
      "$id": "27",
-     "name": "propertyModelToMakeInternal",
-     "serializedName": "propertyModelToMakeInternal",
-     "description": "ModelToMakeInternal",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelToMakeInternal",
+     "SerializedName": "propertyModelToMakeInternal",
+     "Description": "ModelToMakeInternal",
+     "Type": {
       "$id": "28",
       "Kind": "model",
       "Name": "ModelToMakeInternal",
@@ -219,36 +221,38 @@
       "Properties": [
        {
         "$id": "29",
-        "name": "requiredInt",
-        "serializedName": "requiredInt",
-        "description": "Required int",
-        "type": {
+        "Kind": "property",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
          "$id": "30",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal.requiredInt"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal.requiredInt"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToMakeInternal"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToMakeInternal"
     },
     {
      "$id": "31",
-     "name": "propertyModelToRename",
-     "serializedName": "propertyModelToRename",
-     "description": "ModelToRename",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelToRename",
+     "SerializedName": "propertyModelToRename",
+     "Description": "ModelToRename",
+     "Type": {
       "$id": "32",
       "Kind": "model",
       "Name": "ModelToRename",
@@ -259,54 +263,57 @@
       "Properties": [
        {
         "$id": "33",
-        "name": "requiredIntOnBase",
-        "serializedName": "requiredIntOnBase",
-        "description": "Required int",
-        "type": {
+        "Kind": "property",
+        "Name": "requiredIntOnBase",
+        "SerializedName": "requiredIntOnBase",
+        "Description": "Required int",
+        "Type": {
          "$id": "34",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.requiredIntOnBase"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.requiredIntOnBase"
        },
        {
         "$id": "35",
-        "name": "optionalInt",
-        "serializedName": "optionalInt",
-        "description": "Optional int",
-        "type": {
+        "Kind": "property",
+        "Name": "optionalInt",
+        "SerializedName": "optionalInt",
+        "Description": "Optional int",
+        "Type": {
          "$id": "36",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.optionalInt"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename.optionalInt"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToRename"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToRename"
     },
     {
      "$id": "37",
-     "name": "propertyModelToChangeNamespace",
-     "serializedName": "propertyModelToChangeNamespace",
-     "description": "ModelToChangeNamespace",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelToChangeNamespace",
+     "SerializedName": "propertyModelToChangeNamespace",
+     "Description": "ModelToChangeNamespace",
+     "Type": {
       "$id": "38",
       "Kind": "model",
       "Name": "ModelToChangeNamespace",
@@ -317,36 +324,38 @@
       "Properties": [
        {
         "$id": "39",
-        "name": "requiredInt",
-        "serializedName": "requiredInt",
-        "description": "Required int",
-        "type": {
+        "Kind": "property",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
          "$id": "40",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace.requiredInt"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace.requiredInt"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToChangeNamespace"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToChangeNamespace"
     },
     {
      "$id": "41",
-     "name": "propertyModelWithCustomizedProperties",
-     "serializedName": "propertyModelWithCustomizedProperties",
-     "description": "ModelWithCustomizedProperties",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelWithCustomizedProperties",
+     "SerializedName": "propertyModelWithCustomizedProperties",
+     "Description": "ModelWithCustomizedProperties",
+     "Type": {
       "$id": "42",
       "Kind": "model",
       "Name": "ModelWithCustomizedProperties",
@@ -357,100 +366,106 @@
       "Properties": [
        {
         "$id": "43",
-        "name": "propertyToMakeInternal",
-        "serializedName": "propertyToMakeInternal",
-        "description": "Public property made internal",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeInternal",
+        "SerializedName": "propertyToMakeInternal",
+        "Description": "Public property made internal",
+        "Type": {
          "$id": "44",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInternal"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInternal"
        },
        {
         "$id": "45",
-        "name": "propertyToRename",
-        "serializedName": "propertyToRename",
-        "description": "Renamed property (original name: PropertyToRename)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToRename",
+        "SerializedName": "propertyToRename",
+        "Description": "Renamed property (original name: PropertyToRename)",
+        "Type": {
          "$id": "46",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToRename"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToRename"
        },
        {
         "$id": "47",
-        "name": "propertyToMakeFloat",
-        "serializedName": "propertyToMakeFloat",
-        "description": "Property with type changed to float (original type: int)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeFloat",
+        "SerializedName": "propertyToMakeFloat",
+        "Description": "Property with type changed to float (original type: int)",
+        "Type": {
          "$id": "48",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeFloat"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeFloat"
        },
        {
         "$id": "49",
-        "name": "propertyToMakeInt",
-        "serializedName": "propertyToMakeInt",
-        "description": "Property with type changed to int (original type: float)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeInt",
+        "SerializedName": "propertyToMakeInt",
+        "Description": "Property with type changed to int (original type: float)",
+        "Type": {
          "$id": "50",
          "Kind": "float32",
          "Name": "float32",
          "CrossLanguageDefinitionId": "TypeSpec.float32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInt"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeInt"
        },
        {
         "$id": "51",
-        "name": "propertyToMakeDuration",
-        "serializedName": "propertyToMakeDuration",
-        "description": "Property with type changed to duration (original type: string)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeDuration",
+        "SerializedName": "propertyToMakeDuration",
+        "Description": "Property with type changed to duration (original type: string)",
+        "Type": {
          "$id": "52",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeDuration"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeDuration"
        },
        {
         "$id": "53",
-        "name": "propertyToMakeString",
-        "serializedName": "propertyToMakeString",
-        "description": "Property with type changed to string (original type: duration)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeString",
+        "SerializedName": "propertyToMakeString",
+        "Description": "Property with type changed to string (original type: duration)",
+        "Type": {
          "$id": "54",
          "Kind": "duration",
          "Name": "duration",
@@ -465,54 +480,57 @@
          "CrossLanguageDefinitionId": "TypeSpec.duration",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeString"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeString"
        },
        {
         "$id": "56",
-        "name": "propertyToMakeJsonElement",
-        "serializedName": "propertyToMakeJsonElement",
-        "description": "Property with type changed to JsonElement (original type: string)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToMakeJsonElement",
+        "SerializedName": "propertyToMakeJsonElement",
+        "Description": "Property with type changed to JsonElement (original type: string)",
+        "Type": {
          "$id": "57",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeJsonElement"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToMakeJsonElement"
        },
        {
         "$id": "58",
-        "name": "propertyToField",
-        "serializedName": "propertyToField",
-        "description": "Field that replaces property (original name: PropertyToField)",
-        "type": {
+        "Kind": "property",
+        "Name": "propertyToField",
+        "SerializedName": "propertyToField",
+        "Description": "Field that replaces property (original name: PropertyToField)",
+        "Type": {
          "$id": "59",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToField"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.propertyToField"
        },
        {
         "$id": "60",
-        "name": "badListName",
-        "serializedName": "badListName",
-        "description": "Property renamed that is list",
-        "type": {
+        "Kind": "property",
+        "Name": "badListName",
+        "SerializedName": "badListName",
+        "Description": "Property renamed that is list",
+        "Type": {
          "$id": "61",
          "Kind": "array",
          "Name": "Array",
@@ -526,18 +544,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListName"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListName"
        },
        {
         "$id": "63",
-        "name": "badDictionaryName",
-        "serializedName": "badDictionaryName",
-        "description": "Property renamed that is dictionary",
-        "type": {
+        "Kind": "property",
+        "Name": "badDictionaryName",
+        "SerializedName": "badDictionaryName",
+        "Description": "Property renamed that is dictionary",
+        "Type": {
          "$id": "64",
          "Kind": "dict",
          "KeyType": {
@@ -556,18 +575,19 @@
          },
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badDictionaryName"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badDictionaryName"
        },
        {
         "$id": "67",
-        "name": "badListOfListName",
-        "serializedName": "badListOfListName",
-        "description": "Property renamed that is listoflist",
-        "type": {
+        "Kind": "property",
+        "Name": "badListOfListName",
+        "SerializedName": "badListOfListName",
+        "Description": "Property renamed that is listoflist",
+        "Type": {
          "$id": "68",
          "Kind": "array",
          "Name": "ArrayArray",
@@ -588,18 +608,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfListName"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfListName"
        },
        {
         "$id": "71",
-        "name": "badListOfDictionaryName",
-        "serializedName": "badListOfDictionaryName",
-        "description": "Property renamed that is listofdictionary",
-        "type": {
+        "Kind": "property",
+        "Name": "badListOfDictionaryName",
+        "SerializedName": "badListOfDictionaryName",
+        "Description": "Property renamed that is listofdictionary",
+        "Type": {
          "$id": "72",
          "Kind": "array",
          "Name": "ArrayRecord",
@@ -625,18 +646,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfDictionaryName"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.badListOfDictionaryName"
        },
        {
         "$id": "76",
-        "name": "vector",
-        "serializedName": "vector",
-        "description": "Property type changed to ReadOnlyMemory<float>",
-        "type": {
+        "Kind": "property",
+        "Name": "vector",
+        "SerializedName": "vector",
+        "Description": "Property type changed to ReadOnlyMemory<float>",
+        "Type": {
          "$id": "77",
          "Kind": "array",
          "Name": "Array",
@@ -650,18 +672,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vector"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vector"
        },
        {
         "$id": "79",
-        "name": "vectorOptional",
-        "serializedName": "vectorOptional",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorOptional",
+        "SerializedName": "vectorOptional",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "80",
          "Kind": "array",
          "Name": "Array",
@@ -675,18 +698,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptional"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptional"
        },
        {
         "$id": "82",
-        "name": "vectorNullable",
-        "serializedName": "vectorNullable",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorNullable",
+        "SerializedName": "vectorNullable",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "83",
          "Kind": "nullable",
          "Type": {
@@ -704,18 +728,19 @@
           "Decorators": []
          }
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullable"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullable"
        },
        {
         "$id": "86",
-        "name": "vectorOptionalNullable",
-        "serializedName": "vectorOptionalNullable",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorOptionalNullable",
+        "SerializedName": "vectorOptionalNullable",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "87",
          "Kind": "nullable",
          "Type": {
@@ -733,18 +758,19 @@
           "Decorators": []
          }
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullable"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullable"
        },
        {
         "$id": "90",
-        "name": "vectorReadOnly",
-        "serializedName": "vectorReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorReadOnly",
+        "SerializedName": "vectorReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>",
+        "Type": {
          "$id": "91",
          "Kind": "array",
          "Name": "Array",
@@ -758,18 +784,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorReadOnly"
+        "Optional": false,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorReadOnly"
        },
        {
         "$id": "93",
-        "name": "vectorOptionalReadOnly",
-        "serializedName": "vectorOptionalReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorOptionalReadOnly",
+        "SerializedName": "vectorOptionalReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "94",
          "Kind": "array",
          "Name": "Array",
@@ -783,18 +810,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.Array",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalReadOnly"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalReadOnly"
        },
        {
         "$id": "96",
-        "name": "vectorNullableReadOnly",
-        "serializedName": "vectorNullableReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorNullableReadOnly",
+        "SerializedName": "vectorNullableReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "97",
          "Kind": "nullable",
          "Type": {
@@ -812,18 +840,19 @@
           "Decorators": []
          }
         },
-        "optional": false,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullableReadOnly"
+        "Optional": false,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorNullableReadOnly"
        },
        {
         "$id": "100",
-        "name": "vectorOptionalNullableReadOnly",
-        "serializedName": "vectorOptionalNullableReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
-        "type": {
+        "Kind": "property",
+        "Name": "vectorOptionalNullableReadOnly",
+        "SerializedName": "vectorOptionalNullableReadOnly",
+        "Description": "Property type changed to ReadOnlyMemory<float>?",
+        "Type": {
          "$id": "101",
          "Kind": "nullable",
          "Type": {
@@ -841,68 +870,72 @@
           "Decorators": []
          }
         },
-        "optional": true,
-        "readOnly": true,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullableReadOnly"
+        "Optional": true,
+        "ReadOnly": true,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties.vectorOptionalNullableReadOnly"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelWithCustomizedProperties"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelWithCustomizedProperties"
     },
     {
      "$id": "104",
-     "name": "propertyEnumToRename",
-     "serializedName": "propertyEnumToRename",
-     "description": "EnumToRename",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyEnumToRename",
+     "SerializedName": "propertyEnumToRename",
+     "Description": "EnumToRename",
+     "Type": {
       "$ref": "6"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToRename"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToRename"
     },
     {
      "$id": "105",
-     "name": "propertyEnumWithValueToRename",
-     "serializedName": "propertyEnumWithValueToRename",
-     "description": "EnumWithValueToRename",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyEnumWithValueToRename",
+     "SerializedName": "propertyEnumWithValueToRename",
+     "Description": "EnumWithValueToRename",
+     "Type": {
       "$ref": "11"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumWithValueToRename"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumWithValueToRename"
     },
     {
      "$id": "106",
-     "name": "propertyEnumToBeMadeExtensible",
-     "serializedName": "propertyEnumToBeMadeExtensible",
-     "description": "EnumToBeMadeExtensible",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyEnumToBeMadeExtensible",
+     "SerializedName": "propertyEnumToBeMadeExtensible",
+     "Description": "EnumToBeMadeExtensible",
+     "Type": {
       "$ref": "16"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToBeMadeExtensible"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyEnumToBeMadeExtensible"
     },
     {
      "$id": "107",
-     "name": "propertyModelToAddAdditionalSerializableProperty",
-     "serializedName": "propertyModelToAddAdditionalSerializableProperty",
-     "description": "ModelToAddAdditionalSerializableProperty",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelToAddAdditionalSerializableProperty",
+     "SerializedName": "propertyModelToAddAdditionalSerializableProperty",
+     "Description": "ModelToAddAdditionalSerializableProperty",
+     "Type": {
       "$id": "108",
       "Kind": "model",
       "Name": "ModelToAddAdditionalSerializableProperty",
@@ -916,50 +949,53 @@
       "Properties": [
        {
         "$id": "109",
-        "name": "requiredInt",
-        "serializedName": "requiredInt",
-        "description": "Required int",
-        "type": {
+        "Kind": "property",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
          "$id": "110",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty.requiredInt"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty.requiredInt"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToAddAdditionalSerializableProperty"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelToAddAdditionalSerializableProperty"
     },
     {
      "$id": "111",
-     "name": "propertyToMoveToCustomization",
-     "serializedName": "propertyToMoveToCustomization",
-     "description": "Enum type property to move to customization code",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyToMoveToCustomization",
+     "SerializedName": "propertyToMoveToCustomization",
+     "Description": "Enum type property to move to customization code",
+     "Type": {
       "$ref": "21"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyToMoveToCustomization"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyToMoveToCustomization"
     },
     {
      "$id": "112",
-     "name": "propertyModelStruct",
-     "serializedName": "propertyModelStruct",
-     "description": "ModelStruct",
-     "type": {
+     "Kind": "property",
+     "Name": "propertyModelStruct",
+     "SerializedName": "propertyModelStruct",
+     "Description": "ModelStruct",
+     "Type": {
       "$id": "113",
       "Kind": "model",
       "Name": "ModelStruct",
@@ -970,65 +1006,68 @@
       "Properties": [
        {
         "$id": "114",
-        "name": "requiredInt",
-        "serializedName": "requiredInt",
-        "description": "Required int",
-        "type": {
+        "Kind": "property",
+        "Name": "requiredInt",
+        "SerializedName": "requiredInt",
+        "Description": "Required int",
+        "Type": {
          "$id": "115",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.requiredInt"
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.requiredInt"
        },
        {
         "$id": "116",
-        "name": "optionalInt",
-        "serializedName": "optionalInt",
-        "description": "Optional int",
-        "type": {
+        "Kind": "property",
+        "Name": "optionalInt",
+        "SerializedName": "optionalInt",
+        "Description": "Optional int",
+        "Type": {
          "$id": "117",
          "Kind": "int32",
          "Name": "int32",
          "CrossLanguageDefinitionId": "TypeSpec.int32",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalInt"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalInt"
        },
        {
         "$id": "118",
-        "name": "optionalString",
-        "serializedName": "optionalString",
-        "description": "Optional string",
-        "type": {
+        "Kind": "property",
+        "Name": "optionalString",
+        "SerializedName": "optionalString",
+        "Description": "Optional string",
+        "Type": {
          "$id": "119",
          "Kind": "string",
          "Name": "string",
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "optional": true,
-        "readOnly": false,
-        "discriminator": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalString"
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct.optionalString"
        }
       ]
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelStruct"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.RootModel.propertyModelStruct"
     }
    ]
   },
@@ -1060,39 +1099,41 @@
    "Properties": [
     {
      "$id": "121",
-     "name": "requiredIntOnBase",
-     "serializedName": "requiredIntOnBase",
-     "description": "Required int",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredIntOnBase",
+     "SerializedName": "requiredIntOnBase",
+     "Description": "Required int",
+     "Type": {
       "$id": "122",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.requiredIntOnBase"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.requiredIntOnBase"
     },
     {
      "$id": "123",
-     "name": "optionalInt",
-     "serializedName": "optionalInt",
-     "description": "Optional int",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalInt",
+     "SerializedName": "optionalInt",
+     "Description": "Optional int",
+     "Type": {
       "$id": "124",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.optionalInt"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.optionalInt"
     }
    ]
   }

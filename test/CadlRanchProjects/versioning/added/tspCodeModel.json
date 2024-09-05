@@ -105,39 +105,42 @@
    "Properties": [
     {
      "$id": "14",
-     "name": "prop",
-     "serializedName": "prop",
-     "type": {
+     "Kind": "property",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Type": {
       "$id": "15",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV1.prop"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.prop"
     },
     {
      "$id": "16",
-     "name": "enumProp",
-     "serializedName": "enumProp",
-     "type": {
+     "Kind": "property",
+     "Name": "enumProp",
+     "SerializedName": "enumProp",
+     "Type": {
       "$ref": "2"
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV1.enumProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.enumProp"
     },
     {
      "$id": "17",
-     "name": "unionProp",
-     "serializedName": "unionProp",
-     "type": {
+     "Kind": "property",
+     "Name": "unionProp",
+     "SerializedName": "unionProp",
+     "Type": {
       "$id": "18",
       "Kind": "union",
       "Name": "UnionV1",
@@ -166,11 +169,11 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV1.unionProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV1.unionProp"
     }
    ]
   },
@@ -184,39 +187,42 @@
    "Properties": [
     {
      "$id": "23",
-     "name": "prop",
-     "serializedName": "prop",
-     "type": {
+     "Kind": "property",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Type": {
       "$id": "24",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV2.prop"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.prop"
     },
     {
      "$id": "25",
-     "name": "enumProp",
-     "serializedName": "enumProp",
-     "type": {
+     "Kind": "property",
+     "Name": "enumProp",
+     "SerializedName": "enumProp",
+     "Type": {
       "$ref": "6"
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV2.enumProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.enumProp"
     },
     {
      "$id": "26",
-     "name": "unionProp",
-     "serializedName": "unionProp",
-     "type": {
+     "Kind": "property",
+     "Name": "unionProp",
+     "SerializedName": "unionProp",
+     "Type": {
       "$id": "27",
       "Kind": "union",
       "Name": "UnionV2",
@@ -238,11 +244,11 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Added.ModelV2.unionProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Added.ModelV2.unionProp"
     }
    ]
   }

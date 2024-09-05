@@ -14,9 +14,10 @@
    "Properties": [
     {
      "$id": "3",
-     "name": "content",
-     "serializedName": "content",
-     "type": {
+     "Kind": "property",
+     "Name": "content",
+     "SerializedName": "content",
+     "Type": {
       "$id": "4",
       "Kind": "bytes",
       "Name": "bytes",
@@ -24,11 +25,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.content"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.ContentNegotiation.DifferentBody.PngImageAsJson.content"
     }
    ]
   }

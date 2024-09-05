@@ -75,39 +75,42 @@
    "Properties": [
     {
      "$id": "10",
-     "name": "prop",
-     "serializedName": "prop",
-     "type": {
+     "Kind": "property",
+     "Name": "prop",
+     "SerializedName": "prop",
+     "Type": {
       "$id": "11",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Removed.ModelV2.prop"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2.prop"
     },
     {
      "$id": "12",
-     "name": "enumProp",
-     "serializedName": "enumProp",
-     "type": {
+     "Kind": "property",
+     "Name": "enumProp",
+     "SerializedName": "enumProp",
+     "Type": {
       "$ref": "2"
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Removed.ModelV2.enumProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2.enumProp"
     },
     {
      "$id": "13",
-     "name": "unionProp",
-     "serializedName": "unionProp",
-     "type": {
+     "Kind": "property",
+     "Name": "unionProp",
+     "SerializedName": "unionProp",
+     "Type": {
       "$id": "14",
       "Kind": "union",
       "Name": "UnionV2",
@@ -129,11 +132,11 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Versioning.Removed.ModelV2.unionProp"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.Removed.ModelV2.unionProp"
     }
    ]
   }

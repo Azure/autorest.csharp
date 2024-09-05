@@ -342,28 +342,30 @@
    "Properties": [
     {
      "$id": "42",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the Thing",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
       "$id": "43",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.name"
     },
     {
      "$id": "44",
-     "name": "requiredUnion",
-     "serializedName": "requiredUnion",
-     "description": "required Union",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredUnion",
+     "SerializedName": "requiredUnion",
+     "Description": "required Union",
+     "Type": {
       "$id": "45",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
@@ -399,18 +401,19 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredUnion"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredUnion"
     },
     {
      "$id": "50",
-     "name": "requiredLiteralString",
-     "serializedName": "requiredLiteralString",
-     "description": "required literal string",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralString",
+     "SerializedName": "requiredLiteralString",
+     "Description": "required literal string",
+     "Type": {
       "$id": "51",
       "Kind": "constant",
       "ValueType": {
@@ -419,18 +422,19 @@
       "Value": "accept",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralString"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralString"
     },
     {
      "$id": "52",
-     "name": "requiredLiteralInt",
-     "serializedName": "requiredLiteralInt",
-     "description": "required literal int",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralInt",
+     "SerializedName": "requiredLiteralInt",
+     "Description": "required literal int",
+     "Type": {
       "$id": "53",
       "Kind": "constant",
       "ValueType": {
@@ -439,18 +443,19 @@
       "Value": 123,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralInt"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralInt"
     },
     {
      "$id": "54",
-     "name": "requiredLiteralFloat",
-     "serializedName": "requiredLiteralFloat",
-     "description": "required literal float",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralFloat",
+     "SerializedName": "requiredLiteralFloat",
+     "Description": "required literal float",
+     "Type": {
       "$id": "55",
       "Kind": "constant",
       "ValueType": {
@@ -459,18 +464,19 @@
       "Value": 1.23,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralFloat"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralFloat"
     },
     {
      "$id": "56",
-     "name": "requiredLiteralBool",
-     "serializedName": "requiredLiteralBool",
-     "description": "required literal bool",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralBool",
+     "SerializedName": "requiredLiteralBool",
+     "Description": "required literal bool",
+     "Type": {
       "$id": "57",
       "Kind": "constant",
       "ValueType": {
@@ -483,18 +489,19 @@
       "Value": false,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralBool"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredLiteralBool"
     },
     {
      "$id": "59",
-     "name": "optionalLiteralString",
-     "serializedName": "optionalLiteralString",
-     "description": "optional literal string",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralString",
+     "SerializedName": "optionalLiteralString",
+     "Description": "optional literal string",
+     "Type": {
       "$id": "60",
       "Kind": "constant",
       "ValueType": {
@@ -503,18 +510,19 @@
       "Value": "reject",
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralString"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralString"
     },
     {
      "$id": "61",
-     "name": "optionalLiteralInt",
-     "serializedName": "optionalLiteralInt",
-     "description": "optional literal int",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralInt",
+     "SerializedName": "optionalLiteralInt",
+     "Description": "optional literal int",
+     "Type": {
       "$id": "62",
       "Kind": "constant",
       "ValueType": {
@@ -523,18 +531,19 @@
       "Value": 456,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralInt"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralInt"
     },
     {
      "$id": "63",
-     "name": "optionalLiteralFloat",
-     "serializedName": "optionalLiteralFloat",
-     "description": "optional literal float",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralFloat",
+     "SerializedName": "optionalLiteralFloat",
+     "Description": "optional literal float",
+     "Type": {
       "$id": "64",
       "Kind": "constant",
       "ValueType": {
@@ -543,18 +552,19 @@
       "Value": 4.56,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralFloat"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralFloat"
     },
     {
      "$id": "65",
-     "name": "optionalLiteralBool",
-     "serializedName": "optionalLiteralBool",
-     "description": "optional literal bool",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralBool",
+     "SerializedName": "optionalLiteralBool",
+     "Description": "optional literal bool",
+     "Type": {
       "$id": "66",
       "Kind": "constant",
       "ValueType": {
@@ -567,36 +577,38 @@
       "Value": true,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralBool"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalLiteralBool"
     },
     {
      "$id": "68",
-     "name": "requiredBadDescription",
-     "serializedName": "requiredBadDescription",
-     "description": "description with xml <|endoftext|>",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredBadDescription",
+     "SerializedName": "requiredBadDescription",
+     "Description": "description with xml <|endoftext|>",
+     "Type": {
       "$id": "69",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredBadDescription"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredBadDescription"
     },
     {
      "$id": "70",
-     "name": "optionalNullableList",
-     "serializedName": "optionalNullableList",
-     "description": "optional nullable collection",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalNullableList",
+     "SerializedName": "optionalNullableList",
+     "Description": "optional nullable collection",
+     "Type": {
       "$id": "71",
       "Kind": "nullable",
       "Type": {
@@ -614,18 +626,19 @@
        "Decorators": []
       }
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalNullableList"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.optionalNullableList"
     },
     {
      "$id": "74",
-     "name": "requiredNullableList",
-     "serializedName": "requiredNullableList",
-     "description": "required nullable collection",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredNullableList",
+     "SerializedName": "requiredNullableList",
+     "Description": "required nullable collection",
+     "Type": {
       "$id": "75",
       "Kind": "nullable",
       "Type": {
@@ -643,11 +656,11 @@
        "Decorators": []
       }
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredNullableList"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.Thing.requiredNullableList"
     }
    ]
   },
@@ -662,57 +675,60 @@
    "Properties": [
     {
      "$id": "79",
-     "name": "requiredString",
-     "serializedName": "requiredString",
-     "description": "Required string, illustrating a reference type property.",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredString",
+     "SerializedName": "requiredString",
+     "Description": "Required string, illustrating a reference type property.",
+     "Type": {
       "$id": "80",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredString"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredString"
     },
     {
      "$id": "81",
-     "name": "requiredInt",
-     "serializedName": "requiredInt",
-     "description": "Required int, illustrating a value type property.",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredInt",
+     "SerializedName": "requiredInt",
+     "Description": "Required int, illustrating a value type property.",
+     "Type": {
       "$id": "82",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredInt"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredInt"
     },
     {
      "$id": "83",
-     "name": "requiredReadonlyInt",
-     "serializedName": "requiredReadonlyInt",
-     "description": "Required readonly int",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredReadonlyInt",
+     "SerializedName": "requiredReadonlyInt",
+     "Description": "Required readonly int",
+     "Type": {
       "$id": "84",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredReadonlyInt"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel.requiredReadonlyInt"
     }
    ]
   },
@@ -726,28 +742,30 @@
    "Properties": [
     {
      "$id": "86",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the Thing",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
       "$id": "87",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.name"
     },
     {
      "$id": "88",
-     "name": "requiredUnion",
-     "serializedName": "requiredUnion",
-     "description": "required Union",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredUnion",
+     "SerializedName": "requiredUnion",
+     "Description": "required Union",
+     "Type": {
       "$id": "89",
       "Kind": "union",
       "Name": "ThingRequiredUnion",
@@ -783,18 +801,19 @@
       ],
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredUnion"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredUnion"
     },
     {
      "$id": "94",
-     "name": "requiredLiteralString",
-     "serializedName": "requiredLiteralString",
-     "description": "required literal string",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralString",
+     "SerializedName": "requiredLiteralString",
+     "Description": "required literal string",
+     "Type": {
       "$id": "95",
       "Kind": "constant",
       "ValueType": {
@@ -803,18 +822,19 @@
       "Value": "accept",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralString"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralString"
     },
     {
      "$id": "96",
-     "name": "requiredLiteralInt",
-     "serializedName": "requiredLiteralInt",
-     "description": "required literal int",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralInt",
+     "SerializedName": "requiredLiteralInt",
+     "Description": "required literal int",
+     "Type": {
       "$id": "97",
       "Kind": "constant",
       "ValueType": {
@@ -823,18 +843,19 @@
       "Value": 123,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralInt"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralInt"
     },
     {
      "$id": "98",
-     "name": "requiredLiteralFloat",
-     "serializedName": "requiredLiteralFloat",
-     "description": "required literal float",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralFloat",
+     "SerializedName": "requiredLiteralFloat",
+     "Description": "required literal float",
+     "Type": {
       "$id": "99",
       "Kind": "constant",
       "ValueType": {
@@ -843,18 +864,19 @@
       "Value": 1.23,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralFloat"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralFloat"
     },
     {
      "$id": "100",
-     "name": "requiredLiteralBool",
-     "serializedName": "requiredLiteralBool",
-     "description": "required literal bool",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredLiteralBool",
+     "SerializedName": "requiredLiteralBool",
+     "Description": "required literal bool",
+     "Type": {
       "$id": "101",
       "Kind": "constant",
       "ValueType": {
@@ -867,18 +889,19 @@
       "Value": false,
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralBool"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredLiteralBool"
     },
     {
      "$id": "103",
-     "name": "optionalLiteralString",
-     "serializedName": "optionalLiteralString",
-     "description": "optional literal string",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralString",
+     "SerializedName": "optionalLiteralString",
+     "Description": "optional literal string",
+     "Type": {
       "$id": "104",
       "Kind": "constant",
       "ValueType": {
@@ -887,18 +910,19 @@
       "Value": "reject",
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralString"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralString"
     },
     {
      "$id": "105",
-     "name": "optionalLiteralInt",
-     "serializedName": "optionalLiteralInt",
-     "description": "optional literal int",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralInt",
+     "SerializedName": "optionalLiteralInt",
+     "Description": "optional literal int",
+     "Type": {
       "$id": "106",
       "Kind": "constant",
       "ValueType": {
@@ -907,18 +931,19 @@
       "Value": 456,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralInt"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralInt"
     },
     {
      "$id": "107",
-     "name": "optionalLiteralFloat",
-     "serializedName": "optionalLiteralFloat",
-     "description": "optional literal float",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralFloat",
+     "SerializedName": "optionalLiteralFloat",
+     "Description": "optional literal float",
+     "Type": {
       "$id": "108",
       "Kind": "constant",
       "ValueType": {
@@ -927,18 +952,19 @@
       "Value": 4.56,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralFloat"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralFloat"
     },
     {
      "$id": "109",
-     "name": "optionalLiteralBool",
-     "serializedName": "optionalLiteralBool",
-     "description": "optional literal bool",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalLiteralBool",
+     "SerializedName": "optionalLiteralBool",
+     "Description": "optional literal bool",
+     "Type": {
       "$id": "110",
       "Kind": "constant",
       "ValueType": {
@@ -951,36 +977,38 @@
       "Value": true,
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralBool"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalLiteralBool"
     },
     {
      "$id": "112",
-     "name": "requiredBadDescription",
-     "serializedName": "requiredBadDescription",
-     "description": "description with xml <|endoftext|>",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredBadDescription",
+     "SerializedName": "requiredBadDescription",
+     "Description": "description with xml <|endoftext|>",
+     "Type": {
       "$id": "113",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredBadDescription"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredBadDescription"
     },
     {
      "$id": "114",
-     "name": "optionalNullableList",
-     "serializedName": "optionalNullableList",
-     "description": "optional nullable collection",
-     "type": {
+     "Kind": "property",
+     "Name": "optionalNullableList",
+     "SerializedName": "optionalNullableList",
+     "Description": "optional nullable collection",
+     "Type": {
       "$id": "115",
       "Kind": "nullable",
       "Type": {
@@ -998,18 +1026,19 @@
        "Decorators": []
       }
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalNullableList"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.optionalNullableList"
     },
     {
      "$id": "118",
-     "name": "requiredNullableList",
-     "serializedName": "requiredNullableList",
-     "description": "required nullable collection",
-     "type": {
+     "Kind": "property",
+     "Name": "requiredNullableList",
+     "SerializedName": "requiredNullableList",
+     "Description": "required nullable collection",
+     "Type": {
       "$id": "119",
       "Kind": "nullable",
       "Type": {
@@ -1027,11 +1056,11 @@
        "Decorators": []
       }
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredNullableList"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.anonymousBody.Request.anonymous.requiredNullableList"
     }
    ]
   },
@@ -1045,28 +1074,30 @@
    "Properties": [
     {
      "$id": "123",
-     "name": "sourceUrl",
-     "serializedName": "sourceUrl",
-     "description": "url format",
-     "type": {
+     "Kind": "property",
+     "Name": "sourceUrl",
+     "SerializedName": "sourceUrl",
+     "Description": "url format",
+     "Type": {
       "$id": "124",
       "Kind": "url",
       "Name": "url",
       "CrossLanguageDefinitionId": "TypeSpec.url",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat.sourceUrl"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat.sourceUrl"
     },
     {
      "$id": "125",
-     "name": "guid",
-     "serializedName": "guid",
-     "description": "uuid format",
-     "type": {
+     "Kind": "property",
+     "Name": "guid",
+     "SerializedName": "guid",
+     "Description": "uuid format",
+     "Type": {
       "$id": "126",
       "Kind": "string",
       "Name": "uuid",
@@ -1080,11 +1111,11 @@
       },
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat.guid"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithFormat.guid"
     }
    ]
   },
@@ -1098,34 +1129,36 @@
    "Properties": [
     {
      "$id": "129",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the NotFriend",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the NotFriend",
+     "Type": {
       "$id": "130",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous.name"
     },
     {
      "$id": "131",
-     "name": "format",
-     "serializedName": "format",
-     "type": {
+     "Kind": "property",
+     "Name": "format",
+     "SerializedName": "format",
+     "Type": {
       "$ref": "122"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous.format"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.friendlyModel.Request.anonymous.format"
     }
    ]
   },
@@ -1140,34 +1173,36 @@
    "Properties": [
     {
      "$id": "133",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the NotFriend",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the NotFriend",
+     "Type": {
       "$id": "134",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend.name"
     },
     {
      "$id": "135",
-     "name": "format",
-     "serializedName": "format",
-     "type": {
+     "Kind": "property",
+     "Name": "format",
+     "SerializedName": "format",
+     "Type": {
       "$ref": "122"
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend.format"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend.format"
     }
    ]
   },
@@ -1181,21 +1216,22 @@
    "Properties": [
     {
      "$id": "137",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the ModelWithProjectedName",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the ModelWithProjectedName",
+     "Type": {
       "$id": "138",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.projectedNameModel.Request.anonymous.name"
     }
    ]
   },
@@ -1210,21 +1246,22 @@
    "Properties": [
     {
      "$id": "140",
-     "name": "name",
-     "serializedName": "name",
-     "description": "name of the ModelWithProjectedName",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the ModelWithProjectedName",
+     "Type": {
       "$id": "141",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName.name"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName.name"
     }
    ]
   },

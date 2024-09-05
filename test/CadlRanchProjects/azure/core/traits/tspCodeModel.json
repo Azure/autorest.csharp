@@ -77,39 +77,41 @@
    "Properties": [
     {
      "$id": "10",
-     "name": "id",
-     "serializedName": "id",
-     "description": "The user's id.",
-     "type": {
+     "Kind": "property",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The user's id.",
+     "Type": {
       "$id": "11",
       "Kind": "int32",
       "Name": "int32",
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
     },
     {
      "$id": "12",
-     "name": "name",
-     "serializedName": "name",
-     "description": "The user's name.",
-     "type": {
+     "Kind": "property",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The user's name.",
+     "Type": {
       "$id": "13",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
     }
    ]
   },
@@ -124,21 +126,22 @@
    "Properties": [
     {
      "$id": "15",
-     "name": "userActionValue",
-     "serializedName": "userActionValue",
-     "description": "User action value.",
-     "type": {
+     "Kind": "property",
+     "Name": "userActionValue",
+     "SerializedName": "userActionValue",
+     "Description": "User action value.",
+     "Type": {
       "$id": "16",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
     }
    ]
   },
@@ -153,21 +156,22 @@
    "Properties": [
     {
      "$id": "18",
-     "name": "userActionResult",
-     "serializedName": "userActionResult",
-     "description": "User action result.",
-     "type": {
+     "Kind": "property",
+     "Name": "userActionResult",
+     "SerializedName": "userActionResult",
+     "Description": "User action result.",
+     "Type": {
       "$id": "19",
       "Kind": "string",
       "Name": "string",
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
     }
    ]
   }
