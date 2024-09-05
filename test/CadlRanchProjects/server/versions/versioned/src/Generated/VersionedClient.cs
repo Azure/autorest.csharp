@@ -310,7 +310,6 @@ namespace Server.Versions.Versioned
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/server/versions/versioned/without-api-version", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -337,7 +336,6 @@ namespace Server.Versions.Versioned
             uri.Reset(_endpoint);
             uri.AppendPath("/server/versions/versioned/with-path-api-version/", false);
             uri.AppendPath(_apiVersion, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

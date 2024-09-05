@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IReadOnlyList<Parameter>? _parameters;
-        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _typeFactory).GetOrderedParametersByRequired();
+        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _operations, _typeFactory).GetOrderedParametersByRequired();
 
         private ClientFields? _fields;
         public ClientFields Fields => _fields ??= ClientFields.CreateForClient(Parameters, _authorization);

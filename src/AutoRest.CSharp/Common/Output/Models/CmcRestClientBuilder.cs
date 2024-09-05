@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation, requestParameters, clientParameters);
             var methodParameters = BuildMethodParameters(allParameters);
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
-            var request = BuildRequest(operation, clientParameters, new RequestMethodBuildContext(methodParameters, references));
+            var request = BuildRequest(operation, new RequestMethodBuildContext(methodParameters, references));
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private Request BuildRequest(InputOperation operation, IEnumerable<InputParameter> clientParameters, RequestMethodBuildContext buildContext)
+        private Request BuildRequest(InputOperation operation, RequestMethodBuildContext buildContext)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();

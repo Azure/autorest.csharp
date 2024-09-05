@@ -57,9 +57,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -107,9 +105,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -157,9 +153,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -207,9 +201,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -254,9 +246,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -301,9 +291,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -348,9 +336,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", "value1", true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -393,9 +379,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueDefault", false);
             uri.AppendQuery("input", "value1", true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -441,9 +425,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -491,9 +473,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -541,9 +521,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -591,9 +569,7 @@ namespace constants
             {
                 uri.AppendQuery("input", input.Value.ToString(), true);
             }
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -638,9 +614,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -685,9 +659,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -732,9 +704,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 
@@ -779,9 +749,7 @@ namespace constants
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
-            uri.AppendQuery("query-constant", _queryConstant, true);
             request.Uri = uri;
-            request.Headers.Add("header-constant", _headerConstant);
             return message;
         }
 

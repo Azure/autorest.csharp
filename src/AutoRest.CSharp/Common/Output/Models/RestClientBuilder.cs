@@ -40,18 +40,20 @@ namespace AutoRest.CSharp.Output.Models
         private readonly Dictionary<string, Parameter> _parameters;
         private IEnumerable<InputParameter> ClientParameters { get; }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, IEnumerable<InputOperation> operations, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
+            var allClientParameters = clientParameters.Concat(operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name);
+            _parameters = allClientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
             ClientParameters = clientParameters;
         }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, IEnumerable<InputOperation> operations, TypeFactory typeFactory, OutputLibrary library)
         {
             _typeFactory = typeFactory;
             _library = library;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            var allClientParameters = clientParameters.Concat(operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name);
+            _parameters = allClientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
             ClientParameters = clientParameters;
         }
 

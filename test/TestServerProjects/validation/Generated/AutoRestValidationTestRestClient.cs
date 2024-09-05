@@ -212,7 +212,6 @@ namespace validation
             uri.AppendPath("/validation/constantsInPath/", false);
             uri.AppendPath("constant", true);
             uri.AppendPath("/value", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             return message;
         }
@@ -255,7 +254,6 @@ namespace validation
             uri.AppendPath("/validation/constantsInPath/", false);
             uri.AppendPath("constant", true);
             uri.AppendPath("/value", false);
-            uri.AppendQuery("apiVersion", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             if (body != null)
