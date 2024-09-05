@@ -4,7 +4,7 @@
     "author": "Microsoft Corporation",
     "description": "The typespec library that can be used to generate C# models from a TypeSpec REST protocol binding",
     "homepage": "https://github.com/Microsoft/typespec",
-    "readme": "https://github.com/Azure/autorest.csharp/blob/feature/v3/src/TypeSpec.Extension/Emitter.Csharp/readme.md",
+    "readme": "https://github.com/Azure/autorest.csharp/blob/main/src/TypeSpec.Extension/Emitter.Csharp/readme.md",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -36,7 +36,7 @@
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
         "json-serialize-refs": "0.1.0-0",
-        "@typespec/http-client-csharp": "0.1.9-alpha.20240826.1"
+        "@typespec/http-client-csharp": "0.1.9-alpha.20240902.1"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
