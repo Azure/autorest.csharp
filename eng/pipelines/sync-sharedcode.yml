@@ -6,7 +6,7 @@ schedules:
   displayName: 'Daily Synchronize Azure Core Shared Codes'
   branches:
     include:
-    - feature/v3
+    - main
   always: true
 
 extends:
@@ -32,7 +32,7 @@ extends:
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
               - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
                 parameters:
-                  BaseBranchName: feature/v3
+                  BaseBranchName: main
                   RepoName: autorest.csharp
                   PROwner: Azure
                   PRBranchName: update-azure-core-shared-codes-$(Build.BuildId)
