@@ -109,13 +109,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation, IEnumerable<InputParameter> requestParameters, IEnumerable<InputParameter> clientParameters)
         {
-            /*
-            var parameters = clientParameters
-                .Concat(operation.Parameters)
-                .Concat(requestParameters)
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToArray();
-            */
             var parameters = operation.Parameters
                 .Concat(clientParameters)
                 .Concat(requestParameters)

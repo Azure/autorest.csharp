@@ -442,8 +442,6 @@ namespace AutoRest.CSharp.Output.Models
             var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters)
                                       .Concat(ClientParameters)
                                       .DistinctBy(p => p.NameInRequest);
-            //operationParameters = operationParameters.Concat(ClientParameters);
-            //operationParameters= operationParameters.DistinctBy(p => p.NameInRequest);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();
