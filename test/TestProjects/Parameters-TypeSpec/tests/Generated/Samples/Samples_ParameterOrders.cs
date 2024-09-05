@@ -24,7 +24,7 @@ namespace ParametersCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
-            Response response = client.Operation(1234, default, null);
+            Response response = client.Operation(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -37,7 +37,7 @@ namespace ParametersCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
-            Response response = await client.OperationAsync(1234, default, null);
+            Response response = await client.OperationAsync(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -116,7 +116,7 @@ namespace ParametersCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
-            Response response = client.Operation2(1234, default, null);
+            Response response = client.Operation2(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -129,7 +129,7 @@ namespace ParametersCadl.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
-            Response response = await client.Operation2Async(1234, default, null);
+            Response response = await client.Operation2Async(1234, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());

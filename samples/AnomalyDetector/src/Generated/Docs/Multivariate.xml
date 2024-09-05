@@ -859,7 +859,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, default, null))
+await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -876,7 +876,7 @@ Uri endpoint = new Uri("<https://my-service.azure.com>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-foreach (BinaryData item in client.GetMultivariateModels(0, default, null))
+foreach (BinaryData item in client.GetMultivariateModels(0, null, null))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("modelId").ToString());

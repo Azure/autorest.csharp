@@ -24,7 +24,7 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            Response response = client.NoRequestBodyResponseBody(1234, default, default, null, null);
+            Response response = client.NoRequestBodyResponseBody(1234, default, null, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -37,7 +37,7 @@ namespace Parameters_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             ParametersLowlevelClient client = new ParametersLowlevelClient(credential);
 
-            Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, default, null, null);
+            Response response = await client.NoRequestBodyResponseBodyAsync(1234, default, null, null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

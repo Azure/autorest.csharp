@@ -28,7 +28,7 @@ namespace PaginationParams_LowLevel.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.GetPaginationParamsAsync(default, default, default, null))
+            await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
             }
         }
@@ -54,7 +54,7 @@ namespace PaginationParams_LowLevel.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.Get2sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
             }
         }
@@ -80,7 +80,7 @@ namespace PaginationParams_LowLevel.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.Get3sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
             }
         }
@@ -106,7 +106,7 @@ namespace PaginationParams_LowLevel.Tests
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = CreatePaginationParamsClient(endpoint, credential);
 
-            await foreach (BinaryData item in client.Get4sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
             }
         }

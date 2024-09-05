@@ -23,7 +23,7 @@ namespace Payload.Pageable.Samples
         {
             PageableClient client = new PageableClient();
 
-            foreach (BinaryData item in client.GetPageables(default, null))
+            foreach (BinaryData item in client.GetPageables(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());
@@ -36,7 +36,7 @@ namespace Payload.Pageable.Samples
         {
             PageableClient client = new PageableClient();
 
-            await foreach (BinaryData item in client.GetPageablesAsync(default, null))
+            await foreach (BinaryData item in client.GetPageablesAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("name").ToString());

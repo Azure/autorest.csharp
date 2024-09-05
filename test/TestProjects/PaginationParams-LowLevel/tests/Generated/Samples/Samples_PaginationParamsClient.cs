@@ -24,7 +24,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (BinaryData item in client.GetPaginationParams(default, default, default, null))
+            foreach (BinaryData item in client.GetPaginationParams(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -38,7 +38,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (BinaryData item in client.GetPaginationParamsAsync(default, default, default, null))
+            await foreach (BinaryData item in client.GetPaginationParamsAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -84,7 +84,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (BinaryData item in client.Get2s(default, default, default, null))
+            foreach (BinaryData item in client.Get2s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -98,7 +98,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (BinaryData item in client.Get2sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get2sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -144,7 +144,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (BinaryData item in client.Get3s(default, default, default, null))
+            foreach (BinaryData item in client.Get3s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -158,7 +158,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (BinaryData item in client.Get3sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get3sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -204,7 +204,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            foreach (BinaryData item in client.Get4s(default, default, default, null))
+            foreach (BinaryData item in client.Get4s(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -218,7 +218,7 @@ namespace PaginationParams_LowLevel.Samples
             TokenCredential credential = new DefaultAzureCredential();
             PaginationParamsClient client = new PaginationParamsClient(credential);
 
-            await foreach (BinaryData item in client.Get4sAsync(default, default, default, null))
+            await foreach (BinaryData item in client.Get4sAsync(null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());

@@ -850,7 +850,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            foreach (BinaryData item in client.GetMultivariateModels(0, default, null))
+            foreach (BinaryData item in client.GetMultivariateModels(0, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());
@@ -867,7 +867,7 @@ new VariableValues("Variable_3", new string[]{"2021-01-01T00:00:00Z", "2021-01-0
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Multivariate client = new AnomalyDetectorClient(endpoint, credential).GetMultivariateClient();
 
-            await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, default, null))
+            await foreach (BinaryData item in client.GetMultivariateModelsAsync(0, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("modelId").ToString());

@@ -382,7 +382,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            foreach (BinaryData item in client.GetMultiplePages(default, default, null))
+            foreach (BinaryData item in client.GetMultiplePages(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -396,7 +396,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            await foreach (BinaryData item in client.GetMultiplePagesAsync(default, default, null))
+            await foreach (BinaryData item in client.GetMultiplePagesAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -672,7 +672,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            foreach (BinaryData item in client.GetOdataMultiplePages(default, default, null))
+            foreach (BinaryData item in client.GetOdataMultiplePages(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -686,7 +686,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(default, default, null))
+            await foreach (BinaryData item in client.GetOdataMultiplePagesAsync(null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -730,7 +730,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, default, default, null))
+            foreach (BinaryData item in client.GetMultiplePagesWithOffset(1234, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -744,7 +744,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, default, default, null))
+            await foreach (BinaryData item in client.GetMultiplePagesWithOffsetAsync(1234, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -1484,7 +1484,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, default, default, null);
+            Operation<Pageable<BinaryData>> operation = client.GetMultiplePagesLRO(WaitUntil.Completed, null, null, null);
             Pageable<BinaryData> responseData = operation.Value;
             foreach (BinaryData item in operation.Value)
             {
@@ -1500,7 +1500,7 @@ namespace paging_LowLevel.Samples
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             PagingClient client = new PagingClient(credential);
 
-            Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, default, default, null);
+            Operation<AsyncPageable<BinaryData>> operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, null, null, null);
             AsyncPageable<BinaryData> responseData = operation.Value;
             await foreach (BinaryData item in operation.Value)
             {
