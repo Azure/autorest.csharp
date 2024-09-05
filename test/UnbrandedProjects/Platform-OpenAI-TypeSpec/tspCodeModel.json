@@ -1102,6 +1102,7 @@
    "Properties": [
     {
      "$id": "154",
+     "Kind": "property",
      "Name": "input",
      "SerializedName": "input",
      "Description": "The input text to classify",
@@ -1134,21 +1135,26 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateModerationRequest.input"
     },
     {
      "$id": "159",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "Two content moderations models are available: `text-moderation-stable` and\n`text-moderation-latest`. The default is `text-moderation-latest` which will be automatically\nupgraded over time. This ensures you are always using our most accurate model. If you use\n`text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy\nof `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.",
      "Type": {
       "$ref": "2"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateModerationRequest.model"
     }
    ]
   },
@@ -1162,6 +1168,7 @@
    "Properties": [
     {
      "$id": "161",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique identifier for the moderation request.",
@@ -1172,12 +1179,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.id"
     },
     {
      "$id": "163",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used to generate the moderation results.",
@@ -1188,12 +1198,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.model"
     },
     {
      "$id": "165",
+     "Kind": "property",
      "Name": "results",
      "SerializedName": "results",
      "Description": "A list of moderation objects.",
@@ -1211,6 +1224,7 @@
        "Properties": [
         {
          "$id": "168",
+         "Kind": "property",
          "Name": "flagged",
          "SerializedName": "flagged",
          "Description": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
@@ -1221,12 +1235,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.boolean",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.flagged"
         },
         {
          "$id": "170",
+         "Kind": "property",
          "Name": "categories",
          "SerializedName": "categories",
          "Description": "A list of the categories, and whether they are flagged or not.",
@@ -1240,6 +1257,7 @@
           "Properties": [
            {
             "$id": "172",
+            "Kind": "property",
             "Name": "hate",
             "SerializedName": "hate",
             "Description": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
@@ -1250,12 +1268,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.hate"
            },
            {
             "$id": "174",
+            "Kind": "property",
             "Name": "hate/threatening",
             "SerializedName": "hate/threatening",
             "Description": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
@@ -1266,12 +1287,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.hate/threatening"
            },
            {
             "$id": "176",
+            "Kind": "property",
             "Name": "harassment",
             "SerializedName": "harassment",
             "Description": "Content that expresses, incites, or promotes harassing language towards any target.",
@@ -1282,12 +1306,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.harassment"
            },
            {
             "$id": "178",
+            "Kind": "property",
             "Name": "harassment/threatening",
             "SerializedName": "harassment/threatening",
             "Description": "Harassment content that also includes violence or serious harm towards any target.",
@@ -1298,12 +1325,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.harassment/threatening"
            },
            {
             "$id": "180",
+            "Kind": "property",
             "Name": "self-harm",
             "SerializedName": "self-harm",
             "Description": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
@@ -1314,12 +1344,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm"
            },
            {
             "$id": "182",
+            "Kind": "property",
             "Name": "self-harm/intent",
             "SerializedName": "self-harm/intent",
             "Description": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
@@ -1330,12 +1363,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm/intent"
            },
            {
             "$id": "184",
+            "Kind": "property",
             "Name": "self-harm/instructive",
             "SerializedName": "self-harm/instructive",
             "Description": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
@@ -1346,12 +1382,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm/instructive"
            },
            {
             "$id": "186",
+            "Kind": "property",
             "Name": "sexual",
             "SerializedName": "sexual",
             "Description": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
@@ -1362,12 +1401,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.sexual"
            },
            {
             "$id": "188",
+            "Kind": "property",
             "Name": "sexual/minors",
             "SerializedName": "sexual/minors",
             "Description": "Sexual content that includes an individual who is under 18 years old.",
@@ -1378,12 +1420,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.sexual/minors"
            },
            {
             "$id": "190",
+            "Kind": "property",
             "Name": "violence",
             "SerializedName": "violence",
             "Description": "Content that depicts death, violence, or physical injury.",
@@ -1394,12 +1439,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.violence"
            },
            {
             "$id": "192",
+            "Kind": "property",
             "Name": "violence/graphic",
             "SerializedName": "violence/graphic",
             "Description": "Content that depicts death, violence, or physical injury in graphic detail.",
@@ -1410,18 +1458,23 @@
              "CrossLanguageDefinitionId": "TypeSpec.boolean",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.violence/graphic"
            }
           ]
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.categories"
         },
         {
          "$id": "194",
+         "Kind": "property",
          "Name": "category_scores",
          "SerializedName": "category_scores",
          "Description": "A list of the categories along with their scores as predicted by model.",
@@ -1435,6 +1488,7 @@
           "Properties": [
            {
             "$id": "196",
+            "Kind": "property",
             "Name": "hate",
             "SerializedName": "hate",
             "Description": "The score for the category 'hate'.",
@@ -1445,12 +1499,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.hate"
            },
            {
             "$id": "198",
+            "Kind": "property",
             "Name": "hate/threatening",
             "SerializedName": "hate/threatening",
             "Description": "The score for the category 'hate/threatening'.",
@@ -1461,12 +1518,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.hate/threatening"
            },
            {
             "$id": "200",
+            "Kind": "property",
             "Name": "harassment",
             "SerializedName": "harassment",
             "Description": "The score for the category 'harassment'.",
@@ -1477,12 +1537,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.harassment"
            },
            {
             "$id": "202",
+            "Kind": "property",
             "Name": "harassment/threatening",
             "SerializedName": "harassment/threatening",
             "Description": "The score for the category 'harassment/threatening'.",
@@ -1493,12 +1556,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.harassment/threatening"
            },
            {
             "$id": "204",
+            "Kind": "property",
             "Name": "self-harm",
             "SerializedName": "self-harm",
             "Description": "The score for the category 'self-harm'.",
@@ -1509,12 +1575,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm"
            },
            {
             "$id": "206",
+            "Kind": "property",
             "Name": "self-harm/intent",
             "SerializedName": "self-harm/intent",
             "Description": "The score for the category 'self-harm/intent'.",
@@ -1525,12 +1594,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm/intent"
            },
            {
             "$id": "208",
+            "Kind": "property",
             "Name": "self-harm/instructive",
             "SerializedName": "self-harm/instructive",
             "Description": "The score for the category 'self-harm/instructive'.",
@@ -1541,12 +1613,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm/instructive"
            },
            {
             "$id": "210",
+            "Kind": "property",
             "Name": "sexual",
             "SerializedName": "sexual",
             "Description": "The score for the category 'sexual'.",
@@ -1557,12 +1632,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.sexual"
            },
            {
             "$id": "212",
+            "Kind": "property",
             "Name": "sexual/minors",
             "SerializedName": "sexual/minors",
             "Description": "The score for the category 'sexual/minors'.",
@@ -1573,12 +1651,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.sexual/minors"
            },
            {
             "$id": "214",
+            "Kind": "property",
             "Name": "violence",
             "SerializedName": "violence",
             "Description": "The score for the category 'violence'.",
@@ -1589,12 +1670,15 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.violence"
            },
            {
             "$id": "216",
+            "Kind": "property",
             "Name": "violence/graphic",
             "SerializedName": "violence/graphic",
             "Description": "The score for the category 'violence/graphic'.",
@@ -1605,24 +1689,30 @@
              "CrossLanguageDefinitionId": "TypeSpec.float64",
              "Decorators": []
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.violence/graphic"
            }
           ]
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.category_scores"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateModerationResponse.results"
     }
    ]
   },
@@ -1645,9 +1735,9 @@
    "Properties": [
     {
      "$id": "219",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
-     "Description": "",
      "Type": {
       "$id": "220",
       "Kind": "model",
@@ -1658,9 +1748,9 @@
       "Properties": [
        {
         "$id": "221",
+        "Kind": "property",
         "Name": "type",
         "SerializedName": "type",
-        "Description": "",
         "Type": {
          "$id": "222",
          "Kind": "string",
@@ -1668,15 +1758,17 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.Error.type"
        },
        {
         "$id": "223",
+        "Kind": "property",
         "Name": "message",
         "SerializedName": "message",
-        "Description": "",
         "Type": {
          "$id": "224",
          "Kind": "string",
@@ -1684,15 +1776,17 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.Error.message"
        },
        {
         "$id": "225",
+        "Kind": "property",
         "Name": "param",
         "SerializedName": "param",
-        "Description": "",
         "Type": {
          "$id": "226",
          "Kind": "nullable",
@@ -1704,15 +1798,17 @@
           "Decorators": []
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.Error.param"
        },
        {
         "$id": "228",
+        "Kind": "property",
         "Name": "code",
         "SerializedName": "code",
-        "Description": "",
         "Type": {
          "$id": "229",
          "Kind": "nullable",
@@ -1724,15 +1820,19 @@
           "Decorators": []
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.Error.code"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ErrorResponse.error"
     }
    ]
   },
@@ -1749,6 +1849,7 @@
    "Properties": [
     {
      "$id": "232",
+     "Kind": "property",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
@@ -1759,12 +1860,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest.prompt"
     },
     {
      "$id": "234",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "The number of images to generate. Must be between 1 and 10.",
@@ -1786,12 +1890,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest.n"
     },
     {
      "$id": "238",
+     "Kind": "property",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
@@ -1802,12 +1909,15 @@
        "$ref": "6"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest.size"
     },
     {
      "$id": "240",
+     "Kind": "property",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
@@ -1818,15 +1928,17 @@
        "$ref": "11"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest.response_format"
     },
     {
      "$id": "242",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
-     "Description": "",
      "Type": {
       "$id": "243",
       "Kind": "string",
@@ -1841,9 +1953,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageRequest.user"
     }
    ]
   },
@@ -1857,9 +1971,9 @@
    "Properties": [
     {
      "$id": "246",
+     "Kind": "property",
      "Name": "created",
      "SerializedName": "created",
-     "Description": "",
      "Type": {
       "$id": "247",
       "Kind": "utcDateTime",
@@ -1875,15 +1989,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ImagesResponse.created"
     },
     {
      "$id": "249",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "250",
       "Kind": "array",
@@ -1899,6 +2015,7 @@
        "Properties": [
         {
          "$id": "252",
+         "Kind": "property",
          "Name": "url",
          "SerializedName": "url",
          "Description": "The URL of the generated image, if `response_format` is `url` (default).",
@@ -1909,12 +2026,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.url",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Image.url"
         },
         {
          "$id": "254",
+         "Kind": "property",
          "Name": "b64_json",
          "SerializedName": "b64_json",
          "Description": "The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.",
@@ -1926,18 +2046,22 @@
           "CrossLanguageDefinitionId": "TypeSpec.bytes",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Image.b64_json"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ImagesResponse.data"
     }
    ]
   },
@@ -1954,6 +2078,7 @@
    "Properties": [
     {
      "$id": "257",
+     "Kind": "property",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "A text description of the desired image(s). The maximum length is 1000 characters.",
@@ -1964,12 +2089,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.prompt"
     },
     {
      "$id": "259",
+     "Kind": "property",
      "Name": "image",
      "SerializedName": "image",
      "Description": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not\nprovided, image must have transparency, which will be used as the mask.",
@@ -1981,12 +2109,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.image"
     },
     {
      "$id": "261",
+     "Kind": "property",
      "Name": "mask",
      "SerializedName": "mask",
      "Description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where\n`image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions\nas `image`.",
@@ -1998,12 +2129,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.mask"
     },
     {
      "$id": "263",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "The number of images to generate. Must be between 1 and 10.",
@@ -2025,12 +2159,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.n"
     },
     {
      "$id": "267",
+     "Kind": "property",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
@@ -2041,12 +2178,15 @@
        "$ref": "6"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.size"
     },
     {
      "$id": "269",
+     "Kind": "property",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
@@ -2057,15 +2197,17 @@
        "$ref": "11"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.response_format"
     },
     {
      "$id": "271",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
-     "Description": "",
      "Type": {
       "$id": "272",
       "Kind": "string",
@@ -2080,9 +2222,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.user"
     }
    ]
   },
@@ -2096,6 +2240,7 @@
    "Properties": [
     {
      "$id": "275",
+     "Kind": "property",
      "Name": "image",
      "SerializedName": "image",
      "Description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
@@ -2107,12 +2252,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.image"
     },
     {
      "$id": "277",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "The number of images to generate. Must be between 1 and 10.",
@@ -2134,12 +2282,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.n"
     },
     {
      "$id": "281",
+     "Kind": "property",
      "Name": "size",
      "SerializedName": "size",
      "Description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
@@ -2150,12 +2301,15 @@
        "$ref": "6"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.size"
     },
     {
      "$id": "283",
+     "Kind": "property",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
@@ -2166,15 +2320,17 @@
        "$ref": "11"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.response_format"
     },
     {
      "$id": "285",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
-     "Description": "",
      "Type": {
       "$id": "286",
       "Kind": "string",
@@ -2189,9 +2345,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.user"
     }
    ]
   },
@@ -2205,9 +2363,9 @@
    "Properties": [
     {
      "$id": "289",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "290",
       "Kind": "string",
@@ -2215,15 +2373,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListModelsResponse.object"
     },
     {
      "$id": "291",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "292",
       "Kind": "array",
@@ -2239,6 +2399,7 @@
        "Properties": [
         {
          "$id": "294",
+         "Kind": "property",
          "Name": "id",
          "SerializedName": "id",
          "Description": "The model identifier, which can be referenced in the API endpoints.",
@@ -2249,12 +2410,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Model.id"
         },
         {
          "$id": "296",
+         "Kind": "property",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"model\".",
@@ -2267,12 +2431,15 @@
           "Value": "model",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Model.object"
         },
         {
          "$id": "298",
+         "Kind": "property",
          "Name": "created",
          "SerializedName": "created",
          "Description": "The Unix timestamp (in seconds) when the model was created.",
@@ -2291,12 +2458,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Model.created"
         },
         {
          "$id": "301",
+         "Kind": "property",
          "Name": "owned_by",
          "SerializedName": "owned_by",
          "Description": "The organization that owns the model.",
@@ -2307,18 +2477,22 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Model.owned_by"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListModelsResponse.data"
     }
    ]
   },
@@ -2335,9 +2509,9 @@
    "Properties": [
     {
      "$id": "304",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "305",
       "Kind": "string",
@@ -2345,15 +2519,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteModelResponse.id"
     },
     {
      "$id": "306",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "307",
       "Kind": "string",
@@ -2361,15 +2537,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteModelResponse.object"
     },
     {
      "$id": "308",
+     "Kind": "property",
      "Name": "deleted",
      "SerializedName": "deleted",
-     "Description": "",
      "Type": {
       "$id": "309",
       "Kind": "boolean",
@@ -2377,9 +2555,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteModelResponse.deleted"
     }
    ]
   },
@@ -2393,6 +2573,7 @@
    "Properties": [
     {
      "$id": "311",
+     "Kind": "property",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
@@ -2403,12 +2584,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.training_file"
     },
     {
      "$id": "313",
+     "Kind": "property",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the\n[fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\nYour train and validation data should be mutually exclusive.\n\nYour dataset must be formatted as a JSONL file, where each validation example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
@@ -2423,12 +2607,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.validation_file"
     },
     {
      "$id": "316",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the base model to fine-tune. You can select one of \"ada\", \"babbage\", \"curie\",\n\"davinci\", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more\nabout these models, see the [Models](/docs/models) documentation.",
@@ -2439,12 +2626,15 @@
        "$ref": "18"
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.model"
     },
     {
      "$id": "318",
+     "Kind": "property",
      "Name": "n_epochs",
      "SerializedName": "n_epochs",
      "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
@@ -2459,12 +2649,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.n_epochs"
     },
     {
      "$id": "321",
+     "Kind": "property",
      "Name": "batch_size",
      "SerializedName": "batch_size",
      "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.\n\nBy default, the batch size will be dynamically configured to be ~0.2% of the number of examples\nin the training set, capped at 256 - in general, we've found that larger batch sizes tend to\nwork better for larger datasets.",
@@ -2479,12 +2672,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.batch_size"
     },
     {
      "$id": "324",
+     "Kind": "property",
      "Name": "learning_rate_multiplier",
      "SerializedName": "learning_rate_multiplier",
      "Description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original\nlearning rate used for pretraining multiplied by this value.\n\nBy default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final\n`batch_size` (larger learning rates tend to perform better with larger batch sizes). We\nrecommend experimenting with values in the range 0.02 to 0.2 to see what produces the best\nresults.",
@@ -2499,12 +2695,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.learning_rate_multiplier"
     },
     {
      "$id": "327",
+     "Kind": "property",
      "Name": "prompt_loss_rate",
      "SerializedName": "prompt_loss_rate",
      "Description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to\nlearn to generate the prompt (as compared to the completion which always has a weight of 1.0),\nand can add a stabilizing effect to training when completions are short.\n\nIf prompts are extremely long (relative to completions), it may make sense to reduce this\nweight so as to avoid over-prioritizing learning the prompt.",
@@ -2519,12 +2718,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.prompt_loss_rate"
     },
     {
      "$id": "330",
+     "Kind": "property",
      "Name": "compute_classification_metrics",
      "SerializedName": "compute_classification_metrics",
      "Description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the\nvalidation set at the end of every epoch. These metrics can be viewed in the\n[results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\n\nIn order to compute classification metrics, you must provide a `validation_file`. Additionally,\nyou must specify `classification_n_classes` for multiclass classification or\n`classification_positive_class` for binary classification.",
@@ -2539,12 +2741,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.compute_classification_metrics"
     },
     {
      "$id": "333",
+     "Kind": "property",
      "Name": "classification_n_classes",
      "SerializedName": "classification_n_classes",
      "Description": "The number of classes in a classification task.\n\nThis parameter is required for multiclass classification.",
@@ -2559,12 +2764,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_n_classes"
     },
     {
      "$id": "336",
+     "Kind": "property",
      "Name": "classification_positive_class",
      "SerializedName": "classification_positive_class",
      "Description": "The positive class in binary classification.\n\nThis parameter is needed to generate precision, recall, and F1 metrics when doing binary\nclassification.",
@@ -2579,12 +2787,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_positive_class"
     },
     {
      "$id": "339",
+     "Kind": "property",
      "Name": "classification_betas",
      "SerializedName": "classification_betas",
      "Description": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score\nis a generalization of F-1 score. This is only used for binary classification.\n\nWith a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger\nbeta score puts more weight on recall and less on precision. A smaller beta score puts more\nweight on precision and less on recall.",
@@ -2606,12 +2817,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_betas"
     },
     {
      "$id": "343",
+     "Kind": "property",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.",
@@ -2633,9 +2847,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.suffix"
     }
    ]
   },
@@ -2651,6 +2867,7 @@
    "Properties": [
     {
      "$id": "348",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The object identifier, which can be referenced in the API endpoints.",
@@ -2661,12 +2878,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.id"
     },
     {
      "$id": "350",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"fine-tune\".",
@@ -2679,12 +2899,15 @@
       "Value": "fine-tune",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.object"
     },
     {
      "$id": "352",
+     "Kind": "property",
      "Name": "created_at",
      "SerializedName": "created_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
@@ -2703,12 +2926,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.created_at"
     },
     {
      "$id": "355",
+     "Kind": "property",
      "Name": "updated_at",
      "SerializedName": "updated_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was last updated.",
@@ -2727,12 +2953,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.updated_at"
     },
     {
      "$id": "358",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The base model that is being fine-tuned.",
@@ -2743,12 +2972,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.model"
     },
     {
      "$id": "360",
+     "Kind": "property",
      "Name": "fine_tuned_model",
      "SerializedName": "fine_tuned_model",
      "Description": "The name of the fine-tuned model that is being created.",
@@ -2763,12 +2995,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.fine_tuned_model"
     },
     {
      "$id": "363",
+     "Kind": "property",
      "Name": "organization_id",
      "SerializedName": "organization_id",
      "Description": "The organization that owns the fine-tuning job.",
@@ -2779,24 +3014,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.organization_id"
     },
     {
      "$id": "365",
+     "Kind": "property",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The current status of the fine-tuning job, which can be either `created`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "Type": {
       "$ref": "27"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.status"
     },
     {
      "$id": "366",
+     "Kind": "property",
      "Name": "hyperparams",
      "SerializedName": "hyperparams",
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.",
@@ -2810,6 +3051,7 @@
       "Properties": [
        {
         "$id": "368",
+        "Kind": "property",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
@@ -2820,12 +3062,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.n_epochs"
        },
        {
         "$id": "370",
+        "Kind": "property",
         "Name": "batch_size",
         "SerializedName": "batch_size",
         "Description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
@@ -2836,12 +3081,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.batch_size"
        },
        {
         "$id": "372",
+        "Kind": "property",
         "Name": "prompt_loss_weight",
         "SerializedName": "prompt_loss_weight",
         "Description": "The weight to use for loss on the prompt tokens.",
@@ -2852,12 +3100,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.float64",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.prompt_loss_weight"
        },
        {
         "$id": "374",
+        "Kind": "property",
         "Name": "learning_rate_multiplier",
         "SerializedName": "learning_rate_multiplier",
         "Description": "The learning rate multiplier to use for training.",
@@ -2868,12 +3119,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.float64",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.learning_rate_multiplier"
        },
        {
         "$id": "376",
+        "Kind": "property",
         "Name": "compute_classification_metrics",
         "SerializedName": "compute_classification_metrics",
         "Description": "The classification metrics to compute using the validation dataset at the end of every epoch.",
@@ -2884,12 +3138,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.boolean",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.compute_classification_metrics"
        },
        {
         "$id": "378",
+        "Kind": "property",
         "Name": "classification_positive_class",
         "SerializedName": "classification_positive_class",
         "Description": "The positive class to use for computing classification metrics.",
@@ -2900,12 +3157,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.classification_positive_class"
        },
        {
         "$id": "380",
+        "Kind": "property",
         "Name": "classification_n_classes",
         "SerializedName": "classification_n_classes",
         "Description": "The number of classes to use for computing classification metrics.",
@@ -2916,18 +3176,23 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.classification_n_classes"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.hyperparams"
     },
     {
      "$id": "382",
+     "Kind": "property",
      "Name": "training_files",
      "SerializedName": "training_files",
      "Description": "The list of files used for training.",
@@ -2946,6 +3211,7 @@
        "Properties": [
         {
          "$id": "385",
+         "Kind": "property",
          "Name": "id",
          "SerializedName": "id",
          "Description": "The file identifier, which can be referenced in the API endpoints.",
@@ -2956,12 +3222,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.id"
         },
         {
          "$id": "387",
+         "Kind": "property",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"file\".",
@@ -2974,12 +3243,15 @@
           "Value": "file",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.object"
         },
         {
          "$id": "389",
+         "Kind": "property",
          "Name": "bytes",
          "SerializedName": "bytes",
          "Description": "The size of the file in bytes.",
@@ -2990,12 +3262,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.safeint",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.bytes"
         },
         {
          "$id": "391",
+         "Kind": "property",
          "Name": "createdAt",
          "SerializedName": "createdAt",
          "Description": "The Unix timestamp (in seconds) for when the file was created.",
@@ -3014,12 +3289,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.createdAt"
         },
         {
          "$id": "394",
+         "Kind": "property",
          "Name": "filename",
          "SerializedName": "filename",
          "Description": "The name of the file.",
@@ -3030,12 +3308,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.filename"
         },
         {
          "$id": "396",
+         "Kind": "property",
          "Name": "purpose",
          "SerializedName": "purpose",
          "Description": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
@@ -3046,24 +3327,30 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.purpose"
         },
         {
          "$id": "398",
+         "Kind": "property",
          "Name": "status",
          "SerializedName": "status",
          "Description": "The current status of the file, which can be either `uploaded`, `processed`, `pending`,\n`error`, `deleting` or `deleted`.",
          "Type": {
           "$ref": "37"
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.status"
         },
         {
          "$id": "399",
+         "Kind": "property",
          "Name": "status_details",
          "SerializedName": "status_details",
          "Description": "Additional details about the status of the file. If the file is in the `error` state, this will\ninclude a message describing the error.",
@@ -3078,21 +3365,26 @@
            "Decorators": []
           }
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.OpenAIFile.status_details"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.training_files"
     },
     {
      "$id": "402",
+     "Kind": "property",
      "Name": "validation_files",
      "SerializedName": "validation_files",
      "Description": "The list of files used for validation.",
@@ -3106,12 +3398,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.validation_files"
     },
     {
      "$id": "404",
+     "Kind": "property",
      "Name": "result_files",
      "SerializedName": "result_files",
      "Description": "The compiled results files for the fine-tuning job.",
@@ -3125,12 +3420,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.result_files"
     },
     {
      "$id": "406",
+     "Kind": "property",
      "Name": "events",
      "SerializedName": "events",
      "Description": "The list of events that have been observed in the lifecycle of the FineTune job.",
@@ -3148,9 +3446,9 @@
        "Properties": [
         {
          "$id": "409",
+         "Kind": "property",
          "Name": "object",
          "SerializedName": "object",
-         "Description": "",
          "Type": {
           "$id": "410",
           "Kind": "string",
@@ -3158,15 +3456,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuneEvent.object"
         },
         {
          "$id": "411",
+         "Kind": "property",
          "Name": "created_at",
          "SerializedName": "created_at",
-         "Description": "",
          "Type": {
           "$id": "412",
           "Kind": "utcDateTime",
@@ -3182,15 +3482,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuneEvent.created_at"
         },
         {
          "$id": "414",
+         "Kind": "property",
          "Name": "level",
          "SerializedName": "level",
-         "Description": "",
          "Type": {
           "$id": "415",
           "Kind": "string",
@@ -3198,15 +3500,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuneEvent.level"
         },
         {
          "$id": "416",
+         "Kind": "property",
          "Name": "message",
          "SerializedName": "message",
-         "Description": "",
          "Type": {
           "$id": "417",
           "Kind": "string",
@@ -3214,18 +3518,22 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuneEvent.message"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTune.events"
     }
    ]
   },
@@ -3248,9 +3556,9 @@
    "Properties": [
     {
      "$id": "419",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "420",
       "Kind": "string",
@@ -3258,15 +3566,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTunesResponse.object"
     },
     {
      "$id": "421",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "422",
       "Kind": "array",
@@ -3277,9 +3587,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTunesResponse.data"
     }
    ]
   },
@@ -3293,9 +3605,9 @@
    "Properties": [
     {
      "$id": "424",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "425",
       "Kind": "string",
@@ -3303,15 +3615,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTuneEventsResponse.object"
     },
     {
      "$id": "426",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "427",
       "Kind": "array",
@@ -3322,9 +3636,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTuneEventsResponse.data"
     }
    ]
   },
@@ -3338,9 +3654,9 @@
    "Properties": [
     {
      "$id": "429",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "430",
       "Kind": "string",
@@ -3348,15 +3664,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFilesResponse.object"
     },
     {
      "$id": "431",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "432",
       "Kind": "array",
@@ -3367,9 +3685,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFilesResponse.data"
     }
    ]
   },
@@ -3383,6 +3703,7 @@
    "Properties": [
     {
      "$id": "434",
+     "Kind": "property",
      "Name": "file",
      "SerializedName": "file",
      "Description": "Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.\n\nIf the `purpose` is set to \"fine-tune\", the file will be used for fine-tuning.",
@@ -3394,12 +3715,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFileRequest.file"
     },
     {
      "$id": "436",
+     "Kind": "property",
      "Name": "purpose",
      "SerializedName": "purpose",
      "Description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
@@ -3410,9 +3734,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFileRequest.purpose"
     }
    ]
   },
@@ -3426,9 +3752,9 @@
    "Properties": [
     {
      "$id": "439",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "440",
       "Kind": "string",
@@ -3436,15 +3762,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteFileResponse.id"
     },
     {
      "$id": "441",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "442",
       "Kind": "string",
@@ -3452,15 +3780,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteFileResponse.object"
     },
     {
      "$id": "443",
+     "Kind": "property",
      "Name": "deleted",
      "SerializedName": "deleted",
-     "Description": "",
      "Type": {
       "$id": "444",
       "Kind": "boolean",
@@ -3468,9 +3798,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.DeleteFileResponse.deleted"
     }
    ]
   },
@@ -3484,18 +3816,22 @@
    "Properties": [
     {
      "$id": "446",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.",
      "Type": {
       "$ref": "45"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.model"
     },
     {
      "$id": "447",
+     "Kind": "property",
      "Name": "input",
      "SerializedName": "input",
      "Description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
@@ -3563,15 +3899,17 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.input"
     },
     {
      "$id": "457",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
-     "Description": "",
      "Type": {
       "$id": "458",
       "Kind": "string",
@@ -3586,9 +3924,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.user"
     }
    ]
   },
@@ -3602,6 +3942,7 @@
    "Properties": [
     {
      "$id": "461",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"embedding\".",
@@ -3614,12 +3955,15 @@
       "Value": "embedding",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.object"
     },
     {
      "$id": "463",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the model used to generate the embedding.",
@@ -3630,12 +3974,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.model"
     },
     {
      "$id": "465",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
      "Description": "The list of embeddings generated by the model.",
@@ -3654,6 +4001,7 @@
        "Properties": [
         {
          "$id": "468",
+         "Kind": "property",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the embedding in the list of embeddings.",
@@ -3664,12 +4012,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.safeint",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Embedding.index"
         },
         {
          "$id": "470",
+         "Kind": "property",
          "Name": "object",
          "SerializedName": "object",
          "Description": "The object type, which is always \"embedding\".",
@@ -3682,12 +4033,15 @@
           "Value": "embedding",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Embedding.object"
         },
         {
          "$id": "472",
+         "Kind": "property",
          "Name": "embedding",
          "SerializedName": "embedding",
          "Description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
@@ -3705,21 +4059,26 @@
           "CrossLanguageDefinitionId": "TypeSpec.Array",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.Embedding.embedding"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.data"
     },
     {
      "$id": "475",
+     "Kind": "property",
      "Name": "usage",
      "SerializedName": "usage",
      "Description": "The usage information for the request.",
@@ -3733,6 +4092,7 @@
       "Properties": [
        {
         "$id": "477",
+        "Kind": "property",
         "Name": "prompt_tokens",
         "SerializedName": "prompt_tokens",
         "Description": "The number of tokens used by the prompt.",
@@ -3743,12 +4103,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage.anonymous.prompt_tokens"
        },
        {
         "$id": "479",
+        "Kind": "property",
         "Name": "total_tokens",
         "SerializedName": "total_tokens",
         "Description": "The total number of tokens used by the request.",
@@ -3759,15 +4122,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage.anonymous.total_tokens"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage"
     }
    ]
   },
@@ -3787,18 +4154,22 @@
    "Properties": [
     {
      "$id": "482",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`\nmodel with this endpoint.",
      "Type": {
       "$ref": "54"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.model"
     },
     {
      "$id": "483",
+     "Kind": "property",
      "Name": "input",
      "SerializedName": "input",
      "Description": "The input text to use as a starting point for the edit.",
@@ -3813,12 +4184,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.input"
     },
     {
      "$id": "486",
+     "Kind": "property",
      "Name": "instruction",
      "SerializedName": "instruction",
      "Description": "The instruction that tells the model how to edit the prompt.",
@@ -3829,12 +4203,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.instruction"
     },
     {
      "$id": "488",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many edits to generate for the input and instruction.",
@@ -3856,12 +4233,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.n"
     },
     {
      "$id": "492",
+     "Kind": "property",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
@@ -3883,12 +4263,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.temperature"
     },
     {
      "$id": "496",
+     "Kind": "property",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
@@ -3910,9 +4293,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditRequest.top_p"
     }
    ]
   },
@@ -3927,6 +4312,7 @@
    "Properties": [
     {
      "$id": "501",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `edit`.",
@@ -3939,12 +4325,15 @@
       "Value": "edit",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.object"
     },
     {
      "$id": "503",
+     "Kind": "property",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the edit was created.",
@@ -3963,12 +4352,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.created"
     },
     {
      "$id": "506",
+     "Kind": "property",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
@@ -3986,6 +4378,7 @@
        "Properties": [
         {
          "$id": "509",
+         "Kind": "property",
          "Name": "text",
          "SerializedName": "text",
          "Description": "The edited result.",
@@ -3996,12 +4389,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.text"
         },
         {
          "$id": "511",
+         "Kind": "property",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the choice in the list of choices.",
@@ -4012,36 +4408,43 @@
           "CrossLanguageDefinitionId": "TypeSpec.safeint",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.index"
         },
         {
          "$id": "513",
+         "Kind": "property",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `length` if the maximum number of tokens\nspecified in the request was reached.",
          "Type": {
           "$ref": "61"
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.finish_reason"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.choices"
     },
     {
      "$id": "514",
+     "Kind": "property",
      "Name": "usage",
      "SerializedName": "usage",
-     "Description": "",
      "Type": {
       "$id": "515",
       "Kind": "model",
@@ -4053,6 +4456,7 @@
       "Properties": [
        {
         "$id": "516",
+        "Kind": "property",
         "Name": "prompt_tokens",
         "SerializedName": "prompt_tokens",
         "Description": "Number of tokens in the prompt.",
@@ -4063,12 +4467,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CompletionUsage.prompt_tokens"
        },
        {
         "$id": "518",
+        "Kind": "property",
         "Name": "completion_tokens",
         "SerializedName": "completion_tokens",
         "Description": "Number of tokens in the generated completion",
@@ -4079,12 +4486,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CompletionUsage.completion_tokens"
        },
        {
         "$id": "520",
+        "Kind": "property",
         "Name": "total_tokens",
         "SerializedName": "total_tokens",
         "Description": "Total number of tokens used in the request (prompt + completion).",
@@ -4095,15 +4505,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.safeint",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CompletionUsage.total_tokens"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateEditResponse.usage"
     }
    ]
   },
@@ -4123,18 +4537,22 @@
    "Properties": [
     {
      "$id": "523",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to\nsee all of your available models, or see our [Model overview](/docs/models/overview) for\ndescriptions of them.",
      "Type": {
       "$ref": "65"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.model"
     },
     {
      "$id": "524",
+     "Kind": "property",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of\ntokens, or array of token arrays.\n\nNote that <|endoftext|> is the document separator that the model sees during training, so if a\nprompt is not specified the model will generate as if from the beginning of a new document.",
@@ -4206,12 +4624,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.prompt"
     },
     {
      "$id": "535",
+     "Kind": "property",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "The suffix that comes after a completion of inserted text.",
@@ -4226,12 +4647,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.suffix"
     },
     {
      "$id": "538",
+     "Kind": "property",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
@@ -4253,12 +4677,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.temperature"
     },
     {
      "$id": "542",
+     "Kind": "property",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
@@ -4280,12 +4707,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.top_p"
     },
     {
      "$id": "546",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
@@ -4307,12 +4737,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.n"
     },
     {
      "$id": "550",
+     "Kind": "property",
      "Name": "max_tokens",
      "SerializedName": "max_tokens",
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
@@ -4334,12 +4767,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.max_tokens"
     },
     {
      "$id": "554",
+     "Kind": "property",
      "Name": "stop",
      "SerializedName": "stop",
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
@@ -4376,12 +4812,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.stop"
     },
     {
      "$id": "560",
+     "Kind": "property",
      "Name": "presence_penalty",
      "SerializedName": "presence_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
@@ -4403,12 +4842,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.presence_penalty"
     },
     {
      "$id": "564",
+     "Kind": "property",
      "Name": "frequency_penalty",
      "SerializedName": "frequency_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
@@ -4430,12 +4872,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.frequency_penalty"
     },
     {
      "$id": "568",
+     "Kind": "property",
      "Name": "logit_bias",
      "SerializedName": "logit_bias",
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
@@ -4462,12 +4907,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.logit_bias"
     },
     {
      "$id": "573",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
@@ -4485,12 +4933,15 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.user"
     },
     {
      "$id": "576",
+     "Kind": "property",
      "Name": "stream",
      "SerializedName": "stream",
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
@@ -4505,12 +4956,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.stream"
     },
     {
      "$id": "579",
+     "Kind": "property",
      "Name": "logprobs",
      "SerializedName": "logprobs",
      "Description": "Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.\nFor example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The\nAPI will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`\nelements in the response.\n\nThe maximum value for `logprobs` is 5.",
@@ -4525,12 +4979,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.logprobs"
     },
     {
      "$id": "582",
+     "Kind": "property",
      "Name": "echo",
      "SerializedName": "echo",
      "Description": "Echo back the prompt in addition to the completion",
@@ -4545,12 +5002,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.echo"
     },
     {
      "$id": "585",
+     "Kind": "property",
      "Name": "best_of",
      "SerializedName": "best_of",
      "Description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest\nlog probability per token). Results cannot be streamed.\n\nWhen used with `n`, `best_of` controls the number of candidate completions and `n` specifies\nhow many to return – `best_of` must be greater than `n`.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
@@ -4565,9 +5025,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.create.Request.anonymous.best_of"
     }
    ]
   },
@@ -4582,6 +5044,7 @@
    "Properties": [
     {
      "$id": "589",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "A unique identifier for the completion.",
@@ -4592,12 +5055,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.id"
     },
     {
      "$id": "591",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `text_completion`.",
@@ -4608,12 +5074,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.object"
     },
     {
      "$id": "593",
+     "Kind": "property",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the completion was created.",
@@ -4632,12 +5101,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.created"
     },
     {
      "$id": "596",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used for the completion.",
@@ -4648,12 +5120,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.model"
     },
     {
      "$id": "598",
+     "Kind": "property",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "The list of completion choices the model generated for the input.",
@@ -4671,9 +5146,9 @@
        "Properties": [
         {
          "$id": "601",
+         "Kind": "property",
          "Name": "index",
          "SerializedName": "index",
-         "Description": "",
          "Type": {
           "$id": "602",
           "Kind": "safeint",
@@ -4681,15 +5156,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.safeint",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.index"
         },
         {
          "$id": "603",
+         "Kind": "property",
          "Name": "text",
          "SerializedName": "text",
-         "Description": "",
          "Type": {
           "$id": "604",
           "Kind": "string",
@@ -4697,15 +5174,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.text"
         },
         {
          "$id": "605",
+         "Kind": "property",
          "Name": "logprobs",
          "SerializedName": "logprobs",
-         "Description": "",
          "Type": {
           "$id": "606",
           "Kind": "nullable",
@@ -4719,9 +5198,9 @@
            "Properties": [
             {
              "$id": "608",
+             "Kind": "property",
              "Name": "tokens",
              "SerializedName": "tokens",
-             "Description": "",
              "Type": {
               "$id": "609",
               "Kind": "array",
@@ -4736,15 +5215,17 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": true,
-             "IsReadOnly": false,
-             "Decorators": []
+             "Optional": false,
+             "ReadOnly": false,
+             "Discriminator": false,
+             "Decorators": [],
+             "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.tokens"
             },
             {
              "$id": "611",
+             "Kind": "property",
              "Name": "token_logprobs",
              "SerializedName": "token_logprobs",
-             "Description": "",
              "Type": {
               "$id": "612",
               "Kind": "array",
@@ -4759,15 +5240,17 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": true,
-             "IsReadOnly": false,
-             "Decorators": []
+             "Optional": false,
+             "ReadOnly": false,
+             "Discriminator": false,
+             "Decorators": [],
+             "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.token_logprobs"
             },
             {
              "$id": "614",
+             "Kind": "property",
              "Name": "top_logprobs",
              "SerializedName": "top_logprobs",
-             "Description": "",
              "Type": {
               "$id": "615",
               "Kind": "array",
@@ -4794,15 +5277,17 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": true,
-             "IsReadOnly": false,
-             "Decorators": []
+             "Optional": false,
+             "ReadOnly": false,
+             "Discriminator": false,
+             "Decorators": [],
+             "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.top_logprobs"
             },
             {
              "$id": "619",
+             "Kind": "property",
              "Name": "text_offset",
              "SerializedName": "text_offset",
-             "Description": "",
              "Type": {
               "$id": "620",
               "Kind": "array",
@@ -4817,49 +5302,60 @@
               "CrossLanguageDefinitionId": "TypeSpec.Array",
               "Decorators": []
              },
-             "IsRequired": true,
-             "IsReadOnly": false,
-             "Decorators": []
+             "Optional": false,
+             "ReadOnly": false,
+             "Discriminator": false,
+             "Decorators": [],
+             "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.text_offset"
             }
            ]
           }
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.logprobs"
         },
         {
          "$id": "622",
+         "Kind": "property",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `content_filter` if content was omitted\ndue to a flag from our content filters, `length` if the maximum number of tokens specified\nin the request was reached, or `content_filter` if content was omitted due to a flag from our\ncontent filters.",
          "Type": {
           "$ref": "76"
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.finish_reason"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choices"
     },
     {
      "$id": "623",
+     "Kind": "property",
      "Name": "usage",
      "SerializedName": "usage",
-     "Description": "",
      "Type": {
       "$ref": "515"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.usage"
     }
    ]
   },
@@ -4879,6 +5375,7 @@
    "Properties": [
     {
      "$id": "625",
+     "Kind": "property",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
@@ -4889,12 +5386,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.training_file"
     },
     {
      "$id": "627",
+     "Kind": "property",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should\nnot be present in both train and validation files.\n\nYour dataset must be formatted as a JSONL file. You must upload your file with the purpose\n`fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
@@ -4909,24 +5409,30 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.validation_file"
     },
     {
      "$id": "630",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The name of the model to fine-tune. You can select one of the\n[supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).",
      "Type": {
       "$ref": "81"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.model"
     },
     {
      "$id": "631",
+     "Kind": "property",
      "Name": "hyperparameters",
      "SerializedName": "hyperparameters",
      "Description": "The hyperparameters used for the fine-tuning job.",
@@ -4940,6 +5446,7 @@
       "Properties": [
        {
         "$id": "633",
+        "Kind": "property",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
@@ -4978,18 +5485,23 @@
          ],
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.hyperparameters.anonymous.n_epochs"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.hyperparameters"
     },
     {
      "$id": "639",
+     "Kind": "property",
      "Name": "suffix",
      "SerializedName": "suffix",
      "Description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.",
@@ -5011,9 +5523,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.suffix"
     }
    ]
   },
@@ -5030,6 +5544,7 @@
    "Properties": [
     {
      "$id": "644",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The object identifier, which can be referenced in the API endpoints.",
@@ -5040,12 +5555,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.id"
     },
     {
      "$id": "646",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always \"fine_tuning.job\".",
@@ -5058,12 +5576,15 @@
       "Value": "fine_tuning.job",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.object"
     },
     {
      "$id": "648",
+     "Kind": "property",
      "Name": "created_at",
      "SerializedName": "created_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
@@ -5082,12 +5603,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.created_at"
     },
     {
      "$id": "651",
+     "Kind": "property",
      "Name": "finished_at",
      "SerializedName": "finished_at",
      "Description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be\nnull if the fine-tuning job is still running.",
@@ -5110,12 +5634,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.finished_at"
     },
     {
      "$id": "655",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The base model that is being fine-tuned.",
@@ -5126,12 +5653,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.model"
     },
     {
      "$id": "657",
+     "Kind": "property",
      "Name": "fine_tuned_model",
      "SerializedName": "fine_tuned_model",
      "Description": "The name of the fine-tuned model that is being created. The value will be null if the\nfine-tuning job is still running.",
@@ -5146,12 +5676,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.fine_tuned_model"
     },
     {
      "$id": "660",
+     "Kind": "property",
      "Name": "organization_id",
      "SerializedName": "organization_id",
      "Description": "The organization that owns the fine-tuning job.",
@@ -5162,24 +5695,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.organization_id"
     },
     {
      "$id": "662",
+     "Kind": "property",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "Type": {
       "$ref": "89"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.status"
     },
     {
      "$id": "663",
+     "Kind": "property",
      "Name": "hyperparameters",
      "SerializedName": "hyperparameters",
      "Description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/fine-tuning) for more details.",
@@ -5193,6 +5732,7 @@
       "Properties": [
        {
         "$id": "665",
+        "Kind": "property",
         "Name": "n_epochs",
         "SerializedName": "n_epochs",
         "Description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
@@ -5231,18 +5771,23 @@
          ],
          "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.hyperparameters.anonymous.n_epochs"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.hyperparameters"
     },
     {
      "$id": "671",
+     "Kind": "property",
      "Name": "training_file",
      "SerializedName": "training_file",
      "Description": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
@@ -5253,12 +5798,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.training_file"
     },
     {
      "$id": "673",
+     "Kind": "property",
      "Name": "validation_file",
      "SerializedName": "validation_file",
      "Description": "The file ID used for validation. You can retrieve the validation results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
@@ -5273,12 +5821,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.validation_file"
     },
     {
      "$id": "676",
+     "Kind": "property",
      "Name": "result_files",
      "SerializedName": "result_files",
      "Description": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
@@ -5296,12 +5847,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.result_files"
     },
     {
      "$id": "679",
+     "Kind": "property",
      "Name": "trained_tokens",
      "SerializedName": "trained_tokens",
      "Description": "The total number of billable tokens processed by this fine tuning job. The value will be null\nif the fine-tuning job is still running.",
@@ -5316,12 +5870,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.trained_tokens"
     },
     {
      "$id": "682",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
      "Description": "For fine-tuning jobs that have `failed`, this will contain more information on the cause of the\nfailure.",
@@ -5338,6 +5895,7 @@
        "Properties": [
         {
          "$id": "685",
+         "Kind": "property",
          "Name": "message",
          "SerializedName": "message",
          "Description": "A human-readable error message.",
@@ -5348,12 +5906,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.message"
         },
         {
          "$id": "687",
+         "Kind": "property",
          "Name": "code",
          "SerializedName": "code",
          "Description": "A machine-readable error code.",
@@ -5364,12 +5925,15 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.code"
         },
         {
          "$id": "689",
+         "Kind": "property",
          "Name": "param",
          "SerializedName": "param",
          "Description": "The parameter that was invalid, usually `training_file` or `validation_file`. This field\nwill be null if the failure was not parameter-specific.",
@@ -5384,16 +5948,20 @@
            "Decorators": []
           }
          },
-         "IsRequired": false,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": true,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.param"
         }
        ]
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.FineTuningJob.error"
     }
    ]
   },
@@ -5413,9 +5981,9 @@
    "Properties": [
     {
      "$id": "693",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "694",
       "Kind": "string",
@@ -5423,15 +5991,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.object"
     },
     {
      "$id": "695",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "696",
       "Kind": "array",
@@ -5442,15 +6012,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.data"
     },
     {
      "$id": "697",
+     "Kind": "property",
      "Name": "has_more",
      "SerializedName": "has_more",
-     "Description": "",
      "Type": {
       "$id": "698",
       "Kind": "boolean",
@@ -5458,9 +6030,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.has_more"
     }
    ]
   },
@@ -5474,9 +6048,9 @@
    "Properties": [
     {
      "$id": "700",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
-     "Description": "",
      "Type": {
       "$id": "701",
       "Kind": "string",
@@ -5484,15 +6058,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTuningJobEventsResponse.object"
     },
     {
      "$id": "702",
+     "Kind": "property",
      "Name": "data",
      "SerializedName": "data",
-     "Description": "",
      "Type": {
       "$id": "703",
       "Kind": "array",
@@ -5507,9 +6083,9 @@
        "Properties": [
         {
          "$id": "705",
+         "Kind": "property",
          "Name": "id",
          "SerializedName": "id",
-         "Description": "",
          "Type": {
           "$id": "706",
           "Kind": "string",
@@ -5517,15 +6093,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.id"
         },
         {
          "$id": "707",
+         "Kind": "property",
          "Name": "object",
          "SerializedName": "object",
-         "Description": "",
          "Type": {
           "$id": "708",
           "Kind": "string",
@@ -5533,15 +6111,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.object"
         },
         {
          "$id": "709",
+         "Kind": "property",
          "Name": "created_at",
          "SerializedName": "created_at",
-         "Description": "",
          "Type": {
           "$id": "710",
           "Kind": "utcDateTime",
@@ -5557,27 +6137,31 @@
           "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.created_at"
         },
         {
          "$id": "712",
+         "Kind": "property",
          "Name": "level",
          "SerializedName": "level",
-         "Description": "",
          "Type": {
           "$ref": "97"
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.level"
         },
         {
          "$id": "713",
+         "Kind": "property",
          "Name": "message",
          "SerializedName": "message",
-         "Description": "",
          "Type": {
           "$id": "714",
           "Kind": "string",
@@ -5585,18 +6169,22 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.message"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ListFineTuningJobEventsResponse.data"
     }
    ]
   },
@@ -5613,18 +6201,22 @@
    "Properties": [
     {
      "$id": "716",
+     "Kind": "property",
      "Name": "role",
      "SerializedName": "role",
      "Description": "The role of the messages author. One of `system`, `user`, `assistant`, or `function`.",
      "Type": {
       "$ref": "115"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.role"
     },
     {
      "$id": "717",
+     "Kind": "property",
      "Name": "content",
      "SerializedName": "content",
      "Description": "The contents of the message. `content` is required for all messages, and may be null for\nassistant messages with function calls.",
@@ -5639,12 +6231,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.content"
     },
     {
      "$id": "720",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of the author of this message. `name` is required if role is `function`, and it\nshould be the name of the function whose response is in the `content`. May contain a-z,\nA-Z, 0-9, and underscores, with a maximum length of 64 characters.",
@@ -5655,12 +6250,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.name"
     },
     {
      "$id": "722",
+     "Kind": "property",
      "Name": "function_call",
      "SerializedName": "function_call",
      "Description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -5674,6 +6272,7 @@
       "Properties": [
        {
         "$id": "724",
+        "Kind": "property",
         "Name": "name",
         "SerializedName": "name",
         "Description": "The name of the function to call.",
@@ -5684,12 +6283,15 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous.name"
        },
        {
         "$id": "726",
+        "Kind": "property",
         "Name": "arguments",
         "SerializedName": "arguments",
         "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
@@ -5700,15 +6302,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous.arguments"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call"
     }
    ]
   },
@@ -5725,6 +6331,7 @@
    "Properties": [
     {
      "$id": "729",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and\ndashes, with a maximum length of 64.",
@@ -5735,12 +6342,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.name"
     },
     {
      "$id": "731",
+     "Kind": "property",
      "Name": "description",
      "SerializedName": "description",
      "Description": "A description of what the function does, used by the model to choose when and how to call the\nfunction.",
@@ -5751,12 +6361,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.description"
     },
     {
      "$id": "733",
+     "Kind": "property",
      "Name": "parameters",
      "SerializedName": "parameters",
      "Description": "The parameters the functions accepts, described as a JSON Schema object. See the\n[guide](/docs/guides/gpt/function-calling) for examples, and the\n[JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation\nabout the format.\\n\\nTo describe a function that accepts no parameters, provide the value\n`{\\\"type\\\": \\\"object\\\", \\\"properties\\\": {}}`.",
@@ -5776,9 +6389,11 @@
       },
       "Properties": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.parameters"
     }
    ]
   },
@@ -5795,6 +6410,7 @@
    "Properties": [
     {
      "$id": "737",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of the function to call.",
@@ -5805,9 +6421,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionCallOption.name"
     }
    ]
   },
@@ -5821,18 +6439,22 @@
    "Properties": [
     {
      "$id": "740",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)\ntable for details on which models work with the Chat API.",
      "Type": {
       "$ref": "102"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.model"
     },
     {
      "$id": "741",
+     "Kind": "property",
      "Name": "messages",
      "SerializedName": "messages",
      "Description": "A list of messages comprising the conversation so far.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).",
@@ -5846,12 +6468,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.messages"
     },
     {
      "$id": "743",
+     "Kind": "property",
      "Name": "functions",
      "SerializedName": "functions",
      "Description": "A list of functions the model may generate JSON inputs for.",
@@ -5865,12 +6490,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.functions"
     },
     {
      "$id": "745",
+     "Kind": "property",
      "Name": "function_call",
      "SerializedName": "function_call",
      "Description": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
@@ -5911,12 +6539,15 @@
       ],
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.function_call"
     },
     {
      "$id": "751",
+     "Kind": "property",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
@@ -5938,12 +6569,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.temperature"
     },
     {
      "$id": "755",
+     "Kind": "property",
      "Name": "top_p",
      "SerializedName": "top_p",
      "Description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
@@ -5965,12 +6599,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.top_p"
     },
     {
      "$id": "759",
+     "Kind": "property",
      "Name": "n",
      "SerializedName": "n",
      "Description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
@@ -5992,12 +6629,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.n"
     },
     {
      "$id": "763",
+     "Kind": "property",
      "Name": "max_tokens",
      "SerializedName": "max_tokens",
      "Description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
@@ -6019,12 +6659,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.max_tokens"
     },
     {
      "$id": "767",
+     "Kind": "property",
      "Name": "stop",
      "SerializedName": "stop",
      "Description": "Up to 4 sequences where the API will stop generating further tokens.",
@@ -6061,12 +6704,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.stop"
     },
     {
      "$id": "773",
+     "Kind": "property",
      "Name": "presence_penalty",
      "SerializedName": "presence_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
@@ -6088,12 +6734,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.presence_penalty"
     },
     {
      "$id": "777",
+     "Kind": "property",
      "Name": "frequency_penalty",
      "SerializedName": "frequency_penalty",
      "Description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
@@ -6115,12 +6764,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.frequency_penalty"
     },
     {
      "$id": "781",
+     "Kind": "property",
      "Name": "logit_bias",
      "SerializedName": "logit_bias",
      "Description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
@@ -6147,12 +6799,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.logit_bias"
     },
     {
      "$id": "786",
+     "Kind": "property",
      "Name": "user",
      "SerializedName": "user",
      "Description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
@@ -6170,12 +6825,15 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.user"
     },
     {
      "$id": "789",
+     "Kind": "property",
      "Name": "stream",
      "SerializedName": "stream",
      "Description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
@@ -6190,9 +6848,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.stream"
     }
    ]
   },
@@ -6207,6 +6867,7 @@
    "Properties": [
     {
      "$id": "793",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "A unique identifier for the chat completion.",
@@ -6217,12 +6878,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.id"
     },
     {
      "$id": "795",
+     "Kind": "property",
      "Name": "object",
      "SerializedName": "object",
      "Description": "The object type, which is always `chat.completion`.",
@@ -6233,12 +6897,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.object"
     },
     {
      "$id": "797",
+     "Kind": "property",
      "Name": "created",
      "SerializedName": "created",
      "Description": "The Unix timestamp (in seconds) of when the chat completion was created.",
@@ -6257,12 +6924,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.created"
     },
     {
      "$id": "800",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "The model used for the chat completion.",
@@ -6273,12 +6943,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.model"
     },
     {
      "$id": "802",
+     "Kind": "property",
      "Name": "choices",
      "SerializedName": "choices",
      "Description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
@@ -6296,6 +6969,7 @@
        "Properties": [
         {
          "$id": "805",
+         "Kind": "property",
          "Name": "index",
          "SerializedName": "index",
          "Description": "The index of the choice in the list of choices.",
@@ -6306,15 +6980,17 @@
           "CrossLanguageDefinitionId": "TypeSpec.safeint",
           "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.index"
         },
         {
          "$id": "807",
+         "Kind": "property",
          "Name": "message",
          "SerializedName": "message",
-         "Description": "",
          "Type": {
           "$id": "808",
           "Kind": "model",
@@ -6325,18 +7001,22 @@
           "Properties": [
            {
             "$id": "809",
+            "Kind": "property",
             "Name": "role",
             "SerializedName": "role",
             "Description": "The role of the author of this message.",
             "Type": {
              "$ref": "121"
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.role"
            },
            {
             "$id": "810",
+            "Kind": "property",
             "Name": "content",
             "SerializedName": "content",
             "Description": "The contents of the message.",
@@ -6351,12 +7031,15 @@
               "Decorators": []
              }
             },
-            "IsRequired": true,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": false,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.content"
            },
            {
             "$id": "813",
+            "Kind": "property",
             "Name": "function_call",
             "SerializedName": "function_call",
             "Description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -6370,6 +7053,7 @@
              "Properties": [
               {
                "$id": "815",
+               "Kind": "property",
                "Name": "name",
                "SerializedName": "name",
                "Description": "The name of the function to call.",
@@ -6380,12 +7064,15 @@
                 "CrossLanguageDefinitionId": "TypeSpec.string",
                 "Decorators": []
                },
-               "IsRequired": true,
-               "IsReadOnly": false,
-               "Decorators": []
+               "Optional": false,
+               "ReadOnly": false,
+               "Discriminator": false,
+               "Decorators": [],
+               "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call.anonymous.name"
               },
               {
                "$id": "817",
+               "Kind": "property",
                "Name": "arguments",
                "SerializedName": "arguments",
                "Description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
@@ -6396,54 +7083,67 @@
                 "CrossLanguageDefinitionId": "TypeSpec.string",
                 "Decorators": []
                },
-               "IsRequired": true,
-               "IsReadOnly": false,
-               "Decorators": []
+               "Optional": false,
+               "ReadOnly": false,
+               "Discriminator": false,
+               "Decorators": [],
+               "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call.anonymous.arguments"
               }
              ]
             },
-            "IsRequired": false,
-            "IsReadOnly": false,
-            "Decorators": []
+            "Optional": true,
+            "ReadOnly": false,
+            "Discriminator": false,
+            "Decorators": [],
+            "CrossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call"
            }
           ]
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.message"
         },
         {
          "$id": "819",
+         "Kind": "property",
          "Name": "finish_reason",
          "SerializedName": "finish_reason",
          "Description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, `length` if the maximum number of tokens\nspecified in the request was reached, `content_filter` if the content was omitted due to\na flag from our content filters, or `function_call` if the model called a function.",
          "Type": {
           "$ref": "127"
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.finish_reason"
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choices"
     },
     {
      "$id": "820",
+     "Kind": "property",
      "Name": "usage",
      "SerializedName": "usage",
-     "Description": "",
      "Type": {
       "$ref": "515"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.usage"
     }
    ]
   },
@@ -6466,6 +7166,7 @@
    "Properties": [
     {
      "$id": "822",
+     "Kind": "property",
      "Name": "file",
      "SerializedName": "file",
      "Description": "The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
@@ -6477,24 +7178,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.file"
     },
     {
      "$id": "824",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. Only `whisper-1` is currently available.",
      "Type": {
       "$ref": "133"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.model"
     },
     {
      "$id": "825",
+     "Kind": "property",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
@@ -6505,24 +7212,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.prompt"
     },
     {
      "$id": "827",
+     "Kind": "property",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "Type": {
       "$ref": "136"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.response_format"
     },
     {
      "$id": "828",
+     "Kind": "property",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
@@ -6533,9 +7246,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.float64",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.temperature"
     }
    ]
   },
@@ -6549,9 +7264,9 @@
    "Properties": [
     {
      "$id": "831",
+     "Kind": "property",
      "Name": "text",
      "SerializedName": "text",
-     "Description": "",
      "Type": {
       "$id": "832",
       "Kind": "string",
@@ -6559,9 +7274,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranslationResponse.text"
     }
    ]
   },
@@ -6575,6 +7292,7 @@
    "Properties": [
     {
      "$id": "834",
+     "Kind": "property",
      "Name": "file",
      "SerializedName": "file",
      "Description": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
@@ -6586,24 +7304,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.bytes",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.file"
     },
     {
      "$id": "836",
+     "Kind": "property",
      "Name": "model",
      "SerializedName": "model",
      "Description": "ID of the model to use. Only `whisper-1` is currently available.",
      "Type": {
       "$ref": "143"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.model"
     },
     {
      "$id": "837",
+     "Kind": "property",
      "Name": "prompt",
      "SerializedName": "prompt",
      "Description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
@@ -6614,24 +7338,30 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.prompt"
     },
     {
      "$id": "839",
+     "Kind": "property",
      "Name": "response_format",
      "SerializedName": "response_format",
      "Description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "Type": {
       "$ref": "146"
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.response_format"
     },
     {
      "$id": "840",
+     "Kind": "property",
      "Name": "temperature",
      "SerializedName": "temperature",
      "Description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
@@ -6642,12 +7372,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.float64",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.temperature"
     },
     {
      "$id": "842",
+     "Kind": "property",
      "Name": "language",
      "SerializedName": "language",
      "Description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy\nand latency.",
@@ -6658,9 +7391,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.language"
     }
    ]
   },
@@ -6674,9 +7409,9 @@
    "Properties": [
     {
      "$id": "845",
+     "Kind": "property",
      "Name": "text",
      "SerializedName": "text",
-     "Description": "",
      "Type": {
       "$id": "846",
       "Kind": "string",
@@ -6684,9 +7419,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "OpenAI.CreateTranscriptionResponse.text"
     }
    ]
   }

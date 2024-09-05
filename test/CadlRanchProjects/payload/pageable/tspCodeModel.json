@@ -15,6 +15,7 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "User name",
@@ -25,9 +26,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.Pageable.User.name"
     }
    ]
   },
@@ -42,6 +45,7 @@
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
@@ -55,12 +59,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Page.value"
     },
     {
      "$id": "8",
+     "Kind": "property",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -78,9 +85,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
   }

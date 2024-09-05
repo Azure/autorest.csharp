@@ -31,9 +31,9 @@
      "Properties": [
       {
        "$id": "5",
+       "Kind": "property",
        "Name": "name",
        "SerializedName": "name",
-       "Description": "",
        "Type": {
         "$id": "6",
         "Kind": "string",
@@ -41,18 +41,20 @@
         "CrossLanguageDefinitionId": "TypeSpec.string",
         "Decorators": []
        },
-       "IsRequired": true,
-       "IsReadOnly": false,
-       "Decorators": []
+       "Optional": false,
+       "ReadOnly": false,
+       "Discriminator": false,
+       "Decorators": [],
+       "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
       }
      ]
     },
     "Properties": [
      {
       "$id": "7",
+      "Kind": "property",
       "Name": "age",
       "SerializedName": "age",
-      "Description": "",
       "Type": {
        "$id": "8",
        "Kind": "int32",
@@ -60,18 +62,20 @@
        "CrossLanguageDefinitionId": "TypeSpec.int32",
        "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false,
-      "Decorators": []
+      "Optional": false,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
      }
     ]
    },
    "Properties": [
     {
      "$id": "9",
+     "Kind": "property",
      "Name": "smart",
      "SerializedName": "smart",
-     "Description": "",
      "Type": {
       "$id": "10",
       "Kind": "boolean",
@@ -79,9 +83,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
     }
    ]
   },

@@ -41,9 +41,9 @@
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "7",
       "Kind": "int64",
@@ -51,15 +51,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.int64",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Toy.id"
     },
     {
      "$id": "8",
+     "Kind": "property",
      "Name": "petId",
      "SerializedName": "petId",
-     "Description": "",
      "Type": {
       "$id": "9",
       "Kind": "int64",
@@ -67,15 +69,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.int64",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Toy.petId"
     },
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "11",
       "Kind": "string",
@@ -83,9 +87,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Toy.name"
     }
    ]
   },
@@ -100,6 +106,7 @@
    "Properties": [
     {
      "$id": "13",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "pet name",
@@ -110,15 +117,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Pet.name"
     },
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "tag",
      "SerializedName": "tag",
-     "Description": "",
      "Type": {
       "$id": "16",
       "Kind": "string",
@@ -126,15 +135,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Pet.tag"
     },
     {
      "$id": "17",
+     "Kind": "property",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
      "Type": {
       "$id": "18",
       "Kind": "int32",
@@ -142,9 +153,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Pet.age"
     }
    ]
   },
@@ -159,9 +172,9 @@
    "Properties": [
     {
      "$id": "20",
+     "Kind": "property",
      "Name": "code",
      "SerializedName": "code",
-     "Description": "",
      "Type": {
       "$id": "21",
       "Kind": "int32",
@@ -169,15 +182,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Error.code"
     },
     {
      "$id": "22",
+     "Kind": "property",
      "Name": "message",
      "SerializedName": "message",
-     "Description": "",
      "Type": {
       "$id": "23",
       "Kind": "string",
@@ -185,9 +200,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MixApiVersion.Error.message"
     }
    ]
   },
@@ -202,6 +219,7 @@
    "Properties": [
     {
      "$id": "25",
+     "Kind": "property",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The Toy items on this page",
@@ -215,12 +233,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
     },
     {
      "$id": "27",
+     "Kind": "property",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -238,9 +259,11 @@
       },
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
     }
    ]
   }

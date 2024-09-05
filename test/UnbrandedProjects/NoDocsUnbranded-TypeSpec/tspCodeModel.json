@@ -166,6 +166,7 @@
    "Properties": [
     {
      "$id": "21",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
@@ -176,12 +177,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.name"
     },
     {
      "$id": "23",
+     "Kind": "property",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "required Union",
@@ -221,12 +225,15 @@
       ],
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredUnion"
     },
     {
      "$id": "29",
+     "Kind": "property",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
      "Description": "required literal string",
@@ -239,12 +246,15 @@
       "Value": "accept",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredLiteralString"
     },
     {
      "$id": "31",
+     "Kind": "property",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
      "Description": "required literal int",
@@ -257,12 +267,15 @@
       "Value": 123,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredLiteralInt"
     },
     {
      "$id": "33",
+     "Kind": "property",
      "Name": "requiredLiteralFloat",
      "SerializedName": "requiredLiteralFloat",
      "Description": "required literal float",
@@ -275,12 +288,15 @@
       "Value": 1.23,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredLiteralFloat"
     },
     {
      "$id": "35",
+     "Kind": "property",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
      "Description": "required literal bool",
@@ -297,12 +313,15 @@
       "Value": false,
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredLiteralBool"
     },
     {
      "$id": "38",
+     "Kind": "property",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
      "Description": "optional literal string",
@@ -315,12 +334,15 @@
       "Value": "reject",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.optionalLiteralString"
     },
     {
      "$id": "40",
+     "Kind": "property",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
      "Description": "optional literal int",
@@ -333,12 +355,15 @@
       "Value": 456,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.optionalLiteralInt"
     },
     {
      "$id": "42",
+     "Kind": "property",
      "Name": "optionalLiteralFloat",
      "SerializedName": "optionalLiteralFloat",
      "Description": "optional literal float",
@@ -351,12 +376,15 @@
       "Value": 4.56,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.optionalLiteralFloat"
     },
     {
      "$id": "44",
+     "Kind": "property",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
      "Description": "optional literal bool",
@@ -373,12 +401,15 @@
       "Value": true,
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.optionalLiteralBool"
     },
     {
      "$id": "47",
+     "Kind": "property",
      "Name": "requiredBadDescription",
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
@@ -389,12 +420,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredBadDescription"
     },
     {
      "$id": "49",
+     "Kind": "property",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "optional nullable collection",
@@ -416,12 +450,15 @@
        "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.optionalNullableList"
     },
     {
      "$id": "53",
+     "Kind": "property",
      "Name": "requiredNullableList",
      "SerializedName": "requiredNullableList",
      "Description": "required nullable collection",
@@ -443,9 +480,11 @@
        "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing.requiredNullableList"
     }
    ]
   }

@@ -5,7 +5,7 @@ schedules:
   displayName: "4AM (UTC +8) daily mock test"
   branches:
     include:
-    - feature/v3
+    - main
 
 variables:
   OfficialBuildId: $(Build.BuildNumber)

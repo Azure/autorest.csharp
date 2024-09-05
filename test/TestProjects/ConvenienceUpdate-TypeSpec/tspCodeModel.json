@@ -15,9 +15,9 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
@@ -25,9 +25,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "ConvenienceInCadl.Model.id"
     }
    ]
   }
