@@ -82,6 +82,17 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Azure_Core_Basic_exoportAllUsers() => Test(async (host) =>
+        {
+            var response = await new BasicClient(host, null).ExportAllUsersAsync("json");
+            Assert.AreEqual(1, response.Value.Users.First().Id);
+            Assert.AreEqual("Madge", response.Value.Users.First().Name);
+            Assert.AreEqual(2, response.Value.Users.Last().Id);
+            Assert.AreEqual("John", response.Value.Users.Last().Name);
+            Assert.AreEqual(2, response.Value.Users.Count());
+        });
+
+        [Test]
         public void Azure_Core_basic_RenameGetMethod()
         {
             var getUserMethod = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });

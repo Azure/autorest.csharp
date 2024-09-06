@@ -427,6 +427,92 @@ Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code></example>
     </member>
+    <member name="ExportAllUsersAsync(string,CancellationToken)">
+      <example>
+This sample shows how to call ExportAllUsersAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<UserList> response = await client.ExportAllUsersAsync("<format>");
+]]></code>
+This sample shows how to call ExportAllUsersAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<UserList> response = await client.ExportAllUsersAsync("<format>");
+]]></code></example>
+    </member>
+    <member name="ExportAllUsers(string,CancellationToken)">
+      <example>
+This sample shows how to call ExportAllUsers.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<UserList> response = client.ExportAllUsers("<format>");
+]]></code>
+This sample shows how to call ExportAllUsers with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response<UserList> response = client.ExportAllUsers("<format>");
+]]></code></example>
+    </member>
+    <member name="ExportAllUsersAsync(string,RequestContext)">
+      <example>
+This sample shows how to call ExportAllUsersAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = await client.ExportAllUsersAsync("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call ExportAllUsersAsync with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = await client.ExportAllUsersAsync("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
+]]></code></example>
+    </member>
+    <member name="ExportAllUsers(string,RequestContext)">
+      <example>
+This sample shows how to call ExportAllUsers and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = client.ExportAllUsers("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
+]]></code>
+This sample shows how to call ExportAllUsers with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+Response response = client.ExportAllUsers("<format>", null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
+]]></code></example>
+    </member>
     <member name="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)">
       <example>
 This sample shows how to call GetUsersAsync.

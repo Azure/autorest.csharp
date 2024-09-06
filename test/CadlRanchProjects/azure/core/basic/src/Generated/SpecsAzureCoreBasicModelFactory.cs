@@ -37,5 +37,15 @@ namespace _Specs_.Azure.Core.Basic.Models
         {
             return new UserOrder(id, userId, detail, serializedAdditionalRawData: null);
         }
+
+        /// <summary> Initializes a new instance of <see cref="Models.UserList"/>. </summary>
+        /// <param name="users"></param>
+        /// <returns> A new <see cref="Models.UserList"/> instance for mocking. </returns>
+        public static UserList UserList(IEnumerable<User> users = null)
+        {
+            users ??= new List<User>();
+
+            return new UserList(users?.ToList(), serializedAdditionalRawData: null);
+        }
     }
 }

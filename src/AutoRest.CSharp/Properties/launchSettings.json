@@ -632,6 +632,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\src\\Generated -n"
     },
+    "typespec-azure/core/lro/rpc": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\rpc\\src\\Generated -n"
+    },
     "typespec-azure/core/lro/standard": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\standard\\src\\Generated -n"
@@ -719,10 +723,6 @@
     "typespec-nonAzure-payload/content-negotiation": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\content-negotiation\\src\\Generated -n"
-    },
-    "typespec-nonAzure-payload/multipart": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\payload\\multipart\\src\\Generated -n"
     },
     "typespec-nonAzure-serialization/encoded-name/json": {
       "commandName": "Project",
@@ -820,10 +820,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\media-type\\src\\Generated -n"
     },
-    "typespec-payload/multipart": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\multipart\\src\\Generated -n"
-    },
     "typespec-payload/pageable": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\pageable\\src\\Generated -n"
@@ -883,10 +879,6 @@
     "typespec-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\empty\\src\\Generated -n"
-    },
-    "typespec-type/model/flatten": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\flatten\\src\\Generated -n"
     },
     "typespec-type/model/inheritance/enum-discriminator": {
       "commandName": "Project",
