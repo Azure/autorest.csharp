@@ -167,14 +167,14 @@ This sample shows how to call ModelInReadOnlyPropertyAsync.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-RoundTripModel body = new RoundTripModel();
+RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
 Response<RoundTripModel> response = await client.ModelInReadOnlyPropertyAsync(body);
 ]]></code>
 This sample shows how to call ModelInReadOnlyPropertyAsync with all parameters.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-RoundTripModel body = new RoundTripModel();
+RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
 Response<RoundTripModel> response = await client.ModelInReadOnlyPropertyAsync(body);
 ]]></code></example>
     </member>
@@ -184,14 +184,14 @@ This sample shows how to call ModelInReadOnlyProperty.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-RoundTripModel body = new RoundTripModel();
+RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
 Response<RoundTripModel> response = client.ModelInReadOnlyProperty(body);
 ]]></code>
 This sample shows how to call ModelInReadOnlyProperty with all parameters.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-RoundTripModel body = new RoundTripModel();
+RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
 Response<RoundTripModel> response = client.ModelInReadOnlyProperty(body);
 ]]></code></example>
     </member>
@@ -201,7 +201,13 @@ This sample shows how to call ModelInReadOnlyPropertyAsync and parse the result.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new
+{
+    result = new
+    {
+        name = "<name>",
+    },
+});
 Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -211,7 +217,13 @@ This sample shows how to call ModelInReadOnlyPropertyAsync with all request cont
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new
+{
+    result = new
+    {
+        name = "<name>",
+    },
+});
 Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -224,7 +236,13 @@ This sample shows how to call ModelInReadOnlyProperty and parse the result.
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new
+{
+    result = new
+    {
+        name = "<name>",
+    },
+});
 Response response = client.ModelInReadOnlyProperty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -234,7 +252,13 @@ This sample shows how to call ModelInReadOnlyProperty with all request content a
 <code><![CDATA[
 ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-using RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new
+{
+    result = new
+    {
+        name = "<name>",
+    },
+});
 Response response = client.ModelInReadOnlyProperty(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;

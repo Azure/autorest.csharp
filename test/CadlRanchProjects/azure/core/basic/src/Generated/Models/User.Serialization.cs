@@ -27,28 +27,19 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteNumberValue(Id);
-            }
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (Optional.IsCollectionDefined(Orders))
+            writer.WritePropertyName("orders"u8);
+            writer.WriteStartArray();
+            foreach (var item in Orders)
             {
-                writer.WritePropertyName("orders"u8);
-                writer.WriteStartArray();
-                foreach (var item in Orders)
-                {
-                    writer.WriteObjectValue(item, options);
-                }
-                writer.WriteEndArray();
+                writer.WriteObjectValue(item, options);
             }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag.ToString());
-            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("etag"u8);
+            writer.WriteStringValue(Etag.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -107,10 +98,6 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
                 if (property.NameEquals("orders"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     List<UserOrder> array = new List<UserOrder>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
@@ -130,7 +117,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new User(id, name, orders ?? new ChangeTrackingList<UserOrder>(), etag, serializedAdditionalRawData);
+            return new User(id, name, orders, etag, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<User>.Write(ModelReaderWriterOptions options)

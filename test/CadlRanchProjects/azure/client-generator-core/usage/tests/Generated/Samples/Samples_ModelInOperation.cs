@@ -208,7 +208,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new
+            {
+                result = new
+                {
+                    name = "<name>",
+                },
+            });
             Response response = client.ModelInReadOnlyProperty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -221,7 +227,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new
+            {
+                result = new
+                {
+                    name = "<name>",
+                },
+            });
             Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -234,7 +246,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            RoundTripModel body = new RoundTripModel();
+            RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
             Response<RoundTripModel> response = client.ModelInReadOnlyProperty(body);
         }
 
@@ -244,7 +256,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            RoundTripModel body = new RoundTripModel();
+            RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
             Response<RoundTripModel> response = await client.ModelInReadOnlyPropertyAsync(body);
         }
 
@@ -254,7 +266,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new
+            {
+                result = new
+                {
+                    name = "<name>",
+                },
+            });
             Response response = client.ModelInReadOnlyProperty(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -267,7 +285,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            using RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new
+            {
+                result = new
+                {
+                    name = "<name>",
+                },
+            });
             Response response = await client.ModelInReadOnlyPropertyAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -280,7 +304,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            RoundTripModel body = new RoundTripModel();
+            RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
             Response<RoundTripModel> response = client.ModelInReadOnlyProperty(body);
         }
 
@@ -290,7 +314,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
         {
             ModelInOperation client = new UsageClient().GetModelInOperationClient();
 
-            RoundTripModel body = new RoundTripModel();
+            RoundTripModel body = new RoundTripModel(new ResultModel("<name>"));
             Response<RoundTripModel> response = await client.ModelInReadOnlyPropertyAsync(body);
         }
     }

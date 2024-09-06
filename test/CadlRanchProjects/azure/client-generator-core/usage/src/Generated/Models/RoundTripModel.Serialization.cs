@@ -27,11 +27,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("result"u8);
-                writer.WriteObjectValue(Result, options);
-            }
+            writer.WritePropertyName("result"u8);
+            writer.WriteObjectValue(Result, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)

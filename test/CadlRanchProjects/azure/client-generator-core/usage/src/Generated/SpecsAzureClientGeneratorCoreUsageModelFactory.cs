@@ -10,14 +10,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
     /// <summary> Model factory for models. </summary>
     public static partial class SpecsAzureClientGeneratorCoreUsageModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
-        /// <param name="result"></param>
-        /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(ResultModel result = null)
-        {
-            return new RoundTripModel(result, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.ResultModel"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.ResultModel"/> instance for mocking. </returns>

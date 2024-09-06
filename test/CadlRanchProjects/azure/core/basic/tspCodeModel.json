@@ -44,7 +44,6 @@
    "Properties": [
     {
      "$id": "6",
-     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The user's id.",
@@ -55,15 +54,12 @@
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "Optional": false,
-     "ReadOnly": true,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User.id"
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "Decorators": []
     },
     {
      "$id": "8",
-     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The user's name.",
@@ -74,15 +70,12 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User.name"
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "10",
-     "Kind": "property",
      "Name": "orders",
      "SerializedName": "orders",
      "Description": "The user's order list",
@@ -101,7 +94,6 @@
        "Properties": [
         {
          "$id": "13",
-         "Kind": "property",
          "Name": "id",
          "SerializedName": "id",
          "Description": "The user's id.",
@@ -112,15 +104,12 @@
           "CrossLanguageDefinitionId": "TypeSpec.int32",
           "Decorators": []
          },
-         "Optional": false,
-         "ReadOnly": true,
-         "Discriminator": false,
-         "Decorators": [],
-         "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder.id"
+         "IsRequired": true,
+         "IsReadOnly": true,
+         "Decorators": []
         },
         {
          "$id": "15",
-         "Kind": "property",
          "Name": "userId",
          "SerializedName": "userId",
          "Description": "The user's id.",
@@ -131,15 +120,12 @@
           "CrossLanguageDefinitionId": "TypeSpec.int32",
           "Decorators": []
          },
-         "Optional": false,
-         "ReadOnly": false,
-         "Discriminator": false,
-         "Decorators": [],
-         "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder.userId"
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "Decorators": []
         },
         {
          "$id": "17",
-         "Kind": "property",
          "Name": "detail",
          "SerializedName": "detail",
          "Description": "The user's order detail",
@@ -150,26 +136,21 @@
           "CrossLanguageDefinitionId": "TypeSpec.string",
           "Decorators": []
          },
-         "Optional": false,
-         "ReadOnly": false,
-         "Discriminator": false,
-         "Decorators": [],
-         "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder.detail"
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "Decorators": []
         }
        ]
       },
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "Optional": true,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User.orders"
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
      "$id": "19",
-     "Kind": "property",
      "Name": "etag",
      "SerializedName": "etag",
      "Description": "The entity tag for this resource.",
@@ -187,11 +168,9 @@
       },
       "Decorators": []
      },
-     "Optional": false,
-     "ReadOnly": true,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User.etag"
+     "IsRequired": true,
+     "IsReadOnly": true,
+     "Decorators": []
     }
    ]
   },
@@ -237,8 +216,7 @@
    "Decorators": [],
    "Properties": [
     {
-     "$id": "23",
-     "Kind": "property",
+     "$id": "26",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
@@ -252,15 +230,12 @@
       "CrossLanguageDefinitionId": "TypeSpec.Array",
       "Decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "Decorators": []
     },
     {
-     "$id": "25",
-     "Kind": "property",
+     "$id": "28",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -278,11 +253,9 @@
       },
       "Decorators": []
      },
-     "Optional": true,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "Decorators": []
     }
    ]
   }
@@ -1382,7 +1355,8 @@
         },
         "Value": "2022-12-01-preview"
        },
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "135",
@@ -1403,7 +1377,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Method",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "137",
@@ -1429,7 +1404,8 @@
        "Explode": false,
        "IsRequired": true,
        "Kind": "Constant",
-       "Decorators": []
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [

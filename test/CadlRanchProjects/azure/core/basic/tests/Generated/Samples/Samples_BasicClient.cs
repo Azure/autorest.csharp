@@ -27,13 +27,27 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
+                orders = new object[]
+            {
+new
+{
+id = 1234,
+userId = 1234,
+detail = "<detail>",
+}
+            },
+                etag = "<etag>",
             });
             Response response = client.CreateOrUpdate(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -45,13 +59,27 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
+                orders = new object[]
+            {
+new
+{
+id = 1234,
+userId = 1234,
+detail = "<detail>",
+}
+            },
+                etag = "<etag>",
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -63,15 +91,18 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
                 orders = new object[]
             {
 new
 {
+id = 1234,
 userId = 1234,
 detail = "<detail>",
 }
             },
+                etag = "<etag>",
             });
             Response response = client.CreateOrUpdate(1234, content);
 
@@ -92,15 +123,18 @@ detail = "<detail>",
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
                 orders = new object[]
             {
 new
 {
+id = 1234,
 userId = 1234,
 detail = "<detail>",
 }
             },
+                etag = "<etag>",
             });
             Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -121,13 +155,27 @@ detail = "<detail>",
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
+                orders = new object[]
+            {
+new
+{
+id = 1234,
+userId = 1234,
+detail = "<detail>",
+}
+            },
+                etag = "<etag>",
             });
             Response response = client.CreateOrReplace(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -139,13 +187,27 @@ detail = "<detail>",
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
+                orders = new object[]
+            {
+new
+{
+id = 1234,
+userId = 1234,
+detail = "<detail>",
+}
+            },
+                etag = "<etag>",
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -155,7 +217,10 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            User resource = new User("<name>");
+            User resource = new User(1234, "<name>", new UserOrder[]
+            {
+new UserOrder(1234, 1234, "<detail>")
+            }, new ETag("<etag>"));
             Response<User> response = client.CreateOrReplace(1234, resource);
         }
 
@@ -165,7 +230,10 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            User resource = new User("<name>");
+            User resource = new User(1234, "<name>", new UserOrder[]
+            {
+new UserOrder(1234, 1234, "<detail>")
+            }, new ETag("<etag>"));
             Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
         }
 
@@ -177,15 +245,18 @@ detail = "<detail>",
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
                 orders = new object[]
             {
 new
 {
+id = 1234,
 userId = 1234,
 detail = "<detail>",
 }
             },
+                etag = "<etag>",
             });
             Response response = client.CreateOrReplace(1234, content);
 
@@ -206,15 +277,18 @@ detail = "<detail>",
 
             using RequestContent content = RequestContent.Create(new
             {
+                id = 1234,
                 name = "<name>",
                 orders = new object[]
             {
 new
 {
+id = 1234,
 userId = 1234,
 detail = "<detail>",
 }
             },
+                etag = "<etag>",
             });
             Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -233,10 +307,10 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            User resource = new User("<name>")
+            User resource = new User(1234, "<name>", new UserOrder[]
             {
-                Orders = { new UserOrder(1234, "<detail>") },
-            };
+new UserOrder(1234, 1234, "<detail>")
+            }, new ETag("<etag>"));
             Response<User> response = client.CreateOrReplace(1234, resource);
         }
 
@@ -246,10 +320,10 @@ detail = "<detail>",
         {
             BasicClient client = new BasicClient();
 
-            User resource = new User("<name>")
+            User resource = new User(1234, "<name>", new UserOrder[]
             {
-                Orders = { new UserOrder(1234, "<detail>") },
-            };
+new UserOrder(1234, 1234, "<detail>")
+            }, new ETag("<etag>"));
             Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
         }
 
@@ -264,6 +338,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -278,6 +355,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -406,6 +486,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -420,6 +503,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -504,6 +590,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
@@ -518,6 +607,9 @@ detail = "<detail>",
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+            Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
             Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
         }
 
@@ -602,6 +694,9 @@ detail = "<detail>",
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }
@@ -617,6 +712,9 @@ detail = "<detail>",
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
                 Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
                 Console.WriteLine(result.GetProperty("etag").ToString());
             }
         }

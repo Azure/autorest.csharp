@@ -46,13 +46,15 @@ namespace _Specs_.Azure.Core.Basic.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
+        /// <param name="id"> The user's id. </param>
         /// <param name="userId"> The user's id. </param>
         /// <param name="detail"> The user's order detail. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="detail"/> is null. </exception>
-        public UserOrder(int userId, string detail)
+        public UserOrder(int id, int userId, string detail)
         {
             Argument.AssertNotNull(detail, nameof(detail));
 
+            Id = id;
             UserId = userId;
             Detail = detail;
         }
@@ -76,7 +78,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         }
 
         /// <summary> The user's id. </summary>
-        public int Id { get; }
+        public int Id { get; set; }
         /// <summary> The user's id. </summary>
         public int UserId { get; set; }
         /// <summary> The user's order detail. </summary>
