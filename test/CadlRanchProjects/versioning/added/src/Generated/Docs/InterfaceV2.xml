@@ -6,7 +6,7 @@
 This sample shows how to call V2InInterfaceAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = await client.V2InInterfaceAsync(body);
@@ -14,7 +14,7 @@ Response<ModelV2> response = await client.V2InInterfaceAsync(body);
 This sample shows how to call V2InInterfaceAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = await client.V2InInterfaceAsync(body);
@@ -25,7 +25,7 @@ Response<ModelV2> response = await client.V2InInterfaceAsync(body);
 This sample shows how to call V2InInterface.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = client.V2InInterface(body);
@@ -33,7 +33,7 @@ Response<ModelV2> response = client.V2InInterface(body);
 This sample shows how to call V2InInterface with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<ModelV2> response = client.V2InInterface(body);
@@ -44,7 +44,7 @@ Response<ModelV2> response = client.V2InInterface(body);
 This sample shows how to call V2InInterfaceAsync and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2InInterfaceAsync with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -83,7 +83,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2InInterface and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 This sample shows how to call V2InInterface with all request content and parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
 using RequestContent content = RequestContent.Create(new
 {

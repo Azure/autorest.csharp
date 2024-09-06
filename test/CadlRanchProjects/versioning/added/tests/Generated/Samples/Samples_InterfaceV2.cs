@@ -23,7 +23,7 @@ namespace Versioning.Added.Samples
         public void Example_InterfaceV2_V2InInterface_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -44,7 +44,7 @@ namespace Versioning.Added.Samples
         public async Task Example_InterfaceV2_V2InInterface_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -65,7 +65,7 @@ namespace Versioning.Added.Samples
         public void Example_InterfaceV2_V2InInterface_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2InInterface(body);
@@ -76,7 +76,7 @@ namespace Versioning.Added.Samples
         public async Task Example_InterfaceV2_V2InInterface_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2InInterfaceAsync(body);
@@ -87,7 +87,7 @@ namespace Versioning.Added.Samples
         public void Example_InterfaceV2_V2InInterface_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -108,7 +108,7 @@ namespace Versioning.Added.Samples
         public async Task Example_InterfaceV2_V2InInterface_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -129,7 +129,7 @@ namespace Versioning.Added.Samples
         public void Example_InterfaceV2_V2InInterface_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2InInterface(body);
@@ -140,7 +140,7 @@ namespace Versioning.Added.Samples
         public async Task Example_InterfaceV2_V2InInterface_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            InterfaceV2 client = new AddedClient(endpoint, default).GetInterfaceV2Client();
+            InterfaceV2 client = new AddedClient(endpoint, Versions.V1).GetInterfaceV2Client();
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2InInterfaceAsync(body);

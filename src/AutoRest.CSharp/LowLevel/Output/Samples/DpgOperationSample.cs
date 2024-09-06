@@ -81,6 +81,21 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             return callChain.ToArray();
         }
+        /// <summary>
+        /// Get all the parameters to get the client.
+        /// </summary>
+        /// <returns></returns>
+        private IReadOnlyList<InputParameter> GetAllClientInvocatioParameters()
+        {
+            var client = _client;
+            var parameters = new List<InputParameter>();
+            while (client != null)
+            {
+                parameters.AddRange(client.GetConstructorParameters());
+                client = client.ParentClient;
+            }
+            return parameters;
+        }
 
         public IEnumerable<ValueExpression> GetValueExpressionsForParameters(IEnumerable<Parameter> parameters, List<MethodBodyStatement> variableDeclarationStatements)
         {
@@ -101,6 +116,28 @@ namespace AutoRest.CSharp.Output.Samples.Models
                         continue;
 
                     parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+
+                    /*
+                     * TODO: remove this when example can contain client parameter value. Following workaround will not needed.
+                     */
+                    /*
+                    switch (parameter.Type)
+                    {
+                        case { IsEnum: true }:
+                            var inputParameter = GetAllClientInvocatioParameters().Concat(_inputOperation.Parameters).Where(p => p.Name == parameter.Name).FirstOrDefault();
+                            if (inputParameter?.Type is InputEnumType enumType)
+                            {
+                                var enumMember = enumType.Values.First().Name;
+                                parameterExpression = new TypeReference(parameter.Type).Property(enumMember);
+                                break;
+                            }
+                            parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+                            break;
+                        default:
+                            parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+                            break;
+                    }
+                    */
                 }
                 if (IsInlineParameter(parameter))
                 {
@@ -138,7 +175,28 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (!parameter.IsOptionalInSignature)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type)));
+                        /*
+                         * TODO: remove this when example can contain client parameter value. Following workaround will not needed.
+                         */
+                        ValueExpression parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+                        switch (parameter.Type)
+                        {
+                            case { IsEnum: true }:
+                                var inputParameter = GetAllClientInvocatioParameters().Where(p => p.Name == parameter.Name).FirstOrDefault();
+                                if (inputParameter?.Type is InputEnumType enumType)
+                                {
+                                    var enumValue = enumType.Values.First();
+                                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, InputExampleValue.Value(enumType, enumValue.Value)));
+                                }
+                                else
+                                {
+                                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
+                                }
+                                break;
+                            default:
+                                result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
+                                break;
+                        }
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }

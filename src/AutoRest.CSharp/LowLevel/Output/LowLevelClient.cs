@@ -115,7 +115,10 @@ namespace AutoRest.CSharp.Output.Models
             yield break;
         }
 
-
+        public IReadOnlyList<InputParameter> GetConstructorParameters()
+        {
+            return _clientParameters.Concat(_operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name).ToList();
+        }
         public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
             var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, clientParameters, fields, typeFactory, sourceInputModel));
