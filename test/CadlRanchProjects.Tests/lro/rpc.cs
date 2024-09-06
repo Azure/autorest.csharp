@@ -19,13 +19,22 @@ namespace CadlRanchProjects.Tests.lro
     public class LroRpcTest : CadlRanchTestBase
     {
         [Test]
-        public Task Delete() => Test(async (host) =>
+        public Task Lro_Rpc_InPrograss() => Test(async (host) =>
         {
             var operation = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Started, new GenerationOptions("text"));
 
             Assert.IsFalse(operation.HasCompleted);
             Assert.AreEqual(202, operation.GetRawResponse().Status);
-            //Assert.AreEqual("operation1", operation.Value.Data);
+        });
+
+        [Test]
+        public Task Lro_Rpc_Succeed() => Test(async (host) =>
+        {
+            var operation = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Completed, new GenerationOptions("text"));
+
+            Assert.IsTrue(operation.HasCompleted);
+            Assert.AreEqual(200, operation.GetRawResponse().Status);
+            Assert.AreEqual("text data", operation.Value.Data);
         });
     }
 }
