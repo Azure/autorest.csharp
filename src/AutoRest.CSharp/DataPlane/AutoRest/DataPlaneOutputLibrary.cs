@@ -209,8 +209,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
             foreach (var client in _input.Clients)
             {
-                var clientParameters = RestClientBuilder.GetParametersFromClient(client).ToList();
-                var restClientBuilder = new RestClientBuilder(clientParameters, _typeFactory, this);
+                //var clientParameters = RestClientBuilder.GetParametersFromClient(client).ToList();
+                var restClientBuilder = new RestClientBuilder(client.Parameters, client.Operations, _typeFactory, this);
                 restClients.Add(client, new DataPlaneRestClient(client, restClientBuilder, GetRestClientDefaultName(client), this, _typeFactory, _sourceInputModel));
             }
 

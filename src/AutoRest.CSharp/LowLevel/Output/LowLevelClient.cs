@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IReadOnlyList<Parameter>? _parameters;
-        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _typeFactory).GetOrderedParametersByRequired();
+        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _operations, _typeFactory).GetOrderedParametersByRequired();
 
         private ClientFields? _fields;
         public ClientFields Fields => _fields ??= ClientFields.CreateForClient(Parameters, _authorization);
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(this, _typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(this, _typeFactory, _operations, _clientParameters, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -115,10 +115,13 @@ namespace AutoRest.CSharp.Output.Models
             yield break;
         }
 
-
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public IReadOnlyList<InputParameter> GetConstructorParameters()
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
+            return _clientParameters.Concat(_operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name).ToList();
+        }
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        {
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, clientParameters, fields, typeFactory, sourceInputModel));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

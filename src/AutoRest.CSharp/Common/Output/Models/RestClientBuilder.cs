@@ -38,18 +38,23 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OutputLibrary? _library;
         private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
+        private IEnumerable<InputParameter> ClientParameters { get; }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, IEnumerable<InputOperation> operations, TypeFactory typeFactory)
         {
             _typeFactory = typeFactory;
-            _parameters = clientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
+            var allClientParameters = clientParameters.Concat(operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name);
+            _parameters = allClientParameters.DistinctBy(p => p.Name).ToDictionary(p => p.Name, BuildConstructorParameter);
+            ClientParameters = clientParameters;
         }
 
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory, OutputLibrary library)
+        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, IEnumerable<InputOperation> operations, TypeFactory typeFactory, OutputLibrary library)
         {
             _typeFactory = typeFactory;
             _library = library;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            var allClientParameters = clientParameters.Concat(operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client)).DistinctBy(p => p.Name);
+            _parameters = allClientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
+            ClientParameters = clientParameters;
         }
 
         /// <summary>
@@ -65,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return client.Parameters
                 .Concat(client.Operations.SelectMany(op => op.Parameters).Where(p => p.Kind == InputOperationParameterKind.Client))
-                .Distinct();
+                .DistinctBy(p => p.Name);
         }
 
         public static RestClientMethod BuildRequestMethod(InputOperation operation, Parameter[] parameters, IReadOnlyCollection<RequestPartSource> requestParts, Parameter? bodyParameter, TypeFactory typeFactory)
@@ -98,8 +103,9 @@ namespace AutoRest.CSharp.Output.Models
         {
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
-            var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
+            var requestParts = allParameters.Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
+                .Concat(ClientParameters.Select(p => new RequestPartSource(p.NameInRequest, p, CreateReference(p, _parameters[p.Name]), SerializationBuilder.GetSerializationFormat(p.Type))))
+                .DistinctBy(r => r.NameInRequest)
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _typeFactory, _library);

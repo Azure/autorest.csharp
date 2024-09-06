@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var operation in InputClient.Operations)
             {
-                requestMethods.Add(operation, _clientBuilder.BuildMethod(operation, operation.Parameters, null, "public", ShouldReturnNullOn404(operation)));
+                requestMethods.Add(operation, _clientBuilder.BuildMethod(operation, operation.Parameters, InputClient.Parameters, null, "public", ShouldReturnNullOn404(operation)));
 
             }
 
