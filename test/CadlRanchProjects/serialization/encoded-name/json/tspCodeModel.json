@@ -14,6 +14,7 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "defaultName",
      "SerializedName": "wireName",
      "Description": "Pass in true",
@@ -24,9 +25,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.boolean",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Serialization.EncodedName.Json.Property.JsonEncodedNameModel.defaultName"
     }
    ]
   }

@@ -15,9 +15,9 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
@@ -25,15 +25,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.FlattenModel.name"
     },
     {
      "$id": "5",
+     "Kind": "property",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
      "Type": {
       "$id": "6",
       "Kind": "string",
@@ -41,19 +43,21 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "description"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.description"
     },
     {
      "$id": "7",
+     "Kind": "property",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
      "Type": {
       "$id": "8",
       "Kind": "int32",
@@ -61,13 +65,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "age"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.age"
     }
    ]
   },
@@ -82,27 +88,31 @@
    "Properties": [
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
      "Type": {
       "$ref": "6"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.description"
     },
     {
      "$id": "11",
+     "Kind": "property",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
      "Type": {
       "$ref": "8"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.age"
     }
    ]
   },
@@ -117,9 +127,9 @@
    "Properties": [
     {
      "$id": "13",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "14",
       "Kind": "string",
@@ -127,15 +137,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.NestedFlattenModel.name"
     },
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "summary",
      "SerializedName": "summary",
-     "Description": "",
      "Type": {
       "$id": "16",
       "Kind": "string",
@@ -143,47 +155,53 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "summary"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel.summary"
     },
     {
      "$id": "17",
+     "Kind": "property",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
      "Type": {
       "$ref": "6"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "properties",
       "description"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.description"
     },
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
      "Type": {
       "$ref": "8"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "properties",
       "age"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.age"
     }
    ]
   },
@@ -198,47 +216,53 @@
    "Properties": [
     {
      "$id": "20",
+     "Kind": "property",
      "Name": "summary",
      "SerializedName": "summary",
-     "Description": "",
      "Type": {
       "$ref": "16"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildFlattenModel.summary"
     },
     {
      "$id": "21",
+     "Kind": "property",
      "Name": "description",
      "SerializedName": "description",
-     "Description": "",
      "Type": {
       "$ref": "6"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "description"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.description"
     },
     {
      "$id": "22",
+     "Kind": "property",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
      "Type": {
       "$ref": "8"
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
      "FlattenedNames": [
       "properties",
       "age"
      ],
-     "Decorators": []
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Type.Model.Flatten.ChildModel.age"
     }
    ]
   }
