@@ -46,13 +46,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
-        /// <param name="result"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="result"/> is null. </exception>
-        public RoundTripModel(ResultModel result)
+        public RoundTripModel()
         {
-            Argument.AssertNotNull(result, nameof(result));
-
-            Result = result;
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
@@ -64,12 +59,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/> for deserialization. </summary>
-        internal RoundTripModel()
-        {
-        }
-
-        /// <summary> Gets or sets the result. </summary>
-        public ResultModel Result { get; set; }
+        /// <summary> Gets the result. </summary>
+        public ResultModel Result { get; }
     }
 }
