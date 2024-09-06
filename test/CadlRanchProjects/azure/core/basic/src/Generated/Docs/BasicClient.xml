@@ -9,27 +9,13 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
-    orders = new object[]
-    {
-        new
-        {
-            id = 1234,
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-    etag = "<etag>",
 });
 Response response = await client.CreateOrUpdateAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateAsync with all parameters and request content and parse the result.
@@ -38,18 +24,15 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
     orders = new object[]
     {
         new
         {
-            id = 1234,
             userId = 1234,
             detail = "<detail>",
         }
     },
-    etag = "<etag>",
 });
 Response response = await client.CreateOrUpdateAsync(1234, content);
 
@@ -70,27 +53,13 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
-    orders = new object[]
-    {
-        new
-        {
-            id = 1234,
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-    etag = "<etag>",
 });
 Response response = client.CreateOrUpdate(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdate with all parameters and request content and parse the result.
@@ -99,18 +68,15 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
     orders = new object[]
     {
         new
         {
-            id = 1234,
             userId = 1234,
             detail = "<detail>",
         }
     },
-    etag = "<etag>",
 });
 Response response = client.CreateOrUpdate(1234, content);
 
@@ -129,20 +95,17 @@ This sample shows how to call CreateOrReplaceAsync.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-User resource = new User(1234, "<name>", new UserOrder[]
-{
-    new UserOrder(1234, 1234, "<detail>")
-}, new ETag("<etag>"));
+User resource = new User("<name>");
 Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
 ]]></code>
 This sample shows how to call CreateOrReplaceAsync with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-User resource = new User(1234, "<name>", new UserOrder[]
+User resource = new User("<name>")
 {
-    new UserOrder(1234, 1234, "<detail>")
-}, new ETag("<etag>"));
+    Orders = { new UserOrder(1234, "<detail>") },
+};
 Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
 ]]></code></example>
     </member>
@@ -152,20 +115,17 @@ This sample shows how to call CreateOrReplace.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-User resource = new User(1234, "<name>", new UserOrder[]
-{
-    new UserOrder(1234, 1234, "<detail>")
-}, new ETag("<etag>"));
+User resource = new User("<name>");
 Response<User> response = client.CreateOrReplace(1234, resource);
 ]]></code>
 This sample shows how to call CreateOrReplace with all parameters.
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-User resource = new User(1234, "<name>", new UserOrder[]
+User resource = new User("<name>")
 {
-    new UserOrder(1234, 1234, "<detail>")
-}, new ETag("<etag>"));
+    Orders = { new UserOrder(1234, "<detail>") },
+};
 Response<User> response = client.CreateOrReplace(1234, resource);
 ]]></code></example>
     </member>
@@ -177,27 +137,13 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
-    orders = new object[]
-    {
-        new
-        {
-            id = 1234,
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-    etag = "<etag>",
 });
 Response response = await client.CreateOrReplaceAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call CreateOrReplaceAsync with all parameters and request content and parse the result.
@@ -206,18 +152,15 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
     orders = new object[]
     {
         new
         {
-            id = 1234,
             userId = 1234,
             detail = "<detail>",
         }
     },
-    etag = "<etag>",
 });
 Response response = await client.CreateOrReplaceAsync(1234, content);
 
@@ -238,27 +181,13 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
-    orders = new object[]
-    {
-        new
-        {
-            id = 1234,
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-    etag = "<etag>",
 });
 Response response = client.CreateOrReplace(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call CreateOrReplace with all parameters and request content and parse the result.
@@ -267,18 +196,15 @@ BasicClient client = new BasicClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    id = 1234,
     name = "<name>",
     orders = new object[]
     {
         new
         {
-            id = 1234,
             userId = 1234,
             detail = "<detail>",
         }
     },
-    etag = "<etag>",
 });
 Response response = client.CreateOrReplace(1234, content);
 
@@ -332,9 +258,6 @@ Response response = await client.GetUserAsync(1234, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call GetUserAsync with all parameters and parse the result.
@@ -363,9 +286,6 @@ Response response = client.GetUser(1234, null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call GetUser with all parameters and parse the result.
@@ -462,9 +382,6 @@ Response response = await client.ExportAsync(1234, "<format>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call ExportAsync with all parameters and parse the result.
@@ -493,9 +410,6 @@ Response response = client.Export(1234, "<format>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call Export with all parameters and parse the result.
@@ -554,9 +468,6 @@ Response response = await client.ExportAllUsersAsync("<format>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call ExportAllUsersAsync with all parameters and parse the result.
@@ -585,9 +496,6 @@ Response response = client.ExportAllUsers("<format>", null);
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("id").ToString());
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("id").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("userId").ToString());
-Console.WriteLine(result.GetProperty("users")[0].GetProperty("orders")[0].GetProperty("detail").ToString());
 Console.WriteLine(result.GetProperty("users")[0].GetProperty("etag").ToString());
 ]]></code>
 This sample shows how to call ExportAllUsers with all parameters and parse the result.
@@ -654,9 +562,6 @@ await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, n
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
     Console.WriteLine(result.GetProperty("etag").ToString());
 }
 ]]></code>
@@ -687,9 +592,6 @@ foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, 
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
     Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
     Console.WriteLine(result.GetProperty("etag").ToString());
 }
 ]]></code>

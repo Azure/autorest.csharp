@@ -27,8 +27,11 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
 
             writer.WriteStartObject();
-            writer.WritePropertyName("id"u8);
-            writer.WriteNumberValue(Id);
+            if (options.Format != "W")
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteNumberValue(Id);
+            }
             writer.WritePropertyName("userId"u8);
             writer.WriteNumberValue(UserId);
             writer.WritePropertyName("detail"u8);
