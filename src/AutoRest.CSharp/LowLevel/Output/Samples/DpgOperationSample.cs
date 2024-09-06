@@ -116,28 +116,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
                         continue;
 
                     parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
-
-                    /*
-                     * TODO: remove this when example can contain client parameter value. Following workaround will not needed.
-                     */
-                    /*
-                    switch (parameter.Type)
-                    {
-                        case { IsEnum: true }:
-                            var inputParameter = GetAllClientInvocatioParameters().Concat(_inputOperation.Parameters).Where(p => p.Name == parameter.Name).FirstOrDefault();
-                            if (inputParameter?.Type is InputEnumType enumType)
-                            {
-                                var enumMember = enumType.Values.First().Name;
-                                parameterExpression = new TypeReference(parameter.Type).Property(enumMember);
-                                break;
-                            }
-                            parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
-                            break;
-                        default:
-                            parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
-                            break;
-                    }
-                    */
                 }
                 if (IsInlineParameter(parameter))
                 {
