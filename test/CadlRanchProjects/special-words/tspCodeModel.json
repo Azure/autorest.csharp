@@ -14,9 +14,9 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "SameAsModel",
      "SerializedName": "SameAsModel",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
@@ -24,9 +24,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel.SameAsModel"
     }
    ]
   },
@@ -40,9 +42,9 @@
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "7",
       "Kind": "string",
@@ -50,9 +52,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.and.name"
     }
    ]
   },
@@ -66,9 +70,9 @@
    "Properties": [
     {
      "$id": "9",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "10",
       "Kind": "string",
@@ -76,9 +80,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.as.name"
     }
    ]
   },
@@ -92,9 +98,9 @@
    "Properties": [
     {
      "$id": "12",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "13",
       "Kind": "string",
@@ -102,9 +108,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.assert.name"
     }
    ]
   },
@@ -118,9 +126,9 @@
    "Properties": [
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "16",
       "Kind": "string",
@@ -128,9 +136,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.async.name"
     }
    ]
   },
@@ -144,9 +154,9 @@
    "Properties": [
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "19",
       "Kind": "string",
@@ -154,9 +164,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.await.name"
     }
    ]
   },
@@ -170,9 +182,9 @@
    "Properties": [
     {
      "$id": "21",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "22",
       "Kind": "string",
@@ -180,9 +192,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.break.name"
     }
    ]
   },
@@ -196,9 +210,9 @@
    "Properties": [
     {
      "$id": "24",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "25",
       "Kind": "string",
@@ -206,9 +220,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.class.name"
     }
    ]
   },
@@ -222,9 +238,9 @@
    "Properties": [
     {
      "$id": "27",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "28",
       "Kind": "string",
@@ -232,9 +248,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.constructor.name"
     }
    ]
   },
@@ -248,9 +266,9 @@
    "Properties": [
     {
      "$id": "30",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "31",
       "Kind": "string",
@@ -258,9 +276,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.continue.name"
     }
    ]
   },
@@ -274,9 +294,9 @@
    "Properties": [
     {
      "$id": "33",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "34",
       "Kind": "string",
@@ -284,9 +304,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.def.name"
     }
    ]
   },
@@ -300,9 +322,9 @@
    "Properties": [
     {
      "$id": "36",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "37",
       "Kind": "string",
@@ -310,9 +332,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.del.name"
     }
    ]
   },
@@ -326,9 +350,9 @@
    "Properties": [
     {
      "$id": "39",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "40",
       "Kind": "string",
@@ -336,9 +360,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.elif.name"
     }
    ]
   },
@@ -352,9 +378,9 @@
    "Properties": [
     {
      "$id": "42",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "43",
       "Kind": "string",
@@ -362,9 +388,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.else.name"
     }
    ]
   },
@@ -378,9 +406,9 @@
    "Properties": [
     {
      "$id": "45",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "46",
       "Kind": "string",
@@ -388,9 +416,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.except.name"
     }
    ]
   },
@@ -404,9 +434,9 @@
    "Properties": [
     {
      "$id": "48",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "49",
       "Kind": "string",
@@ -414,9 +444,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.exec.name"
     }
    ]
   },
@@ -430,9 +462,9 @@
    "Properties": [
     {
      "$id": "51",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "52",
       "Kind": "string",
@@ -440,9 +472,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.finally.name"
     }
    ]
   },
@@ -456,9 +490,9 @@
    "Properties": [
     {
      "$id": "54",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "55",
       "Kind": "string",
@@ -466,9 +500,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.for.name"
     }
    ]
   },
@@ -482,9 +518,9 @@
    "Properties": [
     {
      "$id": "57",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "58",
       "Kind": "string",
@@ -492,9 +528,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.from.name"
     }
    ]
   },
@@ -508,9 +546,9 @@
    "Properties": [
     {
      "$id": "60",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "61",
       "Kind": "string",
@@ -518,9 +556,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.global.name"
     }
    ]
   },
@@ -534,9 +574,9 @@
    "Properties": [
     {
      "$id": "63",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "64",
       "Kind": "string",
@@ -544,9 +584,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.if.name"
     }
    ]
   },
@@ -560,9 +602,9 @@
    "Properties": [
     {
      "$id": "66",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "67",
       "Kind": "string",
@@ -570,9 +612,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.import.name"
     }
    ]
   },
@@ -586,9 +630,9 @@
    "Properties": [
     {
      "$id": "69",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "70",
       "Kind": "string",
@@ -596,9 +640,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.in.name"
     }
    ]
   },
@@ -612,9 +658,9 @@
    "Properties": [
     {
      "$id": "72",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "73",
       "Kind": "string",
@@ -622,9 +668,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.is.name"
     }
    ]
   },
@@ -638,9 +686,9 @@
    "Properties": [
     {
      "$id": "75",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "76",
       "Kind": "string",
@@ -648,9 +696,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.lambda.name"
     }
    ]
   },
@@ -664,9 +714,9 @@
    "Properties": [
     {
      "$id": "78",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "79",
       "Kind": "string",
@@ -674,9 +724,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.not.name"
     }
    ]
   },
@@ -690,9 +742,9 @@
    "Properties": [
     {
      "$id": "81",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "82",
       "Kind": "string",
@@ -700,9 +752,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.or.name"
     }
    ]
   },
@@ -716,9 +770,9 @@
    "Properties": [
     {
      "$id": "84",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "85",
       "Kind": "string",
@@ -726,9 +780,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.pass.name"
     }
    ]
   },
@@ -742,9 +798,9 @@
    "Properties": [
     {
      "$id": "87",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "88",
       "Kind": "string",
@@ -752,9 +808,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.raise.name"
     }
    ]
   },
@@ -768,9 +826,9 @@
    "Properties": [
     {
      "$id": "90",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "91",
       "Kind": "string",
@@ -778,9 +836,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.return.name"
     }
    ]
   },
@@ -794,9 +854,9 @@
    "Properties": [
     {
      "$id": "93",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "94",
       "Kind": "string",
@@ -804,9 +864,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.try.name"
     }
    ]
   },
@@ -820,9 +882,9 @@
    "Properties": [
     {
      "$id": "96",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "97",
       "Kind": "string",
@@ -830,9 +892,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.while.name"
     }
    ]
   },
@@ -846,9 +910,9 @@
    "Properties": [
     {
      "$id": "99",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "100",
       "Kind": "string",
@@ -856,9 +920,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.with.name"
     }
    ]
   },
@@ -872,9 +938,9 @@
    "Properties": [
     {
      "$id": "102",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "103",
       "Kind": "string",
@@ -882,9 +948,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "SpecialWords.Models.yield.name"
     }
    ]
   }

@@ -77,6 +77,7 @@
    "Properties": [
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The user's id.",
@@ -87,12 +88,15 @@
       "CrossLanguageDefinitionId": "TypeSpec.int32",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
     },
     {
      "$id": "12",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The user's name.",
@@ -103,9 +107,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
     }
    ]
   },
@@ -120,6 +126,7 @@
    "Properties": [
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "userActionValue",
      "SerializedName": "userActionValue",
      "Description": "User action value.",
@@ -130,9 +137,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
     }
    ]
   },
@@ -147,6 +156,7 @@
    "Properties": [
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "userActionResult",
      "SerializedName": "userActionResult",
      "Description": "User action result.",
@@ -157,9 +167,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
     }
    ]
   }

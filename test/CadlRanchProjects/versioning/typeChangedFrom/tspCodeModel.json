@@ -51,9 +51,9 @@
    "Properties": [
     {
      "$id": "7",
+     "Kind": "property",
      "Name": "prop",
      "SerializedName": "prop",
-     "Description": "",
      "Type": {
       "$id": "8",
       "Kind": "string",
@@ -61,15 +61,17 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.TestModel.prop"
     },
     {
      "$id": "9",
+     "Kind": "property",
      "Name": "changedProp",
      "SerializedName": "changedProp",
-     "Description": "",
      "Type": {
       "$id": "10",
       "Kind": "string",
@@ -77,9 +79,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Versioning.TypeChangedFrom.TestModel.changedProp"
     }
    ]
   }

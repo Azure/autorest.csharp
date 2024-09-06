@@ -15,9 +15,9 @@
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
@@ -25,9 +25,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel.name"
     }
    ]
   },
@@ -42,9 +44,9 @@
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "7",
       "Kind": "string",
@@ -52,9 +54,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel.name"
     }
    ]
   },
@@ -68,9 +72,9 @@
    "Properties": [
     {
      "$id": "9",
+     "Kind": "property",
      "Name": "result",
      "SerializedName": "result",
-     "Description": "",
      "Type": {
       "$id": "10",
       "Kind": "model",
@@ -81,9 +85,9 @@
       "Properties": [
        {
         "$id": "11",
+        "Kind": "property",
         "Name": "name",
         "SerializedName": "name",
-        "Description": "",
         "Type": {
          "$id": "12",
          "Kind": "string",
@@ -91,15 +95,19 @@
          "CrossLanguageDefinitionId": "TypeSpec.string",
          "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "Decorators": []
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.ResultModel.name"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.RoundTripModel.result"
     }
    ]
   },
@@ -118,9 +126,9 @@
    "Properties": [
     {
      "$id": "14",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
      "Type": {
       "$id": "15",
       "Kind": "string",
@@ -128,9 +136,11 @@
       "CrossLanguageDefinitionId": "TypeSpec.string",
       "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel.name"
     }
    ]
   }
