@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Parameters.Spread;
 using Parameters.Spread.Models;
+using _Type.Model.Visibility.Models;
 
 namespace CadlRanchProjects.Tests
 {
@@ -140,6 +141,5 @@ namespace CadlRanchProjects.Tests
 
         private static bool IsProtocolMethod(MethodInfo method)
             => method.GetParameters().Any(parameter => parameter.ParameterType.Equals(typeof(RequestContent)));
-
     }
 }

@@ -75,6 +75,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 keepNonOverloadableProtocolSignature: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useWriteCore: true,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 projectFolder: "/..",
@@ -91,6 +92,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
+                examplesDirectory: null,
                 helperNamespace: "");
         }
 

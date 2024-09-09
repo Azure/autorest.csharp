@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Autorest.CSharp.Core;
 using Azure;
 using Azure.Core;
@@ -42,30 +44,73 @@ namespace MgmtTypeSpec.Mocking
             return apiVersion;
         }
 
+        /// <summary> Gets a collection of FooResources in the ResourceGroupResource. </summary>
+        /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
+        public virtual FooCollection GetFoos()
+        {
+            return GetCachedClient(client => new FooCollection(client, Id));
+        }
+
         /// <summary>
-        /// list private links on the given resource
+        /// Get a Foo
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources</description>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}</description>
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>Foos_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="fooName"> The name of the Foo. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoClusterAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual async Task<Response<FooResource>> GetFooAsync(string fooName, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateListByMongoClusterRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateListByMongoClusterNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster", "value", "nextLink", cancellationToken);
+            return await GetFoos().GetAsync(fooName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a Foo
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-05-01</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="FooResource"/></description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="fooName"> The name of the Foo. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public virtual Response<FooResource> GetFoo(string fooName, CancellationToken cancellationToken = default)
+        {
+            return GetFoos().Get(fooName, cancellationToken);
         }
 
         /// <summary>
@@ -77,21 +122,47 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>PrivateLinkResource_ListByMongoCluster</description>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary>
+        /// list private links on the given resource
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PrivateLinkResource_GetAllPrivateLinkResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-05-01</description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="MgmtTypeSpecPrivateLinkResourceData"/> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<MgmtTypeSpecPrivateLinkResourceData> GetPrivateLinksByMongoCluster(CancellationToken cancellationToken = default)
+        public virtual Pageable<MgmtTypeSpecPrivateLinkResourceData> GetAllPrivateLinkResources(CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateListByMongoClusterRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateListByMongoClusterNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetPrivateLinksByMongoCluster", "value", "nextLink", cancellationToken);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesRequest(Id.SubscriptionId, Id.ResourceGroupName);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PrivateLinksRestClient.CreateGetAllPrivateLinkResourcesNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => MgmtTypeSpecPrivateLinkResourceData.DeserializeMgmtTypeSpecPrivateLinkResourceData(e), PrivateLinksClientDiagnostics, Pipeline, "MockableMgmtTypeSpecResourceGroupResource.GetAllPrivateLinkResources", "value", "nextLink", cancellationToken);
         }
     }
 }

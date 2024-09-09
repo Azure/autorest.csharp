@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class Sample : MockTestCase
     {
-        public Sample(MockTestCase testCase) : base(testCase.OperationId, testCase.Carrier, testCase.Operation, testCase._example)
+        public Sample(MockTestCase testCase) : base(testCase.OperationId, testCase.Carrier, testCase.Operation, testCase._inputOperation, testCase._example)
         {
         }
 
@@ -21,6 +21,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return value;
         }
 
-        public string ExampleFilepath => _example.ExampleFilePath!;
+        public string ExampleFilepath => _example.FilePath;
     }
 }

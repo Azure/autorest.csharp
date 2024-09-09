@@ -11,4 +11,5 @@ internal record InputModelProperty(string Name, string SerializedName, string De
     public FormattableString? DefaultValue { get; init; }
 
     public string Name { get; internal set; } = Name;
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
 }

@@ -28,12 +28,14 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             object? value = null;
             string? description = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputEnumTypeValue.Name), ref name)
                     || reader.TryReadEnumValue(nameof(InputEnumTypeValue.Value), ref value)
-                    || reader.TryReadString(nameof(InputEnumTypeValue.Description), ref description);
+                    || reader.TryReadString(nameof(InputEnumTypeValue.Description), ref description)
+                    || reader.TryReadWithConverter(nameof(InputEnumTypeValue.Decorators), options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -45,7 +47,10 @@ namespace AutoRest.CSharp.Common.Input
 
             value = value ?? throw new JsonException("EnumValue must have value");
 
-            var enumValue = new InputEnumTypeValue(name, value, description);
+            var enumValue = new InputEnumTypeValue(name, value, description)
+            {
+                Decorators = decorators ?? Array.Empty<InputDecoratorInfo>(),
+            };
             if (id != null)
             {
                 resolver.AddReference(id, enumValue);

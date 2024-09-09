@@ -10,35 +10,44 @@
    "Name": "MultiPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest.id"
     },
     {
      "$id": "5",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "6",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.MultiPartRequest.profileImage"
     }
    ]
   },
@@ -48,72 +57,89 @@
    "Name": "ComplexPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "8",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "9",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.id"
     },
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "address",
      "SerializedName": "address",
-     "Description": "",
      "Type": {
       "$id": "11",
       "Kind": "model",
       "Name": "Address",
       "CrossLanguageDefinitionId": "Payload.MultiPart.Address",
       "Usage": "Input",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "12",
+        "Kind": "property",
         "Name": "city",
         "SerializedName": "city",
-        "Description": "",
         "Type": {
          "$id": "13",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Payload.MultiPart.Address.city"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.address"
     },
     {
      "$id": "14",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "15",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.profileImage"
     },
     {
      "$id": "16",
+     "Kind": "property",
      "Name": "previousAddresses",
      "SerializedName": "previousAddresses",
-     "Description": "",
      "Type": {
       "$id": "17",
       "Kind": "array",
@@ -121,16 +147,20 @@
       "ValueType": {
        "$ref": "11"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.previousAddresses"
     },
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "pictures",
      "SerializedName": "pictures",
-     "Description": "",
      "Type": {
       "$id": "19",
       "Kind": "array",
@@ -140,12 +170,17 @@
        "Kind": "bytes",
        "Name": "bytes",
        "Encode": "base64",
-       "CrossLanguageDefinitionId": "TypeSpec.bytes"
+       "CrossLanguageDefinitionId": "TypeSpec.bytes",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.ComplexPartsRequest.pictures"
     }
    ]
   },
@@ -158,32 +193,40 @@
    "Name": "JsonPartRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "22",
+     "Kind": "property",
      "Name": "address",
      "SerializedName": "address",
-     "Description": "",
      "Type": {
       "$ref": "11"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest.address"
     },
     {
      "$id": "23",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "24",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.JsonPartRequest.profileImage"
     }
    ]
   },
@@ -193,26 +236,31 @@
    "Name": "BinaryArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "26",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "27",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest.id"
     },
     {
      "$id": "28",
+     "Kind": "property",
      "Name": "pictures",
      "SerializedName": "pictures",
-     "Description": "",
      "Type": {
       "$id": "29",
       "Kind": "array",
@@ -222,12 +270,17 @@
        "Kind": "bytes",
        "Name": "bytes",
        "Encode": "base64",
-       "CrossLanguageDefinitionId": "TypeSpec.bytes"
+       "CrossLanguageDefinitionId": "TypeSpec.bytes",
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.BinaryArrayPartsRequest.pictures"
     }
    ]
   },
@@ -237,27 +290,32 @@
    "Name": "JsonArrayPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "32",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "33",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest.profileImage"
     },
     {
      "$id": "34",
+     "Kind": "property",
      "Name": "previousAddresses",
      "SerializedName": "previousAddresses",
-     "Description": "",
      "Type": {
       "$id": "35",
       "Kind": "array",
@@ -265,10 +323,14 @@
       "ValueType": {
        "$ref": "11"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.JsonArrayPartsRequest.previousAddresses"
     }
    ]
   },
@@ -278,36 +340,45 @@
    "Name": "MultiBinaryPartsRequest",
    "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest",
    "Usage": "Input,MultipartFormData",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "37",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "38",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest.profileImage"
     },
     {
      "$id": "39",
+     "Kind": "property",
      "Name": "picture",
      "SerializedName": "picture",
-     "Description": "",
      "Type": {
       "$id": "40",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.MultiPart.MultiBinaryPartsRequest.picture"
     }
    ]
   },
@@ -317,21 +388,26 @@
    "Name": "AnonymousModelRequest",
    "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous",
    "Usage": "MultipartFormData,Spread",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
+     "Kind": "property",
      "Name": "profileImage",
      "SerializedName": "profileImage",
-     "Description": "",
      "Type": {
       "$id": "43",
       "Kind": "bytes",
       "Name": "bytes",
       "Encode": "base64",
-      "CrossLanguageDefinitionId": "TypeSpec.bytes"
+      "CrossLanguageDefinitionId": "TypeSpec.bytes",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "anonymousModel.Request.anonymous.profileImage"
     }
    ]
   }
@@ -352,9 +428,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "47",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "Kind": "url",
+      "Name": "url",
+      "CrossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -376,7 +452,8 @@
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "50",
@@ -395,9 +472,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "53",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -430,9 +507,11 @@
          "$id": "58",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -440,7 +519,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "59",
@@ -455,7 +536,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -478,7 +561,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.basic",
+     "Decorators": []
     },
     {
      "$id": "61",
@@ -501,9 +586,11 @@
          "$id": "64",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -511,7 +598,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "65",
@@ -526,7 +615,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -549,7 +640,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.complex",
+     "Decorators": []
     },
     {
      "$id": "67",
@@ -572,9 +665,11 @@
          "$id": "70",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -582,7 +677,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "71",
@@ -597,7 +694,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -620,7 +719,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.jsonPart",
+     "Decorators": []
     },
     {
      "$id": "73",
@@ -643,9 +744,11 @@
          "$id": "76",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -653,7 +756,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "77",
@@ -668,7 +773,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -691,7 +798,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.binaryArrayParts",
+     "Decorators": []
     },
     {
      "$id": "79",
@@ -714,9 +823,11 @@
          "$id": "82",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -724,7 +835,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "83",
@@ -739,7 +852,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -762,7 +877,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.jsonArrayParts",
+     "Decorators": []
     },
     {
      "$id": "85",
@@ -785,9 +902,11 @@
          "$id": "88",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -795,7 +914,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "89",
@@ -810,7 +931,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -833,7 +956,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.multiBinaryParts",
+     "Decorators": []
     },
     {
      "$id": "91",
@@ -856,9 +981,11 @@
          "$id": "94",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -866,7 +993,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "95",
@@ -881,7 +1010,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -904,7 +1035,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.checkFileNameAndContentType",
+     "Decorators": []
     },
     {
      "$id": "97",
@@ -927,9 +1060,11 @@
          "$id": "100",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "multipart/form-data"
+        "Value": "multipart/form-data",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -937,7 +1072,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "101",
@@ -952,7 +1089,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Spread"
+       "Kind": "Spread",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -975,7 +1114,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.MultiPart.FormData.anonymousModel",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -986,7 +1127,8 @@
     {
      "$ref": "52"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

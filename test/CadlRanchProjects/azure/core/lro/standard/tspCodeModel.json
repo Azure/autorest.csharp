@@ -14,19 +14,22 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The 2022-12-01-preview version."
+     "Description": "The 2022-12-01-preview version.",
+     "Decorators": []
     }
    ],
    "Description": "The API version.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -37,43 +40,50 @@
     "$id": "6",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "7",
      "Name": "NotStarted",
      "Value": "NotStarted",
-     "Description": "The operation has not started."
+     "Description": "The operation has not started.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "Running",
      "Value": "Running",
-     "Description": "The operation is in progress."
+     "Description": "The operation is in progress.",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "Succeeded",
      "Value": "Succeeded",
-     "Description": "The operation has completed successfully."
+     "Description": "The operation has completed successfully.",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "Failed",
      "Value": "Failed",
-     "Description": "The operation has failed."
+     "Description": "The operation has failed.",
+     "Decorators": []
     },
     {
      "$id": "11",
      "Name": "Canceled",
      "Value": "Canceled",
-     "Description": "The operation has been canceled by the user."
+     "Description": "The operation has been canceled by the user.",
+     "Decorators": []
     }
    ],
    "Description": "Enum describing allowed operation states.",
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -84,9 +94,11 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User",
    "Usage": "Input,Output,Json",
    "Description": "Details about a user.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "13",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of user.",
@@ -94,13 +106,18 @@
       "$id": "14",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User.name"
     },
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "role",
      "SerializedName": "role",
      "Description": "The role of user",
@@ -108,10 +125,14 @@
       "$id": "16",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.User.role"
     }
    ]
   },
@@ -122,9 +143,11 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser",
    "Usage": "Output,Json",
    "Description": "The exported user data.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The name of user.",
@@ -132,13 +155,18 @@
       "$id": "19",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser.name"
     },
     {
      "$id": "20",
+     "Kind": "property",
      "Name": "resourceUri",
      "SerializedName": "resourceUri",
      "Description": "The exported URI.",
@@ -146,10 +174,14 @@
       "$id": "21",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.ExportedUser.resourceUri"
     }
    ]
   },
@@ -160,9 +192,11 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "23",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
@@ -170,24 +204,33 @@
       "$id": "24",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.id"
     },
     {
      "$id": "25",
+     "Kind": "property",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
       "$ref": "5"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.status"
     },
     {
      "$id": "26",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
@@ -198,9 +241,11 @@
       "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "Usage": "None",
       "Description": "The error object.",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "28",
+        "Kind": "property",
         "Name": "code",
         "SerializedName": "code",
         "Description": "One of a server-defined set of error codes.",
@@ -208,13 +253,18 @@
          "$id": "29",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
        },
        {
         "$id": "30",
+        "Kind": "property",
         "Name": "message",
         "SerializedName": "message",
         "Description": "A human-readable representation of the error.",
@@ -222,13 +272,18 @@
          "$id": "31",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
        },
        {
         "$id": "32",
+        "Kind": "property",
         "Name": "target",
         "SerializedName": "target",
         "Description": "The target of the error.",
@@ -236,13 +291,18 @@
          "$id": "33",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
        },
        {
         "$id": "34",
+        "Kind": "property",
         "Name": "details",
         "SerializedName": "details",
         "Description": "An array of details about specific errors that led to this reported error.",
@@ -253,13 +313,18 @@
          "ValueType": {
           "$ref": "27"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         },
-        "IsRequired": false,
-        "IsReadOnly": false
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
        },
        {
         "$id": "36",
+        "Kind": "property",
         "Name": "innererror",
         "SerializedName": "innererror",
         "Description": "An object containing more specific information than the current object about the error.",
@@ -270,9 +335,11 @@
          "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "Usage": "None",
          "Description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "38",
+           "Kind": "property",
            "Name": "code",
            "SerializedName": "code",
            "Description": "One of a server-defined set of error codes.",
@@ -280,31 +347,45 @@
             "$id": "39",
             "Kind": "string",
             "Name": "string",
-            "CrossLanguageDefinitionId": "TypeSpec.string"
+            "CrossLanguageDefinitionId": "TypeSpec.string",
+            "Decorators": []
            },
-           "IsRequired": false,
-           "IsReadOnly": false
+           "Optional": true,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
           },
           {
            "$id": "40",
+           "Kind": "property",
            "Name": "innererror",
            "SerializedName": "innererror",
            "Description": "Inner error.",
            "Type": {
             "$ref": "37"
            },
-           "IsRequired": false,
-           "IsReadOnly": false
+           "Optional": true,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror"
           }
          ]
         },
-        "IsRequired": false,
-        "IsReadOnly": false
+        "Optional": true,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror"
        }
       ]
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.error"
     }
    ]
   },
@@ -321,9 +402,11 @@
    "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "42",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
@@ -331,43 +414,59 @@
       "$id": "43",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
     },
     {
      "$id": "44",
+     "Kind": "property",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
       "$ref": "5"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
     },
     {
      "$id": "45",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$ref": "27"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
     },
     {
      "$id": "46",
+     "Kind": "property",
      "Name": "result",
      "SerializedName": "result",
      "Description": "The result of the operation.",
      "Type": {
       "$ref": "17"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result"
     }
    ]
   },
@@ -378,9 +477,11 @@
    "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "Usage": "None",
    "Description": "Provides status details for long running operations.",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "48",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The unique ID of the operation.",
@@ -388,43 +489,59 @@
       "$id": "49",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.id"
     },
     {
      "$id": "50",
+     "Kind": "property",
      "Name": "status",
      "SerializedName": "status",
      "Description": "The status of the operation",
      "Type": {
       "$ref": "5"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.status"
     },
     {
      "$id": "51",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
      "Description": "Error object that describes the error when status is \"Failed\".",
      "Type": {
       "$ref": "27"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.error"
     },
     {
      "$id": "52",
+     "Kind": "property",
      "Name": "result",
      "SerializedName": "result",
      "Description": "The result of the operation.",
      "Type": {
       "$ref": "17"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus.result"
     }
    ]
   }
@@ -449,9 +566,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "56",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -482,7 +599,8 @@
         "$id": "60",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -500,7 +618,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "63",
@@ -511,7 +631,8 @@
         "$id": "64",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -519,7 +640,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "65",
@@ -533,9 +656,11 @@
          "$id": "67",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -543,7 +668,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "68",
@@ -556,9 +683,11 @@
          "$id": "70",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -566,7 +695,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "71",
@@ -582,7 +713,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -610,8 +743,10 @@
            "$id": "75",
            "Kind": "url",
            "Name": "url",
-           "CrossLanguageDefinitionId": "TypeSpec.url"
-          }
+           "CrossLanguageDefinitionId": "TypeSpec.url",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -644,8 +779,10 @@
            "$id": "79",
            "Kind": "url",
            "Name": "url",
-           "CrossLanguageDefinitionId": "TypeSpec.url"
-          }
+           "CrossLanguageDefinitionId": "TypeSpec.url",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -678,7 +815,9 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.createOrReplace",
+     "Decorators": []
     },
     {
      "$id": "82",
@@ -700,7 +839,8 @@
         "$id": "84",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -718,7 +858,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "87",
@@ -729,7 +871,8 @@
         "$id": "88",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -737,7 +880,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "89",
@@ -750,9 +895,11 @@
          "$id": "91",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -760,7 +907,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -788,8 +937,10 @@
            "$id": "95",
            "Kind": "url",
            "Name": "url",
-           "CrossLanguageDefinitionId": "TypeSpec.url"
-          }
+           "CrossLanguageDefinitionId": "TypeSpec.url",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -816,7 +967,9 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.delete",
+     "Decorators": []
     },
     {
      "$id": "98",
@@ -838,7 +991,8 @@
         "$id": "100",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -856,7 +1010,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "103",
@@ -867,7 +1023,8 @@
         "$id": "104",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -875,7 +1032,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "105",
@@ -886,7 +1045,8 @@
         "$id": "106",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -894,7 +1054,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "107",
@@ -907,9 +1069,11 @@
          "$id": "109",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -917,7 +1081,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -945,8 +1111,10 @@
            "$id": "113",
            "Kind": "url",
            "Name": "url",
-           "CrossLanguageDefinitionId": "TypeSpec.url"
-          }
+           "CrossLanguageDefinitionId": "TypeSpec.url",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -977,7 +1145,9 @@
       "ResultPath": "result"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Standard.export",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -987,7 +1157,8 @@
     {
      "$ref": "55"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useWriteCore: true,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 modelFactoryForHlc: Array.Empty<string>(),
@@ -72,6 +73,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
+                examplesDirectory: null,
                 helperNamespace: "");
         }
 

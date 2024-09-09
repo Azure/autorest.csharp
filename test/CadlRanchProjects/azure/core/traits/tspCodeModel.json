@@ -14,19 +14,22 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "2022-12-01-preview"
+     "Description": "2022-12-01-preview",
+     "Decorators": []
     }
    ],
    "Description": "Service versions",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -37,25 +40,29 @@
     "$id": "6",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "7",
      "Name": "accepted",
      "Value": "accepted",
-     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation."
+     "Description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation.",
+     "Decorators": []
     },
     {
      "$id": "8",
      "Name": "rejected",
      "Value": "rejected",
-     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server."
+     "Description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server.",
+     "Decorators": []
     }
    ],
    "Description": "Repeatability Result header options",
    "IsExtensible": false,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -66,9 +73,11 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "Usage": "Output,Json",
    "Description": "Sample Model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "10",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
      "Description": "The user's id.",
@@ -76,13 +85,18 @@
       "$id": "11",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32"
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
     },
     {
      "$id": "12",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "The user's name.",
@@ -90,10 +104,14 @@
       "$id": "13",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
     }
    ]
   },
@@ -104,9 +122,11 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "Usage": "Input,Json",
    "Description": "User action param",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "15",
+     "Kind": "property",
      "Name": "userActionValue",
      "SerializedName": "userActionValue",
      "Description": "User action value.",
@@ -114,10 +134,14 @@
       "$id": "16",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
     }
    ]
   },
@@ -128,9 +152,11 @@
    "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "Usage": "Output,Json",
    "Description": "User action response",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "18",
+     "Kind": "property",
      "Name": "userActionResult",
      "SerializedName": "userActionResult",
      "Description": "User action result.",
@@ -138,10 +164,14 @@
       "$id": "19",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
     }
    ]
   }
@@ -165,9 +195,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "23",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -198,7 +228,8 @@
         "$id": "27",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -216,7 +247,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "30",
@@ -227,7 +260,8 @@
         "$id": "31",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -235,7 +269,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "32",
@@ -246,7 +282,8 @@
         "$id": "33",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -254,7 +291,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "34",
@@ -265,7 +304,8 @@
         "$id": "35",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -273,7 +313,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "36",
@@ -284,7 +326,8 @@
         "$id": "37",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -292,7 +335,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "38",
@@ -308,9 +353,11 @@
          "$id": "40",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -318,7 +365,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "41",
@@ -334,9 +383,11 @@
          "$id": "43",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -344,7 +395,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "44",
@@ -360,8 +413,10 @@
          "$id": "46",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -369,7 +424,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "47",
@@ -382,9 +439,11 @@
          "$id": "49",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -392,7 +451,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -414,7 +475,8 @@
           "$id": "52",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          }
         },
         {
@@ -426,7 +488,8 @@
           "$id": "54",
           "Kind": "string",
           "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "CrossLanguageDefinitionId": "TypeSpec.string",
+          "Decorators": []
          }
         },
         {
@@ -443,8 +506,10 @@
            "$id": "57",
            "Kind": "string",
            "Name": "string",
-           "CrossLanguageDefinitionId": "TypeSpec.string"
-          }
+           "CrossLanguageDefinitionId": "TypeSpec.string",
+           "Decorators": []
+          },
+          "Decorators": []
          }
         }
        ],
@@ -460,7 +525,9 @@
      "Path": "/azure/core/traits/user/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.smokeTest",
+     "Decorators": []
     },
     {
      "$id": "58",
@@ -481,7 +548,8 @@
         "$id": "60",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -499,7 +567,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "63",
@@ -510,7 +580,8 @@
         "$id": "64",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -518,7 +589,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "65",
@@ -529,7 +602,8 @@
         "$id": "66",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -537,7 +611,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "67",
@@ -553,9 +629,11 @@
          "$id": "69",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -563,7 +641,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "70",
@@ -577,9 +657,11 @@
          "$id": "72",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -587,7 +669,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "73",
@@ -600,9 +684,11 @@
          "$id": "75",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -610,7 +696,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "76",
@@ -626,7 +714,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -665,7 +755,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.repeatableAction",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -675,7 +767,8 @@
     {
      "$ref": "22"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

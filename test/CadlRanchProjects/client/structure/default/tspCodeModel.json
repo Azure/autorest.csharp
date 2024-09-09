@@ -12,32 +12,38 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "Default",
-     "Value": "default"
+     "Value": "default",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "MultiClient",
-     "Value": "multi-client"
+     "Value": "multi-client",
+     "Decorators": []
     },
     {
      "$id": "6",
      "Name": "RenamedOperation",
-     "Value": "renamed-operation"
+     "Value": "renamed-operation",
+     "Decorators": []
     },
     {
      "$id": "7",
      "Name": "TwoOperationGroup",
-     "Value": "two-operation-group"
+     "Value": "two-operation-group",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -110,7 +116,9 @@
      "Path": "/one",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.one",
+     "Decorators": []
     },
     {
      "$id": "14",
@@ -142,7 +150,9 @@
      "Path": "/two",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.two",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -155,7 +165,8 @@
     {
      "$ref": "12"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -205,7 +216,8 @@
      "Explode": false,
      "Kind": "Client"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "22",
@@ -274,7 +286,9 @@
      "Path": "/seven",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Baz.Foo.seven",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -288,7 +302,8 @@
     {
      "$ref": "26"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "29",
@@ -357,7 +372,9 @@
      "Path": "/eight",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Qux.eight",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -371,7 +388,8 @@
     {
      "$ref": "33"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "36",
@@ -440,7 +458,9 @@
      "Path": "/nine",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Qux.Bar.nine",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -454,7 +474,8 @@
     {
      "$ref": "40"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "43",
@@ -523,7 +544,9 @@
      "Path": "/three",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Foo.three",
+     "Decorators": []
     },
     {
      "$id": "49",
@@ -555,7 +578,9 @@
      "Path": "/four",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Foo.four",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -569,7 +594,8 @@
     {
      "$ref": "47"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "52",
@@ -638,7 +664,9 @@
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Bar.five",
+     "Decorators": []
     },
     {
      "$id": "58",
@@ -670,7 +698,9 @@
      "Path": "/six",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.Service.Bar.six",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -684,7 +714,8 @@
     {
      "$ref": "56"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

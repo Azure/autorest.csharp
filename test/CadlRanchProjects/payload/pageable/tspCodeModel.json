@@ -11,9 +11,11 @@
    "CrossLanguageDefinitionId": "Payload.Pageable.User",
    "Usage": "Output,Json",
    "Description": "User model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "User name",
@@ -21,10 +23,14 @@
       "$id": "4",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Payload.Pageable.User.name"
     }
    ]
   },
@@ -35,9 +41,11 @@
    "CrossLanguageDefinitionId": "Azure.Core.Page",
    "Usage": "None",
    "Description": "Paged collection of User items",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "6",
+     "Kind": "property",
      "Name": "value",
      "SerializedName": "value",
      "Description": "The User items on this page",
@@ -48,13 +56,18 @@
       "ValueType": {
        "$ref": "2"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Page.value"
     },
     {
      "$id": "8",
+     "Kind": "property",
      "Name": "nextLink",
      "SerializedName": "nextLink",
      "Description": "The link to the next page of items",
@@ -67,11 +80,16 @@
        "$id": "10",
        "Kind": "url",
        "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url"
-      }
+       "CrossLanguageDefinitionId": "TypeSpec.url",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
   }
@@ -95,9 +113,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "14",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -128,7 +146,8 @@
         "$id": "18",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -136,7 +155,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "19",
@@ -149,9 +170,11 @@
          "$id": "21",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -159,7 +182,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -190,7 +215,9 @@
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Payload.Pageable.list",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -200,7 +227,8 @@
     {
      "$ref": "13"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

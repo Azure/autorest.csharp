@@ -12,22 +12,26 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "application/json; serialization=Avro",
-     "Value": "application/json; serialization=Avro"
+     "Value": "application/json; serialization=Avro",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
+     "Value": "application/octet-stream",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   },
   {
    "$id": "6",
@@ -38,27 +42,32 @@
     "$id": "7",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "8",
      "Name": "application/json",
-     "Value": "application/json"
+     "Value": "application/json",
+     "Decorators": []
     },
     {
      "$id": "9",
      "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
+     "Value": "application/octet-stream",
+     "Decorators": []
     },
     {
      "$id": "10",
      "Name": "text/plain",
-     "Value": "text/plain"
+     "Value": "text/plain",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -68,20 +77,25 @@
    "Name": "Body",
    "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "12",
+     "Kind": "property",
      "Name": "id",
      "SerializedName": "id",
-     "Description": "",
      "Type": {
       "$id": "13",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.Body.id"
     }
    ]
   }
@@ -131,7 +145,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "19",
@@ -142,7 +158,8 @@
         "Kind": "bytes",
         "Name": "bytes",
         "Encode": "base64",
-        "CrossLanguageDefinitionId": "TypeSpec.bytes"
+        "CrossLanguageDefinitionId": "TypeSpec.bytes",
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -150,7 +167,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -174,7 +193,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes",
+     "Decorators": []
     },
     {
      "$id": "22",
@@ -198,7 +219,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "24",
@@ -208,7 +231,8 @@
         "$id": "25",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -216,7 +240,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -241,7 +267,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes",
+     "Decorators": []
     },
     {
      "$id": "27",
@@ -263,9 +291,11 @@
          "$id": "30",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -273,7 +303,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "31",
@@ -288,7 +320,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -311,7 +345,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -321,7 +357,8 @@
     {
      "$ref": "16"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

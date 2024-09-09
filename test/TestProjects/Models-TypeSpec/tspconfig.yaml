@@ -1,6 +1,0 @@
-options:
-  "@azure-tools/typespec-csharp":
-    flavor: "azure"
-    generate-convenience-methods: false
-    use-model-reader-writer: true
-    generate-test-project: true

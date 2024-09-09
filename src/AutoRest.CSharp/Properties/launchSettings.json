@@ -476,10 +476,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelReaderWriterValidation-TypeSpec\\src\\Generated -n"
     },
-    "Models-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Models-TypeSpec\\src\\Generated -n"
-    },
     "ModelShapes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\Generated"
@@ -523,10 +519,6 @@
     "OldestVersion-TypeSpec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\OldestVersion-TypeSpec\\src\\Generated -n"
-    },
-    "Pagination-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Pagination-TypeSpec\\src\\Generated -n"
     },
     "PaginationParams-LowLevel": {
       "commandName": "Project",
@@ -643,6 +635,10 @@
     "typespec-azure/core/model": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\model\\src\\Generated -n"
+    },
+    "typespec-azure/core/page": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\page\\src\\Generated -n"
     },
     "typespec-azure/core/scalar": {
       "commandName": "Project",
@@ -907,6 +903,10 @@
     "typespec-type/model/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\usage\\src\\Generated -n"
+    },
+    "typespec-type/model/visibility": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\visibility\\src\\Generated -n"
     },
     "typespec-type/property/additional-properties": {
       "commandName": "Project",

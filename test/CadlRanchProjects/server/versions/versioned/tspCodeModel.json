@@ -15,25 +15,29 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "4",
      "Name": "v2021_01_01_preview",
      "Value": "2021-01-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     },
     {
      "$id": "5",
      "Name": "v2022_12_01_preview",
      "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "Description": "The version 2022-12-01-preview.",
+     "Decorators": []
     }
    ],
    "Description": "The version of the API.",
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   }
  ],
  "Models": [],
@@ -88,7 +92,9 @@
      "Path": "/server/versions/versioned/without-api-version",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.Versioned.withoutApiVersion",
+     "Decorators": []
     },
     {
      "$id": "11",
@@ -107,7 +113,8 @@
         "$id": "13",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -125,7 +132,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -145,7 +154,9 @@
      "Path": "/server/versions/versioned/with-query-api-version",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.Versioned.withQueryApiVersion",
+     "Decorators": []
     },
     {
      "$id": "17",
@@ -164,7 +175,8 @@
         "$id": "19",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": true,
@@ -182,7 +194,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -202,7 +216,9 @@
      "Path": "/server/versions/versioned/with-path-api-version/{apiVersion}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.Versioned.withPathApiVersion",
+     "Decorators": []
     },
     {
      "$id": "23",
@@ -221,7 +237,8 @@
         "$id": "25",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -239,7 +256,9 @@
          "CrossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
-       }
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -259,7 +278,9 @@
      "Path": "/server/versions/versioned/with-query-old-api-version",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Versions.Versioned.withQueryOldApiVersion",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -269,7 +290,8 @@
     {
      "$ref": "8"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

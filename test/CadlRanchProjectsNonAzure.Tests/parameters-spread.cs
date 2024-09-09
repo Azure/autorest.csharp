@@ -45,7 +45,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         });
 
         [Test]
-        public Task Parameters_Spread_Alias_spreadAliasinAlias() => Test(async (host) =>
+        public Task Parameters_Spread_Alias_spreadAliasInAlias() => Test(async (host) =>
         {
             var response = await new SpreadClient(host, null).GetAliasClient().SpreadParameterWithInnerAliasAsync("1", "bar", "foo", 1);
             Assert.AreEqual(204, response.GetRawResponse().Status);

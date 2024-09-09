@@ -10,20 +10,25 @@
    "Name": "InvalidAuth",
    "CrossLanguageDefinitionId": "Authentication.OAuth2.InvalidAuth",
    "Usage": "Output,Error,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "3",
+     "Kind": "property",
      "Name": "error",
      "SerializedName": "error",
-     "Description": "",
      "Type": {
       "$id": "4",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "Authentication.OAuth2.InvalidAuth.error"
     }
    ]
   }
@@ -47,9 +52,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -89,7 +94,9 @@
      "Path": "/authentication/oauth2/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Authentication.OAuth2.valid",
+     "Decorators": []
     },
     {
      "$id": "12",
@@ -112,9 +119,11 @@
          "$id": "15",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -122,7 +131,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -142,7 +153,9 @@
      "Path": "/authentication/oauth2/invalid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Authentication.OAuth2.invalid",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -152,7 +165,8 @@
     {
      "$ref": "7"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ],
  "Auth": {

@@ -154,11 +154,12 @@ namespace AutoRest.CSharp.Common.Input
                 paging: CreateOperationPaging(serviceRequest, operation),
                 generateProtocolMethod: true,
                 generateConvenienceMethod: false,
-                keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId))
+                crossLanguageDefinitionId: string.Empty, // in typespec input, this is to determine whether an operation has been renamed. We have separated configuration for that in swagger input, therefore we leave it empty here
+                keepClientDefaultValue: operationId is null ? false : Configuration.MethodsToKeepClientDefaultValue.Contains(operationId),
+                examples: CreateOperationExamplesFromTestModeler(operation))
             {
                 SpecName = operation.Language.Default.SerializedName ?? operation.Language.Default.Name
             };
-            inputOperation.CodeModelExamples = CreateOperationExamples(inputOperation, operation);
             return inputOperation;
         }
 
@@ -171,8 +172,11 @@ namespace AutoRest.CSharp.Common.Input
             return operationId.Split('_')[0];
         }
 
-        private IReadOnlyList<InputOperationExample> CreateOperationExamples(InputOperation inputOperation, Operation operation)
+        private IReadOnlyList<InputOperationExample>? CreateOperationExamplesFromTestModeler(Operation operation)
         {
+            if (!Configuration.AzureArm)
+                return null;
+
             var result = new List<InputOperationExample>();
             var exampleOperation = _codeModel.TestModel?.MockTest.ExampleGroups?.FirstOrDefault(g => g.Operation == operation);
             if (exampleOperation is null)
@@ -182,9 +186,9 @@ namespace AutoRest.CSharp.Common.Input
             foreach (var example in exampleOperation.Examples)
             {
                 var parameters = example.AllParameters
-                    .Select(p => new InputParameterExample(CreateOperationParameter(p.Parameter), CreateExampleValue(p.ExampleValue)))
+                    .Select(p => new InputParameterExample(_parametersCache[p.Parameter](), CreateExampleValue(p.ExampleValue)))
                     .ToList();
-                result.Add(new InputOperationExample(inputOperation, parameters, example.Name, example.OriginalFile));
+                result.Add(new InputOperationExample(example.Name, null, example.OriginalFile!, parameters));
             }
             return result;
         }
@@ -387,7 +391,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatedSubtypes: discriminatedSubtypes,
                 AdditionalProperties: dictionarySchema is not null ? GetOrCreateType(dictionarySchema.ElementType, false) : null)
             {
-                Serialization = GetSerialization(schema, usage),
+                Serialization = GetSerialization(schema),
+                UseSystemTextJsonConverter = usage.HasFlag(SchemaTypeUsage.Converter),
                 SpecName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name
             };
 
@@ -451,7 +456,7 @@ namespace AutoRest.CSharp.Common.Input
             _ => InputOperationParameterKind.Method
         };
 
-        private static InputTypeSerialization GetSerialization(Schema schema, SchemaTypeUsage typeUsage)
+        private static InputTypeSerialization GetSerialization(Schema schema)
         {
             var formats = schema is ObjectSchema objectSchema ? objectSchema.SerializationFormats : new List<KnownMediaType> { KnownMediaType.Json, KnownMediaType.Xml };
             if (Configuration.SkipSerializationFormatXml)
@@ -473,7 +478,7 @@ namespace AutoRest.CSharp.Common.Input
                 ? new InputTypeXmlSerialization(xmlSerialization?.Name, xmlSerialization?.Attribute == true, xmlSerialization?.Text == true, xmlSerialization?.Wrapped == true)
                 : null;
 
-            return new InputTypeSerialization(jsonFormat, xmlFormat, typeUsage.HasFlag(SchemaTypeUsage.Converter));
+            return new InputTypeSerialization(jsonFormat, xmlFormat);
         }
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch
@@ -575,7 +580,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 return type with
                 {
-                    Serialization = GetSerialization(schema, SchemaTypeUsage.None),
+                    Serialization = GetSerialization(schema),
                 };
             }
 
@@ -732,7 +737,7 @@ namespace AutoRest.CSharp.Common.Input
                 IsExtensible: isExtensible
             )
             {
-                Serialization = GetSerialization(schema, usage)
+                Serialization = GetSerialization(schema)
             };
             return inputEnumType;
         }

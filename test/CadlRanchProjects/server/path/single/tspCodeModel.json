@@ -55,7 +55,9 @@
      "Path": "/server/path/single/myOp",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Path.Single.myOp",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -65,7 +67,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

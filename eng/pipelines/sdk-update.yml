@@ -71,22 +71,6 @@ extends:
                 name: Package
                 displayName: "Pack Artifacts"
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              - ${{ if eq(parameters.RunTests, 'true') }}:
-                - task: Npm@1
-                  displayName: 'Build CADL Ranch Mock Api project'
-                  inputs:
-                    command: custom
-                    customCommand: run build
-                    workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
-                - script: |
-                    dotnet test AutoRest.CSharp.sln -v:q
-                  displayName: "Test"
-                  env:
-                    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-                    DOTNET_CLI_TELEMETRY_OPTOUT: 1
-                    DOTNET_MULTILEVEL_LOOKUP: 0
-                  workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-                  continueOnError: ${{ parameters.UseTypeSpecNext }}
               - task: Npm@1
                 displayName: 'Build TypeSpec csharp emitter'
                 inputs:
@@ -112,7 +96,7 @@ extends:
                 displayName: 'Publish @autorest/csharp'
                 inputs:
                   command: 'publish'
-                  workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net7.0'
+                  workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net8.0'
                   publishRegistry: 'useFeed'
                   publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
               - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.AutorestCSharpVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages

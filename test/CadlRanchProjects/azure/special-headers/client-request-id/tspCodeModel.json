@@ -23,9 +23,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "Kind": "url",
+        "Name": "url",
+        "CrossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -55,7 +55,8 @@
         "$id": "9",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -63,7 +64,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -83,7 +86,9 @@
      "Path": "/azure/special-headers/x-ms-client-request-id/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Azure.SpecialHeaders.XmsClientRequestId.get",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -93,7 +98,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

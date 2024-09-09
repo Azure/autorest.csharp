@@ -13,7 +13,8 @@
     "$id": "3",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -26,7 +27,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "5",
@@ -36,7 +38,8 @@
     "$id": "6",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -49,7 +52,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "8",
@@ -59,7 +63,8 @@
     "$id": "9",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -72,7 +77,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "11",
@@ -82,7 +88,8 @@
     "$id": "12",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -95,7 +102,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "14",
@@ -105,7 +113,8 @@
     "$id": "15",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -118,7 +127,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "17",
@@ -128,7 +138,8 @@
     "$id": "18",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -141,7 +152,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The Thing_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "20",
@@ -151,7 +163,8 @@
     "$id": "21",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -164,7 +177,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralString",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "23",
@@ -174,7 +188,8 @@
     "$id": "24",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -187,7 +202,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralInt",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "26",
@@ -197,7 +213,8 @@
     "$id": "27",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -210,7 +227,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_requiredLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "29",
@@ -220,7 +238,8 @@
     "$id": "30",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
@@ -233,7 +252,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralString",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "32",
@@ -243,7 +263,8 @@
     "$id": "33",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -256,7 +277,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralInt",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "35",
@@ -266,7 +288,8 @@
     "$id": "36",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
@@ -279,7 +302,8 @@
    "CrossLanguageDefinitionId": "",
    "Description": "The AnonymousBodyRequest_optionalLiteralFloat",
    "IsExtensible": true,
-   "Usage": "Spread,Json"
+   "Usage": "Spread,Json",
+   "Decorators": []
   },
   {
    "$id": "38",
@@ -290,28 +314,33 @@
     "$id": "39",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "40",
      "Name": "CsOne",
-     "Value": 1.1
+     "Value": 1.1,
+     "Decorators": []
     },
     {
      "$id": "41",
      "Name": "Two",
-     "Value": 2.2
+     "Value": 2.2,
+     "Decorators": []
     },
     {
      "$id": "42",
      "Name": "Four",
-     "Value": 4.4
+     "Value": 4.4,
+     "Decorators": []
     }
    ],
    "Description": "enum with projected name",
    "IsExtensible": false,
-   "Usage": "Input"
+   "Usage": "Input",
+   "Decorators": []
   },
   {
    "$id": "43",
@@ -322,28 +351,33 @@
     "$id": "44",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "45",
      "Name": "CsOne",
-     "Value": 1.1
+     "Value": 1.1,
+     "Decorators": []
     },
     {
      "$id": "46",
      "Name": "Two",
-     "Value": 2.2
+     "Value": 2.2,
+     "Decorators": []
     },
     {
      "$id": "47",
      "Name": "Four",
-     "Value": 4.4
+     "Value": 4.4,
+     "Decorators": []
     }
    ],
    "Description": "enum with projected name used in a model",
    "IsExtensible": false,
-   "Usage": "Input,Json"
+   "Usage": "Input,Json",
+   "Decorators": []
   },
   {
    "$id": "48",
@@ -354,28 +388,33 @@
     "$id": "49",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "50",
      "Name": "One",
-     "Value": "1"
+     "Value": "1",
+     "Decorators": []
     },
     {
      "$id": "51",
      "Name": "Two",
-     "Value": "2"
+     "Value": "2",
+     "Decorators": []
     },
     {
      "$id": "52",
      "Name": "Four",
-     "Value": "4"
+     "Value": "4",
+     "Decorators": []
     }
    ],
    "Description": "Simple enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "53",
@@ -386,28 +425,33 @@
     "$id": "54",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "55",
      "Name": "One",
-     "Value": "1"
+     "Value": "1",
+     "Decorators": []
     },
     {
      "$id": "56",
      "Name": "Two",
-     "Value": "2"
+     "Value": "2",
+     "Decorators": []
     },
     {
      "$id": "57",
      "Name": "Four",
-     "Value": "4"
+     "Value": "4",
+     "Decorators": []
     }
    ],
    "Description": "Extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "58",
@@ -418,28 +462,33 @@
     "$id": "59",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "60",
      "Name": "One",
-     "Value": 1
+     "Value": 1,
+     "Decorators": []
     },
     {
      "$id": "61",
      "Name": "Two",
-     "Value": 2
+     "Value": 2,
+     "Decorators": []
     },
     {
      "$id": "62",
      "Name": "Four",
-     "Value": 4
+     "Value": 4,
+     "Decorators": []
     }
    ],
    "Description": "Int based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "63",
@@ -450,28 +499,33 @@
     "$id": "64",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "65",
      "Name": "One",
-     "Value": 1
+     "Value": 1,
+     "Decorators": []
     },
     {
      "$id": "66",
      "Name": "Two",
-     "Value": 2
+     "Value": 2,
+     "Decorators": []
     },
     {
      "$id": "67",
      "Name": "Four",
-     "Value": 4
+     "Value": 4,
+     "Decorators": []
     }
    ],
    "Description": "Float based extensible enum",
    "IsExtensible": true,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "68",
@@ -482,28 +536,33 @@
     "$id": "69",
     "Kind": "float32",
     "Name": "float32",
-    "CrossLanguageDefinitionId": "TypeSpec.float32"
+    "CrossLanguageDefinitionId": "TypeSpec.float32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "70",
      "Name": "One",
-     "Value": 1.1
+     "Value": 1.1,
+     "Decorators": []
     },
     {
      "$id": "71",
      "Name": "Two",
-     "Value": 2.2
+     "Value": 2.2,
+     "Decorators": []
     },
     {
      "$id": "72",
      "Name": "Four",
-     "Value": 4.4
+     "Value": 4.4,
+     "Decorators": []
     }
    ],
    "Description": "float fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "73",
@@ -514,28 +573,33 @@
     "$id": "74",
     "Kind": "int32",
     "Name": "int32",
-    "CrossLanguageDefinitionId": "TypeSpec.int32"
+    "CrossLanguageDefinitionId": "TypeSpec.int32",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "75",
      "Name": "One",
-     "Value": 1
+     "Value": 1,
+     "Decorators": []
     },
     {
      "$id": "76",
      "Name": "Two",
-     "Value": 2
+     "Value": 2,
+     "Decorators": []
     },
     {
      "$id": "77",
      "Name": "Four",
-     "Value": 4
+     "Value": 4,
+     "Decorators": []
     }
    ],
    "Description": "int fixed enum",
    "IsExtensible": false,
-   "Usage": "Input,Output,Json"
+   "Usage": "Input,Output,Json",
+   "Decorators": []
   },
   {
    "$id": "78",
@@ -546,17 +610,20 @@
     "$id": "79",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "80",
      "Name": "2022-05-15-preview",
-     "Value": "2022-05-15-preview"
+     "Value": "2022-05-15-preview",
+     "Decorators": []
     }
    ],
    "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "Usage": "ApiVersionEnum",
+   "Decorators": []
   },
   {
    "$id": "81",
@@ -567,47 +634,56 @@
     "$id": "82",
     "Kind": "string",
     "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "CrossLanguageDefinitionId": "TypeSpec.string",
+    "Decorators": []
    },
    "Values": [
     {
      "$id": "83",
      "Name": "Monday",
-     "Value": "Monday"
+     "Value": "Monday",
+     "Decorators": []
     },
     {
      "$id": "84",
      "Name": "Tuesday",
-     "Value": "Tuesday"
+     "Value": "Tuesday",
+     "Decorators": []
     },
     {
      "$id": "85",
      "Name": "Wednesday",
-     "Value": "Wednesday"
+     "Value": "Wednesday",
+     "Decorators": []
     },
     {
      "$id": "86",
      "Name": "Thursday",
-     "Value": "Thursday"
+     "Value": "Thursday",
+     "Decorators": []
     },
     {
      "$id": "87",
      "Name": "Friday",
-     "Value": "Friday"
+     "Value": "Friday",
+     "Decorators": []
     },
     {
      "$id": "88",
      "Name": "Saturday",
-     "Value": "Saturday"
+     "Value": "Saturday",
+     "Decorators": []
     },
     {
      "$id": "89",
      "Name": "Sunday",
-     "Value": "Sunday"
+     "Value": "Sunday",
+     "Decorators": []
     }
    ],
    "IsExtensible": true,
-   "Usage": "None"
+   "Usage": "None",
+   "Decorators": []
   }
  ],
  "Models": [
@@ -618,9 +694,11 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing",
    "Usage": "Input,Output,Json",
    "Description": "A model with a few properties of literal types",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "91",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
@@ -628,13 +706,18 @@
       "$id": "92",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.name"
     },
     {
      "$id": "93",
+     "Kind": "property",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "required Union",
@@ -647,7 +730,8 @@
         "$id": "95",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        {
         "$id": "96",
@@ -657,23 +741,31 @@
          "$id": "97",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        {
         "$id": "98",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        }
-      ]
+      ],
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredUnion"
     },
     {
      "$id": "99",
+     "Kind": "property",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
      "Description": "required literal string",
@@ -683,13 +775,18 @@
       "ValueType": {
        "$ref": "2"
       },
-      "Value": "accept"
+      "Value": "accept",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredLiteralString"
     },
     {
      "$id": "101",
+     "Kind": "property",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
      "Description": "required literal int",
@@ -699,13 +796,18 @@
       "ValueType": {
        "$ref": "5"
       },
-      "Value": 123
+      "Value": 123,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredLiteralInt"
     },
     {
      "$id": "103",
+     "Kind": "property",
      "Name": "requiredLiteralFloat",
      "SerializedName": "requiredLiteralFloat",
      "Description": "required literal float",
@@ -715,13 +817,18 @@
       "ValueType": {
        "$ref": "8"
       },
-      "Value": 1.23
+      "Value": 1.23,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredLiteralFloat"
     },
     {
      "$id": "105",
+     "Kind": "property",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
      "Description": "required literal bool",
@@ -732,15 +839,21 @@
        "$id": "107",
        "Kind": "boolean",
        "Name": "boolean",
-       "CrossLanguageDefinitionId": "TypeSpec.boolean"
+       "CrossLanguageDefinitionId": "TypeSpec.boolean",
+       "Decorators": []
       },
-      "Value": false
+      "Value": false,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredLiteralBool"
     },
     {
      "$id": "108",
+     "Kind": "property",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
      "Description": "optional literal string",
@@ -750,13 +863,18 @@
       "ValueType": {
        "$ref": "11"
       },
-      "Value": "reject"
+      "Value": "reject",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.optionalLiteralString"
     },
     {
      "$id": "110",
+     "Kind": "property",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
      "Description": "optional literal int",
@@ -766,13 +884,18 @@
       "ValueType": {
        "$ref": "14"
       },
-      "Value": 456
+      "Value": 456,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.optionalLiteralInt"
     },
     {
      "$id": "112",
+     "Kind": "property",
      "Name": "optionalLiteralFloat",
      "SerializedName": "optionalLiteralFloat",
      "Description": "optional literal float",
@@ -782,13 +905,18 @@
       "ValueType": {
        "$ref": "17"
       },
-      "Value": 4.56
+      "Value": 4.56,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.optionalLiteralFloat"
     },
     {
      "$id": "114",
+     "Kind": "property",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
      "Description": "optional literal bool",
@@ -799,15 +927,21 @@
        "$id": "116",
        "Kind": "boolean",
        "Name": "boolean",
-       "CrossLanguageDefinitionId": "TypeSpec.boolean"
+       "CrossLanguageDefinitionId": "TypeSpec.boolean",
+       "Decorators": []
       },
-      "Value": true
+      "Value": true,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.optionalLiteralBool"
     },
     {
      "$id": "117",
+     "Kind": "property",
      "Name": "requiredBadDescription",
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
@@ -815,13 +949,18 @@
       "$id": "118",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredBadDescription"
     },
     {
      "$id": "119",
+     "Kind": "property",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "optional nullable collection",
@@ -836,16 +975,22 @@
         "$id": "122",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.optionalNullableList"
     },
     {
      "$id": "123",
+     "Kind": "property",
      "Name": "requiredNullableList",
      "SerializedName": "requiredNullableList",
      "Description": "required nullable collection",
@@ -860,13 +1005,18 @@
         "$id": "126",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Thing.requiredNullableList"
     }
    ]
   },
@@ -876,9 +1026,11 @@
    "Name": "AnonymousBodyRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "128",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the Thing",
@@ -886,13 +1038,18 @@
       "$id": "129",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.name"
     },
     {
      "$id": "130",
+     "Kind": "property",
      "Name": "requiredUnion",
      "SerializedName": "requiredUnion",
      "Description": "required Union",
@@ -905,7 +1062,8 @@
         "$id": "132",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        {
         "$id": "133",
@@ -915,23 +1073,31 @@
          "$id": "134",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "CrossLanguageDefinitionId": "TypeSpec.Array",
+        "Decorators": []
        },
        {
         "$id": "135",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        }
-      ]
+      ],
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredUnion"
     },
     {
      "$id": "136",
+     "Kind": "property",
      "Name": "requiredLiteralString",
      "SerializedName": "requiredLiteralString",
      "Description": "required literal string",
@@ -941,13 +1107,18 @@
       "ValueType": {
        "$ref": "20"
       },
-      "Value": "accept"
+      "Value": "accept",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredLiteralString"
     },
     {
      "$id": "138",
+     "Kind": "property",
      "Name": "requiredLiteralInt",
      "SerializedName": "requiredLiteralInt",
      "Description": "required literal int",
@@ -957,13 +1128,18 @@
       "ValueType": {
        "$ref": "23"
       },
-      "Value": 123
+      "Value": 123,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredLiteralInt"
     },
     {
      "$id": "140",
+     "Kind": "property",
      "Name": "requiredLiteralFloat",
      "SerializedName": "requiredLiteralFloat",
      "Description": "required literal float",
@@ -973,13 +1149,18 @@
       "ValueType": {
        "$ref": "26"
       },
-      "Value": 1.23
+      "Value": 1.23,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredLiteralFloat"
     },
     {
      "$id": "142",
+     "Kind": "property",
      "Name": "requiredLiteralBool",
      "SerializedName": "requiredLiteralBool",
      "Description": "required literal bool",
@@ -990,15 +1171,21 @@
        "$id": "144",
        "Kind": "boolean",
        "Name": "boolean",
-       "CrossLanguageDefinitionId": "TypeSpec.boolean"
+       "CrossLanguageDefinitionId": "TypeSpec.boolean",
+       "Decorators": []
       },
-      "Value": false
+      "Value": false,
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredLiteralBool"
     },
     {
      "$id": "145",
+     "Kind": "property",
      "Name": "optionalLiteralString",
      "SerializedName": "optionalLiteralString",
      "Description": "optional literal string",
@@ -1008,13 +1195,18 @@
       "ValueType": {
        "$ref": "29"
       },
-      "Value": "reject"
+      "Value": "reject",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.optionalLiteralString"
     },
     {
      "$id": "147",
+     "Kind": "property",
      "Name": "optionalLiteralInt",
      "SerializedName": "optionalLiteralInt",
      "Description": "optional literal int",
@@ -1024,13 +1216,18 @@
       "ValueType": {
        "$ref": "32"
       },
-      "Value": 456
+      "Value": 456,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.optionalLiteralInt"
     },
     {
      "$id": "149",
+     "Kind": "property",
      "Name": "optionalLiteralFloat",
      "SerializedName": "optionalLiteralFloat",
      "Description": "optional literal float",
@@ -1040,13 +1237,18 @@
       "ValueType": {
        "$ref": "35"
       },
-      "Value": 4.56
+      "Value": 4.56,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.optionalLiteralFloat"
     },
     {
      "$id": "151",
+     "Kind": "property",
      "Name": "optionalLiteralBool",
      "SerializedName": "optionalLiteralBool",
      "Description": "optional literal bool",
@@ -1057,15 +1259,21 @@
        "$id": "153",
        "Kind": "boolean",
        "Name": "boolean",
-       "CrossLanguageDefinitionId": "TypeSpec.boolean"
+       "CrossLanguageDefinitionId": "TypeSpec.boolean",
+       "Decorators": []
       },
-      "Value": true
+      "Value": true,
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.optionalLiteralBool"
     },
     {
      "$id": "154",
+     "Kind": "property",
      "Name": "requiredBadDescription",
      "SerializedName": "requiredBadDescription",
      "Description": "description with xml <|endoftext|>",
@@ -1073,13 +1281,18 @@
       "$id": "155",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredBadDescription"
     },
     {
      "$id": "156",
+     "Kind": "property",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "optional nullable collection",
@@ -1094,16 +1307,22 @@
         "$id": "159",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.optionalNullableList"
     },
     {
      "$id": "160",
+     "Kind": "property",
      "Name": "requiredNullableList",
      "SerializedName": "requiredNullableList",
      "Description": "required nullable collection",
@@ -1118,13 +1337,18 @@
         "$id": "163",
         "Kind": "int32",
         "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "CrossLanguageDefinitionId": "TypeSpec.int32",
+        "Decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       }
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody.Request.anonymous.requiredNullableList"
     }
    ]
   },
@@ -1134,9 +1358,11 @@
    "Name": "FriendlyModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.friendlyModel.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "165",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the NotFriend",
@@ -1144,10 +1370,14 @@
       "$id": "166",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.friendlyModel.Request.anonymous.name"
     }
    ]
   },
@@ -1158,9 +1388,11 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend",
    "Usage": "Output,Json",
    "Description": "this is not a friendly model but with a friendly name",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "168",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the NotFriend",
@@ -1168,10 +1400,14 @@
       "$id": "169",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.NotFriend.name"
     }
    ]
   },
@@ -1181,9 +1417,11 @@
    "Name": "ProjectedNameModelRequest",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.projectedNameModel.Request.anonymous",
    "Usage": "Spread,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "171",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
@@ -1191,10 +1429,14 @@
       "$id": "172",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.projectedNameModel.Request.anonymous.name"
     }
    ]
   },
@@ -1205,9 +1447,11 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName",
    "Usage": "Output,Json",
    "Description": "this is a model with a projected name",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "174",
+     "Kind": "property",
      "Name": "name",
      "SerializedName": "name",
      "Description": "name of the ModelWithProjectedName",
@@ -1215,10 +1459,14 @@
       "$id": "175",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedName.name"
     }
    ]
   },
@@ -1228,6 +1476,7 @@
    "Name": "ReturnsAnonymousModelResponse",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel.Response.anonymous",
    "Usage": "Output,Json",
+   "Decorators": [],
    "Properties": []
   },
   {
@@ -1237,6 +1486,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension",
    "Usage": "Input,Json",
    "Description": "extension",
+   "Decorators": [],
    "BaseModel": {
     "$id": "178",
     "Kind": "model",
@@ -1244,12 +1494,13 @@
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element",
     "Usage": "Input,Json",
     "Description": "element",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "179",
+      "Kind": "property",
       "Name": "extension",
       "SerializedName": "extension",
-      "Description": "",
       "Type": {
        "$id": "180",
        "Kind": "array",
@@ -1257,27 +1508,35 @@
        "ValueType": {
         "$ref": "177"
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "CrossLanguageDefinitionId": "TypeSpec.Array",
+       "Decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false
+      "Optional": true,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "NoDocsTypeSpec.Element.extension"
      }
     ]
    },
    "Properties": [
     {
      "$id": "181",
+     "Kind": "property",
      "Name": "level",
      "SerializedName": "level",
-     "Description": "",
      "Type": {
       "$id": "182",
       "Kind": "int8",
       "Name": "int8",
-      "CrossLanguageDefinitionId": "TypeSpec.int8"
+      "CrossLanguageDefinitionId": "TypeSpec.int8",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extension.level"
     }
    ]
   },
@@ -1291,9 +1550,11 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible",
    "Usage": "Input,Json",
    "Description": "FHIR extendible element",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "184",
+     "Kind": "property",
      "Name": "extension",
      "SerializedName": "extension",
      "Description": "Additional Content defined by implementations",
@@ -1308,6 +1569,7 @@
        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension",
        "Usage": "Input,Json",
        "Description": "extension",
+       "Decorators": [],
        "BaseModel": {
         "$id": "187",
         "Kind": "model",
@@ -1315,12 +1577,13 @@
         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement",
         "Usage": "Input,Json",
         "Description": "element",
+        "Decorators": [],
         "Properties": [
          {
           "$id": "188",
+          "Kind": "property",
           "Name": "extension",
           "SerializedName": "extension",
-          "Description": "",
           "Type": {
            "$id": "189",
            "Kind": "array",
@@ -1328,34 +1591,46 @@
            "ValueType": {
             "$ref": "186"
            },
-           "CrossLanguageDefinitionId": "TypeSpec.Array"
+           "CrossLanguageDefinitionId": "TypeSpec.Array",
+           "Decorators": []
           },
-          "IsRequired": false,
-          "IsReadOnly": false
+          "Optional": true,
+          "ReadOnly": false,
+          "Discriminator": false,
+          "Decorators": [],
+          "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelElement.extension"
          }
         ]
        },
        "Properties": [
         {
          "$id": "190",
+         "Kind": "property",
          "Name": "level",
          "SerializedName": "level",
-         "Description": "",
          "Type": {
           "$id": "191",
           "Kind": "int8",
           "Name": "int8",
-          "CrossLanguageDefinitionId": "TypeSpec.int8"
+          "CrossLanguageDefinitionId": "TypeSpec.int8",
+          "Decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false
+         "Optional": false,
+         "ReadOnly": false,
+         "Discriminator": false,
+         "Decorators": [],
+         "CrossLanguageDefinitionId": "NoDocsTypeSpec.ThereLevelExtension.level"
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Extendible.extension"
     }
    ]
   },
@@ -1372,6 +1647,7 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel",
    "Usage": "Input,Json",
    "Description": "ChildModel",
+   "Decorators": [],
    "BaseModel": {
     "$id": "193",
     "Kind": "model",
@@ -1379,29 +1655,34 @@
     "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel",
     "Usage": "Input,Json",
     "Description": "parenetModel",
+    "Decorators": [],
     "Properties": [
      {
       "$id": "194",
+      "Kind": "property",
       "Name": "level",
       "SerializedName": "level",
-      "Description": "",
       "Type": {
        "$id": "195",
        "Kind": "int8",
        "Name": "int8",
-       "CrossLanguageDefinitionId": "TypeSpec.int8"
+       "CrossLanguageDefinitionId": "TypeSpec.int8",
+       "Decorators": []
       },
-      "IsRequired": true,
-      "IsReadOnly": false
+      "Optional": false,
+      "ReadOnly": false,
+      "Discriminator": false,
+      "Decorators": [],
+      "CrossLanguageDefinitionId": "NoDocsTypeSpec.BaseModel.level"
      }
     ]
    },
    "Properties": [
     {
      "$id": "196",
+     "Kind": "property",
      "Name": "parent",
      "SerializedName": "parent",
-     "Description": "",
      "Type": {
       "$id": "197",
       "Kind": "array",
@@ -1409,10 +1690,14 @@
       "ValueType": {
        "$ref": "193"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ChildModel.parent"
     }
    ]
   },
@@ -1426,17 +1711,21 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf",
    "Usage": "Input,Json",
    "Description": "containself",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "199",
+     "Kind": "property",
      "Name": "self",
      "SerializedName": "self",
-     "Description": "",
      "Type": {
       "$ref": "198"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelf.self"
     }
    ]
   },
@@ -1446,17 +1735,22 @@
    "Name": "ModelWithProjectedEnum",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "201",
+     "Kind": "property",
      "Name": "enumProperty",
      "SerializedName": "enumProperty",
      "Description": "enum with projected name used in a model",
      "Type": {
       "$ref": "43"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithProjectedEnum.enumProperty"
     }
    ]
   },
@@ -1466,12 +1760,13 @@
    "Name": "AzureLocationModel",
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel",
    "Usage": "Input,Json",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "203",
+     "Kind": "property",
      "Name": "location",
      "SerializedName": "location",
-     "Description": "",
      "Type": {
       "$id": "204",
       "Kind": "string",
@@ -1481,11 +1776,16 @@
        "$id": "205",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
-      }
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.AzureLocationModel.location"
     }
    ]
   },
@@ -1496,9 +1796,11 @@
    "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel",
    "Usage": "Input,Output,Json",
    "Description": "this is a roundtrip model",
+   "Decorators": [],
    "Properties": [
     {
      "$id": "207",
+     "Kind": "property",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
@@ -1506,13 +1808,18 @@
       "$id": "208",
       "Kind": "string",
       "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "CrossLanguageDefinitionId": "TypeSpec.string",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredString"
     },
     {
      "$id": "209",
+     "Kind": "property",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
@@ -1520,13 +1827,18 @@
       "$id": "210",
       "Kind": "int32",
       "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32"
+      "CrossLanguageDefinitionId": "TypeSpec.int32",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredInt"
     },
     {
      "$id": "211",
+     "Kind": "property",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
      "Description": "Required collection of enums",
@@ -1537,13 +1849,18 @@
       "ValueType": {
        "$ref": "48"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredCollection"
     },
     {
      "$id": "213",
+     "Kind": "property",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
      "Description": "Required dictionary of enums",
@@ -1554,39 +1871,53 @@
        "$id": "215",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$ref": "53"
-      }
+      },
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredDictionary"
     },
     {
      "$id": "216",
+     "Kind": "property",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
      "Type": {
       "$ref": "90"
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredModel"
     },
     {
      "$id": "217",
+     "Kind": "property",
      "Name": "intExtensibleEnum",
      "SerializedName": "intExtensibleEnum",
      "Description": "this is an int based extensible enum",
      "Type": {
       "$ref": "58"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.intExtensibleEnum"
     },
     {
      "$id": "218",
+     "Kind": "property",
      "Name": "intExtensibleEnumCollection",
      "SerializedName": "intExtensibleEnumCollection",
      "Description": "this is a collection of int based extensible enum",
@@ -1597,24 +1928,33 @@
       "ValueType": {
        "$ref": "58"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.intExtensibleEnumCollection"
     },
     {
      "$id": "220",
+     "Kind": "property",
      "Name": "floatExtensibleEnum",
      "SerializedName": "floatExtensibleEnum",
      "Description": "this is a float based extensible enum",
      "Type": {
       "$ref": "63"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.floatExtensibleEnum"
     },
     {
      "$id": "221",
+     "Kind": "property",
      "Name": "floatExtensibleEnumCollection",
      "SerializedName": "floatExtensibleEnumCollection",
      "Description": "this is a collection of float based extensible enum",
@@ -1625,24 +1965,33 @@
       "ValueType": {
        "$ref": "63"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.floatExtensibleEnumCollection"
     },
     {
      "$id": "223",
+     "Kind": "property",
      "Name": "floatFixedEnum",
      "SerializedName": "floatFixedEnum",
      "Description": "this is a float based fixed enum",
      "Type": {
       "$ref": "68"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.floatFixedEnum"
     },
     {
      "$id": "224",
+     "Kind": "property",
      "Name": "floatFixedEnumCollection",
      "SerializedName": "floatFixedEnumCollection",
      "Description": "this is a collection of float based fixed enum",
@@ -1653,24 +2002,33 @@
       "ValueType": {
        "$ref": "68"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.floatFixedEnumCollection"
     },
     {
      "$id": "226",
+     "Kind": "property",
      "Name": "intFixedEnum",
      "SerializedName": "intFixedEnum",
      "Description": "this is a int based fixed enum",
      "Type": {
       "$ref": "73"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.intFixedEnum"
     },
     {
      "$id": "227",
+     "Kind": "property",
      "Name": "intFixedEnumCollection",
      "SerializedName": "intFixedEnumCollection",
      "Description": "this is a collection of int based fixed enum",
@@ -1681,24 +2039,33 @@
       "ValueType": {
        "$ref": "73"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.intFixedEnumCollection"
     },
     {
      "$id": "229",
+     "Kind": "property",
      "Name": "stringFixedEnum",
      "SerializedName": "stringFixedEnum",
      "Description": "this is a string based fixed enum",
      "Type": {
       "$ref": "48"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.stringFixedEnum"
     },
     {
      "$id": "230",
+     "Kind": "property",
      "Name": "requiredUnknown",
      "SerializedName": "requiredUnknown",
      "Description": "required unknown",
@@ -1706,13 +2073,18 @@
       "$id": "231",
       "Kind": "any",
       "Name": "unknown",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredUnknown"
     },
     {
      "$id": "232",
+     "Kind": "property",
      "Name": "optionalUnknown",
      "SerializedName": "optionalUnknown",
      "Description": "optional unknown",
@@ -1720,13 +2092,18 @@
       "$id": "233",
       "Kind": "any",
       "Name": "unknown",
-      "CrossLanguageDefinitionId": ""
+      "CrossLanguageDefinitionId": "",
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.optionalUnknown"
     },
     {
      "$id": "234",
+     "Kind": "property",
      "Name": "requiredRecordUnknown",
      "SerializedName": "requiredRecordUnknown",
      "Description": "required record of unknown",
@@ -1737,20 +2114,27 @@
        "$id": "236",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$id": "237",
        "Kind": "any",
        "Name": "unknown",
-       "CrossLanguageDefinitionId": ""
-      }
+       "CrossLanguageDefinitionId": "",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.requiredRecordUnknown"
     },
     {
      "$id": "238",
+     "Kind": "property",
      "Name": "optionalRecordUnknown",
      "SerializedName": "optionalRecordUnknown",
      "Description": "optional record of unknown",
@@ -1761,20 +2145,27 @@
        "$id": "240",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$id": "241",
        "Kind": "any",
        "Name": "unknown",
-       "CrossLanguageDefinitionId": ""
-      }
+       "CrossLanguageDefinitionId": "",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Optional": true,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.optionalRecordUnknown"
     },
     {
      "$id": "242",
+     "Kind": "property",
      "Name": "readOnlyRequiredRecordUnknown",
      "SerializedName": "readOnlyRequiredRecordUnknown",
      "Description": "required readonly record of unknown",
@@ -1785,20 +2176,27 @@
        "$id": "244",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$id": "245",
        "Kind": "any",
        "Name": "unknown",
-       "CrossLanguageDefinitionId": ""
-      }
+       "CrossLanguageDefinitionId": "",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true
+     "Optional": false,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.readOnlyRequiredRecordUnknown"
     },
     {
      "$id": "246",
+     "Kind": "property",
      "Name": "readOnlyOptionalRecordUnknown",
      "SerializedName": "readOnlyOptionalRecordUnknown",
      "Description": "optional readonly record of unknown",
@@ -1809,20 +2207,27 @@
        "$id": "248",
        "Kind": "string",
        "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "CrossLanguageDefinitionId": "TypeSpec.string",
+       "Decorators": []
       },
       "ValueType": {
        "$id": "249",
        "Kind": "any",
        "Name": "unknown",
-       "CrossLanguageDefinitionId": ""
-      }
+       "CrossLanguageDefinitionId": "",
+       "Decorators": []
+      },
+      "Decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": true
+     "Optional": true,
+     "ReadOnly": true,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.readOnlyOptionalRecordUnknown"
     },
     {
      "$id": "250",
+     "Kind": "property",
      "Name": "modelWithRequiredNullable",
      "SerializedName": "modelWithRequiredNullable",
      "Description": "this is a model with required nullable properties",
@@ -1833,9 +2238,11 @@
       "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties",
       "Usage": "Input,Output,Json",
       "Description": "A model with a few required nullable properties",
+      "Decorators": [],
       "Properties": [
        {
         "$id": "252",
+        "Kind": "property",
         "Name": "requiredNullablePrimitive",
         "SerializedName": "requiredNullablePrimitive",
         "Description": "required nullable primitive type",
@@ -1846,14 +2253,19 @@
           "$id": "254",
           "Kind": "int32",
           "Name": "int32",
-          "CrossLanguageDefinitionId": "TypeSpec.int32"
+          "CrossLanguageDefinitionId": "TypeSpec.int32",
+          "Decorators": []
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties.requiredNullablePrimitive"
        },
        {
         "$id": "255",
+        "Kind": "property",
         "Name": "requiredExtensibleEnum",
         "SerializedName": "requiredExtensibleEnum",
         "Description": "required nullable extensible enum type",
@@ -1864,11 +2276,15 @@
           "$ref": "53"
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties.requiredExtensibleEnum"
        },
        {
         "$id": "257",
+        "Kind": "property",
         "Name": "requiredFixedEnum",
         "SerializedName": "requiredFixedEnum",
         "Description": "required nullable fixed enum type",
@@ -1879,16 +2295,23 @@
           "$ref": "48"
          }
         },
-        "IsRequired": true,
-        "IsReadOnly": false
+        "Optional": false,
+        "ReadOnly": false,
+        "Discriminator": false,
+        "Decorators": [],
+        "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelWithRequiredNullableProperties.requiredFixedEnum"
        }
       ]
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.modelWithRequiredNullable"
     },
     {
      "$id": "259",
+     "Kind": "property",
      "Name": "unionList",
      "SerializedName": "unionList",
      "Description": "this is a list of union types",
@@ -1905,13 +2328,15 @@
          "$id": "262",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         {
          "$id": "263",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+         "CrossLanguageDefinitionId": "TypeSpec.int32",
+         "Decorators": []
         },
         {
          "$id": "264",
@@ -1920,9 +2345,11 @@
          "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion",
          "Usage": "Input,Output,Json",
          "Description": "This is a model only used in union types, please do not use it anywhere else.",
+         "Decorators": [],
          "Properties": [
           {
            "$id": "265",
+           "Kind": "property",
            "Name": "name",
            "SerializedName": "name",
            "Description": "name of the ModelForUnion",
@@ -1930,13 +2357,18 @@
             "$id": "266",
             "Kind": "string",
             "Name": "string",
-            "CrossLanguageDefinitionId": "TypeSpec.string"
+            "CrossLanguageDefinitionId": "TypeSpec.string",
+            "Decorators": []
            },
-           "IsRequired": true,
-           "IsReadOnly": false
+           "Optional": false,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion.name"
           },
           {
            "$id": "267",
+           "Kind": "property",
            "Name": "age",
            "SerializedName": "age",
            "Description": "age of the ModelForUnion",
@@ -1944,10 +2376,14 @@
             "$id": "268",
             "Kind": "int32",
             "Name": "int32",
-            "CrossLanguageDefinitionId": "TypeSpec.int32"
+            "CrossLanguageDefinitionId": "TypeSpec.int32",
+            "Decorators": []
            },
-           "IsRequired": false,
-           "IsReadOnly": false
+           "Optional": true,
+           "ReadOnly": false,
+           "Discriminator": false,
+           "Decorators": [],
+           "CrossLanguageDefinitionId": "NoDocsTypeSpec.ModelForUnion.age"
           }
          ]
         },
@@ -1958,14 +2394,20 @@
          "ValueType": {
           "$ref": "264"
          },
-         "CrossLanguageDefinitionId": "TypeSpec.Array"
+         "CrossLanguageDefinitionId": "TypeSpec.Array",
+         "Decorators": []
         }
-       ]
+       ],
+       "Decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "CrossLanguageDefinitionId": "TypeSpec.Array",
+      "Decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "Optional": false,
+     "ReadOnly": false,
+     "Discriminator": false,
+     "Decorators": [],
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.RoundTripModel.unionList"
     }
    ]
   },
@@ -2020,9 +2462,11 @@
          "$id": "276",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2030,7 +2474,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2056,7 +2502,9 @@
      "Path": "/top",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.topAction",
+     "Decorators": []
     },
     {
      "$id": "278",
@@ -2080,9 +2528,11 @@
          "$id": "281",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2090,7 +2540,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "282",
@@ -2103,9 +2555,11 @@
          "$id": "284",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2113,7 +2567,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "285",
@@ -2128,7 +2584,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2157,7 +2615,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.patchAction",
+     "Decorators": []
     },
     {
      "$id": "287",
@@ -2181,9 +2641,11 @@
          "$id": "290",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2191,7 +2653,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "291",
@@ -2204,9 +2668,11 @@
          "$id": "293",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2214,7 +2680,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "294",
@@ -2229,7 +2697,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Spread"
+       "Kind": "Spread",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2258,7 +2728,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.anonymousBody",
+     "Decorators": []
     },
     {
      "$id": "296",
@@ -2282,9 +2754,11 @@
          "$id": "299",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2292,7 +2766,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "300",
@@ -2305,9 +2781,11 @@
          "$id": "302",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2315,7 +2793,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "303",
@@ -2330,7 +2810,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Spread"
+       "Kind": "Spread",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2359,7 +2841,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.friendlyModel",
+     "Decorators": []
     },
     {
      "$id": "305",
@@ -2383,9 +2867,11 @@
          "$id": "308",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2393,7 +2879,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2413,7 +2901,9 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.addTimeHeader",
+     "Decorators": []
     },
     {
      "$id": "310",
@@ -2437,9 +2927,11 @@
          "$id": "313",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2447,7 +2939,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "314",
@@ -2460,9 +2954,11 @@
          "$id": "316",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2470,7 +2966,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "317",
@@ -2485,7 +2983,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Spread"
+       "Kind": "Spread",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2514,7 +3014,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.projectedNameModel",
+     "Decorators": []
     },
     {
      "$id": "319",
@@ -2537,9 +3039,11 @@
          "$id": "322",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2547,7 +3051,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2573,7 +3079,9 @@
      "Path": "/retunsAnonymousModel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnsAnonymousModel",
+     "Decorators": []
     },
     {
      "$id": "324",
@@ -2593,7 +3101,8 @@
         "$id": "326",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -2601,7 +3110,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2621,7 +3132,9 @@
      "Path": "/headAsBoolean/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.headAsBoolean",
+     "Decorators": []
     },
     {
      "$id": "328",
@@ -2645,9 +3158,11 @@
          "$id": "331",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2655,7 +3170,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "332",
@@ -2665,7 +3182,8 @@
         "$id": "333",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2673,7 +3191,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2696,7 +3216,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.stringBody",
+     "Decorators": []
     },
     {
      "$id": "335",
@@ -2720,9 +3242,11 @@
          "$id": "338",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2730,7 +3254,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "339",
@@ -2740,7 +3266,8 @@
         "$id": "340",
         "Kind": "boolean",
         "Name": "boolean",
-        "CrossLanguageDefinitionId": "TypeSpec.boolean"
+        "CrossLanguageDefinitionId": "TypeSpec.boolean",
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2748,7 +3275,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2771,7 +3300,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.boolBody",
+     "Decorators": []
     },
     {
      "$id": "342",
@@ -2795,9 +3326,11 @@
          "$id": "345",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2805,7 +3338,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "346",
@@ -2820,9 +3355,11 @@
          "$id": "348",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime"
+        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -2830,7 +3367,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2853,7 +3392,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.dateTimeBody",
+     "Decorators": []
     },
     {
      "$id": "350",
@@ -2876,9 +3417,11 @@
          "$id": "353",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2886,7 +3429,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2899,7 +3444,8 @@
         "$id": "355",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2915,7 +3461,9 @@
      "Path": "/returnString",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnString",
+     "Decorators": []
     },
     {
      "$id": "356",
@@ -2937,9 +3485,11 @@
          "$id": "359",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2947,7 +3497,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -2960,7 +3512,8 @@
         "$id": "361",
         "Kind": "any",
         "Name": "unknown",
-        "CrossLanguageDefinitionId": ""
+        "CrossLanguageDefinitionId": "",
+        "Decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2976,7 +3529,9 @@
      "Path": "/returnUnknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.returnUnknown",
+     "Decorators": []
     },
     {
      "$id": "362",
@@ -3000,9 +3555,11 @@
          "$id": "365",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3010,7 +3567,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "366",
@@ -3025,7 +3584,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3048,7 +3609,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.recursiveExtension",
+     "Decorators": []
     },
     {
      "$id": "368",
@@ -3072,9 +3635,11 @@
          "$id": "371",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3082,7 +3647,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "372",
@@ -3097,7 +3664,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3120,7 +3689,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.threeLevelRecursive",
+     "Decorators": []
     },
     {
      "$id": "374",
@@ -3144,9 +3715,11 @@
          "$id": "377",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3154,7 +3727,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "378",
@@ -3169,7 +3744,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3192,7 +3769,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.recursiveModels",
+     "Decorators": []
     },
     {
      "$id": "380",
@@ -3216,9 +3795,11 @@
          "$id": "383",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3226,7 +3807,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "384",
@@ -3241,7 +3824,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3264,7 +3849,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ContainSelfModels",
+     "Decorators": []
     },
     {
      "$id": "386",
@@ -3289,7 +3876,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3309,7 +3898,9 @@
      "Path": "/enumParameter/{p1}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.enumParameter",
+     "Decorators": []
     },
     {
      "$id": "389",
@@ -3333,9 +3924,11 @@
          "$id": "392",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3343,7 +3936,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "393",
@@ -3358,7 +3953,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3381,7 +3978,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.bodyIsModelWithProjectedEnum",
+     "Decorators": []
     },
     {
      "$id": "395",
@@ -3405,9 +4004,11 @@
          "$id": "398",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3415,7 +4016,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "399",
@@ -3428,14 +4031,17 @@
          "$id": "401",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
         "ValueType": {
          "$id": "402",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.int32",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -3443,7 +4049,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3466,7 +4074,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.optionalDictionary",
+     "Decorators": []
     },
     {
      "$id": "404",
@@ -3491,8 +4101,10 @@
          "$id": "407",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -3500,7 +4112,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "408",
@@ -3515,8 +4129,10 @@
          "$id": "410",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
-        }
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
+        },
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3524,7 +4140,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "411",
@@ -3538,9 +4156,11 @@
          "$id": "413",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3548,7 +4168,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "414",
@@ -3563,7 +4185,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3586,7 +4210,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.azureLocationOp",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -3596,7 +4222,8 @@
     {
      "$ref": "272"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "417",
@@ -3627,7 +4254,8 @@
      "Explode": false,
      "Kind": "Client"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "421",
@@ -3669,7 +4297,8 @@
         "$id": "426",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3677,7 +4306,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "427",
@@ -3687,7 +4318,8 @@
         "$id": "428",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -3695,7 +4327,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "429",
@@ -3705,7 +4339,8 @@
         "$id": "430",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -3713,7 +4348,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": false,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "431",
@@ -3726,9 +4363,11 @@
          "$id": "433",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3736,7 +4375,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3762,7 +4403,9 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo.sayHi",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -3773,7 +4416,8 @@
     {
      "$ref": "423"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "436",
@@ -3814,7 +4458,8 @@
         "$id": "441",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3822,7 +4467,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "442",
@@ -3835,9 +4482,11 @@
          "$id": "444",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "text/plain"
+        "Value": "text/plain",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3845,7 +4494,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "445",
@@ -3855,7 +4506,8 @@
         "$id": "446",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -3863,7 +4515,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "447",
@@ -3876,9 +4530,11 @@
          "$id": "449",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3886,7 +4542,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "450",
@@ -3901,7 +4559,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -3930,7 +4590,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo2.helloAgain",
+     "Decorators": []
     },
     {
      "$id": "452",
@@ -3950,7 +4612,8 @@
         "$id": "454",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3958,7 +4621,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "455",
@@ -3968,7 +4633,8 @@
         "$id": "456",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -3976,7 +4642,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "457",
@@ -3990,9 +4658,11 @@
          "$id": "459",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4000,7 +4670,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "460",
@@ -4013,9 +4685,11 @@
          "$id": "462",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4023,7 +4697,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "463",
@@ -4038,7 +4714,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4067,7 +4745,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo2.noContentType",
+     "Decorators": []
     },
     {
      "$id": "465",
@@ -4090,9 +4770,11 @@
          "$id": "468",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4100,7 +4782,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4126,7 +4810,9 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo2.helloDemoAgain",
+     "Decorators": []
     },
     {
      "$id": "470",
@@ -4150,9 +4836,11 @@
          "$id": "473",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4160,7 +4848,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "474",
@@ -4173,9 +4863,11 @@
          "$id": "476",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4183,7 +4875,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "477",
@@ -4198,7 +4892,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4227,7 +4923,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo2.createLiteral",
+     "Decorators": []
     },
     {
      "$id": "479",
@@ -4250,9 +4948,11 @@
          "$id": "482",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "test"
+        "Value": "test",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4260,7 +4960,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "483",
@@ -4273,9 +4975,11 @@
          "$id": "485",
          "Kind": "int32",
          "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+         "CrossLanguageDefinitionId": "TypeSpec.int32",
+         "Decorators": []
         },
-        "Value": 123
+        "Value": 123,
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -4283,7 +4987,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "486",
@@ -4296,9 +5002,11 @@
          "$id": "488",
          "Kind": "boolean",
          "Name": "boolean",
-         "CrossLanguageDefinitionId": "TypeSpec.boolean"
+         "CrossLanguageDefinitionId": "TypeSpec.boolean",
+         "Decorators": []
         },
-        "Value": true
+        "Value": true,
+        "Decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4306,7 +5014,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "489",
@@ -4319,9 +5029,11 @@
          "$id": "491",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4329,7 +5041,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4355,7 +5069,9 @@
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Hello.Demo2.helloLiteral",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -4366,7 +5082,8 @@
     {
      "$ref": "438"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "494",
@@ -4411,9 +5128,11 @@
          "$id": "500",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4421,7 +5140,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "501",
@@ -4436,7 +5157,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4459,7 +5182,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.EnumTest.createUnknownValue",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -4470,7 +5195,8 @@
     {
      "$ref": "496"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "504",
@@ -4515,9 +5241,11 @@
          "$id": "510",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4525,7 +5253,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "511",
@@ -4538,9 +5268,11 @@
          "$id": "513",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4548,7 +5280,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "514",
@@ -4563,7 +5297,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4592,7 +5328,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProtocolAndConvenient.internalProtocol",
+     "Decorators": []
     },
     {
      "$id": "516",
@@ -4622,7 +5360,9 @@
      "Path": "/stillConvenient",
      "BufferResponse": true,
      "GenerateProtocolMethod": false,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.ProtocolAndConvenient.stillConvenient",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -4633,7 +5373,8 @@
     {
      "$ref": "506"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "519",
@@ -4674,7 +5415,8 @@
         "$id": "524",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -4682,7 +5424,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "525",
@@ -4695,9 +5439,11 @@
          "$id": "527",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4705,7 +5451,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4731,7 +5479,9 @@
      "Path": "/entity/doSomething/{p2}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Entity.doSomething",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -4742,7 +5492,8 @@
     {
      "$ref": "521"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "530",
@@ -4783,7 +5534,8 @@
         "$id": "535",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -4791,7 +5543,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "536",
@@ -4801,7 +5555,8 @@
         "$id": "537",
         "Kind": "string",
         "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "CrossLanguageDefinitionId": "TypeSpec.string",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4809,7 +5564,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "538",
@@ -4822,9 +5579,11 @@
          "$id": "540",
          "Kind": "string",
          "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "CrossLanguageDefinitionId": "TypeSpec.string",
+         "Decorators": []
         },
-        "Value": "application/json"
+        "Value": "application/json",
+        "Decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -4832,7 +5591,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -4858,7 +5619,9 @@
      "Path": "/glossary/doSomething/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "NoDocsTypeSpec.Glossary.doSomething",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -4869,7 +5632,8 @@
     {
      "$ref": "532"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ],
  "Auth": {
