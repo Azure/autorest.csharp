@@ -5,70 +5,115 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "ClientType",
-   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
-   "ValueType": {
+   "kind": "enum",
+   "name": "ClientType",
+   "crossLanguageDefinitionId": "Client.Structure.Service.ClientType",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string",
-    "Decorators": []
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "Default",
-     "Value": "default",
-     "Decorators": []
-    },
-    {
-     "$id": "5",
-     "Name": "MultiClient",
-     "Value": "multi-client",
-     "Decorators": []
+     "kind": "enumvalue",
+     "name": "Default",
+     "value": "default",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     },
     {
      "$id": "6",
-     "Name": "RenamedOperation",
-     "Value": "renamed-operation",
-     "Decorators": []
+     "kind": "enumvalue",
+     "name": "MultiClient",
+     "value": "multi-client",
+     "valueType": {
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     },
     {
-     "$id": "7",
-     "Name": "TwoOperationGroup",
-     "Value": "two-operation-group",
-     "Decorators": []
+     "$id": "8",
+     "kind": "enumvalue",
+     "name": "RenamedOperation",
+     "value": "renamed-operation",
+     "valueType": {
+      "$id": "9",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "10",
+     "kind": "enumvalue",
+     "name": "TwoOperationGroup",
+     "value": "two-operation-group",
+     "valueType": {
+      "$id": "11",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     }
    ],
-   "IsExtensible": false,
-   "Usage": "Input",
-   "Decorators": []
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input",
+   "decorators": []
   }
  ],
  "Models": [],
  "Clients": [
   {
-   "$id": "8",
+   "$id": "12",
    "Name": "ServiceClient",
    "Description": "Test that we can use @client and @operationGroup decorators to customize client side code structure, such as:\n1. have everything as default.\n2. to rename client or operation group\n3. one client can have more than one operations groups\n4. split one interface into two clients\n5. have two clients with operations come from different interfaces\n6. have two clients with a hierarchy relation.",
    "Operations": [
     {
-     "$id": "9",
+     "$id": "13",
      "Name": "one",
      "ResourceName": "Service",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "10",
+       "$id": "14",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "11",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "15",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -81,7 +126,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "12",
+       "$id": "16",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -101,7 +146,7 @@
      ],
      "Responses": [
       {
-       "$id": "13",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -121,21 +166,21 @@
      "Decorators": []
     },
     {
-     "$id": "14",
+     "$id": "18",
      "Name": "two",
      "ResourceName": "Service",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
+       "$ref": "14"
       },
       {
-       "$ref": "12"
+       "$ref": "16"
       }
      ],
      "Responses": [
       {
-       "$id": "15",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
@@ -156,37 +201,37 @@
     }
    ],
    "Protocol": {
-    "$id": "16"
+    "$id": "20"
    },
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "14"
     },
     {
-     "$ref": "12"
+     "$ref": "16"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "17",
+   "$id": "21",
    "Name": "Baz",
    "Operations": [],
    "Protocol": {
-    "$id": "18"
+    "$id": "22"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$id": "19",
+     "$id": "23",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "20",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "$id": "24",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -199,7 +244,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "21",
+     "$id": "25",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -220,25 +265,25 @@
    "Decorators": []
   },
   {
-   "$id": "22",
+   "$id": "26",
    "Name": "BazFoo",
    "Operations": [
     {
-     "$id": "23",
+     "$id": "27",
      "Name": "seven",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "24",
+       "$id": "28",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "25",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "29",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -251,7 +296,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "26",
+       "$id": "30",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -271,7 +316,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -292,39 +337,39 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "32"
    },
    "Parent": "Baz",
    "Parameters": [
     {
-     "$ref": "24"
+     "$ref": "28"
     },
     {
-     "$ref": "26"
+     "$ref": "30"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "29",
+   "$id": "33",
    "Name": "Qux",
    "Operations": [
     {
-     "$id": "30",
+     "$id": "34",
      "Name": "eight",
      "ResourceName": "Qux",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "31",
+       "$id": "35",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "32",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "36",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -337,7 +382,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "33",
+       "$id": "37",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -357,7 +402,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "38",
        "StatusCodes": [
         204
        ],
@@ -378,39 +423,39 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "39"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "31"
+     "$ref": "35"
     },
     {
-     "$ref": "33"
+     "$ref": "37"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "36",
+   "$id": "40",
    "Name": "QuxBar",
    "Operations": [
     {
-     "$id": "37",
+     "$id": "41",
      "Name": "nine",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "38",
+       "$id": "42",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "39",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "43",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -423,7 +468,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "40",
+       "$id": "44",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -443,7 +488,7 @@
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "45",
        "StatusCodes": [
         204
        ],
@@ -464,39 +509,39 @@
     }
    ],
    "Protocol": {
-    "$id": "42"
+    "$id": "46"
    },
    "Parent": "Qux",
    "Parameters": [
     {
-     "$ref": "38"
+     "$ref": "42"
     },
     {
-     "$ref": "40"
+     "$ref": "44"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "43",
+   "$id": "47",
    "Name": "Foo",
    "Operations": [
     {
-     "$id": "44",
+     "$id": "48",
      "Name": "three",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "45",
+       "$id": "49",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "46",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "50",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -509,7 +554,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "47",
+       "$id": "51",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -529,7 +574,7 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "52",
        "StatusCodes": [
         204
        ],
@@ -549,21 +594,21 @@
      "Decorators": []
     },
     {
-     "$id": "49",
+     "$id": "53",
      "Name": "four",
      "ResourceName": "Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "45"
+       "$ref": "49"
       },
       {
-       "$ref": "47"
+       "$ref": "51"
       }
      ],
      "Responses": [
       {
-       "$id": "50",
+       "$id": "54",
        "StatusCodes": [
         204
        ],
@@ -584,39 +629,39 @@
     }
    ],
    "Protocol": {
-    "$id": "51"
+    "$id": "55"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "45"
+     "$ref": "49"
     },
     {
-     "$ref": "47"
+     "$ref": "51"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "52",
+   "$id": "56",
    "Name": "Bar",
    "Operations": [
     {
-     "$id": "53",
+     "$id": "57",
      "Name": "five",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "54",
+       "$id": "58",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "55",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "59",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -629,7 +674,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "56",
+       "$id": "60",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -649,7 +694,7 @@
      ],
      "Responses": [
       {
-       "$id": "57",
+       "$id": "61",
        "StatusCodes": [
         204
        ],
@@ -669,21 +714,21 @@
      "Decorators": []
     },
     {
-     "$id": "58",
+     "$id": "62",
      "Name": "six",
      "ResourceName": "Bar",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "54"
+       "$ref": "58"
       },
       {
-       "$ref": "56"
+       "$ref": "60"
       }
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "63",
        "StatusCodes": [
         204
        ],
@@ -704,15 +749,15 @@
     }
    ],
    "Protocol": {
-    "$id": "60"
+    "$id": "64"
    },
    "Parent": "ServiceClient",
    "Parameters": [
     {
-     "$ref": "54"
+     "$ref": "58"
     },
     {
-     "$ref": "56"
+     "$ref": "60"
     }
    ],
    "Decorators": []
