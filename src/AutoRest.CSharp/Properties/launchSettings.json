@@ -804,6 +804,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\src\\Generated -n"
     },
+    "typespec-parameters/query-optionality": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\query-optionality\\src\\Generated -n"
+    },
     "typespec-parameters/spread": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\spread\\src\\Generated -n"
@@ -879,10 +883,6 @@
     "typespec-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\empty\\src\\Generated -n"
-    },
-    "typespec-type/model/flatten": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\flatten\\src\\Generated -n"
     },
     "typespec-type/model/inheritance/enum-discriminator": {
       "commandName": "Project",
