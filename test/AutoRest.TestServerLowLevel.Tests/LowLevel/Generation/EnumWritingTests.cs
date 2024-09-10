@@ -100,21 +100,21 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
-                        new("English", "English", InputPrimitiveType.String, "Translate to English"),
-                        new("Spanish", "Spanish", InputPrimitiveType.String, "Translate to Spanish"),
-                        new("Mandarin", "Mandarin", InputPrimitiveType.String, "Translate to Mandarin"),
-                        new("Undocumented", "Undocumented", InputPrimitiveType.String, null)
+                        new("English", "English", "Translate to English"),
+                        new("Spanish", "Spanish", "Translate to Spanish"),
+                        new("Mandarin", "Mandarin", "Translate to Mandarin"),
+                        new("Undocumented", "Undocumented", null)
                     }, true);
 
         private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.Input | InputModelTypeUsage.Output, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
-                        new("Monday", "Monday", InputPrimitiveType.String, null),
-                        new("Tuesday", "Tuesday", InputPrimitiveType.String, null),
-                        new("Wednesday", "Wednesday", InputPrimitiveType.String, null),
-                        new("Thursday", "Thursday", InputPrimitiveType.String, "Wednesday is documented to test this case."),
-                        new("Friday", "Friday", InputPrimitiveType.String, null),
-                        new("Saturday", "Saturday", InputPrimitiveType.String, null),
-                        new("Sunday", "Sunday", InputPrimitiveType.String, null)
+                        new("Monday", "Monday", null),
+                        new("Tuesday", "Tuesday", null),
+                        new("Wednesday", "Wednesday", null),
+                        new("Thursday", "Thursday", "Wednesday is documented to test this case."),
+                        new("Friday", "Friday", null),
+                        new("Saturday", "Saturday", null),
+                        new("Sunday", "Sunday", null)
                     }, false);
 
         private static readonly object[] ExtensibleEnumCase =

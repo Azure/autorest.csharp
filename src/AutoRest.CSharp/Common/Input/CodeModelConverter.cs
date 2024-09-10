@@ -758,9 +758,7 @@ namespace AutoRest.CSharp.Common.Input
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue, InputPrimitiveType valueType) => new(
             Name: choiceValue.Language.Default.Name,
             Description: choiceValue.Language.Default.Description,
-            Value: choiceValue.Value,
-            ValueType: valueType
-        );
+            Value: choiceValue.Value);
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
         {
