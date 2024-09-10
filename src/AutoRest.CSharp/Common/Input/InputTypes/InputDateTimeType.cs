@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDateTimeType(DateTimeKnownEncoding Encode, string Name, string CrossLanguagueDefinitionId, InputPrimitiveType WireType, InputDateTimeType? BaseType = null) : InputType(Name);
+internal record InputDateTimeType(DateTimeKnownEncoding Encode, string Name, string CrossLanguageDefinitionId, InputPrimitiveType WireType, InputDateTimeType? BaseType = null) : InputType(Name);

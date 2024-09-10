@@ -42,18 +42,18 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            valueType = valueType ?? throw new JsonException("InputConstant must have type");
+            valueType = valueType ?? throw new JsonException("InputLiteralType must have type");
 
             if (rawValue == null)
             {
-                throw new JsonException("InputConstant must have value");
+                throw new JsonException("InputLiteralType must have value");
             }
 
             var valueKind = valueType switch
             {
                 InputPrimitiveType primitiveType => primitiveType.Kind,
                 InputEnumType enumType => enumType.ValueType.Kind,
-                _ => throw new JsonException($"Not supported literal type {valueType.GetType()}")
+                _ => throw new JsonException($"InputLiteralType does not support type {valueType.GetType()}")
             };
             object value = valueKind switch
             {
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Common.Input
                 InputPrimitiveTypeKind.Float32 => rawValue.Value.GetSingle(),
                 InputPrimitiveTypeKind.Float64 => rawValue.Value.GetDouble(),
                 InputPrimitiveTypeKind.Boolean => rawValue.Value.GetBoolean(),
-                _ => throw new JsonException($"Not supported literal type {valueKind}")
+                _ => throw new JsonException($"InputLiteralType does not support type {valueKind}")
             };
 
             var literalType = new InputLiteralType(valueType, value)

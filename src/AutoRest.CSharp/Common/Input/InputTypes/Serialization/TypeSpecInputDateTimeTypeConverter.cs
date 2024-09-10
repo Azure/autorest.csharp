@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputDateTimeType CreateDateTimeType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            string? crossLanguagueDefinitionId = null;
+            string? crossLanguageDefinitionId = null;
             string? encode = null;
             InputPrimitiveType? wireType = null;
             InputDateTimeType? baseType = null;
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString("name", ref name)
-                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguagueDefinitionId)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
                     || reader.TryReadString("encode", ref encode)
                     || reader.TryReadWithConverter("wireType", options, ref wireType)
                     || reader.TryReadWithConverter("baseType", options, ref baseType)
@@ -48,12 +48,12 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException("DateTime type must have name");
-            crossLanguagueDefinitionId= crossLanguagueDefinitionId?? throw new JsonException("DateTime type must have crossLanguagueDefinitionId");
+            crossLanguageDefinitionId = crossLanguageDefinitionId ?? throw new JsonException("DateTime type must have crossLanguageDefinitionId");
             encode = encode ?? throw new JsonException("DateTime type must have encoding");
             wireType = wireType ?? throw new JsonException("DateTime type must have wireType");
 
             var dateTimeType = Enum.TryParse<DateTimeKnownEncoding>(encode, ignoreCase: true, out var encodeKind)
-                ? new InputDateTimeType(encodeKind, name, crossLanguagueDefinitionId, wireType, baseType)
+                ? new InputDateTimeType(encodeKind, name, crossLanguageDefinitionId, wireType, baseType)
                 {
                     Decorators = decorators ?? Array.Empty<InputDecoratorInfo>()
                 }
