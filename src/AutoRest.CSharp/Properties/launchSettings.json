@@ -828,10 +828,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\pageable\\src\\Generated -n"
     },
-    "typespec-resiliency/srv-driven": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\resiliency\\srv-driven\\src\\Generated -n"
-    },
     "typespec-serialization/encoded-name/json": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\serialization\\encoded-name\\json\\src\\Generated -n"

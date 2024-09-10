@@ -39,7 +39,6 @@
         "payload/media-type",
         "payload/multipart",
         "payload/pageable",
-        "resiliency/srv-driven",
         "serialization/encoded-name/json",
         "server/endpoint/not-defined",
         "server/path/multiple",
