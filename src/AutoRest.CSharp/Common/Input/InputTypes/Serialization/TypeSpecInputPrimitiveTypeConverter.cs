@@ -31,11 +31,11 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Kind), ref kind)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Name), ref name)
-                    || reader.TryReadString(nameof(InputPrimitiveType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadString(nameof(InputPrimitiveType.Encode), ref encode)
-                    || reader.TryReadWithConverter(nameof(InputPrimitiveType.BaseType), options, ref baseType);
+                    || reader.TryReadString("kind", ref kind)
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
+                    || reader.TryReadString("encode", ref encode)
+                    || reader.TryReadWithConverter("baseType", options, ref baseType);
 
                 if (!isKnownProperty)
                 {
