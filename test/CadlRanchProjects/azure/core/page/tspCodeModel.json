@@ -412,7 +412,7 @@
    "kind": "model",
    "name": "PagedUser",
    "crossLanguageDefinitionId": "Azure.Core.Page",
-   "usage": "None",
+   "usage": "Output,Json",
    "description": "Paged collection of User items",
    "decorators": [],
    "properties": [
@@ -471,7 +471,7 @@
    "kind": "model",
    "name": "PagedFirstItem",
    "crossLanguageDefinitionId": "Azure.Core.Page",
-   "usage": "None",
+   "usage": "Output,Json",
    "description": "Paged collection of FirstItem items",
    "decorators": [],
    "properties": [
@@ -530,7 +530,7 @@
    "kind": "model",
    "name": "PagedSecondItem",
    "crossLanguageDefinitionId": "Azure.Core.Page",
-   "usage": "None",
+   "usage": "Output,Json",
    "description": "Paged collection of SecondItem items",
    "decorators": [],
    "properties": [
