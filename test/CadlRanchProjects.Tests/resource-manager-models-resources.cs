@@ -33,6 +33,14 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_actionSync() => Test(async (host) =>
+        {
+            var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).ActionSyncAsync(new NotificationDetails("Resource action at top level.", true));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_createOrReplace() => Test(async (host) =>
         {
