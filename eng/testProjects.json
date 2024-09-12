@@ -35,6 +35,7 @@
         "encode/bytes",
         "encode/datetime",
         "encode/duration",
+        "encode/numeric",
         "payload/content-negotiation",
         "payload/media-type",
         "payload/multipart",
