@@ -31,9 +31,9 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputNullableType.Name), ref name)
-                    || reader.TryReadWithConverter(nameof(InputNullableType.Type), options, ref valueType)
-                    || reader.TryReadWithConverter(nameof(InputNullableType.Decorators), options, ref decorators);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadWithConverter("type", options, ref valueType)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Serialization
 
             var nullableType = new InputNullableType(valueType)
             {
-                Decorators = decorators ?? Array.Empty<InputDecoratorInfo>()
+                Decorators = decorators ?? []
             };
             if (id != null)
             {

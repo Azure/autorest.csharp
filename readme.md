@@ -96,7 +96,7 @@ It packages a bunch of test swagger files, along with a “mock” nodejs server
 
 The swagger files are compiled, and then run, which pings the mock server (to verify behavior). This tests both the Modeler 4 and language specific codegen. 
 
-This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
+This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/main/test/README.md).
 
 **cadl-ranch**
 
@@ -141,7 +141,7 @@ When the autorest.csharp PR gets merged there will be an automatic azure-sdk-for
 
 Run `dotnet build /t:GenerateCode` in the directory that contains your `.csproj` file.
 
-This executes [these targets](https://github.com/Azure/autorest.csharp/blob/feature/v3/src/AutoRest.CSharp/build/CodeGeneration.targets).
+This executes [these targets](https://github.com/Azure/autorest.csharp/blob/main/src/AutoRest.CSharp/build/CodeGeneration.targets).
 
 Refer also to [azure-sdk-for-net/CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/master/CONTRIBUTING.md#on-boarding-new-generated-code-library) for more details.
 
