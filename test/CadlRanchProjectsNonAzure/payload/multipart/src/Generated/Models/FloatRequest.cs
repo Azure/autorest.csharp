@@ -44,18 +44,15 @@ namespace Payload.MultiPart.Models
 
         /// <summary> Initializes a new instance of <see cref="FloatRequest"/>. </summary>
         /// <param name="temperature"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="temperature"/> is null. </exception>
-        public FloatRequest(Models.temperature)
+        public FloatRequest(double temperature)
         {
-            Argument.AssertNotNull(temperature, nameof(temperature));
-
             Temperature = temperature;
         }
 
         /// <summary> Initializes a new instance of <see cref="FloatRequest"/>. </summary>
         /// <param name="temperature"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FloatRequest(Models.temperature, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FloatRequest(double temperature, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Temperature = temperature;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -67,6 +64,6 @@ namespace Payload.MultiPart.Models
         }
 
         /// <summary> Gets the temperature. </summary>
-        public Models.Temperature{get;}
-}
+        public double Temperature { get; }
+    }
 }

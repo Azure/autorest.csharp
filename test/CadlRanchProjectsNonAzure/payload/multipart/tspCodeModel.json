@@ -601,12 +601,10 @@
      "serializedName": "temperature",
      "type": {
       "$id": "63",
-      "kind": "model",
-      "name": "",
-      "crossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts.NonString..anonymous",
-      "usage": "Input",
-      "decorators": [],
-      "properties": []
+      "kind": "float64",
+      "name": "float64",
+      "crossLanguageDefinitionId": "TypeSpec.float64",
+      "decorators": []
      },
      "optional": false,
      "readOnly": false,
@@ -615,9 +613,6 @@
      "crossLanguageDefinitionId": "Payload.MultiPart.FormData.HttpParts.NonString.float.Request.anonymous.temperature"
     }
    ]
-  },
-  {
-   "$ref": "63"
   },
   {
    "$id": "64",

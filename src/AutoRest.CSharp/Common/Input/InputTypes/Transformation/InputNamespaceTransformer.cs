@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using AutoRest.CSharp.Common.Input.InputTypes.Transformation;
+
 namespace AutoRest.CSharp.Common.Input
 {
     internal class InputNamespaceTransformer
@@ -14,6 +16,7 @@ namespace AutoRest.CSharp.Common.Input
             InputUrlToUriTransformer.Transform(input);
             InputRenameTimeToOnTransformer.Transform(input);
             InputPluralEnumTransformer.Transform(input);
+            SubscriptionIdTransformer.Transform(input);
         }
     }
 }

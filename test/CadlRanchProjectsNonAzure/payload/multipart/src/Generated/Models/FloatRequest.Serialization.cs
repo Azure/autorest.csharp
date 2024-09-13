@@ -23,7 +23,7 @@ namespace Payload.MultiPart.Models
 
             writer.WriteStartObject();
             writer.WritePropertyName("temperature"u8);
-            writer.WriteObjectValue < Models.> (Temperature, options);
+            writer.WriteNumberValue(Temperature);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -62,14 +62,14 @@ namespace Payload.MultiPart.Models
             {
                 return null;
             }
-            Models.temperature = default;
+            double temperature = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("temperature"u8))
                 {
-                    temperature = Models..Deserialize(property.Value, options);
+                    temperature = property.Value.GetDouble();
                     continue;
                 }
                 if (options.Format != "W")
@@ -99,7 +99,7 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataBinaryContent ToMultipartBinaryBody()
         {
             MultipartFormDataBinaryContent content = new MultipartFormDataBinaryContent();
-            content.Add(ModelReaderWriter.Write < Models.> (Temperature, ModelSerializationExtensions.WireOptions), "temperature");
+            content.Add(Temperature, "temperature");
             return content;
         }
 
