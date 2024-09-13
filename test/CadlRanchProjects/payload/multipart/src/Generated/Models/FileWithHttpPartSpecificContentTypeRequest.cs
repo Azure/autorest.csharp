@@ -7,13 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace Payload.MultiPart.Models
 {
-    /// <summary> The JsonArrayPartsRequest. </summary>
-    public partial class JsonArrayPartsRequest
+    /// <summary> The FileWithHttpPartSpecificContentTypeRequest. </summary>
+    public partial class FileWithHttpPartSpecificContentTypeRequest
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -47,38 +45,31 @@ namespace Payload.MultiPart.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="JsonArrayPartsRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FileWithHttpPartSpecificContentTypeRequest"/>. </summary>
         /// <param name="profileImage"></param>
-        /// <param name="previousAddresses"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> or <paramref name="previousAddresses"/> is null. </exception>
-        public JsonArrayPartsRequest(Stream profileImage, IEnumerable<Address> previousAddresses)
+        /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
+        public FileWithHttpPartSpecificContentTypeRequest(FileSpecificContentType profileImage)
         {
             Argument.AssertNotNull(profileImage, nameof(profileImage));
-            Argument.AssertNotNull(previousAddresses, nameof(previousAddresses));
 
             ProfileImage = profileImage;
-            PreviousAddresses = previousAddresses.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="JsonArrayPartsRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FileWithHttpPartSpecificContentTypeRequest"/>. </summary>
         /// <param name="profileImage"></param>
-        /// <param name="previousAddresses"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal JsonArrayPartsRequest(Stream profileImage, IList<Address> previousAddresses, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FileWithHttpPartSpecificContentTypeRequest(FileSpecificContentType profileImage, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ProfileImage = profileImage;
-            PreviousAddresses = previousAddresses;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="JsonArrayPartsRequest"/> for deserialization. </summary>
-        internal JsonArrayPartsRequest()
+        /// <summary> Initializes a new instance of <see cref="FileWithHttpPartSpecificContentTypeRequest"/> for deserialization. </summary>
+        internal FileWithHttpPartSpecificContentTypeRequest()
         {
         }
 
         /// <summary> Gets the profile image. </summary>
-        public Stream ProfileImage { get; }
-        /// <summary> Gets the previous addresses. </summary>
-        public IList<Address> PreviousAddresses { get; }
+        public FileSpecificContentType ProfileImage { get; }
     }
 }

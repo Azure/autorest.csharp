@@ -1479,7 +1479,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method",
+       "Kind": "Client",
        "Decorators": [],
        "SkipUrlEncoding": false
       },
@@ -1675,7 +1675,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method",
+       "Kind": "Client",
        "Decorators": [],
        "SkipUrlEncoding": false
       },
@@ -2117,7 +2117,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method",
+       "Kind": "Client",
        "Decorators": [],
        "SkipUrlEncoding": false
       },
@@ -2408,7 +2408,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method",
+       "Kind": "Client",
        "Decorators": [],
        "SkipUrlEncoding": false
       },
@@ -2619,7 +2619,7 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method",
+       "Kind": "Client",
        "Decorators": [],
        "SkipUrlEncoding": false
       },

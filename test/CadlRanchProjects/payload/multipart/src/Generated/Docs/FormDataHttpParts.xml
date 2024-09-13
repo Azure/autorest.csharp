@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="JsonArrayAndFileArrayAsync(ComplexHttpPartsModelRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonArrayAndFileArrayAsync.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+ComplexHttpPartsModelRequest body = new ComplexHttpPartsModelRequest("<id>", new Address("<city>"), new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"), new Address[]
+{
+    default
+}, new FileRequiredMetaData[]
+{
+    default
+});
+Response response = await client.JsonArrayAndFileArrayAsync(body);
+]]></code>
+This sample shows how to call JsonArrayAndFileArrayAsync with all parameters.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+ComplexHttpPartsModelRequest body = new ComplexHttpPartsModelRequest("<id>", new Address("<city>"), new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"), new Address[]
+{
+    default
+}, new FileRequiredMetaData[]
+{
+    default
+});
+Response response = await client.JsonArrayAndFileArrayAsync(body);
+]]></code></example>
+    </member>
+    <member name="JsonArrayAndFileArray(ComplexHttpPartsModelRequest,CancellationToken)">
+      <example>
+This sample shows how to call JsonArrayAndFileArray.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+ComplexHttpPartsModelRequest body = new ComplexHttpPartsModelRequest("<id>", new Address("<city>"), new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"), new Address[]
+{
+    default
+}, new FileRequiredMetaData[]
+{
+    default
+});
+Response response = client.JsonArrayAndFileArray(body);
+]]></code>
+This sample shows how to call JsonArrayAndFileArray with all parameters.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+ComplexHttpPartsModelRequest body = new ComplexHttpPartsModelRequest("<id>", new Address("<city>"), new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"), new Address[]
+{
+    default
+}, new FileRequiredMetaData[]
+{
+    default
+});
+Response response = client.JsonArrayAndFileArray(body);
+]]></code></example>
+    </member>
+    <member name="JsonArrayAndFileArrayAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonArrayAndFileArrayAsync.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        null
+    },
+});
+Response response = await client.JsonArrayAndFileArrayAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonArrayAndFileArrayAsync with all parameters and request content.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        null
+    },
+});
+Response response = await client.JsonArrayAndFileArrayAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="JsonArrayAndFileArray(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call JsonArrayAndFileArray.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        null
+    },
+});
+Response response = client.JsonArrayAndFileArray(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call JsonArrayAndFileArray with all parameters and request content.
+<code><![CDATA[
+FormDataHttpParts client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    address = new
+    {
+        city = "<city>",
+    },
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+    previousAddresses = new object[]
+    {
+        null
+    },
+    pictures = new object[]
+    {
+        null
+    },
+});
+Response response = client.JsonArrayAndFileArray(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

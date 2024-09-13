@@ -15,31 +15,35 @@ using Azure.Core;
 
 namespace Payload.MultiPart.Models
 {
-    public partial class JsonArrayPartsRequest : IUtf8JsonSerializable, IJsonModel<JsonArrayPartsRequest>
+    public partial class ComplexHttpPartsModelRequest : IUtf8JsonSerializable, IJsonModel<ComplexHttpPartsModelRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonArrayPartsRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ComplexHttpPartsModelRequest>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<JsonArrayPartsRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ComplexHttpPartsModelRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<JsonArrayPartsRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ComplexHttpPartsModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JsonArrayPartsRequest)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ComplexHttpPartsModelRequest)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("address"u8);
+            writer.WriteObjectValue(Address, options);
             writer.WritePropertyName("profileImage"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(global::System.BinaryData.FromStream(ProfileImage));
-#else
-            using (JsonDocument document = JsonDocument.Parse(BinaryData.FromStream(ProfileImage)))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            writer.WriteObjectValue(ProfileImage, options);
             writer.WritePropertyName("previousAddresses"u8);
             writer.WriteStartArray();
             foreach (var item in PreviousAddresses)
+            {
+                writer.WriteObjectValue(item, options);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("pictures"u8);
+            writer.WriteStartArray();
+            foreach (var item in Pictures)
             {
                 writer.WriteObjectValue(item, options);
             }
@@ -62,19 +66,19 @@ namespace Payload.MultiPart.Models
             writer.WriteEndObject();
         }
 
-        JsonArrayPartsRequest IJsonModel<JsonArrayPartsRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ComplexHttpPartsModelRequest IJsonModel<ComplexHttpPartsModelRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<JsonArrayPartsRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ComplexHttpPartsModelRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(JsonArrayPartsRequest)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ComplexHttpPartsModelRequest)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeJsonArrayPartsRequest(document.RootElement, options);
+            return DeserializeComplexHttpPartsModelRequest(document.RootElement, options);
         }
 
-        internal static JsonArrayPartsRequest DeserializeJsonArrayPartsRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ComplexHttpPartsModelRequest DeserializeComplexHttpPartsModelRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -82,15 +86,28 @@ namespace Payload.MultiPart.Models
             {
                 return null;
             }
-            Stream profileImage = default;
+            string id = default;
+            Address address = default;
+            FileRequiredMetaData profileImage = default;
             IList<Address> previousAddresses = default;
+            IList<FileRequiredMetaData> pictures = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"u8))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("address"u8))
+                {
+                    address = Address.DeserializeAddress(property.Value, options);
+                    continue;
+                }
                 if (property.NameEquals("profileImage"u8))
                 {
-                    profileImage = BinaryData.FromString(property.Value.GetRawText()).ToStream();
+                    profileImage = FileRequiredMetaData.DeserializeFileRequiredMetaData(property.Value, options);
                     continue;
                 }
                 if (property.NameEquals("previousAddresses"u8))
@@ -103,13 +120,29 @@ namespace Payload.MultiPart.Models
                     previousAddresses = array;
                     continue;
                 }
+                if (property.NameEquals("pictures"u8))
+                {
+                    List<FileRequiredMetaData> array = new List<FileRequiredMetaData>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(FileRequiredMetaData.DeserializeFileRequiredMetaData(item, options));
+                    }
+                    pictures = array;
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new JsonArrayPartsRequest(profileImage, previousAddresses, serializedAdditionalRawData);
+            return new ComplexHttpPartsModelRequest(
+                id,
+                address,
+                profileImage,
+                previousAddresses,
+                pictures,
+                serializedAdditionalRawData);
         }
 
         private BinaryData SerializeMultipart(ModelReaderWriterOptions options)
@@ -130,17 +163,23 @@ namespace Payload.MultiPart.Models
         internal virtual MultipartFormDataRequestContent ToMultipartRequestContent()
         {
             MultipartFormDataRequestContent content = new MultipartFormDataRequestContent();
-            content.Add(ProfileImage, "profileImage", "profileImage", "application/octet-stream");
+            content.Add(Id, "id");
+            content.Add(ModelReaderWriter.Write(Address, ModelSerializationExtensions.WireOptions), "address");
+            content.Add(ModelReaderWriter.Write(ProfileImage, ModelSerializationExtensions.WireOptions), "profileImage");
             foreach (Address item in PreviousAddresses)
             {
                 content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "previousAddresses");
             }
+            foreach (FileRequiredMetaData item in Pictures)
+            {
+                content.Add(ModelReaderWriter.Write(item, ModelSerializationExtensions.WireOptions), "pictures");
+            }
             return content;
         }
 
-        BinaryData IPersistableModel<JsonArrayPartsRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ComplexHttpPartsModelRequest>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<JsonArrayPartsRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ComplexHttpPartsModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
@@ -149,34 +188,34 @@ namespace Payload.MultiPart.Models
                 case "MFD":
                     return SerializeMultipart(options);
                 default:
-                    throw new FormatException($"The model {nameof(JsonArrayPartsRequest)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ComplexHttpPartsModelRequest)} does not support writing '{options.Format}' format.");
             }
         }
 
-        JsonArrayPartsRequest IPersistableModel<JsonArrayPartsRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ComplexHttpPartsModelRequest IPersistableModel<ComplexHttpPartsModelRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<JsonArrayPartsRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ComplexHttpPartsModelRequest>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeJsonArrayPartsRequest(document.RootElement, options);
+                        return DeserializeComplexHttpPartsModelRequest(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(JsonArrayPartsRequest)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ComplexHttpPartsModelRequest)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<JsonArrayPartsRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
+        string IPersistableModel<ComplexHttpPartsModelRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "MFD";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static JsonArrayPartsRequest FromResponse(Response response)
+        internal static ComplexHttpPartsModelRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJsonArrayPartsRequest(document.RootElement);
+            return DeserializeComplexHttpPartsModelRequest(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

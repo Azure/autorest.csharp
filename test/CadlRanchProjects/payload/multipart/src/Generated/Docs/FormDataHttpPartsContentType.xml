@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="ImageJpegContentTypeAsync(FileWithHttpPartSpecificContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call ImageJpegContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartSpecificContentTypeRequest body = new FileWithHttpPartSpecificContentTypeRequest(new FileSpecificContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "image/jpg",
+});
+Response response = await client.ImageJpegContentTypeAsync(body);
+]]></code>
+This sample shows how to call ImageJpegContentTypeAsync with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartSpecificContentTypeRequest body = new FileWithHttpPartSpecificContentTypeRequest(new FileSpecificContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "image/jpg",
+});
+Response response = await client.ImageJpegContentTypeAsync(body);
+]]></code></example>
+    </member>
+    <member name="ImageJpegContentType(FileWithHttpPartSpecificContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call ImageJpegContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartSpecificContentTypeRequest body = new FileWithHttpPartSpecificContentTypeRequest(new FileSpecificContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "image/jpg",
+});
+Response response = client.ImageJpegContentType(body);
+]]></code>
+This sample shows how to call ImageJpegContentType with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartSpecificContentTypeRequest body = new FileWithHttpPartSpecificContentTypeRequest(new FileSpecificContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "image/jpg",
+});
+Response response = client.ImageJpegContentType(body);
+]]></code></example>
+    </member>
+    <member name="ImageJpegContentTypeAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call ImageJpegContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "image/jpg",
+        contents = new object(),
+    },
+});
+Response response = await client.ImageJpegContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ImageJpegContentTypeAsync with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "image/jpg",
+        contents = new object(),
+    },
+});
+Response response = await client.ImageJpegContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ImageJpegContentType(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call ImageJpegContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "image/jpg",
+        contents = new object(),
+    },
+});
+Response response = client.ImageJpegContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ImageJpegContentType with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "image/jpg",
+        contents = new object(),
+    },
+});
+Response response = client.ImageJpegContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="RequiredContentTypeAsync(FileWithHttpPartRequiredContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call RequiredContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartRequiredContentTypeRequest body = new FileWithHttpPartRequiredContentTypeRequest(new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"));
+Response response = await client.RequiredContentTypeAsync(body);
+]]></code>
+This sample shows how to call RequiredContentTypeAsync with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartRequiredContentTypeRequest body = new FileWithHttpPartRequiredContentTypeRequest(new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"));
+Response response = await client.RequiredContentTypeAsync(body);
+]]></code></example>
+    </member>
+    <member name="RequiredContentType(FileWithHttpPartRequiredContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call RequiredContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartRequiredContentTypeRequest body = new FileWithHttpPartRequiredContentTypeRequest(new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"));
+Response response = client.RequiredContentType(body);
+]]></code>
+This sample shows how to call RequiredContentType with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartRequiredContentTypeRequest body = new FileWithHttpPartRequiredContentTypeRequest(new FileRequiredMetaData(BinaryData.FromObjectAsJson(new object()), "<filename>", "<contentType>"));
+Response response = client.RequiredContentType(body);
+]]></code></example>
+    </member>
+    <member name="RequiredContentTypeAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call RequiredContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = await client.RequiredContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredContentTypeAsync with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = await client.RequiredContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="RequiredContentType(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call RequiredContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = client.RequiredContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RequiredContentType with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = client.RequiredContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="OptionalContentTypeAsync(FileWithHttpPartOptionalContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call OptionalContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartOptionalContentTypeRequest body = new FileWithHttpPartOptionalContentTypeRequest(new FileOptionalContentType(BinaryData.FromObjectAsJson(new object()), "<filename>"));
+Response response = await client.OptionalContentTypeAsync(body);
+]]></code>
+This sample shows how to call OptionalContentTypeAsync with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartOptionalContentTypeRequest body = new FileWithHttpPartOptionalContentTypeRequest(new FileOptionalContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "<contentType>",
+});
+Response response = await client.OptionalContentTypeAsync(body);
+]]></code></example>
+    </member>
+    <member name="OptionalContentType(FileWithHttpPartOptionalContentTypeRequest,CancellationToken)">
+      <example>
+This sample shows how to call OptionalContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartOptionalContentTypeRequest body = new FileWithHttpPartOptionalContentTypeRequest(new FileOptionalContentType(BinaryData.FromObjectAsJson(new object()), "<filename>"));
+Response response = client.OptionalContentType(body);
+]]></code>
+This sample shows how to call OptionalContentType with all parameters.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+FileWithHttpPartOptionalContentTypeRequest body = new FileWithHttpPartOptionalContentTypeRequest(new FileOptionalContentType(BinaryData.FromObjectAsJson(new object()), "<filename>")
+{
+    ContentType = "<contentType>",
+});
+Response response = client.OptionalContentType(body);
+]]></code></example>
+    </member>
+    <member name="OptionalContentTypeAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call OptionalContentTypeAsync.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contents = new object(),
+    },
+});
+Response response = await client.OptionalContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OptionalContentTypeAsync with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = await client.OptionalContentTypeAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="OptionalContentType(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call OptionalContentType.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contents = new object(),
+    },
+});
+Response response = client.OptionalContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call OptionalContentType with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsContentType client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsContentTypeClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    profileImage = new
+    {
+        filename = "<filename>",
+        contentType = "<contentType>",
+        contents = new object(),
+    },
+});
+Response response = client.OptionalContentType(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
