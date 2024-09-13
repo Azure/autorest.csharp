@@ -162,18 +162,18 @@
        "Description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nbeen modified since the specified time.",
        "Type": {
         "$id": "17",
-        "Kind": "utcDateTime",
-        "Name": "utcDateTime",
-        "Encode": "rfc7231",
-        "WireType": {
+        "kind": "utcDateTime",
+        "name": "utcDateTime",
+        "encode": "rfc7231",
+        "wireType": {
          "$id": "18",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
-        "Decorators": []
+        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -224,18 +224,18 @@
        "Description": "A timestamp indicating the last modified time of the resource known to the\nclient. The operation will be performed only if the resource on the service has\nnot been modified since the specified time.",
        "Type": {
         "$id": "22",
-        "Kind": "utcDateTime",
-        "Name": "utcDateTime",
-        "Encode": "rfc7231",
-        "WireType": {
+        "kind": "utcDateTime",
+        "name": "utcDateTime",
+        "encode": "rfc7231",
+        "wireType": {
          "$id": "23",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.utcDateTime",
-        "Decorators": []
+        "crossLanguageDefinitionId": "TypeSpec.utcDateTime",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
