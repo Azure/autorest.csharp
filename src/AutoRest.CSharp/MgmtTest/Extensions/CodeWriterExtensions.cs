@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     case InputExampleObjectValue objectValue:
                         return writer.AppendBinaryData(objectValue);
                     case InputExampleRawValue rawValue:
-                        return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
+                        return writer.AppendBinaryData(rawValue);
                     default:
                         throw new InvalidOperationException("Unhandled BinaryData example value type");
                 }
