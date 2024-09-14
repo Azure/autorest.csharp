@@ -133,6 +133,7 @@ namespace CadlRanchProjects.Tests
             }
         });
 
+        [Test]
         public void Azure_Core_basic_RenameGetMethod()
         {
             var getUserMethod = typeof(BasicClient).GetMethod("GetUserAsync", new[] { typeof(int), typeof(CancellationToken) });
