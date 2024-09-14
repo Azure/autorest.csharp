@@ -107,15 +107,15 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
             if (type.FrameworkType == typeof(BinaryData))
             {
-                if (exampleValue is InputExampleObjectValue objectValue)
+                switch (exampleValue)
                 {
-                    return writer.AppendBinaryData(objectValue);
+                    case InputExampleObjectValue objectValue:
+                        return writer.AppendBinaryData(objectValue);
+                    case InputExampleRawValue rawValue:
+                        return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
+                    default:
+                        throw new InvalidOperationException("Unhandled BinaryData example value type");
                 }
-                if (exampleValue is InputExampleRawValue rawValue)
-                {
-                    return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
-                }
-                throw new InvalidOperationException("Unhandled BinaryData example value type");
             }
 
             if (type.FrameworkType == typeof(DataFactoryElement<>))
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.AppendRaw(")");
         }
 
-            private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleRawValue exampleValue)
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleRawValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
             if (exampleValue.RawValue != null && exampleValue.RawValue is string strValue)
