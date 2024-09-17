@@ -54,7 +54,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
+        /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Bird(string kind, int wingspan, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -69,7 +69,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
         {
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
         /// <summary> Gets or sets the wingspan. </summary>
         public int Wingspan { get; set; }

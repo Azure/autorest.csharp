@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputDurationType(DurationKnownEncoding Encode, InputPrimitiveType WireType) : InputType("Duration");
+internal record InputDurationType(DurationKnownEncoding Encode, string Name, string CrossLanguageDefinitionId, InputPrimitiveType WireType, InputDurationType? BaseType = null) : InputType(Name);

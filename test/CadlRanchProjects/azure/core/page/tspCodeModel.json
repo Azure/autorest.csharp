@@ -7,517 +7,606 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "ListItemInputExtensibleEnum",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputExtensibleEnum",
-   "ValueType": {
+   "kind": "enum",
+   "name": "ListItemInputExtensibleEnum",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputExtensibleEnum",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string",
-    "Decorators": []
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "First",
-     "Value": "First",
-     "Description": "The first enum value.",
-     "Decorators": []
+     "kind": "enumvalue",
+     "name": "First",
+     "value": "First",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "description": "The first enum value.",
+     "decorators": []
     },
     {
-     "$id": "5",
-     "Name": "Second",
-     "Value": "Second",
-     "Description": "The second enum value.",
-     "Decorators": []
+     "$id": "6",
+     "kind": "enumvalue",
+     "name": "Second",
+     "value": "Second",
+     "valueType": {
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "description": "The second enum value.",
+     "decorators": []
     }
    ],
-   "Description": "An extensible enum input parameter.",
-   "IsExtensible": false,
-   "Usage": "Input",
-   "Decorators": []
+   "description": "An extensible enum input parameter.",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input",
+   "decorators": []
   },
   {
-   "$id": "6",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.Versions",
-   "ValueType": {
-    "$id": "7",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string",
-    "Decorators": []
+   "$id": "8",
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.Versions",
+   "valueType": {
+    "$id": "9",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
-     "$id": "8",
-     "Name": "v2022_12_01_preview",
-     "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview.",
-     "Decorators": []
+     "$id": "10",
+     "kind": "enumvalue",
+     "name": "v2022_12_01_preview",
+     "value": "2022-12-01-preview",
+     "valueType": {
+      "$id": "11",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "8"
+     },
+     "description": "The version 2022-12-01-preview.",
+     "decorators": []
     }
    ],
-   "Description": "The version of the API.",
-   "IsExtensible": false,
-   "Usage": "ApiVersionEnum",
-   "Decorators": []
+   "description": "The version of the API.",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "ApiVersionEnum",
+   "decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "9",
-   "Kind": "model",
-   "Name": "User",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User",
-   "Usage": "Output,Json",
-   "Description": "Details about a user.",
-   "Decorators": [],
-   "Properties": [
+   "$id": "12",
+   "kind": "model",
+   "name": "User",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User",
+   "usage": "Output,Json",
+   "description": "Details about a user.",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "10",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The user's id.",
-     "Type": {
-      "$id": "11",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+     "$id": "13",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "description": "The user's id.",
+     "type": {
+      "$id": "14",
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.id"
     },
     {
-     "$id": "12",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The user's name.",
-     "Type": {
-      "$id": "13",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+     "$id": "15",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "description": "The user's name.",
+     "type": {
+      "$id": "16",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.name"
     },
     {
-     "$id": "14",
-     "Name": "orders",
-     "SerializedName": "orders",
-     "Description": "The user's order list",
-     "Type": {
-      "$id": "15",
-      "Kind": "array",
-      "Name": "ArrayUserOrder",
-      "ValueType": {
-       "$id": "16",
-       "Kind": "model",
-       "Name": "UserOrder",
-       "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder",
-       "Usage": "Output,Json",
-       "Description": "UserOrder for testing list with expand.",
-       "Decorators": [],
-       "Properties": [
+     "$id": "17",
+     "kind": "property",
+     "name": "orders",
+     "serializedName": "orders",
+     "description": "The user's order list",
+     "type": {
+      "$id": "18",
+      "kind": "array",
+      "name": "ArrayUserOrder",
+      "valueType": {
+       "$id": "19",
+       "kind": "model",
+       "name": "UserOrder",
+       "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder",
+       "usage": "Output,Json",
+       "description": "UserOrder for testing list with expand.",
+       "decorators": [],
+       "properties": [
         {
-         "$id": "17",
-         "Name": "id",
-         "SerializedName": "id",
-         "Description": "The user's id.",
-         "Type": {
-          "$id": "18",
-          "Kind": "int32",
-          "Name": "int32",
-          "CrossLanguageDefinitionId": "TypeSpec.int32",
-          "Decorators": []
+         "$id": "20",
+         "kind": "property",
+         "name": "id",
+         "serializedName": "id",
+         "description": "The user's id.",
+         "type": {
+          "$id": "21",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": true,
-         "Decorators": []
+         "optional": false,
+         "readOnly": true,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.id"
         },
         {
-         "$id": "19",
-         "Name": "userId",
-         "SerializedName": "userId",
-         "Description": "The user's id.",
-         "Type": {
-          "$id": "20",
-          "Kind": "int32",
-          "Name": "int32",
-          "CrossLanguageDefinitionId": "TypeSpec.int32",
-          "Decorators": []
+         "$id": "22",
+         "kind": "property",
+         "name": "userId",
+         "serializedName": "userId",
+         "description": "The user's id.",
+         "type": {
+          "$id": "23",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.userId"
         },
         {
-         "$id": "21",
-         "Name": "detail",
-         "SerializedName": "detail",
-         "Description": "The user's order detail",
-         "Type": {
-          "$id": "22",
-          "Kind": "string",
-          "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string",
-          "Decorators": []
+         "$id": "24",
+         "kind": "property",
+         "name": "detail",
+         "serializedName": "detail",
+         "description": "The user's order detail",
+         "type": {
+          "$id": "25",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
          },
-         "IsRequired": true,
-         "IsReadOnly": false,
-         "Decorators": []
+         "optional": false,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.detail"
         }
        ]
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.orders"
     },
     {
-     "$id": "23",
-     "Name": "etag",
-     "SerializedName": "etag",
-     "Description": "The entity tag for this resource.",
-     "Type": {
-      "$id": "24",
-      "Kind": "string",
-      "Name": "eTag",
-      "CrossLanguageDefinitionId": "Azure.Core.eTag",
-      "BaseType": {
-       "$id": "25",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string",
-       "Decorators": []
+     "$id": "26",
+     "kind": "property",
+     "name": "etag",
+     "serializedName": "etag",
+     "description": "The entity tag for this resource.",
+     "type": {
+      "$id": "27",
+      "kind": "string",
+      "name": "eTag",
+      "crossLanguageDefinitionId": "Azure.Core.eTag",
+      "baseType": {
+       "$id": "28",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "Decorators": []
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.etag"
     }
    ]
   },
   {
-   "$ref": "16"
-  },
-  {
-   "$id": "26",
-   "Kind": "model",
-   "Name": "ListItemInputBody",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody",
-   "Usage": "Input,Json",
-   "Description": "The body of the input.",
-   "Decorators": [],
-   "Properties": [
-    {
-     "$id": "27",
-     "Name": "inputName",
-     "SerializedName": "inputName",
-     "Description": "The name of the input.",
-     "Type": {
-      "$id": "28",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
-    }
-   ]
+   "$ref": "19"
   },
   {
    "$id": "29",
-   "Kind": "model",
-   "Name": "UserListResults",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel",
-   "Usage": "Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "ListItemInputBody",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody",
+   "usage": "Input,Json",
+   "description": "The body of the input.",
+   "decorators": [],
+   "properties": [
     {
      "$id": "30",
-     "Name": "items",
-     "SerializedName": "items",
-     "Description": "List of items.",
-     "Type": {
+     "kind": "property",
+     "name": "inputName",
+     "serializedName": "inputName",
+     "description": "The name of the input.",
+     "type": {
       "$id": "31",
-      "Kind": "array",
-      "Name": "ArrayUser",
-      "ValueType": {
-       "$ref": "9"
-      },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
-    },
-    {
-     "$id": "32",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "Link to fetch more items.",
-     "Type": {
-      "$id": "33",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody.inputName"
     }
    ]
   },
   {
-   "$id": "34",
-   "Kind": "model",
-   "Name": "FirstItem",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem",
-   "Usage": "Output,Json",
-   "Description": "First item.",
-   "Decorators": [],
-   "Properties": [
+   "$id": "32",
+   "kind": "model",
+   "name": "UserListResults",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel",
+   "usage": "Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "33",
+     "kind": "property",
+     "name": "items",
+     "serializedName": "items",
+     "description": "List of items.",
+     "type": {
+      "$id": "34",
+      "kind": "array",
+      "name": "ArrayUser",
+      "valueType": {
+       "$ref": "12"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel.items"
+    },
     {
      "$id": "35",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "The id of the item.",
-     "Type": {
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "Link to fetch more items.",
+     "type": {
       "$id": "36",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel.nextLink"
     }
    ]
   },
   {
    "$id": "37",
-   "Kind": "model",
-   "Name": "SecondItem",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem",
-   "Usage": "Output,Json",
-   "Description": "Second item.",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "FirstItem",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem",
+   "usage": "Output,Json",
+   "description": "First item.",
+   "decorators": [],
+   "properties": [
     {
      "$id": "38",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name of the item.",
-     "Type": {
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "description": "The id of the item.",
+     "type": {
       "$id": "39",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": true,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem.id"
     }
    ]
   },
   {
    "$id": "40",
-   "Kind": "model",
-   "Name": "PagedUser",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "None",
-   "Description": "Paged collection of User items",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "SecondItem",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem",
+   "usage": "Output,Json",
+   "description": "Second item.",
+   "decorators": [],
+   "properties": [
     {
      "$id": "41",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The User items on this page",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "description": "The name of the item.",
+     "type": {
       "$id": "42",
-      "Kind": "array",
-      "Name": "ArrayUser",
-      "ValueType": {
-       "$ref": "9"
-      },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
-    },
-    {
-     "$id": "43",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
-      "$id": "44",
-      "Kind": "url",
-      "Name": "ResourceLocation",
-      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "BaseType": {
-       "$id": "45",
-       "Kind": "url",
-       "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url",
-       "Decorators": []
-      },
-      "Decorators": []
-     },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem.name"
     }
    ]
   },
   {
-   "$id": "46",
-   "Kind": "model",
-   "Name": "PagedFirstItem",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "None",
-   "Description": "Paged collection of FirstItem items",
-   "Decorators": [],
-   "Properties": [
+   "$id": "43",
+   "kind": "model",
+   "name": "PagedUser",
+   "crossLanguageDefinitionId": "Azure.Core.Page",
+   "usage": "None",
+   "description": "Paged collection of User items",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "47",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The FirstItem items on this page",
-     "Type": {
-      "$id": "48",
-      "Kind": "array",
-      "Name": "ArrayFirstItem",
-      "ValueType": {
-       "$ref": "34"
+     "$id": "44",
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "description": "The User items on this page",
+     "type": {
+      "$id": "45",
+      "kind": "array",
+      "name": "ArrayUser",
+      "valueType": {
+       "$ref": "12"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
     {
-     "$id": "49",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
-      "$id": "50",
-      "Kind": "url",
-      "Name": "ResourceLocation",
-      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "BaseType": {
-       "$id": "51",
-       "Kind": "url",
-       "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url",
-       "Decorators": []
+     "$id": "46",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
+      "$id": "47",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "48",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
       },
-      "Decorators": []
+      "decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
   },
   {
-   "$id": "52",
-   "Kind": "model",
-   "Name": "PagedSecondItem",
-   "CrossLanguageDefinitionId": "Azure.Core.Page",
-   "Usage": "None",
-   "Description": "Paged collection of SecondItem items",
-   "Decorators": [],
-   "Properties": [
+   "$id": "49",
+   "kind": "model",
+   "name": "PagedFirstItem",
+   "crossLanguageDefinitionId": "Azure.Core.Page",
+   "usage": "None",
+   "description": "Paged collection of FirstItem items",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "53",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "The SecondItem items on this page",
-     "Type": {
-      "$id": "54",
-      "Kind": "array",
-      "Name": "ArraySecondItem",
-      "ValueType": {
+     "$id": "50",
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "description": "The FirstItem items on this page",
+     "type": {
+      "$id": "51",
+      "kind": "array",
+      "name": "ArrayFirstItem",
+      "valueType": {
        "$ref": "37"
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
     {
-     "$id": "55",
-     "Name": "nextLink",
-     "SerializedName": "nextLink",
-     "Description": "The link to the next page of items",
-     "Type": {
-      "$id": "56",
-      "Kind": "url",
-      "Name": "ResourceLocation",
-      "CrossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-      "BaseType": {
-       "$id": "57",
-       "Kind": "url",
-       "Name": "url",
-       "CrossLanguageDefinitionId": "TypeSpec.url",
-       "Decorators": []
+     "$id": "52",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
+      "$id": "53",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "54",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
       },
-      "Decorators": []
+      "decorators": []
      },
-     "IsRequired": false,
-     "IsReadOnly": false,
-     "Decorators": []
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
+    }
+   ]
+  },
+  {
+   "$id": "55",
+   "kind": "model",
+   "name": "PagedSecondItem",
+   "crossLanguageDefinitionId": "Azure.Core.Page",
+   "usage": "None",
+   "description": "Paged collection of SecondItem items",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "56",
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "description": "The SecondItem items on this page",
+     "type": {
+      "$id": "57",
+      "kind": "array",
+      "name": "ArraySecondItem",
+      "valueType": {
+       "$ref": "40"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.value"
+    },
+    {
+     "$id": "58",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
+      "$id": "59",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "60",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "58",
+   "$id": "61",
    "Name": "PageClient",
    "Description": "Illustrates bodies templated with Azure Core with paging support",
    "Operations": [
     {
-     "$id": "59",
+     "$id": "62",
      "Name": "listWithPage",
      "ResourceName": "Page",
      "Description": "List with Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "60",
+       "$id": "63",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "61",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "64",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -529,27 +618,27 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "65",
         "Type": {
-         "$id": "63",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "66",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "64",
+       "$id": "67",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "65",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "68",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -559,12 +648,12 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "69",
         "Type": {
-         "$id": "67",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "70",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -572,21 +661,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "68",
+       "$id": "71",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "70",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "72",
+        "kind": "constant",
+        "valueType": {
+         "$id": "73",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -601,12 +690,12 @@
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "74",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -622,7 +711,7 @@
      "Path": "/azure/core/page/page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "72",
+      "$id": "75",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -632,26 +721,26 @@
      "Decorators": []
     },
     {
-     "$id": "73",
+     "$id": "76",
      "Name": "listWithParameters",
      "ResourceName": "Page",
      "Description": "List with extensible enum parameter Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "60"
+       "$ref": "63"
       },
       {
-       "$id": "74",
+       "$id": "77",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "75",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "78",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -661,12 +750,12 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "79",
         "Type": {
-         "$id": "77",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "80",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -674,7 +763,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "78",
+       "$id": "81",
        "Name": "another",
        "NameInRequest": "another",
        "Description": "Another query parameter.",
@@ -692,22 +781,22 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "79",
+       "$id": "82",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "80",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "81",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "83",
+        "kind": "constant",
+        "valueType": {
+         "$id": "84",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -720,21 +809,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "82",
+       "$id": "85",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "83",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "84",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "86",
+        "kind": "constant",
+        "valueType": {
+         "$id": "87",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -747,12 +836,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "85",
+       "$id": "88",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "The body of the input.",
        "Type": {
-        "$ref": "26"
+        "$ref": "29"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -767,12 +856,12 @@
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "89",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "40"
+        "$ref": "43"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -791,7 +880,7 @@
      ],
      "BufferResponse": true,
      "Paging": {
-      "$id": "87",
+      "$id": "90",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -801,26 +890,26 @@
      "Decorators": []
     },
     {
-     "$id": "88",
+     "$id": "91",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Page",
      "Description": "List with custom page model.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "60"
+       "$ref": "63"
       },
       {
-       "$id": "89",
+       "$id": "92",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "90",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "93",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -830,12 +919,12 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "94",
         "Type": {
-         "$id": "92",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "95",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -843,21 +932,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "93",
+       "$id": "96",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "95",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "97",
+        "kind": "constant",
+        "valueType": {
+         "$id": "98",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -872,12 +961,12 @@
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "99",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "29"
+        "$ref": "32"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -893,7 +982,7 @@
      "Path": "/azure/core/page/custom-page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "97",
+      "$id": "100",
       "ItemName": "items",
       "NextLinkName": "nextLink"
      },
@@ -904,35 +993,35 @@
     }
    ],
    "Protocol": {
-    "$id": "98"
+    "$id": "101"
    },
    "Parameters": [
     {
-     "$ref": "60"
+     "$ref": "63"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "99",
+   "$id": "102",
    "Name": "TwoModelsAsPageItem",
    "Operations": [
     {
-     "$id": "100",
+     "$id": "103",
      "Name": "listFirstItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "101",
+       "$id": "104",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "102",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "105",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -944,27 +1033,27 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "103",
+        "$id": "106",
         "Type": {
-         "$id": "104",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "107",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "105",
+       "$id": "108",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "106",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "109",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -974,12 +1063,12 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "110",
         "Type": {
-         "$id": "108",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "111",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -987,21 +1076,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "109",
+       "$id": "112",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "110",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "111",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "113",
+        "kind": "constant",
+        "valueType": {
+         "$id": "114",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1016,12 +1105,12 @@
      ],
      "Responses": [
       {
-       "$id": "112",
+       "$id": "115",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "46"
+        "$ref": "49"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1037,7 +1126,7 @@
      "Path": "/azure/core/page/first-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "113",
+      "$id": "116",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -1047,26 +1136,26 @@
      "Decorators": []
     },
     {
-     "$id": "114",
+     "$id": "117",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "101"
+       "$ref": "104"
       },
       {
-       "$id": "115",
+       "$id": "118",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "116",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "119",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": true,
@@ -1076,12 +1165,12 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "117",
+        "$id": "120",
         "Type": {
-         "$id": "118",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "121",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "2022-12-01-preview"
        },
@@ -1089,21 +1178,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "119",
+       "$id": "122",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "120",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "121",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "123",
+        "kind": "constant",
+        "valueType": {
+         "$id": "124",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1118,12 +1207,12 @@
      ],
      "Responses": [
       {
-       "$id": "122",
+       "$id": "125",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "52"
+        "$ref": "55"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1139,7 +1228,7 @@
      "Path": "/azure/core/page/second-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "123",
+      "$id": "126",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -1150,12 +1239,12 @@
     }
    ],
    "Protocol": {
-    "$id": "124"
+    "$id": "127"
    },
    "Parent": "PageClient",
    "Parameters": [
     {
-     "$ref": "101"
+     "$ref": "104"
     }
    ],
    "Decorators": []
