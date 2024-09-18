@@ -106,7 +106,17 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
-                return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
+            {
+                switch (exampleValue)
+                {
+                    case InputExampleObjectValue objectValue:
+                        return writer.AppendBinaryData(objectValue);
+                    case InputExampleRawValue rawValue:
+                        return writer.AppendBinaryData(rawValue);
+                    default:
+                        throw new InvalidOperationException("Unhandled BinaryData example value type");
+                }
+            }
 
             if (type.FrameworkType == typeof(DataFactoryElement<>))
                 return writer.AppendDataFactoryElementValue(type, exampleValue);
@@ -203,6 +213,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleObjectValue exampleValue)
+        {
+            var method = "FromObjectAsJson";
+            writer.Append($"{typeof(BinaryData)}.{method}(");
+            writer.AppendAnonymousObject(exampleValue);
+            return writer.AppendRaw(")");
+        }
+
         private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleRawValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
@@ -280,7 +298,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // check if this is an array
             if (exampleValue is InputExampleListValue exampleListValue)
             {
-                return writer.AppendListValue(typeof(object), exampleListValue);
+                return writer.AppendListValue(typeof(List<object>), exampleListValue);
             }
             // fallback to complex object
             if (exampleValue is InputExampleObjectValue exampleObjectValue)

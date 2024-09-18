@@ -6,62 +6,62 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "Extension",
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
-   "Usage": "Input,Output,Json",
-   "Description": "extension",
-   "Decorators": [],
-   "BaseModel": {
+   "kind": "model",
+   "name": "Extension",
+   "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
+   "usage": "Input,Output,Json",
+   "description": "extension",
+   "decorators": [],
+   "baseModel": {
     "$id": "3",
-    "Kind": "model",
-    "Name": "Element",
-    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
-    "Usage": "Input,Output,Json",
-    "Description": "element",
-    "Decorators": [],
-    "Properties": [
+    "kind": "model",
+    "name": "Element",
+    "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
+    "usage": "Input,Output,Json",
+    "description": "element",
+    "decorators": [],
+    "properties": [
      {
       "$id": "4",
-      "Kind": "property",
-      "Name": "extension",
-      "SerializedName": "extension",
-      "Type": {
+      "kind": "property",
+      "name": "extension",
+      "serializedName": "extension",
+      "type": {
        "$id": "5",
-       "Kind": "array",
-       "Name": "ArrayExtension",
-       "ValueType": {
+       "kind": "array",
+       "name": "ArrayExtension",
+       "valueType": {
         "$ref": "2"
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array",
-       "Decorators": []
+       "crossLanguageDefinitionId": "TypeSpec.Array",
+       "decorators": []
       },
-      "Optional": true,
-      "ReadOnly": false,
-      "Discriminator": false,
-      "Decorators": [],
-      "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element.extension"
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element.extension"
      }
     ]
    },
-   "Properties": [
+   "properties": [
     {
      "$id": "6",
-     "Kind": "property",
-     "Name": "level",
-     "SerializedName": "level",
-     "Type": {
+     "kind": "property",
+     "name": "level",
+     "serializedName": "level",
+     "type": {
       "$id": "7",
-      "Kind": "int8",
-      "Name": "int8",
-      "CrossLanguageDefinitionId": "TypeSpec.int8",
-      "Decorators": []
+      "kind": "int8",
+      "name": "int8",
+      "crossLanguageDefinitionId": "TypeSpec.int8",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension.level"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension.level"
     }
    ]
   },
@@ -87,9 +87,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -104,9 +104,9 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -118,16 +118,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "15",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "16",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -196,16 +196,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "22",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
