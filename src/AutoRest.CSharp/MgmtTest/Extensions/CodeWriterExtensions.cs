@@ -252,10 +252,17 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"new {type}(");
             foreach (var parameter in publicCtor.GetParameters())
             {
-                // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
-                var value = exampleObjectValue.Values[parameter.Name!];
-                writer.AppendExampleValue(value, parameter.ParameterType);
-                writer.AppendRaw(",");
+                // we here assume the parameter name is the same as the serialized name of the property.
+                if (exampleObjectValue.Values.TryGetValue(parameter.Name!, out var value))
+                {
+                    writer.AppendExampleValue(value, parameter.ParameterType);
+                    writer.AppendRaw(",");
+                }
+                else
+                {
+                    // when there is nothing matched, we could not do much but write a `default` as placeholder here.
+                    writer.AppendRaw("default,");
+                }
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
