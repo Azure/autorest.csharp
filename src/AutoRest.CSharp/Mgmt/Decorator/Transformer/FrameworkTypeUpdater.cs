@@ -36,13 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         {
                             property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name, property.Schema.Type);
                         }
-                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
-                        {
-                            property.Language.Default.Name = GetEnclosingTypeName(objSchema.Name, property.Schema.Name.TrimEnd('s'), property.Schema.Type);
-                        }
                         else
                         {
-                            throw new InvalidOperationException($"{objSchema.Name} has a property named \"Type\" which is not allowed. Please use \"x-ms-client-name\" to rename the property for the client.");
+                            throw new InvalidOperationException($"{objSchema.Name} has a property named \"{property.CSharpName()}\" which is not allowed. Please add \"{objSchema.Name}.{property.Language.Default.Name}: YourNewPropertyName\" into the `rename-mapping` section to rename the property for the client.");
                         }
                     }
                 }
