@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                         }
                         else
                         {
-                            throw new InvalidOperationException($"{objSchema.Name} has a property named \"Type\" which is not allowed. Please use \"x-ms-client-name\" to rename the property for the client.");
+                            throw new InvalidOperationException($"{objSchema.Name} has a property named \"{property.CSharpName()}\" which is not allowed. Please add \"{objSchema.Name}.{property.Language.Default.Name}: {{YourNewPropertyName}}\" into the `rename-mapping` section of your `autorest.md` file to rename the property for the client.");
                         }
                     }
                 }
