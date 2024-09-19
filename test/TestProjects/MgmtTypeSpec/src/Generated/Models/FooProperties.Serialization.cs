@@ -38,6 +38,11 @@ namespace MgmtTypeSpec.Models
                 writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
+            if (Optional.IsDefined(BoolValue))
+            {
+                writer.WritePropertyName("boolValue"u8);
+                writer.WriteBooleanValue(BoolValue.Value);
+            }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -78,6 +83,7 @@ namespace MgmtTypeSpec.Models
             }
             Uri serviceUrl = default;
             string something = default;
+            bool? boolValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,13 +102,22 @@ namespace MgmtTypeSpec.Models
                     something = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("boolValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    boolValue = property.Value.GetBoolean();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new FooProperties(serviceUrl, something, serializedAdditionalRawData);
+            return new FooProperties(serviceUrl, something, boolValue, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FooProperties>.Write(ModelReaderWriterOptions options)

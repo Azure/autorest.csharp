@@ -21,6 +21,9 @@ model FooProperties {
 
     /** something */
     something?: string;
+
+    /** boolean value */
+    boolValue?: boolean;
 }
 
 @armResourceOperations

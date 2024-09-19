@@ -45,6 +45,7 @@ namespace MgmtTypeSpec.Samples
                 {
                     ServiceUri = new Uri("https://myService.com"),
                     Something = "for test only",
+                    BoolValue = true,
                 },
             };
             ArmOperation<FooResource> lro = await foo.UpdateAsync(WaitUntil.Completed, data);
