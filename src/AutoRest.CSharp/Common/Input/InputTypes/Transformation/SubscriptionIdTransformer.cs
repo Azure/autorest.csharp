@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Common.Input.InputTypes.Transformation
             {
                 foreach (var operation in client.Operations)
                 {
-                    var subscriptionIdParameter = operation.Parameters.Where(p => p.NameInRequest == "subscriptionId").FirstOrDefault();
+                    var subscriptionIdParameter = operation.Parameters.FirstOrDefault(p => p.NameInRequest == "subscriptionId");
                     if (subscriptionIdParameter != null)
                     {
                         subscriptionIdParameter.Kind = InputOperationParameterKind.Method;
