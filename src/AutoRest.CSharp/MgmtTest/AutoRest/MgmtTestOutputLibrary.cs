@@ -50,8 +50,8 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                             // the source code generator will never write them if it is not in arm core
                             if (providerForExample.Carrier is ArmClientExtension)
                                 continue;
-                            var mockTestCase = new Sample(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
-                            result.AddInList(mockTestCase.Owner, mockTestCase);
+                            var sample = new Sample(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
+                            result.AddInList(sample.Owner, sample);
                         }
                     }
                 }
