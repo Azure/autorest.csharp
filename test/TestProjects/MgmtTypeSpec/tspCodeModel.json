@@ -248,8 +248,8 @@
   {
    "$id": "28",
    "kind": "enum",
-   "name": "Versions",
-   "crossLanguageDefinitionId": "MgmtTypeSpec.Versions",
+   "name": "Origin",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Origin",
    "valueType": {
     "$id": "29",
     "kind": "string",
@@ -261,8 +261,8 @@
     {
      "$id": "30",
      "kind": "enumvalue",
-     "name": "v2024_05_01",
-     "value": "2024-05-01",
+     "name": "user",
+     "value": "user",
      "valueType": {
       "$id": "31",
       "kind": "string",
@@ -272,6 +272,118 @@
      },
      "enumType": {
       "$ref": "28"
+     },
+     "description": "Indicates the operation is initiated by a user.",
+     "decorators": []
+    },
+    {
+     "$id": "32",
+     "kind": "enumvalue",
+     "name": "system",
+     "value": "system",
+     "valueType": {
+      "$id": "33",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "28"
+     },
+     "description": "Indicates the operation is initiated by a system.",
+     "decorators": []
+    },
+    {
+     "$id": "34",
+     "kind": "enumvalue",
+     "name": "user,system",
+     "value": "user,system",
+     "valueType": {
+      "$id": "35",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "28"
+     },
+     "description": "Indicates the operation is initiated by a user or system.",
+     "decorators": []
+    }
+   ],
+   "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Output,Json",
+   "decorators": []
+  },
+  {
+   "$id": "36",
+   "kind": "enum",
+   "name": "ActionType",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ActionType",
+   "valueType": {
+    "$id": "37",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "38",
+     "kind": "enumvalue",
+     "name": "Internal",
+     "value": "Internal",
+     "valueType": {
+      "$id": "39",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "36"
+     },
+     "description": "Actions are for internal-only APIs.",
+     "decorators": []
+    }
+   ],
+   "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "Output,Json",
+   "decorators": []
+  },
+  {
+   "$id": "40",
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "MgmtTypeSpec.Versions",
+   "valueType": {
+    "$id": "41",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
+    {
+     "$id": "42",
+     "kind": "enumvalue",
+     "name": "v2024_05_01",
+     "value": "2024-05-01",
+     "valueType": {
+      "$id": "43",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "40"
      },
      "description": "Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview.",
      "decorators": []
@@ -286,7 +398,7 @@
  ],
  "Models": [
   {
-   "$id": "32",
+   "$id": "44",
    "kind": "model",
    "name": "Foo",
    "crossLanguageDefinitionId": "MgmtTypeSpec.Foo",
@@ -294,7 +406,7 @@
    "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
-    "$id": "33",
+    "$id": "45",
     "kind": "model",
     "name": "TrackedResource",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
@@ -302,7 +414,7 @@
     "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "decorators": [],
     "baseModel": {
-     "$id": "34",
+     "$id": "46",
      "kind": "model",
      "name": "Resource",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
@@ -311,18 +423,18 @@
      "decorators": [],
      "properties": [
       {
-       "$id": "35",
+       "$id": "47",
        "kind": "property",
        "name": "id",
        "serializedName": "id",
        "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "type": {
-        "$id": "36",
+        "$id": "48",
         "kind": "string",
         "name": "armResourceIdentifier",
         "crossLanguageDefinitionId": "Azure.Core.armResourceIdentifier",
         "baseType": {
-         "$id": "37",
+         "$id": "49",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -337,13 +449,13 @@
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.id"
       },
       {
-       "$id": "38",
+       "$id": "50",
        "kind": "property",
        "name": "name",
        "serializedName": "name",
        "description": "The name of the resource",
        "type": {
-        "$id": "39",
+        "$id": "51",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -356,13 +468,13 @@
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.name"
       },
       {
-       "$id": "40",
+       "$id": "52",
        "kind": "property",
        "name": "type",
        "serializedName": "type",
        "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "type": {
-        "$id": "41",
+        "$id": "53",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -375,13 +487,13 @@
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.type"
       },
       {
-       "$id": "42",
+       "$id": "54",
        "kind": "property",
        "name": "systemData",
        "serializedName": "systemData",
        "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
        "type": {
-        "$id": "43",
+        "$id": "55",
         "kind": "model",
         "name": "SystemData",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
@@ -390,13 +502,13 @@
         "decorators": [],
         "properties": [
          {
-          "$id": "44",
+          "$id": "56",
           "kind": "property",
           "name": "createdBy",
           "serializedName": "createdBy",
           "description": "The identity that created the resource.",
           "type": {
-           "$id": "45",
+           "$id": "57",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -409,7 +521,7 @@
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdBy"
          },
          {
-          "$id": "46",
+          "$id": "58",
           "kind": "property",
           "name": "createdByType",
           "serializedName": "createdByType",
@@ -424,18 +536,18 @@
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdByType"
          },
          {
-          "$id": "47",
+          "$id": "59",
           "kind": "property",
           "name": "createdAt",
           "serializedName": "createdAt",
           "description": "The timestamp of resource creation (UTC).",
           "type": {
-           "$id": "48",
+           "$id": "60",
            "kind": "utcDateTime",
            "name": "utcDateTime",
            "encode": "rfc3339",
            "wireType": {
-            "$id": "49",
+            "$id": "61",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -451,13 +563,13 @@
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdAt"
          },
          {
-          "$id": "50",
+          "$id": "62",
           "kind": "property",
           "name": "lastModifiedBy",
           "serializedName": "lastModifiedBy",
           "description": "The identity that last modified the resource.",
           "type": {
-           "$id": "51",
+           "$id": "63",
            "kind": "string",
            "name": "string",
            "crossLanguageDefinitionId": "TypeSpec.string",
@@ -470,7 +582,7 @@
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedBy"
          },
          {
-          "$id": "52",
+          "$id": "64",
           "kind": "property",
           "name": "lastModifiedByType",
           "serializedName": "lastModifiedByType",
@@ -485,18 +597,18 @@
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedByType"
          },
          {
-          "$id": "53",
+          "$id": "65",
           "kind": "property",
           "name": "lastModifiedAt",
           "serializedName": "lastModifiedAt",
           "description": "The timestamp of resource last modification (UTC)",
           "type": {
-           "$id": "54",
+           "$id": "66",
            "kind": "utcDateTime",
            "name": "utcDateTime",
            "encode": "rfc3339",
            "wireType": {
-            "$id": "55",
+            "$id": "67",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -523,23 +635,23 @@
     },
     "properties": [
      {
-      "$id": "56",
+      "$id": "68",
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
       "description": "Resource tags.",
       "type": {
-       "$id": "57",
+       "$id": "69",
        "kind": "dict",
        "keyType": {
-        "$id": "58",
+        "$id": "70",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
         "decorators": []
        },
        "valueType": {
-        "$id": "59",
+        "$id": "71",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -554,13 +666,13 @@
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags"
      },
      {
-      "$id": "60",
+      "$id": "72",
       "kind": "property",
       "name": "location",
       "serializedName": "location",
       "description": "The geo-location where the resource lives",
       "type": {
-       "$id": "61",
+       "$id": "73",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string",
@@ -576,36 +688,36 @@
    },
    "properties": [
     {
-     "$id": "62",
+     "$id": "74",
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
      "description": "The resource-specific properties for this resource.",
      "type": {
-      "$id": "63",
+      "$id": "75",
       "kind": "model",
       "name": "FooProperties",
       "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties",
       "usage": "Input,Output,Json",
       "decorators": [
        {
-        "$id": "64",
+        "$id": "76",
         "name": "Azure.ClientGenerator.Core.@useSystemTextJsonConverter",
         "arguments": {
-         "$id": "65",
+         "$id": "77",
          "scope": "csharp"
         }
        }
       ],
       "properties": [
        {
-        "$id": "66",
+        "$id": "78",
         "kind": "property",
         "name": "serviceUrl",
         "serializedName": "serviceUrl",
         "description": "the service url",
         "type": {
-         "$id": "67",
+         "$id": "79",
          "kind": "url",
          "name": "url",
          "crossLanguageDefinitionId": "TypeSpec.url",
@@ -618,13 +730,13 @@
         "crossLanguageDefinitionId": "MgmtTypeSpec.FooProperties.serviceUrl"
        },
        {
-        "$id": "68",
+        "$id": "80",
         "kind": "property",
         "name": "something",
         "serializedName": "something",
         "description": "something",
         "type": {
-         "$id": "69",
+         "$id": "81",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -645,12 +757,12 @@
      "crossLanguageDefinitionId": "MgmtTypeSpec.Foo.properties"
     },
     {
-     "$id": "70",
+     "$id": "82",
      "kind": "property",
      "name": "extendedLocation",
      "serializedName": "extendedLocation",
      "type": {
-      "$id": "71",
+      "$id": "83",
       "kind": "model",
       "name": "ExtendedLocation",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation",
@@ -659,13 +771,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "72",
+        "$id": "84",
         "kind": "property",
         "name": "name",
         "serializedName": "name",
         "description": "The name of the extended location.",
         "type": {
-         "$id": "73",
+         "$id": "85",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -678,7 +790,7 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation.name"
        },
        {
-        "$id": "74",
+        "$id": "86",
         "kind": "property",
         "name": "type",
         "serializedName": "type",
@@ -703,22 +815,22 @@
    ]
   },
   {
-   "$ref": "63"
+   "$ref": "75"
   },
   {
-   "$ref": "71"
+   "$ref": "83"
   },
   {
-   "$ref": "33"
+   "$ref": "45"
   },
   {
-   "$ref": "34"
+   "$ref": "46"
   },
   {
-   "$ref": "43"
+   "$ref": "55"
   },
   {
-   "$id": "75",
+   "$id": "87",
    "kind": "model",
    "name": "ErrorResponse",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
@@ -727,13 +839,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "76",
+     "$id": "88",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "description": "The error object.",
      "type": {
-      "$id": "77",
+      "$id": "89",
       "kind": "model",
       "name": "ErrorDetail",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
@@ -742,13 +854,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "78",
+        "$id": "90",
         "kind": "property",
         "name": "code",
         "serializedName": "code",
         "description": "The error code.",
         "type": {
-         "$id": "79",
+         "$id": "91",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -761,13 +873,13 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code"
        },
        {
-        "$id": "80",
+        "$id": "92",
         "kind": "property",
         "name": "message",
         "serializedName": "message",
         "description": "The error message.",
         "type": {
-         "$id": "81",
+         "$id": "93",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -780,13 +892,13 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message"
        },
        {
-        "$id": "82",
+        "$id": "94",
         "kind": "property",
         "name": "target",
         "serializedName": "target",
         "description": "The error target.",
         "type": {
-         "$id": "83",
+         "$id": "95",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -799,17 +911,17 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target"
        },
        {
-        "$id": "84",
+        "$id": "96",
         "kind": "property",
         "name": "details",
         "serializedName": "details",
         "description": "The error details.",
         "type": {
-         "$id": "85",
+         "$id": "97",
          "kind": "array",
          "name": "ArrayErrorDetail",
          "valueType": {
-          "$ref": "77"
+          "$ref": "89"
          },
          "crossLanguageDefinitionId": "TypeSpec.Array",
          "decorators": []
@@ -821,17 +933,17 @@
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details"
        },
        {
-        "$id": "86",
+        "$id": "98",
         "kind": "property",
         "name": "additionalInfo",
         "serializedName": "additionalInfo",
         "description": "The error additional info.",
         "type": {
-         "$id": "87",
+         "$id": "99",
          "kind": "array",
          "name": "ArrayErrorAdditionalInfo",
          "valueType": {
-          "$id": "88",
+          "$id": "100",
           "kind": "model",
           "name": "ErrorAdditionalInfo",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
@@ -840,13 +952,13 @@
           "decorators": [],
           "properties": [
            {
-            "$id": "89",
+            "$id": "101",
             "kind": "property",
             "name": "type",
             "serializedName": "type",
             "description": "The additional info type.",
             "type": {
-             "$id": "90",
+             "$id": "102",
              "kind": "string",
              "name": "string",
              "crossLanguageDefinitionId": "TypeSpec.string",
@@ -859,13 +971,13 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type"
            },
            {
-            "$id": "91",
+            "$id": "103",
             "kind": "property",
             "name": "info",
             "serializedName": "info",
             "description": "The additional info.",
             "type": {
-             "$id": "92",
+             "$id": "104",
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
              "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
@@ -901,16 +1013,16 @@
    ]
   },
   {
-   "$ref": "77"
+   "$ref": "89"
   },
   {
-   "$ref": "88"
+   "$ref": "100"
   },
   {
-   "$ref": "92"
+   "$ref": "104"
   },
   {
-   "$id": "93",
+   "$id": "105",
    "kind": "model",
    "name": "FooListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
@@ -919,17 +1031,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "94",
+     "$id": "106",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "description": "The Foo items on this page",
      "type": {
-      "$id": "95",
+      "$id": "107",
       "kind": "array",
       "name": "ArrayFoo",
       "valueType": {
-       "$ref": "32"
+       "$ref": "44"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -941,18 +1053,18 @@
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
-     "$id": "96",
+     "$id": "108",
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
      "description": "The link to the next page of items",
      "type": {
-      "$id": "97",
+      "$id": "109",
       "kind": "url",
       "name": "ResourceLocation",
       "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
       "baseType": {
-       "$id": "98",
+       "$id": "110",
        "kind": "url",
        "name": "url",
        "crossLanguageDefinitionId": "TypeSpec.url",
@@ -969,7 +1081,7 @@
    ]
   },
   {
-   "$id": "99",
+   "$id": "111",
    "kind": "model",
    "name": "PrivateLinkResourceListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
@@ -978,17 +1090,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "100",
+     "$id": "112",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "description": "The PrivateLinkResource items on this page",
      "type": {
-      "$id": "101",
+      "$id": "113",
       "kind": "array",
       "name": "ArrayPrivateLinkResource",
       "valueType": {
-       "$id": "102",
+       "$id": "114",
        "kind": "model",
        "name": "PrivateLinkResource",
        "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource",
@@ -996,7 +1108,7 @@
        "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
        "decorators": [],
        "baseModel": {
-        "$id": "103",
+        "$id": "115",
         "kind": "model",
         "name": "ProxyResource",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
@@ -1004,19 +1116,19 @@
         "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
         "decorators": [],
         "baseModel": {
-         "$ref": "34"
+         "$ref": "46"
         },
         "properties": []
        },
        "properties": [
         {
-         "$id": "104",
+         "$id": "116",
          "kind": "property",
          "name": "properties",
          "serializedName": "properties",
          "description": "The resource-specific properties for this resource.",
          "type": {
-          "$id": "105",
+          "$id": "117",
           "kind": "model",
           "name": "PrivateLinkResourceProperties",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
@@ -1025,13 +1137,13 @@
           "decorators": [],
           "properties": [
            {
-            "$id": "106",
+            "$id": "118",
             "kind": "property",
             "name": "groupId",
             "serializedName": "groupId",
             "description": "The private link resource group id.",
             "type": {
-             "$id": "107",
+             "$id": "119",
              "kind": "string",
              "name": "string",
              "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1044,17 +1156,17 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.groupId"
            },
            {
-            "$id": "108",
+            "$id": "120",
             "kind": "property",
             "name": "requiredMembers",
             "serializedName": "requiredMembers",
             "description": "The private link resource required member names.",
             "type": {
-             "$id": "109",
+             "$id": "121",
              "kind": "array",
              "name": "Array",
              "valueType": {
-              "$id": "110",
+              "$id": "122",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1070,17 +1182,17 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties.requiredMembers"
            },
            {
-            "$id": "111",
+            "$id": "123",
             "kind": "property",
             "name": "requiredZoneNames",
             "serializedName": "requiredZoneNames",
             "description": "The private link resource private link DNS zone name.",
             "type": {
-             "$id": "112",
+             "$id": "124",
              "kind": "array",
              "name": "Array",
              "valueType": {
-              "$id": "113",
+              "$id": "125",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1104,13 +1216,13 @@
          "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource.properties"
         },
         {
-         "$id": "114",
+         "$id": "126",
          "kind": "property",
          "name": "identity",
          "serializedName": "identity",
          "description": "The managed service identities assigned to this resource.",
          "type": {
-          "$id": "115",
+          "$id": "127",
           "kind": "model",
           "name": "ManagedServiceIdentity",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
@@ -1119,18 +1231,18 @@
           "decorators": [],
           "properties": [
            {
-            "$id": "116",
+            "$id": "128",
             "kind": "property",
             "name": "principalId",
             "serializedName": "principalId",
             "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
             "type": {
-             "$id": "117",
+             "$id": "129",
              "kind": "string",
              "name": "uuid",
              "crossLanguageDefinitionId": "Azure.Core.uuid",
              "baseType": {
-              "$id": "118",
+              "$id": "130",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1145,18 +1257,18 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.principalId"
            },
            {
-            "$id": "119",
+            "$id": "131",
             "kind": "property",
             "name": "tenantId",
             "serializedName": "tenantId",
             "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
             "type": {
-             "$id": "120",
+             "$id": "132",
              "kind": "string",
              "name": "uuid",
              "crossLanguageDefinitionId": "Azure.Core.uuid",
              "baseType": {
-              "$id": "121",
+              "$id": "133",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1171,7 +1283,7 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.tenantId"
            },
            {
-            "$id": "122",
+            "$id": "134",
             "kind": "property",
             "name": "type",
             "serializedName": "type",
@@ -1186,26 +1298,26 @@
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity.type"
            },
            {
-            "$id": "123",
+            "$id": "135",
             "kind": "property",
             "name": "userAssignedIdentities",
             "serializedName": "userAssignedIdentities",
             "description": "The identities assigned to this resource by the user.",
             "type": {
-             "$id": "124",
+             "$id": "136",
              "kind": "dict",
              "keyType": {
-              "$id": "125",
+              "$id": "137",
               "kind": "string",
               "name": "string",
               "crossLanguageDefinitionId": "TypeSpec.string",
               "decorators": []
              },
              "valueType": {
-              "$id": "126",
+              "$id": "138",
               "kind": "nullable",
               "type": {
-               "$id": "127",
+               "$id": "139",
                "kind": "model",
                "name": "UserAssignedIdentity",
                "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
@@ -1214,18 +1326,18 @@
                "decorators": [],
                "properties": [
                 {
-                 "$id": "128",
+                 "$id": "140",
                  "kind": "property",
                  "name": "principalId",
                  "serializedName": "principalId",
                  "description": "The principal ID of the assigned identity.",
                  "type": {
-                  "$id": "129",
+                  "$id": "141",
                   "kind": "string",
                   "name": "uuid",
                   "crossLanguageDefinitionId": "Azure.Core.uuid",
                   "baseType": {
-                   "$id": "130",
+                   "$id": "142",
                    "kind": "string",
                    "name": "string",
                    "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1240,18 +1352,18 @@
                  "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity.principalId"
                 },
                 {
-                 "$id": "131",
+                 "$id": "143",
                  "kind": "property",
                  "name": "clientId",
                  "serializedName": "clientId",
                  "description": "The client ID of the assigned identity.",
                  "type": {
-                  "$id": "132",
+                  "$id": "144",
                   "kind": "string",
                   "name": "uuid",
                   "crossLanguageDefinitionId": "Azure.Core.uuid",
                   "baseType": {
-                   "$id": "133",
+                   "$id": "145",
                    "kind": "string",
                    "name": "string",
                    "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1296,18 +1408,18 @@
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
     {
-     "$id": "134",
+     "$id": "146",
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
      "description": "The link to the next page of items",
      "type": {
-      "$id": "135",
+      "$id": "147",
       "kind": "url",
       "name": "ResourceLocation",
       "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
       "baseType": {
-       "$id": "136",
+       "$id": "148",
        "kind": "url",
        "name": "url",
        "crossLanguageDefinitionId": "TypeSpec.url",
@@ -1324,36 +1436,276 @@
    ]
   },
   {
-   "$ref": "102"
+   "$ref": "114"
   },
   {
-   "$ref": "105"
-  },
-  {
-   "$ref": "115"
+   "$ref": "117"
   },
   {
    "$ref": "127"
   },
   {
-   "$ref": "103"
+   "$ref": "139"
+  },
+  {
+   "$ref": "115"
+  },
+  {
+   "$id": "149",
+   "kind": "model",
+   "name": "OperationListResult",
+   "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationListResult",
+   "usage": "Output,Json",
+   "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "150",
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "description": "The Operation items on this page",
+     "type": {
+      "$id": "151",
+      "kind": "array",
+      "name": "ArrayOperation",
+      "valueType": {
+       "$id": "152",
+       "kind": "model",
+       "name": "Operation",
+       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation",
+       "usage": "Output,Json",
+       "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+       "decorators": [],
+       "properties": [
+        {
+         "$id": "153",
+         "kind": "property",
+         "name": "name",
+         "serializedName": "name",
+         "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+         "type": {
+          "$id": "154",
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": true,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation.name"
+        },
+        {
+         "$id": "155",
+         "kind": "property",
+         "name": "isDataAction",
+         "serializedName": "isDataAction",
+         "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations.",
+         "type": {
+          "$id": "156",
+          "kind": "boolean",
+          "name": "boolean",
+          "crossLanguageDefinitionId": "TypeSpec.boolean",
+          "decorators": []
+         },
+         "optional": true,
+         "readOnly": true,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation.isDataAction"
+        },
+        {
+         "$id": "157",
+         "kind": "property",
+         "name": "display",
+         "serializedName": "display",
+         "description": "Localized display information for this particular operation.",
+         "type": {
+          "$id": "158",
+          "kind": "model",
+          "name": "OperationDisplay",
+          "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay",
+          "usage": "Output,Json",
+          "description": "Localized display information for and operation.",
+          "decorators": [],
+          "properties": [
+           {
+            "$id": "159",
+            "kind": "property",
+            "name": "provider",
+            "serializedName": "provider",
+            "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+            "type": {
+             "$id": "160",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay.provider"
+           },
+           {
+            "$id": "161",
+            "kind": "property",
+            "name": "resource",
+            "serializedName": "resource",
+            "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+            "type": {
+             "$id": "162",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay.resource"
+           },
+           {
+            "$id": "163",
+            "kind": "property",
+            "name": "operation",
+            "serializedName": "operation",
+            "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+            "type": {
+             "$id": "164",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay.operation"
+           },
+           {
+            "$id": "165",
+            "kind": "property",
+            "name": "description",
+            "serializedName": "description",
+            "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+            "type": {
+             "$id": "166",
+             "kind": "string",
+             "name": "string",
+             "crossLanguageDefinitionId": "TypeSpec.string",
+             "decorators": []
+            },
+            "optional": true,
+            "readOnly": true,
+            "discriminator": false,
+            "decorators": [],
+            "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay.description"
+           }
+          ]
+         },
+         "optional": true,
+         "readOnly": true,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation.display"
+        },
+        {
+         "$id": "167",
+         "kind": "property",
+         "name": "origin",
+         "serializedName": "origin",
+         "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+         "type": {
+          "$ref": "28"
+         },
+         "optional": true,
+         "readOnly": true,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation.origin"
+        },
+        {
+         "$id": "168",
+         "kind": "property",
+         "name": "actionType",
+         "serializedName": "actionType",
+         "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+         "type": {
+          "$ref": "36"
+         },
+         "optional": true,
+         "readOnly": false,
+         "discriminator": false,
+         "decorators": [],
+         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation.actionType"
+        }
+       ]
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationListResult.value"
+    },
+    {
+     "$id": "169",
+     "kind": "property",
+     "name": "nextLink",
+     "serializedName": "nextLink",
+     "description": "The link to the next page of items",
+     "type": {
+      "$id": "170",
+      "kind": "url",
+      "name": "ResourceLocation",
+      "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+      "baseType": {
+       "$id": "171",
+       "kind": "url",
+       "name": "url",
+       "crossLanguageDefinitionId": "TypeSpec.url",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationListResult.nextLink"
+    }
+   ]
+  },
+  {
+   "$ref": "152"
+  },
+  {
+   "$ref": "158"
   }
  ],
  "Clients": [
   {
-   "$id": "137",
+   "$id": "172",
    "Name": "MgmtTypeSpecClient",
    "Operations": [],
    "Protocol": {
-    "$id": "138"
+    "$id": "173"
    },
    "Parameters": [
     {
-     "$id": "139",
+     "$id": "174",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Type": {
-      "$id": "140",
+      "$id": "175",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1368,9 +1720,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "141",
+      "$id": "176",
       "Type": {
-       "$id": "142",
+       "$id": "177",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1382,22 +1734,22 @@
    "Decorators": []
   },
   {
-   "$id": "143",
-   "Name": "PrivateLinks",
+   "$id": "178",
+   "Name": "Operations",
    "Operations": [
     {
-     "$id": "144",
-     "Name": "GetAllPrivateLinkResources",
-     "ResourceName": "PrivateLinkResource",
-     "Description": "list private links on the given resource",
+     "$id": "179",
+     "Name": "list",
+     "ResourceName": "Operations",
+     "Description": "List the operations for the provider",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "145",
+       "$id": "180",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "146",
+        "$id": "181",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1412,9 +1764,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "147",
+        "$id": "182",
         "Type": {
-         "$id": "148",
+         "$id": "183",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1423,12 +1775,12 @@
        }
       },
       {
-       "$id": "149",
+       "$id": "184",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "150",
+        "$id": "185",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1442,9 +1794,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "151",
+        "$id": "186",
         "Type": {
-         "$id": "152",
+         "$id": "187",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1455,65 +1807,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "153",
-       "Name": "subscriptionId",
-       "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
-       "Type": {
-        "$id": "154",
-        "kind": "string",
-        "name": "uuid",
-        "crossLanguageDefinitionId": "Azure.Core.uuid",
-        "baseType": {
-         "$id": "155",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "decorators": []
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "156",
-       "Name": "resourceGroupName",
-       "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
-       "Type": {
-        "$id": "157",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Path",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": true,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "158",
+       "$id": "188",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "159",
+        "$id": "189",
         "kind": "constant",
         "valueType": {
-         "$id": "160",
+         "$id": "190",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1535,12 +1836,12 @@
      ],
      "Responses": [
       {
-       "$id": "161",
+       "$id": "191",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "99"
+        "$ref": "149"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1553,47 +1854,47 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{endpoint}",
-     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources",
+     "Path": "/providers/MgmtTypeSpec/operations",
      "BufferResponse": true,
      "Paging": {
-      "$id": "162",
+      "$id": "192",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster",
+     "CrossLanguageDefinitionId": "Azure.ResourceManager.Operations.list",
      "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "163"
+    "$id": "193"
    },
    "Parent": "MgmtTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "145"
+     "$ref": "180"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "164",
-   "Name": "Foos",
+   "$id": "194",
+   "Name": "PrivateLinks",
    "Operations": [
     {
-     "$id": "165",
-     "Name": "createOrUpdate",
-     "ResourceName": "Foos",
-     "Description": "Create a Foo",
+     "$id": "195",
+     "Name": "GetAllPrivateLinkResources",
+     "ResourceName": "PrivateLinkResource",
+     "Description": "list private links on the given resource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "166",
+       "$id": "196",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "167",
+        "$id": "197",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1608,9 +1909,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "168",
+        "$id": "198",
         "Type": {
-         "$id": "169",
+         "$id": "199",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1619,12 +1920,12 @@
        }
       },
       {
-       "$id": "170",
+       "$id": "200",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "171",
+        "$id": "201",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1638,9 +1939,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "172",
+        "$id": "202",
         "Type": {
-         "$id": "173",
+         "$id": "203",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1651,17 +1952,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "174",
+       "$id": "204",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "175",
+        "$id": "205",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "176",
+         "$id": "206",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1680,12 +1981,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "177",
+       "$id": "207",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "178",
+        "$id": "208",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1702,12 +2003,208 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "179",
+       "$id": "209",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "210",
+        "kind": "constant",
+        "valueType": {
+         "$id": "211",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "value": "application/json",
+        "decorators": []
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "212",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "111"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/privateLinkResources",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "213",
+      "ItemName": "value",
+      "NextLinkName": "nextLink"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinks.listByMongoCluster",
+     "Decorators": []
+    }
+   ],
+   "Protocol": {
+    "$id": "214"
+   },
+   "Parent": "MgmtTypeSpecClient",
+   "Parameters": [
+    {
+     "$ref": "196"
+    }
+   ],
+   "Decorators": []
+  },
+  {
+   "$id": "215",
+   "Name": "Foos",
+   "Operations": [
+    {
+     "$id": "216",
+     "Name": "createOrUpdate",
+     "ResourceName": "Foos",
+     "Description": "Create a Foo",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$id": "217",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Type": {
+        "$id": "218",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "219",
+        "Type": {
+         "$id": "220",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "https://management.azure.com"
+       }
+      },
+      {
+       "$id": "221",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "The API version to use for this operation.",
+       "Type": {
+        "$id": "222",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Query",
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "223",
+        "Type": {
+         "$id": "224",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
+        },
+        "Value": "2024-05-01"
+       },
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "225",
+       "Name": "subscriptionId",
+       "NameInRequest": "subscriptionId",
+       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Type": {
+        "$id": "226",
+        "kind": "string",
+        "name": "uuid",
+        "crossLanguageDefinitionId": "Azure.Core.uuid",
+        "baseType": {
+         "$id": "227",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "228",
+       "Name": "resourceGroupName",
+       "NameInRequest": "resourceGroupName",
+       "Description": "The name of the resource group. The name is case insensitive.",
+       "Type": {
+        "$id": "229",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Path",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": true,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "230",
        "Name": "fooName",
        "NameInRequest": "fooName",
        "Description": "The name of the Foo",
        "Type": {
-        "$id": "180",
+        "$id": "231",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1724,15 +2221,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "181",
+       "$id": "232",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "182",
+        "$id": "233",
         "kind": "constant",
         "valueType": {
-         "$id": "183",
+         "$id": "234",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1752,14 +2249,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "184",
+       "$id": "235",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "185",
+        "$id": "236",
         "kind": "constant",
         "valueType": {
-         "$id": "186",
+         "$id": "237",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1779,12 +2276,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "187",
+       "$id": "238",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "Resource create parameters.",
        "Type": {
-        "$ref": "32"
+        "$ref": "44"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1799,12 +2296,12 @@
      ],
      "Responses": [
       {
-       "$id": "188",
+       "$id": "239",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1814,22 +2311,22 @@
        ]
       },
       {
-       "$id": "189",
+       "$id": "240",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "190",
+         "$id": "241",
          "Name": "azureAsyncOperation",
          "NameInResponse": "Azure-AsyncOperation",
          "Description": "A link to the status monitor",
          "Type": {
-          "$id": "191",
+          "$id": "242",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1837,12 +2334,12 @@
          }
         },
         {
-         "$id": "192",
+         "$id": "243",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "193",
+          "$id": "244",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -1865,15 +2362,15 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "194",
+      "$id": "245",
       "FinalStateVia": 0,
       "FinalResponse": {
-       "$id": "195",
+       "$id": "246",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "44"
        },
        "BodyMediaType": "Json"
       }
@@ -1884,88 +2381,88 @@
      "Decorators": [],
      "Examples": [
       {
-       "$id": "196",
+       "$id": "247",
        "kind": "http",
        "name": "Create a foo",
        "description": "Create a foo",
        "filePath": "2024-05-01/Foos_CreateOrUpdate.json",
        "parameters": [
         {
-         "$id": "197",
+         "$id": "248",
          "parameter": {
-          "$ref": "174"
+          "$ref": "225"
          },
          "value": {
-          "$id": "198",
+          "$id": "249",
           "kind": "string",
           "type": {
-           "$ref": "175"
+           "$ref": "226"
           },
           "value": "00000000-0000-0000-0000-000000000000"
          }
         },
         {
-         "$id": "199",
+         "$id": "250",
          "parameter": {
-          "$ref": "177"
+          "$ref": "228"
          },
          "value": {
-          "$id": "200",
+          "$id": "251",
           "kind": "string",
           "type": {
-           "$ref": "178"
+           "$ref": "229"
           },
           "value": "myRg"
          }
         },
         {
-         "$id": "201",
+         "$id": "252",
          "parameter": {
-          "$ref": "179"
+          "$ref": "230"
          },
          "value": {
-          "$id": "202",
+          "$id": "253",
           "kind": "string",
           "type": {
-           "$ref": "180"
+           "$ref": "231"
           },
           "value": "myFoo"
          }
         },
         {
-         "$id": "203",
+         "$id": "254",
          "parameter": {
-          "$ref": "187"
+          "$ref": "238"
          },
          "value": {
-          "$id": "204",
+          "$id": "255",
           "kind": "model",
           "type": {
-           "$ref": "32"
+           "$ref": "44"
           },
           "value": {
-           "$id": "205",
+           "$id": "256",
            "properties": {
-            "$id": "206",
+            "$id": "257",
             "kind": "model",
             "type": {
-             "$ref": "63"
+             "$ref": "75"
             },
             "value": {
-             "$id": "207",
+             "$id": "258",
              "serviceUrl": {
-              "$id": "208",
+              "$id": "259",
               "kind": "string",
               "type": {
-               "$ref": "67"
+               "$ref": "79"
               },
               "value": "https://myService.com"
              },
              "something": {
-              "$id": "209",
+              "$id": "260",
               "kind": "string",
               "type": {
-               "$ref": "69"
+               "$ref": "81"
               },
               "value": "for test only"
              }
@@ -1977,31 +2474,31 @@
        ],
        "responses": [
         {
-         "$id": "210",
+         "$id": "261",
          "response": {
-          "$ref": "188"
+          "$ref": "239"
          },
          "bodyValue": {
-          "$id": "211",
+          "$id": "262",
           "kind": "model",
           "type": {
-           "$ref": "32"
+           "$ref": "44"
           },
           "value": {
-           "$id": "212",
+           "$id": "263",
            "id": {
-            "$id": "213",
+            "$id": "264",
             "kind": "string",
             "type": {
-             "$ref": "36"
+             "$ref": "48"
             },
             "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/MgmtTypeSpec/foos/myFoo"
            },
            "name": {
-            "$id": "214",
+            "$id": "265",
             "kind": "string",
             "type": {
-             "$id": "215",
+             "$id": "266",
              "kind": "string",
              "name": "string",
              "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2010,34 +2507,34 @@
             "value": "myFoo"
            },
            "type": {
-            "$id": "216",
+            "$id": "267",
             "kind": "string",
             "type": {
-             "$ref": "41"
+             "$ref": "53"
             },
             "value": "MgmtTypeSpec/foos"
            },
            "properties": {
-            "$id": "217",
+            "$id": "268",
             "kind": "model",
             "type": {
-             "$ref": "63"
+             "$ref": "75"
             },
             "value": {
-             "$id": "218",
+             "$id": "269",
              "serviceUrl": {
-              "$id": "219",
+              "$id": "270",
               "kind": "string",
               "type": {
-               "$ref": "67"
+               "$ref": "79"
               },
               "value": "https://myService.com"
              },
              "something": {
-              "$id": "220",
+              "$id": "271",
               "kind": "string",
               "type": {
-               "$ref": "69"
+               "$ref": "81"
               },
               "value": "for test only"
              }
@@ -2051,22 +2548,22 @@
      ]
     },
     {
-     "$id": "221",
+     "$id": "272",
      "Name": "get",
      "ResourceName": "Foos",
      "Description": "Get a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "166"
+       "$ref": "217"
       },
       {
-       "$id": "222",
+       "$id": "273",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "223",
+        "$id": "274",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2080,9 +2577,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "224",
+        "$id": "275",
         "Type": {
-         "$id": "225",
+         "$id": "276",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -2093,17 +2590,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "226",
+       "$id": "277",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "227",
+        "$id": "278",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "228",
+         "$id": "279",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2122,12 +2619,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "229",
+       "$id": "280",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "230",
+        "$id": "281",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2144,12 +2641,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "231",
+       "$id": "282",
        "Name": "fooName",
        "NameInRequest": "fooName",
        "Description": "The name of the Foo",
        "Type": {
-        "$id": "232",
+        "$id": "283",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2166,14 +2663,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "233",
+       "$id": "284",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "234",
+        "$id": "285",
         "kind": "constant",
         "valueType": {
-         "$id": "235",
+         "$id": "286",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2195,12 +2692,12 @@
      ],
      "Responses": [
       {
-       "$id": "236",
+       "$id": "287",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "32"
+        "$ref": "44"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2221,50 +2718,50 @@
      "Decorators": [],
      "Examples": [
       {
-       "$id": "237",
+       "$id": "288",
        "kind": "http",
        "name": "Get a foo",
        "description": "Get a foo",
        "filePath": "2024-05-01/Foos_Get.json",
        "parameters": [
         {
-         "$id": "238",
+         "$id": "289",
          "parameter": {
-          "$ref": "226"
+          "$ref": "277"
          },
          "value": {
-          "$id": "239",
+          "$id": "290",
           "kind": "string",
           "type": {
-           "$ref": "227"
+           "$ref": "278"
           },
           "value": "00000000-0000-0000-0000-000000000000"
          }
         },
         {
-         "$id": "240",
+         "$id": "291",
          "parameter": {
-          "$ref": "229"
+          "$ref": "280"
          },
          "value": {
-          "$id": "241",
+          "$id": "292",
           "kind": "string",
           "type": {
-           "$ref": "230"
+           "$ref": "281"
           },
           "value": "myRg"
          }
         },
         {
-         "$id": "242",
+         "$id": "293",
          "parameter": {
-          "$ref": "231"
+          "$ref": "282"
          },
          "value": {
-          "$id": "243",
+          "$id": "294",
           "kind": "string",
           "type": {
-           "$ref": "232"
+           "$ref": "283"
           },
           "value": "myFoo"
          }
@@ -2272,63 +2769,63 @@
        ],
        "responses": [
         {
-         "$id": "244",
+         "$id": "295",
          "response": {
-          "$ref": "236"
+          "$ref": "287"
          },
          "bodyValue": {
-          "$id": "245",
+          "$id": "296",
           "kind": "model",
           "type": {
-           "$ref": "32"
+           "$ref": "44"
           },
           "value": {
-           "$id": "246",
+           "$id": "297",
            "id": {
-            "$id": "247",
+            "$id": "298",
             "kind": "string",
             "type": {
-             "$ref": "36"
+             "$ref": "48"
             },
             "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/MgmtTypeSpec/foos/myFoo"
            },
            "name": {
-            "$id": "248",
+            "$id": "299",
             "kind": "string",
             "type": {
-             "$ref": "215"
+             "$ref": "266"
             },
             "value": "myFoo"
            },
            "type": {
-            "$id": "249",
+            "$id": "300",
             "kind": "string",
             "type": {
-             "$ref": "41"
+             "$ref": "53"
             },
             "value": "MgmtTypeSpec/foos"
            },
            "properties": {
-            "$id": "250",
+            "$id": "301",
             "kind": "model",
             "type": {
-             "$ref": "63"
+             "$ref": "75"
             },
             "value": {
-             "$id": "251",
+             "$id": "302",
              "serviceUrl": {
-              "$id": "252",
+              "$id": "303",
               "kind": "string",
               "type": {
-               "$ref": "67"
+               "$ref": "79"
               },
               "value": "https://myService.com"
              },
              "something": {
-              "$id": "253",
+              "$id": "304",
               "kind": "string",
               "type": {
-               "$ref": "69"
+               "$ref": "81"
               },
               "value": "for test only"
              }
@@ -2342,22 +2839,22 @@
      ]
     },
     {
-     "$id": "254",
+     "$id": "305",
      "Name": "delete",
      "ResourceName": "Foos",
      "Description": "Delete a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "166"
+       "$ref": "217"
       },
       {
-       "$id": "255",
+       "$id": "306",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "256",
+        "$id": "307",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2371,9 +2868,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "257",
+        "$id": "308",
         "Type": {
-         "$id": "258",
+         "$id": "309",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -2384,17 +2881,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "259",
+       "$id": "310",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "260",
+        "$id": "311",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "261",
+         "$id": "312",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2413,12 +2910,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "262",
+       "$id": "313",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "263",
+        "$id": "314",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2435,12 +2932,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "264",
+       "$id": "315",
        "Name": "fooName",
        "NameInRequest": "fooName",
        "Description": "The name of the Foo",
        "Type": {
-        "$id": "265",
+        "$id": "316",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2457,14 +2954,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "266",
+       "$id": "317",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "267",
+        "$id": "318",
         "kind": "constant",
         "valueType": {
-         "$id": "268",
+         "$id": "319",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2486,19 +2983,19 @@
      ],
      "Responses": [
       {
-       "$id": "269",
+       "$id": "320",
        "StatusCodes": [
         202
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "270",
+         "$id": "321",
          "Name": "location",
          "NameInResponse": "Location",
          "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
-          "$id": "271",
+          "$id": "322",
           "kind": "string",
           "name": "string",
           "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2506,12 +3003,12 @@
          }
         },
         {
-         "$id": "272",
+         "$id": "323",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
          "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
-          "$id": "273",
+          "$id": "324",
           "kind": "int32",
           "name": "int32",
           "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -2522,7 +3019,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "274",
+       "$id": "325",
        "StatusCodes": [
         204
        ],
@@ -2537,10 +3034,10 @@
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos/{fooName}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "275",
+      "$id": "326",
       "FinalStateVia": 1,
       "FinalResponse": {
-       "$id": "276",
+       "$id": "327",
        "StatusCodes": [
         204
        ],
@@ -2553,22 +3050,22 @@
      "Decorators": []
     },
     {
-     "$id": "277",
+     "$id": "328",
      "Name": "list",
      "ResourceName": "Foo",
      "Description": "List Foo resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "166"
+       "$ref": "217"
       },
       {
-       "$id": "278",
+       "$id": "329",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "279",
+        "$id": "330",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2582,9 +3079,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "280",
+        "$id": "331",
         "Type": {
-         "$id": "281",
+         "$id": "332",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -2595,17 +3092,17 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "282",
+       "$id": "333",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "283",
+        "$id": "334",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "284",
+         "$id": "335",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2624,12 +3121,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "285",
+       "$id": "336",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "286",
+        "$id": "337",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2646,14 +3143,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "287",
+       "$id": "338",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "288",
+        "$id": "339",
         "kind": "constant",
         "valueType": {
-         "$id": "289",
+         "$id": "340",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2675,12 +3172,12 @@
      ],
      "Responses": [
       {
-       "$id": "290",
+       "$id": "341",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "93"
+        "$ref": "105"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2696,7 +3193,7 @@
      "Path": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MgmtTypeSpec/foos",
      "BufferResponse": true,
      "Paging": {
-      "$id": "291",
+      "$id": "342",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -2707,21 +3204,21 @@
     }
    ],
    "Protocol": {
-    "$id": "292"
+    "$id": "343"
    },
    "Parent": "MgmtTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "166"
+     "$ref": "217"
     }
    ],
    "Decorators": []
   }
  ],
  "Auth": {
-  "$id": "293",
+  "$id": "344",
   "OAuth2": {
-   "$id": "294",
+   "$id": "345",
    "Scopes": [
     "user_impersonation"
    ]
