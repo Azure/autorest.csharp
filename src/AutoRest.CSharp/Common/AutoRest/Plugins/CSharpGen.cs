@@ -39,22 +39,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (Configuration.AzureArm)
             {
-                if (Configuration.MgmtConfiguration.MgmtDebug.SkipCodeGen)
-                {
-                    var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
-                    await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
-                    if (Configuration.MgmtTestConfiguration is not null)
-                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, null);
-                }
-                else
-                {
-                    CodeModelTransformer.TransformForMgmt(codeModel);
-                    var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
-                    MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
-                    await MgmtTarget.ExecuteAsync(project);
-                    if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                        await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
-                }
+                CodeModelTransformer.TransformForMgmt(codeModel);
+                var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+                MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
+                await MgmtTarget.ExecuteAsync(project);
+                if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
+                    await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                 GenerateMgmtReport(project);
             }
             else
