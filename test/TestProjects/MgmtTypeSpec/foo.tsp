@@ -24,6 +24,12 @@ model FooProperties {
 
     /** boolean value */
     boolValue?: boolean;
+
+    /** float value */
+    floatValue?: float32;
+
+    /** double value */
+    doubleValue?: float64;
 }
 
 @armResourceOperations
