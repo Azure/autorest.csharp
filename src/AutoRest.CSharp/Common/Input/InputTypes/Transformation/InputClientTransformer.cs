@@ -23,9 +23,8 @@ namespace AutoRest.CSharp.Common.Input
             var operationsToKeep = new List<InputOperation>();
             foreach (var operation in inputClient.Operations)
             {
-                // "internal" is set only we set access decorator in typespec, default null represents public
-                // TODO: Skip internal operations for Mgmt, we might need a better way to remove operations, tracking in https://github.com/Azure/typespec-azure/issues/964
-                if (operation.Accessibility == "public")
+                // operations_list has been covered in Azure.ResourceManager already, we don't need to generate it in the client
+                if (operation.CrossLanguageDefinitionId != "Azure.ResourceManager.Operations.list")
                 {
                     operationsToKeep.Add(operation);
                 }
