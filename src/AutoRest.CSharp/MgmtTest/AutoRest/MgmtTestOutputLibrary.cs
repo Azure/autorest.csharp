@@ -15,12 +15,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class MgmtTestOutputLibrary
     {
-        private readonly InputNamespace _inputNamespace;
+        private readonly InputNamespace _input;
         private readonly HashSet<string> _skippedOperations;
 
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
-            _inputNamespace = inputNamespace;
+            _input = inputNamespace;
             _skippedOperations = new HashSet<string>(Configuration.MgmtTestConfiguration?.SkippedOperations ?? []);
         }
 
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private IEnumerable<MgmtSampleProvider> EnsureSamples()
         {
             var result = new Dictionary<MgmtTypeProvider, List<Sample>>();
-            foreach (var client in _inputNamespace.Clients)
+            foreach (var client in _input.Clients)
             {
                 foreach (var inputOperation in client.Operations)
                 {

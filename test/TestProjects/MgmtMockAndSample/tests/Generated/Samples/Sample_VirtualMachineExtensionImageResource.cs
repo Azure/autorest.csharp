@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this VirtualMachineExtensionImageResource created on azure
             // for more information of creating VirtualMachineExtensionImageResource, please refer to the document of VirtualMachineExtensionImageResource
-            string subscriptionId = "{subscription-id}";
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this VirtualMachineExtensionImageResource created on azure
             // for more information of creating VirtualMachineExtensionImageResource, please refer to the document of VirtualMachineExtensionImageResource
-            string subscriptionId = "{subscription-id}";
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
             string type = "aa";
