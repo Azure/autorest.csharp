@@ -401,7 +401,7 @@
        "IsContentType": true,
        "IsEndpoint": false,
        "Explode": false,
-       "IsRequired": true,
+       "IsRequired": false,
        "Kind": "Constant",
        "Decorators": [],
        "SkipUrlEncoding": false
@@ -912,7 +912,7 @@
        "IsContentType": true,
        "IsEndpoint": false,
        "Explode": false,
-       "IsRequired": true,
+       "IsRequired": false,
        "Kind": "Constant",
        "Decorators": [],
        "SkipUrlEncoding": false
@@ -1416,7 +1416,7 @@
        "IsContentType": true,
        "IsEndpoint": false,
        "Explode": false,
-       "IsRequired": true,
+       "IsRequired": false,
        "Kind": "Constant",
        "Decorators": [],
        "SkipUrlEncoding": false
@@ -1576,7 +1576,7 @@
        "IsContentType": true,
        "IsEndpoint": false,
        "Explode": false,
-       "IsRequired": true,
+       "IsRequired": false,
        "Kind": "Constant",
        "Decorators": [],
        "SkipUrlEncoding": false

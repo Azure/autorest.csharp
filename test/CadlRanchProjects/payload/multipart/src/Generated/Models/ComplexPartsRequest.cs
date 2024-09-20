@@ -51,21 +51,18 @@ namespace Payload.MultiPart.Models
         /// <param name="id"></param>
         /// <param name="address"></param>
         /// <param name="profileImage"></param>
-        /// <param name="previousAddresses"></param>
         /// <param name="pictures"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="address"/>, <paramref name="profileImage"/>, <paramref name="previousAddresses"/> or <paramref name="pictures"/> is null. </exception>
-        public ComplexPartsRequest(string id, Address address, Stream profileImage, IEnumerable<Address> previousAddresses, IEnumerable<Stream> pictures)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="address"/>, <paramref name="profileImage"/> or <paramref name="pictures"/> is null. </exception>
+        public ComplexPartsRequest(string id, Address address, Stream profileImage, IEnumerable<Stream> pictures)
         {
             Argument.AssertNotNull(id, nameof(id));
             Argument.AssertNotNull(address, nameof(address));
             Argument.AssertNotNull(profileImage, nameof(profileImage));
-            Argument.AssertNotNull(previousAddresses, nameof(previousAddresses));
             Argument.AssertNotNull(pictures, nameof(pictures));
 
             Id = id;
             Address = address;
             ProfileImage = profileImage;
-            PreviousAddresses = previousAddresses.ToList();
             Pictures = pictures.ToList();
         }
 
@@ -73,15 +70,13 @@ namespace Payload.MultiPart.Models
         /// <param name="id"></param>
         /// <param name="address"></param>
         /// <param name="profileImage"></param>
-        /// <param name="previousAddresses"></param>
         /// <param name="pictures"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ComplexPartsRequest(string id, Address address, Stream profileImage, IList<Address> previousAddresses, IList<Stream> pictures, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ComplexPartsRequest(string id, Address address, Stream profileImage, IList<Stream> pictures, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Address = address;
             ProfileImage = profileImage;
-            PreviousAddresses = previousAddresses;
             Pictures = pictures;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
@@ -97,8 +92,6 @@ namespace Payload.MultiPart.Models
         public Address Address { get; }
         /// <summary> Gets the profile image. </summary>
         public Stream ProfileImage { get; }
-        /// <summary> Gets the previous addresses. </summary>
-        public IList<Address> PreviousAddresses { get; }
         /// <summary> Gets the pictures. </summary>
         public IList<Stream> Pictures { get; }
     }

@@ -96,7 +96,7 @@
    "description": "Repeatability Result header options",
    "isFixed": true,
    "isFlags": false,
-   "usage": "None",
+   "usage": "Output",
    "decorators": []
   }
  ],

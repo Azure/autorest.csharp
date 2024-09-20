@@ -8,7 +8,10 @@
       "resource": {
         "properties": {
             "serviceUrl": "https://myService.com",
-            "something": "for test only"
+            "something": "for test only",
+            "boolValue": true,
+            "floatValue": 1.2,
+            "doubleValue": 1.2
         }
       }
     },
@@ -20,7 +23,10 @@
           "type": "MgmtTypeSpec/foos",
           "properties": {
             "serviceUrl": "https://myService.com",
-            "something": "for test only"
+            "something": "for test only",
+            "boolValue": true,
+            "floatValue": 1.2,
+            "doubleValue": 1.2
           }
         }
       }
