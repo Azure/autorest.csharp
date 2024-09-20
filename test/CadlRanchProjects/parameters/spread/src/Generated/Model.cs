@@ -54,9 +54,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,9 +69,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
             return response;
         }
 

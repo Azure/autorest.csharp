@@ -834,8 +834,8 @@
   {
    "$id": "92",
    "kind": "enum",
-   "name": "CreateRequestModel",
-   "crossLanguageDefinitionId": "create.Request.model.anonymous",
+   "name": "CreateCompletionRequestModel",
+   "crossLanguageDefinitionId": "CreateCompletionRequest.model.anonymous",
    "valueType": {
     "$id": "93",
     "kind": "string",
@@ -1370,8 +1370,8 @@
   {
    "$id": "153",
    "kind": "enum",
-   "name": "CreateRequestModel1",
-   "crossLanguageDefinitionId": "create.Request.model.anonymous",
+   "name": "CreateChatCompletionRequestModel",
+   "crossLanguageDefinitionId": "CreateChatCompletionRequest.model.anonymous",
    "valueType": {
     "$id": "154",
     "kind": "string",
@@ -5554,8 +5554,8 @@
   {
    "$id": "608",
    "kind": "model",
-   "name": "CreateRequest",
-   "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous",
+   "name": "CreateCompletionRequest",
+   "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest",
    "usage": "Spread,Json",
    "decorators": [],
    "properties": [
@@ -5572,7 +5572,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.model"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.model"
     },
     {
      "$id": "610",
@@ -5652,7 +5652,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.prompt"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.prompt"
     },
     {
      "$id": "621",
@@ -5675,7 +5675,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.suffix"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.suffix"
     },
     {
      "$id": "624",
@@ -5705,7 +5705,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.temperature"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.temperature"
     },
     {
      "$id": "628",
@@ -5735,7 +5735,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.top_p"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.top_p"
     },
     {
      "$id": "632",
@@ -5765,7 +5765,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.n"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.n"
     },
     {
      "$id": "636",
@@ -5795,7 +5795,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.max_tokens"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.max_tokens"
     },
     {
      "$id": "640",
@@ -5840,7 +5840,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.stop"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.stop"
     },
     {
      "$id": "646",
@@ -5870,7 +5870,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.presence_penalty"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.presence_penalty"
     },
     {
      "$id": "650",
@@ -5900,7 +5900,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.frequency_penalty"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.frequency_penalty"
     },
     {
      "$id": "654",
@@ -5935,7 +5935,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.logit_bias"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.logit_bias"
     },
     {
      "$id": "659",
@@ -5961,7 +5961,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.user"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.user"
     },
     {
      "$id": "662",
@@ -5984,7 +5984,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.stream"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.stream"
     },
     {
      "$id": "665",
@@ -6007,7 +6007,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.logprobs"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.logprobs"
     },
     {
      "$id": "668",
@@ -6030,7 +6030,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.echo"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.echo"
     },
     {
      "$id": "671",
@@ -6053,7 +6053,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.create.Request.anonymous.best_of"
+     "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.best_of"
     }
    ]
   },
@@ -7456,8 +7456,8 @@
   {
    "$id": "825",
    "kind": "model",
-   "name": "CreateRequest1",
-   "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous",
+   "name": "CreateChatCompletionRequest",
+   "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest",
    "usage": "Spread,Json",
    "decorators": [],
    "properties": [
@@ -7474,7 +7474,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.model"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.model"
     },
     {
      "$id": "827",
@@ -7496,7 +7496,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.messages"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.messages"
     },
     {
      "$id": "829",
@@ -7518,7 +7518,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.functions"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.functions"
     },
     {
      "$id": "831",
@@ -7529,7 +7529,7 @@
      "type": {
       "$id": "832",
       "kind": "union",
-      "name": "CreateRequestFunctionCall",
+      "name": "CreateChatCompletionRequestFunctionCall1",
       "variantTypes": [
        {
         "$id": "833",
@@ -7567,7 +7567,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.function_call"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.function_call"
     },
     {
      "$id": "837",
@@ -7597,7 +7597,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.temperature"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.temperature"
     },
     {
      "$id": "841",
@@ -7627,7 +7627,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.top_p"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.top_p"
     },
     {
      "$id": "845",
@@ -7657,7 +7657,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.n"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.n"
     },
     {
      "$id": "849",
@@ -7687,7 +7687,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.max_tokens"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.max_tokens"
     },
     {
      "$id": "853",
@@ -7732,7 +7732,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.stop"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.stop"
     },
     {
      "$id": "859",
@@ -7762,7 +7762,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.presence_penalty"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.presence_penalty"
     },
     {
      "$id": "863",
@@ -7792,7 +7792,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.frequency_penalty"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.frequency_penalty"
     },
     {
      "$id": "867",
@@ -7827,7 +7827,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.logit_bias"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.logit_bias"
     },
     {
      "$id": "872",
@@ -7853,7 +7853,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.user"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.user"
     },
     {
      "$id": "875",
@@ -7876,7 +7876,7 @@
      "readOnly": false,
      "discriminator": false,
      "decorators": [],
-     "crossLanguageDefinitionId": "OpenAI.Chat.create.Request.anonymous.stream"
+     "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.stream"
     }
    ]
   },
@@ -8986,8 +8986,8 @@
       },
       {
        "$id": "993",
-       "Name": "createRequest1",
-       "NameInRequest": "createRequest1",
+       "Name": "createChatCompletionRequest",
+       "NameInRequest": "createChatCompletionRequest",
        "Type": {
         "$ref": "825"
        },
@@ -9751,8 +9751,8 @@
       },
       {
        "$id": "1063",
-       "Name": "createRequest",
-       "NameInRequest": "createRequest",
+       "Name": "createCompletionRequest",
+       "NameInRequest": "createCompletionRequest",
        "Type": {
         "$ref": "608"
        },

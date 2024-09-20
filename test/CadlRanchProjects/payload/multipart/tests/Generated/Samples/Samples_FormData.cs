@@ -27,7 +27,7 @@ namespace Payload.MultiPart.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.Basic(content, "multipart/form-data");
 
@@ -43,7 +43,7 @@ namespace Payload.MultiPart.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.BasicAsync(content, "multipart/form-data");
 
@@ -79,7 +79,7 @@ namespace Payload.MultiPart.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.Basic(content, "multipart/form-data");
 
@@ -95,7 +95,7 @@ namespace Payload.MultiPart.Samples
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.BasicAsync(content, "multipart/form-data");
 
@@ -124,7 +124,7 @@ namespace Payload.MultiPart.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_Complex_ShortVersion()
+        public void Example_FormData_FileArrayAndBasic_ShortVersion()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -135,24 +135,20 @@ namespace Payload.MultiPart.Samples
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-null
-            },
+                profileImage = System.IO.File.OpenRead("<filePath>"),
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
-            Response response = client.Complex(content, "multipart/form-data");
+            Response response = client.FileArrayAndBasic(content, "multipart/form-data");
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_Complex_ShortVersion_Async()
+        public async Task Example_FormData_FileArrayAndBasic_ShortVersion_Async()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -163,50 +159,40 @@ File.OpenRead("<filePath>")
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-null
-            },
+                profileImage = System.IO.File.OpenRead("<filePath>"),
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.ComplexAsync(content, "multipart/form-data");
+            Response response = await client.FileArrayAndBasicAsync(content, "multipart/form-data");
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_Complex_ShortVersion_Convenience()
+        public void Example_FormData_FileArrayAndBasic_ShortVersion_Convenience()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-            {
-default
-            }, new Stream[] { null });
-            Response response = client.Complex(body);
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+            Response response = client.FileArrayAndBasic(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_Complex_ShortVersion_Convenience_Async()
+        public async Task Example_FormData_FileArrayAndBasic_ShortVersion_Convenience_Async()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-            {
-default
-            }, new Stream[] { null });
-            Response response = await client.ComplexAsync(body);
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+            Response response = await client.FileArrayAndBasicAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_Complex_AllParameters()
+        public void Example_FormData_FileArrayAndBasic_AllParameters()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -217,24 +203,20 @@ default
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-null
-            },
+                profileImage = System.IO.File.OpenRead("<filePath>"),
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
-            Response response = client.Complex(content, "multipart/form-data");
+            Response response = client.FileArrayAndBasic(content, "multipart/form-data");
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_Complex_AllParameters_Async()
+        public async Task Example_FormData_FileArrayAndBasic_AllParameters_Async()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -245,45 +227,35 @@ File.OpenRead("<filePath>")
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-null
-            },
+                profileImage = System.IO.File.OpenRead("<filePath>"),
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
-            Response response = await client.ComplexAsync(content, "multipart/form-data");
+            Response response = await client.FileArrayAndBasicAsync(content, "multipart/form-data");
 
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_Complex_AllParameters_Convenience()
+        public void Example_FormData_FileArrayAndBasic_AllParameters_Convenience()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-            {
-default
-            }, new Stream[] { null });
-            Response response = client.Complex(body);
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+            Response response = client.FileArrayAndBasic(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_Complex_AllParameters_Convenience_Async()
+        public async Task Example_FormData_FileArrayAndBasic_AllParameters_Convenience_Async()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
-            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-            {
-default
-            }, new Stream[] { null });
-            Response response = await client.ComplexAsync(body);
+            ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+            Response response = await client.FileArrayAndBasicAsync(body);
         }
 
         [Test]
@@ -298,7 +270,7 @@ default
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.JsonPart(content, "multipart/form-data");
 
@@ -317,7 +289,7 @@ default
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
@@ -356,7 +328,7 @@ default
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.JsonPart(content, "multipart/form-data");
 
@@ -375,7 +347,7 @@ default
                 {
                     city = "<city>",
                 },
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
@@ -413,7 +385,7 @@ default
                 id = "<id>",
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
             Response response = client.BinaryArrayParts(content, "multipart/form-data");
@@ -432,7 +404,7 @@ File.OpenRead("<filePath>")
                 id = "<id>",
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
             Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
@@ -471,7 +443,7 @@ File.OpenRead("<filePath>")
                 id = "<id>",
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
             Response response = client.BinaryArrayParts(content, "multipart/form-data");
@@ -490,7 +462,7 @@ File.OpenRead("<filePath>")
                 id = "<id>",
                 pictures = new object[]
             {
-File.OpenRead("<filePath>")
+System.IO.File.OpenRead("<filePath>")
             },
             });
             Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
@@ -520,153 +492,13 @@ File.OpenRead("<filePath>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_JsonArrayParts_ShortVersion()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-new
-{
-city = "<city>",
-}
-            },
-            });
-            Response response = client.JsonArrayParts(content, "multipart/form-data");
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_JsonArrayParts_ShortVersion_Async()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-new
-{
-city = "<city>",
-}
-            },
-            });
-            Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_JsonArrayParts_ShortVersion_Convenience()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-            {
-new Address("<city>")
-            });
-            Response response = client.JsonArrayParts(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_JsonArrayParts_ShortVersion_Convenience_Async()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-            {
-new Address("<city>")
-            });
-            Response response = await client.JsonArrayPartsAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_JsonArrayParts_AllParameters()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-new
-{
-city = "<city>",
-}
-            },
-            });
-            Response response = client.JsonArrayParts(content, "multipart/form-data");
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_JsonArrayParts_AllParameters_Async()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            using RequestContent content = RequestContent.Create(new
-            {
-                profileImage = File.OpenRead("<filePath>"),
-                previousAddresses = new object[]
-            {
-new
-{
-city = "<city>",
-}
-            },
-            });
-            Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
-
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_FormData_JsonArrayParts_AllParameters_Convenience()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-            {
-new Address("<city>")
-            });
-            Response response = client.JsonArrayParts(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_FormData_JsonArrayParts_AllParameters_Convenience_Async()
-        {
-            FormData client = new MultiPartClient().GetFormDataClient();
-
-            JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-            {
-new Address("<city>")
-            });
-            Response response = await client.JsonArrayPartsAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_FormData_MultiBinaryParts_ShortVersion()
         {
             FormData client = new MultiPartClient().GetFormDataClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
@@ -681,7 +513,7 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
@@ -716,8 +548,8 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
-                picture = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
+                picture = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
@@ -732,8 +564,8 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
-                picture = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
+                picture = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
@@ -775,7 +607,7 @@ new Address("<city>")
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
@@ -791,7 +623,7 @@ new Address("<city>")
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
@@ -827,7 +659,7 @@ new Address("<city>")
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
@@ -843,7 +675,7 @@ new Address("<city>")
             using RequestContent content = RequestContent.Create(new
             {
                 id = "<id>",
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
@@ -878,7 +710,7 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.AnonymousModel(content, "multipart/form-data");
 
@@ -893,7 +725,7 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 
@@ -926,7 +758,7 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = client.AnonymousModel(content, "multipart/form-data");
 
@@ -941,7 +773,7 @@ new Address("<city>")
 
             using RequestContent content = RequestContent.Create(new
             {
-                profileImage = File.OpenRead("<filePath>"),
+                profileImage = System.IO.File.OpenRead("<filePath>"),
             });
             Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 

@@ -148,7 +148,7 @@
    "description": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
-   "usage": "None",
+   "usage": "Output,Json",
    "decorators": []
   }
  ],
@@ -304,7 +304,7 @@
    "kind": "model",
    "name": "ResourceOperationStatusResourceExportedResourceError",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
-   "usage": "None",
+   "usage": "Output,Json",
    "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
@@ -353,7 +353,7 @@
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
-      "usage": "None",
+      "usage": "Output,Json",
       "description": "The error object.",
       "decorators": [],
       "properties": [
@@ -447,7 +447,7 @@
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
-         "usage": "None",
+         "usage": "Output,Json",
          "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
@@ -529,7 +529,7 @@
    "kind": "model",
    "name": "PagedResource",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "usage": "None",
+   "usage": "Output,Json",
    "description": "Paged collection of Resource items",
    "decorators": [],
    "properties": [

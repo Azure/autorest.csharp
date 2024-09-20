@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -35,12 +36,11 @@ namespace AutoRest.CSharp.Common.Input
         {
             foreach (var operation in inputClient.Operations)
             {
-                foreach (var parameter in operation.Parameters)
+                var subscriptionIdParameter = operation.Parameters.FirstOrDefault(p => p.NameInRequest.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase));
+                if (subscriptionIdParameter != null)
                 {
-                    if (parameter.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
-                    {
-                        parameter.Type = InputPrimitiveType.String;
-                    }
+                    subscriptionIdParameter.Kind = InputOperationParameterKind.Method;
+                    subscriptionIdParameter.Type = InputPrimitiveType.String;
                 }
             }
         }

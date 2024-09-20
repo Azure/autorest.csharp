@@ -127,8 +127,8 @@ namespace Scm.Parameters.BodyOptionality
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
-            ClientResult result = await RequiredImplicitAsync(requiredImplicitRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            BodyModel bodyModel = new BodyModel(name, null);
+            ClientResult result = await RequiredImplicitAsync(bodyModel.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -139,8 +139,8 @@ namespace Scm.Parameters.BodyOptionality
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
-            ClientResult result = RequiredImplicit(requiredImplicitRequest.ToBinaryContent(), null);
+            BodyModel bodyModel = new BodyModel(name, null);
+            ClientResult result = RequiredImplicit(bodyModel.ToBinaryContent(), null);
             return result;
         }
 

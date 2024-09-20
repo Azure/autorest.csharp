@@ -83,6 +83,7 @@ namespace AutoRest.CSharp.Output.Builders
                 {
                     BytesKnownEncoding.Base64 => SerializationFormat.Bytes_Base64,
                     BytesKnownEncoding.Base64Url => SerializationFormat.Bytes_Base64Url,
+                    null => SerializationFormat.Default,
                     _ => throw new IndexOutOfRangeException($"unknown encode {primitiveType.Encode}")
                 },
                 InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.Int16 or InputPrimitiveTypeKind.Int8
