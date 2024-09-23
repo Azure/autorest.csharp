@@ -2559,6 +2559,7 @@
          "response": {
           "$ref": "245"
          },
+         "statusCode": 200,
          "bodyValue": {
           "$id": "271",
           "kind": "model",
@@ -2878,6 +2879,7 @@
          "response": {
           "$ref": "299"
          },
+         "statusCode": 200,
          "bodyValue": {
           "$id": "308",
           "kind": "model",
