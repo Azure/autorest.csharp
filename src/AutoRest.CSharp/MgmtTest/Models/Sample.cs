@@ -151,26 +151,5 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public bool IsLro => Operation.IsLongRunningOperation;
 
         public bool IsPageable => Operation.IsPagingOperation;
-
-        protected override InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
-        {
-            if (serializedName == "subscriptionId")
-            {
-                return new InputExampleRawValue(value.Type, ReplaceValueForSubscriptionId((string)(value as InputExampleRawValue)?.RawValue!));
-            }
-
-            return value;
-        }
-
-        private readonly static Regex _regexForGuid = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
-        private const string _fallbackSubscriptionId = "00000000-0000-0000-0000-000000000000";
-
-        private string ReplaceValueForSubscriptionId(string rawValue)
-        {
-            if (_regexForGuid.IsMatch(rawValue))
-                return rawValue;
-
-            return _fallbackSubscriptionId;
-        }
     }
 }

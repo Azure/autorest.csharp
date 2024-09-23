@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ArmResource, please refer to the document of ArmResource
 
             // get the collection of this GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", subscriptionId, resourceGroupName, vmName));
@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ArmResource, please refer to the document of ArmResource
 
             // get the collection of this GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", subscriptionId, resourceGroupName, vmName));
@@ -112,7 +112,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ArmResource, please refer to the document of ArmResource
 
             // get the collection of this GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", subscriptionId, resourceGroupName, vmName));
@@ -142,7 +142,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ArmResource, please refer to the document of ArmResource
 
             // get the collection of this GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", subscriptionId, resourceGroupName, vmName));
@@ -184,7 +184,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ArmResource, please refer to the document of ArmResource
 
             // get the collection of this GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             ResourceIdentifier scopeId = new ResourceIdentifier(string.Format("/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Compute/virtualMachines/{2}", subscriptionId, resourceGroupName, vmName));

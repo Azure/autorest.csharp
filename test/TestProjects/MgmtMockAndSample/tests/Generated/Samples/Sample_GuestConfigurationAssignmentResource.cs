@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this GuestConfigurationAssignmentResource created on azure
             // for more information of creating GuestConfigurationAssignmentResource, please refer to the document of GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "NotInstalledApplicationForWindows";
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this GuestConfigurationAssignmentResource created on azure
             // for more information of creating GuestConfigurationAssignmentResource, please refer to the document of GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "SecureProtocol";
@@ -106,7 +106,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this GuestConfigurationAssignmentResource created on azure
             // for more information of creating GuestConfigurationAssignmentResource, please refer to the document of GuestConfigurationAssignmentResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "mySubscriptionId";
             string resourceGroupName = "myResourceGroupName";
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "SecureProtocol";

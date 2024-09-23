@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -60,7 +60,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -92,7 +92,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -124,7 +124,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleGroup1";
@@ -156,7 +156,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "e747cc13-97d4-4a79-b463-42d7f4e558f2";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -188,7 +188,7 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -262,7 +262,7 @@ Priority = 100,
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -331,7 +331,7 @@ Priority = 100,
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "e747cc13-97d4-4a79-b463-42d7f4e558f2";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -365,7 +365,7 @@ Priority = 100,
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "subid";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
@@ -433,7 +433,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // this example assumes you already have this FirewallPolicyRuleCollectionGroupResource created on azure
             // for more information of creating FirewallPolicyRuleCollectionGroupResource, please refer to the document of FirewallPolicyRuleCollectionGroupResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string subscriptionId = "e747cc13-97d4-4a79-b463-42d7f4e558f2";
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
