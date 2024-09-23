@@ -32,15 +32,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
             var schemaUsageProvider = new SchemaUsageProvider(codeModel); // Create schema usage before transformation applied
-            var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
             if (Configuration.Generation1ConvenienceClient)
             {
                 CodeModelTransformer.TransformForDataPlane(codeModel);
+                var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
                 DataPlaneTarget.Execute(project, inputNamespace, sourceInputModel);
             }
             else if (Configuration.AzureArm)
             {
                 CodeModelTransformer.TransformForMgmt(codeModel);
+                var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
                 if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
@@ -49,6 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else
             {
+                var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
                 await LowLevelTarget.ExecuteAsync(project, inputNamespace, sourceInputModel, false);
             }
             return project;
