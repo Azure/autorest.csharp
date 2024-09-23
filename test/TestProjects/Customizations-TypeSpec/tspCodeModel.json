@@ -405,7 +405,7 @@
       "kind": "model",
       "name": "ModelToRename",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
-      "usage": "Input,Output,Json",
+      "usage": "Input,Output,Spread,Json",
       "description": "Renamed model (original name: ModelToRename)",
       "decorators": [],
       "properties": [
@@ -1236,75 +1236,27 @@
   },
   {
    "$ref": "126"
-  },
-  {
-   "$id": "133",
-   "kind": "model",
-   "name": "BarRequest",
-   "crossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous",
-   "usage": "Spread,Json",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "134",
-     "kind": "property",
-     "name": "requiredIntOnBase",
-     "serializedName": "requiredIntOnBase",
-     "description": "Required int",
-     "type": {
-      "$id": "135",
-      "kind": "int32",
-      "name": "int32",
-      "crossLanguageDefinitionId": "TypeSpec.int32",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.requiredIntOnBase"
-    },
-    {
-     "$id": "136",
-     "kind": "property",
-     "name": "optionalInt",
-     "serializedName": "optionalInt",
-     "description": "Optional int",
-     "type": {
-      "$id": "137",
-      "kind": "int32",
-      "name": "int32",
-      "crossLanguageDefinitionId": "TypeSpec.int32",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "CustomizationsInTsp.bar.Request.anonymous.optionalInt"
-    }
-   ]
   }
  ],
  "Clients": [
   {
-   "$id": "138",
+   "$id": "133",
    "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "139",
+     "$id": "134",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "140",
+       "$id": "135",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "141",
+        "$id": "136",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -1320,15 +1272,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "142",
+       "$id": "137",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "143",
+        "$id": "138",
         "kind": "constant",
         "valueType": {
-         "$id": "144",
+         "$id": "139",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1348,14 +1300,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "145",
+       "$id": "140",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "146",
+        "$id": "141",
         "kind": "constant",
         "valueType": {
-         "$id": "147",
+         "$id": "142",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1375,7 +1327,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "148",
+       "$id": "143",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1394,7 +1346,7 @@
      ],
      "Responses": [
       {
-       "$id": "149",
+       "$id": "144",
        "StatusCodes": [
         200
        ],
@@ -1423,25 +1375,25 @@
      "Decorators": []
     },
     {
-     "$id": "150",
+     "$id": "145",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "140"
+       "$ref": "135"
       },
       {
-       "$id": "151",
+       "$id": "146",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "152",
+        "$id": "147",
         "kind": "constant",
         "valueType": {
-         "$id": "153",
+         "$id": "148",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1461,14 +1413,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "154",
+       "$id": "149",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "150",
         "kind": "constant",
         "valueType": {
-         "$id": "156",
+         "$id": "151",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1488,7 +1440,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "157",
+       "$id": "152",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1507,7 +1459,7 @@
      ],
      "Responses": [
       {
-       "$id": "158",
+       "$id": "153",
        "StatusCodes": [
         200
        ],
@@ -1536,25 +1488,25 @@
      "Decorators": []
     },
     {
-     "$id": "159",
+     "$id": "154",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "140"
+       "$ref": "135"
       },
       {
-       "$id": "160",
+       "$id": "155",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "161",
+        "$id": "156",
         "kind": "constant",
         "valueType": {
-         "$id": "162",
+         "$id": "157",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1574,14 +1526,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "163",
+       "$id": "158",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "164",
+        "$id": "159",
         "kind": "constant",
         "valueType": {
-         "$id": "165",
+         "$id": "160",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1601,11 +1553,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "166",
-       "Name": "barRequest",
-       "NameInRequest": "barRequest",
+       "$id": "161",
+       "Name": "modelToRename",
+       "NameInRequest": "modelToRename",
        "Type": {
-        "$ref": "133"
+        "$ref": "45"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1620,7 +1572,7 @@
      ],
      "Responses": [
       {
-       "$id": "167",
+       "$id": "162",
        "StatusCodes": [
         200
        ],
@@ -1650,11 +1602,11 @@
     }
    ],
    "Protocol": {
-    "$id": "168"
+    "$id": "163"
    },
    "Parameters": [
     {
-     "$ref": "140"
+     "$ref": "135"
     }
    ],
    "Decorators": []

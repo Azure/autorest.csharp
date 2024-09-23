@@ -44,7 +44,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.BasicAsync(content, "multipart/form-data");
 
@@ -57,7 +57,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.BasicAsync(content, "multipart/form-data");
 
@@ -73,7 +73,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.Basic(content, "multipart/form-data");
 
@@ -86,62 +86,50 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.Basic(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="ComplexAsync(ComplexPartsRequest,CancellationToken)">
+    <member name="FileArrayAndBasicAsync(ComplexPartsRequest,CancellationToken)">
       <example>
-This sample shows how to call ComplexAsync.
+This sample shows how to call FileArrayAndBasicAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-{
-    default
-}, new Stream[] { null });
-Response response = await client.ComplexAsync(body);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+Response response = await client.FileArrayAndBasicAsync(body);
 ]]></code>
-This sample shows how to call ComplexAsync with all parameters.
+This sample shows how to call FileArrayAndBasicAsync with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-{
-    default
-}, new Stream[] { null });
-Response response = await client.ComplexAsync(body);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+Response response = await client.FileArrayAndBasicAsync(body);
 ]]></code></example>
     </member>
-    <member name="Complex(ComplexPartsRequest,CancellationToken)">
+    <member name="FileArrayAndBasic(ComplexPartsRequest,CancellationToken)">
       <example>
-This sample shows how to call Complex.
+This sample shows how to call FileArrayAndBasic.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-{
-    default
-}, new Stream[] { null });
-Response response = client.Complex(body);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+Response response = client.FileArrayAndBasic(body);
 ]]></code>
-This sample shows how to call Complex with all parameters.
+This sample shows how to call FileArrayAndBasic with all parameters.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
-ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Address[]
-{
-    default
-}, new Stream[] { null });
-Response response = client.Complex(body);
+ComplexPartsRequest body = new ComplexPartsRequest("<id>", new Address("<city>"), null, new Stream[] { null });
+Response response = client.FileArrayAndBasic(body);
 ]]></code></example>
     </member>
-    <member name="ComplexAsync(RequestContent,string,RequestContext)">
+    <member name="FileArrayAndBasicAsync(RequestContent,string,RequestContext)">
       <example>
-This sample shows how to call ComplexAsync.
+This sample shows how to call FileArrayAndBasicAsync.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -152,21 +140,17 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        null
-    },
+    profileImage = System.IO.File.OpenRead("<filePath>"),
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
-Response response = await client.ComplexAsync(content, "multipart/form-data");
+Response response = await client.FileArrayAndBasicAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call ComplexAsync with all parameters and request content.
+This sample shows how to call FileArrayAndBasicAsync with all parameters and request content.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -177,24 +161,20 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        null
-    },
+    profileImage = System.IO.File.OpenRead("<filePath>"),
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
-Response response = await client.ComplexAsync(content, "multipart/form-data");
+Response response = await client.FileArrayAndBasicAsync(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
-    <member name="Complex(RequestContent,string,RequestContext)">
+    <member name="FileArrayAndBasic(RequestContent,string,RequestContext)">
       <example>
-This sample shows how to call Complex.
+This sample shows how to call FileArrayAndBasic.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -205,21 +185,17 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        null
-    },
+    profileImage = System.IO.File.OpenRead("<filePath>"),
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
-Response response = client.Complex(content, "multipart/form-data");
+Response response = client.FileArrayAndBasic(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call Complex with all parameters and request content.
+This sample shows how to call FileArrayAndBasic with all parameters and request content.
 <code><![CDATA[
 FormData client = new MultiPartClient().GetFormDataClient();
 
@@ -230,17 +206,13 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        null
-    },
+    profileImage = System.IO.File.OpenRead("<filePath>"),
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
-Response response = client.Complex(content, "multipart/form-data");
+Response response = client.FileArrayAndBasic(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -291,7 +263,7 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
@@ -307,7 +279,7 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.JsonPartAsync(content, "multipart/form-data");
 
@@ -326,7 +298,7 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.JsonPart(content, "multipart/form-data");
 
@@ -342,7 +314,7 @@ using RequestContent content = RequestContent.Create(new
     {
         city = "<city>",
     },
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.JsonPart(content, "multipart/form-data");
 
@@ -394,7 +366,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
 Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
@@ -410,7 +382,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
 Response response = await client.BinaryArrayPartsAsync(content, "multipart/form-data");
@@ -429,7 +401,7 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
 Response response = client.BinaryArrayParts(content, "multipart/form-data");
@@ -445,138 +417,10 @@ using RequestContent content = RequestContent.Create(new
     id = "<id>",
     pictures = new object[]
     {
-        File.OpenRead("<filePath>")
+        System.IO.File.OpenRead("<filePath>")
     },
 });
 Response response = client.BinaryArrayParts(content, "multipart/form-data");
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
-    <member name="JsonArrayPartsAsync(JsonArrayPartsRequest,CancellationToken)">
-      <example>
-This sample shows how to call JsonArrayPartsAsync.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-{
-    new Address("<city>")
-});
-Response response = await client.JsonArrayPartsAsync(body);
-]]></code>
-This sample shows how to call JsonArrayPartsAsync with all parameters.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-{
-    new Address("<city>")
-});
-Response response = await client.JsonArrayPartsAsync(body);
-]]></code></example>
-    </member>
-    <member name="JsonArrayParts(JsonArrayPartsRequest,CancellationToken)">
-      <example>
-This sample shows how to call JsonArrayParts.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-{
-    new Address("<city>")
-});
-Response response = client.JsonArrayParts(body);
-]]></code>
-This sample shows how to call JsonArrayParts with all parameters.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-JsonArrayPartsRequest body = new JsonArrayPartsRequest(null, new Address[]
-{
-    new Address("<city>")
-});
-Response response = client.JsonArrayParts(body);
-]]></code></example>
-    </member>
-    <member name="JsonArrayPartsAsync(RequestContent,string,RequestContext)">
-      <example>
-This sample shows how to call JsonArrayPartsAsync.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        new
-        {
-            city = "<city>",
-        }
-    },
-});
-Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call JsonArrayPartsAsync with all parameters and request content.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        new
-        {
-            city = "<city>",
-        }
-    },
-});
-Response response = await client.JsonArrayPartsAsync(content, "multipart/form-data");
-
-Console.WriteLine(response.Status);
-]]></code></example>
-    </member>
-    <member name="JsonArrayParts(RequestContent,string,RequestContext)">
-      <example>
-This sample shows how to call JsonArrayParts.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        new
-        {
-            city = "<city>",
-        }
-    },
-});
-Response response = client.JsonArrayParts(content, "multipart/form-data");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call JsonArrayParts with all parameters and request content.
-<code><![CDATA[
-FormData client = new MultiPartClient().GetFormDataClient();
-
-using RequestContent content = RequestContent.Create(new
-{
-    profileImage = File.OpenRead("<filePath>"),
-    previousAddresses = new object[]
-    {
-        new
-        {
-            city = "<city>",
-        }
-    },
-});
-Response response = client.JsonArrayParts(content, "multipart/form-data");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
@@ -629,7 +473,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
@@ -641,8 +485,8 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
-    picture = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
+    picture = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.MultiBinaryPartsAsync(content, "multipart/form-data");
 
@@ -657,7 +501,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
@@ -669,8 +513,8 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
-    picture = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
+    picture = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.MultiBinaryParts(content, "multipart/form-data");
 
@@ -720,7 +564,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
@@ -733,7 +577,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.CheckFileNameAndContentTypeAsync(content, "multipart/form-data");
 
@@ -749,7 +593,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
@@ -762,7 +606,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 using RequestContent content = RequestContent.Create(new
 {
     id = "<id>",
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.CheckFileNameAndContentType(content, "multipart/form-data");
 
@@ -807,7 +651,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 
@@ -819,7 +663,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = await client.AnonymousModelAsync(content, "multipart/form-data");
 
@@ -834,7 +678,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.AnonymousModel(content, "multipart/form-data");
 
@@ -846,7 +690,7 @@ FormData client = new MultiPartClient().GetFormDataClient();
 
 using RequestContent content = RequestContent.Create(new
 {
-    profileImage = File.OpenRead("<filePath>"),
+    profileImage = System.IO.File.OpenRead("<filePath>"),
 });
 Response response = client.AnonymousModel(content, "multipart/form-data");
 

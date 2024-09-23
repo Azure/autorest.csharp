@@ -278,9 +278,9 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> BarAsync(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            BarRequest barRequest = new BarRequest(requiredIntOnBase, optionalInt, null);
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await BarAsync(barRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await BarAsync(renamedModel.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
@@ -291,9 +291,9 @@ namespace CustomizationsInTsp
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(int,int?,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Bar(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
         {
-            BarRequest barRequest = new BarRequest(requiredIntOnBase, optionalInt, null);
+            RenamedModel renamedModel = new RenamedModel(requiredIntOnBase, optionalInt, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Bar(barRequest.ToRequestContent(), context);
+            Response response = Bar(renamedModel.ToRequestContent(), context);
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
