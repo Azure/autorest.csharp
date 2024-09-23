@@ -379,7 +379,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             _ => writer.Append($"{value:L}"),
         };
 
-        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
+        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType)) || type.Equals(typeof(string));
 
         private static readonly HashSet<Type> _primitiveTypes = new()
         {
