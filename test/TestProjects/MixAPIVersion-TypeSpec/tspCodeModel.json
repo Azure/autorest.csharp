@@ -225,7 +225,7 @@
    "kind": "model",
    "name": "PagedToy",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
-   "usage": "None",
+   "usage": "Json",
    "description": "Paged collection of Toy items",
    "decorators": [],
    "properties": [

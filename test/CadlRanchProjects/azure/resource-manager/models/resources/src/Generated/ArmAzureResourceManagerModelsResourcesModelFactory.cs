@@ -17,6 +17,39 @@ namespace _Azure.ResourceManager.Models.Resources.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmAzureResourceManagerModelsResourcesModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Resources.SingletonTrackedResourceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="Resources.SingletonTrackedResourceData"/> instance for mocking. </returns>
+        public static SingletonTrackedResourceData SingletonTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, SingletonTrackedResourceProperties properties = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new SingletonTrackedResourceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.SingletonTrackedResourceProperties"/>. </summary>
+        /// <param name="provisioningState"> The status of the last operation. </param>
+        /// <param name="description"> The description of the resource. </param>
+        /// <returns> A new <see cref="Models.SingletonTrackedResourceProperties"/> instance for mocking. </returns>
+        public static SingletonTrackedResourceProperties SingletonTrackedResourceProperties(ProvisioningState? provisioningState = null, string description = null)
+        {
+            return new SingletonTrackedResourceProperties(provisioningState, description, serializedAdditionalRawData: null);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Resources.NestedProxyResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

@@ -50,5 +50,6 @@ internal record InputParameter(
     public string Name { get; internal set; } = Name;
     public bool IsRequired { get; internal set; } = IsRequired;
     public InputType Type { get; internal set; } = Type;
+    public InputOperationParameterKind Kind { get; internal set; } = Kind;
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
 }
