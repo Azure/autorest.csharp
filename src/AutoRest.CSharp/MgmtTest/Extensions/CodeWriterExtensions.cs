@@ -364,7 +364,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             null => writer.AppendRaw("null"),
             List<object?> list => writer.AppendRawList(list),
             Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
-            _ => writer.AppendRaw(rawValue.ToString()!)
+            _ when type == rawValue.GetType() => writer.Append($"{rawValue:L}"),
+            _ => writer.Append($"({type}){rawValue:L}")
         };
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType) => type switch
