@@ -42,8 +42,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
-            ClientResult result = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToBinaryContent(), null).ConfigureAwait(false);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
+            ClientResult result = await SpreadAsRequestBodyAsync(bodyParameter.ToBinaryContent(), null).ConfigureAwait(false);
             return result;
         }
 
@@ -54,8 +54,8 @@ namespace Scm.Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
-            ClientResult result = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToBinaryContent(), null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
+            ClientResult result = SpreadAsRequestBody(bodyParameter.ToBinaryContent(), null);
             return result;
         }
 
