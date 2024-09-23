@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         private const string ModelKind = "model";
         private const string ArrayKind = "array";
         private const string DictionaryKind = "dict";
-        private const string UnknownKind = "any";
+        private const string UnknownKind = "unknown";
 
         private InputExampleValue CreateDerivedType(ref Utf8JsonReader reader, string? id, string? kind, JsonSerializerOptions options) => kind switch
         {

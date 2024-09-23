@@ -36,7 +36,7 @@
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20240625.4",
         "json-serialize-refs": "0.1.0-0",
-        "@typespec/http-client-csharp": "0.1.9-alpha.20240917.1"
+        "@typespec/http-client-csharp": "https://artprodcus3.artifacts.visualstudio.com/A0fb41ef4-5012-48a9-bf39-4ee3de03ee35/29ec6040-b234-4e31-b139-33dc4287b756/_apis/artifact/cGlwZWxpbmVhcnRpZmFjdDovL2F6dXJlLXNkay9wcm9qZWN0SWQvMjllYzYwNDAtYjIzNC00ZTMxLWIxMzktMzNkYzQyODdiNzU2L2J1aWxkSWQvNDE2MDA2NC9hcnRpZmFjdE5hbWUvYnVpbGRfYXJ0aWZhY3RzX2NzaGFycA2/content?format=file&subPath=%2fpackages%2ftypespec-http-client-csharp-0.1.9-alpha.20240922.5.tgz"
     },
     "peerDependencies": {
         "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
@@ -53,7 +53,7 @@
     },
     "devDependencies": {
         "@azure-tools/typespec-azure-core": "0.46.0",
-        "@azure-tools/typespec-client-generator-core": "0.46.0",
+        "@azure-tools/typespec-client-generator-core": "0.46.1",
         "@azure-tools/typespec-azure-resource-manager": "0.46.0",
         "@azure-tools/typespec-azure-rulesets": "0.46.0",
         "@azure-tools/typespec-autorest": "0.46.0",
