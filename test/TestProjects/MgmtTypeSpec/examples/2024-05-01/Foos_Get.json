@@ -1,0 +1,23 @@
+{
+    "operationId": "Foos_Get",
+    "title": "Get a foo",
+    "parameters": {
+      "subscriptionId": "00000000-0000-0000-0000-000000000000",
+      "resourceGroupName": "myRg",
+      "fooName": "myFoo"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/MgmtTypeSpec/foos/myFoo",
+          "name": "myFoo",
+          "type": "MgmtTypeSpec/foos",
+          "properties": {
+            "serviceUrl": "https://myService.com",
+            "something": "for test only"
+          }
+        }
+      }
+    }
+  }
+  

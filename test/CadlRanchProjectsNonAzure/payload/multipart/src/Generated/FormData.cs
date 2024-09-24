@@ -7,6 +7,7 @@ using System.ClientModel;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Payload.MultiPart.Models;
 
@@ -29,7 +30,7 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormData. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FormData(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -121,24 +122,24 @@ namespace Payload.MultiPart
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> ComplexAsync(ComplexPartsRequest body)
+        public virtual async Task<ClientResult> FileArrayAndBasicAsync(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
-            ClientResult result = await ComplexAsync(content, content.ContentType, null).ConfigureAwait(false);
+            ClientResult result = await FileArrayAndBasicAsync(content, content.ContentType, null).ConfigureAwait(false);
             return result;
         }
 
         /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult Complex(ComplexPartsRequest body)
+        public virtual ClientResult FileArrayAndBasic(ComplexPartsRequest body)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
-            ClientResult result = Complex(content, content.ContentType, null);
+            ClientResult result = FileArrayAndBasic(content, content.ContentType, null);
             return result;
         }
 
@@ -152,7 +153,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ComplexAsync(ComplexPartsRequest)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FileArrayAndBasicAsync(ComplexPartsRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -163,11 +164,11 @@ namespace Payload.MultiPart
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> ComplexAsync(BinaryContent content, string contentType, RequestOptions options = null)
+        public virtual async Task<ClientResult> FileArrayAndBasicAsync(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateComplexRequest(content, contentType, options);
+            using PipelineMessage message = CreateFileArrayAndBasicRequest(content, contentType, options);
             return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
@@ -181,7 +182,7 @@ namespace Payload.MultiPart
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Complex(ComplexPartsRequest)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FileArrayAndBasic(ComplexPartsRequest)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -192,11 +193,11 @@ namespace Payload.MultiPart
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult Complex(BinaryContent content, string contentType, RequestOptions options = null)
+        public virtual ClientResult FileArrayAndBasic(BinaryContent content, string contentType, RequestOptions options = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using PipelineMessage message = CreateComplexRequest(content, contentType, options);
+            using PipelineMessage message = CreateFileArrayAndBasicRequest(content, contentType, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -361,88 +362,6 @@ namespace Payload.MultiPart
             Argument.AssertNotNull(content, nameof(content));
 
             using PipelineMessage message = CreateBinaryArrayPartsRequest(content, contentType, options);
-            return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
-        }
-
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
-        /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ClientResult> JsonArrayPartsAsync(JsonArrayPartsRequest body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
-            ClientResult result = await JsonArrayPartsAsync(content, content.ContentType, null).ConfigureAwait(false);
-            return result;
-        }
-
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi json parts. </summary>
-        /// <param name="body"> The <see cref="JsonArrayPartsRequest"/> to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ClientResult JsonArrayParts(JsonArrayPartsRequest body)
-        {
-            Argument.AssertNotNull(body, nameof(body));
-
-            using MultipartFormDataBinaryContent content = body.ToMultipartBinaryBody();
-            ClientResult result = JsonArrayParts(content, content.ContentType, null);
-            return result;
-        }
-
-        /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi json parts
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="JsonArrayPartsAsync(JsonArrayPartsRequest)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual async Task<ClientResult> JsonArrayPartsAsync(BinaryContent content, string contentType, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateJsonArrayPartsRequest(content, contentType, options);
-            return ClientResult.FromResponse(await _pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
-        }
-
-        /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi json parts
-        /// <list type="bullet">
-        /// <item>
-        /// <description>
-        /// This <see href="https://aka.ms/azsdk/net/protocol-methods">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="JsonArrayParts(JsonArrayPartsRequest)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> The <see cref="string"/> to use. Allowed values: "multipart/form-data". </param>
-        /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. </returns>
-        public virtual ClientResult JsonArrayParts(BinaryContent content, string contentType, RequestOptions options = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using PipelineMessage message = CreateJsonArrayPartsRequest(content, contentType, options);
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
@@ -694,6 +613,14 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
+        private FormDataHttpParts _cachedFormDataHttpParts;
+
+        /// <summary> Initializes a new instance of FormDataHttpParts. </summary>
+        public virtual FormDataHttpParts GetFormDataHttpPartsClient()
+        {
+            return Volatile.Read(ref _cachedFormDataHttpParts) ?? Interlocked.CompareExchange(ref _cachedFormDataHttpParts, new FormDataHttpParts(_pipeline, _endpoint), null) ?? _cachedFormDataHttpParts;
+        }
+
         internal PipelineMessage CreateBasicRequest(BinaryContent content, string contentType, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
@@ -710,7 +637,7 @@ namespace Payload.MultiPart
             return message;
         }
 
-        internal PipelineMessage CreateComplexRequest(BinaryContent content, string contentType, RequestOptions options)
+        internal PipelineMessage CreateFileArrayAndBasicRequest(BinaryContent content, string contentType, RequestOptions options)
         {
             var message = _pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier204;
@@ -751,22 +678,6 @@ namespace Payload.MultiPart
             var uri = new ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/multipart/form-data/binary-array-parts", false);
-            request.Uri = uri.ToUri();
-            request.Headers.Set("Content-Type", contentType);
-            request.Content = content;
-            message.Apply(options);
-            return message;
-        }
-
-        internal PipelineMessage CreateJsonArrayPartsRequest(BinaryContent content, string contentType, RequestOptions options)
-        {
-            var message = _pipeline.CreateMessage();
-            message.ResponseClassifier = PipelineMessageClassifier204;
-            var request = message.Request;
-            request.Method = "POST";
-            var uri = new ClientUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/multipart/form-data/json-array-parts", false);
             request.Uri = uri.ToUri();
             request.Headers.Set("Content-Type", contentType);
             request.Content = content;

@@ -27,7 +27,7 @@ namespace Scm._Type.Property.AdditionalProperties
 
         /// <summary> Initializes a new instance of SpreadDifferentString. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="string"/> to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal SpreadDifferentString(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

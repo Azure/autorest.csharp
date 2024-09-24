@@ -19,6 +19,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Bicep;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -66,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             SkipInitializerConstructor = IsUnknownDerivedType;
             IsInheritableCommonType = MgmtReferenceType.IsTypeReferenceType(InputModel) || MgmtReferenceType.IsReferenceType(InputModel);
 
-            JsonConverter = InputModel.Serialization.IncludeConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
+            JsonConverter = InputModel.UseSystemTextJsonConverter ? new JsonConverterProvider(this, _sourceInputModel) : null;
         }
 
         internal InputModelType InputModel { get; }
@@ -724,12 +725,25 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override bool EnsureIncludeDeserializer()
         {
             // TODO -- this should always return true when use model reader writer is enabled.
-            return Configuration.UseModelReaderWriter || _usage.HasFlag(InputModelTypeUsage.Output);
+            return !MgmtReferenceType.IsReferenceType(InputModel) && (Configuration.UseModelReaderWriter || _usage.HasFlag(InputModelTypeUsage.Output));
         }
 
         protected override JsonObjectSerialization? BuildJsonSerialization()
         {
-            return MgmtReferenceType.IsReferenceType(InputModel) || !InputModel.Serialization.Json ? null : _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
+            return !InputModel.Serialization.Json ? null : _serializationBuilder.BuildJsonObjectSerialization(InputModel, this);
+        }
+
+        protected override ObjectTypeSerialization BuildSerialization()
+        {
+            bool isReference = MgmtReferenceType.IsReferenceType(InputModel);
+            var json = BuildJsonSerialization();
+            var xml = isReference ? null : BuildXmlSerialization();
+            var bicep = isReference ? null : BuildBicepSerialization(json);
+            var multipart = isReference ? null : BuildMultipartSerialization();
+            // select interface model type here
+            var modelType = IsUnknownDerivedType && Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : Type;
+            var interfaces = isReference ? null : new SerializationInterfaces(IncludeSerializer, IsStruct, modelType, json is not null, xml is not null);
+            return new ObjectTypeSerialization(this, json, xml, bicep, multipart, interfaces);
         }
 
         protected override BicepObjectSerialization? BuildBicepSerialization(JsonObjectSerialization? json)

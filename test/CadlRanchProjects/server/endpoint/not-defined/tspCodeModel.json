@@ -22,9 +22,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "5",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -54,7 +54,9 @@
      "Path": "/server/endpoint/not-defined/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Server.Endpoint.NotDefined.valid",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -64,7 +66,8 @@
     {
      "$ref": "4"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

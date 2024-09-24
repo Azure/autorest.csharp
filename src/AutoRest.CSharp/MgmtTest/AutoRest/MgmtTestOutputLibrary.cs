@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -18,11 +17,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private readonly InputNamespace _inputNamespace;
-        private readonly MgmtTestConfiguration _mgmtTestConfiguration;
+        private readonly HashSet<string> _skippedOperations;
+
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
             _inputNamespace = inputNamespace;
-            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
+            _skippedOperations = new HashSet<string>(Configuration.MgmtTestConfiguration?.SkippedOperations ?? []);
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -44,15 +44,15 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             var result = new Dictionary<MgmtTypeProvider, List<MockTestCase>>();
             foreach (var client in _inputNamespace.Clients)
             {
-                foreach (var operation in client.Operations)
+                foreach (var inputOperation in client.Operations)
                 {
-                    foreach (var example in operation.CodeModelExamples)
+                    foreach (var example in inputOperation.Examples)
                     {
                         // we need to find which resource or resource collection this test case belongs
-                        var operationId = example.Operation.OperationId!;
+                        var operationId = inputOperation.OperationId!;
 
                         // skip this operation if we find it in the `skipped-operations` configuration
-                        if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                        if (_skippedOperations.Contains(operationId))
                             continue;
 
                         var providerAndOperations = FindCarriersFromOperationId(operationId);
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                             // the source code generator will never write them if it is not in arm core
                             if (providerForExample.Carrier is ArmClientExtension)
                                 continue;
-                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
+                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
                             result.AddInList(mockTestCase.Owner, mockTestCase);
                         }
                     }
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             // it is possible that an operationId does not exist in the MgmtOutputLibrary, because some of the operations are removed by design. For instance, `Operations_List`.
             if (EnsureOperationIdToProviders().TryGetValue(operationId, out var result))
                 return result;
-            return Enumerable.Empty<MgmtTypeProviderAndOperation>();
+            return Array.Empty<MgmtTypeProviderAndOperation>();
         }
 
         private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationNameToProviders;

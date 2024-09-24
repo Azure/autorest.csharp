@@ -6,30 +6,33 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "EmptyInput",
-   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyInput",
-   "Usage": "Input,Json",
-   "Description": "Empty model used in operation parameters",
-   "Properties": []
+   "kind": "model",
+   "name": "EmptyInput",
+   "crossLanguageDefinitionId": "Type.Model.Empty.EmptyInput",
+   "usage": "Input,Json",
+   "description": "Empty model used in operation parameters",
+   "decorators": [],
+   "properties": []
   },
   {
    "$id": "3",
-   "Kind": "model",
-   "Name": "EmptyOutput",
-   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyOutput",
-   "Usage": "Output,Json",
-   "Description": "Empty model used in operation return type",
-   "Properties": []
+   "kind": "model",
+   "name": "EmptyOutput",
+   "crossLanguageDefinitionId": "Type.Model.Empty.EmptyOutput",
+   "usage": "Output,Json",
+   "description": "Empty model used in operation return type",
+   "decorators": [],
+   "properties": []
   },
   {
    "$id": "4",
-   "Kind": "model",
-   "Name": "EmptyInputOutput",
-   "CrossLanguageDefinitionId": "Type.Model.Empty.EmptyInputOutput",
-   "Usage": "Input,Output,Json",
-   "Description": "Empty model used in both parameter and return type",
-   "Properties": []
+   "kind": "model",
+   "name": "EmptyInputOutput",
+   "crossLanguageDefinitionId": "Type.Model.Empty.EmptyInputOutput",
+   "usage": "Input,Output,Json",
+   "description": "Empty model used in both parameter and return type",
+   "decorators": [],
+   "properties": []
   }
  ],
  "Clients": [
@@ -50,9 +53,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "8",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -67,9 +70,9 @@
         "$id": "9",
         "Type": {
          "$id": "10",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -81,14 +84,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "12",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "13",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -96,7 +101,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "14",
@@ -111,7 +118,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -134,7 +143,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.putEmpty",
+     "Decorators": []
     },
     {
      "$id": "16",
@@ -151,14 +162,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "18",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "19",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -166,7 +179,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -192,7 +207,9 @@
      "Path": "/type/model/empty/alone",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.getEmpty",
+     "Decorators": []
     },
     {
      "$id": "21",
@@ -210,14 +227,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "23",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "24",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -225,7 +244,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "25",
@@ -233,14 +254,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "26",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "27",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -248,7 +271,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "28",
@@ -263,7 +288,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -292,7 +319,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Empty.postRoundTripEmpty",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -302,7 +331,8 @@
     {
      "$ref": "7"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

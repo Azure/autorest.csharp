@@ -87,5 +87,19 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(20, response.Value.Size);
             Assert.IsInstanceOf<TRex>(response.Value);
         });
+
+        [Test]
+        public void InputRecursive()
+        {
+            var input = new Eagle(32);
+            input.Partner = new Eagle(32);
+
+            JsonAsserts.AssertWireSerialization("{\"partner\":{\"kind\":\"eagle\",\"wingspan\":32},\"kind\":\"eagle\",\"wingspan\":32}", input);
+
+            var output = Eagle.DeserializeEagle(JsonAsserts.AssertWireSerializes(input));
+
+            Assert.AreEqual(input.Kind, output.Kind);
+            Assert.AreEqual(input.Partner.Kind, output.Partner.Kind);
+        }
     }
 }

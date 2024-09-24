@@ -665,7 +665,7 @@ namespace AutoRest.CSharp.Generation.Types
                 return false;
             }
 
-            if (Equals(typeof(string)))
+            if (Equals(typeof(string)) || Equals(typeof(Uri)))
             {
                 return true;
             }

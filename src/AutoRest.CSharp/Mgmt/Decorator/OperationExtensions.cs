@@ -63,6 +63,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     "OverrideOperationName", operation.Name, name);
                 return true;
             }
+
+            if (operation.IsNameChanged)
+            {
+                name = operation.Name;
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.OverrideOperationName, operation.OperationId!, name),
+                    operation.GetFullSerializedName(),
+                    "OverrideOperationName", operation.Name, name);
+                return true;
+            }
+
             return false;
         }
 

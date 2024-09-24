@@ -6,52 +6,62 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "Extension",
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
-   "Usage": "Input,Output,Json",
-   "Description": "extension",
-   "BaseModel": {
+   "kind": "model",
+   "name": "Extension",
+   "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension",
+   "usage": "Input,Output,Json",
+   "description": "extension",
+   "decorators": [],
+   "baseModel": {
     "$id": "3",
-    "Kind": "model",
-    "Name": "Element",
-    "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
-    "Usage": "Input,Output,Json",
-    "Description": "element",
-    "Properties": [
+    "kind": "model",
+    "name": "Element",
+    "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element",
+    "usage": "Input,Output,Json",
+    "description": "element",
+    "decorators": [],
+    "properties": [
      {
       "$id": "4",
-      "Name": "extension",
-      "SerializedName": "extension",
-      "Description": "",
-      "Type": {
+      "kind": "property",
+      "name": "extension",
+      "serializedName": "extension",
+      "type": {
        "$id": "5",
-       "Kind": "array",
-       "Name": "ArrayExtension",
-       "ValueType": {
+       "kind": "array",
+       "name": "ArrayExtension",
+       "valueType": {
         "$ref": "2"
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array"
+       "crossLanguageDefinitionId": "TypeSpec.Array",
+       "decorators": []
       },
-      "IsRequired": false,
-      "IsReadOnly": false
+      "optional": true,
+      "readOnly": false,
+      "discriminator": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Element.extension"
      }
     ]
    },
-   "Properties": [
+   "properties": [
     {
      "$id": "6",
-     "Name": "level",
-     "SerializedName": "level",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "level",
+     "serializedName": "level",
+     "type": {
       "$id": "7",
-      "Kind": "int8",
-      "Name": "int8",
-      "CrossLanguageDefinitionId": "TypeSpec.int8"
+      "kind": "int8",
+      "name": "int8",
+      "crossLanguageDefinitionId": "TypeSpec.int8",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.Extension.level"
     }
    ]
   },
@@ -77,9 +87,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "11",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -94,9 +104,9 @@
         "$id": "12",
         "Type": {
          "$id": "13",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -108,14 +118,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "15",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "16",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -123,7 +135,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "17",
@@ -138,7 +152,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -161,7 +177,9 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.put",
+     "Decorators": []
     },
     {
      "$id": "19",
@@ -178,14 +196,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "21",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "22",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -193,7 +213,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -219,7 +241,9 @@
      "Path": "/type/model/inheritance/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Type.Model.Inheritance.Recursive.get",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -229,7 +253,8 @@
     {
      "$ref": "10"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

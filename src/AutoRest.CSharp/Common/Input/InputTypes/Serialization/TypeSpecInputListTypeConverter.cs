@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -27,12 +28,15 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             string? crossLanguageDefinitionId = null;
             InputType? valueType = null;
+            IReadOnlyList<InputDecoratorInfo>? decorators = null;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputListType.Name), ref name)
-                    || reader.TryReadString(nameof(InputListType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadWithConverter(nameof(InputListType.ValueType), options, ref valueType);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
+                    || reader.TryReadWithConverter("valueType", options, ref valueType)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -42,7 +46,7 @@ namespace AutoRest.CSharp.Common.Input
 
             name = name ?? throw new JsonException("Array must have a name");
             valueType = valueType ?? throw new JsonException("Array must have an value type");
-            var listType = new InputListType(name, crossLanguageDefinitionId ?? string.Empty, valueType);
+            var listType = new InputListType(name, crossLanguageDefinitionId ?? string.Empty, valueType) { Decorators = decorators ?? Array.Empty<InputDecoratorInfo>() };
             if (id != null)
             {
                 resolver.AddReference(id, listType);

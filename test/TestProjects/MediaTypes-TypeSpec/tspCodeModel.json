@@ -5,108 +5,179 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "OneBinaryBodyTwoContentTypesRequestContentType",
-   "CrossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
-   "ValueType": {
+   "kind": "enum",
+   "name": "OneBinaryBodyTwoContentTypesRequestContentType",
+   "crossLanguageDefinitionId": "oneBinaryBodyTwoContentTypes.RequestContentType.anonymous",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "application/json; serialization=Avro",
-     "Value": "application/json; serialization=Avro"
+     "kind": "enumvalue",
+     "name": "application/json; serialization=Avro",
+     "value": "application/json; serialization=Avro",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     },
     {
-     "$id": "5",
-     "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
+     "$id": "6",
+     "kind": "enumvalue",
+     "name": "application/octet-stream",
+     "value": "application/octet-stream",
+     "valueType": {
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     }
    ],
-   "IsExtensible": false,
-   "Usage": "Input"
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input",
+   "decorators": []
   },
   {
-   "$id": "6",
-   "Kind": "enum",
-   "Name": "OneStringBodyThreeContentTypesRequestContentType",
-   "CrossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
-   "ValueType": {
-    "$id": "7",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+   "$id": "8",
+   "kind": "enum",
+   "name": "OneStringBodyThreeContentTypesRequestContentType",
+   "crossLanguageDefinitionId": "oneStringBodyThreeContentTypes.RequestContentType.anonymous",
+   "valueType": {
+    "$id": "9",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
-    {
-     "$id": "8",
-     "Name": "application/json",
-     "Value": "application/json"
-    },
-    {
-     "$id": "9",
-     "Name": "application/octet-stream",
-     "Value": "application/octet-stream"
-    },
+   "values": [
     {
      "$id": "10",
-     "Name": "text/plain",
-     "Value": "text/plain"
+     "kind": "enumvalue",
+     "name": "application/json",
+     "value": "application/json",
+     "valueType": {
+      "$id": "11",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "8"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "12",
+     "kind": "enumvalue",
+     "name": "application/octet-stream",
+     "value": "application/octet-stream",
+     "valueType": {
+      "$id": "13",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "8"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "14",
+     "kind": "enumvalue",
+     "name": "text/plain",
+     "value": "text/plain",
+     "valueType": {
+      "$id": "15",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "8"
+     },
+     "decorators": []
     }
    ],
-   "IsExtensible": false,
-   "Usage": "Input"
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input",
+   "decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "11",
-   "Kind": "model",
-   "Name": "Body",
-   "CrossLanguageDefinitionId": "MultipleMediaTypes.Body",
-   "Usage": "Input,Json",
-   "Properties": [
+   "$id": "16",
+   "kind": "model",
+   "name": "Body",
+   "crossLanguageDefinitionId": "MultipleMediaTypes.Body",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "12",
-     "Name": "id",
-     "SerializedName": "id",
-     "Description": "",
-     "Type": {
-      "$id": "13",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+     "$id": "17",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "type": {
+      "$id": "18",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "MultipleMediaTypes.Body.id"
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "14",
+   "$id": "19",
    "Name": "MultipleMediaTypesClient",
    "Description": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {
-     "$id": "15",
+     "$id": "20",
      "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "16",
+       "$id": "21",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "17",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "22",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -119,7 +190,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "18",
+       "$id": "23",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
@@ -131,18 +202,20 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "19",
+       "$id": "24",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "20",
-        "Kind": "bytes",
-        "Name": "bytes",
-        "Encode": "base64",
-        "CrossLanguageDefinitionId": "TypeSpec.bytes"
+        "$id": "25",
+        "kind": "bytes",
+        "name": "bytes",
+        "crossLanguageDefinitionId": "TypeSpec.bytes",
+        "decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -150,12 +223,14 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "26",
        "StatusCodes": [
         204
        ],
@@ -174,23 +249,25 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneBinaryBodyTwoContentTypes",
+     "Decorators": []
     },
     {
-     "$id": "22",
+     "$id": "27",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "21"
       },
       {
-       "$id": "23",
+       "$id": "28",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$ref": "6"
+        "$ref": "8"
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -198,17 +275,20 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "24",
+       "$id": "29",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "25",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "30",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -216,12 +296,14 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -241,31 +323,35 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneStringBodyThreeContentTypes",
+     "Decorators": []
     },
     {
-     "$id": "27",
+     "$id": "32",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "16"
+       "$ref": "21"
       },
       {
-       "$id": "28",
+       "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "29",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "30",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "34",
+        "kind": "constant",
+        "valueType": {
+         "$id": "35",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -273,14 +359,16 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "36",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$ref": "11"
+        "$ref": "16"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -288,12 +376,14 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -311,17 +401,20 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "MultipleMediaTypes.oneModelBodyOneContentType",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "38"
    },
    "Parameters": [
     {
-     "$ref": "16"
+     "$ref": "21"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

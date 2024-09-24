@@ -6,6 +6,5 @@
     <PackageTags>_Azure.ResourceManager.Models.CommonTypes.ManagedIdentity</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
   </PropertyGroup>
 </Project>

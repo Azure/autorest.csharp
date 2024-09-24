@@ -629,13 +629,13 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -647,10 +647,10 @@ namespace CustomizedTypeSpec.Models
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 null);
-            ClientResult result = await AnonymousBodyAsync(anonymousBodyRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            ClientResult result = await AnonymousBodyAsync(thing.ToBinaryContent(), null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -669,13 +669,13 @@ namespace CustomizedTypeSpec.Models
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
+        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -687,10 +687,10 @@ namespace CustomizedTypeSpec.Models
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 null);
-            ClientResult result = AnonymousBody(anonymousBodyRequest.ToBinaryContent(), null);
+            ClientResult result = AnonymousBody(thing.ToBinaryContent(), null);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -704,7 +704,7 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -732,7 +732,7 @@ namespace CustomizedTypeSpec.Models
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int})"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -758,8 +758,8 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, format, null);
-            ClientResult result = await FriendlyModelAsync(friendlyModelRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            SuperFriend superFriend = new SuperFriend(name, format, null);
+            ClientResult result = await FriendlyModelAsync(superFriend.ToBinaryContent(), null).ConfigureAwait(false);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -771,8 +771,8 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, format, null);
-            ClientResult result = FriendlyModel(friendlyModelRequest.ToBinaryContent(), null);
+            SuperFriend superFriend = new SuperFriend(name, format, null);
+            ClientResult result = FriendlyModel(superFriend.ToBinaryContent(), null);
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -877,8 +877,8 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
-            ClientResult result = await ProjectedNameModelAsync(projectedNameModelRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
+            ClientResult result = await ProjectedNameModelAsync(projectedModel.ToBinaryContent(), null).ConfigureAwait(false);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -889,8 +889,8 @@ namespace CustomizedTypeSpec.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
-            ClientResult result = ProjectedNameModel(projectedNameModelRequest.ToBinaryContent(), null);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
+            ClientResult result = ProjectedNameModel(projectedModel.ToBinaryContent(), null);
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 

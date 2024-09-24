@@ -103,5 +103,12 @@ namespace _Azure.ResourceManager.Models.Resources.Mocking
         {
             return GetTopLevelTrackedResources().Get(topLevelTrackedResourceName, cancellationToken);
         }
+
+        /// <summary> Gets an object representing a SingletonTrackedResource along with the instance operations that can be performed on it in the ResourceGroupResource. </summary>
+        /// <returns> Returns a <see cref="SingletonTrackedResource"/> object. </returns>
+        public virtual SingletonTrackedResource GetSingletonTrackedResource()
+        {
+            return new SingletonTrackedResource(Client, Id.AppendProviderResource("Azure.ResourceManager.Models.Resources", "singletonTrackedResources", "default"));
+        }
     }
 }

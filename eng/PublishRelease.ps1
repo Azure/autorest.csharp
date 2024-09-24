@@ -1,4 +1,4 @@
-param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory, $CoverageUser, $CoveragePass, $CoverageDirectory)
+param($NpmToken, $GitHubToken, [string]$BuildNumber, $Sha, $AutorestArtifactDirectory, $typespecEmitterDirectory)
 
 $AutorestArtifactDirectory = Resolve-Path $AutorestArtifactDirectory
 $RepoRoot = Resolve-Path "$PSScriptRoot/.."
@@ -39,10 +39,10 @@ try {
     $devVersion = "$currentVersion-beta.$BuildNumber"
 
     $attemptCount = 0
-    $maxAttempts = 3
+    $maxAttempts = 4
     while($true) {
         Write-Host "Installing @autorest/csharp@$autorestVersion and updating package.json"
-        npm install @autorest/csharp@$autorestVersion --save-exact
+        npm install @autorest/csharp@$autorestVersion --save-exact --prefer-online
         $attemptCount += 1
 
         if($LASTEXITCODE -eq 0) {
@@ -55,7 +55,7 @@ try {
         }
 
         Write-Host "Failed to install @autorest/csharp@$autorestVersion. Retrying in 5 seconds..."
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 15
     }
 
     Write-Host "Setting TypeSpec Emitter version to $devVersion"
@@ -69,20 +69,6 @@ try {
     npm publish $file --access public
     
     Write-Host "##vso[task.setvariable variable=TypeSpecEmitterVersion;isoutput=true]$devVersion"
-}
-finally {
-    Pop-Location
-}
-
-Push-Location $RepoRoot
-try {
-    # set the version in the root package.json so coverage can pick it up
-
-    npm version --no-git-tag-version $devVersion | Out-Null;
-   
-    $CoverageDirectory = Resolve-Path $CoverageDirectory
-
-    npm run coverage --prefix node_modules/@microsoft.azure/autorest.testserver -- publish --repo=Azure/autorest.csharp --ref=refs/heads/feature/v3 --githubToken=skip --azStorageAccount=$CoverageUser --azStorageAccessKey=$CoveragePass --coverageDirectory=$CoverageDirectory
 }
 finally {
     Pop-Location

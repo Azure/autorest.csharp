@@ -97,6 +97,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 InputNamespaceTransformer.Transform(rootNamespace);
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
+                if (Configuration.GenerateSampleProject)
+                    await MgmtTestTarget.ExecuteAsync(project, rootNamespace, sourceInputModel);
             }
             else
             {
