@@ -60,8 +60,8 @@ internal record InputPrimitiveType(InputPrimitiveTypeKind Kind, string Name, str
     public static InputPrimitiveType String { get; } = new(InputPrimitiveTypeKind.String, "string", "TypeSpec.string");
     public static InputPrimitiveType PlainTime { get; } = new(InputPrimitiveTypeKind.PlainTime, "plainTime", "TypeSpec.plainTime");
     public static InputPrimitiveType Url { get; } = new(InputPrimitiveTypeKind.Url, "url", "TypeSpec.url");
-    public static InputPrimitiveType Any { get; } = new(InputPrimitiveTypeKind.Any, "any", string.Empty);
-    public static InputPrimitiveType Object { get; } = new(InputPrimitiveTypeKind.Any, "object", ObjectId);
+    public static InputPrimitiveType Any { get; } = new(InputPrimitiveTypeKind.Unknown, "any", string.Empty);
+    public static InputPrimitiveType Object { get; } = new(InputPrimitiveTypeKind.Unknown, "object", ObjectId);
 
     public static InputPrimitiveType IPAddress { get; } = new(InputPrimitiveTypeKind.String, "ipAddress", IPAddressId);
 

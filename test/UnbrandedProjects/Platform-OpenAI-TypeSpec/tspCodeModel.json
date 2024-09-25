@@ -7406,7 +7406,7 @@
       "decorators": [],
       "additionalProperties": {
        "$id": "821",
-       "kind": "any",
+       "kind": "unknown",
        "name": "unknown",
        "crossLanguageDefinitionId": "",
        "decorators": []

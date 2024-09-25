@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ClientAndOperationGroup.csproj" />
+    <ProjectReference Include="..\src\_Specs_.Azure.ClientGenerator.Core.FlattenProperty.csproj" />
   </ItemGroup>
 
   <ItemGroup>
