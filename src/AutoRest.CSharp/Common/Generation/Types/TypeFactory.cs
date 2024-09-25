@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputPrimitiveTypeKind.Stream => new CSharpType(typeof(Stream)),
                 InputPrimitiveTypeKind.String => new CSharpType(typeof(string)),
                 InputPrimitiveTypeKind.Url => new CSharpType(typeof(Uri)),
-                InputPrimitiveTypeKind.Any => UnknownType,
+                InputPrimitiveTypeKind.Unknown => UnknownType,
                 _ => new CSharpType(typeof(object)),
             };
         }
@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <returns></returns>
         private CSharpType CreateTypeForDataFactoryElement(InputType inputType) => inputType switch
         {
-            InputPrimitiveType { Kind: InputPrimitiveTypeKind.Any } => typeof(BinaryData),
+            InputPrimitiveType { Kind: InputPrimitiveTypeKind.Unknown } => typeof(BinaryData),
             _ => CreateType(inputType)
         };
 
