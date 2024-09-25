@@ -33,7 +33,7 @@ namespace _Type.Union.Models
         public static bool operator ==(GetResponseProp3 left, GetResponseProp3 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="GetResponseProp3"/> values are not the same. </summary>
         public static bool operator !=(GetResponseProp3 left, GetResponseProp3 right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="GetResponseProp3"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="GetResponseProp3"/>. </summary>
         public static implicit operator GetResponseProp3(string value) => new GetResponseProp3(value);
 
         /// <inheritdoc />

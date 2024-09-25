@@ -30,7 +30,7 @@ namespace paging.Models
         public static bool operator ==(MaxPageSizeType left, MaxPageSizeType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MaxPageSizeType"/> values are not the same. </summary>
         public static bool operator !=(MaxPageSizeType left, MaxPageSizeType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="MaxPageSizeType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="MaxPageSizeType"/>. </summary>
         public static implicit operator MaxPageSizeType(string value) => new MaxPageSizeType(value);
 
         /// <inheritdoc />

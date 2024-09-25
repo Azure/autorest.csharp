@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(CreateEmbeddingRequestModel left, CreateEmbeddingRequestModel right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CreateEmbeddingRequestModel"/> values are not the same. </summary>
         public static bool operator !=(CreateEmbeddingRequestModel left, CreateEmbeddingRequestModel right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CreateEmbeddingRequestModel"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CreateEmbeddingRequestModel"/>. </summary>
         public static implicit operator CreateEmbeddingRequestModel(string value) => new CreateEmbeddingRequestModel(value);
 
         /// <inheritdoc />

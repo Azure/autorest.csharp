@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(Algorithm left, Algorithm right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Algorithm"/> values are not the same. </summary>
         public static bool operator !=(Algorithm left, Algorithm right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Algorithm"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Algorithm"/>. </summary>
         public static implicit operator Algorithm(string value) => new Algorithm(value);
 
         /// <inheritdoc />

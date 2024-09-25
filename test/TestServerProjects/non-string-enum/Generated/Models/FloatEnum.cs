@@ -45,7 +45,7 @@ namespace non_string_enum.Models
         public static bool operator ==(FloatEnum left, FloatEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FloatEnum"/> values are not the same. </summary>
         public static bool operator !=(FloatEnum left, FloatEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FloatEnum"/>. </summary>
+        /// <summary> Converts a <see cref="float"/> to a <see cref="FloatEnum"/>. </summary>
         public static implicit operator FloatEnum(float value) => new FloatEnum(value);
 
         /// <inheritdoc />

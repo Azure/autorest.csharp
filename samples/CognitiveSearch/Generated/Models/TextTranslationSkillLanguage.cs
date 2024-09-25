@@ -216,7 +216,7 @@ namespace CognitiveSearch.Models
         public static bool operator ==(TextTranslationSkillLanguage left, TextTranslationSkillLanguage right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TextTranslationSkillLanguage"/> values are not the same. </summary>
         public static bool operator !=(TextTranslationSkillLanguage left, TextTranslationSkillLanguage right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="TextTranslationSkillLanguage"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="TextTranslationSkillLanguage"/>. </summary>
         public static implicit operator TextTranslationSkillLanguage(string value) => new TextTranslationSkillLanguage(value);
 
         /// <inheritdoc />

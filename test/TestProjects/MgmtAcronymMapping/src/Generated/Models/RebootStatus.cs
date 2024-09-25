@@ -60,7 +60,7 @@ namespace MgmtAcronymMapping.Models
         public static bool operator ==(RebootStatus left, RebootStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RebootStatus"/> values are not the same. </summary>
         public static bool operator !=(RebootStatus left, RebootStatus right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RebootStatus"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RebootStatus"/>. </summary>
         public static implicit operator RebootStatus(string value) => new RebootStatus(value);
 
         /// <inheritdoc />

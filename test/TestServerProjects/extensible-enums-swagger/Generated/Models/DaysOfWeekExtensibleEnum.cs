@@ -48,7 +48,7 @@ namespace extensible_enums_swagger.Models
         public static bool operator ==(DaysOfWeekExtensibleEnum left, DaysOfWeekExtensibleEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DaysOfWeekExtensibleEnum"/> values are not the same. </summary>
         public static bool operator !=(DaysOfWeekExtensibleEnum left, DaysOfWeekExtensibleEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DaysOfWeekExtensibleEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="DaysOfWeekExtensibleEnum"/>. </summary>
         public static implicit operator DaysOfWeekExtensibleEnum(string value) => new DaysOfWeekExtensibleEnum(value);
 
         /// <inheritdoc />

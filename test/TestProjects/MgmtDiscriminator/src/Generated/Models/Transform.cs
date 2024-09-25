@@ -45,7 +45,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(Transform left, Transform right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Transform"/> values are not the same. </summary>
         public static bool operator !=(Transform left, Transform right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Transform"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Transform"/>. </summary>
         public static implicit operator Transform(string value) => new Transform(value);
 
         /// <inheritdoc />

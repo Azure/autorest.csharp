@@ -51,7 +51,7 @@ namespace AppConfiguration.Models
         public static bool operator ==(Head7ItemsItem left, Head7ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Head7ItemsItem"/> values are not the same. </summary>
         public static bool operator !=(Head7ItemsItem left, Head7ItemsItem right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Head7ItemsItem"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Head7ItemsItem"/>. </summary>
         public static implicit operator Head7ItemsItem(string value) => new Head7ItemsItem(value);
 
         /// <inheritdoc />

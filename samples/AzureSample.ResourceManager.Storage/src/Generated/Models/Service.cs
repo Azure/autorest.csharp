@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(Service left, Service right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Service"/> values are not the same. </summary>
         public static bool operator !=(Service left, Service right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Service"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Service"/>. </summary>
         public static implicit operator Service(string value) => new Service(value);
 
         /// <inheritdoc />
