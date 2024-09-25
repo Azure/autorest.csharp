@@ -28,5 +28,5 @@ internal enum InputPrimitiveTypeKind
     String,
     PlainTime,
     Url,
-    Any, // aka unknown
+    Unknown,
 }
