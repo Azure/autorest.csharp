@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -34,12 +32,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
 
-        public DataPlaneOutputLibrary(CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
+        public DataPlaneOutputLibrary(InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
             _typeFactory = new TypeFactory(this, typeof(object));
             _sourceInputModel = sourceInputModel;
 
-            _input = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+            _input = inputNamespace;
 
             _libraryName = Configuration.LibraryName;
 

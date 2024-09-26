@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
-        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MockTestCase testCase, FormattableString clientExpression)
+        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, Sample testCase, FormattableString clientExpression)
         {
             if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
                 return null;
