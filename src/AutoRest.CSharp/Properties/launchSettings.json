@@ -696,6 +696,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\duration\\src\\Generated -n"
     },
+    "typespec-encode/numeric": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\numeric\\src\\Generated -n"
+    },
     "typespec-nonAzure-authentication/api-key": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\authentication\\api-key\\src\\Generated -n"
