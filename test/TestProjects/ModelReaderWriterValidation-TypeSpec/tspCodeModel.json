@@ -2192,7 +2192,7 @@
    "decorators": [],
    "additionalProperties": {
     "$id": "227",
-    "kind": "any",
+    "kind": "unknown",
     "name": "unknown",
     "crossLanguageDefinitionId": "",
     "decorators": []

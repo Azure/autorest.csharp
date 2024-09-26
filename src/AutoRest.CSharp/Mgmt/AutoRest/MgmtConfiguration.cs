@@ -10,7 +10,6 @@ using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Report;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Input
 {
@@ -23,8 +22,6 @@ namespace AutoRest.CSharp.Input
             public bool SuppressListException { get; }
 
             public bool ShowSerializedNames { get; }
-
-            public bool SkipCodeGen { get; }
 
             public bool GenerateReport { get; }
 
@@ -43,7 +40,6 @@ namespace AutoRest.CSharp.Input
             {
                 SuppressListException = Configuration.DeserializeBoolean(suppressListException, false);
                 ShowSerializedNames = Configuration.DeserializeBoolean(showSerializedNames, false);
-                SkipCodeGen = Configuration.DeserializeBoolean(skipCodeGen, false);
                 GenerateReport = Configuration.DeserializeBoolean(generateReport, true);
                 ReportOnly = Configuration.DeserializeBoolean(reportOnly, false);
                 ReportFormat = Configuration.IsValidJsonElement(reportFormat) ? reportFormat?.GetString() ?? "yaml" : "yaml";
@@ -56,7 +52,6 @@ namespace AutoRest.CSharp.Input
 
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
                 root.TryGetProperty(nameof(ShowSerializedNames), out var showSerializedNames);
-                root.TryGetProperty(nameof(SkipCodeGen), out var skipCodeGen);
                 root.TryGetProperty(nameof(GenerateReport), out var generateReport);
                 root.TryGetProperty(nameof(ReportOnly), out var reportOnly);
                 root.TryGetProperty(nameof(ReportFormat), out var reportFormat);
@@ -64,7 +59,6 @@ namespace AutoRest.CSharp.Input
                 return new MgmtDebugConfiguration(
                     suppressListException: suppressListException,
                     showSerializedNames: showSerializedNames,
-                    skipCodeGen: skipCodeGen,
                     generateReport: generateReport,
                     reportOnly: reportOnly,
                     reportFormat: reportFormat
@@ -76,7 +70,6 @@ namespace AutoRest.CSharp.Input
                 return new MgmtDebugConfiguration(
                     suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult(),
                     showSerializedNames: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-serialized-names")).GetAwaiter().GetResult(),
-                    skipCodeGen: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "skip-codegen")).GetAwaiter().GetResult(),
                     generateReport: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "generate-report")).GetAwaiter().GetResult(),
                     reportOnly: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "report-only")).GetAwaiter().GetResult(),
                     reportFormat: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "report-format")).GetAwaiter().GetResult()

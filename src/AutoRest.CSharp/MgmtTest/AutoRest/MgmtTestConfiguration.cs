@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Input
 
         public string? SourceCodePath { get; }
         public string? OutputFolder { get; }
-        public bool Mock { get; }
         public bool Sample { get; }
         public IReadOnlyList<string> SkippedOperations { get; }
         public bool ClearOutputFolder { get; }
@@ -32,7 +31,6 @@ namespace AutoRest.CSharp.Input
         {
             SkippedOperations = skippedOperations;
             SourceCodePath = !Configuration.IsValidJsonElement(sourceCodePath) ? null : sourceCodePath.ToString();
-            Mock = Configuration.DeserializeBoolean(mock, false);
             Sample = Configuration.DeserializeBoolean(sample, true);
             OutputFolder = !Configuration.IsValidJsonElement(outputFolder) ? null : Configuration.TrimFileSuffix(outputFolder.ToString() ?? "");
             ClearOutputFolder = Configuration.DeserializeBoolean(clearOutputFolder, false);
@@ -47,7 +45,6 @@ namespace AutoRest.CSharp.Input
 
             testGenRoot.TryGetProperty(nameof(SkippedOperations), out var skippedOperationsElement);
             testGenRoot.TryGetProperty(nameof(SourceCodePath), out var sourceCodePath);
-            testGenRoot.TryGetProperty(nameof(Mock), out var mock);
             testGenRoot.TryGetProperty(nameof(Sample), out var sample);
             testGenRoot.TryGetProperty(nameof(OutputFolder), out var testGenOutputFolder);
             testGenRoot.TryGetProperty(nameof(ClearOutputFolder), out var testGenClearOutputFolder);
@@ -57,7 +54,6 @@ namespace AutoRest.CSharp.Input
             return new MgmtTestConfiguration(
                 skippedOperations,
                 sourceCodePath: sourceCodePath,
-                mock: mock,
                 sample: sample,
                 outputFolder: testGenOutputFolder,
                 clearOutputFolder: testGenClearOutputFolder);
@@ -85,9 +81,6 @@ namespace AutoRest.CSharp.Input
 
             if (SourceCodePath is not null)
                 writer.WriteString(nameof(SourceCodePath), SourceCodePath);
-
-            if (Mock)
-                writer.WriteBoolean(nameof(Mock), Mock);
 
             if (Sample)
                 writer.WriteBoolean(nameof(Sample), Sample);
