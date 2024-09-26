@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
@@ -11,9 +11,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class DataPlaneTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, SchemaUsageProvider schemaUsageProvider)
+        public static void Execute(GeneratedCodeWorkspace project, InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
         {
-            var library = new DataPlaneOutputLibrary(codeModel, sourceInputModel, schemaUsageProvider);
+            var library = new DataPlaneOutputLibrary(inputNamespace, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();

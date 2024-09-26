@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.MgmtTest.AutoRest;
-using AutoRest.CSharp.MgmtTest.Generation.Mock;
 using AutoRest.CSharp.MgmtTest.Generation.Samples;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -41,11 +40,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 library = new MgmtTestOutputLibrary(inputNamespace);
             }
 
-            if (Configuration.MgmtTestConfiguration?.Mock ?? false)
-            {
-                WriteMockTests(project, library);
-            }
-
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)
             {
                 WriteSamples(project, library);
@@ -68,34 +62,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var _ in MgmtContext.Library.ResourceSchemaMap.Value)
             {
             }
-        }
-
-        private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
-        {
-            string outputFolder = GetOutputFolder(MOCK_TEST_DEFAULT_OUTPUT_PATH);
-
-            // write the collection mock tests
-            foreach (var collectionTest in library.ResourceCollectionMockTests)
-            {
-                var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
-                collectionTestWriter.Write();
-
-                AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{collectionTest.Type.Name}.cs"), collectionTestWriter.ToString());
-            }
-
-            foreach (var resourceTest in library.ResourceMockTests)
-            {
-                var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
-                resourceTestWriter.Write();
-
-                AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{resourceTest.Type.Name}.cs"), resourceTestWriter.ToString());
-            }
-
-            var extensionWrapperTest = library.ExtensionWrapperMockTest;
-            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
-            extensionWrapperTestWriter.Write();
-
-            AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{extensionWrapperTest.Type.Name}.cs"), extensionWrapperTestWriter.ToString());
         }
 
         private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
