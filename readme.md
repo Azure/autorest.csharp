@@ -50,6 +50,7 @@ ___
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
     - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
+    - [Change the file license header](#change-the-file-license-header)
   - [Management plane concepts and configurations](#management-plane-concepts-and-configurations)
 
 <!-- /TOC -->
@@ -1786,6 +1787,16 @@ namespace Azure.Service.Models
 }
 ```
 
+</details>
+
+### Change the file license header
+
+<details>
+Add the `--custom-header="// Your header content\n"` option to the autorest command, or add the following configuration in your `md` file for autorest
+```yaml
+custom-header: "// Your header content\n"
+```
+to change the file license headers in all generated files.
 </details>
 
 <details>
