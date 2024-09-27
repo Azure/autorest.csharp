@@ -74,7 +74,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 generateSampleProject: true,
                 generateTestProject: true,
                 examplesDirectory: null,
-                helperNamespace: "");
+                helperNamespace: "",
+                customHeader: null);
         }
 
 
