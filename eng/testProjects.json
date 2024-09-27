@@ -50,6 +50,7 @@
         "special-headers/conditional-request",
         "special-headers/repeatability",
         "special-words",
+        "parameters/basic",
         "parameters/collection-format",
         "parameters/spread",
         "parameters/body-optionality",
