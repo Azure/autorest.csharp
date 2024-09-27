@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         public static bool operator ==(IPVersion left, IPVersion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IPVersion"/> values are not the same. </summary>
         public static bool operator !=(IPVersion left, IPVersion right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="IPVersion"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="IPVersion"/>. </summary>
         public static implicit operator IPVersion(string value) => new IPVersion(value);
 
         /// <inheritdoc />

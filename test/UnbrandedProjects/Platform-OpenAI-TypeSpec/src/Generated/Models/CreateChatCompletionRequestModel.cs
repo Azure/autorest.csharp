@@ -57,7 +57,7 @@ namespace OpenAI.Models
         public static bool operator ==(CreateChatCompletionRequestModel left, CreateChatCompletionRequestModel right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CreateChatCompletionRequestModel"/> values are not the same. </summary>
         public static bool operator !=(CreateChatCompletionRequestModel left, CreateChatCompletionRequestModel right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CreateChatCompletionRequestModel"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CreateChatCompletionRequestModel"/>. </summary>
         public static implicit operator CreateChatCompletionRequestModel(string value) => new CreateChatCompletionRequestModel(value);
 
         /// <inheritdoc />

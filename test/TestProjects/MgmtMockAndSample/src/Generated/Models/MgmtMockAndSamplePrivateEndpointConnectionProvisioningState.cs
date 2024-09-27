@@ -45,7 +45,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(MgmtMockAndSamplePrivateEndpointConnectionProvisioningState left, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MgmtMockAndSamplePrivateEndpointConnectionProvisioningState"/> values are not the same. </summary>
         public static bool operator !=(MgmtMockAndSamplePrivateEndpointConnectionProvisioningState left, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="MgmtMockAndSamplePrivateEndpointConnectionProvisioningState"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="MgmtMockAndSamplePrivateEndpointConnectionProvisioningState"/>. </summary>
         public static implicit operator MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(string value) => new MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(value);
 
         /// <inheritdoc />

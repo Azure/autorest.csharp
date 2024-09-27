@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(CertificatePermission left, CertificatePermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CertificatePermission"/> values are not the same. </summary>
         public static bool operator !=(CertificatePermission left, CertificatePermission right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CertificatePermission"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CertificatePermission"/>. </summary>
         public static implicit operator CertificatePermission(string value) => new CertificatePermission(value);
 
         /// <inheritdoc />

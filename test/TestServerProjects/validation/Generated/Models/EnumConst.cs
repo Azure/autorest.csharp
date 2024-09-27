@@ -30,7 +30,7 @@ namespace validation.Models
         public static bool operator ==(EnumConst left, EnumConst right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnumConst"/> values are not the same. </summary>
         public static bool operator !=(EnumConst left, EnumConst right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EnumConst"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EnumConst"/>. </summary>
         public static implicit operator EnumConst(string value) => new EnumConst(value);
 
         /// <inheritdoc />

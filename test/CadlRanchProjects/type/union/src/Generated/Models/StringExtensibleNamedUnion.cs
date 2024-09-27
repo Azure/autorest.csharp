@@ -33,7 +33,7 @@ namespace _Type.Union.Models
         public static bool operator ==(StringExtensibleNamedUnion left, StringExtensibleNamedUnion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StringExtensibleNamedUnion"/> values are not the same. </summary>
         public static bool operator !=(StringExtensibleNamedUnion left, StringExtensibleNamedUnion right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StringExtensibleNamedUnion"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StringExtensibleNamedUnion"/>. </summary>
         public static implicit operator StringExtensibleNamedUnion(string value) => new StringExtensibleNamedUnion(value);
 
         /// <inheritdoc />

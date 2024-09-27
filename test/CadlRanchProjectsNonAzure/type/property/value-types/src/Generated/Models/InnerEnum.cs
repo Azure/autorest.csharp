@@ -30,7 +30,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         public static bool operator ==(InnerEnum left, InnerEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InnerEnum"/> values are not the same. </summary>
         public static bool operator !=(InnerEnum left, InnerEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="InnerEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="InnerEnum"/>. </summary>
         public static implicit operator InnerEnum(string value) => new InnerEnum(value);
 
         /// <inheritdoc />

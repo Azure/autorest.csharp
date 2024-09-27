@@ -30,7 +30,7 @@ namespace azure_parameter_grouping.Models
         public static bool operator ==(EncryptionAlgorithmType left, EncryptionAlgorithmType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EncryptionAlgorithmType"/> values are not the same. </summary>
         public static bool operator !=(EncryptionAlgorithmType left, EncryptionAlgorithmType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EncryptionAlgorithmType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EncryptionAlgorithmType"/>. </summary>
         public static implicit operator EncryptionAlgorithmType(string value) => new EncryptionAlgorithmType(value);
 
         /// <inheritdoc />

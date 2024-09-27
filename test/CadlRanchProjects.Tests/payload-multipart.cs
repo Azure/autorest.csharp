@@ -44,6 +44,37 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Payload_Multipart_FormData_CheckFileNameAndContentType() => Test(async (host) =>
+        {
+            Address addressX = new Address("X");
+            var profileImage = System.IO.File.OpenRead(SampleJpgPath);
+            var pictures = new Stream[]
+            {
+                System.IO.File.OpenRead(SamplePngPath),
+                System.IO.File.OpenRead(SamplePngPath)
+            };
+            ComplexPartsRequest data = new ComplexPartsRequest("123", addressX, profileImage, pictures);
+            var response = await new MultiPartClient(host, null).GetFormDataClient().FileArrayAndBasicAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Payload_Multipart_FormData_FileArrayAndBasic() => Test(async (host) =>
+        {
+            Address addressX = new Address("X");
+            var profileImage = System.IO.File.OpenRead(SampleJpgPath);
+            var pictures = new Stream[]
+            {
+                System.IO.File.OpenRead(SamplePngPath),
+                System.IO.File.OpenRead(SamplePngPath)
+            };
+            ComplexPartsRequest data = new ComplexPartsRequest("123", addressX, profileImage, pictures);
+            var response = await new MultiPartClient(host, null).GetFormDataClient().FileArrayAndBasicAsync(data);
+            Assert.AreEqual(204, response.Status);
+        });
+
+
+        [Test]
         public Task Payload_Multipart_FormData_Anonymous_Model() => Test(async (host) =>
         {
             var response = await new MultiPartClient(host, null).GetFormDataClient().AnonymousModelAsync(System.IO.File.OpenRead(SampleJpgPath));

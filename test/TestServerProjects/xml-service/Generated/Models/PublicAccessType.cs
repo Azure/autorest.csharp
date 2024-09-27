@@ -33,7 +33,7 @@ namespace xml_service.Models
         public static bool operator ==(PublicAccessType left, PublicAccessType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PublicAccessType"/> values are not the same. </summary>
         public static bool operator !=(PublicAccessType left, PublicAccessType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="PublicAccessType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="PublicAccessType"/>. </summary>
         public static implicit operator PublicAccessType(string value) => new PublicAccessType(value);
 
         /// <inheritdoc />

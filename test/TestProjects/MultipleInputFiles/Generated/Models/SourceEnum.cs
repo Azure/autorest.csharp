@@ -33,7 +33,7 @@ namespace MultipleInputFiles.Models
         public static bool operator ==(SourceEnum left, SourceEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SourceEnum"/> values are not the same. </summary>
         public static bool operator !=(SourceEnum left, SourceEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="SourceEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="SourceEnum"/>. </summary>
         public static implicit operator SourceEnum(string value) => new SourceEnum(value);
 
         /// <inheritdoc />

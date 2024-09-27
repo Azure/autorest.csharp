@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(RoutingChoice left, RoutingChoice right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RoutingChoice"/> values are not the same. </summary>
         public static bool operator !=(RoutingChoice left, RoutingChoice right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RoutingChoice"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RoutingChoice"/>. </summary>
         public static implicit operator RoutingChoice(string value) => new RoutingChoice(value);
 
         /// <inheritdoc />

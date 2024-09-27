@@ -36,7 +36,7 @@ namespace Azure.NewProject.TypeSpec.Models
         public static bool operator ==(StringExtensibleEnum left, StringExtensibleEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StringExtensibleEnum"/> values are not the same. </summary>
         public static bool operator !=(StringExtensibleEnum left, StringExtensibleEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StringExtensibleEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StringExtensibleEnum"/>. </summary>
         public static implicit operator StringExtensibleEnum(string value) => new StringExtensibleEnum(value);
 
         /// <inheritdoc />

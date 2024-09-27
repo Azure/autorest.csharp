@@ -57,7 +57,7 @@ namespace xml_service.Models
         public static bool operator ==(AccessTier left, AccessTier right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AccessTier"/> values are not the same. </summary>
         public static bool operator !=(AccessTier left, AccessTier right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="AccessTier"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="AccessTier"/>. </summary>
         public static implicit operator AccessTier(string value) => new AccessTier(value);
 
         /// <inheritdoc />
