@@ -27,7 +27,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         public static bool operator ==(ExtendedEnum left, ExtendedEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ExtendedEnum"/> values are not the same. </summary>
         public static bool operator !=(ExtendedEnum left, ExtendedEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ExtendedEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ExtendedEnum"/>. </summary>
         public static implicit operator ExtendedEnum(string value) => new ExtendedEnum(value);
 
         /// <inheritdoc />

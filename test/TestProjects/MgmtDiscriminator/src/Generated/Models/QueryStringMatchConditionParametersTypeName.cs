@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(QueryStringMatchConditionParametersTypeName left, QueryStringMatchConditionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="QueryStringMatchConditionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(QueryStringMatchConditionParametersTypeName left, QueryStringMatchConditionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="QueryStringMatchConditionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="QueryStringMatchConditionParametersTypeName"/>. </summary>
         public static implicit operator QueryStringMatchConditionParametersTypeName(string value) => new QueryStringMatchConditionParametersTypeName(value);
 
         /// <inheritdoc />

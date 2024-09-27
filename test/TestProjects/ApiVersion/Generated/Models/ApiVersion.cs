@@ -30,7 +30,7 @@ namespace ApiVersion.Models
         public static bool operator ==(ApiVersion left, ApiVersion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ApiVersion"/> values are not the same. </summary>
         public static bool operator !=(ApiVersion left, ApiVersion right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ApiVersion"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ApiVersion"/>. </summary>
         public static implicit operator ApiVersion(string value) => new ApiVersion(value);
 
         /// <inheritdoc />

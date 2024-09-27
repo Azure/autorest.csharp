@@ -60,7 +60,7 @@ namespace lro.Models
         public static bool operator ==(ProductPropertiesProvisioningStateValues left, ProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are not the same. </summary>
         public static bool operator !=(ProductPropertiesProvisioningStateValues left, ProductPropertiesProvisioningStateValues right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ProductPropertiesProvisioningStateValues"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ProductPropertiesProvisioningStateValues"/>. </summary>
         public static implicit operator ProductPropertiesProvisioningStateValues(string value) => new ProductPropertiesProvisioningStateValues(value);
 
         /// <inheritdoc />

@@ -33,7 +33,7 @@ namespace MgmtSafeFlatten.Models
         public static bool operator ==(LayerOneTypeName left, LayerOneTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LayerOneTypeName"/> values are not the same. </summary>
         public static bool operator !=(LayerOneTypeName left, LayerOneTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="LayerOneTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="LayerOneTypeName"/>. </summary>
         public static implicit operator LayerOneTypeName(string value) => new LayerOneTypeName(value);
 
         /// <inheritdoc />

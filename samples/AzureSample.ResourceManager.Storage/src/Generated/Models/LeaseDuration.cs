@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(LeaseDuration left, LeaseDuration right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LeaseDuration"/> values are not the same. </summary>
         public static bool operator !=(LeaseDuration left, LeaseDuration right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="LeaseDuration"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="LeaseDuration"/>. </summary>
         public static implicit operator LeaseDuration(string value) => new LeaseDuration(value);
 
         /// <inheritdoc />

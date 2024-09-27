@@ -45,7 +45,7 @@ namespace MgmtCollectionParent.Models
         public static bool operator ==(StageStatus left, StageStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StageStatus"/> values are not the same. </summary>
         public static bool operator !=(StageStatus left, StageStatus right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StageStatus"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StageStatus"/>. </summary>
         public static implicit operator StageStatus(string value) => new StageStatus(value);
 
         /// <inheritdoc />

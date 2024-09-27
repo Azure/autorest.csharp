@@ -30,7 +30,7 @@ namespace MgmtListMethods.Models
         public static bool operator ==(QuotaUnit left, QuotaUnit right) => left.Equals(right);
         /// <summary> Determines if two <see cref="QuotaUnit"/> values are not the same. </summary>
         public static bool operator !=(QuotaUnit left, QuotaUnit right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="QuotaUnit"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="QuotaUnit"/>. </summary>
         public static implicit operator QuotaUnit(string value) => new QuotaUnit(value);
 
         /// <inheritdoc />

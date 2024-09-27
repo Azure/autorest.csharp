@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(CreateTranslationRequestModel left, CreateTranslationRequestModel right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CreateTranslationRequestModel"/> values are not the same. </summary>
         public static bool operator !=(CreateTranslationRequestModel left, CreateTranslationRequestModel right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CreateTranslationRequestModel"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CreateTranslationRequestModel"/>. </summary>
         public static implicit operator CreateTranslationRequestModel(string value) => new CreateTranslationRequestModel(value);
 
         /// <inheritdoc />

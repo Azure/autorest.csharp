@@ -36,7 +36,7 @@ namespace ModelNamespace
         public static bool operator ==(TestExtensibleEnum left, TestExtensibleEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TestExtensibleEnum"/> values are not the same. </summary>
         public static bool operator !=(TestExtensibleEnum left, TestExtensibleEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="TestExtensibleEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="TestExtensibleEnum"/>. </summary>
         public static implicit operator TestExtensibleEnum(string value) => new TestExtensibleEnum(value);
 
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace constants.Models
         public static bool operator ==(NoModelAsStringNoRequiredOneValueNoDefaultEnum left, NoModelAsStringNoRequiredOneValueNoDefaultEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NoModelAsStringNoRequiredOneValueNoDefaultEnum"/> values are not the same. </summary>
         public static bool operator !=(NoModelAsStringNoRequiredOneValueNoDefaultEnum left, NoModelAsStringNoRequiredOneValueNoDefaultEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="NoModelAsStringNoRequiredOneValueNoDefaultEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="NoModelAsStringNoRequiredOneValueNoDefaultEnum"/>. </summary>
         public static implicit operator NoModelAsStringNoRequiredOneValueNoDefaultEnum(string value) => new NoModelAsStringNoRequiredOneValueNoDefaultEnum(value);
 
         /// <inheritdoc />

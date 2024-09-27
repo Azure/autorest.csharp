@@ -33,7 +33,7 @@ namespace MgmtPartialResource.Models
         public static bool operator ==(DeleteOption left, DeleteOption right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DeleteOption"/> values are not the same. </summary>
         public static bool operator !=(DeleteOption left, DeleteOption right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DeleteOption"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="DeleteOption"/>. </summary>
         public static implicit operator DeleteOption(string value) => new DeleteOption(value);
 
         /// <inheritdoc />

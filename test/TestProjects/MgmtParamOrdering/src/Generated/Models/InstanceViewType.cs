@@ -30,7 +30,7 @@ namespace MgmtParamOrdering.Models
         public static bool operator ==(InstanceViewType left, InstanceViewType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InstanceViewType"/> values are not the same. </summary>
         public static bool operator !=(InstanceViewType left, InstanceViewType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="InstanceViewType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="InstanceViewType"/>. </summary>
         public static implicit operator InstanceViewType(string value) => new InstanceViewType(value);
 
         /// <inheritdoc />

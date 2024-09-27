@@ -36,7 +36,7 @@ namespace MgmtScopeResource.Models
         public static bool operator ==(ComplianceStatus left, ComplianceStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ComplianceStatus"/> values are not the same. </summary>
         public static bool operator !=(ComplianceStatus left, ComplianceStatus right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ComplianceStatus"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ComplianceStatus"/>. </summary>
         public static implicit operator ComplianceStatus(string value) => new ComplianceStatus(value);
 
         /// <inheritdoc />

@@ -36,7 +36,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(CacheBehavior left, CacheBehavior right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheBehavior"/> values are not the same. </summary>
         public static bool operator !=(CacheBehavior left, CacheBehavior right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CacheBehavior"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CacheBehavior"/>. </summary>
         public static implicit operator CacheBehavior(string value) => new CacheBehavior(value);
 
         /// <inheritdoc />

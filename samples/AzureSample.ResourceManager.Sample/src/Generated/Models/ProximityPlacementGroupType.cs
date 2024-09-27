@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         public static bool operator ==(ProximityPlacementGroupType left, ProximityPlacementGroupType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProximityPlacementGroupType"/> values are not the same. </summary>
         public static bool operator !=(ProximityPlacementGroupType left, ProximityPlacementGroupType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ProximityPlacementGroupType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ProximityPlacementGroupType"/>. </summary>
         public static implicit operator ProximityPlacementGroupType(string value) => new ProximityPlacementGroupType(value);
 
         /// <inheritdoc />
