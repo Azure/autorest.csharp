@@ -33,7 +33,7 @@ namespace MultipleInputFiles.Models
         public static bool operator ==(Source left, Source right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Source"/> values are not the same. </summary>
         public static bool operator !=(Source left, Source right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Source"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Source"/>. </summary>
         public static implicit operator Source(string value) => new Source(value);
 
         /// <inheritdoc />

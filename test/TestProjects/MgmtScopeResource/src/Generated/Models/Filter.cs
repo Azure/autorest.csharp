@@ -30,7 +30,7 @@ namespace MgmtScopeResource.Models
         public static bool operator ==(Filter left, Filter right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Filter"/> values are not the same. </summary>
         public static bool operator !=(Filter left, Filter right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Filter"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Filter"/>. </summary>
         public static implicit operator Filter(string value) => new Filter(value);
 
         /// <inheritdoc />

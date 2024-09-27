@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(CacheKeyQueryStringActionParametersTypeName left, CacheKeyQueryStringActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheKeyQueryStringActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(CacheKeyQueryStringActionParametersTypeName left, CacheKeyQueryStringActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CacheKeyQueryStringActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CacheKeyQueryStringActionParametersTypeName"/>. </summary>
         public static implicit operator CacheKeyQueryStringActionParametersTypeName(string value) => new CacheKeyQueryStringActionParametersTypeName(value);
 
         /// <inheritdoc />

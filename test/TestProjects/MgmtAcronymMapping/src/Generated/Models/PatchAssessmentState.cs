@@ -66,7 +66,7 @@ namespace MgmtAcronymMapping.Models
         public static bool operator ==(PatchAssessmentState left, PatchAssessmentState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PatchAssessmentState"/> values are not the same. </summary>
         public static bool operator !=(PatchAssessmentState left, PatchAssessmentState right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="PatchAssessmentState"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="PatchAssessmentState"/>. </summary>
         public static implicit operator PatchAssessmentState(string value) => new PatchAssessmentState(value);
 
         /// <inheritdoc />

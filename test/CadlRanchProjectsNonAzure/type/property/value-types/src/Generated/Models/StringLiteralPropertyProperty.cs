@@ -27,7 +27,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         public static bool operator ==(StringLiteralPropertyProperty left, StringLiteralPropertyProperty right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StringLiteralPropertyProperty"/> values are not the same. </summary>
         public static bool operator !=(StringLiteralPropertyProperty left, StringLiteralPropertyProperty right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StringLiteralPropertyProperty"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StringLiteralPropertyProperty"/>. </summary>
         public static implicit operator StringLiteralPropertyProperty(string value) => new StringLiteralPropertyProperty(value);
 
         /// <inheritdoc />

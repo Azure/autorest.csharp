@@ -48,7 +48,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(RequestMethodMatchConditionParametersMatchValuesItem left, RequestMethodMatchConditionParametersMatchValuesItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RequestMethodMatchConditionParametersMatchValuesItem"/> values are not the same. </summary>
         public static bool operator !=(RequestMethodMatchConditionParametersMatchValuesItem left, RequestMethodMatchConditionParametersMatchValuesItem right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RequestMethodMatchConditionParametersMatchValuesItem"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RequestMethodMatchConditionParametersMatchValuesItem"/>. </summary>
         public static implicit operator RequestMethodMatchConditionParametersMatchValuesItem(string value) => new RequestMethodMatchConditionParametersMatchValuesItem(value);
 
         /// <inheritdoc />

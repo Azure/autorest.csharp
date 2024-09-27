@@ -27,7 +27,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         public static bool operator ==(WidgetData1Kind left, WidgetData1Kind right) => left.Equals(right);
         /// <summary> Determines if two <see cref="WidgetData1Kind"/> values are not the same. </summary>
         public static bool operator !=(WidgetData1Kind left, WidgetData1Kind right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="WidgetData1Kind"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="WidgetData1Kind"/>. </summary>
         public static implicit operator WidgetData1Kind(string value) => new WidgetData1Kind(value);
 
         /// <inheritdoc />

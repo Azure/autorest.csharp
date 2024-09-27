@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(KeySource left, KeySource right) => left.Equals(right);
         /// <summary> Determines if two <see cref="KeySource"/> values are not the same. </summary>
         public static bool operator !=(KeySource left, KeySource right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="KeySource"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="KeySource"/>. </summary>
         public static implicit operator KeySource(string value) => new KeySource(value);
 
         /// <inheritdoc />

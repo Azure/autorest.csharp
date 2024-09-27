@@ -33,7 +33,7 @@ namespace NameConflicts.Models
         public static bool operator ==(SystemEnum left, SystemEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SystemEnum"/> values are not the same. </summary>
         public static bool operator !=(SystemEnum left, SystemEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="SystemEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="SystemEnum"/>. </summary>
         public static implicit operator SystemEnum(string value) => new SystemEnum(value);
 
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(UrlRedirectActionParametersTypeName left, UrlRedirectActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="UrlRedirectActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(UrlRedirectActionParametersTypeName left, UrlRedirectActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="UrlRedirectActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="UrlRedirectActionParametersTypeName"/>. </summary>
         public static implicit operator UrlRedirectActionParametersTypeName(string value) => new UrlRedirectActionParametersTypeName(value);
 
         /// <inheritdoc />

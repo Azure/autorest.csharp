@@ -45,7 +45,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(DesiredStatusCode left, DesiredStatusCode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DesiredStatusCode"/> values are not the same. </summary>
         public static bool operator !=(DesiredStatusCode left, DesiredStatusCode right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DesiredStatusCode"/>. </summary>
+        /// <summary> Converts a <see cref="int"/> to a <see cref="DesiredStatusCode"/>. </summary>
         public static implicit operator DesiredStatusCode(int value) => new DesiredStatusCode(value);
 
         /// <inheritdoc />

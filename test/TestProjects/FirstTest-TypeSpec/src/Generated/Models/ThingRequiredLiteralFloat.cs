@@ -33,7 +33,7 @@ namespace FirstTestTypeSpec.Models
         public static bool operator ==(ThingRequiredLiteralFloat left, ThingRequiredLiteralFloat right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ThingRequiredLiteralFloat"/> values are not the same. </summary>
         public static bool operator !=(ThingRequiredLiteralFloat left, ThingRequiredLiteralFloat right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ThingRequiredLiteralFloat"/>. </summary>
+        /// <summary> Converts a <see cref="float"/> to a <see cref="ThingRequiredLiteralFloat"/>. </summary>
         public static implicit operator ThingRequiredLiteralFloat(float value) => new ThingRequiredLiteralFloat(value);
 
         /// <inheritdoc />

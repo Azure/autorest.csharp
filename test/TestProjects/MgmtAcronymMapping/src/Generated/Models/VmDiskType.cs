@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
         public static bool operator ==(VmDiskType left, VmDiskType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VmDiskType"/> values are not the same. </summary>
         public static bool operator !=(VmDiskType left, VmDiskType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="VmDiskType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="VmDiskType"/>. </summary>
         public static implicit operator VmDiskType(string value) => new VmDiskType(value);
 
         /// <inheritdoc />
