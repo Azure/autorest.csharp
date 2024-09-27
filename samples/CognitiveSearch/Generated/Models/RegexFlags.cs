@@ -51,7 +51,7 @@ namespace CognitiveSearch.Models
         public static bool operator ==(RegexFlags left, RegexFlags right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RegexFlags"/> values are not the same. </summary>
         public static bool operator !=(RegexFlags left, RegexFlags right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RegexFlags"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RegexFlags"/>. </summary>
         public static implicit operator RegexFlags(string value) => new RegexFlags(value);
 
         /// <inheritdoc />

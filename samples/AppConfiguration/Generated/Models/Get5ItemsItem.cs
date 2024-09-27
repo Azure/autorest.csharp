@@ -30,7 +30,7 @@ namespace AppConfiguration.Models
         public static bool operator ==(Get5ItemsItem left, Get5ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Get5ItemsItem"/> values are not the same. </summary>
         public static bool operator !=(Get5ItemsItem left, Get5ItemsItem right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Get5ItemsItem"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Get5ItemsItem"/>. </summary>
         public static implicit operator Get5ItemsItem(string value) => new Get5ItemsItem(value);
 
         /// <inheritdoc />

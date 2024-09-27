@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(EncryptionType left, EncryptionType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EncryptionType"/> values are not the same. </summary>
         public static bool operator !=(EncryptionType left, EncryptionType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EncryptionType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EncryptionType"/>. </summary>
         public static implicit operator EncryptionType(string value) => new EncryptionType(value);
 
         /// <inheritdoc />

@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(FirewallPolicySkuTier left, FirewallPolicySkuTier right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FirewallPolicySkuTier"/> values are not the same. </summary>
         public static bool operator !=(FirewallPolicySkuTier left, FirewallPolicySkuTier right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FirewallPolicySkuTier"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="FirewallPolicySkuTier"/>. </summary>
         public static implicit operator FirewallPolicySkuTier(string value) => new FirewallPolicySkuTier(value);
 
         /// <inheritdoc />

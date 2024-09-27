@@ -48,7 +48,7 @@ namespace MgmtAcronymMapping.Models
         public static bool operator ==(DiskCreateOptionType left, DiskCreateOptionType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DiskCreateOptionType"/> values are not the same. </summary>
         public static bool operator !=(DiskCreateOptionType left, DiskCreateOptionType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DiskCreateOptionType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="DiskCreateOptionType"/>. </summary>
         public static implicit operator DiskCreateOptionType(string value) => new DiskCreateOptionType(value);
 
         /// <inheritdoc />

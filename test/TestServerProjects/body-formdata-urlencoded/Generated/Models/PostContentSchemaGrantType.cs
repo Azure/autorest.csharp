@@ -30,7 +30,7 @@ namespace body_formdata_urlencoded.Models
         public static bool operator ==(PostContentSchemaGrantType left, PostContentSchemaGrantType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PostContentSchemaGrantType"/> values are not the same. </summary>
         public static bool operator !=(PostContentSchemaGrantType left, PostContentSchemaGrantType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="PostContentSchemaGrantType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="PostContentSchemaGrantType"/>. </summary>
         public static implicit operator PostContentSchemaGrantType(string value) => new PostContentSchemaGrantType(value);
 
         /// <inheritdoc />

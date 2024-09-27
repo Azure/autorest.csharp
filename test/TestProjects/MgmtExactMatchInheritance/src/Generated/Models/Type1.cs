@@ -30,7 +30,7 @@ namespace MgmtExactMatchInheritance.Models
         public static bool operator ==(Type1 left, Type1 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Type1"/> values are not the same. </summary>
         public static bool operator !=(Type1 left, Type1 right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Type1"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Type1"/>. </summary>
         public static implicit operator Type1(string value) => new Type1(value);
 
         /// <inheritdoc />

@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(ModelObject left, ModelObject right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ModelObject"/> values are not the same. </summary>
         public static bool operator !=(ModelObject left, ModelObject right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ModelObject"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ModelObject"/>. </summary>
         public static implicit operator ModelObject(string value) => new ModelObject(value);
 
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(HeaderActionParametersTypeName left, HeaderActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="HeaderActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(HeaderActionParametersTypeName left, HeaderActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="HeaderActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="HeaderActionParametersTypeName"/>. </summary>
         public static implicit operator HeaderActionParametersTypeName(string value) => new HeaderActionParametersTypeName(value);
 
         /// <inheritdoc />

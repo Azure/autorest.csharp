@@ -93,7 +93,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 generateSampleProject: true,
                 generateTestProject: true,
                 examplesDirectory: null,
-                helperNamespace: "");
+                helperNamespace: "",
+                customHeader: null);
         }
 
         private void TestPair(ResourceMatchType expected, string httpMethod, string resourcePathStr, string requestPathStr, bool isList)

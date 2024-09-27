@@ -33,7 +33,7 @@ namespace CustomizationsInTsp.Models
         public static bool operator ==(NormalEnum left, NormalEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NormalEnum"/> values are not the same. </summary>
         public static bool operator !=(NormalEnum left, NormalEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="NormalEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="NormalEnum"/>. </summary>
         public static implicit operator NormalEnum(string value) => new NormalEnum(value);
 
         /// <inheritdoc />

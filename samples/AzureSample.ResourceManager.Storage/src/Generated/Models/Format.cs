@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(Format left, Format right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Format"/> values are not the same. </summary>
         public static bool operator !=(Format left, Format right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Format"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Format"/>. </summary>
         public static implicit operator Format(string value) => new Format(value);
 
         /// <inheritdoc />

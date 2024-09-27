@@ -370,7 +370,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var cs = enumType.Type;
             string name = enumType.Declaration.Name;
-            var isString = enumType.ValueType.FrameworkType == typeof(string);
+            var valueType = enumType.ValueType;
+            var isString = valueType.FrameworkType == typeof(string);
 
             using (writer.Namespace(enumType.Declaration.Namespace))
             {
@@ -380,7 +381,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{enumType.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
                 {
-                    writer.Line($"private readonly {enumType.ValueType} _value;");
+                    writer.Line($"private readonly {valueType} _value;");
                     writer.Line();
 
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {name:C}.");
@@ -390,7 +391,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteXmlDocumentationException(typeof(ArgumentNullException), $"<paramref name=\"value\"/> is null.");
                     }
 
-                    using (writer.Scope($"public {name}({enumType.ValueType} value)"))
+                    using (writer.Scope($"public {name}({valueType} value)"))
                     {
                         writer.Append($"_value = value");
                         if (isString)
@@ -404,7 +405,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var choice in enumType.Values)
                     {
                         var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
-                        writer.Line($"private const {enumType.ValueType} {fieldName} = {choice.Value.Value:L};");
+                        writer.Line($"private const {valueType} {fieldName} = {choice.Value.Value:L};");
                     }
                     writer.Line();
 
@@ -419,7 +420,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (!enumType.IsStringValueType)
                     {
                         writer.Line();
-                        writer.Line($"internal {enumType.ValueType} {enumType.SerializationMethodName}() => _value;");
+                        writer.Line($"internal {valueType} {enumType.SerializationMethodName}() => _value;");
                         writer.Line();
                     }
 
@@ -429,8 +430,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary($"Determines if two {name:C} values are not the same.");
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Converts a string to a {name:C}.");
-                    writer.Line($"public static implicit operator {cs}({enumType.ValueType} value) => new {cs}(value);");
+                    writer.WriteXmlDocumentationSummary($"Converts a {valueType:C} to a {name:C}.");
+                    writer.Line($"public static implicit operator {cs}({valueType} value) => new {cs}(value);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -441,11 +442,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public bool Equals({cs} other) => ");
                     if (isString)
                     {
-                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
+                        writer.Line($"{valueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
                     }
                     else
                     {
-                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value);");
+                        writer.Line($"{valueType}.Equals(_value, other._value);");
                     }
                     writer.Line();
 

@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
         public static bool operator ==(TokenizerName left, TokenizerName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TokenizerName"/> values are not the same. </summary>
         public static bool operator !=(TokenizerName left, TokenizerName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="TokenizerName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="TokenizerName"/>. </summary>
         public static implicit operator TokenizerName(string value) => new TokenizerName(value);
 
         /// <inheritdoc />

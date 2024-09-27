@@ -30,7 +30,7 @@ namespace OpenAI.Models
         public static bool operator ==(CreateModerationRequestModel left, CreateModerationRequestModel right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CreateModerationRequestModel"/> values are not the same. </summary>
         public static bool operator !=(CreateModerationRequestModel left, CreateModerationRequestModel right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CreateModerationRequestModel"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CreateModerationRequestModel"/>. </summary>
         public static implicit operator CreateModerationRequestModel(string value) => new CreateModerationRequestModel(value);
 
         /// <inheritdoc />
