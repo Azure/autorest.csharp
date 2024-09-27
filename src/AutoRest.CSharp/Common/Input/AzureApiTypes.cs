@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public override ExtensibleSnippets ExtensibleSnippets { get; } = new AzureExtensibleSnippets();
 
-        public override string LicenseString => """
+        public override string LicenseString => Configuration.CustomHeader ?? """
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
