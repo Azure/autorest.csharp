@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 result = CreateDerivedType(ref reader, id, kind, options);
             }
 
-            return result ?? CreateDerivedType(ref reader, id, kind, options);
+            return result ?? throw new JsonException();
         }
 
         private const string ModelKind = "model";
@@ -143,41 +144,44 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
 
             return result;
+        }
 
-            static InputExampleValue ParseUnknownValue(InputType type, JsonElement? rawValue)
+        private static InputExampleValue ParseUnknownValue(InputType type, JsonElement? rawValue)
+        {
+            switch (rawValue?.ValueKind)
             {
-                switch (rawValue?.ValueKind)
-                {
-                    case null or JsonValueKind.Null:
-                        return InputExampleValue.Null(type);
-                    case JsonValueKind.String:
-                        return InputExampleValue.Value(type, rawValue.Value.GetString());
-                    case JsonValueKind.True or JsonValueKind.False:
-                        return InputExampleValue.Value(type, rawValue.Value.GetBoolean());
-                    case JsonValueKind.Number:
-                        if (rawValue.Value.TryGetInt32(out var int32Value))
-                            return InputExampleValue.Value(type, int32Value);
-                        else if (rawValue.Value.TryGetInt64(out var int64Value))
-                            return InputExampleValue.Value(type, int64Value);
+                case null or JsonValueKind.Null:
+                    return InputExampleValue.Null(type);
+                case JsonValueKind.String:
+                    return InputExampleValue.Value(type, rawValue.Value.GetString());
+                case JsonValueKind.True or JsonValueKind.False:
+                    return InputExampleValue.Value(type, rawValue.Value.GetBoolean());
+                case JsonValueKind.Number:
+                    if (rawValue.Value.TryGetInt32(out var int32Value))
+                        return InputExampleValue.Value(type, int32Value);
+                    else if (rawValue.Value.TryGetInt64(out var int64Value))
+                        return InputExampleValue.Value(type, int64Value);
+                    else if (rawValue.Value.TryGetSingle(out var floatValue))
+                        return InputExampleValue.Value(type, floatValue);
+                    else
                         return InputExampleValue.Value(type, rawValue.Value.GetDouble());
-                    case JsonValueKind.Array:
-                        var length = rawValue.Value.GetArrayLength();
-                        var values = new List<InputExampleValue>(length);
-                        foreach (var item in rawValue.Value.EnumerateArray())
-                        {
-                            values.Add(ParseUnknownValue(type, item));
-                        }
-                        return InputExampleValue.List(type, values);
-                    case JsonValueKind.Object:
-                        var objValues = new Dictionary<string, InputExampleValue>();
-                        foreach (var property in rawValue.Value.EnumerateObject())
-                        {
-                            objValues.Add(property.Name, ParseUnknownValue(type, property.Value));
-                        }
-                        return InputExampleValue.Object(type, objValues);
-                    default:
-                        throw new JsonException($"kind {rawValue?.ValueKind} is not expected here");
-                }
+                case JsonValueKind.Array:
+                    var length = rawValue.Value.GetArrayLength();
+                    var values = new List<InputExampleValue>(length);
+                    foreach (var item in rawValue.Value.EnumerateArray())
+                    {
+                        values.Add(ParseUnknownValue(type, item));
+                    }
+                    return InputExampleValue.List(type, values);
+                case JsonValueKind.Object:
+                    var objValues = new Dictionary<string, InputExampleValue>();
+                    foreach (var property in rawValue.Value.EnumerateObject())
+                    {
+                        objValues.Add(property.Name, ParseUnknownValue(type, property.Value));
+                    }
+                    return InputExampleValue.Object(type, objValues);
+                default:
+                    throw new JsonException($"kind {rawValue?.ValueKind} is not expected here");
             }
         }
 
@@ -198,13 +202,29 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 }
             }
 
+            var effectiveType = type switch
+            {
+                null => throw new JsonException(),
+                InputEnumType enumType => enumType.ValueType,
+                InputDurationType durationType => durationType.WireType,
+                InputDateTimeType dateTimeType => dateTimeType.WireType,
+                _ => type
+            };
+
             object? value = rawValue?.ValueKind switch
             {
                 null or JsonValueKind.Null => null,
                 JsonValueKind.String => rawValue.Value.GetString(),
                 JsonValueKind.False => false,
                 JsonValueKind.True => true,
-                JsonValueKind.Number => rawValue.Value.GetDouble(),
+                JsonValueKind.Number => effectiveType switch
+                {
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.UInt32 } => rawValue.Value.TryGetInt32(out var intValue) ? intValue : rawValue.Value.GetDouble(),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.Integer } => rawValue.Value.TryGetInt64(out var longValue) ? longValue : rawValue.Value.GetDouble(),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 } => rawValue.Value.TryGetSingle(out var floatValue) ? floatValue : rawValue.Value.GetDouble(),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 } => rawValue.Value.TryGetDecimal(out var decimalValue) ? decimalValue : rawValue.Value.GetDouble(),
+                    _ => rawValue.Value.GetDouble(),
+                },
                 _ => throw new JsonException($"kind {rawValue?.ValueKind} is not expected here")
             };
 

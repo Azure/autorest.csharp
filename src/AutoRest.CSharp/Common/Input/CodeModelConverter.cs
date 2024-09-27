@@ -239,6 +239,8 @@ namespace AutoRest.CSharp.Common.Input
                         return long.TryParse(strValue, out var longValue) ? longValue : default(long);
                     case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 or InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float }:
                         return double.TryParse(strValue, out var doubleValue) ? doubleValue : default(double);
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 }:
+                        return decimal.TryParse(strValue, out var decimalValue) ? decimalValue : default(decimal);
                     case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Boolean }:
                         return bool.TryParse(strValue, out var boolValue) ? boolValue : default(bool);
                     default:
