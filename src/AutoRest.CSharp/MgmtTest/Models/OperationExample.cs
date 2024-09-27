@@ -127,13 +127,9 @@ namespace AutoRest.CSharp.MgmtTest.Models
             // find a path parameter in our path parameters for one with same name
             var serializedName = GetParameterSerializedName(reference.Name);
             var parameter = FindPathExampleParameterBySerializedName(serializedName);
-            var exampleValue = ReplacePathParameterValue(serializedName, reference.Type, parameter.ExampleValue);
 
-            return new ExampleParameterValue(reference, exampleValue);
+            return new ExampleParameterValue(reference, parameter.ExampleValue);
         }
-
-        protected virtual InputExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, InputExampleValue value)
-            => value;
 
         private Dictionary<string, string> EnsureParameterSerializedNames()
         {
