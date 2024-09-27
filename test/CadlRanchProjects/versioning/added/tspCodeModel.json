@@ -176,6 +176,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV1.prop"
     },
@@ -190,6 +191,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV1.enumProp"
     },
@@ -230,6 +232,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV1.unionProp"
     }
@@ -258,6 +261,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV2.prop"
     },
@@ -272,6 +276,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV2.enumProp"
     },
@@ -305,6 +310,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.Added.ModelV2.unionProp"
     }

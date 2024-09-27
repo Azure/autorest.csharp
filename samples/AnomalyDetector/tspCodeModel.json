@@ -1003,6 +1003,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult.resultId"
     },
@@ -1033,6 +1034,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary.status"
        },
@@ -1071,6 +1073,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse.code"
            },
@@ -1090,6 +1093,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse.message"
            }
@@ -1101,6 +1105,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary.errors"
        },
@@ -1139,6 +1144,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState.variable"
            },
@@ -1158,6 +1164,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState.filledNARatio"
            },
@@ -1177,6 +1184,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState.effectiveCount"
            },
@@ -1204,6 +1212,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState.firstTimestamp"
            },
@@ -1231,6 +1240,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState.lastTimestamp"
            }
@@ -1242,6 +1252,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary.variableStates"
        },
@@ -1276,6 +1287,7 @@
            "optional": false,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions.dataSource"
           },
@@ -1295,6 +1307,7 @@
            "optional": false,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions.topContributorCount"
           },
@@ -1322,6 +1335,7 @@
            "optional": false,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions.startTime"
           },
@@ -1349,6 +1363,7 @@
            "optional": false,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions.endTime"
           }
@@ -1357,6 +1372,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary.setupInfo"
        }
@@ -1365,6 +1381,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult.summary"
     },
@@ -1411,6 +1428,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState.timestamp"
         },
@@ -1445,6 +1463,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue.isAnomaly"
            },
@@ -1464,6 +1483,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue.severity"
            },
@@ -1483,6 +1503,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue.score"
            },
@@ -1521,6 +1542,7 @@
                 "optional": true,
                 "readOnly": false,
                 "discriminator": false,
+                "flatten": false,
                 "decorators": [],
                 "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation.variable"
                },
@@ -1540,6 +1562,7 @@
                 "optional": true,
                 "readOnly": false,
                 "discriminator": false,
+                "flatten": false,
                 "decorators": [],
                 "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation.contributionScore"
                },
@@ -1581,6 +1604,7 @@
                    "optional": true,
                    "readOnly": false,
                    "discriminator": false,
+                   "flatten": false,
                    "decorators": [],
                    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges.changedVariables"
                   }
@@ -1589,6 +1613,7 @@
                 "optional": true,
                 "readOnly": false,
                 "discriminator": false,
+                "flatten": false,
                 "decorators": [],
                 "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation.correlationChanges"
                }
@@ -1600,6 +1625,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue.interpretation"
            }
@@ -1608,6 +1634,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState.value"
         },
@@ -1630,6 +1657,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState.errors"
         }
@@ -1641,6 +1669,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult.results"
     }
@@ -1695,6 +1724,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.dataSource"
     },
@@ -1710,6 +1740,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.dataSchema"
     },
@@ -1737,6 +1768,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.startTime"
     },
@@ -1764,6 +1796,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.endTime"
     },
@@ -1783,6 +1816,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.displayName"
     },
@@ -1802,6 +1836,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.slidingWindow"
     },
@@ -1832,6 +1867,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy.alignMode"
        },
@@ -1847,6 +1883,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy.fillNAMethod"
        },
@@ -1866,6 +1903,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy.paddingValue"
        }
@@ -1874,6 +1912,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.alignPolicy"
     },
@@ -1889,6 +1928,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.status"
     },
@@ -1911,6 +1951,7 @@
      "optional": true,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.errors"
     },
@@ -1967,6 +2008,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState.epochIds"
           },
@@ -1993,6 +2035,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState.trainLosses"
           },
@@ -2019,6 +2062,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState.validationLosses"
           },
@@ -2045,6 +2089,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState.latenciesInSeconds"
           }
@@ -2053,6 +2098,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo.modelState"
        },
@@ -2075,6 +2121,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo.variableStates"
        }
@@ -2083,6 +2130,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo.diagnosticsInfo"
     }
@@ -2129,6 +2177,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel.modelId"
     },
@@ -2156,6 +2205,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel.createdTime"
     },
@@ -2183,6 +2233,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel.lastUpdatedTime"
     },
@@ -2198,6 +2249,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel.modelInfo"
     }
@@ -2231,6 +2283,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList.models"
     },
@@ -2250,6 +2303,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList.currentCount"
     },
@@ -2269,6 +2323,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList.maxCount"
     },
@@ -2288,6 +2343,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList.nextLink"
     }
@@ -2337,6 +2393,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues.variable"
         },
@@ -2363,6 +2420,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues.timestamps"
         },
@@ -2389,6 +2447,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues.values"
         }
@@ -2400,6 +2459,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions.variables"
     },
@@ -2419,6 +2479,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions.topContributorCount"
     }
@@ -2455,6 +2516,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult.variableStates"
     },
@@ -2477,6 +2539,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult.results"
     }
@@ -2534,6 +2597,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint.timestamp"
         },
@@ -2553,6 +2617,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint.value"
         }
@@ -2564,6 +2629,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.series"
     },
@@ -2579,6 +2645,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.granularity"
     },
@@ -2598,6 +2665,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.customInterval"
     },
@@ -2617,6 +2685,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.period"
     },
@@ -2636,6 +2705,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.maxAnomalyRatio"
     },
@@ -2655,6 +2725,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.sensitivity"
     },
@@ -2670,6 +2741,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.imputeMode"
     },
@@ -2689,6 +2761,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions.imputeFixedValue"
     }
@@ -2722,6 +2795,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.period"
     },
@@ -2748,6 +2822,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.expectedValues"
     },
@@ -2774,6 +2849,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.upperMargins"
     },
@@ -2800,6 +2876,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.lowerMargins"
     },
@@ -2826,6 +2903,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isAnomaly"
     },
@@ -2852,6 +2930,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isNegativeAnomaly"
     },
@@ -2878,6 +2957,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.isPositiveAnomaly"
     },
@@ -2904,6 +2984,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult.severity"
     }
@@ -2930,6 +3011,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError.code"
     },
@@ -2949,6 +3031,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError.message"
     }
@@ -2979,6 +3062,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.period"
     },
@@ -2998,6 +3082,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.suggestedWindow"
     },
@@ -3017,6 +3102,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.expectedValue"
     },
@@ -3036,6 +3122,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.upperMargin"
     },
@@ -3055,6 +3142,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.lowerMargin"
     },
@@ -3074,6 +3162,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.isAnomaly"
     },
@@ -3093,6 +3182,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.isNegativeAnomaly"
     },
@@ -3112,6 +3202,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.isPositiveAnomaly"
     },
@@ -3131,6 +3222,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult.severity"
     }
@@ -3164,6 +3256,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.series"
     },
@@ -3179,6 +3272,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.granularity"
     },
@@ -3198,6 +3292,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.customInterval"
     },
@@ -3217,6 +3312,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.period"
     },
@@ -3236,6 +3332,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.stableTrendWindow"
     },
@@ -3255,6 +3352,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions.threshold"
     }
@@ -3285,6 +3383,7 @@
      "optional": true,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult.period"
     },
@@ -3311,6 +3410,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult.isChangePoint"
     },
@@ -3337,6 +3437,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult.confidenceScores"
     }
@@ -3367,6 +3468,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ResponseError.code"
     },
@@ -3386,6 +3488,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ResponseError.message"
     }

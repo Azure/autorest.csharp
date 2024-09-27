@@ -123,6 +123,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.newProp"
     },
@@ -137,6 +138,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.enumProp"
     },
@@ -177,6 +179,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.RenamedFrom.NewModel.unionProp"
     }

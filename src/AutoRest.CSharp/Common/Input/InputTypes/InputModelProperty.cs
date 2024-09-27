@@ -6,10 +6,16 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputModelProperty(string Name, string SerializedName, string Description, InputType Type, InputConstant? ConstantValue, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, IReadOnlyList<string>? FlattenedNames = null)
+internal record InputModelProperty(string Name, string SerializedName, string Description, InputType Type, InputConstant? ConstantValue, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
 {
     public FormattableString? DefaultValue { get; init; }
 
     public string Name { get; internal set; } = Name;
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
-}
+
+    // original emitter input
+    public bool Flatten { get; internal set; }
+
+    // calculated flatten prefix names
+    public IReadOnlyList<string>? FlattenedNames { get; internal set; }
+};
