@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Input
             bool isOptional = false;
             bool isDiscriminator = false;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
-            bool flatten = false;
+            bool isFlattened = false;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadBoolean("optional", ref isOptional)
                     || reader.TryReadBoolean("discriminator", ref isDiscriminator)
                     || reader.TryReadWithConverter("decorators", options, ref decorators)
-                    || reader.TryReadBoolean("flatten", ref flatten);
+                    || reader.TryReadBoolean("flatten", ref isFlattened);
 
                 if (!isKnownProperty)
                 {
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Common.Input
             var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator)
             {
                 Decorators = decorators ?? [],
-                Flatten = flatten
+                IsFlattened = isFlattened
             };
             if (id != null)
             {

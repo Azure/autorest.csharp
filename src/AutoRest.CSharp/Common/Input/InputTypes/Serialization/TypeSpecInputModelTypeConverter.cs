@@ -162,13 +162,13 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         /// <summary>
-        /// Flatten the property if <see cref="InputModelProperty.Flatten"/> is true.
+        /// Flatten the property if <see cref="InputModelProperty.IsFlattened"/> is true.
         /// </summary>
         /// <param name="propertyToFlatten"> <see cref="InputModelProperty"/> model property type passed in by emitter to be flattened. </param>
         /// <returns> One or more <see cref="InputModelProperty"/> instances. </returns>
         private static IEnumerable<InputModelProperty> FlattenPropertyIfNecessary(InputModelProperty propertyToFlatten)
         {
-            if (propertyToFlatten.Flatten is false)
+            if (propertyToFlatten.IsFlattened is false)
             {
                 yield return propertyToFlatten;
             }
