@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -219,11 +218,12 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 JsonValueKind.True => true,
                 JsonValueKind.Number => effectiveType switch
                 {
-                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.UInt32 } => rawValue.Value.TryGetInt32(out var intValue) ? intValue : rawValue.Value.GetDouble(),
-                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.Integer } => rawValue.Value.TryGetInt64(out var longValue) ? longValue : rawValue.Value.GetDouble(),
-                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 } => rawValue.Value.TryGetSingle(out var floatValue) ? floatValue : rawValue.Value.GetDouble(),
-                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 } => rawValue.Value.TryGetDecimal(out var decimalValue) ? decimalValue : rawValue.Value.GetDouble(),
-                    _ => rawValue.Value.GetDouble(),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.UInt32 } => int.TryParse(rawValue.Value.GetRawText(), out var intValue) ? intValue : default(int),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.Integer } => long.TryParse(rawValue.Value.GetRawText(), out var longValue) ? longValue : default(long),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 } => float.TryParse(rawValue.Value.GetRawText(), out var floatValue) ? floatValue : default(float),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float } => double.TryParse(rawValue.Value.GetRawText(), out var doubleValue) ? doubleValue : default(double),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 } => decimal.TryParse(rawValue.Value.GetRawText(), out var decimalValue) ? decimalValue : default(decimal),
+                    _ => null,
                 },
                 _ => throw new JsonException($"kind {rawValue?.ValueKind} is not expected here")
             };
