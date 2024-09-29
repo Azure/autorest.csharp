@@ -151,28 +151,37 @@ namespace AutoRest.CSharp.Common.Input
                     throw new JsonException($"Property of model '{modelName}' cannot be null.");
                 }
 
-                var flattenedProperties = FlattenPropertyIfNecessary(rawProperty);
-
-                foreach (var property in flattenedProperties)
+                if (rawProperty.IsFlattened)
                 {
-                    properties.Add(isMultipartType ? ConvertMultipartProperty(property) : property);
+                    if (isMultipartType)
+                    {
+                        throw new JsonException($"Flattened property '{rawProperty.Name}' cannot be used in a multipart type '{modelName}'.");
+                    }
+
+                    var flattenedProperties = FlattenProperty(rawProperty);
+
+                    foreach (var property in flattenedProperties)
+                    {
+                        properties.Add(property);
+                    }
                 }
+                else
+                {
+                    properties.Add(isMultipartType ? ConvertMultipartProperty(rawProperty) : rawProperty);
+                }
+
             }
             reader.Read();
         }
 
         /// <summary>
-        /// Flatten the property if <see cref="InputModelProperty.IsFlattened"/> is true.
+        /// Flatten the property of which the <see cref="InputModelProperty.IsFlattened"/> is true.
         /// </summary>
         /// <param name="propertyToFlatten"> <see cref="InputModelProperty"/> model property type passed in by emitter to be flattened. </param>
         /// <returns> One or more <see cref="InputModelProperty"/> instances. </returns>
-        private static IEnumerable<InputModelProperty> FlattenPropertyIfNecessary(InputModelProperty propertyToFlatten)
+        private static IEnumerable<InputModelProperty> FlattenProperty(InputModelProperty propertyToFlatten)
         {
-            if (propertyToFlatten.IsFlattened is false)
-            {
-                yield return propertyToFlatten;
-            }
-            else if (propertyToFlatten.Type is InputModelType model)
+            if (propertyToFlatten.Type is InputModelType model)
             {
                 foreach (var p in model.Properties)
                 {
