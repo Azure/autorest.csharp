@@ -17,6 +17,7 @@ namespace Client.Structure.Service.Multiple.Client.Models
             ClientType.MultiClient => "multi-client",
             ClientType.RenamedOperation => "renamed-operation",
             ClientType.TwoOperationGroup => "two-operation-group",
+            ClientType.ClientOperationGroup => "client-operation-group",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ClientType value.")
         };
 
@@ -26,6 +27,7 @@ namespace Client.Structure.Service.Multiple.Client.Models
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "multi-client")) return ClientType.MultiClient;
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "renamed-operation")) return ClientType.RenamedOperation;
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "two-operation-group")) return ClientType.TwoOperationGroup;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "client-operation-group")) return ClientType.ClientOperationGroup;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ClientType value.");
         }
     }
