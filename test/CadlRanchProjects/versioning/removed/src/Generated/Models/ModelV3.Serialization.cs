@@ -12,33 +12,25 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace TypeSpec.Versioning.Specific.Models
+namespace Versioning.Removed.Models
 {
-    public partial class Resource : IUtf8JsonSerializable, IJsonModel<Resource>
+    public partial class ModelV3 : IUtf8JsonSerializable, IJsonModel<ModelV3>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Resource>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelV3>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<Resource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ModelV3>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Resource>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV3>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Resource)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelV3)} does not support writing '{format}' format.");
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(Type);
+            writer.WritePropertyName("id"u8);
+            writer.WriteStringValue(Id);
+            writer.WritePropertyName("enumProp"u8);
+            writer.WriteStringValue(EnumProp.ToSerialString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -57,19 +49,19 @@ namespace TypeSpec.Versioning.Specific.Models
             writer.WriteEndObject();
         }
 
-        Resource IJsonModel<Resource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelV3 IJsonModel<ModelV3>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Resource>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV3>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Resource)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelV3)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeResource(document.RootElement, options);
+            return DeserializeModelV3(document.RootElement, options);
         }
 
-        internal static Resource DeserializeResource(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ModelV3 DeserializeModelV3(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -78,8 +70,7 @@ namespace TypeSpec.Versioning.Specific.Models
                 return null;
             }
             string id = default;
-            string name = default;
-            string type = default;
+            EnumV3 enumProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -89,14 +80,9 @@ namespace TypeSpec.Versioning.Specific.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("name"u8))
+                if (property.NameEquals("enumProp"u8))
                 {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"u8))
-                {
-                    type = property.Value.GetString();
+                    enumProp = property.Value.GetString().ToEnumV3();
                     continue;
                 }
                 if (options.Format != "W")
@@ -105,46 +91,46 @@ namespace TypeSpec.Versioning.Specific.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new Resource(id, name, type, serializedAdditionalRawData);
+            return new ModelV3(id, enumProp, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<Resource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelV3>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Resource>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV3>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(Resource)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelV3)} does not support writing '{options.Format}' format.");
             }
         }
 
-        Resource IPersistableModel<Resource>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ModelV3 IPersistableModel<ModelV3>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Resource>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV3>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeResource(document.RootElement, options);
+                        return DeserializeModelV3(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(Resource)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelV3)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<Resource>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelV3>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Resource FromResponse(Response response)
+        internal static ModelV3 FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeResource(document.RootElement);
+            return DeserializeModelV3(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace TypeSpec.Versioning.Oldest.Models
+namespace Versioning.Removed.Models
 {
-    /// <summary> The ExportedResource. </summary>
-    public partial class ExportedResource
+    /// <summary> The ModelV3. </summary>
+    public partial class ModelV3
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,52 +45,37 @@ namespace TypeSpec.Versioning.Oldest.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ExportedResource"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelV3"/>. </summary>
         /// <param name="id"></param>
-        /// <param name="resourceUri"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="resourceUri"/>, <paramref name="name"/> or <paramref name="type"/> is null. </exception>
-        internal ExportedResource(string id, string resourceUri, string name, string type)
+        /// <param name="enumProp"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        public ModelV3(string id, EnumV3 enumProp)
         {
             Argument.AssertNotNull(id, nameof(id));
-            Argument.AssertNotNull(resourceUri, nameof(resourceUri));
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(type, nameof(type));
 
             Id = id;
-            ResourceUri = resourceUri;
-            Name = name;
-            Type = type;
+            EnumProp = enumProp;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ExportedResource"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelV3"/>. </summary>
         /// <param name="id"></param>
-        /// <param name="resourceUri"></param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="enumProp"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ExportedResource(string id, string resourceUri, string name, string type, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelV3(string id, EnumV3 enumProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
-            ResourceUri = resourceUri;
-            Name = name;
-            Type = type;
+            EnumProp = enumProp;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ExportedResource"/> for deserialization. </summary>
-        internal ExportedResource()
+        /// <summary> Initializes a new instance of <see cref="ModelV3"/> for deserialization. </summary>
+        internal ModelV3()
         {
         }
 
-        /// <summary> Gets the id. </summary>
-        public string Id { get; }
-        /// <summary> Gets the resource uri. </summary>
-        public string ResourceUri { get; }
-        /// <summary> Gets the name. </summary>
-        public string Name { get; }
-        /// <summary> Gets the type. </summary>
-        public string Type { get; }
+        /// <summary> Gets or sets the id. </summary>
+        public string Id { get; set; }
+        /// <summary> Gets or sets the enum prop. </summary>
+        public EnumV3 EnumProp { get; set; }
     }
 }
