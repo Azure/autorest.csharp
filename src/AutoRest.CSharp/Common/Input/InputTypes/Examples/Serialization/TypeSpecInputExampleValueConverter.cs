@@ -143,44 +143,49 @@ namespace AutoRest.CSharp.Common.Input.Examples
             }
 
             return result;
-        }
 
-        private static InputExampleValue ParseUnknownValue(InputType type, JsonElement? rawValue)
-        {
-            switch (rawValue?.ValueKind)
+            static InputExampleValue ParseUnknownValue(InputType type, JsonElement? rawValue)
             {
-                case null or JsonValueKind.Null:
-                    return InputExampleValue.Null(type);
-                case JsonValueKind.String:
-                    return InputExampleValue.Value(type, rawValue.Value.GetString());
-                case JsonValueKind.True or JsonValueKind.False:
-                    return InputExampleValue.Value(type, rawValue.Value.GetBoolean());
-                case JsonValueKind.Number:
-                    if (rawValue.Value.TryGetInt32(out var int32Value))
-                        return InputExampleValue.Value(type, int32Value);
-                    else if (rawValue.Value.TryGetInt64(out var int64Value))
-                        return InputExampleValue.Value(type, int64Value);
-                    else if (rawValue.Value.TryGetSingle(out var floatValue))
-                        return InputExampleValue.Value(type, floatValue);
-                    else
-                        return InputExampleValue.Value(type, rawValue.Value.GetDouble());
-                case JsonValueKind.Array:
-                    var length = rawValue.Value.GetArrayLength();
-                    var values = new List<InputExampleValue>(length);
-                    foreach (var item in rawValue.Value.EnumerateArray())
-                    {
-                        values.Add(ParseUnknownValue(type, item));
-                    }
-                    return InputExampleValue.List(type, values);
-                case JsonValueKind.Object:
-                    var objValues = new Dictionary<string, InputExampleValue>();
-                    foreach (var property in rawValue.Value.EnumerateObject())
-                    {
-                        objValues.Add(property.Name, ParseUnknownValue(type, property.Value));
-                    }
-                    return InputExampleValue.Object(type, objValues);
-                default:
-                    throw new JsonException($"kind {rawValue?.ValueKind} is not expected here");
+                switch (rawValue?.ValueKind)
+                {
+                    case null or JsonValueKind.Null:
+                        return InputExampleValue.Null(type);
+                    case JsonValueKind.String:
+                        return InputExampleValue.Value(type, rawValue.Value.GetString());
+                    case JsonValueKind.True or JsonValueKind.False:
+                        return InputExampleValue.Value(type, rawValue.Value.GetBoolean());
+                    case JsonValueKind.Number:
+                        var rawText = rawValue.Value.GetRawText();
+                        if (int.TryParse(rawText, out var int32Value))
+                            return InputExampleValue.Value(type, int32Value);
+                        else if (long.TryParse(rawText, out var int64Value))
+                            return InputExampleValue.Value(type, int64Value);
+                        else if (float.TryParse(rawText, out var floatValue))
+                            return InputExampleValue.Value(type, floatValue);
+                        else if (double.TryParse(rawText, out var doubleValue))
+                            return InputExampleValue.Value(type, doubleValue);
+                        else if (decimal.TryParse(rawText, out var decimalValue))
+                            return InputExampleValue.Value(type, decimalValue);
+                        else
+                            return InputExampleValue.Value(type, null);
+                    case JsonValueKind.Array:
+                        var length = rawValue.Value.GetArrayLength();
+                        var values = new List<InputExampleValue>(length);
+                        foreach (var item in rawValue.Value.EnumerateArray())
+                        {
+                            values.Add(ParseUnknownValue(type, item));
+                        }
+                        return InputExampleValue.List(type, values);
+                    case JsonValueKind.Object:
+                        var objValues = new Dictionary<string, InputExampleValue>();
+                        foreach (var property in rawValue.Value.EnumerateObject())
+                        {
+                            objValues.Add(property.Name, ParseUnknownValue(type, property.Value));
+                        }
+                        return InputExampleValue.Object(type, objValues);
+                    default:
+                        throw new JsonException($"kind {rawValue?.ValueKind} is not expected here");
+                }
             }
         }
 
