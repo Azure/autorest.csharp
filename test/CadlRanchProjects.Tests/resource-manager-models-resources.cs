@@ -41,7 +41,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_createOrReplace() => Test(async (host) =>
         {
             ResourceIdentifier id = ResourceGroupResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
@@ -67,7 +66,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_update() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
@@ -228,7 +226,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_SingletonTrackedResource_createOrUpdate() => Test(async (host) =>
         {
             var id = SingletonTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
@@ -252,7 +249,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_SingletonTrackedResource_update() => Test(async (host) =>
         {
             var id = SingletonTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
