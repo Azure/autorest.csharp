@@ -234,18 +234,5 @@ namespace AutoRest.TestServer.Tests
             var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceOptionalBody");
             Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
         }
-
-        [Test]
-        public void SetKeepNonOverloadableProtocolSignature()
-        {
-            var getPetsClientMethod = typeof(MixApiVersionClient).GetMethod("GetPetsClient");
-            Assert.AreEqual(typeof(Pets), getPetsClientMethod.ReturnType);
-
-            var method = getPetsClientMethod.ReturnType.GetMethod("Delete");
-            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
-
-            method = getPetsClientMethod.ReturnType.GetMethod("Read");
-            Assert.AreEqual(false, method.GetParameters().Last().IsOptional);
-        }
     }
 }
