@@ -254,7 +254,7 @@ where you must use `%3B` as escape of the semicolon to append multiple options.
 
 You could also use the raw `tsp-client` command to debug the project. Run the following command in the same directory of the project you want to debug:
 ```powershell
-npx tsp-client update --output-dir . --emitter-options="csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll;debug=true"
+npx tsp-client update --output-dir . --emitter-options "csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll;debug=true"
 ```
 
 ## Debugging transforms
