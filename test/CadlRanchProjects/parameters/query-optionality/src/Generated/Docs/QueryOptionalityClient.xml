@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="FromRequiredAsync(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromRequiredAsync.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = await client.FromRequiredAsync("<start>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromRequiredAsync with all parameters.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = await client.FromRequiredAsync("<start>", end: "<end>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromRequired(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromRequired.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = client.FromRequired("<start>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromRequired with all parameters.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = client.FromRequired("<start>", end: "<end>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOptionalAsync(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOptionalAsync.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = await client.FromOptionalAsync("<end>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOptionalAsync with all parameters.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = await client.FromOptionalAsync("<end>", start: "<start>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="FromOptional(string,string,RequestContext)">
+      <example>
+This sample shows how to call FromOptional.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = client.FromOptional("<end>");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FromOptional with all parameters.
+<code><![CDATA[
+QueryOptionalityClient client = new QueryOptionalityClient();
+
+Response response = client.FromOptional("<end>", start: "<start>");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

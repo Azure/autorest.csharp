@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ParametersCadl
+namespace Parameters.QueryOptionality
 {
     internal static class Argument
     {

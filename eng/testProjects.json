@@ -54,6 +54,7 @@
         "parameters/collection-format",
         "parameters/spread",
         "parameters/body-optionality",
+        "parameters/query-optionality",
         "client/naming",
         "client/structure/default",
         "client/structure/multi-client",
