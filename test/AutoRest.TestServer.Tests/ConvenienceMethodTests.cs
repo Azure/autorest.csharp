@@ -7,7 +7,6 @@ using Azure;
 using Azure.Core;
 using ConvenienceInCadl;
 using ConvenienceInCadl.Models;
-using MixApiVersion;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
