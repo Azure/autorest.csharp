@@ -72,7 +72,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(StoragePermission left, StoragePermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StoragePermission"/> values are not the same. </summary>
         public static bool operator !=(StoragePermission left, StoragePermission right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StoragePermission"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StoragePermission"/>. </summary>
         public static implicit operator StoragePermission(string value) => new StoragePermission(value);
 
         /// <inheritdoc />

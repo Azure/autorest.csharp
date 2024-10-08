@@ -4,6 +4,7 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Common.Input.Examples;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
@@ -38,6 +39,9 @@ namespace AutoRest.CSharp.Common.Input
                     new TypeSpecInputDurationTypeConverter(referenceHandler),
                     new TypeSpecInputPrimitiveTypeConverter(referenceHandler),
                     new TypeSpecInputDecoratorInfoConverter(referenceHandler),
+                    new TypeSpecInputExampleValueConverter(referenceHandler),
+                    new TypeSpecInputOperationExampleConverter(referenceHandler),
+                    new TypeSpecInputParameterExampleConverter(referenceHandler),
                 }
             };
 

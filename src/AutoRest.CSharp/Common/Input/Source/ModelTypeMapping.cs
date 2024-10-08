@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -14,6 +16,7 @@ namespace AutoRest.CSharp.Input.Source
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
+        public bool UseSystemTextJsonConverter { get; }
 
         public ModelTypeMapping(CodeGenAttributes codeGenAttributes, INamedTypeSymbol existingType)
         {
@@ -46,6 +49,7 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     Usage = usage;
                     Formats = formats;
+                    UseSystemTextJsonConverter = usage != null && usage.Contains(nameof(SchemaTypeUsage.Converter), StringComparer.OrdinalIgnoreCase);
                 }
 
                 // handle CodeGenSerialization attribute

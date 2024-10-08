@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
                 => throw new InvalidOperationException("JSON writing isn't supported");
 
             public override object ResolveReference(string referenceId)
-                => _referenceIdToObjectMap.TryGetValue(referenceId, out object? value) ? value : throw new JsonException();
+                => _referenceIdToObjectMap.TryGetValue(referenceId, out object? value) ? value : throw new JsonException($"Cannot resolve reference {referenceId}");
         }
     }
 }

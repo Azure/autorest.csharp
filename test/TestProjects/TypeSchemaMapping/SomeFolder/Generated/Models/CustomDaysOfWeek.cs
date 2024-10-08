@@ -43,7 +43,7 @@ namespace NamespaceForEnums
         public static bool operator ==(CustomDaysOfWeek left, CustomDaysOfWeek right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CustomDaysOfWeek"/> values are not the same. </summary>
         public static bool operator !=(CustomDaysOfWeek left, CustomDaysOfWeek right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CustomDaysOfWeek"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CustomDaysOfWeek"/>. </summary>
         public static implicit operator CustomDaysOfWeek(string value) => new CustomDaysOfWeek(value);
 
         /// <inheritdoc />

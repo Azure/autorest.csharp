@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SafeintAsStringAsync(SafeintAsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call SafeintAsStringAsync.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+SafeintAsStringProperty value = new SafeintAsStringProperty(1234L);
+Response<SafeintAsStringProperty> response = await client.SafeintAsStringAsync(value);
+]]></code>
+This sample shows how to call SafeintAsStringAsync with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+SafeintAsStringProperty value = new SafeintAsStringProperty(1234L);
+Response<SafeintAsStringProperty> response = await client.SafeintAsStringAsync(value);
+]]></code></example>
+    </member>
+    <member name="SafeintAsString(SafeintAsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call SafeintAsString.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+SafeintAsStringProperty value = new SafeintAsStringProperty(1234L);
+Response<SafeintAsStringProperty> response = client.SafeintAsString(value);
+]]></code>
+This sample shows how to call SafeintAsString with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+SafeintAsStringProperty value = new SafeintAsStringProperty(1234L);
+Response<SafeintAsStringProperty> response = client.SafeintAsString(value);
+]]></code></example>
+    </member>
+    <member name="SafeintAsStringAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SafeintAsStringAsync and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 1234L,
+});
+Response response = await client.SafeintAsStringAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call SafeintAsStringAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 1234L,
+});
+Response response = await client.SafeintAsStringAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="SafeintAsString(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SafeintAsString and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 1234L,
+});
+Response response = client.SafeintAsString(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call SafeintAsString with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 1234L,
+});
+Response response = client.SafeintAsString(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Uint32AsStringOptionalAsync(Uint32AsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call Uint32AsStringOptionalAsync.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint32AsStringProperty value = new Uint32AsStringProperty();
+Response<Uint32AsStringProperty> response = await client.Uint32AsStringOptionalAsync(value);
+]]></code>
+This sample shows how to call Uint32AsStringOptionalAsync with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint32AsStringProperty value = new Uint32AsStringProperty
+{
+    Value = new object(),
+};
+Response<Uint32AsStringProperty> response = await client.Uint32AsStringOptionalAsync(value);
+]]></code></example>
+    </member>
+    <member name="Uint32AsStringOptional(Uint32AsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call Uint32AsStringOptional.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint32AsStringProperty value = new Uint32AsStringProperty();
+Response<Uint32AsStringProperty> response = client.Uint32AsStringOptional(value);
+]]></code>
+This sample shows how to call Uint32AsStringOptional with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint32AsStringProperty value = new Uint32AsStringProperty
+{
+    Value = new object(),
+};
+Response<Uint32AsStringProperty> response = client.Uint32AsStringOptional(value);
+]]></code></example>
+    </member>
+    <member name="Uint32AsStringOptionalAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Uint32AsStringOptionalAsync and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = await client.Uint32AsStringOptionalAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call Uint32AsStringOptionalAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = await client.Uint32AsStringOptionalAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Uint32AsStringOptional(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Uint32AsStringOptional and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new object());
+Response response = client.Uint32AsStringOptional(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call Uint32AsStringOptional with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = new object(),
+});
+Response response = client.Uint32AsStringOptional(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Uint8AsStringAsync(Uint8AsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call Uint8AsStringAsync.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint8AsStringProperty value = new Uint8AsStringProperty(123);
+Response<Uint8AsStringProperty> response = await client.Uint8AsStringAsync(value);
+]]></code>
+This sample shows how to call Uint8AsStringAsync with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint8AsStringProperty value = new Uint8AsStringProperty(123);
+Response<Uint8AsStringProperty> response = await client.Uint8AsStringAsync(value);
+]]></code></example>
+    </member>
+    <member name="Uint8AsString(Uint8AsStringProperty,CancellationToken)">
+      <example>
+This sample shows how to call Uint8AsString.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint8AsStringProperty value = new Uint8AsStringProperty(123);
+Response<Uint8AsStringProperty> response = client.Uint8AsString(value);
+]]></code>
+This sample shows how to call Uint8AsString with all parameters.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+Uint8AsStringProperty value = new Uint8AsStringProperty(123);
+Response<Uint8AsStringProperty> response = client.Uint8AsString(value);
+]]></code></example>
+    </member>
+    <member name="Uint8AsStringAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Uint8AsStringAsync and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 123,
+});
+Response response = await client.Uint8AsStringAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Uint8AsStringAsync with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 123,
+});
+Response response = await client.Uint8AsStringAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+    <member name="Uint8AsString(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Uint8AsString and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 123,
+});
+Response response = client.Uint8AsString(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code>
+This sample shows how to call Uint8AsString with all request content and parse the result.
+<code><![CDATA[
+Property client = new NumericClient().GetPropertyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    value = 123,
+});
+Response response = client.Uint8AsString(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("value").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>

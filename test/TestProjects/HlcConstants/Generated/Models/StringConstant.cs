@@ -30,7 +30,7 @@ namespace HlcConstants.Models
         public static bool operator ==(StringConstant left, StringConstant right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StringConstant"/> values are not the same. </summary>
         public static bool operator !=(StringConstant left, StringConstant right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="StringConstant"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="StringConstant"/>. </summary>
         public static implicit operator StringConstant(string value) => new StringConstant(value);
 
         /// <inheritdoc />

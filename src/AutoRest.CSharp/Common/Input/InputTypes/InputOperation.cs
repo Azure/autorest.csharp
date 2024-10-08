@@ -33,7 +33,8 @@ internal record InputOperation
     bool generateProtocolMethod,
     bool generateConvenienceMethod,
     string crossLanguageDefinitionId,
-    bool keepClientDefaultValue)
+    bool keepClientDefaultValue,
+    IReadOnlyList<InputOperationExample>? examples = null)
     {
         Name = name;
         SpecName = name;
@@ -57,6 +58,7 @@ internal record InputOperation
         GenerateConvenienceMethod = generateConvenienceMethod;
         CrossLanguageDefinitionId = crossLanguageDefinitionId;
         KeepClientDefaultValue = keepClientDefaultValue;
+        _examples = examples;
     }
 
     public InputOperation() : this(
@@ -115,15 +117,20 @@ internal record InputOperation
     }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-    private readonly Dictionary<string, InputOperationExample> _examples = new();
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples.Any() ? _examples : EnsureExamples(_examples);
-    public IReadOnlyList<InputOperationExample> CodeModelExamples { get; internal set; } = new List<InputOperationExample>();
 
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples(Dictionary<string, InputOperationExample> examples)
+    private IReadOnlyList<InputOperationExample>? _examples;
+    public IReadOnlyList<InputOperationExample> Examples => _examples ??= EnsureExamples();
+
+    private IReadOnlyList<InputOperationExample> EnsureExamples()
     {
-        examples[ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false);
-        examples[ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true);
-        return examples;
+        // see if we need to generate the mock examples
+        if (Configuration.ExamplesDirectory != null || Configuration.AzureArm)
+        {
+            return Array.Empty<InputOperationExample>();
+        }
+
+        // build the mock examples
+        return ExampleMockValueBuilder.BuildOperationExamples(this);
     }
 
     public bool IsLongRunning => LongRunning != null;
@@ -152,7 +159,8 @@ internal record InputOperation
     public string? OperationVersion { get; }
     public string? OperationType { get; }
     public string OperationId => ResourceName is null ? Name : $"{ResourceName}_{Name.FirstCharToUpperCase()}";
-    //TODO: Remove this until the SDK nullable is enabled, traking in https://github.com/Azure/autorest.csharp/issues/4780
+    public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
+    //TODO: Remove this until the SDK nullable is enabled, tracking in https://github.com/Azure/autorest.csharp/issues/4780
     internal string SpecName { get; init; }
 
     internal bool IsNameChanged { get; init; }

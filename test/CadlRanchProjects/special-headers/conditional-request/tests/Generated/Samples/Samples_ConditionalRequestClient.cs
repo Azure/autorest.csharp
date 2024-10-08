@@ -102,5 +102,93 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConditionalRequest_HeadIfModifiedSince_ShortVersion()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = client.HeadIfModifiedSince();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConditionalRequest_HeadIfModifiedSince_ShortVersion_Async()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = await client.HeadIfModifiedSinceAsync();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConditionalRequest_HeadIfModifiedSince_AllParameters()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = client.HeadIfModifiedSince(requestConditions: null);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConditionalRequest_HeadIfModifiedSince_AllParameters_Async()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = await client.HeadIfModifiedSinceAsync(requestConditions: null);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConditionalRequest_PostIfUnmodifiedSince_ShortVersion()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = client.PostIfUnmodifiedSince();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConditionalRequest_PostIfUnmodifiedSince_ShortVersion_Async()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = await client.PostIfUnmodifiedSinceAsync();
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ConditionalRequest_PostIfUnmodifiedSince_AllParameters()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = client.PostIfUnmodifiedSince(requestConditions: null);
+
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ConditionalRequest_PostIfUnmodifiedSince_AllParameters_Async()
+        {
+            ConditionalRequestClient client = new ConditionalRequestClient();
+
+            Response response = await client.PostIfUnmodifiedSinceAsync(requestConditions: null);
+
+            Console.WriteLine(response.Status);
+        }
     }
 }

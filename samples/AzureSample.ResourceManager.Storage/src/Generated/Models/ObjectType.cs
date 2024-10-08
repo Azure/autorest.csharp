@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(ObjectType left, ObjectType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ObjectType"/> values are not the same. </summary>
         public static bool operator !=(ObjectType left, ObjectType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ObjectType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ObjectType"/>. </summary>
         public static implicit operator ObjectType(string value) => new ObjectType(value);
 
         /// <inheritdoc />

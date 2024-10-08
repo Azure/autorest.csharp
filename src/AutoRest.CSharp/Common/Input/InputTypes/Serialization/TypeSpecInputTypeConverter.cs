@@ -10,8 +10,6 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal sealed class TypeSpecInputTypeConverter : JsonConverter<InputType>
     {
-        private const string KindPropertyName = "Kind";
-
         private readonly TypeSpecReferenceHandler _referenceHandler;
 
         public TypeSpecInputTypeConverter(TypeSpecReferenceHandler referenceHandler)
@@ -21,24 +19,25 @@ namespace AutoRest.CSharp.Common.Input
 
         public override InputType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return reader.ReadReferenceAndResolve<InputType>(_referenceHandler.CurrentResolver) ?? CreateObject(ref reader, options);
+            return reader.ReadReferenceAndResolve<InputType>(_referenceHandler.CurrentResolver) ?? CreateInputType(ref reader, options);
         }
 
         public override void Write(Utf8JsonWriter writer, InputType value, JsonSerializerOptions options)
             => throw new NotSupportedException("Writing not supported");
 
-        private InputType CreateObject(ref Utf8JsonReader reader, JsonSerializerOptions options)
+        private InputType CreateInputType(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             string? id = null;
             string? kind = null;
             string? name = null;
             InputType? result = null;
             var isFirstProperty = true;
+
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isIdOrNameOrKind = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(KindPropertyName, ref kind)
-                    || reader.TryReadString(nameof(InputType.Name), ref name);
+                    || reader.TryReadString("kind", ref kind)
+                    || reader.TryReadString("name", ref name);
 
                 if (isIdOrNameOrKind)
                 {
@@ -71,8 +70,8 @@ namespace AutoRest.CSharp.Common.Input
             ArrayKind => TypeSpecInputListTypeConverter.CreateListType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             DictionaryKind => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, options, _referenceHandler.CurrentResolver),
             NullableKind => TypeSpecInputNullableTypeConverter.CreateNullableType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, options, _referenceHandler.CurrentResolver),
-            DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, options, _referenceHandler.CurrentResolver),
+            UtcDateTimeKind or OffsetDateTimeKind => TypeSpecInputDateTimeTypeConverter.CreateDateTimeType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
+            DurationKind => TypeSpecInputDurationTypeConverter.CreateDurationType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             _ => TypeSpecInputPrimitiveTypeConverter.CreatePrimitiveType(ref reader, id, kind, name, options, _referenceHandler.CurrentResolver),
         };
     }

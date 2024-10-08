@@ -106,7 +106,17 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
-                return writer.AppendBinaryData((InputExampleRawValue)exampleValue);
+            {
+                switch (exampleValue)
+                {
+                    case InputExampleObjectValue objectValue:
+                        return writer.AppendBinaryData(objectValue);
+                    case InputExampleRawValue rawValue:
+                        return writer.AppendBinaryData(rawValue);
+                    default:
+                        throw new InvalidOperationException("Unhandled BinaryData example value type");
+                }
+            }
 
             if (type.FrameworkType == typeof(DataFactoryElement<>))
                 return writer.AppendDataFactoryElementValue(type, exampleValue);
@@ -203,6 +213,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleObjectValue exampleValue)
+        {
+            var method = "FromObjectAsJson";
+            writer.Append($"{typeof(BinaryData)}.{method}(");
+            writer.AppendAnonymousObject(exampleValue);
+            return writer.AppendRaw(")");
+        }
+
         private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleRawValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
@@ -234,10 +252,17 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             writer.Append($"new {type}(");
             foreach (var parameter in publicCtor.GetParameters())
             {
-                // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
-                var value = exampleObjectValue.Values[parameter.Name!];
-                writer.AppendExampleValue(value, parameter.ParameterType);
-                writer.AppendRaw(",");
+                // we here assume the parameter name is the same as the serialized name of the property.
+                if (exampleObjectValue.Values.TryGetValue(parameter.Name!, out var value))
+                {
+                    writer.AppendExampleValue(value, parameter.ParameterType);
+                    writer.AppendRaw(",");
+                }
+                else
+                {
+                    // when there is nothing matched, we could not do much but write a `default` as placeholder here.
+                    writer.AppendRaw("default,");
+                }
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
@@ -280,7 +305,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // check if this is an array
             if (exampleValue is InputExampleListValue exampleListValue)
             {
-                return writer.AppendListValue(typeof(object), exampleListValue);
+                return writer.AppendListValue(typeof(List<object>), exampleListValue);
             }
             // fallback to complex object
             if (exampleValue is InputExampleObjectValue exampleObjectValue)
@@ -339,7 +364,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             null => writer.AppendRaw("null"),
             List<object?> list => writer.AppendRawList(list),
             Dictionary<object, object?> dict => writer.AppendRawDictionary(dict),
-            _ => writer.AppendRaw(rawValue.ToString()!)
+            _ when type == rawValue.GetType() => writer.Append($"{rawValue:L}"),
+            _ => writer.Append($"({type}){rawValue:L}")
         };
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType) => type switch
@@ -353,7 +379,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             _ => writer.Append($"{value:L}"),
         };
 
-        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
+        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType)) || type.Equals(typeof(string));
 
         private static readonly HashSet<Type> _primitiveTypes = new()
         {

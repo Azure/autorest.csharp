@@ -30,7 +30,7 @@ namespace MgmtSingletonResource.Models
         public static bool operator ==(BrakeName left, BrakeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="BrakeName"/> values are not the same. </summary>
         public static bool operator !=(BrakeName left, BrakeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="BrakeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="BrakeName"/>. </summary>
         public static implicit operator BrakeName(string value) => new BrakeName(value);
 
         /// <inheritdoc />

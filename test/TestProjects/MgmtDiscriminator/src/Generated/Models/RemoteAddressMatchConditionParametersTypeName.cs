@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(RemoteAddressMatchConditionParametersTypeName left, RemoteAddressMatchConditionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RemoteAddressMatchConditionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(RemoteAddressMatchConditionParametersTypeName left, RemoteAddressMatchConditionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RemoteAddressMatchConditionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RemoteAddressMatchConditionParametersTypeName"/>. </summary>
         public static implicit operator RemoteAddressMatchConditionParametersTypeName(string value) => new RemoteAddressMatchConditionParametersTypeName(value);
 
         /// <inheritdoc />

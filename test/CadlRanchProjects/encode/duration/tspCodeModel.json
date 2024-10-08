@@ -6,206 +6,239 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "DefaultDurationProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "DefaultDurationProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "3",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "4",
-      "Kind": "duration",
-      "Name": "duration",
-      "Encode": "ISO8601",
-      "WireType": {
+      "kind": "duration",
+      "name": "duration",
+      "encode": "ISO8601",
+      "wireType": {
        "$id": "5",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.duration"
+      "crossLanguageDefinitionId": "TypeSpec.duration",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.DefaultDurationProperty.value"
     }
    ]
   },
   {
    "$id": "6",
-   "Kind": "model",
-   "Name": "ISO8601DurationProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "ISO8601DurationProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "7",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "8",
-      "Kind": "duration",
-      "Name": "duration",
-      "Encode": "ISO8601",
-      "WireType": {
+      "kind": "duration",
+      "name": "duration",
+      "encode": "ISO8601",
+      "wireType": {
        "$id": "9",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.duration"
+      "crossLanguageDefinitionId": "TypeSpec.duration",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.ISO8601DurationProperty.value"
     }
    ]
   },
   {
    "$id": "10",
-   "Kind": "model",
-   "Name": "Int32SecondsDurationProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "Int32SecondsDurationProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "11",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "12",
-      "Kind": "duration",
-      "Name": "duration",
-      "Encode": "seconds",
-      "WireType": {
+      "kind": "duration",
+      "name": "duration",
+      "encode": "seconds",
+      "wireType": {
        "$id": "13",
-       "Kind": "int32",
-       "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32"
+       "kind": "int32",
+       "name": "int32",
+       "crossLanguageDefinitionId": "TypeSpec.int32",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.duration"
+      "crossLanguageDefinitionId": "TypeSpec.duration",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.Int32SecondsDurationProperty.value"
     }
    ]
   },
   {
    "$id": "14",
-   "Kind": "model",
-   "Name": "FloatSecondsDurationProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "FloatSecondsDurationProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "15",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "16",
-      "Kind": "duration",
-      "Name": "duration",
-      "Encode": "seconds",
-      "WireType": {
+      "kind": "duration",
+      "name": "duration",
+      "encode": "seconds",
+      "wireType": {
        "$id": "17",
-       "Kind": "float",
-       "Name": "float",
-       "CrossLanguageDefinitionId": "TypeSpec.float"
+       "kind": "float",
+       "name": "float",
+       "crossLanguageDefinitionId": "TypeSpec.float",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.duration"
+      "crossLanguageDefinitionId": "TypeSpec.duration",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationProperty.value"
     }
    ]
   },
   {
    "$id": "18",
-   "Kind": "model",
-   "Name": "Float64SecondsDurationProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "Float64SecondsDurationProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "19",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "20",
-      "Kind": "duration",
-      "Name": "duration",
-      "Encode": "seconds",
-      "WireType": {
+      "kind": "duration",
+      "name": "duration",
+      "encode": "seconds",
+      "wireType": {
        "$id": "21",
-       "Kind": "float64",
-       "Name": "float64",
-       "CrossLanguageDefinitionId": "TypeSpec.float64"
+       "kind": "float64",
+       "name": "float64",
+       "crossLanguageDefinitionId": "TypeSpec.float64",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.duration"
+      "crossLanguageDefinitionId": "TypeSpec.duration",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.Float64SecondsDurationProperty.value"
     }
    ]
   },
   {
    "$id": "22",
-   "Kind": "model",
-   "Name": "FloatSecondsDurationArrayProperty",
-   "CrossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "FloatSecondsDurationArrayProperty",
+   "crossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "23",
-     "Name": "value",
-     "SerializedName": "value",
-     "Description": "",
-     "Type": {
+     "kind": "property",
+     "name": "value",
+     "serializedName": "value",
+     "type": {
       "$id": "24",
-      "Kind": "array",
-      "Name": "Array",
-      "ValueType": {
+      "kind": "array",
+      "name": "Array",
+      "valueType": {
        "$id": "25",
-       "Kind": "duration",
-       "Name": "Float32Duration",
-       "Encode": "seconds",
-       "WireType": {
+       "kind": "duration",
+       "name": "Float32Duration",
+       "encode": "seconds",
+       "wireType": {
         "$id": "26",
-        "Kind": "float32",
-        "Name": "float32",
-        "CrossLanguageDefinitionId": "TypeSpec.float32"
+        "kind": "float32",
+        "name": "float32",
+        "crossLanguageDefinitionId": "TypeSpec.float32",
+        "decorators": []
        },
-       "CrossLanguageDefinitionId": "Encode.Duration.Property.Float32Duration",
-       "BaseType": {
+       "crossLanguageDefinitionId": "Encode.Duration.Property.Float32Duration",
+       "baseType": {
         "$id": "27",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "ISO8601",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "ISO8601",
+        "wireType": {
          "$id": "28",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
-       }
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
+       },
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array"
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Encode.Duration.Property.FloatSecondsDurationArrayProperty.value"
     }
    ]
   }
@@ -226,9 +259,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "32",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -243,14 +276,15 @@
       "$id": "33",
       "Type": {
        "$id": "34",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "35",
@@ -268,9 +302,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "38",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -285,9 +319,9 @@
         "$id": "39",
         "Type": {
          "$id": "40",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -298,16 +332,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "42",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "ISO8601",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "ISO8601",
+        "wireType": {
          "$id": "43",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -315,7 +351,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -336,7 +374,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.default"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.default",
+     "Decorators": []
     },
     {
      "$id": "45",
@@ -353,16 +392,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "47",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "ISO8601",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "ISO8601",
+        "wireType": {
          "$id": "48",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -370,7 +411,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -391,7 +434,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.iso8601"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.iso8601",
+     "Decorators": []
     },
     {
      "$id": "50",
@@ -408,16 +452,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "52",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "53",
-         "Kind": "int32",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -425,7 +471,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -446,7 +494,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32Seconds",
+     "Decorators": []
     },
     {
      "$id": "55",
@@ -463,16 +512,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "57",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "58",
-         "Kind": "float",
-         "Name": "float",
-         "CrossLanguageDefinitionId": "TypeSpec.float"
+         "kind": "float",
+         "name": "float",
+         "crossLanguageDefinitionId": "TypeSpec.float",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -480,7 +531,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -501,7 +554,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.floatSeconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.floatSeconds",
+     "Decorators": []
     },
     {
      "$id": "60",
@@ -518,16 +572,18 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "62",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "63",
-         "Kind": "float64",
-         "Name": "float64",
-         "CrossLanguageDefinitionId": "TypeSpec.float64"
+         "kind": "float64",
+         "name": "float64",
+         "crossLanguageDefinitionId": "TypeSpec.float64",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -535,7 +591,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -556,7 +614,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.float64Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.float64Seconds",
+     "Decorators": []
     },
     {
      "$id": "65",
@@ -573,35 +632,40 @@
        "NameInRequest": "input",
        "Type": {
         "$id": "67",
-        "Kind": "array",
-        "Name": "Array",
-        "ValueType": {
+        "kind": "array",
+        "name": "Array",
+        "valueType": {
          "$id": "68",
-         "Kind": "duration",
-         "Name": "Int32Duration",
-         "Encode": "seconds",
-         "WireType": {
+         "kind": "duration",
+         "name": "Int32Duration",
+         "encode": "seconds",
+         "wireType": {
           "$id": "69",
-          "Kind": "int32",
-          "Name": "int32",
-          "CrossLanguageDefinitionId": "TypeSpec.int32"
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
          },
-         "CrossLanguageDefinitionId": "Encode.Duration.Query.Int32Duration",
-         "BaseType": {
+         "crossLanguageDefinitionId": "Encode.Duration.Query.Int32Duration",
+         "baseType": {
           "$id": "70",
-          "Kind": "duration",
-          "Name": "duration",
-          "Encode": "ISO8601",
-          "WireType": {
+          "kind": "duration",
+          "name": "duration",
+          "encode": "ISO8601",
+          "wireType": {
            "$id": "71",
-           "Kind": "string",
-           "Name": "string",
-           "CrossLanguageDefinitionId": "TypeSpec.string"
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.duration"
-         }
+          "crossLanguageDefinitionId": "TypeSpec.duration",
+          "decorators": []
+         },
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "crossLanguageDefinitionId": "TypeSpec.Array",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -610,7 +674,9 @@
        "Explode": false,
        "ArraySerializationDelimiter": ",",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -631,7 +697,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32SecondsArray"
+     "CrossLanguageDefinitionId": "Encode.Duration.Query.int32SecondsArray",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -642,7 +709,8 @@
     {
      "$ref": "37"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "74",
@@ -660,9 +728,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "77",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -677,9 +745,9 @@
         "$id": "78",
         "Type": {
          "$id": "79",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -691,14 +759,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "81",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "82",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -706,7 +776,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "83",
@@ -714,14 +786,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "84",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "85",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -729,7 +803,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "86",
@@ -744,7 +820,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -774,7 +852,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.default"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.default",
+     "Decorators": []
     },
     {
      "$id": "88",
@@ -792,14 +871,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "90",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "91",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -807,7 +888,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "92",
@@ -815,14 +898,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "93",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "94",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -830,7 +915,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "95",
@@ -845,7 +932,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -875,7 +964,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.iso8601"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.iso8601",
+     "Decorators": []
     },
     {
      "$id": "97",
@@ -893,14 +983,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "99",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "100",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -908,7 +1000,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "101",
@@ -916,14 +1010,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "102",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "103",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -931,7 +1027,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "104",
@@ -946,7 +1044,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -976,7 +1076,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.int32Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.int32Seconds",
+     "Decorators": []
     },
     {
      "$id": "106",
@@ -994,14 +1095,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "108",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "109",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1009,7 +1112,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "110",
@@ -1017,14 +1122,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "111",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "112",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1032,7 +1139,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "113",
@@ -1047,7 +1156,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1077,7 +1188,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSeconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSeconds",
+     "Decorators": []
     },
     {
      "$id": "115",
@@ -1095,14 +1207,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "117",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "118",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1110,7 +1224,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "119",
@@ -1118,14 +1234,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "120",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "121",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1133,7 +1251,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "122",
@@ -1148,7 +1268,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1178,7 +1300,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.float64Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.float64Seconds",
+     "Decorators": []
     },
     {
      "$id": "124",
@@ -1196,14 +1319,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "126",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "127",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1211,7 +1336,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "128",
@@ -1219,14 +1346,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "129",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "130",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1234,7 +1363,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
        "$id": "131",
@@ -1249,7 +1380,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1279,7 +1412,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSecondsArray"
+     "CrossLanguageDefinitionId": "Encode.Duration.Property.floatSecondsArray",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1290,7 +1424,8 @@
     {
      "$ref": "76"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
    "$id": "134",
@@ -1308,9 +1443,9 @@
        "NameInRequest": "endpoint",
        "Type": {
         "$id": "137",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -1325,9 +1460,9 @@
         "$id": "138",
         "Type": {
          "$id": "139",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
@@ -1338,16 +1473,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "141",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "ISO8601",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "ISO8601",
+        "wireType": {
          "$id": "142",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1355,7 +1492,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1376,7 +1515,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.default"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.default",
+     "Decorators": []
     },
     {
      "$id": "144",
@@ -1393,16 +1533,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "146",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "ISO8601",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "ISO8601",
+        "wireType": {
          "$id": "147",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1410,7 +1552,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1431,7 +1575,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601",
+     "Decorators": []
     },
     {
      "$id": "149",
@@ -1448,35 +1593,40 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "151",
-        "Kind": "array",
-        "Name": "Array",
-        "ValueType": {
+        "kind": "array",
+        "name": "Array",
+        "valueType": {
          "$id": "152",
-         "Kind": "duration",
-         "Name": "Iso8601Duration",
-         "Encode": "ISO8601",
-         "WireType": {
+         "kind": "duration",
+         "name": "Iso8601Duration",
+         "encode": "ISO8601",
+         "wireType": {
           "$id": "153",
-          "Kind": "string",
-          "Name": "string",
-          "CrossLanguageDefinitionId": "TypeSpec.string"
+          "kind": "string",
+          "name": "string",
+          "crossLanguageDefinitionId": "TypeSpec.string",
+          "decorators": []
          },
-         "CrossLanguageDefinitionId": "Encode.Duration.Header.Iso8601Duration",
-         "BaseType": {
+         "crossLanguageDefinitionId": "Encode.Duration.Header.Iso8601Duration",
+         "baseType": {
           "$id": "154",
-          "Kind": "duration",
-          "Name": "duration",
-          "Encode": "ISO8601",
-          "WireType": {
+          "kind": "duration",
+          "name": "duration",
+          "encode": "ISO8601",
+          "wireType": {
            "$id": "155",
-           "Kind": "string",
-           "Name": "string",
-           "CrossLanguageDefinitionId": "TypeSpec.string"
+           "kind": "string",
+           "name": "string",
+           "crossLanguageDefinitionId": "TypeSpec.string",
+           "decorators": []
           },
-          "CrossLanguageDefinitionId": "TypeSpec.duration"
-         }
+          "crossLanguageDefinitionId": "TypeSpec.duration",
+          "decorators": []
+         },
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.Array"
+        "crossLanguageDefinitionId": "TypeSpec.Array",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1485,7 +1635,9 @@
        "Explode": false,
        "ArraySerializationDelimiter": ",",
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1506,7 +1658,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601Array"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.iso8601Array",
+     "Decorators": []
     },
     {
      "$id": "157",
@@ -1523,16 +1676,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "159",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "160",
-         "Kind": "int32",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1540,7 +1695,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1561,7 +1718,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.int32Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.int32Seconds",
+     "Decorators": []
     },
     {
      "$id": "162",
@@ -1578,16 +1736,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "164",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "165",
-         "Kind": "float",
-         "Name": "float",
-         "CrossLanguageDefinitionId": "TypeSpec.float"
+         "kind": "float",
+         "name": "float",
+         "crossLanguageDefinitionId": "TypeSpec.float",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1595,7 +1755,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1616,7 +1778,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.floatSeconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.floatSeconds",
+     "Decorators": []
     },
     {
      "$id": "167",
@@ -1633,16 +1796,18 @@
        "NameInRequest": "duration",
        "Type": {
         "$id": "169",
-        "Kind": "duration",
-        "Name": "duration",
-        "Encode": "seconds",
-        "WireType": {
+        "kind": "duration",
+        "name": "duration",
+        "encode": "seconds",
+        "wireType": {
          "$id": "170",
-         "Kind": "float64",
-         "Name": "float64",
-         "CrossLanguageDefinitionId": "TypeSpec.float64"
+         "kind": "float64",
+         "name": "float64",
+         "crossLanguageDefinitionId": "TypeSpec.float64",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "TypeSpec.duration"
+        "crossLanguageDefinitionId": "TypeSpec.duration",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1650,7 +1815,9 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
@@ -1671,7 +1838,8 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Encode.Duration.Header.float64Seconds"
+     "CrossLanguageDefinitionId": "Encode.Duration.Header.float64Seconds",
+     "Decorators": []
     }
    ],
    "Protocol": {
@@ -1682,7 +1850,8 @@
     {
      "$ref": "136"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

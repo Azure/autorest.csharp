@@ -33,7 +33,7 @@ namespace azure_special_properties.Models
         public static bool operator ==(ErrorConstantId left, ErrorConstantId right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ErrorConstantId"/> values are not the same. </summary>
         public static bool operator !=(ErrorConstantId left, ErrorConstantId right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ErrorConstantId"/>. </summary>
+        /// <summary> Converts a <see cref="int"/> to a <see cref="ErrorConstantId"/>. </summary>
         public static implicit operator ErrorConstantId(int value) => new ErrorConstantId(value);
 
         /// <inheritdoc />

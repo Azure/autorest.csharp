@@ -55,8 +55,10 @@ namespace AutoRest.CSharp.Common.Input
             public const string Flavor = "flavor";
             public const string GenerateSampleProject = "generate-sample-project";
             public const string GenerateTestProject = "generate-test-project";
+            public const string ExamplesDirectory = "examples-dir";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             public const string UseModelReaderWriter = "use-model-reader-writer";
+            public const string UseWriteCore = "use-write-core";
             // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
             // It is only respected if UseModelReaderWriter is true.
             public const string EnableBicepSerialization = "enable-bicep-serialization";
@@ -64,6 +66,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string EnableInternalRawData = "enable-internal-raw-data";
             public const string HelperNamespace = "helper-namespace";
             public const string DisableXmlDocs = "disable-xml-docs";
+            public const string CustomHeader = "custom-header";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -94,6 +97,7 @@ namespace AutoRest.CSharp.Common.Input
             bool deserializeNullCollectionAsNullValue,
             bool useCoreDataFactoryReplacements,
             bool useModelReaderWriter,
+            bool useWriteCore,
             bool enableBicepSerialization,
             bool enableInternalRawData,
             IReadOnlyList<string> modelFactoryForHlc,
@@ -113,7 +117,9 @@ namespace AutoRest.CSharp.Common.Input
             bool disableXmlDocs,
             bool generateSampleProject,
             bool generateTestProject,
-            string? helperNamespace)
+            string? examplesDirectory,
+            string? helperNamespace,
+            string? customHeader)
         {
             _outputFolder = outputFolder;
             _namespace = ns;
@@ -141,6 +147,7 @@ namespace AutoRest.CSharp.Common.Input
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
+            UseWriteCore = useWriteCore;
             EnableBicepSerialization = enableBicepSerialization;
             EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;
@@ -153,7 +160,7 @@ namespace AutoRest.CSharp.Common.Input
             if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
-                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net7.0", "AutoRest.CSharp.dll")))
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net8.0", "AutoRest.CSharp.dll")))
                 {
                     if (_absoluteProjectFolder is not null)
                     {
@@ -185,6 +192,8 @@ namespace AutoRest.CSharp.Common.Input
             DisableXmlDocs = disableXmlDocs;
             GenerateSampleProject = DisableXmlDocs ? false : generateSampleProject; // turn off the samples if all xml docs are explicitly disabled
             GenerateTestProject = generateTestProject;
+            ExamplesDirectory = examplesDirectory;
+            CustomHeader = customHeader;
             _helperNamespace = helperNamespace ?? Namespace;
         }
 
@@ -243,11 +252,15 @@ namespace AutoRest.CSharp.Common.Input
         private static string? _helperNamespace;
         public static string HelperNamespace => _helperNamespace ?? throw new InvalidOperationException("Configuration has not been initialized");
 
+        public static string? CustomHeader { get; private set; }
+
         public static bool DisableXmlDocs { get; private set; }
 
         public static bool GenerateSampleProject { get; private set; }
 
         public static bool GenerateTestProject { get; private set; }
+
+        public static string? ExamplesDirectory { get; private set; }
 
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
@@ -259,6 +272,8 @@ namespace AutoRest.CSharp.Common.Input
         public static bool UseCoreDataFactoryReplacements { get; private set; }
 
         public static bool UseModelReaderWriter { get; private set; }
+
+        public static bool UseWriteCore { get; private set; }
 
         public static bool EnableBicepSerialization { get; private set; }
 
@@ -368,6 +383,7 @@ namespace AutoRest.CSharp.Common.Input
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: GetOptionBoolValue(autoRest, Options.UseModelReaderWriter),
+                useWriteCore: GetOptionBoolValue(autoRest, Options.UseWriteCore),
                 enableBicepSerialization: GetOptionBoolValue(autoRest, Options.EnableBicepSerialization),
                 enableInternalRawData: GetOptionBoolValue(autoRest, Options.EnableInternalRawData),
                 projectFolder: GetProjectFolderOption(autoRest),
@@ -383,8 +399,10 @@ namespace AutoRest.CSharp.Common.Input
                 flavor: autoRest.GetValue<string?>(Options.Flavor).GetAwaiter().GetResult() ?? "azure", // for autorest input, always branded
                 generateSampleProject: GetOptionBoolValue(autoRest, Options.GenerateSampleProject),
                 generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
+                examplesDirectory: null, // TODO -- what we put here?
                 helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult(),
-                disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs)
+                disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs),
+                customHeader: autoRest.GetValue<string?>(Options.CustomHeader).GetAwaiter().GetResult()
             );
         }
 
@@ -458,6 +476,8 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.GenerateTestProject:
                     return false;
                 case Options.UseModelReaderWriter:
+                    return false;
+                case Options.UseWriteCore:
                     return false;
                 case Options.EnableBicepSerialization:
                     return false;
@@ -538,6 +558,7 @@ namespace AutoRest.CSharp.Common.Input
                 deserializeNullCollectionAsNullValue: ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 useCoreDataFactoryReplacements: ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 useModelReaderWriter: ReadOption(root, Options.UseModelReaderWriter),
+                useWriteCore: ReadOption(root, Options.UseWriteCore),
                 enableBicepSerialization: ReadOption(root, Options.EnableBicepSerialization),
                 enableInternalRawData: ReadOption(root, Options.EnableInternalRawData),
                 modelFactoryForHlc: oldModelFactoryEntries,
@@ -554,11 +575,12 @@ namespace AutoRest.CSharp.Common.Input
                 mgmtConfiguration: MgmtConfiguration.LoadConfiguration(root),
                 mgmtTestConfiguration: MgmtTestConfiguration.LoadConfiguration(root),
                 flavor: ReadStringOption(root, Options.Flavor),
-                disableXmlDocs: ReadOption(root, Options.DisableXmlDocs)
-,
+                disableXmlDocs: ReadOption(root, Options.DisableXmlDocs),
                 generateSampleProject: ReadOption(root, Options.GenerateSampleProject),
                 generateTestProject: ReadOption(root, Options.GenerateTestProject),
-                helperNamespace: ReadStringOption(root, Options.HelperNamespace));
+                examplesDirectory: ReadStringOption(root, Options.ExamplesDirectory),
+                helperNamespace: ReadStringOption(root, Options.HelperNamespace),
+                customHeader: ReadStringOption(root, Options.CustomHeader));
         }
 
         internal static string SaveConfiguration()
@@ -604,6 +626,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
             WriteIfNotDefault(writer, Options.UseModelReaderWriter, UseModelReaderWriter);
+            WriteIfNotDefault(writer, Options.UseWriteCore, UseWriteCore);
             WriteIfNotDefault(writer, Options.EnableBicepSerialization, EnableBicepSerialization);
             WriteNonEmptyArray(writer, Options.ProtocolMethodList, ProtocolMethodList);
             WriteNonEmptyArray(writer, Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
@@ -627,6 +650,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
             WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);
             WriteIfNotDefault(writer, Options.DisableXmlDocs, DisableXmlDocs);
+            WriteIfNotDefault(writer, Options.CustomHeader, CustomHeader);
 
             writer.WriteEndObject();
         }

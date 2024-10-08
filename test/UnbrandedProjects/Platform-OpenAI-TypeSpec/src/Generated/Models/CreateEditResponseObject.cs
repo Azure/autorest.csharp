@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(CreateEditResponseObject left, CreateEditResponseObject right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CreateEditResponseObject"/> values are not the same. </summary>
         public static bool operator !=(CreateEditResponseObject left, CreateEditResponseObject right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="CreateEditResponseObject"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="CreateEditResponseObject"/>. </summary>
         public static implicit operator CreateEditResponseObject(string value) => new CreateEditResponseObject(value);
 
         /// <inheritdoc />

@@ -5,63 +5,114 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "ClientType",
-   "CrossLanguageDefinitionId": "Client.Structure.Service.ClientType",
-   "ValueType": {
+   "kind": "enum",
+   "name": "ClientType",
+   "crossLanguageDefinitionId": "Client.Structure.Service.ClientType",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "Default",
-     "Value": "default"
-    },
-    {
-     "$id": "5",
-     "Name": "MultiClient",
-     "Value": "multi-client"
+     "kind": "enumvalue",
+     "name": "Default",
+     "value": "default",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     },
     {
      "$id": "6",
-     "Name": "RenamedOperation",
-     "Value": "renamed-operation"
+     "kind": "enumvalue",
+     "name": "MultiClient",
+     "value": "multi-client",
+     "valueType": {
+      "$id": "7",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     },
     {
-     "$id": "7",
-     "Name": "TwoOperationGroup",
-     "Value": "two-operation-group"
+     "$id": "8",
+     "kind": "enumvalue",
+     "name": "RenamedOperation",
+     "value": "renamed-operation",
+     "valueType": {
+      "$id": "9",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "10",
+     "kind": "enumvalue",
+     "name": "TwoOperationGroup",
+     "value": "two-operation-group",
+     "valueType": {
+      "$id": "11",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     }
    ],
-   "IsExtensible": false,
-   "Usage": "Input"
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input",
+   "decorators": []
   }
  ],
  "Models": [],
  "Clients": [
   {
-   "$id": "8",
+   "$id": "12",
    "Name": "RenamedOperationClient",
    "Operations": [
     {
-     "$id": "9",
+     "$id": "13",
      "Name": "renamedOne",
      "ResourceName": "RenamedOperation",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "10",
+       "$id": "14",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "11",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "15",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -74,7 +125,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "12",
+       "$id": "16",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -90,72 +141,6 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Client"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "13",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
-     "Path": "/one",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedOne"
-    },
-    {
-     "$id": "14",
-     "Name": "renamedThree",
-     "ResourceName": "RenamedOperation",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "10"
-      },
-      {
-       "$ref": "12"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "15",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "None",
-     "Uri": "{endpoint}/client/structure/{client}",
-     "Path": "/three",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedThree"
-    },
-    {
-     "$id": "16",
-     "Name": "renamedFive",
-     "ResourceName": "RenamedOperation",
-     "Accessibility": "public",
-     "Parameters": [
-      {
-       "$ref": "10"
-      },
-      {
-       "$ref": "12"
       }
      ],
      "Responses": [
@@ -172,45 +157,115 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "None",
      "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/one",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedOne",
+     "Decorators": []
+    },
+    {
+     "$id": "18",
+     "Name": "renamedThree",
+     "ResourceName": "RenamedOperation",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "14"
+      },
+      {
+       "$ref": "16"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "19",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
+     "Path": "/three",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true,
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedThree",
+     "Decorators": []
+    },
+    {
+     "$id": "20",
+     "Name": "renamedFive",
+     "ResourceName": "RenamedOperation",
+     "Accessibility": "public",
+     "Parameters": [
+      {
+       "$ref": "14"
+      },
+      {
+       "$ref": "16"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "21",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}/client/structure/{client}",
      "Path": "/five",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedFive"
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.renamedFive",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "18"
+    "$id": "22"
    },
    "Parameters": [
     {
-     "$ref": "10"
+     "$ref": "14"
     },
     {
-     "$ref": "12"
+     "$ref": "16"
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
-   "$id": "19",
+   "$id": "23",
    "Name": "Group",
    "Operations": [
     {
-     "$id": "20",
+     "$id": "24",
      "Name": "renamedTwo",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "21",
+       "$id": "25",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Need to be set as 'http://localhost:3000' in client.",
        "Type": {
-        "$id": "22",
-        "Kind": "url",
-        "Name": "url",
-        "CrossLanguageDefinitionId": "TypeSpec.url"
+        "$id": "26",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -223,7 +278,7 @@
        "Kind": "Client"
       },
       {
-       "$id": "23",
+       "$id": "27",
        "Name": "client",
        "NameInRequest": "client",
        "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -243,7 +298,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "28",
        "StatusCodes": [
         204
        ],
@@ -259,24 +314,25 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedTwo"
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedTwo",
+     "Decorators": []
     },
     {
-     "$id": "25",
+     "$id": "29",
      "Name": "renamedFour",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
+       "$ref": "25"
       },
       {
-       "$ref": "23"
+       "$ref": "27"
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "30",
        "StatusCodes": [
         204
        ],
@@ -292,24 +348,25 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedFour"
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedFour",
+     "Decorators": []
     },
     {
-     "$id": "27",
+     "$id": "31",
      "Name": "renamedSix",
      "ResourceName": "Group",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
+       "$ref": "25"
       },
       {
-       "$ref": "23"
+       "$ref": "27"
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -325,21 +382,23 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedSix"
+     "CrossLanguageDefinitionId": "Client.Structure.RenamedOperation.Group.renamedSix",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "29"
+    "$id": "33"
    },
    "Parent": "RenamedOperationClient",
    "Parameters": [
     {
-     "$ref": "21"
+     "$ref": "25"
     },
     {
-     "$ref": "23"
+     "$ref": "27"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

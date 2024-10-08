@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(RouteConfigurationOverrideActionParametersTypeName left, RouteConfigurationOverrideActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RouteConfigurationOverrideActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(RouteConfigurationOverrideActionParametersTypeName left, RouteConfigurationOverrideActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="RouteConfigurationOverrideActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="RouteConfigurationOverrideActionParametersTypeName"/>. </summary>
         public static implicit operator RouteConfigurationOverrideActionParametersTypeName(string value) => new RouteConfigurationOverrideActionParametersTypeName(value);
 
         /// <inheritdoc />

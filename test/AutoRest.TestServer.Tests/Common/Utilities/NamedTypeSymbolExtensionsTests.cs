@@ -95,6 +95,7 @@ namespace NamedTypeSymbolExtensionsTests
                 deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 useModelReaderWriter: true,
+                useWriteCore: true,
                 enableBicepSerialization: true,
                 enableInternalRawData: false,
                 modelFactoryForHlc: Array.Empty<string>(),
@@ -114,7 +115,9 @@ namespace NamedTypeSymbolExtensionsTests
                 disableXmlDocs: false,
                 generateSampleProject: true,
                 generateTestProject: true,
-                helperNamespace: "");
+                examplesDirectory: null,
+                helperNamespace: "",
+                customHeader: null);
         }
 
         [Test]

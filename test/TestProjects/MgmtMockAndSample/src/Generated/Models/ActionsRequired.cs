@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(ActionsRequired left, ActionsRequired right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ActionsRequired"/> values are not the same. </summary>
         public static bool operator !=(ActionsRequired left, ActionsRequired right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ActionsRequired"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ActionsRequired"/>. </summary>
         public static implicit operator ActionsRequired(string value) => new ActionsRequired(value);
 
         /// <inheritdoc />

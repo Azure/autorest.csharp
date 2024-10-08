@@ -104,7 +104,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -144,7 +144,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -184,7 +184,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -226,7 +226,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -268,7 +268,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -314,7 +314,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -360,7 +360,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -417,7 +417,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -474,7 +474,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -530,7 +530,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -586,7 +586,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>
@@ -641,7 +641,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>v1</description>
+        /// <description>2024-05-01</description>
         /// </item>
         /// <item>
         /// <term>Resource</term>

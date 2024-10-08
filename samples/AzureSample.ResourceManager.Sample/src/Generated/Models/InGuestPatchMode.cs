@@ -48,7 +48,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         public static bool operator ==(InGuestPatchMode left, InGuestPatchMode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InGuestPatchMode"/> values are not the same. </summary>
         public static bool operator !=(InGuestPatchMode left, InGuestPatchMode right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="InGuestPatchMode"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="InGuestPatchMode"/>. </summary>
         public static implicit operator InGuestPatchMode(string value) => new InGuestPatchMode(value);
 
         /// <inheritdoc />

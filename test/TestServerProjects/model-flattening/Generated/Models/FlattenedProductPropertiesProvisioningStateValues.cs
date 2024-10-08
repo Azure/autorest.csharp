@@ -60,7 +60,7 @@ namespace model_flattening.Models
         public static bool operator ==(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are not the same. </summary>
         public static bool operator !=(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FlattenedProductPropertiesProvisioningStateValues"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="FlattenedProductPropertiesProvisioningStateValues"/>. </summary>
         public static implicit operator FlattenedProductPropertiesProvisioningStateValues(string value) => new FlattenedProductPropertiesProvisioningStateValues(value);
 
         /// <inheritdoc />

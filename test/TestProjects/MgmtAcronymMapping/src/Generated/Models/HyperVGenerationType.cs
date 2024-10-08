@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
         public static bool operator ==(HyperVGenerationType left, HyperVGenerationType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="HyperVGenerationType"/> values are not the same. </summary>
         public static bool operator !=(HyperVGenerationType left, HyperVGenerationType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="HyperVGenerationType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="HyperVGenerationType"/>. </summary>
         public static implicit operator HyperVGenerationType(string value) => new HyperVGenerationType(value);
 
         /// <inheritdoc />

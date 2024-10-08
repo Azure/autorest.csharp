@@ -60,8 +60,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                     new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, null, true, false, false),
                     new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, null, true, false, false),
                     new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, null, true, false, false),
-                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String), null, true, false, false),
-                    new InputModelProperty("requiredDuration", "requiredDuration", "", new InputDurationType(DurationKnownEncoding.Iso8601, InputPrimitiveType.String), null, true, false, false),
+                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String), null, true, false, false),
+                    new InputModelProperty("requiredDuration", "requiredDuration", "", new InputDurationType(DurationKnownEncoding.Iso8601, "dateTime", string.Empty, InputPrimitiveType.String), null, true, false, false),
                     new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
                     new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.Base64, null, true, false, false)
                 },

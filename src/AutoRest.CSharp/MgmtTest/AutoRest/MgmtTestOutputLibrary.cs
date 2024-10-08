@@ -5,11 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.MgmtTest.Output.Mock;
 using AutoRest.CSharp.MgmtTest.Output.Samples;
 using AutoRest.CSharp.Utilities;
 
@@ -17,12 +15,13 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 {
     internal class MgmtTestOutputLibrary
     {
-        private readonly InputNamespace _inputNamespace;
-        private readonly MgmtTestConfiguration _mgmtTestConfiguration;
+        private readonly InputNamespace _input;
+        private readonly HashSet<string> _skippedOperations;
+
         public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
-            _inputNamespace = inputNamespace;
-            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
+            _input = inputNamespace;
+            _skippedOperations = new HashSet<string>(Configuration.MgmtTestConfiguration?.SkippedOperations ?? []);
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -30,29 +29,18 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 
         private IEnumerable<MgmtSampleProvider> EnsureSamples()
         {
-            foreach ((var owner, var cases) in MockTestCases)
+            var result = new Dictionary<MgmtTypeProvider, List<Sample>>();
+            foreach (var client in _input.Clients)
             {
-                yield return new MgmtSampleProvider(owner, cases.Select(testCase => new Sample(testCase)));
-            }
-        }
-
-        private Dictionary<MgmtTypeProvider, List<MockTestCase>>? _mockTestCases;
-        internal Dictionary<MgmtTypeProvider, List<MockTestCase>> MockTestCases => _mockTestCases ??= EnsureMockTestCases();
-
-        private Dictionary<MgmtTypeProvider, List<MockTestCase>> EnsureMockTestCases()
-        {
-            var result = new Dictionary<MgmtTypeProvider, List<MockTestCase>>();
-            foreach (var client in _inputNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
+                foreach (var inputOperation in client.Operations)
                 {
-                    foreach (var example in operation.CodeModelExamples)
+                    foreach (var example in inputOperation.Examples)
                     {
                         // we need to find which resource or resource collection this test case belongs
-                        var operationId = example.Operation.OperationId!;
+                        var operationId = inputOperation.OperationId!;
 
                         // skip this operation if we find it in the `skipped-operations` configuration
-                        if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                        if (_skippedOperations.Contains(operationId))
                             continue;
 
                         var providerAndOperations = FindCarriersFromOperationId(operationId);
@@ -62,14 +50,17 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                             // the source code generator will never write them if it is not in arm core
                             if (providerForExample.Carrier is ArmClientExtension)
                                 continue;
-                            var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
-                            result.AddInList(mockTestCase.Owner, mockTestCase);
+                            var sample = new Sample(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
+                            result.AddInList(sample.Owner, sample);
                         }
                     }
                 }
             }
 
-            return result;
+            foreach ((var owner, var cases) in result)
+            {
+                yield return new MgmtSampleProvider(owner, cases);
+            }
         }
 
         private IEnumerable<MgmtTypeProviderAndOperation> FindCarriersFromOperationId(string operationId)
@@ -77,7 +68,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             // it is possible that an operationId does not exist in the MgmtOutputLibrary, because some of the operations are removed by design. For instance, `Operations_List`.
             if (EnsureOperationIdToProviders().TryGetValue(operationId, out var result))
                 return result;
-            return Enumerable.Empty<MgmtTypeProviderAndOperation>();
+            return Array.Empty<MgmtTypeProviderAndOperation>();
         }
 
         private Dictionary<string, List<MgmtTypeProviderAndOperation>>? _operationNameToProviders;
@@ -106,27 +97,6 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             return _operationNameToProviders;
-        }
-
-        private MgmtMockTestProvider<MgmtExtensionWrapper>? _extensionWrapperMockTest;
-        public MgmtMockTestProvider<MgmtExtensionWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
-
-        private IEnumerable<MgmtMockTestProvider<MgmtExtension>>? _extensionMockTests;
-        public IEnumerable<MgmtMockTestProvider<MgmtExtension>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtension>();
-
-        private IEnumerable<MgmtMockTestProvider<ResourceCollection>>? _resourceCollectionMockTests;
-        public IEnumerable<MgmtMockTestProvider<ResourceCollection>> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureMockTestProviders<ResourceCollection>();
-
-        private IEnumerable<MgmtMockTestProvider<Resource>>? _resourceMockTests;
-        public IEnumerable<MgmtMockTestProvider<Resource>> ResourceMockTests => _resourceMockTests ??= EnsureMockTestProviders<Resource>();
-
-        private IEnumerable<MgmtMockTestProvider<TProvider>> EnsureMockTestProviders<TProvider>() where TProvider : MgmtTypeProvider
-        {
-            foreach ((var owner, var testCases) in MockTestCases)
-            {
-                if (owner.GetType() == typeof(TProvider))
-                    yield return new MgmtMockTestProvider<TProvider>((TProvider)owner, testCases);
-            }
         }
     }
 }

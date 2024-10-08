@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         public static bool operator ==(IPAllocationMethod left, IPAllocationMethod right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IPAllocationMethod"/> values are not the same. </summary>
         public static bool operator !=(IPAllocationMethod left, IPAllocationMethod right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="IPAllocationMethod"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="IPAllocationMethod"/>. </summary>
         public static implicit operator IPAllocationMethod(string value) => new IPAllocationMethod(value);
 
         /// <inheritdoc />

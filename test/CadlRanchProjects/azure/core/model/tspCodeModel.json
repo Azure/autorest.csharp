@@ -7,78 +7,98 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.Versions",
-   "ValueType": {
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.Versions",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string"
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "v2022_12_01_preview",
-     "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview."
+     "kind": "enumvalue",
+     "name": "v2022_12_01_preview",
+     "value": "2022-12-01-preview",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "description": "The version 2022-12-01-preview.",
+     "decorators": []
     }
    ],
-   "Description": "The version of the API.",
-   "IsExtensible": false,
-   "Usage": "ApiVersionEnum"
+   "description": "The version of the API.",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "ApiVersionEnum",
+   "decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "5",
-   "Kind": "model",
-   "Name": "AzureEmbeddingModel",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "$id": "6",
+   "kind": "model",
+   "name": "AzureEmbeddingModel",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "6",
-     "Name": "embedding",
-     "SerializedName": "embedding",
-     "Description": "",
-     "Type": {
-      "$id": "7",
-      "Kind": "array",
-      "Name": "EmbeddingVector",
-      "ValueType": {
-       "$id": "8",
-       "Kind": "int32",
-       "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32"
+     "$id": "7",
+     "kind": "property",
+     "name": "embedding",
+     "serializedName": "embedding",
+     "type": {
+      "$id": "8",
+      "kind": "array",
+      "name": "EmbeddingVector",
+      "valueType": {
+       "$id": "9",
+       "kind": "int32",
+       "name": "int32",
+       "crossLanguageDefinitionId": "TypeSpec.int32",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+      "crossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+      "decorators": []
      },
-     "IsRequired": true,
-     "IsReadOnly": false
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureEmbeddingModel.embedding"
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "9",
+   "$id": "10",
    "Name": "ModelClient",
    "Operations": [],
    "Protocol": {
-    "$id": "10"
+    "$id": "11"
    },
    "Parameters": [
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Type": {
-      "$id": "12",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string"
+      "$id": "13",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -90,38 +110,39 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "13",
+      "$id": "14",
       "Type": {
-       "$id": "14",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "$id": "15",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
     }
-   ]
+   ],
+   "Decorators": []
   },
   {
-   "$id": "15",
+   "$id": "16",
    "Name": "AzureCoreEmbeddingVector",
    "Operations": [
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "get",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "get an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "18",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "19",
+        "kind": "url",
+        "name": "url",
+        "crossLanguageDefinitionId": "TypeSpec.url"
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -133,30 +154,32 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "19",
+        "$id": "20",
         "Type": {
-         "$id": "20",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+         "$id": "21",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string"
         },
         "Value": "http://localhost:3000"
        }
       },
       {
-       "$id": "21",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "23",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "23",
+        "kind": "constant",
+        "valueType": {
+         "$id": "24",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -164,26 +187,30 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "25",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "25",
-        "Kind": "array",
-        "Name": "EmbeddingVector",
-        "ValueType": {
-         "$id": "26",
-         "Kind": "int32",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "$id": "26",
+        "kind": "array",
+        "name": "EmbeddingVector",
+        "valueType": {
+         "$id": "27",
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+        "crossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+        "decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -200,33 +227,36 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.get"
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.get",
+     "Decorators": []
     },
     {
-     "$id": "27",
+     "$id": "28",
      "Name": "put",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "put an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "17"
+       "$ref": "18"
       },
       {
-       "$id": "28",
+       "$id": "29",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "29",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "30",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "30",
+        "kind": "constant",
+        "valueType": {
+         "$id": "31",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -234,24 +264,28 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "32",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "32",
-        "Kind": "array",
-        "Name": "EmbeddingVector",
-        "ValueType": {
-         "$id": "33",
-         "Kind": "int32",
-         "Name": "int32",
-         "CrossLanguageDefinitionId": "TypeSpec.int32"
+        "$id": "33",
+        "kind": "array",
+        "name": "EmbeddingVector",
+        "valueType": {
+         "$id": "34",
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
         },
-        "CrossLanguageDefinitionId": "Azure.Core.EmbeddingVector"
+        "crossLanguageDefinitionId": "Azure.Core.EmbeddingVector",
+        "decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -259,12 +293,14 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -283,33 +319,36 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.put"
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.put",
+     "Decorators": []
     },
     {
-     "$id": "35",
+     "$id": "36",
      "Name": "post",
      "ResourceName": "AzureCoreEmbeddingVector",
      "Description": "post a model which has an embeddingVector property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "17"
+       "$ref": "18"
       },
       {
-       "$id": "36",
+       "$id": "37",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "37",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "38",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "38",
+        "kind": "constant",
+        "valueType": {
+         "$id": "39",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -317,22 +356,26 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "39",
+       "$id": "40",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "41",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string"
+        "$id": "41",
+        "kind": "constant",
+        "valueType": {
+         "$id": "42",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json"
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -340,15 +383,17 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Constant"
+       "Kind": "Constant",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       },
       {
-       "$id": "42",
+       "$id": "43",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -356,17 +401,19 @@
        "IsEndpoint": false,
        "Explode": false,
        "IsRequired": true,
-       "Kind": "Method"
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
       }
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "44",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -386,18 +433,20 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.post"
+     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Model.AzureCoreEmbeddingVector.post",
+     "Decorators": []
     }
    ],
    "Protocol": {
-    "$id": "44"
+    "$id": "45"
    },
    "Parent": "ModelClient",
    "Parameters": [
     {
-     "$ref": "17"
+     "$ref": "18"
     }
-   ]
+   ],
+   "Decorators": []
   }
  ]
 }

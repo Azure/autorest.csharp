@@ -24,18 +24,20 @@ namespace AutoRest.CSharp.Output.Samples.Models
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(LowLevelClient client, TypeFactory typeFactory, LowLevelClientMethod method, InputOperation inputOperation, InputOperationExample operationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
             _typeFactory = typeFactory;
             _method = method;
-            _inputOperationExample = inputOperationExample;
+            _inputOperation = inputOperation;
+            _inputOperationExample = operationExample;
             IsConvenienceSample = isConvenienceSample;
-            ExampleKey = exampleKey;
+            ExampleKey = exampleKey.ToCleanName();
             IsAllParametersUsed = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around for the response usage building.
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
+        protected internal readonly InputOperation _inputOperation;
         protected internal readonly InputOperationExample _inputOperationExample;
         protected internal readonly LowLevelClient _client;
         protected internal readonly LowLevelClientMethod _method;
@@ -44,8 +46,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsAllParametersUsed { get; }
         public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
-        public string? ResourceName => _inputOperationExample.Operation.ResourceName;
-        public string InputOperationName => _inputOperationExample.Operation.Name;
+        public string? ResourceName => _inputOperation.ResourceName;
+        public string InputOperationName => _inputOperation.Name;
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
@@ -269,7 +271,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     var modelType = parameter.Type as InputModelType;
                     var objectExampleValue = parameterExample.ExampleValue as InputExampleObjectValue;
                     Debug.Assert(modelType != null);
-                    Debug.Assert(objectExampleValue != null);
+                    var values = objectExampleValue?.Values ?? new Dictionary<string, InputExampleValue>();
 
                     foreach (var modelOrBase in modelType.GetSelfAndBaseModels())
                     {
@@ -277,7 +279,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                         {
                             if (property.Name.ToVariableName() == name)
                             {
-                                return objectExampleValue.Values[property.SerializedName];
+                                return values.TryGetValue(property.SerializedName, out var exampleValue) ? exampleValue : null;
                             }
                         }
                     }

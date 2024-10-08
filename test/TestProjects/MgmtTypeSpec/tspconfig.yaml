@@ -3,3 +3,4 @@ options:
     flavor: "azure"
     namespace: "MgmtTypeSpec"
     clear-output-folder: true
+    examples-dir: "{project-root}/examples"

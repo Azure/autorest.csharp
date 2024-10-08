@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Models
         public static bool operator ==(FloatLiteralPropertyProperty left, FloatLiteralPropertyProperty right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FloatLiteralPropertyProperty"/> values are not the same. </summary>
         public static bool operator !=(FloatLiteralPropertyProperty left, FloatLiteralPropertyProperty right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FloatLiteralPropertyProperty"/>. </summary>
+        /// <summary> Converts a <see cref="float"/> to a <see cref="FloatLiteralPropertyProperty"/>. </summary>
         public static implicit operator FloatLiteralPropertyProperty(float value) => new FloatLiteralPropertyProperty(value);
 
         /// <inheritdoc />

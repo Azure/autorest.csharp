@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(FineTuneObject left, FineTuneObject right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FineTuneObject"/> values are not the same. </summary>
         public static bool operator !=(FineTuneObject left, FineTuneObject right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FineTuneObject"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="FineTuneObject"/>. </summary>
         public static implicit operator FineTuneObject(string value) => new FineTuneObject(value);
 
         /// <inheritdoc />

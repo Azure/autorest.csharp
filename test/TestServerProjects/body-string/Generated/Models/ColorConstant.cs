@@ -30,7 +30,7 @@ namespace body_string.Models
         public static bool operator ==(ColorConstant left, ColorConstant right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ColorConstant"/> values are not the same. </summary>
         public static bool operator !=(ColorConstant left, ColorConstant right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ColorConstant"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ColorConstant"/>. </summary>
         public static implicit operator ColorConstant(string value) => new ColorConstant(value);
 
         /// <inheritdoc />

@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Parameters.Spread;
 using Parameters.Spread.Models;
+using _Type.Model.Visibility.Models;
 
 namespace CadlRanchProjects.Tests
 {
@@ -20,6 +21,34 @@ namespace CadlRanchProjects.Tests
         public Task Parameters_Spread_Model_spreadAsRequestBody() => Test(async (host) =>
         {
             Response response = await new SpreadClient(host, null).GetModelClient().SpreadAsRequestBodyAsync("foo");
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_Spread_Model_spreadCompositeRequest() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host, null).GetModelClient().SpreadCompositeRequestAsync("foo", "bar", new BodyParameter("foo"));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_Spread_Model_spreadCompositeRequestMix() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host, null).GetModelClient().SpreadCompositeRequestMixAsync("foo", "bar", "foo");
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_Spread_Model_spreadCompositeRequestOnlyWithBody() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host, null).GetModelClient().SpreadCompositeRequestOnlyWithBodyAsync(new BodyParameter("foo"));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_Spread_Model_spreadCompositeRequestOnlyWithoutBody() => Test(async (host) =>
+        {
+            Response response = await new SpreadClient(host, null).GetModelClient().SpreadCompositeRequestWithoutBodyAsync("foo", "bar");
             Assert.AreEqual(204, response.Status);
         });
 
@@ -140,6 +169,5 @@ namespace CadlRanchProjects.Tests
 
         private static bool IsProtocolMethod(MethodInfo method)
             => method.GetParameters().Any(parameter => parameter.ParameterType.Equals(typeof(RequestContent)));
-
     }
 }

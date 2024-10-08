@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(MgmtMockAndSampleSkuFamily left, MgmtMockAndSampleSkuFamily right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MgmtMockAndSampleSkuFamily"/> values are not the same. </summary>
         public static bool operator !=(MgmtMockAndSampleSkuFamily left, MgmtMockAndSampleSkuFamily right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="MgmtMockAndSampleSkuFamily"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="MgmtMockAndSampleSkuFamily"/>. </summary>
         public static implicit operator MgmtMockAndSampleSkuFamily(string value) => new MgmtMockAndSampleSkuFamily(value);
 
         /// <inheritdoc />
