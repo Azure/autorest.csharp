@@ -153,11 +153,6 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (rawProperty.IsFlattened)
                 {
-                    if (isMultipartType)
-                    {
-                        throw new JsonException($"Flattened property '{rawProperty.Name}' cannot be used in a multipart type '{modelName}'.");
-                    }
-
                     var flattenedProperties = FlattenProperty(rawProperty);
 
                     foreach (var property in flattenedProperties)
