@@ -358,8 +358,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
         {
-            // TODO -- the code model deserializer has an issue that it will deserialize all the primitive types into a string
-            // https://github.com/Azure/autorest.csharp/issues/2377
             string str => writer.AppendStringValue(type, str, inputType), // we need this function to convert the string to real type. There might be a bug that some literal types (like bool and int) are deserialized to string
             null => writer.AppendRaw("null"),
             List<object?> list => writer.AppendRawList(list),
@@ -370,9 +368,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType) => type switch
         {
-            _ when inputType == InputPrimitiveType.Int32 || inputType == InputPrimitiveType.Int64 || inputType == InputPrimitiveType.Float32 || inputType == InputPrimitiveType.Float64 || inputType == InputPrimitiveType.Decimal128 => writer.AppendRaw(value),
             _ when inputType is InputDurationType { Encode: DurationKnownEncoding.Iso8601 } => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
-            _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
             _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
             _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
             _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
@@ -380,16 +376,6 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         };
 
         private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType)) || type.Equals(typeof(string));
-
-        private static readonly HashSet<Type> _primitiveTypes = new()
-        {
-            typeof(bool), typeof(bool?),
-            typeof(int), typeof(int?),
-            typeof(long), typeof(long?),
-            typeof(float), typeof(float?),
-            typeof(double), typeof(double?),
-            typeof(decimal), typeof(decimal?)
-        };
 
         private static readonly HashSet<Type> _newInstanceInitializedTypes = new()
         {

@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 result = CreateDerivedType(ref reader, id, kind, options);
             }
 
-            return result ?? CreateDerivedType(ref reader, id, kind, options);
+            return result ?? throw new JsonException();
         }
 
         private const string ModelKind = "model";
@@ -155,11 +155,19 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     case JsonValueKind.True or JsonValueKind.False:
                         return InputExampleValue.Value(type, rawValue.Value.GetBoolean());
                     case JsonValueKind.Number:
-                        if (rawValue.Value.TryGetInt32(out var int32Value))
+                        var rawText = rawValue.Value.GetRawText();
+                        if (int.TryParse(rawText, out var int32Value))
                             return InputExampleValue.Value(type, int32Value);
-                        else if (rawValue.Value.TryGetInt64(out var int64Value))
+                        else if (long.TryParse(rawText, out var int64Value))
                             return InputExampleValue.Value(type, int64Value);
-                        return InputExampleValue.Value(type, rawValue.Value.GetDouble());
+                        else if (float.TryParse(rawText, out var floatValue))
+                            return InputExampleValue.Value(type, floatValue);
+                        else if (double.TryParse(rawText, out var doubleValue))
+                            return InputExampleValue.Value(type, doubleValue);
+                        else if (decimal.TryParse(rawText, out var decimalValue))
+                            return InputExampleValue.Value(type, decimalValue);
+                        else
+                            return InputExampleValue.Value(type, null);
                     case JsonValueKind.Array:
                         var length = rawValue.Value.GetArrayLength();
                         var values = new List<InputExampleValue>(length);
@@ -198,13 +206,30 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 }
             }
 
+            var effectiveType = type switch
+            {
+                null => throw new JsonException(),
+                InputEnumType enumType => enumType.ValueType,
+                InputDurationType durationType => durationType.WireType,
+                InputDateTimeType dateTimeType => dateTimeType.WireType,
+                _ => type
+            };
+
             object? value = rawValue?.ValueKind switch
             {
                 null or JsonValueKind.Null => null,
                 JsonValueKind.String => rawValue.Value.GetString(),
                 JsonValueKind.False => false,
                 JsonValueKind.True => true,
-                JsonValueKind.Number => rawValue.Value.GetDouble(),
+                JsonValueKind.Number => effectiveType switch
+                {
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.UInt32 } => int.TryParse(rawValue.Value.GetRawText(), out var intValue) ? intValue : default(int),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.Integer } => long.TryParse(rawValue.Value.GetRawText(), out var longValue) ? longValue : default(long),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 } => float.TryParse(rawValue.Value.GetRawText(), out var floatValue) ? floatValue : default(float),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float } => double.TryParse(rawValue.Value.GetRawText(), out var doubleValue) ? doubleValue : default(double),
+                    InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 } => decimal.TryParse(rawValue.Value.GetRawText(), out var decimalValue) ? decimalValue : default(decimal),
+                    _ => null,
+                },
                 _ => throw new JsonException($"kind {rawValue?.ValueKind} is not expected here")
             };
 
