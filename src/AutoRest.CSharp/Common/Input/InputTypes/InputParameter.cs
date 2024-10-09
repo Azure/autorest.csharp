@@ -30,7 +30,7 @@ internal record InputParameter(
         Name: string.Empty,
         NameInRequest: string.Empty,
         Description: null,
-        Type: InputPrimitiveType.Any,
+        Type: InputPrimitiveType.Unknown,
         Location: RequestLocation.None,
         DefaultValue: null,
         FlattenedBodyProperty: null,

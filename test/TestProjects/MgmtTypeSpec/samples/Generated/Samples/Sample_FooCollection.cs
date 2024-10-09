@@ -50,7 +50,7 @@ namespace MgmtTypeSpec.Samples
                     ServiceUri = new Uri("https://myService.com"),
                     Something = "for test only",
                     BoolValue = true,
-                    FloatValue = (float)1.2,
+                    FloatValue = 1.2F,
                     DoubleValue = 1.2,
                 },
             };
