@@ -242,15 +242,20 @@ and then run `dotnet build /t:GenerateCode` and it will attach a debugger to the
 
 To debug a TypeSpec project inside `azure-sdk-for-net` repo, you could run
 ```powershell
-dotnet build /t:GenerateCode /p:typespecAdditionalOptions="debug=true"
+dotnet build /t:GenerateCode /p:TypeSpecAdditionalOptions="debug=true"
 ```
 to attach a debugger to the plugin process.
 
 If you are trying to use a locally built generator `dll` and debug it, you should run
 ```powershell
-dotnet build /t:GenerateCode /p:typespecAdditionalOptions="csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll%3Bdebug=true"
+dotnet build /t:GenerateCode /p:TypeSpecAdditionalOptions="csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll%3Bdebug=true"
 ```
 where you must use `%3B` as escape of the semicolon to append multiple options.
+
+You could also use the raw `tsp-client` command to debug the project. Run the following command in the same directory of the project you want to debug:
+```powershell
+npx tsp-client update --output-dir . --emitter-options "csharpGeneratorPath=/absolute/path/to/AutoRest.CSharp.dll;debug=true"
+```
 
 ## Debugging transforms
 
