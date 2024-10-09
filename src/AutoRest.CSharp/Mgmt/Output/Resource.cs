@@ -23,6 +23,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -585,5 +586,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
+
+        private FormattableString? _createResourceIdentifierReference;
+        public FormattableString CreateResourceIdentifierReference => _createResourceIdentifierReference ??= BuildCreateResourceIdentifierMethodReference();
+
+        private FormattableString BuildCreateResourceIdentifierMethodReference()
+        {
+            // see if there is method with same name in customization code
+            var methods = ExistingType?.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind is MethodKind.Ordinary);
+            var createResourceIdentifierMethod = methods?.FirstOrDefault(m => m.Name == CreateResourceIdentifierMethod.Signature.Name);
+
+            if (createResourceIdentifierMethod == null)
+            {
+                return $"{Type}.{CreateResourceIdentifierMethod.Signature.Name}";
+            }
+
+            return $"";
+        }
     }
 }
