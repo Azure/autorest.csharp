@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -601,7 +602,25 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return $"{Type}.{CreateResourceIdentifierMethod.Signature.Name}";
             }
 
-            return $"";
+            var parameters = CreateResourceIdentifierMethod.Signature.Parameters;
+            var formatBuilder = new StringBuilder("{0}.")
+                .Append(CreateResourceIdentifierMethod.Signature.Name)
+                .Append("(");
+            var arguments = new List<object?>(parameters.Count + 1)
+            {
+                Type
+            };
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                formatBuilder.Append($"{{{i + 1}}}"); // +1 because we should start from 1
+                if (i != parameters.Count - 1)
+                {
+                    formatBuilder.Append(",");
+                }
+                arguments.Add(parameters[i].Type);
+            }
+            formatBuilder.Append(")");
+            return FormattableStringFactory.Create(formatBuilder.ToString(), [.. arguments]);
         }
     }
 }
