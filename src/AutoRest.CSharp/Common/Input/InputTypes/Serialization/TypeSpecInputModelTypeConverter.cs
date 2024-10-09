@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Common.Input
                     {
                         newFlattenedNames.Add(p.Name);
                     }
-                    yield return p with { FlattenedNames = newFlattenedNames };
+                    yield return p with { FlattenedNames = newFlattenedNames, IsRequired = (propertyToFlatten.IsRequired ? p.IsRequired : false) };
                 }
             }
             else
