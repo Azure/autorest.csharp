@@ -473,8 +473,10 @@ namespace AutoRest.CSharp.Common.Input
                 ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, property.IsNullable) : null,
                 IsRequired: property.IsRequired,
                 IsReadOnly: property.IsReadOnly,
-                IsDiscriminator: property.IsDiscriminator ?? false,
-                FlattenedNames: property.FlattenedNames.ToList());
+                IsDiscriminator: property.IsDiscriminator ?? false)
+            {
+                FlattenedNames = property.FlattenedNames.ToList(),
+            };
             _propertiesCache.Add(property, inputProperty);
 
             return inputProperty;

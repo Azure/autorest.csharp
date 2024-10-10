@@ -2162,6 +2162,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateModerationRequest.input"
     },
@@ -2177,6 +2178,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateModerationRequest.model"
     }
@@ -2206,6 +2208,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.id"
     },
@@ -2225,6 +2228,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.model"
     },
@@ -2262,6 +2266,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.flagged"
         },
@@ -2295,6 +2300,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.hate"
            },
@@ -2314,6 +2320,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.hate/threatening"
            },
@@ -2333,6 +2340,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.harassment"
            },
@@ -2352,6 +2360,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.harassment/threatening"
            },
@@ -2371,6 +2380,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm"
            },
@@ -2390,6 +2400,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm/intent"
            },
@@ -2409,6 +2420,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.self-harm/instructive"
            },
@@ -2428,6 +2440,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.sexual"
            },
@@ -2447,6 +2460,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.sexual/minors"
            },
@@ -2466,6 +2480,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.violence"
            },
@@ -2485,6 +2500,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.categories.anonymous.violence/graphic"
            }
@@ -2493,6 +2509,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.categories"
         },
@@ -2526,6 +2543,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.hate"
            },
@@ -2545,6 +2563,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.hate/threatening"
            },
@@ -2564,6 +2583,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.harassment"
            },
@@ -2583,6 +2603,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.harassment/threatening"
            },
@@ -2602,6 +2623,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm"
            },
@@ -2621,6 +2643,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm/intent"
            },
@@ -2640,6 +2663,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.self-harm/instructive"
            },
@@ -2659,6 +2683,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.sexual"
            },
@@ -2678,6 +2703,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.sexual/minors"
            },
@@ -2697,6 +2723,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.violence"
            },
@@ -2716,6 +2743,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.category_scores.anonymous.violence/graphic"
            }
@@ -2724,6 +2752,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.result.anonymous.category_scores"
         }
@@ -2735,6 +2764,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateModerationResponse.results"
     }
@@ -2785,6 +2815,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.Error.type"
        },
@@ -2803,6 +2834,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.Error.message"
        },
@@ -2825,6 +2857,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.Error.param"
        },
@@ -2847,6 +2880,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.Error.code"
        }
@@ -2855,6 +2889,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ErrorResponse.error"
     }
@@ -2887,6 +2922,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.prompt"
     },
@@ -2917,6 +2953,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.n"
     },
@@ -2936,6 +2973,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.size"
     },
@@ -2955,6 +2993,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.response_format"
     },
@@ -2980,6 +3019,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageRequest.user"
     }
@@ -3016,6 +3056,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ImagesResponse.created"
     },
@@ -3053,6 +3094,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Image.url"
         },
@@ -3073,6 +3115,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Image.b64_json"
         }
@@ -3084,6 +3127,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ImagesResponse.data"
     }
@@ -3116,6 +3160,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.prompt"
     },
@@ -3136,6 +3181,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.image"
     },
@@ -3156,6 +3202,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.mask"
     },
@@ -3186,6 +3233,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.n"
     },
@@ -3205,6 +3253,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.size"
     },
@@ -3224,6 +3273,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.response_format"
     },
@@ -3249,6 +3299,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageEditRequest.user"
     }
@@ -3279,6 +3330,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.image"
     },
@@ -3309,6 +3361,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.n"
     },
@@ -3328,6 +3381,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.size"
     },
@@ -3347,6 +3401,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.response_format"
     },
@@ -3372,6 +3427,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateImageVariationRequest.user"
     }
@@ -3400,6 +3456,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListModelsResponse.object"
     },
@@ -3437,6 +3494,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Model.id"
         },
@@ -3458,6 +3516,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Model.object"
         },
@@ -3485,6 +3544,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Model.created"
         },
@@ -3504,6 +3564,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Model.owned_by"
         }
@@ -3515,6 +3576,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListModelsResponse.data"
     }
@@ -3546,6 +3608,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteModelResponse.id"
     },
@@ -3564,6 +3627,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteModelResponse.object"
     },
@@ -3582,6 +3646,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteModelResponse.deleted"
     }
@@ -3611,6 +3676,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.training_file"
     },
@@ -3634,6 +3700,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.validation_file"
     },
@@ -3653,6 +3720,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.model"
     },
@@ -3676,6 +3744,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.n_epochs"
     },
@@ -3699,6 +3768,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.batch_size"
     },
@@ -3722,6 +3792,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.learning_rate_multiplier"
     },
@@ -3745,6 +3816,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.prompt_loss_rate"
     },
@@ -3768,6 +3840,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.compute_classification_metrics"
     },
@@ -3791,6 +3864,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_n_classes"
     },
@@ -3814,6 +3888,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_positive_class"
     },
@@ -3844,6 +3919,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.classification_betas"
     },
@@ -3874,6 +3950,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuneRequest.suffix"
     }
@@ -3905,6 +3982,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.id"
     },
@@ -3926,6 +4004,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.object"
     },
@@ -3953,6 +4032,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.created_at"
     },
@@ -3980,6 +4060,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.updated_at"
     },
@@ -3999,6 +4080,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.model"
     },
@@ -4022,6 +4104,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.fine_tuned_model"
     },
@@ -4041,6 +4124,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.organization_id"
     },
@@ -4056,6 +4140,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.status"
     },
@@ -4089,6 +4174,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.n_epochs"
        },
@@ -4108,6 +4194,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.batch_size"
        },
@@ -4127,6 +4214,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.prompt_loss_weight"
        },
@@ -4146,6 +4234,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.learning_rate_multiplier"
        },
@@ -4165,6 +4254,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.compute_classification_metrics"
        },
@@ -4184,6 +4274,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.classification_positive_class"
        },
@@ -4203,6 +4294,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams.anonymous.classification_n_classes"
        }
@@ -4211,6 +4303,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.hyperparams"
     },
@@ -4249,6 +4342,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.id"
         },
@@ -4270,6 +4364,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.object"
         },
@@ -4289,6 +4384,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.bytes"
         },
@@ -4316,6 +4412,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.createdAt"
         },
@@ -4335,6 +4432,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.filename"
         },
@@ -4354,6 +4452,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.purpose"
         },
@@ -4369,6 +4468,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.status"
         },
@@ -4392,6 +4492,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.OpenAIFile.status_details"
         }
@@ -4403,6 +4504,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.training_files"
     },
@@ -4425,6 +4527,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.validation_files"
     },
@@ -4447,6 +4550,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.result_files"
     },
@@ -4483,6 +4587,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuneEvent.object"
         },
@@ -4509,6 +4614,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuneEvent.created_at"
         },
@@ -4527,6 +4633,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuneEvent.level"
         },
@@ -4545,6 +4652,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuneEvent.message"
         }
@@ -4556,6 +4664,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTune.events"
     }
@@ -4593,6 +4702,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTunesResponse.object"
     },
@@ -4614,6 +4724,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTunesResponse.data"
     }
@@ -4642,6 +4753,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTuneEventsResponse.object"
     },
@@ -4663,6 +4775,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTuneEventsResponse.data"
     }
@@ -4691,6 +4804,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFilesResponse.object"
     },
@@ -4712,6 +4826,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFilesResponse.data"
     }
@@ -4742,6 +4857,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFileRequest.file"
     },
@@ -4761,6 +4877,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFileRequest.purpose"
     }
@@ -4789,6 +4906,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteFileResponse.id"
     },
@@ -4807,6 +4925,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteFileResponse.object"
     },
@@ -4825,6 +4944,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.DeleteFileResponse.deleted"
     }
@@ -4850,6 +4970,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.model"
     },
@@ -4926,6 +5047,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.input"
     },
@@ -4951,6 +5073,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingRequest.user"
     }
@@ -4982,6 +5105,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.object"
     },
@@ -5001,6 +5125,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.model"
     },
@@ -5039,6 +5164,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Embedding.index"
         },
@@ -5060,6 +5186,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Embedding.object"
         },
@@ -5086,6 +5213,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.Embedding.embedding"
         }
@@ -5097,6 +5225,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.data"
     },
@@ -5130,6 +5259,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage.anonymous.prompt_tokens"
        },
@@ -5149,6 +5279,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage.anonymous.total_tokens"
        }
@@ -5157,6 +5288,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEmbeddingResponse.usage"
     }
@@ -5188,6 +5320,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.model"
     },
@@ -5211,6 +5344,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.input"
     },
@@ -5230,6 +5364,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.instruction"
     },
@@ -5260,6 +5395,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.n"
     },
@@ -5290,6 +5426,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.temperature"
     },
@@ -5320,6 +5457,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditRequest.top_p"
     }
@@ -5352,6 +5490,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.object"
     },
@@ -5379,6 +5518,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.created"
     },
@@ -5416,6 +5556,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.text"
         },
@@ -5435,6 +5576,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.index"
         },
@@ -5450,6 +5592,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.choice.anonymous.finish_reason"
         }
@@ -5461,6 +5604,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.choices"
     },
@@ -5494,6 +5638,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CompletionUsage.prompt_tokens"
        },
@@ -5513,6 +5658,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CompletionUsage.completion_tokens"
        },
@@ -5532,6 +5678,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CompletionUsage.total_tokens"
        }
@@ -5540,6 +5687,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateEditResponse.usage"
     }
@@ -5571,6 +5719,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.model"
     },
@@ -5651,6 +5800,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.prompt"
     },
@@ -5674,6 +5824,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.suffix"
     },
@@ -5704,6 +5855,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.temperature"
     },
@@ -5734,6 +5886,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.top_p"
     },
@@ -5764,6 +5917,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.n"
     },
@@ -5794,6 +5948,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.max_tokens"
     },
@@ -5839,6 +5994,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.stop"
     },
@@ -5869,6 +6025,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.presence_penalty"
     },
@@ -5899,6 +6056,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.frequency_penalty"
     },
@@ -5934,6 +6092,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.logit_bias"
     },
@@ -5960,6 +6119,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.user"
     },
@@ -5983,6 +6143,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.stream"
     },
@@ -6006,6 +6167,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.logprobs"
     },
@@ -6029,6 +6191,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.echo"
     },
@@ -6052,6 +6215,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionRequest.best_of"
     }
@@ -6082,6 +6246,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.id"
     },
@@ -6101,6 +6266,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.object"
     },
@@ -6128,6 +6294,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.created"
     },
@@ -6147,6 +6314,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.model"
     },
@@ -6183,6 +6351,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.index"
         },
@@ -6201,6 +6370,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.text"
         },
@@ -6242,6 +6412,7 @@
              "optional": false,
              "readOnly": false,
              "discriminator": false,
+             "flatten": false,
              "decorators": [],
              "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.tokens"
             },
@@ -6267,6 +6438,7 @@
              "optional": false,
              "readOnly": false,
              "discriminator": false,
+             "flatten": false,
              "decorators": [],
              "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.token_logprobs"
             },
@@ -6304,6 +6476,7 @@
              "optional": false,
              "readOnly": false,
              "discriminator": false,
+             "flatten": false,
              "decorators": [],
              "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.top_logprobs"
             },
@@ -6329,6 +6502,7 @@
              "optional": false,
              "readOnly": false,
              "discriminator": false,
+             "flatten": false,
              "decorators": [],
              "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.logprobs.anonymous.text_offset"
             }
@@ -6338,6 +6512,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.logprobs"
         },
@@ -6353,6 +6528,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choice.anonymous.finish_reason"
         }
@@ -6364,6 +6540,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.choices"
     },
@@ -6378,6 +6555,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse.usage"
     }
@@ -6413,6 +6591,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.training_file"
     },
@@ -6436,6 +6615,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.validation_file"
     },
@@ -6451,6 +6631,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.model"
     },
@@ -6512,6 +6693,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.hyperparameters.anonymous.n_epochs"
        }
@@ -6520,6 +6702,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.hyperparameters"
     },
@@ -6550,6 +6733,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateFineTuningJobRequest.suffix"
     }
@@ -6582,6 +6766,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.id"
     },
@@ -6603,6 +6788,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.object"
     },
@@ -6630,6 +6816,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.created_at"
     },
@@ -6661,6 +6848,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.finished_at"
     },
@@ -6680,6 +6868,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.model"
     },
@@ -6703,6 +6892,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.fine_tuned_model"
     },
@@ -6722,6 +6912,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.organization_id"
     },
@@ -6737,6 +6928,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.status"
     },
@@ -6798,6 +6990,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.FineTuningJob.hyperparameters.anonymous.n_epochs"
        }
@@ -6806,6 +6999,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.hyperparameters"
     },
@@ -6825,6 +7019,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.training_file"
     },
@@ -6848,6 +7043,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.validation_file"
     },
@@ -6874,6 +7070,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.result_files"
     },
@@ -6897,6 +7094,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.trained_tokens"
     },
@@ -6933,6 +7131,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.message"
         },
@@ -6952,6 +7151,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.code"
         },
@@ -6975,6 +7175,7 @@
          "optional": true,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJob.error.anonymous.param"
         }
@@ -6984,6 +7185,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.FineTuningJob.error"
     }
@@ -7018,6 +7220,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.object"
     },
@@ -7039,6 +7242,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.data"
     },
@@ -7057,6 +7261,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListPaginatedFineTuningJobsResponse.has_more"
     }
@@ -7085,6 +7290,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTuningJobEventsResponse.object"
     },
@@ -7120,6 +7326,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.id"
         },
@@ -7138,6 +7345,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.object"
         },
@@ -7164,6 +7372,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.created_at"
         },
@@ -7178,6 +7387,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.level"
         },
@@ -7196,6 +7406,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.FineTuningJobEvent.message"
         }
@@ -7207,6 +7418,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ListFineTuningJobEventsResponse.data"
     }
@@ -7235,6 +7447,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.role"
     },
@@ -7258,6 +7471,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.content"
     },
@@ -7277,6 +7491,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.name"
     },
@@ -7310,6 +7525,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous.name"
        },
@@ -7329,6 +7545,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call.anonymous.arguments"
        }
@@ -7337,6 +7554,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionRequestMessage.function_call"
     }
@@ -7369,6 +7587,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.name"
     },
@@ -7388,6 +7607,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.description"
     },
@@ -7416,6 +7636,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionFunctions.parameters"
     }
@@ -7448,6 +7669,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.ChatCompletionFunctionCallOption.name"
     }
@@ -7473,6 +7695,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.model"
     },
@@ -7495,6 +7718,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.messages"
     },
@@ -7517,6 +7741,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.functions"
     },
@@ -7566,6 +7791,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.function_call"
     },
@@ -7596,6 +7822,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.temperature"
     },
@@ -7626,6 +7853,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.top_p"
     },
@@ -7656,6 +7884,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.n"
     },
@@ -7686,6 +7915,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.max_tokens"
     },
@@ -7731,6 +7961,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.stop"
     },
@@ -7761,6 +7992,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.presence_penalty"
     },
@@ -7791,6 +8023,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.frequency_penalty"
     },
@@ -7826,6 +8059,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.logit_bias"
     },
@@ -7852,6 +8086,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.user"
     },
@@ -7875,6 +8110,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionRequest.stream"
     }
@@ -7905,6 +8141,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.id"
     },
@@ -7924,6 +8161,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.object"
     },
@@ -7951,6 +8189,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.created"
     },
@@ -7970,6 +8209,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.model"
     },
@@ -8007,6 +8247,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.index"
         },
@@ -8035,6 +8276,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.role"
            },
@@ -8058,6 +8300,7 @@
             "optional": false,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.content"
            },
@@ -8091,6 +8334,7 @@
                "optional": false,
                "readOnly": false,
                "discriminator": false,
+               "flatten": false,
                "decorators": [],
                "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call.anonymous.name"
               },
@@ -8110,6 +8354,7 @@
                "optional": false,
                "readOnly": false,
                "discriminator": false,
+               "flatten": false,
                "decorators": [],
                "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call.anonymous.arguments"
               }
@@ -8118,6 +8363,7 @@
             "optional": true,
             "readOnly": false,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "OpenAI.ChatCompletionResponseMessage.function_call"
            }
@@ -8126,6 +8372,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.message"
         },
@@ -8141,6 +8388,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choice.anonymous.finish_reason"
         }
@@ -8152,6 +8400,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.choices"
     },
@@ -8166,6 +8415,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse.usage"
     }
@@ -8205,6 +8455,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.file"
     },
@@ -8220,6 +8471,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.model"
     },
@@ -8239,6 +8491,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.prompt"
     },
@@ -8254,6 +8507,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.response_format"
     },
@@ -8273,6 +8527,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationRequest.temperature"
     }
@@ -8301,6 +8556,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranslationResponse.text"
     }
@@ -8331,6 +8587,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.file"
     },
@@ -8346,6 +8603,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.model"
     },
@@ -8365,6 +8623,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.prompt"
     },
@@ -8380,6 +8639,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.response_format"
     },
@@ -8399,6 +8659,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.temperature"
     },
@@ -8418,6 +8679,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionRequest.language"
     }
@@ -8446,6 +8708,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "OpenAI.CreateTranscriptionResponse.text"
     }

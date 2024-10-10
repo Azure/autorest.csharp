@@ -29,6 +29,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.readProp"
     },
@@ -48,6 +49,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.queryProp"
     },
@@ -74,6 +76,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.createProp"
     },
@@ -100,6 +103,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.updateProp"
     },
@@ -119,6 +123,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.deleteProp"
     }
@@ -160,6 +165,7 @@
      "optional": true,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalNullableIntList"
     },
@@ -191,6 +197,7 @@
      "optional": true,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalStringRecord"
     }
