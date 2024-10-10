@@ -126,6 +126,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.id"
     },
@@ -145,6 +146,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User.name"
     }
@@ -175,6 +177,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam.userActionValue"
     }
@@ -205,6 +208,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse.userActionResult"
     }

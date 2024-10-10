@@ -326,6 +326,7 @@
        "optional": true,
        "readOnly": true,
        "discriminator": false,
+       "flatten": false,
        "decorators": [],
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.id"
       },
@@ -345,6 +346,7 @@
        "optional": true,
        "readOnly": true,
        "discriminator": false,
+       "flatten": false,
        "decorators": [],
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.name"
       },
@@ -364,6 +366,7 @@
        "optional": true,
        "readOnly": true,
        "discriminator": false,
+       "flatten": false,
        "decorators": [],
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.type"
       },
@@ -398,6 +401,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdBy"
          },
@@ -413,6 +417,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdByType"
          },
@@ -440,6 +445,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.createdAt"
          },
@@ -459,6 +465,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedBy"
          },
@@ -474,6 +481,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedByType"
          },
@@ -501,6 +509,7 @@
           "optional": true,
           "readOnly": false,
           "discriminator": false,
+          "flatten": false,
           "decorators": [],
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData.lastModifiedAt"
          }
@@ -509,6 +518,7 @@
        "optional": true,
        "readOnly": true,
        "discriminator": false,
+       "flatten": false,
        "decorators": [],
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource.systemData"
       }
@@ -543,6 +553,7 @@
       "optional": true,
       "readOnly": false,
       "discriminator": false,
+      "flatten": false,
       "decorators": [],
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.tags"
      },
@@ -562,6 +573,7 @@
       "optional": false,
       "readOnly": false,
       "discriminator": false,
+      "flatten": false,
       "decorators": [],
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource.location"
      }
@@ -595,6 +607,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.SingletonTrackedResourceProperties.provisioningState"
        },
@@ -614,6 +627,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.SingletonTrackedResourceProperties.description"
        }
@@ -622,6 +636,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.SingletonTrackedResource.properties"
     }
@@ -679,6 +694,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.code"
        },
@@ -698,6 +714,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.message"
        },
@@ -717,6 +734,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.target"
        },
@@ -739,6 +757,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.details"
        },
@@ -777,6 +796,7 @@
             "optional": true,
             "readOnly": true,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.type"
            },
@@ -798,6 +818,7 @@
             "optional": true,
             "readOnly": true,
             "discriminator": false,
+            "flatten": false,
             "decorators": [],
             "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info"
            }
@@ -809,6 +830,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail.additionalInfo"
        }
@@ -817,6 +839,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse.error"
     }
@@ -859,6 +882,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
@@ -885,6 +909,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
@@ -939,6 +964,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties.provisioningState"
        },
@@ -958,6 +984,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResourceProperties.description"
        }
@@ -966,6 +993,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NestedProxyResource.properties"
     }
@@ -1005,6 +1033,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
@@ -1031,6 +1060,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
@@ -1075,6 +1105,7 @@
         "optional": true,
         "readOnly": true,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties.provisioningState"
        },
@@ -1094,6 +1125,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResourceProperties.description"
        }
@@ -1102,6 +1134,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.TopLevelTrackedResource.properties"
     }
@@ -1138,6 +1171,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.value"
     },
@@ -1164,6 +1198,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult.nextLink"
     }
@@ -1194,6 +1229,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NotificationDetails.message"
     },
@@ -1213,6 +1249,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.ResourceManager.Models.Resources.NotificationDetails.urgent"
     }

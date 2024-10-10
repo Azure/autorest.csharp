@@ -228,6 +228,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.name"
     },
@@ -276,6 +277,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredUnion"
     },
@@ -297,6 +299,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredLiteralString"
     },
@@ -318,6 +321,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredLiteralInt"
     },
@@ -339,6 +343,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredLiteralFloat"
     },
@@ -364,6 +369,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredLiteralBool"
     },
@@ -385,6 +391,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.optionalLiteralString"
     },
@@ -406,6 +413,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.optionalLiteralInt"
     },
@@ -427,6 +435,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.optionalLiteralFloat"
     },
@@ -452,6 +461,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.optionalLiteralBool"
     },
@@ -471,6 +481,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredBadDescription"
     },
@@ -501,6 +512,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.optionalNullableList"
     },
@@ -531,6 +543,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.Thing.requiredNullableList"
     }
@@ -562,6 +575,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "NoTestTypeSpec.DerivedThing.myProperty"
     }

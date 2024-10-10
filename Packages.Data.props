@@ -43,7 +43,7 @@
     <PackageReference Update="CommandLineParser" Version="2.9.1" />
     <PackageReference Update="Humanizer.Core" Version="2.13.14" />
     <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
-    <PackageReference Update="System.Text.Json" Version="6.0.9" />
+    <PackageReference Update="System.Text.Json" Version="6.0.10" />
     <PackageReference Update="YamlDotNet" Version="11.2.1" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
     <PackageReference Update="NuGet.Configuration" Version="6.8.0" />

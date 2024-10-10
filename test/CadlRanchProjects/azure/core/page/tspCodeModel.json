@@ -126,6 +126,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.id"
     },
@@ -145,6 +146,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.name"
     },
@@ -183,6 +185,7 @@
          "optional": false,
          "readOnly": true,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.id"
         },
@@ -202,6 +205,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.userId"
         },
@@ -221,6 +225,7 @@
          "optional": false,
          "readOnly": false,
          "discriminator": false,
+         "flatten": false,
          "decorators": [],
          "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.UserOrder.detail"
         }
@@ -232,6 +237,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.orders"
     },
@@ -258,6 +264,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.User.etag"
     }
@@ -291,6 +298,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.ListItemInputBody.inputName"
     }
@@ -323,6 +331,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel.items"
     },
@@ -342,6 +351,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.CustomPageModel.nextLink"
     }
@@ -372,6 +382,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.FirstItem.id"
     }
@@ -402,6 +413,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.Core.Page.SecondItem.name"
     }
@@ -435,6 +447,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
@@ -461,6 +474,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
@@ -494,6 +508,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
@@ -520,6 +535,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
@@ -553,6 +569,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.value"
     },
@@ -579,6 +596,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }

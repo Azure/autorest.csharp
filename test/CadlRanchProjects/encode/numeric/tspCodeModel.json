@@ -28,6 +28,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Numeric.Property.SafeintAsStringProperty.value"
     }
@@ -57,6 +58,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Numeric.Property.Uint32AsStringProperty.value"
     }
@@ -86,6 +88,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Encode.Numeric.Property.Uint8AsStringProperty.value"
     }
