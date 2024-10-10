@@ -28,96 +28,78 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.FlattenModel.name"
     },
     {
      "$id": "5",
      "kind": "property",
-     "name": "description",
-     "serializedName": "description",
+     "name": "properties",
+     "serializedName": "properties",
      "type": {
       "$id": "6",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
+      "kind": "model",
+      "name": "ChildModel",
+      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel",
+      "usage": "Input,Output,Json",
+      "description": "This is the child model to be flattened.",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "7",
+        "kind": "property",
+        "name": "description",
+        "serializedName": "description",
+        "type": {
+         "$id": "8",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.description"
+       },
+       {
+        "$id": "9",
+        "kind": "property",
+        "name": "age",
+        "serializedName": "age",
+        "type": {
+         "$id": "10",
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.age"
+       }
+      ]
      },
      "optional": false,
      "readOnly": false,
      "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "description"
-     ],
+     "flatten": true,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.description"
-    },
-    {
-     "$id": "7",
-     "kind": "property",
-     "name": "age",
-     "serializedName": "age",
-     "type": {
-      "$id": "8",
-      "kind": "int32",
-      "name": "int32",
-      "crossLanguageDefinitionId": "TypeSpec.int32",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "age"
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.age"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.FlattenModel.properties"
     }
    ]
   },
   {
-   "$id": "9",
-   "kind": "model",
-   "name": "ChildModel",
-   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel",
-   "usage": "Input,Output,Json",
-   "description": "This is the child model to be flattened.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "10",
-     "kind": "property",
-     "name": "description",
-     "serializedName": "description",
-     "type": {
-      "$ref": "6"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.description"
-    },
-    {
-     "$id": "11",
-     "kind": "property",
-     "name": "age",
-     "serializedName": "age",
-     "type": {
-      "$ref": "8"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.age"
-    }
-   ]
+   "$ref": "6"
   },
   {
-   "$id": "12",
+   "$id": "11",
    "kind": "model",
    "name": "NestedFlattenModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.NestedFlattenModel",
@@ -126,12 +108,12 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "13",
+     "$id": "12",
      "kind": "property",
      "name": "name",
      "serializedName": "name",
      "type": {
-      "$id": "14",
+      "$id": "13",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -140,151 +122,91 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.NestedFlattenModel.name"
     },
     {
-     "$id": "15",
+     "$id": "14",
      "kind": "property",
-     "name": "summary",
-     "serializedName": "summary",
+     "name": "properties",
+     "serializedName": "properties",
      "type": {
-      "$id": "16",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
+      "$id": "15",
+      "kind": "model",
+      "name": "ChildFlattenModel",
+      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel",
+      "usage": "Input,Output,Json",
+      "description": "This is the child model to be flattened. And it has flattened property as well.",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "16",
+        "kind": "property",
+        "name": "summary",
+        "serializedName": "summary",
+        "type": {
+         "$id": "17",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel.summary"
+       },
+       {
+        "$id": "18",
+        "kind": "property",
+        "name": "properties",
+        "serializedName": "properties",
+        "type": {
+         "$ref": "6"
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": true,
+        "decorators": [],
+        "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel.properties"
+       }
+      ]
      },
      "optional": false,
      "readOnly": false,
      "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "summary"
-     ],
+     "flatten": true,
      "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel.summary"
-    },
-    {
-     "$id": "17",
-     "kind": "property",
-     "name": "description",
-     "serializedName": "description",
-     "type": {
-      "$ref": "6"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "properties",
-      "description"
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.description"
-    },
-    {
-     "$id": "18",
-     "kind": "property",
-     "name": "age",
-     "serializedName": "age",
-     "type": {
-      "$ref": "8"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "properties",
-      "age"
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.age"
+     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.NestedFlattenModel.properties"
     }
    ]
   },
   {
-   "$id": "19",
-   "kind": "model",
-   "name": "ChildFlattenModel",
-   "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel",
-   "usage": "Input,Output,Json",
-   "description": "This is the child model to be flattened. And it has flattened property as well.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "20",
-     "kind": "property",
-     "name": "summary",
-     "serializedName": "summary",
-     "type": {
-      "$ref": "16"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildFlattenModel.summary"
-    },
-    {
-     "$id": "21",
-     "kind": "property",
-     "name": "description",
-     "serializedName": "description",
-     "type": {
-      "$ref": "6"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "description"
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.description"
-    },
-    {
-     "$id": "22",
-     "kind": "property",
-     "name": "age",
-     "serializedName": "age",
-     "type": {
-      "$ref": "8"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flattenedNames": [
-      "properties",
-      "age"
-     ],
-     "decorators": [],
-     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.FlattenProperty.ChildModel.age"
-    }
-   ]
+   "$ref": "15"
   }
  ],
  "Clients": [
   {
-   "$id": "23",
+   "$id": "19",
    "Name": "FlattenPropertyClient",
    "Description": "Illustrates the model flatten cases.",
    "Operations": [
     {
-     "$id": "24",
+     "$id": "20",
      "Name": "putFlattenModel",
      "ResourceName": "FlattenProperty",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "25",
+       "$id": "21",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "26",
+        "$id": "22",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -299,9 +221,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "23",
         "Type": {
-         "$id": "28",
+         "$id": "24",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -310,15 +232,15 @@
        }
       },
       {
-       "$id": "29",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "30",
+        "$id": "26",
         "kind": "constant",
         "valueType": {
-         "$id": "31",
+         "$id": "27",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -338,14 +260,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "32",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
+        "$id": "29",
         "kind": "constant",
         "valueType": {
-         "$id": "34",
+         "$id": "30",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -365,7 +287,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -384,7 +306,7 @@
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "32",
        "StatusCodes": [
         200
        ],
@@ -413,24 +335,24 @@
      "Decorators": []
     },
     {
-     "$id": "37",
+     "$id": "33",
      "Name": "putNestedFlattenModel",
      "ResourceName": "FlattenProperty",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "25"
+       "$ref": "21"
       },
       {
-       "$id": "38",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "39",
+        "$id": "35",
         "kind": "constant",
         "valueType": {
-         "$id": "40",
+         "$id": "36",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -450,14 +372,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "38",
         "kind": "constant",
         "valueType": {
-         "$id": "43",
+         "$id": "39",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -477,11 +399,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "44",
+       "$id": "40",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "12"
+        "$ref": "11"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -496,12 +418,12 @@
      ],
      "Responses": [
       {
-       "$id": "45",
+       "$id": "41",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "12"
+        "$ref": "11"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -526,11 +448,11 @@
     }
    ],
    "Protocol": {
-    "$id": "46"
+    "$id": "42"
    },
    "Parameters": [
     {
-     "$ref": "25"
+     "$ref": "21"
     }
    ],
    "Decorators": []

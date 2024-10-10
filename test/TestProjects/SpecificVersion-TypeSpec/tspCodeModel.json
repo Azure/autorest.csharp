@@ -176,6 +176,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.id"
     },
@@ -194,6 +195,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.ExportedResource.resourceUri"
     }
@@ -222,6 +224,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.id"
     },
@@ -240,6 +243,7 @@
      "optional": false,
      "readOnly": true,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.name"
     },
@@ -258,6 +262,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "TypeSpec.Versioning.Specific.Resource.type"
     }
@@ -288,6 +293,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
     },
@@ -303,6 +309,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
     },
@@ -337,6 +344,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
        },
@@ -356,6 +364,7 @@
         "optional": false,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
        },
@@ -375,6 +384,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
        },
@@ -397,6 +407,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
        },
@@ -431,6 +442,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
           },
@@ -446,6 +458,7 @@
            "optional": true,
            "readOnly": false,
            "discriminator": false,
+           "flatten": false,
            "decorators": [],
            "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.innererror"
           }
@@ -454,6 +467,7 @@
         "optional": true,
         "readOnly": false,
         "discriminator": false,
+        "flatten": false,
         "decorators": [],
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.innererror"
        }
@@ -462,6 +476,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
     },
@@ -477,6 +492,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.result"
     }
@@ -516,6 +532,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
     },
@@ -542,6 +559,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
     }

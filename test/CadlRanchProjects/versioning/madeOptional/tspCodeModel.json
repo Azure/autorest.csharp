@@ -87,6 +87,7 @@
      "optional": false,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.prop"
     },
@@ -105,6 +106,7 @@
      "optional": true,
      "readOnly": false,
      "discriminator": false,
+     "flatten": false,
      "decorators": [],
      "crossLanguageDefinitionId": "Versioning.MadeOptional.TestModel.changedProp"
     }
