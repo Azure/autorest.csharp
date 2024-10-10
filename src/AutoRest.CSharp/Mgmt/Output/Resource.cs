@@ -593,7 +593,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private FormattableString BuildCreateResourceIdentifierMethodReference()
         {
-            // see if there is method with same name in customization code
+            // see if there is method naming "CreateResourceIdentifier" in customization code
             var methods = ExistingType?.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind is MethodKind.Ordinary);
             var createResourceIdentifierMethod = methods?.FirstOrDefault(m => m.Name == CreateResourceIdentifierMethod.Signature.Name);
 
@@ -612,7 +612,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             };
             for (int i = 0; i < parameters.Count; i++)
             {
-                formatBuilder.Append($"{{{i + 1}}}"); // +1 because we should start from 1
+                formatBuilder.Append($"{{{i + 1}}}"); // +1 because the first argument is set to Resource Type
                 if (i != parameters.Count - 1)
                 {
                     formatBuilder.Append(",");
