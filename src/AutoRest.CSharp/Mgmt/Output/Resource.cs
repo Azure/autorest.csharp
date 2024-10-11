@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(restOperation);
             }
 
-            return MgmtClientOperation.FromOperations(result, IdVariableName);
+            return MgmtClientOperation.FromOperations(this, result, IdVariableName);
         }
 
         public virtual Resource GetResource() => this;
@@ -316,6 +316,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
                 return MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         createOrUpdateOperation,
                         "Update",
@@ -356,6 +357,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var getOperation = GetOperation.OperationMappings.Values.First();
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "AddTag",
@@ -367,6 +369,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "SetTags",
@@ -377,6 +380,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getOperation,
                         "RemoveTag",
@@ -453,7 +457,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value, IdVariableName)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(this, pair.Value, IdVariableName)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 

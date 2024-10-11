@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
                     var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(scopeResourceTypes);
                     var parameterOverride = clientOperation.MethodParameters.Skip(1).Prepend(GetScopeParameter(scopeTypes)).Prepend(ExtensionParameter).ToArray();
-                    var newOp = MgmtClientOperation.FromClientOperation(clientOperation, IdVariableName, extensionParameter: extensionParamToUse, parameterOverride: parameterOverride);
+                    var newOp = MgmtClientOperation.FromClientOperation(this, clientOperation, IdVariableName, extensionParameter: extensionParamToUse, parameterOverride: parameterOverride);
                     yield return newOp;
                 }
             }

@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private readonly Dictionary<string, int> _sampleMethods = new();
 
-        private void WriteSample(Sample sample)
+        private void WriteSample(MgmtOperationSample sample)
         {
             var signature = sample.GetMethodSignature(false);
             if (_sampleMethods.TryGetValue(signature.Name, out var count))
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
         }
 
-        private void WriteSampleSteps(Sample sample)
+        private void WriteSampleSteps(MgmtOperationSample sample)
         {
             // Write sample source file
             _writer.Line($"// Generated from example definition: {sample.ExampleFilepath}");
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _ => throw new InvalidOperationException("Should never happen")
         };
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResourceCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, MgmtOperationSample sample)
         {
             _writer.Line();
 
@@ -208,7 +208,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForResource(CodeWriterVariableDeclaration clientVar, Resource resource, MgmtOperationSample sample)
         {
             _writer.Line();
 
@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtension extension, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtension extension, MgmtOperationSample sample)
         {
             _writer.Line();
 
@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
-        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, Sample testCase, FormattableString clientExpression)
+        private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MgmtOperationSample testCase, FormattableString clientExpression)
         {
             if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
                 return null;
@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return col;
         }
 
-        private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
+        private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, MgmtOperationSample sample)
         {
             var parent = sample.Parent;
 
@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return collectionResult;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperation(CodeWriterVariableDeclaration collectionResult, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleOperation(CodeWriterVariableDeclaration collectionResult, MgmtOperationSample sample)
         {
             if (sample.IsLro)
             {
@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return WriteSampleNormalOperation(collectionResult.Declaration, sample);
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleLroOperation(CodeWriterDeclaration instanceVar, MgmtOperationSample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
@@ -376,7 +376,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleNormalOperation(CodeWriterDeclaration instanceVar, MgmtOperationSample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation");
@@ -434,7 +434,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
         }
 
-        private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSamplePageableOperation(CodeWriterDeclaration instanceVar, MgmtOperationSample sample)
         {
             _writer.Line();
             _writer.Line($"// invoke the operation and iterate over the result");
@@ -455,7 +455,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return null;
         }
 
-        private Dictionary<string, CodeWriterVariableDeclaration> WriteOperationInvocationParameters(Sample sample)
+        private Dictionary<string, CodeWriterVariableDeclaration> WriteOperationInvocationParameters(MgmtOperationSample sample)
         {
             var result = new Dictionary<string, CodeWriterVariableDeclaration>();
             foreach (var parameter in sample.Operation.MethodParameters)
@@ -499,7 +499,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private static bool IsInlineParameter(Parameter parameter)
             => InlineParameters.Contains(parameter);
 
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterVariableDeclaration> parameters, Sample sample, bool isEndOfLine = true, bool isAsync = true)
+        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterVariableDeclaration> parameters, MgmtOperationSample sample, bool isEndOfLine = true, bool isAsync = true)
         {
             var methodName = CreateMethodName(sample.Operation.Name);
             _writer.AppendIf($"await ", isAsync && !sample.Operation.IsPagingOperation) // paging operation never needs this await

@@ -44,8 +44,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(inputNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
-                if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
-                    await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
+                //if (Configuration.MgmtTestConfiguration is not null && !Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
+                //    await MgmtTestTarget.ExecuteAsync(project, inputNamespace, sourceInputModel);
                 GenerateMgmtReport(project);
             }
             else
@@ -88,8 +88,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 InputNamespaceTransformer.Transform(rootNamespace);
                 MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(rootNamespace, sourceInputModel));
                 await MgmtTarget.ExecuteAsync(project);
-                if (Configuration.GenerateSampleProject)
-                    await MgmtTestTarget.ExecuteAsync(project, rootNamespace, sourceInputModel);
+                //if (Configuration.GenerateSampleProject)
+                //    await MgmtTestTarget.ExecuteAsync(project, rootNamespace, sourceInputModel);
             }
             else
             {

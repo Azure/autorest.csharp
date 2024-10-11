@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 
         private IEnumerable<MgmtSampleProvider> EnsureSamples()
         {
-            var result = new Dictionary<MgmtTypeProvider, List<Sample>>();
+            var result = new Dictionary<MgmtTypeProvider, List<MgmtOperationSample>>();
             foreach (var client in _input.Clients)
             {
                 foreach (var inputOperation in client.Operations)
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                             // the source code generator will never write them if it is not in arm core
                             if (providerForExample.Carrier is ArmClientExtension)
                                 continue;
-                            var sample = new Sample(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
+                            var sample = new MgmtOperationSample(operationId, providerForExample.Carrier, providerForExample.Operation, inputOperation, example);
                             result.AddInList(sample.Owner, sample);
                         }
                     }

@@ -4,12 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -21,9 +19,9 @@ using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSh
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal class Sample : OperationExample
+    internal class MgmtOperationSample : OperationExample
     {
-        public Sample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
+        public MgmtOperationSample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
         {
             _methodName = $"{Operation.Name}_{Name.ToCleanName()}";
         }
