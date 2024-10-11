@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
@@ -23,6 +24,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -589,5 +591,40 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
+
+        private FormattableString? _createResourceIdentifierReference;
+        public FormattableString CreateResourceIdentifierReference => _createResourceIdentifierReference ??= BuildCreateResourceIdentifierMethodReference();
+
+        private FormattableString BuildCreateResourceIdentifierMethodReference()
+        {
+            // see if there is method naming "CreateResourceIdentifier" in customization code
+            var methods = ExistingType?.GetMembers().OfType<IMethodSymbol>().Where(m => m.MethodKind is MethodKind.Ordinary);
+            var createResourceIdentifierMethod = methods?.FirstOrDefault(m => m.Name == CreateResourceIdentifierMethod.Signature.Name);
+
+            if (createResourceIdentifierMethod == null)
+            {
+                return $"{Type}.{CreateResourceIdentifierMethod.Signature.Name}";
+            }
+
+            var parameters = CreateResourceIdentifierMethod.Signature.Parameters;
+            var formatBuilder = new StringBuilder("{0}.")
+                .Append(CreateResourceIdentifierMethod.Signature.Name)
+                .Append("(");
+            var arguments = new List<object?>(parameters.Count + 1)
+            {
+                Type
+            };
+            for (int i = 0; i < parameters.Count; i++)
+            {
+                formatBuilder.Append($"{{{i + 1}}}"); // +1 because the first argument is set to Resource Type
+                if (i != parameters.Count - 1)
+                {
+                    formatBuilder.Append(",");
+                }
+                arguments.Add(parameters[i].Type);
+            }
+            formatBuilder.Append(")");
+            return FormattableStringFactory.Create(formatBuilder.ToString(), [.. arguments]);
+        }
     }
 }
