@@ -231,6 +231,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
+            // TODO: fix the overriden
+            //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+            //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
+
             // write samples if enabled
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)
             {
@@ -239,16 +246,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     var sampleWriter = new CodeWriter();
                     new ExpressionTypeProviderWriter(sampleWriter, sampleProvider).Write();
-                    AddGeneratedFile(project, Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
+                    project.AddGeneratedTestFile(Path.Combine(sampleOutputFolder, $"Samples/{sampleProvider.Type.Name}.cs"), sampleWriter.ToString());
                 }
             }
-
-            // TODO: fix the overriden
-            //if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
-            //    throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
-
-            var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
         private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)
@@ -324,7 +324,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder))
                 return Configuration.MgmtTestConfiguration.OutputFolder;
 
-            string folder = Configuration.OutputFolder;
+            string folder = FormatPath(Configuration.OutputFolder);
             // if the output folder is not given explicitly, try to figure it out from general output folder if possible according to default folder structure:
             // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
             //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
@@ -334,6 +334,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return folder;
             else
                 throw new InvalidOperationException("'sample-gen.output-folder' is not configured and can't figure it out from give general output-folder");
+        }
+
+        private static string FormatPath(string? path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return path ?? "";
+            return Path.GetFullPath(path.TrimEnd('/', '\\')).Replace("\\", "/");
         }
     }
 }

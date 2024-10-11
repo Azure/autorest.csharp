@@ -15,7 +15,9 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using NUnit.Framework;
 using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
@@ -36,7 +38,10 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
-                Parameters: Array.Empty<Parameter>());
+                Parameters: [],
+                Attributes: _attributes);
+
+        private readonly CSharpAttribute[] _attributes = [new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Only validating compilation of examples"))];
 
         private MgmtTypeProvider? _parent;
         public MgmtTypeProvider? Parent => _parent ??= GetParent();

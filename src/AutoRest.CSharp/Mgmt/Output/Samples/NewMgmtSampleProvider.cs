@@ -5,8 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using NUnit.Framework;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Output.Samples
 {
@@ -25,14 +29,19 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         protected override string DefaultName { get; }
 
-        //private Method BuildSampleMethod(MgmtOperationSample sample, bool isAsync)
-        //{
+        private Method BuildSampleMethod(MgmtOperationSample sample, bool isAsync)
+        {
+            var signature = sample.GetMethodSignature(false);
 
-        //}
+            return new Method(signature, EmptyStatement);
+        }
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            return base.BuildMethods();
+            foreach (var sample in _client.AllOperations.SelectMany(o => o.Samples))
+            {
+                yield return BuildSampleMethod(sample, true);
+            }
         }
     }
 }
