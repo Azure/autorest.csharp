@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="LongRunningRpcAsync(WaitUntil,GenerationOptions,CancellationToken)">
+      <example>
+This sample shows how to call LongRunningRpcAsync.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+GenerationOptions body = new GenerationOptions("<prompt>");
+Operation<GenerationResult> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, body);
+GenerationResult responseData = operation.Value;
+]]></code>
+This sample shows how to call LongRunningRpcAsync with all parameters.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+GenerationOptions body = new GenerationOptions("<prompt>");
+Operation<GenerationResult> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, body);
+GenerationResult responseData = operation.Value;
+]]></code></example>
+    </member>
+    <member name="LongRunningRpc(WaitUntil,GenerationOptions,CancellationToken)">
+      <example>
+This sample shows how to call LongRunningRpc.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+GenerationOptions body = new GenerationOptions("<prompt>");
+Operation<GenerationResult> operation = client.LongRunningRpc(WaitUntil.Completed, body);
+GenerationResult responseData = operation.Value;
+]]></code>
+This sample shows how to call LongRunningRpc with all parameters.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+GenerationOptions body = new GenerationOptions("<prompt>");
+Operation<GenerationResult> operation = client.LongRunningRpc(WaitUntil.Completed, body);
+GenerationResult responseData = operation.Value;
+]]></code></example>
+    </member>
+    <member name="LongRunningRpcAsync(WaitUntil,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call LongRunningRpcAsync and parse the result.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prompt = "<prompt>",
+});
+Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("data").ToString());
+]]></code>
+This sample shows how to call LongRunningRpcAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prompt = "<prompt>",
+});
+Operation<BinaryData> operation = await client.LongRunningRpcAsync(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("data").ToString());
+]]></code></example>
+    </member>
+    <member name="LongRunningRpc(WaitUntil,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call LongRunningRpc and parse the result.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prompt = "<prompt>",
+});
+Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("data").ToString());
+]]></code>
+This sample shows how to call LongRunningRpc with all parameters and request content and parse the result.
+<code><![CDATA[
+RpcClient client = new RpcClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prompt = "<prompt>",
+});
+Operation<BinaryData> operation = client.LongRunningRpc(WaitUntil.Completed, content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("data").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>
