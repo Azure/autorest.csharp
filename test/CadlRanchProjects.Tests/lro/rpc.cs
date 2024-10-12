@@ -1,12 +1,43 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
+using Azure.Core;
+using NUnit.Framework;
+using _Specs_.Azure.Core.Lro.Rpc;
+using _Specs_.Azure.Core.Lro.Rpc.Models;
+using System.Net;
+using Microsoft.CodeAnalysis.Options;
 
 namespace CadlRanchProjects.Tests.lro
 {
-    internal class rpc
+    public class LongRunningOperation : CadlRanchTestBase
     {
+        [Test]
+        public Task LongRunningRpc_Succeed() => Test(async (host) =>
+        {
+            var option = new GenerationOptions("text");
+            var response = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Completed, option);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("text data", response.Value.Data);
+        });
+
+        [Test]
+        public Task LongRunningRpc_InProgress() => Test(async (host) =>
+        {
+            var option = new GenerationOptions("text");
+            var response = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Started, option);
+            Assert.AreEqual(202, response.GetRawResponse().Status);
+            Assert.AreEqual(true, response.GetRawResponse().Headers.TryGetValue("operation-location", out string operationLocation));
+            Assert.AreEqual(true, operationLocation.Contains("/azure/core/lro/rpc/generations/operations/operation1"));
+        });
+
+
     }
 }
