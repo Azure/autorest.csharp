@@ -456,10 +456,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\src\\Generated -n"
     },
-    "MixAPIVersion-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-TypeSpec\\src\\Generated -n"
-    },
     "model-flattening": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\Generated"
