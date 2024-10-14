@@ -99,7 +99,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Get</description>
+        /// <description>NestedProxyResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -139,7 +139,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Get</description>
+        /// <description>NestedProxyResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -179,7 +179,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Delete</description>
+        /// <description>NestedProxyResource_Delete</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -221,7 +221,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Delete</description>
+        /// <description>NestedProxyResource_Delete</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -263,7 +263,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Update</description>
+        /// <description>NestedProxyResource_Update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -309,7 +309,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>NestedProxyResources_Update</description>
+        /// <description>NestedProxyResource_Update</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

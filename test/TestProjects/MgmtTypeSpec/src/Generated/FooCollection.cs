@@ -63,7 +63,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_CreateOrUpdate</description>
+        /// <description>Foo_CreateOrUpdate</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -112,7 +112,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_CreateOrUpdate</description>
+        /// <description>Foo_CreateOrUpdate</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -161,7 +161,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -206,7 +206,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -311,7 +311,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -354,7 +354,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -397,7 +397,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -442,7 +442,7 @@ namespace MgmtTypeSpec
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
