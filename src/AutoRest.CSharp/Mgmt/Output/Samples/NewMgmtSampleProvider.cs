@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -58,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var statements = new List<MethodBodyStatement>()
             {
                 new SingleLineCommentStatement($"Generated from example definition: {sample.ExampleFilepath}"),
-                new SingleLineCommentStatement($"this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resource, they will have to be created separately."),
+                new SingleLineCommentStatement($"this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately."),
                 EmptyLine,
                 new SingleLineCommentStatement("get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line"),
                 Declare(typeof(TokenCredential), "cred", new FormattableStringToExpression($"new DefaultAzureCredential()"), out var cred), // this project does not use Azure.Identity as a dependency, therefore this is the only way to write this.
@@ -125,19 +126,15 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildCreateResourceIdentifier(Resource resource, OperationExample example, out TypedValueExpression id)
         {
-            var resourcePath = resource.RequestPath;
-            var scopePath = resourcePath.GetScopePath();
+            var scopePath = resource.RequestPath.GetScopePath();
             if (scopePath.IsRawParameterizedScope())
             {
-                throw new NotImplementedException();
+                return BuildCreateResourceIdentifierForScopePath(example, resource, out id);
             }
             else
             {
                 return BuildCreateResourceIdentifierForUsualPath(example, resource, out id);
             }
-            //var idParts = example.ComposeResourceIdentifierParts();
-            //var statement = Declare(typeof(ResourceIdentifier), "id", new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, idParts), out id);
-            //return statement;
         }
 
         private MethodBodyStatement BuildCreateResourceIdentifierForUsualPath(OperationExample example, Resource resource, out TypedValueExpression id)
@@ -155,12 +152,33 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             foreach (var reference in myRefs.Take(resourceRefCount))
             {
                 var exampleValue = example.FindInputExampleValueFromReference(reference.Reference);
-                var referenceStatement = Declare(reference.Type, reference.ReferenceName, exampleValue != null ? ExampleValueSnippets.GetExpression(reference.Type, exampleValue) : Default, out var referenceVar);
+                var referenceStatement = Declare(reference.Type, reference.ReferenceName, ExampleValueSnippets.GetExpression(reference.Type, exampleValue), out var referenceVar);
                 statements.Add(referenceStatement);
                 references.Add(referenceVar);
             }
 
-            var idStatement = Declare(typeof(ResourceIdentifier), "id", new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, references), out id);
+            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, references), out id);
+            statements.Add(idStatement);
+
+            return statements;
+        }
+
+        private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, Resource resource, out TypedValueExpression id)
+        {
+            var statements = new List<MethodBodyStatement>();
+            var operationScopePath = example.RequestPath.GetScopePath();
+            var operationTrimeedPath = example.RequestPath.TrimScope();
+
+            var scopeValues = new List<ValueExpression>();
+            foreach (var reference in operationScopePath.Where(segment => segment.IsReference))
+            {
+                var exampleValue = example.FindInputExampleValueFromReference(reference.Reference);
+                var scopeRefStatement = Declare(reference.Type, reference.ReferenceName, ExampleValueSnippets.GetExpression(reference.Type, exampleValue), out var scopeRefVar);
+                statements.Add(scopeRefStatement);
+                scopeValues.Add(scopeRefVar);
+            }
+
+            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, scopeValues), out id);
             statements.Add(idStatement);
 
             return statements;

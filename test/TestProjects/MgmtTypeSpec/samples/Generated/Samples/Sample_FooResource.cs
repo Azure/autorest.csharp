@@ -20,7 +20,7 @@ namespace MgmtTypeSpec.Samples
         public async Task Get_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
-            // this example is just showing the usage of "Foos_Get" operation, for the dependent resource, they will have to be created separately.
+            // this example is just showing the usage of "Foos_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -32,7 +32,7 @@ namespace MgmtTypeSpec.Samples
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace MgmtTypeSpec.Samples
         public async Task Update_CreateAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_CreateOrUpdate.json
-            // this example is just showing the usage of "Foos_CreateOrUpdate" operation, for the dependent resource, they will have to be created separately.
+            // this example is just showing the usage of "Foos_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -52,7 +52,7 @@ namespace MgmtTypeSpec.Samples
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace MgmtTypeSpec.Samples
         public async Task AddTag_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
-            // this example is just showing the usage of "Foos_Get" operation, for the dependent resource, they will have to be created separately.
+            // this example is just showing the usage of "Foos_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -72,7 +72,7 @@ namespace MgmtTypeSpec.Samples
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace MgmtTypeSpec.Samples
         public async Task SetTags_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
-            // this example is just showing the usage of "Foos_Get" operation, for the dependent resource, they will have to be created separately.
+            // this example is just showing the usage of "Foos_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -92,7 +92,7 @@ namespace MgmtTypeSpec.Samples
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace MgmtTypeSpec.Samples
         public async Task RemoveTag_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
-            // this example is just showing the usage of "Foos_Get" operation, for the dependent resource, they will have to be created separately.
+            // this example is just showing the usage of "Foos_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -112,7 +112,7 @@ namespace MgmtTypeSpec.Samples
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
-            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
     }
 }
