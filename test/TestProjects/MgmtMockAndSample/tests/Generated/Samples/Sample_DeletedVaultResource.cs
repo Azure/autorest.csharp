@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             AzureLocation location = new AzureLocation("westus");
             string vaultName = "sample-vault";
             ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
+            DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             AzureLocation location = new AzureLocation("westus");
             string vaultName = "sample-vault";
             ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
+            DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
         }
     }
 }

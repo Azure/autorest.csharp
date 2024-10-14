@@ -35,6 +35,7 @@ namespace MgmtMockAndSample.Samples
             string type = "aaaaaaaaaaaaaaaaaa";
             string version = "aaaaaaaaaaaaaa";
             ResourceIdentifier virtualMachineExtensionImageResourceId = VirtualMachineExtensionImageResource.CreateResourceIdentifier(subscriptionId, location, publisherName, type, version);
+            VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
         }
 
         [Test]
@@ -57,6 +58,7 @@ namespace MgmtMockAndSample.Samples
             string type = "aa";
             string version = "aaa";
             ResourceIdentifier virtualMachineExtensionImageResourceId = VirtualMachineExtensionImageResource.CreateResourceIdentifier(subscriptionId, location, publisherName, type, version);
+            VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
 
         [Test]
@@ -55,6 +56,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
 
         [Test]
@@ -76,6 +78,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
 
         [Test]
@@ -97,6 +100,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
 
         [Test]
@@ -118,6 +122,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
 
         [Test]
@@ -139,6 +144,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             string privateEndpointConnectionName = "sample-pec";
             ResourceIdentifier mhsmPrivateEndpointConnectionResourceId = MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name, privateEndpointConnectionName);
+            MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
         }
     }
 }

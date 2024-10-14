@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -73,6 +75,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -93,6 +96,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -113,6 +117,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -133,6 +138,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
 
         [Test]
@@ -153,6 +159,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "rg1";
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
+            FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
         }
     }
 }

@@ -34,6 +34,7 @@ namespace MgmtMockAndSample.Samples
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "SecureProtocol";
             ResourceIdentifier guestConfigurationAssignmentResourceId = GuestConfigurationAssignmentResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vmName, guestConfigurationAssignmentName);
+            GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
         }
 
         [Test]
@@ -55,6 +56,7 @@ namespace MgmtMockAndSample.Samples
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "SecureProtocol";
             ResourceIdentifier guestConfigurationAssignmentResourceId = GuestConfigurationAssignmentResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vmName, guestConfigurationAssignmentName);
+            GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
         }
 
         [Test]
@@ -76,6 +78,7 @@ namespace MgmtMockAndSample.Samples
             string vmName = "myVMName";
             string guestConfigurationAssignmentName = "NotInstalledApplicationForWindows";
             ResourceIdentifier guestConfigurationAssignmentResourceId = GuestConfigurationAssignmentResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vmName, guestConfigurationAssignmentName);
+            GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
         }
     }
 }

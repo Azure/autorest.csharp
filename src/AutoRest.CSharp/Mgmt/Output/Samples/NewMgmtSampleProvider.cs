@@ -83,22 +83,30 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             {
                 new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
                 new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
-                BuildGetResourceStatement(resource, sample, client)
+                BuildGetResourceStatement(resource, sample, client, out var instance),
+                EmptyLine,
+                BuildSampleOperationStatement(resource, sample, instance, out var result),
             };
 
             return statements;
         }
 
-        private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client)
+        private MethodBodyStatement BuildSampleOperationStatement(Resource resource, OperationExample example, ValueExpression instance, out TypedValueExpression result)
+        {
+            result = null!;
+            return EmptyStatement;
+        }
+
+        private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression instance)
             => carrierResource switch
             {
                 ResourceCollection => throw new InvalidOperationException($"ResourceCollection is not supported here"),
-                Resource parentResource => BuildGetResourceStatementFromResource(parentResource, example, client),
+                Resource parentResource => BuildGetResourceStatementFromResource(parentResource, example, client, out instance),
                 //MgmtExtension parentExtension => WriteGetResourceStatementFromExtension(parentExtension, example, client),
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
-        private MethodBodyStatement BuildGetResourceStatementFromResource(Resource carrierResource, OperationExample example, ValueExpression client)
+        private MethodBodyStatement BuildGetResourceStatementFromResource(Resource carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
             // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
             if (Configuration.MgmtConfiguration.IsArmCore && carrierResource.Type.Name == nameof(TenantResource))
@@ -108,12 +116,11 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
             else
             {
-                var statements = new List<MethodBodyStatement>();
-                // get resource identifier
-                var createId = BuildCreateResourceIdentifier(carrierResource, example, out var id);
-                statements.Add(createId);
-                // WIP here
-                return statements;
+                return new MethodBodyStatement[]
+                {
+                    BuildCreateResourceIdentifier(carrierResource, example, out var id),
+                    Declare(carrierResource.Type, carrierResource.ResourceName.ToVariableName(), client.Invoke($"Get{carrierResource.Type.Name}", id), out resourceVar)
+                };
             }
         }
 

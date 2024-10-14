@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -73,6 +75,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -93,6 +96,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-group";
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -113,6 +117,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -133,6 +138,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
 
         [Test]
@@ -153,6 +159,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "hsm-group";
             string name = "hsm1";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
         }
     }
 }

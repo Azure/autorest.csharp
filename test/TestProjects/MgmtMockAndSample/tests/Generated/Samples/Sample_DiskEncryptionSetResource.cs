@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
 
         [Test]
@@ -73,6 +75,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
 
         [Test]
@@ -93,6 +96,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
 
         [Test]
@@ -113,6 +117,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
 
         [Test]
@@ -133,6 +138,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "myResourceGroup";
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
+            DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
         }
     }
 }

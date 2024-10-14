@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -73,6 +75,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -93,6 +96,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -113,6 +117,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -133,6 +138,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -153,6 +159,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -173,6 +180,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -193,6 +201,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -213,6 +222,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
 
         [Test]
@@ -233,6 +243,7 @@ namespace MgmtMockAndSample.Samples
             string resourceGroupName = "sample-resource-group";
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
+            VaultResource vault = client.GetVaultResource(vaultResourceId);
         }
     }
 }

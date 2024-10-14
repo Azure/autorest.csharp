@@ -65,8 +65,6 @@ namespace AutoRest.CSharp.MgmtTest.Models
             throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_inputOperation.Name}");
         }
 
-        public IReadOnlyList<ValueExpression> ComposeResourceIdentifierParts() => [];
-
         /// <summary>
         /// Returns the values to construct a resource identifier for the input request path of the resource
         /// This method does not validate the parenting relationship between the request path passing in and the request path inside this test case

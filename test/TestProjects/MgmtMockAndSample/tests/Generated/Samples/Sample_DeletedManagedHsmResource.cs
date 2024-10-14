@@ -33,6 +33,7 @@ namespace MgmtMockAndSample.Samples
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
             ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
+            DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtMockAndSample.Samples
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
             ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
+            DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
         }
     }
 }

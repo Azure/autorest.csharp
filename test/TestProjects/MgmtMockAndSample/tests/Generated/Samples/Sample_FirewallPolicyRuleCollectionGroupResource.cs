@@ -34,6 +34,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -55,6 +56,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -76,6 +78,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -97,6 +100,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -118,6 +122,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -139,6 +144,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -160,6 +166,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -181,6 +188,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -202,6 +210,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
 
         [Test]
@@ -223,6 +232,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
+            FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
         }
     }
 }

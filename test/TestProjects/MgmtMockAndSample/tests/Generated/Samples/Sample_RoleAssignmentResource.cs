@@ -31,6 +31,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
         }
 
         [Test]
@@ -49,6 +50,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
         }
 
         [Test]
@@ -67,6 +69,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
             ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
         }
 
         [Test]
@@ -85,6 +88,7 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string subscriptionId = "subId";
             ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(subscriptionId);
+            RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
         }
     }
 }

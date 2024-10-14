@@ -33,6 +33,7 @@ namespace MgmtTypeSpec.Samples
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            FooResource foo = client.GetFooResource(fooResourceId);
         }
 
         [Test]
@@ -53,6 +54,7 @@ namespace MgmtTypeSpec.Samples
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            FooResource foo = client.GetFooResource(fooResourceId);
         }
 
         [Test]
@@ -73,6 +75,7 @@ namespace MgmtTypeSpec.Samples
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            FooResource foo = client.GetFooResource(fooResourceId);
         }
 
         [Test]
@@ -93,6 +96,7 @@ namespace MgmtTypeSpec.Samples
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            FooResource foo = client.GetFooResource(fooResourceId);
         }
 
         [Test]
@@ -113,6 +117,7 @@ namespace MgmtTypeSpec.Samples
             string resourceGroupName = "myRg";
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
+            FooResource foo = client.GetFooResource(fooResourceId);
         }
     }
 }
