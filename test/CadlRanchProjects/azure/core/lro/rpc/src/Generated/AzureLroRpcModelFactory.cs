@@ -7,10 +7,10 @@
 
 using Azure;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Models
+namespace _Azure.Lro.Rpc.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class SpecsAzureCoreLroRpcModelFactory
+    public static partial class AzureLroRpcModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.GenerationResult"/>. </summary>
         /// <param name="data"> The data. </param>

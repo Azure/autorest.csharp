@@ -14,7 +14,7 @@ using System.Text.Json;
 using System.Xml;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc
+namespace _Azure.Lro.Rpc
 {
     internal static class ModelSerializationExtensions
     {

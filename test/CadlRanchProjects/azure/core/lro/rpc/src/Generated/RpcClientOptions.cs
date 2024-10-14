@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc
+namespace _Azure.Lro.Rpc
 {
     /// <summary> Client options for RpcClient. </summary>
     public partial class RpcClientOptions : ClientOptions

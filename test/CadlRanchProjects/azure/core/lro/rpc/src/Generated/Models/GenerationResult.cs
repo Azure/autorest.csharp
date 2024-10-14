@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Models
+namespace _Azure.Lro.Rpc.Models
 {
     /// <summary> Result of the generation. </summary>
     public partial class GenerationResult

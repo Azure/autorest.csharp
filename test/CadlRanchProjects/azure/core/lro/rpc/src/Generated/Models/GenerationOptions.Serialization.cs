@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Models
+namespace _Azure.Lro.Rpc.Models
 {
     public partial class GenerationOptions : IUtf8JsonSerializable, IJsonModel<GenerationOptions>
     {

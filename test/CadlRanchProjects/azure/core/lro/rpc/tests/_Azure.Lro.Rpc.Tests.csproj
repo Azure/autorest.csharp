@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\_Specs_.Azure.Core.Lro.Rpc.csproj" />
+    <ProjectReference Include="..\src\_Azure.Lro.Rpc.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _Specs_.Azure.Core.Lro.Rpc
+namespace _Azure.Lro.Rpc
 {
     internal static class Argument
     {

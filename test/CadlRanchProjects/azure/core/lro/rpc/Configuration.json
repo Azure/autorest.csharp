@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "_Specs_.Azure.Core.Lro.Rpc",
-  "library-name": "_Specs_.Azure.Core.Lro.Rpc",
+  "namespace": "_Azure.Lro.Rpc",
+  "library-name": "_Azure.Lro.Rpc",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

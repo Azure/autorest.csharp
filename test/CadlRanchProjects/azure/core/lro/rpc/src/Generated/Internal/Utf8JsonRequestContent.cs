@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc
+namespace _Azure.Lro.Rpc
 {
     internal class Utf8JsonRequestContent : RequestContent
     {

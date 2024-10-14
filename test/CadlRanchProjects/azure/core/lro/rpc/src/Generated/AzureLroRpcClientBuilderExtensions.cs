@@ -7,12 +7,12 @@
 
 using System;
 using Azure.Core.Extensions;
-using _Specs_.Azure.Core.Lro.Rpc;
+using _Azure.Lro.Rpc;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="RpcClient"/> to client builder. </summary>
-    public static partial class SpecsAzureCoreLroRpcClientBuilderExtensions
+    public static partial class AzureLroRpcClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="RpcClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

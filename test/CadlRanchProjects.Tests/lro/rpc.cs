@@ -1,19 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
+using _Azure.Lro.Rpc;
+using _Azure.Lro.Rpc.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Azure.Core;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Lro.Rpc;
-using _Specs_.Azure.Core.Lro.Rpc.Models;
-using System.Net;
-using Microsoft.CodeAnalysis.Options;
 
 namespace CadlRanchProjects.Tests.lro
 {
