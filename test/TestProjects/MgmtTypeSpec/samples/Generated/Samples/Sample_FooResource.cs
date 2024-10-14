@@ -29,6 +29,10 @@ namespace MgmtTypeSpec.Samples
 
             // this example assumes you already have this FooResource created on azure
             // for more information of creating FooResource, please refer to the document of FooResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myRg";
+            string fooName = "myFoo";
+            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -45,6 +49,10 @@ namespace MgmtTypeSpec.Samples
 
             // this example assumes you already have this FooResource created on azure
             // for more information of creating FooResource, please refer to the document of FooResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myRg";
+            string fooName = "myFoo";
+            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -61,6 +69,10 @@ namespace MgmtTypeSpec.Samples
 
             // this example assumes you already have this FooResource created on azure
             // for more information of creating FooResource, please refer to the document of FooResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myRg";
+            string fooName = "myFoo";
+            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -77,6 +89,10 @@ namespace MgmtTypeSpec.Samples
 
             // this example assumes you already have this FooResource created on azure
             // for more information of creating FooResource, please refer to the document of FooResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myRg";
+            string fooName = "myFoo";
+            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
 
         [Test]
@@ -93,6 +109,10 @@ namespace MgmtTypeSpec.Samples
 
             // this example assumes you already have this FooResource created on azure
             // for more information of creating FooResource, please refer to the document of FooResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "myRg";
+            string fooName = "myFoo";
+            ResourceIdentifier id = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
-using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -65,6 +65,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
             throw new InvalidOperationException($"Cannot find operationId {OperationId} in example {_inputOperation.Name}");
         }
 
+        public IReadOnlyList<ValueExpression> ComposeResourceIdentifierParts() => [];
+
         /// <summary>
         /// Returns the values to construct a resource identifier for the input request path of the resource
         /// This method does not validate the parenting relationship between the request path passing in and the request path inside this test case
@@ -120,6 +122,14 @@ namespace AutoRest.CSharp.MgmtTest.Models
             var myRefs = requestPath.Where(s => s.IsReference);
             var resourceRefCount = resourcePath.Where(s => s.IsReference).Count();
             return myRefs.Take(resourceRefCount).Select(refSeg => new ResourceIdentifierInitializer(FindExampleParameterValueFromReference(refSeg.Reference)));
+        }
+
+        public InputExampleValue? FindInputExampleValueFromReference(Reference reference)
+        {
+            // find a path parameter in our path parameters for one with same name
+            var serializedName = GetParameterSerializedName(reference.Name);
+            var parameter = FindExampleParameterBySerializedName(PathParameters, serializedName);
+            return parameter?.ExampleValue;
         }
 
         private ExampleParameterValue FindExampleParameterValueFromReference(Reference reference)

@@ -10,8 +10,12 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Extensions;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
@@ -103,9 +107,12 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
             else
             {
-                var id = new VariableReference(typeof(ResourceIdentifier), "id");
+                var statements = new List<MethodBodyStatement>();
+                // get resource identifier
+                var createId = BuildCreateResourceIdentifier(carrierResource, example, out var id);
+                statements.Add(createId);
                 // WIP here
-                return EmptyLine;
+                return statements;
             }
         }
 
@@ -115,6 +122,49 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             MgmtExtension extension => extension.ArmCoreType.Name,
             _ => throw new InvalidOperationException("Should never happen")
         };
+
+        private MethodBodyStatement BuildCreateResourceIdentifier(Resource resource, OperationExample example, out TypedValueExpression id)
+        {
+            var resourcePath = resource.RequestPath;
+            var scopePath = resourcePath.GetScopePath();
+            if (scopePath.IsRawParameterizedScope())
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                return BuildCreateResourceIdentifierForUsualPath(example, resource, out id);
+            }
+            //var idParts = example.ComposeResourceIdentifierParts();
+            //var statement = Declare(typeof(ResourceIdentifier), "id", new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, idParts), out id);
+            //return statement;
+        }
+
+        private MethodBodyStatement BuildCreateResourceIdentifierForUsualPath(OperationExample example, Resource resource, out TypedValueExpression id)
+        {
+            var statements = new List<MethodBodyStatement>();
+            // try to figure out ref segments from requestPath according the ones from resource Path
+            // Dont match the path side-by-side because
+            // 1. there is a case that the parameter names are different
+            // 2. the path structure may be different totally when customized,
+            //    i.e. in ResourceManager, parent of /subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}
+            //         is configured to /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
+            var myRefs = example.RequestPath.Where(s => s.IsReference);
+            var resourceRefCount = resource.RequestPath.Where(s => s.IsReference).Count();
+            var references = new List<ValueExpression>(resourceRefCount);
+            foreach (var reference in myRefs.Take(resourceRefCount))
+            {
+                var exampleValue = example.FindInputExampleValueFromReference(reference.Reference);
+                var referenceStatement = Declare(reference.Type, reference.ReferenceName, exampleValue != null ? ExampleValueSnippets.GetExpression(reference.Type, exampleValue) : Default, out var referenceVar);
+                statements.Add(referenceStatement);
+                references.Add(referenceVar);
+            }
+
+            var idStatement = Declare(typeof(ResourceIdentifier), "id", new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, references), out id);
+            statements.Add(idStatement);
+
+            return statements;
+        }
 
         protected override IEnumerable<Method> BuildMethods()
         {
