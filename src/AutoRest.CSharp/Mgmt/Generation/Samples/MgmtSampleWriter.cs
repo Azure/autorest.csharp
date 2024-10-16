@@ -397,7 +397,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     _writer.AppendDeclaration(valueResult).AppendRaw(" = ")
                         .Line($"{valueResponse.Declaration}.HasValue ? {valueResponse.Declaration}.Value : null;");
                     return valueResult;
-
                 }
                 else
                 {

@@ -57,6 +57,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return parents.FirstOrDefault();
         }
 
+        // TODO -- refactor this to remove the value type, or change it to a more primitive one
         private MappingObject? _parameterValueMapping;
         public MappingObject ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping().Item1;
 

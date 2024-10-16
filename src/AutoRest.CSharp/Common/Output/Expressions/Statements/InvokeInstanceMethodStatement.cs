@@ -15,6 +15,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg1, ValueExpression arg2) : this(instance, methodName, new[] { arg1, arg2 }, false) { }
         public InvokeInstanceMethodStatement(ValueExpression? instance, string methodName, ValueExpression arg1, ValueExpression arg2, ValueExpression arg3) : this(instance, methodName, new[] { arg1, arg2, arg3 }, false) { }
 
+        public InvokeInstanceMethodStatement(InvokeInstanceMethodExpression expression) : this(expression.InstanceReference, expression.MethodName, expression.Arguments, expression.CallAsAsync) { }
+
         public sealed override void Write(CodeWriter writer)
         {
             new InvokeInstanceMethodExpression(InstanceReference, MethodName, Arguments, null, CallAsAsync).Write(writer);

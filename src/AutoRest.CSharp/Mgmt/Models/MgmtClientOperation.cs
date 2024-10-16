@@ -291,6 +291,13 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private IReadOnlyList<MgmtOperationSample> EnsureSamples()
         {
+            // if the method is not a service method which directly corresponds to a rest api call, we skip the samples on it.
+            // for example, those methods that manipulate the tags.
+            // the spec does not have such operations, therefore there is impossible to have examples for them.
+            if (IsConvenientOperation)
+            {
+                return [];
+            }
             var samples = new List<MgmtOperationSample>();
             foreach (var restOperation in this)
             {

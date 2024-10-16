@@ -19,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -68,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 EmptyLine,
                 sample.Carrier switch
                 {
-                    Resource resource => BuildSampleOperationForResource(client, resource, sample),
+                    Resource resource => BuildSampleMethodBodyForResource(client, resource, sample),
                     _ => throw new InvalidOperationException("This should never happen")
                 },
             };
@@ -76,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return statements;
         }
 
-        private MethodBodyStatement BuildSampleOperationForResource(ValueExpression client, Resource resource, MgmtOperationSample sample)
+        private MethodBodyStatement BuildSampleMethodBodyForResource(ValueExpression client, Resource resource, MgmtOperationSample sample)
         {
             var resourceName = GetResourceName(resource);
             var statements = new List<MethodBodyStatement>()
@@ -85,16 +86,142 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
                 BuildGetResourceStatement(resource, sample, client, out var instance),
                 EmptyLine,
-                BuildSampleOperationStatement(resource, sample, instance, out var result),
+                BuildSampleOperationStatement(sample, instance, out var result),
             };
 
             return statements;
         }
 
-        private MethodBodyStatement BuildSampleOperationStatement(Resource resource, OperationExample example, ValueExpression instance, out TypedValueExpression result)
+        private MethodBodyStatement BuildSampleOperationStatement(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
         {
-            result = null!;
+            if (example.IsLro)
+            {
+                return BuildSampleOperationStatementForLro(example, instance, out result);
+            }
+            else if (example.IsPageable)
+            {
+                throw new NotImplementedException("Pageable not implemented yet");
+                // return BuildSampleOperationStatementForPageable(example, instance, out result);
+            }
+
+            return BuildSampleOperationStatementForNormal(example, instance, out result);
+        }
+
+        private MethodBodyStatement BuildSampleOperationStatementForLro(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
+        {
+            result = null;
             return EmptyStatement;
+        }
+
+        private MethodBodyStatement BuildSampleOperationStatementForNormal(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
+        {
+            var statements = new List<MethodBodyStatement>
+            {
+                new SingleLineCommentStatement("invoke the operation")
+            };
+
+            // collect all the parameters
+            var (parameterDeclaration, parameterArguments) = BuildOperationInvocationParameters(example);
+            statements.Add(parameterDeclaration);
+            var operationInvocationExpression = BuildOperationInvocation(instance, example.Operation.Name, parameterArguments);
+            var returnType = example.Operation.ReturnType;
+            if (returnType.IsGenericType)
+            {
+                // if the type is NullableResponse, there is no implicit convert, so we have to explicitly unwrap it
+                if (returnType.IsFrameworkType && returnType.FrameworkType == typeof(NullableResponse<>))
+                {
+                    var unwrappedReturnType = returnType.Arguments[0].WithNullable(true);
+                    statements.Add(
+                        Declare(returnType, Configuration.ApiTypes.ResponseParameterName, operationInvocationExpression, out var valueResponse)
+                        );
+                    var resultVar = new VariableReference(unwrappedReturnType, "result");
+                    statements.Add(
+                        Declare(resultVar, new TernaryConditionalOperator(valueResponse.Property(nameof(NullableResponse<object>.HasValue)), valueResponse.Property(nameof(NullableResponse<object>.Value)), Null))
+                        );
+                    result = resultVar;
+                }
+                else
+                {
+                    // an operation with a response
+                    var unwrappedReturnType = returnType.Arguments[0];
+                    // if the type inside Response<T> is a generic type, somehow the implicit convert Response<T> => T does not work, we have to explicitly unwrap it
+                    if (unwrappedReturnType.IsGenericType)
+                    {
+                        statements.Add(
+                            Declare(returnType, Configuration.ApiTypes.ResponseParameterName, operationInvocationExpression, out var valueResponse)
+                            );
+                        // unwrap the response
+                        var resultVar = new VariableReference(unwrappedReturnType, "result");
+                        statements.Add(
+                            Declare(resultVar, valueResponse.Property(nameof(Response<object>.Value)))
+                            );
+                        result = resultVar;
+                    }
+                    else // if it is a type provider type, we could rely on the implicit convert Response<T> => T
+                    {
+                        var resultVar = new VariableReference(unwrappedReturnType, "result");
+                        statements.Add(
+                            Declare(resultVar, operationInvocationExpression)
+                            );
+                        result = resultVar;
+                    }
+                }
+            }
+            else
+            {
+                // an operation without a response
+                statements.Add(
+                    new InvokeInstanceMethodStatement(operationInvocationExpression)
+                    );
+                result = null;
+            }
+
+            return statements;
+        }
+
+        private (MethodBodyStatement ParameterDeclarations, IReadOnlyList<ValueExpression> Arguments) BuildOperationInvocationParameters(MgmtOperationSample example)
+        {
+            var statements = new List<MethodBodyStatement>();
+            var methodParameters = example.Operation.MethodParameters;
+            var arguments = new List<ValueExpression>(methodParameters.Count);
+            foreach (var parameter in methodParameters)
+            {
+                // some parameters are always inline
+                if (_inlineParameters.Contains(parameter))
+                {
+
+                }
+
+                if (example.Carrier is ArmResourceExtension && parameter.Type.Equals(typeof(ArmResource)))
+                {
+                    // this is an extension operation against ArmResource
+                    // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
+                    // so insert a scope parameter instead of ArmResource here
+                    throw new NotImplementedException();
+                }
+
+                if (example.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
+                {
+                    // TODO -- clean up the formattable string here when the refactor is done.
+                    var expression = parameterValue.Expression is { } f ?
+                        new FormattableStringToExpression(f) :
+                        ExampleValueSnippets.GetExpression(parameter.Type, parameterValue.Value);
+                    statements.Add(Declare(parameter.Type, parameter.Name, expression, out var p));
+                    arguments.Add(p);
+                }
+                else if (parameter.IsPropertyBag)
+                {
+                    // TODO -- build property bag assignment
+                    throw new NotImplementedException("property bag is not implemented yet");
+                }
+            }
+
+            return (statements, arguments);
+        }
+
+        private InvokeInstanceMethodExpression BuildOperationInvocation(ValueExpression instance, string methodName, IReadOnlyList<ValueExpression> parameterArguments, bool isAsync = true)
+        {
+            return new InvokeInstanceMethodExpression(instance, GetMethodName(methodName, isAsync), parameterArguments, isAsync);
         }
 
         private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression instance)
@@ -197,6 +324,13 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             {
                 yield return BuildSampleMethod(sample, true);
             }
+        }
+
+        private static readonly HashSet<Parameter> _inlineParameters = [KnownParameters.WaitForCompletion, KnownParameters.CancellationTokenParameter];
+
+        private string GetMethodName(string methodName, bool isAsync = true)
+        {
+            return isAsync ? $"{methodName}Async" : methodName;
         }
     }
 }
