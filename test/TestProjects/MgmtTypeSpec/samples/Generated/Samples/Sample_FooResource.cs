@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
@@ -37,6 +38,12 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             FooResource result = await foo.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FooData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -58,6 +65,8 @@ namespace MgmtTypeSpec.Samples
             string fooName = "myFoo";
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
             FooResource foo = client.GetFooResource(fooResourceId);
+
+            Console.WriteLine("Succeeded");
         }
     }
 }

@@ -55,38 +55,107 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return new Method(signature, BuildSampleMethodBody(sample, isAsync));
         }
 
-        private MethodBodyStatement BuildSampleMethodBody(MgmtOperationSample sample, bool isAsync)
+        private MethodBodyStatement BuildSampleMethodBody(MgmtOperationSample example, bool isAsync)
         {
             var statements = new List<MethodBodyStatement>()
             {
-                new SingleLineCommentStatement($"Generated from example definition: {sample.ExampleFilepath}"),
-                new SingleLineCommentStatement($"this example is just showing the usage of \"{sample.OperationId}\" operation, for the dependent resources, they will have to be created separately."),
+                new SingleLineCommentStatement($"Generated from example definition: {example.ExampleFilepath}"),
+                new SingleLineCommentStatement($"this example is just showing the usage of \"{example.OperationId}\" operation, for the dependent resources, they will have to be created separately."),
                 EmptyLine,
                 new SingleLineCommentStatement("get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line"),
                 Declare(typeof(TokenCredential), "cred", new FormattableStringToExpression($"new DefaultAzureCredential()"), out var cred), // this project does not use Azure.Identity as a dependency, therefore this is the only way to write this.
                 new SingleLineCommentStatement("authenticate your client"),
                 Declare(typeof(ArmClient), "client", New.Instance(typeof(ArmClient), cred), out var client),
                 EmptyLine,
-                sample.Carrier switch
-                {
-                    Resource resource => BuildSampleMethodBodyForResource(client, resource, sample),
-                    _ => throw new InvalidOperationException("This should never happen")
-                },
+                BuildSampleMethodInvocation(example, client, out var result),
+                EmptyLine,
+                BuildResultHandlingStatement(result)
             };
 
             return statements;
         }
 
-        private MethodBodyStatement BuildSampleMethodBodyForResource(ValueExpression client, Resource resource, MgmtOperationSample sample)
+        private MethodBodyStatement BuildResultHandlingStatement(TypedValueExpression? result)
+        {
+            if (result == null)
+            {
+                return InvokeConsoleWriteLine(Literal("Succeeded"));
+            }
+            else
+            {
+                if (result.Type.IsNullable)
+                {
+                    return new IfElseStatement(
+                        Equal(result, Null),
+                        InvokeConsoleWriteLine(Literal("Succeeded with null as result")),
+                        BuildNotNullResultHandlingStatement(result));
+                }
+                else
+                {
+                    return BuildNotNullResultHandlingStatement(result);
+                }
+            }
+        }
+
+        private static MethodBodyStatement BuildNotNullResultHandlingStatement(TypedValueExpression result)
+        {
+            if (result.Type is { IsFrameworkType: false, Implementation: Resource resource })
+            {
+                return BuildResourceResultHandling(result, resource);
+            }
+            else if (result.Type is { IsFrameworkType: false, Implementation: ResourceData resourceData })
+            {
+                return BuildResourceDataResultHandling(result, resourceData);
+            }
+            else
+            {
+                return BuildOtherResultHandling(result);
+            }
+
+            static MethodBodyStatement BuildResourceResultHandling(TypedValueExpression result, Resource resource)
+            {
+                return new MethodBodyStatement[]
+                {
+                    new SingleLineCommentStatement((FormattableString)$"the variable {result} is a resource, you could call other operations on this instance as well"),
+                    new SingleLineCommentStatement("but just for demo, we get its data from this resource instance"),
+                    Declare(resource.ResourceData.Type, "resourceData", result.Property("Data"), out var resourceData),
+                    BuildResourceDataResultHandling(resourceData, resource.ResourceData)
+                };
+            }
+
+            static MethodBodyStatement BuildResourceDataResultHandling(TypedValueExpression result, ResourceData resourceData)
+            {
+
+                return new MethodBodyStatement[]
+                {
+                    new SingleLineCommentStatement("for demo we just print out the id"),
+                    InvokeConsoleWriteLine(new FormattableStringExpression("Succeeded on id: {0}", result.Property("Id")))
+                };
+            }
+
+            static MethodBodyStatement BuildOtherResultHandling(TypedValueExpression result)
+            {
+                return InvokeConsoleWriteLine(new FormattableStringExpression("Succeeded: {0}", result));
+            }
+        }
+
+        private MethodBodyStatement BuildSampleMethodInvocation(MgmtOperationSample example, ValueExpression client, out TypedValueExpression? result)
+            => example.Carrier switch
+            {
+                Resource resource => BuildSampleMethodBodyForResource(example, client, resource, out result),
+                _ => throw new InvalidOperationException("This should never happen")
+            };
+
+        private MethodBodyStatement BuildSampleMethodBodyForResource(MgmtOperationSample example, ValueExpression client, Resource resource, out TypedValueExpression? result)
         {
             var resourceName = GetResourceName(resource);
             var statements = new List<MethodBodyStatement>()
             {
                 new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
                 new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
-                BuildGetResourceStatement(resource, sample, client, out var instance),
+                BuildGetResourceStatement(resource, example, client, out var instance),
                 EmptyLine,
-                BuildSampleOperationStatement(sample, instance, out var result),
+                BuildSampleOperationStatement(example, instance, out result),
             };
 
             return statements;
