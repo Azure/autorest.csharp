@@ -11,6 +11,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
+using Azure.Core.Traits;
 
 @versioned(Versions)
 @service({
@@ -569,3 +570,39 @@ model AzureLocationModel
 @put
 @convenientAPI(true)
 op azureLocationOp(@query location: azureLocation, @header regenLocation: azureLocation, @body body?: AzureLocationModel): void;
+
+// TODO: remove below after duplicated polling operation case is added into cadl-ranch
+@resource("resources")
+model Resource {
+  @visibility("read")
+  id: string;
+
+  @key
+  @visibility("read")
+  name: string;
+
+  type: string;
+}
+
+model ExportedResource {
+  id: string;
+  name: string;
+}
+
+model ExportParams {
+  @query
+  projectFileVersion?: string;
+}
+interface ResourceOperations
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@route("/lro")
+interface VersioningOp {
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, ExportedResource>)
+  export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
+
+  @pollingOperation(ResourceOperations.GetResourceOperationStatus<Resource, ExportedResource>)
+  exportW is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
+}
