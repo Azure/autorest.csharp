@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests.lro
     public class LongRunningOperation : CadlRanchTestBase
     {
         [Test]
-        public Task LongRunningRpc_Succeed() => Test(async (host) =>
+        public Task LongRunningRpc_Completed() => Test(async (host) =>
         {
             var option = new GenerationOptions("text");
             var response = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Completed, option);
@@ -22,7 +22,7 @@ namespace CadlRanchProjects.Tests.lro
         });
 
         [Test]
-        public Task LongRunningRpc_InProgress() => Test(async (host) =>
+        public Task LongRunningRpc_Started() => Test(async (host) =>
         {
             var option = new GenerationOptions("text");
             var response = await new RpcClient(host, null).LongRunningRpcAsync(WaitUntil.Started, option);
