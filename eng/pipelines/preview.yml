@@ -23,7 +23,7 @@ resources:
       type: github
       endpoint: Azure
       name: Azure/azure-sdk-tools
-      ref: refs/heads/main
+      ref: refs/pull/9147/head
 
 pool:
   name: azsdk-pool-mms-win-2022-general
