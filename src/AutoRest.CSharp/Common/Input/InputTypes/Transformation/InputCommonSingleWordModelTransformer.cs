@@ -32,7 +32,8 @@ namespace AutoRest.CSharp.Common.Input
             "PrivateLinkServiceConnectionStateProperty",
             // internal, but could be public in the future, also make the names more consistent
             "PrivateEndpointConnectionListResult",
-            "PrivateLinkResourceListResult"
+            "PrivateLinkResourceListResult",
+            "Severity"
         };
 
         public static void Transform(InputNamespace inputNamespace)
