@@ -24,6 +24,7 @@
         "azure/resource-manager/models/resources",
         "azure/core/basic",
         "azure/core/lro/standard",
+        "azure/core/lro/rpc",
         "azure/core/scalar",
         "azure/core/traits",
         "azure/core/model",
