@@ -30,14 +30,14 @@ namespace ParametersCadl
         }
 
         /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ParametersCadlClient(Uri endpoint) : this(endpoint, new ParametersCadlClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ParametersCadlClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ParametersCadlClient(Uri endpoint, ParametersCadlClientOptions options)

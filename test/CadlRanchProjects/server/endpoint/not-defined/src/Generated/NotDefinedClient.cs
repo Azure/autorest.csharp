@@ -32,14 +32,14 @@ namespace Server.Endpoint.NotDefined
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint) : this(endpoint, new NotDefinedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint, NotDefinedClientOptions options)

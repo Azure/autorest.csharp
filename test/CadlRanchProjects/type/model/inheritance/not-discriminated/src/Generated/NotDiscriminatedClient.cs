@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary> Initializes a new instance of NotDiscriminatedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDiscriminatedClient(Uri endpoint, NotDiscriminatedClientOptions options)

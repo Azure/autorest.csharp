@@ -36,7 +36,7 @@ namespace _Azure.Lro.Rpc
         }
 
         /// <summary> Initializes a new instance of RpcClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RpcClient(Uri endpoint, RpcClientOptions options)

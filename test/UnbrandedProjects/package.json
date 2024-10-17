@@ -3,7 +3,7 @@
     "private": true,
     "description": "Preserve the dependencies for unbranded tests.",
     "devDependencies": {
-      "@typespec/openapi": "0.60.0"
+      "@typespec/openapi": "0.61.0"
     }
   }
   
