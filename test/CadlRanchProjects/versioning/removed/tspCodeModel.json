@@ -193,53 +193,14 @@
      "Parameters": [
       {
        "$id": "22",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "23",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "24",
-       "Name": "version",
-       "NameInRequest": "version",
-       "Description": "Need to be set as 'v1' or 'v2' in client.",
-       "Type": {
-        "$ref": "6"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "26",
+        "$id": "23",
         "kind": "constant",
         "valueType": {
-         "$id": "27",
+         "$id": "24",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -259,14 +220,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "28",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "26",
         "kind": "constant",
         "valueType": {
-         "$id": "30",
+         "$id": "27",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -286,7 +247,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "31",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -305,7 +266,7 @@
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "29",
        "StatusCodes": [
         200
        ],
@@ -335,14 +296,47 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "30"
    },
    "Parameters": [
     {
-     "$ref": "22"
+     "$id": "31",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
+     "Type": {
+      "$id": "32",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     },
     {
-     "$ref": "24"
+     "$id": "33",
+     "Name": "version",
+     "NameInRequest": "version",
+     "Description": "Need to be set as 'v1' or 'v2' in client.",
+     "Type": {
+      "$ref": "6"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": false,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

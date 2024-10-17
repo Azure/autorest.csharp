@@ -565,30 +565,10 @@
      "Parameters": [
       {
        "$id": "59",
-       "Name": "noTestTypeSpecUrl",
-       "NameInRequest": "noTestTypeSpecUrl",
-       "Type": {
-        "$id": "60",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "61",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "62",
+        "$id": "60",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -605,11 +585,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "63",
+       "$id": "61",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "64",
+        "$id": "62",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -626,11 +606,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "65",
+       "$id": "63",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "66",
+        "$id": "64",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -647,14 +627,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "67",
+       "$id": "65",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "68",
+        "$id": "66",
         "kind": "constant",
         "valueType": {
-         "$id": "69",
+         "$id": "67",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -676,7 +656,7 @@
      ],
      "Responses": [
       {
-       "$id": "70",
+       "$id": "68",
        "StatusCodes": [
         200
        ],
@@ -703,11 +683,28 @@
     }
    ],
    "Protocol": {
-    "$id": "71"
+    "$id": "69"
    },
    "Parameters": [
     {
-     "$ref": "59"
+     "$id": "70",
+     "Name": "noTestTypeSpecUrl",
+     "NameInRequest": "noTestTypeSpecUrl",
+     "Type": {
+      "$id": "71",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []
