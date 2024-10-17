@@ -329,6 +329,7 @@
        "$id": "34",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
+       "Description": "Service host",
        "Type": {
         "$id": "35",
         "kind": "url",

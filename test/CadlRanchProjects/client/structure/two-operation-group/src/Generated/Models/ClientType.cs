@@ -17,6 +17,8 @@ namespace Client.Structure.Service.TwoOperationGroup.Models
         /// <summary> renamed-operation. </summary>
         RenamedOperation,
         /// <summary> two-operation-group. </summary>
-        TwoOperationGroup
+        TwoOperationGroup,
+        /// <summary> client-operation-group. </summary>
+        ClientOperationGroup
     }
 }
