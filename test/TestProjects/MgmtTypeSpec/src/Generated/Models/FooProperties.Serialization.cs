@@ -21,13 +21,21 @@ namespace MgmtTypeSpec.Models
 
         void IJsonModel<FooProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<FooProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(FooProperties)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (Optional.IsDefined(ServiceUri))
             {
                 writer.WritePropertyName("serviceUrl"u8);
@@ -37,6 +45,21 @@ namespace MgmtTypeSpec.Models
             {
                 writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
+            }
+            if (Optional.IsDefined(BoolValue))
+            {
+                writer.WritePropertyName("boolValue"u8);
+                writer.WriteBooleanValue(BoolValue.Value);
+            }
+            if (Optional.IsDefined(FloatValue))
+            {
+                writer.WritePropertyName("floatValue"u8);
+                writer.WriteNumberValue(FloatValue.Value);
+            }
+            if (Optional.IsDefined(DoubleValue))
+            {
+                writer.WritePropertyName("doubleValue"u8);
+                writer.WriteNumberValue(DoubleValue.Value);
             }
             if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
@@ -53,7 +76,6 @@ namespace MgmtTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         FooProperties IJsonModel<FooProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -78,6 +100,9 @@ namespace MgmtTypeSpec.Models
             }
             Uri serviceUrl = default;
             string something = default;
+            bool? boolValue = default;
+            float? floatValue = default;
+            double? doubleValue = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
@@ -96,13 +121,46 @@ namespace MgmtTypeSpec.Models
                     something = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("boolValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    boolValue = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("floatValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    floatValue = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("doubleValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    doubleValue = property.Value.GetDouble();
+                    continue;
+                }
                 if (options.Format != "W")
                 {
                     rawDataDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new FooProperties(serviceUrl, something, serializedAdditionalRawData);
+            return new FooProperties(
+                serviceUrl,
+                something,
+                boolValue,
+                floatValue,
+                doubleValue,
+                serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<FooProperties>.Write(ModelReaderWriterOptions options)

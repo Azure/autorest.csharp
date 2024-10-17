@@ -6,193 +6,200 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "VisibilityModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel",
-   "Usage": "Input,Output,Json",
-   "Description": "Output model with visibility properties.",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "VisibilityModel",
+   "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel",
+   "usage": "Input,Output,Json",
+   "description": "Output model with visibility properties.",
+   "decorators": [],
+   "properties": [
     {
      "$id": "3",
-     "Kind": "property",
-     "Name": "readProp",
-     "SerializedName": "readProp",
-     "Description": "Required string, illustrating a readonly property.",
-     "Type": {
+     "kind": "property",
+     "name": "readProp",
+     "serializedName": "readProp",
+     "description": "Required string, illustrating a readonly property.",
+     "type": {
       "$id": "4",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": true,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.readProp"
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.readProp"
     },
     {
      "$id": "5",
-     "Kind": "property",
-     "Name": "queryProp",
-     "SerializedName": "queryProp",
-     "Description": "Required int32, illustrating a query property.",
-     "Type": {
+     "kind": "property",
+     "name": "queryProp",
+     "serializedName": "queryProp",
+     "description": "Required int32, illustrating a query property.",
+     "type": {
       "$id": "6",
-      "Kind": "int32",
-      "Name": "int32",
-      "CrossLanguageDefinitionId": "TypeSpec.int32",
-      "Decorators": []
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.queryProp"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.queryProp"
     },
     {
      "$id": "7",
-     "Kind": "property",
-     "Name": "createProp",
-     "SerializedName": "createProp",
-     "Description": "Required string[], illustrating a create property.",
-     "Type": {
+     "kind": "property",
+     "name": "createProp",
+     "serializedName": "createProp",
+     "description": "Required string[], illustrating a create property.",
+     "type": {
       "$id": "8",
-      "Kind": "array",
-      "Name": "Array",
-      "ValueType": {
+      "kind": "array",
+      "name": "Array",
+      "valueType": {
        "$id": "9",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string",
-       "Decorators": []
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.createProp"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.createProp"
     },
     {
      "$id": "10",
-     "Kind": "property",
-     "Name": "updateProp",
-     "SerializedName": "updateProp",
-     "Description": "Required int32[], illustrating a update property.",
-     "Type": {
+     "kind": "property",
+     "name": "updateProp",
+     "serializedName": "updateProp",
+     "description": "Required int32[], illustrating a update property.",
+     "type": {
       "$id": "11",
-      "Kind": "array",
-      "Name": "Array",
-      "ValueType": {
+      "kind": "array",
+      "name": "Array",
+      "valueType": {
        "$id": "12",
-       "Kind": "int32",
-       "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "Decorators": []
+       "kind": "int32",
+       "name": "int32",
+       "crossLanguageDefinitionId": "TypeSpec.int32",
+       "decorators": []
       },
-      "CrossLanguageDefinitionId": "TypeSpec.Array",
-      "Decorators": []
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.updateProp"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.updateProp"
     },
     {
      "$id": "13",
-     "Kind": "property",
-     "Name": "deleteProp",
-     "SerializedName": "deleteProp",
-     "Description": "Required bool, illustrating a delete property.",
-     "Type": {
+     "kind": "property",
+     "name": "deleteProp",
+     "serializedName": "deleteProp",
+     "description": "Required bool, illustrating a delete property.",
+     "type": {
       "$id": "14",
-      "Kind": "boolean",
-      "Name": "boolean",
-      "CrossLanguageDefinitionId": "TypeSpec.boolean",
-      "Decorators": []
+      "kind": "boolean",
+      "name": "boolean",
+      "crossLanguageDefinitionId": "TypeSpec.boolean",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.deleteProp"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.VisibilityModel.deleteProp"
     }
    ]
   },
   {
    "$id": "15",
-   "Kind": "model",
-   "Name": "ReadOnlyModel",
-   "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel",
-   "Usage": "Input,Output,Json",
-   "Description": "RoundTrip model with readonly optional properties.",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "ReadOnlyModel",
+   "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel",
+   "usage": "Input,Output,Json",
+   "description": "RoundTrip model with readonly optional properties.",
+   "decorators": [],
+   "properties": [
     {
      "$id": "16",
-     "Kind": "property",
-     "Name": "optionalNullableIntList",
-     "SerializedName": "optionalNullableIntList",
-     "Description": "Optional readonly nullable int list.",
-     "Type": {
+     "kind": "property",
+     "name": "optionalNullableIntList",
+     "serializedName": "optionalNullableIntList",
+     "description": "Optional readonly nullable int list.",
+     "type": {
       "$id": "17",
-      "Kind": "nullable",
-      "Type": {
+      "kind": "nullable",
+      "type": {
        "$id": "18",
-       "Kind": "array",
-       "Name": "Array",
-       "ValueType": {
+       "kind": "array",
+       "name": "Array",
+       "valueType": {
         "$id": "19",
-        "Kind": "int32",
-        "Name": "int32",
-        "CrossLanguageDefinitionId": "TypeSpec.int32",
-        "Decorators": []
+        "kind": "int32",
+        "name": "int32",
+        "crossLanguageDefinitionId": "TypeSpec.int32",
+        "decorators": []
        },
-       "CrossLanguageDefinitionId": "TypeSpec.Array",
-       "Decorators": []
+       "crossLanguageDefinitionId": "TypeSpec.Array",
+       "decorators": []
       }
      },
-     "Optional": true,
-     "ReadOnly": true,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalNullableIntList"
+     "optional": true,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalNullableIntList"
     },
     {
      "$id": "20",
-     "Kind": "property",
-     "Name": "optionalStringRecord",
-     "SerializedName": "optionalStringRecord",
-     "Description": "Optional readonly string dictionary.",
-     "Type": {
+     "kind": "property",
+     "name": "optionalStringRecord",
+     "serializedName": "optionalStringRecord",
+     "description": "Optional readonly string dictionary.",
+     "type": {
       "$id": "21",
-      "Kind": "dict",
-      "KeyType": {
+      "kind": "dict",
+      "keyType": {
        "$id": "22",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string",
-       "Decorators": []
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "ValueType": {
+      "valueType": {
        "$id": "23",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string",
-       "Decorators": []
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "Decorators": []
+      "decorators": []
      },
-     "Optional": true,
-     "ReadOnly": true,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalStringRecord"
+     "optional": true,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Visibility.ReadOnlyModel.optionalStringRecord"
     }
    ]
   }
@@ -216,16 +223,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "27",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "28",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -243,16 +250,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "30",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "31",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -325,16 +332,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "36",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "37",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -401,16 +408,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "42",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "43",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -477,16 +484,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "48",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "49",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -553,16 +560,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "54",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "55",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -629,16 +636,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "60",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "61",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -705,16 +712,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "66",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "67",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -732,16 +739,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "69",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "70",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -812,9 +819,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "75",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -829,9 +836,9 @@
       "$id": "76",
       "Type": {
        "$id": "77",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="SimpleAsync(User,CancellationToken)">
+      <example>
+This sample shows how to call SimpleAsync.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+User body = new User("<name>");
+Response response = await client.SimpleAsync(body);
+]]></code>
+This sample shows how to call SimpleAsync with all parameters.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+User body = new User("<name>");
+Response response = await client.SimpleAsync(body);
+]]></code></example>
+    </member>
+    <member name="Simple(User,CancellationToken)">
+      <example>
+This sample shows how to call Simple.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+User body = new User("<name>");
+Response response = client.Simple(body);
+]]></code>
+This sample shows how to call Simple with all parameters.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+User body = new User("<name>");
+Response response = client.Simple(body);
+]]></code></example>
+    </member>
+    <member name="SimpleAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SimpleAsync.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.SimpleAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SimpleAsync with all request content.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = await client.SimpleAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Simple(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Simple.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Simple(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Simple with all request content.
+<code><![CDATA[
+ExplicitBody client = new BasicClient().GetExplicitBodyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    name = "<name>",
+});
+Response response = client.Simple(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

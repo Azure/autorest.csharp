@@ -7,46 +7,58 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "Server.Path.Multiple.Versions",
-   "ValueType": {
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "Server.Path.Multiple.Versions",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string",
-    "Decorators": []
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "v1_0",
-     "Value": "v1.0",
-     "Description": "Version 1.0",
-     "Decorators": []
+     "kind": "enumvalue",
+     "name": "v1_0",
+     "value": "v1.0",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "description": "Version 1.0",
+     "decorators": []
     }
    ],
-   "Description": "Service versions",
-   "IsExtensible": false,
-   "Usage": "Input,ApiVersionEnum",
-   "Decorators": []
+   "description": "Service versions",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "Input,ApiVersionEnum",
+   "decorators": []
   }
  ],
  "Models": [],
  "Clients": [
   {
-   "$id": "5",
+   "$id": "6",
    "Name": "MultipleClient",
    "Operations": [
     {
-     "$id": "6",
+     "$id": "7",
      "Name": "noOperationParams",
      "ResourceName": "Multiple",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "7",
+       "$id": "8",
        "StatusCodes": [
         204
        ],
@@ -66,21 +78,21 @@
      "Decorators": []
     },
     {
-     "$id": "8",
+     "$id": "9",
      "Name": "withOperationPathParam",
      "ResourceName": "Multiple",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "9",
+       "$id": "10",
        "Name": "keyword",
        "NameInRequest": "keyword",
        "Type": {
-        "$id": "10",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "$id": "11",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Path",
        "IsApiVersion": false,
@@ -95,7 +107,7 @@
      ],
      "Responses": [
       {
-       "$id": "11",
+       "$id": "12",
        "StatusCodes": [
         204
        ],
@@ -116,19 +128,19 @@
     }
    ],
    "Protocol": {
-    "$id": "12"
+    "$id": "13"
    },
    "Parameters": [
     {
-     "$id": "13",
+     "$id": "14",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Pass in http://localhost:3000 for endpoint.",
      "Type": {
-      "$id": "14",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "$id": "15",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -141,7 +153,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "15",
+     "$id": "16",
      "Name": "apiVersion",
      "NameInRequest": "apiVersion",
      "Description": "Pass in v1.0 for API version.",
@@ -158,12 +170,12 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "16",
+      "$id": "17",
       "Type": {
-       "$id": "17",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "$id": "18",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "v1.0"
      }

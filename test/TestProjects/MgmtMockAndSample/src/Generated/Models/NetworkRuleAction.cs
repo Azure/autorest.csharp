@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(NetworkRuleAction left, NetworkRuleAction right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NetworkRuleAction"/> values are not the same. </summary>
         public static bool operator !=(NetworkRuleAction left, NetworkRuleAction right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="NetworkRuleAction"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="NetworkRuleAction"/>. </summary>
         public static implicit operator NetworkRuleAction(string value) => new NetworkRuleAction(value);
 
         /// <inheritdoc />

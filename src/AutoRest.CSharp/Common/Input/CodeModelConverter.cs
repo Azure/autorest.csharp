@@ -198,7 +198,8 @@ namespace AutoRest.CSharp.Common.Input
             var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, false);
             if (exampleValue.RawValue != null)
             {
-                return new InputExampleRawValue(inputType, exampleValue.RawValue);
+                // test modeler has a bug that all the primitive types are deserialized as strings, here we should convert them according to its real type
+                return new InputExampleRawValue(inputType, ConvertRawValue(inputType, exampleValue.RawValue));
             }
             if (exampleValue.Elements != null && exampleValue.Elements.Any())
             {
@@ -212,6 +213,42 @@ namespace AutoRest.CSharp.Common.Input
             {
                 return new InputExampleObjectValue(inputType, exampleValue.Properties.ToDictionary(p => p.Key, p => CreateExampleValue(p.Value)));
             }
+        }
+
+        private static object? ConvertRawValue(InputType inputType, object? originalValue)
+        {
+            if (originalValue == null)
+            {
+                return null;
+            }
+
+            if (originalValue is string strValue)
+            {
+                var effectiveInputType = inputType switch
+                {
+                    InputEnumType enumType => enumType.ValueType,
+                    InputDurationType durationType => durationType.WireType,
+                    InputDateTimeType dateTimeType => dateTimeType.WireType,
+                    _ => inputType
+                };
+                switch (effectiveInputType)
+                {
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int32 or InputPrimitiveTypeKind.UInt32 }:
+                        return int.TryParse(strValue, out var intValue) ? intValue : default(int);
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Int64 or InputPrimitiveTypeKind.UInt64 or InputPrimitiveTypeKind.Integer }:
+                        return long.TryParse(strValue, out var longValue) ? longValue : default(long);
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Float32 or InputPrimitiveTypeKind.Float64 or InputPrimitiveTypeKind.Float }:
+                        return double.TryParse(strValue, out var doubleValue) ? doubleValue : default(double);
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Decimal or InputPrimitiveTypeKind.Decimal128 }:
+                        return decimal.TryParse(strValue, out var decimalValue) ? decimalValue : default(decimal);
+                    case InputPrimitiveType { Kind: InputPrimitiveTypeKind.Boolean }:
+                        return bool.TryParse(strValue, out var boolValue) ? boolValue : default(bool);
+                    default:
+                        return strValue;
+                }
+            }
+
+            return originalValue;
         }
 
         private List<InputParameter> CreateOperationParameters(IReadOnlyCollection<RequestParameter> requestParameters)
@@ -436,8 +473,10 @@ namespace AutoRest.CSharp.Common.Input
                 ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, property.IsNullable) : null,
                 IsRequired: property.IsRequired,
                 IsReadOnly: property.IsReadOnly,
-                IsDiscriminator: property.IsDiscriminator ?? false,
-                FlattenedNames: property.FlattenedNames.ToList());
+                IsDiscriminator: property.IsDiscriminator ?? false)
+            {
+                FlattenedNames = property.FlattenedNames.ToList(),
+            };
             _propertiesCache.Add(property, inputProperty);
 
             return inputProperty;
@@ -597,27 +636,27 @@ namespace AutoRest.CSharp.Common.Input
             ByteArraySchema { Type: AllSchemaTypes.ByteArray, Format: ByteArraySchemaFormat.Byte } => InputPrimitiveType.Base64.WithNullable(isNullable),
             { Type: AllSchemaTypes.Credential } => InputPrimitiveType.String.WithNullable(isNullable),
             { Type: AllSchemaTypes.Date } => InputPrimitiveType.PlainDate.WithNullable(isNullable),
-            DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String).WithNullable(isNullable),
-            DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTimeRfc1123 } => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, InputPrimitiveType.String).WithNullable(isNullable),
-            { Type: AllSchemaTypes.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String).WithNullable(isNullable),
-            DurationSchema when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, InputPrimitiveType.String).WithNullable(isNullable),
-            { Type: AllSchemaTypes.Duration } => new InputDurationType(DurationKnownEncoding.Iso8601, InputPrimitiveType.String).WithNullable(isNullable),
+            DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            DateTimeSchema { Type: AllSchemaTypes.DateTime, Format: DateTimeSchemaFormat.DateTimeRfc1123 } => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.DateTime } => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            DurationSchema when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.Duration } => new InputDurationType(DurationKnownEncoding.Iso8601, "duration", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => InputPrimitiveType.Float32.WithNullable(isNullable),
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Decimal128.WithNullable(isNullable),
             { Type: AllSchemaTypes.Number } => InputPrimitiveType.Float64.WithNullable(isNullable),
             NumberSchema { Type: AllSchemaTypes.Integer, Precision: 64 } => InputPrimitiveType.Int64.WithNullable(isNullable),
             { Type: AllSchemaTypes.Integer } => InputPrimitiveType.Int32.WithNullable(isNullable),
             { Type: AllSchemaTypes.Time } => InputPrimitiveType.PlainTime.WithNullable(isNullable),
-            { Type: AllSchemaTypes.Unixtime } => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.Unixtime } => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Url.WithNullable(isNullable),
             { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Uuid.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ArmId => InputPrimitiveType.ResourceIdentifier.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.AzureLocation => InputPrimitiveType.AzureLocation.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ContentType => InputPrimitiveType.ContentType.WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String).WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, InputPrimitiveType.String).WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, InputPrimitiveType.Int64).WithNullable(isNullable),
-            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTime => new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeRFC1123 => new InputDateTimeType(DateTimeKnownEncoding.Rfc7231, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DateTimeUnix => new InputDateTimeType(DateTimeKnownEncoding.UnixTimestamp, "dateTime", string.Empty, InputPrimitiveType.Int64).WithNullable(isNullable),
+            { Type: AllSchemaTypes.String } when format == XMsFormat.DurationConstant => new InputDurationType(DurationKnownEncoding.Constant, "dateTime", string.Empty, InputPrimitiveType.String).WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress.WithNullable(isNullable),
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType.WithNullable(isNullable),
@@ -627,8 +666,8 @@ namespace AutoRest.CSharp.Common.Input
 #pragma warning restore CS0618 // Type or member is obsolete
             { Type: AllSchemaTypes.String } => ToDataFactoryElementType(schema.Name, format, isNullable) ?? InputPrimitiveType.String.WithNullable(isNullable),
             { Type: AllSchemaTypes.Char } => InputPrimitiveType.Char.WithNullable(isNullable),
-            { Type: AllSchemaTypes.Any } => InputPrimitiveType.Any.WithNullable(isNullable),
-            { Type: AllSchemaTypes.AnyObject } => ToDataFactoryElementType(schema.Name, format, isNullable) ?? InputPrimitiveType.Any.WithNullable(isNullable),
+            { Type: AllSchemaTypes.Any } => InputPrimitiveType.Unknown.WithNullable(isNullable),
+            { Type: AllSchemaTypes.AnyObject } => ToDataFactoryElementType(schema.Name, format, isNullable) ?? InputPrimitiveType.Unknown.WithNullable(isNullable),
 
             ConstantSchema constantSchema => CreateConstant(constantSchema, format, isNullable).Type,
             ChoiceSchema choiceSchema => GetInputTypeForChoiceSchema(choiceSchema),
@@ -673,7 +712,7 @@ namespace AutoRest.CSharp.Common.Input
             var type = typeof(DataFactoryElement<>);
             return format switch
             {
-                XMsFormat.DataFactoryElementOfObject => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.Any),
+                XMsFormat.DataFactoryElementOfObject => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.Unknown),
                 XMsFormat.DataFactoryElementOfString => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.String),
                 XMsFormat.DataFactoryElementOfInt => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.Int32),
                 XMsFormat.DataFactoryElementOfDouble => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.Float64),
@@ -681,10 +720,10 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfListOfT => CreateDataFactoryElementInputType(isNullable, new InputListType(name, "TypeSpec.Array", GetOrCreateType(elementType!, false))),
                 XMsFormat.DataFactoryElementOfListOfString => CreateDataFactoryElementInputType(isNullable, new InputListType(name, "TypeSpec.Array", InputPrimitiveType.String)),
                 XMsFormat.DataFactoryElementOfKeyValuePairs => CreateDataFactoryElementInputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String)),
-                XMsFormat.DataFactoryElementOfDateTime => CreateDataFactoryElementInputType(isNullable, new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, InputPrimitiveType.String)),
+                XMsFormat.DataFactoryElementOfDateTime => CreateDataFactoryElementInputType(isNullable, new InputDateTimeType(DateTimeKnownEncoding.Rfc3339, "dateTime", string.Empty, InputPrimitiveType.String)),
                 XMsFormat.DataFactoryElementOfDuration => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.PlainTime),
                 XMsFormat.DataFactoryElementOfUri => CreateDataFactoryElementInputType(isNullable, InputPrimitiveType.Url),
-                XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementInputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.Any)),
+                XMsFormat.DataFactoryElementOfKeyObjectValuePairs => CreateDataFactoryElementInputType(isNullable, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.Unknown)),
                 _ => null
             };
         }
@@ -725,6 +764,7 @@ namespace AutoRest.CSharp.Common.Input
         private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
         {
             var usage = _schemaUsageProvider.GetUsage(schema);
+            var valueType = (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, false);
             var inputEnumType = new InputEnumType(
                 Name: schema.Name,
                 CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
@@ -732,8 +772,8 @@ namespace AutoRest.CSharp.Common.Input
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
                 Usage: GetUsage(usage),
-                ValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, false),
-                Values: choices.Select(CreateEnumValue).ToList(),
+                ValueType: valueType,
+                Values: choices.Select(c => CreateEnumValue(c, valueType)).ToList(),
                 IsExtensible: isExtensible
             )
             {
@@ -754,11 +794,15 @@ namespace AutoRest.CSharp.Common.Input
             return $"{ns}.{name}";
         }
 
-        private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
-            Name: choiceValue.Language.Default.Name,
-            Description: choiceValue.Language.Default.Description,
-            Value: choiceValue.Value
-        );
+        private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue, InputPrimitiveType valueType)
+        {
+            // in code model, the value of choices are defined to be strings. We need to convert them back to their real values
+            var value = ConvertRawValue(valueType, choiceValue.Value);
+            return new(
+                Name: choiceValue.Language.Default.Name,
+                Description: choiceValue.Language.Default.Description,
+                Value: value!);
+        }
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
         {

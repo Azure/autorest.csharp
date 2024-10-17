@@ -167,7 +167,7 @@ public static global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageVal
 public static bool operator ==(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues left, global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues right) => left.Equals(right);
 /// <summary> Determines if two <see cref=""TranslationLanguageValues""/> values are not the same. </summary>
 public static bool operator !=(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues left, global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues right) => !left.Equals(right);
-/// <summary> Converts a string to a <see cref=""TranslationLanguageValues""/>. </summary>
+/// <summary> Converts a <see cref=""string""/> to a <see cref=""TranslationLanguageValues""/>. </summary>
 public static implicit operator global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues(string value) => new global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues(value);
 
 /// <inheritdoc />

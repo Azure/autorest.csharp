@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(UrlRewriteActionParametersTypeName left, UrlRewriteActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="UrlRewriteActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(UrlRewriteActionParametersTypeName left, UrlRewriteActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="UrlRewriteActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="UrlRewriteActionParametersTypeName"/>. </summary>
         public static implicit operator UrlRewriteActionParametersTypeName(string value) => new UrlRewriteActionParametersTypeName(value);
 
         /// <inheritdoc />

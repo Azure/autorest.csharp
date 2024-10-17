@@ -30,7 +30,7 @@ namespace FirstTestTypeSpec.Models
         public static bool operator ==(ThingOptionalLiteralString left, ThingOptionalLiteralString right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ThingOptionalLiteralString"/> values are not the same. </summary>
         public static bool operator !=(ThingOptionalLiteralString left, ThingOptionalLiteralString right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ThingOptionalLiteralString"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ThingOptionalLiteralString"/>. </summary>
         public static implicit operator ThingOptionalLiteralString(string value) => new ThingOptionalLiteralString(value);
 
         /// <inheritdoc />

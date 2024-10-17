@@ -33,7 +33,7 @@ namespace Azure.NewProject.TypeSpec.Models
         public static bool operator ==(ThingRequiredLiteralInt left, ThingRequiredLiteralInt right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ThingRequiredLiteralInt"/> values are not the same. </summary>
         public static bool operator !=(ThingRequiredLiteralInt left, ThingRequiredLiteralInt right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ThingRequiredLiteralInt"/>. </summary>
+        /// <summary> Converts a <see cref="int"/> to a <see cref="ThingRequiredLiteralInt"/>. </summary>
         public static implicit operator ThingRequiredLiteralInt(int value) => new ThingRequiredLiteralInt(value);
 
         /// <inheritdoc />

@@ -33,10 +33,10 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputListType.Name), ref name)
-                    || reader.TryReadString(nameof(InputListType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadWithConverter(nameof(InputListType.ValueType), options, ref valueType)
-                    || reader.TryReadWithConverter(nameof(InputListType.Decorators), options, ref decorators);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
+                    || reader.TryReadWithConverter("valueType", options, ref valueType)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {

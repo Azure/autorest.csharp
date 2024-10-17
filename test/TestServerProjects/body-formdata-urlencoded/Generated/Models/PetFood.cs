@@ -36,7 +36,7 @@ namespace body_formdata_urlencoded.Models
         public static bool operator ==(PetFood left, PetFood right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PetFood"/> values are not the same. </summary>
         public static bool operator !=(PetFood left, PetFood right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="PetFood"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="PetFood"/>. </summary>
         public static implicit operator PetFood(string value) => new PetFood(value);
 
         /// <inheritdoc />

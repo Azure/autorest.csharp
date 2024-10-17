@@ -27,7 +27,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
         public static bool operator ==(DogKind left, DogKind right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DogKind"/> values are not the same. </summary>
         public static bool operator !=(DogKind left, DogKind right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DogKind"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="DogKind"/>. </summary>
         public static implicit operator DogKind(string value) => new DogKind(value);
 
         /// <inheritdoc />

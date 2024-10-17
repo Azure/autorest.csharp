@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var lines = new List<FormattableString>();
             string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
             lines.Add($"Gets an object representing {an} {resource.Type:C} along with the instance operations that can be performed on it but with no data.");
-            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} {resource.Type:C} {typeof(ResourceIdentifier):C} from its components.");
+            lines.Add($"You can use <see cref=\"{resource.CreateResourceIdentifierReference}\" /> to create {an} {resource.Type:C} {typeof(ResourceIdentifier):C} from its components.");
             var description = FormattableStringHelpers.Join(lines, Environment.NewLine);
 
             var parameters = new List<Parameter>

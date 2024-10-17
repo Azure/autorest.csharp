@@ -30,7 +30,7 @@ namespace model_flattening.Models
         public static bool operator ==(SimpleProductPropertiesMaxProductCapacity left, SimpleProductPropertiesMaxProductCapacity right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SimpleProductPropertiesMaxProductCapacity"/> values are not the same. </summary>
         public static bool operator !=(SimpleProductPropertiesMaxProductCapacity left, SimpleProductPropertiesMaxProductCapacity right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="SimpleProductPropertiesMaxProductCapacity"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="SimpleProductPropertiesMaxProductCapacity"/>. </summary>
         public static implicit operator SimpleProductPropertiesMaxProductCapacity(string value) => new SimpleProductPropertiesMaxProductCapacity(value);
 
         /// <inheritdoc />

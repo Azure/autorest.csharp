@@ -30,7 +30,7 @@ namespace AzureSample.Storage.Tables.Models
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum0"/> values are not the same. </summary>
         public static bool operator !=(Enum0 left, Enum0 right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Enum0"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Enum0"/>. </summary>
         public static implicit operator Enum0(string value) => new Enum0(value);
 
         /// <inheritdoc />

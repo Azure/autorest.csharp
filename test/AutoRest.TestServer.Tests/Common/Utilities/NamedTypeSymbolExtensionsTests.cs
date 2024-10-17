@@ -116,7 +116,8 @@ namespace NamedTypeSymbolExtensionsTests
                 generateSampleProject: true,
                 generateTestProject: true,
                 examplesDirectory: null,
-                helperNamespace: "");
+                helperNamespace: "",
+                customHeader: null);
         }
 
         [Test]

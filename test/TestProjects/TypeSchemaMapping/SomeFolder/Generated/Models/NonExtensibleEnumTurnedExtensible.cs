@@ -36,7 +36,7 @@ namespace NamespaceForEnums
         public static bool operator ==(NonExtensibleEnumTurnedExtensible left, NonExtensibleEnumTurnedExtensible right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NonExtensibleEnumTurnedExtensible"/> values are not the same. </summary>
         public static bool operator !=(NonExtensibleEnumTurnedExtensible left, NonExtensibleEnumTurnedExtensible right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="NonExtensibleEnumTurnedExtensible"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="NonExtensibleEnumTurnedExtensible"/>. </summary>
         public static implicit operator NonExtensibleEnumTurnedExtensible(string value) => new NonExtensibleEnumTurnedExtensible(value);
 
         /// <inheritdoc />

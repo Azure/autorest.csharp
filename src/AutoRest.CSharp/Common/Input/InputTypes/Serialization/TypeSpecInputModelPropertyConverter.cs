@@ -35,20 +35,20 @@ namespace AutoRest.CSharp.Common.Input
             bool isOptional = false;
             bool isDiscriminator = false;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
-            IReadOnlyList<string>? flattenedNames = null;
+            bool isFlattened = false;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString("Name", ref name)
-                    || reader.TryReadString("SerializedName", ref serializedName)
-                    || reader.TryReadString("Description", ref description)
-                    || reader.TryReadWithConverter("Type", options, ref propertyType)
-                    || reader.TryReadBoolean("ReadOnly", ref isReadOnly)
-                    || reader.TryReadBoolean("Optional", ref isOptional)
-                    || reader.TryReadBoolean("Discriminator", ref isDiscriminator)
-                    || reader.TryReadWithConverter("Decorators", options, ref decorators)
-                    || reader.TryReadStringArray("FlattenedNames", ref flattenedNames);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("serializedName", ref serializedName)
+                    || reader.TryReadString("description", ref description)
+                    || reader.TryReadWithConverter("type", options, ref propertyType)
+                    || reader.TryReadBoolean("readOnly", ref isReadOnly)
+                    || reader.TryReadBoolean("optional", ref isOptional)
+                    || reader.TryReadBoolean("discriminator", ref isDiscriminator)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators)
+                    || reader.TryReadBoolean("flatten", ref isFlattened);
 
                 if (!isKnownProperty)
                 {
@@ -66,7 +66,11 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator, flattenedNames) { Decorators = decorators ?? [] };
+            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator)
+            {
+                Decorators = decorators ?? [],
+                IsFlattened = isFlattened
+            };
             if (id != null)
             {
                 resolver.AddReference(id, property);

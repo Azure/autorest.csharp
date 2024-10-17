@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     var modelType = parameter.Type as InputModelType;
                     var objectExampleValue = parameterExample.ExampleValue as InputExampleObjectValue;
                     Debug.Assert(modelType != null);
-                    Debug.Assert(objectExampleValue != null);
+                    var values = objectExampleValue?.Values ?? new Dictionary<string, InputExampleValue>();
 
                     foreach (var modelOrBase in modelType.GetSelfAndBaseModels())
                     {
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                         {
                             if (property.Name.ToVariableName() == name)
                             {
-                                return objectExampleValue.Values[property.SerializedName];
+                                return values.TryGetValue(property.SerializedName, out var exampleValue) ? exampleValue : null;
                             }
                         }
                     }
@@ -373,7 +373,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             // we have a request body type
             if (_method.RequestBodyType == null)
-                return InputExampleValue.Null(InputPrimitiveType.Any);
+                return InputExampleValue.Null(InputPrimitiveType.Unknown);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");

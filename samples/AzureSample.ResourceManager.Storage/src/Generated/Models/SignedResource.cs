@@ -39,7 +39,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(SignedResource left, SignedResource right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SignedResource"/> values are not the same. </summary>
         public static bool operator !=(SignedResource left, SignedResource right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="SignedResource"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="SignedResource"/>. </summary>
         public static implicit operator SignedResource(string value) => new SignedResource(value);
 
         /// <inheritdoc />

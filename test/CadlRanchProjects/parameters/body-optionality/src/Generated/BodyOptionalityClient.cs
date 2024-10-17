@@ -165,9 +165,9 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
+            BodyModel bodyModel = new BodyModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredImplicitAsync(requiredImplicitRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await RequiredImplicitAsync(bodyModel.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -180,9 +180,9 @@ namespace Parameters.BodyOptionality
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            RequiredImplicitRequest requiredImplicitRequest = new RequiredImplicitRequest(name, null);
+            BodyModel bodyModel = new BodyModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredImplicit(requiredImplicitRequest.ToRequestContent(), context);
+            Response response = RequiredImplicit(bodyModel.ToRequestContent(), context);
             return response;
         }
 

@@ -6,88 +6,91 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "Siamese",
-   "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
-   "Usage": "Input,Output,Json",
-   "Description": "The third level model in the normal multiple levels inheritance.",
-   "Decorators": [],
-   "BaseModel": {
+   "kind": "model",
+   "name": "Siamese",
+   "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese",
+   "usage": "Input,Output,Json",
+   "description": "The third level model in the normal multiple levels inheritance.",
+   "decorators": [],
+   "baseModel": {
     "$id": "3",
-    "Kind": "model",
-    "Name": "Cat",
-    "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
-    "Usage": "Input,Output,Json",
-    "Description": "The second level model in the normal multiple levels inheritance.",
-    "Decorators": [],
-    "BaseModel": {
+    "kind": "model",
+    "name": "Cat",
+    "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat",
+    "usage": "Input,Output,Json",
+    "description": "The second level model in the normal multiple levels inheritance.",
+    "decorators": [],
+    "baseModel": {
      "$id": "4",
-     "Kind": "model",
-     "Name": "Pet",
-     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
-     "Usage": "Input,Output,Json",
-     "Description": "This is base model for not-discriminated normal multiple levels inheritance.",
-     "Decorators": [],
-     "Properties": [
+     "kind": "model",
+     "name": "Pet",
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet",
+     "usage": "Input,Output,Json",
+     "description": "This is base model for not-discriminated normal multiple levels inheritance.",
+     "decorators": [],
+     "properties": [
       {
        "$id": "5",
-       "Kind": "property",
-       "Name": "name",
-       "SerializedName": "name",
-       "Type": {
+       "kind": "property",
+       "name": "name",
+       "serializedName": "name",
+       "type": {
         "$id": "6",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
-       "Optional": false,
-       "ReadOnly": false,
-       "Discriminator": false,
-       "Decorators": [],
-       "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
+       "optional": false,
+       "readOnly": false,
+       "discriminator": false,
+       "flatten": false,
+       "decorators": [],
+       "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Pet.name"
       }
      ]
     },
-    "Properties": [
+    "properties": [
      {
       "$id": "7",
-      "Kind": "property",
-      "Name": "age",
-      "SerializedName": "age",
-      "Type": {
+      "kind": "property",
+      "name": "age",
+      "serializedName": "age",
+      "type": {
        "$id": "8",
-       "Kind": "int32",
-       "Name": "int32",
-       "CrossLanguageDefinitionId": "TypeSpec.int32",
-       "Decorators": []
+       "kind": "int32",
+       "name": "int32",
+       "crossLanguageDefinitionId": "TypeSpec.int32",
+       "decorators": []
       },
-      "Optional": false,
-      "ReadOnly": false,
-      "Discriminator": false,
-      "Decorators": [],
-      "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
+      "optional": false,
+      "readOnly": false,
+      "discriminator": false,
+      "flatten": false,
+      "decorators": [],
+      "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Cat.age"
      }
     ]
    },
-   "Properties": [
+   "properties": [
     {
      "$id": "9",
-     "Kind": "property",
-     "Name": "smart",
-     "SerializedName": "smart",
-     "Type": {
+     "kind": "property",
+     "name": "smart",
+     "serializedName": "smart",
+     "type": {
       "$id": "10",
-      "Kind": "boolean",
-      "Name": "boolean",
-      "CrossLanguageDefinitionId": "TypeSpec.boolean",
-      "Decorators": []
+      "kind": "boolean",
+      "name": "boolean",
+      "crossLanguageDefinitionId": "TypeSpec.boolean",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Type.Model.Inheritance.NotDiscriminated.Siamese.smart"
     }
    ]
   },
@@ -117,16 +120,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "14",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "15",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -192,16 +195,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "20",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "21",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -254,16 +257,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "25",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "26",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -281,16 +284,16 @@
        "NameInRequest": "Accept",
        "Type": {
         "$id": "28",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "29",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -361,9 +364,9 @@
      "NameInRequest": "endpoint",
      "Type": {
       "$id": "34",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -378,9 +381,9 @@
       "$id": "35",
       "Type": {
        "$id": "36",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

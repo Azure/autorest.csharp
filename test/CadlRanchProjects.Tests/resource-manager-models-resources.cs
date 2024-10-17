@@ -33,7 +33,14 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
+        public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_actionSync() => Test(async (host) =>
+        {
+            var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).ActionSyncAsync(new NotificationDetails("Resource action at top level.", true));
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_createOrReplace() => Test(async (host) =>
         {
             ResourceIdentifier id = ResourceGroupResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
@@ -59,7 +66,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/4876")]
         public Task Azure_ResourceManager_Models_Resources_TopLevelTrackedResources_update() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
@@ -211,6 +217,68 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("valid", response.Value.Data.Properties.Description);
+            Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.CreatedByType);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.LastModifiedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.LastModifiedByType);
+        });
+
+        [Test]
+        public Task Azure_ResourceManager_Models_Resources_SingletonTrackedResource_createOrUpdate() => Test(async (host) =>
+        {
+            var id = SingletonTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
+            var data = new SingletonTrackedResourceData(AzureLocation.EastUS)
+            {
+                Properties = new SingletonTrackedResourceProperties()
+                {
+                    Description = "valid"
+                }
+            };
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).CreateOrUpdateAsync(WaitUntil.Completed, data);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual(true, response.Value.HasData);
+            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("valid", response.Value.Data.Properties.Description);
+            Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.CreatedByType);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.LastModifiedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.LastModifiedByType);
+        });
+
+        [Test]
+        public Task Azure_ResourceManager_Models_Resources_SingletonTrackedResource_update() => Test(async (host) =>
+        {
+            var id = SingletonTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
+            var data = new SingletonTrackedResourceData(AzureLocation.EastUS2)
+            {
+                Properties = new SingletonTrackedResourceProperties()
+                {
+                    Description = "valid2"
+                }
+            };
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).UpdateAsync(data);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual(true, response.Value.HasData);
+            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("valid2", response.Value.Data.Properties.Description);
+            Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.CreatedByType);
+            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.LastModifiedBy);
+            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.LastModifiedByType);
+        });
+
+        [Test]
+        public Task Azure_ResourceManager_Models_Resources_SingletonTrackedResource_getByResourceGroup() => Test(async (host) =>
+        {
+            var id = SingletonTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
+            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).GetAsync();
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual(true, response.Value.HasData);
+            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);

@@ -30,7 +30,7 @@ namespace UnbrandedTypeSpec.Models
         public static bool operator ==(ThingOptionalLiteralInt left, ThingOptionalLiteralInt right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ThingOptionalLiteralInt"/> values are not the same. </summary>
         public static bool operator !=(ThingOptionalLiteralInt left, ThingOptionalLiteralInt right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ThingOptionalLiteralInt"/>. </summary>
+        /// <summary> Converts a <see cref="int"/> to a <see cref="ThingOptionalLiteralInt"/>. </summary>
         public static implicit operator ThingOptionalLiteralInt(int value) => new ThingOptionalLiteralInt(value);
 
         /// <inheritdoc />

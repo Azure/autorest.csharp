@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="FloatAsync(FloatRequest,CancellationToken)">
+      <example>
+This sample shows how to call FloatAsync.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+FloatRequest body = new FloatRequest(123.45);
+Response response = await client.FloatAsync(body);
+]]></code>
+This sample shows how to call FloatAsync with all parameters.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+FloatRequest body = new FloatRequest(123.45);
+Response response = await client.FloatAsync(body);
+]]></code></example>
+    </member>
+    <member name="Float(FloatRequest,CancellationToken)">
+      <example>
+This sample shows how to call Float.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+FloatRequest body = new FloatRequest(123.45);
+Response response = client.Float(body);
+]]></code>
+This sample shows how to call Float with all parameters.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+FloatRequest body = new FloatRequest(123.45);
+Response response = client.Float(body);
+]]></code></example>
+    </member>
+    <member name="FloatAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call FloatAsync.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    temperature = 123.45,
+});
+Response response = await client.FloatAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FloatAsync with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    temperature = 123.45,
+});
+Response response = await client.FloatAsync(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Float(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call Float.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    temperature = 123.45,
+});
+Response response = client.Float(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Float with all parameters and request content.
+<code><![CDATA[
+FormDataHttpPartsNonString client = new MultiPartClient().GetFormDataClient().GetFormDataHttpPartsClient().GetFormDataHttpPartsNonStringClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    temperature = 123.45,
+});
+Response response = client.Float(content, "multipart/form-data");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

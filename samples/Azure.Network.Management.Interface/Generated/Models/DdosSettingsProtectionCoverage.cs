@@ -33,7 +33,7 @@ namespace Azure.Network.Management.Interface.Models
         public static bool operator ==(DdosSettingsProtectionCoverage left, DdosSettingsProtectionCoverage right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DdosSettingsProtectionCoverage"/> values are not the same. </summary>
         public static bool operator !=(DdosSettingsProtectionCoverage left, DdosSettingsProtectionCoverage right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="DdosSettingsProtectionCoverage"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="DdosSettingsProtectionCoverage"/>. </summary>
         public static implicit operator DdosSettingsProtectionCoverage(string value) => new DdosSettingsProtectionCoverage(value);
 
         /// <inheritdoc />

@@ -36,7 +36,7 @@ namespace Very.Custom.Namespace.From.Swagger
         public static bool operator ==(EnumWithCustomNamespace left, EnumWithCustomNamespace right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnumWithCustomNamespace"/> values are not the same. </summary>
         public static bool operator !=(EnumWithCustomNamespace left, EnumWithCustomNamespace right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EnumWithCustomNamespace"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EnumWithCustomNamespace"/>. </summary>
         public static implicit operator EnumWithCustomNamespace(string value) => new EnumWithCustomNamespace(value);
 
         /// <inheritdoc />

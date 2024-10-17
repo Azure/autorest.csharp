@@ -50,7 +50,6 @@
       "Vaults_GetDeleted",
       "Vaults_Update"
     ],
-    "Mock": true,
     "Sample": true
   },
   "flavor": "azure",
