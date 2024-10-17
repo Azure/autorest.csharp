@@ -117,7 +117,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_Get</description>
+        /// <description>TopLevelTrackedResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -155,7 +155,7 @@ namespace _Azure.ResourceManager.Models.Resources
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>TopLevelTrackedResources_Get</description>
+        /// <description>TopLevelTrackedResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

@@ -28,7 +28,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of DecimalVerify. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal DecimalVerify(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

@@ -2370,6 +2370,7 @@ namespace FirstTestTypeSpec
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
         private Entity _cachedEntity;
         private Glossary _cachedGlossary;
+        private Resource _cachedResource;
 
         /// <summary> Initializes a new instance of Hello. </summary>
         public virtual Hello GetHelloClient()
@@ -2399,6 +2400,22 @@ namespace FirstTestTypeSpec
         public virtual Glossary GetGlossaryClient()
         {
             return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
+        }
+
+        /// <summary> Initializes a new instance of Resource. </summary>
+        public virtual Resource GetResourceClient()
+        {
+            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedResource;
+        }
+
+        /// <summary> Initializes a new instance of VersioningOp. </summary>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-05-15-preview")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new VersioningOp(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
         }
 
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)

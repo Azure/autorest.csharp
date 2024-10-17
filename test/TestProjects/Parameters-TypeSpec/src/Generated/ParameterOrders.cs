@@ -37,7 +37,7 @@ namespace ParametersCadl
         /// <summary> Initializes a new instance of ParameterOrders. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal ParameterOrders(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {

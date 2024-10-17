@@ -31,14 +31,14 @@ namespace TypeSpec.Versioning.Latest
         }
 
         /// <summary> Initializes a new instance of LatestClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public LatestClient(Uri endpoint) : this(endpoint, new LatestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of LatestClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public LatestClient(Uri endpoint, LatestClientOptions options)
