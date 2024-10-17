@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteLongRunningResultRetrievalMethods()
         {
-            foreach (var method in _client.ClientMethods.Select(c => c.LongRunningResultRetrievalMethod).WhereNotNull())
+            foreach (var method in _client.ClientMethods.Select(c => c.LongRunningResultRetrievalMethod).WhereNotNull().Distinct())
             {
                 _writer.Line();
                 WriteLroResultRetrievalMethod(method);
