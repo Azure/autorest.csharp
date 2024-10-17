@@ -5,10 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+using MgmtMockAndSample.Models;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -34,6 +38,15 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -55,6 +68,15 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            DiskEncryptionSetResource result = await diskEncryptionSet.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -76,6 +98,12 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            await diskEncryptionSet.DeleteAsync(waitUntil).ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -97,6 +125,24 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch
+            {
+                Identity = new ManagedServiceIdentity(default),
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                RotationToLatestKeyVersionEnabled = true,
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(waitUntil, patch).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -118,6 +164,24 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch
+            {
+                Identity = new ManagedServiceIdentity(default),
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
+                RotationToLatestKeyVersionEnabled = true,
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(waitUntil, patch).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -139,6 +203,30 @@ namespace MgmtMockAndSample.Samples
             string diskEncryptionSetName = "myDiskEncryptionSet";
             ResourceIdentifier diskEncryptionSetResourceId = DiskEncryptionSetResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, diskEncryptionSetName);
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch
+            {
+                Tags =
+{
+["department"] = "Development",
+["project"] = "Encryption"
+},
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/keyName/keyVersion"))
+                {
+                    SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
+                },
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await diskEncryptionSet.UpdateAsync(waitUntil, patch).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

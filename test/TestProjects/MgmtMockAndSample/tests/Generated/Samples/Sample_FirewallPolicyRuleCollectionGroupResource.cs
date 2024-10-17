@@ -5,10 +5,13 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -35,6 +38,15 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -57,6 +69,15 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -79,6 +100,15 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -101,6 +131,15 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -123,6 +162,12 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            await firewallPolicyRuleCollectionGroup.DeleteAsync(waitUntil).ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -145,6 +190,38 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData
+            {
+                Priority = 100,
+                RuleCollections = {new FirewallPolicyNatRuleCollection
+{
+ActionType = FirewallPolicyNatRuleCollectionActionType.Dnat,
+Rules = {new NatRule
+{
+IpProtocols = {FirewallPolicyRuleNetworkProtocol.TCP, FirewallPolicyRuleNetworkProtocol.UDP},
+SourceAddresses = {"2.2.2.2"},
+DestinationAddresses = {"152.23.32.23"},
+DestinationPorts = {"8080"},
+TranslatedPort = "8080",
+SourceIpGroups = {},
+TranslatedFqdn = "internalhttp.server.net",
+Name = "nat-rule1",
+}},
+Name = "Example-Nat-Rule-Collection",
+Priority = 100,
+}},
+            };
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -167,6 +244,35 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData
+            {
+                Priority = 100,
+                RuleCollections = {new FirewallPolicyFilterRuleCollection
+{
+ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
+Rules = {new NetworkRule
+{
+IpProtocols = {FirewallPolicyRuleNetworkProtocol.TCP},
+SourceAddresses = {"10.1.25.0/24"},
+DestinationAddresses = {"*"},
+DestinationPorts = {"*"},
+Name = "network-rule1",
+}},
+Name = "Example-Filter-Rule-Collection",
+Priority = 100,
+}},
+            };
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -189,6 +295,18 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData();
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -211,6 +329,34 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData
+            {
+                Priority = 110,
+                RuleCollections = {new FirewallPolicyFilterRuleCollection
+{
+ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
+Rules = {new NetworkRule
+{
+IpProtocols = {FirewallPolicyRuleNetworkProtocol.TCP},
+DestinationPorts = {"*"},
+SourceIpGroups = {"/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups1"},
+DestinationIpGroups = {"/subscriptions/subid/providers/Microsoft.Network/resourceGroup/rg1/ipGroups/ipGroups2"},
+Name = "network-1",
+}},
+Name = "Example-Filter-Rule-Collection",
+}},
+            };
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -233,6 +379,38 @@ namespace MgmtMockAndSample.Samples
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             ResourceIdentifier firewallPolicyRuleCollectionGroupResourceId = FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName, ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData
+            {
+                Priority = 110,
+                RuleCollections = {new FirewallPolicyFilterRuleCollection
+{
+ActionType = FirewallPolicyFilterRuleCollectionActionType.Deny,
+Rules = {new ApplicationRule
+{
+SourceAddresses = {"216.58.216.164", "10.0.0.0/24"},
+Protocols = {new FirewallPolicyRuleApplicationProtocol
+{
+ProtocolType = FirewallPolicyRuleApplicationProtocolType.Https,
+Port = 443,
+}},
+WebCategories = {"Hacking"},
+Name = "rule1",
+Description = "Deny inbound rule",
+}},
+Name = "Example-Filter-Rule-Collection",
+}},
+            };
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FirewallPolicyRuleCollectionGroupData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

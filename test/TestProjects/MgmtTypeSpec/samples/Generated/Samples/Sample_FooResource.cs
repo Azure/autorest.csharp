@@ -7,9 +7,11 @@
 
 using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtTypeSpec.Models;
 using NUnit.Framework;
 
 namespace MgmtTypeSpec.Samples
@@ -66,7 +68,27 @@ namespace MgmtTypeSpec.Samples
             ResourceIdentifier fooResourceId = FooResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, fooName);
             FooResource foo = client.GetFooResource(fooResourceId);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            FooData data = new FooData(default)
+            {
+                Properties = new FooProperties
+                {
+                    ServiceUri = new Uri("https://myService.com"),
+                    Something = "for test only",
+                    BoolValue = true,
+                    FloatValue = 1.2F,
+                    DoubleValue = 1.2,
+                },
+            };
+            ArmOperation<FooResource> lro = await foo.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            FooResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            FooData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

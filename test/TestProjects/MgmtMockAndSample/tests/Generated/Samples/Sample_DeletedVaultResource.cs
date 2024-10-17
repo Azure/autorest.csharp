@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
@@ -34,6 +36,15 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
             DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
+
+            // invoke the operation
+            DeletedVaultResource result = await deletedVault.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DeletedVaultData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -55,6 +66,12 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier deletedVaultResourceId = DeletedVaultResource.CreateResourceIdentifier(subscriptionId, location, vaultName);
             DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            await deletedVault.PurgeDeletedAsync(waitUntil).ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
     }
 }

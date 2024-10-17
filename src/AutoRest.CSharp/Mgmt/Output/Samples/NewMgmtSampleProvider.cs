@@ -8,14 +8,12 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -23,7 +21,6 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Output.Samples
@@ -48,14 +45,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             yield return "Azure.Identity"; // we need this using because we might need to call `new DefaultAzureCredential` from `Azure.Identity` package, but Azure.Identity package is not a dependency of the generator project.
         }
 
-        private Method BuildSampleMethod(MgmtOperationSample sample, bool isAsync)
+        private Method BuildSample(MgmtOperationSample sample, bool isAsync)
         {
             var signature = sample.GetMethodSignature(false);
 
-            return new Method(signature, BuildSampleMethodBody(sample, isAsync));
+            return new Method(signature, BuildSampleBody(sample, isAsync));
         }
 
-        private MethodBodyStatement BuildSampleMethodBody(MgmtOperationSample example, bool isAsync)
+        private MethodBodyStatement BuildSampleBody(MgmtOperationSample example, bool isAsync)
         {
             var statements = new List<MethodBodyStatement>()
             {
@@ -169,8 +166,8 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
             else if (example.IsPageable)
             {
-                throw new NotImplementedException("Pageable not implemented yet");
-                // return BuildSampleOperationStatementForPageable(example, instance, out result);
+                result = null; // pageable operations do not return a result to handle
+                return BuildSampleOperationStatementForPageable(example, instance);
             }
 
             return BuildSampleOperationStatementForNormal(example, instance, out result);
@@ -178,8 +175,54 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildSampleOperationStatementForLro(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
         {
-            result = null;
-            return EmptyStatement;
+            var statements = new List<MethodBodyStatement>
+            {
+                new SingleLineCommentStatement("invoke the operation")
+            };
+
+            // collect all the parameters
+            var (parameterDeclaration, parameterArguments) = BuildOperationInvocationParameters(example);
+            statements.Add(parameterDeclaration);
+            var operationInvocationExpression = BuildOperationInvocation(instance, example.Operation, parameterArguments);
+            var lroType = example.Operation.ReturnType;
+            if (lroType.IsGenericType)
+            {
+                statements.Add(
+                    Declare(lroType, "lro", operationInvocationExpression, out var lro)
+                    );
+                var resultVar = new VariableReference(lroType.Arguments[0], "result");
+                statements.Add(
+                    Declare(resultVar, lro.Property("Value"))
+                    );
+                result = resultVar;
+            }
+            else
+            {
+                statements.Add(new InvokeInstanceMethodStatement(operationInvocationExpression));
+                result = null;
+            }
+            return statements;
+        }
+
+        private MethodBodyStatement BuildSampleOperationStatementForPageable(MgmtOperationSample example, ValueExpression instance)
+        {
+            var statements = new List<MethodBodyStatement>
+            {
+                new SingleLineCommentStatement("invoke the operation and iterate over the result")
+            };
+
+            // collect the parameters
+            var (parameterDeclaration, parameterArguments) = BuildOperationInvocationParameters(example);
+            statements.Add(parameterDeclaration);
+            var operationInvocationExpression = BuildOperationInvocation(instance, example.Operation, parameterArguments);
+            statements.Add(
+                new ForeachStatement(example.Operation.ReturnType, "item", operationInvocationExpression, true, out var item)
+                {
+                    BuildResultHandlingStatement(item)
+                }
+                );
+
+            return statements;
         }
 
         private MethodBodyStatement BuildSampleOperationStatementForNormal(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
@@ -192,7 +235,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             // collect all the parameters
             var (parameterDeclaration, parameterArguments) = BuildOperationInvocationParameters(example);
             statements.Add(parameterDeclaration);
-            var operationInvocationExpression = BuildOperationInvocation(instance, example.Operation.Name, parameterArguments);
+            var operationInvocationExpression = BuildOperationInvocation(instance, example.Operation, parameterArguments);
             var returnType = example.Operation.ReturnType;
             if (returnType.IsGenericType)
             {
@@ -288,9 +331,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return (statements, arguments);
         }
 
-        private InvokeInstanceMethodExpression BuildOperationInvocation(ValueExpression instance, string methodName, IReadOnlyList<ValueExpression> parameterArguments, bool isAsync = true)
+        private InvokeInstanceMethodExpression BuildOperationInvocation(ValueExpression instance, MgmtClientOperation operation, IReadOnlyList<ValueExpression> parameterArguments, bool isAsync = true)
         {
-            return new InvokeInstanceMethodExpression(instance, GetMethodName(methodName, isAsync), parameterArguments, isAsync);
+            return new InvokeInstanceMethodExpression(instance, GetMethodName(operation.Name, isAsync), parameterArguments, isAsync && !operation.IsPagingOperation);
         }
 
         private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression instance)
@@ -298,7 +341,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             {
                 ResourceCollection => throw new InvalidOperationException($"ResourceCollection is not supported here"),
                 Resource parentResource => BuildGetResourceStatementFromResource(parentResource, example, client, out instance),
-                //MgmtExtension parentExtension => WriteGetResourceStatementFromExtension(parentExtension, example, client),
+                MgmtExtension parentExtension => BuildGetResourceStatementFromExtension(parentExtension, example, client, out instance),
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
@@ -318,6 +361,13 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                     Declare(carrierResource.Type, carrierResource.ResourceName.ToVariableName(), client.Invoke($"Get{carrierResource.Type.Name}", id), out resourceVar)
                 };
             }
+        }
+
+        private MethodBodyStatement BuildGetResourceStatementFromExtension(MgmtExtension extensionResource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        {
+            // TODO
+            resourceVar = new VariableReference(extensionResource.Type, "temp");
+            return EmptyStatement;
         }
 
         private string GetResourceName(MgmtTypeProvider provider) => provider switch
@@ -391,7 +441,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         {
             foreach (var sample in _client.AllOperations.SelectMany(o => o.Samples))
             {
-                yield return BuildSampleMethod(sample, true);
+                yield return BuildSample(sample, true);
             }
         }
 

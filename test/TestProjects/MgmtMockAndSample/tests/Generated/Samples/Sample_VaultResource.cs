@@ -5,10 +5,13 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample.Models;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -34,6 +37,15 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            VaultResource result = await vault.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            VaultData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -55,6 +67,12 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            await vault.DeleteAsync(waitUntil).ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -76,6 +94,33 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            VaultPatch patch = new VaultPatch
+            {
+                Properties = new VaultPatchProperties
+                {
+                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
+                    Sku = new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard),
+                    AccessPolicies = {new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"), "00000000-0000-0000-0000-000000000000", new Permissions
+{
+Keys = {KeyPermission.Encrypt, KeyPermission.Decrypt, KeyPermission.WrapKey, KeyPermission.UnwrapKey, KeyPermission.Sign, KeyPermission.Verify, KeyPermission.Get, KeyPermission.List, KeyPermission.Create, KeyPermission.Update, KeyPermission.Import, KeyPermission.Delete, KeyPermission.Backup, KeyPermission.Restore, KeyPermission.Recover, KeyPermission.Purge},
+Secrets = {SecretPermission.Get, SecretPermission.List, SecretPermission.Set, SecretPermission.Delete, SecretPermission.Backup, SecretPermission.Restore, SecretPermission.Recover, SecretPermission.Purge},
+Certificates = {CertificatePermission.Get, CertificatePermission.List, CertificatePermission.Delete, CertificatePermission.Create, CertificatePermission.Import, CertificatePermission.Update, CertificatePermission.Managecontacts, CertificatePermission.Getissuers, CertificatePermission.Listissuers, CertificatePermission.Setissuers, CertificatePermission.Deleteissuers, CertificatePermission.Manageissuers, CertificatePermission.Recover, CertificatePermission.Purge},
+})},
+                    EnabledForDeployment = true,
+                    EnabledForDiskEncryption = true,
+                    EnabledForTemplateDeployment = true,
+                    PublicNetworkAccess = "Enabled",
+                },
+            };
+            VaultResource result = await vault.UpdateAsync(patch).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            VaultData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -97,6 +142,14 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation and iterate over the result
+            await foreach (VaultKey item in vault.GetKeysAsync())
+            {
+                Console.WriteLine($"Succeeded: {item}");
+            }
+
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -118,6 +171,11 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            VaultValidationResult result = await vault.ValidateAsync().ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -139,6 +197,11 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            await vault.DisableAsync().ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -160,6 +223,21 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
+            // invoke the operation
+            AccessPolicyUpdateKind operationKind = AccessPolicyUpdateKind.Add;
+            VaultAccessPolicyParameters vaultAccessPolicyParameters = new VaultAccessPolicyParameters(new VaultAccessPolicyProperties(new AccessPolicyEntry[]
+            {
+new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"), "00000000-0000-0000-0000-000000000000", new Permissions
+{
+Keys = {KeyPermission.Encrypt},
+Secrets = {SecretPermission.Get},
+Certificates = {CertificatePermission.Get},
+})
+            }));
+            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -181,69 +259,14 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
-        }
 
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task AddTag_RetrieveAVault()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
+            // invoke the operation and iterate over the result
+            await foreach (MgmtMockAndSamplePrivateLinkResource item in vault.GetPrivateLinkResourcesAsync())
+            {
+                Console.WriteLine($"Succeeded: {item}");
+            }
 
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this VaultResource created on azure
-            // for more information of creating VaultResource, please refer to the document of VaultResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-resource-group";
-            string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            VaultResource vault = client.GetVaultResource(vaultResourceId);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task SetTags_RetrieveAVault()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this VaultResource created on azure
-            // for more information of creating VaultResource, please refer to the document of VaultResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-resource-group";
-            string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            VaultResource vault = client.GetVaultResource(vaultResourceId);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task RemoveTag_RetrieveAVault()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this VaultResource created on azure
-            // for more information of creating VaultResource, please refer to the document of VaultResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-resource-group";
-            string vaultName = "sample-vault";
-            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
-            VaultResource vault = client.GetVaultResource(vaultResourceId);
+            Console.WriteLine("Succeeded");
         }
     }
 }

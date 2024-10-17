@@ -5,7 +5,9 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
@@ -34,6 +36,15 @@ namespace MgmtMockAndSample.Samples
             string name = "hsm1";
             ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+
+            // invoke the operation
+            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync().ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DeletedManagedHsmData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -55,6 +66,12 @@ namespace MgmtMockAndSample.Samples
             string name = "hsm1";
             ResourceIdentifier deletedManagedHsmResourceId = DeletedManagedHsmResource.CreateResourceIdentifier(subscriptionId, location, name);
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
+
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            await deletedManagedHsm.PurgeDeletedAsync(waitUntil).ConfigureAwait(false);
+
+            Console.WriteLine("Succeeded");
         }
     }
 }
