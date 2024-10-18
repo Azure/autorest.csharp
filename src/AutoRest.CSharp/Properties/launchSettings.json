@@ -840,10 +840,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\payload\\pageable\\src\\Generated -n"
     },
-    "typespec-routes": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\routes\\src\\Generated -n"
-    },
     "typespec-serialization/encoded-name/json": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\serialization\\encoded-name\\json\\src\\Generated -n"
