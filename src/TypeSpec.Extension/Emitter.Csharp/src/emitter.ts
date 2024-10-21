@@ -24,6 +24,9 @@ import { azureSDKContextOptions } from "./sdk-context-options.js";
 
 export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
+
+    if (program.compilerOptions.noEmit || program.hasError()) return;
+
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
