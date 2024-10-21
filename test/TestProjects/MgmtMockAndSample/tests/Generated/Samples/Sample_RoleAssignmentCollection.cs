@@ -30,10 +30,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = tmp.GetRoleAssignments();
+            RoleAssignmentCollection collection = client.GetRoleAssignments();
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -65,10 +63,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = tmp.GetRoleAssignments();
+            RoleAssignmentCollection collection = client.GetRoleAssignments();
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -93,10 +89,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = tmp.GetRoleAssignments();
+            RoleAssignmentCollection collection = client.GetRoleAssignments();
 
             // invoke the operation and iterate over the result
             await foreach (RoleAssignmentResource item in collection.GetAllAsync())
@@ -123,10 +117,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = tmp.GetRoleAssignments();
+            RoleAssignmentCollection collection = client.GetRoleAssignments();
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
@@ -147,10 +139,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this RoleAssignmentResource
-            RoleAssignmentCollection collection = tmp.GetRoleAssignments();
+            RoleAssignmentCollection collection = client.GetRoleAssignments();
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";

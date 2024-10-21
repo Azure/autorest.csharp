@@ -360,21 +360,23 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var statements = new List<MethodBodyStatement>();
 
             var resourceName = collection.Resource.ResourceName;
-            TypedValueExpression parentVar;
-            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
-            {
-                statements.Add(new SingleLineCommentStatement("scope case not implemented yet"));
-                //    parentVar = new TypedValueExpression(typeof(object), new FormattableStringToExpression($"tmp"));
-            }
-            //else
-            //{
-            statements.Add(BuildGetResourceStatement(parent, example, client, out parentVar));
-            //}
+            statements.Add(BuildGetResourceStatement(parent, example, client, out var parentVar));
 
             // write get collection
             statements.Add(new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}"));
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var arguments = new List<ValueExpression>();
+
+            // if the extension is on ArmResource, we need an extra "scope" parameter before its actual parameters
+            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
+            {
+                statements.Add(
+                    // TODO -- find out the scope parameter
+                    BuildCreateResourceIdentifierForScopePath(example, collection.RequestPath.GetScopePath(), parent.Type, out var scope)
+                    );
+                arguments.Add(scope);
+            }
+
             foreach (var extraParameter in collection.ExtraConstructorParameters)
             {
                 if (example.ParameterValueMapping.TryGetValue(extraParameter.Name, out var exampleParameterValue))
@@ -447,8 +449,15 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildGetResourceStatementFromArmResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
-            // TODO
-            return Declare(typeof(object), "tmp", Null, out resourceVar);
+            if (client is TypedValueExpression typedClient)
+            {
+                resourceVar = typedClient;
+            }
+            else
+            {
+                resourceVar = new TypedValueExpression(typeof(ArmClient), client);
+            }
+            return EmptyStatement;
         }
 
         private MethodBodyStatement BuildGetResourceStatementForOther(MgmtExtension extension, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)

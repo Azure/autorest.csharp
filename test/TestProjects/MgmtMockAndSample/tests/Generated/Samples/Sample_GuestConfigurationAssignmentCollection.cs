@@ -30,10 +30,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
 
             // invoke the operation
             string guestConfigurationAssignmentName = "NotInstalledApplicationForWindows";
@@ -68,10 +66,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
@@ -96,10 +92,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
 
             // invoke the operation and iterate over the result
             await foreach (GuestConfigurationAssignmentResource item in collection.GetAllAsync())
@@ -126,10 +120,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
@@ -150,10 +142,8 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // scope case not implemented yet
-            object tmp = null;
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
