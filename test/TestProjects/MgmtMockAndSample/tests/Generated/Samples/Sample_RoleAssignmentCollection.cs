@@ -36,7 +36,6 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentCollection collection = tmp.GetRoleAssignments();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string roleAssignmentName = "roleAssignmentName";
             RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent
             {
@@ -44,7 +43,7 @@ namespace MgmtMockAndSample.Samples
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(waitUntil, roleAssignmentName, content).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content).ConfigureAwait(false);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

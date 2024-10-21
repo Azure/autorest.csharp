@@ -71,8 +71,7 @@ namespace MgmtMockAndSample.Samples
             GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            await guestConfigurationAssignment.DeleteAsync(waitUntil).ConfigureAwait(false);
+            await guestConfigurationAssignment.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine("Succeeded");
         }
@@ -99,7 +98,6 @@ namespace MgmtMockAndSample.Samples
             GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             GuestConfigurationAssignmentData data = new GuestConfigurationAssignmentData
             {
                 Properties = new GuestConfigurationAssignmentProperties
@@ -109,7 +107,7 @@ namespace MgmtMockAndSample.Samples
                 Name = "NotInstalledApplicationForWindows",
                 Location = new AzureLocation("westcentralus"),
             };
-            ArmOperation<GuestConfigurationAssignmentResource> lro = await guestConfigurationAssignment.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<GuestConfigurationAssignmentResource> lro = await guestConfigurationAssignment.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             GuestConfigurationAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

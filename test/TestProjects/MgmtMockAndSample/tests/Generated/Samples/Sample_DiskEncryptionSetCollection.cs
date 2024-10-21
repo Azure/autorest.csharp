@@ -42,7 +42,6 @@ namespace MgmtMockAndSample.Samples
             DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
@@ -51,7 +50,7 @@ namespace MgmtMockAndSample.Samples
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
                 MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -83,7 +82,6 @@ namespace MgmtMockAndSample.Samples
             DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
@@ -98,7 +96,7 @@ namespace MgmtMockAndSample.Samples
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}")),
                 FederatedClientId = "00000000-0000-0000-0000-000000000000",
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -130,7 +128,6 @@ namespace MgmtMockAndSample.Samples
             DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string diskEncryptionSetName = "myDiskEncryptionSet";
             DiskEncryptionSetData data = new DiskEncryptionSetData
             {
@@ -141,7 +138,7 @@ namespace MgmtMockAndSample.Samples
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

@@ -67,8 +67,7 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(waitUntil).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -98,14 +97,13 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             RoleAssignmentCreateOrUpdateContent content = new RoleAssignmentCreateOrUpdateContent
             {
                 RoleDefinitionId = "/subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772",
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(waitUntil, content).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(WaitUntil.Completed, content).ConfigureAwait(false);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

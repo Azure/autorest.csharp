@@ -71,8 +71,7 @@ namespace MgmtMockAndSample.Samples
             MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(waitUntil).ConfigureAwait(false);
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
             MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -104,7 +103,6 @@ namespace MgmtMockAndSample.Samples
             MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(default)
             {
                 PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState
@@ -113,7 +111,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

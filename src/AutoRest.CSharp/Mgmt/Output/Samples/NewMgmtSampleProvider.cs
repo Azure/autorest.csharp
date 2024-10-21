@@ -309,12 +309,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var arguments = new List<ValueExpression>(methodParameters.Count);
             foreach (var parameter in methodParameters)
             {
-                // some parameters are always inline
-                if (_inlineParameters.Contains(parameter))
-                {
-
-                }
-
                 if (example.Carrier is ArmResourceExtension && parameter.Type.Equals(typeof(ArmResource)))
                 {
                     // this is an extension operation against ArmResource
@@ -326,8 +320,17 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 if (example.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
                     var expression = ToExpression(parameterValue);
-                    statements.Add(Declare(parameter.Type, parameter.Name, expression, out var p));
-                    arguments.Add(p);
+
+                    // some parameters are always inline
+                    if (_inlineParameters.Contains(parameter))
+                    {
+                        arguments.Add(expression);
+                    }
+                    else
+                    {
+                        statements.Add(Declare(parameter.Type, parameter.Name, expression, out var p));
+                        arguments.Add(p);
+                    }
                 }
                 else if (parameter.IsPropertyBag)
                 {

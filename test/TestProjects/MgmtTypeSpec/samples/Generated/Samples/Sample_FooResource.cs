@@ -69,7 +69,6 @@ namespace MgmtTypeSpec.Samples
             FooResource foo = client.GetFooResource(fooResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             FooData data = new FooData(default)
             {
                 Properties = new FooProperties
@@ -81,7 +80,7 @@ namespace MgmtTypeSpec.Samples
                     DoubleValue = 1.2,
                 },
             };
-            ArmOperation<FooResource> lro = await foo.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<FooResource> lro = await foo.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             FooResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

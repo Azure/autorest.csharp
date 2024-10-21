@@ -69,8 +69,7 @@ namespace MgmtMockAndSample.Samples
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            await managedHsm.DeleteAsync(waitUntil).ConfigureAwait(false);
+            await managedHsm.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine("Succeeded");
         }
@@ -96,7 +95,6 @@ namespace MgmtMockAndSample.Samples
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             ManagedHsmData data = new ManagedHsmData(default)
             {
                 Tags =
@@ -106,7 +104,7 @@ namespace MgmtMockAndSample.Samples
 ["Slice"] = "A"
 },
             };
-            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

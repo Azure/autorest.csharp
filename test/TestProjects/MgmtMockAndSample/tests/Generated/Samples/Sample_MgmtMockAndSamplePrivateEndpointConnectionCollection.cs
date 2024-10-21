@@ -41,7 +41,6 @@ namespace MgmtMockAndSample.Samples
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string privateEndpointConnectionName = "sample-pec";
             MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData
             {
@@ -52,7 +51,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(waitUntil, privateEndpointConnectionName, data).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data).ConfigureAwait(false);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

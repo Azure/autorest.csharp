@@ -71,8 +71,7 @@ namespace MgmtMockAndSample.Samples
             MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(waitUntil).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -104,7 +103,6 @@ namespace MgmtMockAndSample.Samples
             MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             MgmtMockAndSamplePrivateEndpointConnectionData data = new MgmtMockAndSamplePrivateEndpointConnectionData
             {
                 Etag = "",
@@ -114,7 +112,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

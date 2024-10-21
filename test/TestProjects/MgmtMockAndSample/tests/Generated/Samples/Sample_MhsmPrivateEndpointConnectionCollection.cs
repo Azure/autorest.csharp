@@ -41,7 +41,6 @@ namespace MgmtMockAndSample.Samples
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string privateEndpointConnectionName = "sample-pec";
             MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(default)
             {
@@ -51,7 +50,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(waitUntil, privateEndpointConnectionName, data).ConfigureAwait(false);
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data).ConfigureAwait(false);
             MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

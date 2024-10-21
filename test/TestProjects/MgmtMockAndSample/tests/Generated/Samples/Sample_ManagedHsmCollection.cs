@@ -44,7 +44,6 @@ namespace MgmtMockAndSample.Samples
             ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string name = "hsm1";
             ManagedHsmData data = new ManagedHsmData(new AzureLocation("westus"))
             {
@@ -73,7 +72,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 ["Environment"] = "dogfood"
 },
             };
-            ArmOperation<ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(waitUntil, name, data).ConfigureAwait(false);
+            ArmOperation<ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data).ConfigureAwait(false);
             ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

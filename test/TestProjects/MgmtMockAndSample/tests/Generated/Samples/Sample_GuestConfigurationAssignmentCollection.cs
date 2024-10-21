@@ -36,7 +36,6 @@ namespace MgmtMockAndSample.Samples
             GuestConfigurationAssignmentCollection collection = tmp.GetGuestConfigurationAssignments();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string guestConfigurationAssignmentName = "NotInstalledApplicationForWindows";
             GuestConfigurationAssignmentData data = new GuestConfigurationAssignmentData
             {
@@ -47,7 +46,7 @@ namespace MgmtMockAndSample.Samples
                 Name = "NotInstalledApplicationForWindows",
                 Location = new AzureLocation("westcentralus"),
             };
-            ArmOperation<GuestConfigurationAssignmentResource> lro = await collection.CreateOrUpdateAsync(waitUntil, guestConfigurationAssignmentName, data).ConfigureAwait(false);
+            ArmOperation<GuestConfigurationAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, guestConfigurationAssignmentName, data).ConfigureAwait(false);
             GuestConfigurationAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

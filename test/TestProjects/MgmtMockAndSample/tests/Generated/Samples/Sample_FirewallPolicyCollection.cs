@@ -42,7 +42,6 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string firewallPolicyName = "firewallPolicy";
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
@@ -116,7 +115,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(waitUntil, firewallPolicyName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data).ConfigureAwait(false);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -148,7 +147,6 @@ DestinationPorts = {"*"},
             FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string firewallPolicyName = "firewallPolicy";
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
@@ -222,7 +220,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(waitUntil, firewallPolicyName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data).ConfigureAwait(false);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

@@ -70,8 +70,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            await firewallPolicy.DeleteAsync(waitUntil).ConfigureAwait(false);
+            await firewallPolicy.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine("Succeeded");
         }
@@ -97,7 +96,6 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
                 StartupProbe = default,
@@ -170,7 +168,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -201,7 +199,6 @@ DestinationPorts = {"*"},
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             FirewallPolicyData data = new FirewallPolicyData(new AzureLocation("West US"))
             {
                 StartupProbe = default,
@@ -274,7 +271,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(waitUntil, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

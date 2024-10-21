@@ -69,8 +69,7 @@ namespace MgmtMockAndSample.Samples
             VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            await vault.DeleteAsync(waitUntil).ConfigureAwait(false);
+            await vault.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine("Succeeded");
         }

@@ -42,7 +42,6 @@ namespace MgmtMockAndSample.Samples
             VaultCollection collection = ResourceGroupResource.GetVaults();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string vaultName = "sample-vault";
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
@@ -61,7 +60,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             {
                 Identity = new ManagedServiceIdentity(default),
             };
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(waitUntil, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -93,7 +92,6 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             VaultCollection collection = ResourceGroupResource.GetVaults();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string vaultName = "sample-vault";
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
@@ -109,7 +107,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 ReadWriteSingleStringPropertySomething = "test",
                 DeepSomething = "deep-value",
             });
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(waitUntil, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -141,7 +139,6 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             VaultCollection collection = ResourceGroupResource.GetVaults();
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
             string vaultName = default /* Warning: No value is provided for vaultName in example 'Verify Sample-gen can handle examples with some parameter missing'. Please consider adding a proper example value for it in swagger*/;
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
@@ -160,7 +157,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             {
                 Identity = new ManagedServiceIdentity(default),
             };
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(waitUntil, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

@@ -68,8 +68,7 @@ namespace MgmtMockAndSample.Samples
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            WaitUntil waitUntil = WaitUntil.Completed;
-            await deletedManagedHsm.PurgeDeletedAsync(waitUntil).ConfigureAwait(false);
+            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine("Succeeded");
         }
