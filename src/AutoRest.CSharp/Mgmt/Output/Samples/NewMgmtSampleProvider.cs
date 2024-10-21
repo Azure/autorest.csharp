@@ -382,7 +382,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var scopePath = resource.RequestPath.GetScopePath();
             if (scopePath.IsRawParameterizedScope())
             {
-                return BuildCreateResourceIdentifierForScopePath(example, resource, out id);
+                return BuildCreateResourceIdentifierForScopePath(example, resource, scopePath, out id);
             }
             else
             {
@@ -416,7 +416,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return statements;
         }
 
-        private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, Resource resource, out TypedValueExpression id)
+        private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, Resource resource, RequestPath resourceScopePath, out TypedValueExpression id)
         {
             var statements = new List<MethodBodyStatement>();
             var operationScopePath = example.RequestPath.GetScopePath();
@@ -433,8 +433,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
 
             var idArguments = new List<ValueExpression>();
-            // TODO - verify if this is still needed
-            if (scopeValues.Count == 1)
+            if (operationScopePath.Count == 1)
             {
                 // the scope in the id is an explicit scope, such as a request path defined like: `/{scope}/providers/Microsoft.Something/roleDefinitions/{name}` therefore we do not have do anything special for it
                 idArguments.AddRange(scopeValues);
@@ -442,7 +441,10 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             else
             {
                 // this scope is an implicit scope, such as a request path defined like: `/subscriptions/{subsId}/providers/Microsoft.Something/roleDefinitions/{name}` but we changed this in our generator to make it a scope resource
-                idArguments.AddRange(scopeValues);
+                var scopeSegment = resourceScopePath[0];
+                var scopeDeclarationStatement = Declare(scopeSegment.Reference.Type, scopeSegment.ReferenceName, new FormattableStringExpression(operationScopePath, scopeValues), out var scope);
+                statements.Add(scopeDeclarationStatement);
+                idArguments.Add(scope);
             }
 
             foreach (var reference in operationTrimeedPath.Take(trimmedPath.Count).Where(segment => segment.IsReference))
