@@ -139,6 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         private MethodBodyStatement BuildSampleMethodInvocation(MgmtOperationSample example, ValueExpression client, out TypedValueExpression? result)
             => example.Carrier switch
             {
+                ResourceCollection collection => BuildSampleMethodBodyForResourceCollection(example, client, collection, out result),
                 Resource resource => BuildSampleMethodBodyForResource(example, client, resource, out result),
                 _ => throw new InvalidOperationException("This should never happen")
             };
@@ -154,6 +155,29 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 EmptyLine,
                 BuildSampleOperationStatement(example, instance, out result),
             };
+
+            return statements;
+        }
+
+        private MethodBodyStatement BuildSampleMethodBodyForResourceCollection(MgmtOperationSample example, ValueExpression client, ResourceCollection collection, out TypedValueExpression? result)
+        {
+            var parent = example.Parent;
+
+            if (parent == null)
+            {
+                throw new NotImplementedException("no parent collection samples not implemented yet");
+            }
+
+            var parentName = GetResourceName(parent);
+            var statements = new List<MethodBodyStatement>()
+            {
+                new SingleLineCommentStatement($"this example assumes you already have this {parentName} created on azure"),
+                new SingleLineCommentStatement($"for more information of creating {parentName}, please refer to the document of {parentName}"),
+            };
+            //    BuildGetResourceStatement(resource, example, client, out var instance),
+            //    EmptyLine,
+            //    BuildSampleOperationStatement(example, instance, out result),
+            result = null;
 
             return statements;
         }

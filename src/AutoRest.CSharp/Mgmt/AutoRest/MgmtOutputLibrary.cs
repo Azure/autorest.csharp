@@ -958,12 +958,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<MgmtTypeProvider, NewMgmtSampleProvider> EnsureMgmtClientSampleProviders()
         {
             var result = new Dictionary<MgmtTypeProvider, NewMgmtSampleProvider>();
-            foreach (var resource in ArmResources)
+            foreach (var provider in ArmResources.Concat(ResourceCollections))
             {
-                var sampleProvider = new NewMgmtSampleProvider(Configuration.Namespace, resource, MgmtContext.Context.SourceInputModel);
+                var sampleProvider = new NewMgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
                 if (!sampleProvider.IsEmpty)
                 {
-                    result.Add(resource, sampleProvider);
+                    result.Add(provider, sampleProvider);
                 }
             }
 
