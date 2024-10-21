@@ -7,9 +7,11 @@
 
 using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -30,8 +32,22 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this DeletedManagedHsmResource
+            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            AzureLocation location = new AzureLocation("westus");
+            string name = "hsm1";
+            DeletedManagedHsmResource result = await collection.GetAsync(location, name).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DeletedManagedHsmData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -48,8 +64,18 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this DeletedManagedHsmResource
+            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            AzureLocation location = new AzureLocation("westus");
+            string name = "hsm1";
+            bool result = await collection.ExistsAsync(location, name).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -66,8 +92,30 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this DeletedManagedHsmResource
+            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            AzureLocation location = new AzureLocation("westus");
+            string name = "hsm1";
+            NullableResponse<DeletedManagedHsmResource> response = await collection.GetIfExistsAsync(location, name).ConfigureAwait(false);
+            DeletedManagedHsmResource result = response.HasValue ? response.Value : null;
+
+            if (result == null)
+            {
+                Console.WriteLine("Succeeded with null as result");
+            }
+            else
+            {
+                // the variable result is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                DeletedManagedHsmData resourceData = result.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
         }
     }
 }

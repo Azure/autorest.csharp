@@ -7,9 +7,11 @@
 
 using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -30,8 +32,24 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string version = "aaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            VirtualMachineExtensionImageData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -48,8 +66,24 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aa";
+            string version = "aaa";
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            VirtualMachineExtensionImageData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -66,6 +100,23 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+
+            // invoke the operation and iterate over the result
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
+            {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
 
             Console.WriteLine("Succeeded");
         }
@@ -84,6 +135,23 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaa");
+            string publisherName = "aa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+
+            // invoke the operation and iterate over the result
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
+            {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
 
             Console.WriteLine("Succeeded");
         }
@@ -102,6 +170,27 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+
+            // invoke the operation and iterate over the result
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
+            int? top = 22;
+            string orderby = "a";
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter, top, orderby))
+            {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
 
             Console.WriteLine("Succeeded");
         }
@@ -120,6 +209,24 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+
+            // invoke the operation and iterate over the result
+            string type = "aaaa";
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type))
+            {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
 
             Console.WriteLine("Succeeded");
         }
@@ -138,8 +245,20 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string version = "aaaaaaaaaaaaaa";
+            bool result = await collection.ExistsAsync(type, version).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -156,8 +275,20 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aa";
+            string version = "aaa";
+            bool result = await collection.ExistsAsync(type, version).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -174,8 +305,32 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aaaaaaaaaaaaaaaaaa";
+            string version = "aaaaaaaaaaaaaa";
+            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version).ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = response.HasValue ? response.Value : null;
+
+            if (result == null)
+            {
+                Console.WriteLine("Succeeded with null as result");
+            }
+            else
+            {
+                // the variable result is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = result.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
         }
 
         [Test]
@@ -192,8 +347,32 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            string subscriptionId = "{subscription-id}";
+            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            // get the collection of this VirtualMachineExtensionImageResource
+            AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
+            string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
+            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string type = "aa";
+            string version = "aaa";
+            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version).ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = response.HasValue ? response.Value : null;
+
+            if (result == null)
+            {
+                Console.WriteLine("Succeeded with null as result");
+            }
+            else
+            {
+                // the variable result is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                VirtualMachineExtensionImageData resourceData = result.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
         }
     }
 }

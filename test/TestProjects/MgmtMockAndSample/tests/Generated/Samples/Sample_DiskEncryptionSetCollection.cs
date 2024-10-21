@@ -7,9 +7,13 @@
 
 using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
+using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Models;
 using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
@@ -30,8 +34,31 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            DiskEncryptionSetData data = new DiskEncryptionSetData
+            {
+                Identity = new ManagedServiceIdentity(default),
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
+                MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -48,8 +75,37 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            DiskEncryptionSetData data = new DiskEncryptionSetData
+            {
+                Identity = new ManagedServiceIdentity(default)
+                {
+                    UserAssignedIdentities =
+{
+[new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}")] = null
+},
+                },
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}")),
+                FederatedClientId = "00000000-0000-0000-0000-000000000000",
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -66,8 +122,33 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            WaitUntil waitUntil = WaitUntil.Completed;
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            DiskEncryptionSetData data = new DiskEncryptionSetData
+            {
+                Identity = new ManagedServiceIdentity(default),
+                EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
+                ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvmvault.vault-int.azure-int.net/keys/{key}"))
+                {
+                    SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
+                },
+            };
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(waitUntil, diskEncryptionSetName, data).ConfigureAwait(false);
+            DiskEncryptionSetResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -84,8 +165,22 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -102,8 +197,22 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            DiskEncryptionSetData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
@@ -120,6 +229,22 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+
+            // invoke the operation and iterate over the result
+            await foreach (DiskEncryptionSetResource item in collection.GetAllAsync())
+            {
+                // the variable item is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                DiskEncryptionSetData resourceData = item.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
 
             Console.WriteLine("Succeeded");
         }
@@ -138,8 +263,18 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            bool result = await collection.ExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -156,8 +291,18 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            bool result = await collection.ExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+
+            Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
@@ -174,8 +319,30 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            DiskEncryptionSetResource result = response.HasValue ? response.Value : null;
+
+            if (result == null)
+            {
+                Console.WriteLine("Succeeded with null as result");
+            }
+            else
+            {
+                // the variable result is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                DiskEncryptionSetData resourceData = result.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
         }
 
         [Test]
@@ -192,8 +359,30 @@ namespace MgmtMockAndSample.Samples
 
             // this example assumes you already have this ResourceGroupResource created on azure
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
+            string subscriptionId = "{subscription-id}";
+            string resourceGroupName = "myResourceGroup";
+            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            // get the collection of this DiskEncryptionSetResource
+            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
 
-            Console.WriteLine("Succeeded");
+            // invoke the operation
+            string diskEncryptionSetName = "myDiskEncryptionSet";
+            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            DiskEncryptionSetResource result = response.HasValue ? response.Value : null;
+
+            if (result == null)
+            {
+                Console.WriteLine("Succeeded with null as result");
+            }
+            else
+            {
+                // the variable result is a resource, you could call other operations on this instance as well
+                // but just for demo, we get its data from this resource instance
+                DiskEncryptionSetData resourceData = result.Data;
+                // for demo we just print out the id
+                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+            }
         }
     }
 }

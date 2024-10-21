@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -21,12 +22,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using Humanizer.Localisation;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Output.Samples
 {
     internal class NewMgmtSampleProvider : ExpressionTypeProvider
     {
+        private const string _createResourceIdentifierMethodName = "CreateResourceIdentifier";
         protected readonly MgmtTypeProvider _client;
 
         public NewMgmtSampleProvider(string defaultNamespace, MgmtTypeProvider client, SourceInputModel? sourceInputModel) : base($"{defaultNamespace}.Samples", sourceInputModel)
@@ -146,11 +149,8 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildSampleMethodBodyForResource(MgmtOperationSample example, ValueExpression client, Resource resource, out TypedValueExpression? result)
         {
-            var resourceName = GetResourceName(resource);
             var statements = new List<MethodBodyStatement>()
             {
-                new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
-                new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
                 BuildGetResourceStatement(resource, example, client, out var instance),
                 EmptyLine,
                 BuildSampleOperationStatement(example, instance, out result),
@@ -161,25 +161,12 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildSampleMethodBodyForResourceCollection(MgmtOperationSample example, ValueExpression client, ResourceCollection collection, out TypedValueExpression? result)
         {
-            var parent = example.Parent;
-
-            if (parent == null)
+            return new MethodBodyStatement[]
             {
-                throw new NotImplementedException("no parent collection samples not implemented yet");
-            }
-
-            var parentName = GetResourceName(parent);
-            var statements = new List<MethodBodyStatement>()
-            {
-                new SingleLineCommentStatement($"this example assumes you already have this {parentName} created on azure"),
-                new SingleLineCommentStatement($"for more information of creating {parentName}, please refer to the document of {parentName}"),
+                BuildGetCollectionStatement(collection, example, client, out var instance),
+                EmptyLine,
+                BuildSampleOperationStatement(example, instance, out result),
             };
-            //    BuildGetResourceStatement(resource, example, client, out var instance),
-            //    EmptyLine,
-            //    BuildSampleOperationStatement(example, instance, out result),
-            result = null;
-
-            return statements;
         }
 
         private MethodBodyStatement BuildSampleOperationStatement(MgmtOperationSample example, ValueExpression instance, out TypedValueExpression? result)
@@ -338,10 +325,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
                 if (example.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
-                    // TODO -- clean up the formattable string here when the refactor is done.
-                    var expression = parameterValue.Expression is { } f ?
-                        new FormattableStringToExpression(f) :
-                        ExampleValueSnippets.GetExpression(parameter.Type, parameterValue.Value);
+                    var expression = ToExpression(parameterValue);
                     statements.Add(Declare(parameter.Type, parameter.Name, expression, out var p));
                     arguments.Add(p);
                 }
@@ -360,6 +344,53 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return new InvokeInstanceMethodExpression(instance, GetMethodName(operation.Name, isAsync), parameterArguments, isAsync && !operation.IsPagingOperation);
         }
 
+        private MethodBodyStatement BuildGetCollectionStatement(ResourceCollection collection, MgmtOperationSample example, ValueExpression client, out TypedValueExpression instance)
+        {
+            var parent = example.Parent;
+
+            if (parent == null)
+            {
+                throw new NotImplementedException("no parent collection samples not implemented yet");
+            }
+
+            var parentName = GetResourceName(parent);
+            var statements = new List<MethodBodyStatement>();
+
+            var resourceName = collection.Resource.ResourceName;
+            TypedValueExpression parentVar;
+            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
+            {
+                statements.Add(new SingleLineCommentStatement("scope case not implemented yet"));
+                //    parentVar = new TypedValueExpression(typeof(object), new FormattableStringToExpression($"tmp"));
+            }
+            //else
+            //{
+            statements.Add(BuildGetResourceStatement(parent, example, client, out parentVar));
+            //}
+
+            // write get collection
+            statements.Add(new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}"));
+            var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
+            var arguments = new List<ValueExpression>();
+            foreach (var extraParameter in collection.ExtraConstructorParameters)
+            {
+                if (example.ParameterValueMapping.TryGetValue(extraParameter.Name, out var exampleParameterValue))
+                {
+                    statements.Add(
+                        Declare(extraParameter.Type, extraParameter.Name, ToExpression(exampleParameterValue), out var arg)
+                        );
+                    arguments.Add(arg);
+                }
+            }
+
+            // call the method to get the collection instance
+            statements.Add(
+                Declare(collection.Type, "collection", parentVar.Invoke(getResourceCollectionMethodName, arguments), out instance)
+                );
+
+            return statements;
+        }
+
         private MethodBodyStatement BuildGetResourceStatement(MgmtTypeProvider carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression instance)
             => carrierResource switch
             {
@@ -369,29 +400,64 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 _ => throw new InvalidOperationException($"Unknown parent {carrierResource.GetType()}"),
             };
 
-        private MethodBodyStatement BuildGetResourceStatementFromResource(Resource carrierResource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        private MethodBodyStatement BuildGetResourceStatementFromResource(Resource resource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
             // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
-            if (Configuration.MgmtConfiguration.IsArmCore && carrierResource.Type.Name == nameof(TenantResource))
+            if (Configuration.MgmtConfiguration.IsArmCore && resource.Type.Name == nameof(TenantResource))
             {
-                //return BuildGetResourceStatementFromTenantResource(carrierResource, example, client);
-                throw new InvalidOperationException("WIP");
+                return BuildGetResourceStatementFromTenantResource(example, client, out resourceVar);
             }
             else
             {
+                var resourceName = GetResourceName(resource);
                 return new MethodBodyStatement[]
                 {
-                    BuildCreateResourceIdentifier(carrierResource, example, out var id),
-                    Declare(carrierResource.Type, carrierResource.ResourceName.ToVariableName(), client.Invoke($"Get{carrierResource.Type.Name}", id), out resourceVar)
+                    new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
+                    new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
+                    BuildCreateResourceIdentifier(resource.RequestPath, resource.Type, example, out var id),
+                    Declare(resource.Type, resource.ResourceName.ToVariableName(), client.Invoke($"Get{resourceName}", id), out resourceVar)
                 };
             }
         }
 
-        private MethodBodyStatement BuildGetResourceStatementFromExtension(MgmtExtension extensionResource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        private MethodBodyStatement BuildGetResourceStatementFromExtension(MgmtExtension extension, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        {
+            if (extension.ArmCoreType == typeof(TenantResource))
+            {
+                return BuildGetResourceStatementFromTenantResource(example, client, out resourceVar);
+            }
+            else if (extension.ArmCoreType == typeof(ArmResource))
+            {
+                return BuildGetResourceStatementFromArmResource(example, client, out resourceVar);
+            }
+            else
+            {
+                return BuildGetResourceStatementForOther(extension, example, client, out resourceVar);
+            }
+        }
+
+        private MethodBodyStatement BuildGetResourceStatementFromTenantResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
             // TODO
-            resourceVar = new VariableReference(extensionResource.Type, "temp");
-            return EmptyStatement;
+            return Declare(typeof(object), "tmp", Null, out resourceVar);
+        }
+
+        private MethodBodyStatement BuildGetResourceStatementFromArmResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        {
+            // TODO
+            return Declare(typeof(object), "tmp", Null, out resourceVar);
+        }
+
+        private MethodBodyStatement BuildGetResourceStatementForOther(MgmtExtension extension, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        {
+            var resourceName = GetResourceName(extension);
+            return new MethodBodyStatement[]
+            {
+                new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
+                new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
+                BuildCreateResourceIdentifier(extension.ContextualPath, extension.ArmCoreType, example, out var id),
+                Declare(extension.ArmCoreType, extension.ResourceName, client.Invoke($"Get{resourceName}", id), out resourceVar)
+            };
         }
 
         private string GetResourceName(MgmtTypeProvider provider) => provider switch
@@ -401,20 +467,20 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             _ => throw new InvalidOperationException("Should never happen")
         };
 
-        private MethodBodyStatement BuildCreateResourceIdentifier(Resource resource, OperationExample example, out TypedValueExpression id)
+        private MethodBodyStatement BuildCreateResourceIdentifier(RequestPath resourcePath, CSharpType typeOfResource, OperationExample example, out TypedValueExpression id)
         {
-            var scopePath = resource.RequestPath.GetScopePath();
+            var scopePath = resourcePath.GetScopePath();
             if (scopePath.IsRawParameterizedScope())
             {
-                return BuildCreateResourceIdentifierForScopePath(example, resource, scopePath, out id);
+                return BuildCreateResourceIdentifierForScopePath(example, resourcePath, typeOfResource, out id);
             }
             else
             {
-                return BuildCreateResourceIdentifierForUsualPath(example, resource, out id);
+                return BuildCreateResourceIdentifierForUsualPath(example, resourcePath, typeOfResource, out id);
             }
         }
 
-        private MethodBodyStatement BuildCreateResourceIdentifierForUsualPath(OperationExample example, Resource resource, out TypedValueExpression id)
+        private MethodBodyStatement BuildCreateResourceIdentifierForUsualPath(OperationExample example, RequestPath resourcePath, CSharpType typeOfResource, out TypedValueExpression id)
         {
             var statements = new List<MethodBodyStatement>();
             // try to figure out ref segments from requestPath according the ones from resource Path
@@ -424,7 +490,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             //    i.e. in ResourceManager, parent of /subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}
             //         is configured to /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
             var myRefs = example.RequestPath.Where(s => s.IsReference);
-            var resourceRefCount = resource.RequestPath.Where(s => s.IsReference).Count();
+            var resourceRefCount = resourcePath.Where(s => s.IsReference).Count();
             var references = new List<ValueExpression>(resourceRefCount);
             foreach (var reference in myRefs.Take(resourceRefCount))
             {
@@ -434,17 +500,18 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 references.Add(referenceVar);
             }
 
-            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, references), out id);
+            var idStatement = Declare(typeof(ResourceIdentifier), $"{typeOfResource.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(typeOfResource, _createResourceIdentifierMethodName, references), out id);
             statements.Add(idStatement);
 
             return statements;
         }
 
-        private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, Resource resource, RequestPath resourceScopePath, out TypedValueExpression id)
+        private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, RequestPath resourcePath, CSharpType typeOfResource, out TypedValueExpression id)
         {
             var statements = new List<MethodBodyStatement>();
             var operationScopePath = example.RequestPath.GetScopePath();
-            var trimmedPath = resource.RequestPath.TrimScope();
+            var resourceScopePath = resourcePath.GetScopePath();
+            var trimmedPath = resourcePath.TrimScope();
             var operationTrimeedPath = example.RequestPath.TrimScope();
 
             var scopeValues = new List<ValueExpression>();
@@ -479,7 +546,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 idArguments.Add(idPartVar);
             }
 
-            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, idArguments), out id);
+            var idStatement = Declare(typeof(ResourceIdentifier), $"{typeOfResource.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(typeOfResource, _createResourceIdentifierMethodName, idArguments), out id);
             statements.Add(idStatement);
 
             return statements;
@@ -498,6 +565,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         private string GetMethodName(string methodName, bool isAsync = true)
         {
             return isAsync ? $"{methodName}Async" : methodName;
+        }
+
+        // TODO -- clean up the formattable string here when the refactor is done.
+        private static ValueExpression ToExpression(ExampleParameterValue parameterValue)
+        {
+            return parameterValue.Expression is { } f ?
+                        new FormattableStringToExpression(f) :
+                        ExampleValueSnippets.GetExpression(parameterValue.Type, parameterValue.Value);
         }
     }
 }
