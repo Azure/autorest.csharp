@@ -30,6 +30,7 @@ namespace CadlRanchProjects.Tests
             options.AddPolicy(new MockBearerTokenAuthenticationPolicy(new MockCredential(), OAuth2Client.TokenScopes, options.Transport), HttpPipelinePosition.PerCall);
 
             var exception = Assert.ThrowsAsync<RequestFailedException>(() => new OAuth2Client(host, new MockCredential(), options).InvalidAsync());
+            Assert.IsTrue(exception.Message.Contains("invalid-grant"));
             Assert.AreEqual(403, exception.Status);
             return Task.CompletedTask;
         });

@@ -6,6 +6,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
 using System.Threading.Tasks;
+using YamlDotNet.Core.Tokens;
 
 namespace CadlRanchProjects.Tests
 {
@@ -23,6 +24,7 @@ namespace CadlRanchProjects.Tests
         {
             var exception = Assert.ThrowsAsync<RequestFailedException>(() => new ApiKeyClient(host, new AzureKeyCredential("valid-key"), null).InvalidAsync());
             Assert.AreEqual(403, exception.Status);
+            Assert.IsTrue( exception.Message.Contains("invalid-api-key"));
             return Task.CompletedTask;
         });
     }
