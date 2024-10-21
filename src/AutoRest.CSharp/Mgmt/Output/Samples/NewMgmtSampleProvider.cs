@@ -420,6 +420,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         {
             var statements = new List<MethodBodyStatement>();
             var operationScopePath = example.RequestPath.GetScopePath();
+            var trimmedPath = resource.RequestPath.TrimScope();
             var operationTrimeedPath = example.RequestPath.TrimScope();
 
             var scopeValues = new List<ValueExpression>();
@@ -431,7 +432,28 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 scopeValues.Add(scopeRefVar);
             }
 
-            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, scopeValues), out id);
+            var idArguments = new List<ValueExpression>();
+            // TODO - verify if this is still needed
+            if (scopeValues.Count == 1)
+            {
+                // the scope in the id is an explicit scope, such as a request path defined like: `/{scope}/providers/Microsoft.Something/roleDefinitions/{name}` therefore we do not have do anything special for it
+                idArguments.AddRange(scopeValues);
+            }
+            else
+            {
+                // this scope is an implicit scope, such as a request path defined like: `/subscriptions/{subsId}/providers/Microsoft.Something/roleDefinitions/{name}` but we changed this in our generator to make it a scope resource
+                idArguments.AddRange(scopeValues);
+            }
+
+            foreach (var reference in operationTrimeedPath.Take(trimmedPath.Count).Where(segment => segment.IsReference))
+            {
+                var exampleValue = example.FindInputExampleValueFromReference(reference.Reference);
+                var refStatement = Declare(reference.Type, reference.ReferenceName, ExampleValueSnippets.GetExpression(reference.Type, exampleValue), out var idPartVar);
+                statements.Add(refStatement);
+                idArguments.Add(idPartVar);
+            }
+
+            var idStatement = Declare(typeof(ResourceIdentifier), $"{resource.Type.Name}Id".ToVariableName(), new InvokeStaticMethodExpression(resource.Type, resource.CreateResourceIdentifierMethod.Signature.Name, idArguments), out id);
             statements.Add(idStatement);
 
             return statements;

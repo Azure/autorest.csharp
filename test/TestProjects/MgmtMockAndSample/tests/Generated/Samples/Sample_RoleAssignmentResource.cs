@@ -33,7 +33,8 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this RoleAssignmentResource created on azure
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
-            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            string roleAssignmentName = "roleAssignmentName";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope, roleAssignmentName);
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
@@ -61,7 +62,8 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this RoleAssignmentResource created on azure
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
-            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            string roleAssignmentName = "roleAssignmentName";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope, roleAssignmentName);
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
@@ -91,7 +93,8 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this RoleAssignmentResource created on azure
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string scope = "scope";
-            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope);
+            string roleAssignmentName = "roleAssignmentName";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(scope, roleAssignmentName);
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
@@ -127,7 +130,8 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this RoleAssignmentResource created on azure
             // for more information of creating RoleAssignmentResource, please refer to the document of RoleAssignmentResource
             string subscriptionId = "subId";
-            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(subscriptionId);
+            string roleAssignmentName = "roleAssignmentId";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier(subscriptionId, roleAssignmentName);
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
