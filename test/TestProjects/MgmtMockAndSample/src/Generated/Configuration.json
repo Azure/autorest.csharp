@@ -45,12 +45,16 @@
   "PrivilegedOperations": {
     "Vaults_CreateOrUpdate": "Test for privileged operations configuration"
   },
+  "RawParameterizedScopes": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+  ],
   "sample-gen": {
-    "SkippedOperations": [
+    "skipped-operations": [
       "Vaults_GetDeleted",
       "Vaults_Update"
     ],
-    "Sample": true
+    "sample": true,
+    "output-folder": "C:\\Users\\dapzhang\\Documents\\workspace\\autorest.csharp\\test\\TestProjects\\MgmtMockAndSample\\tests\\Generated"
   },
   "flavor": "azure",
   "generate-test-project": true,

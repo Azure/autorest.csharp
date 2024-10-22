@@ -31,7 +31,11 @@ namespace MgmtMockAndSample.Samples
             ArmClient client = new ArmClient(cred);
 
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
+            string subscriptionId = "mySubscriptionId";
+            string resourceGroupName = "myResourceGroupName";
+            string vmName = "myVMName";
+            string scope = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments(new ResourceIdentifier(scope));
 
             // invoke the operation
             string guestConfigurationAssignmentName = "NotInstalledApplicationForWindows";
@@ -67,7 +71,11 @@ namespace MgmtMockAndSample.Samples
             ArmClient client = new ArmClient(cred);
 
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
+            string subscriptionId = "mySubscriptionId";
+            string resourceGroupName = "myResourceGroupName";
+            string vmName = "myVMName";
+            string scope = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments(new ResourceIdentifier(scope));
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
@@ -93,7 +101,11 @@ namespace MgmtMockAndSample.Samples
             ArmClient client = new ArmClient(cred);
 
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
+            string subscriptionId = "mySubscriptionId";
+            string resourceGroupName = "myResourceGroupName";
+            string vmName = "myVMName";
+            string scope = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments(new ResourceIdentifier(scope));
 
             // invoke the operation and iterate over the result
             await foreach (GuestConfigurationAssignmentResource item in collection.GetAllAsync())
@@ -121,7 +133,11 @@ namespace MgmtMockAndSample.Samples
             ArmClient client = new ArmClient(cred);
 
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
+            string subscriptionId = "mySubscriptionId";
+            string resourceGroupName = "myResourceGroupName";
+            string vmName = "myVMName";
+            string scope = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments(new ResourceIdentifier(scope));
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
@@ -143,7 +159,11 @@ namespace MgmtMockAndSample.Samples
             ArmClient client = new ArmClient(cred);
 
             // get the collection of this GuestConfigurationAssignmentResource
-            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments();
+            string subscriptionId = "mySubscriptionId";
+            string resourceGroupName = "myResourceGroupName";
+            string vmName = "myVMName";
+            string scope = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
+            GuestConfigurationAssignmentCollection collection = client.GetGuestConfigurationAssignments(new ResourceIdentifier(scope));
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";

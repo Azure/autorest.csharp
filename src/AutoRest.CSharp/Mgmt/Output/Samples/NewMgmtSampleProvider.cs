@@ -371,10 +371,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
             {
                 statements.Add(
-                    // TODO -- find out the scope parameter
-                    BuildCreateResourceIdentifierForScopePath(example, collection.RequestPath.GetScopePath(), parent.Type, out var scope)
+                    BuildCreateScopeResourceIdentifier(example, example.RequestPath.GetScopePath(), out var scopeId)
                     );
-                arguments.Add(scope);
+                arguments.Add(New.Instance(typeof(ResourceIdentifier), scopeId));
             }
 
             foreach (var extraParameter in collection.ExtraConstructorParameters)
@@ -518,6 +517,35 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return statements;
         }
 
+        private MethodBodyStatement BuildCreateScopeResourceIdentifier(OperationExample example, RequestPath operationScopePath, out TypedValueExpression scopeId)
+        {
+            var statements = new List<MethodBodyStatement>();
+            var scopeValues = new List<TypedValueExpression>();
+            foreach (var reference in operationScopePath.Where(segment => segment.IsReference))
+            {
+                var exampleValue = example.FindInputExampleValueFromReference(reference.Reference);
+                var scopeRefStatement = Declare(reference.Type, reference.ReferenceName, ExampleValueSnippets.GetExpression(reference.Type, exampleValue), out var scopeRefVar);
+                statements.Add(scopeRefStatement);
+                scopeValues.Add(scopeRefVar);
+            }
+
+            if (operationScopePath.Count == 1)
+            {
+                // the scope in the id is an explicit scope, such as a request path defined like: `/{scope}/providers/Microsoft.Something/roleDefinitions/{name}` therefore we do not have do anything special for it
+                //idArguments.AddRange(scopeValues);
+                scopeId = scopeValues[0];
+            }
+            else
+            {
+                // this scope is an implicit scope, such as a request path defined like: `/subscriptions/{subsId}/providers/Microsoft.Something/roleDefinitions/{name}` but we changed this in our generator to make it a scope resource
+                var scopeDeclarationStatement = Declare(typeof(string), "scope", new FormattableStringExpression(operationScopePath, scopeValues), out var scope);
+                statements.Add(scopeDeclarationStatement);
+                scopeId = scope;
+            }
+
+            return statements;
+        }
+
         private MethodBodyStatement BuildCreateResourceIdentifierForScopePath(OperationExample example, RequestPath resourcePath, CSharpType typeOfResource, out TypedValueExpression id)
         {
             var statements = new List<MethodBodyStatement>();
@@ -544,8 +572,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             else
             {
                 // this scope is an implicit scope, such as a request path defined like: `/subscriptions/{subsId}/providers/Microsoft.Something/roleDefinitions/{name}` but we changed this in our generator to make it a scope resource
-                var scopeSegment = resourceScopePath[0];
-                var scopeDeclarationStatement = Declare(scopeSegment.Reference.Type, scopeSegment.ReferenceName, new FormattableStringExpression(operationScopePath, scopeValues), out var scope);
+                var scopeDeclarationStatement = Declare(typeof(string), "scope", new FormattableStringExpression(operationScopePath, scopeValues), out var scope);
                 statements.Add(scopeDeclarationStatement);
                 idArguments.Add(scope);
             }
