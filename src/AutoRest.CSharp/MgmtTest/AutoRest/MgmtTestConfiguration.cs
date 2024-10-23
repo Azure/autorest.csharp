@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.Input
                 writer.WriteBoolean(Options.Sample, Sample);
 
             if (OutputFolder is not null)
-                writer.WriteString(Options.OutputFolder, OutputFolder);
+                writer.WriteString(Options.OutputFolder, Path.GetRelativePath(Configuration.OutputFolder, OutputFolder));
 
             if (!ClearOutputFolder)
                 writer.WriteBoolean(Options.ClearOutputFolder, ClearOutputFolder);
