@@ -91,4 +91,4 @@ stages:
             displayName: Publish Code Coverage Reports
             inputs:
               codeCoverageTool: Cobertura
-              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.xml
+              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.html
