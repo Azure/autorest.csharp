@@ -36,10 +36,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
@@ -141,10 +142,11 @@ DestinationPorts = {"*"},
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
@@ -246,10 +248,11 @@ DestinationPorts = {"*"},
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
@@ -278,10 +281,11 @@ DestinationPorts = {"*"},
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation and iterate over the result
             await foreach (FirewallPolicyResource item in collection.GetAllAsync())
@@ -312,10 +316,11 @@ DestinationPorts = {"*"},
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
@@ -340,10 +345,11 @@ DestinationPorts = {"*"},
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "subid";
             string resourceGroupName = "rg1";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FirewallPolicyResource
-            FirewallPolicyCollection collection = ResourceGroupResource.GetFirewallPolicies();
+            FirewallPolicyCollection collection = resourceGroupResource.GetFirewallPolicies();
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";

@@ -35,10 +35,11 @@ namespace MgmtTypeSpec.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FooResource
-            FooCollection collection = ResourceGroupResource.GetFoos();
+            FooCollection collection = resourceGroupResource.GetFoos();
 
             // invoke the operation
             string fooName = "myFoo";
@@ -79,10 +80,11 @@ namespace MgmtTypeSpec.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FooResource
-            FooCollection collection = ResourceGroupResource.GetFoos();
+            FooCollection collection = resourceGroupResource.GetFoos();
 
             // invoke the operation
             string fooName = "myFoo";
@@ -111,10 +113,11 @@ namespace MgmtTypeSpec.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FooResource
-            FooCollection collection = ResourceGroupResource.GetFoos();
+            FooCollection collection = resourceGroupResource.GetFoos();
 
             // invoke the operation
             string fooName = "myFoo";
@@ -139,10 +142,11 @@ namespace MgmtTypeSpec.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "myRg";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this FooResource
-            FooCollection collection = ResourceGroupResource.GetFoos();
+            FooCollection collection = resourceGroupResource.GetFoos();
 
             // invoke the operation
             string fooName = "myFoo";

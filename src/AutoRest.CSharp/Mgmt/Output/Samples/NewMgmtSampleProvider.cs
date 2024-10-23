@@ -359,10 +359,15 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var statements = new List<MethodBodyStatement>();
 
             var resourceName = collection.Resource.ResourceName;
-            statements.Add(BuildGetResourceStatement(parent, example, client, out var parentVar));
+            statements.Add(
+                BuildGetResourceStatement(parent, example, client, out var parentVar)
+                );
 
             // write get collection
-            statements.Add(new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}"));
+            statements.Add(EmptyLine);
+            statements.Add(
+                new SingleLineCommentStatement($"get the collection of this {collection.Resource.Type.Name}")
+                );
             var getResourceCollectionMethodName = $"Get{resourceName.ResourceNameToPlural()}";
             var arguments = new List<ValueExpression>();
 
@@ -466,7 +471,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure"),
                 new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}"),
                 BuildCreateResourceIdentifier(extension.ContextualPath, extension.ArmCoreType, example, out var id),
-                Declare(extension.ArmCoreType, extension.ResourceName, client.Invoke($"Get{resourceName}", id), out resourceVar)
+                Declare(extension.ArmCoreType, extension.ResourceName.ToVariableName(), client.Invoke($"Get{resourceName}", id), out resourceVar)
             };
         }
 

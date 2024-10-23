@@ -36,10 +36,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -76,10 +77,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -122,10 +124,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -164,10 +167,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -196,10 +200,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -228,10 +233,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation and iterate over the result
             await foreach (DiskEncryptionSetResource item in collection.GetAllAsync())
@@ -262,10 +268,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -290,10 +297,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -318,10 +326,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
@@ -358,10 +367,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "{subscription-id}";
             string resourceGroupName = "myResourceGroup";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this DiskEncryptionSetResource
-            DiskEncryptionSetCollection collection = ResourceGroupResource.GetDiskEncryptionSets();
+            DiskEncryptionSetCollection collection = resourceGroupResource.GetDiskEncryptionSets();
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";

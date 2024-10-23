@@ -36,10 +36,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
@@ -86,10 +87,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
@@ -133,10 +135,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = default /* Warning: No value is provided for vaultName in example 'Verify Sample-gen can handle examples with some parameter missing'. Please consider adding a proper example value for it in swagger*/;
@@ -183,10 +186,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
@@ -215,10 +219,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation and iterate over the result
             int? top = 1;
@@ -250,10 +255,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";
@@ -278,10 +284,11 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "sample-resource-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this VaultResource
-            VaultCollection collection = ResourceGroupResource.GetVaults();
+            VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
             string vaultName = "sample-vault";

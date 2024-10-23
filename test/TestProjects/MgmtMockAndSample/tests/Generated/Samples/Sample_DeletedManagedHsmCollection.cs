@@ -33,10 +33,11 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
+            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
@@ -65,10 +66,11 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
+            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
@@ -93,10 +95,11 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = SubscriptionResource.GetDeletedManagedHsms();
+            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");

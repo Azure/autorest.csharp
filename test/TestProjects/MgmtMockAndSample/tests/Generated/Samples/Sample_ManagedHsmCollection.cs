@@ -38,10 +38,11 @@ namespace MgmtMockAndSample.Samples
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
@@ -98,10 +99,11 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
@@ -130,10 +132,11 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation and iterate over the result
             await foreach (ManagedHsmResource item in collection.GetAllAsync())
@@ -164,10 +167,11 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";
@@ -192,10 +196,11 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             // for more information of creating ResourceGroupResource, please refer to the document of ResourceGroupResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
             string resourceGroupName = "hsm-group";
-            ResourceIdentifier resourceGroupResourceId = Azure.ResourceManager.Resources.ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
-            ResourceGroupResource ResourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier(subscriptionId, resourceGroupName);
+            ResourceGroupResource resourceGroupResource = client.GetResourceGroupResource(resourceGroupResourceId);
+
             // get the collection of this ManagedHsmResource
-            ManagedHsmCollection collection = ResourceGroupResource.GetManagedHsms();
+            ManagedHsmCollection collection = resourceGroupResource.GetManagedHsms();
 
             // invoke the operation
             string name = "hsm1";

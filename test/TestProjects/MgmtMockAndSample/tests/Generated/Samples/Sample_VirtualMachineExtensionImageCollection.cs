@@ -33,12 +33,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -67,12 +68,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";
@@ -101,12 +103,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
@@ -136,12 +139,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaa");
             string publisherName = "aa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync())
@@ -171,12 +175,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -210,12 +215,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation and iterate over the result
             string type = "aaaa";
@@ -246,12 +252,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -276,12 +283,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";
@@ -306,12 +314,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
@@ -348,12 +357,13 @@ namespace MgmtMockAndSample.Samples
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
             string subscriptionId = "{subscription-id}";
-            ResourceIdentifier subscriptionResourceId = Azure.ResourceManager.Resources.SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource SubscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
+            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+
             // get the collection of this VirtualMachineExtensionImageResource
             AzureLocation location = new AzureLocation("aaaaaaaaaaaaaa");
             string publisherName = "aaaaaaaaaaaaaaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageCollection collection = SubscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
+            VirtualMachineExtensionImageCollection collection = subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName);
 
             // invoke the operation
             string type = "aa";

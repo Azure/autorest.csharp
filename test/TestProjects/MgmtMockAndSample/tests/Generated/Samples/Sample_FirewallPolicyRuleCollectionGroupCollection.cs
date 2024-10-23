@@ -37,6 +37,7 @@ namespace MgmtMockAndSample.Samples
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -92,6 +93,7 @@ Priority = 100,
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -144,6 +146,7 @@ Priority = 100,
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -179,6 +182,7 @@ Priority = 100,
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -230,6 +234,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -285,6 +290,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -318,6 +324,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -351,6 +358,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -384,6 +392,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -417,6 +426,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -452,6 +462,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -487,6 +498,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -522,6 +534,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -551,6 +564,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -580,6 +594,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -609,6 +624,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -638,6 +654,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -679,6 +696,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -720,6 +738,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 
@@ -761,6 +780,7 @@ Name = "Example-Filter-Rule-Collection",
             string firewallPolicyName = "firewallPolicy";
             ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, firewallPolicyName);
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
+
             // get the collection of this FirewallPolicyRuleCollectionGroupResource
             FirewallPolicyRuleCollectionGroupCollection collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
 

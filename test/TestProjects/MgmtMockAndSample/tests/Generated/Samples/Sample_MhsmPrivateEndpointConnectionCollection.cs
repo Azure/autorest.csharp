@@ -37,6 +37,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
@@ -79,6 +80,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
@@ -112,6 +114,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
@@ -147,6 +150,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 
@@ -176,6 +180,7 @@ namespace MgmtMockAndSample.Samples
             string name = "sample-mhsm";
             ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
             // get the collection of this MhsmPrivateEndpointConnectionResource
             MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
 

@@ -37,6 +37,7 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
@@ -80,6 +81,7 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
@@ -113,6 +115,7 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
@@ -148,6 +151,7 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
@@ -177,6 +181,7 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, vaultName);
             VaultResource vault = client.GetVaultResource(vaultResourceId);
+
             // get the collection of this MgmtMockAndSamplePrivateEndpointConnectionResource
             MgmtMockAndSamplePrivateEndpointConnectionCollection collection = vault.GetMgmtMockAndSamplePrivateEndpointConnections();
 
