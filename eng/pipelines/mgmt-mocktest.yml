@@ -5,7 +5,7 @@ schedules:
   displayName: "4AM (UTC +8) daily mock test"
   branches:
     include:
-    - main
+    - feature/v3
 
 variables:
   OfficialBuildId: $(Build.BuildNumber)
@@ -24,7 +24,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20240910.2
+      ref: refs/tags/azure-sdk-build-tools_20240507.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -91,4 +91,5 @@ stages:
             displayName: Publish Code Coverage Reports
             inputs:
               codeCoverageTool: Cobertura
-              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.html
+              summaryFileLocation: $(Build.ArtifactStagingDirectory)\coverage\Cobertura.xml
+              reportDirectory: $(Build.ArtifactStagingDirectory)\coverage
