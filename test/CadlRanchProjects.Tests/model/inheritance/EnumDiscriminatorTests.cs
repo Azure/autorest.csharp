@@ -2,10 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using _Type.Model.Inheritance.EnumDiscriminator;
 using _Type.Model.Inheritance.EnumDiscriminator.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
+using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -72,11 +75,14 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task GetFixedModelWrongDiscriminator() => Test((host) =>
+        public Task GetFixedModelWrongDiscriminator() => Test(async (host) =>
         {
-            var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => new EnumDiscriminatorClient(host, null).GetFixedModelWrongDiscriminatorAsync());
+            var client = new EnumDiscriminatorClient(host, null);
+            var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => client.GetFixedModelWrongDiscriminatorAsync());
             Assert.IsTrue(exception.Message.Contains("wrongKind"));
-            return Task.CompletedTask;
+            var context = new RequestContext();
+            var response = await client.GetFixedModelWrongDiscriminatorAsync(context);
+            Assert.AreEqual(200, response.Status);
         });
     }
 }
