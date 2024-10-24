@@ -19,21 +19,13 @@ namespace _Azure.ResourceManager.Models.Resources.Models
 
         void IJsonModel<NotificationDetails>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
-            writer.WriteEndObject();
-        }
-
-        /// <param name="writer"> The JSON writer. </param>
-        /// <param name="options"> The client options for reading and writing models. </param>
-        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
-        {
             var format = options.Format == "W" ? ((IPersistableModel<NotificationDetails>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(NotificationDetails)} does not support writing '{format}' format.");
             }
 
+            writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
             writer.WritePropertyName("urgent"u8);
@@ -53,6 +45,7 @@ namespace _Azure.ResourceManager.Models.Resources.Models
 #endif
                 }
             }
+            writer.WriteEndObject();
         }
 
         NotificationDetails IJsonModel<NotificationDetails>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
