@@ -8,6 +8,5 @@
     "../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
   ],
-  "azure-arm": true,
-  "use-write-core": true
+  "azure-arm": true
 }
