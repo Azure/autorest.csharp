@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests
     public class AzureManagedIdentityTest : CadlRanchTestBase
     {
         [Test]
-        public Task Azure_Managed_Identity_ManagedIdentityTrackedResource_get() => Test(async (host) =>
+        public Task Azure_CommonProperties_ManagedIdentity_get() => Test(async (host) =>
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ManagedIdentityTrackedResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg", "identity");
@@ -29,7 +29,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Managed_Identity_ManagedIdentityTrackedResourceCollection_createWithSystemAssigned() => Test(async (host) =>
+        public Task Azure_CommonProperties_ManagedIdentityCollection_createWithSystemAssigned() => Test(async (host) =>
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg");
@@ -49,7 +49,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Managed_Identity_ManagedIdentityTrackedResource_updateWithUserAssignedAndSystemAssigned() => Test(async (host) =>
+        public Task Azure_CommonProperties_ManagedIdentity_updateWithUserAssignedAndSystemAssigned() => Test(async (host) =>
         {
             ArmClient client = MgmtTestHelper.CreateArmClientWithMockAuth(host);
             var resourceId = ManagedIdentityTrackedResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "test-rg", "identity");
