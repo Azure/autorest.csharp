@@ -1,10 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using _Type.Model.Inheritance.EnumDiscriminator;
 using _Type.Model.Inheritance.EnumDiscriminator.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
+using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
@@ -64,20 +68,28 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetFixedModelMissingDiscriminator() => Test(async (host) =>
         {
-            var response = await new EnumDiscriminatorClient(host, null).GetExtensibleModelMissingDiscriminatorAsync();
+            var response = await new EnumDiscriminatorClient(host, null).GetFixedModelMissingDiscriminatorAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.IsNotInstanceOf<Golden>(response.Value);
-            Assert.AreEqual(10, response.Value.Weight);
+            Assert.IsNotInstanceOf<Cobra>(response.Value);
+            Assert.AreEqual(10, response.Value.Length);
         });
 
         [Test]
-        public Task GetFixedModelWrongDiscriminator() => Test(async (host) =>
+        public Task GetFixedModelWrongDiscriminator() => Test((host) =>
         {
-            var response = await new EnumDiscriminatorClient(host, null).GetExtensibleModelWrongDiscriminatorAsync();
-            Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.IsNotInstanceOf<Golden>(response.Value);
-            Assert.AreEqual(8, response.Value.Weight);
+            var client = new EnumDiscriminatorClient(host, null);
+            var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => client.GetFixedModelWrongDiscriminatorAsync());
+            Assert.IsTrue(exception.Message.Contains("wrongKind"));
+            return Task.CompletedTask;
         });
 
+        [Test]
+        public Task GetFixedModelWrongDiscriminator_Protocol() => Test(async (host) =>
+        {
+            var client = new EnumDiscriminatorClient(host, null);
+            var context = new RequestContext();
+            var response = await client.GetFixedModelWrongDiscriminatorAsync(context);
+            Assert.AreEqual(200, response.Status);
+        });
     }
 }

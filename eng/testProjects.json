@@ -56,6 +56,7 @@
         "parameters/spread",
         "parameters/body-optionality",
         "client/naming",
+        "client/structure/client-operation-group",
         "client/structure/default",
         "client/structure/multi-client",
         "client/structure/renamed-operation",
