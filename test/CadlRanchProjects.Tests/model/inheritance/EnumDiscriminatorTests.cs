@@ -75,11 +75,18 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task GetFixedModelWrongDiscriminator() => Test(async (host) =>
+        public Task GetFixedModelWrongDiscriminator() => Test((host) =>
         {
             var client = new EnumDiscriminatorClient(host, null);
             var exception = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => client.GetFixedModelWrongDiscriminatorAsync());
             Assert.IsTrue(exception.Message.Contains("wrongKind"));
+            return Task.CompletedTask;
+        });
+
+        [Test]
+        public Task GetFixedModelWrongDiscriminator_Protocol() => Test(async (host) =>
+        {
+            var client = new EnumDiscriminatorClient(host, null);
             var context = new RequestContext();
             var response = await client.GetFixedModelWrongDiscriminatorAsync(context);
             Assert.AreEqual(200, response.Status);
