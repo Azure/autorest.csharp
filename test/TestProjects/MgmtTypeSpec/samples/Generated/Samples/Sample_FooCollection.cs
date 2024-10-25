@@ -13,14 +13,14 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtTypeSpec.Models;
+using NUnit.Framework;
 
 namespace MgmtTypeSpec.Samples
 {
     public partial class Sample_FooCollection
     {
-        // Create a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CreateOrUpdate_CreateAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_CreateOrUpdate.json
@@ -43,9 +43,9 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             string fooName = "myFoo";
-            FooData data = new FooData(new AzureLocation("placeholder"))
+            FooData data = new FooData(default)
             {
-                Properties = new FooProperties()
+                Properties = new FooProperties
                 {
                     ServiceUri = new Uri("https://myService.com"),
                     Something = "for test only",
@@ -54,7 +54,7 @@ namespace MgmtTypeSpec.Samples
                     DoubleValue = 1.2,
                 },
             };
-            ArmOperation<FooResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, fooName, data);
+            ArmOperation<FooResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, fooName, data).ConfigureAwait(false);
             FooResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -64,9 +64,8 @@ namespace MgmtTypeSpec.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
@@ -89,7 +88,7 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             string fooName = "myFoo";
-            FooResource result = await collection.GetAsync(fooName);
+            FooResource result = await collection.GetAsync(fooName).ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -98,9 +97,8 @@ namespace MgmtTypeSpec.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
@@ -123,14 +121,13 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             string fooName = "myFoo";
-            bool result = await collection.ExistsAsync(fooName);
+            bool result = await collection.ExistsAsync(fooName).ConfigureAwait(false);
 
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // Get a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json
@@ -153,12 +150,12 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             string fooName = "myFoo";
-            NullableResponse<FooResource> response = await collection.GetIfExistsAsync(fooName);
+            NullableResponse<FooResource> response = await collection.GetIfExistsAsync(fooName).ConfigureAwait(false);
             FooResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
             {
-                Console.WriteLine($"Succeeded with null as result");
+                Console.WriteLine("Succeeded with null as result");
             }
             else
             {

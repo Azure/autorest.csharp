@@ -240,6 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 var getMgmtRestOperation = GetOperation.OperationMappings.Values.First();
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "Exists",
@@ -247,6 +248,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         $"Checks to see if the resource exists in azure."),
                     IdVariableName));
                 result.Add(MgmtClientOperation.FromOperation(
+                    this,
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",

@@ -11,84 +11,15 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_ManagedHsmResource
     {
-        // Update an existing managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Update_UpdateAnExistingManagedHSMPool()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_Update" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this ManagedHsmResource created on azure
-            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "hsm-group";
-            string name = "hsm1";
-            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
-
-            // invoke the operation
-            ManagedHsmData data = new ManagedHsmData(new AzureLocation("placeholder"))
-            {
-                Tags =
-{
-["Dept"] = "hsm",
-["Environment"] = "dogfood",
-["Slice"] = "A",
-},
-            };
-            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data);
-            ManagedHsmResource result = lro.Value;
-
-            // the variable result is a resource, you could call other operations on this instance as well
-            // but just for demo, we get its data from this resource instance
-            ManagedHsmData resourceData = result.Data;
-            // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
-        }
-
-        // Delete a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Delete_DeleteAManagedHSMPool()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_Delete" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this ManagedHsmResource created on azure
-            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "hsm-group";
-            string name = "hsm1";
-            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
-
-            // invoke the operation
-            await managedHsm.DeleteAsync(WaitUntil.Completed);
-
-            Console.WriteLine($"Succeeded");
-        }
-
-        // Retrieve a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveAManagedHSMPool()
         {
             // Generated from example definition:
@@ -108,7 +39,7 @@ namespace MgmtMockAndSample.Samples
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            ManagedHsmResource result = await managedHsm.GetAsync();
+            ManagedHsmResource result = await managedHsm.GetAsync().ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -117,41 +48,74 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // List managed HSM Pools in a subscription
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task GetManagedHsms_ListManagedHSMPoolsInASubscription()
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Delete_DeleteAManagedHSMPool()
         {
             // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_ListBySubscription" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "ManagedHsms_Delete" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this SubscriptionResource created on azure
-            // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
+            // this example assumes you already have this ManagedHsmResource created on azure
+            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
             string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
+            string resourceGroupName = "hsm-group";
+            string name = "hsm1";
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
-            // invoke the operation and iterate over the result
-            await foreach (ManagedHsmResource item in subscriptionResource.GetManagedHsmsAsync())
-            {
-                // the variable item is a resource, you could call other operations on this instance as well
-                // but just for demo, we get its data from this resource instance
-                ManagedHsmData resourceData = item.Data;
-                // for demo we just print out the id
-                Console.WriteLine($"Succeeded on id: {resourceData.Id}");
-            }
+            // invoke the operation
+            await managedHsm.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
-        // KeyVaultListPrivateLinkResources
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Update_UpdateAnExistingManagedHSMPool()
+        {
+            // Generated from example definition:
+            // this example is just showing the usage of "ManagedHsms_Update" operation, for the dependent resources, they will have to be created separately.
+
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
+            // authenticate your client
+            ArmClient client = new ArmClient(cred);
+
+            // this example assumes you already have this ManagedHsmResource created on azure
+            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "hsm-group";
+            string name = "hsm1";
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
+            // invoke the operation
+            ManagedHsmData data = new ManagedHsmData(default)
+            {
+                Tags =
+{
+["Dept"] = "hsm",
+["Environment"] = "dogfood",
+["Slice"] = "A"
+},
+            };
+            ArmOperation<ManagedHsmResource> lro = await managedHsm.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ManagedHsmResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            ManagedHsmData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource_KeyVaultListPrivateLinkResources()
         {
             // Generated from example definition:
@@ -176,7 +140,7 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded: {item}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

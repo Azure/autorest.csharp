@@ -12,14 +12,91 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_MhsmPrivateEndpointConnectionCollection
     {
-        // List managed HSM Pools in a subscription
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task CreateOrUpdate_ManagedHsmPutPrivateEndpointConnection()
+        {
+            // Generated from example definition:
+            // this example is just showing the usage of "MHSMPrivateEndpointConnections_Put" operation, for the dependent resources, they will have to be created separately.
+
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
+            // authenticate your client
+            ArmClient client = new ArmClient(cred);
+
+            // this example assumes you already have this ManagedHsmResource created on azure
+            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string name = "sample-mhsm";
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
+            // get the collection of this MhsmPrivateEndpointConnectionResource
+            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+
+            // invoke the operation
+            string privateEndpointConnectionName = "sample-pec";
+            MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(default)
+            {
+                PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState
+                {
+                    Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,
+                    Description = "My name is Joe and I'm approving this.",
+                },
+            };
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data).ConfigureAwait(false);
+            MhsmPrivateEndpointConnectionResource result = lro.Value;
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Get_ManagedHsmGetPrivateEndpointConnection()
+        {
+            // Generated from example definition:
+            // this example is just showing the usage of "MHSMPrivateEndpointConnections_Get" operation, for the dependent resources, they will have to be created separately.
+
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
+            // authenticate your client
+            ArmClient client = new ArmClient(cred);
+
+            // this example assumes you already have this ManagedHsmResource created on azure
+            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            string resourceGroupName = "sample-group";
+            string name = "sample-mhsm";
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
+            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
+
+            // get the collection of this MhsmPrivateEndpointConnectionResource
+            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
+
+            // invoke the operation
+            string privateEndpointConnectionName = "sample-pec";
+            MhsmPrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName).ConfigureAwait(false);
+
+            // the variable result is a resource, you could call other operations on this instance as well
+            // but just for demo, we get its data from this resource instance
+            MhsmPrivateEndpointConnectionData resourceData = result.Data;
+            // for demo we just print out the id
+            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_ListManagedHSMPoolsInASubscription()
         {
             // Generated from example definition:
@@ -51,47 +128,11 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
-        // ManagedHsmGetPrivateEndpointConnection
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task Get_ManagedHsmGetPrivateEndpointConnection()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "MHSMPrivateEndpointConnections_Get" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this ManagedHsmResource created on azure
-            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-group";
-            string name = "sample-mhsm";
-            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
-
-            // get the collection of this MhsmPrivateEndpointConnectionResource
-            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
-
-            // invoke the operation
-            string privateEndpointConnectionName = "sample-pec";
-            MhsmPrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName);
-
-            // the variable result is a resource, you could call other operations on this instance as well
-            // but just for demo, we get its data from this resource instance
-            MhsmPrivateEndpointConnectionData resourceData = result.Data;
-            // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
-        }
-
-        // ManagedHsmGetPrivateEndpointConnection
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_ManagedHsmGetPrivateEndpointConnection()
         {
             // Generated from example definition:
@@ -115,14 +156,13 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            bool result = await collection.ExistsAsync(privateEndpointConnectionName);
+            bool result = await collection.ExistsAsync(privateEndpointConnectionName).ConfigureAwait(false);
 
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // ManagedHsmGetPrivateEndpointConnection
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_ManagedHsmGetPrivateEndpointConnection()
         {
             // Generated from example definition:
@@ -146,12 +186,12 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            NullableResponse<MhsmPrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName);
+            NullableResponse<MhsmPrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName).ConfigureAwait(false);
             MhsmPrivateEndpointConnectionResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
             {
-                Console.WriteLine($"Succeeded with null as result");
+                Console.WriteLine("Succeeded with null as result");
             }
             else
             {
@@ -161,50 +201,6 @@ namespace MgmtMockAndSample.Samples
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
-        }
-
-        // ManagedHsmPutPrivateEndpointConnection
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task CreateOrUpdate_ManagedHsmPutPrivateEndpointConnection()
-        {
-            // Generated from example definition:
-            // this example is just showing the usage of "MHSMPrivateEndpointConnections_Put" operation, for the dependent resources, they will have to be created separately.
-
-            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
-            TokenCredential cred = new DefaultAzureCredential();
-            // authenticate your client
-            ArmClient client = new ArmClient(cred);
-
-            // this example assumes you already have this ManagedHsmResource created on azure
-            // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            string resourceGroupName = "sample-group";
-            string name = "sample-mhsm";
-            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier(subscriptionId, resourceGroupName, name);
-            ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
-
-            // get the collection of this MhsmPrivateEndpointConnectionResource
-            MhsmPrivateEndpointConnectionCollection collection = managedHsm.GetMhsmPrivateEndpointConnections();
-
-            // invoke the operation
-            string privateEndpointConnectionName = "sample-pec";
-            MhsmPrivateEndpointConnectionData data = new MhsmPrivateEndpointConnectionData(new AzureLocation("placeholder"))
-            {
-                PrivateLinkServiceConnectionState = new MhsmPrivateLinkServiceConnectionState()
-                {
-                    Status = MgmtMockAndSamplePrivateEndpointServiceConnectionStatus.Approved,
-                    Description = "My name is Joe and I'm approving this.",
-                },
-            };
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
-            MhsmPrivateEndpointConnectionResource result = lro.Value;
-
-            // the variable result is a resource, you could call other operations on this instance as well
-            // but just for demo, we get its data from this resource instance
-            MhsmPrivateEndpointConnectionData resourceData = result.Data;
-            // for demo we just print out the id
-            Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
     }
 }

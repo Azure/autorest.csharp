@@ -4,12 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -17,13 +15,15 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using NUnit.Framework;
 using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
-    internal class Sample : OperationExample
+    internal class MgmtOperationSample : OperationExample
     {
-        public Sample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
+        public MgmtOperationSample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
         {
             _methodName = $"{Operation.Name}_{Name.ToCleanName()}";
         }
@@ -38,7 +38,10 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
-                Parameters: Array.Empty<Parameter>());
+                Parameters: [],
+                Attributes: _attributes);
+
+        private readonly CSharpAttribute[] _attributes = [new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Only validating compilation of examples"))];
 
         private MgmtTypeProvider? _parent;
         public MgmtTypeProvider? Parent => _parent ??= GetParent();
@@ -54,6 +57,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return parents.FirstOrDefault();
         }
 
+        // TODO -- refactor this to remove the value type, or change it to a more primitive one
         private MappingObject? _parameterValueMapping;
         public MappingObject ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping().Item1;
 

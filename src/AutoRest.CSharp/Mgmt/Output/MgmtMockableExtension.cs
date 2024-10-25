@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var (_, operations) in operationDict)
             {
-                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariableName)!;
+                yield return MgmtClientOperation.FromOperations(this, operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariableName)!;
             }
         }
 

@@ -21,6 +21,7 @@ using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
 using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input.InputTypes;
+using AutoRest.CSharp.Mgmt.Output.Samples;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -953,6 +954,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return operationsToRequestPath;
         }
+
+        private Dictionary<MgmtTypeProvider, NewMgmtSampleProvider> EnsureMgmtClientSampleProviders()
+        {
+            var result = new Dictionary<MgmtTypeProvider, NewMgmtSampleProvider>();
+            foreach (var provider in ArmResources.Concat(ResourceCollections))
+            {
+                var sampleProvider = new NewMgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
+                if (!sampleProvider.IsEmpty)
+                {
+                    result.Add(provider, sampleProvider);
+                }
+            }
+
+            return result;
+        }
+
+        private IReadOnlyList<NewMgmtSampleProvider>? _samples;
+        public IReadOnlyList<NewMgmtSampleProvider> SampleProviders => _samples ??= [..EnsureMgmtClientSampleProviders().Values];
 
         private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
         {

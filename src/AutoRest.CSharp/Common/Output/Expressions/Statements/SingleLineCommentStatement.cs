@@ -10,4 +10,9 @@ internal record SingleLineCommentStatement(FormattableString Message) : MethodBo
 {
     public SingleLineCommentStatement(string message) : this(FormattableStringHelpers.FromString(message))
     { }
+
+    public override void Write(CodeWriter writer)
+    {
+        writer.Line($"// {Message}");
+    }
 }

@@ -11,9 +11,9 @@ namespace AutoRest.CSharp.MgmtTest.Output.Samples
     internal class MgmtSampleProvider : MgmtTestProvider
     {
         public MgmtTypeProvider Owner { get; }
-        public IEnumerable<Sample> Samples { get; }
+        public IEnumerable<MgmtOperationSample> Samples { get; }
 
-        public MgmtSampleProvider(MgmtTypeProvider owner, IEnumerable<Sample> samples) : base()
+        public MgmtSampleProvider(MgmtTypeProvider owner, IEnumerable<MgmtOperationSample> samples) : base()
         {
             Owner = owner;
             Samples = samples;

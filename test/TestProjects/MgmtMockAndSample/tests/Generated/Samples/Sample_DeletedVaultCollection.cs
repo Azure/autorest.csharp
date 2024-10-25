@@ -16,14 +16,14 @@ using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
-    public partial class Sample_DeletedManagedHsmCollection
+    public partial class Sample_DeletedVaultCollection
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Get_RetrieveADeletedManagedHSM()
+        public async Task Get_RetrieveADeletedVault()
         {
             // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -36,27 +36,27 @@ namespace MgmtMockAndSample.Samples
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
-            // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            // get the collection of this DeletedVaultResource
+            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
-            string name = "hsm1";
-            DeletedManagedHsmResource result = await collection.GetAsync(location, name).ConfigureAwait(false);
+            string vaultName = "sample-vault";
+            DeletedVaultResource result = await collection.GetAsync(location, vaultName).ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
-            DeletedManagedHsmData resourceData = result.Data;
+            DeletedVaultData resourceData = result.Data;
             // for demo we just print out the id
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Exists_RetrieveADeletedManagedHSM()
+        public async Task Exists_RetrieveADeletedVault()
         {
             // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -69,23 +69,23 @@ namespace MgmtMockAndSample.Samples
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
-            // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            // get the collection of this DeletedVaultResource
+            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
-            string name = "hsm1";
-            bool result = await collection.ExistsAsync(location, name).ConfigureAwait(false);
+            string vaultName = "sample-vault";
+            bool result = await collection.ExistsAsync(location, vaultName).ConfigureAwait(false);
 
             Console.WriteLine($"Succeeded: {result}");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task GetIfExists_RetrieveADeletedManagedHSM()
+        public async Task GetIfExists_RetrieveADeletedVault()
         {
             // Generated from example definition:
-            // this example is just showing the usage of "ManagedHsms_GetDeleted" operation, for the dependent resources, they will have to be created separately.
+            // this example is just showing the usage of "Vaults_GetDeleted" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
             TokenCredential cred = new DefaultAzureCredential();
@@ -98,14 +98,14 @@ namespace MgmtMockAndSample.Samples
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
             SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
 
-            // get the collection of this DeletedManagedHsmResource
-            DeletedManagedHsmCollection collection = subscriptionResource.GetDeletedManagedHsms();
+            // get the collection of this DeletedVaultResource
+            DeletedVaultCollection collection = subscriptionResource.GetDeletedVaults();
 
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
-            string name = "hsm1";
-            NullableResponse<DeletedManagedHsmResource> response = await collection.GetIfExistsAsync(location, name).ConfigureAwait(false);
-            DeletedManagedHsmResource result = response.HasValue ? response.Value : null;
+            string vaultName = "sample-vault";
+            NullableResponse<DeletedVaultResource> response = await collection.GetIfExistsAsync(location, vaultName).ConfigureAwait(false);
+            DeletedVaultResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
             {
@@ -115,7 +115,7 @@ namespace MgmtMockAndSample.Samples
             {
                 // the variable result is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance
-                DeletedManagedHsmData resourceData = result.Data;
+                DeletedVaultData resourceData = result.Data;
                 // for demo we just print out the id
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_VirtualMachineExtensionImageResource
     {
-        // VirtualMachineExtensionImages_Get_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Generated from example definition:
@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Samples
             VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
-            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
+            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync().ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -48,9 +48,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // VirtualMachineExtensionImages_Get_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Generated from example definition:
@@ -72,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
-            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
+            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync().ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance

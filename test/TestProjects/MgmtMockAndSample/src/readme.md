@@ -25,7 +25,6 @@ modelerfour:
 
 include-x-ms-examples-original-file: false
 sample-gen:
-  mock: true
   sample: true
   output-folder: $(this-folder)../tests/Generated
   clear-output-folder: true

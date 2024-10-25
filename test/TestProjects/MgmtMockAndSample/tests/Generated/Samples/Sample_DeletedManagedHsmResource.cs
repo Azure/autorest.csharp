@@ -11,14 +11,14 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_DeletedManagedHsmResource
     {
-        // Retrieve a deleted managed HSM
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveADeletedManagedHSM()
         {
             // Generated from example definition:
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Samples
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
+            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync().ConfigureAwait(false);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -47,9 +47,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Purge a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task PurgeDeleted_PurgeAManagedHSMPool()
         {
             // Generated from example definition:
@@ -69,9 +68,9 @@ namespace MgmtMockAndSample.Samples
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
+            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed).ConfigureAwait(false);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

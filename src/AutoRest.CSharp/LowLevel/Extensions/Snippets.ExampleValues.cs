@@ -191,6 +191,11 @@ namespace AutoRest.CSharp.LowLevel.Extensions
             return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
         }
 
+        public static ValueExpression GetExpression(CSharpType type, InputExampleValue? value)
+            => value != null ?
+                GetExpression(type, value, SerializationFormat.Default) :
+                Default.CastTo(type);
+
         public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
