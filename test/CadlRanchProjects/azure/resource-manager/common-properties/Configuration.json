@@ -1,0 +1,13 @@
+{
+  "output-folder": ".",
+  "namespace": "_Azure.ResourceManager.CommonProperties",
+  "library-name": "_Azure.ResourceManager.CommonProperties",
+  "flavor": "azure",
+  "use-model-reader-writer": true,
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "use-write-core": true
+}
