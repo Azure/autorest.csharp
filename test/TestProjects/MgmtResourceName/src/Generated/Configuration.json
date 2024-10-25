@@ -11,6 +11,7 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "generate-model-factory": false,
+  "use-write-core": true,
   "NoResourceSuffix": [
     "Disk",
     "Memory"
