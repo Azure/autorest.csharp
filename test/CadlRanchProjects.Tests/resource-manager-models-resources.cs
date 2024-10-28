@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
@@ -54,7 +54,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
@@ -79,7 +79,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual("valid2", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
@@ -105,7 +105,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
             Assert.AreEqual("top", response.Value.Data.Name);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
@@ -126,7 +126,7 @@ namespace CadlRanchProjects.Tests
                 sum++;
                 Assert.AreEqual(true, response.HasData);
                 Assert.AreEqual("top", response.Data.Name);
-                Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources", response.Data.ResourceType.ToString());
+                Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Data.ResourceType.ToString());
                 Assert.AreEqual(AzureLocation.EastUS, response.Data.Location);
                 Assert.AreEqual("valid", response.Data.Properties.Description);
                 Assert.AreEqual(ProvisioningState.Succeeded, response.Data.Properties.ProvisioningState);
@@ -145,7 +145,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetNestedProxyResource(id).GetAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -168,7 +168,7 @@ namespace CadlRanchProjects.Tests
             var response =await (await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).GetAsync()).Value.GetNestedProxyResources().CreateOrUpdateAsync(WaitUntil.Completed, "nested", data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -191,7 +191,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetNestedProxyResource(id).UpdateAsync(WaitUntil.Completed, data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid2", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -215,7 +215,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).GetNestedProxyResourceAsync("nested");
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -238,7 +238,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).CreateOrUpdateAsync(WaitUntil.Completed, data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -261,7 +261,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).UpdateAsync(data);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid2", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
@@ -277,7 +277,7 @@ namespace CadlRanchProjects.Tests
             var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetSingletonTrackedResource(id).GetAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Models.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
+            Assert.AreEqual("Azure.ResourceManager.Resources/singletonTrackedResources", response.Value.Data.ResourceType.ToString());
             Assert.AreEqual("valid", response.Value.Data.Properties.Description);
             Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);

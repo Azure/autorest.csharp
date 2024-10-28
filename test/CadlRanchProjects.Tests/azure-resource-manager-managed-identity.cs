@@ -41,7 +41,7 @@ namespace CadlRanchProjects.Tests
             var response = await collection.CreateOrUpdateAsync(Azure.WaitUntil.Completed, "identity", inputData);
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
-            Assert.AreEqual(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity/managedIdentityTrackedResources/identity"), response.Value.Data.Id);
+            Assert.AreEqual(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.ResourceManager.CommonProperties/managedIdentityTrackedResources/identity"), response.Value.Data.Id);
             Assert.AreEqual("Succeeded", response.Value.Data.Properties.ProvisioningState);
             Assert.AreEqual(ManagedServiceIdentityType.SystemAssigned, response.Value.Data.Identity.ManagedServiceIdentityType);
             Assert.AreEqual(Guid.Empty, response.Value.Data.Identity.TenantId);
