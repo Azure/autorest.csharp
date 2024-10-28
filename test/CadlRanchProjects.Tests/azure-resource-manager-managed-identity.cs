@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using Azure.ResourceManager;
-using _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity;
 using Azure.ResourceManager.Resources;
 using NUnit.Framework;
+using Azure.ResourceManager.CommonProperties;
 using Azure.ResourceManager.Models;
 
 namespace CadlRanchProjects.Tests

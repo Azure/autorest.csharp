@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
 using NUnit.Framework;
-using _Azure.ResourceManager.Models.Resources;
 using Azure.ResourceManager.Models;
-using _Azure.ResourceManager.Models.Resources.Models;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using Azure;
 using Microsoft.Extensions.Azure;
 
