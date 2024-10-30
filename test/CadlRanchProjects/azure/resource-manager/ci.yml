@@ -1,0 +1,35 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+    - main
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/resource-manager
+    - sdk/resource-manager/ci.yml
+    - sdk/resource-manager/Azure.ResourceManager.Resources
+
+pr:
+  branches:
+    include:
+    - main
+    - feature/*
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/resource-manager
+    - sdk/resource-manager/ci.yml
+    - sdk/resource-manager/Azure.ResourceManager.Resources
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: resource-manager
+    ArtifactName: packages
+    Artifacts:
+    - name: Azure.ResourceManager.Resources
+      safeName: AzureResourceManagerResources
