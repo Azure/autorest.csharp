@@ -1,0 +1,10 @@
+{
+  "output-folder": ".",
+  "namespace": "_Specs_.Azure.Core.Basic",
+  "library-name": "_Specs_.Azure.Core.Basic",
+  "use-model-reader-writer": true,
+  "shared-source-folders": [
+    "../../../../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
+    "../../../../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
+  ]
+}
