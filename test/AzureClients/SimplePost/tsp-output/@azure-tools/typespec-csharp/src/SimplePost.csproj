@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>This is the SimplePost client library for developing .NET applications with rich experience.</Description>
     <AssemblyTitle>SDK Code Generation SimplePost</AssemblyTitle>
@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.44.1" />
     <PackageReference Include="System.ClientModel" Version="1.2.1" />
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>

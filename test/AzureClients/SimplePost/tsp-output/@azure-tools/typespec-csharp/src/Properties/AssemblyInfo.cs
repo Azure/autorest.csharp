@@ -3,4 +3,4 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("SimplePost.Tests")]
+//[assembly: InternalsVisibleTo("SimplePost.Tests")]
