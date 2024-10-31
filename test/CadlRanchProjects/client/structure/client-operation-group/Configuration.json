@@ -1,0 +1,11 @@
+{
+  "output-folder": ".",
+  "namespace": "Client.Structure.Service.ClientOperationGroup",
+  "library-name": "Client.Structure.Service.ClientOperationGroup",
+  "flavor": "azure",
+  "use-model-reader-writer": true,
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
+  ]
+}

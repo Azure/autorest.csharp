@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -12,6 +11,7 @@ namespace CadlRanchProjects.Tests
     {
         private string SamplePngPath = Path.Combine(CadlRanchServer.GetSpecDirectory(), "assets", "image.png");
         private string SampleJpgPath = Path.Combine(CadlRanchServer.GetSpecDirectory(), "assets", "image.jpg");
+        private string SampleJpgPath2 = Path.Combine(CadlRanchServer.GetSpecDirectory(), "assets", "hello.jpg");
 
         [Test]
         public Task Payload_Multipart_FormData_Basic() => Test(async (host) =>
@@ -44,17 +44,12 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("The Cadl Ranch's cadl-ranch-specs/assets folder does not contain a hello.jpg file with the mimetype \"image/jpg\", so this test lacks the necessary input.")]
         public Task Payload_Multipart_FormData_CheckFileNameAndContentType() => Test(async (host) =>
         {
-            Address addressX = new Address("X");
-            var profileImage = System.IO.File.OpenRead(SampleJpgPath);
-            var pictures = new Stream[]
-            {
-                System.IO.File.OpenRead(SamplePngPath),
-                System.IO.File.OpenRead(SamplePngPath)
-            };
-            ComplexPartsRequest data = new ComplexPartsRequest("123", addressX, profileImage, pictures);
-            var response = await new MultiPartClient(host, null).GetFormDataClient().FileArrayAndBasicAsync(data);
+            var profileImage = System.IO.File.OpenRead(SampleJpgPath2);
+            MultiPartRequest input = new MultiPartRequest("123", profileImage);
+            var response = await new MultiPartClient(host, null).GetFormDataClient().CheckFileNameAndContentTypeAsync(input);
             Assert.AreEqual(204, response.Status);
         });
 

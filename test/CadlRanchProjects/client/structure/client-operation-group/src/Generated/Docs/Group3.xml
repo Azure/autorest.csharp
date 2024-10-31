@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="TwoAsync(RequestContext)">
+      <example>
+This sample shows how to call TwoAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = await client.TwoAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call TwoAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = await client.TwoAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Two(RequestContext)">
+      <example>
+This sample shows how to call Two.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = client.Two();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Two with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = client.Two();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="ThreeAsync(RequestContext)">
+      <example>
+This sample shows how to call ThreeAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = await client.ThreeAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ThreeAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = await client.ThreeAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Three(RequestContext)">
+      <example>
+This sample shows how to call Three.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = client.Three();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Three with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
+
+Response response = client.Three();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
