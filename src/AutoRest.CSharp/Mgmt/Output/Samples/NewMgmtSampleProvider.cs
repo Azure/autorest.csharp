@@ -31,11 +31,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         private const string _createResourceIdentifierMethodName = "CreateResourceIdentifier";
         protected readonly MgmtTypeProvider _client;
 
+        private readonly HashSet<string> _skippedOperations;
+
         public NewMgmtSampleProvider(string defaultNamespace, MgmtTypeProvider client, SourceInputModel? sourceInputModel) : base($"{defaultNamespace}.Samples", sourceInputModel)
         {
             DeclarationModifiers = TypeSignatureModifiers.Public | TypeSignatureModifiers.Partial;
             DefaultName = $"Sample_{client.Type.Name}";
             _client = client;
+            _skippedOperations = new HashSet<string>(Configuration.MgmtTestConfiguration?.SkippedOperations ?? []);
         }
 
         public bool IsEmpty => !Methods.Any();
@@ -597,9 +600,16 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            foreach (var sample in _client.AllOperations.SelectMany(o => o.Samples))
+            foreach (var operation in _client.AllOperations)
             {
-                yield return BuildSample(sample, true);
+                if (operation.Any(o => _skippedOperations.Contains(o.OperationId)))
+                {
+                    continue;
+                }
+                foreach (var sample in operation.Samples)
+                {
+                    yield return BuildSample(sample, true);
+                }
             }
         }
 
