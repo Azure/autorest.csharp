@@ -223,7 +223,7 @@
     {
      "$id": "26",
      "kind": "enumvalue",
-     "name": "SystemAndUserAssigned",
+     "name": "SystemAssigned,UserAssigned",
      "value": "SystemAssigned,UserAssigned",
      "valueType": {
       "$id": "27",
@@ -1816,6 +1816,7 @@
      "$id": "180",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "181",
       "kind": "url",
@@ -1958,6 +1959,7 @@
      "$id": "196",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "197",
       "kind": "url",
@@ -2151,6 +2153,7 @@
      "$id": "217",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "218",
       "kind": "url",
@@ -2187,7 +2190,7 @@
     {
      "$id": "222",
      "Name": "createOrUpdate",
-     "ResourceName": "Foos",
+     "ResourceName": "Foo",
      "Description": "Create a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -2675,7 +2678,7 @@
     {
      "$id": "280",
      "Name": "get",
-     "ResourceName": "Foos",
+     "ResourceName": "Foo",
      "Description": "Get a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -2964,7 +2967,7 @@
     {
      "$id": "313",
      "Name": "delete",
-     "ResourceName": "Foos",
+     "ResourceName": "Foo",
      "Description": "Delete a Foo",
      "Accessibility": "public",
      "Parameters": [
@@ -3329,6 +3332,7 @@
      "$id": "352",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "353",
       "kind": "url",

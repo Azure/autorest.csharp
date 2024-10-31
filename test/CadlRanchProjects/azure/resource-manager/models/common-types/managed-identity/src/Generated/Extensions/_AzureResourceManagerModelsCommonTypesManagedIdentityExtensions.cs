@@ -74,7 +74,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ManagedIdentityTrackedResources_Get</description>
+        /// <description>ManagedIdentityTrackedResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -112,7 +112,7 @@ namespace _Azure.ResourceManager.Models.CommonTypes.ManagedIdentity
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ManagedIdentityTrackedResources_Get</description>
+        /// <description>ManagedIdentityTrackedResource_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

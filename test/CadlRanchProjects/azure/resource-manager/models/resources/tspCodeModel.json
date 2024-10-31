@@ -1270,6 +1270,7 @@
      "$id": "123",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "124",
       "kind": "url",
@@ -1306,7 +1307,7 @@
     {
      "$id": "128",
      "Name": "get",
-     "ResourceName": "TopLevelTrackedResources",
+     "ResourceName": "TopLevelTrackedResource",
      "Description": "Get a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1473,7 +1474,7 @@
     {
      "$id": "144",
      "Name": "createOrReplace",
-     "ResourceName": "TopLevelTrackedResources",
+     "ResourceName": "TopLevelTrackedResource",
      "Description": "Create a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1745,7 +1746,7 @@
     {
      "$id": "171",
      "Name": "update",
-     "ResourceName": "TopLevelTrackedResources",
+     "ResourceName": "TopLevelTrackedResource",
      "Description": "Update a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -2011,7 +2012,7 @@
     {
      "$id": "198",
      "Name": "delete",
-     "ResourceName": "TopLevelTrackedResources",
+     "ResourceName": "TopLevelTrackedResource",
      "Description": "Delete a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -2714,6 +2715,7 @@
      "$id": "270",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "271",
       "kind": "url",
@@ -2750,7 +2752,7 @@
     {
      "$id": "275",
      "Name": "get",
-     "ResourceName": "NestedProxyResources",
+     "ResourceName": "NestedProxyResource",
      "Description": "Get a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -2939,7 +2941,7 @@
     {
      "$id": "293",
      "Name": "createOrReplace",
-     "ResourceName": "NestedProxyResources",
+     "ResourceName": "NestedProxyResource",
      "Description": "Create a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3233,7 +3235,7 @@
     {
      "$id": "322",
      "Name": "update",
-     "ResourceName": "NestedProxyResources",
+     "ResourceName": "NestedProxyResource",
      "Description": "Update a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3521,7 +3523,7 @@
     {
      "$id": "351",
      "Name": "delete",
-     "ResourceName": "NestedProxyResources",
+     "ResourceName": "NestedProxyResource",
      "Description": "Delete a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
@@ -3930,6 +3932,7 @@
      "$id": "394",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "395",
       "kind": "url",
@@ -3966,7 +3969,7 @@
     {
      "$id": "399",
      "Name": "getByResourceGroup",
-     "ResourceName": "SingletonTrackedResources",
+     "ResourceName": "SingletonTrackedResource",
      "Description": "Get a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4111,7 +4114,7 @@
     {
      "$id": "413",
      "Name": "createOrUpdate",
-     "ResourceName": "SingletonTrackedResources",
+     "ResourceName": "SingletonTrackedResource",
      "Description": "Create a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4361,7 +4364,7 @@
     {
      "$id": "438",
      "Name": "update",
-     "ResourceName": "SingletonTrackedResources",
+     "ResourceName": "SingletonTrackedResource",
      "Description": "Update a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -4712,6 +4715,7 @@
      "$id": "472",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "473",
       "kind": "url",

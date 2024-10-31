@@ -83,6 +83,23 @@
       "$ref": "2"
      },
      "decorators": []
+    },
+    {
+     "$id": "12",
+     "kind": "enumvalue",
+     "name": "ClientOperationGroup",
+     "value": "client-operation-group",
+     "valueType": {
+      "$id": "13",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "decorators": []
     }
    ],
    "isFixed": true,
@@ -94,20 +111,20 @@
  "Models": [],
  "Clients": [
   {
-   "$id": "12",
+   "$id": "14",
    "Name": "TwoOperationGroupClient",
    "Operations": [],
    "Protocol": {
-    "$id": "13"
+    "$id": "15"
    },
    "Parameters": [
     {
-     "$id": "14",
+     "$id": "16",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "15",
+      "$id": "17",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -123,7 +140,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "16",
+     "$id": "18",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -144,18 +161,18 @@
    "Decorators": []
   },
   {
-   "$id": "17",
+   "$id": "19",
    "Name": "Group1",
    "Operations": [
     {
-     "$id": "18",
+     "$id": "20",
      "Name": "one",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "21",
        "StatusCodes": [
         204
        ],
@@ -175,14 +192,14 @@
      "Decorators": []
     },
     {
-     "$id": "20",
+     "$id": "22",
      "Name": "three",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "23",
        "StatusCodes": [
         204
        ],
@@ -202,14 +219,14 @@
      "Decorators": []
     },
     {
-     "$id": "22",
+     "$id": "24",
      "Name": "four",
      "ResourceName": "Group1",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "25",
        "StatusCodes": [
         204
        ],
@@ -230,17 +247,17 @@
     }
    ],
    "Protocol": {
-    "$id": "24"
+    "$id": "26"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$id": "25",
+     "$id": "27",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "26",
+      "$id": "28",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -256,7 +273,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "27",
+     "$id": "29",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",
@@ -277,18 +294,18 @@
    "Decorators": []
   },
   {
-   "$id": "28",
+   "$id": "30",
    "Name": "Group2",
    "Operations": [
     {
-     "$id": "29",
+     "$id": "31",
      "Name": "two",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -308,14 +325,14 @@
      "Decorators": []
     },
     {
-     "$id": "31",
+     "$id": "33",
      "Name": "five",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -335,14 +352,14 @@
      "Decorators": []
     },
     {
-     "$id": "33",
+     "$id": "35",
      "Name": "six",
      "ResourceName": "Group2",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "36",
        "StatusCodes": [
         204
        ],
@@ -363,17 +380,17 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "37"
    },
    "Parent": "TwoOperationGroupClient",
    "Parameters": [
     {
-     "$id": "36",
+     "$id": "38",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
-      "$id": "37",
+      "$id": "39",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -389,7 +406,7 @@
      "Kind": "Client"
     },
     {
-     "$id": "38",
+     "$id": "40",
      "Name": "client",
      "NameInRequest": "client",
      "Description": "Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.",

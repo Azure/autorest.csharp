@@ -27,7 +27,7 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormDataHttpPartsNonString. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal FormDataHttpPartsNonString(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

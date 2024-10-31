@@ -60,7 +60,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
@@ -91,7 +91,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>Foos_Get</description>
+        /// <description>Foo_Get</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>

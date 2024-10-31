@@ -75,7 +75,7 @@
     {
      "$id": "10",
      "kind": "enumvalue",
-     "name": "SystemAndUserAssignedV3",
+     "name": "SystemAssigned,UserAssigned",
      "value": "SystemAssigned,UserAssigned",
      "valueType": {
       "$id": "11",
@@ -987,6 +987,7 @@
      "$id": "98",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "99",
       "kind": "url",
@@ -1023,7 +1024,7 @@
     {
      "$id": "103",
      "Name": "get",
-     "ResourceName": "ManagedIdentityTrackedResources",
+     "ResourceName": "ManagedIdentityTrackedResource",
      "Description": "Get a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1183,7 +1184,7 @@
     {
      "$id": "118",
      "Name": "createWithSystemAssigned",
-     "ResourceName": "ManagedIdentityTrackedResources",
+     "ResourceName": "ManagedIdentityTrackedResource",
      "Description": "Create a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1407,7 +1408,7 @@
     {
      "$id": "138",
      "Name": "updateWithUserAssignedAndSystemAssigned",
-     "ResourceName": "ManagedIdentityTrackedResources",
+     "ResourceName": "ManagedIdentityTrackedResource",
      "Description": "Update a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
@@ -1623,6 +1624,7 @@
      "$id": "158",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "159",
       "kind": "url",

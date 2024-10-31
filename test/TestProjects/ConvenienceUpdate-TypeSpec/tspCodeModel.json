@@ -1649,6 +1649,7 @@
      "$id": "136",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "137",
       "kind": "url",

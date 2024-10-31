@@ -1212,6 +1212,7 @@
      "$id": "119",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "120",
       "kind": "url",

@@ -24,6 +24,9 @@ import { azureSDKContextOptions } from "./sdk-context-options.js";
 
 export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
     const program: Program = context.program;
+
+    if (program.compilerOptions.noEmit || program.hasError()) return;
+
     const options = resolveAzureEmitterOptions(context);
     /* set the loglevel. */
     Logger.initialize(program, options.logLevel ?? LoggerLevel.INFO);
@@ -88,9 +91,7 @@ export async function $onEmit(context: EmitContext<AzureNetEmitterOptions>) {
         );
         configurations["azure-arm"] =
             sdkContext.arm === false ? undefined : sdkContext.arm;
-        configurations["use-write-core"] =
-            options["use-write-core"] ??
-            (configurations["azure-arm"] ? true : undefined);
+        configurations["use-write-core"] = options["use-write-core"];
         await program.host.writeFile(
             resolvePath(outputFolder, configurationFileName),
             prettierOutput(JSON.stringify(configurations, null, 2))

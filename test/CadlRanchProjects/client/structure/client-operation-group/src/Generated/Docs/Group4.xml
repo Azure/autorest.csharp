@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="FourAsync(RequestContext)">
+      <example>
+This sample shows how to call FourAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+
+Response response = await client.FourAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call FourAsync with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+
+Response response = await client.FourAsync();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Four(RequestContext)">
+      <example>
+This sample shows how to call Four.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+
+Response response = client.Four();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Four with all request content.
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+
+Response response = client.Four();
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>
