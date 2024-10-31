@@ -9,9 +9,8 @@ using Azure.Core;
 @service({
     title: "SimplePost",
 })
-   
+  
+
 namespace SimplePost;
-   
-interface SimplePostClient {
-    @post @route("add") IncrementCount(@path addend: int32) : int32;
-}
+
+op create(@body content: string): string;
