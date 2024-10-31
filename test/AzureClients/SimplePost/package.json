@@ -1,0 +1,21 @@
+{
+  "name": "SimplePost",
+  "version": "0.1.0",
+  "type": "module",
+  "peerDependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/rest": "latest"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "latest",
+    "@typespec/http": "latest",
+    "@typespec/openapi3": "latest",
+    "@typespec/rest": "latest"
+  },
+  "private": true,
+  "dependencies": {
+    "@azure-tools/typespec-csharp": "^0.2.0-beta.20241030.1"
+  }
+}
