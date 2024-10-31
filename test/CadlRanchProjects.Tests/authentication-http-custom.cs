@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Authentication_Http_Custom_invalid() => Test((host) =>
         {
-            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new CustomClient(host, new AzureKeyCredential("invalid-api-key"), null).InvalidAsync());
+            var exception = Assert.ThrowsAsync<RequestFailedException>(() => new CustomClient(host, new AzureKeyCredential("invalid-key"), null).InvalidAsync());
             Assert.AreEqual(403, exception.Status);
             return Task.CompletedTask;
         });

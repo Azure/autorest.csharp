@@ -15,11 +15,11 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_PublicOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetPublicOperationClient().NoDecoratorInPublicAsync("name");
-            Assert.AreEqual("name", response1.Value.Name);
+            var response1 = await new AccessClient(host, null).GetPublicOperationClient().NoDecoratorInPublicAsync("sample");
+            Assert.AreEqual("sample", response1.Value.Name);
 
-            var response2 = await new AccessClient(host, null).GetPublicOperationClient().PublicDecoratorInPublicAsync("name");
-            Assert.AreEqual("name", response2.Value.Name);
+            var response2 = await new AccessClient(host, null).GetPublicOperationClient().PublicDecoratorInPublicAsync("sample");
+            Assert.AreEqual("sample", response2.Value.Name);
 
             Assert.IsNotNull(typeof(PublicOperation).GetMethod("NoDecoratorInPublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(PublicOperation).GetMethod("NoDecoratorInPublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(RequestContext) }));
@@ -34,14 +34,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_InternalOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetInternalOperationClient().NoDecoratorInInternalAsync("name");
-            Assert.AreEqual("name", response1.Value.Name);
+            var response1 = await new AccessClient(host, null).GetInternalOperationClient().NoDecoratorInInternalAsync("sample");
+            Assert.AreEqual("sample", response1.Value.Name);
 
-            var response2 = await new AccessClient(host, null).GetInternalOperationClient().InternalDecoratorInInternalAsync("name");
-            Assert.AreEqual("name", response2.Value.Name);
+            var response2 = await new AccessClient(host, null).GetInternalOperationClient().InternalDecoratorInInternalAsync("sample");
+            Assert.AreEqual("sample", response2.Value.Name);
 
-            var response3 = await new AccessClient(host, null).GetInternalOperationClient().PublicDecoratorInInternalAsync("name");
-            Assert.AreEqual("name", response3.Value.Name);
+            var response3 = await new AccessClient(host, null).GetInternalOperationClient().PublicDecoratorInInternalAsync("sample");
+            Assert.AreEqual("sample", response3.Value.Name);
 
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("NoDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(InternalOperation).GetMethod("NoDecoratorInInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(RequestContext) }));
@@ -60,11 +60,11 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_SharedModelInOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetSharedModelInOperationClient().PublicAsync("name");
-            Assert.AreEqual("name", response1.Value.Name);
+            var response1 = await new AccessClient(host, null).GetSharedModelInOperationClient().PublicAsync("sample");
+            Assert.AreEqual("sample", response1.Value.Name);
 
-            var response2 = await new AccessClient(host, null).GetSharedModelInOperationClient().InternalAsync("name");
-            Assert.AreEqual("name", response2.Value.Name);
+            var response2 = await new AccessClient(host, null).GetSharedModelInOperationClient().InternalAsync("sample");
+            Assert.AreEqual("sample", response2.Value.Name);
 
             Assert.IsNotNull(typeof(SharedModelInOperation).GetMethod("PublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(CancellationToken) }));
             Assert.IsNotNull(typeof(SharedModelInOperation).GetMethod("PublicAsync", BindingFlags.Instance | BindingFlags.Public, new[] { typeof(string), typeof(RequestContext) }));
@@ -78,11 +78,11 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Access_RelativeModelInOperation() => Test(async (host) =>
         {
-            var response1 = await new AccessClient(host, null).GetRelativeModelInOperationClient().OperationAsync("name");
+            var response1 = await new AccessClient(host, null).GetRelativeModelInOperationClient().OperationAsync("Madge");
             Assert.AreEqual("Madge", response1.Value.Name);
             Assert.AreEqual("Madge", response1.Value.Inner.Name);
 
-            var response2 = await new AccessClient(host, null).GetRelativeModelInOperationClient().DiscriminatorAsync("name");
+            var response2 = await new AccessClient(host, null).GetRelativeModelInOperationClient().DiscriminatorAsync("real");
             Assert.AreEqual("Madge", response2.Value.Name);
 
             Assert.IsNotNull(typeof(RelativeModelInOperation).GetMethod("OperationAsync", BindingFlags.Instance | BindingFlags.NonPublic, new[] { typeof(string), typeof(CancellationToken) }));
