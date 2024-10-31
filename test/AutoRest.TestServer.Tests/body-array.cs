@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure;
 using body_array;
 using body_array.Models;
 using NUnit.Framework;
@@ -20,7 +21,9 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayArrayEmpty() => Test(async (host, pipeline) =>
         {
-            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayEmptyAsync();
+            ArrayClient client = new ArrayClient(ClientDiagnostics, pipeline, host);
+
+            Response<IReadOnlyList<IList<string>>> result = await client.GetArrayEmptyAsync();
 
             CollectionAssert.IsEmpty(result.Value);
         });

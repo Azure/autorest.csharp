@@ -50,7 +50,7 @@
    "kind": "model",
    "name": "User",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
-   "usage": "Input,Output,Json",
+   "usage": "Input,Output,JsonMergePatch,Json",
    "description": "Details about a user.",
    "decorators": [],
    "properties": [
@@ -109,7 +109,7 @@
        "kind": "model",
        "name": "UserOrder",
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
-       "usage": "Input,Output,Json",
+       "usage": "Input,Output,JsonMergePatch,Json",
        "description": "UserOrder for testing list with expand.",
        "decorators": [],
        "properties": [
