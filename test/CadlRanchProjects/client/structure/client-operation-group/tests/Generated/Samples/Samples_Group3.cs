@@ -20,7 +20,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group3_Two_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = client.Two();
@@ -32,7 +32,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group3_Two_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = await client.TwoAsync();
@@ -44,7 +44,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group3_Two_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = client.Two();
@@ -56,7 +56,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group3_Two_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = await client.TwoAsync();
@@ -68,7 +68,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group3_Three_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = client.Three();
@@ -80,7 +80,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group3_Three_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = await client.ThreeAsync();
@@ -92,7 +92,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group3_Three_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = client.Three();
@@ -104,7 +104,7 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group3_Three_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Group3 client = new FirstClient(endpoint, ClientType.Default).GetGroup3Client();
 
             Response response = await client.ThreeAsync();

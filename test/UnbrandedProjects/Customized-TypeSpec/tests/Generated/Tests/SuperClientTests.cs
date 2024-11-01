@@ -15,7 +15,7 @@ namespace CustomizedTypeSpec.Tests
         [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            Uri endpoint = new Uri("https://my-service.com");
+            Uri endpoint = new Uri("<endpoint>");
             ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("SuperClient_KEY"));
             SuperClient client = new SuperClient(endpoint, credential);
             Assert.IsNotNull(client);

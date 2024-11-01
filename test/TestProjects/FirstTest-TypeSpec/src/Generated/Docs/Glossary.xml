@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call DoSomethingAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
 ]]></code>
 This sample shows how to call DoSomethingAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
@@ -22,14 +22,14 @@ Response<Thing> response = await client.DoSomethingAsync("<id>", "<h1>");
       <example>
 This sample shows how to call DoSomething.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response<Thing> response = client.DoSomething("<id>", "<h1>");
 ]]></code>
 This sample shows how to call DoSomething with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response<Thing> response = client.DoSomething("<id>", "<h1>");
@@ -39,7 +39,7 @@ Response<Thing> response = client.DoSomething("<id>", "<h1>");
       <example>
 This sample shows how to call DoSomethingAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
@@ -57,7 +57,7 @@ Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call DoSomethingAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = await client.DoSomethingAsync("<id>", "<h1>", null);
@@ -85,7 +85,7 @@ Console.WriteLine(result.GetProperty("optionalResourceId").ToString());
       <example>
 This sample shows how to call DoSomething and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = client.DoSomething("<id>", "<h1>", null);
@@ -103,7 +103,7 @@ Console.WriteLine(result.GetProperty("requiredFloatProperty").ToString());
 ]]></code>
 This sample shows how to call DoSomething with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Glossary client = new FirstTestTypeSpecClient(endpoint).GetGlossaryClient();
 
 Response response = client.DoSomething("<id>", "<h1>", null);

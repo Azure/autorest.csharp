@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call SayHiAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -22,7 +22,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -46,7 +46,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call SayHi and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -63,7 +63,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 

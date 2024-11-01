@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Operation.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 
@@ -45,7 +45,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Operation with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 SecurityDefinitionClient client = new SecurityDefinitionClient(endpoint, credential);
 

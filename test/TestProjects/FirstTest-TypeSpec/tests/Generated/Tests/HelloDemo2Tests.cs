@@ -26,7 +26,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloAgain_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -80,7 +80,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloAgain_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -110,7 +110,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloAgain_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -200,7 +200,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloAgain_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -255,7 +255,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_NoContentType_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -309,7 +309,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_NoContentType_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -399,7 +399,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloDemoAgain_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -410,7 +410,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloDemoAgain_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -421,7 +421,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloDemoAgain_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -432,7 +432,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloDemoAgain_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -443,7 +443,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_CreateLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -469,7 +469,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_CreateLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -481,7 +481,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_CreateLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -517,7 +517,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_CreateLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -538,7 +538,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -549,7 +549,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -560,7 +560,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -571,7 +571,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo2_HelloLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo2 client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 

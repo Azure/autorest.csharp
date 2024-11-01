@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call V1Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -13,7 +13,7 @@ Response<ModelV1> response = await client.V1Async("<headerV2>", body);
 ]]></code>
 This sample shows how to call V1Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -24,7 +24,7 @@ Response<ModelV1> response = await client.V1Async("<headerV2>", body);
       <example>
 This sample shows how to call V1.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -32,7 +32,7 @@ Response<ModelV1> response = client.V1("<headerV2>", body);
 ]]></code>
 This sample shows how to call V1 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -43,7 +43,7 @@ Response<ModelV1> response = client.V1("<headerV2>", body);
       <example>
 This sample shows how to call V1Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -61,7 +61,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call V1Async with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -82,7 +82,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
       <example>
 This sample shows how to call V1 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -100,7 +100,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call V1 with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -121,7 +121,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
       <example>
 This sample shows how to call V2Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -129,7 +129,7 @@ Response<ModelV2> response = await client.V2Async(body);
 ]]></code>
 This sample shows how to call V2Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -140,7 +140,7 @@ Response<ModelV2> response = await client.V2Async(body);
       <example>
 This sample shows how to call V2.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -148,7 +148,7 @@ Response<ModelV2> response = client.V2(body);
 ]]></code>
 This sample shows how to call V2 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -159,7 +159,7 @@ Response<ModelV2> response = client.V2(body);
       <example>
 This sample shows how to call V2Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -177,7 +177,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call V2Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -198,7 +198,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
       <example>
 This sample shows how to call V2 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new
@@ -216,7 +216,7 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call V2 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AddedClient client = new AddedClient(endpoint, Versions.V1);
 
 using RequestContent content = RequestContent.Create(new

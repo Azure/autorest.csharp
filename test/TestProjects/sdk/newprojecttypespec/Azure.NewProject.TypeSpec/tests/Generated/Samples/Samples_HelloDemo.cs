@@ -19,7 +19,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo_SayHi_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -39,7 +39,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo_SayHi_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -59,7 +59,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo_SayHi_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -83,7 +83,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo_SayHi_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 

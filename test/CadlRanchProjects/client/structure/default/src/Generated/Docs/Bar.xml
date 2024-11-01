@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call FiveAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = await client.FiveAsync();
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FiveAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = await client.FiveAsync();
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Five.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = client.Five();
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Five with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = client.Five();
@@ -47,7 +47,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call SixAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = await client.SixAsync();
@@ -56,7 +56,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call SixAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = await client.SixAsync();
@@ -68,7 +68,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Six.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = client.Six();
@@ -77,7 +77,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Six with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Bar client = new ServiceClient(endpoint, ClientType.Default).GetBarClient();
 
 Response response = client.Six();

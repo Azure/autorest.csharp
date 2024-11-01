@@ -22,7 +22,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V1_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -43,7 +43,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V1_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -64,7 +64,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V1_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -75,7 +75,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V1_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -86,7 +86,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V1_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -107,7 +107,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V1_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -128,7 +128,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V1_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -139,7 +139,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V1_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -150,7 +150,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V2_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -171,7 +171,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V2_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -192,7 +192,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V2_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -203,7 +203,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V2_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -214,7 +214,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V2_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -235,7 +235,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V2_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             using RequestContent content = RequestContent.Create(new
@@ -256,7 +256,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Added_V2_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
@@ -267,7 +267,7 @@ namespace Versioning.Added.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Added_V2_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AddedClient client = new AddedClient(endpoint, Versions.V1);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));

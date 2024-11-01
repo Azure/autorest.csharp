@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call GetDeploymentStatusValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 This sample shows how to call GetDeploymentStatusValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -22,14 +22,14 @@ Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<
       <example>
 This sample shows how to call GetDeploymentStatusValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 This sample shows how to call GetDeploymentStatusValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -39,7 +39,7 @@ Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName
       <example>
 This sample shows how to call GetDeploymentStatusAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -58,7 +58,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDeploymentStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -82,7 +82,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call GetDeploymentStatus and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetDeploymentStatus with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -125,14 +125,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call GetSwapDeploymentsStatusValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 This sample shows how to call GetSwapDeploymentsStatusValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -142,14 +142,14 @@ Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusVal
       <example>
 This sample shows how to call GetSwapDeploymentsStatusValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
 ]]></code>
 This sample shows how to call GetSwapDeploymentsStatusValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -159,7 +159,7 @@ Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<p
       <example>
 This sample shows how to call GetSwapDeploymentsStatusAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -178,7 +178,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetSwapDeploymentsStatusAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -202,7 +202,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call GetSwapDeploymentsStatus and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -221,7 +221,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call GetSwapDeploymentsStatus with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
 Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");

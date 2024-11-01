@@ -22,7 +22,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccountProperties_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -36,7 +36,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccountProperties_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -50,7 +50,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccountProperties_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -101,7 +101,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccountProperties_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -152,7 +152,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateAccountProperties_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -167,7 +167,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateAccountProperties_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -182,7 +182,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateAccountProperties_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -237,7 +237,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateAccountProperties_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -292,7 +292,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccessKeys_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -306,7 +306,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccessKeys_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -320,7 +320,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccessKeys_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -335,7 +335,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccessKeys_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -350,7 +350,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RegenerateAccessKey_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -365,7 +365,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RegenerateAccessKey_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -380,7 +380,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RegenerateAccessKey_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -399,7 +399,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RegenerateAccessKey_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -418,7 +418,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRules_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -433,7 +433,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRules_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -448,7 +448,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRules_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 
@@ -547,7 +547,7 @@ namespace AzureSample.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRules_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = new PurviewAccountsClient(endpoint, credential);
 

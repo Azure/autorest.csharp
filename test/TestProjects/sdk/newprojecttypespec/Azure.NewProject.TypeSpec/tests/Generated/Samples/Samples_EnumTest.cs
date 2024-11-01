@@ -19,7 +19,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumTest_GetUnknownValue_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -33,7 +33,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumTest_GetUnknownValue_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -47,7 +47,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumTest_GetUnknownValue_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -61,7 +61,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumTest_GetUnknownValue_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 

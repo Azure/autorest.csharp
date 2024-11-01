@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call Op1Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelAsStruct body = new ModelAsStruct(1234);
@@ -13,7 +13,7 @@ Response<ModelAsStruct> response = await client.Op1Async(body);
 ]]></code>
 This sample shows how to call Op1Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelAsStruct body = new ModelAsStruct(1234);
@@ -24,7 +24,7 @@ Response<ModelAsStruct> response = await client.Op1Async(body);
       <example>
 This sample shows how to call Op1.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelAsStruct body = new ModelAsStruct(1234);
@@ -32,7 +32,7 @@ Response<ModelAsStruct> response = client.Op1(body);
 ]]></code>
 This sample shows how to call Op1 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelAsStruct body = new ModelAsStruct(1234);
@@ -43,7 +43,7 @@ Response<ModelAsStruct> response = client.Op1(body);
       <example>
 This sample shows how to call Op1Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -57,7 +57,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Op1Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -74,7 +74,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call Op1 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -88,7 +88,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Op1 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -105,7 +105,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call Op2Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithPersistableOnly body = new ModelWithPersistableOnly();
@@ -113,7 +113,7 @@ Response<ModelWithPersistableOnly> response = await client.Op2Async(body);
 ]]></code>
 This sample shows how to call Op2Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithPersistableOnly body = new ModelWithPersistableOnly
@@ -133,7 +133,7 @@ Response<ModelWithPersistableOnly> response = await client.Op2Async(body);
       <example>
 This sample shows how to call Op2.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithPersistableOnly body = new ModelWithPersistableOnly();
@@ -141,7 +141,7 @@ Response<ModelWithPersistableOnly> response = client.Op2(body);
 ]]></code>
 This sample shows how to call Op2 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithPersistableOnly body = new ModelWithPersistableOnly
@@ -161,7 +161,7 @@ Response<ModelWithPersistableOnly> response = client.Op2(body);
       <example>
 This sample shows how to call Op2Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new object());
@@ -172,7 +172,7 @@ Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code>
 This sample shows how to call Op2Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -202,7 +202,7 @@ Console.WriteLine(result.GetProperty("xProperty").ToString());
       <example>
 This sample shows how to call Op2 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new object());
@@ -213,7 +213,7 @@ Console.WriteLine(result.GetProperty("xProperty").ToString());
 ]]></code>
 This sample shows how to call Op2 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -243,7 +243,7 @@ Console.WriteLine(result.GetProperty("xProperty").ToString());
       <example>
 This sample shows how to call Op3Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 BaseModel body = new ModelX();
@@ -251,7 +251,7 @@ Response<BaseModel> response = await client.Op3Async(body);
 ]]></code>
 This sample shows how to call Op3Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 BaseModel body = new ModelX
@@ -271,7 +271,7 @@ Response<BaseModel> response = await client.Op3Async(body);
       <example>
 This sample shows how to call Op3.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 BaseModel body = new ModelX();
@@ -279,7 +279,7 @@ Response<BaseModel> response = client.Op3(body);
 ]]></code>
 This sample shows how to call Op3 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 BaseModel body = new ModelX
@@ -299,7 +299,7 @@ Response<BaseModel> response = client.Op3(body);
       <example>
 This sample shows how to call Op3Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -313,7 +313,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call Op3Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -341,7 +341,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call Op3 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -355,7 +355,7 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 This sample shows how to call Op3 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -383,7 +383,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call Op4Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 AvailabilitySetData body = new AvailabilitySetData("<location>");
@@ -391,7 +391,7 @@ Response<AvailabilitySetData> response = await client.Op4Async(body);
 ]]></code>
 This sample shows how to call Op4Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 AvailabilitySetData body = new AvailabilitySetData("<location>")
@@ -423,7 +423,7 @@ Response<AvailabilitySetData> response = await client.Op4Async(body);
       <example>
 This sample shows how to call Op4.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 AvailabilitySetData body = new AvailabilitySetData("<location>");
@@ -431,7 +431,7 @@ Response<AvailabilitySetData> response = client.Op4(body);
 ]]></code>
 This sample shows how to call Op4 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 AvailabilitySetData body = new AvailabilitySetData("<location>")
@@ -463,7 +463,7 @@ Response<AvailabilitySetData> response = client.Op4(body);
       <example>
 This sample shows how to call Op4Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -480,7 +480,7 @@ Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call Op4Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -529,7 +529,7 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
       <example>
 This sample shows how to call Op4 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -546,7 +546,7 @@ Console.WriteLine(result.GetProperty("location").ToString());
 ]]></code>
 This sample shows how to call Op4 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -595,14 +595,14 @@ Console.WriteLine(result.GetProperty("tags").GetProperty("<key>").ToString());
       <example>
 This sample shows how to call Op5Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response<ResourceProviderData> response = await client.Op5Async();
 ]]></code>
 This sample shows how to call Op5Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response<ResourceProviderData> response = await client.Op5Async();
@@ -612,14 +612,14 @@ Response<ResourceProviderData> response = await client.Op5Async();
       <example>
 This sample shows how to call Op5.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response<ResourceProviderData> response = client.Op5();
 ]]></code>
 This sample shows how to call Op5 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response<ResourceProviderData> response = client.Op5();
@@ -629,7 +629,7 @@ Response<ResourceProviderData> response = client.Op5();
       <example>
 This sample shows how to call Op5Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response response = await client.Op5Async(null);
@@ -639,7 +639,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Op5Async with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response response = await client.Op5Async(null);
@@ -684,7 +684,7 @@ Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToStri
       <example>
 This sample shows how to call Op5 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response response = client.Op5(null);
@@ -694,7 +694,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call Op5 with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 Response response = client.Op5(null);
@@ -739,7 +739,7 @@ Console.WriteLine(result.GetProperty("providerAuthorizationConsentState").ToStri
       <example>
 This sample shows how to call Op6Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
@@ -747,7 +747,7 @@ Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(b
 ]]></code>
 This sample shows how to call Op6Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
@@ -761,7 +761,7 @@ Response<ModelWithStringAdditionalProperties> response = await client.Op6Async(b
       <example>
 This sample shows how to call Op6.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
@@ -769,7 +769,7 @@ Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
 ]]></code>
 This sample shows how to call Op6 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
@@ -783,7 +783,7 @@ Response<ModelWithStringAdditionalProperties> response = client.Op6(body);
       <example>
 This sample shows how to call Op6Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -798,7 +798,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op6Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -818,7 +818,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
       <example>
 This sample shows how to call Op6 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -833,7 +833,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op6 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -853,7 +853,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
       <example>
 This sample shows how to call Op7Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
@@ -861,7 +861,7 @@ Response<ModelWithArrayAdditionalProperties> response = await client.Op7Async(bo
 ]]></code>
 This sample shows how to call Op7Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
@@ -875,7 +875,7 @@ Response<ModelWithArrayAdditionalProperties> response = await client.Op7Async(bo
       <example>
 This sample shows how to call Op7.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
@@ -883,7 +883,7 @@ Response<ModelWithArrayAdditionalProperties> response = client.Op7(body);
 ]]></code>
 This sample shows how to call Op7 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
@@ -897,7 +897,7 @@ Response<ModelWithArrayAdditionalProperties> response = client.Op7(body);
       <example>
 This sample shows how to call Op7Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -912,7 +912,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op7Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -932,7 +932,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
       <example>
 This sample shows how to call Op7 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -947,7 +947,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op7 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -967,7 +967,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
       <example>
 This sample shows how to call Op8Async.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
@@ -975,7 +975,7 @@ Response<ModelWithUnknownAdditionalProperties> response = await client.Op8Async(
 ]]></code>
 This sample shows how to call Op8Async with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")
@@ -989,7 +989,7 @@ Response<ModelWithUnknownAdditionalProperties> response = await client.Op8Async(
       <example>
 This sample shows how to call Op8.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
@@ -997,7 +997,7 @@ Response<ModelWithUnknownAdditionalProperties> response = client.Op8(body);
 ]]></code>
 This sample shows how to call Op8 with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")
@@ -1011,7 +1011,7 @@ Response<ModelWithUnknownAdditionalProperties> response = client.Op8(body);
       <example>
 This sample shows how to call Op8Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1026,7 +1026,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op8Async with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1046,7 +1046,7 @@ Console.WriteLine(result.GetProperty("age").ToString());
       <example>
 This sample shows how to call Op8 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1061,7 +1061,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Op8 with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new

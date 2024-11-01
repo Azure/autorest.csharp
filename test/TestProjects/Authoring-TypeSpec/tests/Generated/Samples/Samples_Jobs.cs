@@ -21,7 +21,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeploymentJob_GetDeploymentStatus_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -43,7 +43,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeploymentJob_GetDeploymentStatus_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -65,7 +65,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeploymentJob_GetDeploymentStatus_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -75,7 +75,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeploymentJob_GetDeploymentStatus_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -85,7 +85,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeploymentJob_GetDeploymentStatus_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -109,7 +109,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeploymentJob_GetDeploymentStatus_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -133,7 +133,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeploymentJob_GetDeploymentStatus_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -143,7 +143,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeploymentJob_GetDeploymentStatus_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -153,7 +153,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -175,7 +175,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -197,7 +197,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -207,7 +207,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -217,7 +217,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
@@ -241,7 +241,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
@@ -265,7 +265,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
@@ -275,7 +275,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SwapDeploymentsJob_GetSwapDeploymentsStatus_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Jobs client = new AuthoringTypeSpecClient(endpoint).GetJobsClient(apiVersion: "2022-05-15-preview");
 
             Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");

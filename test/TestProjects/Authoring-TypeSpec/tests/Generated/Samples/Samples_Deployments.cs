@@ -21,7 +21,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_GetDeployment_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetDeployment("<projectName>", "<deploymentName>");
@@ -34,7 +34,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_GetDeployment_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
@@ -47,7 +47,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_GetDeployment_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetDeployment("<projectName>", "<deploymentName>");
@@ -60,7 +60,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_GetDeployment_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
@@ -73,7 +73,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_GetDeployments_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
@@ -87,7 +87,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_GetDeployments_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
@@ -101,7 +101,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_GetDeployments_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             foreach (BinaryData item in client.GetDeployments("<projectName>"))
@@ -115,7 +115,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_GetDeployments_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
@@ -129,7 +129,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_DeployProject_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new object());
@@ -144,7 +144,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_DeployProject_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new object());
@@ -159,7 +159,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_DeployProject_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new object());
@@ -174,7 +174,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_DeployProject_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new object());
@@ -189,7 +189,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_DeleteDeployment_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
@@ -199,7 +199,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_DeleteDeployment_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
@@ -209,7 +209,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployment_DeleteDeployment_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.DeleteDeployment(WaitUntil.Completed, "<projectName>", "<deploymentName>");
@@ -219,7 +219,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployment_DeleteDeployment_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.DeleteDeploymentAsync(WaitUntil.Completed, "<projectName>", "<deploymentName>");
@@ -229,7 +229,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployments_SwapDeployments_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -244,7 +244,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployments_SwapDeployments_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -259,7 +259,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Deployments_SwapDeployments_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -274,7 +274,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Deployments_SwapDeployments_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Deployments client = new AuthoringTypeSpecClient(endpoint).GetDeploymentsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
