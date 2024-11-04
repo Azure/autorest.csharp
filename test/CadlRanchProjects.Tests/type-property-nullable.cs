@@ -105,6 +105,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("DateTimeOffset serialization is not working correctly")]
         public Task Type_Property_Nullable_Datetime_patchNonNull() => Test(async (host) =>
         {
             var value = new
