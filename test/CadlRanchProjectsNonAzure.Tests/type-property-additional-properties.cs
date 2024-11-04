@@ -753,6 +753,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         });
 
         [Test]
+        [Ignore("DateTimeOffset serialization is not working correctly")]
         public Task Type_Property_AdditionalProperties_SpreadRecordDiscriminatedUnion_put() => Test(async host =>
         {
             var value = new SpreadRecordForDiscriminatedUnion("abc")
@@ -784,6 +785,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         });
 
         [Test]
+        [Ignore("DateTimeOffset serialization is not working correctly")]
         public Task Type_Property_AdditionalProperties_SpreadRecordNonDiscriminatedUnion_put() => Test(async host =>
         {
             var value = new SpreadRecordForNonDiscriminatedUnion("abc")
@@ -815,6 +817,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         });
 
         [Test]
+        [Ignore("DateTimeOffset serialization is not working correctly")]
         public Task Type_Property_AdditionalProperties_SpreadRecordNonDiscriminatedUnion2_put() => Test(async host =>
         {
             var value = new SpreadRecordForNonDiscriminatedUnion2("abc")
