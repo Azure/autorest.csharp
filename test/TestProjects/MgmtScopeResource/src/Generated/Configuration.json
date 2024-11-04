@@ -54,6 +54,9 @@
   "OverrideOperationName": {
     "ResourceLinks_ListAtSourceScope": "GetAll"
   },
+  "RawParameterizedScopes": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+  ],
   "PatchInitializerCustomization": {
     "Deployment": {
       "Properties": "new DeploymentProperties(current.Properties.Mode.HasValue ? current.Properties.Mode.Value : DeploymentMode.Incremental)"
