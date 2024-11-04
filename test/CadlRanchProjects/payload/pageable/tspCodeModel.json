@@ -7,6 +7,37 @@
   {
    "$id": "2",
    "kind": "model",
+   "name": "User",
+   "crossLanguageDefinitionId": "Payload.Pageable.User",
+   "usage": "Output,Json",
+   "description": "User model",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "3",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "description": "User name",
+     "type": {
+      "$id": "4",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "Payload.Pageable.User.name"
+    }
+   ]
+  },
+  {
+   "$id": "5",
+   "kind": "model",
    "name": "PagedUser",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
@@ -14,45 +45,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "3",
+     "$id": "6",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "description": "The User items on this page",
      "type": {
-      "$id": "4",
+      "$id": "7",
       "kind": "array",
       "name": "ArrayUser",
       "valueType": {
-       "$id": "5",
-       "kind": "model",
-       "name": "User",
-       "crossLanguageDefinitionId": "Payload.Pageable.User",
-       "usage": "Output,Json",
-       "description": "User model",
-       "decorators": [],
-       "properties": [
-        {
-         "$id": "6",
-         "kind": "property",
-         "name": "name",
-         "serializedName": "name",
-         "description": "User name",
-         "type": {
-          "$id": "7",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "optional": false,
-         "readOnly": false,
-         "discriminator": false,
-         "flatten": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "Payload.Pageable.User.name"
-        }
-       ]
+       "$ref": "2"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -92,9 +95,6 @@
      "crossLanguageDefinitionId": "Azure.Core.Page.nextLink"
     }
    ]
-  },
-  {
-   "$ref": "5"
   }
  ],
  "Clients": [
@@ -198,7 +198,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$ref": "5"
        },
        "BodyMediaType": "Json",
        "Headers": [],

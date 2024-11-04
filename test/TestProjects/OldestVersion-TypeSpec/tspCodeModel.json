@@ -8,8 +8,8 @@
   {
    "$id": "2",
    "kind": "enum",
-   "name": "OperationState",
-   "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "name": "ApiVersions",
+   "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ApiVersions",
    "valueType": {
     "$id": "3",
     "kind": "string",
@@ -21,8 +21,8 @@
     {
      "$id": "4",
      "kind": "enumvalue",
-     "name": "NotStarted",
-     "value": "NotStarted",
+     "name": "v2022_06_01_preview",
+     "value": "2022-06-01-preview",
      "valueType": {
       "$id": "5",
       "kind": "string",
@@ -33,32 +33,32 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "The operation has not started.",
      "decorators": []
-    },
-    {
-     "$id": "6",
-     "kind": "enumvalue",
-     "name": "Running",
-     "value": "Running",
-     "valueType": {
-      "$id": "7",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "2"
-     },
-     "description": "The operation is in progress.",
-     "decorators": []
-    },
+    }
+   ],
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "ApiVersionEnum",
+   "decorators": []
+  },
+  {
+   "$id": "6",
+   "kind": "enum",
+   "name": "OperationState",
+   "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "valueType": {
+    "$id": "7",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
     {
      "$id": "8",
      "kind": "enumvalue",
-     "name": "Succeeded",
-     "value": "Succeeded",
+     "name": "NotStarted",
+     "value": "NotStarted",
      "valueType": {
       "$id": "9",
       "kind": "string",
@@ -67,16 +67,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "2"
+      "$ref": "6"
      },
-     "description": "The operation has completed successfully.",
+     "description": "The operation has not started.",
      "decorators": []
     },
     {
      "$id": "10",
      "kind": "enumvalue",
-     "name": "Failed",
-     "value": "Failed",
+     "name": "Running",
+     "value": "Running",
      "valueType": {
       "$id": "11",
       "kind": "string",
@@ -85,16 +85,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "2"
+      "$ref": "6"
      },
-     "description": "The operation has failed.",
+     "description": "The operation is in progress.",
      "decorators": []
     },
     {
      "$id": "12",
      "kind": "enumvalue",
-     "name": "Canceled",
-     "value": "Canceled",
+     "name": "Succeeded",
+     "value": "Succeeded",
      "valueType": {
       "$id": "13",
       "kind": "string",
@@ -103,7 +103,43 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "2"
+      "$ref": "6"
+     },
+     "description": "The operation has completed successfully.",
+     "decorators": []
+    },
+    {
+     "$id": "14",
+     "kind": "enumvalue",
+     "name": "Failed",
+     "value": "Failed",
+     "valueType": {
+      "$id": "15",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "6"
+     },
+     "description": "The operation has failed.",
+     "decorators": []
+    },
+    {
+     "$id": "16",
+     "kind": "enumvalue",
+     "name": "Canceled",
+     "value": "Canceled",
+     "valueType": {
+      "$id": "17",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "6"
      },
      "description": "The operation has been canceled by the user.",
      "decorators": []
@@ -114,47 +150,164 @@
    "isFlags": false,
    "usage": "Output,Json",
    "decorators": []
-  },
-  {
-   "$id": "14",
-   "kind": "enum",
-   "name": "ApiVersions",
-   "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ApiVersions",
-   "valueType": {
-    "$id": "15",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "16",
-     "kind": "enumvalue",
-     "name": "v2022_06_01_preview",
-     "value": "2022-06-01-preview",
-     "valueType": {
-      "$id": "17",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "14"
-     },
-     "decorators": []
-    }
-   ],
-   "isFixed": true,
-   "isFlags": false,
-   "usage": "ApiVersionEnum",
-   "decorators": []
   }
  ],
  "Models": [
   {
    "$id": "18",
+   "kind": "model",
+   "name": "ExportedResource",
+   "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource",
+   "usage": "Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "19",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "type": {
+      "$id": "20",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.id"
+    },
+    {
+     "$id": "21",
+     "kind": "property",
+     "name": "resourceUri",
+     "serializedName": "resourceUri",
+     "type": {
+      "$id": "22",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.resourceUri"
+    },
+    {
+     "$id": "23",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
+      "$id": "24",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.name"
+    },
+    {
+     "$id": "25",
+     "kind": "property",
+     "name": "type",
+     "serializedName": "type",
+     "type": {
+      "$id": "26",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.type"
+    }
+   ]
+  },
+  {
+   "$id": "27",
+   "kind": "model",
+   "name": "Resource",
+   "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "28",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "type": {
+      "$id": "29",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.id"
+    },
+    {
+     "$id": "30",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
+      "$id": "31",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.name"
+    },
+    {
+     "$id": "32",
+     "kind": "property",
+     "name": "type",
+     "serializedName": "type",
+     "type": {
+      "$id": "33",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.type"
+    }
+   ]
+  },
+  {
+   "$id": "34",
    "kind": "model",
    "name": "ResourceOperationStatusResourceExportedResourceError",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
@@ -163,13 +316,13 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "19",
+     "$id": "35",
      "kind": "property",
      "name": "id",
      "serializedName": "id",
      "description": "The unique ID of the operation.",
      "type": {
-      "$id": "20",
+      "$id": "36",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -183,13 +336,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
     },
     {
-     "$id": "21",
+     "$id": "37",
      "kind": "property",
      "name": "status",
      "serializedName": "status",
      "description": "The status of the operation",
      "type": {
-      "$ref": "2"
+      "$ref": "6"
      },
      "optional": false,
      "readOnly": false,
@@ -199,13 +352,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
     },
     {
-     "$id": "22",
+     "$id": "38",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "description": "Error object that describes the error when status is \"Failed\".",
      "type": {
-      "$id": "23",
+      "$id": "39",
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
@@ -214,13 +367,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "24",
+        "$id": "40",
         "kind": "property",
         "name": "code",
         "serializedName": "code",
         "description": "One of a server-defined set of error codes.",
         "type": {
-         "$id": "25",
+         "$id": "41",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -234,13 +387,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
        },
        {
-        "$id": "26",
+        "$id": "42",
         "kind": "property",
         "name": "message",
         "serializedName": "message",
         "description": "A human-readable representation of the error.",
         "type": {
-         "$id": "27",
+         "$id": "43",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -254,13 +407,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
        },
        {
-        "$id": "28",
+        "$id": "44",
         "kind": "property",
         "name": "target",
         "serializedName": "target",
         "description": "The target of the error.",
         "type": {
-         "$id": "29",
+         "$id": "45",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -274,17 +427,17 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
        },
        {
-        "$id": "30",
+        "$id": "46",
         "kind": "property",
         "name": "details",
         "serializedName": "details",
         "description": "An array of details about specific errors that led to this reported error.",
         "type": {
-         "$id": "31",
+         "$id": "47",
          "kind": "array",
          "name": "ArrayError",
          "valueType": {
-          "$ref": "23"
+          "$ref": "39"
          },
          "crossLanguageDefinitionId": "TypeSpec.Array",
          "decorators": []
@@ -297,13 +450,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
        },
        {
-        "$id": "32",
+        "$id": "48",
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
         "description": "An object containing more specific information than the current object about the error.",
         "type": {
-         "$id": "33",
+         "$id": "49",
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
@@ -312,13 +465,13 @@
          "decorators": [],
          "properties": [
           {
-           "$id": "34",
+           "$id": "50",
            "kind": "property",
            "name": "code",
            "serializedName": "code",
            "description": "One of a server-defined set of error codes.",
            "type": {
-            "$id": "35",
+            "$id": "51",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -332,13 +485,13 @@
            "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
           },
           {
-           "$id": "36",
+           "$id": "52",
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
            "description": "Inner error.",
            "type": {
-            "$ref": "33"
+            "$ref": "49"
            },
            "optional": true,
            "readOnly": false,
@@ -366,96 +519,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
     },
     {
-     "$id": "37",
+     "$id": "53",
      "kind": "property",
      "name": "result",
      "serializedName": "result",
      "description": "The result of the operation.",
      "type": {
-      "$id": "38",
-      "kind": "model",
-      "name": "ExportedResource",
-      "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource",
-      "usage": "Output,Json",
-      "decorators": [],
-      "properties": [
-       {
-        "$id": "39",
-        "kind": "property",
-        "name": "id",
-        "serializedName": "id",
-        "type": {
-         "$id": "40",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.id"
-       },
-       {
-        "$id": "41",
-        "kind": "property",
-        "name": "resourceUri",
-        "serializedName": "resourceUri",
-        "type": {
-         "$id": "42",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.resourceUri"
-       },
-       {
-        "$id": "43",
-        "kind": "property",
-        "name": "name",
-        "serializedName": "name",
-        "type": {
-         "$id": "44",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.name"
-       },
-       {
-        "$id": "45",
-        "kind": "property",
-        "name": "type",
-        "serializedName": "type",
-        "type": {
-         "$id": "46",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.ExportedResource.type"
-       }
-      ]
+      "$ref": "18"
      },
      "optional": true,
      "readOnly": false,
@@ -467,43 +537,13 @@
    ]
   },
   {
-   "$ref": "23"
+   "$ref": "39"
   },
   {
-   "$ref": "33"
+   "$ref": "49"
   },
   {
-   "$ref": "38"
-  },
-  {
-   "$id": "47",
-   "kind": "model",
-   "name": "ErrorResponse",
-   "crossLanguageDefinitionId": "Azure.Core.Foundations.ErrorResponse",
-   "usage": "Output,Error,Json",
-   "description": "A response containing error details.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "48",
-     "kind": "property",
-     "name": "error",
-     "serializedName": "error",
-     "description": "The error object.",
-     "type": {
-      "$ref": "23"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.ErrorResponse.error"
-    }
-   ]
-  },
-  {
-   "$id": "49",
+   "$id": "54",
    "kind": "model",
    "name": "PagedResource",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
@@ -512,81 +552,17 @@
    "decorators": [],
    "properties": [
     {
-     "$id": "50",
+     "$id": "55",
      "kind": "property",
      "name": "value",
      "serializedName": "value",
      "description": "The Resource items on this page",
      "type": {
-      "$id": "51",
+      "$id": "56",
       "kind": "array",
       "name": "ArrayResource",
       "valueType": {
-       "$id": "52",
-       "kind": "model",
-       "name": "Resource",
-       "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource",
-       "usage": "Input,Output,Json",
-       "decorators": [],
-       "properties": [
-        {
-         "$id": "53",
-         "kind": "property",
-         "name": "id",
-         "serializedName": "id",
-         "type": {
-          "$id": "54",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "optional": false,
-         "readOnly": true,
-         "discriminator": false,
-         "flatten": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.id"
-        },
-        {
-         "$id": "55",
-         "kind": "property",
-         "name": "name",
-         "serializedName": "name",
-         "type": {
-          "$id": "56",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "optional": false,
-         "readOnly": true,
-         "discriminator": false,
-         "flatten": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.name"
-        },
-        {
-         "$id": "57",
-         "kind": "property",
-         "name": "type",
-         "serializedName": "type",
-         "type": {
-          "$id": "58",
-          "kind": "string",
-          "name": "string",
-          "crossLanguageDefinitionId": "TypeSpec.string",
-          "decorators": []
-         },
-         "optional": false,
-         "readOnly": false,
-         "discriminator": false,
-         "flatten": false,
-         "decorators": [],
-         "crossLanguageDefinitionId": "TypeSpec.Versioning.Oldest.Resource.type"
-        }
-       ]
+       "$ref": "27"
       },
       "crossLanguageDefinitionId": "TypeSpec.Array",
       "decorators": []
@@ -599,18 +575,18 @@
      "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.value"
     },
     {
-     "$id": "59",
+     "$id": "57",
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
      "description": "The link to the next page of items",
      "type": {
-      "$id": "60",
+      "$id": "58",
       "kind": "url",
       "name": "ResourceLocation",
       "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
       "baseType": {
-       "$id": "61",
+       "$id": "59",
        "kind": "url",
        "name": "url",
        "crossLanguageDefinitionId": "TypeSpec.url",
@@ -626,27 +602,24 @@
      "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage.nextLink"
     }
    ]
-  },
-  {
-   "$ref": "52"
   }
  ],
  "Clients": [
   {
-   "$id": "62",
+   "$id": "60",
    "Name": "OldestClient",
    "Operations": [],
    "Protocol": {
-    "$id": "63"
+    "$id": "61"
    },
    "Parameters": [
     {
-     "$id": "64",
+     "$id": "62",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Service host",
      "Type": {
-      "$id": "65",
+      "$id": "63",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -665,21 +638,21 @@
    "Decorators": []
   },
   {
-   "$id": "66",
+   "$id": "64",
    "Name": "ResourceOperations",
    "Operations": [],
    "Protocol": {
-    "$id": "67"
+    "$id": "65"
    },
    "Parent": "OldestClient",
    "Parameters": [
     {
-     "$id": "68",
+     "$id": "66",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Service host",
      "Type": {
-      "$id": "69",
+      "$id": "67",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -698,23 +671,23 @@
    "Decorators": []
   },
   {
-   "$id": "70",
+   "$id": "68",
    "Name": "VersioningOp",
    "Operations": [
     {
-     "$id": "71",
+     "$id": "69",
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "72",
+       "$id": "70",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Description": "Service host",
        "Type": {
-        "$id": "73",
+        "$id": "71",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -730,12 +703,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "74",
+       "$id": "72",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "75",
+        "$id": "73",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -749,9 +722,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "76",
+        "$id": "74",
         "Type": {
-         "$id": "77",
+         "$id": "75",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -762,11 +735,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "78",
+       "$id": "76",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "79",
+        "$id": "77",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -783,9 +756,30 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "80",
+       "$id": "78",
        "Name": "projectFileVersion",
        "NameInRequest": "projectFileVersion",
+       "Type": {
+        "$id": "79",
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
+       },
+       "Location": "Query",
+       "IsApiVersion": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "Explode": false,
+       "IsRequired": false,
+       "Kind": "Method",
+       "Decorators": [],
+       "SkipUrlEncoding": false
+      },
+      {
+       "$id": "80",
+       "Name": "removedQueryParam",
+       "NameInRequest": "removedQueryParam",
        "Type": {
         "$id": "81",
         "kind": "string",
@@ -805,31 +799,10 @@
       },
       {
        "$id": "82",
-       "Name": "removedQueryParam",
-       "NameInRequest": "removedQueryParam",
-       "Type": {
-        "$id": "83",
-        "kind": "string",
-        "name": "string",
-        "crossLanguageDefinitionId": "TypeSpec.string",
-        "decorators": []
-       },
-       "Location": "Query",
-       "IsApiVersion": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "Explode": false,
-       "IsRequired": false,
-       "Kind": "Method",
-       "Decorators": [],
-       "SkipUrlEncoding": false
-      },
-      {
-       "$id": "84",
        "Name": "maxLines",
        "NameInRequest": "maxLines",
        "Type": {
-        "$id": "85",
+        "$id": "83",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -846,14 +819,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "86",
+       "$id": "84",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "87",
+        "$id": "85",
         "kind": "constant",
         "valueType": {
-         "$id": "88",
+         "$id": "86",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -875,27 +848,27 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "87",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "18"
+        "$ref": "34"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "90",
+         "$id": "88",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "91",
+          "$id": "89",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "92",
+           "$id": "90",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -917,15 +890,15 @@
      "Path": "/versioning/resources/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "93",
+      "$id": "91",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "94",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "18"
+        "$ref": "34"
        },
        "BodyMediaType": "Json"
       },
@@ -937,22 +910,22 @@
      "Decorators": []
     },
     {
-     "$id": "95",
+     "$id": "93",
      "Name": "list",
      "ResourceName": "Resource",
      "Description": "Resource list operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "72"
+       "$ref": "70"
       },
       {
-       "$id": "96",
+       "$id": "94",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "97",
+        "$id": "95",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -966,9 +939,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "96",
         "Type": {
-         "$id": "99",
+         "$id": "97",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -979,16 +952,16 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "100",
+       "$id": "98",
        "Name": "select",
        "NameInRequest": "select",
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
-        "$id": "101",
+        "$id": "99",
         "kind": "array",
         "name": "Array",
         "valueType": {
-         "$id": "102",
+         "$id": "100",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1008,11 +981,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "103",
+       "$id": "101",
        "Name": "expand",
        "NameInRequest": "expand",
        "Type": {
-        "$id": "104",
+        "$id": "102",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1029,14 +1002,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "105",
+       "$id": "103",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "104",
         "kind": "constant",
         "valueType": {
-         "$id": "107",
+         "$id": "105",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1058,12 +1031,12 @@
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "106",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "49"
+        "$ref": "54"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1079,7 +1052,7 @@
      "Path": "/versioning/resources",
      "BufferResponse": true,
      "Paging": {
-      "$id": "109",
+      "$id": "107",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -1089,22 +1062,22 @@
      "Decorators": []
     },
     {
-     "$id": "110",
+     "$id": "108",
      "Name": "create",
      "ResourceName": "Resource",
      "Description": "Create or replace operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "72"
+       "$ref": "70"
       },
       {
-       "$id": "111",
+       "$id": "109",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "112",
+        "$id": "110",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1118,9 +1091,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "113",
+        "$id": "111",
         "Type": {
-         "$id": "114",
+         "$id": "112",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1131,11 +1104,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "115",
+       "$id": "113",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "116",
+        "$id": "114",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1152,15 +1125,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "117",
+       "$id": "115",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "118",
+        "$id": "116",
         "kind": "constant",
         "valueType": {
-         "$id": "119",
+         "$id": "117",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1180,14 +1153,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "120",
+       "$id": "118",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "121",
+        "$id": "119",
         "kind": "constant",
         "valueType": {
-         "$id": "122",
+         "$id": "120",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1207,12 +1180,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "123",
+       "$id": "121",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
        "Type": {
-        "$ref": "52"
+        "$ref": "27"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -1227,12 +1200,12 @@
      ],
      "Responses": [
       {
-       "$id": "124",
+       "$id": "122",
        "StatusCodes": [
         201
        ],
        "BodyType": {
-        "$ref": "52"
+        "$ref": "27"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1242,12 +1215,12 @@
        ]
       },
       {
-       "$id": "125",
+       "$id": "123",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "52"
+        "$ref": "27"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1272,12 +1245,12 @@
     }
    ],
    "Protocol": {
-    "$id": "126"
+    "$id": "124"
    },
    "Parent": "OldestClient",
    "Parameters": [
     {
-     "$ref": "72"
+     "$ref": "70"
     }
    ],
    "Decorators": []

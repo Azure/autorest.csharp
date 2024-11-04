@@ -348,8 +348,8 @@
   {
    "$id": "36",
    "kind": "enum",
-   "name": "OperationState",
-   "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "name": "StringFixedEnum",
+   "crossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
    "valueType": {
     "$id": "37",
     "kind": "string",
@@ -361,8 +361,8 @@
     {
      "$id": "38",
      "kind": "enumvalue",
-     "name": "NotStarted",
-     "value": "NotStarted",
+     "name": "One",
+     "value": "1",
      "valueType": {
       "$id": "39",
       "kind": "string",
@@ -373,14 +373,13 @@
      "enumType": {
       "$ref": "36"
      },
-     "description": "The operation has not started.",
      "decorators": []
     },
     {
      "$id": "40",
      "kind": "enumvalue",
-     "name": "Running",
-     "value": "Running",
+     "name": "Two",
+     "value": "2",
      "valueType": {
       "$id": "41",
       "kind": "string",
@@ -391,14 +390,13 @@
      "enumType": {
       "$ref": "36"
      },
-     "description": "The operation is in progress.",
      "decorators": []
     },
     {
      "$id": "42",
      "kind": "enumvalue",
-     "name": "Succeeded",
-     "value": "Succeeded",
+     "name": "Four",
+     "value": "4",
      "valueType": {
       "$id": "43",
       "kind": "string",
@@ -408,114 +406,6 @@
      },
      "enumType": {
       "$ref": "36"
-     },
-     "description": "The operation has completed successfully.",
-     "decorators": []
-    },
-    {
-     "$id": "44",
-     "kind": "enumvalue",
-     "name": "Failed",
-     "value": "Failed",
-     "valueType": {
-      "$id": "45",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "36"
-     },
-     "description": "The operation has failed.",
-     "decorators": []
-    },
-    {
-     "$id": "46",
-     "kind": "enumvalue",
-     "name": "Canceled",
-     "value": "Canceled",
-     "valueType": {
-      "$id": "47",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "36"
-     },
-     "description": "The operation has been canceled by the user.",
-     "decorators": []
-    }
-   ],
-   "description": "Enum describing allowed operation states.",
-   "isFixed": false,
-   "isFlags": false,
-   "usage": "Json",
-   "decorators": []
-  },
-  {
-   "$id": "48",
-   "kind": "enum",
-   "name": "StringFixedEnum",
-   "crossLanguageDefinitionId": "FirstTestTypeSpec.StringFixedEnum",
-   "valueType": {
-    "$id": "49",
-    "kind": "string",
-    "name": "string",
-    "crossLanguageDefinitionId": "TypeSpec.string",
-    "decorators": []
-   },
-   "values": [
-    {
-     "$id": "50",
-     "kind": "enumvalue",
-     "name": "One",
-     "value": "1",
-     "valueType": {
-      "$id": "51",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "48"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "52",
-     "kind": "enumvalue",
-     "name": "Two",
-     "value": "2",
-     "valueType": {
-      "$id": "53",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "48"
-     },
-     "decorators": []
-    },
-    {
-     "$id": "54",
-     "kind": "enumvalue",
-     "name": "Four",
-     "value": "4",
-     "valueType": {
-      "$id": "55",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "48"
      },
      "decorators": []
     }
@@ -527,12 +417,12 @@
    "decorators": []
   },
   {
-   "$id": "56",
+   "$id": "44",
    "kind": "enum",
    "name": "StringExtensibleEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.StringExtensibleEnum",
    "valueType": {
-    "$id": "57",
+    "$id": "45",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -540,53 +430,53 @@
    },
    "values": [
     {
-     "$id": "58",
+     "$id": "46",
      "kind": "enumvalue",
      "name": "One",
      "value": "1",
      "valueType": {
-      "$id": "59",
+      "$id": "47",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "56"
+      "$ref": "44"
      },
      "decorators": []
     },
     {
-     "$id": "60",
+     "$id": "48",
      "kind": "enumvalue",
      "name": "Two",
      "value": "2",
      "valueType": {
-      "$id": "61",
+      "$id": "49",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "56"
+      "$ref": "44"
      },
      "decorators": []
     },
     {
-     "$id": "62",
+     "$id": "50",
      "kind": "enumvalue",
      "name": "Four",
      "value": "4",
      "valueType": {
-      "$id": "63",
+      "$id": "51",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "56"
+      "$ref": "44"
      },
      "decorators": []
     }
@@ -598,12 +488,12 @@
    "decorators": []
   },
   {
-   "$id": "64",
+   "$id": "52",
    "kind": "enum",
    "name": "IntExtensibleEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.IntExtensibleEnum",
    "valueType": {
-    "$id": "65",
+    "$id": "53",
     "kind": "int32",
     "name": "int32",
     "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -611,53 +501,53 @@
    },
    "values": [
     {
-     "$id": "66",
+     "$id": "54",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "67",
+      "$id": "55",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "64"
+      "$ref": "52"
      },
      "decorators": []
     },
     {
-     "$id": "68",
+     "$id": "56",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "69",
+      "$id": "57",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "64"
+      "$ref": "52"
      },
      "decorators": []
     },
     {
-     "$id": "70",
+     "$id": "58",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "71",
+      "$id": "59",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "64"
+      "$ref": "52"
      },
      "decorators": []
     }
@@ -669,12 +559,12 @@
    "decorators": []
   },
   {
-   "$id": "72",
+   "$id": "60",
    "kind": "enum",
    "name": "FloatExtensibleEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.FloatExtensibleEnum",
    "valueType": {
-    "$id": "73",
+    "$id": "61",
     "kind": "float32",
     "name": "float32",
     "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -682,53 +572,53 @@
    },
    "values": [
     {
-     "$id": "74",
+     "$id": "62",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "75",
+      "$id": "63",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "72"
+      "$ref": "60"
      },
      "decorators": []
     },
     {
-     "$id": "76",
+     "$id": "64",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "77",
+      "$id": "65",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "72"
+      "$ref": "60"
      },
      "decorators": []
     },
     {
-     "$id": "78",
+     "$id": "66",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "79",
+      "$id": "67",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "72"
+      "$ref": "60"
      },
      "decorators": []
     }
@@ -740,12 +630,12 @@
    "decorators": []
   },
   {
-   "$id": "80",
+   "$id": "68",
    "kind": "enum",
    "name": "FloatFixedEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.FloatFixedEnum",
    "valueType": {
-    "$id": "81",
+    "$id": "69",
     "kind": "float32",
     "name": "float32",
     "crossLanguageDefinitionId": "TypeSpec.float32",
@@ -753,53 +643,53 @@
    },
    "values": [
     {
-     "$id": "82",
+     "$id": "70",
      "kind": "enumvalue",
      "name": "One",
      "value": 1.1,
      "valueType": {
-      "$id": "83",
+      "$id": "71",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "80"
+      "$ref": "68"
      },
      "decorators": []
     },
     {
-     "$id": "84",
+     "$id": "72",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2.2,
      "valueType": {
-      "$id": "85",
+      "$id": "73",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "80"
+      "$ref": "68"
      },
      "decorators": []
     },
     {
-     "$id": "86",
+     "$id": "74",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4.4,
      "valueType": {
-      "$id": "87",
+      "$id": "75",
       "kind": "float32",
       "name": "float32",
       "crossLanguageDefinitionId": "TypeSpec.float32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "80"
+      "$ref": "68"
      },
      "decorators": []
     }
@@ -811,12 +701,12 @@
    "decorators": []
   },
   {
-   "$id": "88",
+   "$id": "76",
    "kind": "enum",
    "name": "IntFixedEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.IntFixedEnum",
    "valueType": {
-    "$id": "89",
+    "$id": "77",
     "kind": "int32",
     "name": "int32",
     "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -824,53 +714,53 @@
    },
    "values": [
     {
-     "$id": "90",
+     "$id": "78",
      "kind": "enumvalue",
      "name": "One",
      "value": 1,
      "valueType": {
-      "$id": "91",
+      "$id": "79",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "88"
+      "$ref": "76"
      },
      "decorators": []
     },
     {
-     "$id": "92",
+     "$id": "80",
      "kind": "enumvalue",
      "name": "Two",
      "value": 2,
      "valueType": {
-      "$id": "93",
+      "$id": "81",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "88"
+      "$ref": "76"
      },
      "decorators": []
     },
     {
-     "$id": "94",
+     "$id": "82",
      "kind": "enumvalue",
      "name": "Four",
      "value": 4,
      "valueType": {
-      "$id": "95",
+      "$id": "83",
       "kind": "int32",
       "name": "int32",
       "crossLanguageDefinitionId": "TypeSpec.int32",
       "decorators": []
      },
      "enumType": {
-      "$ref": "88"
+      "$ref": "76"
      },
      "decorators": []
     }
@@ -882,12 +772,12 @@
    "decorators": []
   },
   {
-   "$id": "96",
+   "$id": "84",
    "kind": "enum",
    "name": "Versions",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Versions",
    "valueType": {
-    "$id": "97",
+    "$id": "85",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -895,19 +785,19 @@
    },
    "values": [
     {
-     "$id": "98",
+     "$id": "86",
      "kind": "enumvalue",
      "name": "2022-05-15-preview",
      "value": "2022-05-15-preview",
      "valueType": {
-      "$id": "99",
+      "$id": "87",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
       "decorators": []
      },
      "enumType": {
-      "$ref": "96"
+      "$ref": "84"
      },
      "decorators": []
     }
@@ -918,12 +808,12 @@
    "decorators": []
   },
   {
-   "$id": "100",
+   "$id": "88",
    "kind": "enum",
    "name": "DaysOfWeekExtensibleEnum",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.DaysOfWeekExtensibleEnum",
    "valueType": {
-    "$id": "101",
+    "$id": "89",
     "kind": "string",
     "name": "string",
     "crossLanguageDefinitionId": "TypeSpec.string",
@@ -931,10 +821,112 @@
    },
    "values": [
     {
-     "$id": "102",
+     "$id": "90",
      "kind": "enumvalue",
      "name": "Monday",
      "value": "Monday",
+     "valueType": {
+      "$id": "91",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "92",
+     "kind": "enumvalue",
+     "name": "Tuesday",
+     "value": "Tuesday",
+     "valueType": {
+      "$id": "93",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "94",
+     "kind": "enumvalue",
+     "name": "Wednesday",
+     "value": "Wednesday",
+     "valueType": {
+      "$id": "95",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "96",
+     "kind": "enumvalue",
+     "name": "Thursday",
+     "value": "Thursday",
+     "valueType": {
+      "$id": "97",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "98",
+     "kind": "enumvalue",
+     "name": "Friday",
+     "value": "Friday",
+     "valueType": {
+      "$id": "99",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "100",
+     "kind": "enumvalue",
+     "name": "Saturday",
+     "value": "Saturday",
+     "valueType": {
+      "$id": "101",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "88"
+     },
+     "decorators": []
+    },
+    {
+     "$id": "102",
+     "kind": "enumvalue",
+     "name": "Sunday",
+     "value": "Sunday",
      "valueType": {
       "$id": "103",
       "kind": "string",
@@ -943,32 +935,34 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "88"
      },
      "decorators": []
-    },
-    {
-     "$id": "104",
-     "kind": "enumvalue",
-     "name": "Tuesday",
-     "value": "Tuesday",
-     "valueType": {
-      "$id": "105",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "enumType": {
-      "$ref": "100"
-     },
-     "decorators": []
-    },
+    }
+   ],
+   "isFixed": false,
+   "isFlags": false,
+   "usage": "None",
+   "decorators": []
+  },
+  {
+   "$id": "104",
+   "kind": "enum",
+   "name": "OperationState",
+   "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationState",
+   "valueType": {
+    "$id": "105",
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
+   },
+   "values": [
     {
      "$id": "106",
      "kind": "enumvalue",
-     "name": "Wednesday",
-     "value": "Wednesday",
+     "name": "NotStarted",
+     "value": "NotStarted",
      "valueType": {
       "$id": "107",
       "kind": "string",
@@ -977,15 +971,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "104"
      },
+     "description": "The operation has not started.",
      "decorators": []
     },
     {
      "$id": "108",
      "kind": "enumvalue",
-     "name": "Thursday",
-     "value": "Thursday",
+     "name": "Running",
+     "value": "Running",
      "valueType": {
       "$id": "109",
       "kind": "string",
@@ -994,15 +989,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "104"
      },
+     "description": "The operation is in progress.",
      "decorators": []
     },
     {
      "$id": "110",
      "kind": "enumvalue",
-     "name": "Friday",
-     "value": "Friday",
+     "name": "Succeeded",
+     "value": "Succeeded",
      "valueType": {
       "$id": "111",
       "kind": "string",
@@ -1011,15 +1007,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "104"
      },
+     "description": "The operation has completed successfully.",
      "decorators": []
     },
     {
      "$id": "112",
      "kind": "enumvalue",
-     "name": "Saturday",
-     "value": "Saturday",
+     "name": "Failed",
+     "value": "Failed",
      "valueType": {
       "$id": "113",
       "kind": "string",
@@ -1028,15 +1025,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "104"
      },
+     "description": "The operation has failed.",
      "decorators": []
     },
     {
      "$id": "114",
      "kind": "enumvalue",
-     "name": "Sunday",
-     "value": "Sunday",
+     "name": "Canceled",
+     "value": "Canceled",
      "valueType": {
       "$id": "115",
       "kind": "string",
@@ -1045,14 +1043,16 @@
       "decorators": []
      },
      "enumType": {
-      "$ref": "100"
+      "$ref": "104"
      },
+     "description": "The operation has been canceled by the user.",
      "decorators": []
     }
    ],
+   "description": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
-   "usage": "None",
+   "usage": "Json",
    "decorators": []
   }
  ],
@@ -1921,10 +1921,9 @@
   {
    "$id": "202",
    "kind": "model",
-   "name": "ResourceOperationStatusResourceExportedResourceError",
-   "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
+   "name": "ExportedResource",
+   "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource",
    "usage": "Json",
-   "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
     {
@@ -1932,9 +1931,713 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The unique ID of the operation.",
      "type": {
       "$id": "204",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource.id"
+    },
+    {
+     "$id": "205",
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
+      "$id": "206",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource.name"
+    }
+   ]
+  },
+  {
+   "$id": "207",
+   "kind": "model",
+   "name": "RoundTripModel",
+   "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
+   "usage": "Input,Output,Json",
+   "description": "this is a roundtrip model",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "208",
+     "kind": "property",
+     "name": "requiredString",
+     "serializedName": "requiredString",
+     "description": "Required string, illustrating a reference type property.",
+     "type": {
+      "$id": "209",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredString"
+    },
+    {
+     "$id": "210",
+     "kind": "property",
+     "name": "requiredInt",
+     "serializedName": "requiredInt",
+     "description": "Required int, illustrating a value type property.",
+     "type": {
+      "$id": "211",
+      "kind": "int32",
+      "name": "int32",
+      "crossLanguageDefinitionId": "TypeSpec.int32",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredInt"
+    },
+    {
+     "$id": "212",
+     "kind": "property",
+     "name": "requiredCollection",
+     "serializedName": "requiredCollection",
+     "description": "Required collection of enums",
+     "type": {
+      "$id": "213",
+      "kind": "array",
+      "name": "ArrayStringFixedEnum",
+      "valueType": {
+       "$ref": "36"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredCollection"
+    },
+    {
+     "$id": "214",
+     "kind": "property",
+     "name": "requiredDictionary",
+     "serializedName": "requiredDictionary",
+     "description": "Required dictionary of enums",
+     "type": {
+      "$id": "215",
+      "kind": "dict",
+      "keyType": {
+       "$id": "216",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "valueType": {
+       "$ref": "44"
+      },
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredDictionary"
+    },
+    {
+     "$id": "217",
+     "kind": "property",
+     "name": "requiredModel",
+     "serializedName": "requiredModel",
+     "description": "Required model",
+     "type": {
+      "$ref": "116"
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredModel"
+    },
+    {
+     "$id": "218",
+     "kind": "property",
+     "name": "intExtensibleEnum",
+     "serializedName": "intExtensibleEnum",
+     "description": "this is an int based extensible enum",
+     "type": {
+      "$ref": "52"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnum"
+    },
+    {
+     "$id": "219",
+     "kind": "property",
+     "name": "intExtensibleEnumCollection",
+     "serializedName": "intExtensibleEnumCollection",
+     "description": "this is a collection of int based extensible enum",
+     "type": {
+      "$id": "220",
+      "kind": "array",
+      "name": "ArrayIntExtensibleEnum",
+      "valueType": {
+       "$ref": "52"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnumCollection"
+    },
+    {
+     "$id": "221",
+     "kind": "property",
+     "name": "floatExtensibleEnum",
+     "serializedName": "floatExtensibleEnum",
+     "description": "this is a float based extensible enum",
+     "type": {
+      "$ref": "60"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnum"
+    },
+    {
+     "$id": "222",
+     "kind": "property",
+     "name": "floatExtensibleEnumCollection",
+     "serializedName": "floatExtensibleEnumCollection",
+     "description": "this is a collection of float based extensible enum",
+     "type": {
+      "$id": "223",
+      "kind": "array",
+      "name": "ArrayFloatExtensibleEnum",
+      "valueType": {
+       "$ref": "60"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnumCollection"
+    },
+    {
+     "$id": "224",
+     "kind": "property",
+     "name": "floatFixedEnum",
+     "serializedName": "floatFixedEnum",
+     "description": "this is a float based fixed enum",
+     "type": {
+      "$ref": "68"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnum"
+    },
+    {
+     "$id": "225",
+     "kind": "property",
+     "name": "floatFixedEnumCollection",
+     "serializedName": "floatFixedEnumCollection",
+     "description": "this is a collection of float based fixed enum",
+     "type": {
+      "$id": "226",
+      "kind": "array",
+      "name": "ArrayFloatFixedEnum",
+      "valueType": {
+       "$ref": "68"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnumCollection"
+    },
+    {
+     "$id": "227",
+     "kind": "property",
+     "name": "intFixedEnum",
+     "serializedName": "intFixedEnum",
+     "description": "this is a int based fixed enum",
+     "type": {
+      "$ref": "76"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnum"
+    },
+    {
+     "$id": "228",
+     "kind": "property",
+     "name": "intFixedEnumCollection",
+     "serializedName": "intFixedEnumCollection",
+     "description": "this is a collection of int based fixed enum",
+     "type": {
+      "$id": "229",
+      "kind": "array",
+      "name": "ArrayIntFixedEnum",
+      "valueType": {
+       "$ref": "76"
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnumCollection"
+    },
+    {
+     "$id": "230",
+     "kind": "property",
+     "name": "stringFixedEnum",
+     "serializedName": "stringFixedEnum",
+     "description": "this is a string based fixed enum",
+     "type": {
+      "$ref": "36"
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.stringFixedEnum"
+    },
+    {
+     "$id": "231",
+     "kind": "property",
+     "name": "requiredUnknown",
+     "serializedName": "requiredUnknown",
+     "description": "required unknown",
+     "type": {
+      "$id": "232",
+      "kind": "unknown",
+      "name": "unknown",
+      "crossLanguageDefinitionId": "",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredUnknown"
+    },
+    {
+     "$id": "233",
+     "kind": "property",
+     "name": "optionalUnknown",
+     "serializedName": "optionalUnknown",
+     "description": "optional unknown",
+     "type": {
+      "$id": "234",
+      "kind": "unknown",
+      "name": "unknown",
+      "crossLanguageDefinitionId": "",
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalUnknown"
+    },
+    {
+     "$id": "235",
+     "kind": "property",
+     "name": "requiredRecordUnknown",
+     "serializedName": "requiredRecordUnknown",
+     "description": "required record of unknown",
+     "type": {
+      "$id": "236",
+      "kind": "dict",
+      "keyType": {
+       "$id": "237",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "valueType": {
+       "$id": "238",
+       "kind": "unknown",
+       "name": "unknown",
+       "crossLanguageDefinitionId": "",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredRecordUnknown"
+    },
+    {
+     "$id": "239",
+     "kind": "property",
+     "name": "optionalRecordUnknown",
+     "serializedName": "optionalRecordUnknown",
+     "description": "optional record of unknown",
+     "type": {
+      "$id": "240",
+      "kind": "dict",
+      "keyType": {
+       "$id": "241",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "valueType": {
+       "$id": "242",
+       "kind": "unknown",
+       "name": "unknown",
+       "crossLanguageDefinitionId": "",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalRecordUnknown"
+    },
+    {
+     "$id": "243",
+     "kind": "property",
+     "name": "readOnlyRequiredRecordUnknown",
+     "serializedName": "readOnlyRequiredRecordUnknown",
+     "description": "required readonly record of unknown",
+     "type": {
+      "$id": "244",
+      "kind": "dict",
+      "keyType": {
+       "$id": "245",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "valueType": {
+       "$id": "246",
+       "kind": "unknown",
+       "name": "unknown",
+       "crossLanguageDefinitionId": "",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyRequiredRecordUnknown"
+    },
+    {
+     "$id": "247",
+     "kind": "property",
+     "name": "readOnlyOptionalRecordUnknown",
+     "serializedName": "readOnlyOptionalRecordUnknown",
+     "description": "optional readonly record of unknown",
+     "type": {
+      "$id": "248",
+      "kind": "dict",
+      "keyType": {
+       "$id": "249",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
+      },
+      "valueType": {
+       "$id": "250",
+       "kind": "unknown",
+       "name": "unknown",
+       "crossLanguageDefinitionId": "",
+       "decorators": []
+      },
+      "decorators": []
+     },
+     "optional": true,
+     "readOnly": true,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyOptionalRecordUnknown"
+    },
+    {
+     "$id": "251",
+     "kind": "property",
+     "name": "modelWithRequiredNullable",
+     "serializedName": "modelWithRequiredNullable",
+     "description": "this is a model with required nullable properties",
+     "type": {
+      "$id": "252",
+      "kind": "model",
+      "name": "ModelWithRequiredNullableProperties",
+      "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
+      "usage": "Input,Output,Json",
+      "description": "A model with a few required nullable properties",
+      "decorators": [],
+      "properties": [
+       {
+        "$id": "253",
+        "kind": "property",
+        "name": "requiredNullablePrimitive",
+        "serializedName": "requiredNullablePrimitive",
+        "description": "required nullable primitive type",
+        "type": {
+         "$id": "254",
+         "kind": "nullable",
+         "type": {
+          "$id": "255",
+          "kind": "int32",
+          "name": "int32",
+          "crossLanguageDefinitionId": "TypeSpec.int32",
+          "decorators": []
+         }
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredNullablePrimitive"
+       },
+       {
+        "$id": "256",
+        "kind": "property",
+        "name": "requiredExtensibleEnum",
+        "serializedName": "requiredExtensibleEnum",
+        "description": "required nullable extensible enum type",
+        "type": {
+         "$id": "257",
+         "kind": "nullable",
+         "type": {
+          "$ref": "44"
+         }
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredExtensibleEnum"
+       },
+       {
+        "$id": "258",
+        "kind": "property",
+        "name": "requiredFixedEnum",
+        "serializedName": "requiredFixedEnum",
+        "description": "required nullable fixed enum type",
+        "type": {
+         "$id": "259",
+         "kind": "nullable",
+         "type": {
+          "$ref": "36"
+         }
+        },
+        "optional": false,
+        "readOnly": false,
+        "discriminator": false,
+        "flatten": false,
+        "decorators": [],
+        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredFixedEnum"
+       }
+      ]
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.modelWithRequiredNullable"
+    },
+    {
+     "$id": "260",
+     "kind": "property",
+     "name": "unionList",
+     "serializedName": "unionList",
+     "description": "this is a list of union types",
+     "type": {
+      "$id": "261",
+      "kind": "array",
+      "name": "Array",
+      "valueType": {
+       "$id": "262",
+       "kind": "union",
+       "name": "RoundTripModelUnionList",
+       "variantTypes": [
+        {
+         "$id": "263",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
+        },
+        {
+         "$id": "264",
+         "kind": "int32",
+         "name": "int32",
+         "crossLanguageDefinitionId": "TypeSpec.int32",
+         "decorators": []
+        },
+        {
+         "$id": "265",
+         "kind": "model",
+         "name": "ModelForUnion",
+         "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
+         "usage": "Input,Output,Json",
+         "description": "This is a model only used in union types, please do not use it anywhere else.",
+         "decorators": [],
+         "properties": [
+          {
+           "$id": "266",
+           "kind": "property",
+           "name": "name",
+           "serializedName": "name",
+           "description": "name of the ModelForUnion",
+           "type": {
+            "$id": "267",
+            "kind": "string",
+            "name": "string",
+            "crossLanguageDefinitionId": "TypeSpec.string",
+            "decorators": []
+           },
+           "optional": false,
+           "readOnly": false,
+           "discriminator": false,
+           "flatten": false,
+           "decorators": [],
+           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.name"
+          },
+          {
+           "$id": "268",
+           "kind": "property",
+           "name": "age",
+           "serializedName": "age",
+           "description": "age of the ModelForUnion",
+           "type": {
+            "$id": "269",
+            "kind": "int32",
+            "name": "int32",
+            "crossLanguageDefinitionId": "TypeSpec.int32",
+            "decorators": []
+           },
+           "optional": true,
+           "readOnly": false,
+           "discriminator": false,
+           "flatten": false,
+           "decorators": [],
+           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.age"
+          }
+         ]
+        },
+        {
+         "$id": "270",
+         "kind": "array",
+         "name": "ArrayModelForUnion",
+         "valueType": {
+          "$ref": "265"
+         },
+         "crossLanguageDefinitionId": "TypeSpec.Array",
+         "decorators": []
+        }
+       ],
+       "decorators": []
+      },
+      "crossLanguageDefinitionId": "TypeSpec.Array",
+      "decorators": []
+     },
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.unionList"
+    }
+   ]
+  },
+  {
+   "$ref": "252"
+  },
+  {
+   "$ref": "265"
+  },
+  {
+   "$id": "271",
+   "kind": "model",
+   "name": "ResourceOperationStatusResourceExportedResourceError",
+   "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
+   "usage": "Json",
+   "description": "Provides status details for long running operations.",
+   "decorators": [],
+   "properties": [
+    {
+     "$id": "272",
+     "kind": "property",
+     "name": "id",
+     "serializedName": "id",
+     "description": "The unique ID of the operation.",
+     "type": {
+      "$id": "273",
       "kind": "string",
       "name": "string",
       "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1948,13 +2651,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.id"
     },
     {
-     "$id": "205",
+     "$id": "274",
      "kind": "property",
      "name": "status",
      "serializedName": "status",
      "description": "The status of the operation",
      "type": {
-      "$ref": "36"
+      "$ref": "104"
      },
      "optional": false,
      "readOnly": false,
@@ -1964,13 +2667,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.status"
     },
     {
-     "$id": "206",
+     "$id": "275",
      "kind": "property",
      "name": "error",
      "serializedName": "error",
      "description": "Error object that describes the error when status is \"Failed\".",
      "type": {
-      "$id": "207",
+      "$id": "276",
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
@@ -1979,13 +2682,13 @@
       "decorators": [],
       "properties": [
        {
-        "$id": "208",
+        "$id": "277",
         "kind": "property",
         "name": "code",
         "serializedName": "code",
         "description": "One of a server-defined set of error codes.",
         "type": {
-         "$id": "209",
+         "$id": "278",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1999,13 +2702,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.code"
        },
        {
-        "$id": "210",
+        "$id": "279",
         "kind": "property",
         "name": "message",
         "serializedName": "message",
         "description": "A human-readable representation of the error.",
         "type": {
-         "$id": "211",
+         "$id": "280",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2019,13 +2722,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.message"
        },
        {
-        "$id": "212",
+        "$id": "281",
         "kind": "property",
         "name": "target",
         "serializedName": "target",
         "description": "The target of the error.",
         "type": {
-         "$id": "213",
+         "$id": "282",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2039,17 +2742,17 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.target"
        },
        {
-        "$id": "214",
+        "$id": "283",
         "kind": "property",
         "name": "details",
         "serializedName": "details",
         "description": "An array of details about specific errors that led to this reported error.",
         "type": {
-         "$id": "215",
+         "$id": "284",
          "kind": "array",
          "name": "ArrayError",
          "valueType": {
-          "$ref": "207"
+          "$ref": "276"
          },
          "crossLanguageDefinitionId": "TypeSpec.Array",
          "decorators": []
@@ -2062,13 +2765,13 @@
         "crossLanguageDefinitionId": "Azure.Core.Foundations.Error.details"
        },
        {
-        "$id": "216",
+        "$id": "285",
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
         "description": "An object containing more specific information than the current object about the error.",
         "type": {
-         "$id": "217",
+         "$id": "286",
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
@@ -2077,13 +2780,13 @@
          "decorators": [],
          "properties": [
           {
-           "$id": "218",
+           "$id": "287",
            "kind": "property",
            "name": "code",
            "serializedName": "code",
            "description": "One of a server-defined set of error codes.",
            "type": {
-            "$id": "219",
+            "$id": "288",
             "kind": "string",
             "name": "string",
             "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2097,13 +2800,13 @@
            "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError.code"
           },
           {
-           "$id": "220",
+           "$id": "289",
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
            "description": "Inner error.",
            "type": {
-            "$ref": "217"
+            "$ref": "286"
            },
            "optional": true,
            "readOnly": false,
@@ -2131,58 +2834,13 @@
      "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus.error"
     },
     {
-     "$id": "221",
+     "$id": "290",
      "kind": "property",
      "name": "result",
      "serializedName": "result",
      "description": "The result of the operation.",
      "type": {
-      "$id": "222",
-      "kind": "model",
-      "name": "ExportedResource",
-      "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource",
-      "usage": "Json",
-      "decorators": [],
-      "properties": [
-       {
-        "$id": "223",
-        "kind": "property",
-        "name": "id",
-        "serializedName": "id",
-        "type": {
-         "$id": "224",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource.id"
-       },
-       {
-        "$id": "225",
-        "kind": "property",
-        "name": "name",
-        "serializedName": "name",
-        "type": {
-         "$id": "226",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "FirstTestTypeSpec.ExportedResource.name"
-       }
-      ]
+      "$ref": "202"
      },
      "optional": true,
      "readOnly": false,
@@ -2194,716 +2852,31 @@
    ]
   },
   {
-   "$ref": "207"
+   "$ref": "276"
   },
   {
-   "$ref": "217"
-  },
-  {
-   "$ref": "222"
-  },
-  {
-   "$id": "227",
-   "kind": "model",
-   "name": "ErrorResponse",
-   "crossLanguageDefinitionId": "Azure.Core.Foundations.ErrorResponse",
-   "usage": "Error,Json",
-   "description": "A response containing error details.",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "228",
-     "kind": "property",
-     "name": "error",
-     "serializedName": "error",
-     "description": "The error object.",
-     "type": {
-      "$ref": "207"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "Azure.Core.Foundations.ErrorResponse.error"
-    }
-   ]
-  },
-  {
-   "$id": "229",
-   "kind": "model",
-   "name": "RoundTripModel",
-   "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
-   "usage": "Input,Output,Json",
-   "description": "this is a roundtrip model",
-   "decorators": [],
-   "properties": [
-    {
-     "$id": "230",
-     "kind": "property",
-     "name": "requiredString",
-     "serializedName": "requiredString",
-     "description": "Required string, illustrating a reference type property.",
-     "type": {
-      "$id": "231",
-      "kind": "string",
-      "name": "string",
-      "crossLanguageDefinitionId": "TypeSpec.string",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredString"
-    },
-    {
-     "$id": "232",
-     "kind": "property",
-     "name": "requiredInt",
-     "serializedName": "requiredInt",
-     "description": "Required int, illustrating a value type property.",
-     "type": {
-      "$id": "233",
-      "kind": "int32",
-      "name": "int32",
-      "crossLanguageDefinitionId": "TypeSpec.int32",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredInt"
-    },
-    {
-     "$id": "234",
-     "kind": "property",
-     "name": "requiredCollection",
-     "serializedName": "requiredCollection",
-     "description": "Required collection of enums",
-     "type": {
-      "$id": "235",
-      "kind": "array",
-      "name": "ArrayStringFixedEnum",
-      "valueType": {
-       "$ref": "48"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredCollection"
-    },
-    {
-     "$id": "236",
-     "kind": "property",
-     "name": "requiredDictionary",
-     "serializedName": "requiredDictionary",
-     "description": "Required dictionary of enums",
-     "type": {
-      "$id": "237",
-      "kind": "dict",
-      "keyType": {
-       "$id": "238",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "valueType": {
-       "$ref": "56"
-      },
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredDictionary"
-    },
-    {
-     "$id": "239",
-     "kind": "property",
-     "name": "requiredModel",
-     "serializedName": "requiredModel",
-     "description": "Required model",
-     "type": {
-      "$ref": "116"
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredModel"
-    },
-    {
-     "$id": "240",
-     "kind": "property",
-     "name": "intExtensibleEnum",
-     "serializedName": "intExtensibleEnum",
-     "description": "this is an int based extensible enum",
-     "type": {
-      "$ref": "64"
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnum"
-    },
-    {
-     "$id": "241",
-     "kind": "property",
-     "name": "intExtensibleEnumCollection",
-     "serializedName": "intExtensibleEnumCollection",
-     "description": "this is a collection of int based extensible enum",
-     "type": {
-      "$id": "242",
-      "kind": "array",
-      "name": "ArrayIntExtensibleEnum",
-      "valueType": {
-       "$ref": "64"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intExtensibleEnumCollection"
-    },
-    {
-     "$id": "243",
-     "kind": "property",
-     "name": "floatExtensibleEnum",
-     "serializedName": "floatExtensibleEnum",
-     "description": "this is a float based extensible enum",
-     "type": {
-      "$ref": "72"
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnum"
-    },
-    {
-     "$id": "244",
-     "kind": "property",
-     "name": "floatExtensibleEnumCollection",
-     "serializedName": "floatExtensibleEnumCollection",
-     "description": "this is a collection of float based extensible enum",
-     "type": {
-      "$id": "245",
-      "kind": "array",
-      "name": "ArrayFloatExtensibleEnum",
-      "valueType": {
-       "$ref": "72"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatExtensibleEnumCollection"
-    },
-    {
-     "$id": "246",
-     "kind": "property",
-     "name": "floatFixedEnum",
-     "serializedName": "floatFixedEnum",
-     "description": "this is a float based fixed enum",
-     "type": {
-      "$ref": "80"
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnum"
-    },
-    {
-     "$id": "247",
-     "kind": "property",
-     "name": "floatFixedEnumCollection",
-     "serializedName": "floatFixedEnumCollection",
-     "description": "this is a collection of float based fixed enum",
-     "type": {
-      "$id": "248",
-      "kind": "array",
-      "name": "ArrayFloatFixedEnum",
-      "valueType": {
-       "$ref": "80"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.floatFixedEnumCollection"
-    },
-    {
-     "$id": "249",
-     "kind": "property",
-     "name": "intFixedEnum",
-     "serializedName": "intFixedEnum",
-     "description": "this is a int based fixed enum",
-     "type": {
-      "$ref": "88"
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnum"
-    },
-    {
-     "$id": "250",
-     "kind": "property",
-     "name": "intFixedEnumCollection",
-     "serializedName": "intFixedEnumCollection",
-     "description": "this is a collection of int based fixed enum",
-     "type": {
-      "$id": "251",
-      "kind": "array",
-      "name": "ArrayIntFixedEnum",
-      "valueType": {
-       "$ref": "88"
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.intFixedEnumCollection"
-    },
-    {
-     "$id": "252",
-     "kind": "property",
-     "name": "stringFixedEnum",
-     "serializedName": "stringFixedEnum",
-     "description": "this is a string based fixed enum",
-     "type": {
-      "$ref": "48"
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.stringFixedEnum"
-    },
-    {
-     "$id": "253",
-     "kind": "property",
-     "name": "requiredUnknown",
-     "serializedName": "requiredUnknown",
-     "description": "required unknown",
-     "type": {
-      "$id": "254",
-      "kind": "unknown",
-      "name": "unknown",
-      "crossLanguageDefinitionId": "",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredUnknown"
-    },
-    {
-     "$id": "255",
-     "kind": "property",
-     "name": "optionalUnknown",
-     "serializedName": "optionalUnknown",
-     "description": "optional unknown",
-     "type": {
-      "$id": "256",
-      "kind": "unknown",
-      "name": "unknown",
-      "crossLanguageDefinitionId": "",
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalUnknown"
-    },
-    {
-     "$id": "257",
-     "kind": "property",
-     "name": "requiredRecordUnknown",
-     "serializedName": "requiredRecordUnknown",
-     "description": "required record of unknown",
-     "type": {
-      "$id": "258",
-      "kind": "dict",
-      "keyType": {
-       "$id": "259",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "valueType": {
-       "$id": "260",
-       "kind": "unknown",
-       "name": "unknown",
-       "crossLanguageDefinitionId": "",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.requiredRecordUnknown"
-    },
-    {
-     "$id": "261",
-     "kind": "property",
-     "name": "optionalRecordUnknown",
-     "serializedName": "optionalRecordUnknown",
-     "description": "optional record of unknown",
-     "type": {
-      "$id": "262",
-      "kind": "dict",
-      "keyType": {
-       "$id": "263",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "valueType": {
-       "$id": "264",
-       "kind": "unknown",
-       "name": "unknown",
-       "crossLanguageDefinitionId": "",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.optionalRecordUnknown"
-    },
-    {
-     "$id": "265",
-     "kind": "property",
-     "name": "readOnlyRequiredRecordUnknown",
-     "serializedName": "readOnlyRequiredRecordUnknown",
-     "description": "required readonly record of unknown",
-     "type": {
-      "$id": "266",
-      "kind": "dict",
-      "keyType": {
-       "$id": "267",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "valueType": {
-       "$id": "268",
-       "kind": "unknown",
-       "name": "unknown",
-       "crossLanguageDefinitionId": "",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": true,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyRequiredRecordUnknown"
-    },
-    {
-     "$id": "269",
-     "kind": "property",
-     "name": "readOnlyOptionalRecordUnknown",
-     "serializedName": "readOnlyOptionalRecordUnknown",
-     "description": "optional readonly record of unknown",
-     "type": {
-      "$id": "270",
-      "kind": "dict",
-      "keyType": {
-       "$id": "271",
-       "kind": "string",
-       "name": "string",
-       "crossLanguageDefinitionId": "TypeSpec.string",
-       "decorators": []
-      },
-      "valueType": {
-       "$id": "272",
-       "kind": "unknown",
-       "name": "unknown",
-       "crossLanguageDefinitionId": "",
-       "decorators": []
-      },
-      "decorators": []
-     },
-     "optional": true,
-     "readOnly": true,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.readOnlyOptionalRecordUnknown"
-    },
-    {
-     "$id": "273",
-     "kind": "property",
-     "name": "modelWithRequiredNullable",
-     "serializedName": "modelWithRequiredNullable",
-     "description": "this is a model with required nullable properties",
-     "type": {
-      "$id": "274",
-      "kind": "model",
-      "name": "ModelWithRequiredNullableProperties",
-      "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
-      "usage": "Input,Output,Json",
-      "description": "A model with a few required nullable properties",
-      "decorators": [],
-      "properties": [
-       {
-        "$id": "275",
-        "kind": "property",
-        "name": "requiredNullablePrimitive",
-        "serializedName": "requiredNullablePrimitive",
-        "description": "required nullable primitive type",
-        "type": {
-         "$id": "276",
-         "kind": "nullable",
-         "type": {
-          "$id": "277",
-          "kind": "int32",
-          "name": "int32",
-          "crossLanguageDefinitionId": "TypeSpec.int32",
-          "decorators": []
-         }
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredNullablePrimitive"
-       },
-       {
-        "$id": "278",
-        "kind": "property",
-        "name": "requiredExtensibleEnum",
-        "serializedName": "requiredExtensibleEnum",
-        "description": "required nullable extensible enum type",
-        "type": {
-         "$id": "279",
-         "kind": "nullable",
-         "type": {
-          "$ref": "56"
-         }
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredExtensibleEnum"
-       },
-       {
-        "$id": "280",
-        "kind": "property",
-        "name": "requiredFixedEnum",
-        "serializedName": "requiredFixedEnum",
-        "description": "required nullable fixed enum type",
-        "type": {
-         "$id": "281",
-         "kind": "nullable",
-         "type": {
-          "$ref": "48"
-         }
-        },
-        "optional": false,
-        "readOnly": false,
-        "discriminator": false,
-        "flatten": false,
-        "decorators": [],
-        "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties.requiredFixedEnum"
-       }
-      ]
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.modelWithRequiredNullable"
-    },
-    {
-     "$id": "282",
-     "kind": "property",
-     "name": "unionList",
-     "serializedName": "unionList",
-     "description": "this is a list of union types",
-     "type": {
-      "$id": "283",
-      "kind": "array",
-      "name": "Array",
-      "valueType": {
-       "$id": "284",
-       "kind": "union",
-       "name": "RoundTripModelUnionList",
-       "variantTypes": [
-        {
-         "$id": "285",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string",
-         "decorators": []
-        },
-        {
-         "$id": "286",
-         "kind": "int32",
-         "name": "int32",
-         "crossLanguageDefinitionId": "TypeSpec.int32",
-         "decorators": []
-        },
-        {
-         "$id": "287",
-         "kind": "model",
-         "name": "ModelForUnion",
-         "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
-         "usage": "Input,Output,Json",
-         "description": "This is a model only used in union types, please do not use it anywhere else.",
-         "decorators": [],
-         "properties": [
-          {
-           "$id": "288",
-           "kind": "property",
-           "name": "name",
-           "serializedName": "name",
-           "description": "name of the ModelForUnion",
-           "type": {
-            "$id": "289",
-            "kind": "string",
-            "name": "string",
-            "crossLanguageDefinitionId": "TypeSpec.string",
-            "decorators": []
-           },
-           "optional": false,
-           "readOnly": false,
-           "discriminator": false,
-           "flatten": false,
-           "decorators": [],
-           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.name"
-          },
-          {
-           "$id": "290",
-           "kind": "property",
-           "name": "age",
-           "serializedName": "age",
-           "description": "age of the ModelForUnion",
-           "type": {
-            "$id": "291",
-            "kind": "int32",
-            "name": "int32",
-            "crossLanguageDefinitionId": "TypeSpec.int32",
-            "decorators": []
-           },
-           "optional": true,
-           "readOnly": false,
-           "discriminator": false,
-           "flatten": false,
-           "decorators": [],
-           "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion.age"
-          }
-         ]
-        },
-        {
-         "$id": "292",
-         "kind": "array",
-         "name": "ArrayModelForUnion",
-         "valueType": {
-          "$ref": "287"
-         },
-         "crossLanguageDefinitionId": "TypeSpec.Array",
-         "decorators": []
-        }
-       ],
-       "decorators": []
-      },
-      "crossLanguageDefinitionId": "TypeSpec.Array",
-      "decorators": []
-     },
-     "optional": false,
-     "readOnly": false,
-     "discriminator": false,
-     "flatten": false,
-     "decorators": [],
-     "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel.unionList"
-    }
-   ]
-  },
-  {
-   "$ref": "274"
-  },
-  {
-   "$ref": "287"
+   "$ref": "286"
   }
  ],
  "Clients": [
   {
-   "$id": "293",
+   "$id": "291",
    "Name": "FirstTestTypeSpecClient",
    "Description": "This is a sample typespec project.",
    "Operations": [
     {
-     "$id": "294",
+     "$id": "292",
      "Name": "topAction",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "295",
+       "$id": "293",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "296",
+        "$id": "294",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -2919,16 +2892,16 @@
        "Kind": "Client"
       },
       {
-       "$id": "297",
+       "$id": "295",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$id": "298",
+        "$id": "296",
         "kind": "utcDateTime",
         "name": "utcDateTime",
         "encode": "rfc3339",
         "wireType": {
-         "$id": "299",
+         "$id": "297",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2948,14 +2921,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "300",
+       "$id": "298",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "301",
+        "$id": "299",
         "kind": "constant",
         "valueType": {
-         "$id": "302",
+         "$id": "300",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2977,7 +2950,7 @@
      ],
      "Responses": [
       {
-       "$id": "303",
+       "$id": "301",
        "StatusCodes": [
         200
        ],
@@ -3003,24 +2976,24 @@
      "Decorators": []
     },
     {
-     "$id": "304",
+     "$id": "302",
      "Name": "topAction2",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "305",
+       "$id": "303",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "306",
+        "$id": "304",
         "kind": "constant",
         "valueType": {
-         "$id": "307",
+         "$id": "305",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3042,7 +3015,7 @@
      ],
      "Responses": [
       {
-       "$id": "308",
+       "$id": "306",
        "StatusCodes": [
         200
        ],
@@ -3068,25 +3041,25 @@
      "Decorators": []
     },
     {
-     "$id": "309",
+     "$id": "307",
      "Name": "patchAction",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "310",
+       "$id": "308",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "311",
+        "$id": "309",
         "kind": "constant",
         "valueType": {
-         "$id": "312",
+         "$id": "310",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3106,14 +3079,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "313",
+       "$id": "311",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "314",
+        "$id": "312",
         "kind": "constant",
         "valueType": {
-         "$id": "315",
+         "$id": "313",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3133,7 +3106,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "316",
+       "$id": "314",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3152,7 +3125,7 @@
      ],
      "Responses": [
       {
-       "$id": "317",
+       "$id": "315",
        "StatusCodes": [
         200
        ],
@@ -3181,25 +3154,25 @@
      "Decorators": []
     },
     {
-     "$id": "318",
+     "$id": "316",
      "Name": "anonymousBody",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "319",
+       "$id": "317",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "320",
+        "$id": "318",
         "kind": "constant",
         "valueType": {
-         "$id": "321",
+         "$id": "319",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3219,14 +3192,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "322",
+       "$id": "320",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "323",
+        "$id": "321",
         "kind": "constant",
         "valueType": {
-         "$id": "324",
+         "$id": "322",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3246,7 +3219,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "325",
+       "$id": "323",
        "Name": "thing",
        "NameInRequest": "thing",
        "Type": {
@@ -3265,7 +3238,7 @@
      ],
      "Responses": [
       {
-       "$id": "326",
+       "$id": "324",
        "StatusCodes": [
         200
        ],
@@ -3294,25 +3267,25 @@
      "Decorators": []
     },
     {
-     "$id": "327",
+     "$id": "325",
      "Name": "friendlyModel",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "328",
+       "$id": "326",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "329",
+        "$id": "327",
         "kind": "constant",
         "valueType": {
-         "$id": "330",
+         "$id": "328",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3332,14 +3305,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "331",
+       "$id": "329",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "332",
+        "$id": "330",
         "kind": "constant",
         "valueType": {
-         "$id": "333",
+         "$id": "331",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3359,7 +3332,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "334",
+       "$id": "332",
        "Name": "friend",
        "NameInRequest": "friend",
        "Type": {
@@ -3378,7 +3351,7 @@
      ],
      "Responses": [
       {
-       "$id": "335",
+       "$id": "333",
        "StatusCodes": [
         200
        ],
@@ -3407,25 +3380,25 @@
      "Decorators": []
     },
     {
-     "$id": "336",
+     "$id": "334",
      "Name": "addTimeHeader",
      "ResourceName": "FirstTestTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "337",
+       "$id": "335",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
-        "$id": "338",
+        "$id": "336",
         "kind": "utcDateTime",
         "name": "utcDateTime",
         "encode": "rfc7231",
         "wireType": {
-         "$id": "339",
+         "$id": "337",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3447,7 +3420,7 @@
      ],
      "Responses": [
       {
-       "$id": "340",
+       "$id": "338",
        "StatusCodes": [
         204
        ],
@@ -3467,26 +3440,26 @@
      "Decorators": []
     },
     {
-     "$id": "341",
+     "$id": "339",
      "Name": "stringFormat",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "paramete has string format.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "342",
+       "$id": "340",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Type": {
-        "$id": "343",
+        "$id": "341",
         "kind": "string",
         "name": "uuid",
         "crossLanguageDefinitionId": "Azure.Core.uuid",
         "baseType": {
-         "$id": "344",
+         "$id": "342",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3505,15 +3478,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "345",
+       "$id": "343",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "346",
+        "$id": "344",
         "kind": "constant",
         "valueType": {
-         "$id": "347",
+         "$id": "345",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3533,7 +3506,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "348",
+       "$id": "346",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3552,7 +3525,7 @@
      ],
      "Responses": [
       {
-       "$id": "349",
+       "$id": "347",
        "StatusCodes": [
         204
        ],
@@ -3575,25 +3548,25 @@
      "Decorators": []
     },
     {
-     "$id": "350",
+     "$id": "348",
      "Name": "projectedNameModel",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "351",
+       "$id": "349",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "352",
+        "$id": "350",
         "kind": "constant",
         "valueType": {
-         "$id": "353",
+         "$id": "351",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3613,14 +3586,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "354",
+       "$id": "352",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "355",
+        "$id": "353",
         "kind": "constant",
         "valueType": {
-         "$id": "356",
+         "$id": "354",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3640,7 +3613,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "357",
+       "$id": "355",
        "Name": "projectedModel",
        "NameInRequest": "projectedModel",
        "Type": {
@@ -3659,7 +3632,7 @@
      ],
      "Responses": [
       {
-       "$id": "358",
+       "$id": "356",
        "StatusCodes": [
         200
        ],
@@ -3688,24 +3661,24 @@
      "Decorators": []
     },
     {
-     "$id": "359",
+     "$id": "357",
      "Name": "returnsAnonymousModel",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "360",
+       "$id": "358",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "361",
+        "$id": "359",
         "kind": "constant",
         "valueType": {
-         "$id": "362",
+         "$id": "360",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3727,7 +3700,7 @@
      ],
      "Responses": [
       {
-       "$id": "363",
+       "$id": "361",
        "StatusCodes": [
         200
        ],
@@ -3753,21 +3726,21 @@
      "Decorators": []
     },
     {
-     "$id": "364",
+     "$id": "362",
      "Name": "headAsBoolean",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "365",
+       "$id": "363",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "366",
+        "$id": "364",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3786,7 +3759,7 @@
      ],
      "Responses": [
       {
-       "$id": "367",
+       "$id": "365",
        "StatusCodes": [
         204
        ],
@@ -3806,25 +3779,25 @@
      "Decorators": []
     },
     {
-     "$id": "368",
+     "$id": "366",
      "Name": "stringBody",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "369",
+       "$id": "367",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "370",
+        "$id": "368",
         "kind": "constant",
         "valueType": {
-         "$id": "371",
+         "$id": "369",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3844,11 +3817,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "372",
+       "$id": "370",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "373",
+        "$id": "371",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3867,7 +3840,7 @@
      ],
      "Responses": [
       {
-       "$id": "374",
+       "$id": "372",
        "StatusCodes": [
         204
        ],
@@ -3890,25 +3863,25 @@
      "Decorators": []
     },
     {
-     "$id": "375",
+     "$id": "373",
      "Name": "boolBody",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "376",
+       "$id": "374",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "377",
+        "$id": "375",
         "kind": "constant",
         "valueType": {
-         "$id": "378",
+         "$id": "376",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3928,11 +3901,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "379",
+       "$id": "377",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "380",
+        "$id": "378",
         "kind": "boolean",
         "name": "boolean",
         "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -3951,7 +3924,7 @@
      ],
      "Responses": [
       {
-       "$id": "381",
+       "$id": "379",
        "StatusCodes": [
         204
        ],
@@ -3974,25 +3947,25 @@
      "Decorators": []
     },
     {
-     "$id": "382",
+     "$id": "380",
      "Name": "dateTimeBody",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "383",
+       "$id": "381",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "384",
+        "$id": "382",
         "kind": "constant",
         "valueType": {
-         "$id": "385",
+         "$id": "383",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4012,16 +3985,16 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "386",
+       "$id": "384",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "387",
+        "$id": "385",
         "kind": "utcDateTime",
         "name": "utcDateTime",
         "encode": "rfc3339",
         "wireType": {
-         "$id": "388",
+         "$id": "386",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4043,7 +4016,7 @@
      ],
      "Responses": [
       {
-       "$id": "389",
+       "$id": "387",
        "StatusCodes": [
         204
        ],
@@ -4066,24 +4039,24 @@
      "Decorators": []
     },
     {
-     "$id": "390",
+     "$id": "388",
      "Name": "returnString",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "391",
+       "$id": "389",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "392",
+        "$id": "390",
         "kind": "constant",
         "valueType": {
-         "$id": "393",
+         "$id": "391",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4105,12 +4078,12 @@
      ],
      "Responses": [
       {
-       "$id": "394",
+       "$id": "392",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "395",
+        "$id": "393",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4135,23 +4108,23 @@
      "Decorators": []
     },
     {
-     "$id": "396",
+     "$id": "394",
      "Name": "returnUnknown",
      "ResourceName": "FirstTestTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "397",
+       "$id": "395",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "398",
+        "$id": "396",
         "kind": "constant",
         "valueType": {
-         "$id": "399",
+         "$id": "397",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4173,12 +4146,12 @@
      ],
      "Responses": [
       {
-       "$id": "400",
+       "$id": "398",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "401",
+        "$id": "399",
         "kind": "unknown",
         "name": "unknown",
         "crossLanguageDefinitionId": "",
@@ -4203,25 +4176,25 @@
      "Decorators": []
     },
     {
-     "$id": "402",
+     "$id": "400",
      "Name": "recursiveExtension",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "403",
+       "$id": "401",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "404",
+        "$id": "402",
         "kind": "constant",
         "valueType": {
-         "$id": "405",
+         "$id": "403",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4241,7 +4214,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "406",
+       "$id": "404",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4260,7 +4233,7 @@
      ],
      "Responses": [
       {
-       "$id": "407",
+       "$id": "405",
        "StatusCodes": [
         204
        ],
@@ -4283,25 +4256,25 @@
      "Decorators": []
     },
     {
-     "$id": "408",
+     "$id": "406",
      "Name": "threeLevelRecursive",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "409",
+       "$id": "407",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "410",
+        "$id": "408",
         "kind": "constant",
         "valueType": {
-         "$id": "411",
+         "$id": "409",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4321,7 +4294,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "412",
+       "$id": "410",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4340,7 +4313,7 @@
      ],
      "Responses": [
       {
-       "$id": "413",
+       "$id": "411",
        "StatusCodes": [
         204
        ],
@@ -4363,25 +4336,25 @@
      "Decorators": []
     },
     {
-     "$id": "414",
+     "$id": "412",
      "Name": "recursiveModels",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "415",
+       "$id": "413",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "416",
+        "$id": "414",
         "kind": "constant",
         "valueType": {
-         "$id": "417",
+         "$id": "415",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4401,7 +4374,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "418",
+       "$id": "416",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4420,7 +4393,7 @@
      ],
      "Responses": [
       {
-       "$id": "419",
+       "$id": "417",
        "StatusCodes": [
         204
        ],
@@ -4443,25 +4416,25 @@
      "Decorators": []
     },
     {
-     "$id": "420",
+     "$id": "418",
      "Name": "ContainSelfModels",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "421",
+       "$id": "419",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "422",
+        "$id": "420",
         "kind": "constant",
         "valueType": {
-         "$id": "423",
+         "$id": "421",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4481,7 +4454,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "424",
+       "$id": "422",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -4500,7 +4473,7 @@
      ],
      "Responses": [
       {
-       "$id": "425",
+       "$id": "423",
        "StatusCodes": [
         204
        ],
@@ -4523,17 +4496,17 @@
      "Decorators": []
     },
     {
-     "$id": "426",
+     "$id": "424",
      "Name": "enumParameter",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "427",
+       "$id": "425",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
@@ -4552,7 +4525,7 @@
      ],
      "Responses": [
       {
-       "$id": "428",
+       "$id": "426",
        "StatusCodes": [
         204
        ],
@@ -4572,25 +4545,25 @@
      "Decorators": []
     },
     {
-     "$id": "429",
+     "$id": "427",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "430",
+       "$id": "428",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "431",
+        "$id": "429",
         "kind": "constant",
         "valueType": {
-         "$id": "432",
+         "$id": "430",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4610,7 +4583,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "433",
+       "$id": "431",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -4629,7 +4602,7 @@
      ],
      "Responses": [
       {
-       "$id": "434",
+       "$id": "432",
        "StatusCodes": [
         204
        ],
@@ -4652,25 +4625,25 @@
      "Decorators": []
     },
     {
-     "$id": "435",
+     "$id": "433",
      "Name": "optionalDictionary",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "436",
+       "$id": "434",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "437",
+        "$id": "435",
         "kind": "constant",
         "valueType": {
-         "$id": "438",
+         "$id": "436",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4690,21 +4663,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "439",
+       "$id": "437",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "440",
+        "$id": "438",
         "kind": "dict",
         "keyType": {
-         "$id": "441",
+         "$id": "439",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
          "decorators": []
         },
         "valueType": {
-         "$id": "442",
+         "$id": "440",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -4725,7 +4698,7 @@
      ],
      "Responses": [
       {
-       "$id": "443",
+       "$id": "441",
        "StatusCodes": [
         204
        ],
@@ -4748,26 +4721,26 @@
      "Decorators": []
     },
     {
-     "$id": "444",
+     "$id": "442",
      "Name": "azureLocationOp",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "295"
+       "$ref": "293"
       },
       {
-       "$id": "445",
+       "$id": "443",
        "Name": "location",
        "NameInRequest": "location",
        "Type": {
-        "$id": "446",
+        "$id": "444",
         "kind": "string",
         "name": "azureLocation",
         "crossLanguageDefinitionId": "Azure.Core.azureLocation",
         "baseType": {
-         "$id": "447",
+         "$id": "445",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4786,16 +4759,16 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "448",
+       "$id": "446",
        "Name": "regenLocation",
        "NameInRequest": "regen-location",
        "Type": {
-        "$id": "449",
+        "$id": "447",
         "kind": "string",
         "name": "azureLocation",
         "crossLanguageDefinitionId": "Azure.Core.azureLocation",
         "baseType": {
-         "$id": "450",
+         "$id": "448",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4814,15 +4787,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "451",
+       "$id": "449",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "452",
+        "$id": "450",
         "kind": "constant",
         "valueType": {
-         "$id": "453",
+         "$id": "451",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4842,7 +4815,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "454",
+       "$id": "452",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -4861,7 +4834,7 @@
      ],
      "Responses": [
       {
-       "$id": "455",
+       "$id": "453",
        "StatusCodes": [
         204
        ],
@@ -4885,30 +4858,30 @@
     }
    ],
    "Protocol": {
-    "$id": "456"
+    "$id": "454"
    },
    "Parameters": [
     {
-     "$ref": "295"
+     "$ref": "293"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "457",
+   "$id": "455",
    "Name": "Hello",
    "Operations": [],
    "Protocol": {
-    "$id": "458"
+    "$id": "456"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$id": "459",
+     "$id": "457",
      "Name": "firstTestTypeSpecUrl",
      "NameInRequest": "firstTestTypeSpecUrl",
      "Type": {
-      "$id": "460",
+      "$id": "458",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -4927,23 +4900,23 @@
    "Decorators": []
   },
   {
-   "$id": "461",
+   "$id": "459",
    "Name": "HelloDemo",
    "Description": "Hello world service",
    "Operations": [
     {
-     "$id": "462",
+     "$id": "460",
      "Name": "sayHi",
      "ResourceName": "Demo",
      "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "463",
+       "$id": "461",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "464",
+        "$id": "462",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -4959,11 +4932,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "465",
+       "$id": "463",
        "Name": "headParameter",
        "NameInRequest": "head-parameter",
        "Type": {
-        "$id": "466",
+        "$id": "464",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -4980,11 +4953,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "467",
+       "$id": "465",
        "Name": "queryParameter",
        "NameInRequest": "queryParameter",
        "Type": {
-        "$id": "468",
+        "$id": "466",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5001,11 +4974,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "469",
+       "$id": "467",
        "Name": "optionalQuery",
        "NameInRequest": "optionalQuery",
        "Type": {
-        "$id": "470",
+        "$id": "468",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5022,14 +4995,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "471",
+       "$id": "469",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "472",
+        "$id": "470",
         "kind": "constant",
         "valueType": {
-         "$id": "473",
+         "$id": "471",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5051,7 +5024,7 @@
      ],
      "Responses": [
       {
-       "$id": "474",
+       "$id": "472",
        "StatusCodes": [
         200
        ],
@@ -5078,33 +5051,33 @@
     }
    ],
    "Protocol": {
-    "$id": "475"
+    "$id": "473"
    },
    "Parent": "Hello",
    "Parameters": [
     {
-     "$ref": "463"
+     "$ref": "461"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "476",
+   "$id": "474",
    "Name": "HelloDemo2",
    "Operations": [
     {
-     "$id": "477",
+     "$id": "475",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "478",
+       "$id": "476",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "479",
+        "$id": "477",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -5120,11 +5093,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "480",
+       "$id": "478",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "481",
+        "$id": "479",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5141,14 +5114,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "482",
+       "$id": "480",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "483",
+        "$id": "481",
         "kind": "constant",
         "valueType": {
-         "$id": "484",
+         "$id": "482",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5168,11 +5141,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "485",
+       "$id": "483",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "486",
+        "$id": "484",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5189,14 +5162,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "487",
+       "$id": "485",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "488",
+        "$id": "486",
         "kind": "constant",
         "valueType": {
-         "$id": "489",
+         "$id": "487",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5216,11 +5189,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "490",
+       "$id": "488",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "229"
+        "$ref": "207"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -5235,12 +5208,12 @@
      ],
      "Responses": [
       {
-       "$id": "491",
+       "$id": "489",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "229"
+        "$ref": "207"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5264,21 +5237,21 @@
      "Decorators": []
     },
     {
-     "$id": "492",
+     "$id": "490",
      "Name": "noContentType",
      "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "478"
+       "$ref": "476"
       },
       {
-       "$id": "493",
+       "$id": "491",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "494",
+        "$id": "492",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5295,11 +5268,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "495",
+       "$id": "493",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "496",
+        "$id": "494",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5316,15 +5289,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "497",
+       "$id": "495",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "498",
+        "$id": "496",
         "kind": "constant",
         "valueType": {
-         "$id": "499",
+         "$id": "497",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5344,14 +5317,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "500",
+       "$id": "498",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "501",
+        "$id": "499",
         "kind": "constant",
         "valueType": {
-         "$id": "502",
+         "$id": "500",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5371,11 +5344,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "503",
+       "$id": "501",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
-        "$ref": "229"
+        "$ref": "207"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -5390,12 +5363,12 @@
      ],
      "Responses": [
       {
-       "$id": "504",
+       "$id": "502",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "229"
+        "$ref": "207"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -5419,24 +5392,24 @@
      "Decorators": []
     },
     {
-     "$id": "505",
+     "$id": "503",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "478"
+       "$ref": "476"
       },
       {
-       "$id": "506",
+       "$id": "504",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "507",
+        "$id": "505",
         "kind": "constant",
         "valueType": {
-         "$id": "508",
+         "$id": "506",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5458,7 +5431,7 @@
      ],
      "Responses": [
       {
-       "$id": "509",
+       "$id": "507",
        "StatusCodes": [
         200
        ],
@@ -5484,25 +5457,25 @@
      "Decorators": []
     },
     {
-     "$id": "510",
+     "$id": "508",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
      "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "478"
+       "$ref": "476"
       },
       {
-       "$id": "511",
+       "$id": "509",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "512",
+        "$id": "510",
         "kind": "constant",
         "valueType": {
-         "$id": "513",
+         "$id": "511",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5522,14 +5495,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "514",
+       "$id": "512",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "515",
+        "$id": "513",
         "kind": "constant",
         "valueType": {
-         "$id": "516",
+         "$id": "514",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5549,7 +5522,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "517",
+       "$id": "515",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -5568,7 +5541,7 @@
      ],
      "Responses": [
       {
-       "$id": "518",
+       "$id": "516",
        "StatusCodes": [
         200
        ],
@@ -5597,24 +5570,24 @@
      "Decorators": []
     },
     {
-     "$id": "519",
+     "$id": "517",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
      "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "478"
+       "$ref": "476"
       },
       {
-       "$id": "520",
+       "$id": "518",
        "Name": "p1",
        "NameInRequest": "p1",
        "Type": {
-        "$id": "521",
+        "$id": "519",
         "kind": "constant",
         "valueType": {
-         "$id": "522",
+         "$id": "520",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5634,14 +5607,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "523",
+       "$id": "521",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "524",
+        "$id": "522",
         "kind": "constant",
         "valueType": {
-         "$id": "525",
+         "$id": "523",
          "kind": "int32",
          "name": "int32",
          "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -5661,14 +5634,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "526",
+       "$id": "524",
        "Name": "p3",
        "NameInRequest": "p3",
        "Type": {
-        "$id": "527",
+        "$id": "525",
         "kind": "constant",
         "valueType": {
-         "$id": "528",
+         "$id": "526",
          "kind": "boolean",
          "name": "boolean",
          "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -5688,14 +5661,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "529",
+       "$id": "527",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "530",
+        "$id": "528",
         "kind": "constant",
         "valueType": {
-         "$id": "531",
+         "$id": "529",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5717,7 +5690,7 @@
      ],
      "Responses": [
       {
-       "$id": "532",
+       "$id": "530",
        "StatusCodes": [
         200
        ],
@@ -5744,33 +5717,33 @@
     }
    ],
    "Protocol": {
-    "$id": "533"
+    "$id": "531"
    },
    "Parent": "Hello",
    "Parameters": [
     {
-     "$ref": "478"
+     "$ref": "476"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "534",
+   "$id": "532",
    "Name": "EnumTest",
    "Operations": [
     {
-     "$id": "535",
+     "$id": "533",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
      "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "536",
+       "$id": "534",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "537",
+        "$id": "535",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -5786,15 +5759,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "538",
+       "$id": "536",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "539",
+        "$id": "537",
         "kind": "constant",
         "valueType": {
-         "$id": "540",
+         "$id": "538",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5814,11 +5787,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "541",
+       "$id": "539",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "100"
+        "$ref": "88"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -5833,7 +5806,7 @@
      ],
      "Responses": [
       {
-       "$id": "542",
+       "$id": "540",
        "StatusCodes": [
         204
        ],
@@ -5857,33 +5830,33 @@
     }
    ],
    "Protocol": {
-    "$id": "543"
+    "$id": "541"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "536"
+     "$ref": "534"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "544",
+   "$id": "542",
    "Name": "ProtocolAndConvenient",
    "Operations": [
     {
-     "$id": "545",
+     "$id": "543",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "546",
+       "$id": "544",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "547",
+        "$id": "545",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -5899,15 +5872,15 @@
        "Kind": "Client"
       },
       {
-       "$id": "548",
+       "$id": "546",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "549",
+        "$id": "547",
         "kind": "constant",
         "valueType": {
-         "$id": "550",
+         "$id": "548",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5927,14 +5900,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "551",
+       "$id": "549",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "552",
+        "$id": "550",
         "kind": "constant",
         "valueType": {
-         "$id": "553",
+         "$id": "551",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -5954,7 +5927,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "554",
+       "$id": "552",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -5973,7 +5946,7 @@
      ],
      "Responses": [
       {
-       "$id": "555",
+       "$id": "553",
        "StatusCodes": [
         200
        ],
@@ -6002,19 +5975,19 @@
      "Decorators": []
     },
     {
-     "$id": "556",
+     "$id": "554",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
      "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "546"
+       "$ref": "544"
       }
      ],
      "Responses": [
       {
-       "$id": "557",
+       "$id": "555",
        "StatusCodes": [
         204
        ],
@@ -6035,33 +6008,33 @@
     }
    ],
    "Protocol": {
-    "$id": "558"
+    "$id": "556"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "546"
+     "$ref": "544"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "559",
+   "$id": "557",
    "Name": "Entity",
    "Operations": [
     {
-     "$id": "560",
+     "$id": "558",
      "Name": "doSomething",
      "ResourceName": "Entity",
      "Description": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "561",
+       "$id": "559",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "562",
+        "$id": "560",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -6077,11 +6050,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "563",
+       "$id": "561",
        "Name": "p2",
        "NameInRequest": "p2",
        "Type": {
-        "$id": "564",
+        "$id": "562",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6098,14 +6071,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "565",
+       "$id": "563",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "566",
+        "$id": "564",
         "kind": "constant",
         "valueType": {
-         "$id": "567",
+         "$id": "565",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6127,7 +6100,7 @@
      ],
      "Responses": [
       {
-       "$id": "568",
+       "$id": "566",
        "StatusCodes": [
         200
        ],
@@ -6154,33 +6127,33 @@
     }
    ],
    "Protocol": {
-    "$id": "569"
+    "$id": "567"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "561"
+     "$ref": "559"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "570",
+   "$id": "568",
    "Name": "Glossary",
    "Operations": [
     {
-     "$id": "571",
+     "$id": "569",
      "Name": "doSomething",
      "ResourceName": "Glossary",
      "Description": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "572",
+       "$id": "570",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "573",
+        "$id": "571",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -6196,11 +6169,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "574",
+       "$id": "572",
        "Name": "id",
        "NameInRequest": "id",
        "Type": {
-        "$id": "575",
+        "$id": "573",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6217,11 +6190,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "576",
+       "$id": "574",
        "Name": "h1",
        "NameInRequest": "h1",
        "Type": {
-        "$id": "577",
+        "$id": "575",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6238,14 +6211,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "578",
+       "$id": "576",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "579",
+        "$id": "577",
         "kind": "constant",
         "valueType": {
-         "$id": "580",
+         "$id": "578",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6267,7 +6240,7 @@
      ],
      "Responses": [
       {
-       "$id": "581",
+       "$id": "579",
        "StatusCodes": [
         200
        ],
@@ -6294,31 +6267,31 @@
     }
    ],
    "Protocol": {
-    "$id": "582"
+    "$id": "580"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "572"
+     "$ref": "570"
     }
    ],
    "Decorators": []
   },
   {
-   "$id": "583",
+   "$id": "581",
    "Name": "ResourceOperations",
    "Operations": [],
    "Protocol": {
-    "$id": "584"
+    "$id": "582"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$id": "585",
+     "$id": "583",
      "Name": "firstTestTypeSpecUrl",
      "NameInRequest": "firstTestTypeSpecUrl",
      "Type": {
-      "$id": "586",
+      "$id": "584",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -6337,22 +6310,22 @@
    "Decorators": []
   },
   {
-   "$id": "587",
+   "$id": "585",
    "Name": "VersioningOp",
    "Operations": [
     {
-     "$id": "588",
+     "$id": "586",
      "Name": "export",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "589",
+       "$id": "587",
        "Name": "firstTestTypeSpecUrl",
        "NameInRequest": "firstTestTypeSpecUrl",
        "Type": {
-        "$id": "590",
+        "$id": "588",
         "kind": "url",
         "name": "url",
         "crossLanguageDefinitionId": "TypeSpec.url"
@@ -6368,12 +6341,12 @@
        "Kind": "Client"
       },
       {
-       "$id": "591",
+       "$id": "589",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "592",
+        "$id": "590",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6387,9 +6360,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "593",
+        "$id": "591",
         "Type": {
-         "$id": "594",
+         "$id": "592",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -6400,11 +6373,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "595",
+       "$id": "593",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "596",
+        "$id": "594",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6421,11 +6394,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "597",
+       "$id": "595",
        "Name": "projectFileVersion",
        "NameInRequest": "projectFileVersion",
        "Type": {
-        "$id": "598",
+        "$id": "596",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6442,14 +6415,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "599",
+       "$id": "597",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "600",
+        "$id": "598",
         "kind": "constant",
         "valueType": {
-         "$id": "601",
+         "$id": "599",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6471,27 +6444,27 @@
      ],
      "Responses": [
       {
-       "$id": "602",
+       "$id": "600",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "202"
+        "$ref": "271"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "603",
+         "$id": "601",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "604",
+          "$id": "602",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "605",
+           "$id": "603",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -6513,15 +6486,15 @@
      "Path": "/lro/resources/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "606",
+      "$id": "604",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "607",
+       "$id": "605",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "202"
+        "$ref": "271"
        },
        "BodyMediaType": "Json"
       },
@@ -6533,22 +6506,22 @@
      "Decorators": []
     },
     {
-     "$id": "608",
+     "$id": "606",
      "Name": "exportW",
      "ResourceName": "VersioningOp",
      "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "589"
+       "$ref": "587"
       },
       {
-       "$id": "609",
+       "$id": "607",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "610",
+        "$id": "608",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6562,9 +6535,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "611",
+        "$id": "609",
         "Type": {
-         "$id": "612",
+         "$id": "610",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -6575,11 +6548,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "613",
+       "$id": "611",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "614",
+        "$id": "612",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6596,11 +6569,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "615",
+       "$id": "613",
        "Name": "projectFileVersion",
        "NameInRequest": "projectFileVersion",
        "Type": {
-        "$id": "616",
+        "$id": "614",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6617,14 +6590,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "617",
+       "$id": "615",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "618",
+        "$id": "616",
         "kind": "constant",
         "valueType": {
-         "$id": "619",
+         "$id": "617",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -6646,27 +6619,27 @@
      ],
      "Responses": [
       {
-       "$id": "620",
+       "$id": "618",
        "StatusCodes": [
         202
        ],
        "BodyType": {
-        "$ref": "202"
+        "$ref": "271"
        },
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "621",
+         "$id": "619",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "622",
+          "$id": "620",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "623",
+           "$id": "621",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -6688,15 +6661,15 @@
      "Path": "/lro/resources/{name}:exportW",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "624",
+      "$id": "622",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "625",
+       "$id": "623",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "202"
+        "$ref": "271"
        },
        "BodyMediaType": "Json"
       },
@@ -6709,27 +6682,27 @@
     }
    ],
    "Protocol": {
-    "$id": "626"
+    "$id": "624"
    },
    "Parent": "FirstTestTypeSpecClient",
    "Parameters": [
     {
-     "$ref": "589"
+     "$ref": "587"
     }
    ],
    "Decorators": []
   }
  ],
  "Auth": {
-  "$id": "627",
+  "$id": "625",
   "OAuth2": {
-   "$id": "628",
+   "$id": "626",
    "Scopes": [
     "https://api.example.com/.default"
    ]
   },
   "ApiKey": {
-   "$id": "629",
+   "$id": "627",
    "Name": "x-ms-api-key"
   }
  }
