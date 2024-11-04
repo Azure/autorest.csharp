@@ -146,8 +146,31 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             {
                 ResourceCollection collection => BuildSampleMethodBodyForResourceCollection(example, client, collection, out result),
                 Resource resource => BuildSampleMethodBodyForResource(example, client, resource, out result),
+                MgmtExtension extension => BuildSampleMethodBodyForExtension(example, client, extension, out result),
                 _ => throw new InvalidOperationException("This should never happen")
             };
+
+        private MethodBodyStatement BuildSampleMethodBodyForExtension(MgmtOperationSample example, ValueExpression client, MgmtExtension extension, out TypedValueExpression? result)
+        {
+            var statements = new List<MethodBodyStatement>();
+            var resourceName = GetResourceName(extension);
+            if (extension is not ArmResourceExtension)
+            {
+                statements.Add(
+                    new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure")
+                    );
+                statements.Add(
+                    new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}")
+                    );
+            }
+            // get extension resource instance
+            statements.Add(
+                BuildGetResourceStatementFromExtension(extension, example, client, out var instance)
+                );
+            statements.Add(EmptyLine);
+            statements.Add(BuildSampleOperationStatement(example, instance, out result));
+            return statements;
+        }
 
         private MethodBodyStatement BuildSampleMethodBodyForResource(MgmtOperationSample example, ValueExpression client, Resource resource, out TypedValueExpression? result)
         {
@@ -416,7 +439,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
             if (Configuration.MgmtConfiguration.IsArmCore && resource.Type.Name == nameof(TenantResource))
             {
-                return BuildGetResourceStatementFromTenantResource(example, client, out resourceVar);
+                return BuildGetResourceStatementFromTenantResource(resource, example, client, out resourceVar);
             }
             else
             {
@@ -435,7 +458,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         {
             if (extension.ArmCoreType == typeof(TenantResource))
             {
-                return BuildGetResourceStatementFromTenantResource(example, client, out resourceVar);
+                return BuildGetResourceStatementFromTenantResource(extension, example, client, out resourceVar);
             }
             else if (extension.ArmCoreType == typeof(ArmResource))
             {
@@ -447,10 +470,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             }
         }
 
-        private MethodBodyStatement BuildGetResourceStatementFromTenantResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        private MethodBodyStatement BuildGetResourceStatementFromTenantResource(MgmtTypeProvider resource, OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
-            // TODO
-            return Declare(typeof(object), "tmp", Null, out resourceVar);
+            return Declare(typeof(TenantResource), resource.ResourceName.ToVariableName(), client.Invoke("GetTenants").Invoke("GetAllAsync").Invoke("GetAsyncEnumerator").Property("Current"), out resourceVar);
         }
 
         private MethodBodyStatement BuildGetResourceStatementFromArmResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
