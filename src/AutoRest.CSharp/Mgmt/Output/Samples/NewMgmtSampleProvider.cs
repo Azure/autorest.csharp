@@ -415,13 +415,27 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return new InvokeInstanceMethodExpression(instance, GetMethodName(operation.Name, isAsync), parameterArguments, TypeArguments: null, CallAsAsync: isAsync && !operation.IsPagingOperation, AddConfigureAwaitFalse: false);
         }
 
+        private MethodBodyStatement BuildGetCollectionWithoutParent(ValueExpression client, ResourceCollection collection, out TypedValueExpression instance)
+        {
+            // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+            if (Configuration.MgmtConfiguration.IsArmCore && collection.Type.Name == nameof(TenantCollection))
+            {
+                return Declare(collection.Type, "collection", client.Invoke("GetTenants"), out instance);
+            }
+            else
+            {
+                // TODO: add support when we found any other case
+                throw new NotSupportedException("Unsupported type to get collection without parent: " + collection.Type.Name);
+            }
+        }
+
         private MethodBodyStatement BuildGetCollectionStatement(ResourceCollection collection, MgmtOperationSample example, ValueExpression client, out TypedValueExpression instance)
         {
             var parent = example.Parent;
 
             if (parent == null)
             {
-                throw new NotImplementedException("no parent collection samples not implemented yet");
+                return BuildGetCollectionWithoutParent(client, collection, out instance);
             }
 
             var parentName = GetResourceName(parent);
