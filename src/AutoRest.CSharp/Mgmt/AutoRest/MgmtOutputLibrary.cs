@@ -955,13 +955,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return operationsToRequestPath;
         }
 
-        private Dictionary<MgmtTypeProvider, NewMgmtSampleProvider> EnsureMgmtClientSampleProviders()
+        private Dictionary<MgmtTypeProvider, MgmtSampleProvider> EnsureMgmtClientSampleProviders()
         {
-            var result = new Dictionary<MgmtTypeProvider, NewMgmtSampleProvider>();
+            var result = new Dictionary<MgmtTypeProvider, MgmtSampleProvider>();
             IEnumerable<MgmtTypeProvider> providers = ArmResources.Cast<MgmtTypeProvider>().Concat(ResourceCollections).Concat(Extensions);
             foreach (var provider in providers)
             {
-                var sampleProvider = new NewMgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
+                var sampleProvider = new MgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
                 if (!sampleProvider.IsEmpty)
                 {
                     result.Add(provider, sampleProvider);
@@ -971,8 +971,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return result;
         }
 
-        private IReadOnlyList<NewMgmtSampleProvider>? _samples;
-        public IReadOnlyList<NewMgmtSampleProvider> SampleProviders => _samples ??= [..EnsureMgmtClientSampleProviders().Values];
+        private IReadOnlyList<MgmtSampleProvider>? _samples;
+        public IReadOnlyList<MgmtSampleProvider> SampleProviders => _samples ??= [..EnsureMgmtClientSampleProviders().Values];
 
         private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
         {
