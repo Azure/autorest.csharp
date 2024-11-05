@@ -10,16 +10,16 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using NUnit.Framework;
-using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
 
-namespace AutoRest.CSharp.MgmtTest.Models
+namespace AutoRest.CSharp.Mgmt.Output.Samples
 {
     internal class MgmtOperationSample : OperationExample
     {
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
                     {
                         // this parameter is not from body which means its type should be primary which means "default" keyword should be able to handle
                         // the default value (also string because we disabled nullable in generated code)
-                        var warning = $"No value is provided for {parameter.Name} in example '{this.Name}'. Please consider adding a proper example value for it in swagger";
+                        var warning = $"No value is provided for {parameter.Name} in example '{Name}'. Please consider adding a proper example value for it in swagger";
                         AutoRestLogger.Warning(warning).Wait();
                         var pv = new ExampleParameterValue(parameter, $"default /* Warning: {warning}*/");
                         if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))

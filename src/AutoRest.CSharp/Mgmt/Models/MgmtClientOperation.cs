@@ -17,7 +17,7 @@ using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using AutoRest.CSharp.MgmtTest.Models;
+using AutoRest.CSharp.Mgmt.Output.Samples;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
