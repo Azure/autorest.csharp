@@ -12,14 +12,14 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_VirtualMachineExtensionImageCollection
     {
-        // VirtualMachineExtensionImages_Get_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Generated from example definition:
@@ -53,9 +53,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // VirtualMachineExtensionImages_Get_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Generated from example definition:
@@ -85,9 +84,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // VirtualMachineExtensionImages_Get_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_VirtualMachineExtensionImagesGetMaximumSetGen()
         {
             // Generated from example definition:
@@ -129,9 +127,8 @@ namespace MgmtMockAndSample.Samples
             }
         }
 
-        // VirtualMachineExtensionImages_Get_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Generated from example definition:
@@ -165,9 +162,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // VirtualMachineExtensionImages_Get_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Generated from example definition:
@@ -197,9 +193,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // VirtualMachineExtensionImages_Get_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_VirtualMachineExtensionImagesGetMinimumSetGen()
         {
             // Generated from example definition:
@@ -241,9 +236,8 @@ namespace MgmtMockAndSample.Samples
             }
         }
 
-        // VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_VirtualMachineExtensionImagesListTypesMaximumSetGen()
         {
             // Generated from example definition:
@@ -278,9 +272,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_VirtualMachineExtensionImagesListTypesMinimumSetGen()
         {
             // Generated from example definition:
@@ -315,9 +308,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_VirtualMachineExtensionImagesListVersionsMaximumSetGen()
         {
             // Generated from example definition:
@@ -356,9 +348,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_VirtualMachineExtensionImagesListVersionsMinimumSetGen()
         {
             // Generated from example definition:

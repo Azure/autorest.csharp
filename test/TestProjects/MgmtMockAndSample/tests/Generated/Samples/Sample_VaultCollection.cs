@@ -15,14 +15,14 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_VaultCollection
     {
-        // Create a new vault or update an existing vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CreateOrUpdate_CreateANewVaultOrUpdateAnExistingVault()
         {
             // Generated from example definition:
@@ -84,9 +84,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Create or update a vault with network acls
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CreateOrUpdate_CreateOrUpdateAVaultWithNetworkAcls()
         {
             // Generated from example definition:
@@ -139,9 +138,8 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Verify Sample-gen can handle examples with some parameter missing
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CreateOrUpdate_VerifySampleGenCanHandleExamplesWithSomeParameterMissing()
         {
             // Generated from example definition:
@@ -203,9 +201,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Retrieve a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveAVault()
         {
             // Generated from example definition:
@@ -237,9 +234,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Retrieve a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_RetrieveAVault()
         {
             // Generated from example definition:
@@ -267,9 +263,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // Retrieve a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_RetrieveAVault()
         {
             // Generated from example definition:
@@ -309,9 +304,8 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
             }
         }
 
-        // List vaults in the specified resource group
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_ListVaultsInTheSpecifiedResourceGroup()
         {
             // Generated from example definition:

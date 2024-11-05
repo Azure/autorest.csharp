@@ -11,14 +11,14 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_DeletedManagedHsmResource
     {
-        // Retrieve a deleted managed HSM
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveADeletedManagedHSM()
         {
             // Generated from example definition:
@@ -47,9 +47,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Purge a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task PurgeDeleted_PurgeAManagedHSMPool()
         {
             // Generated from example definition:

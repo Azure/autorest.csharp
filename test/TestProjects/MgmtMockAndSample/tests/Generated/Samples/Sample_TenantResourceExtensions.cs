@@ -12,14 +12,14 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_TenantResourceExtensions
     {
-        // Get Tenant Activity Logs without filter or select
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetTenantActivityLogs_GetTenantActivityLogsWithoutFilterOrSelect()
         {
             // Generated from example definition:
@@ -43,9 +43,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // Calculate template hash
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CalculateTemplateHashDeployment_CalculateTemplateHash()
         {
             // Generated from example definition:

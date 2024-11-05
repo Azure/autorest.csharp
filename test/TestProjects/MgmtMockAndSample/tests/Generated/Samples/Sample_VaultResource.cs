@@ -13,14 +13,14 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_VaultResource
     {
-        // Delete a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Delete_DeleteAVault()
         {
             // Generated from example definition:
@@ -45,9 +45,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // Retrieve a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveAVault()
         {
             // Generated from example definition:
@@ -76,9 +75,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // List keys on an existing vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetKeys_ListKeysOnAnExistingVault()
         {
             // Generated from example definition:
@@ -106,9 +104,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // Validate an existing vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Validate_ValidateAnExistingVault()
         {
             // Generated from example definition:
@@ -133,9 +130,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // Disable a vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Disable_DisableAVault()
         {
             // Generated from example definition:
@@ -160,9 +156,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // Add an access policy, or update an access policy with new permissions
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task UpdateAccessPolicy_AddAnAccessPolicyOrUpdateAnAccessPolicyWithNewPermissions()
         {
             // Generated from example definition:
@@ -206,9 +201,8 @@ CertificatePermission.Get
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // List vaults in the specified subscription
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetVaults_ListVaultsInTheSpecifiedSubscription()
         {
             // Generated from example definition:
@@ -239,9 +233,8 @@ CertificatePermission.Get
             Console.WriteLine($"Succeeded");
         }
 
-        // Validate a vault name
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CheckNameAvailabilityVault_ValidateAVaultName()
         {
             // Generated from example definition:
@@ -265,9 +258,8 @@ CertificatePermission.Get
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // KeyVaultListPrivateLinkResources
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetPrivateLinkResources_KeyVaultListPrivateLinkResources()
         {
             // Generated from example definition:

@@ -14,14 +14,14 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_FirewallPolicyResource
     {
-        // Delete Firewall Policy
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Delete_DeleteFirewallPolicy()
         {
             // Generated from example definition:
@@ -46,9 +46,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded");
         }
 
-        // Get FirewallPolicy
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_GetFirewallPolicy()
         {
             // Generated from example definition:
@@ -77,9 +76,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Create FirewallPolicy
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_CreateFirewallPolicy()
         {
             // Generated from example definition:
@@ -211,9 +209,8 @@ DestinationPorts =
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Create FirewallPolicy with different values
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_CreateFirewallPolicyWithDifferentValues()
         {
             // Generated from example definition:
@@ -345,9 +342,8 @@ DestinationPorts =
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // List all Firewall Policies for a given subscription
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetFirewallPolicies_ListAllFirewallPoliciesForAGivenSubscription()
         {
             // Generated from example definition:
