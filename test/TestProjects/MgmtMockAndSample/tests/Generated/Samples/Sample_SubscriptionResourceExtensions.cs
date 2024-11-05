@@ -107,7 +107,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             VaultCheckNameAvailabilityContent content = new VaultCheckNameAvailabilityContent("sample-vault");
-            CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content).ConfigureAwait(false);
+            CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
 
             Console.WriteLine($"Succeeded: {result}");
         }

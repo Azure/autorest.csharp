@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            MhsmPrivateEndpointConnectionResource result = await mhsmPrivateEndpointConnection.GetAsync().ConfigureAwait(false);
+            MhsmPrivateEndpointConnectionResource result = await mhsmPrivateEndpointConnection.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             MhsmPrivateEndpointConnectionResource mhsmPrivateEndpointConnection = client.GetMhsmPrivateEndpointConnectionResource(mhsmPrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
             MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -111,7 +111,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<MhsmPrivateEndpointConnectionResource> lro = await mhsmPrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
             MhsmPrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

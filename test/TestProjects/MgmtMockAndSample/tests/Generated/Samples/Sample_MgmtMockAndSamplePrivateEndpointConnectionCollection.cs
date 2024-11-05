@@ -52,7 +52,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -87,7 +87,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            MgmtMockAndSamplePrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName).ConfigureAwait(false);
+            MgmtMockAndSamplePrivateEndpointConnectionResource result = await collection.GetAsync(privateEndpointConnectionName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -157,7 +157,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            bool result = await collection.ExistsAsync(privateEndpointConnectionName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(privateEndpointConnectionName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -187,7 +187,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string privateEndpointConnectionName = "sample-pec";
-            NullableResponse<MgmtMockAndSamplePrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName).ConfigureAwait(false);
+            NullableResponse<MgmtMockAndSamplePrivateEndpointConnectionResource> response = await collection.GetIfExistsAsync(privateEndpointConnectionName);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
 
             // invoke the operation
-            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
 
             // invoke the operation
-            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -102,7 +102,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
 
             // invoke the operation
-            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -133,7 +133,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
 
             // invoke the operation
-            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync().ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await firewallPolicyRuleCollectionGroup.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -212,7 +212,7 @@ Name = "Example-Nat-Rule-Collection",
 Priority = 100,
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -262,7 +262,7 @@ Name = "Example-Filter-Rule-Collection",
 Priority = 100,
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -295,7 +295,7 @@ Priority = 100,
 
             // invoke the operation
             FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData();
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -344,7 +344,7 @@ Name = "network-1",
 Name = "Example-Filter-Rule-Collection",
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -397,7 +397,7 @@ Description = "Deny inbound rule",
 Name = "Example-Filter-Rule-Collection",
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await firewallPolicyRuleCollectionGroup.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

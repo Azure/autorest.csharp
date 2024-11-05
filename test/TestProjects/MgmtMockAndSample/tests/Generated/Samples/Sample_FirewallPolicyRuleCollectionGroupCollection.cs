@@ -64,7 +64,7 @@ Name = "Example-Nat-Rule-Collection",
 Priority = 100,
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -117,7 +117,7 @@ Name = "Example-Filter-Rule-Collection",
 Priority = 100,
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -153,7 +153,7 @@ Priority = 100,
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
             FirewallPolicyRuleCollectionGroupData data = new FirewallPolicyRuleCollectionGroupData();
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -205,7 +205,7 @@ Name = "network-1",
 Name = "Example-Filter-Rule-Collection",
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -261,7 +261,7 @@ Description = "Deny inbound rule",
 Name = "Example-Filter-Rule-Collection",
 }},
             };
-            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyRuleCollectionGroupResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, ruleCollectionGroupName, data);
             FirewallPolicyRuleCollectionGroupResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -296,7 +296,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -330,7 +330,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -364,7 +364,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleGroup1";
-            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -398,7 +398,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            FirewallPolicyRuleCollectionGroupResource result = await collection.GetAsync(ruleCollectionGroupName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -540,7 +540,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            bool result = await collection.ExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(ruleCollectionGroupName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -570,7 +570,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            bool result = await collection.ExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(ruleCollectionGroupName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -600,7 +600,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleGroup1";
-            bool result = await collection.ExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(ruleCollectionGroupName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -630,7 +630,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            bool result = await collection.ExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(ruleCollectionGroupName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -660,7 +660,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
@@ -702,7 +702,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
@@ -744,7 +744,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleGroup1";
-            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
@@ -786,7 +786,7 @@ Name = "Example-Filter-Rule-Collection",
 
             // invoke the operation
             string ruleCollectionGroupName = "ruleCollectionGroup1";
-            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName).ConfigureAwait(false);
+            NullableResponse<FirewallPolicyRuleCollectionGroupResource> response = await collection.GetIfExistsAsync(ruleCollectionGroupName);
             FirewallPolicyRuleCollectionGroupResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

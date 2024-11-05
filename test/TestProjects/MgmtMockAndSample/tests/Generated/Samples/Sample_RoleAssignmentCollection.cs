@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Samples
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, roleAssignmentName, content);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
-            RoleAssignmentResource result = await collection.GetAsync(roleAssignmentName).ConfigureAwait(false);
+            RoleAssignmentResource result = await collection.GetAsync(roleAssignmentName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -126,7 +126,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
-            bool result = await collection.ExistsAsync(roleAssignmentName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(roleAssignmentName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -149,7 +149,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string roleAssignmentName = "roleAssignmentName";
-            NullableResponse<RoleAssignmentResource> response = await collection.GetIfExistsAsync(roleAssignmentName).ConfigureAwait(false);
+            NullableResponse<RoleAssignmentResource> response = await collection.GetIfExistsAsync(roleAssignmentName);
             RoleAssignmentResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

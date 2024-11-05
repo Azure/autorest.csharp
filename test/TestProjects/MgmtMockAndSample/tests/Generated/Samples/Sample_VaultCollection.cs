@@ -61,7 +61,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             {
                 Identity = new ManagedServiceIdentity(default),
             };
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -109,7 +109,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 ReadWriteSingleStringPropertySomething = "test",
                 DeepSomething = "deep-value",
             });
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -160,7 +160,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             {
                 Identity = new ManagedServiceIdentity(default),
             };
-            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content).ConfigureAwait(false);
+            ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -194,7 +194,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
 
             // invoke the operation
             string vaultName = "sample-vault";
-            VaultResource result = await collection.GetAsync(vaultName).ConfigureAwait(false);
+            VaultResource result = await collection.GetAsync(vaultName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -263,7 +263,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
 
             // invoke the operation
             string vaultName = "sample-vault";
-            bool result = await collection.ExistsAsync(vaultName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(vaultName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -292,7 +292,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
 
             // invoke the operation
             string vaultName = "sample-vault";
-            NullableResponse<VaultResource> response = await collection.GetIfExistsAsync(vaultName).ConfigureAwait(false);
+            NullableResponse<VaultResource> response = await collection.GetIfExistsAsync(vaultName);
             VaultResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

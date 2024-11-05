@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            DeletedManagedHsmResource result = await collection.GetAsync(location, name).ConfigureAwait(false);
+            DeletedManagedHsmResource result = await collection.GetAsync(location, name);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -75,7 +75,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            bool result = await collection.ExistsAsync(location, name).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(location, name);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -104,7 +104,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             AzureLocation location = new AzureLocation("westus");
             string name = "hsm1";
-            NullableResponse<DeletedManagedHsmResource> response = await collection.GetIfExistsAsync(location, name).ConfigureAwait(false);
+            NullableResponse<DeletedManagedHsmResource> response = await collection.GetIfExistsAsync(location, name);
             DeletedManagedHsmResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

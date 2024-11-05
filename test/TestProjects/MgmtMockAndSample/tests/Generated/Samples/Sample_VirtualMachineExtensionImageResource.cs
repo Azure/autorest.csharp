@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Samples
             VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
-            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync().ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             VirtualMachineExtensionImageResource virtualMachineExtensionImage = client.GetVirtualMachineExtensionImageResource(virtualMachineExtensionImageResourceId);
 
             // invoke the operation
-            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync().ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = await virtualMachineExtensionImage.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance

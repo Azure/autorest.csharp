@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
 
             // invoke the operation
-            FirewallPolicyResource result = await firewallPolicy.GetAsync().ConfigureAwait(false);
+            FirewallPolicyResource result = await firewallPolicy.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -168,7 +168,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -271,7 +271,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await firewallPolicy.UpdateAsync(WaitUntil.Completed, data);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

@@ -116,7 +116,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -222,7 +222,7 @@ DestinationPorts = {"*"},
 ["key1"] = "value1"
 },
             };
-            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data).ConfigureAwait(false);
+            ArmOperation<FirewallPolicyResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, firewallPolicyName, data);
             FirewallPolicyResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -256,7 +256,7 @@ DestinationPorts = {"*"},
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
-            FirewallPolicyResource result = await collection.GetAsync(firewallPolicyName).ConfigureAwait(false);
+            FirewallPolicyResource result = await collection.GetAsync(firewallPolicyName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -324,7 +324,7 @@ DestinationPorts = {"*"},
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
-            bool result = await collection.ExistsAsync(firewallPolicyName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(firewallPolicyName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -353,7 +353,7 @@ DestinationPorts = {"*"},
 
             // invoke the operation
             string firewallPolicyName = "firewallPolicy";
-            NullableResponse<FirewallPolicyResource> response = await collection.GetIfExistsAsync(firewallPolicyName).ConfigureAwait(false);
+            NullableResponse<FirewallPolicyResource> response = await collection.GetIfExistsAsync(firewallPolicyName);
             FirewallPolicyResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

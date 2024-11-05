@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            MgmtMockAndSamplePrivateEndpointConnectionResource result = await mgmtMockAndSamplePrivateEndpointConnection.GetAsync().ConfigureAwait(false);
+            MgmtMockAndSamplePrivateEndpointConnectionResource result = await mgmtMockAndSamplePrivateEndpointConnection.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             MgmtMockAndSamplePrivateEndpointConnectionResource mgmtMockAndSamplePrivateEndpointConnection = client.GetMgmtMockAndSamplePrivateEndpointConnectionResource(mgmtMockAndSamplePrivateEndpointConnectionResourceId);
 
             // invoke the operation
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -112,7 +112,7 @@ namespace MgmtMockAndSample.Samples
                     Description = "My name is Joe and I'm approving this.",
                 },
             };
-            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data).ConfigureAwait(false);
+            ArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource> lro = await mgmtMockAndSamplePrivateEndpointConnection.UpdateAsync(WaitUntil.Completed, data);
             MgmtMockAndSamplePrivateEndpointConnectionResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

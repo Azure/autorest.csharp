@@ -44,7 +44,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
             string version = "aaaaaaaaaaaaaa";
-            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version).ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -79,7 +79,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aa";
             string version = "aaa";
-            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version).ConfigureAwait(false);
+            VirtualMachineExtensionImageResource result = await collection.GetAsync(type, version);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -263,7 +263,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
             string version = "aaaaaaaaaaaaaa";
-            bool result = await collection.ExistsAsync(type, version).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(type, version);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -294,7 +294,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aa";
             string version = "aaa";
-            bool result = await collection.ExistsAsync(type, version).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(type, version);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -325,7 +325,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aaaaaaaaaaaaaaaaaa";
             string version = "aaaaaaaaaaaaaa";
-            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version).ConfigureAwait(false);
+            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version);
             VirtualMachineExtensionImageResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
@@ -368,7 +368,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             string type = "aa";
             string version = "aaa";
-            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version).ConfigureAwait(false);
+            NullableResponse<VirtualMachineExtensionImageResource> response = await collection.GetIfExistsAsync(type, version);
             VirtualMachineExtensionImageResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

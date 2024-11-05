@@ -48,7 +48,7 @@ namespace MgmtMockAndSample.Samples
                 Name = "NotInstalledApplicationForWindows",
                 Location = new AzureLocation("westcentralus"),
             };
-            ArmOperation<GuestConfigurationAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, guestConfigurationAssignmentName, data).ConfigureAwait(false);
+            ArmOperation<GuestConfigurationAssignmentResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, guestConfigurationAssignmentName, data);
             GuestConfigurationAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -79,7 +79,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
-            GuestConfigurationAssignmentResource result = await collection.GetAsync(guestConfigurationAssignmentName).ConfigureAwait(false);
+            GuestConfigurationAssignmentResource result = await collection.GetAsync(guestConfigurationAssignmentName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -141,7 +141,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
-            bool result = await collection.ExistsAsync(guestConfigurationAssignmentName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(guestConfigurationAssignmentName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -167,7 +167,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string guestConfigurationAssignmentName = "SecureProtocol";
-            NullableResponse<GuestConfigurationAssignmentResource> response = await collection.GetIfExistsAsync(guestConfigurationAssignmentName).ConfigureAwait(false);
+            NullableResponse<GuestConfigurationAssignmentResource> response = await collection.GetIfExistsAsync(guestConfigurationAssignmentName);
             GuestConfigurationAssignmentResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

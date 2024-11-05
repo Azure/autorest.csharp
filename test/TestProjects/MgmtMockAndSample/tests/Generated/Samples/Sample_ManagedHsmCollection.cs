@@ -87,7 +87,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 ["Environment"] = "dogfood"
 },
             };
-            ArmOperation<ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data).ConfigureAwait(false);
+            ArmOperation<ManagedHsmResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, name, data);
             ManagedHsmResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -121,7 +121,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 
             // invoke the operation
             string name = "hsm1";
-            ManagedHsmResource result = await collection.GetAsync(name).ConfigureAwait(false);
+            ManagedHsmResource result = await collection.GetAsync(name);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -189,7 +189,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 
             // invoke the operation
             string name = "hsm1";
-            bool result = await collection.ExistsAsync(name).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(name);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -218,7 +218,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 
             // invoke the operation
             string name = "hsm1";
-            NullableResponse<ManagedHsmResource> response = await collection.GetIfExistsAsync(name).ConfigureAwait(false);
+            NullableResponse<ManagedHsmResource> response = await collection.GetIfExistsAsync(name);
             ManagedHsmResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

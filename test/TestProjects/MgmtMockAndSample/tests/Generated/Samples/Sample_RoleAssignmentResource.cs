@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            RoleAssignmentResource result = await roleAssignment.GetAsync().ConfigureAwait(false);
+            RoleAssignmentResource result = await roleAssignment.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -67,7 +67,7 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.DeleteAsync(WaitUntil.Completed);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -103,7 +103,7 @@ namespace MgmtMockAndSample.Samples
                 PrincipalId = "d93a38bc-d029-4160-bfb0-fbda779ac214",
                 CanDelegate = false,
             };
-            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(WaitUntil.Completed, content).ConfigureAwait(false);
+            ArmOperation<RoleAssignmentResource> lro = await roleAssignment.UpdateAsync(WaitUntil.Completed, content);
             RoleAssignmentResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well

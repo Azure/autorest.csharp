@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Samples
             DeletedManagedHsmResource deletedManagedHsm = client.GetDeletedManagedHsmResource(deletedManagedHsmResourceId);
 
             // invoke the operation
-            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync().ConfigureAwait(false);
+            DeletedManagedHsmResource result = await deletedManagedHsm.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance

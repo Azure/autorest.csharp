@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Samples
             VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            VaultResource result = await vault.GetAsync().ConfigureAwait(false);
+            VaultResource result = await vault.GetAsync();
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -124,7 +124,7 @@ namespace MgmtMockAndSample.Samples
             VaultResource vault = client.GetVaultResource(vaultResourceId);
 
             // invoke the operation
-            VaultValidationResult result = await vault.ValidateAsync().ConfigureAwait(false);
+            VaultValidationResult result = await vault.ValidateAsync();
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -186,7 +186,7 @@ Secrets = {SecretPermission.Get},
 Certificates = {CertificatePermission.Get},
 })
             }));
-            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters).ConfigureAwait(false);
+            VaultAccessPolicyParameters result = await vault.UpdateAccessPolicyAsync(operationKind, vaultAccessPolicyParameters);
 
             Console.WriteLine($"Succeeded: {result}");
         }

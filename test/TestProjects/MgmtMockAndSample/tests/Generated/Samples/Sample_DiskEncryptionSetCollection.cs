@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Samples
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/{key}")),
                 MinimumTlsVersion = MinimumTlsVersion.Tls1_1,
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -98,7 +98,7 @@ namespace MgmtMockAndSample.Samples
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferenttenant.vault-int.azure-int.net/keys/{key}")),
                 FederatedClientId = "00000000-0000-0000-0000-000000000000",
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -141,7 +141,7 @@ namespace MgmtMockAndSample.Samples
                     SourceVaultId = new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"),
                 },
             };
-            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data).ConfigureAwait(false);
+            ArmOperation<DiskEncryptionSetResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, diskEncryptionSetName, data);
             DiskEncryptionSetResource result = lro.Value;
 
             // the variable result is a resource, you could call other operations on this instance as well
@@ -175,7 +175,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName).ConfigureAwait(false);
+            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -208,7 +208,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName).ConfigureAwait(false);
+            DiskEncryptionSetResource result = await collection.GetAsync(diskEncryptionSetName);
 
             // the variable result is a resource, you could call other operations on this instance as well
             // but just for demo, we get its data from this resource instance
@@ -276,7 +276,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            bool result = await collection.ExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(diskEncryptionSetName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -305,7 +305,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            bool result = await collection.ExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            bool result = await collection.ExistsAsync(diskEncryptionSetName);
 
             Console.WriteLine($"Succeeded: {result}");
         }
@@ -334,7 +334,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName);
             DiskEncryptionSetResource result = response.HasValue ? response.Value : null;
 
             if (result == null)
@@ -375,7 +375,7 @@ namespace MgmtMockAndSample.Samples
 
             // invoke the operation
             string diskEncryptionSetName = "myDiskEncryptionSet";
-            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName).ConfigureAwait(false);
+            NullableResponse<DiskEncryptionSetResource> response = await collection.GetIfExistsAsync(diskEncryptionSetName);
             DiskEncryptionSetResource result = response.HasValue ? response.Value : null;
 
             if (result == null)

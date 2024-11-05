@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private InvokeInstanceMethodExpression BuildOperationInvocation(ValueExpression instance, MgmtClientOperation operation, IReadOnlyList<ValueExpression> parameterArguments, bool isAsync = true)
         {
-            return new InvokeInstanceMethodExpression(instance, GetMethodName(operation.Name, isAsync), parameterArguments, isAsync && !operation.IsPagingOperation);
+            return new InvokeInstanceMethodExpression(instance, GetMethodName(operation.Name, isAsync), parameterArguments, TypeArguments: null, CallAsAsync: isAsync && !operation.IsPagingOperation, AddConfigureAwaitFalse: false);
         }
 
         private MethodBodyStatement BuildGetCollectionStatement(ResourceCollection collection, MgmtOperationSample example, ValueExpression client, out TypedValueExpression instance)
