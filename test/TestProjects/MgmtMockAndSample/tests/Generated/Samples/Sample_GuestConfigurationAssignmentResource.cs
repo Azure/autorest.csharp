@@ -114,7 +114,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await guestConfigurationAssignment.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

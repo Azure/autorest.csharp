@@ -292,7 +292,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
 
             if (result == null)
             {
-                Console.WriteLine($"Succeeded with null as result");
+                Console.WriteLine("Succeeded with null as result");
             }
             else
             {
@@ -337,7 +337,7 @@ CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delet
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

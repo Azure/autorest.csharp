@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await vault.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded: {item}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -153,7 +153,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await vault.DisableAsync();
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -230,7 +230,7 @@ CertificatePermission.Get
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -284,7 +284,7 @@ CertificatePermission.Get
                 Console.WriteLine($"Succeeded: {item}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
             if (result == null)
             {
-                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded\");");
+                _writer.Line($"{typeof(Console)}.WriteLine(\"Succeeded\");");
             }
             else
             {
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     using (_writer.Scope($"if({result.Declaration} == null)"))
                     {
-                        _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded with null as result\");");
+                        _writer.Line($"{typeof(Console)}.WriteLine(\"Succeeded with null as result\");");
                     }
                     using (_writer.Scope($"else"))
                     {

@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await firewallPolicy.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -370,7 +370,7 @@ DestinationPorts =
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

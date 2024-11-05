@@ -136,7 +136,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await roleAssignment.ValidateAsync();
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

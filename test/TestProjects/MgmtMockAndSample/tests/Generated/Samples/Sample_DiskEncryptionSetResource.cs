@@ -223,7 +223,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]
@@ -254,7 +254,7 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await firewallPolicyRuleCollectionGroup.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
         [Test]

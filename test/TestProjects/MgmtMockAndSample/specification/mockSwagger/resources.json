@@ -43,11 +43,53 @@
                             "type": "object"
                         },
                         "description": "The template provided to calculate hash."
+                    },
+                    {
+                        "name": "q1",
+                        "in": "query",
+                        "type": "string",
+                        "description": "The first query parameter"
+                    },
+                    {
+                        "name": "q2",
+                        "in": "query",
+                        "type": "integer",
+                        "description": "The second query parameter"
+                    },
+                    {
+                        "name": "q3",
+                        "in": "query",
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "The third query parameter"
+                    },
+                    {
+                        "name": "q4",
+                        "in": "query",
+                        "type": "number",
+                        "format": "float",
+                        "description": "The fourth query parameter"
+                    },
+                    {
+                        "name": "q5",
+                        "in": "query",
+                        "type": "number",
+                        "format": "double",
+                        "description": "The fifth query parameter"
+                    },
+                    {
+                        "name": "q6",
+                        "in": "query",
+                        "type": "boolean",
+                        "description": "The sixth query parameter"
                     }
                 ],
                 "x-ms-examples": {
                     "Calculate template hash": {
                         "$ref": "./examples/resources/CalculateTemplateHash.json"
+                    },
+                    "Calculate template hash with query parameters": {
+                        "$ref": "./examples/resources/CalculateTemplateHashWithQueryParameters.json"
                     }
                 },
                 "responses": {
