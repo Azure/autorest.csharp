@@ -102,18 +102,24 @@ namespace CadlRanchProjects.Tests
         public Task Azure_ResourceManager_Resources_TopLevelTrackedResources_listByResourceGroup() => Test(async (host) =>
         {
             var id = ResourceGroupResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg");
-            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetResourceGroupResource(id).GetTopLevelTrackedResourceAsync("top");
-            Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("top", response.Value.Data.Name);
-            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", response.Value.Data.ResourceType.ToString());
-            Assert.AreEqual(AzureLocation.EastUS, response.Value.Data.Location);
-            Assert.AreEqual("valid", response.Value.Data.Properties.Description);
-            Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
-            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
-            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.CreatedByType);
-            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.LastModifiedBy);
-            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.LastModifiedByType);
+            var resourceGroup = MgmtTestHelper.CreateArmClientWithMockAuth(host).GetResourceGroupResource(id);
+            var collection = resourceGroup.GetTopLevelTrackedResources();
+            int count = 0;
+            await foreach (var resource in collection.GetAllAsync())
+            {
+                count++;
+                Assert.AreEqual(true, resource.HasData);
+                Assert.AreEqual("top", resource.Data.Name);
+                Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources", resource.Data.ResourceType.ToString());
+                Assert.AreEqual(AzureLocation.EastUS, resource.Data.Location);
+                Assert.AreEqual("valid", resource.Data.Properties.Description);
+                Assert.AreEqual(ProvisioningState.Succeeded, resource.Data.Properties.ProvisioningState);
+                Assert.AreEqual("AzureSDK", resource.Data.SystemData.CreatedBy);
+                Assert.AreEqual(CreatedByType.User, resource.Data.SystemData.CreatedByType);
+                Assert.AreEqual("AzureSDK", resource.Data.SystemData.LastModifiedBy);
+                Assert.AreEqual(CreatedByType.User, resource.Data.SystemData.LastModifiedByType);
+            }
+            Assert.AreEqual(1, count);
         });
 
         [Test]
@@ -213,16 +219,21 @@ namespace CadlRanchProjects.Tests
         public Task Azure_ResourceManager_Resources_NestedProxyResources_listByTopLevelTrackedResource() => Test(async (host) =>
         {
             var id = TopLevelTrackedResource.CreateResourceIdentifier(Guid.Empty.ToString(), "test-rg", "top");
-            var response = await MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).GetNestedProxyResourceAsync("nested");
-            Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual(true, response.Value.HasData);
-            Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", response.Value.Data.ResourceType.ToString());
-            Assert.AreEqual("valid", response.Value.Data.Properties.Description);
-            Assert.AreEqual(ProvisioningState.Succeeded, response.Value.Data.Properties.ProvisioningState);
-            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.CreatedBy);
-            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.CreatedByType);
-            Assert.AreEqual("AzureSDK", response.Value.Data.SystemData.LastModifiedBy);
-            Assert.AreEqual(CreatedByType.User, response.Value.Data.SystemData.LastModifiedByType);
+            var collection = MgmtTestHelper.CreateArmClientWithMockAuth(host).GetTopLevelTrackedResource(id).GetNestedProxyResources();
+            int count = 0;
+            await foreach (var resource in collection.GetAllAsync())
+            {
+                count++;
+                Assert.AreEqual(true, resource.HasData);
+                Assert.AreEqual("Azure.ResourceManager.Resources/topLevelTrackedResources/top/nestedProxyResources", resource.Data.ResourceType.ToString());
+                Assert.AreEqual("valid", resource.Data.Properties.Description);
+                Assert.AreEqual(ProvisioningState.Succeeded, resource.Data.Properties.ProvisioningState);
+                Assert.AreEqual("AzureSDK", resource.Data.SystemData.CreatedBy);
+                Assert.AreEqual(CreatedByType.User, resource.Data.SystemData.CreatedByType);
+                Assert.AreEqual("AzureSDK", resource.Data.SystemData.LastModifiedBy);
+                Assert.AreEqual(CreatedByType.User, resource.Data.SystemData.LastModifiedByType);
+            }
+            Assert.AreEqual(1, count);
         });
 
         [Test]
