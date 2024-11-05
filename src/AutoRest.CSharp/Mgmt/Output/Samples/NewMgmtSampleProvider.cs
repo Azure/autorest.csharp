@@ -152,24 +152,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
         private MethodBodyStatement BuildSampleMethodBodyForExtension(MgmtOperationSample example, ValueExpression client, MgmtExtension extension, out TypedValueExpression? result)
         {
-            var statements = new List<MethodBodyStatement>();
             var resourceName = GetResourceName(extension);
-            if (extension is not ArmResourceExtension)
+            return new MethodBodyStatement[]
             {
-                statements.Add(
-                    new SingleLineCommentStatement($"this example assumes you already have this {resourceName} created on azure")
-                    );
-                statements.Add(
-                    new SingleLineCommentStatement($"for more information of creating {resourceName}, please refer to the document of {resourceName}")
-                    );
-            }
-            // get extension resource instance
-            statements.Add(
-                BuildGetResourceStatementFromExtension(extension, example, client, out var instance)
-                );
-            statements.Add(EmptyLine);
-            statements.Add(BuildSampleOperationStatement(example, instance, out result));
-            return statements;
+                // get extension resource instance
+                BuildGetResourceStatementFromExtension(extension, example, client, out var instance),
+                EmptyLine,
+                BuildSampleOperationStatement(example, instance, out result)
+            };
         }
 
         private MethodBodyStatement BuildSampleMethodBodyForResource(MgmtOperationSample example, ValueExpression client, Resource resource, out TypedValueExpression? result)

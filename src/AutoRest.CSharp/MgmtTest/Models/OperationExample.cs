@@ -150,7 +150,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
             return result;
         }
 
-        protected string GetParameterSerializedName(string name) => _parameterNameToSerializedNameMapping.Value[name];
+        // there are possibilities that we cannot find the corresponding parameter's serialized name. We have to return an empty here to ensure everything is going fine
+        protected string GetParameterSerializedName(string name) => _parameterNameToSerializedNameMapping.Value.TryGetValue(name, out var serializedName) ? serializedName : string.Empty;
 
         private InputParameterExample FindPathExampleParameterBySerializedName(string serializedName)
         {
