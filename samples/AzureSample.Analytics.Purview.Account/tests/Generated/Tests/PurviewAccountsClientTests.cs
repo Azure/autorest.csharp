@@ -25,7 +25,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAccountProperties_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -36,7 +36,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAccountProperties_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -47,7 +47,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateAccountProperties_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -59,7 +59,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task UpdateAccountProperties_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -74,7 +74,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAccessKeys_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -85,7 +85,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetAccessKeys_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -96,7 +96,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RegenerateAccessKey_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -108,7 +108,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task RegenerateAccessKey_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -123,7 +123,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRules_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 
@@ -136,7 +136,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRules_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountsClient client = CreatePurviewAccountsClient(endpoint, credential);
 

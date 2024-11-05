@@ -23,7 +23,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -98,7 +98,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -173,7 +173,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
@@ -202,7 +202,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
@@ -231,7 +231,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -361,7 +361,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -491,7 +491,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
@@ -545,7 +545,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             RoundTripModel action = new RoundTripModel(
@@ -599,7 +599,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_NoContentType_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -674,7 +674,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_NoContentType_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -749,7 +749,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_NoContentType_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -879,7 +879,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_NoContentType_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -1009,7 +1009,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloDemoAgain_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloDemoAgain(null);
@@ -1030,7 +1030,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloDemoAgainAsync(null);
@@ -1051,7 +1051,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloDemoAgain_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloDemoAgain();
@@ -1061,7 +1061,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloDemoAgain_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloDemoAgainAsync();
@@ -1071,7 +1071,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloDemoAgain_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloDemoAgain(null);
@@ -1099,7 +1099,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloDemoAgain_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloDemoAgainAsync(null);
@@ -1127,7 +1127,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloDemoAgain_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloDemoAgain();
@@ -1137,7 +1137,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloDemoAgain_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloDemoAgainAsync();
@@ -1147,7 +1147,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -1183,7 +1183,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -1219,7 +1219,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
@@ -1230,7 +1230,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default);
@@ -1241,7 +1241,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -1294,7 +1294,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             using RequestContent content = RequestContent.Create(new
@@ -1347,7 +1347,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
@@ -1367,7 +1367,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Thing body = new Thing("<name>", BinaryData.FromObjectAsJson("<requiredUnion>"), "<requiredBadDescription>", new int[] { 1234 }, (double)default)
@@ -1387,7 +1387,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
@@ -1408,7 +1408,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
@@ -1429,7 +1429,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
@@ -1439,7 +1439,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();
@@ -1449,7 +1449,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = client.HelloLiteral(null);
@@ -1477,7 +1477,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response response = await client.HelloLiteralAsync(null);
@@ -1505,7 +1505,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = client.HelloLiteral();
@@ -1515,7 +1515,7 @@ BinaryData.FromObjectAsJson("<unionList>")
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             HelloDemo2 client = new FirstTestTypeSpecClient(endpoint).GetHelloClient().GetHelloDemo2Client();
 
             Response<Thing> response = await client.HelloLiteralAsync();

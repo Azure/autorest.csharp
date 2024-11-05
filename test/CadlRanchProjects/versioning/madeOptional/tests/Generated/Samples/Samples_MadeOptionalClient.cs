@@ -22,7 +22,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MadeOptional_Test_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -39,7 +39,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MadeOptional_Test_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -56,7 +56,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MadeOptional_Test_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>");
@@ -67,7 +67,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MadeOptional_Test_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>");
@@ -78,7 +78,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MadeOptional_Test_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -97,7 +97,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MadeOptional_Test_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -116,7 +116,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_MadeOptional_Test_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>")
@@ -130,7 +130,7 @@ namespace Versioning.MadeOptional.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_MadeOptional_Test_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>")

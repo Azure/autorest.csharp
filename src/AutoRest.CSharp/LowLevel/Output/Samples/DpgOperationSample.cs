@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return operationParameterValue;
 
             // sometimes, especially in swagger projects, the parameter used as endpoint in our client, does not have the `IsEndpoint` flag, we have to fallback here so that we could at least have a value for it.
-            return InputExampleValue.Value(InputPrimitiveType.Url, Configuration.ApiTypes.EndPointSampleValue);
+            return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
         }
 
         private bool NeedsDispose(Parameter parameter)

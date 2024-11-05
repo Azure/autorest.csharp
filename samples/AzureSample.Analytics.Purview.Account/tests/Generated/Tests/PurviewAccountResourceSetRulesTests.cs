@@ -25,7 +25,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRule_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -36,7 +36,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task GetResourceSetRule_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -47,7 +47,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateResourceSetRule_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -59,7 +59,7 @@ namespace AzureSample.Analytics.Purview.Account.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task CreateOrUpdateResourceSetRule_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -181,7 +181,7 @@ storeType = "<storeType>",
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteResourceSetRule_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -192,7 +192,7 @@ storeType = "<storeType>",
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task DeleteResourceSetRule_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TokenCredential credential = new DefaultAzureCredential();
             PurviewAccountResourceSetRules client = CreatePurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 

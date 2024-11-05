@@ -20,7 +20,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Bar_Nine_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             QuxBar client = new ServiceClient(endpoint, default).GetQuxClient().GetQuxBarClient();
 
             Response response = client.Nine();
@@ -32,7 +32,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Bar_Nine_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             QuxBar client = new ServiceClient(endpoint, default).GetQuxClient().GetQuxBarClient();
 
             Response response = await client.NineAsync();
@@ -44,7 +44,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Bar_Nine_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             QuxBar client = new ServiceClient(endpoint, default).GetQuxClient().GetQuxBarClient();
 
             Response response = client.Nine();
@@ -56,7 +56,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Bar_Nine_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             QuxBar client = new ServiceClient(endpoint, default).GetQuxClient().GetQuxBarClient();
 
             Response response = await client.NineAsync();

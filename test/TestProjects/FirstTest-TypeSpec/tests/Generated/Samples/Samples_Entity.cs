@@ -21,7 +21,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Entity_DoSomething_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response response = client.DoSomething("<p2>", null);
@@ -42,7 +42,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Entity_DoSomething_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response response = await client.DoSomethingAsync("<p2>", null);
@@ -63,7 +63,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Entity_DoSomething_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response<Thing> response = client.DoSomething("<p2>");
@@ -73,7 +73,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Entity_DoSomething_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<p2>");
@@ -83,7 +83,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Entity_DoSomething_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response response = client.DoSomething("<p2>", null);
@@ -111,7 +111,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Entity_DoSomething_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response response = await client.DoSomethingAsync("<p2>", null);
@@ -139,7 +139,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Entity_DoSomething_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response<Thing> response = client.DoSomething("<p2>");
@@ -149,7 +149,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Entity_DoSomething_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Entity client = new FirstTestTypeSpecClient(endpoint).GetEntityClient();
 
             Response<Thing> response = await client.DoSomethingAsync("<p2>");

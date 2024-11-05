@@ -19,7 +19,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithoutApiVersion_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithoutApiVersion();
@@ -31,7 +31,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithoutApiVersion_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithoutApiVersionAsync();
@@ -43,7 +43,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithoutApiVersion_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithoutApiVersion();
@@ -55,7 +55,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithoutApiVersion_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithoutApiVersionAsync();
@@ -67,7 +67,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithQueryApiVersion_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithQueryApiVersion("<apiVersion>");
@@ -79,7 +79,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithQueryApiVersion_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithQueryApiVersionAsync("<apiVersion>");
@@ -91,7 +91,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithQueryApiVersion_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithQueryApiVersion("<apiVersion>");
@@ -103,7 +103,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithQueryApiVersion_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithQueryApiVersionAsync("<apiVersion>");
@@ -115,7 +115,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithPathApiVersion_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithPathApiVersion("<apiVersion>");
@@ -127,7 +127,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithPathApiVersion_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithPathApiVersionAsync("<apiVersion>");
@@ -139,7 +139,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotVersioned_WithPathApiVersion_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = client.WithPathApiVersion("<apiVersion>");
@@ -151,7 +151,7 @@ namespace Server.Versions.NotVersioned.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotVersioned_WithPathApiVersion_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotVersionedClient client = new NotVersionedClient(endpoint);
 
             Response response = await client.WithPathApiVersionAsync("<apiVersion>");

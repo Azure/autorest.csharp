@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call FiveAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
 Response response = await client.FiveAsync();
@@ -14,7 +14,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call FiveAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
 Response response = await client.FiveAsync();
@@ -26,7 +26,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Five.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
 Response response = client.Five();
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Five with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
 Response response = client.Five();

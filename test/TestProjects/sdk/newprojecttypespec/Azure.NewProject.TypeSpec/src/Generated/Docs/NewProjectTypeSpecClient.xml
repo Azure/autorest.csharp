@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call TopActionAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -13,7 +13,7 @@ Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("202
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -24,7 +24,7 @@ Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("202
       <example>
 This sample shows how to call TopAction.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -32,7 +32,7 @@ Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:
 ]]></code>
 This sample shows how to call TopAction with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -43,7 +43,7 @@ Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T18:
       <example>
 This sample shows how to call TopActionAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -60,7 +60,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call TopActionAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -84,7 +84,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call TopAction and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -101,7 +101,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call TopAction with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -125,7 +125,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -142,7 +142,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call TopAction2Async with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -166,7 +166,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -183,7 +183,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call TopAction2 with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -207,7 +207,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call PatchActionAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -234,7 +234,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -272,7 +272,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call PatchAction and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -299,7 +299,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -337,7 +337,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call AnonymousBodyAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -345,7 +345,7 @@ Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -356,7 +356,7 @@ Response<Thing> response = await client.AnonymousBodyAsync("<name>", BinaryData.
       <example>
 This sample shows how to call AnonymousBody.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -364,7 +364,7 @@ Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectA
 ]]></code>
 This sample shows how to call AnonymousBody with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -375,7 +375,7 @@ Response<Thing> response = client.AnonymousBody("<name>", BinaryData.FromObjectA
       <example>
 This sample shows how to call AnonymousBodyAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -402,7 +402,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -440,7 +440,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call AnonymousBody and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -467,7 +467,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -505,7 +505,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
       <example>
 This sample shows how to call FriendlyModelAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -513,7 +513,7 @@ Response<Friend> response = await client.FriendlyModelAsync("<name>");
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -524,7 +524,7 @@ Response<Friend> response = await client.FriendlyModelAsync("<name>");
       <example>
 This sample shows how to call FriendlyModel.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -532,7 +532,7 @@ Response<Friend> response = client.FriendlyModel("<name>");
 ]]></code>
 This sample shows how to call FriendlyModel with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -543,7 +543,7 @@ Response<Friend> response = client.FriendlyModel("<name>");
       <example>
 This sample shows how to call FriendlyModelAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -558,7 +558,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModelAsync with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -576,7 +576,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call FriendlyModel and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -591,7 +591,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call FriendlyModel with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -609,7 +609,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -619,7 +619,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AddTimeHeaderAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -632,7 +632,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -642,7 +642,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call AddTimeHeader with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 

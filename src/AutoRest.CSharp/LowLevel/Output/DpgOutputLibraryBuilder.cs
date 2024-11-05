@@ -282,7 +282,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
                 var clientNamespace = Configuration.Namespace;
-                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Concat(c.Operations.SelectMany(op => op.Parameters)).Where(p => !p.IsRequired || p.IsApiVersion || p.IsEndpoint)).Distinct().ToArray();
+                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Concat(c.Operations.SelectMany(op => op.Parameters)))
+                    .Where(p => (p.Kind == InputOperationParameterKind.Client) && (!p.IsRequired || p.IsApiVersion || p.IsEndpoint))
+                    .DistinctBy(p => p.Name)
+                    .ToArray();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);
             }

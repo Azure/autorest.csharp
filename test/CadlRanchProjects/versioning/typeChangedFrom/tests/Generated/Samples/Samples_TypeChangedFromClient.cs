@@ -22,7 +22,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TypeChangedFrom_Test_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -41,7 +41,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TypeChangedFrom_Test_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -60,7 +60,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TypeChangedFrom_Test_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>", "<changedProp>");
@@ -71,7 +71,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TypeChangedFrom_Test_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>", "<changedProp>");
@@ -82,7 +82,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TypeChangedFrom_Test_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -101,7 +101,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TypeChangedFrom_Test_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
@@ -120,7 +120,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_TypeChangedFrom_Test_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>", "<changedProp>");
@@ -131,7 +131,7 @@ namespace Versioning.TypeChangedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_TypeChangedFrom_Test_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
             TestModel body = new TestModel("<prop>", "<changedProp>");

@@ -20,7 +20,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Qux_Eight_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Qux client = new ServiceClient(endpoint, default).GetQuxClient();
 
             Response response = client.Eight();
@@ -32,7 +32,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Qux_Eight_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Qux client = new ServiceClient(endpoint, default).GetQuxClient();
 
             Response response = await client.EightAsync();
@@ -44,7 +44,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Qux_Eight_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Qux client = new ServiceClient(endpoint, default).GetQuxClient();
 
             Response response = client.Eight();
@@ -56,7 +56,7 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Qux_Eight_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Qux client = new ServiceClient(endpoint, default).GetQuxClient();
 
             Response response = await client.EightAsync();

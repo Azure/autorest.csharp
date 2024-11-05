@@ -21,7 +21,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_GetProject_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetProject("<projectName>");
@@ -41,7 +41,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_GetProject_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetProjectAsync("<projectName>");
@@ -61,7 +61,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_GetProject_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.GetProject("<projectName>");
@@ -84,7 +84,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_GetProject_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.GetProjectAsync("<projectName>");
@@ -107,7 +107,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_GetProjects_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             foreach (BinaryData item in client.GetProjects())
@@ -128,7 +128,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_GetProjects_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             await foreach (BinaryData item in client.GetProjectsAsync())
@@ -149,7 +149,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_GetProjects_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             foreach (BinaryData item in client.GetProjects())
@@ -173,7 +173,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_GetProjects_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             await foreach (BinaryData item in client.GetProjectsAsync())
@@ -197,7 +197,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_CreateOrUpdate_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -224,7 +224,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_CreateOrUpdate_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -251,7 +251,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_CreateOrUpdate_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -284,7 +284,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_CreateOrUpdate_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -317,7 +317,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_Delete_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
@@ -327,7 +327,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_Delete_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
@@ -337,7 +337,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Project_Delete_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Delete(WaitUntil.Completed, "<projectName>");
@@ -347,7 +347,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Project_Delete_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.DeleteAsync(WaitUntil.Completed, "<projectName>");
@@ -357,7 +357,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Export_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
@@ -367,7 +367,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Export_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
@@ -377,7 +377,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Export_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Export(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
@@ -387,7 +387,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Export_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.ExportAsync(WaitUntil.Completed, "<projectName>", "<projectFileVersion>");
@@ -397,7 +397,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Importx_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
@@ -407,7 +407,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Importx_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
@@ -417,7 +417,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Importx_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = client.Importx(WaitUntil.Completed, "<projectName>");
@@ -427,7 +427,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Importx_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             Operation operation = await client.ImportxAsync(WaitUntil.Completed, "<projectName>");
@@ -437,7 +437,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Train_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -451,7 +451,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Train_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -465,7 +465,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Projects_Train_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -479,7 +479,7 @@ namespace AuthoringTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Projects_Train_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             Projects client = new AuthoringTypeSpecClient(endpoint).GetProjectsClient(apiVersion: "2022-05-15-preview");
 
             using RequestContent content = RequestContent.Create(new
