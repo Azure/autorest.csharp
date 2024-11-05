@@ -193,8 +193,12 @@ namespace AutoRest.CSharp.Common.Input
             return result;
         }
 
-        private static InputExampleValue HandleRawExampleValue(InputType inputType, object rawValue)
+        private static InputExampleValue HandleRawExampleValue(InputType inputType, object? rawValue)
         {
+            if (rawValue == null)
+            {
+                return InputExampleValue.Null(inputType);
+            }
             var type = rawValue.GetType();
             if (type.IsGenericType)
             {
