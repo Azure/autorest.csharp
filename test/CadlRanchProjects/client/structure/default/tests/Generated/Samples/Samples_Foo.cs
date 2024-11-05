@@ -21,7 +21,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Three_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = client.Three();
 
@@ -33,7 +33,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Three_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = await client.ThreeAsync();
 
@@ -45,7 +45,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Three_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = client.Three();
 
@@ -57,7 +57,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Three_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = await client.ThreeAsync();
 
@@ -69,7 +69,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Four_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = client.Four();
 
@@ -81,7 +81,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Four_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = await client.FourAsync();
 
@@ -93,7 +93,7 @@ namespace Client.Structure.Service.Samples
         public void Example_Foo_Four_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = client.Four();
 
@@ -105,7 +105,7 @@ namespace Client.Structure.Service.Samples
         public async Task Example_Foo_Four_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+            Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
             Response response = await client.FourAsync();
 

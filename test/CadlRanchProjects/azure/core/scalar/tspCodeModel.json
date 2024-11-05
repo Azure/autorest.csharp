@@ -7,86 +7,100 @@
  "Enums": [
   {
    "$id": "2",
-   "Kind": "enum",
-   "Name": "Versions",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
-   "ValueType": {
+   "kind": "enum",
+   "name": "Versions",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.Versions",
+   "valueType": {
     "$id": "3",
-    "Kind": "string",
-    "Name": "string",
-    "CrossLanguageDefinitionId": "TypeSpec.string",
-    "Decorators": []
+    "kind": "string",
+    "name": "string",
+    "crossLanguageDefinitionId": "TypeSpec.string",
+    "decorators": []
    },
-   "Values": [
+   "values": [
     {
      "$id": "4",
-     "Name": "v2022_12_01_preview",
-     "Value": "2022-12-01-preview",
-     "Description": "The version 2022-12-01-preview.",
-     "Decorators": []
+     "kind": "enumvalue",
+     "name": "v2022_12_01_preview",
+     "value": "2022-12-01-preview",
+     "valueType": {
+      "$id": "5",
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
+     },
+     "enumType": {
+      "$ref": "2"
+     },
+     "description": "The version 2022-12-01-preview.",
+     "decorators": []
     }
    ],
-   "Description": "The version of the API.",
-   "IsExtensible": false,
-   "Usage": "ApiVersionEnum",
-   "Decorators": []
+   "description": "The version of the API.",
+   "isFixed": true,
+   "isFlags": false,
+   "usage": "ApiVersionEnum",
+   "decorators": []
   }
  ],
  "Models": [
   {
-   "$id": "5",
-   "Kind": "model",
-   "Name": "AzureLocationModel",
-   "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
-   "Usage": "Input,Output,Json",
-   "Decorators": [],
-   "Properties": [
+   "$id": "6",
+   "kind": "model",
+   "name": "AzureLocationModel",
+   "crossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel",
+   "usage": "Input,Output,Json",
+   "decorators": [],
+   "properties": [
     {
-     "$id": "6",
-     "Kind": "property",
-     "Name": "location",
-     "SerializedName": "location",
-     "Type": {
-      "$id": "7",
-      "Kind": "string",
-      "Name": "azureLocation",
-      "CrossLanguageDefinitionId": "Azure.Core.azureLocation",
-      "BaseType": {
-       "$id": "8",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string",
-       "Decorators": []
+     "$id": "7",
+     "kind": "property",
+     "name": "location",
+     "serializedName": "location",
+     "type": {
+      "$id": "8",
+      "kind": "string",
+      "name": "azureLocation",
+      "crossLanguageDefinitionId": "Azure.Core.azureLocation",
+      "baseType": {
+       "$id": "9",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string",
+       "decorators": []
       },
-      "Decorators": []
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel.location"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "_Specs_.Azure.Core.Scalar.AzureLocationModel.location"
     }
    ]
   }
  ],
  "Clients": [
   {
-   "$id": "9",
+   "$id": "10",
    "Name": "ScalarClient",
    "Operations": [],
    "Protocol": {
-    "$id": "10"
+    "$id": "11"
    },
    "Parameters": [
     {
-     "$id": "11",
+     "$id": "12",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
-      "$id": "12",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "$id": "13",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -98,12 +112,12 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "13",
+      "$id": "14",
       "Type": {
-       "$id": "14",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "$id": "15",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -112,32 +126,32 @@
    "Decorators": []
   },
   {
-   "$id": "15",
+   "$id": "16",
    "Name": "AzureLocationScalar",
    "Operations": [
     {
-     "$id": "16",
+     "$id": "17",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
      "Description": "get azureLocation value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "17",
+       "$id": "18",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "18",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "19",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "19",
+        "kind": "constant",
+        "valueType": {
+         "$id": "20",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -152,23 +166,23 @@
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "21",
-        "Kind": "string",
-        "Name": "azureLocation",
-        "CrossLanguageDefinitionId": "Azure.Core.azureLocation",
-        "BaseType": {
-         "$id": "22",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "22",
+        "kind": "string",
+        "name": "azureLocation",
+        "crossLanguageDefinitionId": "Azure.Core.azureLocation",
+        "baseType": {
+         "$id": "23",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Decorators": []
+        "decorators": []
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -189,29 +203,29 @@
      "Decorators": []
     },
     {
-     "$id": "23",
+     "$id": "24",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
      "Description": "put azureLocation value",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "24",
+       "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "25",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "26",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "26",
+        "kind": "constant",
+        "valueType": {
+         "$id": "27",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -224,23 +238,23 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "27",
+       "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$id": "28",
-        "Kind": "string",
-        "Name": "azureLocation",
-        "CrossLanguageDefinitionId": "Azure.Core.azureLocation",
-        "BaseType": {
-         "$id": "29",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "29",
+        "kind": "string",
+        "name": "azureLocation",
+        "crossLanguageDefinitionId": "Azure.Core.azureLocation",
+        "baseType": {
+         "$id": "30",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Decorators": []
+        "decorators": []
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -255,7 +269,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "31",
        "StatusCodes": [
         204
        ],
@@ -278,29 +292,29 @@
      "Decorators": []
     },
     {
-     "$id": "31",
+     "$id": "32",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
      "Description": "post a model which has azureLocation property",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "32",
+       "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "33",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "34",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "34",
+        "kind": "constant",
+        "valueType": {
+         "$id": "35",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -313,21 +327,21 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "35",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
-        "Kind": "constant",
-        "ValueType": {
-         "$id": "37",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "37",
+        "kind": "constant",
+        "valueType": {
+         "$id": "38",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -340,12 +354,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "38",
+       "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
        "Description": "_",
        "Type": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "Location": "Body",
        "IsApiVersion": false,
@@ -360,12 +374,12 @@
      ],
      "Responses": [
       {
-       "$id": "39",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "5"
+        "$ref": "6"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -389,30 +403,30 @@
      "Decorators": []
     },
     {
-     "$id": "40",
+     "$id": "41",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value header",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "41",
+       "$id": "42",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "42",
-        "Kind": "string",
-        "Name": "azureLocation",
-        "CrossLanguageDefinitionId": "Azure.Core.azureLocation",
-        "BaseType": {
-         "$id": "43",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "43",
+        "kind": "string",
+        "name": "azureLocation",
+        "crossLanguageDefinitionId": "Azure.Core.azureLocation",
+        "baseType": {
+         "$id": "44",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Decorators": []
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -427,7 +441,7 @@
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "45",
        "StatusCodes": [
         204
        ],
@@ -447,30 +461,30 @@
      "Decorators": []
     },
     {
-     "$id": "45",
+     "$id": "46",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
      "Description": "azureLocation value query",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$id": "46",
+       "$id": "47",
        "Name": "region",
        "NameInRequest": "region",
        "Description": "_",
        "Type": {
-        "$id": "47",
-        "Kind": "string",
-        "Name": "azureLocation",
-        "CrossLanguageDefinitionId": "Azure.Core.azureLocation",
-        "BaseType": {
-         "$id": "48",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+        "$id": "48",
+        "kind": "string",
+        "name": "azureLocation",
+        "crossLanguageDefinitionId": "Azure.Core.azureLocation",
+        "baseType": {
+         "$id": "49",
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Decorators": []
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -485,7 +499,7 @@
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "50",
        "StatusCodes": [
         204
        ],
@@ -506,19 +520,20 @@
     }
    ],
    "Protocol": {
-    "$id": "50"
+    "$id": "51"
    },
    "Parent": "ScalarClient",
    "Parameters": [
     {
-     "$id": "51",
+     "$id": "52",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
-      "$id": "52",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "$id": "53",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -530,12 +545,12 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "53",
+      "$id": "54",
       "Type": {
-       "$id": "54",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "$id": "55",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

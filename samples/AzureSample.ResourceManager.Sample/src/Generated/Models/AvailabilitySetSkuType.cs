@@ -42,7 +42,7 @@ namespace AzureSample.ResourceManager.Sample.Models
         public static bool operator ==(AvailabilitySetSkuType left, AvailabilitySetSkuType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AvailabilitySetSkuType"/> values are not the same. </summary>
         public static bool operator !=(AvailabilitySetSkuType left, AvailabilitySetSkuType right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="AvailabilitySetSkuType"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="AvailabilitySetSkuType"/>. </summary>
         public static implicit operator AvailabilitySetSkuType(string value) => new AvailabilitySetSkuType(value);
 
         /// <inheritdoc />

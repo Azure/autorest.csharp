@@ -10,6 +10,7 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "use-write-core": true,
   "models-to-treat-empty-string-as-null": [
     "EventData",
     "ManagedHsmProperties"
@@ -50,7 +51,6 @@
       "Vaults_GetDeleted",
       "Vaults_Update"
     ],
-    "Mock": true,
     "Sample": true
   },
   "flavor": "azure",

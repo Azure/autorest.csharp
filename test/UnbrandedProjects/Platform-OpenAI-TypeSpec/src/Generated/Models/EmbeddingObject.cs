@@ -27,7 +27,7 @@ namespace OpenAI.Models
         public static bool operator ==(EmbeddingObject left, EmbeddingObject right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EmbeddingObject"/> values are not the same. </summary>
         public static bool operator !=(EmbeddingObject left, EmbeddingObject right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EmbeddingObject"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EmbeddingObject"/>. </summary>
         public static implicit operator EmbeddingObject(string value) => new EmbeddingObject(value);
 
         /// <inheritdoc />

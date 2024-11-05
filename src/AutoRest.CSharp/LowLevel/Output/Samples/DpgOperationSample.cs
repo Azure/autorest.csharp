@@ -153,28 +153,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (!parameter.IsOptionalInSignature)
                     {
-                        /*
-                         * TODO: remove this when example can contain client parameter value. Following workaround will not needed.
-                         */
                         ValueExpression parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
-                        switch (parameter.Type)
-                        {
-                            case { IsEnum: true }:
-                                var inputParameter = GetAllClientInvocatioParameters().Where(p => p.Name == parameter.Name).FirstOrDefault();
-                                if (inputParameter?.Type is InputEnumType enumType)
-                                {
-                                    var enumValue = enumType.Values.First();
-                                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, InputExampleValue.Value(enumType, enumValue.Value)));
-                                }
-                                else
-                                {
-                                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
-                                }
-                                break;
-                            default:
-                                result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
-                                break;
-                        }
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -307,7 +287,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     var modelType = parameter.Type as InputModelType;
                     var objectExampleValue = parameterExample.ExampleValue as InputExampleObjectValue;
                     Debug.Assert(modelType != null);
-                    Debug.Assert(objectExampleValue != null);
+                    var values = objectExampleValue?.Values ?? new Dictionary<string, InputExampleValue>();
 
                     foreach (var modelOrBase in modelType.GetSelfAndBaseModels())
                     {
@@ -315,7 +295,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                         {
                             if (property.Name.ToVariableName() == name)
                             {
-                                return objectExampleValue.Values[property.SerializedName];
+                                return values.TryGetValue(property.SerializedName, out var exampleValue) ? exampleValue : null;
                             }
                         }
                     }
@@ -373,7 +353,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             // we have a request body type
             if (_method.RequestBodyType == null)
-                return InputExampleValue.Null(InputPrimitiveType.Any);
+                return InputExampleValue.Null(InputPrimitiveType.Unknown);
 
             //if (Method.RequestBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             //    return InputExampleValue.Stream(Method.RequestBodyType, "<filePath>");

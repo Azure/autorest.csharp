@@ -6,953 +6,987 @@
  "Models": [
   {
    "$id": "2",
-   "Kind": "model",
-   "Name": "SameAsModel",
-   "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "SameAsModel",
+   "crossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "3",
-     "Kind": "property",
-     "Name": "SameAsModel",
-     "SerializedName": "SameAsModel",
-     "Type": {
+     "kind": "property",
+     "name": "SameAsModel",
+     "serializedName": "SameAsModel",
+     "type": {
       "$id": "4",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel.SameAsModel"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.ModelProperties.SameAsModel.SameAsModel"
     }
    ]
   },
   {
    "$id": "5",
-   "Kind": "model",
-   "Name": "and",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.and",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "and",
+   "crossLanguageDefinitionId": "SpecialWords.Models.and",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "6",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "7",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.and.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.and.name"
     }
    ]
   },
   {
    "$id": "8",
-   "Kind": "model",
-   "Name": "as",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.as",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "as",
+   "crossLanguageDefinitionId": "SpecialWords.Models.as",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "9",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "10",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.as.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.as.name"
     }
    ]
   },
   {
    "$id": "11",
-   "Kind": "model",
-   "Name": "assert",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.assert",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "assert",
+   "crossLanguageDefinitionId": "SpecialWords.Models.assert",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "12",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "13",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.assert.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.assert.name"
     }
    ]
   },
   {
    "$id": "14",
-   "Kind": "model",
-   "Name": "async",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.async",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "async",
+   "crossLanguageDefinitionId": "SpecialWords.Models.async",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "15",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "16",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.async.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.async.name"
     }
    ]
   },
   {
    "$id": "17",
-   "Kind": "model",
-   "Name": "await",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.await",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "await",
+   "crossLanguageDefinitionId": "SpecialWords.Models.await",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "18",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "19",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.await.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.await.name"
     }
    ]
   },
   {
    "$id": "20",
-   "Kind": "model",
-   "Name": "break",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.break",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "break",
+   "crossLanguageDefinitionId": "SpecialWords.Models.break",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "21",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "22",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.break.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.break.name"
     }
    ]
   },
   {
    "$id": "23",
-   "Kind": "model",
-   "Name": "class",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.class",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "class",
+   "crossLanguageDefinitionId": "SpecialWords.Models.class",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "24",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "25",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.class.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.class.name"
     }
    ]
   },
   {
    "$id": "26",
-   "Kind": "model",
-   "Name": "constructor",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.constructor",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "constructor",
+   "crossLanguageDefinitionId": "SpecialWords.Models.constructor",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "27",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "28",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.constructor.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.constructor.name"
     }
    ]
   },
   {
    "$id": "29",
-   "Kind": "model",
-   "Name": "continue",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.continue",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "continue",
+   "crossLanguageDefinitionId": "SpecialWords.Models.continue",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "30",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "31",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.continue.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.continue.name"
     }
    ]
   },
   {
    "$id": "32",
-   "Kind": "model",
-   "Name": "def",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.def",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "def",
+   "crossLanguageDefinitionId": "SpecialWords.Models.def",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "33",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "34",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.def.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.def.name"
     }
    ]
   },
   {
    "$id": "35",
-   "Kind": "model",
-   "Name": "del",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.del",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "del",
+   "crossLanguageDefinitionId": "SpecialWords.Models.del",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "36",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "37",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.del.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.del.name"
     }
    ]
   },
   {
    "$id": "38",
-   "Kind": "model",
-   "Name": "elif",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.elif",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "elif",
+   "crossLanguageDefinitionId": "SpecialWords.Models.elif",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "39",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "40",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.elif.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.elif.name"
     }
    ]
   },
   {
    "$id": "41",
-   "Kind": "model",
-   "Name": "else",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.else",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "else",
+   "crossLanguageDefinitionId": "SpecialWords.Models.else",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "42",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "43",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.else.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.else.name"
     }
    ]
   },
   {
    "$id": "44",
-   "Kind": "model",
-   "Name": "except",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.except",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "except",
+   "crossLanguageDefinitionId": "SpecialWords.Models.except",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "45",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "46",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.except.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.except.name"
     }
    ]
   },
   {
    "$id": "47",
-   "Kind": "model",
-   "Name": "exec",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.exec",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "exec",
+   "crossLanguageDefinitionId": "SpecialWords.Models.exec",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "48",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "49",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.exec.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.exec.name"
     }
    ]
   },
   {
    "$id": "50",
-   "Kind": "model",
-   "Name": "finally",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.finally",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "finally",
+   "crossLanguageDefinitionId": "SpecialWords.Models.finally",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "51",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "52",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.finally.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.finally.name"
     }
    ]
   },
   {
    "$id": "53",
-   "Kind": "model",
-   "Name": "for",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.for",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "for",
+   "crossLanguageDefinitionId": "SpecialWords.Models.for",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "54",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "55",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.for.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.for.name"
     }
    ]
   },
   {
    "$id": "56",
-   "Kind": "model",
-   "Name": "from",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.from",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "from",
+   "crossLanguageDefinitionId": "SpecialWords.Models.from",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "57",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "58",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.from.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.from.name"
     }
    ]
   },
   {
    "$id": "59",
-   "Kind": "model",
-   "Name": "global",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.global",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "global",
+   "crossLanguageDefinitionId": "SpecialWords.Models.global",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "60",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "61",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.global.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.global.name"
     }
    ]
   },
   {
    "$id": "62",
-   "Kind": "model",
-   "Name": "if",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.if",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "if",
+   "crossLanguageDefinitionId": "SpecialWords.Models.if",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "63",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "64",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.if.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.if.name"
     }
    ]
   },
   {
    "$id": "65",
-   "Kind": "model",
-   "Name": "import",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.import",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "import",
+   "crossLanguageDefinitionId": "SpecialWords.Models.import",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "66",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "67",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.import.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.import.name"
     }
    ]
   },
   {
    "$id": "68",
-   "Kind": "model",
-   "Name": "in",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.in",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "in",
+   "crossLanguageDefinitionId": "SpecialWords.Models.in",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "69",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "70",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.in.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.in.name"
     }
    ]
   },
   {
    "$id": "71",
-   "Kind": "model",
-   "Name": "is",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.is",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "is",
+   "crossLanguageDefinitionId": "SpecialWords.Models.is",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "72",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "73",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.is.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.is.name"
     }
    ]
   },
   {
    "$id": "74",
-   "Kind": "model",
-   "Name": "lambda",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.lambda",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "lambda",
+   "crossLanguageDefinitionId": "SpecialWords.Models.lambda",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "75",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "76",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.lambda.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.lambda.name"
     }
    ]
   },
   {
    "$id": "77",
-   "Kind": "model",
-   "Name": "not",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.not",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "not",
+   "crossLanguageDefinitionId": "SpecialWords.Models.not",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "78",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "79",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.not.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.not.name"
     }
    ]
   },
   {
    "$id": "80",
-   "Kind": "model",
-   "Name": "or",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.or",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "or",
+   "crossLanguageDefinitionId": "SpecialWords.Models.or",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "81",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "82",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.or.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.or.name"
     }
    ]
   },
   {
    "$id": "83",
-   "Kind": "model",
-   "Name": "pass",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.pass",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "pass",
+   "crossLanguageDefinitionId": "SpecialWords.Models.pass",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "84",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "85",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.pass.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.pass.name"
     }
    ]
   },
   {
    "$id": "86",
-   "Kind": "model",
-   "Name": "raise",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.raise",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "raise",
+   "crossLanguageDefinitionId": "SpecialWords.Models.raise",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "87",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "88",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.raise.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.raise.name"
     }
    ]
   },
   {
    "$id": "89",
-   "Kind": "model",
-   "Name": "return",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.return",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "return",
+   "crossLanguageDefinitionId": "SpecialWords.Models.return",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "90",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "91",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.return.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.return.name"
     }
    ]
   },
   {
    "$id": "92",
-   "Kind": "model",
-   "Name": "try",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.try",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "try",
+   "crossLanguageDefinitionId": "SpecialWords.Models.try",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "93",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "94",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.try.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.try.name"
     }
    ]
   },
   {
    "$id": "95",
-   "Kind": "model",
-   "Name": "while",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.while",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "while",
+   "crossLanguageDefinitionId": "SpecialWords.Models.while",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "96",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "97",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.while.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.while.name"
     }
    ]
   },
   {
    "$id": "98",
-   "Kind": "model",
-   "Name": "with",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.with",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "with",
+   "crossLanguageDefinitionId": "SpecialWords.Models.with",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "99",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "100",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.with.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.with.name"
     }
    ]
   },
   {
    "$id": "101",
-   "Kind": "model",
-   "Name": "yield",
-   "CrossLanguageDefinitionId": "SpecialWords.Models.yield",
-   "Usage": "Input,Json",
-   "Decorators": [],
-   "Properties": [
+   "kind": "model",
+   "name": "yield",
+   "crossLanguageDefinitionId": "SpecialWords.Models.yield",
+   "usage": "Input,Json",
+   "decorators": [],
+   "properties": [
     {
      "$id": "102",
-     "Kind": "property",
-     "Name": "name",
-     "SerializedName": "name",
-     "Type": {
+     "kind": "property",
+     "name": "name",
+     "serializedName": "name",
+     "type": {
       "$id": "103",
-      "Kind": "string",
-      "Name": "string",
-      "CrossLanguageDefinitionId": "TypeSpec.string",
-      "Decorators": []
+      "kind": "string",
+      "name": "string",
+      "crossLanguageDefinitionId": "TypeSpec.string",
+      "decorators": []
      },
-     "Optional": false,
-     "ReadOnly": false,
-     "Discriminator": false,
-     "Decorators": [],
-     "CrossLanguageDefinitionId": "SpecialWords.Models.yield.name"
+     "optional": false,
+     "readOnly": false,
+     "discriminator": false,
+     "flatten": false,
+     "decorators": [],
+     "crossLanguageDefinitionId": "SpecialWords.Models.yield.name"
     }
    ]
   }
@@ -971,11 +1005,12 @@
      "$id": "106",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "107",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -990,9 +1025,9 @@
       "$id": "108",
       "Type": {
        "$id": "109",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -1018,16 +1053,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "113",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "114",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1094,16 +1129,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "119",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "120",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1170,16 +1205,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "125",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "126",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1246,16 +1281,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "131",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "132",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1322,16 +1357,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "137",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "138",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1398,16 +1433,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "143",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "144",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1474,16 +1509,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "149",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "150",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1550,16 +1585,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "155",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "156",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1626,16 +1661,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "161",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "162",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1702,16 +1737,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "167",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "168",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1778,16 +1813,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "173",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "174",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1854,16 +1889,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "179",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "180",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -1930,16 +1965,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "185",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "186",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2006,16 +2041,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "191",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "192",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2082,16 +2117,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "197",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "198",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2158,16 +2193,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "203",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "204",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2234,16 +2269,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "209",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "210",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2310,16 +2345,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "215",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "216",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2386,16 +2421,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "221",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "222",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2462,16 +2497,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "227",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "228",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2538,16 +2573,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "233",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "234",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2614,16 +2649,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "239",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "240",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2690,16 +2725,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "245",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "246",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2766,16 +2801,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "251",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "252",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2842,16 +2877,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "257",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "258",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2918,16 +2953,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "263",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "264",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -2994,16 +3029,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "269",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "270",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3070,16 +3105,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "275",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "276",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3146,16 +3181,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "281",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "282",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3222,16 +3257,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "287",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "288",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3298,16 +3333,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "293",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "294",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3374,16 +3409,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "299",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "300",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3450,16 +3485,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "305",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "306",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3523,11 +3558,12 @@
      "$id": "310",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "311",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -3542,9 +3578,9 @@
       "$id": "312",
       "Type": {
        "$id": "313",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -3570,16 +3606,16 @@
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "317",
-        "Kind": "constant",
-        "ValueType": {
+        "kind": "constant",
+        "valueType": {
          "$id": "318",
-         "Kind": "string",
-         "Name": "string",
-         "CrossLanguageDefinitionId": "TypeSpec.string",
-         "Decorators": []
+         "kind": "string",
+         "name": "string",
+         "crossLanguageDefinitionId": "TypeSpec.string",
+         "decorators": []
         },
-        "Value": "application/json",
-        "Decorators": []
+        "value": "application/json",
+        "decorators": []
        },
        "Location": "Header",
        "IsApiVersion": false,
@@ -3643,11 +3679,12 @@
      "$id": "322",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "323",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -3662,9 +3699,9 @@
       "$id": "324",
       "Type": {
        "$id": "325",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -4578,11 +4615,12 @@
      "$id": "394",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "395",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -4597,9 +4635,9 @@
       "$id": "396",
       "Type": {
        "$id": "397",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }
@@ -4624,10 +4662,10 @@
        "NameInRequest": "and",
        "Type": {
         "$id": "401",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4673,10 +4711,10 @@
        "NameInRequest": "as",
        "Type": {
         "$id": "405",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4722,10 +4760,10 @@
        "NameInRequest": "assert",
        "Type": {
         "$id": "409",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4771,10 +4809,10 @@
        "NameInRequest": "async",
        "Type": {
         "$id": "413",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4820,10 +4858,10 @@
        "NameInRequest": "await",
        "Type": {
         "$id": "417",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4869,10 +4907,10 @@
        "NameInRequest": "break",
        "Type": {
         "$id": "421",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4918,10 +4956,10 @@
        "NameInRequest": "class",
        "Type": {
         "$id": "425",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -4967,10 +5005,10 @@
        "NameInRequest": "constructor",
        "Type": {
         "$id": "429",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5016,10 +5054,10 @@
        "NameInRequest": "continue",
        "Type": {
         "$id": "433",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5065,10 +5103,10 @@
        "NameInRequest": "def",
        "Type": {
         "$id": "437",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5114,10 +5152,10 @@
        "NameInRequest": "del",
        "Type": {
         "$id": "441",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5163,10 +5201,10 @@
        "NameInRequest": "elif",
        "Type": {
         "$id": "445",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5212,10 +5250,10 @@
        "NameInRequest": "else",
        "Type": {
         "$id": "449",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5261,10 +5299,10 @@
        "NameInRequest": "except",
        "Type": {
         "$id": "453",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5310,10 +5348,10 @@
        "NameInRequest": "exec",
        "Type": {
         "$id": "457",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5359,10 +5397,10 @@
        "NameInRequest": "finally",
        "Type": {
         "$id": "461",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5408,10 +5446,10 @@
        "NameInRequest": "for",
        "Type": {
         "$id": "465",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5457,10 +5495,10 @@
        "NameInRequest": "from",
        "Type": {
         "$id": "469",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5506,10 +5544,10 @@
        "NameInRequest": "global",
        "Type": {
         "$id": "473",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5555,10 +5593,10 @@
        "NameInRequest": "if",
        "Type": {
         "$id": "477",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5604,10 +5642,10 @@
        "NameInRequest": "import",
        "Type": {
         "$id": "481",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5653,10 +5691,10 @@
        "NameInRequest": "in",
        "Type": {
         "$id": "485",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5702,10 +5740,10 @@
        "NameInRequest": "is",
        "Type": {
         "$id": "489",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5751,10 +5789,10 @@
        "NameInRequest": "lambda",
        "Type": {
         "$id": "493",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5800,10 +5838,10 @@
        "NameInRequest": "not",
        "Type": {
         "$id": "497",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5849,10 +5887,10 @@
        "NameInRequest": "or",
        "Type": {
         "$id": "501",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5898,10 +5936,10 @@
        "NameInRequest": "pass",
        "Type": {
         "$id": "505",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5947,10 +5985,10 @@
        "NameInRequest": "raise",
        "Type": {
         "$id": "509",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -5996,10 +6034,10 @@
        "NameInRequest": "return",
        "Type": {
         "$id": "513",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6045,10 +6083,10 @@
        "NameInRequest": "try",
        "Type": {
         "$id": "517",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6094,10 +6132,10 @@
        "NameInRequest": "while",
        "Type": {
         "$id": "521",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6143,10 +6181,10 @@
        "NameInRequest": "with",
        "Type": {
         "$id": "525",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6192,10 +6230,10 @@
        "NameInRequest": "yield",
        "Type": {
         "$id": "529",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6241,10 +6279,10 @@
        "NameInRequest": "cancellationToken",
        "Type": {
         "$id": "533",
-        "Kind": "string",
-        "Name": "string",
-        "CrossLanguageDefinitionId": "TypeSpec.string",
-        "Decorators": []
+        "kind": "string",
+        "name": "string",
+        "crossLanguageDefinitionId": "TypeSpec.string",
+        "decorators": []
        },
        "Location": "Query",
        "IsApiVersion": false,
@@ -6288,11 +6326,12 @@
      "$id": "536",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
+     "Description": "Service host",
      "Type": {
       "$id": "537",
-      "Kind": "url",
-      "Name": "url",
-      "CrossLanguageDefinitionId": "TypeSpec.url"
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
      },
      "Location": "Uri",
      "IsApiVersion": false,
@@ -6307,9 +6346,9 @@
       "$id": "538",
       "Type": {
        "$id": "539",
-       "Kind": "string",
-       "Name": "string",
-       "CrossLanguageDefinitionId": "TypeSpec.string"
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
       },
       "Value": "http://localhost:3000"
      }

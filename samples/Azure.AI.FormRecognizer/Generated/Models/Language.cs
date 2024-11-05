@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
         public static bool operator ==(Language left, Language right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Language"/> values are not the same. </summary>
         public static bool operator !=(Language left, Language right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="Language"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="Language"/>. </summary>
         public static implicit operator Language(string value) => new Language(value);
 
         /// <inheritdoc />

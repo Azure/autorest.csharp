@@ -53,11 +53,17 @@ namespace MgmtTypeSpec.Models
         /// <summary> Initializes a new instance of <see cref="FooProperties"/>. </summary>
         /// <param name="serviceUri"> the service url. </param>
         /// <param name="something"> something. </param>
+        /// <param name="boolValue"> boolean value. </param>
+        /// <param name="floatValue"> float value. </param>
+        /// <param name="doubleValue"> double value. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal FooProperties(Uri serviceUri, string something, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal FooProperties(Uri serviceUri, string something, bool? boolValue, float? floatValue, double? doubleValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ServiceUri = serviceUri;
             Something = something;
+            BoolValue = boolValue;
+            FloatValue = floatValue;
+            DoubleValue = doubleValue;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -65,5 +71,11 @@ namespace MgmtTypeSpec.Models
         public Uri ServiceUri { get; set; }
         /// <summary> something. </summary>
         public string Something { get; set; }
+        /// <summary> boolean value. </summary>
+        public bool? BoolValue { get; set; }
+        /// <summary> float value. </summary>
+        public float? FloatValue { get; set; }
+        /// <summary> double value. </summary>
+        public double? DoubleValue { get; set; }
     }
 }

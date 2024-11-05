@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
         public static bool operator ==(UrlSigningActionParametersTypeName left, UrlSigningActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="UrlSigningActionParametersTypeName"/> values are not the same. </summary>
         public static bool operator !=(UrlSigningActionParametersTypeName left, UrlSigningActionParametersTypeName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="UrlSigningActionParametersTypeName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="UrlSigningActionParametersTypeName"/>. </summary>
         public static implicit operator UrlSigningActionParametersTypeName(string value) => new UrlSigningActionParametersTypeName(value);
 
         /// <inheritdoc />

@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Common.Input
             var properties = new List<InputModelProperty>();
             var discriminatedSubtypes = new Dictionary<string, InputModelType>();
             string? crossLanguageDefinitionId = null;
-            string? accessibility = null;
-            string? deprecated = null;
+            string? access = null;
+            string? deprecation = null;
             string? description = null;
             string? usageString = null;
             InputModelProperty? discriminatorProperty = null;
@@ -47,16 +47,16 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputModelType.Name), ref name)
-                    || reader.TryReadString(nameof(InputModelType.CrossLanguageDefinitionId), ref crossLanguageDefinitionId)
-                    || reader.TryReadString(nameof(InputModelType.Access), ref accessibility)
-                    || reader.TryReadString(nameof(InputModelType.Deprecation), ref deprecated)
-                    || reader.TryReadString(nameof(InputModelType.Description), ref description)
-                    || reader.TryReadString(nameof(InputModelType.Usage), ref usageString)
-                    || reader.TryReadWithConverter(nameof(InputModelType.DiscriminatorProperty), options, ref discriminatorProperty)
-                    || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
-                    || reader.TryReadWithConverter(nameof(InputModelType.AdditionalProperties), options, ref additionalProperties)
-                    || reader.TryReadWithConverter(nameof(InputModelType.Decorators), options, ref decorators);
+                    || reader.TryReadString("name", ref name)
+                    || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
+                    || reader.TryReadString("access", ref access)
+                    || reader.TryReadString("deprecation", ref deprecation)
+                    || reader.TryReadString("description", ref description)
+                    || reader.TryReadString("usage", ref usageString)
+                    || reader.TryReadWithConverter("discriminatorProperty", options, ref discriminatorProperty)
+                    || reader.TryReadString("discriminatorValue", ref discriminatorValue)
+                    || reader.TryReadWithConverter("additionalProperties", options, ref additionalProperties)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (isKnownProperty)
                 {
@@ -66,10 +66,10 @@ namespace AutoRest.CSharp.Common.Input
                  * If the model has base model, `BaseModel` and `Properties` should be the last two items in tspCodeModel.
                  * and `BaseModel` should be last but one, and `Properties` should be the last one.
                  */
-                if (reader.GetString() == nameof(InputModelType.BaseModel))
+                if (reader.GetString() == "baseModel")
                 {
-                    model = CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
-                    reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel);
+                    model = CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, access, deprecation, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+                    reader.TryReadWithConverter("baseModel", options, ref baseModel);
                     if (baseModel != null)
                     {
                         model.SetBaseModel(baseModel);
@@ -78,16 +78,16 @@ namespace AutoRest.CSharp.Common.Input
                     }
                     continue;
                 }
-                if (reader.GetString() == nameof(InputModelType.Properties))
+                if (reader.GetString() == "properties")
                 {
-                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, access, deprecation, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
                     reader.Read();
-                    CreateProperties(ref reader, properties, options, model.Usage.HasFlag(InputModelTypeUsage.MultipartFormData));
+                    CreateProperties(ref reader, properties, options, name!, model.Usage.HasFlag(InputModelTypeUsage.MultipartFormData));
                     continue;
                 }
-                if (reader.GetString() == nameof(InputModelType.DiscriminatedSubtypes))
+                if (reader.GetString() == "discriminatedSubtypes")
                 {
-                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+                    model = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, access, deprecation, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
                     reader.Read();
                     CreateDiscriminatedSubtypes(ref reader, discriminatedSubtypes, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Common.Input
                 reader.SkipProperty();
             }
 
-            var result = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
+            var result = model ?? CreateInputModelTypeInstance(id, name, crossLanguageDefinitionId, access, deprecation, description, usageString, discriminatorValue, discriminatorProperty, baseModel, properties, discriminatedSubtypes, additionalProperties, decorators, resolver);
             result.Decorators = decorators ?? Array.Empty<InputDecoratorInfo>();
             return result;
         }
@@ -135,56 +135,67 @@ namespace AutoRest.CSharp.Common.Input
             return model;
         }
 
-        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options, bool isMultipartType)
+        private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options, string modelName, bool isMultipartType)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
-                throw new JsonException();
+                throw new JsonException($"Invalid JSON format. 'properties' property of '{modelName}' should be an array.");
             }
             reader.Read();
 
             while (reader.TokenType != JsonTokenType.EndArray)
             {
-                var property = reader.ReadWithConverter<InputModelProperty>(options);
-                /* TODO: in Multipart body model, if the property is of type Bytes, it should be converted to Stream
-                 * In future, we will convert this in emitter when we adopt tcgc.
-                 */
-                if (property != null && isMultipartType)
+                var rawProperty = reader.ReadWithConverter<InputModelProperty>(options);
+                if (rawProperty == null)
                 {
-                    static InputType ConvertPropertyType(InputType propertyType)
-                    {
-                        return propertyType switch
-                        {
-                            InputPrimitiveType { Kind: InputPrimitiveTypeKind.Bytes } => InputPrimitiveType.Stream,
-                            InputListType listType => new InputListType(listType.Name, listType.CrossLanguageDefinitionId, ConvertPropertyType(listType.ValueType))
-                            {
-                                Decorators = listType.Decorators
-                            },
-                            InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType))
-                            {
-                                Decorators = dictionaryType.Decorators
-                            },
-                            InputNullableType nullableType => new InputNullableType(ConvertPropertyType(nullableType.Type))
-                            {
-                                Decorators = nullableType.Decorators
-                            },
-                            _ => propertyType
-                        };
-                    }
-
-                    property = new InputModelProperty(property.Name,
-                                                    property.SerializedName,
-                                                    property.Description,
-                                                    ConvertPropertyType(property.Type),
-                                                    property.ConstantValue,
-                                                    property.IsRequired,
-                                                    property.IsReadOnly,
-                                                    property.IsDiscriminator,
-                                                    property.FlattenedNames);
+                    throw new JsonException($"Property of model '{modelName}' cannot be null.");
                 }
-                properties.Add(property ?? throw new JsonException($"null {nameof(InputModelProperty)} is not allowed"));
+
+                if (rawProperty.IsFlattened)
+                {
+                    var flattenedProperties = FlattenProperty(rawProperty);
+
+                    foreach (var property in flattenedProperties)
+                    {
+                        properties.Add(property);
+                    }
+                }
+                else
+                {
+                    properties.Add(isMultipartType ? ConvertMultipartProperty(rawProperty) : rawProperty);
+                }
+
             }
             reader.Read();
+        }
+
+        /// <summary>
+        /// Flatten the property of which the <see cref="InputModelProperty.IsFlattened"/> is true.
+        /// </summary>
+        /// <param name="propertyToFlatten"> <see cref="InputModelProperty"/> model property type passed in by emitter to be flattened. </param>
+        /// <returns> One or more <see cref="InputModelProperty"/> instances. </returns>
+        private static IEnumerable<InputModelProperty> FlattenProperty(InputModelProperty propertyToFlatten)
+        {
+            if (propertyToFlatten.Type is InputModelType model)
+            {
+                foreach (var p in model.Properties)
+                {
+                    var newFlattenedNames = new List<string>() { propertyToFlatten.Name };
+                    if (p.FlattenedNames != null)
+                    {
+                        newFlattenedNames.AddRange(p.FlattenedNames);
+                    }
+                    else
+                    {
+                        newFlattenedNames.Add(p.Name);
+                    }
+                    yield return p with { FlattenedNames = newFlattenedNames, IsRequired = (propertyToFlatten.IsRequired ? p.IsRequired : false) };
+                }
+            }
+            else
+            {
+                throw new JsonException($"Flattened property '{propertyToFlatten.Name}' must be a model type.");
+            }
         }
 
         private static void CreateDiscriminatedSubtypes(ref Utf8JsonReader reader, IDictionary<string, InputModelType> discriminatedSubtypes, JsonSerializerOptions options)
@@ -211,6 +222,46 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             reader.Read();
+        }
+
+        /* TODO: in Multipart body model, if the property is of type Bytes, it should be converted to Stream
+         * In future, we will convert this in emitter when we adopt tcgc.
+         */
+        private static InputModelProperty ConvertMultipartProperty(InputModelProperty property)
+            => new InputModelProperty(
+                property.Name,
+                property.SerializedName,
+                property.Description,
+                ConvertPropertyType(property.Type),
+                property.ConstantValue,
+                property.IsRequired,
+                property.IsReadOnly,
+                property.IsDiscriminator)
+            {
+                DefaultValue = property.DefaultValue,
+                Decorators = property.Decorators,
+                FlattenedNames = property.FlattenedNames
+            };
+
+        private static InputType ConvertPropertyType(InputType propertyType)
+        {
+            return propertyType switch
+            {
+                InputPrimitiveType { Kind: InputPrimitiveTypeKind.Bytes } => InputPrimitiveType.Stream,
+                InputListType listType => new InputListType(listType.Name, listType.CrossLanguageDefinitionId, ConvertPropertyType(listType.ValueType))
+                {
+                    Decorators = listType.Decorators
+                },
+                InputDictionaryType dictionaryType => new InputDictionaryType(dictionaryType.Name, dictionaryType.KeyType, ConvertPropertyType(dictionaryType.ValueType))
+                {
+                    Decorators = dictionaryType.Decorators
+                },
+                InputNullableType nullableType => new InputNullableType(ConvertPropertyType(nullableType.Type))
+                {
+                    Decorators = nullableType.Decorators
+                },
+                _ => propertyType
+            };
         }
     }
 }

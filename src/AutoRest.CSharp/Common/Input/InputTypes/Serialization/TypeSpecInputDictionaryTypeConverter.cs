@@ -33,9 +33,9 @@ namespace AutoRest.CSharp.Common.Input
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadWithConverter(nameof(InputDictionaryType.KeyType), options, ref keyType)
-                    || reader.TryReadWithConverter(nameof(InputDictionaryType.ValueType), options, ref valueType)
-                    || reader.TryReadWithConverter(nameof(InputDictionaryType.Decorators), options, ref decorators);
+                    || reader.TryReadWithConverter("keyType", options, ref keyType)
+                    || reader.TryReadWithConverter("valueType", options, ref valueType)
+                    || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
                 {
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Common.Input
 
             var dictType = new InputDictionaryType("Dictionary", keyType, valueType)
             {
-                Decorators = decorators ?? Array.Empty<InputDecoratorInfo>()
+                Decorators = decorators ?? []
             };
             if (id != null)
             {

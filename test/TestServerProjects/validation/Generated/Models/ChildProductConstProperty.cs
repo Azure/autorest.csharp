@@ -30,7 +30,7 @@ namespace validation.Models
         public static bool operator ==(ChildProductConstProperty left, ChildProductConstProperty right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ChildProductConstProperty"/> values are not the same. </summary>
         public static bool operator !=(ChildProductConstProperty left, ChildProductConstProperty right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="ChildProductConstProperty"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="ChildProductConstProperty"/>. </summary>
         public static implicit operator ChildProductConstProperty(string value) => new ChildProductConstProperty(value);
 
         /// <inheritdoc />

@@ -31,14 +31,14 @@ namespace TypeSpec.Versioning.Oldest
         }
 
         /// <summary> Initializes a new instance of OldestClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public OldestClient(Uri endpoint) : this(endpoint, new OldestClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of OldestClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public OldestClient(Uri endpoint, OldestClientOptions options)

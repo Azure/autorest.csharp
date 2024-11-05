@@ -37,7 +37,7 @@ namespace Parameters.Spread
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -54,9 +54,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest1.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,9 +69,9 @@ namespace Parameters.Spread
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequest1 = new SpreadAsRequestBodyRequest1(name, null);
+            BodyParameter bodyParameter = new BodyParameter(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest1.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
             return response;
         }
 

@@ -32,7 +32,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of Completions. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Completions(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -130,9 +130,9 @@ namespace OpenAI
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IReadOnlyDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
+        public virtual async Task<ClientResult<CreateCompletionResponse>> CreateAsync(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IReadOnlyDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
         {
-            CreateRequest createRequest = new CreateRequest(
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(
                 model,
                 prompt,
                 suffix,
@@ -150,7 +150,7 @@ namespace OpenAI
                 echo,
                 bestOf,
                 null);
-            ClientResult result = await CreateAsync(createRequest.ToBinaryContent(), null).ConfigureAwait(false);
+            ClientResult result = await CreateAsync(createCompletionRequest.ToBinaryContent(), null).ConfigureAwait(false);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -244,9 +244,9 @@ namespace OpenAI
         /// **Note:** Because this parameter generates many completions, it can quickly consume your token
         /// quota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.
         /// </param>
-        public virtual ClientResult<CreateCompletionResponse> Create(CreateRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IReadOnlyDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
+        public virtual ClientResult<CreateCompletionResponse> Create(CreateCompletionRequestModel model, BinaryData prompt, string suffix = null, double? temperature = null, double? topP = null, long? n = null, long? maxTokens = null, BinaryData stop = null, double? presencePenalty = null, double? frequencyPenalty = null, IReadOnlyDictionary<string, long> logitBias = null, string user = null, bool? stream = null, long? logprobs = null, bool? echo = null, long? bestOf = null)
         {
-            CreateRequest createRequest = new CreateRequest(
+            CreateCompletionRequest createCompletionRequest = new CreateCompletionRequest(
                 model,
                 prompt,
                 suffix,
@@ -264,7 +264,7 @@ namespace OpenAI
                 echo,
                 bestOf,
                 null);
-            ClientResult result = Create(createRequest.ToBinaryContent(), null);
+            ClientResult result = Create(createCompletionRequest.ToBinaryContent(), null);
             return ClientResult.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
@@ -278,7 +278,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateAsync(CreateRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IReadOnlyDictionary{string,long},string,bool?,long?,bool?,long?)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IReadOnlyDictionary{string,long},string,bool?,long?,bool?,long?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -306,7 +306,7 @@ namespace OpenAI
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(CreateRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IReadOnlyDictionary{string,long},string,bool?,long?,bool?,long?)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Create(CreateCompletionRequestModel,BinaryData,string,double?,double?,long?,long?,BinaryData,double?,double?,IReadOnlyDictionary{string,long},string,bool?,long?,bool?,long?)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
         public static bool operator ==(MinimumTlsVersion left, MinimumTlsVersion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MinimumTlsVersion"/> values are not the same. </summary>
         public static bool operator !=(MinimumTlsVersion left, MinimumTlsVersion right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="MinimumTlsVersion"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="MinimumTlsVersion"/>. </summary>
         public static implicit operator MinimumTlsVersion(string value) => new MinimumTlsVersion(value);
 
         /// <inheritdoc />

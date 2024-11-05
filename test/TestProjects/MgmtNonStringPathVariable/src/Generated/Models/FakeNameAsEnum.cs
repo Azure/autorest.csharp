@@ -33,7 +33,7 @@ namespace MgmtNonStringPathVariable.Models
         public static bool operator ==(FakeNameAsEnum left, FakeNameAsEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FakeNameAsEnum"/> values are not the same. </summary>
         public static bool operator !=(FakeNameAsEnum left, FakeNameAsEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="FakeNameAsEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="FakeNameAsEnum"/>. </summary>
         public static implicit operator FakeNameAsEnum(string value) => new FakeNameAsEnum(value);
 
         /// <inheritdoc />

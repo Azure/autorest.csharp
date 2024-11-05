@@ -160,10 +160,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\src\\Generated -n"
     },
-    "ClientAndOperationGroup-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-TypeSpec\\src\\Generated -n"
-    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
@@ -460,10 +456,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtXmlDeserialization\\src\\Generated -n"
     },
-    "MixAPIVersion-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MixAPIVersion-TypeSpec\\src\\Generated -n"
-    },
     "model-flattening": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\Generated"
@@ -624,6 +616,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\access\\src\\Generated -n"
     },
+    "typespec-azure/client-generator-core/flatten-property": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\flatten-property\\src\\Generated -n"
+    },
     "typespec-azure/client-generator-core/usage": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\client-generator-core\\usage\\src\\Generated -n"
@@ -631,6 +627,10 @@
     "typespec-azure/core/basic": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\src\\Generated -n"
+    },
+    "typespec-azure/core/lro/rpc": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\rpc\\src\\Generated -n"
     },
     "typespec-azure/core/lro/standard": {
       "commandName": "Project",
@@ -652,13 +652,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
-    "typespec-azure/resource-manager/models/common-types/managed-identity": {
+    "typespec-azure/resource-manager/common-properties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\models\\common-types\\managed-identity\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\common-properties\\src\\Generated -n"
     },
-    "typespec-azure/resource-manager/models/resources": {
+    "typespec-azure/resource-manager/resources": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\models\\resources\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\resources\\src\\Generated -n"
     },
     "typespec-azure/special-headers/client-request-id": {
       "commandName": "Project",
@@ -667,6 +667,10 @@
     "typespec-client/naming": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\naming\\src\\Generated -n"
+    },
+    "typespec-client/structure/client-operation-group": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\client\\structure\\client-operation-group\\src\\Generated -n"
     },
     "typespec-client/structure/default": {
       "commandName": "Project",
@@ -695,6 +699,10 @@
     "typespec-encode/duration": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\duration\\src\\Generated -n"
+    },
+    "typespec-encode/numeric": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\numeric\\src\\Generated -n"
     },
     "typespec-nonAzure-authentication/api-key": {
       "commandName": "Project",
@@ -800,6 +808,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjectsNonAzure\\type\\union\\src\\Generated -n"
     },
+    "typespec-parameters/basic": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\basic\\src\\Generated -n"
+    },
     "typespec-parameters/body-optionality": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\body-optionality\\src\\Generated -n"
@@ -883,10 +895,6 @@
     "typespec-type/model/empty": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\empty\\src\\Generated -n"
-    },
-    "typespec-type/model/flatten": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\flatten\\src\\Generated -n"
     },
     "typespec-type/model/inheritance/enum-discriminator": {
       "commandName": "Project",

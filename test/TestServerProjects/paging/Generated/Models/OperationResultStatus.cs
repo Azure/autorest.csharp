@@ -60,7 +60,7 @@ namespace paging.Models
         public static bool operator ==(OperationResultStatus left, OperationResultStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="OperationResultStatus"/> values are not the same. </summary>
         public static bool operator !=(OperationResultStatus left, OperationResultStatus right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="OperationResultStatus"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="OperationResultStatus"/>. </summary>
         public static implicit operator OperationResultStatus(string value) => new OperationResultStatus(value);
 
         /// <inheritdoc />

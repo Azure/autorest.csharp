@@ -6,7 +6,7 @@
 This sample shows how to call ThreeAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = await client.ThreeAsync();
 
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call ThreeAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = await client.ThreeAsync();
 
@@ -27,7 +27,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Three.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = client.Three();
 
@@ -36,7 +36,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Three with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = client.Three();
 
@@ -48,7 +48,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call FourAsync.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = await client.FourAsync();
 
@@ -57,7 +57,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call FourAsync with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = await client.FourAsync();
 
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Four.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = client.Four();
 
@@ -78,7 +78,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call Four with all request content.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
-Foo client = new ServiceClient(endpoint, ClientType.Default).GetFooClient();
+Foo client = new ServiceClient(endpoint, default).GetFooClient();
 
 Response response = client.Four();
 

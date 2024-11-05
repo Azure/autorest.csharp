@@ -77,5 +77,81 @@ Response response = client.PostIfNoneMatch(ifNoneMatch: new ETag("<ifNoneMatch>"
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="HeadIfModifiedSinceAsync(RequestConditions,RequestContext)">
+      <example>
+This sample shows how to call HeadIfModifiedSinceAsync.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = await client.HeadIfModifiedSinceAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call HeadIfModifiedSinceAsync with all parameters.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = await client.HeadIfModifiedSinceAsync(requestConditions: null);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="HeadIfModifiedSince(RequestConditions,RequestContext)">
+      <example>
+This sample shows how to call HeadIfModifiedSince.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = client.HeadIfModifiedSince();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call HeadIfModifiedSince with all parameters.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = client.HeadIfModifiedSince(requestConditions: null);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PostIfUnmodifiedSinceAsync(RequestConditions,RequestContext)">
+      <example>
+This sample shows how to call PostIfUnmodifiedSinceAsync.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = await client.PostIfUnmodifiedSinceAsync();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PostIfUnmodifiedSinceAsync with all parameters.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = await client.PostIfUnmodifiedSinceAsync(requestConditions: null);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="PostIfUnmodifiedSince(RequestConditions,RequestContext)">
+      <example>
+This sample shows how to call PostIfUnmodifiedSince.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = client.PostIfUnmodifiedSince();
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PostIfUnmodifiedSince with all parameters.
+<code><![CDATA[
+ConditionalRequestClient client = new ConditionalRequestClient();
+
+Response response = client.PostIfUnmodifiedSince(requestConditions: null);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
   </members>
 </doc>

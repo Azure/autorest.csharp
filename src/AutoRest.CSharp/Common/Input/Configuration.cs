@@ -66,6 +66,7 @@ namespace AutoRest.CSharp.Common.Input
             public const string EnableInternalRawData = "enable-internal-raw-data";
             public const string HelperNamespace = "helper-namespace";
             public const string DisableXmlDocs = "disable-xml-docs";
+            public const string CustomHeader = "custom-header";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -117,7 +118,8 @@ namespace AutoRest.CSharp.Common.Input
             bool generateSampleProject,
             bool generateTestProject,
             string? examplesDirectory,
-            string? helperNamespace)
+            string? helperNamespace,
+            string? customHeader)
         {
             _outputFolder = outputFolder;
             _namespace = ns;
@@ -145,7 +147,8 @@ namespace AutoRest.CSharp.Common.Input
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             UseModelReaderWriter = useModelReaderWriter;
-            UseWriteCore = useWriteCore;
+            // TODO: remove use-writ-core after we enable all RPs for DPG
+            UseWriteCore = azureArm ? true : useWriteCore;
             EnableBicepSerialization = enableBicepSerialization;
             EnableInternalRawData = enableInternalRawData;
             projectFolder ??= ProjectFolderDefault;
@@ -191,6 +194,7 @@ namespace AutoRest.CSharp.Common.Input
             GenerateSampleProject = DisableXmlDocs ? false : generateSampleProject; // turn off the samples if all xml docs are explicitly disabled
             GenerateTestProject = generateTestProject;
             ExamplesDirectory = examplesDirectory;
+            CustomHeader = customHeader;
             _helperNamespace = helperNamespace ?? Namespace;
         }
 
@@ -248,6 +252,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private static string? _helperNamespace;
         public static string HelperNamespace => _helperNamespace ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        public static string? CustomHeader { get; private set; }
 
         public static bool DisableXmlDocs { get; private set; }
 
@@ -396,7 +402,8 @@ namespace AutoRest.CSharp.Common.Input
                 generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
                 examplesDirectory: null, // TODO -- what we put here?
                 helperNamespace: autoRest.GetValue<string?>(Options.HelperNamespace).GetAwaiter().GetResult(),
-                disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs)
+                disableXmlDocs: GetOptionBoolValue(autoRest, Options.DisableXmlDocs),
+                customHeader: autoRest.GetValue<string?>(Options.CustomHeader).GetAwaiter().GetResult()
             );
         }
 
@@ -569,12 +576,12 @@ namespace AutoRest.CSharp.Common.Input
                 mgmtConfiguration: MgmtConfiguration.LoadConfiguration(root),
                 mgmtTestConfiguration: MgmtTestConfiguration.LoadConfiguration(root),
                 flavor: ReadStringOption(root, Options.Flavor),
-                disableXmlDocs: ReadOption(root, Options.DisableXmlDocs)
-,
+                disableXmlDocs: ReadOption(root, Options.DisableXmlDocs),
                 generateSampleProject: ReadOption(root, Options.GenerateSampleProject),
                 generateTestProject: ReadOption(root, Options.GenerateTestProject),
                 examplesDirectory: ReadStringOption(root, Options.ExamplesDirectory),
-                helperNamespace: ReadStringOption(root, Options.HelperNamespace));
+                helperNamespace: ReadStringOption(root, Options.HelperNamespace),
+                customHeader: ReadStringOption(root, Options.CustomHeader));
         }
 
         internal static string SaveConfiguration()
@@ -644,6 +651,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
             WriteIfNotDefault(writer, Options.HelperNamespace, HelperNamespace);
             WriteIfNotDefault(writer, Options.DisableXmlDocs, DisableXmlDocs);
+            WriteIfNotDefault(writer, Options.CustomHeader, CustomHeader);
 
             writer.WriteEndObject();
         }

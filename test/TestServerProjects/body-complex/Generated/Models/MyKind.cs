@@ -30,7 +30,7 @@ namespace body_complex.Models
         public static bool operator ==(MyKind left, MyKind right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MyKind"/> values are not the same. </summary>
         public static bool operator !=(MyKind left, MyKind right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="MyKind"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="MyKind"/>. </summary>
         public static implicit operator MyKind(string value) => new MyKind(value);
 
         /// <inheritdoc />

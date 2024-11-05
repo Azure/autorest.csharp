@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -17,7 +17,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
-using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -183,7 +182,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var lines = new List<FormattableString>();
             string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
             lines.Add($"Gets an object representing {an} <see cref=\"{resource.Type}\" /> along with the instance operations that can be performed on it but with no data.");
-            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
+            lines.Add($"You can use <see cref=\"{resource.CreateResourceIdentifierReference}\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
             var description = FormattableStringHelpers.Join(lines, Environment.NewLine);
 
             var parameters = new List<Parameter>

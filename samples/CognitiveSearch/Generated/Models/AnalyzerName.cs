@@ -306,7 +306,7 @@ namespace CognitiveSearch.Models
         public static bool operator ==(AnalyzerName left, AnalyzerName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AnalyzerName"/> values are not the same. </summary>
         public static bool operator !=(AnalyzerName left, AnalyzerName right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="AnalyzerName"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="AnalyzerName"/>. </summary>
         public static implicit operator AnalyzerName(string value) => new AnalyzerName(value);
 
         /// <inheritdoc />

@@ -135,13 +135,13 @@ namespace NoDocsTypeSpec
             }
         }
 
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -153,21 +153,21 @@ namespace NoDocsTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousBodyAsync(anonymousBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -179,11 +179,11 @@ namespace NoDocsTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousBody(anonymousBodyRequest.ToRequestContent(), context);
+            Response response = AnonymousBody(thing.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -227,9 +227,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FriendlyModelAsync(friendlyModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await FriendlyModelAsync(friend.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -237,9 +237,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FriendlyModel(friendlyModelRequest.ToRequestContent(), context);
+            Response response = FriendlyModel(friend.ToRequestContent(), context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -315,9 +315,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProjectedNameModelAsync(projectedNameModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ProjectedNameModelAsync(projectedModel.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -325,9 +325,9 @@ namespace NoDocsTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProjectedNameModel(projectedNameModelRequest.ToRequestContent(), context);
+            Response response = ProjectedNameModel(projectedModel.ToRequestContent(), context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 

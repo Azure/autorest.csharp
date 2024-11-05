@@ -14,6 +14,8 @@ using Azure.ResourceManager;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace MgmtTypeSpec;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 /** The available API versions. */
 enum Versions {
     /** Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview. */

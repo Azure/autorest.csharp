@@ -330,14 +330,14 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
-        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual async Task<Response<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -349,14 +349,14 @@ namespace FirstTestTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 requiredFloatProperty,
                 optionalFloatProperty,
                 optionalResourceId,
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await AnonymousBodyAsync(anonymousBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await AnonymousBodyAsync(thing.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -379,14 +379,14 @@ namespace FirstTestTypeSpec
         /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
-        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, AnonymousBodyRequestRequiredLiteralString requiredLiteralString, AnonymousBodyRequestRequiredLiteralInt requiredLiteralInt, AnonymousBodyRequestRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, AnonymousBodyRequestOptionalLiteralString? optionalLiteralString = null, AnonymousBodyRequestOptionalLiteralInt? optionalLiteralInt = null, AnonymousBodyRequestOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
+        public virtual Response<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null, double? optionalFloatProperty = null, ResourceIdentifier optionalResourceId = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            AnonymousBodyRequest anonymousBodyRequest = new AnonymousBodyRequest(
+            Thing thing = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -398,14 +398,14 @@ namespace FirstTestTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
-                requiredNullableList?.ToList() as IReadOnlyList<int> ?? new ChangeTrackingList<int>(),
+                optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
+                requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>(),
                 requiredFloatProperty,
                 optionalFloatProperty,
                 optionalResourceId,
                 null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = AnonymousBody(anonymousBodyRequest.ToRequestContent(), context);
+            Response response = AnonymousBody(thing.ToRequestContent(), context);
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
@@ -419,7 +419,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -458,7 +458,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,AnonymousBodyRequestRequiredLiteralString,AnonymousBodyRequestRequiredLiteralInt,AnonymousBodyRequestRequiredLiteralFloat,bool,AnonymousBodyRequestOptionalLiteralString?,AnonymousBodyRequestOptionalLiteralInt?,AnonymousBodyRequestOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -496,9 +496,9 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FriendlyModelAsync(friendlyModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await FriendlyModelAsync(friend.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -511,9 +511,9 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            FriendlyModelRequest friendlyModelRequest = new FriendlyModelRequest(name, null);
+            Friend friend = new Friend(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FriendlyModel(friendlyModelRequest.ToRequestContent(), context);
+            Response response = FriendlyModel(friend.ToRequestContent(), context);
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
@@ -776,9 +776,9 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProjectedNameModelAsync(projectedNameModelRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ProjectedNameModelAsync(projectedModel.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -791,9 +791,9 @@ namespace FirstTestTypeSpec
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            ProjectedNameModelRequest projectedNameModelRequest = new ProjectedNameModelRequest(name, null);
+            ProjectedModel projectedModel = new ProjectedModel(name, null);
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProjectedNameModel(projectedNameModelRequest.ToRequestContent(), context);
+            Response response = ProjectedNameModel(projectedModel.ToRequestContent(), context);
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
@@ -2370,6 +2370,7 @@ namespace FirstTestTypeSpec
         private ProtocolAndConvenient _cachedProtocolAndConvenient;
         private Entity _cachedEntity;
         private Glossary _cachedGlossary;
+        private Resource _cachedResource;
 
         /// <summary> Initializes a new instance of Hello. </summary>
         public virtual Hello GetHelloClient()
@@ -2399,6 +2400,22 @@ namespace FirstTestTypeSpec
         public virtual Glossary GetGlossaryClient()
         {
             return Volatile.Read(ref _cachedGlossary) ?? Interlocked.CompareExchange(ref _cachedGlossary, new Glossary(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedGlossary;
+        }
+
+        /// <summary> Initializes a new instance of Resource. </summary>
+        public virtual Resource GetResourceClient()
+        {
+            return Volatile.Read(ref _cachedResource) ?? Interlocked.CompareExchange(ref _cachedResource, new Resource(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint), null) ?? _cachedResource;
+        }
+
+        /// <summary> Initializes a new instance of VersioningOp. </summary>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-05-15-preview")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new VersioningOp(ClientDiagnostics, _pipeline, _keyCredential, _tokenCredential, _endpoint, apiVersion);
         }
 
         internal HttpMessage CreateTopActionRequest(DateTimeOffset action, RequestContext context)

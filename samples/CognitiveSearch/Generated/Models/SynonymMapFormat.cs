@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
         public static bool operator ==(SynonymMapFormat left, SynonymMapFormat right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SynonymMapFormat"/> values are not the same. </summary>
         public static bool operator !=(SynonymMapFormat left, SynonymMapFormat right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="SynonymMapFormat"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="SynonymMapFormat"/>. </summary>
         public static implicit operator SynonymMapFormat(string value) => new SynonymMapFormat(value);
 
         /// <inheritdoc />

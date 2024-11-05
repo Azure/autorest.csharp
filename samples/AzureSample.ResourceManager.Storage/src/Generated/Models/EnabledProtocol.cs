@@ -33,7 +33,7 @@ namespace AzureSample.ResourceManager.Storage.Models
         public static bool operator ==(EnabledProtocol left, EnabledProtocol right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnabledProtocol"/> values are not the same. </summary>
         public static bool operator !=(EnabledProtocol left, EnabledProtocol right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="EnabledProtocol"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="EnabledProtocol"/>. </summary>
         public static implicit operator EnabledProtocol(string value) => new EnabledProtocol(value);
 
         /// <inheritdoc />

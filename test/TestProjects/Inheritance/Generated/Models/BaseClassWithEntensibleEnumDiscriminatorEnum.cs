@@ -33,7 +33,7 @@ namespace Inheritance.Models
         public static bool operator ==(BaseClassWithEntensibleEnumDiscriminatorEnum left, BaseClassWithEntensibleEnumDiscriminatorEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/> values are not the same. </summary>
         public static bool operator !=(BaseClassWithEntensibleEnumDiscriminatorEnum left, BaseClassWithEntensibleEnumDiscriminatorEnum right) => !left.Equals(right);
-        /// <summary> Converts a string to a <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/>. </summary>
+        /// <summary> Converts a <see cref="string"/> to a <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/>. </summary>
         public static implicit operator BaseClassWithEntensibleEnumDiscriminatorEnum(string value) => new BaseClassWithEntensibleEnumDiscriminatorEnum(value);
 
         /// <inheritdoc />
