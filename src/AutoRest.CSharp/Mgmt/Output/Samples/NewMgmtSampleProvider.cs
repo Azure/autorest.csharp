@@ -359,8 +359,39 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 }
                 else if (parameter.IsPropertyBag)
                 {
-                    // TODO -- build property bag assignment
-                    throw new NotImplementedException("property bag is not implemented yet");
+                    // get the model for the bag
+                    var bag = parameter.Type.Implementation as ModelTypeProvider;
+                    // property bag should always be a ModelTypeProvider, but just in case
+                    if (bag == null)
+                    {
+                        arguments.Add(Null);
+                        continue;
+                    }
+                    // build property bag assignment
+                    var ctor = bag.InitializationConstructor;
+                    var visitedProperties = new HashSet<ObjectTypeProperty>();
+                    var ctorArguments = new List<ValueExpression>();
+                    Dictionary<string, ValueExpression>? initializationProperties = null;
+                    foreach (var p in ctor.Signature.Parameters)
+                    {
+                        var prop = ctor.FindPropertyInitializedByParameter(p);
+                        if (prop != null)
+                        {
+                            visitedProperties.Add(prop);
+                        }
+                        if (example.PropertyBagParamValueMapping.TryGetValue(p.Name, out var value))
+                        {
+                            statements.Add(Declare(p.Type, p.Name, ToExpression(value), out var pVar));
+                            ctorArguments.Add(pVar);
+                        }
+                        else
+                        {
+                            ctorArguments.Add(Default.CastTo(p.Type));
+                        }
+                    }
+                    // TODO -- get the optional properties
+                    statements.Add(Declare(parameter.Type, parameter.Name, New.Instance(ctor.Signature, ctorArguments, initializationProperties), out var options));
+                    arguments.Add(options);
                 }
             }
 

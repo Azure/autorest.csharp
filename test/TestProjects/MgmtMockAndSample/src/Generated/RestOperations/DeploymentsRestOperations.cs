@@ -37,16 +37,40 @@ namespace MgmtMockAndSample
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal RequestUriBuilder CreateCalculateTemplateHashRequestUri(BinaryData template)
+        internal RequestUriBuilder CreateCalculateTemplateHashRequestUri(BinaryData template, string q1, int? q2, long? q3, float? q4, double? q5, bool? q6)
         {
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/providers/Microsoft.Resources/calculateTemplateHash", false);
             uri.AppendQuery("api-version", _apiVersion, true);
+            if (q1 != null)
+            {
+                uri.AppendQuery("q1", q1, true);
+            }
+            if (q2 != null)
+            {
+                uri.AppendQuery("q2", q2.Value, true);
+            }
+            if (q3 != null)
+            {
+                uri.AppendQuery("q3", q3.Value, true);
+            }
+            if (q4 != null)
+            {
+                uri.AppendQuery("q4", q4.Value, true);
+            }
+            if (q5 != null)
+            {
+                uri.AppendQuery("q5", q5.Value, true);
+            }
+            if (q6 != null)
+            {
+                uri.AppendQuery("q6", q6.Value, true);
+            }
             return uri;
         }
 
-        internal HttpMessage CreateCalculateTemplateHashRequest(BinaryData template)
+        internal HttpMessage CreateCalculateTemplateHashRequest(BinaryData template, string q1, int? q2, long? q3, float? q4, double? q5, bool? q6)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -55,6 +79,30 @@ namespace MgmtMockAndSample
             uri.Reset(_endpoint);
             uri.AppendPath("/providers/Microsoft.Resources/calculateTemplateHash", false);
             uri.AppendQuery("api-version", _apiVersion, true);
+            if (q1 != null)
+            {
+                uri.AppendQuery("q1", q1, true);
+            }
+            if (q2 != null)
+            {
+                uri.AppendQuery("q2", q2.Value, true);
+            }
+            if (q3 != null)
+            {
+                uri.AppendQuery("q3", q3.Value, true);
+            }
+            if (q4 != null)
+            {
+                uri.AppendQuery("q4", q4.Value, true);
+            }
+            if (q5 != null)
+            {
+                uri.AppendQuery("q5", q5.Value, true);
+            }
+            if (q6 != null)
+            {
+                uri.AppendQuery("q6", q6.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -74,13 +122,19 @@ namespace MgmtMockAndSample
 
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="q1"> The first query parameter. </param>
+        /// <param name="q2"> The second query parameter. </param>
+        /// <param name="q3"> The third query parameter. </param>
+        /// <param name="q4"> The fourth query parameter. </param>
+        /// <param name="q5"> The fifth query parameter. </param>
+        /// <param name="q6"> The sixth query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(BinaryData template, CancellationToken cancellationToken = default)
+        public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(BinaryData template, string q1 = null, int? q2 = null, long? q3 = null, float? q4 = null, double? q5 = null, bool? q6 = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            using var message = CreateCalculateTemplateHashRequest(template);
+            using var message = CreateCalculateTemplateHashRequest(template, q1, q2, q3, q4, q5, q6);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -98,13 +152,19 @@ namespace MgmtMockAndSample
 
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="q1"> The first query parameter. </param>
+        /// <param name="q2"> The second query parameter. </param>
+        /// <param name="q3"> The third query parameter. </param>
+        /// <param name="q4"> The fourth query parameter. </param>
+        /// <param name="q5"> The fifth query parameter. </param>
+        /// <param name="q6"> The sixth query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public Response<TemplateHashResult> CalculateTemplateHash(BinaryData template, CancellationToken cancellationToken = default)
+        public Response<TemplateHashResult> CalculateTemplateHash(BinaryData template, string q1 = null, int? q2 = null, long? q3 = null, float? q4 = null, double? q5 = null, bool? q6 = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            using var message = CreateCalculateTemplateHashRequest(template);
+            using var message = CreateCalculateTemplateHashRequest(template, q1, q2, q3, q4, q5, q6);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

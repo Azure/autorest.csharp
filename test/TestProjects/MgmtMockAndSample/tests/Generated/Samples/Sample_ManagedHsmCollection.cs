@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Azure;
@@ -51,7 +50,22 @@ namespace MgmtMockAndSample.Samples
                 Properties = new ManagedHsmProperties
                 {
                     Settings = BinaryData.FromObjectAsJson("{\"config1\":\"value1\",\"config2\":8427,\"config3\":false,\"config4\":[\"1\",\"2\"],\"config5\":{\"inner\":\"something\"}}"),
-                    ProtectedSettings = BinaryData.FromObjectAsJson((Dictionary<object, object>)null),
+                    ProtectedSettings = BinaryData.FromObjectAsJson(new
+                    {
+                        protected1 = "value2",
+                        protected2 = "10",
+                        protected3 = "false",
+                        protected4 = new object[]
+            {
+"1",
+"2",
+"3"
+            },
+                        protected5 = new
+                        {
+                            protectedInner = "something else",
+                        },
+                    }),
                     RawMessage = Encoding.UTF8.GetBytes("PFX-or-PEM-blob"),
                     TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                     InitialAdminObjectIds = { "00000000-0000-0000-0000-000000000000" },
