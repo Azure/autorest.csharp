@@ -164,7 +164,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyRuleCollectionGroupResource firewallPolicyRuleCollectionGroup = client.GetFirewallPolicyRuleCollectionGroupResource(firewallPolicyRuleCollectionGroupResourceId);
 
             // invoke the operation
-            await firewallPolicyRuleCollectionGroup.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await firewallPolicyRuleCollectionGroup.DeleteAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }

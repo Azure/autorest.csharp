@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Samples
             DeletedVaultResource deletedVault = client.GetDeletedVaultResource(deletedVaultResourceId);
 
             // invoke the operation
-            await deletedVault.PurgeDeletedAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }

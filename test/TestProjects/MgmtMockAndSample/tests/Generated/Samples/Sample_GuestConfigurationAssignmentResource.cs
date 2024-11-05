@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Samples
             GuestConfigurationAssignmentResource guestConfigurationAssignment = client.GetGuestConfigurationAssignmentResource(guestConfigurationAssignmentResourceId);
 
             // invoke the operation
-            await guestConfigurationAssignment.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await guestConfigurationAssignment.DeleteAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }

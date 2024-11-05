@@ -69,7 +69,7 @@ namespace MgmtMockAndSample.Samples
             ManagedHsmResource managedHsm = client.GetManagedHsmResource(managedHsmResourceId);
 
             // invoke the operation
-            await managedHsm.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await managedHsm.DeleteAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }

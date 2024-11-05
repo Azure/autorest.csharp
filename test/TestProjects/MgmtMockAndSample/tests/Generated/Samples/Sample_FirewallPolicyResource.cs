@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Samples
             FirewallPolicyResource firewallPolicy = client.GetFirewallPolicyResource(firewallPolicyResourceId);
 
             // invoke the operation
-            await firewallPolicy.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await firewallPolicy.DeleteAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }

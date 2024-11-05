@@ -134,7 +134,7 @@ namespace MgmtMockAndSample.Samples
             RoleAssignmentResource roleAssignment = client.GetRoleAssignmentResource(roleAssignmentResourceId);
 
             // invoke the operation
-            await roleAssignment.ValidateAsync().ConfigureAwait(false);
+            await roleAssignment.ValidateAsync();
 
             Console.WriteLine("Succeeded");
         }

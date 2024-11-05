@@ -100,7 +100,7 @@ namespace MgmtMockAndSample.Samples
             DiskEncryptionSetResource diskEncryptionSet = client.GetDiskEncryptionSetResource(diskEncryptionSetResourceId);
 
             // invoke the operation
-            await diskEncryptionSet.DeleteAsync(WaitUntil.Completed).ConfigureAwait(false);
+            await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
 
             Console.WriteLine("Succeeded");
         }
