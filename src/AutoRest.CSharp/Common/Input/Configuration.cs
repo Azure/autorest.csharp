@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input
