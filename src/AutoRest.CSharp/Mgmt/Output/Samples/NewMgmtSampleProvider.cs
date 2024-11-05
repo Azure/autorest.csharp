@@ -389,7 +389,19 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                             ctorArguments.Add(Default.CastTo(p.Type));
                         }
                     }
-                    // TODO -- get the optional properties
+                    // get the optional properties
+                    foreach (var prop in bag.Properties)
+                    {
+                        if (visitedProperties.Contains(prop))
+                        {
+                            continue;
+                        }
+                        if (example.PropertyBagParamValueMapping.TryGetValue(prop.Declaration.Name.ToVariableName(), out var value))
+                        {
+                            initializationProperties ??= new Dictionary<string, ValueExpression>();
+                            initializationProperties.Add(prop.Declaration.Name, ToExpression(value));
+                        }
+                    }
                     statements.Add(Declare(parameter.Type, parameter.Name, New.Instance(ctor.Signature, ctorArguments, initializationProperties), out var options));
                     arguments.Add(options);
                 }

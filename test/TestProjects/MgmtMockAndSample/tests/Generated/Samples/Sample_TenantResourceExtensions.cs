@@ -168,7 +168,7 @@ namespace MgmtMockAndSample.Samples
                     ["string"] = "string"
                 }
             });
-            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template);
+            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template) { Q1 = "first", Q2 = 42, Q3 = 0L, Q4 = (float)3.14, Q5 = 3.14159265358, Q6 = true };
             TemplateHashResult result = await tenantResource.CalculateTemplateHashDeploymentAsync(options).ConfigureAwait(false);
 
             Console.WriteLine($"Succeeded: {result}");
