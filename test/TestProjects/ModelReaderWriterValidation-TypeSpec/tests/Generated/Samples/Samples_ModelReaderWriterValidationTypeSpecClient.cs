@@ -22,7 +22,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op1_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -39,7 +39,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op1_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -56,7 +56,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op1_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelAsStruct body = new ModelAsStruct(1234);
@@ -67,7 +67,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op1_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelAsStruct body = new ModelAsStruct(1234);
@@ -78,7 +78,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op1_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -95,7 +95,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op1_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -112,7 +112,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op1_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelAsStruct body = new ModelAsStruct(1234);
@@ -123,7 +123,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op1_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelAsStruct body = new ModelAsStruct(1234);
@@ -134,7 +134,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op2_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
@@ -148,7 +148,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op2_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
@@ -162,7 +162,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op2_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithPersistableOnly body = new ModelWithPersistableOnly();
@@ -173,7 +173,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op2_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithPersistableOnly body = new ModelWithPersistableOnly();
@@ -184,7 +184,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op2_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -214,7 +214,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op2_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -244,7 +244,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op2_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithPersistableOnly body = new ModelWithPersistableOnly
@@ -264,7 +264,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op2_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithPersistableOnly body = new ModelWithPersistableOnly
@@ -284,7 +284,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op3_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -301,7 +301,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op3_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -318,7 +318,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op3_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             BaseModel body = new ModelX();
@@ -329,7 +329,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op3_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             BaseModel body = new ModelX();
@@ -340,7 +340,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op3_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -368,7 +368,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op3_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -396,7 +396,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op3_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             BaseModel body = new ModelX
@@ -416,7 +416,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op3_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             BaseModel body = new ModelX
@@ -436,7 +436,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -456,7 +456,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -476,7 +476,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             AvailabilitySetData body = new AvailabilitySetData("<location>");
@@ -487,7 +487,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             AvailabilitySetData body = new AvailabilitySetData("<location>");
@@ -498,7 +498,7 @@ namespace ModelReaderWriterValidationTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -547,7 +547,7 @@ id = "<id>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -596,7 +596,7 @@ id = "<id>",
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             AvailabilitySetData body = new AvailabilitySetData("<location>")
@@ -628,7 +628,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op4_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             AvailabilitySetData body = new AvailabilitySetData("<location>")
@@ -660,7 +660,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response response = client.Op5(null);
@@ -673,7 +673,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response response = await client.Op5Async(null);
@@ -686,7 +686,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response<ResourceProviderData> response = client.Op5();
@@ -696,7 +696,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response<ResourceProviderData> response = await client.Op5Async();
@@ -706,7 +706,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response response = client.Op5(null);
@@ -751,7 +751,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response response = await client.Op5Async(null);
@@ -796,7 +796,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response<ResourceProviderData> response = client.Op5();
@@ -806,7 +806,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op5_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             Response<ResourceProviderData> response = await client.Op5Async();
@@ -816,7 +816,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -834,7 +834,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -852,7 +852,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
@@ -863,7 +863,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>");
@@ -874,7 +874,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -894,7 +894,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -914,7 +914,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
@@ -928,7 +928,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op6_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithStringAdditionalProperties body = new ModelWithStringAdditionalProperties("<name>")
@@ -942,7 +942,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op7_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -960,7 +960,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op7_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -978,7 +978,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op7_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
@@ -989,7 +989,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op7_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>");
@@ -1000,7 +1000,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op7_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1020,7 +1020,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op7_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1040,7 +1040,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op7_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
@@ -1054,7 +1054,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op7_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithArrayAdditionalProperties body = new ModelWithArrayAdditionalProperties("<name>")
@@ -1068,7 +1068,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op8_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1086,7 +1086,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op8_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1104,7 +1104,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op8_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
@@ -1115,7 +1115,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op8_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>");
@@ -1126,7 +1126,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op8_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1146,7 +1146,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op8_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -1166,7 +1166,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public void Example_ModelReaderWriterValidationTypeSpec_Op8_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")
@@ -1180,7 +1180,7 @@ Id = new ResourceIdentifier("<id>"),
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ModelReaderWriterValidationTypeSpec_Op8_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ModelReaderWriterValidationTypeSpecClient client = new ModelReaderWriterValidationTypeSpecClient(endpoint);
 
             ModelWithUnknownAdditionalProperties body = new ModelWithUnknownAdditionalProperties("<name>")

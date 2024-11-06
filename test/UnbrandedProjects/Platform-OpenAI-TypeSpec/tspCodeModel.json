@@ -8621,44 +8621,13 @@
      "Parameters": [
       {
        "$id": "908",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "909",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "910",
-        "Type": {
-         "$id": "911",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "912",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "913",
+        "$id": "909",
         "kind": "constant",
         "valueType": {
-         "$id": "914",
+         "$id": "910",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -8678,14 +8647,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "915",
+       "$id": "911",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "916",
+        "$id": "912",
         "kind": "constant",
         "valueType": {
-         "$id": "917",
+         "$id": "913",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -8705,7 +8674,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "918",
+       "$id": "914",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -8724,7 +8693,7 @@
      ],
      "Responses": [
       {
-       "$id": "919",
+       "$id": "915",
        "StatusCodes": [
         200
        ],
@@ -8754,12 +8723,40 @@
     }
    ],
    "Protocol": {
-    "$id": "920"
+    "$id": "916"
    },
    "Parent": "Audio",
    "Parameters": [
     {
-     "$ref": "908"
+     "$id": "917",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "918",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "919",
+      "Type": {
+       "$id": "920",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -8777,44 +8774,13 @@
      "Parameters": [
       {
        "$id": "923",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "924",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "925",
-        "Type": {
-         "$id": "926",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "927",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "928",
+        "$id": "924",
         "kind": "constant",
         "valueType": {
-         "$id": "929",
+         "$id": "925",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -8834,14 +8800,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "930",
+       "$id": "926",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "931",
+        "$id": "927",
         "kind": "constant",
         "valueType": {
-         "$id": "932",
+         "$id": "928",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -8861,7 +8827,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "933",
+       "$id": "929",
        "Name": "audio",
        "NameInRequest": "audio",
        "Type": {
@@ -8880,7 +8846,7 @@
      ],
      "Responses": [
       {
-       "$id": "934",
+       "$id": "930",
        "StatusCodes": [
         200
        ],
@@ -8910,12 +8876,40 @@
     }
    ],
    "Protocol": {
-    "$id": "935"
+    "$id": "931"
    },
    "Parent": "Audio",
    "Parameters": [
     {
-     "$ref": "923"
+     "$id": "932",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "933",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "934",
+      "Type": {
+       "$id": "935",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -8975,45 +8969,14 @@
      "Parameters": [
       {
        "$id": "944",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "945",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "946",
-        "Type": {
-         "$id": "947",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "948",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "949",
+        "$id": "945",
         "kind": "constant",
         "valueType": {
-         "$id": "950",
+         "$id": "946",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9033,14 +8996,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "951",
+       "$id": "947",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "952",
+        "$id": "948",
         "kind": "constant",
         "valueType": {
-         "$id": "953",
+         "$id": "949",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9060,7 +9023,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "954",
+       "$id": "950",
        "Name": "createChatCompletionRequest",
        "NameInRequest": "createChatCompletionRequest",
        "Type": {
@@ -9079,7 +9042,7 @@
      ],
      "Responses": [
       {
-       "$id": "955",
+       "$id": "951",
        "StatusCodes": [
         200
        ],
@@ -9109,12 +9072,40 @@
     }
    ],
    "Protocol": {
-    "$id": "956"
+    "$id": "952"
    },
    "Parent": "Chat",
    "Parameters": [
     {
-     "$ref": "944"
+     "$id": "953",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "954",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "955",
+      "Type": {
+       "$id": "956",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -9175,45 +9166,14 @@
      "Parameters": [
       {
        "$id": "965",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "966",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "967",
-        "Type": {
-         "$id": "968",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "969",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "970",
+        "$id": "966",
         "kind": "constant",
         "valueType": {
-         "$id": "971",
+         "$id": "967",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9233,14 +9193,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "972",
+       "$id": "968",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "973",
+        "$id": "969",
         "kind": "constant",
         "valueType": {
-         "$id": "974",
+         "$id": "970",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9260,7 +9220,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "975",
+       "$id": "971",
        "Name": "job",
        "NameInRequest": "job",
        "Type": {
@@ -9279,7 +9239,7 @@
      ],
      "Responses": [
       {
-       "$id": "976",
+       "$id": "972",
        "StatusCodes": [
         200
        ],
@@ -9308,21 +9268,18 @@
      "Decorators": []
     },
     {
-     "$id": "977",
+     "$id": "973",
      "Name": "listPaginated",
      "ResourceName": "Jobs",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "965"
-      },
-      {
-       "$id": "978",
+       "$id": "974",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last job from the previous pagination request.",
        "Type": {
-        "$id": "979",
+        "$id": "975",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9339,12 +9296,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "980",
+       "$id": "976",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of fine-tuning jobs to retrieve.",
        "Type": {
-        "$id": "981",
+        "$id": "977",
         "kind": "safeint",
         "name": "safeint",
         "crossLanguageDefinitionId": "TypeSpec.safeint",
@@ -9361,14 +9318,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "982",
+       "$id": "978",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "983",
+        "$id": "979",
         "kind": "constant",
         "valueType": {
-         "$id": "984",
+         "$id": "980",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9390,7 +9347,7 @@
      ],
      "Responses": [
       {
-       "$id": "985",
+       "$id": "981",
        "StatusCodes": [
         200
        ],
@@ -9416,21 +9373,18 @@
      "Decorators": []
     },
     {
-     "$id": "986",
+     "$id": "982",
      "Name": "retrieve",
      "ResourceName": "Jobs",
      "Summary": "Get info about a fine-tuning job.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "965"
-      },
-      {
-       "$id": "987",
+       "$id": "983",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Type": {
-        "$id": "988",
+        "$id": "984",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9447,14 +9401,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "989",
+       "$id": "985",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "990",
+        "$id": "986",
         "kind": "constant",
         "valueType": {
-         "$id": "991",
+         "$id": "987",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9476,7 +9430,7 @@
      ],
      "Responses": [
       {
-       "$id": "992",
+       "$id": "988",
        "StatusCodes": [
         200
        ],
@@ -9502,22 +9456,19 @@
      "Decorators": []
     },
     {
-     "$id": "993",
+     "$id": "989",
      "Name": "listEvents",
      "ResourceName": "Jobs",
      "Summary": "Get status updates for a fine-tuning job.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "965"
-      },
-      {
-       "$id": "994",
+       "$id": "990",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to get events for.",
        "Type": {
-        "$id": "995",
+        "$id": "991",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9534,12 +9485,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "996",
+       "$id": "992",
        "Name": "after",
        "NameInRequest": "after",
        "Description": "Identifier for the last event from the previous pagination request.",
        "Type": {
-        "$id": "997",
+        "$id": "993",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9556,12 +9507,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "998",
+       "$id": "994",
        "Name": "limit",
        "NameInRequest": "limit",
        "Description": "Number of events to retrieve.",
        "Type": {
-        "$id": "999",
+        "$id": "995",
         "kind": "integer",
         "name": "integer",
         "crossLanguageDefinitionId": "TypeSpec.integer",
@@ -9578,14 +9529,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1000",
+       "$id": "996",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1001",
+        "$id": "997",
         "kind": "constant",
         "valueType": {
-         "$id": "1002",
+         "$id": "998",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9607,7 +9558,7 @@
      ],
      "Responses": [
       {
-       "$id": "1003",
+       "$id": "999",
        "StatusCodes": [
         200
        ],
@@ -9633,22 +9584,19 @@
      "Decorators": []
     },
     {
-     "$id": "1004",
+     "$id": "1000",
      "Name": "cancel",
      "ResourceName": "Jobs",
      "Summary": "Immediately cancel a fine-tune job.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "965"
-      },
-      {
-       "$id": "1005",
+       "$id": "1001",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
        "Description": "The ID of the fine-tuning job to cancel.",
        "Type": {
-        "$id": "1006",
+        "$id": "1002",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9665,14 +9613,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1007",
+       "$id": "1003",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1008",
+        "$id": "1004",
         "kind": "constant",
         "valueType": {
-         "$id": "1009",
+         "$id": "1005",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9694,7 +9642,7 @@
      ],
      "Responses": [
       {
-       "$id": "1010",
+       "$id": "1006",
        "StatusCodes": [
         200
        ],
@@ -9721,12 +9669,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1011"
+    "$id": "1007"
    },
    "Parent": "FineTuning",
    "Parameters": [
     {
-     "$ref": "965"
+     "$id": "1008",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1009",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1010",
+      "Type": {
+       "$id": "1011",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -9743,45 +9719,14 @@
      "Parameters": [
       {
        "$id": "1014",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1015",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1016",
-        "Type": {
-         "$id": "1017",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1018",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1019",
+        "$id": "1015",
         "kind": "constant",
         "valueType": {
-         "$id": "1020",
+         "$id": "1016",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9801,14 +9746,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1021",
+       "$id": "1017",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1022",
+        "$id": "1018",
         "kind": "constant",
         "valueType": {
-         "$id": "1023",
+         "$id": "1019",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9828,7 +9773,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1024",
+       "$id": "1020",
        "Name": "createCompletionRequest",
        "NameInRequest": "createCompletionRequest",
        "Type": {
@@ -9847,7 +9792,7 @@
      ],
      "Responses": [
       {
-       "$id": "1025",
+       "$id": "1021",
        "StatusCodes": [
         200
        ],
@@ -9877,12 +9822,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1026"
+    "$id": "1022"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1014"
+     "$id": "1023",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1024",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1025",
+      "Type": {
+       "$id": "1026",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -9900,45 +9873,14 @@
      "Parameters": [
       {
        "$id": "1029",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1030",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1031",
-        "Type": {
-         "$id": "1032",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1033",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1034",
+        "$id": "1030",
         "kind": "constant",
         "valueType": {
-         "$id": "1035",
+         "$id": "1031",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9958,14 +9900,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1036",
+       "$id": "1032",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1037",
+        "$id": "1033",
         "kind": "constant",
         "valueType": {
-         "$id": "1038",
+         "$id": "1034",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -9985,7 +9927,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1039",
+       "$id": "1035",
        "Name": "edit",
        "NameInRequest": "edit",
        "Type": {
@@ -10004,7 +9946,7 @@
      ],
      "Responses": [
       {
-       "$id": "1040",
+       "$id": "1036",
        "StatusCodes": [
         200
        ],
@@ -10034,12 +9976,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1041"
+    "$id": "1037"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1029"
+     "$id": "1038",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1039",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1040",
+      "Type": {
+       "$id": "1041",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -10057,45 +10027,14 @@
      "Parameters": [
       {
        "$id": "1044",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1045",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1046",
-        "Type": {
-         "$id": "1047",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1048",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1049",
+        "$id": "1045",
         "kind": "constant",
         "valueType": {
-         "$id": "1050",
+         "$id": "1046",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10115,14 +10054,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1051",
+       "$id": "1047",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1052",
+        "$id": "1048",
         "kind": "constant",
         "valueType": {
-         "$id": "1053",
+         "$id": "1049",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10142,7 +10081,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1054",
+       "$id": "1050",
        "Name": "embedding",
        "NameInRequest": "embedding",
        "Type": {
@@ -10161,7 +10100,7 @@
      ],
      "Responses": [
       {
-       "$id": "1055",
+       "$id": "1051",
        "StatusCodes": [
         200
        ],
@@ -10191,12 +10130,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1056"
+    "$id": "1052"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1044"
+     "$id": "1053",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1054",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1055",
+      "Type": {
+       "$id": "1056",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -10214,44 +10181,13 @@
      "Parameters": [
       {
        "$id": "1059",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1060",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1061",
-        "Type": {
-         "$id": "1062",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1063",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1064",
+        "$id": "1060",
         "kind": "constant",
         "valueType": {
-         "$id": "1065",
+         "$id": "1061",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10273,7 +10209,7 @@
      ],
      "Responses": [
       {
-       "$id": "1066",
+       "$id": "1062",
        "StatusCodes": [
         200
        ],
@@ -10299,24 +10235,21 @@
      "Decorators": []
     },
     {
-     "$id": "1067",
+     "$id": "1063",
      "Name": "create",
      "ResourceName": "Files",
      "Summary": "Returns a list of files that belong to the user's organization.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1059"
-      },
-      {
-       "$id": "1068",
+       "$id": "1064",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1069",
+        "$id": "1065",
         "kind": "constant",
         "valueType": {
-         "$id": "1070",
+         "$id": "1066",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10336,14 +10269,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1071",
+       "$id": "1067",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1072",
+        "$id": "1068",
         "kind": "constant",
         "valueType": {
-         "$id": "1073",
+         "$id": "1069",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10363,7 +10296,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1074",
+       "$id": "1070",
        "Name": "file",
        "NameInRequest": "file",
        "Type": {
@@ -10382,7 +10315,7 @@
      ],
      "Responses": [
       {
-       "$id": "1075",
+       "$id": "1071",
        "StatusCodes": [
         200
        ],
@@ -10411,22 +10344,19 @@
      "Decorators": []
     },
     {
-     "$id": "1076",
+     "$id": "1072",
      "Name": "retrieve",
      "ResourceName": "Files",
      "Summary": "Returns information about a specific file.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1059"
-      },
-      {
-       "$id": "1077",
+       "$id": "1073",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1078",
+        "$id": "1074",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10443,14 +10373,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1079",
+       "$id": "1075",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1080",
+        "$id": "1076",
         "kind": "constant",
         "valueType": {
-         "$id": "1081",
+         "$id": "1077",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10472,7 +10402,7 @@
      ],
      "Responses": [
       {
-       "$id": "1082",
+       "$id": "1078",
        "StatusCodes": [
         200
        ],
@@ -10498,22 +10428,19 @@
      "Decorators": []
     },
     {
-     "$id": "1083",
+     "$id": "1079",
      "Name": "delete",
      "ResourceName": "Files",
      "Summary": "Delete a file",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1059"
-      },
-      {
-       "$id": "1084",
+       "$id": "1080",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1085",
+        "$id": "1081",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10530,14 +10457,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1086",
+       "$id": "1082",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1087",
+        "$id": "1083",
         "kind": "constant",
         "valueType": {
-         "$id": "1088",
+         "$id": "1084",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10559,7 +10486,7 @@
      ],
      "Responses": [
       {
-       "$id": "1089",
+       "$id": "1085",
        "StatusCodes": [
         200
        ],
@@ -10585,22 +10512,19 @@
      "Decorators": []
     },
     {
-     "$id": "1090",
+     "$id": "1086",
      "Name": "download",
      "ResourceName": "Files",
      "Summary": "Returns the contents of the specified file.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1059"
-      },
-      {
-       "$id": "1091",
+       "$id": "1087",
        "Name": "file_id",
        "NameInRequest": "file_id",
        "Description": "The ID of the file to use for this request.",
        "Type": {
-        "$id": "1092",
+        "$id": "1088",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10617,14 +10541,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1093",
+       "$id": "1089",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1094",
+        "$id": "1090",
         "kind": "constant",
         "valueType": {
-         "$id": "1095",
+         "$id": "1091",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10646,12 +10570,12 @@
      ],
      "Responses": [
       {
-       "$id": "1096",
+       "$id": "1092",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$id": "1097",
+        "$id": "1093",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10677,12 +10601,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1098"
+    "$id": "1094"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1059"
+     "$id": "1095",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1096",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1097",
+      "Type": {
+       "$id": "1098",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -10701,45 +10653,14 @@
      "Parameters": [
       {
        "$id": "1101",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1102",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1103",
-        "Type": {
-         "$id": "1104",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1105",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1106",
+        "$id": "1102",
         "kind": "constant",
         "valueType": {
-         "$id": "1107",
+         "$id": "1103",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10759,14 +10680,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1108",
+       "$id": "1104",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1109",
+        "$id": "1105",
         "kind": "constant",
         "valueType": {
-         "$id": "1110",
+         "$id": "1106",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10786,7 +10707,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1111",
+       "$id": "1107",
        "Name": "fine_tune",
        "NameInRequest": "fine_tune",
        "Type": {
@@ -10805,7 +10726,7 @@
      ],
      "Responses": [
       {
-       "$id": "1112",
+       "$id": "1108",
        "StatusCodes": [
         200
        ],
@@ -10834,7 +10755,7 @@
      "Decorators": []
     },
     {
-     "$id": "1113",
+     "$id": "1109",
      "Name": "list",
      "ResourceName": "FineTunes",
      "Deprecated": "deprecated",
@@ -10842,17 +10763,14 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1101"
-      },
-      {
-       "$id": "1114",
+       "$id": "1110",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1115",
+        "$id": "1111",
         "kind": "constant",
         "valueType": {
-         "$id": "1116",
+         "$id": "1112",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10874,7 +10792,7 @@
      ],
      "Responses": [
       {
-       "$id": "1117",
+       "$id": "1113",
        "StatusCodes": [
         200
        ],
@@ -10900,7 +10818,7 @@
      "Decorators": []
     },
     {
-     "$id": "1118",
+     "$id": "1114",
      "Name": "retrieve",
      "ResourceName": "FineTunes",
      "Deprecated": "deprecated",
@@ -10908,15 +10826,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1101"
-      },
-      {
-       "$id": "1119",
+       "$id": "1115",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job",
        "Type": {
-        "$id": "1120",
+        "$id": "1116",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10933,14 +10848,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1121",
+       "$id": "1117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1122",
+        "$id": "1118",
         "kind": "constant",
         "valueType": {
-         "$id": "1123",
+         "$id": "1119",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -10962,7 +10877,7 @@
      ],
      "Responses": [
       {
-       "$id": "1124",
+       "$id": "1120",
        "StatusCodes": [
         200
        ],
@@ -10988,7 +10903,7 @@
      "Decorators": []
     },
     {
-     "$id": "1125",
+     "$id": "1121",
      "Name": "listEvents",
      "ResourceName": "FineTunes",
      "Deprecated": "deprecated",
@@ -10996,15 +10911,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1101"
-      },
-      {
-       "$id": "1126",
+       "$id": "1122",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to get events for.",
        "Type": {
-        "$id": "1127",
+        "$id": "1123",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11021,12 +10933,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1128",
+       "$id": "1124",
        "Name": "stream",
        "NameInRequest": "stream",
        "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
-        "$id": "1129",
+        "$id": "1125",
         "kind": "boolean",
         "name": "boolean",
         "crossLanguageDefinitionId": "TypeSpec.boolean",
@@ -11043,14 +10955,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1130",
+       "$id": "1126",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1131",
+        "$id": "1127",
         "kind": "constant",
         "valueType": {
-         "$id": "1132",
+         "$id": "1128",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11072,7 +10984,7 @@
      ],
      "Responses": [
       {
-       "$id": "1133",
+       "$id": "1129",
        "StatusCodes": [
         200
        ],
@@ -11098,7 +11010,7 @@
      "Decorators": []
     },
     {
-     "$id": "1134",
+     "$id": "1130",
      "Name": "cancel",
      "ResourceName": "FineTunes",
      "Deprecated": "deprecated",
@@ -11106,15 +11018,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1101"
-      },
-      {
-       "$id": "1135",
+       "$id": "1131",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
        "Description": "The ID of the fine-tune job to cancel",
        "Type": {
-        "$id": "1136",
+        "$id": "1132",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11131,14 +11040,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1137",
+       "$id": "1133",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1138",
+        "$id": "1134",
         "kind": "constant",
         "valueType": {
-         "$id": "1139",
+         "$id": "1135",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11160,7 +11069,7 @@
      ],
      "Responses": [
       {
-       "$id": "1140",
+       "$id": "1136",
        "StatusCodes": [
         200
        ],
@@ -11187,12 +11096,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1141"
+    "$id": "1137"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1101"
+     "$id": "1138",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1139",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1140",
+      "Type": {
+       "$id": "1141",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -11210,44 +11147,13 @@
      "Parameters": [
       {
        "$id": "1144",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1145",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1146",
-        "Type": {
-         "$id": "1147",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1148",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1149",
+        "$id": "1145",
         "kind": "constant",
         "valueType": {
-         "$id": "1150",
+         "$id": "1146",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11269,7 +11175,7 @@
      ],
      "Responses": [
       {
-       "$id": "1151",
+       "$id": "1147",
        "StatusCodes": [
         200
        ],
@@ -11295,22 +11201,19 @@
      "Decorators": []
     },
     {
-     "$id": "1152",
+     "$id": "1148",
      "Name": "retrieve",
      "ResourceName": "Models",
      "Summary": "Retrieves a model instance, providing basic information about the model such as the owner and\npermissioning.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1144"
-      },
-      {
-       "$id": "1153",
+       "$id": "1149",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The ID of the model to use for this request.",
        "Type": {
-        "$id": "1154",
+        "$id": "1150",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11327,14 +11230,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1155",
+       "$id": "1151",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1156",
+        "$id": "1152",
         "kind": "constant",
         "valueType": {
-         "$id": "1157",
+         "$id": "1153",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11356,7 +11259,7 @@
      ],
      "Responses": [
       {
-       "$id": "1158",
+       "$id": "1154",
        "StatusCodes": [
         200
        ],
@@ -11382,22 +11285,19 @@
      "Decorators": []
     },
     {
-     "$id": "1159",
+     "$id": "1155",
      "Name": "delete",
      "ResourceName": "Models",
      "Summary": "Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1144"
-      },
-      {
-       "$id": "1160",
+       "$id": "1156",
        "Name": "model",
        "NameInRequest": "model",
        "Description": "The model to delete",
        "Type": {
-        "$id": "1161",
+        "$id": "1157",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11414,14 +11314,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1162",
+       "$id": "1158",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1163",
+        "$id": "1159",
         "kind": "constant",
         "valueType": {
-         "$id": "1164",
+         "$id": "1160",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11443,7 +11343,7 @@
      ],
      "Responses": [
       {
-       "$id": "1165",
+       "$id": "1161",
        "StatusCodes": [
         200
        ],
@@ -11470,12 +11370,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1166"
+    "$id": "1162"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1144"
+     "$id": "1163",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1164",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1165",
+      "Type": {
+       "$id": "1166",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -11493,45 +11421,14 @@
      "Parameters": [
       {
        "$id": "1169",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1170",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1171",
-        "Type": {
-         "$id": "1172",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1173",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1174",
+        "$id": "1170",
         "kind": "constant",
         "valueType": {
-         "$id": "1175",
+         "$id": "1171",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11551,14 +11448,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1176",
+       "$id": "1172",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1177",
+        "$id": "1173",
         "kind": "constant",
         "valueType": {
-         "$id": "1178",
+         "$id": "1174",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11578,7 +11475,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1179",
+       "$id": "1175",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -11597,7 +11494,7 @@
      ],
      "Responses": [
       {
-       "$id": "1180",
+       "$id": "1176",
        "StatusCodes": [
         200
        ],
@@ -11626,24 +11523,21 @@
      "Decorators": []
     },
     {
-     "$id": "1181",
+     "$id": "1177",
      "Name": "createEdit",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1169"
-      },
-      {
-       "$id": "1182",
+       "$id": "1178",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1183",
+        "$id": "1179",
         "kind": "constant",
         "valueType": {
-         "$id": "1184",
+         "$id": "1180",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11663,14 +11557,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1185",
+       "$id": "1181",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1186",
+        "$id": "1182",
         "kind": "constant",
         "valueType": {
-         "$id": "1187",
+         "$id": "1183",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11690,7 +11584,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1188",
+       "$id": "1184",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -11709,7 +11603,7 @@
      ],
      "Responses": [
       {
-       "$id": "1189",
+       "$id": "1185",
        "StatusCodes": [
         200
        ],
@@ -11738,24 +11632,21 @@
      "Decorators": []
     },
     {
-     "$id": "1190",
+     "$id": "1186",
      "Name": "createVariation",
      "ResourceName": "Images",
      "Summary": "Creates an edited or extended image given an original image and a prompt.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "1169"
-      },
-      {
-       "$id": "1191",
+       "$id": "1187",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "1192",
+        "$id": "1188",
         "kind": "constant",
         "valueType": {
-         "$id": "1193",
+         "$id": "1189",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11775,14 +11666,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1194",
+       "$id": "1190",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1195",
+        "$id": "1191",
         "kind": "constant",
         "valueType": {
-         "$id": "1196",
+         "$id": "1192",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11802,7 +11693,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1197",
+       "$id": "1193",
        "Name": "image",
        "NameInRequest": "image",
        "Type": {
@@ -11821,7 +11712,7 @@
      ],
      "Responses": [
       {
-       "$id": "1198",
+       "$id": "1194",
        "StatusCodes": [
         200
        ],
@@ -11851,12 +11742,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1199"
+    "$id": "1195"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1169"
+     "$id": "1196",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1197",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1198",
+      "Type": {
+       "$id": "1199",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []
@@ -11874,45 +11793,14 @@
      "Parameters": [
       {
        "$id": "1202",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "1203",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "1204",
-        "Type": {
-         "$id": "1205",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://api.openai.com/v1"
-       }
-      },
-      {
-       "$id": "1206",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "1207",
+        "$id": "1203",
         "kind": "constant",
         "valueType": {
-         "$id": "1208",
+         "$id": "1204",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11932,14 +11820,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1209",
+       "$id": "1205",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "1210",
+        "$id": "1206",
         "kind": "constant",
         "valueType": {
-         "$id": "1211",
+         "$id": "1207",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -11959,7 +11847,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "1212",
+       "$id": "1208",
        "Name": "content",
        "NameInRequest": "content",
        "Type": {
@@ -11978,7 +11866,7 @@
      ],
      "Responses": [
       {
-       "$id": "1213",
+       "$id": "1209",
        "StatusCodes": [
         200
        ],
@@ -12008,12 +11896,40 @@
     }
    ],
    "Protocol": {
-    "$id": "1214"
+    "$id": "1210"
    },
    "Parent": "OpenAIClient",
    "Parameters": [
     {
-     "$ref": "1202"
+     "$id": "1211",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "1212",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "1213",
+      "Type": {
+       "$id": "1214",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://api.openai.com/v1"
+     }
     }
    ],
    "Decorators": []

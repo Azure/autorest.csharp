@@ -22,7 +22,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -77,7 +77,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -132,7 +132,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -157,7 +157,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -182,7 +182,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -283,7 +283,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -384,7 +384,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloAgain_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -431,7 +431,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloAgain_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -478,7 +478,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_NoContentType_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -533,7 +533,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_NoContentType_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -588,7 +588,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_NoContentType_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -689,7 +689,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_NoContentType_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -790,7 +790,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -820,7 +820,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -850,7 +850,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -862,7 +862,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -874,7 +874,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -912,7 +912,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -950,7 +950,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_CreateLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -968,7 +968,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_CreateLiteral_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -986,7 +986,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1006,7 +1006,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1026,7 +1026,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1037,7 +1037,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1048,7 +1048,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1072,7 +1072,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1096,7 +1096,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Demo2_HelloLiteral_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 
@@ -1107,7 +1107,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Demo2_HelloLiteral_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             HelloDemo2 client = new NewProjectTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemo2Client();
 

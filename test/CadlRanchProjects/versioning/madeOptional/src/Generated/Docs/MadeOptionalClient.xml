@@ -5,16 +5,16 @@
       <example>
 This sample shows how to call TestAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>");
 Response<TestModel> response = await client.TestAsync(body);
 ]]></code>
 This sample shows how to call TestAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>")
 {
@@ -27,16 +27,16 @@ Response<TestModel> response = await client.TestAsync(body, param: "<param>");
       <example>
 This sample shows how to call Test.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>");
 Response<TestModel> response = client.Test(body);
 ]]></code>
 This sample shows how to call Test with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>")
 {
@@ -49,8 +49,8 @@ Response<TestModel> response = client.Test(body, param: "<param>");
       <example>
 This sample shows how to call TestAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -63,8 +63,8 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call TestAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -82,8 +82,8 @@ Console.WriteLine(result.GetProperty("changedProp").ToString());
       <example>
 This sample shows how to call Test and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -96,8 +96,8 @@ Console.WriteLine(result.GetProperty("prop").ToString());
 ]]></code>
 This sample shows how to call Test with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MadeOptionalClient client = new MadeOptionalClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+MadeOptionalClient client = new MadeOptionalClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {

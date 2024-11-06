@@ -5,16 +5,16 @@
       <example>
 This sample shows how to call NewOpAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<NewModel> response = await client.NewOpAsync("<newQuery>", body);
 ]]></code>
 This sample shows how to call NewOpAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<NewModel> response = await client.NewOpAsync("<newQuery>", body);
@@ -24,16 +24,16 @@ Response<NewModel> response = await client.NewOpAsync("<newQuery>", body);
       <example>
 This sample shows how to call NewOp.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<NewModel> response = client.NewOp("<newQuery>", body);
 ]]></code>
 This sample shows how to call NewOp with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
 Response<NewModel> response = client.NewOp("<newQuery>", body);
@@ -43,8 +43,8 @@ Response<NewModel> response = client.NewOp("<newQuery>", body);
       <example>
 This sample shows how to call NewOpAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -61,8 +61,8 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call NewOpAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -82,8 +82,8 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
       <example>
 This sample shows how to call NewOp and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -100,8 +100,8 @@ Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code>
 This sample shows how to call NewOp with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {

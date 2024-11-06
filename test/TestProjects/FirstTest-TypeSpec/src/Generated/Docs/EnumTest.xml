@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call CreateUnknownValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
@@ -15,7 +15,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateUnknownValueAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
@@ -28,7 +28,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call CreateUnknownValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");
@@ -38,7 +38,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call CreateUnknownValue with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
 using RequestContent content = RequestContent.Create("Monday");

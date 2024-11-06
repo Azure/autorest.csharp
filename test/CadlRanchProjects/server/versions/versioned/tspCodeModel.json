@@ -75,32 +75,10 @@
      "Name": "withoutApiVersion",
      "ResourceName": "Versioned",
      "Accessibility": "public",
-     "Parameters": [
-      {
-       "$id": "10",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Need to be set as 'http://localhost:3000' in client.",
-       "Type": {
-        "$id": "11",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      }
-     ],
+     "Parameters": [],
      "Responses": [
       {
-       "$id": "12",
+       "$id": "10",
        "StatusCodes": [
         200
        ],
@@ -120,20 +98,17 @@
      "Decorators": []
     },
     {
-     "$id": "13",
+     "$id": "11",
      "Name": "withQueryApiVersion",
      "ResourceName": "Versioned",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
-      },
-      {
-       "$id": "14",
+       "$id": "12",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "15",
+        "$id": "13",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -147,9 +122,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "16",
+        "$id": "14",
         "Type": {
-         "$id": "17",
+         "$id": "15",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -162,7 +137,7 @@
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "16",
        "StatusCodes": [
         200
        ],
@@ -182,20 +157,17 @@
      "Decorators": []
     },
     {
-     "$id": "19",
+     "$id": "17",
      "Name": "withPathApiVersion",
      "ResourceName": "Versioned",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
-      },
-      {
-       "$id": "20",
+       "$id": "18",
        "Name": "apiVersion",
        "NameInRequest": "apiVersion",
        "Type": {
-        "$id": "21",
+        "$id": "19",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -209,9 +181,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "20",
         "Type": {
-         "$id": "23",
+         "$id": "21",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -224,7 +196,7 @@
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "22",
        "StatusCodes": [
         200
        ],
@@ -244,20 +216,17 @@
      "Decorators": []
     },
     {
-     "$id": "25",
+     "$id": "23",
      "Name": "withQueryOldApiVersion",
      "ResourceName": "Versioned",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "10"
-      },
-      {
-       "$id": "26",
+       "$id": "24",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "27",
+        "$id": "25",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -271,9 +240,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "26",
         "Type": {
-         "$id": "29",
+         "$id": "27",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -286,7 +255,7 @@
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -307,11 +276,29 @@
     }
    ],
    "Protocol": {
-    "$id": "31"
+    "$id": "29"
    },
    "Parameters": [
     {
-     "$ref": "10"
+     "$id": "30",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
+     "Type": {
+      "$id": "31",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []
