@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         public MgmtRestClientBuilder(InputClient inputClient)
-            : base(GetMgmtParametersFromOperations(inputClient.Operations), MgmtContext.Context)
+            : base(inputClient.Parameters.Concat(GetMgmtParametersFromOperations(inputClient.Operations)), MgmtContext.Context)
         {
         }
 

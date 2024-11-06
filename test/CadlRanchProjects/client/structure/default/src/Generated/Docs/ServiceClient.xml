@@ -5,8 +5,8 @@
       <example>
 This sample shows how to call OneAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = await client.OneAsync();
 
@@ -14,8 +14,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OneAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = await client.OneAsync();
 
@@ -26,8 +26,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call One.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = client.One();
 
@@ -35,8 +35,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call One with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = client.One();
 
@@ -47,8 +47,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call TwoAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = await client.TwoAsync();
 
@@ -56,8 +56,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call TwoAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = await client.TwoAsync();
 
@@ -68,8 +68,8 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Two.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = client.Two();
 
@@ -77,8 +77,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Two with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-ServiceClient client = new ServiceClient(endpoint, ClientType.Default);
+Uri endpoint = new Uri("<endpoint>");
+ServiceClient client = new ServiceClient(endpoint, default);
 
 Response response = client.Two();
 

@@ -652,42 +652,11 @@
      "Parameters": [
       {
        "$id": "61",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "62",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "63",
-        "Type": {
-         "$id": "64",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "65",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "66",
+        "$id": "62",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -701,9 +670,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "63",
         "Type": {
-         "$id": "68",
+         "$id": "64",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -714,12 +683,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "69",
+       "$id": "65",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "70",
+        "$id": "66",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -736,15 +705,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "71",
+       "$id": "67",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "72",
+        "$id": "68",
         "kind": "constant",
         "valueType": {
-         "$id": "73",
+         "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -764,14 +733,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "74",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "75",
+        "$id": "71",
         "kind": "constant",
         "valueType": {
-         "$id": "76",
+         "$id": "72",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -791,7 +760,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "77",
+       "$id": "73",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -811,9 +780,45 @@
      ],
      "Responses": [
       {
-       "$id": "78",
+       "$id": "74",
        "StatusCodes": [
         201
+       ],
+       "BodyType": {
+        "$ref": "18"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "75",
+         "Name": "operationLocation",
+         "NameInResponse": "Operation-Location",
+         "Description": "The location for monitoring the operation state.",
+         "Type": {
+          "$id": "76",
+          "kind": "url",
+          "name": "ResourceLocation",
+          "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
+          "baseType": {
+           "$id": "77",
+           "kind": "url",
+           "name": "url",
+           "crossLanguageDefinitionId": "TypeSpec.url",
+           "decorators": []
+          },
+          "decorators": []
+         }
+        }
+       ],
+       "IsErrorResponse": false,
+       "ContentTypes": [
+        "application/json"
+       ]
+      },
+      {
+       "$id": "78",
+       "StatusCodes": [
+        200
        ],
        "BodyType": {
         "$ref": "18"
@@ -845,42 +850,6 @@
        "ContentTypes": [
         "application/json"
        ]
-      },
-      {
-       "$id": "82",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "18"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [
-        {
-         "$id": "83",
-         "Name": "operationLocation",
-         "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
-         "Type": {
-          "$id": "84",
-          "kind": "url",
-          "name": "ResourceLocation",
-          "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
-          "baseType": {
-           "$id": "85",
-           "kind": "url",
-           "name": "url",
-           "crossLanguageDefinitionId": "TypeSpec.url",
-           "decorators": []
-          },
-          "decorators": []
-         }
-        }
-       ],
-       "IsErrorResponse": false,
-       "ContentTypes": [
-        "application/json"
-       ]
       }
      ],
      "HttpMethod": "PUT",
@@ -892,10 +861,10 @@
      ],
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "86",
+      "$id": "82",
       "FinalStateVia": 2,
       "FinalResponse": {
-       "$id": "87",
+       "$id": "83",
        "StatusCodes": [
         200
        ],
@@ -911,7 +880,7 @@
      "Decorators": []
     },
     {
-     "$id": "88",
+     "$id": "84",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
@@ -919,15 +888,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "61"
-      },
-      {
-       "$id": "89",
+       "$id": "85",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "90",
+        "$id": "86",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -941,9 +907,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "87",
         "Type": {
-         "$id": "92",
+         "$id": "88",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -954,12 +920,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "93",
+       "$id": "89",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "94",
+        "$id": "90",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -976,14 +942,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "95",
+       "$id": "91",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "96",
+        "$id": "92",
         "kind": "constant",
         "valueType": {
-         "$id": "97",
+         "$id": "93",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1005,7 +971,7 @@
      ],
      "Responses": [
       {
-       "$id": "98",
+       "$id": "94",
        "StatusCodes": [
         202
        ],
@@ -1015,17 +981,17 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "99",
+         "$id": "95",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "100",
+          "$id": "96",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "101",
+           "$id": "97",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -1047,10 +1013,10 @@
      "Path": "/azure/core/lro/standard/users/{name}",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "102",
+      "$id": "98",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "103",
+       "$id": "99",
        "StatusCodes": [
         204
        ],
@@ -1063,7 +1029,7 @@
      "Decorators": []
     },
     {
-     "$id": "104",
+     "$id": "100",
      "Name": "export",
      "ResourceName": "Standard",
      "Summary": "Exports a user.",
@@ -1071,15 +1037,12 @@
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "61"
-      },
-      {
-       "$id": "105",
+       "$id": "101",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "106",
+        "$id": "102",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1093,9 +1056,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "103",
         "Type": {
-         "$id": "108",
+         "$id": "104",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1106,12 +1069,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "109",
+       "$id": "105",
        "Name": "name",
        "NameInRequest": "name",
        "Description": "The name of user.",
        "Type": {
-        "$id": "110",
+        "$id": "106",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1128,12 +1091,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "111",
+       "$id": "107",
        "Name": "format",
        "NameInRequest": "format",
        "Description": "The format of the data.",
        "Type": {
-        "$id": "112",
+        "$id": "108",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1150,14 +1113,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "113",
+       "$id": "109",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "114",
+        "$id": "110",
         "kind": "constant",
         "valueType": {
-         "$id": "115",
+         "$id": "111",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1179,7 +1142,7 @@
      ],
      "Responses": [
       {
-       "$id": "116",
+       "$id": "112",
        "StatusCodes": [
         202
        ],
@@ -1189,17 +1152,17 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "117",
+         "$id": "113",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "118",
+          "$id": "114",
           "kind": "url",
           "name": "ResourceLocation",
           "crossLanguageDefinitionId": "TypeSpec.Rest.ResourceLocation",
           "baseType": {
-           "$id": "119",
+           "$id": "115",
            "kind": "url",
            "name": "url",
            "crossLanguageDefinitionId": "TypeSpec.url",
@@ -1221,10 +1184,10 @@
      "Path": "/azure/core/lro/standard/users/{name}:export",
      "BufferResponse": true,
      "LongRunning": {
-      "$id": "120",
+      "$id": "116",
       "FinalStateVia": 3,
       "FinalResponse": {
-       "$id": "121",
+       "$id": "117",
        "StatusCodes": [
         200
        ],
@@ -1242,11 +1205,39 @@
     }
    ],
    "Protocol": {
-    "$id": "122"
+    "$id": "118"
    },
    "Parameters": [
     {
-     "$ref": "61"
+     "$id": "119",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "120",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "121",
+      "Type": {
+       "$id": "122",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "http://localhost:3000"
+     }
     }
    ],
    "Decorators": []

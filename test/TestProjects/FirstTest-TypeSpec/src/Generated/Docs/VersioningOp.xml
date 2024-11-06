@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call ExportAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null);
@@ -17,7 +17,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ExportAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
@@ -32,7 +32,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call Export and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null);
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call Export with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
@@ -59,7 +59,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call ExportWAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", null, null);
@@ -71,7 +71,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ExportWAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = await client.ExportWAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);
@@ -86,7 +86,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
       <example>
 This sample shows how to call ExportW and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", null, null);
@@ -98,7 +98,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 This sample shows how to call ExportW with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 VersioningOp client = new FirstTestTypeSpecClient(endpoint).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
 Operation<BinaryData> operation = client.ExportW(WaitUntil.Completed, "<name>", "<projectFileVersion>", null);

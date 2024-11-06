@@ -22,8 +22,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Removed_V2_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -43,8 +43,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Removed_V2_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -64,8 +64,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Removed_V2_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2(body);
@@ -75,8 +75,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Removed_V2_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2Async(body);
@@ -86,8 +86,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Removed_V2_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -107,8 +107,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Removed_V2_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -128,8 +128,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Removed_V2_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = client.V2(body);
@@ -139,8 +139,8 @@ namespace Versioning.Removed.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Removed_V2_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RemovedClient client = new RemovedClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RemovedClient client = new RemovedClient(endpoint, default);
 
             ModelV2 body = new ModelV2("<prop>", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<ModelV2> response = await client.V2Async(body);

@@ -5,16 +5,16 @@
       <example>
 This sample shows how to call TestAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>", "<changedProp>");
 Response<TestModel> response = await client.TestAsync("<param>", body);
 ]]></code>
 This sample shows how to call TestAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>", "<changedProp>");
 Response<TestModel> response = await client.TestAsync("<param>", body);
@@ -24,16 +24,16 @@ Response<TestModel> response = await client.TestAsync("<param>", body);
       <example>
 This sample shows how to call Test.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>", "<changedProp>");
 Response<TestModel> response = client.Test("<param>", body);
 ]]></code>
 This sample shows how to call Test with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 TestModel body = new TestModel("<prop>", "<changedProp>");
 Response<TestModel> response = client.Test("<param>", body);
@@ -43,8 +43,8 @@ Response<TestModel> response = client.Test("<param>", body);
       <example>
 This sample shows how to call TestAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -59,8 +59,8 @@ Console.WriteLine(result.GetProperty("changedProp").ToString());
 ]]></code>
 This sample shows how to call TestAsync with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -78,8 +78,8 @@ Console.WriteLine(result.GetProperty("changedProp").ToString());
       <example>
 This sample shows how to call Test and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -94,8 +94,8 @@ Console.WriteLine(result.GetProperty("changedProp").ToString());
 ]]></code>
 This sample shows how to call Test with all parameters and request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TypeChangedFromClient client = new TypeChangedFromClient(endpoint, Versions.V1);
+Uri endpoint = new Uri("<endpoint>");
+TypeChangedFromClient client = new TypeChangedFromClient(endpoint, default);
 
 using RequestContent content = RequestContent.Create(new
 {

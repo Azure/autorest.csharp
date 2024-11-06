@@ -23,7 +23,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo_SayHi_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 
@@ -34,7 +34,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Demo_SayHi_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             HelloDemo client = CreateFirstTestTypeSpecClient(endpoint, credential).GetHelloClient().GetHelloDemoClient();
 

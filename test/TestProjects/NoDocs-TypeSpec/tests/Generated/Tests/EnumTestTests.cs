@@ -24,7 +24,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task EnumTest_CreateUnknownValue_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -36,7 +36,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task EnumTest_CreateUnknownValue_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             EnumTest client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEnumTestClient();
 

@@ -20,8 +20,8 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Foo_Seven_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            Uri endpoint = new Uri("<endpoint>");
+            BazFoo client = new ServiceClient(endpoint, default).GetBazClient().GetBazFooClient();
 
             Response response = client.Seven();
 
@@ -32,8 +32,8 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Foo_Seven_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            Uri endpoint = new Uri("<endpoint>");
+            BazFoo client = new ServiceClient(endpoint, default).GetBazClient().GetBazFooClient();
 
             Response response = await client.SevenAsync();
 
@@ -44,8 +44,8 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Foo_Seven_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            Uri endpoint = new Uri("<endpoint>");
+            BazFoo client = new ServiceClient(endpoint, default).GetBazClient().GetBazFooClient();
 
             Response response = client.Seven();
 
@@ -56,8 +56,8 @@ namespace Client.Structure.Service.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Foo_Seven_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            BazFoo client = new ServiceClient(endpoint, ClientType.Default).GetBazClient().GetBazFooClient();
+            Uri endpoint = new Uri("<endpoint>");
+            BazFoo client = new ServiceClient(endpoint, default).GetBazClient().GetBazFooClient();
 
             Response response = await client.SevenAsync();
 

@@ -22,8 +22,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewInterface_NewOpInNewInterface_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -43,8 +43,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewInterface_NewOpInNewInterface_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -64,8 +64,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewInterface_NewOpInNewInterface_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = client.NewOpInNewInterface(body);
@@ -75,8 +75,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewInterface_NewOpInNewInterface_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = await client.NewOpInNewInterfaceAsync(body);
@@ -86,8 +86,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewInterface_NewOpInNewInterface_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -107,8 +107,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewInterface_NewOpInNewInterface_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -128,8 +128,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewInterface_NewOpInNewInterface_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = client.NewOpInNewInterface(body);
@@ -139,8 +139,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewInterface_NewOpInNewInterface_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            NewInterface client = new RenamedFromClient(endpoint, Versions.V1).GetNewInterfaceClient();
+            Uri endpoint = new Uri("<endpoint>");
+            NewInterface client = new RenamedFromClient(endpoint, default).GetNewInterfaceClient();
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = await client.NewOpInNewInterfaceAsync(body);

@@ -19,7 +19,7 @@ namespace Server.Endpoint.NotDefined.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotDefined_Valid_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotDefinedClient client = new NotDefinedClient(endpoint);
 
             Response response = client.Valid();
@@ -31,7 +31,7 @@ namespace Server.Endpoint.NotDefined.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotDefined_Valid_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotDefinedClient client = new NotDefinedClient(endpoint);
 
             Response response = await client.ValidAsync();
@@ -43,7 +43,7 @@ namespace Server.Endpoint.NotDefined.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NotDefined_Valid_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotDefinedClient client = new NotDefinedClient(endpoint);
 
             Response response = client.Valid();
@@ -55,7 +55,7 @@ namespace Server.Endpoint.NotDefined.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NotDefined_Valid_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             NotDefinedClient client = new NotDefinedClient(endpoint);
 
             Response response = await client.ValidAsync();
