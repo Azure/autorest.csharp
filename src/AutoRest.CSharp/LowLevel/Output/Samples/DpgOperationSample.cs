@@ -81,21 +81,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             return callChain.ToArray();
         }
-        /// <summary>
-        /// Get all the parameters to get the client.
-        /// </summary>
-        /// <returns></returns>
-        private IReadOnlyList<InputParameter> GetAllClientInvocatioParameters()
-        {
-            var client = _client;
-            var parameters = new List<InputParameter>();
-            while (client != null)
-            {
-                parameters.AddRange(client.GetConstructorParameters());
-                client = client.ParentClient;
-            }
-            return parameters;
-        }
 
         public IEnumerable<ValueExpression> GetValueExpressionsForParameters(IEnumerable<Parameter> parameters, List<MethodBodyStatement> variableDeclarationStatements)
         {
