@@ -142,7 +142,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             VaultCollection collection = resourceGroupResource.GetVaults();
 
             // invoke the operation
-            string vaultName = default /* Warning: No value is provided for vaultName in example 'Verify Sample-gen can handle examples with some parameter missing'. Please consider adding a proper example value for it in swagger*/;
+            string vaultName = null;
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
                 Duration = default,
