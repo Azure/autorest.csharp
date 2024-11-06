@@ -2348,34 +2348,14 @@
      "Parameters": [
       {
        "$id": "236",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Type": {
-        "$id": "237",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "238",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "239",
+        "$id": "237",
         "kind": "constant",
         "valueType": {
-         "$id": "240",
+         "$id": "238",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2395,14 +2375,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "241",
+       "$id": "239",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "242",
+        "$id": "240",
         "kind": "constant",
         "valueType": {
-         "$id": "243",
+         "$id": "241",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2422,7 +2402,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "244",
+       "$id": "242",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2441,7 +2421,7 @@
      ],
      "Responses": [
       {
-       "$id": "245",
+       "$id": "243",
        "StatusCodes": [
         200
        ],
@@ -2470,24 +2450,21 @@
      "Decorators": []
     },
     {
-     "$id": "246",
+     "$id": "244",
      "Name": "op2",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "247",
+       "$id": "245",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "248",
+        "$id": "246",
         "kind": "constant",
         "valueType": {
-         "$id": "249",
+         "$id": "247",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2507,14 +2484,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "250",
+       "$id": "248",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "251",
+        "$id": "249",
         "kind": "constant",
         "valueType": {
-         "$id": "252",
+         "$id": "250",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2534,7 +2511,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "253",
+       "$id": "251",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2553,7 +2530,7 @@
      ],
      "Responses": [
       {
-       "$id": "254",
+       "$id": "252",
        "StatusCodes": [
         200
        ],
@@ -2582,24 +2559,21 @@
      "Decorators": []
     },
     {
-     "$id": "255",
+     "$id": "253",
      "Name": "op3",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "256",
+       "$id": "254",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "257",
+        "$id": "255",
         "kind": "constant",
         "valueType": {
-         "$id": "258",
+         "$id": "256",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2619,14 +2593,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "259",
+       "$id": "257",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "260",
+        "$id": "258",
         "kind": "constant",
         "valueType": {
-         "$id": "261",
+         "$id": "259",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2646,7 +2620,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "262",
+       "$id": "260",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2665,7 +2639,7 @@
      ],
      "Responses": [
       {
-       "$id": "263",
+       "$id": "261",
        "StatusCodes": [
         200
        ],
@@ -2694,24 +2668,21 @@
      "Decorators": []
     },
     {
-     "$id": "264",
+     "$id": "262",
      "Name": "op4",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "265",
+       "$id": "263",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "266",
+        "$id": "264",
         "kind": "constant",
         "valueType": {
-         "$id": "267",
+         "$id": "265",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2731,14 +2702,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "268",
+       "$id": "266",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "269",
+        "$id": "267",
         "kind": "constant",
         "valueType": {
-         "$id": "270",
+         "$id": "268",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2758,7 +2729,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "271",
+       "$id": "269",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2777,7 +2748,7 @@
      ],
      "Responses": [
       {
-       "$id": "272",
+       "$id": "270",
        "StatusCodes": [
         200
        ],
@@ -2806,23 +2777,20 @@
      "Decorators": []
     },
     {
-     "$id": "273",
+     "$id": "271",
      "Name": "op5",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "274",
+       "$id": "272",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "275",
+        "$id": "273",
         "kind": "constant",
         "valueType": {
-         "$id": "276",
+         "$id": "274",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2844,7 +2812,7 @@
      ],
      "Responses": [
       {
-       "$id": "277",
+       "$id": "275",
        "StatusCodes": [
         200
        ],
@@ -2870,24 +2838,21 @@
      "Decorators": []
     },
     {
-     "$id": "278",
+     "$id": "276",
      "Name": "op6",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "279",
+       "$id": "277",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "280",
+        "$id": "278",
         "kind": "constant",
         "valueType": {
-         "$id": "281",
+         "$id": "279",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2907,14 +2872,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "282",
+       "$id": "280",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "283",
+        "$id": "281",
         "kind": "constant",
         "valueType": {
-         "$id": "284",
+         "$id": "282",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -2934,7 +2899,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "285",
+       "$id": "283",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -2953,7 +2918,7 @@
      ],
      "Responses": [
       {
-       "$id": "286",
+       "$id": "284",
        "StatusCodes": [
         200
        ],
@@ -2982,24 +2947,21 @@
      "Decorators": []
     },
     {
-     "$id": "287",
+     "$id": "285",
      "Name": "op7",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "288",
+       "$id": "286",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "289",
+        "$id": "287",
         "kind": "constant",
         "valueType": {
-         "$id": "290",
+         "$id": "288",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3019,14 +2981,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "291",
+       "$id": "289",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "292",
+        "$id": "290",
         "kind": "constant",
         "valueType": {
-         "$id": "293",
+         "$id": "291",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3046,7 +3008,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "294",
+       "$id": "292",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3065,7 +3027,7 @@
      ],
      "Responses": [
       {
-       "$id": "295",
+       "$id": "293",
        "StatusCodes": [
         200
        ],
@@ -3094,24 +3056,21 @@
      "Decorators": []
     },
     {
-     "$id": "296",
+     "$id": "294",
      "Name": "op8",
      "ResourceName": "ModelReaderWriterValidationTypeSpec",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "236"
-      },
-      {
-       "$id": "297",
+       "$id": "295",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "298",
+        "$id": "296",
         "kind": "constant",
         "valueType": {
-         "$id": "299",
+         "$id": "297",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3131,14 +3090,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "300",
+       "$id": "298",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "301",
+        "$id": "299",
         "kind": "constant",
         "valueType": {
-         "$id": "302",
+         "$id": "300",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -3158,7 +3117,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "303",
+       "$id": "301",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -3177,7 +3136,7 @@
      ],
      "Responses": [
       {
-       "$id": "304",
+       "$id": "302",
        "StatusCodes": [
         200
        ],
@@ -3207,11 +3166,28 @@
     }
    ],
    "Protocol": {
-    "$id": "305"
+    "$id": "303"
    },
    "Parameters": [
     {
-     "$ref": "236"
+     "$id": "304",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "305",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

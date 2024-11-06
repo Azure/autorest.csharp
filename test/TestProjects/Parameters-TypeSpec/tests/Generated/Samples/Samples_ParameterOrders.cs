@@ -21,7 +21,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.Operation(1234, null, null);
@@ -34,7 +34,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.OperationAsync(1234, null, null);
@@ -47,7 +47,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response<Result> response = client.Operation(1234);
@@ -57,7 +57,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response<Result> response = await client.OperationAsync(1234);
@@ -67,7 +67,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response response = client.Operation(1234, 1234, null);
@@ -80,7 +80,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response response = await client.OperationAsync(1234, 1234, null);
@@ -93,7 +93,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response<Result> response = client.Operation(1234, end: 1234);
@@ -103,7 +103,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient(apiVersion: "2022-05-15-preview");
 
             Response<Result> response = await client.OperationAsync(1234, end: 1234);
@@ -113,7 +113,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation2_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response response = client.Operation2(1234, null, null);
@@ -126,7 +126,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation2_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response response = await client.Operation2Async(1234, null, null);
@@ -139,7 +139,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation2_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response<Result> response = client.Operation2(1234);
@@ -149,7 +149,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation2_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response<Result> response = await client.Operation2Async(1234);
@@ -159,7 +159,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation2_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response response = client.Operation2(1234, 1234, null);
@@ -172,7 +172,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation2_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response response = await client.Operation2Async(1234, 1234, null);
@@ -185,7 +185,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ParameterOrders_Operation2_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response<Result> response = client.Operation2(1234, start: 1234);
@@ -195,7 +195,7 @@ namespace ParametersCadl.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ParameterOrders_Operation2_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             ParameterOrders client = new ParametersCadlClient(endpoint).GetParameterOrdersClient();
 
             Response<Result> response = await client.Operation2Async(1234, start: 1234);

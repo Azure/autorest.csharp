@@ -21,7 +21,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -41,7 +41,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -61,7 +61,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -72,7 +72,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -83,7 +83,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -107,7 +107,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -131,7 +131,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -142,7 +142,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -153,7 +153,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction2_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -173,7 +173,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction2_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -193,7 +193,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_TopAction2_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -217,7 +217,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_TopAction2_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -241,7 +241,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_PatchAction_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -271,7 +271,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_PatchAction_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -301,7 +301,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_PatchAction_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -339,7 +339,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_PatchAction_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -377,7 +377,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AnonymousBody_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -407,7 +407,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AnonymousBody_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -437,7 +437,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AnonymousBody_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -448,7 +448,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AnonymousBody_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -459,7 +459,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AnonymousBody_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -497,7 +497,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AnonymousBody_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -535,7 +535,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AnonymousBody_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -546,7 +546,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AnonymousBody_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -557,7 +557,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_FriendlyModel_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -575,7 +575,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_FriendlyModel_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -593,7 +593,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_FriendlyModel_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -604,7 +604,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_FriendlyModel_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -615,7 +615,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_FriendlyModel_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -633,7 +633,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_FriendlyModel_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -651,7 +651,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_FriendlyModel_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -662,7 +662,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_FriendlyModel_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -673,7 +673,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AddTimeHeader_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -686,7 +686,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AddTimeHeader_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -699,7 +699,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NewProjectTypeSpec_AddTimeHeader_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 
@@ -712,7 +712,7 @@ namespace Azure.NewProject.TypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NewProjectTypeSpec_AddTimeHeader_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             NewProjectTypeSpecClient client = new NewProjectTypeSpecClient(endpoint, credential);
 

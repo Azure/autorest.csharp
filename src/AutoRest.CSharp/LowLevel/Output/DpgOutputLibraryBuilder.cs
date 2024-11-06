@@ -179,17 +179,6 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            if (!operation.Parameters.Any(p => p.IsEndpoint || p is { Location: RequestLocation.Uri, Kind: InputOperationParameterKind.Client }))
-            {
-                operation = operation with
-                {
-                    Uri = $"{{{KnownParameters.Endpoint.Name}}}",
-                    Parameters = operation.Parameters
-                        .Append(new InputParameter(KnownParameters.Endpoint.Name, KnownParameters.Endpoint.Name, $"{KnownParameters.Endpoint.Description}", InputPrimitiveType.Url, RequestLocation.Uri, null, null, null, InputOperationParameterKind.Client, true, false, false, false, true, false, false, null, null))
-                        .ToList()
-                };
-            }
-
             return operation with
             {
                 Name = name,
@@ -264,12 +253,12 @@ namespace AutoRest.CSharp.Output.Models
             INamedTypeSymbol? existingType;
             if (sourceInputModel == null || (existingType = sourceInputModel.FindForType(clientNamespace, clientName)) == null)
             {
-                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
+                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, ns.Parameters, resourceParameters);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, ns.Parameters, resourceParameters);
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
@@ -293,9 +282,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
                 var clientNamespace = Configuration.Namespace;
-                var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
-                var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
-                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Where(p => !p.IsRequired || p.IsApiVersion || p.IsEndpoint)).Distinct().ToArray();
+                var clientParameters = topLevelClients.SelectMany(c => c.ClientParameters.Concat(c.Operations.SelectMany(op => op.Parameters)))
+                    .Where(p => (p.Kind == InputOperationParameterKind.Client) && (!p.IsRequired || p.IsApiVersion || p.IsEndpoint))
+                    .DistinctBy(p => p.Name)
+                    .ToArray();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);
             }
