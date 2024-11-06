@@ -5,14 +5,14 @@
       <example>
 This sample shows how to call UpdateConvenienceAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.UpdateConvenienceAsync();
 ]]></code>
 This sample shows how to call UpdateConvenienceAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.UpdateConvenienceAsync();
@@ -22,14 +22,14 @@ Response<Model> response = await client.UpdateConvenienceAsync();
       <example>
 This sample shows how to call UpdateConvenience.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.UpdateConvenience();
 ]]></code>
 This sample shows how to call UpdateConvenience with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.UpdateConvenience();
@@ -39,7 +39,7 @@ Response<Model> response = client.UpdateConvenience();
       <example>
 This sample shows how to call UpdateConvenienceAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.UpdateConvenienceAsync(null);
@@ -49,7 +49,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateConvenienceAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.UpdateConvenienceAsync(null);
@@ -62,7 +62,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call UpdateConvenience and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.UpdateConvenience(null);
@@ -72,7 +72,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call UpdateConvenience with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.UpdateConvenience(null);
@@ -85,7 +85,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -93,7 +93,7 @@ Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required
 ]]></code>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -104,7 +104,7 @@ Response response = await client.ConvenienceOptionalBeforeRequiredAsync(required
       <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -112,7 +112,7 @@ Response response = client.ConvenienceOptionalBeforeRequired(required);
 ]]></code>
 This sample shows how to call ConvenienceOptionalBeforeRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -123,7 +123,7 @@ Response response = client.ConvenienceOptionalBeforeRequired(required, optional:
       <example>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -136,7 +136,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all parameters and request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -152,7 +152,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -165,7 +165,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalBeforeRequired with all parameters and request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -181,7 +181,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call NoConvenienceAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.NoConvenienceAsync(null);
@@ -191,7 +191,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call NoConvenienceAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.NoConvenienceAsync(null);
@@ -204,7 +204,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call NoConvenience and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.NoConvenience(null);
@@ -214,7 +214,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call NoConvenience with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.NoConvenience(null);
@@ -227,7 +227,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call NoConvenienceRequiredBodyAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -240,7 +240,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoConvenienceRequiredBodyAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -256,7 +256,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call NoConvenienceRequiredBody.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -269,7 +269,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoConvenienceRequiredBody with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -285,7 +285,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call NoConvenienceOptionalBodyAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -295,7 +295,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoConvenienceOptionalBodyAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -311,7 +311,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call NoConvenienceOptionalBody.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -321,7 +321,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call NoConvenienceOptionalBody with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -337,14 +337,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolValueAsync();
 ]]></code>
 This sample shows how to call ProtocolValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolValueAsync();
@@ -354,14 +354,14 @@ Response<Model> response = await client.ProtocolValueAsync();
       <example>
 This sample shows how to call ProtocolValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolValue();
 ]]></code>
 This sample shows how to call ProtocolValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolValue();
@@ -371,7 +371,7 @@ Response<Model> response = client.ProtocolValue();
       <example>
 This sample shows how to call ProtocolAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolAsync();
@@ -381,7 +381,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolAsync with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolAsync();
@@ -394,7 +394,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call Protocol and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.Protocol();
@@ -404,7 +404,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call Protocol with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.Protocol();
@@ -417,14 +417,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceWithOptionalValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceWithOptionalValueAsync();
 ]]></code>
 This sample shows how to call ConvenienceWithOptionalValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceWithOptionalValueAsync();
@@ -434,14 +434,14 @@ Response<Model> response = await client.ConvenienceWithOptionalValueAsync();
       <example>
 This sample shows how to call ConvenienceWithOptionalValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceWithOptionalValue();
 ]]></code>
 This sample shows how to call ConvenienceWithOptionalValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceWithOptionalValue();
@@ -451,7 +451,7 @@ Response<Model> response = client.ConvenienceWithOptionalValue();
       <example>
 This sample shows how to call ConvenienceWithOptionalAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithOptionalAsync();
@@ -461,7 +461,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithOptionalAsync with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithOptionalAsync();
@@ -474,7 +474,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceWithOptional and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithOptional();
@@ -484,7 +484,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithOptional with all request content and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithOptional();
@@ -497,14 +497,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceWithRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceWithRequiredAsync();
 ]]></code>
 This sample shows how to call ConvenienceWithRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceWithRequiredAsync();
@@ -514,14 +514,14 @@ Response<Model> response = await client.ConvenienceWithRequiredAsync();
       <example>
 This sample shows how to call ConvenienceWithRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceWithRequired();
 ]]></code>
 This sample shows how to call ConvenienceWithRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceWithRequired();
@@ -531,7 +531,7 @@ Response<Model> response = client.ConvenienceWithRequired();
       <example>
 This sample shows how to call ConvenienceWithRequiredAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithRequiredAsync(null);
@@ -541,7 +541,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithRequiredAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceWithRequiredAsync(null);
@@ -554,7 +554,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceWithRequired and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithRequired(null);
@@ -564,7 +564,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceWithRequired with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceWithRequired(null);
@@ -577,7 +577,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceShouldNotGenerateAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceShouldNotGenerateAsync();
@@ -586,7 +586,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceShouldNotGenerateAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceShouldNotGenerateAsync();
@@ -598,7 +598,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceShouldNotGenerate.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceShouldNotGenerate();
@@ -607,7 +607,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceShouldNotGenerate with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceShouldNotGenerate();
@@ -619,7 +619,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenienceAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
@@ -628,7 +628,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolShouldNotGenerateConvenienceAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolShouldNotGenerateConvenienceAsync();
@@ -640,7 +640,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenience.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolShouldNotGenerateConvenience();
@@ -649,7 +649,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolShouldNotGenerateConvenience with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolShouldNotGenerateConvenience();
@@ -661,14 +661,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolOptionalQueryValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolOptionalQueryValueAsync();
 ]]></code>
 This sample shows how to call ProtocolOptionalQueryValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolOptionalQueryValueAsync(optional: 1234);
@@ -678,14 +678,14 @@ Response<Model> response = await client.ProtocolOptionalQueryValueAsync(optional
       <example>
 This sample shows how to call ProtocolOptionalQueryValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolOptionalQueryValue();
 ]]></code>
 This sample shows how to call ProtocolOptionalQueryValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolOptionalQueryValue(optional: 1234);
@@ -695,7 +695,7 @@ Response<Model> response = client.ProtocolOptionalQueryValue(optional: 1234);
       <example>
 This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolOptionalQueryAsync();
@@ -705,7 +705,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolOptionalQueryAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolOptionalQueryAsync(optional: 1234);
@@ -718,7 +718,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ProtocolOptionalQuery and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolOptionalQuery();
@@ -728,7 +728,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolOptionalQuery with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolOptionalQuery(optional: 1234);
@@ -741,14 +741,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ProtocolRequiredQueryValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolRequiredQueryValueAsync(1234);
 ]]></code>
 This sample shows how to call ProtocolRequiredQueryValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ProtocolRequiredQueryValueAsync(1234);
@@ -758,14 +758,14 @@ Response<Model> response = await client.ProtocolRequiredQueryValueAsync(1234);
       <example>
 This sample shows how to call ProtocolRequiredQueryValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolRequiredQueryValue(1234);
 ]]></code>
 This sample shows how to call ProtocolRequiredQueryValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ProtocolRequiredQueryValue(1234);
@@ -775,7 +775,7 @@ Response<Model> response = client.ProtocolRequiredQueryValue(1234);
       <example>
 This sample shows how to call ProtocolRequiredQueryAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolRequiredQueryAsync(1234);
@@ -785,7 +785,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolRequiredQueryAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolRequiredQueryAsync(1234);
@@ -798,7 +798,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ProtocolRequiredQuery and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolRequiredQuery(1234);
@@ -808,7 +808,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ProtocolRequiredQuery with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolRequiredQuery(1234);
@@ -821,14 +821,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ProtocolOptionalModelAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ProtocolOptionalModelAsync();
 ]]></code>
 This sample shows how to call ProtocolOptionalModelAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -839,14 +839,14 @@ Response response = await client.ProtocolOptionalModelAsync(optional: optional);
       <example>
 This sample shows how to call ProtocolOptionalModel.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ProtocolOptionalModel();
 ]]></code>
 This sample shows how to call ProtocolOptionalModel with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -857,7 +857,7 @@ Response response = client.ProtocolOptionalModel(optional: optional);
       <example>
 This sample shows how to call ProtocolOptionalModelAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -867,7 +867,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolOptionalModelAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -883,7 +883,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolOptionalModel.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -893,7 +893,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolOptionalModel with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -909,7 +909,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolRequiredModelAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -917,7 +917,7 @@ Response response = await client.ProtocolRequiredModelAsync(required);
 ]]></code>
 This sample shows how to call ProtocolRequiredModelAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -928,7 +928,7 @@ Response response = await client.ProtocolRequiredModelAsync(required);
       <example>
 This sample shows how to call ProtocolRequiredModel.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -936,7 +936,7 @@ Response response = client.ProtocolRequiredModel(required);
 ]]></code>
 This sample shows how to call ProtocolRequiredModel with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -947,7 +947,7 @@ Response response = client.ProtocolRequiredModel(required);
       <example>
 This sample shows how to call ProtocolRequiredModelAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -960,7 +960,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolRequiredModelAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -976,7 +976,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolRequiredModel.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -989,7 +989,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolRequiredModel with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1005,14 +1005,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync();
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValueAsync(optional: 1234);
@@ -1022,14 +1022,14 @@ Response<Model> response = await client.ConvenienceOptionalQueryWithOptionalValu
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue();
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(optional: 1234);
@@ -1039,7 +1039,7 @@ Response<Model> response = client.ConvenienceOptionalQueryWithOptionalValue(opti
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
@@ -1049,7 +1049,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithOptionalAsync(optional: 1234);
@@ -1062,7 +1062,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithOptional();
@@ -1072,7 +1072,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithOptional with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithOptional(optional: 1234);
@@ -1085,14 +1085,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceRequiredQueryWithOptionalValueAsync(1234);
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalValueAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceRequiredQueryWithOptionalValueAsync(1234);
@@ -1102,14 +1102,14 @@ Response<Model> response = await client.ConvenienceRequiredQueryWithOptionalValu
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceRequiredQueryWithOptionalValue(1234);
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalValue with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceRequiredQueryWithOptionalValue(1234);
@@ -1119,7 +1119,7 @@ Response<Model> response = client.ConvenienceRequiredQueryWithOptionalValue(1234
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
@@ -1129,7 +1129,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithOptionalAsync(1234);
@@ -1142,7 +1142,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptional and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithOptional(1234);
@@ -1152,7 +1152,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithOptional with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithOptional(1234);
@@ -1165,14 +1165,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync();
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsync(optional: 1234);
@@ -1182,14 +1182,14 @@ Response<Model> response = await client.ConvenienceOptionalQueryWithRequiredAsyn
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceOptionalQueryWithRequired();
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceOptionalQueryWithRequired(optional: 1234);
@@ -1199,7 +1199,7 @@ Response<Model> response = client.ConvenienceOptionalQueryWithRequired(optional:
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(null, null);
@@ -1209,7 +1209,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
@@ -1222,7 +1222,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequired and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithRequired(null, null);
@@ -1232,7 +1232,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalQueryWithRequired(1234, null);
@@ -1245,14 +1245,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234);
@@ -1262,14 +1262,14 @@ Response<Model> response = await client.ConvenienceRequiredQueryWithRequiredAsyn
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceRequiredQueryWithRequired(1234);
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response<Model> response = client.ConvenienceRequiredQueryWithRequired(1234);
@@ -1279,7 +1279,7 @@ Response<Model> response = client.ConvenienceRequiredQueryWithRequired(1234);
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
@@ -1289,7 +1289,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
@@ -1302,7 +1302,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequired and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
@@ -1312,7 +1312,7 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with all parameters and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
@@ -1325,14 +1325,14 @@ Console.WriteLine(result.GetProperty("id").ToString());
       <example>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalModelWithOptionalAsync();
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -1343,14 +1343,14 @@ Response response = await client.ConvenienceOptionalModelWithOptionalAsync(optio
       <example>
 This sample shows how to call ConvenienceOptionalModelWithOptional.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalModelWithOptional();
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithOptional with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -1361,7 +1361,7 @@ Response response = client.ConvenienceOptionalModelWithOptional(optional: option
       <example>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -1371,7 +1371,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1387,7 +1387,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceOptionalModelWithOptional.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -1397,7 +1397,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithOptional with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1413,7 +1413,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1421,7 +1421,7 @@ Response response = await client.ConvenienceRequiredModelWithOptionalAsync(requi
 ]]></code>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1432,7 +1432,7 @@ Response response = await client.ConvenienceRequiredModelWithOptionalAsync(requi
       <example>
 This sample shows how to call ConvenienceRequiredModelWithOptional.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1440,7 +1440,7 @@ Response response = client.ConvenienceRequiredModelWithOptional(required);
 ]]></code>
 This sample shows how to call ConvenienceRequiredModelWithOptional with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1451,7 +1451,7 @@ Response response = client.ConvenienceRequiredModelWithOptional(required);
       <example>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1464,7 +1464,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1480,7 +1480,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceRequiredModelWithOptional.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1493,7 +1493,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceRequiredModelWithOptional with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1509,14 +1509,14 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = await client.ConvenienceOptionalModelWithRequiredAsync();
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -1527,14 +1527,14 @@ Response response = await client.ConvenienceOptionalModelWithRequiredAsync(optio
       <example>
 This sample shows how to call ConvenienceOptionalModelWithRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Response response = client.ConvenienceOptionalModelWithRequired();
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model optional = new Model("<id>");
@@ -1545,7 +1545,7 @@ Response response = client.ConvenienceOptionalModelWithRequired(optional: option
       <example>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -1555,7 +1555,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1571,7 +1571,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ConvenienceOptionalModelWithRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = null;
@@ -1581,7 +1581,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ConvenienceOptionalModelWithRequired with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1597,7 +1597,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1605,7 +1605,7 @@ Response response = await client.ProtocolOptionalBeforeRequiredAsync(required);
 ]]></code>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1616,7 +1616,7 @@ Response response = await client.ProtocolOptionalBeforeRequiredAsync(required, o
       <example>
 This sample shows how to call ProtocolOptionalBeforeRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1624,7 +1624,7 @@ Response response = client.ProtocolOptionalBeforeRequired(required);
 ]]></code>
 This sample shows how to call ProtocolOptionalBeforeRequired with all parameters.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 Model required = new Model("<id>");
@@ -1635,7 +1635,7 @@ Response response = client.ProtocolOptionalBeforeRequired(required, optional: 12
       <example>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1648,7 +1648,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync with all parameters and request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1664,7 +1664,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call ProtocolOptionalBeforeRequired.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new
@@ -1677,7 +1677,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ProtocolOptionalBeforeRequired with all parameters and request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 ConvenienceInCadlClient client = new ConvenienceInCadlClient(endpoint);
 
 using RequestContent content = RequestContent.Create(new

@@ -618,42 +618,11 @@
      "Parameters": [
       {
        "$id": "63",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "64",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "65",
-        "Type": {
-         "$id": "66",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "67",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "68",
+        "$id": "64",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -667,9 +636,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "69",
+        "$id": "65",
         "Type": {
-         "$id": "70",
+         "$id": "66",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -680,14 +649,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "71",
+       "$id": "67",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "72",
+        "$id": "68",
         "kind": "constant",
         "valueType": {
-         "$id": "73",
+         "$id": "69",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -709,7 +678,7 @@
      ],
      "Responses": [
       {
-       "$id": "74",
+       "$id": "70",
        "StatusCodes": [
         200
        ],
@@ -730,7 +699,7 @@
      "Path": "/azure/core/page/page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "75",
+      "$id": "71",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -740,22 +709,19 @@
      "Decorators": []
     },
     {
-     "$id": "76",
+     "$id": "72",
      "Name": "listWithParameters",
      "ResourceName": "Page",
      "Description": "List with extensible enum parameter Azure.Core.Page<>.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "63"
-      },
-      {
-       "$id": "77",
+       "$id": "73",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "78",
+        "$id": "74",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -769,9 +735,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "79",
+        "$id": "75",
         "Type": {
-         "$id": "80",
+         "$id": "76",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -782,7 +748,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "81",
+       "$id": "77",
        "Name": "another",
        "NameInRequest": "another",
        "Description": "Another query parameter.",
@@ -800,15 +766,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "82",
+       "$id": "78",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "83",
+        "$id": "79",
         "kind": "constant",
         "valueType": {
-         "$id": "84",
+         "$id": "80",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -828,14 +794,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "85",
+       "$id": "81",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "86",
+        "$id": "82",
         "kind": "constant",
         "valueType": {
-         "$id": "87",
+         "$id": "83",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -855,7 +821,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "88",
+       "$id": "84",
        "Name": "bodyInput",
        "NameInRequest": "bodyInput",
        "Description": "The body of the input.",
@@ -875,7 +841,7 @@
      ],
      "Responses": [
       {
-       "$id": "89",
+       "$id": "85",
        "StatusCodes": [
         200
        ],
@@ -899,7 +865,7 @@
      ],
      "BufferResponse": true,
      "Paging": {
-      "$id": "90",
+      "$id": "86",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -909,22 +875,19 @@
      "Decorators": []
     },
     {
-     "$id": "91",
+     "$id": "87",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Page",
      "Description": "List with custom page model.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "63"
-      },
-      {
-       "$id": "92",
+       "$id": "88",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "93",
+        "$id": "89",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -938,9 +901,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "94",
+        "$id": "90",
         "Type": {
-         "$id": "95",
+         "$id": "91",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -951,14 +914,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "96",
+       "$id": "92",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "97",
+        "$id": "93",
         "kind": "constant",
         "valueType": {
-         "$id": "98",
+         "$id": "94",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -980,7 +943,7 @@
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "95",
        "StatusCodes": [
         200
        ],
@@ -1001,7 +964,7 @@
      "Path": "/azure/core/page/custom-page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "100",
+      "$id": "96",
       "ItemName": "items",
       "NextLinkName": "nextLink"
      },
@@ -1012,11 +975,39 @@
     }
    ],
    "Protocol": {
-    "$id": "101"
+    "$id": "97"
    },
    "Parameters": [
     {
-     "$ref": "63"
+     "$id": "98",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "99",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "100",
+      "Type": {
+       "$id": "101",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "http://localhost:3000"
+     }
     }
    ],
    "Decorators": []
@@ -1034,42 +1025,11 @@
      "Parameters": [
       {
        "$id": "104",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "105",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "106",
-        "Type": {
-         "$id": "107",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "http://localhost:3000"
-       }
-      },
-      {
-       "$id": "108",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "109",
+        "$id": "105",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1083,9 +1043,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "106",
         "Type": {
-         "$id": "111",
+         "$id": "107",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1096,14 +1056,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "112",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "109",
         "kind": "constant",
         "valueType": {
-         "$id": "114",
+         "$id": "110",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1125,7 +1085,7 @@
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "111",
        "StatusCodes": [
         200
        ],
@@ -1146,7 +1106,7 @@
      "Path": "/azure/core/page/first-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "116",
+      "$id": "112",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -1156,22 +1116,19 @@
      "Decorators": []
     },
     {
-     "$id": "117",
+     "$id": "113",
      "Name": "listSecondItem",
      "ResourceName": "TwoModelsAsPageItem",
      "Description": "Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "104"
-      },
-      {
-       "$id": "118",
+       "$id": "114",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "119",
+        "$id": "115",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1185,9 +1142,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "120",
+        "$id": "116",
         "Type": {
-         "$id": "121",
+         "$id": "117",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1198,14 +1155,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "122",
+       "$id": "118",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "123",
+        "$id": "119",
         "kind": "constant",
         "valueType": {
-         "$id": "124",
+         "$id": "120",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1227,7 +1184,7 @@
      ],
      "Responses": [
       {
-       "$id": "125",
+       "$id": "121",
        "StatusCodes": [
         200
        ],
@@ -1248,7 +1205,7 @@
      "Path": "/azure/core/page/second-item",
      "BufferResponse": true,
      "Paging": {
-      "$id": "126",
+      "$id": "122",
       "ItemName": "value",
       "NextLinkName": "nextLink"
      },
@@ -1259,12 +1216,40 @@
     }
    ],
    "Protocol": {
-    "$id": "127"
+    "$id": "123"
    },
    "Parent": "PageClient",
    "Parameters": [
     {
-     "$ref": "104"
+     "$id": "124",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "125",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "126",
+      "Type": {
+       "$id": "127",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "http://localhost:3000"
+     }
     }
    ],
    "Decorators": []

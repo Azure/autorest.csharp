@@ -24,7 +24,7 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_RoundTrip_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
@@ -38,7 +38,7 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_RoundTrip_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new object());
@@ -52,7 +52,7 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_RoundTrip_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel();
@@ -63,7 +63,7 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_RoundTrip_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel();
@@ -74,7 +74,7 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_RoundTrip_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -203,7 +203,7 @@ key = "<badListOfDictionaryName>",
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_RoundTrip_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -332,7 +332,7 @@ key = "<badListOfDictionaryName>",
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_RoundTrip_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel
@@ -391,7 +391,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_RoundTrip_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RootModel input = new RootModel
@@ -450,7 +450,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Foo_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -467,7 +467,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Foo_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -484,7 +484,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Foo_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234);
@@ -495,7 +495,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Foo_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234);
@@ -506,7 +506,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Foo_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -525,7 +525,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Foo_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -544,7 +544,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Foo_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234)
@@ -558,7 +558,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Foo_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             RenamedModel input = new RenamedModel(1234)
@@ -572,7 +572,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Bar_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -589,7 +589,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Bar_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -606,7 +606,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Bar_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             Response<RenamedModel> response = client.Bar(1234);
@@ -616,7 +616,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Bar_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             Response<RenamedModel> response = await client.BarAsync(1234);
@@ -626,7 +626,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Bar_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -645,7 +645,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Bar_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             using RequestContent content = RequestContent.Create(new
@@ -664,7 +664,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomizationsInTsp_Bar_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             Response<RenamedModel> response = client.Bar(1234, optionalInt: 1234);
@@ -674,7 +674,7 @@ new Dictionary<string, string>
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomizationsInTsp_Bar_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             CustomizationsInTspClient client = new CustomizationsInTspClient(endpoint);
 
             Response<RenamedModel> response = await client.BarAsync(1234, optionalInt: 1234);

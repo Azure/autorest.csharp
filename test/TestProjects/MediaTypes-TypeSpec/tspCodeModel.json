@@ -172,26 +172,6 @@
      "Parameters": [
       {
        "$id": "21",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Type": {
-        "$id": "22",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "23",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
@@ -208,11 +188,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "24",
+       "$id": "22",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "25",
+        "$id": "23",
         "kind": "bytes",
         "name": "bytes",
         "crossLanguageDefinitionId": "TypeSpec.bytes",
@@ -231,7 +211,7 @@
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -255,16 +235,13 @@
      "Decorators": []
     },
     {
-     "$id": "27",
+     "$id": "25",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
-      },
-      {
-       "$id": "28",
+       "$id": "26",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
@@ -281,11 +258,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "29",
+       "$id": "27",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "30",
+        "$id": "28",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -304,7 +281,7 @@
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -329,23 +306,20 @@
      "Decorators": []
     },
     {
-     "$id": "32",
+     "$id": "30",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "21"
-      },
-      {
-       "$id": "33",
+       "$id": "31",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "34",
+        "$id": "32",
         "kind": "constant",
         "valueType": {
-         "$id": "35",
+         "$id": "33",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -365,7 +339,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "36",
+       "$id": "34",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -384,7 +358,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -408,11 +382,28 @@
     }
    ],
    "Protocol": {
-    "$id": "38"
+    "$id": "36"
    },
    "Parameters": [
     {
-     "$ref": "21"
+     "$id": "37",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Type": {
+      "$id": "38",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

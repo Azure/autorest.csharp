@@ -20,8 +20,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group5_Six_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group5 client = new SubNamespaceSecondClient(endpoint, ClientType.Default).GetGroup5Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group5 client = new SubNamespaceSecondClient(endpoint, default).GetGroup5Client();
 
             Response response = client.Six();
 
@@ -32,8 +32,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group5_Six_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group5 client = new SubNamespaceSecondClient(endpoint, ClientType.Default).GetGroup5Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group5 client = new SubNamespaceSecondClient(endpoint, default).GetGroup5Client();
 
             Response response = await client.SixAsync();
 
@@ -44,8 +44,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group5_Six_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group5 client = new SubNamespaceSecondClient(endpoint, ClientType.Default).GetGroup5Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group5 client = new SubNamespaceSecondClient(endpoint, default).GetGroup5Client();
 
             Response response = client.Six();
 
@@ -56,8 +56,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group5_Six_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group5 client = new SubNamespaceSecondClient(endpoint, ClientType.Default).GetGroup5Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group5 client = new SubNamespaceSecondClient(endpoint, default).GetGroup5Client();
 
             Response response = await client.SixAsync();
 

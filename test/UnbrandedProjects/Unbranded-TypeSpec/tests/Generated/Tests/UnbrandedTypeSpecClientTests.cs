@@ -14,7 +14,7 @@ namespace UnbrandedTypeSpec.Tests
         [Ignore("Compilation test only")]
         public void SmokeTest()
         {
-            Uri endpoint = new Uri("https://my-service.com");
+            Uri endpoint = new Uri("<endpoint>");
             ApiKeyCredential credential = new ApiKeyCredential(Environment.GetEnvironmentVariable("UnbrandedTypeSpecClient_KEY"));
             UnbrandedTypeSpecClient client = new UnbrandedTypeSpecClient(endpoint, credential);
             Assert.IsNotNull(client);

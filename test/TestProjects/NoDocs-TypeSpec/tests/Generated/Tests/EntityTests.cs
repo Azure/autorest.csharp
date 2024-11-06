@@ -24,7 +24,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Entity_DoSomething_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Entity client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEntityClient();
 
@@ -35,7 +35,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Entity_DoSomething_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Entity client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEntityClient();
 
@@ -46,7 +46,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Entity_DoSomething_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Entity client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEntityClient();
 
@@ -57,7 +57,7 @@ namespace NoDocsTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task Entity_DoSomething_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             Entity client = CreateNoDocsTypeSpecClient(endpoint, credential).GetEntityClient();
 

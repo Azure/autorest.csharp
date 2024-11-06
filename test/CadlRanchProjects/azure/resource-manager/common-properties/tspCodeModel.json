@@ -1030,42 +1030,11 @@
      "Parameters": [
       {
        "$id": "104",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "105",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "106",
-        "Type": {
-         "$id": "107",
-         "kind": "string",
-         "name": "string",
-         "crossLanguageDefinitionId": "TypeSpec.string"
-        },
-        "Value": "https://management.azure.com"
-       }
-      },
-      {
-       "$id": "108",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "109",
+        "$id": "105",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1079,9 +1048,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "110",
+        "$id": "106",
         "Type": {
-         "$id": "111",
+         "$id": "107",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1092,12 +1061,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "112",
+       "$id": "108",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "113",
+        "$id": "109",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1114,12 +1083,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "114",
+       "$id": "110",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "115",
+        "$id": "111",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1136,12 +1105,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "116",
+       "$id": "112",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "117",
+        "$id": "113",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1158,14 +1127,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "118",
+       "$id": "114",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "119",
+        "$id": "115",
         "kind": "constant",
         "valueType": {
-         "$id": "120",
+         "$id": "116",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1187,7 +1156,7 @@
      ],
      "Responses": [
       {
-       "$id": "121",
+       "$id": "117",
        "StatusCodes": [
         200
        ],
@@ -1213,22 +1182,19 @@
      "Decorators": []
     },
     {
-     "$id": "122",
+     "$id": "118",
      "Name": "createWithSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResource",
      "Description": "Create a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "104"
-      },
-      {
-       "$id": "123",
+       "$id": "119",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "124",
+        "$id": "120",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1242,9 +1208,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "125",
+        "$id": "121",
         "Type": {
-         "$id": "126",
+         "$id": "122",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1255,12 +1221,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "127",
+       "$id": "123",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "128",
+        "$id": "124",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1277,12 +1243,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "129",
+       "$id": "125",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "130",
+        "$id": "126",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1299,12 +1265,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "131",
+       "$id": "127",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "132",
+        "$id": "128",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1321,15 +1287,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "133",
+       "$id": "129",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "134",
+        "$id": "130",
         "kind": "constant",
         "valueType": {
-         "$id": "135",
+         "$id": "131",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1349,14 +1315,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "136",
+       "$id": "132",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "137",
+        "$id": "133",
         "kind": "constant",
         "valueType": {
-         "$id": "138",
+         "$id": "134",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1376,7 +1342,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "139",
+       "$id": "135",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "Resource create parameters.",
@@ -1396,7 +1362,7 @@
      ],
      "Responses": [
       {
-       "$id": "140",
+       "$id": "136",
        "StatusCodes": [
         200
        ],
@@ -1411,7 +1377,7 @@
        ]
       },
       {
-       "$id": "141",
+       "$id": "137",
        "StatusCodes": [
         201
        ],
@@ -1440,22 +1406,19 @@
      "Decorators": []
     },
     {
-     "$id": "142",
+     "$id": "138",
      "Name": "updateWithUserAssignedAndSystemAssigned",
      "ResourceName": "ManagedIdentityTrackedResource",
      "Description": "Update a ManagedIdentityTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "104"
-      },
-      {
-       "$id": "143",
+       "$id": "139",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "The API version to use for this operation.",
        "Type": {
-        "$id": "144",
+        "$id": "140",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1469,9 +1432,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "145",
+        "$id": "141",
         "Type": {
-         "$id": "146",
+         "$id": "142",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -1482,12 +1445,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "147",
+       "$id": "143",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
        "Description": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
-        "$id": "148",
+        "$id": "144",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1504,12 +1467,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "149",
+       "$id": "145",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
        "Description": "The name of the resource group. The name is case insensitive.",
        "Type": {
-        "$id": "150",
+        "$id": "146",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1526,12 +1489,12 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "151",
+       "$id": "147",
        "Name": "managedIdentityTrackedResourceName",
        "NameInRequest": "managedIdentityTrackedResourceName",
        "Description": "arm resource name for path",
        "Type": {
-        "$id": "152",
+        "$id": "148",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1548,15 +1511,15 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "153",
+       "$id": "149",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "154",
+        "$id": "150",
         "kind": "constant",
         "valueType": {
-         "$id": "155",
+         "$id": "151",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1576,14 +1539,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "156",
+       "$id": "152",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "157",
+        "$id": "153",
         "kind": "constant",
         "valueType": {
-         "$id": "158",
+         "$id": "154",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1603,7 +1566,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "159",
+       "$id": "155",
        "Name": "properties",
        "NameInRequest": "properties",
        "Description": "The resource properties to be updated.",
@@ -1623,7 +1586,7 @@
      ],
      "Responses": [
       {
-       "$id": "160",
+       "$id": "156",
        "StatusCodes": [
         200
        ],
@@ -1653,12 +1616,40 @@
     }
    ],
    "Protocol": {
-    "$id": "161"
+    "$id": "157"
    },
    "Parent": "CommonPropertiesClient",
    "Parameters": [
     {
-     "$ref": "104"
+     "$id": "158",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "159",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client",
+     "DefaultValue": {
+      "$id": "160",
+      "Type": {
+       "$id": "161",
+       "kind": "string",
+       "name": "string",
+       "crossLanguageDefinitionId": "TypeSpec.string"
+      },
+      "Value": "https://management.azure.com"
+     }
     }
    ],
    "Decorators": []

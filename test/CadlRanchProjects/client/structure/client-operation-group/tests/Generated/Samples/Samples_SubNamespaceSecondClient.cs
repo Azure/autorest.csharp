@@ -20,8 +20,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnotherClientOperationGroup_Five_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
             Response response = client.Five();
 
@@ -32,8 +32,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnotherClientOperationGroup_Five_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
             Response response = await client.FiveAsync();
 
@@ -44,8 +44,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_AnotherClientOperationGroup_Five_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
             Response response = client.Five();
 
@@ -56,8 +56,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_AnotherClientOperationGroup_Five_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            SubNamespaceSecondClient client = new SubNamespaceSecondClient(endpoint, default);
 
             Response response = await client.FiveAsync();
 

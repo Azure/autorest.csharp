@@ -1292,35 +1292,14 @@
      "Parameters": [
       {
        "$id": "135",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "136",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "137",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "138",
+        "$id": "136",
         "kind": "constant",
         "valueType": {
-         "$id": "139",
+         "$id": "137",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1340,14 +1319,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "140",
+       "$id": "138",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "141",
+        "$id": "139",
         "kind": "constant",
         "valueType": {
-         "$id": "142",
+         "$id": "140",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1367,7 +1346,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "143",
+       "$id": "141",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1386,7 +1365,7 @@
      ],
      "Responses": [
       {
-       "$id": "144",
+       "$id": "142",
        "StatusCodes": [
         200
        ],
@@ -1415,25 +1394,22 @@
      "Decorators": []
     },
     {
-     "$id": "145",
+     "$id": "143",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "135"
-      },
-      {
-       "$id": "146",
+       "$id": "144",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "147",
+        "$id": "145",
         "kind": "constant",
         "valueType": {
-         "$id": "148",
+         "$id": "146",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1453,14 +1429,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "149",
+       "$id": "147",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "150",
+        "$id": "148",
         "kind": "constant",
         "valueType": {
-         "$id": "151",
+         "$id": "149",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1480,7 +1456,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "152",
+       "$id": "150",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -1499,7 +1475,7 @@
      ],
      "Responses": [
       {
-       "$id": "153",
+       "$id": "151",
        "StatusCodes": [
         200
        ],
@@ -1528,25 +1504,22 @@
      "Decorators": []
     },
     {
-     "$id": "154",
+     "$id": "152",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
      "Description": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "135"
-      },
-      {
-       "$id": "155",
+       "$id": "153",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
-        "$id": "156",
+        "$id": "154",
         "kind": "constant",
         "valueType": {
-         "$id": "157",
+         "$id": "155",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1566,14 +1539,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "158",
+       "$id": "156",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "159",
+        "$id": "157",
         "kind": "constant",
         "valueType": {
-         "$id": "160",
+         "$id": "158",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -1593,7 +1566,7 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "161",
+       "$id": "159",
        "Name": "modelToRename",
        "NameInRequest": "modelToRename",
        "Type": {
@@ -1612,7 +1585,7 @@
      ],
      "Responses": [
       {
-       "$id": "162",
+       "$id": "160",
        "StatusCodes": [
         200
        ],
@@ -1642,11 +1615,29 @@
     }
    ],
    "Protocol": {
-    "$id": "163"
+    "$id": "161"
    },
    "Parameters": [
     {
-     "$ref": "135"
+     "$id": "162",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "163",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

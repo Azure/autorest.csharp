@@ -20,7 +20,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumTest_CreateUnknownValue_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
@@ -33,7 +33,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumTest_CreateUnknownValue_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
@@ -46,7 +46,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_EnumTest_CreateUnknownValue_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");
@@ -59,7 +59,7 @@ namespace FirstTestTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_EnumTest_CreateUnknownValue_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             EnumTest client = new FirstTestTypeSpecClient(endpoint).GetEnumTestClient();
 
             using RequestContent content = RequestContent.Create("Monday");

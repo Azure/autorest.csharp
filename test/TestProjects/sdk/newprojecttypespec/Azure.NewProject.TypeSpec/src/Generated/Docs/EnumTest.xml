@@ -5,7 +5,7 @@
       <example>
 This sample shows how to call GetUnknownValueAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetUnknownValueAsync with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -30,7 +30,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call GetUnknownValue.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call GetUnknownValue with all request content.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 AzureKeyCredential credential = new AzureKeyCredential("<key>");
 EnumTest client = new NewProjectTypeSpecClient(endpoint, credential).GetEnumTestClient();
 
