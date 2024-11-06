@@ -21,7 +21,7 @@ using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.LowLevel.Extensions
+namespace AutoRest.CSharp.Common.Output.Models.Samples
 {
     internal static partial class ExampleValueSnippets
     {

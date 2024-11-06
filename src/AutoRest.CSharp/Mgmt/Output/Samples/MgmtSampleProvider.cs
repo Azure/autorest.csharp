@@ -8,15 +8,14 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.Samples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -334,7 +333,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
                 if (example.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
-                    var expression = ToExpression(parameterValue);
+                    var expression = ExampleValueSnippets.GetExpression(parameterValue, parameter.SerializationFormat);
 
                     // some parameters are always inline
                     if (_inlineParameters.Contains(parameter))
@@ -371,7 +370,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                         }
                         if (example.PropertyBagParamValueMapping.TryGetValue(p.Name, out var value))
                         {
-                            statements.Add(Declare(p.Type, p.Name, ToExpression(value), out var pVar));
+                            statements.Add(Declare(p.Type, p.Name, ExampleValueSnippets.GetExpression(value, p.SerializationFormat), out var pVar));
                             ctorArguments.Add(pVar);
                         }
                         else
@@ -389,7 +388,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                         if (example.PropertyBagParamValueMapping.TryGetValue(prop.Declaration.Name.ToVariableName(), out var value))
                         {
                             initializationProperties ??= new Dictionary<string, ValueExpression>();
-                            initializationProperties.Add(prop.Declaration.Name, ToExpression(value));
+                            initializationProperties.Add(prop.Declaration.Name, ExampleValueSnippets.GetExpression(value, prop.SerializationFormat));
                         }
                     }
                     statements.Add(Declare(parameter.Type, parameter.Name, New.Instance(ctor.Signature, ctorArguments, initializationProperties), out var options));
@@ -458,7 +457,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                 if (example.ParameterValueMapping.TryGetValue(extraParameter.Name, out var exampleParameterValue))
                 {
                     statements.Add(
-                        Declare(extraParameter.Type, extraParameter.Name, ToExpression(exampleParameterValue), out var arg)
+                        Declare(extraParameter.Type, extraParameter.Name, ExampleValueSnippets.GetExpression(exampleParameterValue, extraParameter.SerializationFormat), out var arg)
                         );
                     arguments.Add(arg);
                 }
@@ -687,13 +686,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         private string GetMethodName(string methodName, bool isAsync = true)
         {
             return isAsync ? $"{methodName}Async" : methodName;
-        }
-
-        private static ValueExpression ToExpression(ExampleParameterValue parameterValue)
-        {
-            return parameterValue.Expression is { } f ?
-                        f :
-                        ExampleValueSnippets.GetExpression(parameterValue.Type, parameterValue.Value);
         }
     }
 }
