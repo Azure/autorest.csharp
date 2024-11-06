@@ -117,12 +117,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
         }
 
-        private Dictionary<string, InputExampleParameterValue>? _parameterValueMapping;
-        public Dictionary<string, InputExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
+        private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
+        public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
 
-        private Dictionary<string, InputExampleParameterValue> EnsureParameterValueMapping()
+        private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
         {
-            var result = new Dictionary<string, InputExampleParameterValue>();
+            var result = new Dictionary<string, ExampleParameterValue>();
             var parameters = GetAllParameters();
             var parameterExamples = GetAllParameterExamples();
 
@@ -139,14 +139,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     if (!parameter.IsOptionalInSignature)
                     {
                         ValueExpression parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
+                        result.Add(parameter.Name, new ExampleParameterValue(parameter, parameterExpression));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
                 else
                 {
                     // add it into the mapping
-                    result.Add(parameter.Name, new InputExampleParameterValue(parameter, exampleValue));
+                    result.Add(parameter.Name, new ExampleParameterValue(parameter, exampleValue));
                 }
             }
 
@@ -202,11 +202,11 @@ namespace AutoRest.CSharp.Output.Samples.Models
             }
         }
 
-        private bool ProcessKnownParameters(Dictionary<string, InputExampleParameterValue> result, Parameter parameter)
+        private bool ProcessKnownParameters(Dictionary<string, ExampleParameterValue> result, Parameter parameter)
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
                 return true;
             }
 
@@ -219,41 +219,41 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (parameter == KnownParameters.RequestContextRequired)
             {
                 // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                 return true;
             }
 
             // endpoint we kind of will change its description therefore here we only find it for name and type
             if (IsSameParameter(parameter, KnownParameters.Endpoint))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, GetEndpointValue(parameter.Name)));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, GetEndpointValue(parameter.Name)));
                 return true;
             }
 
             // request content is also special
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, GetBodyParameterValue()));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, GetBodyParameterValue()));
                 return true;
             }
 
             if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
             {
                 // temporarily just return null value
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                 return true;
             }
 
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_client.TopLevelClient.Type.Name))));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_client.TopLevelClient.Type.Name))));
                 return true;
             }
 
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, new FormattableStringToExpression($"new DefaultAzureCredential()"))); // TODO -- we have to workaround here because we do not have the Azure.Identity dependency here
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, new FormattableStringToExpression($"new DefaultAzureCredential()"))); // TODO -- we have to workaround here because we do not have the Azure.Identity dependency here
                 return true;
             }
 

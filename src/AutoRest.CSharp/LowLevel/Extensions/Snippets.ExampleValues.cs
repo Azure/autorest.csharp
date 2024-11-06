@@ -196,7 +196,7 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 GetExpression(type, value, SerializationFormat.Default) :
                 Default.CastTo(type);
 
-        public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
+        public static ValueExpression GetExpression(ExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
                 return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat);

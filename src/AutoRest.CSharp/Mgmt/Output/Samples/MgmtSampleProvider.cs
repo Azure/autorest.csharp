@@ -13,10 +13,10 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -689,11 +689,10 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return isAsync ? $"{methodName}Async" : methodName;
         }
 
-        // TODO -- clean up the formattable string here when the refactor is done.
         private static ValueExpression ToExpression(ExampleParameterValue parameterValue)
         {
             return parameterValue.Expression is { } f ?
-                        new FormattableStringToExpression(f) :
+                        f :
                         ExampleValueSnippets.GetExpression(parameterValue.Type, parameterValue.Value);
         }
     }

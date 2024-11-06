@@ -7,17 +7,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
+using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.Output.Samples.Models.ExampleParameterValue>;
 
 namespace AutoRest.CSharp.Mgmt.Output.Samples
 {
@@ -106,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                         // the default value (also string because we disabled nullable in generated code)
                         var warning = $"No value is provided for {parameter.Name} in example '{Name}'. Please consider adding a proper example value for it in swagger";
                         AutoRestLogger.Warning(warning).Wait();
-                        var pv = new ExampleParameterValue(parameter, $"default /* Warning: {warning}*/");
+                        var pv = new ExampleParameterValue(parameter, DefaultOf(parameter.Type));
                         if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
                         {
                             propertyBagMapping.Add(parameter.Name, pv);
@@ -138,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"{typeof(WaitUntil)}.Completed"));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
                 return true;
             }
             if (parameter == KnownParameters.CancellationTokenParameter)
