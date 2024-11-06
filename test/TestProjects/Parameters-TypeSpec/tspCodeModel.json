@@ -118,31 +118,10 @@
      "Parameters": [
       {
        "$id": "15",
-       "Name": "endpoint",
-       "NameInRequest": "endpoint",
-       "Description": "Service host",
-       "Type": {
-        "$id": "16",
-        "kind": "url",
-        "name": "url",
-        "crossLanguageDefinitionId": "TypeSpec.url"
-       },
-       "Location": "Uri",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": true,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client"
-      },
-      {
-       "$id": "17",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "18",
+        "$id": "16",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -159,11 +138,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "19",
+       "$id": "17",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "20",
+        "$id": "18",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -180,11 +159,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "21",
+       "$id": "19",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Type": {
-        "$id": "22",
+        "$id": "20",
         "kind": "string",
         "name": "string",
         "crossLanguageDefinitionId": "TypeSpec.string",
@@ -198,9 +177,9 @@
        "IsRequired": true,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "21",
         "Type": {
-         "$id": "24",
+         "$id": "22",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string"
@@ -211,14 +190,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "25",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "26",
+        "$id": "24",
         "kind": "constant",
         "valueType": {
-         "$id": "27",
+         "$id": "25",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -240,7 +219,7 @@
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -266,20 +245,17 @@
      "Decorators": []
     },
     {
-     "$id": "29",
+     "$id": "27",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Accessibility": "public",
      "Parameters": [
       {
-       "$ref": "15"
-      },
-      {
-       "$id": "30",
+       "$id": "28",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "31",
+        "$id": "29",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -296,11 +272,11 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "32",
+       "$id": "30",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "33",
+        "$id": "31",
         "kind": "int32",
         "name": "int32",
         "crossLanguageDefinitionId": "TypeSpec.int32",
@@ -317,14 +293,14 @@
        "SkipUrlEncoding": false
       },
       {
-       "$id": "34",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "33",
         "kind": "constant",
         "valueType": {
-         "$id": "36",
+         "$id": "34",
          "kind": "string",
          "name": "string",
          "crossLanguageDefinitionId": "TypeSpec.string",
@@ -346,7 +322,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "35",
        "StatusCodes": [
         200
        ],
@@ -373,12 +349,30 @@
     }
    ],
    "Protocol": {
-    "$id": "38"
+    "$id": "36"
    },
    "Parent": "ParametersCadlClient",
    "Parameters": [
     {
-     "$ref": "15"
+     "$id": "37",
+     "Name": "endpoint",
+     "NameInRequest": "endpoint",
+     "Description": "Service host",
+     "Type": {
+      "$id": "38",
+      "kind": "url",
+      "name": "url",
+      "crossLanguageDefinitionId": "TypeSpec.url"
+     },
+     "Location": "Uri",
+     "IsApiVersion": false,
+     "IsResourceParameter": false,
+     "IsContentType": false,
+     "IsRequired": true,
+     "IsEndpoint": true,
+     "SkipUrlEncoding": false,
+     "Explode": false,
+     "Kind": "Client"
     }
    ],
    "Decorators": []

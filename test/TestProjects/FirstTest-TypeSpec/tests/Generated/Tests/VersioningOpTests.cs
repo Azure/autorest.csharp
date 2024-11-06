@@ -23,7 +23,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_Export_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
@@ -35,7 +35,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_Export_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
@@ -47,7 +47,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_ExportW_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 
@@ -59,7 +59,7 @@ namespace FirstTestTypeSpec.Tests
         [Ignore("Please remove the Ignore attribute to let the test method run")]
         public async Task VersioningOp_ExportW_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             AzureKeyCredential credential = null;
             VersioningOp client = CreateFirstTestTypeSpecClient(endpoint, credential).GetVersioningOpClient(apiVersion: "2022-05-15-preview");
 

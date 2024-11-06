@@ -107,7 +107,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     public static RequestPath FromOperation(InputOperation operation, InputClient inputClient, TypeFactory typeFactory)
     {
-        var references = new MgmtRestClientBuilder(inputClient).GetReferencesToOperationParameters(operation, operation.Parameters);
+        var references = new MgmtRestClientBuilder(inputClient).GetReferencesToOperationParameters(operation, operation.Parameters, inputClient.Parameters);
 
         var segments = new List<Segment>();
         var segmentIndex = 0;

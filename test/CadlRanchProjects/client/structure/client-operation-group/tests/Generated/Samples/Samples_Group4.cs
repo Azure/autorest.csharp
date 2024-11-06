@@ -20,8 +20,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group4_Four_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group4 client = new FirstClient(endpoint, default).GetGroup4Client();
 
             Response response = client.Four();
 
@@ -32,8 +32,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group4_Four_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group4 client = new FirstClient(endpoint, default).GetGroup4Client();
 
             Response response = await client.FourAsync();
 
@@ -44,8 +44,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Group4_Four_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group4 client = new FirstClient(endpoint, default).GetGroup4Client();
 
             Response response = client.Four();
 
@@ -56,8 +56,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Group4_Four_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            Group4 client = new FirstClient(endpoint, ClientType.Default).GetGroup4Client();
+            Uri endpoint = new Uri("<endpoint>");
+            Group4 client = new FirstClient(endpoint, default).GetGroup4Client();
 
             Response response = await client.FourAsync();
 

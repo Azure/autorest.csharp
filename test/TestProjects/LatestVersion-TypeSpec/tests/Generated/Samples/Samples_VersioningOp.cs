@@ -23,7 +23,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_GetResources_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             foreach (BinaryData item in client.GetResources(null, null, null))
@@ -39,7 +39,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_GetResources_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             await foreach (BinaryData item in client.GetResourcesAsync(null, null, null))
@@ -55,7 +55,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_GetResources_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             foreach (Models.Resource item in client.GetResources())
@@ -67,7 +67,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_GetResources_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             await foreach (Models.Resource item in client.GetResourcesAsync())
@@ -79,7 +79,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_GetResources_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             foreach (BinaryData item in client.GetResources(new string[] { "<select>" }, "<filter>", null))
@@ -95,7 +95,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_GetResources_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             await foreach (BinaryData item in client.GetResourcesAsync(new string[] { "<select>" }, "<filter>", null))
@@ -111,7 +111,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_GetResources_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             foreach (Models.Resource item in client.GetResources(select: new string[] { "<select>" }, filter: "<filter>"))
@@ -123,7 +123,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_GetResources_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             await foreach (Models.Resource item in client.GetResourcesAsync(select: new string[] { "<select>" }, filter: "<filter>"))
@@ -135,7 +135,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_Export_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", null, null, null, null);
@@ -151,7 +151,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_VersioningOp_Export_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", null, null, null, null);
@@ -167,7 +167,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_Export_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>");
@@ -178,7 +178,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_VersioningOp_Export_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>");
@@ -189,7 +189,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_Export_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<BinaryData> operation = client.Export(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<projectedFileFormat>", 1234, null);
@@ -205,7 +205,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_VersioningOp_Export_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<BinaryData> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", "<projectFileVersion>", "<projectedFileFormat>", 1234, null);
@@ -221,7 +221,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_VersioningOp_Export_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<ExportedResource> operation = client.Export(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", projectedFileFormat: "<projectedFileFormat>", maxLines: 1234);
@@ -232,7 +232,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_VersioningOp_Export_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Operation<ExportedResource> operation = await client.ExportAsync(WaitUntil.Completed, "<name>", projectFileVersion: "<projectFileVersion>", projectedFileFormat: "<projectedFileFormat>", maxLines: 1234);
@@ -243,7 +243,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_CreateLongRunning_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -263,7 +263,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_CreateLongRunning_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -283,7 +283,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_CreateLongRunning_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Models.Resource resource = new Models.Resource("<type>");
@@ -295,7 +295,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_CreateLongRunning_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Models.Resource resource = new Models.Resource("<type>");
@@ -307,7 +307,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_CreateLongRunning_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -327,7 +327,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_CreateLongRunning_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             using RequestContent content = RequestContent.Create(new
@@ -347,7 +347,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Resource_CreateLongRunning_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Models.Resource resource = new Models.Resource("<type>");
@@ -359,7 +359,7 @@ namespace TypeSpec.Versioning.Latest.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Resource_CreateLongRunning_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            Uri endpoint = new Uri("<endpoint>");
             VersioningOp client = new LatestClient(endpoint).GetVersioningOpClient(apiVersion: "2022-12-01-preview");
 
             Models.Resource resource = new Models.Resource("<type>");

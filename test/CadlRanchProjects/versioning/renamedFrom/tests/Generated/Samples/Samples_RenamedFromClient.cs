@@ -22,8 +22,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFrom_NewOp_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -43,8 +43,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFrom_NewOp_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -64,8 +64,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFrom_NewOp_ShortVersion_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = client.NewOp("<newQuery>", body);
@@ -75,8 +75,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFrom_NewOp_ShortVersion_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = await client.NewOpAsync("<newQuery>", body);
@@ -86,8 +86,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFrom_NewOp_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -107,8 +107,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFrom_NewOp_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -128,8 +128,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RenamedFrom_NewOp_AllParameters_Convenience()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = client.NewOp("<newQuery>", body);
@@ -139,8 +139,8 @@ namespace Versioning.RenamedFrom.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RenamedFrom_NewOp_AllParameters_Convenience_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            RenamedFromClient client = new RenamedFromClient(endpoint, Versions.V1);
+            Uri endpoint = new Uri("<endpoint>");
+            RenamedFromClient client = new RenamedFromClient(endpoint, default);
 
             NewModel body = new NewModel("<newProp>", NewEnum.NewEnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
             Response<NewModel> response = await client.NewOpAsync("<newQuery>", body);

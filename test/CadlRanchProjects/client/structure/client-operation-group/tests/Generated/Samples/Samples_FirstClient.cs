@@ -20,8 +20,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ClientOperationGroup_One_ShortVersion()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstClient client = new FirstClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            FirstClient client = new FirstClient(endpoint, default);
 
             Response response = client.One();
 
@@ -32,8 +32,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ClientOperationGroup_One_ShortVersion_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstClient client = new FirstClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            FirstClient client = new FirstClient(endpoint, default);
 
             Response response = await client.OneAsync();
 
@@ -44,8 +44,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_ClientOperationGroup_One_AllParameters()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstClient client = new FirstClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            FirstClient client = new FirstClient(endpoint, default);
 
             Response response = client.One();
 
@@ -56,8 +56,8 @@ namespace Client.Structure.Service.ClientOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_ClientOperationGroup_One_AllParameters_Async()
         {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstClient client = new FirstClient(endpoint, ClientType.Default);
+            Uri endpoint = new Uri("<endpoint>");
+            FirstClient client = new FirstClient(endpoint, default);
 
             Response response = await client.OneAsync();
 

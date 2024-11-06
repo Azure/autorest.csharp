@@ -138,7 +138,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (!parameter.IsOptionalInSignature)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
+                        ValueExpression parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, parameterExpression));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
