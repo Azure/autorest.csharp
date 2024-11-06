@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="BasicActionAsync(string,string,ActionRequest,CancellationToken)">
+      <example>
+This sample shows how to call BasicActionAsync.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+ActionRequest body = new ActionRequest("<stringProperty>");
+Response<ActionResponse> response = await client.BasicActionAsync("<queryParam>", "<headerParam>", body);
+]]></code>
+This sample shows how to call BasicActionAsync with all parameters.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+ActionRequest body = new ActionRequest("<stringProperty>")
+{
+    ModelProperty = new Model
+    {
+        Int32Property = 1234,
+        Float32Property = 123.45F,
+        EnumProperty = Models.Enum.EnumValue1,
+    },
+    ArrayProperty = { "<arrayProperty>" },
+    RecordProperty =
+    {
+        ["key"] = "<recordProperty>"
+    },
+};
+Response<ActionResponse> response = await client.BasicActionAsync("<queryParam>", "<headerParam>", body);
+]]></code></example>
+    </member>
+    <member name="BasicAction(string,string,ActionRequest,CancellationToken)">
+      <example>
+This sample shows how to call BasicAction.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+ActionRequest body = new ActionRequest("<stringProperty>");
+Response<ActionResponse> response = client.BasicAction("<queryParam>", "<headerParam>", body);
+]]></code>
+This sample shows how to call BasicAction with all parameters.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+ActionRequest body = new ActionRequest("<stringProperty>")
+{
+    ModelProperty = new Model
+    {
+        Int32Property = 1234,
+        Float32Property = 123.45F,
+        EnumProperty = Models.Enum.EnumValue1,
+    },
+    ArrayProperty = { "<arrayProperty>" },
+    RecordProperty =
+    {
+        ["key"] = "<recordProperty>"
+    },
+};
+Response<ActionResponse> response = client.BasicAction("<queryParam>", "<headerParam>", body);
+]]></code></example>
+    </member>
+    <member name="BasicActionAsync(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BasicActionAsync and parse the result.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    stringProperty = "<stringProperty>",
+});
+Response response = await client.BasicActionAsync("<queryParam>", "<headerParam>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("stringProperty").ToString());
+]]></code>
+This sample shows how to call BasicActionAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    stringProperty = "<stringProperty>",
+    modelProperty = new
+    {
+        int32Property = 1234,
+        float32Property = 123.45F,
+        enumProperty = "EnumValue1",
+    },
+    arrayProperty = new object[]
+    {
+        "<arrayProperty>"
+    },
+    recordProperty = new
+    {
+        key = "<recordProperty>",
+    },
+});
+Response response = await client.BasicActionAsync("<queryParam>", "<headerParam>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("stringProperty").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("int32Property").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("float32Property").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("enumProperty").ToString());
+Console.WriteLine(result.GetProperty("arrayProperty")[0].ToString());
+Console.WriteLine(result.GetProperty("recordProperty").GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+    <member name="BasicAction(string,string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BasicAction and parse the result.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    stringProperty = "<stringProperty>",
+});
+Response response = client.BasicAction("<queryParam>", "<headerParam>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("stringProperty").ToString());
+]]></code>
+This sample shows how to call BasicAction with all parameters and request content and parse the result.
+<code><![CDATA[
+AzureExampleClient client = new AzureExampleClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    stringProperty = "<stringProperty>",
+    modelProperty = new
+    {
+        int32Property = 1234,
+        float32Property = 123.45F,
+        enumProperty = "EnumValue1",
+    },
+    arrayProperty = new object[]
+    {
+        "<arrayProperty>"
+    },
+    recordProperty = new
+    {
+        key = "<recordProperty>",
+    },
+});
+Response response = client.BasicAction("<queryParam>", "<headerParam>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("stringProperty").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("int32Property").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("float32Property").ToString());
+Console.WriteLine(result.GetProperty("modelProperty").GetProperty("enumProperty").ToString());
+Console.WriteLine(result.GetProperty("arrayProperty")[0].ToString());
+Console.WriteLine(result.GetProperty("recordProperty").GetProperty("<key>").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>
