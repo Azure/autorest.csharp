@@ -20,13 +20,21 @@ namespace _Type.Property.AdditionalProperties.Models
 
         void IJsonModel<ExtendsUnknownAdditionalProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ExtendsUnknownAdditionalProperties>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ExtendsUnknownAdditionalProperties)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             foreach (var item in AdditionalProperties)
@@ -41,7 +49,6 @@ namespace _Type.Property.AdditionalProperties.Models
                 }
 #endif
             }
-            writer.WriteEndObject();
         }
 
         ExtendsUnknownAdditionalProperties IJsonModel<ExtendsUnknownAdditionalProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

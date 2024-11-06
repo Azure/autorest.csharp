@@ -21,13 +21,21 @@ namespace Payload.MultiPart.Models
 
         void IJsonModel<FloatRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<FloatRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(FloatRequest)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("temperature"u8);
             writer.WriteNumberValue(Temperature);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -45,7 +53,6 @@ namespace Payload.MultiPart.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         FloatRequest IJsonModel<FloatRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

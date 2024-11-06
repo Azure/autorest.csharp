@@ -10,7 +10,6 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "use-model-reader-writer": true,
-  "use-write-core": true,
   "enable-bicep-serialization": true,
   "suppress-abstract-base-class": [
     "DeliveryRuleAction"

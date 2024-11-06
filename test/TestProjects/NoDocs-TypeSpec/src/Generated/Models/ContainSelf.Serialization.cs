@@ -20,13 +20,19 @@ namespace NoDocsTypeSpec.Models
 
         void IJsonModel<ContainSelf>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ContainSelf>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ContainSelf)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("self"u8);
             writer.WriteObjectValue(Self, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -44,7 +50,6 @@ namespace NoDocsTypeSpec.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ContainSelf IJsonModel<ContainSelf>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
