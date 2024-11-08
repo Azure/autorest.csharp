@@ -531,20 +531,175 @@
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true,
      "CrossLanguageDefinitionId": "Client.AzureExampleClient.basicAction",
-     "Decorators": []
+     "Decorators": [],
+     "Examples": [
+      {
+       "$id": "56",
+       "kind": "http",
+       "name": "Basic action",
+       "description": "Basic action",
+       "filePath": "2022-12-01-preview/basic.json",
+       "parameters": [
+        {
+         "$id": "57",
+         "parameter": {
+          "$ref": "40"
+         },
+         "value": {
+          "$id": "58",
+          "kind": "string",
+          "type": {
+           "$ref": "41"
+          },
+          "value": "2022-12-01-preview"
+         }
+        },
+        {
+         "$id": "59",
+         "parameter": {
+          "$ref": "44"
+         },
+         "value": {
+          "$id": "60",
+          "kind": "string",
+          "type": {
+           "$ref": "45"
+          },
+          "value": "query"
+         }
+        },
+        {
+         "$id": "61",
+         "parameter": {
+          "$ref": "46"
+         },
+         "value": {
+          "$id": "62",
+          "kind": "string",
+          "type": {
+           "$ref": "47"
+          },
+          "value": "header"
+         }
+        },
+        {
+         "$id": "63",
+         "parameter": {
+          "$ref": "54"
+         },
+         "value": {
+          "$id": "64",
+          "kind": "model",
+          "type": {
+           "$ref": "10"
+          },
+          "value": {
+           "$id": "65",
+           "stringProperty": {
+            "$id": "66",
+            "kind": "string",
+            "type": {
+             "$ref": "12"
+            },
+            "value": "text"
+           },
+           "modelProperty": {
+            "$id": "67",
+            "kind": "model",
+            "type": {
+             "$ref": "14"
+            },
+            "value": {
+             "$id": "68",
+             "int32Property": {
+              "$id": "69",
+              "kind": "number",
+              "type": {
+               "$ref": "16"
+              },
+              "value": 1
+             },
+             "float32Property": {
+              "$id": "70",
+              "kind": "number",
+              "type": {
+               "$ref": "18"
+              },
+              "value": 1.5
+             },
+             "enumProperty": {
+              "$id": "71",
+              "kind": "string",
+              "type": {
+               "$ref": "2"
+              },
+              "value": "EnumValue1"
+             }
+            }
+           },
+           "arrayProperty": {
+            "$id": "72",
+            "kind": "array",
+            "type": {
+             "$ref": "21"
+            },
+            "value": [
+             {
+              "$id": "73",
+              "kind": "string",
+              "type": {
+               "$ref": "22"
+              },
+              "value": "item"
+             }
+            ]
+           },
+           "recordProperty": {
+            "$id": "74",
+            "kind": "dict",
+            "type": {
+             "$ref": "24"
+            },
+            "value": {
+             "$id": "75",
+             "record": {
+              "$id": "76",
+              "kind": "string",
+              "type": {
+               "$ref": "26"
+              },
+              "value": "value"
+             }
+            }
+           }
+          }
+         }
+        }
+       ],
+       "responses": [
+        {
+         "$id": "77",
+         "response": {
+          "$ref": "55"
+         },
+         "statusCode": 200
+        }
+       ]
+      }
+     ]
     }
    ],
    "Protocol": {
-    "$id": "56"
+    "$id": "78"
    },
    "Parameters": [
     {
-     "$id": "57",
+     "$id": "79",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
      "Description": "Service host",
      "Type": {
-      "$id": "58",
+      "$id": "80",
       "kind": "url",
       "name": "url",
       "crossLanguageDefinitionId": "TypeSpec.url"
@@ -559,9 +714,9 @@
      "Explode": false,
      "Kind": "Client",
      "DefaultValue": {
-      "$id": "59",
+      "$id": "81",
       "Type": {
-       "$id": "60",
+       "$id": "82",
        "kind": "string",
        "name": "string",
        "crossLanguageDefinitionId": "TypeSpec.string"
