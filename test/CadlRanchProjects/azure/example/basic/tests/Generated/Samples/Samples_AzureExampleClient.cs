@@ -20,29 +20,15 @@ namespace _Specs_.Azure.Example.Basic.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AzureExampleClient_BasicAction_BasicAction()
+        public void Example_AzureExampleClient_BasicAction_ShortVersion()
         {
             AzureExampleClient client = new AzureExampleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                stringProperty = "text",
-                modelProperty = new
-                {
-                    int32Property = 1,
-                    float32Property = 1.5F,
-                    enumProperty = "EnumValue1",
-                },
-                arrayProperty = new object[]
-            {
-"item"
-            },
-                recordProperty = new
-                {
-                    record = "value",
-                },
+                stringProperty = "<stringProperty>",
             });
-            Response response = client.BasicAction("query", "header", content);
+            Response response = client.BasicAction("<queryParam>", "<headerParam>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("stringProperty").ToString());
@@ -50,29 +36,15 @@ namespace _Specs_.Azure.Example.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AzureExampleClient_BasicAction_BasicAction_Async()
+        public async Task Example_AzureExampleClient_BasicAction_ShortVersion_Async()
         {
             AzureExampleClient client = new AzureExampleClient();
 
             using RequestContent content = RequestContent.Create(new
             {
-                stringProperty = "text",
-                modelProperty = new
-                {
-                    int32Property = 1,
-                    float32Property = 1.5F,
-                    enumProperty = "EnumValue1",
-                },
-                arrayProperty = new object[]
-            {
-"item"
-            },
-                recordProperty = new
-                {
-                    record = "value",
-                },
+                stringProperty = "<stringProperty>",
             });
-            Response response = await client.BasicActionAsync("query", "header", content);
+            Response response = await client.BasicActionAsync("<queryParam>", "<headerParam>", content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("stringProperty").ToString());
@@ -80,48 +52,138 @@ namespace _Specs_.Azure.Example.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AzureExampleClient_BasicAction_BasicAction_Convenience()
+        public void Example_AzureExampleClient_BasicAction_ShortVersion_Convenience()
         {
             AzureExampleClient client = new AzureExampleClient();
 
-            ActionRequest body = new ActionRequest("text")
-            {
-                ModelProperty = new Model
-                {
-                    Int32Property = 1,
-                    Float32Property = 1.5F,
-                    EnumProperty = Models.Enum.EnumValue1,
-                },
-                ArrayProperty = { "item" },
-                RecordProperty =
-{
-["record"] = "value"
-},
-            };
-            Response<ActionResponse> response = client.BasicAction("query", "header", body);
+            ActionRequest body = new ActionRequest("<stringProperty>");
+            Response<ActionResponse> response = client.BasicAction("<queryParam>", "<headerParam>", body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_AzureExampleClient_BasicAction_BasicAction_Convenience_Async()
+        public async Task Example_AzureExampleClient_BasicAction_ShortVersion_Convenience_Async()
         {
             AzureExampleClient client = new AzureExampleClient();
 
-            ActionRequest body = new ActionRequest("text")
+            ActionRequest body = new ActionRequest("<stringProperty>");
+            Response<ActionResponse> response = await client.BasicActionAsync("<queryParam>", "<headerParam>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AzureExampleClient_BasicAction_AllParameters()
+        {
+            AzureExampleClient client = new AzureExampleClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                stringProperty = "<stringProperty>",
+                modelProperty = new
+                {
+                    int32Property = 1234,
+                    float32Property = 123.45F,
+                    enumProperty = "EnumValue1",
+                },
+                arrayProperty = new object[]
+            {
+"<arrayProperty>"
+            },
+                recordProperty = new
+                {
+                    key = "<recordProperty>",
+                },
+            });
+            Response response = client.BasicAction("<queryParam>", "<headerParam>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("stringProperty").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("int32Property").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("float32Property").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("enumProperty").ToString());
+            Console.WriteLine(result.GetProperty("arrayProperty")[0].ToString());
+            Console.WriteLine(result.GetProperty("recordProperty").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AzureExampleClient_BasicAction_AllParameters_Async()
+        {
+            AzureExampleClient client = new AzureExampleClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                stringProperty = "<stringProperty>",
+                modelProperty = new
+                {
+                    int32Property = 1234,
+                    float32Property = 123.45F,
+                    enumProperty = "EnumValue1",
+                },
+                arrayProperty = new object[]
+            {
+"<arrayProperty>"
+            },
+                recordProperty = new
+                {
+                    key = "<recordProperty>",
+                },
+            });
+            Response response = await client.BasicActionAsync("<queryParam>", "<headerParam>", content);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("stringProperty").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("int32Property").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("float32Property").ToString());
+            Console.WriteLine(result.GetProperty("modelProperty").GetProperty("enumProperty").ToString());
+            Console.WriteLine(result.GetProperty("arrayProperty")[0].ToString());
+            Console.WriteLine(result.GetProperty("recordProperty").GetProperty("<key>").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AzureExampleClient_BasicAction_AllParameters_Convenience()
+        {
+            AzureExampleClient client = new AzureExampleClient();
+
+            ActionRequest body = new ActionRequest("<stringProperty>")
             {
                 ModelProperty = new Model
                 {
-                    Int32Property = 1,
-                    Float32Property = 1.5F,
+                    Int32Property = 1234,
+                    Float32Property = 123.45F,
                     EnumProperty = Models.Enum.EnumValue1,
                 },
-                ArrayProperty = { "item" },
+                ArrayProperty = { "<arrayProperty>" },
                 RecordProperty =
 {
-["record"] = "value"
+["key"] = "<recordProperty>"
 },
             };
-            Response<ActionResponse> response = await client.BasicActionAsync("query", "header", body);
+            Response<ActionResponse> response = client.BasicAction("<queryParam>", "<headerParam>", body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AzureExampleClient_BasicAction_AllParameters_Convenience_Async()
+        {
+            AzureExampleClient client = new AzureExampleClient();
+
+            ActionRequest body = new ActionRequest("<stringProperty>")
+            {
+                ModelProperty = new Model
+                {
+                    Int32Property = 1234,
+                    Float32Property = 123.45F,
+                    EnumProperty = Models.Enum.EnumValue1,
+                },
+                ArrayProperty = { "<arrayProperty>" },
+                RecordProperty =
+{
+["key"] = "<recordProperty>"
+},
+            };
+            Response<ActionResponse> response = await client.BasicActionAsync("<queryParam>", "<headerParam>", body);
         }
     }
 }

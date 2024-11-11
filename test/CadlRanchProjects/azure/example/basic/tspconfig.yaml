@@ -1,4 +1,3 @@
 options:
   "@azure-tools/typespec-csharp":
     clear-output-folder: true
-    examples-dir: "{project-root}/../../../../../node_modules/@azure-tools/cadl-ranch-specs/http/azure/example/basic/examples"
