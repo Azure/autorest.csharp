@@ -128,7 +128,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch
             {
-                Identity = new ManagedServiceIdentity(default),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
                 RotationToLatestKeyVersionEnabled = true,
@@ -166,7 +166,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             DiskEncryptionSetPatch patch = new DiskEncryptionSetPatch
             {
-                Identity = new ManagedServiceIdentity(default),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
                 ActiveKey = new KeyForDiskEncryptionSet(new Uri("https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1")),
                 RotationToLatestKeyVersionEnabled = true,

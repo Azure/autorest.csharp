@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
@@ -46,8 +47,8 @@ namespace MgmtMockAndSample.Samples
             string vaultName = "sample-vault";
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
-                Duration = default,
-                CreateOn = default,
+                Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
                 AccessPolicies = {new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"), "00000000-0000-0000-0000-000000000000", new Permissions
 {
 Keys = {KeyPermission.Encrypt, KeyPermission.Decrypt, KeyPermission.WrapKey, KeyPermission.UnwrapKey, KeyPermission.Sign, KeyPermission.Verify, KeyPermission.Get, KeyPermission.List, KeyPermission.Create, KeyPermission.Update, KeyPermission.Import, KeyPermission.Delete, KeyPermission.Backup, KeyPermission.Restore, KeyPermission.Recover, KeyPermission.Purge},
@@ -59,7 +60,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 PublicNetworkAccess = "Enabled",
             })
             {
-                Identity = new ManagedServiceIdentity(default),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
             };
             ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
@@ -145,8 +146,8 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
             string vaultName = null;
             VaultCreateOrUpdateContent content = new VaultCreateOrUpdateContent(new AzureLocation("westus"), new VaultProperties(Guid.Parse("00000000-0000-0000-0000-000000000000"), new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard))
             {
-                Duration = default,
-                CreateOn = default,
+                Duration = XmlConvert.ToTimeSpan("P7D"),
+                CreateOn = DateTimeOffset.Parse("2017-05-04T07:12:28.191Z"),
                 AccessPolicies = {new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"), "00000000-0000-0000-0000-000000000000", new Permissions
 {
 Keys = {KeyPermission.Encrypt, KeyPermission.Decrypt, KeyPermission.WrapKey, KeyPermission.UnwrapKey, KeyPermission.Sign, KeyPermission.Verify, KeyPermission.Get, KeyPermission.List, KeyPermission.Create, KeyPermission.Update, KeyPermission.Import, KeyPermission.Delete, KeyPermission.Backup, KeyPermission.Restore, KeyPermission.Recover, KeyPermission.Purge},
@@ -158,7 +159,7 @@ Certificates = {CertificatePermission.Get, CertificatePermission.List, Certifica
                 PublicNetworkAccess = "Enabled",
             })
             {
-                Identity = new ManagedServiceIdentity(default),
+                Identity = new ManagedServiceIdentity("SystemAssigned"),
             };
             ArmOperation<VaultResource> lro = await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, content);
             VaultResource result = lro.Value;
