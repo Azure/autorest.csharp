@@ -32,6 +32,7 @@
         "azure/client-generator-core/access",
         "azure/client-generator-core/flatten-property",
         "azure/client-generator-core/usage",
+        "azure/example/basic",
         "azure/resource-manager/common-properties",
         "azure/special-headers/client-request-id",
         "encode/bytes",
