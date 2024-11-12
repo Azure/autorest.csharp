@@ -10714,7 +10714,7 @@ schemas: !Schemas
                 schema: *ref_369
                 readOnly: true
                 serializedName: id
-                language: !Languages &ref_1500
+                language: !Languages &ref_1493
                   default:
                     name: id
                     description: ARM resource id of the guest configuration assignment.
@@ -10723,7 +10723,7 @@ schemas: !Schemas
                 schema: *ref_370
                 readOnly: false
                 serializedName: name
-                language: !Languages &ref_1491
+                language: !Languages &ref_1484
                   default:
                     name: name
                     description: Name of the guest configuration assignment.
@@ -10732,7 +10732,7 @@ schemas: !Schemas
                 schema: *ref_371
                 readOnly: false
                 serializedName: location
-                language: !Languages &ref_1492
+                language: !Languages &ref_1485
                   default:
                     name: location
                     description: Region where the VM is located.
@@ -10783,7 +10783,7 @@ schemas: !Schemas
                 schema: *ref_375
                 readOnly: true
                 serializedName: complianceStatus
-                language: !Languages &ref_1494
+                language: !Languages &ref_1487
                   default:
                     name: complianceStatus
                     description: A value indicating compliance status of the machine for the assigned guest configuration.
@@ -10793,7 +10793,7 @@ schemas: !Schemas
                 nullable: true
                 readOnly: true
                 serializedName: lastComplianceStatusChecked
-                language: !Languages &ref_1495
+                language: !Languages &ref_1488
                   default:
                     name: lastComplianceStatusChecked
                     description: Date and time when last compliance status was checked.
@@ -10803,7 +10803,7 @@ schemas: !Schemas
                 nullable: true
                 readOnly: true
                 serializedName: latestReportId
-                language: !Languages &ref_1496
+                language: !Languages &ref_1489
                   default:
                     name: latestReportId
                     description: 'Id of the latest report for the guest configuration assignment. '
@@ -10821,7 +10821,7 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_379
                 serializedName: context
-                language: !Languages &ref_1490
+                language: !Languages &ref_1483
                   default:
                     name: context
                     description: 'The source which initiated the guest configuration assignment. Ex: Azure Policy'
@@ -10831,7 +10831,7 @@ schemas: !Schemas
                 nullable: true
                 readOnly: true
                 serializedName: assignmentHash
-                language: !Languages &ref_1497
+                language: !Languages &ref_1490
                   default:
                     name: assignmentHash
                     description: Combined hash of the configuration package and parameters.
@@ -10841,7 +10841,7 @@ schemas: !Schemas
                 nullable: true
                 readOnly: true
                 serializedName: provisioningState
-                language: !Languages &ref_1498
+                language: !Languages &ref_1491
                   default:
                     name: provisioningState
                     description: The provisioning state, which only appears in the response.
@@ -10851,7 +10851,7 @@ schemas: !Schemas
                 nullable: true
                 readOnly: true
                 serializedName: resourceType
-                language: !Languages &ref_1499
+                language: !Languages &ref_1492
                   default:
                     name: resourceType
                     description: Type of the resource - VMSS / VM
@@ -10870,7 +10870,7 @@ schemas: !Schemas
           serializedName: properties
           extensions:
             x-ms-client-flatten: false
-          language: !Languages &ref_1489
+          language: !Languages &ref_1482
             default:
               name: properties
               description: Properties of the Guest configuration assignment.
@@ -22057,7 +22057,7 @@ operationGroups:
           - !Parameter &ref_674
             schema: *ref_666
             implementation: Method
-            language: !Languages &ref_1476
+            language: !Languages 
               default:
                 name: q1
                 description: The first query parameter
@@ -22068,7 +22068,7 @@ operationGroups:
           - !Parameter &ref_675
             schema: *ref_667
             implementation: Method
-            language: !Languages &ref_1477
+            language: !Languages 
               default:
                 name: q2
                 description: The second query parameter
@@ -22079,7 +22079,7 @@ operationGroups:
           - !Parameter &ref_676
             schema: *ref_668
             implementation: Method
-            language: !Languages &ref_1478
+            language: !Languages 
               default:
                 name: q3
                 description: The third query parameter
@@ -22090,7 +22090,7 @@ operationGroups:
           - !Parameter &ref_677
             schema: *ref_669
             implementation: Method
-            language: !Languages &ref_1479
+            language: !Languages 
               default:
                 name: q4
                 description: The fourth query parameter
@@ -22101,7 +22101,7 @@ operationGroups:
           - !Parameter &ref_678
             schema: *ref_670
             implementation: Method
-            language: !Languages &ref_1480
+            language: !Languages 
               default:
                 name: q5
                 description: The fifth query parameter
@@ -22112,7 +22112,7 @@ operationGroups:
           - !Parameter &ref_679
             schema: *ref_671
             implementation: Method
-            language: !Languages &ref_1481
+            language: !Languages 
               default:
                 name: q6
                 description: The sixth query parameter
@@ -22234,46 +22234,6 @@ operationGroups:
                       {"$SCHEMA":"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW","CONTENTVERSION":"1.0.0.0","PARAMETERS":{"STRING":{"TYPE":"STRING"}},"VARIABLES":{"STRING":"STRING","INT":42,"BOOL":TRUE,"ARRAY":[1,2,3,4],"OBJECT":{"OBJECT":{"VMSIZE":"LARGE","LOCATION":"WEST
                       US"}}},"RESOURCES":[],"OUTPUTS":{"STRING":{"TYPE":"STRING","VALUE":"MYVALUE"}}}
                     templateHash: '695440707931307747'
-            Calculate template hash with query parameters:
-              parameters:
-                api-version: '2021-04-01'
-                q1: first
-                q2: 42
-                q3: 4.2222222222222226e+35
-                q4: 3.14
-                q5: 3.14159265358
-                q6: true
-                template: &ref_1482
-                  $schema: http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview
-                  contentVersion: 1.0.0.0
-                  outputs:
-                    string:
-                      type: string
-                      value: myvalue
-                  parameters:
-                    string:
-                      type: string
-                  resources: []
-                  variables:
-                    array:
-                      - 1
-                      - 2
-                      - 3
-                      - 4
-                    bool: true
-                    int: 42
-                    object:
-                      object:
-                        location: West US
-                        vmSize: Large
-                    string: string
-              responses:
-                '200':
-                  body:
-                    minifiedTemplate: >-
-                      {"$SCHEMA":"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW","CONTENTVERSION":"1.0.0.0","PARAMETERS":{"STRING":{"TYPE":"STRING"}},"VARIABLES":{"STRING":"STRING","INT":42,"BOOL":TRUE,"ARRAY":[1,2,3,4],"OBJECT":{"OBJECT":{"VMSIZE":"LARGE","LOCATION":"WEST
-                      US"}}},"RESOURCES":[],"OUTPUTS":{"STRING":{"TYPE":"STRING","VALUE":"MYVALUE"}}}
-                    templateHash: '695440707931307747'
         language: !Languages 
           default:
             name: CalculateTemplateHash
@@ -22284,10 +22244,10 @@ operationGroups:
         name: Deployments
         description: ''
     protocol: !Protocols {}
-  - !OperationGroup &ref_1505
+  - !OperationGroup &ref_1498
     $key: GuestConfigurationAssignments
     operations:
-      - !Operation &ref_1504
+      - !Operation &ref_1497
         operationId: GuestConfigurationAssignments_CreateOrUpdate
         apiVersions:
           - !ApiVersion 
@@ -22298,7 +22258,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1483
+            language: !Languages &ref_1476
               default:
                 name: guestConfigurationAssignmentName
                 description: Name of the guest configuration assignment.
@@ -22311,7 +22271,7 @@ operationGroups:
             schema: *ref_682
             implementation: Method
             required: true
-            language: !Languages &ref_1484
+            language: !Languages &ref_1477
               default:
                 name: resourceGroupName
                 description: The resource group name.
@@ -22323,7 +22283,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1485
+            language: !Languages &ref_1478
               default:
                 name: vmName
                 description: The name of the virtual machine.
@@ -22331,12 +22291,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_1486
+          - !Parameter &ref_1479
             schema: *ref_683
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
-            language: !Languages &ref_1487
+            language: !Languages &ref_1480
               default:
                 name: apiVersion
                 description: Api Version
@@ -22364,7 +22324,7 @@ operationGroups:
                 schema: *ref_368
                 implementation: Method
                 required: true
-                language: !Languages &ref_1488
+                language: !Languages &ref_1481
                   default:
                     name: parameters
                     description: Parameters supplied to the create or update guest configuration assignment.
@@ -22409,7 +22369,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_368
-            language: !Languages &ref_1493
+            language: !Languages &ref_1486
               default:
                 name: ''
                 description: OK. The guest configuration assignment for the VM was updated successfully.
@@ -22422,7 +22382,7 @@ operationGroups:
                   - '200'
           - !SchemaResponse 
             schema: *ref_368
-            language: !Languages &ref_1502
+            language: !Languages &ref_1495
               default:
                 name: ''
                 description: Created. The guest configuration assignment for the VM was created successfully.
@@ -22482,7 +22442,7 @@ operationGroups:
                       provisioningState: Succeeded
                       resourceType: null
                       vmssVMList: null
-                  headers: &ref_1501 {}
+                  headers: &ref_1494 {}
                 '201':
                   body:
                     name: NotInstalledApplicationForWindows
@@ -22508,13 +22468,13 @@ operationGroups:
                       provisioningState: Succeeded
                       resourceType: null
                       vmssVMList: null
-                  headers: &ref_1503 {}
+                  headers: &ref_1496 {}
         language: !Languages 
           default:
             name: CreateOrUpdate
             description: Creates an association between a VM and guest configuration
         protocol: !Protocols {}
-      - !Operation &ref_1513
+      - !Operation &ref_1506
         operationId: GuestConfigurationAssignments_Get
         apiVersions:
           - !ApiVersion 
@@ -22525,7 +22485,7 @@ operationGroups:
             schema: *ref_682
             implementation: Method
             required: true
-            language: !Languages &ref_1506
+            language: !Languages &ref_1499
               default:
                 name: resourceGroupName
                 description: The resource group name.
@@ -22537,7 +22497,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1507
+            language: !Languages &ref_1500
               default:
                 name: guestConfigurationAssignmentName
                 description: The guest configuration assignment name.
@@ -22550,7 +22510,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1508
+            language: !Languages &ref_1501
               default:
                 name: vmName
                 description: The name of the virtual machine.
@@ -22558,12 +22518,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_1509
+          - !Parameter &ref_1502
             schema: *ref_683
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
-            language: !Languages &ref_1510
+            language: !Languages &ref_1503
               default:
                 name: apiVersion
                 description: Api Version
@@ -22605,7 +22565,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_368
-            language: !Languages &ref_1511
+            language: !Languages &ref_1504
               default:
                 name: ''
                 description: OK. The guest configuration assignment was returned successfully.
@@ -22647,13 +22607,13 @@ operationGroups:
                       latestReportId: >-
                         /subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1
                       provisioningState: Succeeded
-                  headers: &ref_1512 {}
+                  headers: &ref_1505 {}
         language: !Languages 
           default:
             name: Get
             description: Get information about a guest configuration assignment
         protocol: !Protocols {}
-      - !Operation &ref_1519
+      - !Operation &ref_1512
         operationId: GuestConfigurationAssignments_Delete
         apiVersions:
           - !ApiVersion 
@@ -22664,7 +22624,7 @@ operationGroups:
             schema: *ref_682
             implementation: Method
             required: true
-            language: !Languages &ref_1514
+            language: !Languages &ref_1507
               default:
                 name: resourceGroupName
                 description: The resource group name.
@@ -22676,7 +22636,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1515
+            language: !Languages &ref_1508
               default:
                 name: guestConfigurationAssignmentName
                 description: Name of the guest configuration assignment
@@ -22689,7 +22649,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1516
+            language: !Languages &ref_1509
               default:
                 name: vmName
                 description: The name of the virtual machine.
@@ -22697,12 +22657,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_1517
+          - !Parameter &ref_1510
             schema: *ref_683
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
-            language: !Languages &ref_1518
+            language: !Languages &ref_1511
               default:
                 name: apiVersion
                 description: Api Version
@@ -22752,7 +22712,7 @@ operationGroups:
             name: Delete
             description: Delete a guest configuration assignment
         protocol: !Protocols {}
-      - !Operation &ref_1526
+      - !Operation &ref_1519
         operationId: GuestConfigurationAssignments_List
         apiVersions:
           - !ApiVersion 
@@ -22763,7 +22723,7 @@ operationGroups:
             schema: *ref_682
             implementation: Method
             required: true
-            language: !Languages &ref_1520
+            language: !Languages &ref_1513
               default:
                 name: resourceGroupName
                 description: The resource group name.
@@ -22776,7 +22736,7 @@ operationGroups:
             schema: *ref_681
             implementation: Method
             required: true
-            language: !Languages &ref_1521
+            language: !Languages &ref_1514
               default:
                 name: vmName
                 description: The name of the virtual machine.
@@ -22784,12 +22744,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_1522
+          - !Parameter &ref_1515
             schema: *ref_683
             implementation: Method
             origin: modelerfour:synthesized/api-version
             required: true
-            language: !Languages &ref_1523
+            language: !Languages &ref_1516
               default:
                 name: apiVersion
                 description: Api Version
@@ -22829,7 +22789,7 @@ operationGroups:
         responses:
           - !SchemaResponse 
             schema: *ref_697
-            language: !Languages &ref_1524
+            language: !Languages &ref_1517
               default:
                 name: ''
                 description: OK
@@ -22889,7 +22849,7 @@ operationGroups:
                         latestReportId: >-
                           /subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/myAssignment/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1
                         provisioningState: null
-                  headers: &ref_1525 {}
+                  headers: &ref_1518 {}
           x-ms-pageable:
             nextLinkName: null
         language: !Languages 
@@ -37469,69 +37429,6 @@ testModel:
                       rawValue: '695440707931307747'
                       language: *ref_1473
                   language: *ref_1471
-          - name: Calculate template hash with query parameters
-            clientParameters: []
-            methodParameters:
-              - exampleValue:
-                  schema: *ref_665
-                  rawValue: '2021-04-01'
-                  language: *ref_1468
-                parameter: *ref_1467
-              - exampleValue:
-                  schema: *ref_666
-                  rawValue: first
-                  language: *ref_1476
-                parameter: *ref_674
-              - exampleValue:
-                  schema: *ref_667
-                  rawValue: 42
-                  language: *ref_1477
-                parameter: *ref_675
-              - exampleValue:
-                  schema: *ref_668
-                  rawValue: 4.2222222222222226e+35
-                  language: *ref_1478
-                parameter: *ref_676
-              - exampleValue:
-                  schema: *ref_669
-                  rawValue: 3.14
-                  language: *ref_1479
-                parameter: *ref_677
-              - exampleValue:
-                  schema: *ref_670
-                  rawValue: 3.14159265358
-                  language: *ref_1480
-                parameter: *ref_678
-              - exampleValue:
-                  schema: *ref_671
-                  rawValue: true
-                  language: *ref_1481
-                parameter: *ref_679
-              - exampleValue:
-                  schema: *ref_174
-                  rawValue: *ref_1482
-                  language: *ref_1469
-                parameter: *ref_672
-            operation: *ref_1474
-            operationGroup: *ref_1475
-            originalFile: ''
-            responses:
-              '200':
-                body:
-                  schema: *ref_680
-                  parentsValue: {}
-                  properties:
-                    minifiedTemplate:
-                      schema: *ref_366
-                      rawValue: >-
-                        {"$SCHEMA":"HTTP://SCHEMAS.MANAGEMENT.AZURE.COM/DEPLOYMENTTEMPLATE?API-VERSION=2014-04-01-PREVIEW","CONTENTVERSION":"1.0.0.0","PARAMETERS":{"STRING":{"TYPE":"STRING"}},"VARIABLES":{"STRING":"STRING","INT":42,"BOOL":TRUE,"ARRAY":[1,2,3,4],"OBJECT":{"OBJECT":{"VMSIZE":"LARGE","LOCATION":"WEST
-                        US"}}},"RESOURCES":[],"OUTPUTS":{"STRING":{"TYPE":"STRING","VALUE":"MYVALUE"}}}
-                      language: *ref_1472
-                    templateHash:
-                      schema: *ref_367
-                      rawValue: '695440707931307747'
-                      language: *ref_1473
-                  language: *ref_1471
         operation: *ref_1474
         operationGroup: *ref_1475
       - operationId: GuestConfigurationAssignments_CreateOrUpdate
@@ -37547,23 +37444,23 @@ testModel:
               - exampleValue:
                   schema: *ref_681
                   rawValue: NotInstalledApplicationForWindows
-                  language: *ref_1483
+                  language: *ref_1476
                 parameter: *ref_686
               - exampleValue:
                   schema: *ref_682
                   rawValue: myResourceGroupName
-                  language: *ref_1484
+                  language: *ref_1477
                 parameter: *ref_687
               - exampleValue:
                   schema: *ref_681
                   rawValue: myVMName
-                  language: *ref_1485
+                  language: *ref_1478
                 parameter: *ref_688
               - exampleValue:
                   schema: *ref_683
                   rawValue: '2022-01-25'
-                  language: *ref_1487
-                parameter: *ref_1486
+                  language: *ref_1480
+                parameter: *ref_1479
               - exampleValue:
                   schema: *ref_368
                   parentsValue: {}
@@ -37571,11 +37468,11 @@ testModel:
                     name:
                       schema: *ref_370
                       rawValue: NotInstalledApplicationForWindows
-                      language: *ref_1491
+                      language: *ref_1484
                     location:
                       schema: *ref_371
                       rawValue: westcentralus
-                      language: *ref_1492
+                      language: *ref_1485
                     properties:
                       schema: *ref_382
                       parentsValue: {}
@@ -37583,12 +37480,12 @@ testModel:
                         context:
                           schema: *ref_379
                           rawValue: Azure policy
-                          language: *ref_1490
-                      language: *ref_1489
-                  language: *ref_1488
+                          language: *ref_1483
+                      language: *ref_1482
+                  language: *ref_1481
                 parameter: *ref_684
-            operation: *ref_1504
-            operationGroup: *ref_1505
+            operation: *ref_1497
+            operationGroup: *ref_1498
             originalFile: ''
             responses:
               '200':
@@ -37599,16 +37496,16 @@ testModel:
                     name:
                       schema: *ref_370
                       rawValue: NotInstalledApplicationForWindows
-                      language: *ref_1491
+                      language: *ref_1484
                     id:
                       schema: *ref_369
                       rawValue: >-
                         /subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows
-                      language: *ref_1500
+                      language: *ref_1493
                     location:
                       schema: *ref_371
                       rawValue: westcentralus
-                      language: *ref_1492
+                      language: *ref_1485
                     properties:
                       schema: *ref_382
                       parentsValue: {}
@@ -37616,34 +37513,34 @@ testModel:
                         assignmentHash:
                           schema: *ref_380
                           rawValue: null
-                          language: *ref_1497
+                          language: *ref_1490
                         complianceStatus:
                           schema: *ref_375
                           rawValue: Pending
-                          language: *ref_1494
+                          language: *ref_1487
                         context:
                           schema: *ref_379
                           rawValue: Azure policy
-                          language: *ref_1490
+                          language: *ref_1483
                         lastComplianceStatusChecked:
                           schema: *ref_376
                           rawValue: null
-                          language: *ref_1495
+                          language: *ref_1488
                         latestReportId:
                           schema: *ref_377
                           rawValue: null
-                          language: *ref_1496
+                          language: *ref_1489
                         provisioningState:
                           schema: *ref_184
                           rawValue: Succeeded
-                          language: *ref_1498
+                          language: *ref_1491
                         resourceType:
                           schema: *ref_381
                           rawValue: null
-                          language: *ref_1499
-                      language: *ref_1489
-                  language: *ref_1493
-                headers: *ref_1501
+                          language: *ref_1492
+                      language: *ref_1482
+                  language: *ref_1486
+                headers: *ref_1494
               '201':
                 body:
                   schema: *ref_368
@@ -37652,16 +37549,16 @@ testModel:
                     name:
                       schema: *ref_370
                       rawValue: NotInstalledApplicationForWindows
-                      language: *ref_1491
+                      language: *ref_1484
                     id:
                       schema: *ref_369
                       rawValue: >-
                         /subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows
-                      language: *ref_1500
+                      language: *ref_1493
                     location:
                       schema: *ref_371
                       rawValue: westcentralus
-                      language: *ref_1492
+                      language: *ref_1485
                     properties:
                       schema: *ref_382
                       parentsValue: {}
@@ -37669,36 +37566,36 @@ testModel:
                         assignmentHash:
                           schema: *ref_380
                           rawValue: null
-                          language: *ref_1497
+                          language: *ref_1490
                         complianceStatus:
                           schema: *ref_375
                           rawValue: Pending
-                          language: *ref_1494
+                          language: *ref_1487
                         context:
                           schema: *ref_379
                           rawValue: Azure policy
-                          language: *ref_1490
+                          language: *ref_1483
                         lastComplianceStatusChecked:
                           schema: *ref_376
                           rawValue: null
-                          language: *ref_1495
+                          language: *ref_1488
                         latestReportId:
                           schema: *ref_377
                           rawValue: null
-                          language: *ref_1496
+                          language: *ref_1489
                         provisioningState:
                           schema: *ref_184
                           rawValue: Succeeded
-                          language: *ref_1498
+                          language: *ref_1491
                         resourceType:
                           schema: *ref_381
                           rawValue: null
-                          language: *ref_1499
-                      language: *ref_1489
-                  language: *ref_1502
-                headers: *ref_1503
-        operation: *ref_1504
-        operationGroup: *ref_1505
+                          language: *ref_1492
+                      language: *ref_1482
+                  language: *ref_1495
+                headers: *ref_1496
+        operation: *ref_1497
+        operationGroup: *ref_1498
       - operationId: GuestConfigurationAssignments_Get
         examples:
           - name: Get a guest configuration assignment
@@ -37712,25 +37609,25 @@ testModel:
               - exampleValue:
                   schema: *ref_682
                   rawValue: myResourceGroupName
-                  language: *ref_1506
+                  language: *ref_1499
                 parameter: *ref_689
               - exampleValue:
                   schema: *ref_681
                   rawValue: SecureProtocol
-                  language: *ref_1507
+                  language: *ref_1500
                 parameter: *ref_690
               - exampleValue:
                   schema: *ref_681
                   rawValue: myVMName
-                  language: *ref_1508
+                  language: *ref_1501
                 parameter: *ref_691
               - exampleValue:
                   schema: *ref_683
                   rawValue: '2022-01-25'
-                  language: *ref_1510
-                parameter: *ref_1509
-            operation: *ref_1513
-            operationGroup: *ref_1505
+                  language: *ref_1503
+                parameter: *ref_1502
+            operation: *ref_1506
+            operationGroup: *ref_1498
             originalFile: ''
             responses:
               '200':
@@ -37741,15 +37638,15 @@ testModel:
                     name:
                       schema: *ref_370
                       rawValue: AuditSecureProtocol
-                      language: *ref_1491
+                      language: *ref_1484
                     id:
                       schema: *ref_369
                       rawValue: /subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol
-                      language: *ref_1500
+                      language: *ref_1493
                     location:
                       schema: *ref_371
                       rawValue: centraluseuap
-                      language: *ref_1492
+                      language: *ref_1485
                     properties:
                       schema: *ref_382
                       parentsValue: {}
@@ -37757,33 +37654,33 @@ testModel:
                         assignmentHash:
                           schema: *ref_380
                           rawValue: E0D8941DD713F284284561648C00C18FA76C8602943C7CD38AFD73B56AE4C35F.E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
-                          language: *ref_1497
+                          language: *ref_1490
                         complianceStatus:
                           schema: *ref_375
                           rawValue: Compliant
-                          language: *ref_1494
+                          language: *ref_1487
                         context:
                           schema: *ref_379
                           rawValue: null
-                          language: *ref_1490
+                          language: *ref_1483
                         lastComplianceStatusChecked:
                           schema: *ref_376
                           rawValue: '2018-08-29T22:14:13Z'
-                          language: *ref_1495
+                          language: *ref_1488
                         latestReportId:
                           schema: *ref_377
                           rawValue: >-
                             /subscriptions/subscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/AuditSecureProtocol/reports/7367cbb8-ae99-47d0-a33b-a283564d2cb1
-                          language: *ref_1496
+                          language: *ref_1489
                         provisioningState:
                           schema: *ref_184
                           rawValue: Succeeded
-                          language: *ref_1498
-                      language: *ref_1489
-                  language: *ref_1511
-                headers: *ref_1512
-        operation: *ref_1513
-        operationGroup: *ref_1505
+                          language: *ref_1491
+                      language: *ref_1482
+                  language: *ref_1504
+                headers: *ref_1505
+        operation: *ref_1506
+        operationGroup: *ref_1498
       - operationId: GuestConfigurationAssignments_Delete
         examples:
           - name: Delete an guest configuration assignment
@@ -37797,30 +37694,30 @@ testModel:
               - exampleValue:
                   schema: *ref_682
                   rawValue: myResourceGroupName
-                  language: *ref_1514
+                  language: *ref_1507
                 parameter: *ref_692
               - exampleValue:
                   schema: *ref_681
                   rawValue: SecureProtocol
-                  language: *ref_1515
+                  language: *ref_1508
                 parameter: *ref_693
               - exampleValue:
                   schema: *ref_681
                   rawValue: myVMName
-                  language: *ref_1516
+                  language: *ref_1509
                 parameter: *ref_694
               - exampleValue:
                   schema: *ref_683
                   rawValue: '2022-01-25'
-                  language: *ref_1518
-                parameter: *ref_1517
-            operation: *ref_1519
-            operationGroup: *ref_1505
+                  language: *ref_1511
+                parameter: *ref_1510
+            operation: *ref_1512
+            operationGroup: *ref_1498
             originalFile: ''
             responses:
               '200': {}
-        operation: *ref_1519
-        operationGroup: *ref_1505
+        operation: *ref_1512
+        operationGroup: *ref_1498
       - operationId: GuestConfigurationAssignments_List
         examples:
           - name: List all guest configuration assignments for a virtual machine
@@ -37834,20 +37731,20 @@ testModel:
               - exampleValue:
                   schema: *ref_682
                   rawValue: myResourceGroupName
-                  language: *ref_1520
+                  language: *ref_1513
                 parameter: *ref_695
               - exampleValue:
                   schema: *ref_681
                   rawValue: myVMName
-                  language: *ref_1521
+                  language: *ref_1514
                 parameter: *ref_696
               - exampleValue:
                   schema: *ref_683
                   rawValue: '2022-01-25'
-                  language: *ref_1523
-                parameter: *ref_1522
-            operation: *ref_1526
-            operationGroup: *ref_1505
+                  language: *ref_1516
+                parameter: *ref_1515
+            operation: *ref_1519
+            operationGroup: *ref_1498
             originalFile: ''
             responses:
               '200':
@@ -37855,10 +37752,10 @@ testModel:
                   schema: *ref_697
                   parentsValue: {}
                   properties: {}
-                  language: *ref_1524
-                headers: *ref_1525
-        operation: *ref_1526
-        operationGroup: *ref_1505
+                  language: *ref_1517
+                headers: *ref_1518
+        operation: *ref_1519
+        operationGroup: *ref_1498
   scenarioTests: []
 language: !Languages 
   default:
