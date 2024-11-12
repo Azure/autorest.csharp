@@ -652,6 +652,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
+    "typespec-azure/example/basic": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\example\\basic\\src\\Generated -n"
+    },
     "typespec-azure/resource-manager/common-properties": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\resource-manager\\common-properties\\src\\Generated -n"
