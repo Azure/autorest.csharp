@@ -15,14 +15,14 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_ManagedHsmCollection
     {
-        // Create a new managed HSM Pool or update an existing managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task CreateOrUpdate_CreateANewManagedHSMPoolOrUpdateAnExistingManagedHSMPool()
         {
             // Generated from example definition:
@@ -98,9 +98,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Retrieve a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveAManagedHSMPool()
         {
             // Generated from example definition:
@@ -132,9 +131,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Retrieve a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Exists_RetrieveAManagedHSMPool()
         {
             // Generated from example definition:
@@ -162,9 +160,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             Console.WriteLine($"Succeeded: {result}");
         }
 
-        // Retrieve a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetIfExists_RetrieveAManagedHSMPool()
         {
             // Generated from example definition:
@@ -192,7 +189,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
 
             if (result == null)
             {
-                Console.WriteLine($"Succeeded with null as result");
+                Console.WriteLine("Succeeded with null as result");
             }
             else
             {
@@ -204,9 +201,8 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
             }
         }
 
-        // List managed HSM Pools in a resource group
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetAll_ListManagedHSMPoolsInAResourceGroup()
         {
             // Generated from example definition:
@@ -237,7 +233,7 @@ Id = new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

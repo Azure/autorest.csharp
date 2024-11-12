@@ -12,14 +12,14 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using MgmtTypeSpec.Models;
+using NUnit.Framework;
 
 namespace MgmtTypeSpec.Samples
 {
     public partial class Sample_FooResource
     {
-        // Create a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_CreateAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_CreateOrUpdate.json
@@ -60,9 +60,8 @@ namespace MgmtTypeSpec.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get a foo
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_GetAFoo()
         {
             // Generated from example definition: 2024-05-01/Foos_Get.json

@@ -11,14 +11,14 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_DeletedVaultResource
     {
-        // Purge a deleted vault
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task PurgeDeleted_PurgeADeletedVault()
         {
             // Generated from example definition:
@@ -40,7 +40,7 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await deletedVault.PurgeDeletedAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

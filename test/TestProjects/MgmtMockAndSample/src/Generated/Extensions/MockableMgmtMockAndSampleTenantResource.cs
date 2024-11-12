@@ -121,18 +121,18 @@ namespace MgmtMockAndSample.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(TenantResourceCalculateTemplateHashDeploymentOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = DeploymentsClientDiagnostics.CreateScope("MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment");
             scope.Start();
             try
             {
-                var response = await DeploymentsRestClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
+                var response = await DeploymentsRestClient.CalculateTemplateHashAsync(options.Template, options.Q1, options.Q2, options.Q3, options.Q4, options.Q5, options.Q6, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -159,18 +159,18 @@ namespace MgmtMockAndSample.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(TenantResourceCalculateTemplateHashDeploymentOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = DeploymentsClientDiagnostics.CreateScope("MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment");
             scope.Start();
             try
             {
-                var response = DeploymentsRestClient.CalculateTemplateHash(template, cancellationToken);
+                var response = DeploymentsRestClient.CalculateTemplateHash(options.Template, options.Q1, options.Q2, options.Q3, options.Q4, options.Q5, options.Q6, cancellationToken);
                 return response;
             }
             catch (Exception e)
