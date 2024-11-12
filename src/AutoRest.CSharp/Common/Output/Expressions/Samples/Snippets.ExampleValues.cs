@@ -200,6 +200,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
                 return Default.CastTo(frameworkType);
             }
 
+            if (frameworkType == typeof(UserAssignedIdentity))
+            {
+                return New.Instance(frameworkType);
+            }
+
             return DefaultOf(frameworkType);
         }
 

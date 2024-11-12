@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Samples
                 {
                     UserAssignedIdentities =
 {
-[new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}")] = null
+[new ResourceIdentifier("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}")] = new UserAssignedIdentity()
 },
                 },
                 EncryptionType = DiskEncryptionSetType.EncryptionAtRestWithCustomerKey,
