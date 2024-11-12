@@ -20,13 +20,21 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<UnivariateLastDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<UnivariateLastDetectionResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(UnivariateLastDetectionResult)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("period"u8);
             writer.WriteNumberValue(Period);
             writer.WritePropertyName("suggestedWindow"u8);
@@ -63,7 +71,6 @@ namespace AnomalyDetector.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         UnivariateLastDetectionResult IJsonModel<UnivariateLastDetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

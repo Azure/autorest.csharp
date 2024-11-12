@@ -20,13 +20,21 @@ namespace AnomalyDetector.Models
 
         void IJsonModel<DiagnosticsInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<DiagnosticsInfo>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DiagnosticsInfo)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (Optional.IsDefined(ModelState))
             {
                 writer.WritePropertyName("modelState"u8);
@@ -57,7 +65,6 @@ namespace AnomalyDetector.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         DiagnosticsInfo IJsonModel<DiagnosticsInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

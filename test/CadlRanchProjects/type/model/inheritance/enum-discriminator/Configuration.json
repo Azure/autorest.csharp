@@ -7,6 +7,5 @@
   "shared-source-folders": [
     "../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
     "../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
-  ],
-  "use-write-core": true
+  ]
 }

@@ -21,13 +21,21 @@ namespace Payload.MultiPart.Models
 
         void IJsonModel<FileWithHttpPartOptionalContentTypeRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<FileWithHttpPartOptionalContentTypeRequest>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(FileWithHttpPartOptionalContentTypeRequest)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("profileImage"u8);
             writer.WriteObjectValue(ProfileImage, options);
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -45,7 +53,6 @@ namespace Payload.MultiPart.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         FileWithHttpPartOptionalContentTypeRequest IJsonModel<FileWithHttpPartOptionalContentTypeRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
