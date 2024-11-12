@@ -190,6 +190,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Samples
                 return Null.CastTo(frameworkType);
             }
 
+            // TODO -- this might be an issue. We have so many shared common types in resoucemanager which replace the generated types in a library.
+            // This way is only temporary, we need a universal way to handle those replaced types.
             if (frameworkType == typeof(ManagedServiceIdentityType))
             {
                 if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string str)
