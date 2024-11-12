@@ -237,7 +237,7 @@ In `azure-sdk-for-net` repo, to debug a project that uses swagger files as input
 csharpgen:
   attach: true
 ```
-
+ddd
 and then run `dotnet build /t:GenerateCode` and it will attach a debugger to the plugin process.
 
 To debug a TypeSpec project inside `azure-sdk-for-net` repo, you could run
