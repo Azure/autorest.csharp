@@ -1802,18 +1802,18 @@ namespace MgmtMockAndSample
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(TenantResourceCalculateTemplateHashDeploymentOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
-        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="options"/> is null. </exception>
+        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, TenantResourceCalculateTemplateHashDeploymentOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tenantResource, nameof(tenantResource));
 
-            return await GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1834,18 +1834,18 @@ namespace MgmtMockAndSample
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(TenantResourceCalculateTemplateHashDeploymentOptions,CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="template"> The template provided to calculate hash. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
-        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="options"/> is null. </exception>
+        public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, TenantResourceCalculateTemplateHashDeploymentOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tenantResource, nameof(tenantResource));
 
-            return GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeployment(options, cancellationToken);
         }
     }
 }

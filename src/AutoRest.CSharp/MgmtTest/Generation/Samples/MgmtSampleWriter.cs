@@ -67,9 +67,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             }
 
             // write the attributes
-            _writer.Line($"// {sample.Name}");
-            _writer.Line($"[NUnit.Framework.Test]");
-            _writer.Line($"[NUnit.Framework.Ignore(\"Only verifying that the sample builds\")]");
+            _writer.UseNamespace("NUnit.Framework");
+            _writer.Line($"[Test]");
+            _writer.Line($"[Ignore(\"Only validating compilation of examples\")]");
             using (_writer.WriteMethodDeclaration(signature))
             {
                 WriteSampleSteps(sample);
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
             if (result == null)
             {
-                _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded\");");
+                _writer.Line($"{typeof(Console)}.WriteLine(\"Succeeded\");");
             }
             else
             {
@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     using (_writer.Scope($"if({result.Declaration} == null)"))
                     {
-                        _writer.Line($"{typeof(Console)}.WriteLine($\"Succeeded with null as result\");");
+                        _writer.Line($"{typeof(Console)}.WriteLine(\"Succeeded with null as result\");");
                     }
                     using (_writer.Scope($"else"))
                     {

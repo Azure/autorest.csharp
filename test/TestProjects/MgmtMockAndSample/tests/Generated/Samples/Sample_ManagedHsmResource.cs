@@ -13,14 +13,14 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_ManagedHsmResource
     {
-        // Update an existing managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_UpdateAnExistingManagedHSMPool()
         {
             // Generated from example definition:
@@ -59,9 +59,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Delete a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Delete_DeleteAManagedHSMPool()
         {
             // Generated from example definition:
@@ -83,12 +82,11 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await managedHsm.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
-        // Retrieve a managed HSM Pool
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_RetrieveAManagedHSMPool()
         {
             // Generated from example definition:
@@ -117,9 +115,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // List managed HSM Pools in a subscription
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetManagedHsms_ListManagedHSMPoolsInASubscription()
         {
             // Generated from example definition:
@@ -146,12 +143,11 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
-        // KeyVaultListPrivateLinkResources
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource_KeyVaultListPrivateLinkResources()
         {
             // Generated from example definition:
@@ -176,7 +172,7 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded: {item}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }
