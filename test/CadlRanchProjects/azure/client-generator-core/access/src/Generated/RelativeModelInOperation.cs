@@ -45,14 +45,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: name=&lt;any string&gt;
+        /// Expected query parameter: name="Madge"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "inner":
         ///   {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -70,14 +70,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: name=&lt;any string&gt;
+        /// Expected query parameter: name="Madge"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "inner":
         ///   {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -95,14 +95,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: name=&lt;any string&gt;
+        /// [Protocol Method] Expected query parameter: name="Madge"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "inner":
         ///   {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -143,14 +143,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: name=&lt;any string&gt;
+        /// [Protocol Method] Expected query parameter: name="Madge"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "inner":
         ///   {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -191,11 +191,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: kind=&lt;any string&gt;
+        /// Expected query parameter: kind= "real"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "kind": "real"
         /// }
         /// ```
@@ -213,11 +213,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// Expected query parameter: kind=&lt;any string&gt;
+        /// Expected query parameter: kind= "real"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "kind": "real"
         /// }
         /// ```
@@ -235,11 +235,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: kind=&lt;any string&gt;
+        /// [Protocol Method] Expected query parameter: kind= "real"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "kind": "real"
         /// }
         /// ```
@@ -280,11 +280,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Expected query parameter: kind=&lt;any string&gt;
+        /// [Protocol Method] Expected query parameter: kind= "real"
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;,
+        ///   "name": "Madge",
         ///   "kind": "real"
         /// }
         /// ```
