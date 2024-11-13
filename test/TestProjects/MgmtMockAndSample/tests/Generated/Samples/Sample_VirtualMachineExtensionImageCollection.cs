@@ -188,7 +188,7 @@ namespace MgmtMockAndSample.Samples
             string filter = "aaaaaaaaaaaaaaaaaaaaaaaaa";
             int? top = 22;
             string orderby = "a";
-            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter, top, orderby))
+            await foreach (VirtualMachineExtensionImageResource item in collection.GetAllAsync(type, filter: filter, top: top, orderby: orderby))
             {
                 // the variable item is a resource, you could call other operations on this instance as well
                 // but just for demo, we get its data from this resource instance

@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     if (parameter.IsOptionalInSignature)
                         continue;
 
-                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
+                    parameterExpression = DefaultOf(parameter.Type);
                 }
                 if (IsInlineParameter(parameter))
                 {

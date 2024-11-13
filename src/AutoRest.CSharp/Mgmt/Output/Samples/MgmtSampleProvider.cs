@@ -323,16 +323,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             var arguments = new List<ValueExpression>(methodParameters.Count);
             foreach (var parameter in methodParameters)
             {
-                if (example.Carrier is ArmResourceExtension && parameter.Type.Equals(typeof(ArmResource)))
-                {
-                    // this is an extension operation against ArmResource
-                    // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
-                    // so insert a scope parameter instead of ArmResource here
-                    throw new NotImplementedException();
-                }
-
                 if (example.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
+                    // if we could get an example value out of the map, we just use it.
                     var expression = ExampleValueSnippets.GetExpression(parameterValue, parameter.SerializationFormat);
 
                     // some parameters are always inline
@@ -343,7 +336,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
                     else
                     {
                         statements.Add(Declare(parameter.Type, parameter.Name, expression, out var p));
-                        arguments.Add(p);
+                        if (parameter.IsOptionalInSignature)
+                        {
+                            arguments.Add(new PositionalParameterReference(parameter.Name, p));
+                        }
+                        else
+                        {
+                            arguments.Add(p);
+                        }
                     }
                 }
                 else if (parameter.IsPropertyBag)
