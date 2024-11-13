@@ -94,7 +94,7 @@ namespace CadlRanchProjects.Tests
             var input = new Eagle(32);
             input.Partner = new Eagle(32);
 
-            JsonAsserts.AssertWireSerialization("{\"partner\":{\"kind\":\"eagle\",\"wingspan\":32},\"kind\":\"eagle\",\"wingspan\":32}", input);
+            JsonAsserts.AssertWireSerialization("{\"kind\":\"eagle\",\"wingspan\":32,\"partner\":{\"kind\":\"eagle\",\"wingspan\":32}}", input);
 
             var output = Eagle.DeserializeEagle(JsonAsserts.AssertWireSerializes(input));
 

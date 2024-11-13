@@ -20,13 +20,21 @@ namespace xms_error_responses.Models
 
         void IJsonModel<PetAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<PetAction>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(PetAction)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (Optional.IsDefined(ActionResponse))
             {
                 writer.WritePropertyName("actionResponse"u8);
@@ -47,7 +55,6 @@ namespace xms_error_responses.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         PetAction IJsonModel<PetAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
