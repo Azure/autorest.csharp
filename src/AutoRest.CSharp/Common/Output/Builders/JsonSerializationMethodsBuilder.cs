@@ -137,13 +137,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new
                 (
                     new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: iJsonModelInterface),
-                    Configuration.UseWriteCore ? BuildJsonModelWriteMethodBody(jsonModelWriteCore, writer) : WriteObject(json, writer, options, iPersistableModelTInterface)
+                    BuildJsonModelWriteMethodBody(jsonModelWriteCore, writer)
                 );
-                if (Configuration.UseWriteCore)
-                {
-                    yield return jsonModelWriteCore;
-                }
-
+                yield return jsonModelWriteCore;
                 // T IJsonModel<T>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
                 var reader = KnownParameters.Serializations.Utf8JsonReader;
                 yield return new

@@ -11,7 +11,6 @@
   "skip-csproj": true,
   "skip-csproj-packagereference": true,
   "use-model-reader-writer": true,
-  "use-write-core": true,
   "RenameMapping": {
     "Pet.dateOfBirth": "-|date-time"
   },

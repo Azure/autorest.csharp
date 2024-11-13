@@ -14,134 +14,27 @@ namespace NoTestTypeSpec.Models
     {
         void IJsonModel<DerivedThing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected override void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<DerivedThing>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DerivedThing)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
+            base.JsonModelWriteCore(writer, options);
             if (SerializedAdditionalRawData?.ContainsKey("myProperty") != true && Optional.IsDefined(MyProperty))
             {
                 writer.WritePropertyName("myProperty"u8);
                 writer.WriteStringValue(MyProperty);
             }
-            if (SerializedAdditionalRawData?.ContainsKey("name") != true)
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredUnion") != true)
-            {
-                writer.WritePropertyName("requiredUnion"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(RequiredUnion);
-#else
-                using (JsonDocument document = JsonDocument.Parse(RequiredUnion))
-                {
-                    JsonSerializer.Serialize(writer, document.RootElement);
-                }
-#endif
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredLiteralString") != true)
-            {
-                writer.WritePropertyName("requiredLiteralString"u8);
-                writer.WriteStringValue(RequiredLiteralString.ToString());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredLiteralInt") != true)
-            {
-                writer.WritePropertyName("requiredLiteralInt"u8);
-                writer.WriteNumberValue(RequiredLiteralInt.ToSerialInt32());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredLiteralFloat") != true)
-            {
-                writer.WritePropertyName("requiredLiteralFloat"u8);
-                writer.WriteNumberValue(RequiredLiteralFloat.ToSerialSingle());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredLiteralBool") != true)
-            {
-                writer.WritePropertyName("requiredLiteralBool"u8);
-                writer.WriteBooleanValue(RequiredLiteralBool);
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("optionalLiteralString") != true && Optional.IsDefined(OptionalLiteralString))
-            {
-                writer.WritePropertyName("optionalLiteralString"u8);
-                writer.WriteStringValue(OptionalLiteralString.Value.ToString());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("optionalLiteralInt") != true && Optional.IsDefined(OptionalLiteralInt))
-            {
-                writer.WritePropertyName("optionalLiteralInt"u8);
-                writer.WriteNumberValue(OptionalLiteralInt.Value.ToSerialInt32());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("optionalLiteralFloat") != true && Optional.IsDefined(OptionalLiteralFloat))
-            {
-                writer.WritePropertyName("optionalLiteralFloat"u8);
-                writer.WriteNumberValue(OptionalLiteralFloat.Value.ToSerialSingle());
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("optionalLiteralBool") != true && Optional.IsDefined(OptionalLiteralBool))
-            {
-                writer.WritePropertyName("optionalLiteralBool"u8);
-                writer.WriteBooleanValue(OptionalLiteralBool.Value);
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredBadDescription") != true)
-            {
-                writer.WritePropertyName("requiredBadDescription"u8);
-                writer.WriteStringValue(RequiredBadDescription);
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("optionalNullableList") != true && Optional.IsCollectionDefined(OptionalNullableList))
-            {
-                if (OptionalNullableList != null)
-                {
-                    writer.WritePropertyName("optionalNullableList"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OptionalNullableList)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                else
-                {
-                    writer.WriteNull("optionalNullableList");
-                }
-            }
-            if (SerializedAdditionalRawData?.ContainsKey("requiredNullableList") != true)
-            {
-                if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
-                {
-                    writer.WritePropertyName("requiredNullableList"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in RequiredNullableList)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
-                }
-                else
-                {
-                    writer.WriteNull("requiredNullableList");
-                }
-            }
-            if (SerializedAdditionalRawData != null)
-            {
-                foreach (var item in SerializedAdditionalRawData)
-                {
-                    if (ModelSerializationExtensions.IsSentinelValue(item.Value))
-                    {
-                        continue;
-                    }
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
         }
 
         DerivedThing IJsonModel<DerivedThing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

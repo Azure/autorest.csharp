@@ -20,13 +20,21 @@ namespace TypeSchemaMapping.Models
 
         void IJsonModel<ModelWithNullableObjectProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<ModelWithNullableObjectProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(ModelWithNullableObjectProperty)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
@@ -47,7 +55,6 @@ namespace TypeSchemaMapping.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         ModelWithNullableObjectProperty IJsonModel<ModelWithNullableObjectProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

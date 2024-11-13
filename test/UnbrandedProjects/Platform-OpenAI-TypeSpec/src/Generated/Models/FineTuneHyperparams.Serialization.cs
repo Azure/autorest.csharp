@@ -14,13 +14,21 @@ namespace OpenAI.Models
     {
         void IJsonModel<FineTuneHyperparams>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<FineTuneHyperparams>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             if (SerializedAdditionalRawData?.ContainsKey("n_epochs") != true)
             {
                 writer.WritePropertyName("n_epochs"u8);
@@ -75,7 +83,6 @@ namespace OpenAI.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         FineTuneHyperparams IJsonModel<FineTuneHyperparams>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
