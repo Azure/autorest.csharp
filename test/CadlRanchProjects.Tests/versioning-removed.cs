@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using Versioning.Removed;
-using Versioning.Removed.Models;
+using Versioning.Removed.LatestVersion;
+using Versioning.Removed.LatestVersion.Models;
 
 namespace CadlRanchProjects.Tests
 {
@@ -68,12 +68,11 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Versioning_Removed_V3Model() => Test(async (host) =>
         {
-            ModelV2 modelV2 = new ModelV2("foo", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("bar"));
-            var response = await new RemovedClient(host, Versions.V2).V2Async(modelV2);
+            var model = new ModelV3("123", EnumV3.EnumMemberV1);
+            var response = await new RemovedClient(host, Versions.V2).ModelV3Async(model);
             Assert.AreEqual(200, response.GetRawResponse().Status);
-            Assert.AreEqual("foo", response.Value.Prop);
-            Assert.AreEqual(EnumV2.EnumMemberV2, response.Value.EnumProp);
-            Assert.AreEqual("bar", response.Value.UnionProp.ToObjectFromJson<string>());
+            Assert.AreEqual("123", response.Value.Id);
+            Assert.AreEqual(EnumV3.EnumMemberV1, response.Value.EnumProp);
         });
     }
 }
