@@ -64,5 +64,16 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(EnumV2.EnumMemberV2, response.Value.EnumProp);
             Assert.AreEqual("bar", response.Value.UnionProp.ToObjectFromJson<string>());
         });
+
+        [Test]
+        public Task Versioning_Removed_V3Model() => Test(async (host) =>
+        {
+            ModelV2 modelV2 = new ModelV2("foo", EnumV2.EnumMemberV2, BinaryData.FromObjectAsJson("bar"));
+            var response = await new RemovedClient(host, Versions.V2).V2Async(modelV2);
+            Assert.AreEqual(200, response.GetRawResponse().Status);
+            Assert.AreEqual("foo", response.Value.Prop);
+            Assert.AreEqual(EnumV2.EnumMemberV2, response.Value.EnumProp);
+            Assert.AreEqual("bar", response.Value.UnionProp.ToObjectFromJson<string>());
+        });
     }
 }
