@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="V1Async(ModelV1,CancellationToken)">
+      <example>
+This sample shows how to call V1Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV1> response = await client.V1Async(body);
+]]></code>
+This sample shows how to call V1Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV1> response = await client.V1Async(body);
+]]></code></example>
+    </member>
+    <member name="V1(ModelV1,CancellationToken)">
+      <example>
+This sample shows how to call V1.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV1> response = client.V1(body);
+]]></code>
+This sample shows how to call V1 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV1 body = new ModelV1("<prop>", EnumV1.EnumMember, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV1> response = client.V1(body);
+]]></code></example>
+    </member>
+    <member name="V1Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V1Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V1Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V1Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V1Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+    <member name="V1(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V1 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.V1(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V1 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    enumProp = "enumMember",
+    unionProp = "<unionProp>",
+});
+Response response = client.V1(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+    <member name="V2Async(string,ModelV2,CancellationToken)">
+      <example>
+This sample shows how to call V2Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = await client.V2Async("<param>", body);
+]]></code>
+This sample shows how to call V2Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = await client.V2Async("<param>", body);
+]]></code></example>
+    </member>
+    <member name="V2(string,ModelV2,CancellationToken)">
+      <example>
+This sample shows how to call V2.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = client.V2("<param>", body);
+]]></code>
+This sample shows how to call V2 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV2 body = new ModelV2("<prop>", "<removedProp>", EnumV2.EnumMemberV1, BinaryData.FromObjectAsJson("<unionProp>"));
+Response<ModelV2> response = client.V2("<param>", body);
+]]></code></example>
+    </member>
+    <member name="V2Async(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V2Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    removedProp = "<removedProp>",
+    enumProp = "enumMemberV1",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V2Async("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("removedProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V2Async with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    removedProp = "<removedProp>",
+    enumProp = "enumMemberV1",
+    unionProp = "<unionProp>",
+});
+Response response = await client.V2Async("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("removedProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+    <member name="V2(string,RequestContent,RequestContext)">
+      <example>
+This sample shows how to call V2 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    removedProp = "<removedProp>",
+    enumProp = "enumMemberV1",
+    unionProp = "<unionProp>",
+});
+Response response = client.V2("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("removedProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code>
+This sample shows how to call V2 with all parameters and request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "<prop>",
+    removedProp = "<removedProp>",
+    enumProp = "enumMemberV1",
+    unionProp = "<unionProp>",
+});
+Response response = client.V2("<param>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+Console.WriteLine(result.GetProperty("removedProp").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+Console.WriteLine(result.GetProperty("unionProp").ToString());
+]]></code></example>
+    </member>
+  </members>
+</doc>

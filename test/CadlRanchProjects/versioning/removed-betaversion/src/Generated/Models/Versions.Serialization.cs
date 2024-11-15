@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.BetaVersion.Models
 {
     internal static partial class VersionsExtensions
     {

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Versioning.Removed.Models;
+using Versioning.Removed.BetaVersion.Models;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.BetaVersion
 {
     // Data plane generated client.
     /// <summary> Test for the `@removed` decorator. </summary>

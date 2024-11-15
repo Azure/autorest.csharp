@@ -7,13 +7,13 @@
 
 using System;
 using Azure.Core.Extensions;
-using Versioning.Removed;
-using Versioning.Removed.Models;
+using Versioning.Removed.BetaVersion;
+using Versioning.Removed.BetaVersion.Models;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="RemovedClient"/> to client builder. </summary>
-    public static partial class VersioningRemovedClientBuilderExtensions
+    public static partial class VersioningRemovedBetaVersionClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="RemovedClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

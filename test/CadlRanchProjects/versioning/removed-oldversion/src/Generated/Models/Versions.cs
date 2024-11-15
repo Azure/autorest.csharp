@@ -5,14 +5,12 @@
 
 #nullable disable
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.OldVersion.Models
 {
     /// <summary> The version of the API. </summary>
     public enum Versions
     {
         /// <summary> The version v1. </summary>
-        V1,
-        /// <summary> The version v2. </summary>
-        V2
+        V1
     }
 }

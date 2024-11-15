@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Versioning.Removed.Models;
+using Versioning.Removed.OldVersion.Models;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.OldVersion
 {
-    // Data plane generated client.
-    /// <summary> Test for the `@removed` decorator. </summary>
-    public partial class RemovedClient
+    // Data plane generated sub-client.
+    /// <summary> This operation group should not be generated with latest version. </summary>
+    public partial class InterfaceV1
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,67 +29,56 @@ namespace Versioning.Removed
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of RemovedClient for mocking. </summary>
-        protected RemovedClient()
+        /// <summary> Initializes a new instance of InterfaceV1 for mocking. </summary>
+        protected InterfaceV1()
         {
         }
 
-        /// <summary> Initializes a new instance of RemovedClient. </summary>
+        /// <summary> Initializes a new instance of InterfaceV1. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RemovedClient(Uri endpoint, Versions version) : this(endpoint, version, new RemovedClientOptions())
+        internal InterfaceV1(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, Versions version)
         {
-        }
-
-        /// <summary> Initializes a new instance of RemovedClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
-        /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public RemovedClient(Uri endpoint, Versions version, RemovedClientOptions options)
-        {
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new RemovedClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            ClientDiagnostics = clientDiagnostics;
+            _pipeline = pipeline;
             _endpoint = endpoint;
             _version = version;
         }
 
-        /// <summary> V 2. </summary>
-        /// <param name="body"> The <see cref="ModelV2"/> to use. </param>
+        /// <summary> V 1 in interface. </summary>
+        /// <param name="body"> The <see cref="ModelV1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/RemovedClient.xml" path="doc/members/member[@name='V2Async(ModelV2,CancellationToken)']/*" />
-        public virtual async Task<Response<ModelV2>> V2Async(ModelV2 body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/InterfaceV1.xml" path="doc/members/member[@name='V1InInterfaceAsync(ModelV1,CancellationToken)']/*" />
+        public virtual async Task<Response<ModelV1>> V1InInterfaceAsync(ModelV1 body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await V2Async(content, context).ConfigureAwait(false);
-            return Response.FromValue(ModelV2.FromResponse(response), response);
+            Response response = await V1InInterfaceAsync(content, context).ConfigureAwait(false);
+            return Response.FromValue(ModelV1.FromResponse(response), response);
         }
 
-        /// <summary> V 2. </summary>
-        /// <param name="body"> The <see cref="ModelV2"/> to use. </param>
+        /// <summary> V 1 in interface. </summary>
+        /// <param name="body"> The <see cref="ModelV1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/RemovedClient.xml" path="doc/members/member[@name='V2(ModelV2,CancellationToken)']/*" />
-        public virtual Response<ModelV2> V2(ModelV2 body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/InterfaceV1.xml" path="doc/members/member[@name='V1InInterface(ModelV1,CancellationToken)']/*" />
+        public virtual Response<ModelV1> V1InInterface(ModelV1 body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             using RequestContent content = body.ToRequestContent();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = V2(content, context);
-            return Response.FromValue(ModelV2.FromResponse(response), response);
+            Response response = V1InInterface(content, context);
+            return Response.FromValue(ModelV1.FromResponse(response), response);
         }
 
         /// <summary>
-        /// [Protocol Method] V 2.
+        /// [Protocol Method] V 1 in interface.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +87,7 @@ namespace Versioning.Removed
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="V2Async(ModelV2,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="V1InInterfaceAsync(ModelV1,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -108,16 +97,16 @@ namespace Versioning.Removed
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RemovedClient.xml" path="doc/members/member[@name='V2Async(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> V2Async(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/InterfaceV1.xml" path="doc/members/member[@name='V1InInterfaceAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> V1InInterfaceAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("RemovedClient.V2");
+            using var scope = ClientDiagnostics.CreateScope("InterfaceV1.V1InInterface");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateV2Request(content, context);
+                using HttpMessage message = CreateV1InInterfaceRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -128,7 +117,7 @@ namespace Versioning.Removed
         }
 
         /// <summary>
-        /// [Protocol Method] V 2.
+        /// [Protocol Method] V 1 in interface.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,7 +126,7 @@ namespace Versioning.Removed
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="V2(ModelV2,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="V1InInterface(ModelV1,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -147,16 +136,16 @@ namespace Versioning.Removed
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RemovedClient.xml" path="doc/members/member[@name='V2(RequestContent,RequestContext)']/*" />
-        public virtual Response V2(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/InterfaceV1.xml" path="doc/members/member[@name='V1InInterface(RequestContent,RequestContext)']/*" />
+        public virtual Response V1InInterface(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("RemovedClient.V2");
+            using var scope = ClientDiagnostics.CreateScope("InterfaceV1.V1InInterface");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateV2Request(content, context);
+                using HttpMessage message = CreateV1InInterfaceRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -166,7 +155,7 @@ namespace Versioning.Removed
             }
         }
 
-        internal HttpMessage CreateV2Request(RequestContent content, RequestContext context)
+        internal HttpMessage CreateV1InInterfaceRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -175,7 +164,7 @@ namespace Versioning.Removed
             uri.Reset(_endpoint);
             uri.AppendRaw("/versioning/removed/api-version:", false);
             uri.AppendRaw(_version.ToSerialString(), true);
-            uri.AppendPath("/v2", false);
+            uri.AppendPath("/interface-v1/v1", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

@@ -12,9 +12,9 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using Versioning.Removed.Models;
+using Versioning.Removed.BetaVersion.Models;
 
-namespace Versioning.Removed.Samples
+namespace Versioning.Removed.BetaVersion.Samples
 {
     public partial class Samples_RemovedClient
     {

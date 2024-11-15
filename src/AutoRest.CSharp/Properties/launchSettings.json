@@ -548,6 +548,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PublicClientCtor\\Generated"
     },
+    "removedBetaVersion-typespec-versioning/removed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\removed-betaversion\\src\\Generated -n"
+    },
+    "removedOldVersion-typespec-versioning/removed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\versioning\\removed-oldversion\\src\\Generated -n"
+    },
     "required-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"

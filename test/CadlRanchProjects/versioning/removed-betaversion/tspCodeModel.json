@@ -1,10 +1,7 @@
 {
  "$id": "1",
  "Name": "Versioning.Removed",
- "ApiVersions": [
-  "v1",
-  "v2"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",

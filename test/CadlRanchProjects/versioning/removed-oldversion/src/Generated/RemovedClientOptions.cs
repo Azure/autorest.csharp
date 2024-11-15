@@ -8,20 +8,18 @@
 using System;
 using Azure.Core;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.OldVersion
 {
     /// <summary> Client options for RemovedClient. </summary>
     public partial class RemovedClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2;
+        private const ServiceVersion LatestVersion = ServiceVersion.V1;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
             /// <summary> Service version "v1". </summary>
             V1 = 1,
-            /// <summary> Service version "v2". </summary>
-            V2 = 2,
         }
 
         internal string Version { get; }
@@ -32,7 +30,6 @@ namespace Versioning.Removed
             Version = version switch
             {
                 ServiceVersion.V1 => "v1",
-                ServiceVersion.V2 => "v2",
                 _ => throw new NotSupportedException()
             };
         }

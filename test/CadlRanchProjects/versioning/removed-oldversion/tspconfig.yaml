@@ -1,0 +1,5 @@
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: Versioning.Removed.OldVersion
+    clear-output-folder: true
+    "api-version": "v1"

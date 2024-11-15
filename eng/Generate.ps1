@@ -295,6 +295,10 @@ if (!($Exclude -contains "CadlRanchProjectsNonAzure")) {
 
 # add Head-As-Boolen project
 Add-CadlRanch-TypeSpec "server/path/single" "headAsBoolean-typespec-" $cadlRanchProjectDirectory "$cadlRanchProjectDirectory/server/path/single-headAsBoolean"
+# add Removed-OldVersion project
+Add-CadlRanch-TypeSpec "versioning/removed" "removedOldVersion-typespec-" $cadlRanchProjectDirectory "$cadlRanchProjectDirectory/versioning/removed-oldversion"
+# add Removed-BetaVersion project
+Add-CadlRanch-TypeSpec "versioning/removed" "removedBetaVersion-typespec-" $cadlRanchProjectDirectory "$cadlRanchProjectDirectory/versioning/removed-betaversion"
 # Smoke tests
 if (!($Exclude -contains "SmokeTests")) {
     foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt")) {
