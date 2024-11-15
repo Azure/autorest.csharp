@@ -21,7 +21,7 @@ namespace CadlRanchProjectsNonAzure.Tests
         [Test]
         public Task Authentication_ApiKey_invalid() => Test((host) =>
         {
-            var exception = Assert.ThrowsAsync<ClientResultException>(() => new ApiKeyClient(host, new ApiKeyCredential("valid-key"), null).InvalidAsync());
+            var exception = Assert.ThrowsAsync<ClientResultException>(() => new ApiKeyClient(host, new ApiKeyCredential("invalid-key"), null).InvalidAsync());
             Assert.AreEqual(403, exception.Status);
             return Task.CompletedTask;
         });
