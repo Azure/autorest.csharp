@@ -48,7 +48,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected body parameter:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// </summary>
@@ -70,7 +70,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected body parameter:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// </summary>
@@ -92,7 +92,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// [Protocol Method] Expected body parameter:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// <list type="bullet">
@@ -136,7 +136,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// [Protocol Method] Expected body parameter:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// <list type="bullet">
@@ -180,7 +180,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// </summary>
@@ -197,7 +197,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// </summary>
@@ -214,7 +214,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// [Protocol Method] Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// <list type="bullet">
@@ -254,7 +254,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// [Protocol Method] Expected response body:
         /// ```json
         /// {
-        ///   "name": &lt;any string&gt;
+        ///   "name": "Madge"
         /// }
         /// ```
         /// <list type="bullet">
@@ -303,7 +303,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```json
         /// {
         ///   "result": {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -335,7 +335,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```json
         /// {
         ///   "result": {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -367,7 +367,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```json
         /// {
         ///   "result": {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```
@@ -421,7 +421,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```json
         /// {
         ///   "result": {
-        ///     "name": &lt;any string&gt;
+        ///     "name": "Madge"
         ///   }
         /// }
         /// ```

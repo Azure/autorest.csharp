@@ -14,13 +14,21 @@ namespace Scm._Type.Property.ValueTypes.Models
     {
         void IJsonModel<UnionEnumValueProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<UnionEnumValueProperty>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(UnionEnumValueProperty)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -38,7 +46,6 @@ namespace Scm._Type.Property.ValueTypes.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         UnionEnumValueProperty IJsonModel<UnionEnumValueProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

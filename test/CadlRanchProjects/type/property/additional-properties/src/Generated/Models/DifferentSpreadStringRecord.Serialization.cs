@@ -20,13 +20,21 @@ namespace _Type.Property.AdditionalProperties.Models
 
         void IJsonModel<DifferentSpreadStringRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            writer.WriteStartObject();
+            JsonModelWriteCore(writer, options);
+            writer.WriteEndObject();
+        }
+
+        /// <param name="writer"> The JSON writer. </param>
+        /// <param name="options"> The client options for reading and writing models. </param>
+        protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        {
             var format = options.Format == "W" ? ((IPersistableModel<DifferentSpreadStringRecord>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
                 throw new FormatException($"The model {nameof(DifferentSpreadStringRecord)} does not support writing '{format}' format.");
             }
 
-            writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
             foreach (var item in AdditionalProperties)
@@ -49,7 +57,6 @@ namespace _Type.Property.AdditionalProperties.Models
 #endif
                 }
             }
-            writer.WriteEndObject();
         }
 
         DifferentSpreadStringRecord IJsonModel<DifferentSpreadStringRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)

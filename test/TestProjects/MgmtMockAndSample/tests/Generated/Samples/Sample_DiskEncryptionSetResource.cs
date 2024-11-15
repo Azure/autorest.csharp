@@ -14,14 +14,14 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
+using NUnit.Framework;
 
 namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_DiskEncryptionSetResource
     {
-        // Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Succeeded
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabledSetToTrueSucceeded()
         {
             // Generated from example definition:
@@ -58,9 +58,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true - Updating
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabledSetToTrueUpdating()
         {
             // Generated from example definition:
@@ -97,9 +96,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Update a disk encryption set.
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Update_UpdateADiskEncryptionSet()
         {
             // Generated from example definition:
@@ -142,9 +140,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get information about a disk encryption set when auto-key rotation failed.
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_GetInformationAboutADiskEncryptionSetWhenAutoKeyRotationFailed()
         {
             // Generated from example definition:
@@ -173,9 +170,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Get information about a disk encryption set.
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Get_GetInformationAboutADiskEncryptionSet()
         {
             // Generated from example definition:
@@ -204,9 +200,8 @@ namespace MgmtMockAndSample.Samples
             Console.WriteLine($"Succeeded on id: {resourceData.Id}");
         }
 
-        // Delete a disk encryption set.
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Delete_DeleteADiskEncryptionSet()
         {
             // Generated from example definition:
@@ -228,12 +223,11 @@ namespace MgmtMockAndSample.Samples
             // invoke the operation
             await diskEncryptionSet.DeleteAsync(WaitUntil.Completed);
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
 
-        // List all disk encryption sets in a subscription.
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task GetDiskEncryptionSets_ListAllDiskEncryptionSetsInASubscription()
         {
             // Generated from example definition:
@@ -260,7 +254,7 @@ namespace MgmtMockAndSample.Samples
                 Console.WriteLine($"Succeeded on id: {resourceData.Id}");
             }
 
-            Console.WriteLine($"Succeeded");
+            Console.WriteLine("Succeeded");
         }
     }
 }

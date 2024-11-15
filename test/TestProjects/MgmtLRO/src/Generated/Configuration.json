@@ -10,7 +10,6 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "use-write-core": true,
   "OperationsToLroApiVersionOverride": {
     "Fakes_Update": "2021-06-01"
   },
