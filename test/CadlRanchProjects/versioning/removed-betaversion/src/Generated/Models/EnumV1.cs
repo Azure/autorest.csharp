@@ -7,12 +7,10 @@
 
 namespace Versioning.Removed.BetaVersion.Models
 {
-    /// <summary> The EnumV2. </summary>
-    public enum EnumV2
+    /// <summary> The EnumV1. </summary>
+    public enum EnumV1
     {
-        /// <summary> enumMemberV1. </summary>
-        EnumMemberV1,
-        /// <summary> enumMemberV2. </summary>
-        EnumMemberV2
+        /// <summary> enumMember. </summary>
+        EnumMember
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core;
 
 namespace Versioning.Removed.BetaVersion
@@ -12,5 +13,28 @@ namespace Versioning.Removed.BetaVersion
     /// <summary> Client options for RemovedClient. </summary>
     public partial class RemovedClientOptions : ClientOptions
     {
+        private const ServiceVersion LatestVersion = ServiceVersion.V2preview;
+
+        /// <summary> The version of the service to use. </summary>
+        public enum ServiceVersion
+        {
+            /// <summary> Service version "v1". </summary>
+            V1 = 1,
+            /// <summary> Service version "v2preview". </summary>
+            V2preview = 2,
+        }
+
+        internal string Version { get; }
+
+        /// <summary> Initializes new instance of RemovedClientOptions. </summary>
+        public RemovedClientOptions(ServiceVersion version = LatestVersion)
+        {
+            Version = version switch
+            {
+                ServiceVersion.V1 => "v1",
+                ServiceVersion.V2preview => "v2preview",
+                _ => throw new NotSupportedException()
+            };
+        }
     }
 }

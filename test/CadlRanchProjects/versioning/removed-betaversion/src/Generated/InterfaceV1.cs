@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Versioning.Removed.OldVersion.Models;
+using Versioning.Removed.BetaVersion.Models;
 
-namespace Versioning.Removed.OldVersion
+namespace Versioning.Removed.BetaVersion
 {
     // Data plane generated sub-client.
     /// <summary> This operation group should not be generated with latest version. </summary>

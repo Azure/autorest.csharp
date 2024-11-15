@@ -117,5 +117,113 @@ Console.WriteLine(result.GetProperty("enumProp").ToString());
 Console.WriteLine(result.GetProperty("unionProp").ToString());
 ]]></code></example>
     </member>
+    <member name="ModelV3Async(ModelV3,CancellationToken)">
+      <example>
+This sample shows how to call ModelV3Async.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+Response<ModelV3> response = await client.ModelV3Async(body);
+]]></code>
+This sample shows how to call ModelV3Async with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+Response<ModelV3> response = await client.ModelV3Async(body);
+]]></code></example>
+    </member>
+    <member name="ModelV3(ModelV3,CancellationToken)">
+      <example>
+This sample shows how to call ModelV3.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+Response<ModelV3> response = client.ModelV3(body);
+]]></code>
+This sample shows how to call ModelV3 with all parameters.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+ModelV3 body = new ModelV3("<id>", EnumV3.EnumMemberV1);
+Response<ModelV3> response = client.ModelV3(body);
+]]></code></example>
+    </member>
+    <member name="ModelV3Async(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ModelV3Async and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    enumProp = "enumMemberV1",
+});
+Response response = await client.ModelV3Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+]]></code>
+This sample shows how to call ModelV3Async with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    enumProp = "enumMemberV1",
+});
+Response response = await client.ModelV3Async(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+]]></code></example>
+    </member>
+    <member name="ModelV3(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call ModelV3 and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    enumProp = "enumMemberV1",
+});
+Response response = client.ModelV3(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+]]></code>
+This sample shows how to call ModelV3 with all request content and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+RemovedClient client = new RemovedClient(endpoint, default);
+
+using RequestContent content = RequestContent.Create(new
+{
+    id = "<id>",
+    enumProp = "enumMemberV1",
+});
+Response response = client.ModelV3(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("enumProp").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>

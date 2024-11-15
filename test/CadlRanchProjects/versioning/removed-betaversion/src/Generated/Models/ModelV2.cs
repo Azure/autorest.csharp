@@ -47,27 +47,32 @@ namespace Versioning.Removed.BetaVersion.Models
 
         /// <summary> Initializes a new instance of <see cref="ModelV2"/>. </summary>
         /// <param name="prop"></param>
+        /// <param name="removedProp"></param>
         /// <param name="enumProp"></param>
         /// <param name="unionProp"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> or <paramref name="unionProp"/> is null. </exception>
-        public ModelV2(string prop, EnumV2 enumProp, BinaryData unionProp)
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/>, <paramref name="removedProp"/> or <paramref name="unionProp"/> is null. </exception>
+        public ModelV2(string prop, string removedProp, EnumV2 enumProp, BinaryData unionProp)
         {
             Argument.AssertNotNull(prop, nameof(prop));
+            Argument.AssertNotNull(removedProp, nameof(removedProp));
             Argument.AssertNotNull(unionProp, nameof(unionProp));
 
             Prop = prop;
+            RemovedProp = removedProp;
             EnumProp = enumProp;
             UnionProp = unionProp;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelV2"/>. </summary>
         /// <param name="prop"></param>
+        /// <param name="removedProp"></param>
         /// <param name="enumProp"></param>
         /// <param name="unionProp"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelV2(string prop, EnumV2 enumProp, BinaryData unionProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelV2(string prop, string removedProp, EnumV2 enumProp, BinaryData unionProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
+            RemovedProp = removedProp;
             EnumProp = enumProp;
             UnionProp = unionProp;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -80,6 +85,8 @@ namespace Versioning.Removed.BetaVersion.Models
 
         /// <summary> Gets or sets the prop. </summary>
         public string Prop { get; set; }
+        /// <summary> Gets or sets the removed prop. </summary>
+        public string RemovedProp { get; set; }
         /// <summary> Gets or sets the enum prop. </summary>
         public EnumV2 EnumProp { get; set; }
         /// <summary>
@@ -99,6 +106,9 @@ namespace Versioning.Removed.BetaVersion.Models
         /// </item>
         /// <item>
         /// <description><see cref="float"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="int"/></description>
         /// </item>
         /// </list>
         /// </remarks>

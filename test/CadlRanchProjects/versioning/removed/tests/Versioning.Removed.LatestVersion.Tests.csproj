@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Versioning.Removed.csproj" />
+    <ProjectReference Include="..\src\Versioning.Removed.LatestVersion.csproj" />
   </ItemGroup>
 
   <ItemGroup>

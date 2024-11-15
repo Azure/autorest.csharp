@@ -8,10 +8,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Versioning.Removed.LatestVersion.Models
+namespace Versioning.Removed.BetaVersion.Models
 {
-    /// <summary> The ModelV2. </summary>
-    public partial class ModelV2
+    /// <summary> The ModelV1. </summary>
+    public partial class ModelV1
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -45,12 +45,12 @@ namespace Versioning.Removed.LatestVersion.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="ModelV2"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelV1"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="enumProp"></param>
         /// <param name="unionProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prop"/> or <paramref name="unionProp"/> is null. </exception>
-        public ModelV2(string prop, EnumV2 enumProp, BinaryData unionProp)
+        public ModelV1(string prop, EnumV1 enumProp, BinaryData unionProp)
         {
             Argument.AssertNotNull(prop, nameof(prop));
             Argument.AssertNotNull(unionProp, nameof(unionProp));
@@ -60,12 +60,12 @@ namespace Versioning.Removed.LatestVersion.Models
             UnionProp = unionProp;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelV2"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelV1"/>. </summary>
         /// <param name="prop"></param>
         /// <param name="enumProp"></param>
         /// <param name="unionProp"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ModelV2(string prop, EnumV2 enumProp, BinaryData unionProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ModelV1(string prop, EnumV1 enumProp, BinaryData unionProp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Prop = prop;
             EnumProp = enumProp;
@@ -73,15 +73,15 @@ namespace Versioning.Removed.LatestVersion.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelV2"/> for deserialization. </summary>
-        internal ModelV2()
+        /// <summary> Initializes a new instance of <see cref="ModelV1"/> for deserialization. </summary>
+        internal ModelV1()
         {
         }
 
         /// <summary> Gets or sets the prop. </summary>
         public string Prop { get; set; }
         /// <summary> Gets or sets the enum prop. </summary>
-        public EnumV2 EnumProp { get; set; }
+        public EnumV1 EnumProp { get; set; }
         /// <summary>
         /// Gets or sets the union prop
         /// <para>
@@ -98,7 +98,7 @@ namespace Versioning.Removed.LatestVersion.Models
         /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="float"/></description>
+        /// <description><see cref="int"/></description>
         /// </item>
         /// </list>
         /// </remarks>

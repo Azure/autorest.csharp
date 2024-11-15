@@ -12,13 +12,13 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Versioning.Removed.LatestVersion.Models
+namespace Versioning.Removed.BetaVersion.Models
 {
-    public partial class ModelV2 : IUtf8JsonSerializable, IJsonModel<ModelV2>
+    public partial class ModelV1 : IUtf8JsonSerializable, IJsonModel<ModelV1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelV2>)this).Write(writer, ModelSerializationExtensions.WireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelV1>)this).Write(writer, ModelSerializationExtensions.WireOptions);
 
-        void IJsonModel<ModelV2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<ModelV1>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
             JsonModelWriteCore(writer, options);
@@ -29,10 +29,10 @@ namespace Versioning.Removed.LatestVersion.Models
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelV2>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelV2)} does not support writing '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelV1)} does not support writing '{format}' format.");
             }
 
             writer.WritePropertyName("prop"u8);
@@ -65,19 +65,19 @@ namespace Versioning.Removed.LatestVersion.Models
             }
         }
 
-        ModelV2 IJsonModel<ModelV2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelV1 IJsonModel<ModelV1>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelV2>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV1>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelV2)} does not support reading '{format}' format.");
+                throw new FormatException($"The model {nameof(ModelV1)} does not support reading '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelV2(document.RootElement, options);
+            return DeserializeModelV1(document.RootElement, options);
         }
 
-        internal static ModelV2 DeserializeModelV2(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static ModelV1 DeserializeModelV1(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= ModelSerializationExtensions.WireOptions;
 
@@ -86,7 +86,7 @@ namespace Versioning.Removed.LatestVersion.Models
                 return null;
             }
             string prop = default;
-            EnumV2 enumProp = default;
+            EnumV1 enumProp = default;
             BinaryData unionProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
@@ -99,7 +99,7 @@ namespace Versioning.Removed.LatestVersion.Models
                 }
                 if (property.NameEquals("enumProp"u8))
                 {
-                    enumProp = property.Value.GetString().ToEnumV2();
+                    enumProp = property.Value.GetString().ToEnumV1();
                     continue;
                 }
                 if (property.NameEquals("unionProp"u8))
@@ -113,46 +113,46 @@ namespace Versioning.Removed.LatestVersion.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ModelV2(prop, enumProp, unionProp, serializedAdditionalRawData);
+            return new ModelV1(prop, enumProp, unionProp, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<ModelV2>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelV1>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelV2>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV1>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(ModelV2)} does not support writing '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelV1)} does not support writing '{options.Format}' format.");
             }
         }
 
-        ModelV2 IPersistableModel<ModelV2>.Create(BinaryData data, ModelReaderWriterOptions options)
+        ModelV1 IPersistableModel<ModelV1>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ModelV2>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<ModelV1>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeModelV2(document.RootElement, options);
+                        return DeserializeModelV1(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(ModelV2)} does not support reading '{options.Format}' format.");
+                    throw new FormatException($"The model {nameof(ModelV1)} does not support reading '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<ModelV2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelV1>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ModelV2 FromResponse(Response response)
+        internal static ModelV1 FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelV2(document.RootElement);
+            return DeserializeModelV1(document.RootElement);
         }
 
         /// <summary> Convert into a <see cref="RequestContent"/>. </summary>

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Versioning.Removed",
-  "library-name": "Versioning.Removed",
+  "namespace": "Versioning.Removed.LatestVersion",
+  "library-name": "Versioning.Removed.LatestVersion",
   "flavor": "azure",
   "use-model-reader-writer": true,
   "shared-source-folders": [

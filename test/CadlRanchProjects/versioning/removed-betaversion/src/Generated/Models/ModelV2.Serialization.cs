@@ -37,6 +37,8 @@ namespace Versioning.Removed.BetaVersion.Models
 
             writer.WritePropertyName("prop"u8);
             writer.WriteStringValue(Prop);
+            writer.WritePropertyName("removedProp"u8);
+            writer.WriteStringValue(RemovedProp);
             writer.WritePropertyName("enumProp"u8);
             writer.WriteStringValue(EnumProp.ToSerialString());
             writer.WritePropertyName("unionProp"u8);
@@ -86,6 +88,7 @@ namespace Versioning.Removed.BetaVersion.Models
                 return null;
             }
             string prop = default;
+            string removedProp = default;
             EnumV2 enumProp = default;
             BinaryData unionProp = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -95,6 +98,11 @@ namespace Versioning.Removed.BetaVersion.Models
                 if (property.NameEquals("prop"u8))
                 {
                     prop = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("removedProp"u8))
+                {
+                    removedProp = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("enumProp"u8))
@@ -113,7 +121,7 @@ namespace Versioning.Removed.BetaVersion.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new ModelV2(prop, enumProp, unionProp, serializedAdditionalRawData);
+            return new ModelV2(prop, removedProp, enumProp, unionProp, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<ModelV2>.Write(ModelReaderWriterOptions options)

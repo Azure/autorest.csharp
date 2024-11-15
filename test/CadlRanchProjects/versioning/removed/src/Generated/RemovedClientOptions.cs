@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.LatestVersion
 {
     /// <summary> Client options for RemovedClient. </summary>
     public partial class RemovedClientOptions : ClientOptions
@@ -20,8 +20,10 @@ namespace Versioning.Removed
         {
             /// <summary> Service version "v1". </summary>
             V1 = 1,
+            /// <summary> Service version "v2preview". </summary>
+            V2preview = 2,
             /// <summary> Service version "v2". </summary>
-            V2 = 2,
+            V2 = 3,
         }
 
         internal string Version { get; }
@@ -32,6 +34,7 @@ namespace Versioning.Removed
             Version = version switch
             {
                 ServiceVersion.V1 => "v1",
+                ServiceVersion.V2preview => "v2preview",
                 ServiceVersion.V2 => "v2",
                 _ => throw new NotSupportedException()
             };

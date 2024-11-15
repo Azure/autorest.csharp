@@ -5,14 +5,14 @@
 
 #nullable disable
 
-namespace Versioning.Removed.BetaVersion.Models
+namespace Versioning.Removed.OldVersion.Models
 {
-    /// <summary> The EnumV2. </summary>
-    public enum EnumV2
+    /// <summary> The EnumV3. </summary>
+    public enum EnumV3
     {
         /// <summary> enumMemberV1. </summary>
         EnumMemberV1,
-        /// <summary> enumMemberV2. </summary>
-        EnumMemberV2
+        /// <summary> enumMemberV2Preview. </summary>
+        EnumMemberV2Preview
     }
 }

@@ -14,14 +14,14 @@ namespace Versioning.Removed.BetaVersion.Models
         public static string ToSerialString(this Versions value) => value switch
         {
             Versions.V1 => "v1",
-            Versions.V2 => "v2",
+            Versions.V2preview => "v2preview",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Versions value.")
         };
 
         public static Versions ToVersions(this string value)
         {
             if (StringComparer.OrdinalIgnoreCase.Equals(value, "v1")) return Versions.V1;
-            if (StringComparer.OrdinalIgnoreCase.Equals(value, "v2")) return Versions.V2;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "v2preview")) return Versions.V2preview;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Versions value.");
         }
     }
