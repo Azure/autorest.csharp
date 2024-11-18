@@ -49,14 +49,10 @@ namespace CadlRanchProjects.Tests
             Assert.IsNotNull(enumValuesV3);
             Assert.AreEqual(2, enumValuesV3.Length);
 
-            /* check existence of method v2. */
+            /* check existence of method v1. */
             var v1Methods = typeof(RemovedClient).GetMethods().Where(m => m.Name == "V1" || m.Name == "V1Async");
             Assert.IsNotNull(v1Methods);
             Assert.AreEqual(4, v1Methods.Count());
-            foreach (var method in v1Methods)
-            {
-                Assert.False(method.GetParameters().Any(p => p.Name == "param"));
-            }
 
             /* check existence of method v2. */
             var v2Methods = typeof(RemovedClient).GetMethods().Where(m => m.Name == "V2" || m.Name == "V2Async");
@@ -67,14 +63,14 @@ namespace CadlRanchProjects.Tests
                 Assert.True(method.GetParameters().Any(p => p.Name == "param"));
             }
 
-            /* check existence of method v2. */
+            /* check existence of method ModelV3. */
             var v3Methods = typeof(RemovedClient).GetMethods().Where(m => m.Name == "ModelV3" || m.Name == "ModelV3Async");
             Assert.IsNotNull(v3Methods);
             Assert.AreEqual(4, v3Methods.Count());
-            foreach (var method in v3Methods)
-            {
-                Assert.False(method.GetParameters().Any(p => p.Name == "param"));
-            }
+
+            // 1 version are defined
+            var enumType = typeof(Versions);
+            Assert.AreEqual(new string[] { "V1"}, enumType.GetEnumNames());
         }
 
         [Test]

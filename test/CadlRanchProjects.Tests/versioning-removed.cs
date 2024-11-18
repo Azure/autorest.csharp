@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -52,6 +53,10 @@ namespace CadlRanchProjects.Tests
 
             /* check existence of removed interface. */
             Assert.IsNull(Type.GetType("Versioning.Removed.InterfaceV1"));
+
+            // All 3 versions are defined
+            var enumType = typeof(Versions);
+            Assert.AreEqual(new string[] { "V1", "V2preview", "V2" }, enumType.GetEnumNames());
         }
 
         [Test]
