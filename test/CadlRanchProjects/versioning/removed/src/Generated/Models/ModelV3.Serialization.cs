@@ -12,7 +12,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.LatestVersion.Models
 {
     public partial class ModelV3 : IUtf8JsonSerializable, IJsonModel<ModelV3>
     {

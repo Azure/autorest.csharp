@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.LatestVersion.Models
 {
     /// <summary> The ModelV3. </summary>
     public partial class ModelV3

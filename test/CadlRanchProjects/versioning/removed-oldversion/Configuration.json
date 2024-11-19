@@ -1,0 +1,11 @@
+{
+  "output-folder": ".",
+  "namespace": "Versioning.Removed.OldVersion",
+  "library-name": "Versioning.Removed.OldVersion",
+  "flavor": "azure",
+  "use-model-reader-writer": true,
+  "shared-source-folders": [
+    "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Generator.Shared",
+    "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net8.0/Azure.Core.Shared"
+  ]
+}

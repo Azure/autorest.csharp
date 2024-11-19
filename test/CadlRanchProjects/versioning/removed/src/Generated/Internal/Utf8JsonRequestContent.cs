@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.LatestVersion
 {
     internal class Utf8JsonRequestContent : RequestContent
     {
