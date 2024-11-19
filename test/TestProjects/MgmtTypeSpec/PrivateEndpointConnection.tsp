@@ -40,5 +40,5 @@ model StartRequest {
   /**
    * The boolean value indicates whether to start the virtual machines before starting the SAP instances.
    */
-  startVm?: boolean = false;
+  startVm?: boolean;
 }
