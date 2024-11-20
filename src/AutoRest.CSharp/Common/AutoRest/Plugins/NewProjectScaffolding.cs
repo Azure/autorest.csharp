@@ -278,7 +278,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
 ";
-            return string.Format(readmeContent, Configuration.Namespace, Configuration.Namespace.Split('.').Last().ToLower(), (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
 
         private string GetCiYml()
@@ -320,7 +320,7 @@ extends:
     - name: {1}
       safeName: {2}
 ";
-            return string.Format(ciYmlContent, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace, safeName);
+            return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
 
         private string GetDirectoryBuildProps()
