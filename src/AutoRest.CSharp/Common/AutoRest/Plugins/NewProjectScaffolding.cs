@@ -1,12 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static AutoRest.CSharp.Generation.Writers.CSProjWriter;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
 {
@@ -16,6 +22,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         private string _projectDirectory;
         private string _testDirectory;
         private string _serviceDirectory;
+        private string _samplesDirectory;
         private bool _isAzureSdk;
         private bool _needAzureKeyAuth;
         private bool _includeDfe;
@@ -25,6 +32,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             _serviceDirectoryName = Path.GetFileName(Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..")));
             _projectDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..");
             _testDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "tests");
+            _samplesDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "samples");
             _serviceDirectory = Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..");
             _isAzureSdk = Configuration.Namespace.StartsWith("Azure.");
             _needAzureKeyAuth = needAzureKeyAuth;
@@ -55,9 +63,18 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             await WriteTestFiles();
 
+            if (Configuration.AzureArm)
+            {
+                await WriteAssetJson();
+                await WriteSamplesProject();
+            }
+
             return true;
         }
-
+        private async Task WriteAssetJson()
+        {
+            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "asset.json"), Encoding.ASCII.GetBytes(GetAssetJson()));
+        }
         private async Task WriteServiceDirectoryFiles()
         {
             //TODO handle existing ci where multiple projects are in the same service directory
@@ -73,12 +90,17 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             if (_isAzureSdk)
             {
-                Directory.CreateDirectory(Path.Combine(_testDirectory, "SessionRecords"));
+                Directory.CreateDirectory(Path.Combine(_testDirectory, !Configuration.AzureArm ? "SessionRecords" : "Scenario"));
             }
             if (!Directory.Exists(_testDirectory))
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
+            if (Configuration.AzureArm)
+            {
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
+                await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
+            }
         }
 
         private async Task WriteProjectFiles()
@@ -94,11 +116,21 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (_isAzureSdk)
             {
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetDirectoryBuildProps()));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(GetReadme()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadme_Mgmt()));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
         }
-
+        private string GetAssetJson()
+        {
+            const string assetJosn = @"
+{{
+  ""AssetsRepo"": ""Azure/azure-sdk-assets"",
+  ""AssetsRepoPrefixPath"": ""net"",
+  ""TagPrefix"": ""net/{0}/{1}"",
+  ""Tag"": """"
+}}";
+            return string.Format(assetJosn, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
+        }
         private string GetAssemblyInfo()
         {
             const string publicKey = ", PublicKey = 0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4";
@@ -109,12 +141,12 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
 {2}";
-            const string azureResourceProvider = @"
+            string azureResourceProvider = string.Format(@"
 // Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
 // See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
 // for the list of possible values.
-[assembly: Azure.Core.AzureResourceProviderNamespace(""Microsoft.Template"")]
-";
+[assembly: Azure.Core.AzureResourceProviderNamespace(""{0}"")]
+", !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
 
@@ -246,7 +278,7 @@ This is a template, but your SDK readme should include details on how to contrib
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
 ";
-            return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
+            return string.Format(readmeContent, Configuration.Namespace, Configuration.Namespace.Split('.').Last().ToLower(), (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
 
         private string GetCiYml()
@@ -288,7 +320,7 @@ extends:
     - name: {1}
       safeName: {2}
 ";
-            return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
+            return string.Format(ciYmlContent, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace, safeName);
         }
 
         private string GetDirectoryBuildProps()
@@ -307,13 +339,17 @@ extends:
         {
             var builder = new CSProjWriter()
             {
-                Description = $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience.",
-                AssemblyTitle = $"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane",
+                Description = !Configuration.AzureArm ? $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience." : $"Azure Resource Manager client SDK for Azure resource provider {Configuration.Namespace.Split('.').Last()}.",
+                AssemblyTitle = !Configuration.AzureArm ? new CSProjProperty($"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane") : null,
                 Version = "1.0.0-beta.1",
-                PackageTags = Configuration.Namespace,
-                TargetFrameworks = "$(RequiredTargetFrameworks)",
-                IncludeOperationsSharedSource = true,
+                PackageTags = !Configuration.AzureArm ? Configuration.Namespace : $"azure;management;arm;resource manager;{Configuration.Namespace.Split('.').Last().ToLower()}",
+                TargetFrameworks = !Configuration.AzureArm ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
+                IncludeOperationsSharedSource = !Configuration.AzureArm ? new CSProjProperty("true") : null,
             };
+            if (Configuration.AzureArm)
+            {
+                builder.PackageId = Configuration.Namespace;
+            }
             if (_needAzureKeyAuth)
                 builder.CompileIncludes.Add(new("$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs", "Shared/Core"));
             if (!Configuration.AzureArm)
@@ -375,6 +411,12 @@ extends:
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages_Mgmt = new CSProjWriter.CSProjDependencyPackage[]
+        {
+            new("Azure.Identity"),
+            new("NUnit"),
+            new("NUnit3TestAdapter"),
+        };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
@@ -385,11 +427,11 @@ extends:
 
         private string GetBrandedTestCSProj()
         {
-            var writer = new CSProjWriter()
+            var writer = !Configuration.AzureArm ? new CSProjWriter()
             {
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
-            };
+            } : new CSProjWriter();
 
             // add the project references
             if (_isAzureSdk)
@@ -437,9 +479,15 @@ extends:
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 ";
-            if (_isAzureSdk)
+            if (_isAzureSdk && !Configuration.AzureArm)
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
+EndProject
+";
+            }
+            if (Configuration.AzureArm)
+            {
+                slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
 EndProject
 ";
             }
@@ -467,12 +515,20 @@ EndProject
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
-            if (_isAzureSdk)
+            if (_isAzureSdk && !Configuration.AzureArm)
             {
                 slnContent += @"		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.Build.0 = Release|Any CPU
+";
+            }
+            if (Configuration.AzureArm)
+            {
+                slnContent += @"		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
             }
             slnContent += @"		{{A4241C1F-A53D-474C-9E4E-075054407E74}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -505,6 +561,173 @@ EndProject
 EndGlobal
 ";
             return string.Format(slnContent, Configuration.Namespace);
+        }
+
+        private string GetReadme_Mgmt()
+        {
+            string readmeContet = @"# Microsoft Azure {0} management client library for .NET
+
+**[Describe the service briefly first.]**
+
+This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
+
+    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+    - HTTP pipeline with custom policies.
+    - Better error-handling.
+    - Support uniform telemetry across all languages.
+
+## Getting started 
+
+### Install the package
+
+Install the Microsoft Azure {0} management library for .NET with [NuGet](https://www.nuget.org/):
+
+```dotnetcli
+dotnet add package {1} --prerelease
+```
+
+### Prerequisites
+
+* You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/).
+
+### Authenticate the Client
+
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/mgmt_quickstart.md).
+
+## Key concepts
+
+Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
+
+## Documentation
+
+Documentation is available to help you learn how to use this package:
+
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/mgmt_quickstart.md).
+- [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md).
+
+## Examples
+
+Code samples for using the management library for .NET can be found in the following locations
+- [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
+
+## Troubleshooting
+
+-   File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
+-   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
+
+## Next steps
+
+For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
+
+## Contributing
+
+For details on contributing to this repository, see the [contributing
+guide][cg].
+
+This project welcomes contributions and suggestions. Most contributions
+require you to agree to a Contributor License Agreement (CLA) declaring
+that you have the right to, and actually do, grant us the rights to use
+your contribution. For details, visit <https://cla.microsoft.com>.
+
+When you submit a pull request, a CLA-bot will automatically determine
+whether you need to provide a CLA and decorate the PR appropriately
+(for example, label, comment). Follow the instructions provided by the
+bot. You'll only need to do this action once across all repositories
+using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
+more information, see the [Code of Conduct FAQ][coc_faq] or contact
+<opencode@microsoft.com> with any other questions or comments.
+
+<!-- LINKS -->
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[coc]: https://opensource.microsoft.com/codeofconduct/
+[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/";
+            string content = string.Format(readmeContet, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
+            return content;
+        }
+        private string GetTestBase()
+        {
+            string content = @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Azure.Core;
+using Azure.Core.TestFramework;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.TestFramework;
+using NUnit.Framework;
+using System.Threading.Tasks;
+
+namespace {0}.Tests
+{{
+    public class {1}ManagementTestBase : ManagementRecordedTestBase<{1}ManagementTestEnvironment>
+    {{
+        protected ArmClient Client {{ get; private set; }}
+        protected SubscriptionResource DefaultSubscription {{ get; private set; }}
+
+        protected {1}ManagementTestBase(bool isAsync, RecordedTestMode mode)
+        : base(isAsync, mode)
+        {{
+        }}
+
+        protected {1}ManagementTestBase(bool isAsync)
+            : base(isAsync)
+        {{
+        }}
+
+        [SetUp]
+        public async Task CreateCommonClient()
+        {{
+            Client = GetArmClient();
+            DefaultSubscription = await Client.GetDefaultSubscriptionAsync().ConfigureAwait(false);
+        }}
+
+        protected async Task<ResourceGroupResource> CreateResourceGroup(SubscriptionResource subscription, string rgNamePrefix, AzureLocation location)
+        {{
+            string rgName = Recording.GenerateAssetName(rgNamePrefix);
+            ResourceGroupData input = new ResourceGroupData(location);
+            var lro = await subscription.GetResourceGroups().CreateOrUpdateAsync(WaitUntil.Completed, rgName, input);
+            return lro.Value;
+        }}
+    }}
+}}";
+            string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
+            return contentFormatted;
+        }
+        private string GetTestEnvironment()
+        {
+            string content = @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using Azure.Core.TestFramework;
+
+namespace {0}.Tests
+{{
+    public class {1}ManagementTestEnvironment : TestEnvironment
+    {{
+    }}
+}}";
+            string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
+            return contentFormatted;
+        }
+
+        private string GetSamplesProject()
+        {
+            var writer = new CSProjWriter();
+            writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
+            foreach (var package in _brandedTestDependencyPackages_Mgmt)
+            {
+                writer.PackageReferences.Add(package);
+            }
+            return writer.Write();
+        }
+        private async Task WriteSamplesProject()
+        {
+            if (!Directory.Exists(_samplesDirectory))
+                Directory.CreateDirectory(_samplesDirectory);
+            await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
     }
 }

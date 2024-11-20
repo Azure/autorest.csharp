@@ -58,6 +58,8 @@ internal class CSProjWriter
 
     public IList<CSProjCompileInclude> CompileIncludes { get; }
 
+    public CSProjProperty? PackageId { get; set; }
+
     public string Write()
     {
         var builder = new StringBuilder();
