@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         }
         private async Task WriteAssetJson()
         {
-            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "asset.json"), Encoding.ASCII.GetBytes(GetAssetJson()));
+            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetJson()));
         }
         private async Task WriteServiceDirectoryFiles()
         {
