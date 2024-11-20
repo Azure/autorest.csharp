@@ -1,17 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Numerics;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using static AutoRest.CSharp.Generation.Writers.CSProjWriter;
 
 namespace AutoRest.CSharp.Common.AutoRest.Plugins
