@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -143,17 +144,13 @@ internal class CSProjWriter
 
     private void WriteProperties(XmlWriter writer)
     {
+        var list_csProjProperty = _properties.Where(s => s.PropertyType == typeof(CSProjProperty)).Select(p => new { Property = p, Value = (CSProjProperty?)p.GetValue(this) }).Where(x => x.Value != null).ToList();
+        if (!list_csProjProperty.Any())
+            return;
         writer.WriteStartElement("PropertyGroup");
-        // this will write those properties in the same order as they are defined in this class
-        // introduce this method to save the effort of writing every property one by one
-        foreach (var property in _properties)
+        foreach (var entry in list_csProjProperty)
         {
-            // only include those CSProjProperty types
-            if (property.PropertyType != typeof(CSProjProperty))
-                continue;
-            // invoke the WriteElementIfNotNull method on each of them
-            var value = (CSProjProperty?)property.GetValue(this);
-            WriteElementIfNotNull(writer, property.Name, value);
+            WriteElementIfNotNull(writer, entry.Property.Name, entry.Value);
         }
         writer.WriteEndElement();
     }
