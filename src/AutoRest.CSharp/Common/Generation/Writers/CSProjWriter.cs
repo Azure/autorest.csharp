@@ -144,15 +144,25 @@ internal class CSProjWriter
 
     private void WriteProperties(XmlWriter writer)
     {
-        var list_csProjProperty = _properties.Where(s => s.PropertyType == typeof(CSProjProperty)).Select(p => new { Property = p, Value = (CSProjProperty?)p.GetValue(this) }).Where(x => x.Value != null).ToList();
-        if (!list_csProjProperty.Any())
-            return;
-        writer.WriteStartElement("PropertyGroup");
-        foreach (var entry in list_csProjProperty)
+        bool hasValue = false;
+        // this will write those properties in the same order as they are defined in this class
+        // introduce this method to save the effort of writing every property one by one
+        foreach (var property in _properties)
         {
-            WriteElementIfNotNull(writer, entry.Property.Name, entry.Value);
+            // only include those CSProjProperty types
+            if (property.PropertyType != typeof(CSProjProperty))
+                continue;
+            // invoke the WriteElementIfNotNull method on each of them
+            var value = (CSProjProperty?)property.GetValue(this);
+            if (value != null && !hasValue)
+            {
+                hasValue = true;
+                writer.WriteStartElement("PropertyGroup");
+            }
+            WriteElementIfNotNull(writer, property.Name, value);
         }
-        writer.WriteEndElement();
+        if (hasValue)
+            writer.WriteEndElement();
     }
 
     private void WriteElementIfNotNull(XmlWriter writer, string name, CSProjProperty? property)

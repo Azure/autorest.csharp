@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -118,219 +119,40 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         }
         private string GetAssetJson()
         {
-            const string assetJosn = @"
-{{
-  ""AssetsRepo"": ""Azure/azure-sdk-assets"",
-  ""AssetsRepoPrefixPath"": ""net"",
-  ""TagPrefix"": ""net/{0}/{1}"",
-  ""Tag"": """"
-}}";
-            return string.Format(assetJosn, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
+            string content = GetClobFromEmbeddedResource("AssetJson.txt");
+            string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
+            return contentFormatted;
         }
         private string GetAssemblyInfo()
         {
-            const string publicKey = ", PublicKey = 0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4";
-            const string assemblyInfoContent = @"// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
-{2}";
-            string azureResourceProvider = string.Format(@"
-// Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
-// See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
-// for the list of possible values.
-[assembly: Azure.Core.AzureResourceProviderNamespace(""{0}"")]
-", !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
+            string publicKey = GetClobFromEmbeddedResource("AssemblyInfo_publickey.txt");
+            string assemblyInfoContent = GetClobFromEmbeddedResource("AssemblyInfo_InfoContent.txt");
+            string azureResouceProviderContent = GetClobFromEmbeddedResource("AssemblyInfo_AzureResourceProvider.txt");
+            string azureResourceProvider = string.Format(azureResouceProviderContent, !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
-
         private string GetChangeLog()
         {
-            const string changeLogContent = @"# Release History
-
-## 1.0.0-beta.1 (Unreleased)
-
-### Features Added
-
-### Breaking Changes
-
-### Bugs Fixed
-
-### Other Changes
-";
+            string changeLogContent = GetClobFromEmbeddedResource("CHANGELOG.md");
             return changeLogContent;
         }
-
         private string GetReadme()
         {
-            const string multipleApiVersionContent = @"
-
-### Service API versions
-
-The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter from its options to specify which API version service to communicate.
-
-#### Select a service API version
-
-You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
-
-For example,
-
-```C# Snippet:Create<YourService>ClientForSpecificApiVersion
-Uri endpoint = new Uri(""<your endpoint>"");
-DefaultAzureCredential credential = new DefaultAzureCredential();
-<YourService>ClientOptions options = new <YourService>ClientOptions(<YourService>ClientOptions.ServiceVersion.<API Version>)
-var client = new <YourService>Client(endpoint, credential, options);
-```
-
-When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
-
-Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.";
-            const string readmeContent = @"# {0} client library for .NET
-
-{0} is a managed service that helps developers get secret simply and securely.
-
-Use the client library for to:
-
-* [Get secret](https://docs.microsoft.com/azure)
-
-[Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
-
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/{1}/{0}/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://docs.microsoft.com/azure)
-
-## Getting started
-
-This section should include everything a developer needs to do to install and create their first client connection *very quickly*.
-
-### Install the package
-
-First, provide instruction for obtaining and installing the package or library. This section might include only a single line of code, like `dotnet add package package-name`, but should enable a developer to successfully install the package from NuGet, npm, or even cloning a GitHub repository.
-
-Install the client library for .NET with [NuGet](https://www.nuget.org/ ):
-
-```dotnetcli
-dotnet add package {0} --prerelease
-```
-
-### Prerequisites
-
-Include a section after the install command that details any requirements that must be satisfied before a developer can [authenticate](#authenticate-the-client) and test all of the snippets in the [Examples](#examples) section. For example, for Cosmos DB:
-
-> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Cosmos DB account](https://docs.microsoft.com/azure/cosmos-db/account-overview) (SQL API). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](https://docs.microsoft.com/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
-
-### Authenticate the client
-
-If your library requires authentication for use, such as for Azure services, include instructions and example code needed for initializing and authenticating.
-
-For example, include details on obtaining an account key and endpoint URI, setting environment variables for each, and initializing the client object.{2}
-
-## Key concepts
-
-The *Key concepts* section should describe the functionality of the main classes. Point out the most important and useful classes in the package (with links to their reference pages) and explain how those classes work together. Feel free to use bulleted lists, tables, code blocks, or even diagrams for clarity.
-
-Include the *Thread safety* and *Additional concepts* sections below at the end of your *Key concepts* section. You may remove or add links depending on what your library makes use of:
-
-### Thread safety
-
-We guarantee that all client instance methods are thread-safe and independent of each other ([guideline](https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-service-methods-thread-safety)). This ensures that the recommendation of reusing client instances is always safe, even across threads.
-
-### Additional concepts
-<!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
-[Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
-<!-- CLIENT COMMON BAR -->
-
-## Examples
-
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/{1}/{0}/samples).
-
-## Troubleshooting
-
-Describe common errors and exceptions, how to ""unpack"" them if necessary, and include guidance for graceful handling and recovery.
-
-Provide information to help developers avoid throttling or other service-enforced errors they might encounter. For example, provide guidance and examples for using retry or connection policies in the API.
-
-If the package or a related package supports it, include tips for logging or enabling instrumentation to help them debug their code.
-
-## Next steps
-
-* Provide a link to additional code examples, ideally to those sitting alongside the README in the package's `/samples` directory.
-* If appropriate, point users to other packages that might be useful.
-* If you think there's a good chance that developers might stumble across your package in error (because they're searching for specific functionality and mistakenly think the package provides that functionality), point them to the packages they might be looking for.
-
-## Contributing
-
-This is a template, but your SDK readme should include details on how to contribute code to the repo/package.
-
-<!-- LINKS -->
-[style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
-[style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/{1}/{0}/README.png)
-";
+            string multipleApiVersionContent = GetClobFromEmbeddedResource("Readme_multipleApiVersionContent_DataPlane.md");
+            string readmeContent = GetClobFromEmbeddedResource("Readme_readmeContent_DataPlane.md");
             return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
-
         private string GetCiYml()
         {
             string safeName = Configuration.Namespace.Replace(".", "");
-            const string ciYmlContent = @"# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
-
-trigger:
-  branches:
-    include:
-    - main
-    - hotfix/*
-    - release/*
-  paths:
-    include:
-    - sdk/{0}
-    - sdk/{0}/ci.yml
-    - sdk/{0}/{1}
-
-pr:
-  branches:
-    include:
-    - main
-    - feature/*
-    - hotfix/*
-    - release/*
-  paths:
-    include:
-    - sdk/{0}
-    - sdk/{0}/ci.yml
-    - sdk/{0}/{1}
-
-extends:
-  template: /eng/pipelines/templates/stages/archetype-sdk-client.yml
-  parameters:
-    ServiceDirectory: {0}
-    ArtifactName: packages
-    Artifacts:
-    - name: {1}
-      safeName: {2}
-";
+            string ciYmlContent = GetClobFromEmbeddedResource("ci.yml");
             return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
-
         private string GetDirectoryBuildProps()
         {
-            const string directoryBuildPropsContent = @"<Project ToolsVersion=""15.0"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-  <!--
-    Add any shared properties you want for the projects under this package directory that need to be set before the auto imported Directory.Build.props
-  -->
-  <Import Project=""$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory).., Directory.Build.props))\Directory.Build.props"" />
-</Project>
-";
+            string directoryBuildPropsContent = GetClobFromEmbeddedResource("Directory.Build.props");
             return directoryBuildPropsContent;
         }
-
         private string GetBrandedSrcCSProj()
         {
             var builder = new CSProjWriter()
@@ -365,7 +187,6 @@ extends:
 
             return builder.Write();
         }
-
         private string GetUnbrandedSrcCSProj()
         {
             var builder = new CSProjWriter()
@@ -385,7 +206,6 @@ extends:
 
             return builder.Write();
         }
-
         private string GetSrcCSProj() => Configuration.IsBranded ? GetBrandedSrcCSProj() : GetUnbrandedSrcCSProj();
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
@@ -561,154 +381,22 @@ EndGlobal
 
         private string GetReadme_Mgmt()
         {
-            string readmeContet = @"# Microsoft Azure {0} management client library for .NET
-
-**[Describe the service briefly first.]**
-
-This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
-
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
-
-## Getting started 
-
-### Install the package
-
-Install the Microsoft Azure {0} management library for .NET with [NuGet](https://www.nuget.org/):
-
-```dotnetcli
-dotnet add package {1} --prerelease
-```
-
-### Prerequisites
-
-* You must have an [Microsoft Azure subscription](https://azure.microsoft.com/free/dotnet/).
-
-### Authenticate the Client
-
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/mgmt_quickstart.md).
-
-## Key concepts
-
-Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azure.github.io/azure-sdk/dotnet_introduction.html)
-
-## Documentation
-
-Documentation is available to help you learn how to use this package:
-
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/mgmt_quickstart.md).
-- [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md).
-
-## Examples
-
-Code samples for using the management library for .NET can be found in the following locations
-- [.NET Management Library Code Samples](https://aka.ms/azuresdk-net-mgmt-samples)
-
-## Troubleshooting
-
--   File an issue via [GitHub Issues](https://github.com/Azure/azure-sdk-for-net/issues).
--   Check [previous questions](https://stackoverflow.com/questions/tagged/azure+.net) or ask new ones on Stack Overflow using Azure and .NET tags.
-
-## Next steps
-
-For more information about Microsoft Azure SDK, see [this website](https://azure.github.io/azure-sdk/).
-
-## Contributing
-
-For details on contributing to this repository, see the [contributing
-guide][cg].
-
-This project welcomes contributions and suggestions. Most contributions
-require you to agree to a Contributor License Agreement (CLA) declaring
-that you have the right to, and actually do, grant us the rights to use
-your contribution. For details, visit <https://cla.microsoft.com>.
-
-When you submit a pull request, a CLA-bot will automatically determine
-whether you need to provide a CLA and decorate the PR appropriately
-(for example, label, comment). Follow the instructions provided by the
-bot. You'll only need to do this action once across all repositories
-using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For
-more information, see the [Code of Conduct FAQ][coc_faq] or contact
-<opencode@microsoft.com> with any other questions or comments.
-
-<!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
-[coc]: https://opensource.microsoft.com/codeofconduct/
-[coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/";
-            string content = string.Format(readmeContet, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
-            return content;
+            string content = GetClobFromEmbeddedResource("Readme_Mgmt.md");
+            string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
+            return contentFormatted;
         }
         private string GetTestBase()
         {
-            string content = @"// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using Azure.Core;
-using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.TestFramework;
-using NUnit.Framework;
-using System.Threading.Tasks;
-
-namespace {0}.Tests
-{{
-    public class {1}ManagementTestBase : ManagementRecordedTestBase<{1}ManagementTestEnvironment>
-    {{
-        protected ArmClient Client {{ get; private set; }}
-        protected SubscriptionResource DefaultSubscription {{ get; private set; }}
-
-        protected {1}ManagementTestBase(bool isAsync, RecordedTestMode mode)
-        : base(isAsync, mode)
-        {{
-        }}
-
-        protected {1}ManagementTestBase(bool isAsync)
-            : base(isAsync)
-        {{
-        }}
-
-        [SetUp]
-        public async Task CreateCommonClient()
-        {{
-            Client = GetArmClient();
-            DefaultSubscription = await Client.GetDefaultSubscriptionAsync().ConfigureAwait(false);
-        }}
-
-        protected async Task<ResourceGroupResource> CreateResourceGroup(SubscriptionResource subscription, string rgNamePrefix, AzureLocation location)
-        {{
-            string rgName = Recording.GenerateAssetName(rgNamePrefix);
-            ResourceGroupData input = new ResourceGroupData(location);
-            var lro = await subscription.GetResourceGroups().CreateOrUpdateAsync(WaitUntil.Completed, rgName, input);
-            return lro.Value;
-        }}
-    }}
-}}";
+            string content = GetClobFromEmbeddedResource("TestBase_Mgmt.cs");
             string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
             return contentFormatted;
         }
         private string GetTestEnvironment()
         {
-            string content = @"// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-using Azure.Core.TestFramework;
-
-namespace {0}.Tests
-{{
-    public class {1}ManagementTestEnvironment : TestEnvironment
-    {{
-    }}
-}}";
+            string content = GetClobFromEmbeddedResource("TestEnvironment_Mgmt.cs");
             string contentFormatted = string.Format(content, Configuration.Namespace, Configuration.Namespace.Split('.').Last());
             return contentFormatted;
         }
-
         private string GetSamplesProject()
         {
             var writer = new CSProjWriter();
@@ -724,6 +412,21 @@ namespace {0}.Tests
             if (!Directory.Exists(_samplesDirectory))
                 Directory.CreateDirectory(_samplesDirectory);
             await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
+        }
+        private string GetClobFromEmbeddedResource(string assetName)
+        {
+            string content = "";
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = Path.Combine(currentDirectory, "Assets", assetName);
+            if (File.Exists(filePath))
+            {
+                content = File.ReadAllText(filePath);
+            }
+            else
+            {
+                throw new Exception($"Assets/{assetName} file not found");
+            }
+            return content;
         }
     }
 }
