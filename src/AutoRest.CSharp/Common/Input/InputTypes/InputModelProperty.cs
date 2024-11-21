@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputModelProperty(string Name, string SerializedName, string Description, InputType Type, InputConstant? ConstantValue, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+internal record InputModelProperty(string Name, string SerializedName, string Summary, string Doc, InputType Type, InputConstant? ConstantValue, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
 {
     public FormattableString? DefaultValue { get; init; }
 
@@ -18,4 +18,6 @@ internal record InputModelProperty(string Name, string SerializedName, string De
 
     // calculated flatten prefix names
     public IReadOnlyList<string>? FlattenedNames { get; internal set; }
+
+    public string Description { get; init; } = string.IsNullOrEmpty(Summary) ? Doc : Summary;
 };

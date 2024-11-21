@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new ClientMethod(
                     name,
                     startMethod,
-                    BuilderHelpers.EscapeXmlDocDescription(operation.Description),
+                    BuilderHelpers.EscapeXmlDocDescription(operation.Doc),
                     new Diagnostic($"{declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
                     operation.Accessibility ?? "public");
             }

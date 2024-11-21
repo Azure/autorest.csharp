@@ -8,7 +8,8 @@ namespace AutoRest.CSharp.Common.Input;
 internal record InputParameter(
     string Name,
     string NameInRequest,
-    string? Description,
+    string? Summary,
+    string? Doc,
     InputType Type,
     RequestLocation Location,
     InputConstant? DefaultValue,
@@ -29,7 +30,8 @@ internal record InputParameter(
     public InputParameter() : this(
         Name: string.Empty,
         NameInRequest: string.Empty,
-        Description: null,
+        Summary: null,
+        Doc: null,
         Type: InputPrimitiveType.Unknown,
         Location: RequestLocation.None,
         DefaultValue: null,
@@ -52,4 +54,5 @@ internal record InputParameter(
     public InputType Type { get; internal set; } = Type;
     public InputOperationParameterKind Kind { get; internal set; } = Kind;
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
+    public string Description { get; init; } = string.IsNullOrEmpty(Summary) ? (Doc ?? string.Empty) : Summary;
 }

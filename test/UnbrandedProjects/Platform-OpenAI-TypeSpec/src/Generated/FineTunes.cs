@@ -48,7 +48,6 @@ namespace OpenAI
         /// </summary>
         /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<FineTune>> CreateAsync(CreateFineTuneRequest fineTune)
         {
@@ -68,7 +67,6 @@ namespace OpenAI
         /// </summary>
         /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<FineTune> Create(CreateFineTuneRequest fineTune)
         {
@@ -146,7 +144,6 @@ namespace OpenAI
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <remarks> List. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTunesResponse>> GetFineTunesAsync()
         {
@@ -155,7 +152,6 @@ namespace OpenAI
         }
 
         /// <summary> List your organization's fine-tuning jobs. </summary>
-        /// <remarks> List. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTunesResponse> GetFineTunes()
         {
@@ -221,7 +217,6 @@ namespace OpenAI
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Retrieve. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<FineTune>> RetrieveAsync(string fineTuneId)
         {
@@ -239,7 +234,6 @@ namespace OpenAI
         /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Retrieve. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<FineTune> Retrieve(string fineTuneId)
         {
@@ -326,7 +320,6 @@ namespace OpenAI
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> List events. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<ListFineTuneEventsResponse>> GetEventsAsync(string fineTuneId, bool? stream = null)
         {
@@ -349,7 +342,6 @@ namespace OpenAI
         /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> List events. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<ListFineTuneEventsResponse> GetEvents(string fineTuneId, bool? stream = null)
         {
@@ -441,7 +433,6 @@ namespace OpenAI
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Cancel. </remarks>
         [Obsolete("deprecated")]
         public virtual async Task<ClientResult<FineTune>> CancelAsync(string fineTuneId)
         {
@@ -455,7 +446,6 @@ namespace OpenAI
         /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Cancel. </remarks>
         [Obsolete("deprecated")]
         public virtual ClientResult<FineTune> Cancel(string fineTuneId)
         {

@@ -28,7 +28,8 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null;
             string? name = null;
-            string? description = null;
+            string? summary = null;
+            string? doc = null;
             IReadOnlyList<InputOperation>? operations = null;
             IReadOnlyList<InputParameter>? parameters = null;
             string? parent = null;
@@ -37,7 +38,8 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputClient.Name), ref name)
-                    || reader.TryReadString(nameof(InputClient.Description), ref description)
+                    || reader.TryReadString("Summary", ref summary)
+                    || reader.TryReadString("Doc", ref doc)
                     || reader.TryReadWithConverter(nameof(InputClient.Operations), options, ref operations)
                     || reader.TryReadWithConverter(nameof(InputClient.Parameters), options, ref parameters)
                     || reader.TryReadString(nameof(InputClient.Parent), ref parent);
@@ -49,10 +51,11 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name= name ?? throw new JsonException("InputClient must have name");
-            description = description ?? string.Empty;
+            summary = summary ?? string.Empty;
+            doc = doc ?? string.Empty;
             operations = operations ?? Array.Empty<InputOperation>();
             parameters = parameters ?? Array.Empty<InputParameter>();
-            var inputClient = new InputClient(name, description, operations, parameters, parent);
+            var inputClient = new InputClient(name, summary, doc, operations, parameters, parent);
             if (id != null)
             {
                 resolver.AddReference(id, inputClient);

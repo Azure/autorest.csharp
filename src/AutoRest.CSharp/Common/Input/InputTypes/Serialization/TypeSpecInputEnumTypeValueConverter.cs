@@ -28,7 +28,8 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null;
             JsonElement? rawValue = null;
             InputPrimitiveType? valueType = null;
-            string? description = null;
+            string? summary = null;
+            string? doc = null;
             IReadOnlyList<InputDecoratorInfo>? decorators = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
@@ -36,7 +37,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadWithConverter("value", options, ref rawValue)
                     || reader.TryReadWithConverter("valueType", options, ref valueType)
-                    || reader.TryReadString("description", ref description)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("doc", ref doc)
                     || reader.TryReadWithConverter("decorators", options, ref decorators);
 
                 if (!isKnownProperty)
@@ -56,9 +58,9 @@ namespace AutoRest.CSharp.Common.Input
 
             InputEnumTypeValue enumValue = valueType.Kind switch
             {
-                InputPrimitiveTypeKind.String => new InputEnumTypeStringValue(name, rawValue.Value.GetString() ?? throw new JsonException(), description) { Decorators = decorators ?? [] },
-                InputPrimitiveTypeKind.Int32 => new InputEnumTypeIntegerValue(name, rawValue.Value.GetInt32(), description) { Decorators = decorators ?? [] },
-                InputPrimitiveTypeKind.Float32 => new InputEnumTypeFloatValue(name, rawValue.Value.GetSingle(), description) { Decorators = decorators ?? [] },
+                InputPrimitiveTypeKind.String => new InputEnumTypeStringValue(name, rawValue.Value.GetString() ?? throw new JsonException(), summary, doc) { Decorators = decorators ?? [] },
+                InputPrimitiveTypeKind.Int32 => new InputEnumTypeIntegerValue(name, rawValue.Value.GetInt32(), summary, doc) { Decorators = decorators ?? [] },
+                InputPrimitiveTypeKind.Float32 => new InputEnumTypeFloatValue(name, rawValue.Value.GetSingle(), summary, doc) { Decorators = decorators ?? [] },
                 _ => throw new JsonException()
             };
             if (id != null)

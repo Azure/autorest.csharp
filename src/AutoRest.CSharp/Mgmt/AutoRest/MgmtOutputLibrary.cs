@@ -353,6 +353,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     string.Empty,
                     "internal",
                     null,
+                    null,
                     // [TODO]: Condition is added to minimize change
                     $"Unknown version of {actualBase.SpecName ?? actualBase.Name}",
                     actualBase.Usage,

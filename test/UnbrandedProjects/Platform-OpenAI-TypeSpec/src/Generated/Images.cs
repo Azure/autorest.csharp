@@ -42,7 +42,6 @@ namespace OpenAI
         /// <summary> Creates an image given a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         public virtual async Task<ClientResult<ImagesResponse>> CreateAsync(CreateImageRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
@@ -55,7 +54,6 @@ namespace OpenAI
         /// <summary> Creates an image given a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create. </remarks>
         public virtual ClientResult<ImagesResponse> Create(CreateImageRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
@@ -124,7 +122,6 @@ namespace OpenAI
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create edit. </remarks>
         public virtual async Task<ClientResult<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
@@ -137,7 +134,6 @@ namespace OpenAI
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create edit. </remarks>
         public virtual ClientResult<ImagesResponse> CreateEdit(CreateImageEditRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
@@ -208,7 +204,6 @@ namespace OpenAI
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create variation. </remarks>
         public virtual async Task<ClientResult<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));
@@ -221,7 +216,6 @@ namespace OpenAI
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
         /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
-        /// <remarks> Create variation. </remarks>
         public virtual ClientResult<ImagesResponse> CreateVariation(CreateImageVariationRequest image)
         {
             Argument.AssertNotNull(image, nameof(image));

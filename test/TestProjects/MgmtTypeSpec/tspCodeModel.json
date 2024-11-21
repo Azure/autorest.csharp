@@ -33,7 +33,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Azure Edge Zones location type",
+     "doc": "Azure Edge Zones location type",
      "decorators": []
     },
     {
@@ -51,11 +51,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Azure Custom Locations type",
+     "doc": "Azure Custom Locations type",
      "decorators": []
     }
    ],
-   "description": "The supported ExtendedLocation types.",
+   "doc": "The supported ExtendedLocation types.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -89,7 +89,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The entity was created by a user.",
+     "doc": "The entity was created by a user.",
      "decorators": []
     },
     {
@@ -107,7 +107,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The entity was created by an application.",
+     "doc": "The entity was created by an application.",
      "decorators": []
     },
     {
@@ -125,7 +125,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The entity was created by a managed identity.",
+     "doc": "The entity was created by a managed identity.",
      "decorators": []
     },
     {
@@ -143,11 +143,11 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The entity was created by a key.",
+     "doc": "The entity was created by a key.",
      "decorators": []
     }
    ],
-   "description": "The kind of entity that created the resource.",
+   "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -181,7 +181,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "No managed identity.",
+     "doc": "No managed identity.",
      "decorators": []
     },
     {
@@ -199,7 +199,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "System assigned managed identity.",
+     "doc": "System assigned managed identity.",
      "decorators": []
     },
     {
@@ -217,7 +217,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "User assigned managed identity.",
+     "doc": "User assigned managed identity.",
      "decorators": []
     },
     {
@@ -235,11 +235,11 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "System and user assigned managed identity.",
+     "doc": "System and user assigned managed identity.",
      "decorators": []
     }
    ],
-   "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
+   "doc": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -273,7 +273,7 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Indicates the operation is initiated by a user.",
+     "doc": "Indicates the operation is initiated by a user.",
      "decorators": []
     },
     {
@@ -291,7 +291,7 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Indicates the operation is initiated by a system.",
+     "doc": "Indicates the operation is initiated by a system.",
      "decorators": []
     },
     {
@@ -309,11 +309,11 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Indicates the operation is initiated by a user or system.",
+     "doc": "Indicates the operation is initiated by a user or system.",
      "decorators": []
     }
    ],
-   "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+   "doc": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -347,11 +347,11 @@
      "enumType": {
       "$ref": "36"
      },
-     "description": "Actions are for internal-only APIs.",
+     "doc": "Actions are for internal-only APIs.",
      "decorators": []
     }
    ],
-   "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+   "doc": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -385,11 +385,11 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview.",
+     "doc": "Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview.",
      "decorators": []
     }
    ],
-   "description": "The available API versions.",
+   "doc": "The available API versions.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -403,7 +403,7 @@
    "name": "Foo",
    "crossLanguageDefinitionId": "MgmtTypeSpec.Foo",
    "usage": "Input,Output,Json",
-   "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
     "$id": "45",
@@ -411,7 +411,7 @@
     "name": "TrackedResource",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json",
-    "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "decorators": [],
     "baseModel": {
      "$id": "46",
@@ -419,7 +419,7 @@
      "name": "Resource",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json",
-     "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "decorators": [],
      "properties": [
       {
@@ -427,7 +427,7 @@
        "kind": "property",
        "name": "id",
        "serializedName": "id",
-       "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+       "doc": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "type": {
         "$id": "48",
         "kind": "string",
@@ -454,7 +454,7 @@
        "kind": "property",
        "name": "name",
        "serializedName": "name",
-       "description": "The name of the resource",
+       "doc": "The name of the resource",
        "type": {
         "$id": "51",
         "kind": "string",
@@ -474,7 +474,7 @@
        "kind": "property",
        "name": "type",
        "serializedName": "type",
-       "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+       "doc": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "type": {
         "$id": "53",
         "kind": "string",
@@ -494,14 +494,14 @@
        "kind": "property",
        "name": "systemData",
        "serializedName": "systemData",
-       "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+       "doc": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
        "type": {
         "$id": "55",
         "kind": "model",
         "name": "SystemData",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json",
-        "description": "Metadata pertaining to creation and last modification of the resource.",
+        "doc": "Metadata pertaining to creation and last modification of the resource.",
         "decorators": [],
         "properties": [
          {
@@ -509,7 +509,7 @@
           "kind": "property",
           "name": "createdBy",
           "serializedName": "createdBy",
-          "description": "The identity that created the resource.",
+          "doc": "The identity that created the resource.",
           "type": {
            "$id": "57",
            "kind": "string",
@@ -529,7 +529,7 @@
           "kind": "property",
           "name": "createdByType",
           "serializedName": "createdByType",
-          "description": "The type of identity that created the resource.",
+          "doc": "The type of identity that created the resource.",
           "type": {
            "$ref": "8"
           },
@@ -545,7 +545,7 @@
           "kind": "property",
           "name": "createdAt",
           "serializedName": "createdAt",
-          "description": "The timestamp of resource creation (UTC).",
+          "doc": "The timestamp of resource creation (UTC).",
           "type": {
            "$id": "60",
            "kind": "utcDateTime",
@@ -573,7 +573,7 @@
           "kind": "property",
           "name": "lastModifiedBy",
           "serializedName": "lastModifiedBy",
-          "description": "The identity that last modified the resource.",
+          "doc": "The identity that last modified the resource.",
           "type": {
            "$id": "63",
            "kind": "string",
@@ -593,7 +593,7 @@
           "kind": "property",
           "name": "lastModifiedByType",
           "serializedName": "lastModifiedByType",
-          "description": "The type of identity that last modified the resource.",
+          "doc": "The type of identity that last modified the resource.",
           "type": {
            "$ref": "8"
           },
@@ -609,7 +609,7 @@
           "kind": "property",
           "name": "lastModifiedAt",
           "serializedName": "lastModifiedAt",
-          "description": "The timestamp of resource last modification (UTC)",
+          "doc": "The timestamp of resource last modification (UTC)",
           "type": {
            "$id": "66",
            "kind": "utcDateTime",
@@ -649,7 +649,7 @@
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
-      "description": "Resource tags.",
+      "doc": "Resource tags.",
       "type": {
        "$id": "69",
        "kind": "dict",
@@ -681,7 +681,7 @@
       "kind": "property",
       "name": "location",
       "serializedName": "location",
-      "description": "The geo-location where the resource lives",
+      "doc": "The geo-location where the resource lives",
       "type": {
        "$id": "73",
        "kind": "string",
@@ -704,7 +704,7 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
+     "doc": "The resource-specific properties for this resource.",
      "type": {
       "$id": "75",
       "kind": "model",
@@ -727,7 +727,7 @@
         "kind": "property",
         "name": "serviceUrl",
         "serializedName": "serviceUrl",
-        "description": "the service url",
+        "doc": "the service url",
         "type": {
          "$id": "79",
          "kind": "url",
@@ -747,7 +747,7 @@
         "kind": "property",
         "name": "something",
         "serializedName": "something",
-        "description": "something",
+        "doc": "something",
         "type": {
          "$id": "81",
          "kind": "string",
@@ -767,7 +767,7 @@
         "kind": "property",
         "name": "boolValue",
         "serializedName": "boolValue",
-        "description": "boolean value",
+        "doc": "boolean value",
         "type": {
          "$id": "83",
          "kind": "boolean",
@@ -787,7 +787,7 @@
         "kind": "property",
         "name": "floatValue",
         "serializedName": "floatValue",
-        "description": "float value",
+        "doc": "float value",
         "type": {
          "$id": "85",
          "kind": "float32",
@@ -807,7 +807,7 @@
         "kind": "property",
         "name": "doubleValue",
         "serializedName": "doubleValue",
-        "description": "double value",
+        "doc": "double value",
         "type": {
          "$id": "87",
          "kind": "float64",
@@ -842,7 +842,7 @@
       "name": "ExtendedLocation",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ExtendedLocation",
       "usage": "Input,Output,Json",
-      "description": "The complex type of the extended location.",
+      "doc": "The complex type of the extended location.",
       "decorators": [],
       "properties": [
        {
@@ -850,7 +850,7 @@
         "kind": "property",
         "name": "name",
         "serializedName": "name",
-        "description": "The name of the extended location.",
+        "doc": "The name of the extended location.",
         "type": {
          "$id": "91",
          "kind": "string",
@@ -870,7 +870,7 @@
         "kind": "property",
         "name": "type",
         "serializedName": "type",
-        "description": "The type of the extended location.",
+        "doc": "The type of the extended location.",
         "type": {
          "$ref": "2"
         },
@@ -913,7 +913,7 @@
    "name": "ErrorResponse",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Output,Error,Json",
-   "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [
     {
@@ -921,14 +921,14 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "The error object.",
+     "doc": "The error object.",
      "type": {
       "$id": "95",
       "kind": "model",
       "name": "ErrorDetail",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Output,Json",
-      "description": "The error detail.",
+      "doc": "The error detail.",
       "decorators": [],
       "properties": [
        {
@@ -936,7 +936,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "description": "The error code.",
+        "doc": "The error code.",
         "type": {
          "$id": "97",
          "kind": "string",
@@ -956,7 +956,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "description": "The error message.",
+        "doc": "The error message.",
         "type": {
          "$id": "99",
          "kind": "string",
@@ -976,7 +976,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "description": "The error target.",
+        "doc": "The error target.",
         "type": {
          "$id": "101",
          "kind": "string",
@@ -996,7 +996,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "description": "The error details.",
+        "doc": "The error details.",
         "type": {
          "$id": "103",
          "kind": "array",
@@ -1019,7 +1019,7 @@
         "kind": "property",
         "name": "additionalInfo",
         "serializedName": "additionalInfo",
-        "description": "The error additional info.",
+        "doc": "The error additional info.",
         "type": {
          "$id": "105",
          "kind": "array",
@@ -1030,7 +1030,7 @@
           "name": "ErrorAdditionalInfo",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Output,Json",
-          "description": "The resource management error additional info.",
+          "doc": "The resource management error additional info.",
           "decorators": [],
           "properties": [
            {
@@ -1038,7 +1038,7 @@
             "kind": "property",
             "name": "type",
             "serializedName": "type",
-            "description": "The additional info type.",
+            "doc": "The additional info type.",
             "type": {
              "$id": "108",
              "kind": "string",
@@ -1058,7 +1058,7 @@
             "kind": "property",
             "name": "info",
             "serializedName": "info",
-            "description": "The additional info.",
+            "doc": "The additional info.",
             "type": {
              "$id": "110",
              "kind": "model",
@@ -1113,7 +1113,7 @@
    "name": "FooListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "description": "The response of a Foo list operation.",
+   "doc": "The response of a Foo list operation.",
    "decorators": [],
    "properties": [
     {
@@ -1121,7 +1121,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The Foo items on this page",
+     "doc": "The Foo items on this page",
      "type": {
       "$id": "113",
       "kind": "array",
@@ -1144,7 +1144,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "115",
       "kind": "url",
@@ -1174,7 +1174,7 @@
    "name": "PrivateLinkResourceListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "description": "The response of a PrivateLinkResource list operation.",
+   "doc": "The response of a PrivateLinkResource list operation.",
    "decorators": [],
    "properties": [
     {
@@ -1182,7 +1182,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The PrivateLinkResource items on this page",
+     "doc": "The PrivateLinkResource items on this page",
      "type": {
       "$id": "119",
       "kind": "array",
@@ -1193,7 +1193,7 @@
        "name": "PrivateLinkResource",
        "crossLanguageDefinitionId": "MgmtTypeSpec.PrivateLinkResource",
        "usage": "Output,Json",
-       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+       "doc": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
        "decorators": [],
        "baseModel": {
         "$id": "121",
@@ -1201,7 +1201,7 @@
         "name": "ProxyResource",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
         "usage": "Output,Json",
-        "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+        "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
         "decorators": [],
         "baseModel": {
          "$ref": "46"
@@ -1214,14 +1214,14 @@
          "kind": "property",
          "name": "properties",
          "serializedName": "properties",
-         "description": "The resource-specific properties for this resource.",
+         "doc": "The resource-specific properties for this resource.",
          "type": {
           "$id": "123",
           "kind": "model",
           "name": "PrivateLinkResourceProperties",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.PrivateLinkResourceProperties",
           "usage": "Output,Json",
-          "description": "Properties of a private link resource.",
+          "doc": "Properties of a private link resource.",
           "decorators": [],
           "properties": [
            {
@@ -1229,7 +1229,7 @@
             "kind": "property",
             "name": "groupId",
             "serializedName": "groupId",
-            "description": "The private link resource group id.",
+            "doc": "The private link resource group id.",
             "type": {
              "$id": "125",
              "kind": "string",
@@ -1249,7 +1249,7 @@
             "kind": "property",
             "name": "requiredMembers",
             "serializedName": "requiredMembers",
-            "description": "The private link resource required member names.",
+            "doc": "The private link resource required member names.",
             "type": {
              "$id": "127",
              "kind": "array",
@@ -1276,7 +1276,7 @@
             "kind": "property",
             "name": "requiredZoneNames",
             "serializedName": "requiredZoneNames",
-            "description": "The private link resource private link DNS zone name.",
+            "doc": "The private link resource private link DNS zone name.",
             "type": {
              "$id": "130",
              "kind": "array",
@@ -1312,14 +1312,14 @@
          "kind": "property",
          "name": "identity",
          "serializedName": "identity",
-         "description": "The managed service identities assigned to this resource.",
+         "doc": "The managed service identities assigned to this resource.",
          "type": {
           "$id": "133",
           "kind": "model",
           "name": "ManagedServiceIdentity",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ManagedServiceIdentity",
           "usage": "Output,Json",
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
+          "doc": "Managed service identity (system assigned and/or user assigned identities)",
           "decorators": [],
           "properties": [
            {
@@ -1327,7 +1327,7 @@
             "kind": "property",
             "name": "principalId",
             "serializedName": "principalId",
-            "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+            "doc": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
             "type": {
              "$id": "135",
              "kind": "string",
@@ -1354,7 +1354,7 @@
             "kind": "property",
             "name": "tenantId",
             "serializedName": "tenantId",
-            "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+            "doc": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
             "type": {
              "$id": "138",
              "kind": "string",
@@ -1381,7 +1381,7 @@
             "kind": "property",
             "name": "type",
             "serializedName": "type",
-            "description": "The type of managed identity assigned to this resource.",
+            "doc": "The type of managed identity assigned to this resource.",
             "type": {
              "$ref": "18"
             },
@@ -1397,7 +1397,7 @@
             "kind": "property",
             "name": "userAssignedIdentities",
             "serializedName": "userAssignedIdentities",
-            "description": "The identities assigned to this resource by the user.",
+            "doc": "The identities assigned to this resource by the user.",
             "type": {
              "$id": "142",
              "kind": "dict",
@@ -1417,7 +1417,7 @@
                "name": "UserAssignedIdentity",
                "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
                "usage": "Output,Json",
-               "description": "User assigned identity properties",
+               "doc": "User assigned identity properties",
                "decorators": [],
                "properties": [
                 {
@@ -1425,7 +1425,7 @@
                  "kind": "property",
                  "name": "principalId",
                  "serializedName": "principalId",
-                 "description": "The principal ID of the assigned identity.",
+                 "doc": "The principal ID of the assigned identity.",
                  "type": {
                   "$id": "147",
                   "kind": "string",
@@ -1452,7 +1452,7 @@
                  "kind": "property",
                  "name": "clientId",
                  "serializedName": "clientId",
-                 "description": "The client ID of the assigned identity.",
+                 "doc": "The client ID of the assigned identity.",
                  "type": {
                   "$id": "150",
                   "kind": "string",
@@ -1512,7 +1512,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "153",
       "kind": "url",
@@ -1557,7 +1557,7 @@
    "name": "StartRequest",
    "crossLanguageDefinitionId": "MgmtTypeSpec.StartRequest",
    "usage": "Input,Json",
-   "description": "Start SAP instance(s) request body.",
+   "doc": "Start SAP instance(s) request body.",
    "decorators": [],
    "properties": [
     {
@@ -1565,7 +1565,7 @@
      "kind": "property",
      "name": "startVm",
      "serializedName": "startVm",
-     "description": "The boolean value indicates whether to start the virtual machines before starting the SAP instances.",
+     "doc": "The boolean value indicates whether to start the virtual machines before starting the SAP instances.",
      "type": {
       "$id": "157",
       "kind": "boolean",
@@ -1588,7 +1588,7 @@
    "name": "OperationStatusResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationStatusResult",
    "usage": "Output,Json",
-   "description": "The current status of an async operation.",
+   "doc": "The current status of an async operation.",
    "decorators": [],
    "properties": [
     {
@@ -1596,7 +1596,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "Fully qualified ID for the async operation.",
+     "doc": "Fully qualified ID for the async operation.",
      "type": {
       "$id": "160",
       "kind": "string",
@@ -1616,7 +1616,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "Name of the async operation.",
+     "doc": "Name of the async operation.",
      "type": {
       "$id": "162",
       "kind": "string",
@@ -1636,7 +1636,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "Operation status.",
+     "doc": "Operation status.",
      "type": {
       "$id": "164",
       "kind": "string",
@@ -1656,7 +1656,7 @@
      "kind": "property",
      "name": "percentComplete",
      "serializedName": "percentComplete",
-     "description": "Percent of the operation that is complete.",
+     "doc": "Percent of the operation that is complete.",
      "type": {
       "$id": "166",
       "kind": "float64",
@@ -1676,7 +1676,7 @@
      "kind": "property",
      "name": "startTime",
      "serializedName": "startTime",
-     "description": "The start time of the operation.",
+     "doc": "The start time of the operation.",
      "type": {
       "$id": "168",
       "kind": "utcDateTime",
@@ -1704,7 +1704,7 @@
      "kind": "property",
      "name": "endTime",
      "serializedName": "endTime",
-     "description": "The end time of the operation.",
+     "doc": "The end time of the operation.",
      "type": {
       "$id": "171",
       "kind": "utcDateTime",
@@ -1732,7 +1732,7 @@
      "kind": "property",
      "name": "operations",
      "serializedName": "operations",
-     "description": "The operations list.",
+     "doc": "The operations list.",
      "type": {
       "$id": "174",
       "kind": "array",
@@ -1755,7 +1755,7 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "If present, details of the operation error.",
+     "doc": "If present, details of the operation error.",
      "type": {
       "$ref": "95"
      },
@@ -1774,7 +1774,7 @@
    "name": "OperationListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationListResult",
    "usage": "Output,Json",
-   "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+   "doc": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
    "decorators": [],
    "properties": [
     {
@@ -1782,7 +1782,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The Operation items on this page",
+     "doc": "The Operation items on this page",
      "type": {
       "$id": "178",
       "kind": "array",
@@ -1793,7 +1793,7 @@
        "name": "Operation",
        "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Operation",
        "usage": "Output,Json",
-       "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+       "doc": "Details of a REST API operation, returned from the Resource Provider Operations API",
        "decorators": [],
        "properties": [
         {
@@ -1801,7 +1801,7 @@
          "kind": "property",
          "name": "name",
          "serializedName": "name",
-         "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
+         "doc": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
          "type": {
           "$id": "181",
           "kind": "string",
@@ -1821,7 +1821,7 @@
          "kind": "property",
          "name": "isDataAction",
          "serializedName": "isDataAction",
-         "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations.",
+         "doc": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for Azure Resource Manager/control-plane operations.",
          "type": {
           "$id": "183",
           "kind": "boolean",
@@ -1841,14 +1841,14 @@
          "kind": "property",
          "name": "display",
          "serializedName": "display",
-         "description": "Localized display information for this particular operation.",
+         "doc": "Localized display information for this particular operation.",
          "type": {
           "$id": "185",
           "kind": "model",
           "name": "OperationDisplay",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.OperationDisplay",
           "usage": "Output,Json",
-          "description": "Localized display information for and operation.",
+          "doc": "Localized display information for and operation.",
           "decorators": [],
           "properties": [
            {
@@ -1856,7 +1856,7 @@
             "kind": "property",
             "name": "provider",
             "serializedName": "provider",
-            "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+            "doc": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
             "type": {
              "$id": "187",
              "kind": "string",
@@ -1876,7 +1876,7 @@
             "kind": "property",
             "name": "resource",
             "serializedName": "resource",
-            "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+            "doc": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
             "type": {
              "$id": "189",
              "kind": "string",
@@ -1896,7 +1896,7 @@
             "kind": "property",
             "name": "operation",
             "serializedName": "operation",
-            "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+            "doc": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
             "type": {
              "$id": "191",
              "kind": "string",
@@ -1916,7 +1916,7 @@
             "kind": "property",
             "name": "description",
             "serializedName": "description",
-            "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+            "doc": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
             "type": {
              "$id": "193",
              "kind": "string",
@@ -1945,7 +1945,7 @@
          "kind": "property",
          "name": "origin",
          "serializedName": "origin",
-         "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+         "doc": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
          "type": {
           "$ref": "28"
          },
@@ -1961,7 +1961,7 @@
          "kind": "property",
          "name": "actionType",
          "serializedName": "actionType",
-         "description": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+         "doc": "Extensible enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
          "type": {
           "$ref": "36"
          },
@@ -1989,7 +1989,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "197",
       "kind": "url",
@@ -2033,7 +2033,7 @@
      "$id": "201",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "202",
       "kind": "url",
@@ -2071,14 +2071,14 @@
      "$id": "206",
      "Name": "list",
      "ResourceName": "Operations",
-     "Description": "List the operations for the provider",
+     "Doc": "List the operations for the provider",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "207",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "208",
         "kind": "string",
@@ -2176,7 +2176,7 @@
      "$id": "217",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "218",
       "kind": "url",
@@ -2214,14 +2214,14 @@
      "$id": "222",
      "Name": "GetAllPrivateLinkResources",
      "ResourceName": "PrivateLinkResource",
-     "Description": "list private links on the given resource",
+     "Doc": "list private links on the given resource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "223",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "224",
         "kind": "string",
@@ -2253,7 +2253,7 @@
        "$id": "227",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "228",
         "kind": "string",
@@ -2282,7 +2282,7 @@
        "$id": "230",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "231",
         "kind": "string",
@@ -2364,14 +2364,14 @@
      "$id": "237",
      "Name": "start",
      "ResourceName": "PrivateLinks",
-     "Description": "Starts the SAP Application Server Instance.",
+     "Doc": "Starts the SAP Application Server Instance.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "238",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "239",
         "kind": "string",
@@ -2403,7 +2403,7 @@
        "$id": "242",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "243",
         "kind": "string",
@@ -2432,7 +2432,7 @@
        "$id": "245",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "246",
         "kind": "string",
@@ -2454,7 +2454,7 @@
        "$id": "247",
        "Name": "privateLinkResourcenName",
        "NameInRequest": "privateLinkResourcenName",
-       "Description": "The name of the private link associated with the Azure resource.",
+       "Doc": "The name of the private link associated with the Azure resource.",
        "Type": {
         "$id": "248",
         "kind": "string",
@@ -2476,7 +2476,7 @@
        "$id": "249",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "250",
         "kind": "constant",
@@ -2531,7 +2531,7 @@
        "$id": "255",
        "Name": "body",
        "NameInRequest": "body",
-       "Description": "SAP Application server instance start request body.",
+       "Doc": "SAP Application server instance start request body.",
        "Type": {
         "$ref": "155"
        },
@@ -2558,7 +2558,7 @@
          "$id": "257",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "258",
           "kind": "string",
@@ -2571,7 +2571,7 @@
          "$id": "259",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "260",
           "kind": "int32",
@@ -2636,7 +2636,7 @@
      "$id": "265",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "266",
       "kind": "url",
@@ -2674,14 +2674,14 @@
      "$id": "270",
      "Name": "createOrUpdate",
      "ResourceName": "Foo",
-     "Description": "Create a Foo",
+     "Doc": "Create a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "271",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "272",
         "kind": "string",
@@ -2713,7 +2713,7 @@
        "$id": "275",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "276",
         "kind": "string",
@@ -2742,7 +2742,7 @@
        "$id": "278",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "279",
         "kind": "string",
@@ -2764,7 +2764,7 @@
        "$id": "280",
        "Name": "fooName",
        "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
+       "Doc": "The name of the Foo",
        "Type": {
         "$id": "281",
         "kind": "string",
@@ -2786,7 +2786,7 @@
        "$id": "282",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "283",
         "kind": "constant",
@@ -2841,7 +2841,7 @@
        "$id": "288",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "Resource create parameters.",
+       "Doc": "Resource create parameters.",
        "Type": {
         "$ref": "44"
        },
@@ -2886,7 +2886,7 @@
          "$id": "291",
          "Name": "azureAsyncOperation",
          "NameInResponse": "Azure-AsyncOperation",
-         "Description": "A link to the status monitor",
+         "Doc": "A link to the status monitor",
          "Type": {
           "$id": "292",
           "kind": "string",
@@ -2899,7 +2899,7 @@
          "$id": "293",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "294",
           "kind": "int32",
@@ -3162,14 +3162,14 @@
      "$id": "328",
      "Name": "get",
      "ResourceName": "Foo",
-     "Description": "Get a Foo",
+     "Doc": "Get a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "329",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "330",
         "kind": "string",
@@ -3201,7 +3201,7 @@
        "$id": "333",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "334",
         "kind": "string",
@@ -3230,7 +3230,7 @@
        "$id": "336",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "337",
         "kind": "string",
@@ -3252,7 +3252,7 @@
        "$id": "338",
        "Name": "fooName",
        "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
+       "Doc": "The name of the Foo",
        "Type": {
         "$id": "339",
         "kind": "string",
@@ -3451,14 +3451,14 @@
      "$id": "361",
      "Name": "delete",
      "ResourceName": "Foo",
-     "Description": "Delete a Foo",
+     "Doc": "Delete a Foo",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "362",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "363",
         "kind": "string",
@@ -3490,7 +3490,7 @@
        "$id": "366",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "367",
         "kind": "string",
@@ -3519,7 +3519,7 @@
        "$id": "369",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "370",
         "kind": "string",
@@ -3541,7 +3541,7 @@
        "$id": "371",
        "Name": "fooName",
        "NameInRequest": "fooName",
-       "Description": "The name of the Foo",
+       "Doc": "The name of the Foo",
        "Type": {
         "$id": "372",
         "kind": "string",
@@ -3599,7 +3599,7 @@
          "$id": "377",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "378",
           "kind": "string",
@@ -3612,7 +3612,7 @@
          "$id": "379",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "380",
           "kind": "int32",
@@ -3659,14 +3659,14 @@
      "$id": "384",
      "Name": "list",
      "ResourceName": "Foo",
-     "Description": "List Foo resources by resource group",
+     "Doc": "List Foo resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "385",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "386",
         "kind": "string",
@@ -3698,7 +3698,7 @@
        "$id": "389",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "390",
         "kind": "string",
@@ -3727,7 +3727,7 @@
        "$id": "392",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "393",
         "kind": "string",
@@ -3815,7 +3815,7 @@
      "$id": "400",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "401",
       "kind": "url",

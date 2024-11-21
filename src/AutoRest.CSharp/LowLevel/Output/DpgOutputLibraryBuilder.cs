@@ -130,6 +130,7 @@ namespace AutoRest.CSharp.Output.Models
                     string.Empty,
                     "internal",
                     null,
+                    null,
                     $"Unknown version of {actualBase.Name}",
                     model.Usage.HasFlag(InputModelTypeUsage.Input) ? InputModelTypeUsage.Input | InputModelTypeUsage.Output : InputModelTypeUsage.Output,
                     Array.Empty<InputModelProperty>(),

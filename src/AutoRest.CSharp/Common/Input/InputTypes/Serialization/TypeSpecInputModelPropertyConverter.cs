@@ -28,7 +28,8 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = true;
             string? serializedName = null;
-            string? description = null;
+            string? summary = null;
+            string? doc = null;
             InputType? propertyType = null;
             InputConstant? defaultValue = null;
             bool isReadOnly = false;
@@ -42,7 +43,8 @@ namespace AutoRest.CSharp.Common.Input
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString("name", ref name)
                     || reader.TryReadString("serializedName", ref serializedName)
-                    || reader.TryReadString("description", ref description)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("doc", ref doc)
                     || reader.TryReadWithConverter("type", options, ref propertyType)
                     || reader.TryReadBoolean("readOnly", ref isReadOnly)
                     || reader.TryReadBoolean("optional", ref isOptional)
@@ -57,7 +59,8 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
-            description = BuilderHelpers.EscapeXmlDocDescription(description ?? string.Empty);
+            summary = BuilderHelpers.EscapeXmlDocDescription(summary ?? string.Empty);
+            doc = BuilderHelpers.EscapeXmlDocDescription(doc ?? string.Empty);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
             if (propertyType is InputLiteralType lt)
@@ -66,7 +69,7 @@ namespace AutoRest.CSharp.Common.Input
                 propertyType = lt.ValueType;
             }
 
-            var property = new InputModelProperty(name, serializedName ?? name, description, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator)
+            var property = new InputModelProperty(name, serializedName ?? name, summary, doc, propertyType, defaultValue, !isOptional, isReadOnly, isDiscriminator)
             {
                 Decorators = decorators ?? [],
                 IsFlattened = isFlattened
