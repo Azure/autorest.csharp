@@ -14,7 +14,7 @@ using System.Text.Json;
 using System.Xml;
 using Azure.Core;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.LatestVersion
 {
     internal static class ModelSerializationExtensions
     {

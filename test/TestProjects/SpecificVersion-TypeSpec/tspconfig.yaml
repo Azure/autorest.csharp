@@ -1,4 +1,0 @@
-options:
-  "@azure-tools/typespec-csharp":
-    flavor: "azure"
-    "api-version": "2022-09-01"

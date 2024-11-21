@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.LatestVersion
 {
     /// <summary> Client options for RemovedClient. </summary>
     public partial class RemovedClientOptions : ClientOptions
