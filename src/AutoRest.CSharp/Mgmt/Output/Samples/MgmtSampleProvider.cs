@@ -126,7 +126,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
 
             static MethodBodyStatement BuildResourceDataResultHandling(TypedValueExpression result, ResourceData resourceData)
             {
-
                 return new MethodBodyStatement[]
                 {
                     new SingleLineCommentStatement("for demo we just print out the id"),
@@ -506,9 +505,9 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             {
                 return BuildGetResourceStatementFromTenantResource(extension, example, client, out resourceVar);
             }
-            else if (extension.ArmCoreType == typeof(ArmResource))
+            else if (extension.ArmCoreType == typeof(ArmResource) || extension.ArmCoreType == typeof(ArmClient))
             {
-                return BuildGetResourceStatementFromArmResource(example, client, out resourceVar);
+                return BuildGetResourceStatementFromArmResourceOrArmClient(example, client, out resourceVar);
             }
             else
             {
@@ -521,7 +520,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Samples
             return Declare(typeof(TenantResource), resource.ResourceName.ToVariableName(), client.Invoke("GetTenants").Invoke("GetAllAsync").Invoke("GetAsyncEnumerator").Property("Current"), out resourceVar);
         }
 
-        private MethodBodyStatement BuildGetResourceStatementFromArmResource(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
+        private MethodBodyStatement BuildGetResourceStatementFromArmResourceOrArmClient(OperationExample example, ValueExpression client, out TypedValueExpression resourceVar)
         {
             if (client is TypedValueExpression typedClient)
             {
