@@ -119,6 +119,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
+
+            // initialize the samples
+            SampleProviders = new Lazy<IReadOnlyList<MgmtSampleProvider>>(() => EnsureMgmtClientSampleProviders().ToArray());
         }
 
         private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
@@ -955,24 +958,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return operationsToRequestPath;
         }
 
-        private Dictionary<MgmtTypeProvider, MgmtSampleProvider> EnsureMgmtClientSampleProviders()
+        private IEnumerable<MgmtSampleProvider> EnsureMgmtClientSampleProviders()
         {
-            var result = new Dictionary<MgmtTypeProvider, MgmtSampleProvider>();
+            var result = new List<MgmtSampleProvider>();
             IEnumerable<MgmtTypeProvider> providers = ArmResources.Cast<MgmtTypeProvider>().Concat(ResourceCollections).Concat(Extensions);
             foreach (var provider in providers)
             {
                 var sampleProvider = new MgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
                 if (!sampleProvider.IsEmpty)
                 {
-                    result.Add(provider, sampleProvider);
+                    yield return sampleProvider;
                 }
             }
-
-            return result;
         }
 
-        private IReadOnlyList<MgmtSampleProvider>? _samples;
-        public IReadOnlyList<MgmtSampleProvider> SampleProviders => _samples ??= [..EnsureMgmtClientSampleProviders().Values];
+        public Lazy<IReadOnlyList<MgmtSampleProvider>> SampleProviders { get; }
 
         private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
         {

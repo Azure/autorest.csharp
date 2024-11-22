@@ -242,7 +242,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (Configuration.MgmtTestConfiguration?.Sample ?? Configuration.GenerateSampleProject)
             {
                 string sampleOutputFolder = GetSampleOutputFolder(SAMPLE_DEFAULT_OUTPUT_PATH);
-                foreach (var sampleProvider in MgmtContext.Library.SampleProviders)
+                foreach (var sampleProvider in MgmtContext.Library.SampleProviders.Value)
                 {
                     var sampleWriter = new CodeWriter();
                     new ExpressionTypeProviderWriter(sampleWriter, sampleProvider).Write();
@@ -314,8 +314,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, serializationFileName, serializerCodeWriter.ToString());
         }
 
-        private const string SOURCE_DEFAULT_FOLDER_NAME = "src";
-        private const string SOURCE_DEFAULT_OUTPUT_PATH = $"/{SOURCE_DEFAULT_FOLDER_NAME}/Generated";
+        private const string SOURCE_DEFAULT_OUTPUT_PATH = $"/src/Generated";
         private const string MOCK_TEST_DEFAULT_OUTPUT_PATH = "/tests/Generated";
         private const string SAMPLE_DEFAULT_OUTPUT_PATH = "/samples/Generated";
 
