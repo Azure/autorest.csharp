@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Common.Input
             var inputOperation = new InputOperation(
                 name: operation.Language.Default.Name,
                 // Keep the behavior for non-mgmt scenarios
-                resourceName: Configuration.AzureArm ? GetResoureName(operationId) : null,
+                resourceName: Configuration.AzureArm ? GetResourceName(operationId) : null,
                 summary: operation.Language.Default.Summary,
                 deprecated: operation.Deprecated?.Reason,
                 doc: operation.Language.Default.Description,
@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Common.Input
             return inputOperation;
         }
 
-        private static string? GetResoureName(string? operationId)
+        private static string? GetResourceName(string? operationId)
         {
             if (operationId is null || operationId.IndexOf("_") == -1)
             {
