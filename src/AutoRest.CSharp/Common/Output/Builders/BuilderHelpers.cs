@@ -313,9 +313,6 @@ namespace AutoRest.CSharp.Output.Builders
             return $"";
         }
 
-        public static string CreateSummary(this Schema schema)
-            => schema.Language.Default.Summary is not null ? EscapeXmlDocDescription(schema.Language.Default.Summary) : string.Empty;
-
         public static string CreateDescription(this Schema schema)
             => EscapeXmlDocDescription(schema.Language.Default.Description);
 
