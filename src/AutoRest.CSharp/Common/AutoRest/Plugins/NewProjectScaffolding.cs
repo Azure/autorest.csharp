@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
@@ -87,13 +88,13 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             if (_isAzureSdk)
             {
-                Directory.CreateDirectory(Path.Combine(_testDirectory, !Configuration.AzureArm ? "SessionRecords" : "Scenario"));
+                Directory.CreateDirectory(Path.Combine(_testDirectory, "Scenario"));
             }
             if (!Directory.Exists(_testDirectory))
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            if (Configuration.AzureArm)
+            if (Configuration.AzureArm && Configuration.Namespace != "MgmtTypeSpec")
             {
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
@@ -113,7 +114,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (_isAzureSdk)
             {
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetDirectoryBuildProps()));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadme_Mgmt()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadmeMgmt()));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
         }
@@ -227,7 +228,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
-        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackages_Mgmt = new CSProjWriter.CSProjDependencyPackage[]
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackagesMgmt = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Identity"),
             new("NUnit"),
@@ -301,7 +302,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 EndProject
 ";
             }
-            if (Configuration.AzureArm)
+            if (Configuration.AzureArm && Configuration.Namespace != "MgmtTypeSpec")
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
 EndProject
@@ -379,7 +380,7 @@ EndGlobal
             return string.Format(slnContent, Configuration.Namespace);
         }
 
-        private string GetReadme_Mgmt()
+        private string GetReadmeMgmt()
         {
             string content = GetClobFromEmbeddedResource("Readme_Mgmt.md");
             string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last(), Configuration.Namespace);
@@ -401,7 +402,7 @@ EndGlobal
         {
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
-            foreach (var package in _brandedTestDependencyPackages_Mgmt)
+            foreach (var package in _brandedTestDependencyPackagesMgmt)
             {
                 writer.PackageReferences.Add(package);
             }
@@ -411,7 +412,8 @@ EndGlobal
         {
             if (!Directory.Exists(_samplesDirectory))
                 Directory.CreateDirectory(_samplesDirectory);
-            await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
+            if (Configuration.Namespace != "MgmtTypeSpec")
+                await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
         private string GetClobFromEmbeddedResource(string assetName)
         {
