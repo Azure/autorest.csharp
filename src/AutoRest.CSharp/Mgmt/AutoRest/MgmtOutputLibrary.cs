@@ -960,7 +960,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<MgmtSampleProvider> EnsureMgmtClientSampleProviders()
         {
-            var result = new List<MgmtSampleProvider>();
             IEnumerable<MgmtTypeProvider> providers = ArmResources.Cast<MgmtTypeProvider>().Concat(ResourceCollections).Concat(Extensions);
             foreach (var provider in providers)
             {
