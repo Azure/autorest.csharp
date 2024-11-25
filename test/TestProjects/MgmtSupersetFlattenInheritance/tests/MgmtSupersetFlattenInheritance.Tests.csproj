@@ -1,10 +1,5 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
-    <!--We don't care about XML doc comments on test types and members-->
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-  </PropertyGroup>
-
+<Project Sdk="Microsoft.NET.Sdk"
+>
   <ItemGroup>
     <ProjectReference Include="..\src\MgmtSupersetFlattenInheritance.csproj" />
   </ItemGroup>
