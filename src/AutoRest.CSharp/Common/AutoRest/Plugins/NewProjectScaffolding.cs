@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            if (Configuration.AzureArm && Configuration.Namespace != "MgmtTypeSpec")
+            if (Configuration.AzureArm && !Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
             {
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
