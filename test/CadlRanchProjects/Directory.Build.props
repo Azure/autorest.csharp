@@ -13,6 +13,10 @@
     <RequiredTargetFrameworks Condition="'$(IsMgmtLibrary)' == 'true'">net8.0;net6.0;net462</RequiredTargetFrameworks>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
-
+  <ItemGroup Condition="'$(IsMgmtLibrary)' == 'true'">
+    <PackageReference Update="Azure.Identity" Version="1.13.1" />
+    <PackageReference Update="NUnit" Version="4.2.2" />
+    <PackageReference Update="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
   <Import Project="..\..\Directory.Build.props" />
 </Project>
