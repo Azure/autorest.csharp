@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.LatestVersion.Models
 {
     /// <summary> The version of the API. </summary>
     public enum Versions

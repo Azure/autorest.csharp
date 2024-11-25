@@ -1,0 +1,4 @@
+options:
+  "@azure-tools/typespec-csharp":
+    namespace: Versioning.Removed.LatestVersion
+    clear-output-folder: true

@@ -341,7 +341,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[requestParameter.Name];
             }
 
-            if (requestParameter is { Kind: InputOperationParameterKind.Constant, IsRequired: true })
+            if (requestParameter is { Kind: InputOperationParameterKind.Constant })
             {
                 if (requestParameter.Type is InputLiteralType { Value: not null } literalType)
                 {

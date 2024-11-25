@@ -9,7 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Versioning.Removed
+namespace Versioning.Removed.LatestVersion
 {
     internal static class Argument
     {

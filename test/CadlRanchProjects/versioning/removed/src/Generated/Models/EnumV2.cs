@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Versioning.Removed.Models
+namespace Versioning.Removed.LatestVersion.Models
 {
     /// <summary> The EnumV2. </summary>
     public enum EnumV2
