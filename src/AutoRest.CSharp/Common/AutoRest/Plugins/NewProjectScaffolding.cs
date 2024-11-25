@@ -346,7 +346,7 @@ EndProject
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
             }
-            if (Configuration.AzureArm)
+            if (Configuration.AzureArm && !Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
             {
                 slnContent += @"		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.Build.0 = Debug|Any CPU
