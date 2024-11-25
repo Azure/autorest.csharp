@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            if (Configuration.AzureArm && !Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
+            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
             {
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
@@ -234,12 +234,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             new("NUnit"),
             new("NUnit3TestAdapter"),
         };
-        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackagesVersionMgmt = new CSProjWriter.CSProjDependencyPackage[]
-        {
-            new("Azure.Identity","1.13.1"),
-            new("NUnit","4.2.2"),
-            new("NUnit3TestAdapter","4.6.0"),
-        };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
@@ -308,7 +302,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 EndProject
 ";
             }
-            if (Configuration.AzureArm && !Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
+            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
 EndProject
@@ -346,7 +340,7 @@ EndProject
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
             }
-            if (Configuration.AzureArm && !Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
+            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
             {
                 slnContent += @"		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -408,12 +402,7 @@ EndGlobal
         {
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
-            IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages;
-            if (!Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
-                packages = _brandedTestDependencyPackagesMgmt;
-            else
-                packages = _brandedTestDependencyPackagesVersionMgmt;
-            foreach (var package in packages)
+            foreach (var package in _brandedTestDependencyPackagesMgmt)
             {
                 writer.PackageReferences.Add(package);
             }
@@ -423,7 +412,7 @@ EndGlobal
         {
             if (!Directory.Exists(_samplesDirectory))
                 Directory.CreateDirectory(_samplesDirectory);
-            if (!Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
+            if (Configuration.Namespace.StartsWith("Azure.ResourceManager"))
                 await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
         private string GetClobFromEmbeddedResource(string assetName)
