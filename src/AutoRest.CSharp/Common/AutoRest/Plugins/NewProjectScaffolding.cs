@@ -409,10 +409,10 @@ EndGlobal
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
             IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages;
-            if (Configuration.Namespace == "MgmtTypeSpec")
-                packages = _brandedTestDependencyPackagesVersionMgmt;
-            else
+            if (!Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
                 packages = _brandedTestDependencyPackagesMgmt;
+            else
+                packages = _brandedTestDependencyPackagesVersionMgmt;
             foreach (var package in packages)
             {
                 writer.PackageReferences.Add(package);
@@ -423,7 +423,7 @@ EndGlobal
         {
             if (!Directory.Exists(_samplesDirectory))
                 Directory.CreateDirectory(_samplesDirectory);
-            if (Configuration.Namespace != "MgmtTypeSpec")
+            if (!Configuration.Namespace.StartsWith("Mgmt") && !Configuration.Namespace.StartsWith("AzureSample.ResourceManager"))
                 await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
         private string GetClobFromEmbeddedResource(string assetName)
