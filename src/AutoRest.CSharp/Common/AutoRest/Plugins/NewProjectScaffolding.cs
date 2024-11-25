@@ -234,6 +234,12 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             new("NUnit"),
             new("NUnit3TestAdapter"),
         };
+        private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackagesVersionMgmt = new CSProjWriter.CSProjDependencyPackage[]
+        {
+            new("Azure.Identity","1.13.1"),
+            new("NUnit","4.2.2"),
+            new("NUnit3TestAdapter","4.6.0"),
+        };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
@@ -402,7 +408,12 @@ EndGlobal
         {
             var writer = new CSProjWriter();
             writer.ProjectReferences.Add(new($"..\\src\\{Configuration.Namespace}.csproj"));
-            foreach (var package in _brandedTestDependencyPackagesMgmt)
+            IReadOnlyList<CSProjWriter.CSProjDependencyPackage> packages;
+            if (Configuration.Namespace == "MgmtTypeSpec")
+                packages = _brandedTestDependencyPackagesVersionMgmt;
+            else
+                packages = _brandedTestDependencyPackagesMgmt;
+            foreach (var package in packages)
             {
                 writer.PackageReferences.Add(package);
             }
