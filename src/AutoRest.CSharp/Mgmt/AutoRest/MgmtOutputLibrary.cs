@@ -21,6 +21,7 @@ using OutputResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 using Azure.Core;
 using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input.InputTypes;
+using AutoRest.CSharp.Mgmt.Output.Samples;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -118,6 +119,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
+
+            // initialize the samples
+            SampleProviders = new Lazy<IReadOnlyList<MgmtSampleProvider>>(() => EnsureMgmtClientSampleProviders().ToArray());
         }
 
         private Dictionary<string, TypeProvider> EnsureSchemaNameToModels() => _schemaToModels.ToDictionary(kv => kv.Key.Name, kv => kv.Value);
@@ -953,6 +957,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return operationsToRequestPath;
         }
+
+        private IEnumerable<MgmtSampleProvider> EnsureMgmtClientSampleProviders()
+        {
+            IEnumerable<MgmtTypeProvider> providers = ArmResources.Cast<MgmtTypeProvider>().Concat(ResourceCollections).Concat(Extensions);
+            foreach (var provider in providers)
+            {
+                var sampleProvider = new MgmtSampleProvider(Configuration.Namespace, provider, MgmtContext.Context.SourceInputModel);
+                if (!sampleProvider.IsEmpty)
+                {
+                    yield return sampleProvider;
+                }
+            }
+        }
+
+        public Lazy<IReadOnlyList<MgmtSampleProvider>> SampleProviders { get; }
 
         private class ObjectReferenceEqualityComparer<T> : EqualityComparer<T> where T : class
         {

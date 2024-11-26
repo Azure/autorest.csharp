@@ -12,16 +12,18 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using Microsoft.CodeAnalysis.CSharp;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.LowLevel.Extensions
+namespace AutoRest.CSharp.Common.Output.Models.Samples
 {
     internal static partial class ExampleValueSnippets
     {
@@ -188,13 +190,35 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 return Null.CastTo(frameworkType);
             }
 
-            return frameworkType.IsValueType ? Default.CastTo(frameworkType) : Null.CastTo(frameworkType);
+            // TODO -- this might be an issue. We have so many shared common types in resoucemanager which replace the generated types in a library.
+            // This way is only temporary, we need a universal way to handle those replaced types.
+            if (frameworkType == typeof(ManagedServiceIdentityType))
+            {
+                if (exampleValue is InputExampleRawValue rawValue && rawValue.RawValue is string str)
+                {
+                    return Literal(str);
+                }
+
+                return Default.CastTo(frameworkType);
+            }
+
+            if (frameworkType == typeof(UserAssignedIdentity))
+            {
+                return New.Instance(frameworkType);
+            }
+
+            return DefaultOf(frameworkType);
         }
 
-        public static ValueExpression GetExpression(InputExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
+        public static ValueExpression GetExpression(CSharpType type, InputExampleValue? value)
+            => value != null ?
+                GetExpression(type, value, SerializationBuilder.GetDefaultSerializationFormat(type)) :
+                DefaultOf(type);
+
+        public static ValueExpression GetExpression(ExampleParameterValue exampleParameterValue, SerializationFormat serializationFormat)
         {
             if (exampleParameterValue.Value != null)
-                return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat);
+                return GetExpression(exampleParameterValue.Type, exampleParameterValue.Value, serializationFormat == SerializationFormat.Default ? SerializationBuilder.GetDefaultSerializationFormat(exampleParameterValue.Type) : serializationFormat);
             else if (exampleParameterValue.Expression != null)
                 return exampleParameterValue.Expression;
             else
@@ -373,12 +397,12 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 if (valueDict.TryGetValue(property.InputModelProperty!.SerializedName, out var exampleValue))
                 {
                     properties.Remove(property);
-                    argument = GetExpression(propertyType, exampleValue, property.SerializationFormat, includeCollectionInitialization: true);
+                    argument = GetExpression(propertyType, exampleValue, GetSerializationFormat(property, propertyType), includeCollectionInitialization: true);
                 }
                 else
                 {
                     // if no match, we put default here
-                    argument = propertyType.IsValueType && !propertyType.IsNullable ? Default : Null;
+                    argument = DefaultOf(propertyType);
                 }
                 arguments.Add(argument);
             }
@@ -390,13 +414,24 @@ namespace AutoRest.CSharp.LowLevel.Extensions
                 foreach (var (property, exampleValue) in propertiesToWrite)
                 {
                     // we need to pass in the current type of this property to make sure its initialization is correct
-                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, property.SerializationFormat, includeCollectionInitialization: false);
+                    var propertyExpression = GetExpression(property.Declaration.Type, exampleValue, GetSerializationFormat(property, property.Declaration.Type), includeCollectionInitialization: false);
                     initializerDict.Add(property.Declaration.Name, propertyExpression);
                 }
                 objectPropertyInitializer = new(initializerDict, false);
             }
 
             return new NewInstanceExpression(objectType.Type, arguments, objectPropertyInitializer);
+
+            static SerializationFormat GetSerializationFormat(ObjectTypeProperty property, CSharpType propertyType)
+            {
+                var serializationFormat = property.SerializationFormat; // this works for typespec input models
+                // TODO - wait for fix. For swagger input models, the serialization format is not properly added onto the property, therefore here we have to find the serialization format again
+                if (serializationFormat == SerializationFormat.Default)
+                {
+                    serializationFormat = SerializationBuilder.GetDefaultSerializationFormat(propertyType);
+                }
+                return serializationFormat;
+            }
         }
 
         private static IReadOnlyDictionary<ObjectTypeProperty, InputExampleValue> GetPropertiesToWrite(IEnumerable<ObjectTypeProperty> properties, IReadOnlyDictionary<string, InputExampleValue> valueDict)
