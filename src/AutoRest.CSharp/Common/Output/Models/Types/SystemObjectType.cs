@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, inputModelProperty.Description, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
+                yield return new ObjectTypeProperty(memberDeclarationOptions, DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
                 {
                     SerializeAs = GetSerializeAs(property.PropertyType)
                 });

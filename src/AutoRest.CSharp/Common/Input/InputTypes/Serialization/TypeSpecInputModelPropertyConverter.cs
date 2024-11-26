@@ -59,8 +59,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException($"{nameof(InputModelProperty)} must have a name.");
-            summary = BuilderHelpers.EscapeXmlDocDescription(summary ?? string.Empty);
-            doc = BuilderHelpers.EscapeXmlDocDescription(doc ?? string.Empty);
             propertyType = propertyType ?? throw new JsonException($"{nameof(InputModelProperty)} must have a property type.");
 
             if (propertyType is InputLiteralType lt)
