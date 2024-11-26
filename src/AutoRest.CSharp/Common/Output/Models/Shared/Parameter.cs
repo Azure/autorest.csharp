@@ -185,7 +185,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static FormattableString GetDescription(InputParameter parameter, CSharpType type)
         {
-            return FormattableStringHelpers.FromString(DocHelpers.GetDescription(parameter.Summary, parameter.Doc) ?? $"The {type:C} to use.");
+            var description = DocHelpers.GetDescription(parameter.Summary, parameter.Doc);
+            if (description is null)
+            {
+                return $"The {type:C} to use.";
+            }
+            return FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(description));
         }
 
         private static Constant? ParseConstant(InputParameter parameter, TypeFactory typeFactory)
