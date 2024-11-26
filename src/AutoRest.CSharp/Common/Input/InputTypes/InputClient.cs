@@ -6,9 +6,8 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputClient(string Name, string Summary, string Doc, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent)
+internal record InputClient(string Name, string? Summary, string? Doc, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent)
 {
-    public string Description { get; init; } = string.IsNullOrEmpty(Summary) ? Doc : Summary;
     private readonly string? _key;
 
     public string Key

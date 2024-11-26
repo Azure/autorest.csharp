@@ -30,6 +30,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 ? $"The {clientPrefix} service client."
                 : BuilderHelpers.EscapeXmlDocDescription(description);
 
+        public static string CreateDescription(string? summary, string? doc, string? clientPrefix)
+            => (summary, doc) switch
+            {
+                (null or "", null or "") => clientPrefix is null ? string.Empty : $"The {clientPrefix} service client.",
+                (string s, null or "") => BuilderHelpers.EscapeXmlDocDescription(s),
+                _ => BuilderHelpers.EscapeXmlDocDescription(doc),
+            };
+
         private const string AzurePackageNamespacePrefix = "Azure.";
         private const string AzureMgmtPackageNamespacePrefix = "Azure.ResourceManager.";
 

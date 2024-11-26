@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace;
-            var clientDescription = ns.Description;
+            var clientDescription = ClientBuilder.CreateDescription(ns.Summary, ns.Doc, null);
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromClient(ns).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
