@@ -94,9 +94,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static string CreateDescription(InputEnumTypeValue value)
         {
-            var description = string.IsNullOrWhiteSpace(value.Description)
-                ? value.GetValueString()
-                : value.Description;
+            var description = CreateDescription(value.Summary, value.Doc) ?? value.GetValueString();
             return BuilderHelpers.EscapeXmlDocDescription(description);
         }
 
