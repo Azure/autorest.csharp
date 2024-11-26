@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            Description = string.IsNullOrWhiteSpace(input.Description) ? $"The {input.Name}." : input.Description;
+            Description = CreateDescription(input.Summary, input.Doc) ?? $"The {input.Name}.";
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.ValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
@@ -99,5 +99,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 : value.Description;
             return BuilderHelpers.EscapeXmlDocDescription(description);
         }
+
+        private static string? CreateDescription(string? summary, string? doc)
+            => (summary, doc) switch
+            {
+                (null or "", null or "") => null,
+                (string s, null or "") => s,
+                _ => doc,
+            };
     }
 }
