@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -43,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             foreach (var parameter in _paramsToKeep)
             {
                 var inputParameter = _operation.Parameters.First(p => string.Equals(p.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
-                var description = !string.IsNullOrEmpty(inputParameter.Description) && parameter.Description is not null ? parameter.Description.ToString() : $"The {parameter.Name}";
+                var description = DocHelpers.GetDescription(inputParameter.Summary, inputParameter.Doc) is not null && parameter.Description is not null ? parameter.Description.ToString() : $"The {parameter.Name}";
                 var property = new InputModelProperty(parameter.Name, parameter.Name, string.Empty, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
