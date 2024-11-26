@@ -35,7 +35,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable boolean value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<bool?>>> GetNullableBooleanValueAsync()
         {
             ClientResult result = await GetNullableBooleanValueAsync(null).ConfigureAwait(false);
@@ -57,7 +57,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable boolean value. </summary>
         public virtual ClientResult<IReadOnlyList<bool?>> GetNullableBooleanValue()
         {
             ClientResult result = GetNullableBooleanValue(null);
@@ -80,7 +80,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -104,7 +104,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>

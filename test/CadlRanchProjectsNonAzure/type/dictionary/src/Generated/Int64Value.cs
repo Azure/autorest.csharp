@@ -35,7 +35,7 @@ namespace Scm._Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 64 value. </summary>
         public virtual async Task<ClientResult<IReadOnlyDictionary<string, long>>> GetInt64ValueAsync()
         {
             ClientResult result = await GetInt64ValueAsync(null).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Scm._Type._Dictionary
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 64 value. </summary>
         public virtual ClientResult<IReadOnlyDictionary<string, long>> GetInt64Value()
         {
             ClientResult result = GetInt64Value(null);
@@ -66,7 +66,7 @@ namespace Scm._Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 64 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Scm._Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 64 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
