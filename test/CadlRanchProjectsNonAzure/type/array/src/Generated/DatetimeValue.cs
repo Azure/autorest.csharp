@@ -35,7 +35,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get datetime value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<DateTimeOffset>>> GetDatetimeValueAsync()
         {
             ClientResult result = await GetDatetimeValueAsync(null).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get datetime value. </summary>
         public virtual ClientResult<IReadOnlyList<DateTimeOffset>> GetDatetimeValue()
         {
             ClientResult result = GetDatetimeValue(null);
@@ -66,7 +66,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get datetime value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get datetime value.
         /// <list type="bullet">
         /// <item>
         /// <description>

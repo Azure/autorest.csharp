@@ -45,7 +45,7 @@ namespace _Type._Dictionary
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable float value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyDictionary<string, float?>>> GetNullableFloatValueAsync(CancellationToken cancellationToken = default)
@@ -70,7 +70,7 @@ namespace _Type._Dictionary
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable float value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyDictionary<string, float?>> GetNullableFloatValue(CancellationToken cancellationToken = default)
@@ -96,7 +96,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable float value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,7 +131,7 @@ namespace _Type._Dictionary
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable float value.
         /// <list type="bullet">
         /// <item>
         /// <description>

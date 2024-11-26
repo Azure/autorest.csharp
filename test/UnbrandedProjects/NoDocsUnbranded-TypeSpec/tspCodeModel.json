@@ -20,7 +20,7 @@
      "kind": "enumvalue",
      "name": "accept",
      "value": "accept",
-     "description": "accept",
+     "doc": "accept",
      "valueType": {
       "$ref": "3"
      },
@@ -30,7 +30,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralString",
+   "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -53,7 +53,7 @@
      "kind": "enumvalue",
      "name": "123",
      "value": 123,
-     "description": "123",
+     "doc": "123",
      "valueType": {
       "$ref": "6"
      },
@@ -63,7 +63,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralInt",
+   "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -86,7 +86,7 @@
      "kind": "enumvalue",
      "name": "1.23",
      "value": 1.23,
-     "description": "1.23",
+     "doc": "1.23",
      "valueType": {
       "$ref": "9"
      },
@@ -96,7 +96,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralFloat",
+   "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -119,7 +119,7 @@
      "kind": "enumvalue",
      "name": "reject",
      "value": "reject",
-     "description": "reject",
+     "doc": "reject",
      "valueType": {
       "$ref": "12"
      },
@@ -129,7 +129,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralString",
+   "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -152,7 +152,7 @@
      "kind": "enumvalue",
      "name": "456",
      "value": 456,
-     "description": "456",
+     "doc": "456",
      "valueType": {
       "$ref": "15"
      },
@@ -162,7 +162,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralInt",
+   "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -185,7 +185,7 @@
      "kind": "enumvalue",
      "name": "4.56",
      "value": 4.56,
-     "description": "4.56",
+     "doc": "4.56",
      "valueType": {
       "$ref": "18"
      },
@@ -195,7 +195,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralFloat",
+   "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -209,7 +209,7 @@
    "name": "Thing",
    "crossLanguageDefinitionId": "NoDocsUnbrandedTypeSpec.Thing",
    "usage": "Output,Json",
-   "description": "A model with a few properties of literal types",
+   "doc": "A model with a few properties of literal types",
    "decorators": [],
    "properties": [
     {
@@ -217,7 +217,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the Thing",
+     "doc": "name of the Thing",
      "type": {
       "$id": "22",
       "kind": "string",
@@ -237,7 +237,7 @@
      "kind": "property",
      "name": "requiredUnion",
      "serializedName": "requiredUnion",
-     "description": "required Union",
+     "doc": "required Union",
      "type": {
       "$id": "24",
       "kind": "union",
@@ -286,7 +286,7 @@
      "kind": "property",
      "name": "requiredLiteralString",
      "serializedName": "requiredLiteralString",
-     "description": "required literal string",
+     "doc": "required literal string",
      "type": {
       "$id": "30",
       "kind": "constant",
@@ -308,7 +308,7 @@
      "kind": "property",
      "name": "requiredLiteralInt",
      "serializedName": "requiredLiteralInt",
-     "description": "required literal int",
+     "doc": "required literal int",
      "type": {
       "$id": "32",
       "kind": "constant",
@@ -330,7 +330,7 @@
      "kind": "property",
      "name": "requiredLiteralFloat",
      "serializedName": "requiredLiteralFloat",
-     "description": "required literal float",
+     "doc": "required literal float",
      "type": {
       "$id": "34",
       "kind": "constant",
@@ -352,7 +352,7 @@
      "kind": "property",
      "name": "requiredLiteralBool",
      "serializedName": "requiredLiteralBool",
-     "description": "required literal bool",
+     "doc": "required literal bool",
      "type": {
       "$id": "36",
       "kind": "constant",
@@ -378,7 +378,7 @@
      "kind": "property",
      "name": "optionalLiteralString",
      "serializedName": "optionalLiteralString",
-     "description": "optional literal string",
+     "doc": "optional literal string",
      "type": {
       "$id": "39",
       "kind": "constant",
@@ -400,7 +400,7 @@
      "kind": "property",
      "name": "optionalLiteralInt",
      "serializedName": "optionalLiteralInt",
-     "description": "optional literal int",
+     "doc": "optional literal int",
      "type": {
       "$id": "41",
       "kind": "constant",
@@ -422,7 +422,7 @@
      "kind": "property",
      "name": "optionalLiteralFloat",
      "serializedName": "optionalLiteralFloat",
-     "description": "optional literal float",
+     "doc": "optional literal float",
      "type": {
       "$id": "43",
       "kind": "constant",
@@ -444,7 +444,7 @@
      "kind": "property",
      "name": "optionalLiteralBool",
      "serializedName": "optionalLiteralBool",
-     "description": "optional literal bool",
+     "doc": "optional literal bool",
      "type": {
       "$id": "45",
       "kind": "constant",
@@ -470,7 +470,7 @@
      "kind": "property",
      "name": "requiredBadDescription",
      "serializedName": "requiredBadDescription",
-     "description": "description with xml <|endoftext|>",
+     "doc": "description with xml <|endoftext|>",
      "type": {
       "$id": "48",
       "kind": "string",
@@ -490,7 +490,7 @@
      "kind": "property",
      "name": "optionalNullableList",
      "serializedName": "optionalNullableList",
-     "description": "optional nullable collection",
+     "doc": "optional nullable collection",
      "type": {
       "$id": "50",
       "kind": "nullable",
@@ -521,7 +521,7 @@
      "kind": "property",
      "name": "requiredNullableList",
      "serializedName": "requiredNullableList",
-     "description": "required nullable collection",
+     "doc": "required nullable collection",
      "type": {
       "$id": "54",
       "kind": "nullable",
@@ -554,13 +554,13 @@
   {
    "$id": "57",
    "Name": "NoDocsUnbrandedTypeSpecClient",
-   "Description": "This is a sample typespec project.",
+   "Doc": "This is a sample typespec project.",
    "Operations": [
     {
      "$id": "58",
      "Name": "sayHi",
      "ResourceName": "NoDocsUnbrandedTypeSpec",
-     "Description": "Return hi",
+     "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {

@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.InputTypes;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
@@ -97,9 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
-            FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? (FormattableString)$"The {type:C} to use."
-                : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
+            FormattableString description = GetDescription(operationParameter, type);
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
@@ -160,9 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static FormattableString CreateDescription(InputParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
-            FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Description) ?
-                (FormattableString)$"The {type:C} to use." :
-                $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Description)}";
+            FormattableString description = GetDescription(requestParameter, type);
             if (defaultValue != null)
             {
                 var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
@@ -184,6 +181,16 @@ namespace AutoRest.CSharp.Output.Models.Shared
                     ? description
                     : $"{description}{(description.ToString().EndsWith(".") ? "" : ".")} Allowed values: {BuilderHelpers.EscapeXmlDocDescription(allowedValues.ToString())}";
             }
+        }
+
+        private static FormattableString GetDescription(InputParameter parameter, CSharpType type)
+        {
+            var description = DocHelpers.GetDescription(parameter.Summary, parameter.Doc);
+            if (description is null)
+            {
+                return $"The {type:C} to use.";
+            }
+            return FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(description));
         }
 
         private static Constant? ParseConstant(InputParameter parameter, TypeFactory typeFactory)

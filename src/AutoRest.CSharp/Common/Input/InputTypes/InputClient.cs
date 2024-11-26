@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent)
+internal record InputClient(string Name, string? Summary, string? Doc, IReadOnlyList<InputOperation> Operations, IReadOnlyList<InputParameter> Parameters, string? Parent)
 {
     private readonly string? _key;
 
@@ -19,5 +19,5 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
     public IReadOnlyList<InputOperation> Operations { get; internal set; } = Operations ?? Array.Empty<InputOperation>();
     public IReadOnlyList<InputDecoratorInfo> Decorators { get; internal set; } = new List<InputDecoratorInfo>();
 
-    public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), Array.Empty<InputParameter>(), null) { }
+    public InputClient() : this(string.Empty, string.Empty, string.Empty, Array.Empty<InputOperation>(), Array.Empty<InputParameter>(), null) { }
 }

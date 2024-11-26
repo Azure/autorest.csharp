@@ -35,7 +35,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 32 value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<int>>> GetInt32ValueAsync()
         {
             ClientResult result = await GetInt32ValueAsync(null).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 32 value. </summary>
         public virtual ClientResult<IReadOnlyList<int>> GetInt32Value()
         {
             ClientResult result = GetInt32Value(null);
@@ -66,7 +66,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>

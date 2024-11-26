@@ -30,7 +30,8 @@ namespace AutoRest.CSharp.Common.Input
             string? crossLanguageDefinitionId = null;
             string? access = null;
             string? deprecation = null;
-            string? description = null;
+            string? summary = null;
+            string? doc = null;
             string? usageString = null;
             bool isFixed = false;
             InputType? valueType = null;
@@ -44,7 +45,8 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString("crossLanguageDefinitionId", ref crossLanguageDefinitionId)
                     || reader.TryReadString("access", ref access)
                     || reader.TryReadString("deprecation", ref deprecation)
-                    || reader.TryReadString("description", ref description)
+                    || reader.TryReadString("summary", ref summary)
+                    || reader.TryReadString("doc", ref doc)
                     || reader.TryReadString("usage", ref usageString)
                     || reader.TryReadBoolean("isFixed", ref isFixed)
                     || reader.TryReadWithConverter("valueType", options, ref valueType)
@@ -60,10 +62,11 @@ namespace AutoRest.CSharp.Common.Input
             name = name ?? throw new JsonException("Enum must have name");
             // TODO: roll back to throw JSON error when there is linter on the upstream to check enum without @doc
             //description = description ?? throw new JsonException("Enum must have a description");
-            if (description.IsNullOrEmpty())
+            if (doc.IsNullOrEmpty() && summary.IsNullOrEmpty())
             {
-                Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
-                description = $"The {name}.";
+                Console.Error.WriteLine($"[Warn]: Enum '{name}' must have either a summary or description");
+                summary = string.Empty;
+                doc = $"The {name}.";
             }
 
             if (!Enum.TryParse<InputModelTypeUsage>(usageString, out var usage))
@@ -81,7 +84,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("The ValueType of an EnumType must be a primitive type.");
             }
 
-            var enumType = new InputEnumType(name, crossLanguageDefinitionId ?? string.Empty, access, deprecation, description!, usage, inputValueType, values, !isFixed)
+            var enumType = new InputEnumType(name, crossLanguageDefinitionId ?? string.Empty, access, deprecation, summary!, doc!, usage, inputValueType, values, !isFixed)
             {
                 Decorators = decorators ?? []
             };

@@ -71,7 +71,8 @@ namespace AutoRest.CSharp.Common.Input
         private InputClient CreateClient(OperationGroup operationGroup, Dictionary<ServiceRequest, InputOperation>? serviceRequestToInputOperation, Dictionary<InputOperation, Operation>? inputOperationToOperation)
             => new(
                 Name: operationGroup.Language.Default.Name,
-                Description: operationGroup.Language.Default.Description,
+                Summary: string.Empty,
+                Doc: operationGroup.Language.Default.Description,
                 Operations: CreateOperations(operationGroup.Operations, serviceRequestToInputOperation, inputOperationToOperation),
                 Parameters: Array.Empty<InputParameter>(),
                 Parent: null)
@@ -136,10 +137,10 @@ namespace AutoRest.CSharp.Common.Input
             var inputOperation = new InputOperation(
                 name: operation.Language.Default.Name,
                 // Keep the behavior for non-mgmt scenarios
-                resourceName: Configuration.AzureArm ? GetResoureName(operationId) : null,
+                resourceName: Configuration.AzureArm ? GetResourceName(operationId) : null,
                 summary: operation.Language.Default.Summary,
                 deprecated: operation.Deprecated?.Reason,
-                description: operation.Language.Default.Description,
+                doc: operation.Language.Default.Description,
                 accessibility: operation.Accessibility,
                 parameters: parameters,
                 responses: operation.Responses.Select<ServiceResponse, OperationResponse>(CreateOperationResponse).ToList(),
@@ -163,7 +164,7 @@ namespace AutoRest.CSharp.Common.Input
             return inputOperation;
         }
 
-        private static string? GetResoureName(string? operationId)
+        private static string? GetResourceName(string? operationId)
         {
             if (operationId is null || operationId.IndexOf("_") == -1)
             {
@@ -300,7 +301,8 @@ namespace AutoRest.CSharp.Common.Input
         private InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
-            Description: input.Language.Default.Description,
+            Summary: string.Empty,
+            Doc: input.Language.Default.Description,
             Type: GetOrCreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
@@ -332,7 +334,8 @@ namespace AutoRest.CSharp.Common.Input
         private OperationResponseHeader CreateResponseHeader(HttpResponseHeader header) => new(
             Name: header.CSharpName(),
             NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
-            Description: header.Language.Default.Description,
+            Summary: string.Empty,
+            Doc: header.Language.Default.Description,
             Type: GetOrCreateType(header.Schema, header.Extensions?.Format, true)
         );
 
@@ -453,7 +456,8 @@ namespace AutoRest.CSharp.Common.Input
                 CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Access: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecation: schema.Deprecated?.Reason,
-                Description: schema.CreateDescription(),
+                Summary: string.Empty,
+                Doc: schema.CreateDescription(),
                 Usage: (schema.Extensions != null && schema.Extensions.Formats.Contains("multipart/form-data") ? InputModelTypeUsage.MultipartFormData : InputModelTypeUsage.None)
                         | GetUsage(usage),
                 Properties: properties,
@@ -504,7 +508,8 @@ namespace AutoRest.CSharp.Common.Input
             inputProperty = new(
                 Name: property.Language.Default.Name,
                 SerializedName: property.SerializedName,
-                Description: property.Language.Default.Description,
+                Summary: string.Empty,
+                Doc: property.Language.Default.Description,
                 Type: GetOrCreateType(property),
                 ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, property.IsNullable) : null,
                 IsRequired: property.IsRequired,
@@ -765,7 +770,7 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputType CreateDataFactoryElementInputType(bool isNullable, InputType argumentType)
-            => new InputModelType("DataFactoryElement", "Azure.Core.Resources.DataFactoryElement", null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
+            => new InputModelType("DataFactoryElement", "Azure.Core.Resources.DataFactoryElement", null, null, null, null, InputModelTypeUsage.None, Array.Empty<InputModelProperty>(), null, Array.Empty<InputModelType>(), null, null, new Dictionary<string, InputModelType>(), null, new List<InputType> { argumentType }).WithNullable(isNullable);
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, bool isNullable)
         {
@@ -806,7 +811,8 @@ namespace AutoRest.CSharp.Common.Input
                 CrossLanguageDefinitionId: GetCrossLanguageDefinitionId(schema),
                 Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
-                Description: schema.CreateDescription(),
+                Summary: string.Empty,
+                Doc: schema.CreateDescription(),
                 Usage: GetUsage(usage),
                 ValueType: valueType,
                 Values: choices.Select(c => CreateEnumValue(c, valueType)).ToList(),
@@ -836,7 +842,8 @@ namespace AutoRest.CSharp.Common.Input
             var value = ConvertRawValue(valueType, choiceValue.Value);
             return new(
                 Name: choiceValue.Language.Default.Name,
-                Description: choiceValue.Language.Default.Description,
+                Summary: string.Empty,
+                Doc: choiceValue.Language.Default.Description,
                 Value: value!);
         }
 

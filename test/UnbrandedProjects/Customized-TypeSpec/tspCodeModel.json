@@ -22,7 +22,7 @@
      "kind": "enumvalue",
      "name": "accept",
      "value": "accept",
-     "description": "accept",
+     "doc": "accept",
      "valueType": {
       "$ref": "3"
      },
@@ -32,7 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralString",
+   "doc": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -55,7 +55,7 @@
      "kind": "enumvalue",
      "name": "123",
      "value": 123,
-     "description": "123",
+     "doc": "123",
      "valueType": {
       "$ref": "6"
      },
@@ -65,7 +65,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralInt",
+   "doc": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -88,7 +88,7 @@
      "kind": "enumvalue",
      "name": "1.23",
      "value": 1.23,
-     "description": "1.23",
+     "doc": "1.23",
      "valueType": {
       "$ref": "9"
      },
@@ -98,7 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_requiredLiteralFloat",
+   "doc": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -121,7 +121,7 @@
      "kind": "enumvalue",
      "name": "reject",
      "value": "reject",
-     "description": "reject",
+     "doc": "reject",
      "valueType": {
       "$ref": "12"
      },
@@ -131,7 +131,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralString",
+   "doc": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -154,7 +154,7 @@
      "kind": "enumvalue",
      "name": "456",
      "value": 456,
-     "description": "456",
+     "doc": "456",
      "valueType": {
       "$ref": "15"
      },
@@ -164,7 +164,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralInt",
+   "doc": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -187,7 +187,7 @@
      "kind": "enumvalue",
      "name": "4.56",
      "value": 4.56,
-     "description": "4.56",
+     "doc": "4.56",
      "valueType": {
       "$ref": "18"
      },
@@ -197,7 +197,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Thing_optionalLiteralFloat",
+   "doc": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -247,7 +247,7 @@
    "name": "Thing",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
-   "description": "A model with a few properties of literal types",
+   "doc": "A model with a few properties of literal types",
    "decorators": [],
    "properties": [
     {
@@ -255,7 +255,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the Thing",
+     "doc": "name of the Thing",
      "type": {
       "$id": "26",
       "kind": "string",
@@ -275,7 +275,7 @@
      "kind": "property",
      "name": "requiredUnion",
      "serializedName": "requiredUnion",
-     "description": "required Union",
+     "doc": "required Union",
      "type": {
       "$id": "28",
       "kind": "union",
@@ -324,7 +324,7 @@
      "kind": "property",
      "name": "requiredLiteralString",
      "serializedName": "requiredLiteralString",
-     "description": "required literal string",
+     "doc": "required literal string",
      "type": {
       "$id": "34",
       "kind": "constant",
@@ -346,7 +346,7 @@
      "kind": "property",
      "name": "requiredLiteralInt",
      "serializedName": "requiredLiteralInt",
-     "description": "required literal int",
+     "doc": "required literal int",
      "type": {
       "$id": "36",
       "kind": "constant",
@@ -368,7 +368,7 @@
      "kind": "property",
      "name": "requiredLiteralFloat",
      "serializedName": "requiredLiteralFloat",
-     "description": "required literal float",
+     "doc": "required literal float",
      "type": {
       "$id": "38",
       "kind": "constant",
@@ -390,7 +390,7 @@
      "kind": "property",
      "name": "requiredLiteralBool",
      "serializedName": "requiredLiteralBool",
-     "description": "required literal bool",
+     "doc": "required literal bool",
      "type": {
       "$id": "40",
       "kind": "constant",
@@ -416,7 +416,7 @@
      "kind": "property",
      "name": "optionalLiteralString",
      "serializedName": "optionalLiteralString",
-     "description": "optional literal string",
+     "doc": "optional literal string",
      "type": {
       "$id": "43",
       "kind": "constant",
@@ -438,7 +438,7 @@
      "kind": "property",
      "name": "optionalLiteralInt",
      "serializedName": "optionalLiteralInt",
-     "description": "optional literal int",
+     "doc": "optional literal int",
      "type": {
       "$id": "45",
       "kind": "constant",
@@ -460,7 +460,7 @@
      "kind": "property",
      "name": "optionalLiteralFloat",
      "serializedName": "optionalLiteralFloat",
-     "description": "optional literal float",
+     "doc": "optional literal float",
      "type": {
       "$id": "47",
       "kind": "constant",
@@ -482,7 +482,7 @@
      "kind": "property",
      "name": "optionalLiteralBool",
      "serializedName": "optionalLiteralBool",
-     "description": "optional literal bool",
+     "doc": "optional literal bool",
      "type": {
       "$id": "49",
       "kind": "constant",
@@ -508,7 +508,7 @@
      "kind": "property",
      "name": "requiredBadDescription",
      "serializedName": "requiredBadDescription",
-     "description": "description with xml <|endoftext|>",
+     "doc": "description with xml <|endoftext|>",
      "type": {
       "$id": "52",
       "kind": "string",
@@ -528,7 +528,7 @@
      "kind": "property",
      "name": "optionalNullableList",
      "serializedName": "optionalNullableList",
-     "description": "optional nullable collection",
+     "doc": "optional nullable collection",
      "type": {
       "$id": "54",
       "kind": "nullable",
@@ -559,7 +559,7 @@
      "kind": "property",
      "name": "requiredNullableList",
      "serializedName": "requiredNullableList",
-     "description": "required nullable collection",
+     "doc": "required nullable collection",
      "type": {
       "$id": "58",
       "kind": "nullable",
@@ -593,7 +593,7 @@
    "name": "RoundTripModel",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
-   "description": "this is a roundtrip model",
+   "doc": "this is a roundtrip model",
    "decorators": [],
    "properties": [
     {
@@ -601,7 +601,7 @@
      "kind": "property",
      "name": "requiredString",
      "serializedName": "requiredString",
-     "description": "Required string, illustrating a reference type property.",
+     "doc": "Required string, illustrating a reference type property.",
      "type": {
       "$id": "63",
       "kind": "string",
@@ -621,7 +621,7 @@
      "kind": "property",
      "name": "requiredInt",
      "serializedName": "requiredInt",
-     "description": "Required int, illustrating a value type property.",
+     "doc": "Required int, illustrating a value type property.",
      "type": {
       "$id": "65",
       "kind": "int32",
@@ -641,7 +641,7 @@
      "kind": "property",
      "name": "requiredReadonlyInt",
      "serializedName": "requiredReadonlyInt",
-     "description": "Required readonly int",
+     "doc": "Required readonly int",
      "type": {
       "$id": "67",
       "kind": "int32",
@@ -671,7 +671,7 @@
      "kind": "property",
      "name": "sourceUrl",
      "serializedName": "sourceUrl",
-     "description": "url format",
+     "doc": "url format",
      "type": {
       "$id": "70",
       "kind": "url",
@@ -691,7 +691,7 @@
      "kind": "property",
      "name": "guid",
      "serializedName": "guid",
-     "description": "uuid format",
+     "doc": "uuid format",
      "type": {
       "$id": "72",
       "kind": "string",
@@ -721,7 +721,7 @@
    "name": "Friend",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
-   "description": "this is not a friendly model but with a friendly name",
+   "doc": "this is not a friendly model but with a friendly name",
    "decorators": [],
    "properties": [
     {
@@ -729,7 +729,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the NotFriend",
+     "doc": "name of the NotFriend",
      "type": {
       "$id": "76",
       "kind": "string",
@@ -767,7 +767,7 @@
    "name": "ProjectedModel",
    "crossLanguageDefinitionId": "CustomizedTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
-   "description": "this is a model with a projected name",
+   "doc": "this is a model with a projected name",
    "decorators": [],
    "properties": [
     {
@@ -775,7 +775,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "name of the ModelWithProjectedName",
+     "doc": "name of the ModelWithProjectedName",
      "type": {
       "$id": "80",
       "kind": "string",
@@ -806,13 +806,13 @@
   {
    "$id": "82",
    "Name": "CustomizedTypeSpecClient",
-   "Description": "This is a sample typespec project.",
+   "Doc": "This is a sample typespec project.",
    "Operations": [
     {
      "$id": "83",
      "Name": "sayHi",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Return hi",
+     "Doc": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -937,7 +937,7 @@
      "$id": "94",
      "Name": "helloAgain",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Return hi again",
+     "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1088,7 +1088,7 @@
      "$id": "107",
      "Name": "noContentType",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Return hi again",
+     "Doc": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1137,7 +1137,7 @@
        "$id": "112",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "113",
         "kind": "constant",
@@ -1240,7 +1240,7 @@
      "$id": "120",
      "Name": "helloDemo2",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Return hi in demo2",
+     "Doc": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1302,14 +1302,14 @@
      "$id": "125",
      "Name": "createLiteral",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Create with literal value",
+     "Doc": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "126",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "127",
         "kind": "constant",
@@ -1412,7 +1412,7 @@
      "$id": "134",
      "Name": "helloLiteral",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Send literal parameters",
+     "Doc": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1555,7 +1555,7 @@
      "$id": "148",
      "Name": "topAction",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "top level method",
+     "Doc": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1646,7 +1646,7 @@
      "$id": "156",
      "Name": "topAction2",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "top level method2",
+     "Doc": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -1708,14 +1708,14 @@
      "$id": "161",
      "Name": "patchAction",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "top level patch",
+     "Doc": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "162",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "163",
         "kind": "constant",
@@ -1818,14 +1818,14 @@
      "$id": "170",
      "Name": "anonymousBody",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "body parameter without body decorator",
+     "Doc": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "171",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "172",
         "kind": "constant",
@@ -1928,14 +1928,14 @@
      "$id": "179",
      "Name": "friendlyModel",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Model can have its friendly name",
+     "Doc": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "180",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "181",
         "kind": "constant",
@@ -2095,14 +2095,14 @@
      "$id": "193",
      "Name": "projectedNameModel",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "Model can have its projected name",
+     "Doc": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "194",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "195",
         "kind": "constant",
@@ -2205,7 +2205,7 @@
      "$id": "202",
      "Name": "returnsAnonymousModel",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "return anonymous model",
+     "Doc": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2267,7 +2267,7 @@
      "$id": "207",
      "Name": "getUnknownValue",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "get extensible enum",
+     "Doc": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2340,14 +2340,14 @@
      "$id": "213",
      "Name": "internalProtocol",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Doc": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "214",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "215",
         "kind": "constant",
@@ -2450,7 +2450,7 @@
      "$id": "222",
      "Name": "stillConvenient",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Doc": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
@@ -2478,7 +2478,7 @@
      "$id": "224",
      "Name": "headAsBoolean",
      "ResourceName": "CustomizedTypeSpec",
-     "Description": "head as boolean.",
+     "Doc": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {

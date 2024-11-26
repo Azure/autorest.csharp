@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -34,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
                     header.Name.ToCleanName(),
                     header.NameInResponse,
                     type,
-                    BuilderHelpers.EscapeXmlDocDescription(header.Description));
+                    BuilderHelpers.EscapeXmlDocDescription(DocHelpers.GetDescription(header.Summary, header.Doc) ?? string.Empty));
             }
 
             var operationName = operation.Name.ToCleanName();

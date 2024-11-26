@@ -45,7 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableBooleanValue.xml" path="doc/members/member[@name='GetNullableBooleanValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<bool?>>> GetNullableBooleanValueAsync(CancellationToken cancellationToken = default)
@@ -70,7 +70,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable boolean value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableBooleanValue.xml" path="doc/members/member[@name='GetNullableBooleanValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<bool?>> GetNullableBooleanValue(CancellationToken cancellationToken = default)
@@ -96,7 +96,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,7 +131,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable boolean value.
         /// <list type="bullet">
         /// <item>
         /// <description>

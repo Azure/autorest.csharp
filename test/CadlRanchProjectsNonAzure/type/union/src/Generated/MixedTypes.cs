@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed type. </summary>
         public virtual async Task<ClientResult<GetResponse>> GetMixedTypeAsync()
         {
             ClientResult result = await GetMixedTypeAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed type. </summary>
         public virtual ClientResult<GetResponse> GetMixedType()
         {
             ClientResult result = GetMixedType(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed type.
         /// <list type="bullet">
         /// <item>
         /// <description>

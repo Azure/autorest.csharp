@@ -118,14 +118,14 @@ namespace Scm._Type.Model.Inheritance.Recursive
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get recursive. </summary>
         public virtual async Task<ClientResult<Extension>> GetRecursiveAsync()
         {
             ClientResult result = await GetRecursiveAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Extension.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get recursive. </summary>
         public virtual ClientResult<Extension> GetRecursive()
         {
             ClientResult result = GetRecursive(null);
@@ -133,7 +133,7 @@ namespace Scm._Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get recursive.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -157,7 +157,7 @@ namespace Scm._Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get recursive.
         /// <list type="bullet">
         /// <item>
         /// <description>

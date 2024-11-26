@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get ints only. </summary>
         public virtual async Task<ClientResult<GetResponse6>> GetIntsOnlyAsync()
         {
             ClientResult result = await GetIntsOnlyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse6.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get ints only. </summary>
         public virtual ClientResult<GetResponse6> GetIntsOnly()
         {
             ClientResult result = GetIntsOnly(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get ints only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get ints only.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -46,7 +46,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable model value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableModelValue.xml" path="doc/members/member[@name='GetNullableModelValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<InnerModel>>> GetNullableModelValueAsync(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable model value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableModelValue.xml" path="doc/members/member[@name='GetNullableModelValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<InnerModel>> GetNullableModelValue(CancellationToken cancellationToken = default)
@@ -83,7 +83,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable model value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable model value.
         /// <list type="bullet">
         /// <item>
         /// <description>

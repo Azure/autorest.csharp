@@ -45,7 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable int 32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableInt32Value.xml" path="doc/members/member[@name='GetNullableInt32ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<int?>>> GetNullableInt32ValueAsync(CancellationToken cancellationToken = default)
@@ -70,7 +70,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable int 32 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NullableInt32Value.xml" path="doc/members/member[@name='GetNullableInt32Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<int?>> GetNullableInt32Value(CancellationToken cancellationToken = default)
@@ -96,7 +96,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -131,7 +131,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable int 32 value.
         /// <list type="bullet">
         /// <item>
         /// <description>

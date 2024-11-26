@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get floats only. </summary>
         public virtual async Task<ClientResult<GetResponse5>> GetFloatsOnlyAsync()
         {
             ClientResult result = await GetFloatsOnlyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse5.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get floats only. </summary>
         public virtual ClientResult<GetResponse5> GetFloatsOnly()
         {
             ClientResult result = GetFloatsOnly(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get floats only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get floats only.
         /// <list type="bullet">
         /// <item>
         /// <description>

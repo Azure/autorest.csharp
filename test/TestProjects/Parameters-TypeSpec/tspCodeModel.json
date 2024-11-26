@@ -86,7 +86,7 @@
      "$id": "11",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "12",
       "kind": "url",
@@ -357,7 +357,7 @@
      "$id": "37",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "38",
       "kind": "url",

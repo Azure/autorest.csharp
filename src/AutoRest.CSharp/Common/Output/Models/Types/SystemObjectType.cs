@@ -183,11 +183,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         inputType = new InputListType(string.Empty, string.Empty, InputPrimitiveType.Boolean);
                     }
-                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false);
+                    inputModelProperty = new InputModelProperty(property.Name, GetSerializedName(property.Name, SystemType), string.Empty, GetPropertySummary(setter != null, property.Name), inputType, null, IsRequired(property, SystemType), property.IsReadOnly(), false);
 
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, inputModelProperty.Description, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
+                yield return new ObjectTypeProperty(memberDeclarationOptions, DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty, inputModelProperty.IsReadOnly, inputModelProperty, new CSharpType(property.PropertyType)
                 {
                     SerializeAs = GetSerializeAs(property.PropertyType)
                 });

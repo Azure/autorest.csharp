@@ -36,7 +36,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable model value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<InnerModel>>> GetNullableModelValueAsync()
         {
             ClientResult result = await GetNullableModelValueAsync(null).ConfigureAwait(false);
@@ -51,7 +51,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable model value. </summary>
         public virtual ClientResult<IReadOnlyList<InnerModel>> GetNullableModelValue()
         {
             ClientResult result = GetNullableModelValue(null);
@@ -67,7 +67,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable model value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -91,7 +91,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable model value.
         /// <list type="bullet">
         /// <item>
         /// <description>

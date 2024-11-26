@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string and array. </summary>
         public virtual async Task<ClientResult<GetResponse2>> GetStringAndArrayAsync()
         {
             ClientResult result = await GetStringAndArrayAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse2.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string and array. </summary>
         public virtual ClientResult<GetResponse2> GetStringAndArray()
         {
             ClientResult result = GetStringAndArray(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string and array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string and array.
         /// <list type="bullet">
         /// <item>
         /// <description>

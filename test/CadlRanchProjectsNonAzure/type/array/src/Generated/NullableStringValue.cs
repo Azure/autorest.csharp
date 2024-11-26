@@ -35,7 +35,7 @@ namespace Scm._Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable string value. </summary>
         public virtual async Task<ClientResult<IReadOnlyList<string>>> GetNullableStringValueAsync()
         {
             ClientResult result = await GetNullableStringValueAsync(null).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace Scm._Type._Array
             return ClientResult.FromValue(value, result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get nullable string value. </summary>
         public virtual ClientResult<IReadOnlyList<string>> GetNullableStringValue()
         {
             ClientResult result = GetNullableStringValue(null);
@@ -66,7 +66,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable string value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Scm._Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get nullable string value.
         /// <list type="bullet">
         /// <item>
         /// <description>

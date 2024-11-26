@@ -45,7 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get floats only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FloatsOnly.xml" path="doc/members/member[@name='GetFloatsOnlyAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse5>> GetFloatsOnlyAsync(CancellationToken cancellationToken = default)
@@ -55,7 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse5.FromResponse(response), response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get floats only. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FloatsOnly.xml" path="doc/members/member[@name='GetFloatsOnly(CancellationToken)']/*" />
         public virtual Response<GetResponse5> GetFloatsOnly(CancellationToken cancellationToken = default)
@@ -66,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get floats only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get floats only.
         /// <list type="bullet">
         /// <item>
         /// <description>

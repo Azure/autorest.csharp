@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected override string DefaultName { get; }
-        public string Description => ClientBuilder.CreateDescription(_inputClient.Description, ClientBuilder.GetClientPrefix(Declaration.Name, DefaultName));
+        public string Description => ClientBuilder.CreateDescription(_inputClient.Summary, _inputClient.Doc, ClientBuilder.GetClientPrefix(Declaration.Name, DefaultName));
         public DataPlaneRestClient RestClient { get; }
 
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();

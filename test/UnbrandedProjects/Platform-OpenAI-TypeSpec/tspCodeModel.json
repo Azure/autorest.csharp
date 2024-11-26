@@ -196,7 +196,7 @@
      "kind": "enumvalue",
      "name": "model",
      "value": "model",
-     "description": "model",
+     "doc": "model",
      "valueType": {
       "$ref": "23"
      },
@@ -206,7 +206,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Model_object",
+   "doc": "The Model_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -316,7 +316,7 @@
      "kind": "enumvalue",
      "name": "fine-tune",
      "value": "fine-tune",
-     "description": "fine-tune",
+     "doc": "fine-tune",
      "valueType": {
       "$ref": "36"
      },
@@ -326,7 +326,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The FineTune_object",
+   "doc": "The FineTune_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -453,7 +453,7 @@
      "kind": "enumvalue",
      "name": "file",
      "value": "file",
-     "description": "file",
+     "doc": "file",
      "valueType": {
       "$ref": "51"
      },
@@ -463,7 +463,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The OpenAIFile_object",
+   "doc": "The OpenAIFile_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -643,7 +643,7 @@
      "kind": "enumvalue",
      "name": "embedding",
      "value": "embedding",
-     "description": "embedding",
+     "doc": "embedding",
      "valueType": {
       "$ref": "72"
      },
@@ -653,7 +653,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The CreateEmbeddingResponse_object",
+   "doc": "The CreateEmbeddingResponse_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -676,7 +676,7 @@
      "kind": "enumvalue",
      "name": "embedding",
      "value": "embedding",
-     "description": "embedding",
+     "doc": "embedding",
      "valueType": {
       "$ref": "75"
      },
@@ -686,7 +686,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The Embedding_object",
+   "doc": "The Embedding_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -762,7 +762,7 @@
      "kind": "enumvalue",
      "name": "edit",
      "value": "edit",
-     "description": "edit",
+     "doc": "edit",
      "valueType": {
       "$ref": "84"
      },
@@ -772,7 +772,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The CreateEditResponse_object",
+   "doc": "The CreateEditResponse_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -1160,7 +1160,7 @@
      "kind": "enumvalue",
      "name": "fine_tuning.job",
      "value": "fine_tuning.job",
-     "description": "fine_tuning.job",
+     "doc": "fine_tuning.job",
      "valueType": {
       "$ref": "129"
      },
@@ -1170,7 +1170,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "description": "The FineTuningJob_object",
+   "doc": "The FineTuningJob_object",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -2129,7 +2129,7 @@
      "kind": "property",
      "name": "input",
      "serializedName": "input",
-     "description": "The input text to classify",
+     "doc": "The input text to classify",
      "type": {
       "$id": "241",
       "kind": "union",
@@ -2171,7 +2171,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "Two content moderations models are available: `text-moderation-stable` and\n`text-moderation-latest`. The default is `text-moderation-latest` which will be automatically\nupgraded over time. This ensures you are always using our most accurate model. If you use\n`text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy\nof `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.",
+     "doc": "Two content moderations models are available: `text-moderation-stable` and\n`text-moderation-latest`. The default is `text-moderation-latest` which will be automatically\nupgraded over time. This ensures you are always using our most accurate model. If you use\n`text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy\nof `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.",
      "type": {
       "$ref": "2"
      },
@@ -2197,7 +2197,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The unique identifier for the moderation request.",
+     "doc": "The unique identifier for the moderation request.",
      "type": {
       "$id": "248",
       "kind": "string",
@@ -2217,7 +2217,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The model used to generate the moderation results.",
+     "doc": "The model used to generate the moderation results.",
      "type": {
       "$id": "250",
       "kind": "string",
@@ -2237,7 +2237,7 @@
      "kind": "property",
      "name": "results",
      "serializedName": "results",
-     "description": "A list of moderation objects.",
+     "doc": "A list of moderation objects.",
      "type": {
       "$id": "252",
       "kind": "array",
@@ -2255,7 +2255,7 @@
          "kind": "property",
          "name": "flagged",
          "serializedName": "flagged",
-         "description": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
+         "doc": "Whether the content violates [OpenAI's usage policies](/policies/usage-policies).",
          "type": {
           "$id": "255",
           "kind": "boolean",
@@ -2275,7 +2275,7 @@
          "kind": "property",
          "name": "categories",
          "serializedName": "categories",
-         "description": "A list of the categories, and whether they are flagged or not.",
+         "doc": "A list of the categories, and whether they are flagged or not.",
          "type": {
           "$id": "257",
           "kind": "model",
@@ -2289,7 +2289,7 @@
             "kind": "property",
             "name": "hate",
             "serializedName": "hate",
-            "description": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
+            "doc": "Content that expresses, incites, or promotes hate based on race, gender, ethnicity,\nreligion, nationality, sexual orientation, disability status, or caste. Hateful content\naimed at non-protected groups (e.g., chess players) is harrassment.",
             "type": {
              "$id": "259",
              "kind": "boolean",
@@ -2309,7 +2309,7 @@
             "kind": "property",
             "name": "hate/threatening",
             "serializedName": "hate/threatening",
-            "description": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
+            "doc": "Hateful content that also includes violence or serious harm towards the targeted group\nbased on race, gender, ethnicity, religion, nationality, sexual orientation, disability\nstatus, or caste.",
             "type": {
              "$id": "261",
              "kind": "boolean",
@@ -2329,7 +2329,7 @@
             "kind": "property",
             "name": "harassment",
             "serializedName": "harassment",
-            "description": "Content that expresses, incites, or promotes harassing language towards any target.",
+            "doc": "Content that expresses, incites, or promotes harassing language towards any target.",
             "type": {
              "$id": "263",
              "kind": "boolean",
@@ -2349,7 +2349,7 @@
             "kind": "property",
             "name": "harassment/threatening",
             "serializedName": "harassment/threatening",
-            "description": "Harassment content that also includes violence or serious harm towards any target.",
+            "doc": "Harassment content that also includes violence or serious harm towards any target.",
             "type": {
              "$id": "265",
              "kind": "boolean",
@@ -2369,7 +2369,7 @@
             "kind": "property",
             "name": "self-harm",
             "serializedName": "self-harm",
-            "description": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
+            "doc": "Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,\nand eating disorders.",
             "type": {
              "$id": "267",
              "kind": "boolean",
@@ -2389,7 +2389,7 @@
             "kind": "property",
             "name": "self-harm/intent",
             "serializedName": "self-harm/intent",
-            "description": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
+            "doc": "Content where the speaker expresses that they are engaging or intend to engage in acts of\nself-harm, such as suicide, cutting, and eating disorders.",
             "type": {
              "$id": "269",
              "kind": "boolean",
@@ -2409,7 +2409,7 @@
             "kind": "property",
             "name": "self-harm/instructive",
             "serializedName": "self-harm/instructive",
-            "description": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
+            "doc": "Content that encourages performing acts of self-harm, such as suicide, cutting, and eating\ndisorders, or that gives instructions or advice on how to commit such acts.",
             "type": {
              "$id": "271",
              "kind": "boolean",
@@ -2429,7 +2429,7 @@
             "kind": "property",
             "name": "sexual",
             "serializedName": "sexual",
-            "description": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
+            "doc": "Content meant to arouse sexual excitement, such as the description of sexual activity, or\nthat promotes sexual services (excluding sex education and wellness).",
             "type": {
              "$id": "273",
              "kind": "boolean",
@@ -2449,7 +2449,7 @@
             "kind": "property",
             "name": "sexual/minors",
             "serializedName": "sexual/minors",
-            "description": "Sexual content that includes an individual who is under 18 years old.",
+            "doc": "Sexual content that includes an individual who is under 18 years old.",
             "type": {
              "$id": "275",
              "kind": "boolean",
@@ -2469,7 +2469,7 @@
             "kind": "property",
             "name": "violence",
             "serializedName": "violence",
-            "description": "Content that depicts death, violence, or physical injury.",
+            "doc": "Content that depicts death, violence, or physical injury.",
             "type": {
              "$id": "277",
              "kind": "boolean",
@@ -2489,7 +2489,7 @@
             "kind": "property",
             "name": "violence/graphic",
             "serializedName": "violence/graphic",
-            "description": "Content that depicts death, violence, or physical injury in graphic detail.",
+            "doc": "Content that depicts death, violence, or physical injury in graphic detail.",
             "type": {
              "$id": "279",
              "kind": "boolean",
@@ -2518,7 +2518,7 @@
          "kind": "property",
          "name": "category_scores",
          "serializedName": "category_scores",
-         "description": "A list of the categories along with their scores as predicted by model.",
+         "doc": "A list of the categories along with their scores as predicted by model.",
          "type": {
           "$id": "281",
           "kind": "model",
@@ -2532,7 +2532,7 @@
             "kind": "property",
             "name": "hate",
             "serializedName": "hate",
-            "description": "The score for the category 'hate'.",
+            "doc": "The score for the category 'hate'.",
             "type": {
              "$id": "283",
              "kind": "float64",
@@ -2552,7 +2552,7 @@
             "kind": "property",
             "name": "hate/threatening",
             "serializedName": "hate/threatening",
-            "description": "The score for the category 'hate/threatening'.",
+            "doc": "The score for the category 'hate/threatening'.",
             "type": {
              "$id": "285",
              "kind": "float64",
@@ -2572,7 +2572,7 @@
             "kind": "property",
             "name": "harassment",
             "serializedName": "harassment",
-            "description": "The score for the category 'harassment'.",
+            "doc": "The score for the category 'harassment'.",
             "type": {
              "$id": "287",
              "kind": "float64",
@@ -2592,7 +2592,7 @@
             "kind": "property",
             "name": "harassment/threatening",
             "serializedName": "harassment/threatening",
-            "description": "The score for the category 'harassment/threatening'.",
+            "doc": "The score for the category 'harassment/threatening'.",
             "type": {
              "$id": "289",
              "kind": "float64",
@@ -2612,7 +2612,7 @@
             "kind": "property",
             "name": "self-harm",
             "serializedName": "self-harm",
-            "description": "The score for the category 'self-harm'.",
+            "doc": "The score for the category 'self-harm'.",
             "type": {
              "$id": "291",
              "kind": "float64",
@@ -2632,7 +2632,7 @@
             "kind": "property",
             "name": "self-harm/intent",
             "serializedName": "self-harm/intent",
-            "description": "The score for the category 'self-harm/intent'.",
+            "doc": "The score for the category 'self-harm/intent'.",
             "type": {
              "$id": "293",
              "kind": "float64",
@@ -2652,7 +2652,7 @@
             "kind": "property",
             "name": "self-harm/instructive",
             "serializedName": "self-harm/instructive",
-            "description": "The score for the category 'self-harm/instructive'.",
+            "doc": "The score for the category 'self-harm/instructive'.",
             "type": {
              "$id": "295",
              "kind": "float64",
@@ -2672,7 +2672,7 @@
             "kind": "property",
             "name": "sexual",
             "serializedName": "sexual",
-            "description": "The score for the category 'sexual'.",
+            "doc": "The score for the category 'sexual'.",
             "type": {
              "$id": "297",
              "kind": "float64",
@@ -2692,7 +2692,7 @@
             "kind": "property",
             "name": "sexual/minors",
             "serializedName": "sexual/minors",
-            "description": "The score for the category 'sexual/minors'.",
+            "doc": "The score for the category 'sexual/minors'.",
             "type": {
              "$id": "299",
              "kind": "float64",
@@ -2712,7 +2712,7 @@
             "kind": "property",
             "name": "violence",
             "serializedName": "violence",
-            "description": "The score for the category 'violence'.",
+            "doc": "The score for the category 'violence'.",
             "type": {
              "$id": "301",
              "kind": "float64",
@@ -2732,7 +2732,7 @@
             "kind": "property",
             "name": "violence/graphic",
             "serializedName": "violence/graphic",
-            "description": "The score for the category 'violence/graphic'.",
+            "doc": "The score for the category 'violence/graphic'.",
             "type": {
              "$id": "303",
              "kind": "float64",
@@ -2911,7 +2911,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "description": "A text description of the desired image(s). The maximum length is 1000 characters.",
+     "doc": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "type": {
       "$id": "319",
       "kind": "string",
@@ -2931,7 +2931,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "The number of images to generate. Must be between 1 and 10.",
+     "doc": "The number of images to generate. Must be between 1 and 10.",
      "type": {
       "$id": "321",
       "kind": "nullable",
@@ -2962,7 +2962,7 @@
      "kind": "property",
      "name": "size",
      "serializedName": "size",
-     "description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
+     "doc": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "type": {
       "$id": "325",
       "kind": "nullable",
@@ -2982,7 +2982,7 @@
      "kind": "property",
      "name": "response_format",
      "serializedName": "response_format",
-     "description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
+     "doc": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "type": {
       "$id": "327",
       "kind": "nullable",
@@ -3075,7 +3075,7 @@
        "name": "Image",
        "crossLanguageDefinitionId": "OpenAI.Image",
        "usage": "Output,Json",
-       "description": "Represents the url or the content of an image generated by the OpenAI API.",
+       "doc": "Represents the url or the content of an image generated by the OpenAI API.",
        "decorators": [],
        "properties": [
         {
@@ -3083,7 +3083,7 @@
          "kind": "property",
          "name": "url",
          "serializedName": "url",
-         "description": "The URL of the generated image, if `response_format` is `url` (default).",
+         "doc": "The URL of the generated image, if `response_format` is `url` (default).",
          "type": {
           "$id": "339",
           "kind": "url",
@@ -3103,7 +3103,7 @@
          "kind": "property",
          "name": "b64_json",
          "serializedName": "b64_json",
-         "description": "The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.",
+         "doc": "The base64-encoded JSON of the generated image, if `response_format` is `b64_json`.",
          "type": {
           "$id": "341",
           "kind": "bytes",
@@ -3149,7 +3149,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "description": "A text description of the desired image(s). The maximum length is 1000 characters.",
+     "doc": "A text description of the desired image(s). The maximum length is 1000 characters.",
      "type": {
       "$id": "344",
       "kind": "string",
@@ -3169,7 +3169,7 @@
      "kind": "property",
      "name": "image",
      "serializedName": "image",
-     "description": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not\nprovided, image must have transparency, which will be used as the mask.",
+     "doc": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not\nprovided, image must have transparency, which will be used as the mask.",
      "type": {
       "$id": "346",
       "kind": "bytes",
@@ -3190,7 +3190,7 @@
      "kind": "property",
      "name": "mask",
      "serializedName": "mask",
-     "description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where\n`image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions\nas `image`.",
+     "doc": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where\n`image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions\nas `image`.",
      "type": {
       "$id": "348",
       "kind": "bytes",
@@ -3211,7 +3211,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "The number of images to generate. Must be between 1 and 10.",
+     "doc": "The number of images to generate. Must be between 1 and 10.",
      "type": {
       "$ref": "321"
      },
@@ -3227,7 +3227,7 @@
      "kind": "property",
      "name": "size",
      "serializedName": "size",
-     "description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
+     "doc": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "type": {
       "$ref": "325"
      },
@@ -3243,7 +3243,7 @@
      "kind": "property",
      "name": "response_format",
      "serializedName": "response_format",
-     "description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
+     "doc": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "type": {
       "$ref": "327"
      },
@@ -3295,7 +3295,7 @@
      "kind": "property",
      "name": "image",
      "serializedName": "image",
-     "description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
+     "doc": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,\nand square.",
      "type": {
       "$id": "357",
       "kind": "bytes",
@@ -3316,7 +3316,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "The number of images to generate. Must be between 1 and 10.",
+     "doc": "The number of images to generate. Must be between 1 and 10.",
      "type": {
       "$ref": "321"
      },
@@ -3332,7 +3332,7 @@
      "kind": "property",
      "name": "size",
      "serializedName": "size",
-     "description": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
+     "doc": "The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`.",
      "type": {
       "$ref": "325"
      },
@@ -3348,7 +3348,7 @@
      "kind": "property",
      "name": "response_format",
      "serializedName": "response_format",
-     "description": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
+     "doc": "The format in which the generated images are returned. Must be one of `url` or `b64_json`.",
      "type": {
       "$ref": "327"
      },
@@ -3429,7 +3429,7 @@
        "name": "Model",
        "crossLanguageDefinitionId": "OpenAI.Model",
        "usage": "Output,Json",
-       "description": "Describes an OpenAI model offering that can be used with the API.",
+       "doc": "Describes an OpenAI model offering that can be used with the API.",
        "decorators": [],
        "properties": [
         {
@@ -3437,7 +3437,7 @@
          "kind": "property",
          "name": "id",
          "serializedName": "id",
-         "description": "The model identifier, which can be referenced in the API endpoints.",
+         "doc": "The model identifier, which can be referenced in the API endpoints.",
          "type": {
           "$id": "371",
           "kind": "string",
@@ -3457,7 +3457,7 @@
          "kind": "property",
          "name": "object",
          "serializedName": "object",
-         "description": "The object type, which is always \"model\".",
+         "doc": "The object type, which is always \"model\".",
          "type": {
           "$id": "373",
           "kind": "constant",
@@ -3479,7 +3479,7 @@
          "kind": "property",
          "name": "created",
          "serializedName": "created",
-         "description": "The Unix timestamp (in seconds) when the model was created.",
+         "doc": "The Unix timestamp (in seconds) when the model was created.",
          "type": {
           "$id": "375",
           "kind": "utcDateTime",
@@ -3507,7 +3507,7 @@
          "kind": "property",
          "name": "owned_by",
          "serializedName": "owned_by",
-         "description": "The organization that owns the model.",
+         "doc": "The organization that owns the model.",
          "type": {
           "$id": "378",
           "kind": "string",
@@ -3619,7 +3619,7 @@
      "kind": "property",
      "name": "training_file",
      "serializedName": "training_file",
-     "description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
+     "doc": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file, where each training example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "type": {
       "$id": "388",
       "kind": "string",
@@ -3639,7 +3639,7 @@
      "kind": "property",
      "name": "validation_file",
      "serializedName": "validation_file",
-     "description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the\n[fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\nYour train and validation data should be mutually exclusive.\n\nYour dataset must be formatted as a JSONL file, where each validation example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
+     "doc": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the\n[fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\nYour train and validation data should be mutually exclusive.\n\nYour dataset must be formatted as a JSONL file, where each validation example is a JSON object\nwith the keys \"prompt\" and \"completion\". Additionally, you must upload your file with the\npurpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more\ndetails.",
      "type": {
       "$id": "390",
       "kind": "nullable",
@@ -3663,7 +3663,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The name of the base model to fine-tune. You can select one of \"ada\", \"babbage\", \"curie\",\n\"davinci\", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more\nabout these models, see the [Models](/docs/models) documentation.",
+     "doc": "The name of the base model to fine-tune. You can select one of \"ada\", \"babbage\", \"curie\",\n\"davinci\", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more\nabout these models, see the [Models](/docs/models) documentation.",
      "type": {
       "$id": "393",
       "kind": "nullable",
@@ -3683,7 +3683,7 @@
      "kind": "property",
      "name": "n_epochs",
      "serializedName": "n_epochs",
-     "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
+     "doc": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
      "type": {
       "$id": "395",
       "kind": "nullable",
@@ -3707,7 +3707,7 @@
      "kind": "property",
      "name": "batch_size",
      "serializedName": "batch_size",
-     "description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.\n\nBy default, the batch size will be dynamically configured to be ~0.2% of the number of examples\nin the training set, capped at 256 - in general, we've found that larger batch sizes tend to\nwork better for larger datasets.",
+     "doc": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.\n\nBy default, the batch size will be dynamically configured to be ~0.2% of the number of examples\nin the training set, capped at 256 - in general, we've found that larger batch sizes tend to\nwork better for larger datasets.",
      "type": {
       "$id": "398",
       "kind": "nullable",
@@ -3731,7 +3731,7 @@
      "kind": "property",
      "name": "learning_rate_multiplier",
      "serializedName": "learning_rate_multiplier",
-     "description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original\nlearning rate used for pretraining multiplied by this value.\n\nBy default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final\n`batch_size` (larger learning rates tend to perform better with larger batch sizes). We\nrecommend experimenting with values in the range 0.02 to 0.2 to see what produces the best\nresults.",
+     "doc": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original\nlearning rate used for pretraining multiplied by this value.\n\nBy default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final\n`batch_size` (larger learning rates tend to perform better with larger batch sizes). We\nrecommend experimenting with values in the range 0.02 to 0.2 to see what produces the best\nresults.",
      "type": {
       "$id": "401",
       "kind": "nullable",
@@ -3755,7 +3755,7 @@
      "kind": "property",
      "name": "prompt_loss_rate",
      "serializedName": "prompt_loss_rate",
-     "description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to\nlearn to generate the prompt (as compared to the completion which always has a weight of 1.0),\nand can add a stabilizing effect to training when completions are short.\n\nIf prompts are extremely long (relative to completions), it may make sense to reduce this\nweight so as to avoid over-prioritizing learning the prompt.",
+     "doc": "The weight to use for loss on the prompt tokens. This controls how much the model tries to\nlearn to generate the prompt (as compared to the completion which always has a weight of 1.0),\nand can add a stabilizing effect to training when completions are short.\n\nIf prompts are extremely long (relative to completions), it may make sense to reduce this\nweight so as to avoid over-prioritizing learning the prompt.",
      "type": {
       "$id": "404",
       "kind": "nullable",
@@ -3779,7 +3779,7 @@
      "kind": "property",
      "name": "compute_classification_metrics",
      "serializedName": "compute_classification_metrics",
-     "description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the\nvalidation set at the end of every epoch. These metrics can be viewed in the\n[results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\n\nIn order to compute classification metrics, you must provide a `validation_file`. Additionally,\nyou must specify `classification_n_classes` for multiclass classification or\n`classification_positive_class` for binary classification.",
+     "doc": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the\nvalidation set at the end of every epoch. These metrics can be viewed in the\n[results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).\n\nIn order to compute classification metrics, you must provide a `validation_file`. Additionally,\nyou must specify `classification_n_classes` for multiclass classification or\n`classification_positive_class` for binary classification.",
      "type": {
       "$id": "407",
       "kind": "nullable",
@@ -3803,7 +3803,7 @@
      "kind": "property",
      "name": "classification_n_classes",
      "serializedName": "classification_n_classes",
-     "description": "The number of classes in a classification task.\n\nThis parameter is required for multiclass classification.",
+     "doc": "The number of classes in a classification task.\n\nThis parameter is required for multiclass classification.",
      "type": {
       "$id": "410",
       "kind": "nullable",
@@ -3827,7 +3827,7 @@
      "kind": "property",
      "name": "classification_positive_class",
      "serializedName": "classification_positive_class",
-     "description": "The positive class in binary classification.\n\nThis parameter is needed to generate precision, recall, and F1 metrics when doing binary\nclassification.",
+     "doc": "The positive class in binary classification.\n\nThis parameter is needed to generate precision, recall, and F1 metrics when doing binary\nclassification.",
      "type": {
       "$id": "413",
       "kind": "nullable",
@@ -3851,7 +3851,7 @@
      "kind": "property",
      "name": "classification_betas",
      "serializedName": "classification_betas",
-     "description": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score\nis a generalization of F-1 score. This is only used for binary classification.\n\nWith a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger\nbeta score puts more weight on recall and less on precision. A smaller beta score puts more\nweight on precision and less on recall.",
+     "doc": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score\nis a generalization of F-1 score. This is only used for binary classification.\n\nWith a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger\nbeta score puts more weight on recall and less on precision. A smaller beta score puts more\nweight on precision and less on recall.",
      "type": {
       "$id": "416",
       "kind": "nullable",
@@ -3882,7 +3882,7 @@
      "kind": "property",
      "name": "suffix",
      "serializedName": "suffix",
-     "description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.",
+     "doc": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.",
      "type": {
       "$id": "420",
       "kind": "nullable",
@@ -3917,7 +3917,7 @@
    "crossLanguageDefinitionId": "OpenAI.FineTune",
    "usage": "Output,Json",
    "deprecation": "deprecated",
-   "description": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
+   "doc": "The `FineTune` object represents a legacy fine-tune job that has been created through the API.",
    "decorators": [],
    "properties": [
     {
@@ -3925,7 +3925,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The object identifier, which can be referenced in the API endpoints.",
+     "doc": "The object identifier, which can be referenced in the API endpoints.",
      "type": {
       "$id": "425",
       "kind": "string",
@@ -3945,7 +3945,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always \"fine-tune\".",
+     "doc": "The object type, which is always \"fine-tune\".",
      "type": {
       "$id": "427",
       "kind": "constant",
@@ -3967,7 +3967,7 @@
      "kind": "property",
      "name": "created_at",
      "serializedName": "created_at",
-     "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
+     "doc": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "type": {
       "$id": "429",
       "kind": "utcDateTime",
@@ -3995,7 +3995,7 @@
      "kind": "property",
      "name": "updated_at",
      "serializedName": "updated_at",
-     "description": "The Unix timestamp (in seconds) for when the fine-tuning job was last updated.",
+     "doc": "The Unix timestamp (in seconds) for when the fine-tuning job was last updated.",
      "type": {
       "$id": "432",
       "kind": "utcDateTime",
@@ -4023,7 +4023,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The base model that is being fine-tuned.",
+     "doc": "The base model that is being fine-tuned.",
      "type": {
       "$id": "435",
       "kind": "string",
@@ -4043,7 +4043,7 @@
      "kind": "property",
      "name": "fine_tuned_model",
      "serializedName": "fine_tuned_model",
-     "description": "The name of the fine-tuned model that is being created.",
+     "doc": "The name of the fine-tuned model that is being created.",
      "type": {
       "$id": "437",
       "kind": "nullable",
@@ -4067,7 +4067,7 @@
      "kind": "property",
      "name": "organization_id",
      "serializedName": "organization_id",
-     "description": "The organization that owns the fine-tuning job.",
+     "doc": "The organization that owns the fine-tuning job.",
      "type": {
       "$id": "440",
       "kind": "string",
@@ -4087,7 +4087,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The current status of the fine-tuning job, which can be either `created`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
+     "doc": "The current status of the fine-tuning job, which can be either `created`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "type": {
       "$ref": "38"
      },
@@ -4103,7 +4103,7 @@
      "kind": "property",
      "name": "hyperparams",
      "serializedName": "hyperparams",
-     "description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.",
+     "doc": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.",
      "type": {
       "$id": "443",
       "kind": "model",
@@ -4117,7 +4117,7 @@
         "kind": "property",
         "name": "n_epochs",
         "serializedName": "n_epochs",
-        "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
+        "doc": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "type": {
          "$id": "445",
          "kind": "safeint",
@@ -4137,7 +4137,7 @@
         "kind": "property",
         "name": "batch_size",
         "serializedName": "batch_size",
-        "description": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
+        "doc": "The batch size to use for training. The batch size is the number of training examples used to\ntrain a single forward and backward pass.",
         "type": {
          "$id": "447",
          "kind": "safeint",
@@ -4157,7 +4157,7 @@
         "kind": "property",
         "name": "prompt_loss_weight",
         "serializedName": "prompt_loss_weight",
-        "description": "The weight to use for loss on the prompt tokens.",
+        "doc": "The weight to use for loss on the prompt tokens.",
         "type": {
          "$id": "449",
          "kind": "float64",
@@ -4177,7 +4177,7 @@
         "kind": "property",
         "name": "learning_rate_multiplier",
         "serializedName": "learning_rate_multiplier",
-        "description": "The learning rate multiplier to use for training.",
+        "doc": "The learning rate multiplier to use for training.",
         "type": {
          "$id": "451",
          "kind": "float64",
@@ -4197,7 +4197,7 @@
         "kind": "property",
         "name": "compute_classification_metrics",
         "serializedName": "compute_classification_metrics",
-        "description": "The classification metrics to compute using the validation dataset at the end of every epoch.",
+        "doc": "The classification metrics to compute using the validation dataset at the end of every epoch.",
         "type": {
          "$id": "453",
          "kind": "boolean",
@@ -4217,7 +4217,7 @@
         "kind": "property",
         "name": "classification_positive_class",
         "serializedName": "classification_positive_class",
-        "description": "The positive class to use for computing classification metrics.",
+        "doc": "The positive class to use for computing classification metrics.",
         "type": {
          "$id": "455",
          "kind": "string",
@@ -4237,7 +4237,7 @@
         "kind": "property",
         "name": "classification_n_classes",
         "serializedName": "classification_n_classes",
-        "description": "The number of classes to use for computing classification metrics.",
+        "doc": "The number of classes to use for computing classification metrics.",
         "type": {
          "$id": "457",
          "kind": "safeint",
@@ -4266,7 +4266,7 @@
      "kind": "property",
      "name": "training_files",
      "serializedName": "training_files",
-     "description": "The list of files used for training.",
+     "doc": "The list of files used for training.",
      "type": {
       "$id": "459",
       "kind": "array",
@@ -4277,7 +4277,7 @@
        "name": "OpenAIFile",
        "crossLanguageDefinitionId": "OpenAI.OpenAIFile",
        "usage": "Output,Json",
-       "description": "The `File` object represents a document that has been uploaded to OpenAI.",
+       "doc": "The `File` object represents a document that has been uploaded to OpenAI.",
        "decorators": [],
        "properties": [
         {
@@ -4285,7 +4285,7 @@
          "kind": "property",
          "name": "id",
          "serializedName": "id",
-         "description": "The file identifier, which can be referenced in the API endpoints.",
+         "doc": "The file identifier, which can be referenced in the API endpoints.",
          "type": {
           "$id": "462",
           "kind": "string",
@@ -4305,7 +4305,7 @@
          "kind": "property",
          "name": "object",
          "serializedName": "object",
-         "description": "The object type, which is always \"file\".",
+         "doc": "The object type, which is always \"file\".",
          "type": {
           "$id": "464",
           "kind": "constant",
@@ -4327,7 +4327,7 @@
          "kind": "property",
          "name": "bytes",
          "serializedName": "bytes",
-         "description": "The size of the file in bytes.",
+         "doc": "The size of the file in bytes.",
          "type": {
           "$id": "466",
           "kind": "safeint",
@@ -4347,7 +4347,7 @@
          "kind": "property",
          "name": "createdAt",
          "serializedName": "createdAt",
-         "description": "The Unix timestamp (in seconds) for when the file was created.",
+         "doc": "The Unix timestamp (in seconds) for when the file was created.",
          "type": {
           "$id": "468",
           "kind": "utcDateTime",
@@ -4375,7 +4375,7 @@
          "kind": "property",
          "name": "filename",
          "serializedName": "filename",
-         "description": "The name of the file.",
+         "doc": "The name of the file.",
          "type": {
           "$id": "471",
           "kind": "string",
@@ -4395,7 +4395,7 @@
          "kind": "property",
          "name": "purpose",
          "serializedName": "purpose",
-         "description": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
+         "doc": "The intended purpose of the file. Currently, only \"fine-tune\" is supported.",
          "type": {
           "$id": "473",
           "kind": "string",
@@ -4415,7 +4415,7 @@
          "kind": "property",
          "name": "status",
          "serializedName": "status",
-         "description": "The current status of the file, which can be either `uploaded`, `processed`, `pending`,\n`error`, `deleting` or `deleted`.",
+         "doc": "The current status of the file, which can be either `uploaded`, `processed`, `pending`,\n`error`, `deleting` or `deleted`.",
          "type": {
           "$ref": "53"
          },
@@ -4431,7 +4431,7 @@
          "kind": "property",
          "name": "status_details",
          "serializedName": "status_details",
-         "description": "Additional details about the status of the file. If the file is in the `error` state, this will\ninclude a message describing the error.",
+         "doc": "Additional details about the status of the file. If the file is in the `error` state, this will\ninclude a message describing the error.",
          "type": {
           "$id": "476",
           "kind": "nullable",
@@ -4467,7 +4467,7 @@
      "kind": "property",
      "name": "validation_files",
      "serializedName": "validation_files",
-     "description": "The list of files used for validation.",
+     "doc": "The list of files used for validation.",
      "type": {
       "$id": "479",
       "kind": "array",
@@ -4490,7 +4490,7 @@
      "kind": "property",
      "name": "result_files",
      "serializedName": "result_files",
-     "description": "The compiled results files for the fine-tuning job.",
+     "doc": "The compiled results files for the fine-tuning job.",
      "type": {
       "$id": "481",
       "kind": "array",
@@ -4513,7 +4513,7 @@
      "kind": "property",
      "name": "events",
      "serializedName": "events",
-     "description": "The list of events that have been observed in the lifecycle of the FineTune job.",
+     "doc": "The list of events that have been observed in the lifecycle of the FineTune job.",
      "type": {
       "$id": "483",
       "kind": "array",
@@ -4799,7 +4799,7 @@
      "kind": "property",
      "name": "file",
      "serializedName": "file",
-     "description": "Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.\n\nIf the `purpose` is set to \"fine-tune\", the file will be used for fine-tuning.",
+     "doc": "Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.\n\nIf the `purpose` is set to \"fine-tune\", the file will be used for fine-tuning.",
      "type": {
       "$id": "511",
       "kind": "bytes",
@@ -4820,7 +4820,7 @@
      "kind": "property",
      "name": "purpose",
      "serializedName": "purpose",
-     "description": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
+     "doc": "The intended purpose of the uploaded documents. Use \"fine-tune\" for\n[fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the\nuploaded file.",
      "type": {
       "$id": "513",
       "kind": "string",
@@ -4917,7 +4917,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.",
+     "doc": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.",
      "type": {
       "$ref": "67"
      },
@@ -4933,7 +4933,7 @@
      "kind": "property",
      "name": "input",
      "serializedName": "input",
-     "description": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
+     "doc": "Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a\nsingle request, pass an array of strings or array of token arrays. Each input must not exceed\nthe max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "type": {
       "$id": "524",
       "kind": "union",
@@ -5046,7 +5046,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always \"embedding\".",
+     "doc": "The object type, which is always \"embedding\".",
      "type": {
       "$id": "538",
       "kind": "constant",
@@ -5068,7 +5068,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The name of the model used to generate the embedding.",
+     "doc": "The name of the model used to generate the embedding.",
      "type": {
       "$id": "540",
       "kind": "string",
@@ -5088,7 +5088,7 @@
      "kind": "property",
      "name": "data",
      "serializedName": "data",
-     "description": "The list of embeddings generated by the model.",
+     "doc": "The list of embeddings generated by the model.",
      "type": {
       "$id": "542",
       "kind": "array",
@@ -5099,7 +5099,7 @@
        "name": "Embedding",
        "crossLanguageDefinitionId": "OpenAI.Embedding",
        "usage": "Output,Json",
-       "description": "Represents an embedding vector returned by embedding endpoint.",
+       "doc": "Represents an embedding vector returned by embedding endpoint.",
        "decorators": [],
        "properties": [
         {
@@ -5107,7 +5107,7 @@
          "kind": "property",
          "name": "index",
          "serializedName": "index",
-         "description": "The index of the embedding in the list of embeddings.",
+         "doc": "The index of the embedding in the list of embeddings.",
          "type": {
           "$id": "545",
           "kind": "safeint",
@@ -5127,7 +5127,7 @@
          "kind": "property",
          "name": "object",
          "serializedName": "object",
-         "description": "The object type, which is always \"embedding\".",
+         "doc": "The object type, which is always \"embedding\".",
          "type": {
           "$id": "547",
           "kind": "constant",
@@ -5149,7 +5149,7 @@
          "kind": "property",
          "name": "embedding",
          "serializedName": "embedding",
-         "description": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
+         "doc": "The embedding vector, which is a list of floats. The length of vector depends on the model as\\\nlisted in the [embedding guide](/docs/guides/embeddings).",
          "type": {
           "$id": "549",
           "kind": "array",
@@ -5188,7 +5188,7 @@
      "kind": "property",
      "name": "usage",
      "serializedName": "usage",
-     "description": "The usage information for the request.",
+     "doc": "The usage information for the request.",
      "type": {
       "$id": "552",
       "kind": "model",
@@ -5202,7 +5202,7 @@
         "kind": "property",
         "name": "prompt_tokens",
         "serializedName": "prompt_tokens",
-        "description": "The number of tokens used by the prompt.",
+        "doc": "The number of tokens used by the prompt.",
         "type": {
          "$id": "554",
          "kind": "safeint",
@@ -5222,7 +5222,7 @@
         "kind": "property",
         "name": "total_tokens",
         "serializedName": "total_tokens",
-        "description": "The total number of tokens used by the request.",
+        "doc": "The total number of tokens used by the request.",
         "type": {
          "$id": "556",
          "kind": "safeint",
@@ -5267,7 +5267,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`\nmodel with this endpoint.",
+     "doc": "ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`\nmodel with this endpoint.",
      "type": {
       "$ref": "77"
      },
@@ -5283,7 +5283,7 @@
      "kind": "property",
      "name": "input",
      "serializedName": "input",
-     "description": "The input text to use as a starting point for the edit.",
+     "doc": "The input text to use as a starting point for the edit.",
      "type": {
       "$id": "560",
       "kind": "nullable",
@@ -5307,7 +5307,7 @@
      "kind": "property",
      "name": "instruction",
      "serializedName": "instruction",
-     "description": "The instruction that tells the model how to edit the prompt.",
+     "doc": "The instruction that tells the model how to edit the prompt.",
      "type": {
       "$id": "563",
       "kind": "string",
@@ -5327,7 +5327,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "How many edits to generate for the input and instruction.",
+     "doc": "How many edits to generate for the input and instruction.",
      "type": {
       "$id": "565",
       "kind": "nullable",
@@ -5358,7 +5358,7 @@
      "kind": "property",
      "name": "temperature",
      "serializedName": "temperature",
-     "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
+     "doc": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "type": {
       "$id": "569",
       "kind": "nullable",
@@ -5389,7 +5389,7 @@
      "kind": "property",
      "name": "top_p",
      "serializedName": "top_p",
-     "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
+     "doc": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "type": {
       "$id": "573",
       "kind": "nullable",
@@ -5431,7 +5431,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always `edit`.",
+     "doc": "The object type, which is always `edit`.",
      "type": {
       "$id": "578",
       "kind": "constant",
@@ -5453,7 +5453,7 @@
      "kind": "property",
      "name": "created",
      "serializedName": "created",
-     "description": "The Unix timestamp (in seconds) of when the edit was created.",
+     "doc": "The Unix timestamp (in seconds) of when the edit was created.",
      "type": {
       "$id": "580",
       "kind": "utcDateTime",
@@ -5481,7 +5481,7 @@
      "kind": "property",
      "name": "choices",
      "serializedName": "choices",
-     "description": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
+     "doc": "description: A list of edit choices. Can be more than one if `n` is greater than 1.",
      "type": {
       "$id": "583",
       "kind": "array",
@@ -5499,7 +5499,7 @@
          "kind": "property",
          "name": "text",
          "serializedName": "text",
-         "description": "The edited result.",
+         "doc": "The edited result.",
          "type": {
           "$id": "586",
           "kind": "string",
@@ -5519,7 +5519,7 @@
          "kind": "property",
          "name": "index",
          "serializedName": "index",
-         "description": "The index of the choice in the list of choices.",
+         "doc": "The index of the choice in the list of choices.",
          "type": {
           "$id": "588",
           "kind": "safeint",
@@ -5539,7 +5539,7 @@
          "kind": "property",
          "name": "finish_reason",
          "serializedName": "finish_reason",
-         "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `length` if the maximum number of tokens\nspecified in the request was reached.",
+         "doc": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `length` if the maximum number of tokens\nspecified in the request was reached.",
          "type": {
           "$ref": "86"
          },
@@ -5573,7 +5573,7 @@
       "name": "CompletionUsage",
       "crossLanguageDefinitionId": "OpenAI.CompletionUsage",
       "usage": "Output,Json",
-      "description": "Usage statistics for the completion request.",
+      "doc": "Usage statistics for the completion request.",
       "decorators": [],
       "properties": [
        {
@@ -5581,7 +5581,7 @@
         "kind": "property",
         "name": "prompt_tokens",
         "serializedName": "prompt_tokens",
-        "description": "Number of tokens in the prompt.",
+        "doc": "Number of tokens in the prompt.",
         "type": {
          "$id": "593",
          "kind": "safeint",
@@ -5601,7 +5601,7 @@
         "kind": "property",
         "name": "completion_tokens",
         "serializedName": "completion_tokens",
-        "description": "Number of tokens in the generated completion",
+        "doc": "Number of tokens in the generated completion",
         "type": {
          "$id": "595",
          "kind": "safeint",
@@ -5621,7 +5621,7 @@
         "kind": "property",
         "name": "total_tokens",
         "serializedName": "total_tokens",
-        "description": "Total number of tokens used in the request (prompt + completion).",
+        "doc": "Total number of tokens used in the request (prompt + completion).",
         "type": {
          "$id": "597",
          "kind": "safeint",
@@ -5666,7 +5666,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to\nsee all of your available models, or see our [Model overview](/docs/models/overview) for\ndescriptions of them.",
+     "doc": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to\nsee all of your available models, or see our [Model overview](/docs/models/overview) for\ndescriptions of them.",
      "type": {
       "$ref": "92"
      },
@@ -5682,7 +5682,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "description": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of\ntokens, or array of token arrays.\n\nNote that <|endoftext|> is the document separator that the model sees during training, so if a\nprompt is not specified the model will generate as if from the beginning of a new document.",
+     "doc": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of\ntokens, or array of token arrays.\n\nNote that <|endoftext|> is the document separator that the model sees during training, so if a\nprompt is not specified the model will generate as if from the beginning of a new document.",
      "type": {
       "$id": "601",
       "kind": "nullable",
@@ -5763,7 +5763,7 @@
      "kind": "property",
      "name": "suffix",
      "serializedName": "suffix",
-     "description": "The suffix that comes after a completion of inserted text.",
+     "doc": "The suffix that comes after a completion of inserted text.",
      "type": {
       "$id": "612",
       "kind": "nullable",
@@ -5787,7 +5787,7 @@
      "kind": "property",
      "name": "temperature",
      "serializedName": "temperature",
-     "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
+     "doc": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "type": {
       "$id": "615",
       "kind": "nullable",
@@ -5818,7 +5818,7 @@
      "kind": "property",
      "name": "top_p",
      "serializedName": "top_p",
-     "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
+     "doc": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "type": {
       "$id": "619",
       "kind": "nullable",
@@ -5849,7 +5849,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
+     "doc": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "type": {
       "$id": "623",
       "kind": "nullable",
@@ -5880,7 +5880,7 @@
      "kind": "property",
      "name": "max_tokens",
      "serializedName": "max_tokens",
-     "description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
+     "doc": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "type": {
       "$id": "627",
       "kind": "nullable",
@@ -5911,7 +5911,7 @@
      "kind": "property",
      "name": "stop",
      "serializedName": "stop",
-     "description": "Up to 4 sequences where the API will stop generating further tokens.",
+     "doc": "Up to 4 sequences where the API will stop generating further tokens.",
      "type": {
       "$id": "631",
       "kind": "nullable",
@@ -5957,7 +5957,7 @@
      "kind": "property",
      "name": "presence_penalty",
      "serializedName": "presence_penalty",
-     "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
+     "doc": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "type": {
       "$id": "637",
       "kind": "nullable",
@@ -5988,7 +5988,7 @@
      "kind": "property",
      "name": "frequency_penalty",
      "serializedName": "frequency_penalty",
-     "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
+     "doc": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "type": {
       "$id": "641",
       "kind": "nullable",
@@ -6019,7 +6019,7 @@
      "kind": "property",
      "name": "logit_bias",
      "serializedName": "logit_bias",
-     "description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
+     "doc": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "type": {
       "$id": "645",
       "kind": "nullable",
@@ -6055,7 +6055,7 @@
      "kind": "property",
      "name": "user",
      "serializedName": "user",
-     "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
+     "doc": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "type": {
       "$id": "650",
       "kind": "string",
@@ -6082,7 +6082,7 @@
      "kind": "property",
      "name": "stream",
      "serializedName": "stream",
-     "description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
+     "doc": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "type": {
       "$id": "653",
       "kind": "nullable",
@@ -6106,7 +6106,7 @@
      "kind": "property",
      "name": "logprobs",
      "serializedName": "logprobs",
-     "description": "Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.\nFor example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The\nAPI will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`\nelements in the response.\n\nThe maximum value for `logprobs` is 5.",
+     "doc": "Include the log probabilities on the `logprobs` most likely tokens, as well the chosen tokens.\nFor example, if `logprobs` is 5, the API will return a list of the 5 most likely tokens. The\nAPI will always return the `logprob` of the sampled token, so there may be up to `logprobs+1`\nelements in the response.\n\nThe maximum value for `logprobs` is 5.",
      "type": {
       "$id": "656",
       "kind": "nullable",
@@ -6130,7 +6130,7 @@
      "kind": "property",
      "name": "echo",
      "serializedName": "echo",
-     "description": "Echo back the prompt in addition to the completion",
+     "doc": "Echo back the prompt in addition to the completion",
      "type": {
       "$id": "659",
       "kind": "nullable",
@@ -6154,7 +6154,7 @@
      "kind": "property",
      "name": "best_of",
      "serializedName": "best_of",
-     "description": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest\nlog probability per token). Results cannot be streamed.\n\nWhen used with `n`, `best_of` controls the number of candidate completions and `n` specifies\nhow many to return – `best_of` must be greater than `n`.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
+     "doc": "Generates `best_of` completions server-side and returns the \"best\" (the one with the highest\nlog probability per token). Results cannot be streamed.\n\nWhen used with `n`, `best_of` controls the number of candidate completions and `n` specifies\nhow many to return – `best_of` must be greater than `n`.\n\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "type": {
       "$id": "662",
       "kind": "nullable",
@@ -6181,7 +6181,7 @@
    "name": "CreateCompletionResponse",
    "crossLanguageDefinitionId": "OpenAI.CreateCompletionResponse",
    "usage": "Output,Json",
-   "description": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
+   "doc": "Represents a completion response from the API. Note: both the streamed and non-streamed response\nobjects share the same shape (unlike the chat endpoint).",
    "decorators": [],
    "properties": [
     {
@@ -6189,7 +6189,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "A unique identifier for the completion.",
+     "doc": "A unique identifier for the completion.",
      "type": {
       "$id": "666",
       "kind": "string",
@@ -6209,7 +6209,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always `text_completion`.",
+     "doc": "The object type, which is always `text_completion`.",
      "type": {
       "$id": "668",
       "kind": "string",
@@ -6229,7 +6229,7 @@
      "kind": "property",
      "name": "created",
      "serializedName": "created",
-     "description": "The Unix timestamp (in seconds) of when the completion was created.",
+     "doc": "The Unix timestamp (in seconds) of when the completion was created.",
      "type": {
       "$id": "670",
       "kind": "utcDateTime",
@@ -6257,7 +6257,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The model used for the completion.",
+     "doc": "The model used for the completion.",
      "type": {
       "$id": "673",
       "kind": "string",
@@ -6277,7 +6277,7 @@
      "kind": "property",
      "name": "choices",
      "serializedName": "choices",
-     "description": "The list of completion choices the model generated for the input.",
+     "doc": "The list of completion choices the model generated for the input.",
      "type": {
       "$id": "675",
       "kind": "array",
@@ -6475,7 +6475,7 @@
          "kind": "property",
          "name": "finish_reason",
          "serializedName": "finish_reason",
-         "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `content_filter` if content was omitted\ndue to a flag from our content filters, `length` if the maximum number of tokens specified\nin the request was reached, or `content_filter` if content was omitted due to a flag from our\ncontent filters.",
+         "doc": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, or `content_filter` if content was omitted\ndue to a flag from our content filters, `length` if the maximum number of tokens specified\nin the request was reached, or `content_filter` if content was omitted due to a flag from our\ncontent filters.",
          "type": {
           "$ref": "112"
          },
@@ -6534,7 +6534,7 @@
      "kind": "property",
      "name": "training_file",
      "serializedName": "training_file",
-     "description": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
+     "doc": "The ID of an uploaded file that contains training data.\n\nSee [upload file](/docs/api-reference/files/upload) for how to upload a file.\n\nYour dataset must be formatted as a JSONL file. Additionally, you must upload your file with\nthe purpose `fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "type": {
       "$id": "702",
       "kind": "string",
@@ -6554,7 +6554,7 @@
      "kind": "property",
      "name": "validation_file",
      "serializedName": "validation_file",
-     "description": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should\nnot be present in both train and validation files.\n\nYour dataset must be formatted as a JSONL file. You must upload your file with the purpose\n`fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
+     "doc": "The ID of an uploaded file that contains validation data.\n\nIf you provide this file, the data is used to generate validation metrics periodically during\nfine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should\nnot be present in both train and validation files.\n\nYour dataset must be formatted as a JSONL file. You must upload your file with the purpose\n`fine-tune`.\n\nSee the [fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "type": {
       "$id": "704",
       "kind": "nullable",
@@ -6578,7 +6578,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The name of the model to fine-tune. You can select one of the\n[supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).",
+     "doc": "The name of the model to fine-tune. You can select one of the\n[supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).",
      "type": {
       "$ref": "120"
      },
@@ -6594,7 +6594,7 @@
      "kind": "property",
      "name": "hyperparameters",
      "serializedName": "hyperparameters",
-     "description": "The hyperparameters used for the fine-tuning job.",
+     "doc": "The hyperparameters used for the fine-tuning job.",
      "type": {
       "$id": "708",
       "kind": "model",
@@ -6608,7 +6608,7 @@
         "kind": "property",
         "name": "n_epochs",
         "serializedName": "n_epochs",
-        "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
+        "doc": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.",
         "type": {
          "$id": "710",
          "kind": "union",
@@ -6665,7 +6665,7 @@
      "kind": "property",
      "name": "suffix",
      "serializedName": "suffix",
-     "description": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.",
+     "doc": "A string of up to 18 characters that will be added to your fine-tuned model name.\n\nFor example, a `suffix` of \"custom-model-name\" would produce a model name like\n`ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.",
      "type": {
       "$id": "716",
       "kind": "nullable",
@@ -6709,7 +6709,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The object identifier, which can be referenced in the API endpoints.",
+     "doc": "The object identifier, which can be referenced in the API endpoints.",
      "type": {
       "$id": "721",
       "kind": "string",
@@ -6729,7 +6729,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always \"fine_tuning.job\".",
+     "doc": "The object type, which is always \"fine_tuning.job\".",
      "type": {
       "$id": "723",
       "kind": "constant",
@@ -6751,7 +6751,7 @@
      "kind": "property",
      "name": "created_at",
      "serializedName": "created_at",
-     "description": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
+     "doc": "The Unix timestamp (in seconds) for when the fine-tuning job was created.",
      "type": {
       "$id": "725",
       "kind": "utcDateTime",
@@ -6779,7 +6779,7 @@
      "kind": "property",
      "name": "finished_at",
      "serializedName": "finished_at",
-     "description": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be\nnull if the fine-tuning job is still running.",
+     "doc": "The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be\nnull if the fine-tuning job is still running.",
      "type": {
       "$id": "728",
       "kind": "nullable",
@@ -6811,7 +6811,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The base model that is being fine-tuned.",
+     "doc": "The base model that is being fine-tuned.",
      "type": {
       "$id": "732",
       "kind": "string",
@@ -6831,7 +6831,7 @@
      "kind": "property",
      "name": "fine_tuned_model",
      "serializedName": "fine_tuned_model",
-     "description": "The name of the fine-tuned model that is being created. The value will be null if the\nfine-tuning job is still running.",
+     "doc": "The name of the fine-tuned model that is being created. The value will be null if the\nfine-tuning job is still running.",
      "type": {
       "$id": "734",
       "kind": "nullable",
@@ -6855,7 +6855,7 @@
      "kind": "property",
      "name": "organization_id",
      "serializedName": "organization_id",
-     "description": "The organization that owns the fine-tuning job.",
+     "doc": "The organization that owns the fine-tuning job.",
      "type": {
       "$id": "737",
       "kind": "string",
@@ -6875,7 +6875,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
+     "doc": "The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,\n`succeeded`, `failed`, or `cancelled`.",
      "type": {
       "$ref": "131"
      },
@@ -6891,7 +6891,7 @@
      "kind": "property",
      "name": "hyperparameters",
      "serializedName": "hyperparameters",
-     "description": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/fine-tuning) for more details.",
+     "doc": "The hyperparameters used for the fine-tuning job. See the\n[fine-tuning guide](/docs/guides/fine-tuning) for more details.",
      "type": {
       "$id": "740",
       "kind": "model",
@@ -6905,7 +6905,7 @@
         "kind": "property",
         "name": "n_epochs",
         "serializedName": "n_epochs",
-        "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
+        "doc": "The number of epochs to train the model for. An epoch refers to one full cycle through the\ntraining dataset.\n\n\"Auto\" decides the optimal number of epochs based on the size of the dataset. If setting the\nnumber manually, we support any number between 1 and 50 epochs.",
         "type": {
          "$id": "742",
          "kind": "union",
@@ -6962,7 +6962,7 @@
      "kind": "property",
      "name": "training_file",
      "serializedName": "training_file",
-     "description": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
+     "doc": "The file ID used for training. You can retrieve the training data with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "type": {
       "$id": "748",
       "kind": "string",
@@ -6982,7 +6982,7 @@
      "kind": "property",
      "name": "validation_file",
      "serializedName": "validation_file",
-     "description": "The file ID used for validation. You can retrieve the validation results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
+     "doc": "The file ID used for validation. You can retrieve the validation results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "type": {
       "$id": "750",
       "kind": "nullable",
@@ -7006,7 +7006,7 @@
      "kind": "property",
      "name": "result_files",
      "serializedName": "result_files",
-     "description": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
+     "doc": "The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the\n[Files API](/docs/api-reference/files/retrieve-contents).",
      "type": {
       "$id": "753",
       "kind": "array",
@@ -7033,7 +7033,7 @@
      "kind": "property",
      "name": "trained_tokens",
      "serializedName": "trained_tokens",
-     "description": "The total number of billable tokens processed by this fine tuning job. The value will be null\nif the fine-tuning job is still running.",
+     "doc": "The total number of billable tokens processed by this fine tuning job. The value will be null\nif the fine-tuning job is still running.",
      "type": {
       "$id": "756",
       "kind": "nullable",
@@ -7057,7 +7057,7 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "For fine-tuning jobs that have `failed`, this will contain more information on the cause of the\nfailure.",
+     "doc": "For fine-tuning jobs that have `failed`, this will contain more information on the cause of the\nfailure.",
      "type": {
       "$id": "759",
       "kind": "nullable",
@@ -7074,7 +7074,7 @@
          "kind": "property",
          "name": "message",
          "serializedName": "message",
-         "description": "A human-readable error message.",
+         "doc": "A human-readable error message.",
          "type": {
           "$id": "762",
           "kind": "string",
@@ -7094,7 +7094,7 @@
          "kind": "property",
          "name": "code",
          "serializedName": "code",
-         "description": "A machine-readable error code.",
+         "doc": "A machine-readable error code.",
          "type": {
           "$id": "764",
           "kind": "string",
@@ -7114,7 +7114,7 @@
          "kind": "property",
          "name": "param",
          "serializedName": "param",
-         "description": "The parameter that was invalid, usually `training_file` or `validation_file`. This field\nwill be null if the failure was not parameter-specific.",
+         "doc": "The parameter that was invalid, usually `training_file` or `validation_file`. This field\nwill be null if the failure was not parameter-specific.",
          "type": {
           "$id": "766",
           "kind": "nullable",
@@ -7394,7 +7394,7 @@
      "kind": "property",
      "name": "role",
      "serializedName": "role",
-     "description": "The role of the messages author. One of `system`, `user`, `assistant`, or `function`.",
+     "doc": "The role of the messages author. One of `system`, `user`, `assistant`, or `function`.",
      "type": {
       "$ref": "177"
      },
@@ -7410,7 +7410,7 @@
      "kind": "property",
      "name": "content",
      "serializedName": "content",
-     "description": "The contents of the message. `content` is required for all messages, and may be null for\nassistant messages with function calls.",
+     "doc": "The contents of the message. `content` is required for all messages, and may be null for\nassistant messages with function calls.",
      "type": {
       "$id": "794",
       "kind": "nullable",
@@ -7434,7 +7434,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name of the author of this message. `name` is required if role is `function`, and it\nshould be the name of the function whose response is in the `content`. May contain a-z,\nA-Z, 0-9, and underscores, with a maximum length of 64 characters.",
+     "doc": "The name of the author of this message. `name` is required if role is `function`, and it\nshould be the name of the function whose response is in the `content`. May contain a-z,\nA-Z, 0-9, and underscores, with a maximum length of 64 characters.",
      "type": {
       "$id": "797",
       "kind": "string",
@@ -7454,7 +7454,7 @@
      "kind": "property",
      "name": "function_call",
      "serializedName": "function_call",
-     "description": "The name and arguments of a function that should be called, as generated by the model.",
+     "doc": "The name and arguments of a function that should be called, as generated by the model.",
      "type": {
       "$id": "799",
       "kind": "model",
@@ -7468,7 +7468,7 @@
         "kind": "property",
         "name": "name",
         "serializedName": "name",
-        "description": "The name of the function to call.",
+        "doc": "The name of the function to call.",
         "type": {
          "$id": "801",
          "kind": "string",
@@ -7488,7 +7488,7 @@
         "kind": "property",
         "name": "arguments",
         "serializedName": "arguments",
-        "description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
+        "doc": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
         "type": {
          "$id": "803",
          "kind": "string",
@@ -7530,7 +7530,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and\ndashes, with a maximum length of 64.",
+     "doc": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and\ndashes, with a maximum length of 64.",
      "type": {
       "$id": "806",
       "kind": "string",
@@ -7550,7 +7550,7 @@
      "kind": "property",
      "name": "description",
      "serializedName": "description",
-     "description": "A description of what the function does, used by the model to choose when and how to call the\nfunction.",
+     "doc": "A description of what the function does, used by the model to choose when and how to call the\nfunction.",
      "type": {
       "$id": "808",
       "kind": "string",
@@ -7570,7 +7570,7 @@
      "kind": "property",
      "name": "parameters",
      "serializedName": "parameters",
-     "description": "The parameters the functions accepts, described as a JSON Schema object. See the\n[guide](/docs/guides/gpt/function-calling) for examples, and the\n[JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation\nabout the format.\\n\\nTo describe a function that accepts no parameters, provide the value\n`{\\\"type\\\": \\\"object\\\", \\\"properties\\\": {}}`.",
+     "doc": "The parameters the functions accepts, described as a JSON Schema object. See the\n[guide](/docs/guides/gpt/function-calling) for examples, and the\n[JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation\nabout the format.\\n\\nTo describe a function that accepts no parameters, provide the value\n`{\\\"type\\\": \\\"object\\\", \\\"properties\\\": {}}`.",
      "type": {
       "$id": "810",
       "kind": "model",
@@ -7612,7 +7612,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name of the function to call.",
+     "doc": "The name of the function to call.",
      "type": {
       "$id": "814",
       "kind": "string",
@@ -7642,7 +7642,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)\ntable for details on which models work with the Chat API.",
+     "doc": "ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)\ntable for details on which models work with the Chat API.",
      "type": {
       "$ref": "153"
      },
@@ -7658,7 +7658,7 @@
      "kind": "property",
      "name": "messages",
      "serializedName": "messages",
-     "description": "A list of messages comprising the conversation so far.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).",
+     "doc": "A list of messages comprising the conversation so far.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).",
      "type": {
       "$id": "818",
       "kind": "array",
@@ -7681,7 +7681,7 @@
      "kind": "property",
      "name": "functions",
      "serializedName": "functions",
-     "description": "A list of functions the model may generate JSON inputs for.",
+     "doc": "A list of functions the model may generate JSON inputs for.",
      "type": {
       "$id": "820",
       "kind": "array",
@@ -7704,7 +7704,7 @@
      "kind": "property",
      "name": "function_call",
      "serializedName": "function_call",
-     "description": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
+     "doc": "Controls how the model responds to function calls. `none` means the model does not call a\nfunction, and responds to the end-user. `auto` means the model can pick between an end-user or\ncalling a function.  Specifying a particular function via `{\\\"name\":\\ \\\"my_function\\\"}` forces the\nmodel to call that function. `none` is the default when no functions are present. `auto` is the\ndefault if functions are present.",
      "type": {
       "$id": "822",
       "kind": "union",
@@ -7754,7 +7754,7 @@
      "kind": "property",
      "name": "temperature",
      "serializedName": "temperature",
-     "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
+     "doc": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output\nmore random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.",
      "type": {
       "$ref": "615"
      },
@@ -7770,7 +7770,7 @@
      "kind": "property",
      "name": "top_p",
      "serializedName": "top_p",
-     "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
+     "doc": "An alternative to sampling with temperature, called nucleus sampling, where the model considers\nthe results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising\nthe top 10% probability mass are considered.\n\nWe generally recommend altering this or `temperature` but not both.",
      "type": {
       "$ref": "619"
      },
@@ -7786,7 +7786,7 @@
      "kind": "property",
      "name": "n",
      "serializedName": "n",
-     "description": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
+     "doc": "How many completions to generate for each prompt.\n**Note:** Because this parameter generates many completions, it can quickly consume your token\nquota. Use carefully and ensure that you have reasonable settings for `max_tokens` and `stop`.",
      "type": {
       "$ref": "623"
      },
@@ -7802,7 +7802,7 @@
      "kind": "property",
      "name": "max_tokens",
      "serializedName": "max_tokens",
-     "description": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
+     "doc": "The maximum number of [tokens](/tokenizer) to generate in the completion.\n\nThe token count of your prompt plus `max_tokens` cannot exceed the model's context length.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)\nfor counting tokens.",
      "type": {
       "$ref": "627"
      },
@@ -7818,7 +7818,7 @@
      "kind": "property",
      "name": "stop",
      "serializedName": "stop",
-     "description": "Up to 4 sequences where the API will stop generating further tokens.",
+     "doc": "Up to 4 sequences where the API will stop generating further tokens.",
      "type": {
       "$ref": "631"
      },
@@ -7834,7 +7834,7 @@
      "kind": "property",
      "name": "presence_penalty",
      "serializedName": "presence_penalty",
-     "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
+     "doc": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear\nin the text so far, increasing the model's likelihood to talk about new topics.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "type": {
       "$ref": "637"
      },
@@ -7850,7 +7850,7 @@
      "kind": "property",
      "name": "frequency_penalty",
      "serializedName": "frequency_penalty",
-     "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
+     "doc": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing\nfrequency in the text so far, decreasing the model's likelihood to repeat the same line\nverbatim.\n\n[See more information about frequency and presence penalties.](/docs/guides/gpt/parameter-details)",
      "type": {
       "$ref": "641"
      },
@@ -7866,7 +7866,7 @@
      "kind": "property",
      "name": "logit_bias",
      "serializedName": "logit_bias",
-     "description": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
+     "doc": "Modify the likelihood of specified tokens appearing in the completion.\nAccepts a json object that maps tokens (specified by their token ID in the tokenizer) to an\nassociated bias value from -100 to 100. Mathematically, the bias is added to the logits\ngenerated by the model prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values like -100 or 100\nshould result in a ban or exclusive selection of the relevant token.",
      "type": {
       "$ref": "645"
      },
@@ -7882,7 +7882,7 @@
      "kind": "property",
      "name": "user",
      "serializedName": "user",
-     "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
+     "doc": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect\nabuse. [Learn more](/docs/guides/safety-best-practices/end-user-ids).",
      "type": {
       "$id": "836",
       "kind": "string",
@@ -7909,7 +7909,7 @@
      "kind": "property",
      "name": "stream",
      "serializedName": "stream",
-     "description": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
+     "doc": "If set, partial message deltas will be sent, like in ChatGPT. Tokens will be sent as data-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available, with the stream terminated by a `data: [DONE]` message.\n[Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).",
      "type": {
       "$ref": "653"
      },
@@ -7928,7 +7928,7 @@
    "name": "CreateChatCompletionResponse",
    "crossLanguageDefinitionId": "OpenAI.CreateChatCompletionResponse",
    "usage": "Output,Json",
-   "description": "Represents a chat completion response returned by model, based on the provided input.",
+   "doc": "Represents a chat completion response returned by model, based on the provided input.",
    "decorators": [],
    "properties": [
     {
@@ -7936,7 +7936,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "A unique identifier for the chat completion.",
+     "doc": "A unique identifier for the chat completion.",
      "type": {
       "$id": "841",
       "kind": "string",
@@ -7956,7 +7956,7 @@
      "kind": "property",
      "name": "object",
      "serializedName": "object",
-     "description": "The object type, which is always `chat.completion`.",
+     "doc": "The object type, which is always `chat.completion`.",
      "type": {
       "$id": "843",
       "kind": "string",
@@ -7976,7 +7976,7 @@
      "kind": "property",
      "name": "created",
      "serializedName": "created",
-     "description": "The Unix timestamp (in seconds) of when the chat completion was created.",
+     "doc": "The Unix timestamp (in seconds) of when the chat completion was created.",
      "type": {
       "$id": "845",
       "kind": "utcDateTime",
@@ -8004,7 +8004,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "The model used for the chat completion.",
+     "doc": "The model used for the chat completion.",
      "type": {
       "$id": "848",
       "kind": "string",
@@ -8024,7 +8024,7 @@
      "kind": "property",
      "name": "choices",
      "serializedName": "choices",
-     "description": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
+     "doc": "A list of chat completion choices. Can be more than one if `n` is greater than 1.",
      "type": {
       "$id": "850",
       "kind": "array",
@@ -8042,7 +8042,7 @@
          "kind": "property",
          "name": "index",
          "serializedName": "index",
-         "description": "The index of the choice in the list of choices.",
+         "doc": "The index of the choice in the list of choices.",
          "type": {
           "$id": "853",
           "kind": "safeint",
@@ -8075,7 +8075,7 @@
             "kind": "property",
             "name": "role",
             "serializedName": "role",
-            "description": "The role of the author of this message.",
+            "doc": "The role of the author of this message.",
             "type": {
              "$ref": "187"
             },
@@ -8091,7 +8091,7 @@
             "kind": "property",
             "name": "content",
             "serializedName": "content",
-            "description": "The contents of the message.",
+            "doc": "The contents of the message.",
             "type": {
              "$id": "858",
              "kind": "nullable",
@@ -8115,7 +8115,7 @@
             "kind": "property",
             "name": "function_call",
             "serializedName": "function_call",
-            "description": "The name and arguments of a function that should be called, as generated by the model.",
+            "doc": "The name and arguments of a function that should be called, as generated by the model.",
             "type": {
              "$id": "861",
              "kind": "model",
@@ -8129,7 +8129,7 @@
                "kind": "property",
                "name": "name",
                "serializedName": "name",
-               "description": "The name of the function to call.",
+               "doc": "The name of the function to call.",
                "type": {
                 "$id": "863",
                 "kind": "string",
@@ -8149,7 +8149,7 @@
                "kind": "property",
                "name": "arguments",
                "serializedName": "arguments",
-               "description": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
+               "doc": "The arguments to call the function with, as generated by the model in JSON format. Note that\nthe model does not always generate valid JSON, and may hallucinate parameters not defined by\nyour function schema. Validate the arguments in your code before calling your function.",
                "type": {
                 "$id": "865",
                 "kind": "string",
@@ -8187,7 +8187,7 @@
          "kind": "property",
          "name": "finish_reason",
          "serializedName": "finish_reason",
-         "description": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, `length` if the maximum number of tokens\nspecified in the request was reached, `content_filter` if the content was omitted due to\na flag from our content filters, or `function_call` if the model called a function.",
+         "doc": "The reason the model stopped generating tokens. This will be `stop` if the model hit a\nnatural stop point or a provided stop sequence, `length` if the maximum number of tokens\nspecified in the request was reached, `content_filter` if the content was omitted due to\na flag from our content filters, or `function_call` if the model called a function.",
          "type": {
           "$ref": "197"
          },
@@ -8249,7 +8249,7 @@
      "kind": "property",
      "name": "file",
      "serializedName": "file",
-     "description": "The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
+     "doc": "The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
      "type": {
       "$id": "870",
       "kind": "bytes",
@@ -8270,7 +8270,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. Only `whisper-1` is currently available.",
+     "doc": "ID of the model to use. Only `whisper-1` is currently available.",
      "type": {
       "$ref": "207"
      },
@@ -8286,7 +8286,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
+     "doc": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "type": {
       "$id": "873",
       "kind": "string",
@@ -8306,7 +8306,7 @@
      "kind": "property",
      "name": "response_format",
      "serializedName": "response_format",
-     "description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
+     "doc": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "type": {
       "$ref": "211"
      },
@@ -8322,7 +8322,7 @@
      "kind": "property",
      "name": "temperature",
      "serializedName": "temperature",
-     "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
+     "doc": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "type": {
       "$id": "876",
       "kind": "float64",
@@ -8381,7 +8381,7 @@
      "kind": "property",
      "name": "file",
      "serializedName": "file",
-     "description": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
+     "doc": "The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,\nmpeg, mpga, m4a, ogg, wav, or webm.",
      "type": {
       "$id": "882",
       "kind": "bytes",
@@ -8402,7 +8402,7 @@
      "kind": "property",
      "name": "model",
      "serializedName": "model",
-     "description": "ID of the model to use. Only `whisper-1` is currently available.",
+     "doc": "ID of the model to use. Only `whisper-1` is currently available.",
      "type": {
       "$ref": "223"
      },
@@ -8418,7 +8418,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "description": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
+     "doc": "An optional text to guide the model's style or continue a previous audio segment. The\n[prompt](/docs/guides/speech-to-text/prompting) should match the audio language.",
      "type": {
       "$id": "885",
       "kind": "string",
@@ -8438,7 +8438,7 @@
      "kind": "property",
      "name": "response_format",
      "serializedName": "response_format",
-     "description": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
+     "doc": "The format of the transcript output, in one of these options: json, text, srt, verbose_json, or\nvtt.",
      "type": {
       "$ref": "227"
      },
@@ -8454,7 +8454,7 @@
      "kind": "property",
      "name": "temperature",
      "serializedName": "temperature",
-     "description": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
+     "doc": "The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more\nrandom, while lower values like 0.2 will make it more focused and deterministic. If set to 0,\nthe model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to\nautomatically increase the temperature until certain thresholds are hit.",
      "type": {
       "$id": "888",
       "kind": "float64",
@@ -8474,7 +8474,7 @@
      "kind": "property",
      "name": "language",
      "serializedName": "language",
-     "description": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy\nand latency.",
+     "doc": "The language of the input audio. Supplying the input language in\n[ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy\nand latency.",
      "type": {
       "$id": "890",
       "kind": "string",
@@ -8525,7 +8525,7 @@
   {
    "$id": "894",
    "Name": "OpenAIClient",
-   "Description": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
+   "Doc": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
    "Operations": [],
    "Protocol": {
     "$id": "895"
@@ -8535,7 +8535,7 @@
      "$id": "896",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "897",
       "kind": "url",
@@ -8578,7 +8578,7 @@
      "$id": "902",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "903",
       "kind": "url",
@@ -8731,7 +8731,7 @@
      "$id": "917",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "918",
       "kind": "url",
@@ -8884,7 +8884,7 @@
      "$id": "932",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "933",
       "kind": "url",
@@ -8927,7 +8927,7 @@
      "$id": "938",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "939",
       "kind": "url",
@@ -8971,7 +8971,7 @@
        "$id": "944",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "945",
         "kind": "constant",
@@ -9080,7 +9080,7 @@
      "$id": "953",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "954",
       "kind": "url",
@@ -9123,7 +9123,7 @@
      "$id": "959",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "960",
       "kind": "url",
@@ -9161,14 +9161,14 @@
      "$id": "964",
      "Name": "create",
      "ResourceName": "Jobs",
-     "Description": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
+     "Doc": "Creates a job that fine-tunes a specified model from a given dataset.\n\nResponse includes details of the enqueued job including job status and the name of the\nfine-tuned models once complete.\n\n[Learn more about fine-tuning](/docs/guides/fine-tuning)",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "965",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "966",
         "kind": "constant",
@@ -9277,7 +9277,7 @@
        "$id": "974",
        "Name": "after",
        "NameInRequest": "after",
-       "Description": "Identifier for the last job from the previous pagination request.",
+       "Doc": "Identifier for the last job from the previous pagination request.",
        "Type": {
         "$id": "975",
         "kind": "string",
@@ -9299,7 +9299,7 @@
        "$id": "976",
        "Name": "limit",
        "NameInRequest": "limit",
-       "Description": "Number of fine-tuning jobs to retrieve.",
+       "Doc": "Number of fine-tuning jobs to retrieve.",
        "Type": {
         "$id": "977",
         "kind": "safeint",
@@ -9466,7 +9466,7 @@
        "$id": "990",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
-       "Description": "The ID of the fine-tuning job to get events for.",
+       "Doc": "The ID of the fine-tuning job to get events for.",
        "Type": {
         "$id": "991",
         "kind": "string",
@@ -9488,7 +9488,7 @@
        "$id": "992",
        "Name": "after",
        "NameInRequest": "after",
-       "Description": "Identifier for the last event from the previous pagination request.",
+       "Doc": "Identifier for the last event from the previous pagination request.",
        "Type": {
         "$id": "993",
         "kind": "string",
@@ -9510,7 +9510,7 @@
        "$id": "994",
        "Name": "limit",
        "NameInRequest": "limit",
-       "Description": "Number of events to retrieve.",
+       "Doc": "Number of events to retrieve.",
        "Type": {
         "$id": "995",
         "kind": "integer",
@@ -9594,7 +9594,7 @@
        "$id": "1001",
        "Name": "fine_tuning_job_id",
        "NameInRequest": "fine_tuning_job_id",
-       "Description": "The ID of the fine-tuning job to cancel.",
+       "Doc": "The ID of the fine-tuning job to cancel.",
        "Type": {
         "$id": "1002",
         "kind": "string",
@@ -9677,7 +9677,7 @@
      "$id": "1008",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1009",
       "kind": "url",
@@ -9721,7 +9721,7 @@
        "$id": "1014",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1015",
         "kind": "constant",
@@ -9830,7 +9830,7 @@
      "$id": "1023",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1024",
       "kind": "url",
@@ -9875,7 +9875,7 @@
        "$id": "1029",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1030",
         "kind": "constant",
@@ -9984,7 +9984,7 @@
      "$id": "1038",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1039",
       "kind": "url",
@@ -10029,7 +10029,7 @@
        "$id": "1044",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1045",
         "kind": "constant",
@@ -10138,7 +10138,7 @@
      "$id": "1053",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1054",
       "kind": "url",
@@ -10354,7 +10354,7 @@
        "$id": "1073",
        "Name": "file_id",
        "NameInRequest": "file_id",
-       "Description": "The ID of the file to use for this request.",
+       "Doc": "The ID of the file to use for this request.",
        "Type": {
         "$id": "1074",
         "kind": "string",
@@ -10438,7 +10438,7 @@
        "$id": "1080",
        "Name": "file_id",
        "NameInRequest": "file_id",
-       "Description": "The ID of the file to use for this request.",
+       "Doc": "The ID of the file to use for this request.",
        "Type": {
         "$id": "1081",
         "kind": "string",
@@ -10522,7 +10522,7 @@
        "$id": "1087",
        "Name": "file_id",
        "NameInRequest": "file_id",
-       "Description": "The ID of the file to use for this request.",
+       "Doc": "The ID of the file to use for this request.",
        "Type": {
         "$id": "1088",
         "kind": "string",
@@ -10609,7 +10609,7 @@
      "$id": "1095",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1096",
       "kind": "url",
@@ -10655,7 +10655,7 @@
        "$id": "1101",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1102",
         "kind": "constant",
@@ -10829,7 +10829,7 @@
        "$id": "1115",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
-       "Description": "The ID of the fine-tune job",
+       "Doc": "The ID of the fine-tune job",
        "Type": {
         "$id": "1116",
         "kind": "string",
@@ -10914,7 +10914,7 @@
        "$id": "1122",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
-       "Description": "The ID of the fine-tune job to get events for.",
+       "Doc": "The ID of the fine-tune job to get events for.",
        "Type": {
         "$id": "1123",
         "kind": "string",
@@ -10936,7 +10936,7 @@
        "$id": "1124",
        "Name": "stream",
        "NameInRequest": "stream",
-       "Description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
+       "Doc": "Whether to stream events for the fine-tune job. If set to true, events will be sent as\ndata-only\n[server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)\nas they become available. The stream will terminate with a `data: [DONE]` message when the\njob is finished (succeeded, cancelled, or failed).\n\nIf set to false, only events generated so far will be returned.",
        "Type": {
         "$id": "1125",
         "kind": "boolean",
@@ -11021,7 +11021,7 @@
        "$id": "1131",
        "Name": "fine_tune_id",
        "NameInRequest": "fine_tune_id",
-       "Description": "The ID of the fine-tune job to cancel",
+       "Doc": "The ID of the fine-tune job to cancel",
        "Type": {
         "$id": "1132",
         "kind": "string",
@@ -11104,7 +11104,7 @@
      "$id": "1138",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1139",
       "kind": "url",
@@ -11211,7 +11211,7 @@
        "$id": "1149",
        "Name": "model",
        "NameInRequest": "model",
-       "Description": "The ID of the model to use for this request.",
+       "Doc": "The ID of the model to use for this request.",
        "Type": {
         "$id": "1150",
         "kind": "string",
@@ -11295,7 +11295,7 @@
        "$id": "1156",
        "Name": "model",
        "NameInRequest": "model",
-       "Description": "The model to delete",
+       "Doc": "The model to delete",
        "Type": {
         "$id": "1157",
         "kind": "string",
@@ -11378,7 +11378,7 @@
      "$id": "1163",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1164",
       "kind": "url",
@@ -11423,7 +11423,7 @@
        "$id": "1169",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1170",
         "kind": "constant",
@@ -11750,7 +11750,7 @@
      "$id": "1196",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1197",
       "kind": "url",
@@ -11795,7 +11795,7 @@
        "$id": "1202",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1203",
         "kind": "constant",
@@ -11904,7 +11904,7 @@
      "$id": "1211",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "1212",
       "kind": "url",

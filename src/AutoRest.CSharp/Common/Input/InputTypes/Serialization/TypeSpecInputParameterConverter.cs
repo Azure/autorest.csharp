@@ -29,7 +29,8 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null && name == null;
 
             string? nameInRequest = null;
-            string? description = null;
+            string? summary = null;
+            string? doc = null;
             InputType? parameterType = null;
             string? location = null;
             InputConstant? defaultValue = null;
@@ -49,7 +50,8 @@ namespace AutoRest.CSharp.Common.Input
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputParameter.Name), ref name)
                     || reader.TryReadString(nameof(InputParameter.NameInRequest), ref nameInRequest)
-                    || reader.TryReadString(nameof(InputParameter.Description), ref description)
+                    || reader.TryReadString(nameof(InputParameter.Summary), ref summary)
+                    || reader.TryReadString(nameof(InputParameter.Doc), ref doc)
                     || reader.TryReadWithConverter(nameof(InputParameter.Type), options, ref parameterType)
                     || reader.TryReadString(nameof(InputParameter.Location), ref location)
                     || reader.TryReadWithConverter(nameof(InputParameter.DefaultValue), options, ref defaultValue)
@@ -90,7 +92,8 @@ namespace AutoRest.CSharp.Common.Input
             var parameter = new InputParameter(
                 Name: name,
                 NameInRequest: nameInRequest,
-                Description: description,
+                Summary: summary,
+                Doc: doc,
                 Type: parameterType,
                 Location: requestLocation,
                 DefaultValue: defaultValue,
