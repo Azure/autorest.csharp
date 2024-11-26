@@ -15,6 +15,7 @@ using AutoRest.CSharp.Common.Output.Models.Serialization.Multipart;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
@@ -714,7 +715,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            return $"{InputModel.Description}";
+            return FormattableStringHelpers.FromString(DocHelpers.GetDescription(InputModel.Summary, InputModel.Doc) ?? string.Empty);
         }
 
         protected override bool EnsureIncludeSerializer()

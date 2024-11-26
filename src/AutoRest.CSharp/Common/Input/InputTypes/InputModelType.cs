@@ -39,8 +39,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 
-        public string Description { get; init; } = string.IsNullOrEmpty(Summary) ? (Doc ?? string.Empty) : Summary;
-
         // The setter is only used for swagger input
         private bool? _useSystemTextJsonConverter;
         public bool UseSystemTextJsonConverter

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
@@ -27,9 +28,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override FormattableString CreateDescription()
         {
             FormattableString baseDescription = $"{BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.")}";
-            FormattableString extraDescription = string.IsNullOrWhiteSpace(InputModel.Description) ?
+            var modelDescription =  DocHelpers.GetDescription(InputModel.Summary, InputModel.Doc);
+            FormattableString extraDescription = modelDescription is null or "" ?
                 (FormattableString)$"" :
-                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(InputModel.Description)}";
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(modelDescription)}";
             return $"{baseDescription}{extraDescription}";
         }
 
