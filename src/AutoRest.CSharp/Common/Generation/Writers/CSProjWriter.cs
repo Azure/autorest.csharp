@@ -144,7 +144,7 @@ internal class CSProjWriter
 
     private void WriteProperties(XmlWriter writer)
     {
-        bool hasValue = false;
+        writer.WriteStartElement("PropertyGroup");
         // this will write those properties in the same order as they are defined in this class
         // introduce this method to save the effort of writing every property one by one
         foreach (var property in _properties)
@@ -154,15 +154,9 @@ internal class CSProjWriter
                 continue;
             // invoke the WriteElementIfNotNull method on each of them
             var value = (CSProjProperty?)property.GetValue(this);
-            if (value != null && !hasValue)
-            {
-                hasValue = true;
-                writer.WriteStartElement("PropertyGroup");
-            }
             WriteElementIfNotNull(writer, property.Name, value);
         }
-        if (hasValue)
-            writer.WriteEndElement();
+        writer.WriteEndElement();
     }
 
     private void WriteElementIfNotNull(XmlWriter writer, string name, CSProjProperty? property)
