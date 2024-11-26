@@ -4,26 +4,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Utilities;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.MgmtTest.Models.ExampleParameterValue>;
+using NUnit.Framework;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using MappingObject = System.Collections.Generic.Dictionary<string, AutoRest.CSharp.Output.Samples.Models.ExampleParameterValue>;
 
-namespace AutoRest.CSharp.MgmtTest.Models
+namespace AutoRest.CSharp.Mgmt.Output.Samples
 {
-    internal class Sample : OperationExample
+    internal class MgmtOperationSample : OperationExample
     {
-        public Sample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
+        public MgmtOperationSample(string operationId, MgmtTypeProvider carrier, MgmtClientOperation operation, InputOperation inputOperation, InputOperationExample example) : base(operationId, carrier, operation, inputOperation, example)
         {
             _methodName = $"{Operation.Name}_{Name.ToCleanName()}";
         }
@@ -38,7 +39,10 @@ namespace AutoRest.CSharp.MgmtTest.Models
                 Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Async,
                 ReturnType: typeof(Task),
                 ReturnDescription: null,
-                Parameters: Array.Empty<Parameter>());
+                Parameters: [],
+                Attributes: _attributes);
+
+        private readonly CSharpAttribute[] _attributes = [new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), Literal("Only validating compilation of examples"))];
 
         private MgmtTypeProvider? _parent;
         public MgmtTypeProvider? Parent => _parent ??= GetParent();
@@ -100,9 +104,9 @@ namespace AutoRest.CSharp.MgmtTest.Models
                     {
                         // this parameter is not from body which means its type should be primary which means "default" keyword should be able to handle
                         // the default value (also string because we disabled nullable in generated code)
-                        var warning = $"No value is provided for {parameter.Name} in example '{this.Name}'. Please consider adding a proper example value for it in swagger";
+                        var warning = $"No value is provided for {parameter.Name} in example '{Name}'. Please consider adding a proper example value for it in swagger";
                         AutoRestLogger.Warning(warning).Wait();
-                        var pv = new ExampleParameterValue(parameter, $"default /* Warning: {warning}*/");
+                        var pv = new ExampleParameterValue(parameter, DefaultOf(parameter.Type));
                         if (Operation.IsPropertyBagOperation && propertyBagParamNames.Contains(parameter.Name))
                         {
                             propertyBagMapping.Add(parameter.Name, pv);
@@ -134,7 +138,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             if (parameter == KnownParameters.WaitForCompletion)
             {
-                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"{typeof(WaitUntil)}.Completed"));
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, new TypeReference(typeof(WaitUntil)).Property(nameof(WaitUntil.Completed))));
                 return true;
             }
             if (parameter == KnownParameters.CancellationTokenParameter)

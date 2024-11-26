@@ -194,13 +194,49 @@ namespace AutoRest.CSharp.Common.Input
             return result;
         }
 
+        private static InputExampleValue HandleRawExampleValue(InputType inputType, object? rawValue)
+        {
+            if (rawValue == null)
+            {
+                return InputExampleValue.Null(inputType);
+            }
+            var type = rawValue.GetType();
+            if (type.IsGenericType)
+            {
+                // handle dictionary
+                if (type == typeof(Dictionary<object, object>))
+                {
+                    var values = new Dictionary<string, InputExampleValue>();
+                    foreach (var (key, value) in (Dictionary<object, object>)rawValue)
+                    {
+                        // key is always a string
+                        // since we do not have a schema for the value type here, we use unknown
+                        values.Add((string)key, HandleRawExampleValue(InputPrimitiveType.Unknown, value));
+                    }
+                    return new InputExampleObjectValue(inputType, values);
+                }
+                // handle list
+                if (type == typeof(List<object>))
+                {
+                    var values = new List<InputExampleValue>();
+                    foreach (var item in (List<object>)rawValue)
+                    {
+                        values.Add(HandleRawExampleValue(InputPrimitiveType.Unknown, item));
+                    }
+                    return new InputExampleListValue(inputType, values);
+                }
+            }
+
+            // the deserialization part of the test modeler output has a bug that all the primitive types are deserialized as strings, here we should convert them according to its real type
+            return new InputExampleRawValue(inputType, ConvertRawValue(inputType, rawValue));
+        }
+
         private InputExampleValue CreateExampleValue(ExampleValue exampleValue)
         {
             var inputType = CreateType(exampleValue.Schema, exampleValue.Schema.Extensions?.Format, false);
             if (exampleValue.RawValue != null)
             {
-                // test modeler has a bug that all the primitive types are deserialized as strings, here we should convert them according to its real type
-                return new InputExampleRawValue(inputType, ConvertRawValue(inputType, exampleValue.RawValue));
+                return HandleRawExampleValue(inputType, exampleValue.RawValue);
             }
             if (exampleValue.Elements != null && exampleValue.Elements.Any())
             {
