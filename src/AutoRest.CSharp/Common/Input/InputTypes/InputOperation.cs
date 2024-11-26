@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Humanizer;
 
 namespace AutoRest.CSharp.Common.Input;
 
@@ -17,7 +18,7 @@ internal record InputOperation
     string? resourceName,
     string? summary,
     string? deprecated,
-    string doc,
+    string? doc,
     string? accessibility,
     IReadOnlyList<InputParameter> parameters,
     IReadOnlyList<OperationResponse> responses,
@@ -138,7 +139,7 @@ internal record InputOperation
     public string? ResourceName { get; }
     public string? Summary { get; }
     public string? Deprecated { get; }
-    public string Doc { get; }
+    public string? Doc { get; }
     public string? Accessibility { get; }
     public IReadOnlyList<InputParameter> Parameters { get; init; }
     public IReadOnlyList<OperationResponse> Responses { get; }
@@ -164,4 +165,5 @@ internal record InputOperation
     internal string SpecName { get; init; }
 
     internal bool IsNameChanged { get; init; }
-}
+    public string DocDescription => Doc ?? $"{Name.Humanize()}.";
+};

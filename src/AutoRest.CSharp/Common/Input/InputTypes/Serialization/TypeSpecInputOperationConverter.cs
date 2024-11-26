@@ -87,7 +87,6 @@ namespace AutoRest.CSharp.Common.Input
             if (string.IsNullOrEmpty(doc) && string.IsNullOrEmpty(summary))
             {
                 Console.Error.WriteLine($"[Warn]: InputOperation '{name}' must have either a summary or description");
-                doc = $"{name.Humanize()}.";
             }
             crossLanguageDefinitionId = crossLanguageDefinitionId ?? throw new JsonException("InputOperation must have crossLanguageDefinitionId");
             uri = uri ?? throw new JsonException("InputOperation must have uri");
@@ -95,7 +94,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc!, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };
