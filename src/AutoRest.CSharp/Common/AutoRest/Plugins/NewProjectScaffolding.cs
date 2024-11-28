@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             await WriteTestFiles();
 
-            if (Configuration.AzureArm)
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 await WriteAssetJson();
                 await WriteSamplesProject();
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 Directory.CreateDirectory(_testDirectory);
 
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCSProj()));
-            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestBase.cs"), Encoding.ASCII.GetBytes(GetTestBase()));
                 await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace.Split('.').Last()}ManagementTestEnvironment.cs"), Encoding.ASCII.GetBytes(GetTestEnvironment()));
@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (_isAzureSdk)
             {
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "Directory.Build.props"), Encoding.ASCII.GetBytes(GetDirectoryBuildProps()));
-                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(!Configuration.AzureArm ? GetReadme() : GetReadmeMgmt()));
+                await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "README.md"), Encoding.ASCII.GetBytes(Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? GetReadme() : GetReadmeMgmt()));
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
         }
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         {
             const string publicKey = StaticStrings.publicKeyAssemblyInfo;
             const string assemblyInfoContent = StaticStrings.assemblyInfoContentAssemblyInfo;
-            string azureResourceProvider = string.Format(StaticStrings.resourceProviderAssemblyIfno, !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
+            string azureResourceProvider = string.Format(StaticStrings.resourceProviderAssemblyIfno, Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
 
@@ -166,14 +166,14 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         {
             var builder = new CSProjWriter()
             {
-                Description = !Configuration.AzureArm ? $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience." : $"Azure Resource Manager client SDK for Azure resource provider {Configuration.Namespace.Split('.').Last()}.",
-                AssemblyTitle = !Configuration.AzureArm ? new CSProjProperty($"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane") : null,
+                Description = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? $"This is the {Configuration.Namespace} client library for developing .NET applications with rich experience." : $"Azure Resource Manager client SDK for Azure resource provider {Configuration.Namespace.Split('.').Last()}.",
+                AssemblyTitle = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjProperty($"Azure SDK Code Generation {Configuration.Namespace} for Azure Data Plane") : null,
                 Version = "1.0.0-beta.1",
-                PackageTags = !Configuration.AzureArm ? Configuration.Namespace : $"azure;management;arm;resource manager;{Configuration.Namespace.Split('.').Last().ToLower()}",
-                TargetFrameworks = !Configuration.AzureArm ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
-                IncludeOperationsSharedSource = !Configuration.AzureArm ? new CSProjProperty("true") : null,
+                PackageTags = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? Configuration.Namespace : $"azure;management;arm;resource manager;{Configuration.Namespace.Split('.').Last().ToLower()}",
+                TargetFrameworks = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
+                IncludeOperationsSharedSource = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjProperty("true") : null,
             };
-            if (Configuration.AzureArm)
+            if (Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 builder.PackageId = Configuration.Namespace;
             }
@@ -257,7 +257,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private string GetBrandedTestCSProj()
         {
-            var writer = !Configuration.AzureArm ? new CSProjWriter()
+            var writer = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjWriter()
             {
                 TargetFrameworks = "$(RequiredTargetFrameworks)",
                 NoWarn = new("$(NoWarn);CS1591", "We don't care about XML doc comments on test types and members")
@@ -309,13 +309,13 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 ";
-            if (_isAzureSdk && !Configuration.AzureArm)
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
 EndProject
 ";
             }
-            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""{0}.Samples"", ""samples\{0}.Samples.csproj"", ""{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}""
 EndProject
@@ -345,7 +345,7 @@ EndProject
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
-            if (_isAzureSdk && !Configuration.AzureArm)
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -353,7 +353,7 @@ EndProject
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
             }
-            if (Configuration.AzureArm && Configuration.Namespace.StartsWith("Azure.ResourceManager"))
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{7A2DFF15-5746-49F4-BD0F-C6C35337088A}}.Debug|Any CPU.Build.0 = Debug|Any CPU
@@ -425,8 +425,7 @@ EndGlobal
         {
             if (!Directory.Exists(_samplesDirectory))
                 Directory.CreateDirectory(_samplesDirectory);
-            if (Configuration.Namespace.StartsWith("Azure.ResourceManager"))
-                await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
+            await File.WriteAllBytesAsync(Path.Combine(_samplesDirectory, $"{Configuration.Namespace}.Samples.csproj"), Encoding.ASCII.GetBytes(GetSamplesProject()));
         }
         private string GetClobFromEmbeddedResource(string assetName)
         {

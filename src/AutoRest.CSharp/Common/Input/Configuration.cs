@@ -353,6 +353,8 @@ namespace AutoRest.CSharp.Common.Input
         private static string? _absoluteProjectFolder;
         public static string AbsoluteProjectFolder => _absoluteProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
 
+        public static bool SkipMgmtScaffoldingInAutoRestcSharp => !(AzureArm && Namespace.StartsWith("Azure.ResourceManager"));
+
         public static void Initialize(IPluginCommunication autoRest, string defaultNamespace, string defaultLibraryName)
         {
             Initialize(
