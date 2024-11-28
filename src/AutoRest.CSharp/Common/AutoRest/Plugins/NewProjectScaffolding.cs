@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 TargetFrameworks = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjProperty("$(RequiredTargetFrameworks)") : null,
                 IncludeOperationsSharedSource = Configuration.SkipMgmtScaffoldingInAutoRestcSharp ? new CSProjProperty("true") : null,
             };
-            if (Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
+            if (!Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 builder.PackageId = Configuration.Namespace;
             }
