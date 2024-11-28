@@ -69,10 +69,12 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             return true;
         }
+
         private async Task WriteAssetJson()
         {
             await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetJson()));
         }
+
         private async Task WriteServiceDirectoryFiles()
         {
             //TODO handle existing ci where multiple projects are in the same service directory
@@ -118,42 +120,57 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
                 await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "CHANGELOG.md"), Encoding.ASCII.GetBytes(GetChangeLog()));
             }
         }
+
         private string GetAssetJson()
         {
             string content = GetClobFromEmbeddedResource("AssetJson.txt");
             string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
             return contentFormatted;
         }
+
         private string GetAssemblyInfo()
         {
-            string publicKey = GetClobFromEmbeddedResource("AssemblyInfo_publickey.txt");
-            string assemblyInfoContent = GetClobFromEmbeddedResource("AssemblyInfo_InfoContent.txt");
-            string azureResouceProviderContent = GetClobFromEmbeddedResource("AssemblyInfo_AzureResourceProvider.txt");
-            string azureResourceProvider = string.Format(azureResouceProviderContent, !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
+            const string publicKey = ", PublicKey = 0024000004800000940000000602000000240000525341310004000001000100d15ddcb29688295338af4b7686603fe614abd555e09efba8fb88ee09e1f7b1ccaeed2e8f823fa9eef3fdd60217fc012ea67d2479751a0b8c087a4185541b851bd8b16f8d91b840e51b1cb0ba6fe647997e57429265e85ef62d565db50a69ae1647d54d7bd855e4db3d8a91510e5bcbd0edfbbecaa20a7bd9ae74593daa7b11b4";
+            const string assemblyInfoContent = @"// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo(""{0}.Tests{1}"")]
+{2}";
+            string azureResourceProvider = string.Format(@"
+// Replace Microsoft.Test with the correct resource provider namepace for your service and uncomment.
+// See https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers
+// for the list of possible values.
+[assembly: Azure.Core.AzureResourceProviderNamespace(""{0}"")]
+", !Configuration.AzureArm ? "Microsoft.Template" : Configuration.Namespace.Split('.').Last());
             return string.Format(assemblyInfoContent, Configuration.Namespace, Configuration.IsBranded ? publicKey : string.Empty, _isAzureSdk ? azureResourceProvider : string.Empty);
         }
+
         private string GetChangeLog()
         {
             string changeLogContent = GetClobFromEmbeddedResource("CHANGELOG.md");
             return changeLogContent;
         }
+
         private string GetReadme()
         {
             string multipleApiVersionContent = GetClobFromEmbeddedResource("Readme_multipleApiVersionContent_DataPlane.md");
             string readmeContent = GetClobFromEmbeddedResource("Readme_readmeContent_DataPlane.md");
             return string.Format(readmeContent, Configuration.Namespace, _serviceDirectoryName, (Configuration.AzureArm || Configuration.Generation1ConvenienceClient) ? "" : multipleApiVersionContent);
         }
+
         private string GetCiYml()
         {
             string safeName = Configuration.Namespace.Replace(".", "");
             string ciYmlContent = GetClobFromEmbeddedResource("ci.yml");
             return string.Format(ciYmlContent, _serviceDirectoryName, Configuration.Namespace, safeName);
         }
+
         private string GetDirectoryBuildProps()
         {
             string directoryBuildPropsContent = GetClobFromEmbeddedResource("Directory.Build.props");
             return directoryBuildPropsContent;
         }
+
         private string GetBrandedSrcCSProj()
         {
             var builder = new CSProjWriter()
@@ -188,6 +205,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             return builder.Write();
         }
+
         private string GetUnbrandedSrcCSProj()
         {
             var builder = new CSProjWriter()
@@ -207,6 +225,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
             return builder.Write();
         }
+
         private string GetSrcCSProj() => Configuration.IsBranded ? GetBrandedSrcCSProj() : GetUnbrandedSrcCSProj();
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
@@ -214,6 +233,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             new("Azure.Core"),
             new("System.Text.Json")
         };
+
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("System.ClientModel", "1.1.0-beta.3"),
@@ -228,12 +248,14 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             new("Microsoft.NET.Test.Sdk"),
             new("Moq")
         };
+
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedTestDependencyPackagesMgmt = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("Azure.Identity"),
             new("NUnit"),
             new("NUnit3TestAdapter"),
         };
+
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
         {
             new("NUnit", "3.13.2"),
