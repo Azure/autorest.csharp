@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteAssetJson()
         {
-            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetJson()));
+            await File.WriteAllBytesAsync(Path.Combine(_projectDirectory, "assets.json"), Encoding.ASCII.GetBytes(GetAssetsJson()));
         }
 
         private async Task WriteServiceDirectoryFiles()
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             }
         }
 
-        private string GetAssetJson()
+        private string GetAssetsJson()
         {
             string content = GetClobFromEmbeddedResource("AssetJson.txt");
             string contentFormatted = string.Format(content, Configuration.Namespace.Split('.').Last().ToLower(), Configuration.Namespace);
