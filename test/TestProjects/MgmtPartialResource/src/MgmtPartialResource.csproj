@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Azure Resource Manager client SDK for Azure resource provider MgmtPartialResource.</Description>
+    <Description>This is the MgmtPartialResource client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation MgmtPartialResource for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>azure;management;arm;resource manager;mgmtpartialresource</PackageTags>
-    <PackageId>MgmtPartialResource</PackageId>
+    <PackageTags>MgmtPartialResource</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 </Project>

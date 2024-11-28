@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Azure Resource Manager client SDK for Azure resource provider MgmtLRO.</Description>
+    <Description>This is the MgmtLRO client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation MgmtLRO for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>azure;management;arm;resource manager;mgmtlro</PackageTags>
-    <PackageId>MgmtLRO</PackageId>
+    <PackageTags>MgmtLRO</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 </Project>

@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Azure Resource Manager client SDK for Azure resource provider MgmtParent.</Description>
+    <Description>This is the MgmtParent client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation MgmtParent for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>azure;management;arm;resource manager;mgmtparent</PackageTags>
-    <PackageId>MgmtParent</PackageId>
+    <PackageTags>MgmtParent</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 </Project>

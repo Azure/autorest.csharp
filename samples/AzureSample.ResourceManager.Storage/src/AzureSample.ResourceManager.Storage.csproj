@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Azure Resource Manager client SDK for Azure resource provider Storage.</Description>
+    <Description>This is the AzureSample.ResourceManager.Storage client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation AzureSample.ResourceManager.Storage for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>azure;management;arm;resource manager;storage</PackageTags>
-    <PackageId>AzureSample.ResourceManager.Storage</PackageId>
+    <PackageTags>AzureSample.ResourceManager.Storage</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 </Project>

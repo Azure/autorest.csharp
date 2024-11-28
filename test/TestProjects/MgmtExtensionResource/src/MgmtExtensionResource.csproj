@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Azure Resource Manager client SDK for Azure resource provider MgmtExtensionResource.</Description>
+    <Description>This is the MgmtExtensionResource client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation MgmtExtensionResource for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>azure;management;arm;resource manager;mgmtextensionresource</PackageTags>
-    <PackageId>MgmtExtensionResource</PackageId>
+    <PackageTags>MgmtExtensionResource</PackageTags>
+    <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
+    <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>
 </Project>
