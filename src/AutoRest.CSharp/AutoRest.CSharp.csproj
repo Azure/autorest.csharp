@@ -52,9 +52,6 @@
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
     <Compile Remove="Assets\TestBase_Mgmt.cs" />
     <Compile Remove="Assets\TestEnvironment_Mgmt.cs" />
-    <None Remove="Assets\AssemblyInfo_AzureResourceProvider.txt" />
-    <None Remove="Assets\AssemblyInfo_InfoContent.txt" />
-    <None Remove="Assets\AssemblyInfo_publickey.txt" />
     <None Remove="Assets\AssetJson.txt" />
     <None Remove="Assets\CHANGELOG.md" />
     <None Remove="Assets\ci.yml" />
@@ -62,15 +59,6 @@
     <None Remove="Assets\Readme_Mgmt.md" />
     <None Remove="Assets\Readme_multipleApiVersionContent_DataPlane.md" />
     <None Remove="Assets\Readme_readmeContent_DataPlane.md" />
-    <EmbeddedResource Include="Assets\AssemblyInfo_AzureResourceProvider.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\AssemblyInfo_InfoContent.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\AssemblyInfo_publickey.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Assets\AssetJson.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
