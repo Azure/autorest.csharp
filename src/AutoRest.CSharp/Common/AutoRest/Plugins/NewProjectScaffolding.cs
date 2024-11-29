@@ -309,7 +309,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 ";
-            if (_isAzureSdk && !Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
+            if (_isAzureSdk && Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"Project(""{{9A19103F-16F7-4668-BE54-9A1E7A4F7556}}"") = ""Azure.Core.TestFramework"", ""..\..\core\Azure.Core.TestFramework\src\Azure.Core.TestFramework.csproj"", ""{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}""
 EndProject
@@ -345,7 +345,7 @@ EndProject
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{{8E9A77AC-792A-4432-8320-ACFD46730401}}.Release|Any CPU.Build.0 = Release|Any CPU
 ";
-            if (_isAzureSdk && !Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
+            if (_isAzureSdk && Configuration.SkipMgmtScaffoldingInAutoRestcSharp)
             {
                 slnContent += @"		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{{ECC730C1-4AEA-420C-916A-66B19B79E4DC}}.Debug|Any CPU.Build.0 = Debug|Any CPU
