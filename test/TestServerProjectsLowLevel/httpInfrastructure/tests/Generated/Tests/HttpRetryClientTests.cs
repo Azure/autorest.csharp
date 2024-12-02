@@ -11,7 +11,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using httpInfrastructure_LowLevel;
 
 namespace httpInfrastructure_LowLevel.Tests
 {

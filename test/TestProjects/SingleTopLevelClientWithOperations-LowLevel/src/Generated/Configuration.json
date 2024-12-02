@@ -10,6 +10,5 @@
   "skip-csproj-packagereference": true,
   "single-top-level-client": true,
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "SingleTopLevelClientWithOperations_LowLevel"
 }

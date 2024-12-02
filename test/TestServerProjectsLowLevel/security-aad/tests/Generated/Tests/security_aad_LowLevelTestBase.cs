@@ -8,7 +8,6 @@
 using System;
 using Azure.Core;
 using Azure.Core.TestFramework;
-using security_aad_LowLevel;
 
 namespace security_aad_LowLevel.Tests
 {

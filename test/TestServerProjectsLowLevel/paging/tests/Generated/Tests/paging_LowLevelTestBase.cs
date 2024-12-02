@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using paging_LowLevel;
 
 namespace paging_LowLevel.Tests
 {

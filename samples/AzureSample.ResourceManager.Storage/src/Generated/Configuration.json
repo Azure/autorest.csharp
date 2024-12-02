@@ -41,6 +41,5 @@
     "DeletedAccounts_List": "GetAll"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "AzureSample.ResourceManager.Storage"
 }

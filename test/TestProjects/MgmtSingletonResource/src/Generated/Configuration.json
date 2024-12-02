@@ -14,6 +14,5 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}/brakes/{default}": "brakes/default"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtSingletonResource"
 }

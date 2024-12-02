@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using url_LowLevel;
 
 namespace url_LowLevel.Tests
 {

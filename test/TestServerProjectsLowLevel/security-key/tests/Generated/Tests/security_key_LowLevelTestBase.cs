@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using security_key_LowLevel;
 
 namespace security_key_LowLevel.Tests
 {

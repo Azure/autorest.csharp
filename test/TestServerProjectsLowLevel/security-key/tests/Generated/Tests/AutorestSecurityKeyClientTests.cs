@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using security_key_LowLevel;
 
 namespace security_key_LowLevel.Tests
 {

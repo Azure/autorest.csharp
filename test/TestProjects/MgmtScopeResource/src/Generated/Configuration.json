@@ -62,6 +62,5 @@
     }
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtScopeResource"
 }

@@ -469,7 +469,7 @@ namespace AutoRest.CSharp.Common.Input
                 case Options.GenerateSampleProject:
                     return true;
                 case Options.GenerateTestProject:
-                    return false;
+                    return true;
                 case Options.UseModelReaderWriter:
                     return false;
                 case Options.EnableBicepSerialization:

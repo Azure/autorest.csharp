@@ -21,6 +21,5 @@
     "ListOrderAtResourceGroupLevel": "GetAll"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtCollectionParent"
 }

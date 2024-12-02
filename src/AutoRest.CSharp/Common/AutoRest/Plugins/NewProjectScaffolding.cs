@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
 
         private async Task WriteTestFiles()
         {
-            if (!Configuration.GenerateTestProject && !Configuration.GenerateSampleProject)
+            if (!Configuration.GenerateTestProject)
                 return;
 
             if (_isAzureSdk)
@@ -446,7 +446,7 @@ EndProject
             slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}"", ""src\{0}.csproj"", ""{{28FF4005-4467-4E36-92E7-DEA27DEB1519}}""
 EndProject
 ";
-            if (Configuration.GenerateTestProject || Configuration.GenerateSampleProject)
+            if (Configuration.GenerateTestProject)
             {
                 slnContent += @"Project(""{{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}}"") = ""{0}.Tests"", ""tests\{0}.Tests.csproj"", ""{{1F1CD1D4-9932-4B73-99D8-C252A67D4B46}}""
 EndProject

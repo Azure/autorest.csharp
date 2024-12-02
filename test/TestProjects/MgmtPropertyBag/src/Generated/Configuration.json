@@ -14,6 +14,5 @@
     "Foos_Reconnect": "FooReconnectTestOptions"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtPropertyBag"
 }

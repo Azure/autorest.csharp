@@ -10,6 +10,5 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtConstants"
 }
