@@ -57,6 +57,5 @@
     "output-folder": "..\\..\\tests\\Generated"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtMockAndSample"
 }

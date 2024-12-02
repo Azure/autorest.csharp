@@ -14,6 +14,5 @@
     "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": "BuiltInPolicyDefinition"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtExtensionResource"
 }

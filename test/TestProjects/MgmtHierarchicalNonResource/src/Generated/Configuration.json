@@ -18,6 +18,5 @@
     "VCPUs": "VCpus"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtHierarchicalNonResource"
 }

@@ -13,6 +13,5 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}"
   ],
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtParent"
 }

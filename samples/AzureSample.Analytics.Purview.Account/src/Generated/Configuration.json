@@ -9,6 +9,5 @@
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "AzureSample.Analytics.Purview.Account"
 }

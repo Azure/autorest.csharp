@@ -7,7 +7,6 @@
 
 using Azure;
 using Azure.Core.TestFramework;
-using custom_baseUrl_more_options_LowLevel;
 
 namespace custom_baseUrl_more_options_LowLevel.Tests
 {

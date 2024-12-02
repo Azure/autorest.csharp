@@ -7,7 +7,6 @@
 
 using Azure;
 using Azure.Core.TestFramework;
-using custom_baseUrl_paging_LowLevel;
 
 namespace custom_baseUrl_paging_LowLevel.Tests
 {

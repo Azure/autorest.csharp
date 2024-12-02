@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using media_types_LowLevel;
 
 namespace media_types_LowLevel.Tests
 {

@@ -21,6 +21,5 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": "VirtualMachine"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtPartialResource"
 }

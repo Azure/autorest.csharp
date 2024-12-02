@@ -30,6 +30,5 @@
     "RecordSets_ListAllByDnsZone": "GetAllRecordSets"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtExpandResourceTypes"
 }

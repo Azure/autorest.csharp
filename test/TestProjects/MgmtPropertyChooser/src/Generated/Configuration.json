@@ -25,6 +25,5 @@
     "P2S": "P2S|p2s"
   },
   "flavor": "azure",
-  "generate-test-project": true,
   "helper-namespace": "MgmtPropertyChooser"
 }

@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
 using NUnit.Framework;
-using custom_baseUrl_LowLevel;
 
 namespace custom_baseUrl_LowLevel.Tests
 {

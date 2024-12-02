@@ -8,7 +8,6 @@
 using System;
 using Azure;
 using Azure.Core.TestFramework;
-using dpg_initial_LowLevel;
 
 namespace dpg_initial_LowLevel.Tests
 {
