@@ -88,10 +88,6 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             if (!Configuration.GenerateTestProject && !Configuration.GenerateSampleProject)
                 return;
 
-            if (_isAzureSdk)
-            {
-                Directory.CreateDirectory(Path.Combine(_testDirectory, "Scenario"));
-            }
             if (!Directory.Exists(_testDirectory))
                 Directory.CreateDirectory(_testDirectory);
 
