@@ -43,9 +43,9 @@ namespace MgmtTypeSpec.Samples
 
             // invoke the operation
             string fooName = "myFoo";
-            FooData data = new FooData(new AzureLocation("placeholder"))
+            FooData data = new FooData(default)
             {
-                Properties = new FooProperties()
+                Properties = new FooProperties
                 {
                     ServiceUri = new Uri("https://myService.com"),
                     Something = "for test only",

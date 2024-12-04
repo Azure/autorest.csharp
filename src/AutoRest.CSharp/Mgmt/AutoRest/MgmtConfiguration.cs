@@ -350,6 +350,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(PrivilegedOperations), PrivilegedOperations);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
             WriteNonEmptySettings(writer, nameof(PartialResources), PartialResources);
+            WriteNonEmptySettings(writer, nameof(RawParameterizedScopes), RawParameterizedScopes);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);

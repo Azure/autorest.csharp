@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 using MgmtMockAndSample.Models;
 using NUnit.Framework;
 
@@ -30,9 +31,7 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this TenantResource created on azure
-            // for more information of creating TenantResource, please refer to the document of TenantResource
-            var tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+            TenantResource tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
 
             // invoke the operation and iterate over the result
             await foreach (EventData item in tenantResource.GetTenantActivityLogsAsync())
@@ -55,48 +54,52 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this TenantResource created on azure
-            // for more information of creating TenantResource, please refer to the document of TenantResource
-            var tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+            TenantResource tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
 
             // invoke the operation
-            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template: BinaryData.FromObjectAsJson(new Dictionary<string, object>()
+            BinaryData template = BinaryData.FromObjectAsJson(new Dictionary<string, object>
             {
                 ["$schema"] = "http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview",
                 ["contentVersion"] = "1.0.0.0",
-                ["outputs"] = new Dictionary<string, object>()
+                ["outputs"] = new Dictionary<string, object>
                 {
-                    ["string"] = new Dictionary<string, object>()
+                    ["string"] = new
                     {
-                        ["type"] = "string",
-                        ["value"] = "myvalue"
+                        type = "string",
+                        value = "myvalue",
                     }
                 },
-                ["parameters"] = new Dictionary<string, object>()
+                ["parameters"] = new Dictionary<string, object>
                 {
-                    ["string"] = new Dictionary<string, object>()
+                    ["string"] = new
                     {
-                        ["type"] = "string"
+                        type = "string",
                     }
                 },
-                ["resources"] = new object[] { },
-                ["variables"] = new Dictionary<string, object>()
+                ["resources"] = Array.Empty<object>(),
+                ["variables"] = new Dictionary<string, object>
                 {
-                    ["array"] = new object[] { "1", "2", "3", "4" },
+                    ["array"] = new object[]
+            {
+"1",
+"2",
+"3",
+"4"
+            },
                     ["bool"] = "true",
                     ["int"] = "42",
-                    ["object"] = new Dictionary<string, object>()
+                    ["object"] = new Dictionary<string, object>
                     {
-                        ["object"] = new Dictionary<string, object>()
+                        ["object"] = new
                         {
-                            ["location"] = "West US",
-                            ["vmSize"] = "Large"
+                            location = "West US",
+                            vmSize = "Large",
                         }
                     },
                     ["string"] = "string"
                 }
-            }))
-            { };
+            });
+            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template);
             TemplateHashResult result = await tenantResource.CalculateTemplateHashDeploymentAsync(options);
 
             Console.WriteLine($"Succeeded: {result}");
@@ -114,48 +117,52 @@ namespace MgmtMockAndSample.Samples
             // authenticate your client
             ArmClient client = new ArmClient(cred);
 
-            // this example assumes you already have this TenantResource created on azure
-            // for more information of creating TenantResource, please refer to the document of TenantResource
-            var tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
+            TenantResource tenantResource = client.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;
 
             // invoke the operation
-            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template: BinaryData.FromObjectAsJson(new Dictionary<string, object>()
+            BinaryData template = BinaryData.FromObjectAsJson(new Dictionary<string, object>
             {
                 ["$schema"] = "http://schemas.management.azure.com/deploymentTemplate?api-version=2014-04-01-preview",
                 ["contentVersion"] = "1.0.0.0",
-                ["outputs"] = new Dictionary<string, object>()
+                ["outputs"] = new Dictionary<string, object>
                 {
-                    ["string"] = new Dictionary<string, object>()
+                    ["string"] = new
                     {
-                        ["type"] = "string",
-                        ["value"] = "myvalue"
+                        type = "string",
+                        value = "myvalue",
                     }
                 },
-                ["parameters"] = new Dictionary<string, object>()
+                ["parameters"] = new Dictionary<string, object>
                 {
-                    ["string"] = new Dictionary<string, object>()
+                    ["string"] = new
                     {
-                        ["type"] = "string"
+                        type = "string",
                     }
                 },
-                ["resources"] = new object[] { },
-                ["variables"] = new Dictionary<string, object>()
+                ["resources"] = Array.Empty<object>(),
+                ["variables"] = new Dictionary<string, object>
                 {
-                    ["array"] = new object[] { "1", "2", "3", "4" },
+                    ["array"] = new object[]
+            {
+"1",
+"2",
+"3",
+"4"
+            },
                     ["bool"] = "true",
                     ["int"] = "42",
-                    ["object"] = new Dictionary<string, object>()
+                    ["object"] = new Dictionary<string, object>
                     {
-                        ["object"] = new Dictionary<string, object>()
+                        ["object"] = new
                         {
-                            ["location"] = "West US",
-                            ["vmSize"] = "Large"
+                            location = "West US",
+                            vmSize = "Large",
                         }
                     },
                     ["string"] = "string"
                 }
-            }))
-            { Q1 = "first", Q2 = 42, Q3 = 0L, Q4 = (float)3.14, Q5 = 3.14159265358, Q6 = true };
+            });
+            TenantResourceCalculateTemplateHashDeploymentOptions options = new TenantResourceCalculateTemplateHashDeploymentOptions(template) { Q1 = "first", Q2 = 42, Q3 = 0L, Q4 = (float)3.14, Q5 = 3.14159265358, Q6 = true };
             TemplateHashResult result = await tenantResource.CalculateTemplateHashDeploymentAsync(options);
 
             Console.WriteLine($"Succeeded: {result}");
