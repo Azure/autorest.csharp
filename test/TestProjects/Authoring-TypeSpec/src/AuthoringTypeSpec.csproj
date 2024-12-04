@@ -6,7 +6,6 @@
     <PackageTags>AuthoringTypeSpec</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
-    <PackageId>AuthoringTypeSpec</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

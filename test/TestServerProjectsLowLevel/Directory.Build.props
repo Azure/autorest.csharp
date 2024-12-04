@@ -2,6 +2,7 @@
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))  and !$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationSampleProject Condition="$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSampleProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationTestProject)' == 'true'">net7.0;net6.0;net462</RequiredTargetFrameworks>

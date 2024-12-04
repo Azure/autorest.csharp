@@ -2,6 +2,7 @@
   <PropertyGroup>
     <!--Needed for inclusion in the autorest.csharp.sln-->
     <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))  and !$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationSampleProject Condition="$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSampleProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
     <IsNoDocProject Condition="$(MSBuildProjectName.Contains('NoDocs'))">true</IsNoDocProject>
     <IsUnbranded>true</IsUnbranded>
