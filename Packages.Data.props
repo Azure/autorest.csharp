@@ -28,6 +28,7 @@
   <!-- Library only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
+    
       <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
     <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20240813.2" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="All" />
