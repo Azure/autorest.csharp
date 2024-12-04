@@ -244,9 +244,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
         };
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _brandedSampleDependencyPackagesMgmt = new CSProjWriter.CSProjDependencyPackage[]
 {
-            new("Azure.Identity","1.11.4"),
-            new("NUnit","3.13.2"),
-            new("NUnit3TestAdapter","4.4.2"),
+            new("Azure.Identity"),
+            new("NUnit"),
+            new("NUnit3TestAdapter"),
 };
 
         private static readonly IReadOnlyList<CSProjWriter.CSProjDependencyPackage> _unbrandedTestDependencyPackages = new CSProjWriter.CSProjDependencyPackage[]
