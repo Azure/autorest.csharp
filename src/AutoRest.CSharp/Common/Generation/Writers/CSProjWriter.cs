@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -57,6 +58,8 @@ internal class CSProjWriter
     public IList<CSProjDependencyPackage> PrivatePackageReferences { get; }
 
     public IList<CSProjCompileInclude> CompileIncludes { get; }
+
+    public CSProjProperty? PackageId { get; set; }
 
     public string Write()
     {

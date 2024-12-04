@@ -1,0 +1,35 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+
+trigger:
+  branches:
+    include:
+    - main
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/{0}
+    - sdk/{0}/ci.yml
+    - sdk/{0}/{1}
+
+pr:
+  branches:
+    include:
+    - main
+    - feature/*
+    - hotfix/*
+    - release/*
+  paths:
+    include:
+    - sdk/{0}
+    - sdk/{0}/ci.yml
+    - sdk/{0}/{1}
+
+extends:
+  template: /eng/pipelines/templates/stages/archetype-sdk-client.yml
+  parameters:
+    ServiceDirectory: {0}
+    ArtifactName: packages
+    Artifacts:
+    - name: {1}
+      safeName: {2}
