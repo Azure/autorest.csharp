@@ -5,7 +5,7 @@
 
   <!-- Placeholders to mimic Directory.Build.Common.props from azure-sdk-for-net for new project tests-->
   <PropertyGroup>
-    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests')) and !$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSrcProject>
     <IsMgmtLibrary Condition="$(MSBuildProjectName.StartsWith('_Azure.ResourceManager'))">true</IsMgmtLibrary>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>

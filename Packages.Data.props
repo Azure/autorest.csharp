@@ -14,6 +14,11 @@
     <Compile Include="$(FakeAzureCoreTestFrameworkSources)/TestEnvironment.cs" LinkBase="Shared/TestFramework" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(IsMgmtLibrary)' == 'true' and '$(IsTestGenerationTestProject)' == 'true'">
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/ManagementRecordedTestBase.cs" LinkBase="Shared/TestFramework" />
+    <Compile Include="$(FakeAzureCoreTestFrameworkSources)/Recording.cs" LinkBase="Shared/TestFramework" />
+  </ItemGroup>
+  
   <ItemGroup Condition="$(MSBuildProjectName.EndsWith('.Tests'))">
     <PackageReference Update="Azure.Identity" Version="1.11.4" />
     <PackageReference Update="NUnit3TestAdapter" Version="4.4.2" />
@@ -23,11 +28,11 @@
   <!-- Library only dependencies. -->
   <ItemGroup Condition="'$(IsTestGenerationSrcProject)' == 'true'">
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
-  
-    <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
+      <!-- Include analyzers so that we see issues in this repo before we do a regen preview-->
     <PackageReference Update="Azure.ClientSdk.Analyzers" Version="0.1.1-dev.20240813.2" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.2" PrivateAssets="All" />
+
   </ItemGroup>
 
   <!-- All csproj dependencies. -->

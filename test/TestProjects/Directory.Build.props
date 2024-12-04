@@ -1,11 +1,11 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
   <!-- Placeholders to mimic Directory.Build.Common.props from azure-sdk-for-net for new project tests-->
   <PropertyGroup>
-    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests')) and !$(MSBuildProjectName.EndsWith('.Samples'))">true</IsTestGenerationSrcProject>
     <IsTestGenerationTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProject>
     <IsMgmtLibrary Condition="$(MSBuildProjectName.StartsWith('Mgmt'))">true</IsMgmtLibrary>
     <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>

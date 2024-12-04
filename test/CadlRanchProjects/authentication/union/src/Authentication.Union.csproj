@@ -6,6 +6,7 @@
     <PackageTags>Authentication.Union</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
+    <PackageId>Authentication.Union</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
