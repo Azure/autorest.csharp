@@ -894,7 +894,7 @@
    ],
    "isFixed": true,
    "isFlags": false,
-   "usage": "Output,Json",
+   "usage": "Json,Exception",
    "decorators": []
   },
   {
@@ -1017,7 +1017,7 @@
           "kind": "model",
           "name": "ErrorResponse",
           "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
-          "usage": "Output,Error,Json",
+          "usage": "Output,Error,Json,Exception",
           "description": "ErrorResponse contains code and message that shows the error information.",
           "decorators": [],
           "properties": [
@@ -2959,7 +2959,7 @@
    "kind": "model",
    "name": "AnomalyDetectorError",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
-   "usage": "Output,Error,Json",
+   "usage": "Error,Json,Exception",
    "description": "Error information returned by the API.",
    "decorators": [],
    "properties": [

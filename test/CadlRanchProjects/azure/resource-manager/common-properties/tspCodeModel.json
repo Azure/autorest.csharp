@@ -777,7 +777,7 @@
    "kind": "model",
    "name": "ErrorResponse",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
-   "usage": "Output,Error,Json",
+   "usage": "Error,Json,Exception",
    "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [
@@ -792,7 +792,7 @@
       "kind": "model",
       "name": "ErrorDetail",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
-      "usage": "Output,Json",
+      "usage": "Json,Exception",
       "description": "The error detail.",
       "decorators": [],
       "properties": [
@@ -894,7 +894,7 @@
           "kind": "model",
           "name": "ErrorAdditionalInfo",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
-          "usage": "Output,Json",
+          "usage": "Json,Exception",
           "description": "The resource management error additional info.",
           "decorators": [],
           "properties": [
@@ -929,7 +929,7 @@
              "kind": "model",
              "name": "ErrorAdditionalInfoInfo",
              "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo.info.anonymous",
-             "usage": "Output,Json",
+             "usage": "Json,Exception",
              "decorators": [],
              "properties": []
             },
