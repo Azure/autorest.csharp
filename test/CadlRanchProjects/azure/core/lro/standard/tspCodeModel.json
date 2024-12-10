@@ -313,7 +313,7 @@
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
-      "usage": "Output,Json",
+      "usage": "Output,Json,Exception",
       "description": "The error object.",
       "decorators": [],
       "properties": [
@@ -411,7 +411,7 @@
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
-         "usage": "Output,Json",
+         "usage": "Output,Json,Exception",
          "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
