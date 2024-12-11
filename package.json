@@ -13,7 +13,7 @@
     },
   "devDependencies": {
     "@azure-tools/cadl-ranch-specs": "0.39.2",
-    "@azure-tools/typespec-client-generator-core": "0.48.1",
+    "@azure-tools/typespec-client-generator-core": "0.48.4",
     "@azure-tools/typespec-azure-resource-manager": "0.48.0",
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/unbranded-tests": "file:test/UnbrandedProjects",
