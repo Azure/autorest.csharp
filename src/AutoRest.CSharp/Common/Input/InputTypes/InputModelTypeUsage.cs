@@ -17,5 +17,6 @@ internal enum InputModelTypeUsage
     Spread = 1 << 6,
     Error = 1 << 7,
     Json = 1 << 8,
-    Xml = 1 << 9
+    Xml = 1 << 9,
+    Exception = 1 << 10,
 }
