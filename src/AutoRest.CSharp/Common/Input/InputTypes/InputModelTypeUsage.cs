@@ -19,4 +19,7 @@ internal enum InputModelTypeUsage
     Json = 1 << 8,
     Xml = 1 << 9,
     Exception = 1 << 10,
+    LroInitial = 1 << 11,
+    LroPolling = 1 << 12,
+    LroFinalEnvelope = 1 << 13,
 }
