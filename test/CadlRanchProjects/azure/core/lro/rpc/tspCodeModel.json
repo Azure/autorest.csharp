@@ -150,7 +150,7 @@
    "description": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
-   "usage": "Output,Json",
+   "usage": "Json,LroInitial,LroPolling,LroFinalEnvelope",
    "decorators": []
   }
  ],
@@ -191,7 +191,7 @@
    "kind": "model",
    "name": "GenerationResult",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult",
-   "usage": "Output,Json",
+   "usage": "Output,Json,LroInitial,LroPolling,LroFinalEnvelope",
    "description": "Result of the generation.",
    "decorators": [],
    "properties": [
@@ -222,7 +222,7 @@
    "kind": "model",
    "name": "ResourceOperationStatusGenerationResponseGenerationResultError",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
-   "usage": "Output,Json",
+   "usage": "Json,LroInitial",
    "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
@@ -273,7 +273,7 @@
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
-      "usage": "Output,Json,Exception",
+      "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
       "description": "The error object.",
       "decorators": [],
       "properties": [
@@ -371,7 +371,7 @@
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
-         "usage": "Output,Json,Exception",
+         "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
          "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
@@ -458,7 +458,7 @@
    "kind": "model",
    "name": "OperationStatusGenerationResultError",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
-   "usage": "Output",
+   "usage": "LroPolling,LroFinalEnvelope",
    "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
