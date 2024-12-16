@@ -44,7 +44,7 @@ namespace AnomalyDetector
         /// Supported Cognitive Services endpoints (protocol and hostname, for example:
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
-        /// <param name="apiVersion"> Api Version. </param>
+        /// <param name="apiVersion"> Api Version. Allowed values: "v1.1". </param>
         internal Univariate(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
