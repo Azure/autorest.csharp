@@ -42,14 +42,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
-        /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
-        /// <param name="input">
-        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
-        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
-        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
-        /// for counting tokens.
-        /// </param>
+        /// <param name="model"></param>
+        /// <param name="input"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input)
         {
@@ -60,14 +54,8 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
-        /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
-        /// <param name="input">
-        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
-        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
-        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
-        /// for counting tokens.
-        /// </param>
+        /// <param name="model"></param>
+        /// <param name="input"></param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateEmbeddingRequest(CreateEmbeddingRequestModel model, BinaryData input, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -83,14 +71,10 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </summary>
+        /// <summary> Gets the model. </summary>
         public CreateEmbeddingRequestModel Model { get; }
         /// <summary>
-        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
-        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
-        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
-        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
-        /// for counting tokens.
+        /// Gets the input
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

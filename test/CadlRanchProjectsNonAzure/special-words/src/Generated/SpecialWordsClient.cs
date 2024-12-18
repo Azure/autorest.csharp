@@ -9,46 +9,7 @@ using System.Threading;
 namespace Scm.SpecialWords
 {
     // Data plane generated client.
-    /// <summary>
-    /// Scenarios to verify that reserved words can be used in service and generators will handle it appropriately.
-    ///
-    /// Current list of special words
-    /// ```txt
-    /// and
-    /// as
-    /// assert
-    /// async
-    /// await
-    /// break
-    /// class
-    /// constructor
-    /// continue
-    /// def
-    /// del
-    /// elif
-    /// else
-    /// except
-    /// exec
-    /// finally
-    /// for
-    /// from
-    /// global
-    /// if
-    /// import
-    /// in
-    /// is
-    /// lambda
-    /// not
-    /// or
-    /// pass
-    /// raise
-    /// return
-    /// try
-    /// while
-    /// with
-    /// yield
-    /// ```
-    /// </summary>
+    /// <summary> The SpecialWords service client. </summary>
     public partial class SpecialWordsClient
     {
         private readonly ClientPipeline _pipeline;
@@ -63,7 +24,7 @@ namespace Scm.SpecialWords
         }
 
         /// <summary> Initializes a new instance of SpecialWordsClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpecialWordsClient(Uri endpoint, SpecialWordsClientOptions options)

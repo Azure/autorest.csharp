@@ -4,7 +4,7 @@
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> Simple enum. </summary>
+    /// <summary> The StringFixedEnum. </summary>
     public enum StringFixedEnum
     {
         /// <summary> 1. </summary>

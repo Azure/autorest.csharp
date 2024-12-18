@@ -46,8 +46,8 @@ namespace _Type.Union.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="StringAndArrayCases"/>. </summary>
-        /// <param name="string"> This should be receive/send the string variant. </param>
-        /// <param name="array"> This should be receive/send the array variant. </param>
+        /// <param name="string"></param>
+        /// <param name="array"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="string"/> or <paramref name="array"/> is null. </exception>
         public StringAndArrayCases(BinaryData @string, BinaryData array)
         {
@@ -59,8 +59,8 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="StringAndArrayCases"/>. </summary>
-        /// <param name="string"> This should be receive/send the string variant. </param>
-        /// <param name="array"> This should be receive/send the array variant. </param>
+        /// <param name="string"></param>
+        /// <param name="array"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal StringAndArrayCases(BinaryData @string, BinaryData array, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -75,7 +75,7 @@ namespace _Type.Union.Models
         }
 
         /// <summary>
-        /// This should be receive/send the string variant
+        /// Gets or sets the string
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -117,7 +117,7 @@ namespace _Type.Union.Models
         /// </summary>
         public BinaryData String { get; set; }
         /// <summary>
-        /// This should be receive/send the array variant
+        /// Gets or sets the array
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

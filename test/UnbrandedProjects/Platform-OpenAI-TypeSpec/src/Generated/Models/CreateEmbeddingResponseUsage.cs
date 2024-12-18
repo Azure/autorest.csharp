@@ -42,8 +42,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingResponseUsage"/>. </summary>
-        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
-        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
+        /// <param name="promptTokens"></param>
+        /// <param name="totalTokens"></param>
         internal CreateEmbeddingResponseUsage(long promptTokens, long totalTokens)
         {
             PromptTokens = promptTokens;
@@ -51,8 +51,8 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEmbeddingResponseUsage"/>. </summary>
-        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
-        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
+        /// <param name="promptTokens"></param>
+        /// <param name="totalTokens"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateEmbeddingResponseUsage(long promptTokens, long totalTokens, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,9 +66,9 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The number of tokens used by the prompt. </summary>
+        /// <summary> Gets the prompt tokens. </summary>
         public long PromptTokens { get; }
-        /// <summary> The total number of tokens used by the request. </summary>
+        /// <summary> Gets the total tokens. </summary>
         public long TotalTokens { get; }
     }
 }

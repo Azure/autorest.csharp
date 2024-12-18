@@ -38,13 +38,13 @@
   {
    "$id": "5",
    "Name": "ApiKeyClient",
-   "Doc": "Illustrates clients generated with ApiKey authentication.",
+   "Description": "Illustrates clients generated with ApiKey authentication.",
    "Operations": [
     {
      "$id": "6",
      "Name": "valid",
      "ResourceName": "ApiKey",
-     "Doc": "Check whether client is authenticated",
+     "Description": "Check whether client is authenticated",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
@@ -72,7 +72,7 @@
      "$id": "8",
      "Name": "invalid",
      "ResourceName": "ApiKey",
-     "Doc": "Check whether client is authenticated.",
+     "Description": "Check whether client is authenticated.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -133,7 +133,7 @@
      "$id": "14",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "15",
       "kind": "url",

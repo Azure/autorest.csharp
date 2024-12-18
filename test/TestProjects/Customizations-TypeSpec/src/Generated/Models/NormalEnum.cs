@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> A normal enum. </summary>
+    /// <summary> The NormalEnum. </summary>
     public readonly partial struct NormalEnum : IEquatable<NormalEnum>
     {
         private readonly string _value;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    /// <summary> The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances. </summary>
+    /// <summary> The Eagle. </summary>
     public partial class Eagle : Bird
     {
         /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>

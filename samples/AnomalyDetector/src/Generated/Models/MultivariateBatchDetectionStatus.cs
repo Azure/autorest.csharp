@@ -7,7 +7,7 @@
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The batch detection status. </summary>
+    /// <summary> The MultivariateBatchDetectionStatus. </summary>
     public enum MultivariateBatchDetectionStatus
     {
         /// <summary> CREATED. </summary>

@@ -43,11 +43,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
-        /// <param name="file">
-        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
-        /// mpeg, mpga, m4a, ogg, wav, or webm.
-        /// </param>
-        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
+        /// <param name="file"></param>
+        /// <param name="model"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public CreateTranslationRequest(Stream file, CreateTranslationRequestModel model)
         {
@@ -58,25 +55,11 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranslationRequest"/>. </summary>
-        /// <param name="file">
-        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
-        /// mpeg, mpga, m4a, ogg, wav, or webm.
-        /// </param>
-        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
-        /// <param name="prompt">
-        /// An optional text to guide the model's style or continue a previous audio segment. The
-        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-        /// </param>
-        /// <param name="responseFormat">
-        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
-        /// vtt.
-        /// </param>
-        /// <param name="temperature">
-        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
-        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
-        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
-        /// automatically increase the temperature until certain thresholds are hit.
-        /// </param>
+        /// <param name="file"></param>
+        /// <param name="model"></param>
+        /// <param name="prompt"></param>
+        /// <param name="responseFormat"></param>
+        /// <param name="temperature"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateTranslationRequest(Stream file, CreateTranslationRequestModel model, string prompt, CreateTranslationRequestResponseFormat? responseFormat, double? temperature, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -93,29 +76,15 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary>
-        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
-        /// mpeg, mpga, m4a, ogg, wav, or webm.
-        /// </summary>
+        /// <summary> Gets the file. </summary>
         public Stream File { get; }
-        /// <summary> ID of the model to use. Only `whisper-1` is currently available. </summary>
+        /// <summary> Gets the model. </summary>
         public CreateTranslationRequestModel Model { get; }
-        /// <summary>
-        /// An optional text to guide the model's style or continue a previous audio segment. The
-        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
-        /// </summary>
+        /// <summary> Gets or sets the prompt. </summary>
         public string Prompt { get; set; }
-        /// <summary>
-        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
-        /// vtt.
-        /// </summary>
+        /// <summary> Gets or sets the response format. </summary>
         public CreateTranslationRequestResponseFormat? ResponseFormat { get; set; }
-        /// <summary>
-        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
-        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
-        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
-        /// automatically increase the temperature until certain thresholds are hit.
-        /// </summary>
+        /// <summary> Gets or sets the temperature. </summary>
         public double? Temperature { get; set; }
     }
 }

@@ -27,21 +27,21 @@ namespace Scm._Type.Property.AdditionalProperties
 
         /// <summary> Initializes a new instance of ExtendsDifferentSpreadFloat. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ExtendsDifferentSpreadFloat(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get extends different spread float. </summary>
         public virtual async Task<ClientResult<DifferentSpreadFloatDerived>> GetExtendsDifferentSpreadFloatAsync()
         {
             ClientResult result = await GetExtendsDifferentSpreadFloatAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(DifferentSpreadFloatDerived.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get extends different spread float. </summary>
         public virtual ClientResult<DifferentSpreadFloatDerived> GetExtendsDifferentSpreadFloat()
         {
             ClientResult result = GetExtendsDifferentSpreadFloat(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get extends different spread float.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get extends different spread float.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,8 +96,8 @@ namespace Scm._Type.Property.AdditionalProperties
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="DifferentSpreadFloatDerived"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAsync(DifferentSpreadFloatDerived body)
         {
@@ -108,8 +108,8 @@ namespace Scm._Type.Property.AdditionalProperties
             return result;
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="DifferentSpreadFloatDerived"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Put(DifferentSpreadFloatDerived body)
         {
@@ -121,7 +121,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Scm._Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

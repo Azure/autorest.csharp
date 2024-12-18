@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from Record&lt;string&gt; type. </summary>
+    /// <summary> The ExtendsStringAdditionalProperties. </summary>
     public partial class ExtendsStringAdditionalProperties
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.AdditionalProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ExtendsStringAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ExtendsStringAdditionalProperties(string name)
         {
@@ -57,7 +57,7 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsStringAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ExtendsStringAdditionalProperties(string name, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -72,7 +72,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, string> AdditionalProperties { get; }

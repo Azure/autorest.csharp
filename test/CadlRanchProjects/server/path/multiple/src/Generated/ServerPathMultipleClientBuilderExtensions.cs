@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="MultipleClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> Pass in http://localhost:3000 for endpoint. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         public static IAzureClientBuilder<MultipleClient, MultipleClientOptions> AddMultipleClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {

@@ -44,7 +44,7 @@ namespace FirstTestTypeSpec
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="tokenCredential"> The token credential to copy. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal VersioningOp(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, TokenCredential tokenCredential, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -56,7 +56,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long-running resource action operation template.
+        /// [Protocol Method] Export.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long-running resource action operation template.
+        /// [Protocol Method] Export.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -130,7 +130,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long-running resource action operation template.
+        /// [Protocol Method] Export w.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -167,7 +167,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long-running resource action operation template.
+        /// [Protocol Method] Export w.
         /// <list type="bullet">
         /// <item>
         /// <description>

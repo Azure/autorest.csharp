@@ -10,7 +10,7 @@
    "name": "User",
    "crossLanguageDefinitionId": "Payload.Pageable.User",
    "usage": "Output,Json",
-   "doc": "User model",
+   "description": "User model",
    "decorators": [],
    "properties": [
     {
@@ -18,7 +18,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "User name",
+     "description": "User name",
      "type": {
       "$id": "4",
       "kind": "string",
@@ -41,7 +41,7 @@
    "name": "PagedUser",
    "crossLanguageDefinitionId": "Azure.Core.Page",
    "usage": "Output,Json",
-   "doc": "Paged collection of User items",
+   "description": "Paged collection of User items",
    "decorators": [],
    "properties": [
     {
@@ -49,7 +49,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "doc": "The User items on this page",
+     "description": "The User items on this page",
      "type": {
       "$id": "7",
       "kind": "array",
@@ -72,7 +72,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "doc": "The link to the next page of items",
+     "description": "The link to the next page of items",
      "type": {
       "$id": "9",
       "kind": "url",
@@ -101,20 +101,20 @@
   {
    "$id": "11",
    "Name": "PageableClient",
-   "Doc": "Test describing pageable.",
+   "Description": "Test describing pageable.",
    "Operations": [
     {
      "$id": "12",
      "Name": "list",
      "ResourceName": "Pageable",
-     "Doc": "List users",
+     "Description": "List users",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "13",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
-       "Doc": "The maximum number of result items per page.",
+       "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "14",
         "kind": "int32",
@@ -201,7 +201,7 @@
      "$id": "21",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "22",
       "kind": "url",

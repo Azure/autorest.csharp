@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.Lro.Standard.Models
 {
-    /// <summary> The exported user data. </summary>
+    /// <summary> The ExportedUser. </summary>
     public partial class ExportedUser
     {
         /// <summary>
@@ -46,8 +46,8 @@ namespace _Azure.Lro.Standard.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ExportedUser"/>. </summary>
-        /// <param name="name"> The name of user. </param>
-        /// <param name="resourceUri"> The exported URI. </param>
+        /// <param name="name"></param>
+        /// <param name="resourceUri"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>
         internal ExportedUser(string name, string resourceUri)
         {
@@ -59,8 +59,8 @@ namespace _Azure.Lro.Standard.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ExportedUser"/>. </summary>
-        /// <param name="name"> The name of user. </param>
-        /// <param name="resourceUri"> The exported URI. </param>
+        /// <param name="name"></param>
+        /// <param name="resourceUri"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ExportedUser(string name, string resourceUri, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,9 +74,9 @@ namespace _Azure.Lro.Standard.Models
         {
         }
 
-        /// <summary> The name of user. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> The exported URI. </summary>
+        /// <summary> Gets the resource uri. </summary>
         public string ResourceUri { get; }
     }
 }

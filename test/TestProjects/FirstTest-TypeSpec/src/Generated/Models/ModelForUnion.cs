@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> This is a model only used in union types, please do not use it anywhere else. </summary>
+    /// <summary> The ModelForUnion. </summary>
     public partial class ModelForUnion
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace FirstTestTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelForUnion"/>. </summary>
-        /// <param name="name"> name of the ModelForUnion. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelForUnion(string name)
         {
@@ -56,8 +56,8 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelForUnion"/>. </summary>
-        /// <param name="name"> name of the ModelForUnion. </param>
-        /// <param name="age"> age of the ModelForUnion. </param>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelForUnion(string name, int? age, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -71,9 +71,9 @@ namespace FirstTestTypeSpec.Models
         {
         }
 
-        /// <summary> name of the ModelForUnion. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> age of the ModelForUnion. </summary>
+        /// <summary> Gets or sets the age. </summary>
         public int? Age { get; set; }
     }
 }

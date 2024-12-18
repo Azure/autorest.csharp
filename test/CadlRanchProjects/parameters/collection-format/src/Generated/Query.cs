@@ -35,7 +35,7 @@ namespace Parameters.CollectionFormat
         /// <summary> Initializes a new instance of Query. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -54,7 +54,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -89,7 +89,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -124,7 +124,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -159,7 +159,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -194,7 +194,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -229,7 +229,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -264,7 +264,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -299,7 +299,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -334,7 +334,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -369,7 +369,7 @@ namespace Parameters.CollectionFormat
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
+        /// <param name="colors"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

@@ -42,7 +42,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         }
 
         /// <summary>
-        /// List TopLevelTrackedResource resources by subscription ID
+        /// List by subscription.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -72,7 +72,7 @@ namespace _Azure.ResourceManager.Resources.Mocking
         }
 
         /// <summary>
-        /// List TopLevelTrackedResource resources by subscription ID
+        /// List by subscription.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>

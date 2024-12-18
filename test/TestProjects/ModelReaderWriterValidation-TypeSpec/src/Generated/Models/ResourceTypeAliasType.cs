@@ -7,14 +7,14 @@
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The type of the alias. </summary>
+    /// <summary> The ResourceTypeAliasType. </summary>
     public enum ResourceTypeAliasType
     {
-        /// <summary> Alias type is unknown (same as not providing alias type). </summary>
+        /// <summary> NotSpecified. </summary>
         NotSpecified,
-        /// <summary> Alias value is not secret. </summary>
+        /// <summary> PlainText. </summary>
         PlainText,
-        /// <summary> Alias value is secret. </summary>
+        /// <summary> Mask. </summary>
         Mask
     }
 }

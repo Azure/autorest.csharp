@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> Inner model. Will be a property type for ModelWithModelProperties. </summary>
+    /// <summary> The InnerModel. </summary>
     public partial class InnerModel
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Required string property. </param>
+        /// <param name="property"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
@@ -53,7 +53,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Required string property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal InnerModel(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Required string property. </summary>
+        /// <summary> Gets or sets the property. </summary>
         public string Property { get; set; }
     }
 }

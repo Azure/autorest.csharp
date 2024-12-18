@@ -54,7 +54,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create a NestedProxyResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -75,8 +75,8 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -103,7 +103,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create a NestedProxyResource
+        /// Create or replace.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -124,8 +124,8 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="NestedProxyResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -152,7 +152,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -172,7 +172,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
@@ -197,7 +197,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -217,7 +217,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
@@ -242,7 +242,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// List NestedProxyResource resources by TopLevelTrackedResource
+        /// List by top level tracked resource.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -272,7 +272,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// List NestedProxyResource resources by TopLevelTrackedResource
+        /// List by top level tracked resource.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -322,7 +322,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
@@ -365,7 +365,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
@@ -408,7 +408,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
@@ -453,7 +453,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>

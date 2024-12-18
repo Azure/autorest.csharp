@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Usage.Models
 {
-    /// <summary> Record used in operation parameters. </summary>
+    /// <summary> The InputRecord. </summary>
     public partial class InputRecord
     {
         /// <summary>

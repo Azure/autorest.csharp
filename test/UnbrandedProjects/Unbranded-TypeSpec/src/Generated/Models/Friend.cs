@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> this is not a friendly model but with a friendly name. </summary>
+    /// <summary> The Friend. </summary>
     public partial class Friend
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace UnbrandedTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Friend(string name)
         {
@@ -53,7 +53,7 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Friend"/>. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Friend(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace UnbrandedTypeSpec.Models
         {
         }
 
-        /// <summary> name of the NotFriend. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

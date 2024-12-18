@@ -14,7 +14,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
     public partial class ModelWithUnknownAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="ModelWithUnknownAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelWithUnknownAdditionalProperties(string name)
         {
@@ -25,9 +25,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithUnknownAdditionalProperties"/>. </summary>
-        /// <param name="id"> The id property. </param>
-        /// <param name="name"> The name property. </param>
-        /// <param name="age"> The age property. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal ModelWithUnknownAdditionalProperties(string id, string name, int? age, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -42,11 +42,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> The id property. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The age property. </summary>
+        /// <summary> Gets or sets the age. </summary>
         public int? Age { get; set; }
         /// <summary>
         /// Additional Properties

@@ -13,7 +13,7 @@ using Scm._Type._Dictionary.Models;
 namespace Scm._Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of model values. </summary>
+    /// <summary> The RecursiveModelValue sub-client. </summary>
     public partial class RecursiveModelValue
     {
         private readonly ClientPipeline _pipeline;
@@ -29,7 +29,7 @@ namespace Scm._Type._Dictionary
 
         /// <summary> Initializes a new instance of RecursiveModelValue. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal RecursiveModelValue(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

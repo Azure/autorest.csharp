@@ -11,8 +11,8 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
     internal partial class UnknownDog : Dog
     {
         /// <summary> Initializes a new instance of <see cref="UnknownDog"/>. </summary>
-        /// <param name="kind"> discriminator property. </param>
-        /// <param name="weight"> Weight of the dog. </param>
+        /// <param name="kind"></param>
+        /// <param name="weight"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownDog(DogKind kind, int weight, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, weight, serializedAdditionalRawData)
         {

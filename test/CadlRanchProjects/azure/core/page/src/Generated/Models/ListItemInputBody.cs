@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> The body of the input. </summary>
+    /// <summary> The ListItemInputBody. </summary>
     public partial class ListItemInputBody
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Specs_.Azure.Core.Page.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
-        /// <param name="inputName"> The name of the input. </param>
+        /// <param name="inputName"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="inputName"/> is null. </exception>
         public ListItemInputBody(string inputName)
         {
@@ -56,7 +56,7 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
-        /// <param name="inputName"> The name of the input. </param>
+        /// <param name="inputName"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ListItemInputBody(string inputName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Specs_.Azure.Core.Page.Models
         {
         }
 
-        /// <summary> The name of the input. </summary>
+        /// <summary> Gets the input name. </summary>
         public string InputName { get; }
     }
 }

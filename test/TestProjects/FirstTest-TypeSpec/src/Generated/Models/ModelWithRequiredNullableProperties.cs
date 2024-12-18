@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> A model with a few required nullable properties. </summary>
+    /// <summary> The ModelWithRequiredNullableProperties. </summary>
     public partial class ModelWithRequiredNullableProperties
     {
         /// <summary>
@@ -46,9 +46,9 @@ namespace FirstTestTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/>. </summary>
-        /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
-        /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
-        /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
+        /// <param name="requiredNullablePrimitive"></param>
+        /// <param name="requiredExtensibleEnum"></param>
+        /// <param name="requiredFixedEnum"></param>
         public ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum)
         {
             RequiredNullablePrimitive = requiredNullablePrimitive;
@@ -57,9 +57,9 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithRequiredNullableProperties"/>. </summary>
-        /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
-        /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
-        /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
+        /// <param name="requiredNullablePrimitive"></param>
+        /// <param name="requiredExtensibleEnum"></param>
+        /// <param name="requiredFixedEnum"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,11 +74,11 @@ namespace FirstTestTypeSpec.Models
         {
         }
 
-        /// <summary> required nullable primitive type. </summary>
+        /// <summary> Gets or sets the required nullable primitive. </summary>
         public int? RequiredNullablePrimitive { get; set; }
-        /// <summary> required nullable extensible enum type. </summary>
+        /// <summary> Gets or sets the required extensible enum. </summary>
         public StringExtensibleEnum? RequiredExtensibleEnum { get; set; }
-        /// <summary> required nullable fixed enum type. </summary>
+        /// <summary> Gets or sets the required fixed enum. </summary>
         public StringFixedEnum? RequiredFixedEnum { get; set; }
     }
 }

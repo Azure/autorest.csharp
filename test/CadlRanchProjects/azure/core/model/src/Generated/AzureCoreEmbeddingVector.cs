@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Model
         /// <summary> Initializes a new instance of AzureCoreEmbeddingVector. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal AzureCoreEmbeddingVector(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -45,7 +45,7 @@ namespace _Specs_.Azure.Core.Model
             _endpoint = endpoint;
         }
 
-        /// <summary> get an embedding vector. </summary>
+        /// <summary> Get azure core embedding vector. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='GetAzureCoreEmbeddingVectorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReadOnlyMemory<int>>> GetAzureCoreEmbeddingVectorAsync(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Specs_.Azure.Core.Model
             return Response.FromValue(value, response);
         }
 
-        /// <summary> get an embedding vector. </summary>
+        /// <summary> Get azure core embedding vector. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='GetAzureCoreEmbeddingVector(CancellationToken)']/*" />
         public virtual Response<ReadOnlyMemory<int>> GetAzureCoreEmbeddingVector(CancellationToken cancellationToken = default)
@@ -86,7 +86,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] get an embedding vector
+        /// [Protocol Method] Get azure core embedding vector.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -121,7 +121,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] get an embedding vector
+        /// [Protocol Method] Get azure core embedding vector.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -155,8 +155,8 @@ namespace _Specs_.Azure.Core.Model
             }
         }
 
-        /// <summary> put an embedding vector. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="ReadOnlyMemory{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='PutAsync(ReadOnlyMemory{int},CancellationToken)']/*" />
         public virtual async Task<Response> PutAsync(ReadOnlyMemory<int> body, CancellationToken cancellationToken = default)
@@ -167,8 +167,8 @@ namespace _Specs_.Azure.Core.Model
             return response;
         }
 
-        /// <summary> put an embedding vector. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="ReadOnlyMemory{T}"/> where <c>T</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='Put(ReadOnlyMemory{int},CancellationToken)']/*" />
         public virtual Response Put(ReadOnlyMemory<int> body, CancellationToken cancellationToken = default)
@@ -180,7 +180,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] put an embedding vector
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,7 +219,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] put an embedding vector
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -257,8 +257,8 @@ namespace _Specs_.Azure.Core.Model
             }
         }
 
-        /// <summary> post a model which has an embeddingVector property. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Post. </summary>
+        /// <param name="body"> The <see cref="AzureEmbeddingModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='PostAsync(AzureEmbeddingModel,CancellationToken)']/*" />
@@ -272,8 +272,8 @@ namespace _Specs_.Azure.Core.Model
             return Response.FromValue(AzureEmbeddingModel.FromResponse(response), response);
         }
 
-        /// <summary> post a model which has an embeddingVector property. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Post. </summary>
+        /// <param name="body"> The <see cref="AzureEmbeddingModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/AzureCoreEmbeddingVector.xml" path="doc/members/member[@name='Post(AzureEmbeddingModel,CancellationToken)']/*" />
@@ -288,7 +288,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] post a model which has an embeddingVector property
+        /// [Protocol Method] Post.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -327,7 +327,7 @@ namespace _Specs_.Azure.Core.Model
         }
 
         /// <summary>
-        /// [Protocol Method] post a model which has an embeddingVector property
+        /// [Protocol Method] Post.
         /// <list type="bullet">
         /// <item>
         /// <description>

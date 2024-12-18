@@ -38,13 +38,13 @@
   {
    "$id": "5",
    "Name": "OAuth2Client",
-   "Doc": "Illustrates clients generated with OAuth2 authentication.",
+   "Description": "Illustrates clients generated with OAuth2 authentication.",
    "Operations": [
     {
      "$id": "6",
      "Name": "valid",
      "ResourceName": "OAuth2",
-     "Doc": "Check whether client is authenticated",
+     "Description": "Check whether client is authenticated",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
@@ -72,7 +72,7 @@
      "$id": "8",
      "Name": "invalid",
      "ResourceName": "OAuth2",
-     "Doc": "Check whether client is authenticated. Will return an invalid bearer error.",
+     "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -133,7 +133,7 @@
      "$id": "14",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "15",
       "kind": "url",

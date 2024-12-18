@@ -7,7 +7,7 @@
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The alignment mode. </summary>
+    /// <summary> The AlignMode. </summary>
     public enum AlignMode
     {
         /// <summary> Inner. </summary>

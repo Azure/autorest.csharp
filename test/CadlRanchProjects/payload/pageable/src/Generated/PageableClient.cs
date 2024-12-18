@@ -16,7 +16,7 @@ using Payload.Pageable.Models;
 namespace Payload.Pageable
 {
     // Data plane generated client.
-    /// <summary> Test describing pageable. </summary>
+    /// <summary> The Pageable service client. </summary>
     public partial class PageableClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace Payload.Pageable
         }
 
         /// <summary> Initializes a new instance of PageableClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PageableClient(Uri endpoint, PageableClientOptions options)
@@ -47,8 +47,8 @@ namespace Payload.Pageable
             _endpoint = endpoint;
         }
 
-        /// <summary> List users. </summary>
-        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <summary> Get pageables. </summary>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageableClient.xml" path="doc/members/member[@name='GetPageablesAsync(int?,CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetPageablesAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
@@ -59,8 +59,8 @@ namespace Payload.Pageable
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
         }
 
-        /// <summary> List users. </summary>
-        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <summary> Get pageables. </summary>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageableClient.xml" path="doc/members/member[@name='GetPageables(int?,CancellationToken)']/*" />
         public virtual Pageable<User> GetPageables(int? maxpagesize = null, CancellationToken cancellationToken = default)
@@ -72,7 +72,7 @@ namespace Payload.Pageable
         }
 
         /// <summary>
-        /// [Protocol Method] List users
+        /// [Protocol Method] Get pageables.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -86,7 +86,7 @@ namespace Payload.Pageable
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -99,7 +99,7 @@ namespace Payload.Pageable
         }
 
         /// <summary>
-        /// [Protocol Method] List users
+        /// [Protocol Method] Get pageables.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +113,7 @@ namespace Payload.Pageable
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

@@ -11,7 +11,7 @@ using Scm._Type.Property.Optionality.Models;
 namespace Scm._Type.Property.Optionality
 {
     // Data plane generated sub-client.
-    /// <summary> Test optional and required properties. </summary>
+    /// <summary> The RequiredAndOptional sub-client. </summary>
     public partial class RequiredAndOptional
     {
         private readonly ClientPipeline _pipeline;
@@ -27,21 +27,21 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of RequiredAndOptional. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal RequiredAndOptional(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(RequiredAndOptionalProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         public virtual ClientResult<RequiredAndOptionalProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,14 +96,14 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get models that will return only the required properties. </summary>
+        /// <summary> Get required only. </summary>
         public virtual async Task<ClientResult<RequiredAndOptionalProperty>> GetRequiredOnlyAsync()
         {
             ClientResult result = await GetRequiredOnlyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(RequiredAndOptionalProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get models that will return only the required properties. </summary>
+        /// <summary> Get required only. </summary>
         public virtual ClientResult<RequiredAndOptionalProperty> GetRequiredOnly()
         {
             ClientResult result = GetRequiredOnly(null);
@@ -111,7 +111,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return only the required properties
+        /// [Protocol Method] Get required only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,7 +135,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return only the required properties
+        /// [Protocol Method] Get required only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -158,7 +158,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAllAsync(RequiredAndOptionalProperty body)
@@ -170,7 +170,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutAll(RequiredAndOptionalProperty body)
@@ -183,7 +183,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -238,7 +238,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put a body with only required properties. </summary>
+        /// <summary> Put required only. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutRequiredOnlyAsync(RequiredAndOptionalProperty body)
@@ -250,7 +250,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put a body with only required properties. </summary>
+        /// <summary> Put required only. </summary>
         /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutRequiredOnly(RequiredAndOptionalProperty body)
@@ -263,7 +263,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with only required properties.
+        /// [Protocol Method] Put required only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -291,7 +291,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with only required properties.
+        /// [Protocol Method] Put required only.
         /// <list type="bullet">
         /// <item>
         /// <description>

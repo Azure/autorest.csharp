@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The response of a TopLevelTrackedResource list operation. </summary>
+    /// <summary> The TopLevelTrackedResourceListResult. </summary>
     internal partial class TopLevelTrackedResourceListResult
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace _Azure.ResourceManager.Resources.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourceListResult"/>. </summary>
-        /// <param name="value"> The TopLevelTrackedResource items on this page. </param>
+        /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal TopLevelTrackedResourceListResult(IEnumerable<TopLevelTrackedResourceData> value)
         {
@@ -57,8 +57,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="TopLevelTrackedResourceListResult"/>. </summary>
-        /// <param name="value"> The TopLevelTrackedResource items on this page. </param>
-        /// <param name="nextLink"> The link to the next page of items. </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal TopLevelTrackedResourceListResult(IReadOnlyList<TopLevelTrackedResourceData> value, Uri nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -72,9 +72,9 @@ namespace _Azure.ResourceManager.Resources.Models
         {
         }
 
-        /// <summary> The TopLevelTrackedResource items on this page. </summary>
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<TopLevelTrackedResourceData> Value { get; }
-        /// <summary> The link to the next page of items. </summary>
+        /// <summary> Gets the next link. </summary>
         public Uri NextLink { get; }
     }
 }

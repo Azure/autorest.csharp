@@ -46,14 +46,14 @@ namespace FirstTestTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithProjectedEnum"/>. </summary>
-        /// <param name="enumProperty"> enum with projected name used in a model. </param>
+        /// <param name="enumProperty"></param>
         public ModelWithProjectedEnum(CsProjectedEnumInModel enumProperty)
         {
             EnumProperty = enumProperty;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithProjectedEnum"/>. </summary>
-        /// <param name="enumProperty"> enum with projected name used in a model. </param>
+        /// <param name="enumProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithProjectedEnum(CsProjectedEnumInModel enumProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace FirstTestTypeSpec.Models
         {
         }
 
-        /// <summary> enum with projected name used in a model. </summary>
+        /// <summary> Gets the enum property. </summary>
         public CsProjectedEnumInModel EnumProperty { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Models
 {
-    /// <summary> This is the model with one level of flattening. </summary>
+    /// <summary> The FlattenModel. </summary>
     public partial class FlattenModel
     {
         /// <summary>

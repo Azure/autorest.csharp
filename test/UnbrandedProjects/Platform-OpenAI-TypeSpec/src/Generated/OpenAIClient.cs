@@ -10,7 +10,7 @@ using System.Threading;
 namespace OpenAI
 {
     // Data plane generated client.
-    /// <summary> The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details. </summary>
+    /// <summary> The OpenAI service client. </summary>
     public partial class OpenAIClient
     {
         private const string AuthorizationHeader = "Authorization";
@@ -35,7 +35,7 @@ namespace OpenAI
         }
 
         /// <summary> Initializes a new instance of OpenAIClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>

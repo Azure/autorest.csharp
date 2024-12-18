@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     /// <summary>
-    /// Used in internal operations, should be generated but not exported.
+    /// The AbstractModel.
     /// Please note <see cref="AbstractModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="RealModel"/>.
     /// </summary>
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
-        /// <param name="kind"> Discriminator property for AbstractModel. </param>
+        /// <param name="kind"></param>
         /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal AbstractModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -75,7 +75,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         {
         }
 
-        /// <summary> Discriminator property for AbstractModel. </summary>
+        /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
         /// <summary> Gets the name. </summary>
         public string Name { get; }

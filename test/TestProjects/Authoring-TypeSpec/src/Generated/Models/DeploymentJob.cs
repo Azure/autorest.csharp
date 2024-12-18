@@ -48,10 +48,10 @@ namespace AuthoringTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DeploymentJob"/>. </summary>
-        /// <param name="jobId"> The job ID. </param>
-        /// <param name="status"> The job status. </param>
-        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
-        /// <param name="errors"> The errors encountered while executing the job. </param>
+        /// <param name="jobId"></param>
+        /// <param name="status"></param>
+        /// <param name="warnings"></param>
+        /// <param name="errors"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/> or <paramref name="errors"/> is null. </exception>
         internal DeploymentJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors)
         {
@@ -66,13 +66,13 @@ namespace AuthoringTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DeploymentJob"/>. </summary>
-        /// <param name="jobId"> The job ID. </param>
-        /// <param name="createdDateTime"> The creation date time of the job. </param>
-        /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
-        /// <param name="expirationDateTime"> The expiration date time of the job. </param>
-        /// <param name="status"> The job status. </param>
-        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
-        /// <param name="errors"> The errors encountered while executing the job. </param>
+        /// <param name="jobId"></param>
+        /// <param name="createdDateTime"></param>
+        /// <param name="lastUpdatedDateTime"></param>
+        /// <param name="expirationDateTime"></param>
+        /// <param name="status"></param>
+        /// <param name="warnings"></param>
+        /// <param name="errors"></param>
         /// <param name="id"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DeploymentJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -93,19 +93,19 @@ namespace AuthoringTypeSpec.Models
         {
         }
 
-        /// <summary> The job ID. </summary>
+        /// <summary> Gets the job id. </summary>
         public string JobId { get; }
-        /// <summary> The creation date time of the job. </summary>
+        /// <summary> Gets the created date time. </summary>
         public DateTimeOffset CreatedDateTime { get; }
-        /// <summary> The the last date time the job was updated. </summary>
+        /// <summary> Gets the last updated date time. </summary>
         public DateTimeOffset LastUpdatedDateTime { get; }
-        /// <summary> The expiration date time of the job. </summary>
+        /// <summary> Gets the expiration date time. </summary>
         public DateTimeOffset ExpirationDateTime { get; }
-        /// <summary> The job status. </summary>
+        /// <summary> Gets the status. </summary>
         public JobStatus Status { get; }
-        /// <summary> The warnings that were encountered while executing the job. </summary>
+        /// <summary> Gets the warnings. </summary>
         public IReadOnlyList<JobWarning> Warnings { get; }
-        /// <summary> The errors encountered while executing the job. </summary>
+        /// <summary> Gets the errors. </summary>
         public ResponseError Errors { get; }
         /// <summary> Gets the id. </summary>
         public string Id { get; }

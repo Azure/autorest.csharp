@@ -52,7 +52,7 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
@@ -72,7 +72,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
@@ -93,7 +93,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,7 +137,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -181,7 +181,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +220,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -258,7 +258,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> Hello demo again. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloDemoAgainAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloDemoAgainAsync(CancellationToken cancellationToken = default)
@@ -268,7 +268,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> Hello demo again. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloDemoAgain(CancellationToken)']/*" />
         public virtual Response<Thing> HelloDemoAgain(CancellationToken cancellationToken = default)
@@ -279,7 +279,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi in demo2
+        /// [Protocol Method] Hello demo again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -314,7 +314,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi in demo2
+        /// [Protocol Method] Hello demo again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -348,7 +348,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -363,7 +363,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -379,7 +379,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -418,7 +418,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -456,7 +456,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
@@ -466,7 +466,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
@@ -477,7 +477,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -512,7 +512,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>

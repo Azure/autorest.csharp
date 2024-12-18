@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {
-    /// <summary> This is base model for not-discriminated normal multiple levels inheritance. </summary>
+    /// <summary> The Pet. </summary>
     public partial class Pet
     {
         /// <summary>

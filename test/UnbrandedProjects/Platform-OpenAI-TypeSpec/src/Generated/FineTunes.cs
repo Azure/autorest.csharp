@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of FineTunes. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FineTunes(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -218,7 +218,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -236,7 +236,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -266,7 +266,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -298,7 +298,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -314,16 +314,8 @@ namespace OpenAI
         }
 
         /// <summary> Get fine-grained status updates for a fine-tune job. </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to get events for. </param>
-        /// <param name="stream">
-        /// Whether to stream events for the fine-tune job. If set to true, events will be sent as
-        /// data-only
-        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-        /// as they become available. The stream will terminate with a `data: [DONE]` message when the
-        /// job is finished (succeeded, cancelled, or failed).
-        ///
-        /// If set to false, only events generated so far will be returned.
-        /// </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
+        /// <param name="stream"> The <see cref="bool"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Get events. </remarks>
@@ -337,16 +329,8 @@ namespace OpenAI
         }
 
         /// <summary> Get fine-grained status updates for a fine-tune job. </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to get events for. </param>
-        /// <param name="stream">
-        /// Whether to stream events for the fine-tune job. If set to true, events will be sent as
-        /// data-only
-        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-        /// as they become available. The stream will terminate with a `data: [DONE]` message when the
-        /// job is finished (succeeded, cancelled, or failed).
-        ///
-        /// If set to false, only events generated so far will be returned.
-        /// </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
+        /// <param name="stream"> The <see cref="bool"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Get events. </remarks>
@@ -374,16 +358,8 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to get events for. </param>
-        /// <param name="stream">
-        /// Whether to stream events for the fine-tune job. If set to true, events will be sent as
-        /// data-only
-        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-        /// as they become available. The stream will terminate with a `data: [DONE]` message when the
-        /// job is finished (succeeded, cancelled, or failed).
-        ///
-        /// If set to false, only events generated so far will be returned.
-        /// </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
+        /// <param name="stream"> The <see cref="bool"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -413,16 +389,8 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to get events for. </param>
-        /// <param name="stream">
-        /// Whether to stream events for the fine-tune job. If set to true, events will be sent as
-        /// data-only
-        /// [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-        /// as they become available. The stream will terminate with a `data: [DONE]` message when the
-        /// job is finished (succeeded, cancelled, or failed).
-        ///
-        /// If set to false, only events generated so far will be returned.
-        /// </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
+        /// <param name="stream"> The <see cref="bool"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -438,7 +406,7 @@ namespace OpenAI
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Cancel. </remarks>
@@ -452,7 +420,7 @@ namespace OpenAI
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Cancel. </remarks>
@@ -480,7 +448,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -510,7 +478,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuneId"> The ID of the fine-tune job to cancel. </param>
+        /// <param name="fineTuneId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuneId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuneId"/> is an empty string, and was expected to be non-empty. </exception>

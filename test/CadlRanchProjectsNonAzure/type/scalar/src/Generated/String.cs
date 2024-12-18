@@ -26,21 +26,21 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal String(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> get string value. </summary>
+        /// <summary> Get string. </summary>
         public virtual async Task<ClientResult<string>> GetStringAsync()
         {
             ClientResult result = await GetStringAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
-        /// <summary> get string value. </summary>
+        /// <summary> Get string. </summary>
         public virtual ClientResult<string> GetString()
         {
             ClientResult result = GetString(null);
@@ -48,7 +48,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get string value
+        /// [Protocol Method] Get string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -72,7 +72,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get string value
+        /// [Protocol Method] Get string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -95,8 +95,8 @@ namespace Scm._Type.Scalar
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> put string value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<ClientResult> PutAsync(string body)
@@ -108,8 +108,8 @@ namespace Scm._Type.Scalar
             return result;
         }
 
-        /// <summary> put string value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ClientResult Put(string body)
@@ -122,7 +122,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put string value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,7 +150,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put string value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

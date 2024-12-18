@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model spread Record&lt;ModelForRecord&gt; with the same known property type. </summary>
+    /// <summary> The SpreadModelRecord. </summary>
     public partial class SpreadModelRecord
     {
         /// <summary> Initializes a new instance of <see cref="SpreadModelRecord"/>. </summary>

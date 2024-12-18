@@ -7,14 +7,14 @@
 
 namespace Versioning.Removed.LatestVersion.Models
 {
-    /// <summary> The version of the API. </summary>
+    /// <summary> The Versions. </summary>
     public enum Versions
     {
-        /// <summary> The original version v1. </summary>
+        /// <summary> v1. </summary>
         V1,
-        /// <summary> The V2 Preview version. </summary>
+        /// <summary> v2preview. </summary>
         V2preview,
-        /// <summary> The latest version v2. </summary>
+        /// <summary> v2. </summary>
         V2
     }
 }

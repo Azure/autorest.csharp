@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    /// <summary> extensible enum type for discriminator. </summary>
+    /// <summary> The DogKind. </summary>
     internal readonly partial struct DogKind : IEquatable<DogKind>
     {
         private readonly string _value;
@@ -21,7 +21,7 @@ namespace Scm._Type.Model.Inheritance.EnumDiscriminator.Models
 
         private const string GoldenValue = "golden";
 
-        /// <summary> Species golden. </summary>
+        /// <summary> golden. </summary>
         public static DogKind Golden { get; } = new DogKind(GoldenValue);
         /// <summary> Determines if two <see cref="DogKind"/> values are the same. </summary>
         public static bool operator ==(DogKind left, DogKind right) => left.Equals(right);

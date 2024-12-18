@@ -46,7 +46,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithStringAdditionalProperties"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelWithStringAdditionalProperties(string name)
         {
@@ -57,9 +57,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithStringAdditionalProperties"/>. </summary>
-        /// <param name="id"> The id property. </param>
-        /// <param name="name"> The name property. </param>
-        /// <param name="age"> The age property. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithStringAdditionalProperties(string id, string name, int? age, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -76,11 +76,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> The id property. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The age property. </summary>
+        /// <summary> Gets or sets the age. </summary>
         public int? Age { get; set; }
         /// <summary> Additional Properties. </summary>
         public IDictionary<string, string> AdditionalProperties { get; }

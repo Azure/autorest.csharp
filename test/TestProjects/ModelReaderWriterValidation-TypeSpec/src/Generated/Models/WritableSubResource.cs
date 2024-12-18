@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The writable sub resource. </summary>
+    /// <summary> The WritableSubResource. </summary>
     public partial class WritableSubResource
     {
         /// <summary>
@@ -52,7 +52,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="WritableSubResource"/>. </summary>
-        /// <param name="id"> The resource id. </param>
+        /// <param name="id"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal WritableSubResource(ResourceIdentifier id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {

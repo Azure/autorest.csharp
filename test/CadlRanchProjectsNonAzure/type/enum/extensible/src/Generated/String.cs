@@ -27,7 +27,7 @@ namespace Scm._Type._Enum.Extensible
 
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal String(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

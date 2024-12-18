@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.ValueTypes.Models
 {
-    /// <summary> Model with a float literal property. </summary>
+    /// <summary> The FloatLiteralProperty. </summary>
     public partial class FloatLiteralProperty
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace Scm._Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="FloatLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal FloatLiteralProperty(FloatLiteralPropertyProperty property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -56,7 +56,7 @@ namespace Scm._Type.Property.ValueTypes.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Property. </summary>
+        /// <summary> Gets the property. </summary>
         public FloatLiteralPropertyProperty Property { get; } = FloatLiteralPropertyProperty._43125;
     }
 }

@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace _Azure.SpecialHeaders.XmsClientRequestId
 {
     // Data plane generated client.
-    /// <summary> Azure client request id header configurations. </summary>
+    /// <summary> The XmsClientRequestId service client. </summary>
     public partial class XmsClientRequestIdClient
     {
         private readonly HttpPipeline _pipeline;
@@ -32,7 +32,7 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
         }
 
         /// <summary> Initializes a new instance of XmsClientRequestIdClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public XmsClientRequestIdClient(Uri endpoint, XmsClientRequestIdClientOptions options)
@@ -47,7 +47,7 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Get operation with azure `x-ms-client-request-id` header.
+        /// [Protocol Method] Get xms client request id.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -78,7 +78,7 @@ namespace _Azure.SpecialHeaders.XmsClientRequestId
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Get operation with azure `x-ms-client-request-id` header.
+        /// [Protocol Method] Get xms client request id.
         /// <list type="bullet">
         /// <item>
         /// <description>

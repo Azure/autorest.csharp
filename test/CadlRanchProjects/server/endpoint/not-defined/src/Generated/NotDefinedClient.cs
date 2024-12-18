@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace Server.Endpoint.NotDefined
 {
     // Data plane generated client.
-    /// <summary> Illustrates server doesn't define endpoint. Client should automatically add an endpoint to let user pass in. </summary>
+    /// <summary> The NotDefined service client. </summary>
     public partial class NotDefinedClient
     {
         private readonly HttpPipeline _pipeline;
@@ -32,14 +32,14 @@ namespace Server.Endpoint.NotDefined
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint) : this(endpoint, new NotDefinedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NotDefinedClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDefinedClient(Uri endpoint, NotDefinedClientOptions options)

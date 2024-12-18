@@ -33,11 +33,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "doc": "The version 2022-12-01-preview.",
+     "description": "The version 2022-12-01-preview.",
      "decorators": []
     }
    ],
-   "doc": "The version of the API.",
+   "description": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -95,7 +95,7 @@
      "$id": "12",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "13",
       "kind": "url",
@@ -133,7 +133,7 @@
      "$id": "17",
      "Name": "get",
      "ResourceName": "AzureLocationScalar",
-     "Doc": "get azureLocation value",
+     "Description": "get azureLocation value",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -206,14 +206,14 @@
      "$id": "24",
      "Name": "put",
      "ResourceName": "AzureLocationScalar",
-     "Doc": "put azureLocation value",
+     "Description": "put azureLocation value",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "26",
         "kind": "constant",
@@ -241,7 +241,7 @@
        "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
-       "Doc": "_",
+       "Description": "_",
        "Type": {
         "$id": "29",
         "kind": "string",
@@ -295,14 +295,14 @@
      "$id": "32",
      "Name": "post",
      "ResourceName": "AzureLocationScalar",
-     "Doc": "post a model which has azureLocation property",
+     "Description": "post a model which has azureLocation property",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "34",
         "kind": "constant",
@@ -357,7 +357,7 @@
        "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
-       "Doc": "_",
+       "Description": "_",
        "Type": {
         "$ref": "6"
        },
@@ -406,14 +406,14 @@
      "$id": "41",
      "Name": "header",
      "ResourceName": "AzureLocationScalar",
-     "Doc": "azureLocation value header",
+     "Description": "azureLocation value header",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "42",
        "Name": "region",
        "NameInRequest": "region",
-       "Doc": "_",
+       "Description": "_",
        "Type": {
         "$id": "43",
         "kind": "string",
@@ -464,14 +464,14 @@
      "$id": "46",
      "Name": "query",
      "ResourceName": "AzureLocationScalar",
-     "Doc": "azureLocation value query",
+     "Description": "azureLocation value query",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "47",
        "Name": "region",
        "NameInRequest": "region",
-       "Doc": "_",
+       "Description": "_",
        "Type": {
         "$id": "48",
         "kind": "string",
@@ -528,7 +528,7 @@
      "$id": "52",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "53",
       "kind": "url",

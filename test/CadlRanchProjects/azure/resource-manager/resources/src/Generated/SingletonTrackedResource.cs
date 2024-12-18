@@ -91,7 +91,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a SingletonTrackedResource
+        /// Get by resource group.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -131,7 +131,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a SingletonTrackedResource
+        /// Get by resource group.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -171,7 +171,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Update a SingletonTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -191,7 +191,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="SingletonTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<Response<SingletonTrackedResource>> UpdateAsync(SingletonTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -213,7 +213,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Update a SingletonTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -233,7 +233,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="SingletonTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual Response<SingletonTrackedResource> Update(SingletonTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -255,7 +255,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create a SingletonTrackedResource
+        /// Create or update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -276,7 +276,7 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <param name="data"> The <see cref="SingletonTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SingletonTrackedResource>> CreateOrUpdateAsync(WaitUntil waitUntil, SingletonTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -301,7 +301,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Create a SingletonTrackedResource
+        /// Create or update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -322,7 +322,7 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <param name="data"> The <see cref="SingletonTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SingletonTrackedResource> CreateOrUpdate(WaitUntil waitUntil, SingletonTrackedResourceData data, CancellationToken cancellationToken = default)

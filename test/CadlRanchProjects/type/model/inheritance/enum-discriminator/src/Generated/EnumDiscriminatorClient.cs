@@ -16,7 +16,7 @@ using _Type.Model.Inheritance.EnumDiscriminator.Models;
 namespace _Type.Model.Inheritance.EnumDiscriminator
 {
     // Data plane generated client.
-    /// <summary> Illustrates inheritance with enum discriminator. </summary>
+    /// <summary> The EnumDiscriminator service client. </summary>
     public partial class EnumDiscriminatorClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary> Initializes a new instance of EnumDiscriminatorClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EnumDiscriminatorClient(Uri endpoint, EnumDiscriminatorClientOptions options)
@@ -47,7 +47,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             _endpoint = endpoint;
         }
 
-        /// <summary> Receive model with extensible enum discriminator type. </summary>
+        /// <summary> Get extensible model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Dog>> GetExtensibleModelAsync(CancellationToken cancellationToken = default)
@@ -57,7 +57,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Dog.FromResponse(response), response);
         }
 
-        /// <summary> Receive model with extensible enum discriminator type. </summary>
+        /// <summary> Get extensible model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModel(CancellationToken)']/*" />
         public virtual Response<Dog> GetExtensibleModel(CancellationToken cancellationToken = default)
@@ -68,7 +68,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Receive model with extensible enum discriminator type.
+        /// [Protocol Method] Get extensible model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -103,7 +103,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Receive model with extensible enum discriminator type.
+        /// [Protocol Method] Get extensible model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,8 +137,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Send model with extensible enum discriminator type. </summary>
-        /// <param name="input"> Dog to create. </param>
+        /// <summary> Put extensible model. </summary>
+        /// <param name="input"> The <see cref="Dog"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModelAsync(Dog,CancellationToken)']/*" />
@@ -152,8 +152,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return response;
         }
 
-        /// <summary> Send model with extensible enum discriminator type. </summary>
-        /// <param name="input"> Dog to create. </param>
+        /// <summary> Put extensible model. </summary>
+        /// <param name="input"> The <see cref="Dog"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutExtensibleModel(Dog,CancellationToken)']/*" />
@@ -168,7 +168,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Send model with extensible enum discriminator type.
+        /// [Protocol Method] Put extensible model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -207,7 +207,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Send model with extensible enum discriminator type.
+        /// [Protocol Method] Put extensible model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -245,7 +245,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Get a model omitting the discriminator. </summary>
+        /// <summary> Get extensible model missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModelMissingDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Dog>> GetExtensibleModelMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -255,7 +255,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Dog.FromResponse(response), response);
         }
 
-        /// <summary> Get a model omitting the discriminator. </summary>
+        /// <summary> Get extensible model missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModelMissingDiscriminator(CancellationToken)']/*" />
         public virtual Response<Dog> GetExtensibleModelMissingDiscriminator(CancellationToken cancellationToken = default)
@@ -266,7 +266,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model omitting the discriminator.
+        /// [Protocol Method] Get extensible model missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -301,7 +301,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model omitting the discriminator.
+        /// [Protocol Method] Get extensible model missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -335,7 +335,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Get a model containing discriminator value never defined. </summary>
+        /// <summary> Get extensible model wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModelWrongDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Dog>> GetExtensibleModelWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -345,7 +345,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Dog.FromResponse(response), response);
         }
 
-        /// <summary> Get a model containing discriminator value never defined. </summary>
+        /// <summary> Get extensible model wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetExtensibleModelWrongDiscriminator(CancellationToken)']/*" />
         public virtual Response<Dog> GetExtensibleModelWrongDiscriminator(CancellationToken cancellationToken = default)
@@ -356,7 +356,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model containing discriminator value never defined.
+        /// [Protocol Method] Get extensible model wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -391,7 +391,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model containing discriminator value never defined.
+        /// [Protocol Method] Get extensible model wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -425,7 +425,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Receive model with fixed enum discriminator type. </summary>
+        /// <summary> Get fixed model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Snake>> GetFixedModelAsync(CancellationToken cancellationToken = default)
@@ -435,7 +435,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Snake.FromResponse(response), response);
         }
 
-        /// <summary> Receive model with fixed enum discriminator type. </summary>
+        /// <summary> Get fixed model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModel(CancellationToken)']/*" />
         public virtual Response<Snake> GetFixedModel(CancellationToken cancellationToken = default)
@@ -446,7 +446,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Receive model with fixed enum discriminator type.
+        /// [Protocol Method] Get fixed model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -481,7 +481,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Receive model with fixed enum discriminator type.
+        /// [Protocol Method] Get fixed model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -515,8 +515,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Send model with fixed enum discriminator type. </summary>
-        /// <param name="input"> Snake to create. </param>
+        /// <summary> Put fixed model. </summary>
+        /// <param name="input"> The <see cref="Snake"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModelAsync(Snake,CancellationToken)']/*" />
@@ -530,8 +530,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return response;
         }
 
-        /// <summary> Send model with fixed enum discriminator type. </summary>
-        /// <param name="input"> Snake to create. </param>
+        /// <summary> Put fixed model. </summary>
+        /// <param name="input"> The <see cref="Snake"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='PutFixedModel(Snake,CancellationToken)']/*" />
@@ -546,7 +546,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Send model with fixed enum discriminator type.
+        /// [Protocol Method] Put fixed model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -585,7 +585,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Send model with fixed enum discriminator type.
+        /// [Protocol Method] Put fixed model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -623,7 +623,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Get a model omitting the discriminator. </summary>
+        /// <summary> Get fixed model missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModelMissingDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Snake>> GetFixedModelMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -633,7 +633,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Snake.FromResponse(response), response);
         }
 
-        /// <summary> Get a model omitting the discriminator. </summary>
+        /// <summary> Get fixed model missing discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModelMissingDiscriminator(CancellationToken)']/*" />
         public virtual Response<Snake> GetFixedModelMissingDiscriminator(CancellationToken cancellationToken = default)
@@ -644,7 +644,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model omitting the discriminator.
+        /// [Protocol Method] Get fixed model missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -679,7 +679,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model omitting the discriminator.
+        /// [Protocol Method] Get fixed model missing discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -713,7 +713,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             }
         }
 
-        /// <summary> Get a model containing discriminator value never defined. </summary>
+        /// <summary> Get fixed model wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModelWrongDiscriminatorAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Snake>> GetFixedModelWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
@@ -723,7 +723,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             return Response.FromValue(Snake.FromResponse(response), response);
         }
 
-        /// <summary> Get a model containing discriminator value never defined. </summary>
+        /// <summary> Get fixed model wrong discriminator. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumDiscriminatorClient.xml" path="doc/members/member[@name='GetFixedModelWrongDiscriminator(CancellationToken)']/*" />
         public virtual Response<Snake> GetFixedModelWrongDiscriminator(CancellationToken cancellationToken = default)
@@ -734,7 +734,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model containing discriminator value never defined.
+        /// [Protocol Method] Get fixed model wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -769,7 +769,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         }
 
         /// <summary>
-        /// [Protocol Method] Get a model containing discriminator value never defined.
+        /// [Protocol Method] Get fixed model wrong discriminator.
         /// <list type="bullet">
         /// <item>
         /// <description>

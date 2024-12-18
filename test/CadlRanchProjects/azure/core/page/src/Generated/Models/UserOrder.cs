@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> UserOrder for testing list with expand. </summary>
+    /// <summary> The UserOrder. </summary>
     public partial class UserOrder
     {
         /// <summary>
@@ -46,8 +46,8 @@ namespace _Specs_.Azure.Core.Page.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
-        /// <param name="userId"> The user's id. </param>
-        /// <param name="detail"> The user's order detail. </param>
+        /// <param name="userId"></param>
+        /// <param name="detail"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="detail"/> is null. </exception>
         internal UserOrder(int userId, string detail)
         {
@@ -58,9 +58,9 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="userId"> The user's id. </param>
-        /// <param name="detail"> The user's order detail. </param>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <param name="detail"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UserOrder(int id, int userId, string detail, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -75,11 +75,11 @@ namespace _Specs_.Azure.Core.Page.Models
         {
         }
 
-        /// <summary> The user's id. </summary>
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
-        /// <summary> The user's id. </summary>
+        /// <summary> Gets the user id. </summary>
         public int UserId { get; }
-        /// <summary> The user's order detail. </summary>
+        /// <summary> Gets the detail. </summary>
         public string Detail { get; }
     }
 }

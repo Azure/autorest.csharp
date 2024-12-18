@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Serialization.EncodedName.Json
 {
     // Data plane generated client.
-    /// <summary> Projection. </summary>
+    /// <summary> The Json service client. </summary>
     public partial class JsonClient
     {
         private readonly HttpPipeline _pipeline;
@@ -31,7 +31,7 @@ namespace Serialization.EncodedName.Json
         }
 
         /// <summary> Initializes a new instance of JsonClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public JsonClient(Uri endpoint, JsonClientOptions options)

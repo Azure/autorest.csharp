@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> element. </summary>
+    /// <summary> The ThereLevelElement. </summary>
     public partial class ThereLevelElement
     {
         /// <summary>

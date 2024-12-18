@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Scm._Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of boolean values. </summary>
+    /// <summary> The BooleanValue sub-client. </summary>
     public partial class BooleanValue
     {
         private readonly ClientPipeline _pipeline;
@@ -28,7 +28,7 @@ namespace Scm._Type._Array
 
         /// <summary> Initializes a new instance of BooleanValue. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal BooleanValue(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

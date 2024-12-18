@@ -42,13 +42,9 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
-        /// <param name="text"> The edited result. </param>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
-        /// specified in the request was reached.
-        /// </param>
+        /// <param name="text"></param>
+        /// <param name="index"></param>
+        /// <param name="finishReason"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateEditResponseChoice(string text, long index, CreateEditResponseChoiceFinishReason finishReason)
         {
@@ -60,13 +56,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
-        /// <param name="text"> The edited result. </param>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
-        /// specified in the request was reached.
-        /// </param>
+        /// <param name="text"></param>
+        /// <param name="index"></param>
+        /// <param name="finishReason"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateEditResponseChoice(string text, long index, CreateEditResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -81,15 +73,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The edited result. </summary>
+        /// <summary> Gets the text. </summary>
         public string Text { get; }
-        /// <summary> The index of the choice in the list of choices. </summary>
+        /// <summary> Gets the index. </summary>
         public long Index { get; }
-        /// <summary>
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
-        /// specified in the request was reached.
-        /// </summary>
+        /// <summary> Gets the finish reason. </summary>
         public CreateEditResponseChoiceFinishReason FinishReason { get; }
     }
 }

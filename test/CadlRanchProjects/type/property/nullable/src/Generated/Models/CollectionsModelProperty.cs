@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Property.Nullable.Models
 {
-    /// <summary> Model with collection models properties. </summary>
+    /// <summary> The CollectionsModelProperty. </summary>
     public partial class CollectionsModelProperty
     {
         /// <summary>
@@ -47,8 +47,8 @@ namespace _Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal CollectionsModelProperty(string requiredProperty, IEnumerable<InnerModel> nullableProperty)
         {
@@ -59,8 +59,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsModelProperty(string requiredProperty, IReadOnlyList<InnerModel> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,9 +74,9 @@ namespace _Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Required property. </summary>
+        /// <summary> Gets the required property. </summary>
         public string RequiredProperty { get; }
-        /// <summary> Property. </summary>
+        /// <summary> Gets the nullable property. </summary>
         public IReadOnlyList<InnerModel> NullableProperty { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ModelY in the discriminated set. </summary>
+    /// <summary> The ModelY. </summary>
     public partial class ModelY : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
@@ -20,16 +20,16 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
-        /// <param name="kind"> The kind. </param>
-        /// <param name="name"> The name property. </param>
+        /// <param name="kind"></param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="yProperty"> The YProperty property. </param>
+        /// <param name="yProperty"></param>
         internal ModelY(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string yProperty) : base(kind, name, serializedAdditionalRawData)
         {
             YProperty = yProperty;
         }
 
-        /// <summary> The YProperty property. </summary>
+        /// <summary> Gets the y property. </summary>
         public string YProperty { get; }
     }
 }

@@ -52,7 +52,7 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> doSomething for glossary. </summary>
+        /// <summary> Do something. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="h1"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -69,7 +69,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> doSomething for glossary. </summary>
+        /// <summary> Do something. </summary>
         /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="h1"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -87,7 +87,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] doSomething for glossary
+        /// [Protocol Method] Do something.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -129,7 +129,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] doSomething for glossary
+        /// [Protocol Method] Do something.
         /// <list type="bullet">
         /// <item>
         /// <description>

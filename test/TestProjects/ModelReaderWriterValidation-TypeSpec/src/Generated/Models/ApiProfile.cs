@@ -51,8 +51,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ApiProfile"/>. </summary>
-        /// <param name="profileVersion"> The profile version. </param>
-        /// <param name="apiVersion"> The API version. </param>
+        /// <param name="profileVersion"></param>
+        /// <param name="apiVersion"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ApiProfile(string profileVersion, string apiVersion, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -61,9 +61,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The profile version. </summary>
+        /// <summary> Gets the profile version. </summary>
         public string ProfileVersion { get; }
-        /// <summary> The API version. </summary>
+        /// <summary> Gets the api version. </summary>
         public string ApiVersion { get; }
     }
 }

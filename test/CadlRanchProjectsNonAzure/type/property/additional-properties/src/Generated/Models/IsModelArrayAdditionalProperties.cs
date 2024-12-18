@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model is from Record&lt;ModelForRecord[]&gt; type. </summary>
+    /// <summary> The IsModelArrayAdditionalProperties. </summary>
     public partial class IsModelArrayAdditionalProperties
     {
         /// <summary>

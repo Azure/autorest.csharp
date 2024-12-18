@@ -42,14 +42,9 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponseChoice"/>. </summary>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="index"></param>
         /// <param name="message"></param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
-        /// specified in the request was reached, `content_filter` if the content was omitted due to
-        /// a flag from our content filters, or `function_call` if the model called a function.
-        /// </param>
+        /// <param name="finishReason"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         internal CreateChatCompletionResponseChoice(long index, ChatCompletionResponseMessage message, CreateChatCompletionResponseChoiceFinishReason finishReason)
         {
@@ -61,14 +56,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponseChoice"/>. </summary>
-        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="index"></param>
         /// <param name="message"></param>
-        /// <param name="finishReason">
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
-        /// specified in the request was reached, `content_filter` if the content was omitted due to
-        /// a flag from our content filters, or `function_call` if the model called a function.
-        /// </param>
+        /// <param name="finishReason"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateChatCompletionResponseChoice(long index, ChatCompletionResponseMessage message, CreateChatCompletionResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -83,16 +73,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The index of the choice in the list of choices. </summary>
+        /// <summary> Gets the index. </summary>
         public long Index { get; }
         /// <summary> Gets the message. </summary>
         public ChatCompletionResponseMessage Message { get; }
-        /// <summary>
-        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
-        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
-        /// specified in the request was reached, `content_filter` if the content was omitted due to
-        /// a flag from our content filters, or `function_call` if the model called a function.
-        /// </summary>
+        /// <summary> Gets the finish reason. </summary>
         public CreateChatCompletionResponseChoiceFinishReason FinishReason { get; }
     }
 }

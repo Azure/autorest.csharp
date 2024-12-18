@@ -36,7 +36,7 @@ namespace Payload.MultiPart
         /// <summary> Initializes a new instance of FormDataHttpParts. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FormDataHttpParts(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace Payload.MultiPart
             _endpoint = endpoint;
         }
 
-        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <summary> Json array and file array. </summary>
         /// <param name="body"> The <see cref="ComplexHttpPartsModelRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace Payload.MultiPart
             return response;
         }
 
-        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <summary> Json array and file array. </summary>
         /// <param name="body"> The <see cref="ComplexHttpPartsModelRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -75,7 +75,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// [Protocol Method] Json array and file array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -115,7 +115,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// [Protocol Method] Json array and file array.
         /// <list type="bullet">
         /// <item>
         /// <description>

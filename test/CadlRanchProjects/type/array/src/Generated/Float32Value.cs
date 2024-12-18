@@ -17,7 +17,7 @@ using Azure.Core.Pipeline;
 namespace _Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of float values. </summary>
+    /// <summary> The Float32Value sub-client. </summary>
     public partial class Float32Value
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Type._Array
         /// <summary> Initializes a new instance of Float32Value. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Float32Value(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

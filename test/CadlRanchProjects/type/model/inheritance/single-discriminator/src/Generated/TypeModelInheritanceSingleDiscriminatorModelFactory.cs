@@ -11,7 +11,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     public static partial class TypeModelInheritanceSingleDiscriminatorModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
-        /// <param name="kind"> Discriminator property for Dinosaur. </param>
+        /// <param name="kind"></param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
         public static Dinosaur Dinosaur(string kind = null, int size = default)

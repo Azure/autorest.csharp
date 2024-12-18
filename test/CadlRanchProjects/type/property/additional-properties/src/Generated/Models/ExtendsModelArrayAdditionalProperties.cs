@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from Record&lt;ModelForRecord[]&gt; type. </summary>
+    /// <summary> The ExtendsModelArrayAdditionalProperties. </summary>
     public partial class ExtendsModelArrayAdditionalProperties
     {
         /// <summary>

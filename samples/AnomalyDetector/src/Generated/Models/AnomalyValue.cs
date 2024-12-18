@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> Detailed information of the anomalous timestamp. </summary>
+    /// <summary> The AnomalyValue. </summary>
     public partial class AnomalyValue
     {
         /// <summary>
@@ -46,15 +46,9 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AnomalyValue"/>. </summary>
-        /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
-        /// <param name="severity">
-        /// Indicates the significance of the anomaly. The higher the severity, the more
-        /// significant the anomaly is.
-        /// </param>
-        /// <param name="score">
-        /// Raw anomaly score of severity, will help indicate the degree of abnormality as
-        /// well.
-        /// </param>
+        /// <param name="isAnomaly"></param>
+        /// <param name="severity"></param>
+        /// <param name="score"></param>
         internal AnomalyValue(bool isAnomaly, float severity, float score)
         {
             IsAnomaly = isAnomaly;
@@ -64,16 +58,10 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AnomalyValue"/>. </summary>
-        /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
-        /// <param name="severity">
-        /// Indicates the significance of the anomaly. The higher the severity, the more
-        /// significant the anomaly is.
-        /// </param>
-        /// <param name="score">
-        /// Raw anomaly score of severity, will help indicate the degree of abnormality as
-        /// well.
-        /// </param>
-        /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
+        /// <param name="isAnomaly"></param>
+        /// <param name="severity"></param>
+        /// <param name="score"></param>
+        /// <param name="interpretation"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal AnomalyValue(bool isAnomaly, float severity, float score, IReadOnlyList<AnomalyInterpretation> interpretation, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -89,19 +77,13 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> True if an anomaly is detected at the current timestamp. </summary>
+        /// <summary> Gets the is anomaly. </summary>
         public bool IsAnomaly { get; }
-        /// <summary>
-        /// Indicates the significance of the anomaly. The higher the severity, the more
-        /// significant the anomaly is.
-        /// </summary>
+        /// <summary> Gets the severity. </summary>
         public float Severity { get; }
-        /// <summary>
-        /// Raw anomaly score of severity, will help indicate the degree of abnormality as
-        /// well.
-        /// </summary>
+        /// <summary> Gets the score. </summary>
         public float Score { get; }
-        /// <summary> Interpretation of this anomalous timestamp. </summary>
+        /// <summary> Gets the interpretation. </summary>
         public IReadOnlyList<AnomalyInterpretation> Interpretation { get; }
     }
 }

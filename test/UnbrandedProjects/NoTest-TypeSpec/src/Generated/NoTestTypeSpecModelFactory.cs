@@ -12,19 +12,19 @@ namespace NoTestTypeSpec.Models
     public static partial class NoTestTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Thing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
-        /// <param name="optionalLiteralString"> optional literal string. </param>
-        /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralFloat"> optional literal float. </param>
-        /// <param name="optionalLiteralBool"> optional literal bool. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="optionalNullableList"> optional nullable collection. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredLiteralString"></param>
+        /// <param name="requiredLiteralInt"></param>
+        /// <param name="requiredLiteralFloat"></param>
+        /// <param name="requiredLiteralBool"></param>
+        /// <param name="optionalLiteralString"></param>
+        /// <param name="optionalLiteralInt"></param>
+        /// <param name="optionalLiteralFloat"></param>
+        /// <param name="optionalLiteralBool"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="optionalNullableList"></param>
+        /// <param name="requiredNullableList"></param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
         public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
         {
@@ -49,19 +49,19 @@ namespace NoTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedThing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
-        /// <param name="optionalLiteralString"> optional literal string. </param>
-        /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralFloat"> optional literal float. </param>
-        /// <param name="optionalLiteralBool"> optional literal bool. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="optionalNullableList"> optional nullable collection. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredLiteralString"></param>
+        /// <param name="requiredLiteralInt"></param>
+        /// <param name="requiredLiteralFloat"></param>
+        /// <param name="requiredLiteralBool"></param>
+        /// <param name="optionalLiteralString"></param>
+        /// <param name="optionalLiteralInt"></param>
+        /// <param name="optionalLiteralFloat"></param>
+        /// <param name="optionalLiteralBool"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="optionalNullableList"></param>
+        /// <param name="requiredNullableList"></param>
         /// <param name="myProperty"></param>
         /// <returns> A new <see cref="Models.DerivedThing"/> instance for mocking. </returns>
         public static DerivedThing DerivedThing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null, string myProperty = null)

@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Initializes a new instance of ExtendsModel. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ExtendsModel(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.AdditionalProperties
             _endpoint = endpoint;
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get extends model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='GetExtendsModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ExtendsModelAdditionalProperties>> GetExtendsModelAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.AdditionalProperties
             return Response.FromValue(ExtendsModelAdditionalProperties.FromResponse(response), response);
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get extends model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='GetExtendsModel(CancellationToken)']/*" />
         public virtual Response<ExtendsModelAdditionalProperties> GetExtendsModel(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get extends model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get extends model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type.Property.AdditionalProperties
             }
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="ExtendsModelAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='PutAsync(ExtendsModelAdditionalProperties,CancellationToken)']/*" />
@@ -149,8 +149,8 @@ namespace _Type.Property.AdditionalProperties
             return response;
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="ExtendsModelAdditionalProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ExtendsModel.xml" path="doc/members/member[@name='Put(ExtendsModelAdditionalProperties,CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

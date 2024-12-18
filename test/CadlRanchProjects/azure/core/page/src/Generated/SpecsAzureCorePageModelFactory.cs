@@ -16,10 +16,10 @@ namespace _Specs_.Azure.Core.Page.Models
     public static partial class SpecsAzureCorePageModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="name"> The user's name. </param>
-        /// <param name="orders"> The user's order list. </param>
-        /// <param name="etag"> The entity tag for this resource. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="orders"></param>
+        /// <param name="etag"></param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(int id = default, string name = null, IEnumerable<UserOrder> orders = null, ETag etag = default)
         {
@@ -29,9 +29,9 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserOrder"/>. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="userId"> The user's id. </param>
-        /// <param name="detail"> The user's order detail. </param>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <param name="detail"></param>
         /// <returns> A new <see cref="Models.UserOrder"/> instance for mocking. </returns>
         public static UserOrder UserOrder(int id = default, int userId = default, string detail = null)
         {
@@ -39,7 +39,7 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstItem"/>. </summary>
-        /// <param name="id"> The id of the item. </param>
+        /// <param name="id"></param>
         /// <returns> A new <see cref="Models.FirstItem"/> instance for mocking. </returns>
         public static FirstItem FirstItem(int id = default)
         {
@@ -47,7 +47,7 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecondItem"/>. </summary>
-        /// <param name="name"> The name of the item. </param>
+        /// <param name="name"></param>
         /// <returns> A new <see cref="Models.SecondItem"/> instance for mocking. </returns>
         public static SecondItem SecondItem(string name = null)
         {

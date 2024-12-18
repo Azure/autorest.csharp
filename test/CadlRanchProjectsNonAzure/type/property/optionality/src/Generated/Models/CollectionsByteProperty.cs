@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Optionality.Models
 {
-    /// <summary> Model with collection bytes properties. </summary>
+    /// <summary> The CollectionsByteProperty. </summary>
     public partial class CollectionsByteProperty
     {
         /// <summary>
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsByteProperty(IList<BinaryData> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -58,7 +58,7 @@ namespace Scm._Type.Property.Optionality.Models
         }
 
         /// <summary>
-        /// Property
+        /// Gets the property
         /// <para>
         /// To assign a byte[] to the element of this property use <see cref="BinaryData.FromBytes(byte[])"/>.
         /// The byte[] will be serialized to a Base64 encoded string.

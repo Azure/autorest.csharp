@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
 {
-    /// <summary> Usage override to roundtrip. </summary>
+    /// <summary> The OutputModel. </summary>
     public partial class OutputModel
     {
         /// <summary>

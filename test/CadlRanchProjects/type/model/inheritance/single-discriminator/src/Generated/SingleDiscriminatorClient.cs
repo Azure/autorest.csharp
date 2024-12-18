@@ -16,7 +16,7 @@ using _Type.Model.Inheritance.SingleDiscriminator.Models;
 namespace _Type.Model.Inheritance.SingleDiscriminator
 {
     // Data plane generated client.
-    /// <summary> Illustrates inheritance with single discriminator. </summary>
+    /// <summary> The SingleDiscriminator service client. </summary>
     public partial class SingleDiscriminatorClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         }
 
         /// <summary> Initializes a new instance of SingleDiscriminatorClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleDiscriminatorClient(Uri endpoint, SingleDiscriminatorClientOptions options)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Scm.SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> Verify reserved words as parameter name. </summary>
+    /// <summary> The Parameters sub-client. </summary>
     public partial class Parameters
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm.SpecialWords
 
         /// <summary> Initializes a new instance of Parameters. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Parameters(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

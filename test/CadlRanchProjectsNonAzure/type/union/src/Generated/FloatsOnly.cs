@@ -12,7 +12,7 @@ using Scm._Type.Union.Models;
 namespace Scm._Type.Union
 {
     // Data plane generated sub-client.
-    /// <summary> Describe union of floats 1.1 | 2.2 | 3.3. </summary>
+    /// <summary> The FloatsOnly sub-client. </summary>
     public partial class FloatsOnly
     {
         private readonly ClientPipeline _pipeline;
@@ -28,7 +28,7 @@ namespace Scm._Type.Union
 
         /// <summary> Initializes a new instance of FloatsOnly. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FloatsOnly(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
-    /// <summary> The `File` object represents a document that has been uploaded to OpenAI. </summary>
+    /// <summary> The OpenAIFile. </summary>
     public partial class OpenAIFile
     {
         /// <summary>
@@ -42,15 +42,12 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
-        /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
-        /// <param name="bytes"> The size of the file in bytes. </param>
-        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
-        /// <param name="filename"> The name of the file. </param>
-        /// <param name="purpose"> The intended purpose of the file. Currently, only "fine-tune" is supported. </param>
-        /// <param name="status">
-        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
-        /// `error`, `deleting` or `deleted`.
-        /// </param>
+        /// <param name="id"></param>
+        /// <param name="bytes"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="filename"></param>
+        /// <param name="purpose"></param>
+        /// <param name="status"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="filename"/> or <paramref name="purpose"/> is null. </exception>
         internal OpenAIFile(string id, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status)
         {
@@ -67,20 +64,14 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
-        /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
-        /// <param name="object"> The object type, which is always "file". </param>
-        /// <param name="bytes"> The size of the file in bytes. </param>
-        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
-        /// <param name="filename"> The name of the file. </param>
-        /// <param name="purpose"> The intended purpose of the file. Currently, only "fine-tune" is supported. </param>
-        /// <param name="status">
-        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
-        /// `error`, `deleting` or `deleted`.
-        /// </param>
-        /// <param name="statusDetails">
-        /// Additional details about the status of the file. If the file is in the `error` state, this will
-        /// include a message describing the error.
-        /// </param>
+        /// <param name="id"></param>
+        /// <param name="object"></param>
+        /// <param name="bytes"></param>
+        /// <param name="createdAt"></param>
+        /// <param name="filename"></param>
+        /// <param name="purpose"></param>
+        /// <param name="status"></param>
+        /// <param name="statusDetails"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal OpenAIFile(string id, OpenAIFileObject @object, long bytes, DateTimeOffset createdAt, string filename, string purpose, OpenAIFileStatus status, string statusDetails, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -100,28 +91,22 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The file identifier, which can be referenced in the API endpoints. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The object type, which is always "file". </summary>
+        /// <summary> Gets the object. </summary>
         public OpenAIFileObject Object { get; } = OpenAIFileObject.File;
 
-        /// <summary> The size of the file in bytes. </summary>
+        /// <summary> Gets the bytes. </summary>
         public long Bytes { get; }
-        /// <summary> The Unix timestamp (in seconds) for when the file was created. </summary>
+        /// <summary> Gets the created at. </summary>
         public DateTimeOffset CreatedAt { get; }
-        /// <summary> The name of the file. </summary>
+        /// <summary> Gets the filename. </summary>
         public string Filename { get; }
-        /// <summary> The intended purpose of the file. Currently, only "fine-tune" is supported. </summary>
+        /// <summary> Gets the purpose. </summary>
         public string Purpose { get; }
-        /// <summary>
-        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
-        /// `error`, `deleting` or `deleted`.
-        /// </summary>
+        /// <summary> Gets the status. </summary>
         public OpenAIFileStatus Status { get; }
-        /// <summary>
-        /// Additional details about the status of the file. If the file is in the `error` state, this will
-        /// include a message describing the error.
-        /// </summary>
+        /// <summary> Gets the status details. </summary>
         public string StatusDetails { get; }
     }
 }

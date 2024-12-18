@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> Renamed model (original name: ModelToRename). </summary>
+    /// <summary> The ModelToRename. </summary>
     public partial class RenamedModel
     {
         /// <summary>
@@ -46,15 +46,15 @@ namespace CustomizationsInTsp.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
-        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="requiredIntOnBase"></param>
         public RenamedModel(int requiredIntOnBase)
         {
             RequiredIntOnBase = requiredIntOnBase;
         }
 
         /// <summary> Initializes a new instance of <see cref="RenamedModel"/>. </summary>
-        /// <param name="requiredIntOnBase"> Required int. </param>
-        /// <param name="optionalInt"> Optional int. </param>
+        /// <param name="requiredIntOnBase"></param>
+        /// <param name="optionalInt"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal RenamedModel(int requiredIntOnBase, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -68,7 +68,7 @@ namespace CustomizationsInTsp.Models
         {
         }
 
-        /// <summary> Required int. </summary>
+        /// <summary> Gets or sets the required int on base. </summary>
         public int RequiredIntOnBase { get; set; }
     }
 }

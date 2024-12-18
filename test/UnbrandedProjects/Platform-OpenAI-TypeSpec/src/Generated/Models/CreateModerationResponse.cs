@@ -43,9 +43,9 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponse"/>. </summary>
-        /// <param name="id"> The unique identifier for the moderation request. </param>
-        /// <param name="model"> The model used to generate the moderation results. </param>
-        /// <param name="results"> A list of moderation objects. </param>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="results"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="model"/> or <paramref name="results"/> is null. </exception>
         internal CreateModerationResponse(string id, string model, IEnumerable<CreateModerationResponseResult> results)
         {
@@ -59,9 +59,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponse"/>. </summary>
-        /// <param name="id"> The unique identifier for the moderation request. </param>
-        /// <param name="model"> The model used to generate the moderation results. </param>
-        /// <param name="results"> A list of moderation objects. </param>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="results"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateModerationResponse(string id, string model, IReadOnlyList<CreateModerationResponseResult> results, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -76,11 +76,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The unique identifier for the moderation request. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The model used to generate the moderation results. </summary>
+        /// <summary> Gets the model. </summary>
         public string Model { get; }
-        /// <summary> A list of moderation objects. </summary>
+        /// <summary> Gets the results. </summary>
         public IReadOnlyList<CreateModerationResponseResult> Results { get; }
     }
 }

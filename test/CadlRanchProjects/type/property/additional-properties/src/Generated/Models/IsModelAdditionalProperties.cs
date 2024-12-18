@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model is from Record&lt;ModelForRecord&gt; type. </summary>
+    /// <summary> The IsModelAdditionalProperties. </summary>
     public partial class IsModelAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="IsModelAdditionalProperties"/>. </summary>

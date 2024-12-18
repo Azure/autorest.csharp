@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> Model with a union of int literal as property. </summary>
+    /// <summary> The UnionIntLiteralProperty. </summary>
     public partial class UnionIntLiteralProperty
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UnionIntLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         public UnionIntLiteralProperty(UnionIntLiteralPropertyProperty property)
         {
             Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="UnionIntLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnionIntLiteralProperty(UnionIntLiteralPropertyProperty property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Property. </summary>
+        /// <summary> Gets or sets the property. </summary>
         public UnionIntLiteralPropertyProperty Property { get; set; }
     }
 }

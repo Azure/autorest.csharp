@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateImageRequest"/>. </summary>
-        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="prompt"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public CreateImageRequest(string prompt)
         {
@@ -52,10 +52,10 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageRequest"/>. </summary>
-        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
-        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
-        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
-        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
+        /// <param name="prompt"></param>
+        /// <param name="n"></param>
+        /// <param name="size"></param>
+        /// <param name="responseFormat"></param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateImageRequest(string prompt, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -73,13 +73,13 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> A text description of the desired image(s). The maximum length is 1000 characters. </summary>
+        /// <summary> Gets the prompt. </summary>
         public string Prompt { get; }
-        /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
+        /// <summary> Gets or sets the n. </summary>
         public long? N { get; set; }
-        /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
+        /// <summary> Gets or sets the size. </summary>
         public CreateImageRequestSize? Size { get; set; }
-        /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
+        /// <summary> Gets or sets the response format. </summary>
         public CreateImageRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }

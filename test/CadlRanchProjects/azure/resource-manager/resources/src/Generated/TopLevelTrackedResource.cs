@@ -100,7 +100,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -120,7 +120,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -131,7 +131,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a NestedProxyResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -151,7 +151,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="nextedProxyResourceName"> Name of the nested resource. </param>
+        /// <param name="nextedProxyResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextedProxyResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="nextedProxyResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -162,7 +162,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -202,7 +202,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Get a TopLevelTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -242,7 +242,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Delete a TopLevelTrackedResource
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -284,7 +284,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Delete a TopLevelTrackedResource
+        /// Delete.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -326,7 +326,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Update a TopLevelTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -347,7 +347,7 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<TopLevelTrackedResource>> UpdateAsync(WaitUntil waitUntil, TopLevelTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -372,7 +372,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// Update a TopLevelTrackedResource
+        /// Update.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -393,7 +393,7 @@ namespace _Azure.ResourceManager.Resources
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<TopLevelTrackedResource> Update(WaitUntil waitUntil, TopLevelTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -418,7 +418,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// A synchronous resource action that returns no content.
+        /// Action sync.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -438,7 +438,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="details"> The content of the action request. </param>
+        /// <param name="details"> The <see cref="NotificationDetails"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="details"/> is null. </exception>
         public virtual async Task<Response> ActionSyncAsync(NotificationDetails details, CancellationToken cancellationToken = default)
@@ -460,7 +460,7 @@ namespace _Azure.ResourceManager.Resources
         }
 
         /// <summary>
-        /// A synchronous resource action that returns no content.
+        /// Action sync.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -480,7 +480,7 @@ namespace _Azure.ResourceManager.Resources
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="details"> The content of the action request. </param>
+        /// <param name="details"> The <see cref="NotificationDetails"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="details"/> is null. </exception>
         public virtual Response ActionSync(NotificationDetails details, CancellationToken cancellationToken = default)

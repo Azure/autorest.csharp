@@ -42,17 +42,17 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/>. </summary>
-        /// <param name="hate"> The score for the category 'hate'. </param>
-        /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
-        /// <param name="harassment"> The score for the category 'harassment'. </param>
-        /// <param name="harassmentThreatening"> The score for the category 'harassment/threatening'. </param>
-        /// <param name="selfHarm"> The score for the category 'self-harm'. </param>
-        /// <param name="selfHarmIntent"> The score for the category 'self-harm/intent'. </param>
-        /// <param name="selfHarmInstructive"> The score for the category 'self-harm/instructive'. </param>
-        /// <param name="sexual"> The score for the category 'sexual'. </param>
-        /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
-        /// <param name="violence"> The score for the category 'violence'. </param>
-        /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
+        /// <param name="hate"></param>
+        /// <param name="hateThreatening"></param>
+        /// <param name="harassment"></param>
+        /// <param name="harassmentThreatening"></param>
+        /// <param name="selfHarm"></param>
+        /// <param name="selfHarmIntent"></param>
+        /// <param name="selfHarmInstructive"></param>
+        /// <param name="sexual"></param>
+        /// <param name="sexualMinors"></param>
+        /// <param name="violence"></param>
+        /// <param name="violenceGraphic"></param>
         internal CreateModerationResponseResultCategoryScores(double hate, double hateThreatening, double harassment, double harassmentThreatening, double selfHarm, double selfHarmIntent, double selfHarmInstructive, double sexual, double sexualMinors, double violence, double violenceGraphic)
         {
             Hate = hate;
@@ -69,17 +69,17 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResultCategoryScores"/>. </summary>
-        /// <param name="hate"> The score for the category 'hate'. </param>
-        /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
-        /// <param name="harassment"> The score for the category 'harassment'. </param>
-        /// <param name="harassmentThreatening"> The score for the category 'harassment/threatening'. </param>
-        /// <param name="selfHarm"> The score for the category 'self-harm'. </param>
-        /// <param name="selfHarmIntent"> The score for the category 'self-harm/intent'. </param>
-        /// <param name="selfHarmInstructive"> The score for the category 'self-harm/instructive'. </param>
-        /// <param name="sexual"> The score for the category 'sexual'. </param>
-        /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
-        /// <param name="violence"> The score for the category 'violence'. </param>
-        /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
+        /// <param name="hate"></param>
+        /// <param name="hateThreatening"></param>
+        /// <param name="harassment"></param>
+        /// <param name="harassmentThreatening"></param>
+        /// <param name="selfHarm"></param>
+        /// <param name="selfHarmIntent"></param>
+        /// <param name="selfHarmInstructive"></param>
+        /// <param name="sexual"></param>
+        /// <param name="sexualMinors"></param>
+        /// <param name="violence"></param>
+        /// <param name="violenceGraphic"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateModerationResponseResultCategoryScores(double hate, double hateThreatening, double harassment, double harassmentThreatening, double selfHarm, double selfHarmIntent, double selfHarmInstructive, double sexual, double sexualMinors, double violence, double violenceGraphic, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -102,27 +102,27 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The score for the category 'hate'. </summary>
+        /// <summary> Gets the hate. </summary>
         public double Hate { get; }
-        /// <summary> The score for the category 'hate/threatening'. </summary>
+        /// <summary> Gets the hate threatening. </summary>
         public double HateThreatening { get; }
-        /// <summary> The score for the category 'harassment'. </summary>
+        /// <summary> Gets the harassment. </summary>
         public double Harassment { get; }
-        /// <summary> The score for the category 'harassment/threatening'. </summary>
+        /// <summary> Gets the harassment threatening. </summary>
         public double HarassmentThreatening { get; }
-        /// <summary> The score for the category 'self-harm'. </summary>
+        /// <summary> Gets the self harm. </summary>
         public double SelfHarm { get; }
-        /// <summary> The score for the category 'self-harm/intent'. </summary>
+        /// <summary> Gets the self harm intent. </summary>
         public double SelfHarmIntent { get; }
-        /// <summary> The score for the category 'self-harm/instructive'. </summary>
+        /// <summary> Gets the self harm instructive. </summary>
         public double SelfHarmInstructive { get; }
-        /// <summary> The score for the category 'sexual'. </summary>
+        /// <summary> Gets the sexual. </summary>
         public double Sexual { get; }
-        /// <summary> The score for the category 'sexual/minors'. </summary>
+        /// <summary> Gets the sexual minors. </summary>
         public double SexualMinors { get; }
-        /// <summary> The score for the category 'violence'. </summary>
+        /// <summary> Gets the violence. </summary>
         public double Violence { get; }
-        /// <summary> The score for the category 'violence/graphic'. </summary>
+        /// <summary> Gets the violence graphic. </summary>
         public double ViolenceGraphic { get; }
     }
 }

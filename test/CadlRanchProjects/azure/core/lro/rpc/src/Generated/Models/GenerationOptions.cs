@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.Lro.Rpc.Models
 {
-    /// <summary> Options for the generation. </summary>
+    /// <summary> The GenerationOptions. </summary>
     public partial class GenerationOptions
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Azure.Lro.Rpc.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GenerationOptions"/>. </summary>
-        /// <param name="prompt"> Prompt. </param>
+        /// <param name="prompt"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public GenerationOptions(string prompt)
         {
@@ -56,7 +56,7 @@ namespace _Azure.Lro.Rpc.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="GenerationOptions"/>. </summary>
-        /// <param name="prompt"> Prompt. </param>
+        /// <param name="prompt"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal GenerationOptions(string prompt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Azure.Lro.Rpc.Models
         {
         }
 
-        /// <summary> Prompt. </summary>
+        /// <summary> Gets the prompt. </summary>
         public string Prompt { get; }
     }
 }

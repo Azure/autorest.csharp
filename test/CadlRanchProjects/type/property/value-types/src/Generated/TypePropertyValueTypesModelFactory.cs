@@ -11,7 +11,7 @@ namespace _Type.Property.ValueTypes.Models
     public static partial class TypePropertyValueTypesModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.UnionEnumValueProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.UnionEnumValueProperty"/> instance for mocking. </returns>
         public static UnionEnumValueProperty UnionEnumValueProperty(ExtendedEnum property = default)
         {
@@ -19,7 +19,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BooleanLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.BooleanLiteralProperty"/> instance for mocking. </returns>
         public static BooleanLiteralProperty BooleanLiteralProperty(bool property = default)
         {
@@ -27,7 +27,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FloatLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.FloatLiteralProperty"/> instance for mocking. </returns>
         public static FloatLiteralProperty FloatLiteralProperty(FloatLiteralPropertyProperty property = default)
         {
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IntLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.IntLiteralProperty"/> instance for mocking. </returns>
         public static IntLiteralProperty IntLiteralProperty(IntLiteralPropertyProperty property = default)
         {
@@ -43,7 +43,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StringLiteralProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.StringLiteralProperty"/> instance for mocking. </returns>
         public static StringLiteralProperty StringLiteralProperty(StringLiteralPropertyProperty property = default)
         {

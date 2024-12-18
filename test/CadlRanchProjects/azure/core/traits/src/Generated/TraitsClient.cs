@@ -16,7 +16,7 @@ using _Specs_.Azure.Core.Traits.Models;
 namespace _Specs_.Azure.Core.Traits
 {
     // Data plane generated client.
-    /// <summary> Illustrates Azure Core operation customizations by traits. </summary>
+    /// <summary> The Traits service client. </summary>
     public partial class TraitsClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,7 +35,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary> Initializes a new instance of TraitsClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public TraitsClient(Uri endpoint, TraitsClientOptions options)
@@ -49,9 +49,9 @@ namespace _Specs_.Azure.Core.Traits
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="foo"> header in request. </param>
+        /// <summary> Smoke test. </summary>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
@@ -65,9 +65,9 @@ namespace _Specs_.Azure.Core.Traits
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="foo"> header in request. </param>
+        /// <summary> Smoke test. </summary>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
@@ -82,7 +82,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method] Get a resource, sending and receiving headers.
+        /// [Protocol Method] Smoke test.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,8 +96,8 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="foo"> header in request. </param>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
@@ -123,7 +123,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method] Get a resource, sending and receiving headers.
+        /// [Protocol Method] Smoke test.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,8 +137,8 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="foo"> header in request. </param>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
@@ -163,9 +163,9 @@ namespace _Specs_.Azure.Core.Traits
             }
         }
 
-        /// <summary> Test for repeatable requests. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="body"> The body parameter. </param>
+        /// <summary> Repeatable action. </summary>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="body"> The <see cref="UserActionParam"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,CancellationToken)']/*" />
@@ -179,9 +179,9 @@ namespace _Specs_.Azure.Core.Traits
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
 
-        /// <summary> Test for repeatable requests. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="body"> The body parameter. </param>
+        /// <summary> Repeatable action. </summary>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="body"> The <see cref="UserActionParam"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,CancellationToken)']/*" />
@@ -196,7 +196,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method] Test for repeatable requests
+        /// [Protocol Method] Repeatable action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -210,7 +210,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user's id. </param>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -236,7 +236,7 @@ namespace _Specs_.Azure.Core.Traits
         }
 
         /// <summary>
-        /// [Protocol Method] Test for repeatable requests
+        /// [Protocol Method] Repeatable action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -250,7 +250,7 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The user's id. </param>
+        /// <param name="id"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>

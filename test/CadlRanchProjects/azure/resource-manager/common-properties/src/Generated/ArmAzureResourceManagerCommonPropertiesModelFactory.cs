@@ -23,8 +23,8 @@ namespace _Azure.ResourceManager.CommonProperties.Models
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="managedIdentityTrackedResourceProvisioningState"> The resource-specific properties for this resource. </param>
-        /// <param name="identity"> The managed service identities assigned to this resource. </param>
+        /// <param name="managedIdentityTrackedResourceProvisioningState"></param>
+        /// <param name="identity"></param>
         /// <returns> A new <see cref="CommonProperties.ManagedIdentityTrackedResourceData"/> instance for mocking. </returns>
         public static ManagedIdentityTrackedResourceData ManagedIdentityTrackedResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, string managedIdentityTrackedResourceProvisioningState = null, ManagedServiceIdentity identity = null)
         {

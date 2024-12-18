@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> Results of last detection. </summary>
+    /// <summary> The MultivariateLastDetectionResult. </summary>
     public partial class MultivariateLastDetectionResult
     {
         /// <summary>
@@ -53,8 +53,8 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionResult"/>. </summary>
-        /// <param name="variableStates"> Variable Status. </param>
-        /// <param name="results"> Anomaly status and information. </param>
+        /// <param name="variableStates"></param>
+        /// <param name="results"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MultivariateLastDetectionResult(IReadOnlyList<VariableState> variableStates, IReadOnlyList<AnomalyState> results, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,9 +63,9 @@ namespace AnomalyDetector.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Variable Status. </summary>
+        /// <summary> Gets the variable states. </summary>
         public IReadOnlyList<VariableState> VariableStates { get; }
-        /// <summary> Anomaly status and information. </summary>
+        /// <summary> Gets the results. </summary>
         public IReadOnlyList<AnomalyState> Results { get; }
     }
 }

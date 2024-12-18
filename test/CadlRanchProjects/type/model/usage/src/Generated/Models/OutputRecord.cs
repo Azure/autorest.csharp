@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Model.Usage.Models
 {
-    /// <summary> Record used in operation return type. </summary>
+    /// <summary> The OutputRecord. </summary>
     public partial class OutputRecord
     {
         /// <summary>

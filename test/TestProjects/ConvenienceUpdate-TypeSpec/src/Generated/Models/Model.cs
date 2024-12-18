@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ConvenienceInCadl.Models
 {
-    /// <summary> A model. </summary>
+    /// <summary> The Model. </summary>
     public partial class Model
     {
         /// <summary>

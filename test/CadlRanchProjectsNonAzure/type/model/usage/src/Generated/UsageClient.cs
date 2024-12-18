@@ -11,7 +11,7 @@ using Scm._Type.Model.Usage.Models;
 namespace Scm._Type.Model.Usage
 {
     // Data plane generated client.
-    /// <summary> Illustrates usage of Record in different places(Operation parameters, return type or both). </summary>
+    /// <summary> The Usage service client. </summary>
     public partial class UsageClient
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Usage
         }
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public UsageClient(Uri endpoint, UsageClientOptions options)

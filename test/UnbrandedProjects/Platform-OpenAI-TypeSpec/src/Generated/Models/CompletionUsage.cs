@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
-    /// <summary> Usage statistics for the completion request. </summary>
+    /// <summary> The CompletionUsage. </summary>
     public partial class CompletionUsage
     {
         /// <summary>
@@ -42,9 +42,9 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CompletionUsage"/>. </summary>
-        /// <param name="promptTokens"> Number of tokens in the prompt. </param>
-        /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
-        /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>
+        /// <param name="promptTokens"></param>
+        /// <param name="completionTokens"></param>
+        /// <param name="totalTokens"></param>
         internal CompletionUsage(long promptTokens, long completionTokens, long totalTokens)
         {
             PromptTokens = promptTokens;
@@ -53,9 +53,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CompletionUsage"/>. </summary>
-        /// <param name="promptTokens"> Number of tokens in the prompt. </param>
-        /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
-        /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>
+        /// <param name="promptTokens"></param>
+        /// <param name="completionTokens"></param>
+        /// <param name="totalTokens"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CompletionUsage(long promptTokens, long completionTokens, long totalTokens, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,11 +70,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> Number of tokens in the prompt. </summary>
+        /// <summary> Gets the prompt tokens. </summary>
         public long PromptTokens { get; }
-        /// <summary> Number of tokens in the generated completion. </summary>
+        /// <summary> Gets the completion tokens. </summary>
         public long CompletionTokens { get; }
-        /// <summary> Total number of tokens used in the request (prompt + completion). </summary>
+        /// <summary> Gets the total tokens. </summary>
         public long TotalTokens { get; }
     }
 }

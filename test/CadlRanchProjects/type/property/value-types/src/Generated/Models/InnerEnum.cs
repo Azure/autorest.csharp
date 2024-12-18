@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> Enum that will be used as a property for model EnumProperty. Extensible. </summary>
+    /// <summary> The InnerEnum. </summary>
     public readonly partial struct InnerEnum : IEquatable<InnerEnum>
     {
         private readonly string _value;
@@ -25,9 +25,9 @@ namespace _Type.Property.ValueTypes.Models
         private const string ValueOneValue = "ValueOne";
         private const string ValueTwoValue = "ValueTwo";
 
-        /// <summary> First value. </summary>
+        /// <summary> ValueOne. </summary>
         public static InnerEnum ValueOne { get; } = new InnerEnum(ValueOneValue);
-        /// <summary> Second value. </summary>
+        /// <summary> ValueTwo. </summary>
         public static InnerEnum ValueTwo { get; } = new InnerEnum(ValueTwoValue);
         /// <summary> Determines if two <see cref="InnerEnum"/> values are the same. </summary>
         public static bool operator ==(InnerEnum left, InnerEnum right) => left.Equals(right);

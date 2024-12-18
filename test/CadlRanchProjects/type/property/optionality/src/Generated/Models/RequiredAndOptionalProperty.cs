@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.Optionality.Models
 {
-    /// <summary> Model with required and optional properties. </summary>
+    /// <summary> The RequiredAndOptionalProperty. </summary>
     public partial class RequiredAndOptionalProperty
     {
         /// <summary>
@@ -46,15 +46,15 @@ namespace _Type.Property.Optionality.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
-        /// <param name="requiredProperty"> required int property. </param>
+        /// <param name="requiredProperty"></param>
         public RequiredAndOptionalProperty(int requiredProperty)
         {
             RequiredProperty = requiredProperty;
         }
 
         /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
-        /// <param name="optionalProperty"> optional string property. </param>
-        /// <param name="requiredProperty"> required int property. </param>
+        /// <param name="optionalProperty"></param>
+        /// <param name="requiredProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -68,9 +68,9 @@ namespace _Type.Property.Optionality.Models
         {
         }
 
-        /// <summary> optional string property. </summary>
+        /// <summary> Gets or sets the optional property. </summary>
         public string OptionalProperty { get; set; }
-        /// <summary> required int property. </summary>
+        /// <summary> Gets or sets the required property. </summary>
         public int RequiredProperty { get; set; }
     }
 }

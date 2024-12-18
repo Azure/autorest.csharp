@@ -11,14 +11,14 @@ using System.Collections.Generic;
 namespace _Type.Property.AdditionalProperties.Models
 {
     /// <summary>
-    /// The model is Record&lt;unknown&gt; with a discriminator.
+    /// The IsUnknownAdditionalPropertiesDiscriminated.
     /// Please note <see cref="IsUnknownAdditionalPropertiesDiscriminated"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="IsUnknownAdditionalPropertiesDiscriminatedDerived"/>.
     /// </summary>
     public abstract partial class IsUnknownAdditionalPropertiesDiscriminated
     {
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected IsUnknownAdditionalPropertiesDiscriminated(string name)
         {
@@ -29,8 +29,8 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDiscriminated"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="kind"> The discriminator. </param>
+        /// <param name="name"></param>
+        /// <param name="kind"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal IsUnknownAdditionalPropertiesDiscriminated(string name, string kind, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -44,9 +44,9 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> The discriminator. </summary>
+        /// <summary> Gets or sets the kind. </summary>
         internal string Kind { get; set; }
         /// <summary>
         /// Additional Properties

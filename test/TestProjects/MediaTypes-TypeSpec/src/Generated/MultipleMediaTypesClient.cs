@@ -16,7 +16,7 @@ using MultipleMediaTypes.Models;
 namespace MultipleMediaTypes
 {
     // Data plane generated client.
-    /// <summary> Play with produces/consumes and media-types in general. </summary>
+    /// <summary> The MultipleMediaTypes service client. </summary>
     public partial class MultipleMediaTypesClient
     {
         private readonly HttpPipeline _pipeline;

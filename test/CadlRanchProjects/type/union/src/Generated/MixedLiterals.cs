@@ -17,7 +17,7 @@ using _Type.Union.Models;
 namespace _Type.Union
 {
     // Data plane generated sub-client.
-    /// <summary> Describe union of floats "a" | 2 | 3.3. </summary>
+    /// <summary> The MixedLiterals sub-client. </summary>
     public partial class MixedLiterals
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Type.Union
         /// <summary> Initializes a new instance of MixedLiterals. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal MixedLiterals(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

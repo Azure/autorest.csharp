@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionCallOption"/>. </summary>
-        /// <param name="name"> The name of the function to call. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ChatCompletionFunctionCallOption(string name)
         {
@@ -52,7 +52,7 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionCallOption"/>. </summary>
-        /// <param name="name"> The name of the function to call. </param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ChatCompletionFunctionCallOption(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -65,7 +65,7 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The name of the function to call. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

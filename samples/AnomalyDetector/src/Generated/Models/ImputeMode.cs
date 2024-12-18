@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The impute mode. </summary>
+    /// <summary> The ImputeMode. </summary>
     public readonly partial struct ImputeMode : IEquatable<ImputeMode>
     {
         private readonly string _value;

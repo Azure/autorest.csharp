@@ -26,21 +26,21 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of Boolean. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Boolean(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> get boolean value. </summary>
+        /// <summary> Get boolean. </summary>
         public virtual async Task<ClientResult<bool>> GetBooleanAsync()
         {
             ClientResult result = await GetBooleanAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<bool>(), result.GetRawResponse());
         }
 
-        /// <summary> get boolean value. </summary>
+        /// <summary> Get boolean. </summary>
         public virtual ClientResult<bool> GetBoolean()
         {
             ClientResult result = GetBoolean(null);
@@ -48,7 +48,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get boolean value
+        /// [Protocol Method] Get boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -72,7 +72,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get boolean value
+        /// [Protocol Method] Get boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -95,8 +95,8 @@ namespace Scm._Type.Scalar
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> put boolean value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="bool"/> to use. </param>
         public virtual async Task<ClientResult> PutAsync(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);
@@ -104,8 +104,8 @@ namespace Scm._Type.Scalar
             return result;
         }
 
-        /// <summary> put boolean value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="bool"/> to use. </param>
         public virtual ClientResult Put(bool body)
         {
             using BinaryContent content = BinaryContentHelper.FromObject(body);
@@ -114,7 +114,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put boolean value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -142,7 +142,7 @@ namespace Scm._Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put boolean value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

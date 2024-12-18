@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.NotDiscriminated.Models
 {
-    /// <summary> The third level model in the normal multiple levels inheritance. </summary>
+    /// <summary> The Siamese. </summary>
     public partial class Siamese : Cat
     {
         /// <summary> Initializes a new instance of <see cref="Siamese"/>. </summary>

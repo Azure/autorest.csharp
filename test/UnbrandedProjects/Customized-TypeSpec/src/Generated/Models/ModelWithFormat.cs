@@ -43,8 +43,8 @@ namespace CustomizedTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
-        /// <param name="sourceUrl"> url format. </param>
-        /// <param name="guid"> uuid format. </param>
+        /// <param name="sourceUrl"></param>
+        /// <param name="guid"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithFormat(Uri sourceUrl, Guid guid, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -58,9 +58,9 @@ namespace CustomizedTypeSpec.Models
         {
         }
 
-        /// <summary> url format. </summary>
+        /// <summary> Gets or sets the source url. </summary>
         public Uri SourceUrl { get; set; }
-        /// <summary> uuid format. </summary>
+        /// <summary> Gets or sets the guid. </summary>
         public Guid Guid { get; set; }
     }
 }

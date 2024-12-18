@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace OpenAI.Models
 {
-    /// <summary> Represents an embedding vector returned by embedding endpoint. </summary>
+    /// <summary> The Embedding. </summary>
     public partial class Embedding
     {
         /// <summary>
@@ -43,11 +43,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="Embedding"/>. </summary>
-        /// <param name="index"> The index of the embedding in the list of embeddings. </param>
-        /// <param name="embeddingProperty">
-        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
-        /// listed in the [embedding guide](/docs/guides/embeddings).
-        /// </param>
+        /// <param name="index"></param>
+        /// <param name="embeddingProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="embeddingProperty"/> is null. </exception>
         internal Embedding(long index, IEnumerable<double> embeddingProperty)
         {
@@ -58,12 +55,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Embedding"/>. </summary>
-        /// <param name="index"> The index of the embedding in the list of embeddings. </param>
-        /// <param name="object"> The object type, which is always "embedding". </param>
-        /// <param name="embeddingProperty">
-        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
-        /// listed in the [embedding guide](/docs/guides/embeddings).
-        /// </param>
+        /// <param name="index"></param>
+        /// <param name="object"></param>
+        /// <param name="embeddingProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Embedding(long index, EmbeddingObject @object, IReadOnlyList<double> embeddingProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -78,15 +72,12 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The index of the embedding in the list of embeddings. </summary>
+        /// <summary> Gets the index. </summary>
         public long Index { get; }
-        /// <summary> The object type, which is always "embedding". </summary>
+        /// <summary> Gets the object. </summary>
         public EmbeddingObject Object { get; } = EmbeddingObject.Embedding;
 
-        /// <summary>
-        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
-        /// listed in the [embedding guide](/docs/guides/embeddings).
-        /// </summary>
+        /// <summary> Gets the embedding property. </summary>
         public IReadOnlyList<double> EmbeddingProperty { get; }
     }
 }
