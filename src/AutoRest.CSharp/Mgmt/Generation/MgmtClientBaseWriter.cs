@@ -729,7 +729,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            args.Add($"pageSizeHint");
+                            args.Add($"{parameter.Parameter.Name}");
                         }
                         else
                         {
