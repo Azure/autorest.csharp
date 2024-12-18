@@ -267,8 +267,8 @@ namespace MgmtPagination
         /// <returns> An async collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeDecimalModelResource> GetAllAsync(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
@@ -297,8 +297,8 @@ namespace MgmtPagination
         /// <returns> A collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeDecimalModelResource> GetAll(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, maxpagesize);
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
