@@ -40,7 +40,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get files. </remarks>
         public virtual async Task<ClientResult<ListFilesResponse>> GetFilesAsync()
         {
             ClientResult result = await GetFilesAsync(null).ConfigureAwait(false);
@@ -48,7 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get files. </remarks>
         public virtual ClientResult<ListFilesResponse> GetFiles()
         {
             ClientResult result = GetFiles(null);

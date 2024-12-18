@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -298,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override FormattableString CreateDescription()
         {
-            return $"{InputModel.Description}";
+            return FormattableStringHelpers.FromString(DocHelpers.GetDescription(InputModel.Summary, InputModel.Doc) ?? string.Empty);
         }
 
         internal string GetFullSerializedName()

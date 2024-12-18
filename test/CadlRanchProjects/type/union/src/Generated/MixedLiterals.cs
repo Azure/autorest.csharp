@@ -45,7 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse1>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
@@ -55,7 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse1.FromResponse(response), response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteral(CancellationToken)']/*" />
         public virtual Response<GetResponse1> GetMixedLiteral(CancellationToken cancellationToken = default)
@@ -66,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed literal.
         /// <list type="bullet">
         /// <item>
         /// <description>

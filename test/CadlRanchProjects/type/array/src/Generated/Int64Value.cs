@@ -45,7 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<long>>> GetInt64ValueAsync(CancellationToken cancellationToken = default)
@@ -63,7 +63,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get int 64 value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<long>> GetInt64Value(CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 64 value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get int 64 value.
         /// <list type="bullet">
         /// <item>
         /// <description>

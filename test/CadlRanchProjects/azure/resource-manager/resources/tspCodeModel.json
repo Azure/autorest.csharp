@@ -33,7 +33,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Resource has been created.",
+     "doc": "Resource has been created.",
      "decorators": []
     },
     {
@@ -51,7 +51,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Resource creation failed.",
+     "doc": "Resource creation failed.",
      "decorators": []
     },
     {
@@ -69,7 +69,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Resource creation was canceled.",
+     "doc": "Resource creation was canceled.",
      "decorators": []
     },
     {
@@ -174,7 +174,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "The entity was created by a user.",
+     "doc": "The entity was created by a user.",
      "decorators": []
     },
     {
@@ -192,7 +192,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "The entity was created by an application.",
+     "doc": "The entity was created by an application.",
      "decorators": []
     },
     {
@@ -210,7 +210,7 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "The entity was created by a managed identity.",
+     "doc": "The entity was created by a managed identity.",
      "decorators": []
     },
     {
@@ -228,11 +228,11 @@
      "enumType": {
       "$ref": "18"
      },
-     "description": "The entity was created by a key.",
+     "doc": "The entity was created by a key.",
      "decorators": []
     }
    ],
-   "description": "The kind of entity that created the resource.",
+   "doc": "The kind of entity that created the resource.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json,LroInitial,LroFinalEnvelope",
@@ -266,7 +266,7 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Resource has been created.",
+     "doc": "Resource has been created.",
      "decorators": []
     },
     {
@@ -284,7 +284,7 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Resource creation failed.",
+     "doc": "Resource creation failed.",
      "decorators": []
     },
     {
@@ -302,11 +302,11 @@
      "enumType": {
       "$ref": "28"
      },
-     "description": "Resource creation was canceled.",
+     "doc": "Resource creation was canceled.",
      "decorators": []
     }
    ],
-   "description": "The provisioning state of a resource type.",
+   "doc": "The provisioning state of a resource type.",
    "isFixed": false,
    "isFlags": false,
    "usage": "LroPolling",
@@ -340,11 +340,11 @@
      "enumType": {
       "$ref": "36"
      },
-     "description": "Preview API version 2023-12-01-preview.",
+     "doc": "Preview API version 2023-12-01-preview.",
      "decorators": []
     }
    ],
-   "description": "Azure API versions.",
+   "doc": "Azure API versions.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -358,7 +358,7 @@
    "name": "SingletonTrackedResource",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-   "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
     "$id": "41",
@@ -366,7 +366,7 @@
     "name": "TrackedResource",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.TrackedResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-    "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+    "doc": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
     "decorators": [],
     "baseModel": {
      "$id": "42",
@@ -374,7 +374,7 @@
      "name": "Resource",
      "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.Resource",
      "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-     "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+     "doc": "Common fields that are returned in the response for all Azure Resource Manager resources",
      "decorators": [],
      "properties": [
       {
@@ -382,7 +382,7 @@
        "kind": "property",
        "name": "id",
        "serializedName": "id",
-       "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+       "doc": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
        "type": {
         "$id": "44",
         "kind": "string",
@@ -409,7 +409,7 @@
        "kind": "property",
        "name": "name",
        "serializedName": "name",
-       "description": "The name of the resource",
+       "doc": "The name of the resource",
        "type": {
         "$id": "47",
         "kind": "string",
@@ -429,7 +429,7 @@
        "kind": "property",
        "name": "type",
        "serializedName": "type",
-       "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+       "doc": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
        "type": {
         "$id": "49",
         "kind": "string",
@@ -456,14 +456,14 @@
        "kind": "property",
        "name": "systemData",
        "serializedName": "systemData",
-       "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+       "doc": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
        "type": {
         "$id": "52",
         "kind": "model",
         "name": "SystemData",
         "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.SystemData",
         "usage": "Output,Json,LroInitial,LroFinalEnvelope",
-        "description": "Metadata pertaining to creation and last modification of the resource.",
+        "doc": "Metadata pertaining to creation and last modification of the resource.",
         "decorators": [],
         "properties": [
          {
@@ -471,7 +471,7 @@
           "kind": "property",
           "name": "createdBy",
           "serializedName": "createdBy",
-          "description": "The identity that created the resource.",
+          "doc": "The identity that created the resource.",
           "type": {
            "$id": "54",
            "kind": "string",
@@ -491,7 +491,7 @@
           "kind": "property",
           "name": "createdByType",
           "serializedName": "createdByType",
-          "description": "The type of identity that created the resource.",
+          "doc": "The type of identity that created the resource.",
           "type": {
            "$ref": "18"
           },
@@ -507,7 +507,7 @@
           "kind": "property",
           "name": "createdAt",
           "serializedName": "createdAt",
-          "description": "The timestamp of resource creation (UTC).",
+          "doc": "The timestamp of resource creation (UTC).",
           "type": {
            "$id": "57",
            "kind": "utcDateTime",
@@ -535,7 +535,7 @@
           "kind": "property",
           "name": "lastModifiedBy",
           "serializedName": "lastModifiedBy",
-          "description": "The identity that last modified the resource.",
+          "doc": "The identity that last modified the resource.",
           "type": {
            "$id": "60",
            "kind": "string",
@@ -555,7 +555,7 @@
           "kind": "property",
           "name": "lastModifiedByType",
           "serializedName": "lastModifiedByType",
-          "description": "The type of identity that last modified the resource.",
+          "doc": "The type of identity that last modified the resource.",
           "type": {
            "$ref": "18"
           },
@@ -571,7 +571,7 @@
           "kind": "property",
           "name": "lastModifiedAt",
           "serializedName": "lastModifiedAt",
-          "description": "The timestamp of resource last modification (UTC)",
+          "doc": "The timestamp of resource last modification (UTC)",
           "type": {
            "$id": "63",
            "kind": "utcDateTime",
@@ -611,7 +611,7 @@
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
-      "description": "Resource tags.",
+      "doc": "Resource tags.",
       "type": {
        "$id": "66",
        "kind": "dict",
@@ -643,7 +643,7 @@
       "kind": "property",
       "name": "location",
       "serializedName": "location",
-      "description": "The geo-location where the resource lives",
+      "doc": "The geo-location where the resource lives",
       "type": {
        "$id": "70",
        "kind": "string",
@@ -666,14 +666,14 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
+     "doc": "The resource-specific properties for this resource.",
      "type": {
       "$id": "72",
       "kind": "model",
       "name": "SingletonTrackedResourceProperties",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.SingletonTrackedResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "description": "Singleton Arm Resource Properties.",
+      "doc": "Singleton Arm Resource Properties.",
       "decorators": [],
       "properties": [
        {
@@ -681,7 +681,7 @@
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
-        "description": "The status of the last operation.",
+        "doc": "The status of the last operation.",
         "type": {
          "$ref": "2"
         },
@@ -697,7 +697,7 @@
         "kind": "property",
         "name": "description",
         "serializedName": "description",
-        "description": "The description of the resource.",
+        "doc": "The description of the resource.",
         "type": {
          "$id": "75",
          "kind": "string",
@@ -741,7 +741,7 @@
    "name": "ErrorResponse",
    "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorResponse",
    "usage": "Error,Json,Exception",
-   "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+   "doc": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
    "decorators": [],
    "properties": [
     {
@@ -749,14 +749,14 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "The error object.",
+     "doc": "The error object.",
      "type": {
       "$id": "78",
       "kind": "model",
       "name": "ErrorDetail",
       "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorDetail",
       "usage": "Json,Exception,LroPolling",
-      "description": "The error detail.",
+      "doc": "The error detail.",
       "decorators": [],
       "properties": [
        {
@@ -764,7 +764,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "description": "The error code.",
+        "doc": "The error code.",
         "type": {
          "$id": "80",
          "kind": "string",
@@ -784,7 +784,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "description": "The error message.",
+        "doc": "The error message.",
         "type": {
          "$id": "82",
          "kind": "string",
@@ -804,7 +804,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "description": "The error target.",
+        "doc": "The error target.",
         "type": {
          "$id": "84",
          "kind": "string",
@@ -824,7 +824,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "description": "The error details.",
+        "doc": "The error details.",
         "type": {
          "$id": "86",
          "kind": "array",
@@ -847,7 +847,7 @@
         "kind": "property",
         "name": "additionalInfo",
         "serializedName": "additionalInfo",
-        "description": "The error additional info.",
+        "doc": "The error additional info.",
         "type": {
          "$id": "88",
          "kind": "array",
@@ -858,7 +858,7 @@
           "name": "ErrorAdditionalInfo",
           "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
           "usage": "Json,Exception,LroPolling",
-          "description": "The resource management error additional info.",
+          "doc": "The resource management error additional info.",
           "decorators": [],
           "properties": [
            {
@@ -866,7 +866,7 @@
             "kind": "property",
             "name": "type",
             "serializedName": "type",
-            "description": "The additional info type.",
+            "doc": "The additional info type.",
             "type": {
              "$id": "91",
              "kind": "string",
@@ -886,7 +886,7 @@
             "kind": "property",
             "name": "info",
             "serializedName": "info",
-            "description": "The additional info.",
+            "doc": "The additional info.",
             "type": {
              "$id": "93",
              "kind": "model",
@@ -941,7 +941,7 @@
    "name": "ArmOperationStatusResourceProvisioningState",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ArmOperationStatus",
    "usage": "LroPolling",
-   "description": "Standard Azure Resource Manager operation status response",
+   "doc": "Standard Azure Resource Manager operation status response",
    "decorators": [],
    "properties": [
     {
@@ -949,7 +949,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The operation status",
+     "doc": "The operation status",
      "type": {
       "$ref": "28"
      },
@@ -965,7 +965,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name of the  operationStatus resource",
+     "doc": "The name of the  operationStatus resource",
      "type": {
       "$id": "97",
       "kind": "string",
@@ -985,7 +985,7 @@
      "kind": "property",
      "name": "startTime",
      "serializedName": "startTime",
-     "description": "Operation start time",
+     "doc": "Operation start time",
      "type": {
       "$id": "99",
       "kind": "utcDateTime",
@@ -1013,7 +1013,7 @@
      "kind": "property",
      "name": "endTime",
      "serializedName": "endTime",
-     "description": "Operation complete time",
+     "doc": "Operation complete time",
      "type": {
       "$id": "102",
       "kind": "utcDateTime",
@@ -1041,7 +1041,7 @@
      "kind": "property",
      "name": "percentComplete",
      "serializedName": "percentComplete",
-     "description": "The progress made toward completing the operation",
+     "doc": "The progress made toward completing the operation",
      "type": {
       "$id": "105",
       "kind": "float64",
@@ -1061,7 +1061,7 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+     "doc": "Errors that occurred if the operation ended with Canceled or Failed status",
      "type": {
       "$ref": "78"
      },
@@ -1080,7 +1080,7 @@
    "name": "SingletonTrackedResourceListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "description": "The response of a SingletonTrackedResource list operation.",
+   "doc": "The response of a SingletonTrackedResource list operation.",
    "decorators": [],
    "properties": [
     {
@@ -1088,7 +1088,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The SingletonTrackedResource items on this page",
+     "doc": "The SingletonTrackedResource items on this page",
      "type": {
       "$id": "109",
       "kind": "array",
@@ -1111,7 +1111,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "111",
       "kind": "url",
@@ -1141,7 +1141,7 @@
    "name": "NestedProxyResource",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-   "description": "Nested child of Top Level Tracked Resource.",
+   "doc": "Nested child of Top Level Tracked Resource.",
    "decorators": [],
    "baseModel": {
     "$id": "114",
@@ -1149,7 +1149,7 @@
     "name": "ProxyResource",
     "crossLanguageDefinitionId": "Azure.ResourceManager.CommonTypes.ProxyResource",
     "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-    "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+    "doc": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
     "decorators": [],
     "baseModel": {
      "$ref": "42"
@@ -1162,14 +1162,14 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
+     "doc": "The resource-specific properties for this resource.",
      "type": {
       "$id": "116",
       "kind": "model",
       "name": "NestedProxyResourceProperties",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NestedProxyResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "description": "Nested Proxy Resource Properties.",
+      "doc": "Nested Proxy Resource Properties.",
       "decorators": [],
       "properties": [
        {
@@ -1177,7 +1177,7 @@
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
-        "description": "Provisioning State of the nested child Resource",
+        "doc": "Provisioning State of the nested child Resource",
         "type": {
          "$ref": "2"
         },
@@ -1193,7 +1193,7 @@
         "kind": "property",
         "name": "description",
         "serializedName": "description",
-        "description": "Nested resource description.",
+        "doc": "Nested resource description.",
         "type": {
          "$id": "119",
          "kind": "string",
@@ -1231,7 +1231,7 @@
    "name": "NestedProxyResourceListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "description": "The response of a NestedProxyResource list operation.",
+   "doc": "The response of a NestedProxyResource list operation.",
    "decorators": [],
    "properties": [
     {
@@ -1239,7 +1239,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The NestedProxyResource items on this page",
+     "doc": "The NestedProxyResource items on this page",
      "type": {
       "$id": "122",
       "kind": "array",
@@ -1262,7 +1262,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "124",
       "kind": "url",
@@ -1292,7 +1292,7 @@
    "name": "TopLevelTrackedResource",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResource",
    "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-   "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+   "doc": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
    "decorators": [],
    "baseModel": {
     "$ref": "41"
@@ -1303,14 +1303,14 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The resource-specific properties for this resource.",
+     "doc": "The resource-specific properties for this resource.",
      "type": {
       "$id": "128",
       "kind": "model",
       "name": "TopLevelTrackedResourceProperties",
       "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.TopLevelTrackedResourceProperties",
       "usage": "Input,Output,Json,LroInitial,LroFinalEnvelope",
-      "description": "Top Level Arm Resource Properties.",
+      "doc": "Top Level Arm Resource Properties.",
       "decorators": [],
       "properties": [
        {
@@ -1318,7 +1318,7 @@
         "kind": "property",
         "name": "provisioningState",
         "serializedName": "provisioningState",
-        "description": "The status of the last operation.",
+        "doc": "The status of the last operation.",
         "type": {
          "$ref": "2"
         },
@@ -1334,7 +1334,7 @@
         "kind": "property",
         "name": "description",
         "serializedName": "description",
-        "description": "The description of the resource.",
+        "doc": "The description of the resource.",
         "type": {
          "$id": "131",
          "kind": "string",
@@ -1369,7 +1369,7 @@
    "name": "TopLevelTrackedResourceListResult",
    "crossLanguageDefinitionId": "Azure.ResourceManager.ResourceListResult",
    "usage": "Output,Json",
-   "description": "The response of a TopLevelTrackedResource list operation.",
+   "doc": "The response of a TopLevelTrackedResource list operation.",
    "decorators": [],
    "properties": [
     {
@@ -1377,7 +1377,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The TopLevelTrackedResource items on this page",
+     "doc": "The TopLevelTrackedResource items on this page",
      "type": {
       "$id": "134",
       "kind": "array",
@@ -1400,7 +1400,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "136",
       "kind": "url",
@@ -1430,7 +1430,7 @@
    "name": "NotificationDetails",
    "crossLanguageDefinitionId": "Azure.ResourceManager.Resources.NotificationDetails",
    "usage": "Input,Json",
-   "description": "The details of a user notification.",
+   "doc": "The details of a user notification.",
    "decorators": [],
    "properties": [
     {
@@ -1438,7 +1438,7 @@
      "kind": "property",
      "name": "message",
      "serializedName": "message",
-     "description": "The notification message.",
+     "doc": "The notification message.",
      "type": {
       "$id": "140",
       "kind": "string",
@@ -1458,7 +1458,7 @@
      "kind": "property",
      "name": "urgent",
      "serializedName": "urgent",
-     "description": "If true, the notification is urgent.",
+     "doc": "If true, the notification is urgent.",
      "type": {
       "$id": "142",
       "kind": "boolean",
@@ -1480,7 +1480,7 @@
   {
    "$id": "143",
    "Name": "ResourcesClient",
-   "Description": "Arm Resource Provider management API.",
+   "Doc": "Arm Resource Provider management API.",
    "Operations": [],
    "Protocol": {
     "$id": "144"
@@ -1490,7 +1490,7 @@
      "$id": "145",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "146",
       "kind": "url",
@@ -1528,14 +1528,14 @@
      "$id": "150",
      "Name": "get",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "Get a TopLevelTrackedResource",
+     "Doc": "Get a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "151",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "152",
         "kind": "string",
@@ -1567,7 +1567,7 @@
        "$id": "155",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "156",
         "kind": "string",
@@ -1596,7 +1596,7 @@
        "$id": "158",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "159",
         "kind": "string",
@@ -1618,7 +1618,7 @@
        "$id": "160",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "161",
         "kind": "string",
@@ -1695,14 +1695,14 @@
      "$id": "166",
      "Name": "createOrReplace",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "Create a TopLevelTrackedResource",
+     "Doc": "Create a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "167",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "168",
         "kind": "string",
@@ -1734,7 +1734,7 @@
        "$id": "171",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "172",
         "kind": "string",
@@ -1763,7 +1763,7 @@
        "$id": "174",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "175",
         "kind": "string",
@@ -1785,7 +1785,7 @@
        "$id": "176",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "177",
         "kind": "string",
@@ -1807,7 +1807,7 @@
        "$id": "178",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "179",
         "kind": "constant",
@@ -1862,7 +1862,7 @@
        "$id": "184",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "Resource create parameters.",
+       "Doc": "Resource create parameters.",
        "Type": {
         "$ref": "126"
        },
@@ -1907,7 +1907,7 @@
          "$id": "187",
          "Name": "azureAsyncOperation",
          "NameInResponse": "Azure-AsyncOperation",
-         "Description": "A link to the status monitor",
+         "Doc": "A link to the status monitor",
          "Type": {
           "$id": "188",
           "kind": "string",
@@ -1920,7 +1920,7 @@
          "$id": "189",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "190",
           "kind": "int32",
@@ -1967,14 +1967,14 @@
      "$id": "193",
      "Name": "update",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "Update a TopLevelTrackedResource",
+     "Doc": "Update a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "194",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "195",
         "kind": "string",
@@ -2006,7 +2006,7 @@
        "$id": "198",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "199",
         "kind": "string",
@@ -2035,7 +2035,7 @@
        "$id": "201",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "202",
         "kind": "string",
@@ -2057,7 +2057,7 @@
        "$id": "203",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "204",
         "kind": "string",
@@ -2079,7 +2079,7 @@
        "$id": "205",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "206",
         "kind": "constant",
@@ -2134,7 +2134,7 @@
        "$id": "211",
        "Name": "properties",
        "NameInRequest": "properties",
-       "Description": "The resource properties to be updated.",
+       "Doc": "The resource properties to be updated.",
        "Type": {
         "$ref": "126"
        },
@@ -2176,7 +2176,7 @@
          "$id": "214",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "215",
           "kind": "string",
@@ -2189,7 +2189,7 @@
          "$id": "216",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "217",
           "kind": "int32",
@@ -2233,14 +2233,14 @@
      "$id": "220",
      "Name": "delete",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "Delete a TopLevelTrackedResource",
+     "Doc": "Delete a TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "221",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "222",
         "kind": "string",
@@ -2272,7 +2272,7 @@
        "$id": "225",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "226",
         "kind": "string",
@@ -2301,7 +2301,7 @@
        "$id": "228",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "229",
         "kind": "string",
@@ -2323,7 +2323,7 @@
        "$id": "230",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "231",
         "kind": "string",
@@ -2381,7 +2381,7 @@
          "$id": "236",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "237",
           "kind": "string",
@@ -2394,7 +2394,7 @@
          "$id": "238",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "239",
           "kind": "int32",
@@ -2441,14 +2441,14 @@
      "$id": "243",
      "Name": "listByResourceGroup",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "List TopLevelTrackedResource resources by resource group",
+     "Doc": "List TopLevelTrackedResource resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "244",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "245",
         "kind": "string",
@@ -2480,7 +2480,7 @@
        "$id": "248",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "249",
         "kind": "string",
@@ -2509,7 +2509,7 @@
        "$id": "251",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "252",
         "kind": "string",
@@ -2591,14 +2591,14 @@
      "$id": "258",
      "Name": "listBySubscription",
      "ResourceName": "TopLevelTrackedResource",
-     "Description": "List TopLevelTrackedResource resources by subscription ID",
+     "Doc": "List TopLevelTrackedResource resources by subscription ID",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "259",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "260",
         "kind": "string",
@@ -2630,7 +2630,7 @@
        "$id": "263",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "264",
         "kind": "string",
@@ -2719,14 +2719,14 @@
      "$id": "271",
      "Name": "actionSync",
      "ResourceName": "TopLevel",
-     "Description": "A synchronous resource action that returns no content.",
+     "Doc": "A synchronous resource action that returns no content.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "272",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "273",
         "kind": "string",
@@ -2758,7 +2758,7 @@
        "$id": "276",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "277",
         "kind": "string",
@@ -2787,7 +2787,7 @@
        "$id": "279",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "280",
         "kind": "string",
@@ -2809,7 +2809,7 @@
        "$id": "281",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "282",
         "kind": "string",
@@ -2831,7 +2831,7 @@
        "$id": "283",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "284",
         "kind": "constant",
@@ -2886,7 +2886,7 @@
        "$id": "289",
        "Name": "body",
        "NameInRequest": "body",
-       "Description": "The content of the action request",
+       "Doc": "The content of the action request",
        "Type": {
         "$ref": "138"
        },
@@ -2935,7 +2935,7 @@
      "$id": "292",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "293",
       "kind": "url",
@@ -2973,14 +2973,14 @@
      "$id": "297",
      "Name": "get",
      "ResourceName": "NestedProxyResource",
-     "Description": "Get a NestedProxyResource",
+     "Doc": "Get a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "298",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "299",
         "kind": "string",
@@ -3012,7 +3012,7 @@
        "$id": "302",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "303",
         "kind": "string",
@@ -3041,7 +3041,7 @@
        "$id": "305",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "306",
         "kind": "string",
@@ -3063,7 +3063,7 @@
        "$id": "307",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "308",
         "kind": "string",
@@ -3085,7 +3085,7 @@
        "$id": "309",
        "Name": "nextedProxyResourceName",
        "NameInRequest": "nextedProxyResourceName",
-       "Description": "Name of the nested resource.",
+       "Doc": "Name of the nested resource.",
        "Type": {
         "$id": "310",
         "kind": "string",
@@ -3162,14 +3162,14 @@
      "$id": "315",
      "Name": "createOrReplace",
      "ResourceName": "NestedProxyResource",
-     "Description": "Create a NestedProxyResource",
+     "Doc": "Create a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "316",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "317",
         "kind": "string",
@@ -3201,7 +3201,7 @@
        "$id": "320",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "321",
         "kind": "string",
@@ -3230,7 +3230,7 @@
        "$id": "323",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "324",
         "kind": "string",
@@ -3252,7 +3252,7 @@
        "$id": "325",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "326",
         "kind": "string",
@@ -3274,7 +3274,7 @@
        "$id": "327",
        "Name": "nextedProxyResourceName",
        "NameInRequest": "nextedProxyResourceName",
-       "Description": "Name of the nested resource.",
+       "Doc": "Name of the nested resource.",
        "Type": {
         "$id": "328",
         "kind": "string",
@@ -3296,7 +3296,7 @@
        "$id": "329",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "330",
         "kind": "constant",
@@ -3351,7 +3351,7 @@
        "$id": "335",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "Resource create parameters.",
+       "Doc": "Resource create parameters.",
        "Type": {
         "$ref": "113"
        },
@@ -3396,7 +3396,7 @@
          "$id": "338",
          "Name": "azureAsyncOperation",
          "NameInResponse": "Azure-AsyncOperation",
-         "Description": "A link to the status monitor",
+         "Doc": "A link to the status monitor",
          "Type": {
           "$id": "339",
           "kind": "string",
@@ -3409,7 +3409,7 @@
          "$id": "340",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "341",
           "kind": "int32",
@@ -3456,14 +3456,14 @@
      "$id": "344",
      "Name": "update",
      "ResourceName": "NestedProxyResource",
-     "Description": "Update a NestedProxyResource",
+     "Doc": "Update a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "345",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "346",
         "kind": "string",
@@ -3495,7 +3495,7 @@
        "$id": "349",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "350",
         "kind": "string",
@@ -3524,7 +3524,7 @@
        "$id": "352",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "353",
         "kind": "string",
@@ -3546,7 +3546,7 @@
        "$id": "354",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "355",
         "kind": "string",
@@ -3568,7 +3568,7 @@
        "$id": "356",
        "Name": "nextedProxyResourceName",
        "NameInRequest": "nextedProxyResourceName",
-       "Description": "Name of the nested resource.",
+       "Doc": "Name of the nested resource.",
        "Type": {
         "$id": "357",
         "kind": "string",
@@ -3590,7 +3590,7 @@
        "$id": "358",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "359",
         "kind": "constant",
@@ -3645,7 +3645,7 @@
        "$id": "364",
        "Name": "properties",
        "NameInRequest": "properties",
-       "Description": "The resource properties to be updated.",
+       "Doc": "The resource properties to be updated.",
        "Type": {
         "$ref": "113"
        },
@@ -3687,7 +3687,7 @@
          "$id": "367",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "368",
           "kind": "string",
@@ -3700,7 +3700,7 @@
          "$id": "369",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "370",
           "kind": "int32",
@@ -3744,14 +3744,14 @@
      "$id": "373",
      "Name": "delete",
      "ResourceName": "NestedProxyResource",
-     "Description": "Delete a NestedProxyResource",
+     "Doc": "Delete a NestedProxyResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "374",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "375",
         "kind": "string",
@@ -3783,7 +3783,7 @@
        "$id": "378",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "379",
         "kind": "string",
@@ -3812,7 +3812,7 @@
        "$id": "381",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "382",
         "kind": "string",
@@ -3834,7 +3834,7 @@
        "$id": "383",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "384",
         "kind": "string",
@@ -3856,7 +3856,7 @@
        "$id": "385",
        "Name": "nextedProxyResourceName",
        "NameInRequest": "nextedProxyResourceName",
-       "Description": "Name of the nested resource.",
+       "Doc": "Name of the nested resource.",
        "Type": {
         "$id": "386",
         "kind": "string",
@@ -3914,7 +3914,7 @@
          "$id": "391",
          "Name": "location",
          "NameInResponse": "Location",
-         "Description": "The Location header contains the URL where the status of the long running operation can be checked.",
+         "Doc": "The Location header contains the URL where the status of the long running operation can be checked.",
          "Type": {
           "$id": "392",
           "kind": "string",
@@ -3927,7 +3927,7 @@
          "$id": "393",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "394",
           "kind": "int32",
@@ -3974,14 +3974,14 @@
      "$id": "398",
      "Name": "listByTopLevelTrackedResource",
      "ResourceName": "NestedProxyResource",
-     "Description": "List NestedProxyResource resources by TopLevelTrackedResource",
+     "Doc": "List NestedProxyResource resources by TopLevelTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "399",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "400",
         "kind": "string",
@@ -4013,7 +4013,7 @@
        "$id": "403",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "404",
         "kind": "string",
@@ -4042,7 +4042,7 @@
        "$id": "406",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "407",
         "kind": "string",
@@ -4064,7 +4064,7 @@
        "$id": "408",
        "Name": "topLevelTrackedResourceName",
        "NameInRequest": "topLevelTrackedResourceName",
-       "Description": "arm resource name for path",
+       "Doc": "arm resource name for path",
        "Type": {
         "$id": "409",
         "kind": "string",
@@ -4152,7 +4152,7 @@
      "$id": "416",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "417",
       "kind": "url",
@@ -4190,14 +4190,14 @@
      "$id": "421",
      "Name": "getByResourceGroup",
      "ResourceName": "SingletonTrackedResource",
-     "Description": "Get a SingletonTrackedResource",
+     "Doc": "Get a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "422",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "423",
         "kind": "string",
@@ -4229,7 +4229,7 @@
        "$id": "426",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "427",
         "kind": "string",
@@ -4258,7 +4258,7 @@
        "$id": "429",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "430",
         "kind": "string",
@@ -4335,14 +4335,14 @@
      "$id": "435",
      "Name": "createOrUpdate",
      "ResourceName": "SingletonTrackedResource",
-     "Description": "Create a SingletonTrackedResource",
+     "Doc": "Create a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "436",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "437",
         "kind": "string",
@@ -4374,7 +4374,7 @@
        "$id": "440",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "441",
         "kind": "string",
@@ -4403,7 +4403,7 @@
        "$id": "443",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "444",
         "kind": "string",
@@ -4425,7 +4425,7 @@
        "$id": "445",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "446",
         "kind": "constant",
@@ -4480,7 +4480,7 @@
        "$id": "451",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "Resource create parameters.",
+       "Doc": "Resource create parameters.",
        "Type": {
         "$ref": "40"
        },
@@ -4525,7 +4525,7 @@
          "$id": "454",
          "Name": "azureAsyncOperation",
          "NameInResponse": "Azure-AsyncOperation",
-         "Description": "A link to the status monitor",
+         "Doc": "A link to the status monitor",
          "Type": {
           "$id": "455",
           "kind": "string",
@@ -4538,7 +4538,7 @@
          "$id": "456",
          "Name": "retryAfter",
          "NameInResponse": "Retry-After",
-         "Description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+         "Doc": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
          "Type": {
           "$id": "457",
           "kind": "int32",
@@ -4585,14 +4585,14 @@
      "$id": "460",
      "Name": "update",
      "ResourceName": "SingletonTrackedResource",
-     "Description": "Update a SingletonTrackedResource",
+     "Doc": "Update a SingletonTrackedResource",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "461",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "462",
         "kind": "string",
@@ -4624,7 +4624,7 @@
        "$id": "465",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "466",
         "kind": "string",
@@ -4653,7 +4653,7 @@
        "$id": "468",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "469",
         "kind": "string",
@@ -4675,7 +4675,7 @@
        "$id": "470",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "471",
         "kind": "constant",
@@ -4730,7 +4730,7 @@
        "$id": "476",
        "Name": "properties",
        "NameInRequest": "properties",
-       "Description": "The resource properties to be updated.",
+       "Doc": "The resource properties to be updated.",
        "Type": {
         "$ref": "40"
        },
@@ -4779,14 +4779,14 @@
      "$id": "478",
      "Name": "listByResourceGroup",
      "ResourceName": "SingletonTrackedResource",
-     "Description": "List SingletonTrackedResource resources by resource group",
+     "Doc": "List SingletonTrackedResource resources by resource group",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "479",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "480",
         "kind": "string",
@@ -4818,7 +4818,7 @@
        "$id": "483",
        "Name": "subscriptionId",
        "NameInRequest": "subscriptionId",
-       "Description": "The ID of the target subscription. The value must be an UUID.",
+       "Doc": "The ID of the target subscription. The value must be an UUID.",
        "Type": {
         "$id": "484",
         "kind": "string",
@@ -4847,7 +4847,7 @@
        "$id": "486",
        "Name": "resourceGroupName",
        "NameInRequest": "resourceGroupName",
-       "Description": "The name of the resource group. The name is case insensitive.",
+       "Doc": "The name of the resource group. The name is case insensitive.",
        "Type": {
         "$id": "487",
         "kind": "string",
@@ -4935,7 +4935,7 @@
      "$id": "494",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "495",
       "kind": "url",

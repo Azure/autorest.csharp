@@ -33,11 +33,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "The version 2022-12-01-preview.",
+     "doc": "The version 2022-12-01-preview.",
      "decorators": []
     }
    ],
-   "description": "The version of the API.",
+   "doc": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -95,7 +95,7 @@
      "$id": "12",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "13",
       "kind": "url",
@@ -133,7 +133,7 @@
      "$id": "17",
      "Name": "get",
      "ResourceName": "AzureCoreEmbeddingVector",
-     "Description": "get an embedding vector",
+     "Doc": "get an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -206,14 +206,14 @@
      "$id": "24",
      "Name": "put",
      "ResourceName": "AzureCoreEmbeddingVector",
-     "Description": "put an embedding vector",
+     "Doc": "put an embedding vector",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "25",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "26",
         "kind": "constant",
@@ -241,7 +241,7 @@
        "$id": "28",
        "Name": "body",
        "NameInRequest": "body",
-       "Description": "_",
+       "Doc": "_",
        "Type": {
         "$id": "29",
         "kind": "array",
@@ -295,14 +295,14 @@
      "$id": "32",
      "Name": "post",
      "ResourceName": "AzureCoreEmbeddingVector",
-     "Description": "post a model which has an embeddingVector property",
+     "Doc": "post a model which has an embeddingVector property",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "33",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "34",
         "kind": "constant",
@@ -357,7 +357,7 @@
        "$id": "39",
        "Name": "body",
        "NameInRequest": "body",
-       "Description": "_",
+       "Doc": "_",
        "Type": {
         "$ref": "6"
        },
@@ -412,7 +412,7 @@
      "$id": "42",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "43",
       "kind": "url",

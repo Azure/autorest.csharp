@@ -114,14 +114,14 @@ namespace Scm.Serialization.EncodedName.Json
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get property. </summary>
         public virtual async Task<ClientResult<JsonEncodedNameModel>> GetPropertyAsync()
         {
             ClientResult result = await GetPropertyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(JsonEncodedNameModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get property. </summary>
         public virtual ClientResult<JsonEncodedNameModel> GetProperty()
         {
             ClientResult result = GetProperty(null);
@@ -129,7 +129,7 @@ namespace Scm.Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get property.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -153,7 +153,7 @@ namespace Scm.Serialization.EncodedName.Json
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get property.
         /// <list type="bullet">
         /// <item>
         /// <description>

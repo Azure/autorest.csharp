@@ -31,7 +31,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "NotSpecified is not allowed.",
+     "doc": "NotSpecified is not allowed.",
      "decorators": []
     },
     {
@@ -49,11 +49,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Extract is the only allowed value.",
+     "doc": "Extract is the only allowed value.",
      "decorators": []
     }
    ],
-   "description": "The type of alias pattern.",
+   "doc": "The type of alias pattern.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output,Json",
@@ -87,7 +87,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is not specified.",
+     "doc": "The token type is not specified.",
      "decorators": []
     },
     {
@@ -105,7 +105,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type can be anything.",
+     "doc": "The token type can be anything.",
      "decorators": []
     },
     {
@@ -123,7 +123,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is string.",
+     "doc": "The token type is string.",
      "decorators": []
     },
     {
@@ -141,7 +141,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is object.",
+     "doc": "The token type is object.",
      "decorators": []
     },
     {
@@ -159,7 +159,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is array.",
+     "doc": "The token type is array.",
      "decorators": []
     },
     {
@@ -177,7 +177,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is integer.",
+     "doc": "The token type is integer.",
      "decorators": []
     },
     {
@@ -195,7 +195,7 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is number.",
+     "doc": "The token type is number.",
      "decorators": []
     },
     {
@@ -213,11 +213,11 @@
      "enumType": {
       "$ref": "8"
      },
-     "description": "The token type is boolean.",
+     "doc": "The token type is boolean.",
      "decorators": []
     }
    ],
-   "description": "The type of the token that the alias path is referring to.",
+   "doc": "The type of the token that the alias path is referring to.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -251,7 +251,7 @@
      "enumType": {
       "$ref": "26"
      },
-     "description": "The token that the alias path is referring to has no attributes.",
+     "doc": "The token that the alias path is referring to has no attributes.",
      "decorators": []
     },
     {
@@ -269,11 +269,11 @@
      "enumType": {
       "$ref": "26"
      },
-     "description": "The token that the alias path is referring to is modifiable by policies with 'modify' effect.",
+     "doc": "The token that the alias path is referring to is modifiable by policies with 'modify' effect.",
      "decorators": []
     }
    ],
-   "description": "The attributes of the token that the alias path is referring to.",
+   "doc": "The attributes of the token that the alias path is referring to.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -307,7 +307,7 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias type is unknown (same as not providing alias type).",
+     "doc": "Alias type is unknown (same as not providing alias type).",
      "decorators": []
     },
     {
@@ -325,7 +325,7 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias value is not secret.",
+     "doc": "Alias value is not secret.",
      "decorators": []
     },
     {
@@ -343,11 +343,11 @@
      "enumType": {
       "$ref": "32"
      },
-     "description": "Alias value is secret.",
+     "doc": "Alias value is secret.",
      "decorators": []
     }
    ],
-   "description": "The type of the alias.",
+   "doc": "The type of the alias.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output,Json",
@@ -381,7 +381,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is not specified.",
+     "doc": "The provider authorization consent state is not specified.",
      "decorators": []
     },
     {
@@ -399,7 +399,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is required.",
+     "doc": "The provider authorization consent state is required.",
      "decorators": []
     },
     {
@@ -417,7 +417,7 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is not required.",
+     "doc": "The provider authorization consent state is not required.",
      "decorators": []
     },
     {
@@ -435,11 +435,11 @@
      "enumType": {
       "$ref": "40"
      },
-     "description": "The provider authorization consent state is consented.",
+     "doc": "The provider authorization consent state is consented.",
      "decorators": []
     }
    ],
-   "description": "The provider authorization consent state.",
+   "doc": "The provider authorization consent state.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -453,7 +453,7 @@
    "name": "ModelAsStruct",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelAsStruct",
    "usage": "Input,Output,Json",
-   "description": "The model to change to struct.",
+   "doc": "The model to change to struct.",
    "decorators": [],
    "properties": [
     {
@@ -461,7 +461,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
       "$id": "52",
       "kind": "int32",
@@ -491,7 +491,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name.",
+     "doc": "The name.",
      "type": {
       "$id": "55",
       "kind": "string",
@@ -511,7 +511,7 @@
      "kind": "property",
      "name": "fields",
      "serializedName": "fields",
-     "description": "The fields property.",
+     "doc": "The fields property.",
      "type": {
       "$id": "57",
       "kind": "array",
@@ -538,7 +538,7 @@
      "kind": "property",
      "name": "nullProperty",
      "serializedName": "nullProperty",
-     "description": "The nullable property.",
+     "doc": "The nullable property.",
      "type": {
       "$id": "60",
       "kind": "int32",
@@ -558,7 +558,7 @@
      "kind": "property",
      "name": "keyValuePairs",
      "serializedName": "keyValuePairs",
-     "description": "The key value pairs property.",
+     "doc": "The key value pairs property.",
      "type": {
       "$id": "62",
       "kind": "dict",
@@ -590,7 +590,7 @@
      "kind": "property",
      "name": "xProperty",
      "serializedName": "xProperty",
-     "description": "The x property.",
+     "doc": "The x property.",
      "type": {
       "$id": "66",
       "kind": "int32",
@@ -613,14 +613,14 @@
    "name": "BaseModel",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.BaseModel",
    "usage": "Input,Output,Json",
-   "description": "The BaseModel in the discriminated set",
+   "doc": "The BaseModel in the discriminated set",
    "decorators": [],
    "discriminatorProperty": {
     "$id": "68",
     "kind": "property",
     "name": "kind",
     "serializedName": "kind",
-    "description": "The kind",
+    "doc": "The kind",
     "type": {
      "$id": "69",
      "kind": "string",
@@ -644,7 +644,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
       "$id": "71",
       "kind": "string",
@@ -668,7 +668,7 @@
      "name": "ModelX",
      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelX",
      "usage": "Input,Output,Json",
-     "description": "The ModelX in the discriminated set",
+     "doc": "The ModelX in the discriminated set",
      "discriminatorValue": "X",
      "decorators": [],
      "baseModel": {
@@ -705,7 +705,7 @@
        "kind": "property",
        "name": "fields",
        "serializedName": "fields",
-       "description": "Optional list.",
+       "doc": "Optional list.",
        "type": {
         "$id": "78",
         "kind": "array",
@@ -732,7 +732,7 @@
        "kind": "property",
        "name": "nullProperty",
        "serializedName": "nullProperty",
-       "description": "Nullable integer.",
+       "doc": "Nullable integer.",
        "type": {
         "$id": "81",
         "kind": "int32",
@@ -752,7 +752,7 @@
        "kind": "property",
        "name": "keyValuePairs",
        "serializedName": "keyValuePairs",
-       "description": "Optional dictionary.",
+       "doc": "Optional dictionary.",
        "type": {
         "$id": "83",
         "kind": "dict",
@@ -784,7 +784,7 @@
        "kind": "property",
        "name": "xProperty",
        "serializedName": "xProperty",
-       "description": "The XProperty property.",
+       "doc": "The XProperty property.",
        "type": {
         "$id": "87",
         "kind": "int32",
@@ -807,7 +807,7 @@
      "name": "ModelY",
      "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ModelY",
      "usage": "Input,Output,Json",
-     "description": "The ModelY in the discriminated set",
+     "doc": "The ModelY in the discriminated set",
      "discriminatorValue": "Y",
      "decorators": [],
      "baseModel": {
@@ -844,7 +844,7 @@
        "kind": "property",
        "name": "yProperty",
        "serializedName": "yProperty",
-       "description": "The YProperty property.",
+       "doc": "The YProperty property.",
        "type": {
         "$id": "93",
         "kind": "string",
@@ -875,7 +875,7 @@
    "name": "AvailabilitySetData",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetData",
    "usage": "Input,Output,Json",
-   "description": "The availability set data",
+   "doc": "The availability set data",
    "decorators": [],
    "baseModel": {
     "$id": "95",
@@ -883,7 +883,7 @@
     "name": "TrackedResourceData",
     "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.TrackedResourceData",
     "usage": "Input,Output,Json",
-    "description": "The tracked resource data",
+    "doc": "The tracked resource data",
     "decorators": [],
     "properties": [
      {
@@ -891,7 +891,7 @@
       "kind": "property",
       "name": "id",
       "serializedName": "id",
-      "description": "The id property.",
+      "doc": "The id property.",
       "type": {
        "$id": "97",
        "kind": "string",
@@ -911,7 +911,7 @@
       "kind": "property",
       "name": "name",
       "serializedName": "name",
-      "description": "The name property.",
+      "doc": "The name property.",
       "type": {
        "$id": "99",
        "kind": "string",
@@ -931,7 +931,7 @@
       "kind": "property",
       "name": "resourceType",
       "serializedName": "type",
-      "description": "The resource type.",
+      "doc": "The resource type.",
       "type": {
        "$id": "101",
        "kind": "string",
@@ -951,7 +951,7 @@
       "kind": "property",
       "name": "location",
       "serializedName": "location",
-      "description": "The location property.",
+      "doc": "The location property.",
       "type": {
        "$id": "103",
        "kind": "string",
@@ -971,7 +971,7 @@
       "kind": "property",
       "name": "tags",
       "serializedName": "tags",
-      "description": "The tags property.",
+      "doc": "The tags property.",
       "type": {
        "$id": "105",
        "kind": "dict",
@@ -1006,7 +1006,7 @@
      "kind": "property",
      "name": "sku",
      "serializedName": "sku",
-     "description": "The sku.",
+     "doc": "The sku.",
      "type": {
       "$id": "109",
       "kind": "model",
@@ -1020,7 +1020,7 @@
         "kind": "property",
         "name": "name",
         "serializedName": "name",
-        "description": "The sku name.",
+        "doc": "The sku name.",
         "type": {
          "$id": "111",
          "kind": "string",
@@ -1040,7 +1040,7 @@
         "kind": "property",
         "name": "tier",
         "serializedName": "tier",
-        "description": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
+        "doc": "Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**.",
         "type": {
          "$id": "113",
          "kind": "string",
@@ -1060,7 +1060,7 @@
         "kind": "property",
         "name": "capacity",
         "serializedName": "capacity",
-        "description": "Specifies the number of virtual machines in the scale set.",
+        "doc": "Specifies the number of virtual machines in the scale set.",
         "type": {
          "$id": "115",
          "kind": "int64",
@@ -1089,14 +1089,14 @@
      "kind": "property",
      "name": "properties",
      "serializedName": "properties",
-     "description": "The properties property.",
+     "doc": "The properties property.",
      "type": {
       "$id": "117",
       "kind": "model",
       "name": "AvailabilitySetProperties",
       "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.AvailabilitySetProperties",
       "usage": "Input,Output,Json",
-      "description": "The availability set properties",
+      "doc": "The availability set properties",
       "decorators": [],
       "properties": [
        {
@@ -1104,7 +1104,7 @@
         "kind": "property",
         "name": "virtualMachines",
         "serializedName": "virtualMachines",
-        "description": "The virtual machines.",
+        "doc": "The virtual machines.",
         "type": {
          "$id": "119",
          "kind": "array",
@@ -1115,7 +1115,7 @@
           "name": "WritableSubResource",
           "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.WritableSubResource",
           "usage": "Input,Output,Json",
-          "description": "The writable sub resource",
+          "doc": "The writable sub resource",
           "decorators": [],
           "properties": [
            {
@@ -1123,7 +1123,7 @@
             "kind": "property",
             "name": "id",
             "serializedName": "id",
-            "description": "The resource id",
+            "doc": "The resource id",
             "type": {
              "$id": "122",
              "kind": "string",
@@ -1155,7 +1155,7 @@
         "kind": "property",
         "name": "platformFaultDomainCount",
         "serializedName": "platformFaultDomainCount",
-        "description": "The platform fault domain count property.",
+        "doc": "The platform fault domain count property.",
         "type": {
          "$id": "124",
          "kind": "int32",
@@ -1175,7 +1175,7 @@
         "kind": "property",
         "name": "platformUpdateDomainCount",
         "serializedName": "platformUpdateDomainCount",
-        "description": "The platform update domain count property.",
+        "doc": "The platform update domain count property.",
         "type": {
          "$id": "126",
          "kind": "int32",
@@ -1219,7 +1219,7 @@
    "name": "ResourceProviderData",
    "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceProviderData",
    "usage": "Output,Json",
-   "description": "A class representing the ResourceProvider data model.\nResource provider information.",
+   "doc": "A class representing the ResourceProvider data model.\nResource provider information.",
    "decorators": [],
    "properties": [
     {
@@ -1227,7 +1227,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The provider ID.",
+     "doc": "The provider ID.",
      "type": {
       "$id": "129",
       "kind": "string",
@@ -1247,7 +1247,7 @@
      "kind": "property",
      "name": "namespace",
      "serializedName": "namespace",
-     "description": "The namespace of the resource provider.",
+     "doc": "The namespace of the resource provider.",
      "type": {
       "$id": "131",
       "kind": "string",
@@ -1267,7 +1267,7 @@
      "kind": "property",
      "name": "registrationState",
      "serializedName": "registrationState",
-     "description": "The registration state of the resource provider.",
+     "doc": "The registration state of the resource provider.",
      "type": {
       "$id": "133",
       "kind": "string",
@@ -1287,7 +1287,7 @@
      "kind": "property",
      "name": "registrationPolicy",
      "serializedName": "registrationPolicy",
-     "description": "The registration policy of the resource provider.",
+     "doc": "The registration policy of the resource provider.",
      "type": {
       "$id": "135",
       "kind": "string",
@@ -1307,7 +1307,7 @@
      "kind": "property",
      "name": "resourceTypes",
      "serializedName": "resourceTypes",
-     "description": "The collection of provider resource types.",
+     "doc": "The collection of provider resource types.",
      "type": {
       "$id": "137",
       "kind": "array",
@@ -1325,7 +1325,7 @@
          "kind": "property",
          "name": "resourceType",
          "serializedName": "resourceType",
-         "description": "The resource type.",
+         "doc": "The resource type.",
          "type": {
           "$id": "140",
           "kind": "string",
@@ -1345,7 +1345,7 @@
          "kind": "property",
          "name": "locations",
          "serializedName": "locations",
-         "description": "The collection of locations where this resource type can be created.",
+         "doc": "The collection of locations where this resource type can be created.",
          "type": {
           "$id": "142",
           "kind": "array",
@@ -1372,7 +1372,7 @@
          "kind": "property",
          "name": "locationMappings",
          "serializedName": "locationMappings",
-         "description": "The location mappings that are supported by this resource type.",
+         "doc": "The location mappings that are supported by this resource type.",
          "type": {
           "$id": "145",
           "kind": "array",
@@ -1383,7 +1383,7 @@
            "name": "ProviderExtendedLocation",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ProviderExtendedLocation",
            "usage": "Output,Json",
-           "description": "The provider extended location.",
+           "doc": "The provider extended location.",
            "decorators": [],
            "properties": [
             {
@@ -1391,7 +1391,7 @@
              "kind": "property",
              "name": "location",
              "serializedName": "location",
-             "description": "The azure location.",
+             "doc": "The azure location.",
              "type": {
               "$id": "148",
               "kind": "string",
@@ -1411,7 +1411,7 @@
              "kind": "property",
              "name": "providerExtendedLocationType",
              "serializedName": "type",
-             "description": "The extended location type.",
+             "doc": "The extended location type.",
              "type": {
               "$id": "150",
               "kind": "string",
@@ -1431,7 +1431,7 @@
              "kind": "property",
              "name": "extendedLocations",
              "serializedName": "extendedLocations",
-             "description": "The extended locations for the azure location.",
+             "doc": "The extended locations for the azure location.",
              "type": {
               "$id": "152",
               "kind": "array",
@@ -1470,7 +1470,7 @@
          "kind": "property",
          "name": "aliases",
          "serializedName": "aliases",
-         "description": "The aliases that are supported by this resource type.",
+         "doc": "The aliases that are supported by this resource type.",
          "type": {
           "$id": "155",
           "kind": "array",
@@ -1481,7 +1481,7 @@
            "name": "ResourceTypeAlias",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAlias",
            "usage": "Output,Json",
-           "description": "The alias type.",
+           "doc": "The alias type.",
            "decorators": [],
            "properties": [
             {
@@ -1489,7 +1489,7 @@
              "kind": "property",
              "name": "name",
              "serializedName": "name",
-             "description": "The alias name.",
+             "doc": "The alias name.",
              "type": {
               "$id": "158",
               "kind": "string",
@@ -1509,7 +1509,7 @@
              "kind": "property",
              "name": "paths",
              "serializedName": "paths",
-             "description": "The paths for an alias.",
+             "doc": "The paths for an alias.",
              "type": {
               "$id": "160",
               "kind": "array",
@@ -1520,7 +1520,7 @@
                "name": "ResourceTypeAliasPath",
                "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPath",
                "usage": "Output,Json",
-               "description": "The type of the paths for alias.",
+               "doc": "The type of the paths for alias.",
                "decorators": [],
                "properties": [
                 {
@@ -1528,7 +1528,7 @@
                  "kind": "property",
                  "name": "path",
                  "serializedName": "path",
-                 "description": "The path of an alias.",
+                 "doc": "The path of an alias.",
                  "type": {
                   "$id": "163",
                   "kind": "string",
@@ -1548,7 +1548,7 @@
                  "kind": "property",
                  "name": "apiVersions",
                  "serializedName": "apiVersions",
-                 "description": "The API versions.",
+                 "doc": "The API versions.",
                  "type": {
                   "$id": "165",
                   "kind": "array",
@@ -1575,14 +1575,14 @@
                  "kind": "property",
                  "name": "pattern",
                  "serializedName": "pattern",
-                 "description": "The pattern for an alias path.",
+                 "doc": "The pattern for an alias path.",
                  "type": {
                   "$id": "168",
                   "kind": "model",
                   "name": "ResourceTypeAliasPattern",
                   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPattern",
                   "usage": "Output,Json",
-                  "description": "The type of the pattern for an alias path.",
+                  "doc": "The type of the pattern for an alias path.",
                   "decorators": [],
                   "properties": [
                    {
@@ -1590,7 +1590,7 @@
                     "kind": "property",
                     "name": "phrase",
                     "serializedName": "phrase",
-                    "description": "The alias pattern phrase.",
+                    "doc": "The alias pattern phrase.",
                     "type": {
                      "$id": "170",
                      "kind": "string",
@@ -1610,7 +1610,7 @@
                     "kind": "property",
                     "name": "variable",
                     "serializedName": "variable",
-                    "description": "The alias pattern variable.",
+                    "doc": "The alias pattern variable.",
                     "type": {
                      "$id": "172",
                      "kind": "string",
@@ -1630,7 +1630,7 @@
                     "kind": "property",
                     "name": "patternType",
                     "serializedName": "patternType",
-                    "description": "The type of alias pattern.",
+                    "doc": "The type of alias pattern.",
                     "type": {
                      "$ref": "2"
                     },
@@ -1655,14 +1655,14 @@
                  "kind": "property",
                  "name": "metadata",
                  "serializedName": "metadata",
-                 "description": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
+                 "doc": "The metadata of the alias path. If missing, fall back to the default metadata of the alias.",
                  "type": {
                   "$id": "175",
                   "kind": "model",
                   "name": "ResourceTypeAliasPathMetadata",
                   "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ResourceTypeAliasPathMetadata",
                   "usage": "Input,Output,Json",
-                  "description": "The ResourceTypeAliasPathMetadata.",
+                  "doc": "The ResourceTypeAliasPathMetadata.",
                   "decorators": [],
                   "properties": [
                    {
@@ -1670,7 +1670,7 @@
                     "kind": "property",
                     "name": "tokenType",
                     "serializedName": "tokenType",
-                    "description": "The type of the token that the alias path is referring to.",
+                    "doc": "The type of the token that the alias path is referring to.",
                     "type": {
                      "$ref": "8"
                     },
@@ -1686,7 +1686,7 @@
                     "kind": "property",
                     "name": "attributes",
                     "serializedName": "attributes",
-                    "description": "The attributes of the token that the alias path is referring to.",
+                    "doc": "The attributes of the token that the alias path is referring to.",
                     "type": {
                      "$ref": "26"
                     },
@@ -1723,7 +1723,7 @@
              "kind": "property",
              "name": "aliasType",
              "serializedName": "aliasType",
-             "description": "The type of the alias.",
+             "doc": "The type of the alias.",
              "type": {
               "$ref": "32"
              },
@@ -1739,7 +1739,7 @@
              "kind": "property",
              "name": "defaultPath",
              "serializedName": "defaultPath",
-             "description": "The default path for an alias.",
+             "doc": "The default path for an alias.",
              "type": {
               "$id": "180",
               "kind": "string",
@@ -1759,7 +1759,7 @@
              "kind": "property",
              "name": "defaultPattern",
              "serializedName": "defaultPattern",
-             "description": "The default pattern for an alias.",
+             "doc": "The default pattern for an alias.",
              "type": {
               "$ref": "168"
              },
@@ -1775,7 +1775,7 @@
              "kind": "property",
              "name": "defaultMetadata",
              "serializedName": "defaultMetadata",
-             "description": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
+             "doc": "The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.",
              "type": {
               "$ref": "175"
              },
@@ -1803,7 +1803,7 @@
          "kind": "property",
          "name": "apiVersions",
          "serializedName": "apiVersions",
-         "description": "The API version.",
+         "doc": "The API version.",
          "type": {
           "$id": "184",
           "kind": "array",
@@ -1830,7 +1830,7 @@
          "kind": "property",
          "name": "defaultApiVersion",
          "serializedName": "defaultApiVersion",
-         "description": "The default API version.",
+         "doc": "The default API version.",
          "type": {
           "$id": "187",
           "kind": "string",
@@ -1850,7 +1850,7 @@
          "kind": "property",
          "name": "zoneMappings",
          "serializedName": "zoneMappings",
-         "description": "Gets the zone mappings.",
+         "doc": "Gets the zone mappings.",
          "type": {
           "$id": "189",
           "kind": "array",
@@ -1861,7 +1861,7 @@
            "name": "ZoneMapping",
            "crossLanguageDefinitionId": "ModelReaderWriterValidationTypeSpec.ZoneMapping",
            "usage": "Output,Json",
-           "description": "The ZoneMapping.",
+           "doc": "The ZoneMapping.",
            "decorators": [],
            "properties": [
             {
@@ -1869,7 +1869,7 @@
              "kind": "property",
              "name": "location",
              "serializedName": "location",
-             "description": "The location of the zone mapping.",
+             "doc": "The location of the zone mapping.",
              "type": {
               "$id": "192",
               "kind": "string",
@@ -1889,7 +1889,7 @@
              "kind": "property",
              "name": "zones",
              "serializedName": "zones",
-             "description": "The zones.",
+             "doc": "The zones.",
              "type": {
               "$id": "194",
               "kind": "array",
@@ -1928,7 +1928,7 @@
          "kind": "property",
          "name": "apiProfiles",
          "serializedName": "apiProfiles",
-         "description": "The API profiles for the resource provider.",
+         "doc": "The API profiles for the resource provider.",
          "type": {
           "$id": "197",
           "kind": "array",
@@ -1946,7 +1946,7 @@
              "kind": "property",
              "name": "profileVersion",
              "serializedName": "profileVersion",
-             "description": "The profile version.",
+             "doc": "The profile version.",
              "type": {
               "$id": "200",
               "kind": "string",
@@ -1966,7 +1966,7 @@
              "kind": "property",
              "name": "apiVersion",
              "serializedName": "apiVersion",
-             "description": "The API version.",
+             "doc": "The API version.",
              "type": {
               "$id": "202",
               "kind": "string",
@@ -1998,7 +1998,7 @@
          "kind": "property",
          "name": "capabilities",
          "serializedName": "capabilities",
-         "description": "The additional capabilities offered by this resource type.",
+         "doc": "The additional capabilities offered by this resource type.",
          "type": {
           "$id": "204",
           "kind": "string",
@@ -2018,7 +2018,7 @@
          "kind": "property",
          "name": "properties",
          "serializedName": "properties",
-         "description": "The properties.",
+         "doc": "The properties.",
          "type": {
           "$id": "206",
           "kind": "dict",
@@ -2062,7 +2062,7 @@
      "kind": "property",
      "name": "providerAuthorizationConsentState",
      "serializedName": "providerAuthorizationConsentState",
-     "description": "The provider authorization consent state.",
+     "doc": "The provider authorization consent state.",
      "type": {
       "$ref": "40"
      },
@@ -2119,7 +2119,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
       "$id": "213",
       "kind": "string",
@@ -2139,7 +2139,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
       "$id": "215",
       "kind": "string",
@@ -2159,7 +2159,7 @@
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
       "$id": "217",
       "kind": "int32",
@@ -2199,7 +2199,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
       "$id": "221",
       "kind": "string",
@@ -2219,7 +2219,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
       "$id": "223",
       "kind": "string",
@@ -2239,7 +2239,7 @@
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
       "$id": "225",
       "kind": "int32",
@@ -2276,7 +2276,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The id property.",
+     "doc": "The id property.",
      "type": {
       "$id": "229",
       "kind": "string",
@@ -2296,7 +2296,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "description": "The name property.",
+     "doc": "The name property.",
      "type": {
       "$id": "231",
       "kind": "string",
@@ -2316,7 +2316,7 @@
      "kind": "property",
      "name": "age",
      "serializedName": "age",
-     "description": "The age property.",
+     "doc": "The age property.",
      "type": {
       "$id": "233",
       "kind": "int32",
@@ -2338,7 +2338,7 @@
   {
    "$id": "234",
    "Name": "ModelReaderWriterValidationTypeSpecClient",
-   "Description": "This is a typespec project to validation the model reader writer functionalities.",
+   "Doc": "This is a typespec project to validation the model reader writer functionalities.",
    "Operations": [
     {
      "$id": "235",
@@ -2350,7 +2350,7 @@
        "$id": "236",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "237",
         "kind": "constant",
@@ -2459,7 +2459,7 @@
        "$id": "245",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "246",
         "kind": "constant",
@@ -2568,7 +2568,7 @@
        "$id": "254",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "255",
         "kind": "constant",
@@ -2677,7 +2677,7 @@
        "$id": "263",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "264",
         "kind": "constant",
@@ -2847,7 +2847,7 @@
        "$id": "277",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "278",
         "kind": "constant",
@@ -2956,7 +2956,7 @@
        "$id": "286",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "287",
         "kind": "constant",
@@ -3065,7 +3065,7 @@
        "$id": "295",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "296",
         "kind": "constant",

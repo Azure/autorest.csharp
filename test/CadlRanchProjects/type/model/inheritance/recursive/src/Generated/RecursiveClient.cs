@@ -155,7 +155,7 @@ namespace _Type.Model.Inheritance.Recursive
             }
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get recursive. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='GetRecursiveAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Extension>> GetRecursiveAsync(CancellationToken cancellationToken = default)
@@ -165,7 +165,7 @@ namespace _Type.Model.Inheritance.Recursive
             return Response.FromValue(Extension.FromResponse(response), response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get recursive. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/RecursiveClient.xml" path="doc/members/member[@name='GetRecursive(CancellationToken)']/*" />
         public virtual Response<Extension> GetRecursive(CancellationToken cancellationToken = default)
@@ -176,7 +176,7 @@ namespace _Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get recursive.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace _Type.Model.Inheritance.Recursive
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get recursive.
         /// <list type="bullet">
         /// <item>
         /// <description>
