@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string extensible. </summary>
         public virtual async Task<ClientResult<GetResponse8>> GetStringExtensibleAsync()
         {
             ClientResult result = await GetStringExtensibleAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse8.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string extensible. </summary>
         public virtual ClientResult<GetResponse8> GetStringExtensible()
         {
             ClientResult result = GetStringExtensible(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string extensible.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string extensible.
         /// <list type="bullet">
         /// <item>
         /// <description>

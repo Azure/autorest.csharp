@@ -45,7 +45,7 @@ namespace _Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string extensible. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensibleAsync(CancellationToken)']/*" />
         public virtual async Task<Response<GetResponse8>> GetStringExtensibleAsync(CancellationToken cancellationToken = default)
@@ -55,7 +55,7 @@ namespace _Type.Union
             return Response.FromValue(GetResponse8.FromResponse(response), response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string extensible. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensible(CancellationToken)']/*" />
         public virtual Response<GetResponse8> GetStringExtensible(CancellationToken cancellationToken = default)
@@ -66,7 +66,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string extensible.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace _Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string extensible.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -360,7 +360,7 @@
        "$id": "40",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "41",
         "kind": "string",
@@ -434,7 +434,7 @@
        "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "49",
         "kind": "constant",
@@ -697,7 +697,7 @@
      "$id": "79",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "80",
       "kind": "url",

@@ -43,7 +43,7 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get models. </remarks>
         public virtual async Task<ClientResult<ListModelsResponse>> GetModelsAsync()
         {
             ClientResult result = await GetModelsAsync(null).ConfigureAwait(false);
@@ -54,7 +54,7 @@ namespace OpenAI
         /// Lists the currently available models, and provides basic information about each one such as the
         /// owner and availability.
         /// </summary>
-        /// <remarks> List. </remarks>
+        /// <remarks> Get models. </remarks>
         public virtual ClientResult<ListModelsResponse> GetModels()
         {
             ClientResult result = GetModels(null);

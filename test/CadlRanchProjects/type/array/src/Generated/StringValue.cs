@@ -45,7 +45,7 @@ namespace _Type._Array
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<IReadOnlyList<string>>> GetStringValueAsync(CancellationToken cancellationToken = default)
@@ -63,7 +63,7 @@ namespace _Type._Array
             return Response.FromValue(value, response);
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get string value. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(CancellationToken)']/*" />
         public virtual Response<IReadOnlyList<string>> GetStringValue(CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get string value.
         /// <list type="bullet">
         /// <item>
         /// <description>

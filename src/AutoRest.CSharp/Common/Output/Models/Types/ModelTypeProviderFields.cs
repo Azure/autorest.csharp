@@ -9,6 +9,7 @@ using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.InputTypes;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
+using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -70,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var parameterValidation = GetParameterValidation(field, inputModelProperty);
                 var parameter = new Parameter(
                     Name: parameterName,
-                    Description: FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)),
+                    Description: FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty)),
                     Type: field.Type,
                     DefaultValue: null,
                     Validation: parameterValidation,
@@ -270,7 +271,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
             return new FieldDeclaration(
-                FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)),
+                FormattableStringHelpers.FromString(BuilderHelpers.EscapeXmlDocDescription(DocHelpers.GetDescription(inputModelProperty.Summary, inputModelProperty.Doc) ?? string.Empty)),
                 fieldModifiers,
                 originalType,
                 valueType,

@@ -10,7 +10,7 @@
    "name": "InputModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.InputModel",
    "usage": "Input,Output,Json",
-   "description": "Usage override to roundtrip.",
+   "doc": "Usage override to roundtrip.",
    "decorators": [],
    "properties": [
     {
@@ -40,7 +40,7 @@
    "name": "OutputModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.ModelInOperation.OutputModel",
    "usage": "Input,Output,Json",
-   "description": "Usage override to roundtrip.",
+   "doc": "Usage override to roundtrip.",
    "decorators": [],
    "properties": [
     {
@@ -125,7 +125,7 @@
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Usage.OrphanModel",
    "access": "public",
    "usage": "Input",
-   "description": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
+   "doc": "Not used anywhere, but access is override to public so still need to be generated and exported with serialization.",
    "decorators": [],
    "properties": [
     {
@@ -154,7 +154,7 @@
   {
    "$id": "16",
    "Name": "UsageClient",
-   "Description": "Test for internal decorator.",
+   "Doc": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
     "$id": "17"
@@ -164,7 +164,7 @@
      "$id": "18",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "19",
       "kind": "url",
@@ -202,14 +202,14 @@
      "$id": "23",
      "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
-     "Description": "Expected body parameter: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
+     "Doc": "Expected body parameter: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "24",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "25",
         "kind": "constant",
@@ -279,7 +279,7 @@
      "$id": "29",
      "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
-     "Description": "Expected response body: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
+     "Doc": "Expected response body: \n```json\n{\n  \"name\": \"Madge\"\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -341,14 +341,14 @@
      "$id": "34",
      "Name": "modelInReadOnlyProperty",
      "ResourceName": "ModelInOperation",
-     "Description": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": \"Madge\"\n  }\n}\n```",
+     "Doc": "\"ResultModel\" should be usage=output, as it is read-only and does not exist in request body.\n\nExpected body parameter: \n```json\n{\n}\n```\n\nExpected response body: \n```json\n{\n  \"result\": {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "35",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "36",
         "kind": "constant",
@@ -457,7 +457,7 @@
      "$id": "44",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "45",
       "kind": "url",

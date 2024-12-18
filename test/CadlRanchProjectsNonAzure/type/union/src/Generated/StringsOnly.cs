@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get strings only. </summary>
         public virtual async Task<ClientResult<GetResponse9>> GetStringsOnlyAsync()
         {
             ClientResult result = await GetStringsOnlyAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse9.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get strings only. </summary>
         public virtual ClientResult<GetResponse9> GetStringsOnly()
         {
             ClientResult result = GetStringsOnly(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get strings only.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get strings only.
         /// <list type="bullet">
         /// <item>
         /// <description>
