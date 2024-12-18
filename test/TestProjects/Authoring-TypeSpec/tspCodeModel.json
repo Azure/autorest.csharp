@@ -138,7 +138,7 @@
      "decorators": []
     }
    ],
-   "description": "Represents the job status values.",
+   "doc": "Represents the job status values.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Output,Json",
@@ -208,7 +208,7 @@
      "enumType": {
       "$ref": "22"
      },
-     "description": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B.",
+     "doc": "For building a classification model to classify text using your own data. Each file will have only one label. For example, file 1 is classified as A and file 2 is classified as B.",
      "decorators": []
     },
     {
@@ -226,7 +226,7 @@
      "enumType": {
       "$ref": "22"
      },
-     "description": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C.",
+     "doc": "For building a classification model to classify text using your own data. Each file can have one or many labels. For example, file 1 is classified as A, B, and C and file 2 is classified as B and C.",
      "decorators": []
     },
     {
@@ -244,11 +244,11 @@
      "enumType": {
       "$ref": "22"
      },
-     "description": "For building an extraction model to identify your domain categories using your own data.",
+     "doc": "For building an extraction model to identify your domain categories using your own data.",
      "decorators": []
     }
    ],
-   "description": "Represents the project kind.",
+   "doc": "Represents the project kind.",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -282,7 +282,7 @@
      "enumType": {
       "$ref": "30"
      },
-     "description": "The operation has not started.",
+     "doc": "The operation has not started.",
      "decorators": []
     },
     {
@@ -300,7 +300,7 @@
      "enumType": {
       "$ref": "30"
      },
-     "description": "The operation is in progress.",
+     "doc": "The operation is in progress.",
      "decorators": []
     },
     {
@@ -318,7 +318,7 @@
      "enumType": {
       "$ref": "30"
      },
-     "description": "The operation has completed successfully.",
+     "doc": "The operation has completed successfully.",
      "decorators": []
     },
     {
@@ -336,7 +336,7 @@
      "enumType": {
       "$ref": "30"
      },
-     "description": "The operation has failed.",
+     "doc": "The operation has failed.",
      "decorators": []
     },
     {
@@ -354,11 +354,11 @@
      "enumType": {
       "$ref": "30"
      },
-     "description": "The operation has been canceled by the user.",
+     "doc": "The operation has been canceled by the user.",
      "decorators": []
     }
    ],
-   "description": "Enum describing allowed operation states.",
+   "doc": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -379,7 +379,7 @@
      "kind": "property",
      "name": "jobId",
      "serializedName": "jobId",
-     "description": "The job ID.",
+     "doc": "The job ID.",
      "type": {
       "$id": "44",
       "kind": "string",
@@ -399,7 +399,7 @@
      "kind": "property",
      "name": "createdDateTime",
      "serializedName": "createdDateTime",
-     "description": "The creation date time of the job.",
+     "doc": "The creation date time of the job.",
      "type": {
       "$id": "46",
       "kind": "utcDateTime",
@@ -427,7 +427,7 @@
      "kind": "property",
      "name": "lastUpdatedDateTime",
      "serializedName": "lastUpdatedDateTime",
-     "description": "The the last date time the job was updated.",
+     "doc": "The the last date time the job was updated.",
      "type": {
       "$id": "49",
       "kind": "utcDateTime",
@@ -455,7 +455,7 @@
      "kind": "property",
      "name": "expirationDateTime",
      "serializedName": "expirationDateTime",
-     "description": "The expiration date time of the job.",
+     "doc": "The expiration date time of the job.",
      "type": {
       "$id": "52",
       "kind": "utcDateTime",
@@ -483,7 +483,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The job status.",
+     "doc": "The job status.",
      "type": {
       "$ref": "2"
      },
@@ -499,7 +499,7 @@
      "kind": "property",
      "name": "warnings",
      "serializedName": "warnings",
-     "description": "The warnings that were encountered while executing the job.",
+     "doc": "The warnings that were encountered while executing the job.",
      "type": {
       "$id": "56",
       "kind": "array",
@@ -510,7 +510,7 @@
        "name": "JobWarning",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.JobWarning",
        "usage": "Output,Json",
-       "description": "Represents a warning that was encountered while executing the request.",
+       "doc": "Represents a warning that was encountered while executing the request.",
        "decorators": [],
        "properties": [
         {
@@ -518,7 +518,7 @@
          "kind": "property",
          "name": "code",
          "serializedName": "code",
-         "description": "The warning code.",
+         "doc": "The warning code.",
          "type": {
           "$id": "59",
           "kind": "string",
@@ -538,7 +538,7 @@
          "kind": "property",
          "name": "message",
          "serializedName": "message",
-         "description": "The warning message.",
+         "doc": "The warning message.",
          "type": {
           "$id": "61",
           "kind": "string",
@@ -570,14 +570,14 @@
      "kind": "property",
      "name": "errors",
      "serializedName": "errors",
-     "description": "The errors encountered while executing the job.",
+     "doc": "The errors encountered while executing the job.",
      "type": {
       "$id": "63",
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Output,Json,Exception",
-      "description": "The error object.",
+      "doc": "The error object.",
       "decorators": [],
       "properties": [
        {
@@ -585,7 +585,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "description": "One of a server-defined set of error codes.",
+        "doc": "One of a server-defined set of error codes.",
         "type": {
          "$id": "65",
          "kind": "string",
@@ -605,7 +605,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "description": "A human-readable representation of the error.",
+        "doc": "A human-readable representation of the error.",
         "type": {
          "$id": "67",
          "kind": "string",
@@ -625,7 +625,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "description": "The target of the error.",
+        "doc": "The target of the error.",
         "type": {
          "$id": "69",
          "kind": "string",
@@ -645,7 +645,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "description": "An array of details about specific errors that led to this reported error.",
+        "doc": "An array of details about specific errors that led to this reported error.",
         "type": {
          "$id": "71",
          "kind": "array",
@@ -668,14 +668,14 @@
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
-        "description": "An object containing more specific information than the current object about the error.",
+        "doc": "An object containing more specific information than the current object about the error.",
         "type": {
          "$id": "73",
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Output,Json,Exception",
-         "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
           {
@@ -683,7 +683,7 @@
            "kind": "property",
            "name": "code",
            "serializedName": "code",
-           "description": "One of a server-defined set of error codes.",
+           "doc": "One of a server-defined set of error codes.",
            "type": {
             "$id": "75",
             "kind": "string",
@@ -703,7 +703,7 @@
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
-           "description": "Inner error.",
+           "doc": "Inner error.",
            "type": {
             "$ref": "73"
            },
@@ -775,7 +775,7 @@
      "kind": "property",
      "name": "jobId",
      "serializedName": "jobId",
-     "description": "The job ID.",
+     "doc": "The job ID.",
      "type": {
       "$id": "81",
       "kind": "string",
@@ -795,7 +795,7 @@
      "kind": "property",
      "name": "createdDateTime",
      "serializedName": "createdDateTime",
-     "description": "The creation date time of the job.",
+     "doc": "The creation date time of the job.",
      "type": {
       "$id": "83",
       "kind": "utcDateTime",
@@ -823,7 +823,7 @@
      "kind": "property",
      "name": "lastUpdatedDateTime",
      "serializedName": "lastUpdatedDateTime",
-     "description": "The the last date time the job was updated.",
+     "doc": "The the last date time the job was updated.",
      "type": {
       "$id": "86",
       "kind": "utcDateTime",
@@ -851,7 +851,7 @@
      "kind": "property",
      "name": "expirationDateTime",
      "serializedName": "expirationDateTime",
-     "description": "The expiration date time of the job.",
+     "doc": "The expiration date time of the job.",
      "type": {
       "$id": "89",
       "kind": "utcDateTime",
@@ -879,7 +879,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The job status.",
+     "doc": "The job status.",
      "type": {
       "$ref": "2"
      },
@@ -895,7 +895,7 @@
      "kind": "property",
      "name": "warnings",
      "serializedName": "warnings",
-     "description": "The warnings that were encountered while executing the job.",
+     "doc": "The warnings that were encountered while executing the job.",
      "type": {
       "$id": "93",
       "kind": "array",
@@ -918,7 +918,7 @@
      "kind": "property",
      "name": "errors",
      "serializedName": "errors",
-     "description": "The errors encountered while executing the job.",
+     "doc": "The errors encountered while executing the job.",
      "type": {
       "$ref": "63"
      },
@@ -982,7 +982,7 @@
      "kind": "property",
      "name": "projectKind",
      "serializedName": "projectKind",
-     "description": "The project kind.",
+     "doc": "The project kind.",
      "type": {
       "$ref": "22"
      },
@@ -998,7 +998,7 @@
      "kind": "property",
      "name": "storageInputContainerName",
      "serializedName": "storageInputContainerName",
-     "description": "The storage container name.",
+     "doc": "The storage container name.",
      "type": {
       "$id": "102",
       "kind": "string",
@@ -1018,14 +1018,14 @@
      "kind": "property",
      "name": "settings",
      "serializedName": "settings",
-     "description": "The project settings.",
+     "doc": "The project settings.",
      "type": {
       "$id": "104",
       "kind": "model",
       "name": "ProjectSettings",
       "crossLanguageDefinitionId": "AuthoringTypeSpec.ProjectSettings",
       "usage": "None",
-      "description": "Represents the settings used to define the project behavior.",
+      "doc": "Represents the settings used to define the project behavior.",
       "decorators": [],
       "additionalProperties": {
        "$id": "105",
@@ -1048,7 +1048,7 @@
      "kind": "property",
      "name": "multilingual",
      "serializedName": "multilingual",
-     "description": "Whether the project would be used for multiple languages or not.",
+     "doc": "Whether the project would be used for multiple languages or not.",
      "type": {
       "$id": "107",
       "kind": "boolean",
@@ -1068,7 +1068,7 @@
      "kind": "property",
      "name": "description",
      "serializedName": "description",
-     "description": "The project description.",
+     "doc": "The project description.",
      "type": {
       "$id": "109",
       "kind": "string",
@@ -1088,7 +1088,7 @@
      "kind": "property",
      "name": "language",
      "serializedName": "language",
-     "description": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+     "doc": "The project language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
      "type": {
       "$id": "111",
       "kind": "string",
@@ -1108,7 +1108,7 @@
      "kind": "property",
      "name": "createdDateTime",
      "serializedName": "createdDateTime",
-     "description": "Represents the project creation datetime.",
+     "doc": "Represents the project creation datetime.",
      "type": {
       "$id": "113",
       "kind": "utcDateTime",
@@ -1136,7 +1136,7 @@
      "kind": "property",
      "name": "lastModifiedDateTime",
      "serializedName": "lastModifiedDateTime",
-     "description": "Represents the project last modification datetime.",
+     "doc": "Represents the project last modification datetime.",
      "type": {
       "$id": "116",
       "kind": "utcDateTime",
@@ -1164,7 +1164,7 @@
      "kind": "property",
      "name": "lastTrainedDateTime",
      "serializedName": "lastTrainedDateTime",
-     "description": "Represents the project last training datetime.",
+     "doc": "Represents the project last training datetime.",
      "type": {
       "$id": "119",
       "kind": "utcDateTime",
@@ -1192,7 +1192,7 @@
      "kind": "property",
      "name": "lastDeployedDateTime",
      "serializedName": "lastDeployedDateTime",
-     "description": "Represents the project last deployment datetime.",
+     "doc": "Represents the project last deployment datetime.",
      "type": {
       "$id": "122",
       "kind": "utcDateTime",
@@ -1226,7 +1226,7 @@
    "name": "OperationStatusError",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "None",
-   "description": "Provides status details for long running operations.",
+   "doc": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
     {
@@ -1234,7 +1234,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "description": "The unique ID of the operation.",
+     "doc": "The unique ID of the operation.",
      "type": {
       "$id": "126",
       "kind": "string",
@@ -1254,7 +1254,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "description": "The status of the operation",
+     "doc": "The status of the operation",
      "type": {
       "$ref": "30"
      },
@@ -1270,7 +1270,7 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "description": "Error object that describes the error when status is \"Failed\".",
+     "doc": "Error object that describes the error when status is \"Failed\".",
      "type": {
       "$ref": "63"
      },
@@ -1289,7 +1289,7 @@
    "name": "PagedProject",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
-   "description": "Paged collection of Project items",
+   "doc": "Paged collection of Project items",
    "decorators": [],
    "properties": [
     {
@@ -1297,7 +1297,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The Project items on this page",
+     "doc": "The Project items on this page",
      "type": {
       "$id": "131",
       "kind": "array",
@@ -1320,7 +1320,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "133",
       "kind": "url",
@@ -1350,7 +1350,7 @@
    "name": "TrainingJobOptions",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingJobOptions",
    "usage": "None",
-   "description": "Training job parameters.",
+   "doc": "Training job parameters.",
    "decorators": [],
    "properties": [
     {
@@ -1409,7 +1409,7 @@
    "name": "PagedDeployment",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "None",
-   "description": "Paged collection of Deployment items",
+   "doc": "Paged collection of Deployment items",
    "decorators": [],
    "properties": [
     {
@@ -1417,7 +1417,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The Deployment items on this page",
+     "doc": "The Deployment items on this page",
      "type": {
       "$id": "143",
       "kind": "array",
@@ -1440,7 +1440,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "145",
       "kind": "url",
@@ -1477,7 +1477,7 @@
      "kind": "property",
      "name": "firstDeploymentName",
      "serializedName": "firstDeploymentName",
-     "description": "Represents the first deployment name.",
+     "doc": "Represents the first deployment name.",
      "type": {
       "$id": "149",
       "kind": "string",
@@ -1497,7 +1497,7 @@
      "kind": "property",
      "name": "secondDeploymentName",
      "serializedName": "secondDeploymentName",
-     "description": "Represents the second deployment name.",
+     "doc": "Represents the second deployment name.",
      "type": {
       "$id": "151",
       "kind": "string",
@@ -1520,7 +1520,7 @@
    "name": "SupportedLanguages",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguages",
    "usage": "None",
-   "description": "Paged collection of SupportedLanguage items",
+   "doc": "Paged collection of SupportedLanguage items",
    "decorators": [],
    "properties": [
     {
@@ -1528,7 +1528,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The SupportedLanguage items on this page",
+     "doc": "The SupportedLanguage items on this page",
      "type": {
       "$id": "154",
       "kind": "array",
@@ -1539,7 +1539,7 @@
        "name": "SupportedLanguage",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.SupportedLanguage",
        "usage": "None",
-       "description": "Represents a supported language.",
+       "doc": "Represents a supported language.",
        "decorators": [],
        "properties": [
         {
@@ -1547,7 +1547,7 @@
          "kind": "property",
          "name": "languageName",
          "serializedName": "languageName",
-         "description": "The language name.",
+         "doc": "The language name.",
          "type": {
           "$id": "157",
           "kind": "string",
@@ -1567,7 +1567,7 @@
          "kind": "property",
          "name": "languageCode",
          "serializedName": "languageCode",
-         "description": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+         "doc": "The language code. This is BCP-47 representation of a language. For example, \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
          "type": {
           "$id": "159",
           "kind": "string",
@@ -1599,7 +1599,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "161",
       "kind": "url",
@@ -1632,7 +1632,7 @@
    "name": "TrainingConfigVersions",
    "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersions",
    "usage": "None",
-   "description": "Paged collection of TrainingConfigVersion items",
+   "doc": "Paged collection of TrainingConfigVersion items",
    "decorators": [],
    "properties": [
     {
@@ -1640,7 +1640,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "description": "The TrainingConfigVersion items on this page",
+     "doc": "The TrainingConfigVersion items on this page",
      "type": {
       "$id": "165",
       "kind": "array",
@@ -1651,7 +1651,7 @@
        "name": "TrainingConfigVersion",
        "crossLanguageDefinitionId": "AuthoringTypeSpec.TrainingConfigVersion",
        "usage": "None",
-       "description": "Represents a training config version.",
+       "doc": "Represents a training config version.",
        "decorators": [],
        "properties": [
         {
@@ -1659,7 +1659,7 @@
          "kind": "property",
          "name": "trainingConfigVersionStr",
          "serializedName": "trainingConfigVersionStr",
-         "description": "Represents the version of the config.",
+         "doc": "Represents the version of the config.",
          "type": {
           "$id": "168",
           "kind": "string",
@@ -1679,7 +1679,7 @@
          "kind": "property",
          "name": "modelExpirationDate",
          "serializedName": "modelExpirationDate",
-         "description": "Represents the training config version expiration date.",
+         "doc": "Represents the training config version expiration date.",
          "type": {
           "$id": "170",
           "kind": "plainDate",
@@ -1711,7 +1711,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "description": "The link to the next page of items",
+     "doc": "The link to the next page of items",
      "type": {
       "$id": "172",
       "kind": "url",
@@ -1779,14 +1779,14 @@
      "$id": "179",
      "Name": "createOrUpdate",
      "ResourceName": "Project",
-     "Description": "Creates a new project or updates an existing one.",
+     "Doc": "Creates a new project or updates an existing one.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "180",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "181",
         "kind": "string",
@@ -1839,7 +1839,7 @@
        "$id": "186",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "187",
         "kind": "constant",
@@ -1894,7 +1894,7 @@
        "$id": "192",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "The resource instance.",
+       "Doc": "The resource instance.",
        "Type": {
         "$ref": "97"
        },
@@ -1924,7 +1924,7 @@
          "$id": "194",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "195",
           "kind": "url",
@@ -1960,7 +1960,7 @@
          "$id": "198",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "199",
           "kind": "url",
@@ -2014,14 +2014,14 @@
      "$id": "203",
      "Name": "get",
      "ResourceName": "Project",
-     "Description": "Gets the details of a project.",
+     "Doc": "Gets the details of a project.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "204",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "205",
         "kind": "string",
@@ -2129,14 +2129,14 @@
      "$id": "214",
      "Name": "delete",
      "ResourceName": "Project",
-     "Description": "Deletes a project.",
+     "Doc": "Deletes a project.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "215",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "216",
         "kind": "string",
@@ -2228,7 +2228,7 @@
          "$id": "225",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "226",
           "kind": "url",
@@ -2276,14 +2276,14 @@
      "$id": "230",
      "Name": "list",
      "ResourceName": "Project",
-     "Description": "Lists the existing projects.",
+     "Doc": "Lists the existing projects.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "231",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "232",
         "kind": "string",
@@ -2375,14 +2375,14 @@
      "$id": "240",
      "Name": "export",
      "ResourceName": "Projects",
-     "Description": "Triggers a job to export a project's data.",
+     "Doc": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "241",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "242",
         "kind": "string",
@@ -2492,7 +2492,7 @@
          "$id": "253",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "254",
           "kind": "url",
@@ -2537,14 +2537,14 @@
      "$id": "258",
      "Name": "importx",
      "ResourceName": "Projects",
-     "Description": "Triggers a job to export a project's data.",
+     "Doc": "Triggers a job to export a project's data.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "259",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "260",
         "kind": "string",
@@ -2633,7 +2633,7 @@
          "$id": "269",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "270",
           "kind": "url",
@@ -2678,14 +2678,14 @@
      "$id": "274",
      "Name": "train",
      "ResourceName": "Projects",
-     "Description": "Triggers a training job for a project.",
+     "Doc": "Triggers a training job for a project.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "275",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "276",
         "kind": "string",
@@ -2738,7 +2738,7 @@
        "$id": "281",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "282",
         "kind": "constant",
@@ -2819,7 +2819,7 @@
          "$id": "289",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "290",
           "kind": "url",
@@ -2900,14 +2900,14 @@
      "$id": "298",
      "Name": "getDeployment",
      "ResourceName": "Deployment",
-     "Description": "Gets the details of a deployment.",
+     "Doc": "Gets the details of a deployment.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "299",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "300",
         "kind": "string",
@@ -3036,14 +3036,14 @@
      "$id": "311",
      "Name": "deployProject",
      "ResourceName": "Deployment",
-     "Description": "Creates a new deployment or replaces an existing one.",
+     "Doc": "Creates a new deployment or replaces an existing one.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "312",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "313",
         "kind": "string",
@@ -3117,7 +3117,7 @@
        "$id": "320",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "321",
         "kind": "constant",
@@ -3172,7 +3172,7 @@
        "$id": "326",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Description": "The resource instance.",
+       "Doc": "The resource instance.",
        "Type": {
         "$ref": "138"
        },
@@ -3202,7 +3202,7 @@
          "$id": "328",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "329",
           "kind": "url",
@@ -3238,7 +3238,7 @@
          "$id": "332",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "333",
           "kind": "url",
@@ -3292,14 +3292,14 @@
      "$id": "337",
      "Name": "deleteDeployment",
      "ResourceName": "Deployment",
-     "Description": "Deletes a project deployment.",
+     "Doc": "Deletes a project deployment.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "338",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "339",
         "kind": "string",
@@ -3412,7 +3412,7 @@
          "$id": "350",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "351",
           "kind": "url",
@@ -3460,14 +3460,14 @@
      "$id": "355",
      "Name": "list",
      "ResourceName": "Deployment",
-     "Description": "Lists the existing deployments.",
+     "Doc": "Lists the existing deployments.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "356",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "357",
         "kind": "string",
@@ -3580,14 +3580,14 @@
      "$id": "367",
      "Name": "swapDeployments",
      "ResourceName": "Deployments",
-     "Description": "Swaps two existing deployments with each other.",
+     "Doc": "Swaps two existing deployments with each other.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "368",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "369",
         "kind": "string",
@@ -3640,7 +3640,7 @@
        "$id": "374",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "375",
         "kind": "constant",
@@ -3695,7 +3695,7 @@
        "$id": "380",
        "Name": "body",
        "NameInRequest": "body",
-       "Description": "The body schema of the operation.",
+       "Doc": "The body schema of the operation.",
        "Type": {
         "$ref": "147"
        },
@@ -3722,7 +3722,7 @@
          "$id": "382",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Description": "The location for monitoring the operation state.",
+         "Doc": "The location for monitoring the operation state.",
          "Type": {
           "$id": "383",
           "kind": "url",
@@ -3803,14 +3803,14 @@
      "$id": "391",
      "Name": "getDeploymentStatus",
      "ResourceName": "DeploymentJob",
-     "Description": "Gets the status of an existing deployment job.",
+     "Doc": "Gets the status of an existing deployment job.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "392",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "393",
         "kind": "string",
@@ -3960,14 +3960,14 @@
      "$id": "406",
      "Name": "getSwapDeploymentsStatus",
      "ResourceName": "SwapDeploymentsJob",
-     "Description": "Gets the status of an existing swap deployment job.",
+     "Doc": "Gets the status of an existing swap deployment job.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "407",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "408",
         "kind": "string",
@@ -4219,7 +4219,7 @@
        "$id": "432",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "433",
         "kind": "string",
@@ -4380,7 +4380,7 @@
        "$id": "448",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Description": "The API version to use for this operation.",
+       "Doc": "The API version to use for this operation.",
        "Type": {
         "$id": "449",
         "kind": "string",
