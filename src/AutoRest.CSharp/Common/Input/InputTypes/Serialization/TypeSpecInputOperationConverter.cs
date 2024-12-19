@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Input
             string? summary = null;
             string? deprecated = null;
             string? accessibility = null;
-            string? description = null;
+            string? doc = null;
             IReadOnlyList<InputParameter>? parameters = null;
             IReadOnlyList<OperationResponse>? responses = null;
             RequestMethod httpMethod = default;
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputOperation.ResourceName), ref resourceName)
                     || reader.TryReadString(nameof(InputOperation.Summary), ref summary)
                     || reader.TryReadString(nameof(InputOperation.Deprecated), ref deprecated)
-                    || reader.TryReadString(nameof(InputOperation.Description), ref description)
+                    || reader.TryReadString(nameof(InputOperation.Doc), ref doc)
                     || reader.TryReadString(nameof(InputOperation.Accessibility), ref accessibility)
                     || reader.TryReadWithConverter(nameof(InputOperation.Parameters), options, ref parameters)
                     || reader.TryReadWithConverter(nameof(InputOperation.Responses), options, ref responses)
@@ -84,10 +84,9 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException("Enum must have name");
-            if (string.IsNullOrEmpty(description))
+            if (string.IsNullOrEmpty(doc) && string.IsNullOrEmpty(summary))
             {
-                Console.Error.WriteLine($"[Warn]: InputOperation '{name}' does not have a description");
-                description = $"{name.Humanize()}.";
+                Console.Error.WriteLine($"[Warn]: InputOperation '{name}' must have either a summary or description");
             }
             crossLanguageDefinitionId = crossLanguageDefinitionId ?? throw new JsonException("InputOperation must have crossLanguageDefinitionId");
             uri = uri ?? throw new JsonException("InputOperation must have uri");
@@ -95,7 +94,7 @@ namespace AutoRest.CSharp.Common.Input
             parameters = parameters ?? throw new JsonException("InputOperation must have parameters");
             responses = responses ?? throw new JsonException("InputOperation must have responses");
 
-            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, description, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
+            var inputOperation = new InputOperation(name, resourceName, summary, deprecated, doc, accessibility, parameters, responses, httpMethod, requestBodyMediaType, uri, path, externalDocsUri, requestMediaTypes, bufferResponse, longRunning, paging, generateProtocolMethod, generateConvenienceMethod, crossLanguageDefinitionId, keepClientDefaultValue, examples)
             {
                 IsNameChanged = IsNameChanged(crossLanguageDefinitionId, name)
             };

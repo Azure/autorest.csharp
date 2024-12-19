@@ -35,14 +35,14 @@ namespace Scm._Type.Union
             _endpoint = endpoint;
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed literal. </summary>
         public virtual async Task<ClientResult<GetResponse1>> GetMixedLiteralAsync()
         {
             ClientResult result = await GetMixedLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(GetResponse1.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get. </summary>
+        /// <summary> Get mixed literal. </summary>
         public virtual ClientResult<GetResponse1> GetMixedLiteral()
         {
             ClientResult result = GetMixedLiteral(null);
@@ -50,7 +50,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -74,7 +74,7 @@ namespace Scm._Type.Union
         }
 
         /// <summary>
-        /// [Protocol Method] Get.
+        /// [Protocol Method] Get mixed literal.
         /// <list type="bullet">
         /// <item>
         /// <description>

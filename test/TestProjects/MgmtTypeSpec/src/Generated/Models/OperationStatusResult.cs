@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure;
+using Azure.Core;
 
 namespace MgmtTypeSpec.Models
 {
@@ -66,8 +67,9 @@ namespace MgmtTypeSpec.Models
         /// <param name="endOn"> The end time of the operation. </param>
         /// <param name="operations"> The operations list. </param>
         /// <param name="error"> If present, details of the operation error. </param>
+        /// <param name="resourceId"> Fully qualified ID of the resource against which the original async operation was started. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal OperationStatusResult(string id, string name, string status, double? percentComplete, DateTimeOffset? startOn, DateTimeOffset? endOn, IReadOnlyList<OperationStatusResult> operations, ResponseError error, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal OperationStatusResult(ResourceIdentifier id, string name, string status, double? percentComplete, DateTimeOffset? startOn, DateTimeOffset? endOn, IReadOnlyList<OperationStatusResult> operations, ResponseError error, string resourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Id = id;
             Name = name;
@@ -77,6 +79,7 @@ namespace MgmtTypeSpec.Models
             EndOn = endOn;
             Operations = operations;
             Error = error;
+            ResourceId = resourceId;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
@@ -86,7 +89,7 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> Fully qualified ID for the async operation. </summary>
-        public string Id { get; }
+        public ResourceIdentifier Id { get; }
         /// <summary> Name of the async operation. </summary>
         public string Name { get; }
         /// <summary> Operation status. </summary>
@@ -101,5 +104,7 @@ namespace MgmtTypeSpec.Models
         public IReadOnlyList<OperationStatusResult> Operations { get; }
         /// <summary> If present, details of the operation error. </summary>
         public ResponseError Error { get; }
+        /// <summary> Fully qualified ID of the resource against which the original async operation was started. </summary>
+        public string ResourceId { get; }
     }
 }

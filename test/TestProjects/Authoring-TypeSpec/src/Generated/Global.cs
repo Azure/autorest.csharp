@@ -94,7 +94,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] List training config versions.
+        /// [Protocol Method] Get training config versions.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -118,7 +118,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] List training config versions.
+        /// [Protocol Method] Get training config versions.
         /// <list type="bullet">
         /// <item>
         /// <description>
