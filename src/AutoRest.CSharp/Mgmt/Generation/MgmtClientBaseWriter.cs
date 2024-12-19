@@ -727,10 +727,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
                         // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                        // Change back to `parameter.Parameter.Name` to fix the issue :https://github.com/Azure/azure-sdk-for-net/issues/44735
                         if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            args.Add($"{parameter.Parameter.Name}");
+                            args.Add($"pageSizeHint");
                         }
                         else
                         {

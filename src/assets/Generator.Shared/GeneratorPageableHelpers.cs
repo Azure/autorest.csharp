@@ -41,7 +41,20 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
-
+        public static AsyncPageable<T> CreateAsyncPageable<T>(
+            Func<int?, HttpMessage>? createFirstPageRequest,
+            Func<int?, string, HttpMessage>? createNextPageRequest,
+            Func<JsonElement, T> valueFactory,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            string scopeName,
+            string? itemPropertyName,
+            string? nextLinkPropertyName,
+            int? defaultPageSize,
+            CancellationToken cancellationToken) where T : notnull
+        {
+            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
+        }
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
@@ -95,7 +108,20 @@ namespace Autorest.CSharp.Core
         {
             return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, null, cancellationToken, null));
         }
-
+        public static Pageable<T> CreatePageable<T>(
+            Func<int?, HttpMessage>? createFirstPageRequest,
+            Func<int?, string, HttpMessage>? createNextPageRequest,
+            Func<JsonElement, T> valueFactory,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            string scopeName,
+            string? itemPropertyName,
+            string? nextLinkPropertyName,
+            int? defaultPageSize,
+    CancellationToken cancellationToken) where T : notnull
+        {
+            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
+        }
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
