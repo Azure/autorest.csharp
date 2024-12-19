@@ -7,7 +7,7 @@
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> the model status. </summary>
+    /// <summary> The ModelStatus. </summary>
     public enum ModelStatus
     {
         /// <summary> CREATED. </summary>

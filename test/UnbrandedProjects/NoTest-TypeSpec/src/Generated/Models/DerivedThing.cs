@@ -11,10 +11,10 @@ namespace NoTestTypeSpec.Models
     public partial class DerivedThing : Thing
     {
         /// <summary> Initializes a new instance of <see cref="DerivedThing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="requiredNullableList"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         public DerivedThing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList) : base(name, requiredUnion, requiredBadDescription, requiredNullableList)
         {
@@ -24,19 +24,19 @@ namespace NoTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DerivedThing"/>. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
-        /// <param name="optionalLiteralString"> optional literal string. </param>
-        /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralFloat"> optional literal float. </param>
-        /// <param name="optionalLiteralBool"> optional literal bool. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="optionalNullableList"> optional nullable collection. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredLiteralString"></param>
+        /// <param name="requiredLiteralInt"></param>
+        /// <param name="requiredLiteralFloat"></param>
+        /// <param name="requiredLiteralBool"></param>
+        /// <param name="optionalLiteralString"></param>
+        /// <param name="optionalLiteralInt"></param>
+        /// <param name="optionalLiteralFloat"></param>
+        /// <param name="optionalLiteralBool"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="optionalNullableList"></param>
+        /// <param name="requiredNullableList"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="myProperty"></param>
         internal DerivedThing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> serializedAdditionalRawData, string myProperty) : base(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList, requiredNullableList, serializedAdditionalRawData)

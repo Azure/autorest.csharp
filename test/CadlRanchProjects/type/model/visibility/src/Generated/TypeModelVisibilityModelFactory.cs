@@ -14,11 +14,11 @@ namespace _Type.Model.Visibility.Models
     public static partial class TypeModelVisibilityModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.VisibilityModel"/>. </summary>
-        /// <param name="readProp"> Required string, illustrating a readonly property. </param>
-        /// <param name="queryProp"> Required int32, illustrating a query property. </param>
-        /// <param name="createProp"> Required string[], illustrating a create property. </param>
-        /// <param name="updateProp"> Required int32[], illustrating a update property. </param>
-        /// <param name="deleteProp"> Required bool, illustrating a delete property. </param>
+        /// <param name="readProp"></param>
+        /// <param name="queryProp"></param>
+        /// <param name="createProp"></param>
+        /// <param name="updateProp"></param>
+        /// <param name="deleteProp"></param>
         /// <returns> A new <see cref="Models.VisibilityModel"/> instance for mocking. </returns>
         public static VisibilityModel VisibilityModel(string readProp = null, int queryProp = default, IEnumerable<string> createProp = null, IEnumerable<int> updateProp = null, bool deleteProp = default)
         {
@@ -35,8 +35,8 @@ namespace _Type.Model.Visibility.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadOnlyModel"/>. </summary>
-        /// <param name="optionalNullableIntList"> Optional readonly nullable int list. </param>
-        /// <param name="optionalStringRecord"> Optional readonly string dictionary. </param>
+        /// <param name="optionalNullableIntList"></param>
+        /// <param name="optionalStringRecord"></param>
         /// <returns> A new <see cref="Models.ReadOnlyModel"/> instance for mocking. </returns>
         public static ReadOnlyModel ReadOnlyModel(IEnumerable<int> optionalNullableIntList = null, IReadOnlyDictionary<string, string> optionalStringRecord = null)
         {

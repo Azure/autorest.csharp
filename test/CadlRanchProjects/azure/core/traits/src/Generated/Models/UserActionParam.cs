@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
-    /// <summary> User action param. </summary>
+    /// <summary> The UserActionParam. </summary>
     public partial class UserActionParam
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="UserActionParam"/>. </summary>
-        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="userActionValue"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionValue"/> is null. </exception>
         public UserActionParam(string userActionValue)
         {
@@ -56,7 +56,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="UserActionParam"/>. </summary>
-        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="userActionValue"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UserActionParam(string userActionValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         {
         }
 
-        /// <summary> User action value. </summary>
+        /// <summary> Gets the user action value. </summary>
         public string UserActionValue { get; }
     }
 }

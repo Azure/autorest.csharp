@@ -13,7 +13,7 @@ namespace _Azure.Lro.Rpc.Models
     public static partial class AzureLroRpcModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.GenerationResult"/>. </summary>
-        /// <param name="data"> The data. </param>
+        /// <param name="data"></param>
         /// <returns> A new <see cref="Models.GenerationResult"/> instance for mocking. </returns>
         public static GenerationResult GenerationResult(string data = null)
         {

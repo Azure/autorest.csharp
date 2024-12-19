@@ -36,7 +36,7 @@ namespace _Type.Property.Optionality
         /// <summary> Initializes a new instance of Bytes. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Bytes(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.Optionality
             _endpoint = endpoint;
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetAllAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BytesProperty>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality
             return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetAll(CancellationToken)']/*" />
         public virtual Response<BytesProperty> GetAll(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,7 +134,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary> Get default. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetDefaultAsync(CancellationToken)']/*" />
         public virtual async Task<Response<BytesProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
@@ -144,7 +144,7 @@ namespace _Type.Property.Optionality
             return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary> Get default. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetDefault(CancellationToken)']/*" />
         public virtual Response<BytesProperty> GetDefault(CancellationToken cancellationToken = default)
@@ -155,7 +155,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return the default object
+        /// [Protocol Method] Get default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -190,7 +190,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return the default object
+        /// [Protocol Method] Get default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -224,7 +224,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -239,7 +239,7 @@ namespace _Type.Property.Optionality
             return response;
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -255,7 +255,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -294,7 +294,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -332,7 +332,7 @@ namespace _Type.Property.Optionality
             }
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary> Put default. </summary>
         /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -347,7 +347,7 @@ namespace _Type.Property.Optionality
             return response;
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary> Put default. </summary>
         /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -363,7 +363,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with default properties.
+        /// [Protocol Method] Put default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -402,7 +402,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with default properties.
+        /// [Protocol Method] Put default.
         /// <list type="bullet">
         /// <item>
         /// <description>

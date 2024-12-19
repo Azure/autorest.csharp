@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> Model with a datetime property. </summary>
+    /// <summary> The DatetimeProperty. </summary>
     public partial class DatetimeProperty
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         public DatetimeProperty(DateTimeOffset property)
         {
             Property = property;
         }
 
         /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DatetimeProperty(DateTimeOffset property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Property. </summary>
+        /// <summary> Gets or sets the property. </summary>
         public DateTimeOffset Property { get; set; }
     }
 }

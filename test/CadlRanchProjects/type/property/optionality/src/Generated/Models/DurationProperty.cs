@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.Optionality.Models
 {
-    /// <summary> Model with a duration property. </summary>
+    /// <summary> The DurationProperty. </summary>
     public partial class DurationProperty
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Type.Property.Optionality.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DurationProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DurationProperty(TimeSpan? property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +59,7 @@ namespace _Type.Property.Optionality.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Property. </summary>
+        /// <summary> Gets or sets the property. </summary>
         public TimeSpan? Property { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> Request of last detection. </summary>
+    /// <summary> The MultivariateLastDetectionOptions. </summary>
     public partial class MultivariateLastDetectionOptions
     {
         /// <summary>
@@ -47,15 +47,8 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
-        /// <param name="variables">
-        /// This contains the inference data, including the name, timestamps(ISO 8601) and
-        /// values of variables.
-        /// </param>
-        /// <param name="topContributorCount">
-        /// An optional field, which is used to specify the number of top contributed
-        /// variables for one anomalous timestamp in the response. The default number is
-        /// 10.
-        /// </param>
+        /// <param name="variables"></param>
+        /// <param name="topContributorCount"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="variables"/> is null. </exception>
         public MultivariateLastDetectionOptions(IEnumerable<VariableValues> variables, int topContributorCount)
         {
@@ -66,15 +59,8 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
-        /// <param name="variables">
-        /// This contains the inference data, including the name, timestamps(ISO 8601) and
-        /// values of variables.
-        /// </param>
-        /// <param name="topContributorCount">
-        /// An optional field, which is used to specify the number of top contributed
-        /// variables for one anomalous timestamp in the response. The default number is
-        /// 10.
-        /// </param>
+        /// <param name="variables"></param>
+        /// <param name="topContributorCount"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -88,16 +74,9 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary>
-        /// This contains the inference data, including the name, timestamps(ISO 8601) and
-        /// values of variables.
-        /// </summary>
+        /// <summary> Gets the variables. </summary>
         public IList<VariableValues> Variables { get; }
-        /// <summary>
-        /// An optional field, which is used to specify the number of top contributed
-        /// variables for one anomalous timestamp in the response. The default number is
-        /// 10.
-        /// </summary>
+        /// <summary> Gets the top contributor count. </summary>
         public int TopContributorCount { get; }
     }
 }

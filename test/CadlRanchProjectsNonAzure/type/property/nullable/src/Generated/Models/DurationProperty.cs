@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.Nullable.Models
 {
-    /// <summary> Model with a duration property. </summary>
+    /// <summary> The DurationProperty. </summary>
     public partial class DurationProperty
     {
         /// <summary>
@@ -43,8 +43,8 @@ namespace Scm._Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="DurationProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal DurationProperty(string requiredProperty, TimeSpan? nullableProperty)
         {
@@ -55,8 +55,8 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DurationProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DurationProperty(string requiredProperty, TimeSpan? nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,9 +70,9 @@ namespace Scm._Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Required property. </summary>
+        /// <summary> Gets the required property. </summary>
         public string RequiredProperty { get; }
-        /// <summary> Property. </summary>
+        /// <summary> Gets the nullable property. </summary>
         public TimeSpan? NullableProperty { get; }
     }
 }

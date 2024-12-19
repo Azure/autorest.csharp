@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from a model that spread Record&lt;float32&gt; with the different known property type. </summary>
+    /// <summary> The DifferentSpreadFloatDerived. </summary>
     public partial class DifferentSpreadFloatDerived : DifferentSpreadFloatRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/>. </summary>
-        /// <param name="name"> The id property. </param>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="name"></param>
+        /// <param name="derivedProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public DifferentSpreadFloatDerived(string name, float derivedProp) : base(name)
         {
@@ -25,10 +25,10 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadFloatDerived"/>. </summary>
-        /// <param name="name"> The id property. </param>
+        /// <param name="name"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="derivedProp"></param>
         internal DifferentSpreadFloatDerived(string name, IDictionary<string, float> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData, float derivedProp) : base(name, additionalProperties, serializedAdditionalRawData)
         {
             DerivedProp = derivedProp;
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The index property. </summary>
+        /// <summary> Gets or sets the derived prop. </summary>
         public float DerivedProp { get; set; }
     }
 }

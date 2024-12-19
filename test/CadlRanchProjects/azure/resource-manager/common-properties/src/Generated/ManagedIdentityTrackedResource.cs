@@ -92,7 +92,7 @@ namespace _Azure.ResourceManager.CommonProperties
         }
 
         /// <summary>
-        /// Get a ManagedIdentityTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -132,7 +132,7 @@ namespace _Azure.ResourceManager.CommonProperties
         }
 
         /// <summary>
-        /// Get a ManagedIdentityTrackedResource
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -172,7 +172,7 @@ namespace _Azure.ResourceManager.CommonProperties
         }
 
         /// <summary>
-        /// Update a ManagedIdentityTrackedResource
+        /// Update with user assigned and system assigned.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -192,7 +192,7 @@ namespace _Azure.ResourceManager.CommonProperties
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<Response<ManagedIdentityTrackedResource>> UpdateAsync(ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)
@@ -214,7 +214,7 @@ namespace _Azure.ResourceManager.CommonProperties
         }
 
         /// <summary>
-        /// Update a ManagedIdentityTrackedResource
+        /// Update with user assigned and system assigned.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -234,7 +234,7 @@ namespace _Azure.ResourceManager.CommonProperties
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <param name="data"> The <see cref="ManagedIdentityTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual Response<ManagedIdentityTrackedResource> Update(ManagedIdentityTrackedResourceData data, CancellationToken cancellationToken = default)

@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The derived discriminated type. </summary>
+    /// <summary> The ExtendsUnknownAdditionalPropertiesDiscriminatedDerived. </summary>
     public partial class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived : ExtendsUnknownAdditionalPropertiesDiscriminated
     {
         /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminatedDerived"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="index"> The index property. </param>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(string name, int index) : base(name)
         {
@@ -26,11 +26,11 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ExtendsUnknownAdditionalPropertiesDiscriminatedDerived"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="kind"> The discriminator. </param>
+        /// <param name="name"></param>
+        /// <param name="kind"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <param name="index"> The index property. </param>
-        /// <param name="age"> The age property. </param>
+        /// <param name="index"></param>
+        /// <param name="age"></param>
         internal ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(string name, string kind, IDictionary<string, BinaryData> additionalProperties, int index, float? age) : base(name, kind, additionalProperties)
         {
             Index = index;
@@ -42,9 +42,9 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The index property. </summary>
+        /// <summary> Gets or sets the index. </summary>
         public int Index { get; set; }
-        /// <summary> The age property. </summary>
+        /// <summary> Gets or sets the age. </summary>
         public float? Age { get; set; }
     }
 }

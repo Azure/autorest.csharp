@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Azure.ResourceManager.Resources.Models
 {
-    /// <summary> The response of a NestedProxyResource list operation. </summary>
+    /// <summary> The NestedProxyResourceListResult. </summary>
     internal partial class NestedProxyResourceListResult
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace _Azure.ResourceManager.Resources.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NestedProxyResourceListResult"/>. </summary>
-        /// <param name="value"> The NestedProxyResource items on this page. </param>
+        /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal NestedProxyResourceListResult(IEnumerable<NestedProxyResourceData> value)
         {
@@ -57,8 +57,8 @@ namespace _Azure.ResourceManager.Resources.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="NestedProxyResourceListResult"/>. </summary>
-        /// <param name="value"> The NestedProxyResource items on this page. </param>
-        /// <param name="nextLink"> The link to the next page of items. </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal NestedProxyResourceListResult(IReadOnlyList<NestedProxyResourceData> value, Uri nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -72,9 +72,9 @@ namespace _Azure.ResourceManager.Resources.Models
         {
         }
 
-        /// <summary> The NestedProxyResource items on this page. </summary>
+        /// <summary> Gets the value. </summary>
         public IReadOnlyList<NestedProxyResourceData> Value { get; }
-        /// <summary> The link to the next page of items. </summary>
+        /// <summary> Gets the next link. </summary>
         public Uri NextLink { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Parameters.Basic.Models
 {
-    /// <summary> This is a simple model. </summary>
+    /// <summary> The User. </summary>
     public partial class User
     {
         /// <summary>

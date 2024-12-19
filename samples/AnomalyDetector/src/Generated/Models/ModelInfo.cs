@@ -10,10 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary>
-    /// Training result of a model including its status, errors and diagnostics
-    /// information.
-    /// </summary>
+    /// <summary> The ModelInfo. </summary>
     public partial class ModelInfo
     {
         /// <summary>
@@ -49,19 +46,9 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
-        /// <param name="dataSource">
-        /// Source link to the input data to indicate an accessible Azure storage Uri,
-        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection.
-        /// </param>
-        /// <param name="startTime">
-        /// A required field, indicating the start time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
-        /// <param name="endTime">
-        /// A required field, indicating the end time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
+        /// <param name="dataSource"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public ModelInfo(string dataSource, DateTimeOffset startTime, DateTimeOffset endTime)
         {
@@ -74,35 +61,16 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelInfo"/>. </summary>
-        /// <param name="dataSource">
-        /// Source link to the input data to indicate an accessible Azure storage Uri,
-        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection.
-        /// </param>
-        /// <param name="dataSchema">
-        /// Data schema of input data source: OneTable or MultiTable. The default
-        /// DataSchema is OneTable.
-        /// </param>
-        /// <param name="startTime">
-        /// A required field, indicating the start time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
-        /// <param name="endTime">
-        /// A required field, indicating the end time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </param>
-        /// <param name="displayName">
-        /// An optional field. The display name of the model whose maximum length is 24
-        /// characters.
-        /// </param>
-        /// <param name="slidingWindow">
-        /// An optional field, indicating how many previous timestamps will be used to
-        /// detect whether the timestamp is anomaly or not.
-        /// </param>
-        /// <param name="alignPolicy"> An optional field, indicating the manner to align multiple variables. </param>
-        /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
-        /// <param name="errors"> Error messages when failed to create a model. </param>
-        /// <param name="diagnosticsInfo"> Diagnostics information to help inspect the states of model or variable. </param>
+        /// <param name="dataSource"></param>
+        /// <param name="dataSchema"></param>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <param name="displayName"></param>
+        /// <param name="slidingWindow"></param>
+        /// <param name="alignPolicy"></param>
+        /// <param name="status"></param>
+        /// <param name="errors"></param>
+        /// <param name="diagnosticsInfo"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelInfo(string dataSource, DataSchema? dataSchema, DateTimeOffset startTime, DateTimeOffset endTime, string displayName, int? slidingWindow, AlignPolicy alignPolicy, ModelStatus? status, IReadOnlyList<ErrorResponse> errors, DiagnosticsInfo diagnosticsInfo, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -124,44 +92,25 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary>
-        /// Source link to the input data to indicate an accessible Azure storage Uri,
-        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection.
-        /// </summary>
+        /// <summary> Gets or sets the data source. </summary>
         public string DataSource { get; set; }
-        /// <summary>
-        /// Data schema of input data source: OneTable or MultiTable. The default
-        /// DataSchema is OneTable.
-        /// </summary>
+        /// <summary> Gets or sets the data schema. </summary>
         public DataSchema? DataSchema { get; set; }
-        /// <summary>
-        /// A required field, indicating the start time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </summary>
+        /// <summary> Gets or sets the start time. </summary>
         public DateTimeOffset StartTime { get; set; }
-        /// <summary>
-        /// A required field, indicating the end time of training data, which should be
-        /// date-time of ISO 8601 format.
-        /// </summary>
+        /// <summary> Gets or sets the end time. </summary>
         public DateTimeOffset EndTime { get; set; }
-        /// <summary>
-        /// An optional field. The display name of the model whose maximum length is 24
-        /// characters.
-        /// </summary>
+        /// <summary> Gets or sets the display name. </summary>
         public string DisplayName { get; set; }
-        /// <summary>
-        /// An optional field, indicating how many previous timestamps will be used to
-        /// detect whether the timestamp is anomaly or not.
-        /// </summary>
+        /// <summary> Gets or sets the sliding window. </summary>
         public int? SlidingWindow { get; set; }
-        /// <summary> An optional field, indicating the manner to align multiple variables. </summary>
+        /// <summary> Gets or sets the align policy. </summary>
         public AlignPolicy AlignPolicy { get; set; }
-        /// <summary> Model status. One of CREATED, RUNNING, READY, and FAILED. </summary>
+        /// <summary> Gets or sets the status. </summary>
         public ModelStatus? Status { get; set; }
-        /// <summary> Error messages when failed to create a model. </summary>
+        /// <summary> Gets the errors. </summary>
         public IReadOnlyList<ErrorResponse> Errors { get; }
-        /// <summary> Diagnostics information to help inspect the states of model or variable. </summary>
+        /// <summary> Gets or sets the diagnostics info. </summary>
         public DiagnosticsInfo DiagnosticsInfo { get; set; }
     }
 }

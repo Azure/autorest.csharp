@@ -22,7 +22,7 @@
      "kind": "enumvalue",
      "name": "accept",
      "value": "accept",
-     "doc": "accept",
+     "description": "accept",
      "valueType": {
       "$ref": "3"
      },
@@ -32,7 +32,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_requiredLiteralString",
+   "description": "The Thing_requiredLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -55,7 +55,7 @@
      "kind": "enumvalue",
      "name": "123",
      "value": 123,
-     "doc": "123",
+     "description": "123",
      "valueType": {
       "$ref": "6"
      },
@@ -65,7 +65,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_requiredLiteralInt",
+   "description": "The Thing_requiredLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -88,7 +88,7 @@
      "kind": "enumvalue",
      "name": "1.23",
      "value": 1.23,
-     "doc": "1.23",
+     "description": "1.23",
      "valueType": {
       "$ref": "9"
      },
@@ -98,7 +98,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_requiredLiteralFloat",
+   "description": "The Thing_requiredLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -121,7 +121,7 @@
      "kind": "enumvalue",
      "name": "reject",
      "value": "reject",
-     "doc": "reject",
+     "description": "reject",
      "valueType": {
       "$ref": "12"
      },
@@ -131,7 +131,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_optionalLiteralString",
+   "description": "The Thing_optionalLiteralString",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -154,7 +154,7 @@
      "kind": "enumvalue",
      "name": "456",
      "value": 456,
-     "doc": "456",
+     "description": "456",
      "valueType": {
       "$ref": "15"
      },
@@ -164,7 +164,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_optionalLiteralInt",
+   "description": "The Thing_optionalLiteralInt",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -187,7 +187,7 @@
      "kind": "enumvalue",
      "name": "4.56",
      "value": 4.56,
-     "doc": "4.56",
+     "description": "4.56",
      "valueType": {
       "$ref": "18"
      },
@@ -197,7 +197,7 @@
     }
    ],
    "crossLanguageDefinitionId": "",
-   "doc": "The Thing_optionalLiteralFloat",
+   "description": "The Thing_optionalLiteralFloat",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Spread,Json",
@@ -268,7 +268,7 @@
      "decorators": []
     }
    ],
-   "doc": "enum with projected name",
+   "description": "enum with projected name",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input",
@@ -339,7 +339,7 @@
      "decorators": []
     }
    ],
-   "doc": "enum with projected name used in a model",
+   "description": "enum with projected name used in a model",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Json",
@@ -410,7 +410,7 @@
      "decorators": []
     }
    ],
-   "doc": "Simple enum",
+   "description": "Simple enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -481,7 +481,7 @@
      "decorators": []
     }
    ],
-   "doc": "Extensible enum",
+   "description": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -552,7 +552,7 @@
      "decorators": []
     }
    ],
-   "doc": "Int based extensible enum",
+   "description": "Int based extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -623,7 +623,7 @@
      "decorators": []
     }
    ],
-   "doc": "Float based extensible enum",
+   "description": "Float based extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -694,7 +694,7 @@
      "decorators": []
     }
    ],
-   "doc": "float fixed enum",
+   "description": "float fixed enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -765,7 +765,7 @@
      "decorators": []
     }
    ],
-   "doc": "int fixed enum",
+   "description": "int fixed enum",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -973,7 +973,7 @@
      "enumType": {
       "$ref": "104"
      },
-     "doc": "The operation has not started.",
+     "description": "The operation has not started.",
      "decorators": []
     },
     {
@@ -991,7 +991,7 @@
      "enumType": {
       "$ref": "104"
      },
-     "doc": "The operation is in progress.",
+     "description": "The operation is in progress.",
      "decorators": []
     },
     {
@@ -1009,7 +1009,7 @@
      "enumType": {
       "$ref": "104"
      },
-     "doc": "The operation has completed successfully.",
+     "description": "The operation has completed successfully.",
      "decorators": []
     },
     {
@@ -1027,7 +1027,7 @@
      "enumType": {
       "$ref": "104"
      },
-     "doc": "The operation has failed.",
+     "description": "The operation has failed.",
      "decorators": []
     },
     {
@@ -1045,11 +1045,11 @@
      "enumType": {
       "$ref": "104"
      },
-     "doc": "The operation has been canceled by the user.",
+     "description": "The operation has been canceled by the user.",
      "decorators": []
     }
    ],
-   "doc": "Enum describing allowed operation states.",
+   "description": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
    "usage": "None",
@@ -1063,7 +1063,7 @@
    "name": "Thing",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Thing",
    "usage": "Input,Output,Spread,Json",
-   "doc": "A model with a few properties of literal types",
+   "description": "A model with a few properties of literal types",
    "decorators": [],
    "properties": [
     {
@@ -1071,7 +1071,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "name of the Thing",
+     "description": "name of the Thing",
      "type": {
       "$id": "118",
       "kind": "string",
@@ -1091,7 +1091,7 @@
      "kind": "property",
      "name": "requiredUnion",
      "serializedName": "requiredUnion",
-     "doc": "required Union",
+     "description": "required Union",
      "type": {
       "$id": "120",
       "kind": "union",
@@ -1140,7 +1140,7 @@
      "kind": "property",
      "name": "requiredLiteralString",
      "serializedName": "requiredLiteralString",
-     "doc": "required literal string",
+     "description": "required literal string",
      "type": {
       "$id": "126",
       "kind": "constant",
@@ -1162,7 +1162,7 @@
      "kind": "property",
      "name": "requiredLiteralInt",
      "serializedName": "requiredLiteralInt",
-     "doc": "required literal int",
+     "description": "required literal int",
      "type": {
       "$id": "128",
       "kind": "constant",
@@ -1184,7 +1184,7 @@
      "kind": "property",
      "name": "requiredLiteralFloat",
      "serializedName": "requiredLiteralFloat",
-     "doc": "required literal float",
+     "description": "required literal float",
      "type": {
       "$id": "130",
       "kind": "constant",
@@ -1206,7 +1206,7 @@
      "kind": "property",
      "name": "requiredLiteralBool",
      "serializedName": "requiredLiteralBool",
-     "doc": "required literal bool",
+     "description": "required literal bool",
      "type": {
       "$id": "132",
       "kind": "constant",
@@ -1232,7 +1232,7 @@
      "kind": "property",
      "name": "optionalLiteralString",
      "serializedName": "optionalLiteralString",
-     "doc": "optional literal string",
+     "description": "optional literal string",
      "type": {
       "$id": "135",
       "kind": "constant",
@@ -1254,7 +1254,7 @@
      "kind": "property",
      "name": "optionalLiteralInt",
      "serializedName": "optionalLiteralInt",
-     "doc": "optional literal int",
+     "description": "optional literal int",
      "type": {
       "$id": "137",
       "kind": "constant",
@@ -1276,7 +1276,7 @@
      "kind": "property",
      "name": "optionalLiteralFloat",
      "serializedName": "optionalLiteralFloat",
-     "doc": "optional literal float",
+     "description": "optional literal float",
      "type": {
       "$id": "139",
       "kind": "constant",
@@ -1298,7 +1298,7 @@
      "kind": "property",
      "name": "optionalLiteralBool",
      "serializedName": "optionalLiteralBool",
-     "doc": "optional literal bool",
+     "description": "optional literal bool",
      "type": {
       "$id": "141",
       "kind": "constant",
@@ -1324,7 +1324,7 @@
      "kind": "property",
      "name": "requiredBadDescription",
      "serializedName": "requiredBadDescription",
-     "doc": "description with xml <|endoftext|>",
+     "description": "description with xml <|endoftext|>",
      "type": {
       "$id": "144",
       "kind": "string",
@@ -1344,7 +1344,7 @@
      "kind": "property",
      "name": "optionalNullableList",
      "serializedName": "optionalNullableList",
-     "doc": "optional nullable collection",
+     "description": "optional nullable collection",
      "type": {
       "$id": "146",
       "kind": "nullable",
@@ -1375,7 +1375,7 @@
      "kind": "property",
      "name": "requiredNullableList",
      "serializedName": "requiredNullableList",
-     "doc": "required nullable collection",
+     "description": "required nullable collection",
      "type": {
       "$id": "150",
       "kind": "nullable",
@@ -1406,7 +1406,7 @@
      "kind": "property",
      "name": "requiredFloatProperty",
      "serializedName": "requiredFloatProperty",
-     "doc": "required float property",
+     "description": "required float property",
      "type": {
       "$id": "154",
       "kind": "float",
@@ -1426,7 +1426,7 @@
      "kind": "property",
      "name": "optionalFloatProperty",
      "serializedName": "optionalFloatProperty",
-     "doc": "optional float property",
+     "description": "optional float property",
      "type": {
       "$id": "156",
       "kind": "float",
@@ -1446,7 +1446,7 @@
      "kind": "property",
      "name": "optionalResourceId",
      "serializedName": "optionalResourceId",
-     "doc": "optional arm id.",
+     "description": "optional arm id.",
      "type": {
       "$id": "158",
       "kind": "string",
@@ -1476,7 +1476,7 @@
    "name": "Friend",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.NotFriend",
    "usage": "Output,Spread,Json",
-   "doc": "this is not a friendly model but with a friendly name",
+   "description": "this is not a friendly model but with a friendly name",
    "decorators": [],
    "properties": [
     {
@@ -1484,7 +1484,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "name of the NotFriend",
+     "description": "name of the NotFriend",
      "type": {
       "$id": "162",
       "kind": "string",
@@ -1514,7 +1514,7 @@
      "kind": "property",
      "name": "sourceUrl",
      "serializedName": "sourceUrl",
-     "doc": "url format",
+     "description": "url format",
      "type": {
       "$id": "165",
       "kind": "url",
@@ -1534,7 +1534,7 @@
      "kind": "property",
      "name": "guid",
      "serializedName": "guid",
-     "doc": "uuid format",
+     "description": "uuid format",
      "type": {
       "$id": "167",
       "kind": "string",
@@ -1564,7 +1564,7 @@
    "name": "ProjectedModel",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithProjectedName",
    "usage": "Output,Spread,Json",
-   "doc": "this is a model with a projected name",
+   "description": "this is a model with a projected name",
    "decorators": [],
    "properties": [
     {
@@ -1572,7 +1572,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "name of the ModelWithProjectedName",
+     "description": "name of the ModelWithProjectedName",
      "type": {
       "$id": "171",
       "kind": "string",
@@ -1604,7 +1604,7 @@
    "name": "Extension",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Extension",
    "usage": "Input,Json",
-   "doc": "extension",
+   "description": "extension",
    "decorators": [],
    "baseModel": {
     "$id": "174",
@@ -1612,7 +1612,7 @@
     "name": "Element",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.Element",
     "usage": "Input,Json",
-    "doc": "element",
+    "description": "element",
     "decorators": [],
     "properties": [
      {
@@ -1670,7 +1670,7 @@
    "name": "Extendible",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.Extendible",
    "usage": "Input,Json",
-   "doc": "FHIR extendible element",
+   "description": "FHIR extendible element",
    "decorators": [],
    "properties": [
     {
@@ -1678,7 +1678,7 @@
      "kind": "property",
      "name": "extension",
      "serializedName": "extension",
-     "doc": "Additional Content defined by implementations",
+     "description": "Additional Content defined by implementations",
      "type": {
       "$id": "181",
       "kind": "array",
@@ -1689,7 +1689,7 @@
        "name": "ThereLevelExtension",
        "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelExtension",
        "usage": "Input,Json",
-       "doc": "extension",
+       "description": "extension",
        "decorators": [],
        "baseModel": {
         "$id": "183",
@@ -1697,7 +1697,7 @@
         "name": "ThereLevelElement",
         "crossLanguageDefinitionId": "FirstTestTypeSpec.ThereLevelElement",
         "usage": "Input,Json",
-        "doc": "element",
+        "description": "element",
         "decorators": [],
         "properties": [
          {
@@ -1770,7 +1770,7 @@
    "name": "ChildModel",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ChildModel",
    "usage": "Input,Json",
-   "doc": "ChildModel",
+   "description": "ChildModel",
    "decorators": [],
    "baseModel": {
     "$id": "189",
@@ -1778,7 +1778,7 @@
     "name": "BaseModel",
     "crossLanguageDefinitionId": "FirstTestTypeSpec.BaseModel",
     "usage": "Input,Json",
-    "doc": "parenetModel",
+    "description": "parenetModel",
     "decorators": [],
     "properties": [
      {
@@ -1836,7 +1836,7 @@
    "name": "ContainSelf",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.ContainSelf",
    "usage": "Input,Json",
-   "doc": "containself",
+   "description": "containself",
    "decorators": [],
    "properties": [
     {
@@ -1869,7 +1869,7 @@
      "kind": "property",
      "name": "enumProperty",
      "serializedName": "enumProperty",
-     "doc": "enum with projected name used in a model",
+     "description": "enum with projected name used in a model",
      "type": {
       "$ref": "28"
      },
@@ -1924,7 +1924,7 @@
    "name": "RoundTripModel",
    "crossLanguageDefinitionId": "FirstTestTypeSpec.RoundTripModel",
    "usage": "Input,Output,Json",
-   "doc": "this is a roundtrip model",
+   "description": "this is a roundtrip model",
    "decorators": [],
    "properties": [
     {
@@ -1932,7 +1932,7 @@
      "kind": "property",
      "name": "requiredString",
      "serializedName": "requiredString",
-     "doc": "Required string, illustrating a reference type property.",
+     "description": "Required string, illustrating a reference type property.",
      "type": {
       "$id": "204",
       "kind": "string",
@@ -1952,7 +1952,7 @@
      "kind": "property",
      "name": "requiredInt",
      "serializedName": "requiredInt",
-     "doc": "Required int, illustrating a value type property.",
+     "description": "Required int, illustrating a value type property.",
      "type": {
       "$id": "206",
       "kind": "int32",
@@ -1972,7 +1972,7 @@
      "kind": "property",
      "name": "requiredCollection",
      "serializedName": "requiredCollection",
-     "doc": "Required collection of enums",
+     "description": "Required collection of enums",
      "type": {
       "$id": "208",
       "kind": "array",
@@ -1995,7 +1995,7 @@
      "kind": "property",
      "name": "requiredDictionary",
      "serializedName": "requiredDictionary",
-     "doc": "Required dictionary of enums",
+     "description": "Required dictionary of enums",
      "type": {
       "$id": "210",
       "kind": "dict",
@@ -2023,7 +2023,7 @@
      "kind": "property",
      "name": "requiredModel",
      "serializedName": "requiredModel",
-     "doc": "Required model",
+     "description": "Required model",
      "type": {
       "$ref": "116"
      },
@@ -2039,7 +2039,7 @@
      "kind": "property",
      "name": "intExtensibleEnum",
      "serializedName": "intExtensibleEnum",
-     "doc": "this is an int based extensible enum",
+     "description": "this is an int based extensible enum",
      "type": {
       "$ref": "52"
      },
@@ -2055,7 +2055,7 @@
      "kind": "property",
      "name": "intExtensibleEnumCollection",
      "serializedName": "intExtensibleEnumCollection",
-     "doc": "this is a collection of int based extensible enum",
+     "description": "this is a collection of int based extensible enum",
      "type": {
       "$id": "215",
       "kind": "array",
@@ -2078,7 +2078,7 @@
      "kind": "property",
      "name": "floatExtensibleEnum",
      "serializedName": "floatExtensibleEnum",
-     "doc": "this is a float based extensible enum",
+     "description": "this is a float based extensible enum",
      "type": {
       "$ref": "60"
      },
@@ -2094,7 +2094,7 @@
      "kind": "property",
      "name": "floatExtensibleEnumCollection",
      "serializedName": "floatExtensibleEnumCollection",
-     "doc": "this is a collection of float based extensible enum",
+     "description": "this is a collection of float based extensible enum",
      "type": {
       "$id": "218",
       "kind": "array",
@@ -2117,7 +2117,7 @@
      "kind": "property",
      "name": "floatFixedEnum",
      "serializedName": "floatFixedEnum",
-     "doc": "this is a float based fixed enum",
+     "description": "this is a float based fixed enum",
      "type": {
       "$ref": "68"
      },
@@ -2133,7 +2133,7 @@
      "kind": "property",
      "name": "floatFixedEnumCollection",
      "serializedName": "floatFixedEnumCollection",
-     "doc": "this is a collection of float based fixed enum",
+     "description": "this is a collection of float based fixed enum",
      "type": {
       "$id": "221",
       "kind": "array",
@@ -2156,7 +2156,7 @@
      "kind": "property",
      "name": "intFixedEnum",
      "serializedName": "intFixedEnum",
-     "doc": "this is a int based fixed enum",
+     "description": "this is a int based fixed enum",
      "type": {
       "$ref": "76"
      },
@@ -2172,7 +2172,7 @@
      "kind": "property",
      "name": "intFixedEnumCollection",
      "serializedName": "intFixedEnumCollection",
-     "doc": "this is a collection of int based fixed enum",
+     "description": "this is a collection of int based fixed enum",
      "type": {
       "$id": "224",
       "kind": "array",
@@ -2195,7 +2195,7 @@
      "kind": "property",
      "name": "stringFixedEnum",
      "serializedName": "stringFixedEnum",
-     "doc": "this is a string based fixed enum",
+     "description": "this is a string based fixed enum",
      "type": {
       "$ref": "36"
      },
@@ -2211,7 +2211,7 @@
      "kind": "property",
      "name": "requiredUnknown",
      "serializedName": "requiredUnknown",
-     "doc": "required unknown",
+     "description": "required unknown",
      "type": {
       "$id": "227",
       "kind": "unknown",
@@ -2231,7 +2231,7 @@
      "kind": "property",
      "name": "optionalUnknown",
      "serializedName": "optionalUnknown",
-     "doc": "optional unknown",
+     "description": "optional unknown",
      "type": {
       "$id": "229",
       "kind": "unknown",
@@ -2251,7 +2251,7 @@
      "kind": "property",
      "name": "requiredRecordUnknown",
      "serializedName": "requiredRecordUnknown",
-     "doc": "required record of unknown",
+     "description": "required record of unknown",
      "type": {
       "$id": "231",
       "kind": "dict",
@@ -2283,7 +2283,7 @@
      "kind": "property",
      "name": "optionalRecordUnknown",
      "serializedName": "optionalRecordUnknown",
-     "doc": "optional record of unknown",
+     "description": "optional record of unknown",
      "type": {
       "$id": "235",
       "kind": "dict",
@@ -2315,7 +2315,7 @@
      "kind": "property",
      "name": "readOnlyRequiredRecordUnknown",
      "serializedName": "readOnlyRequiredRecordUnknown",
-     "doc": "required readonly record of unknown",
+     "description": "required readonly record of unknown",
      "type": {
       "$id": "239",
       "kind": "dict",
@@ -2347,7 +2347,7 @@
      "kind": "property",
      "name": "readOnlyOptionalRecordUnknown",
      "serializedName": "readOnlyOptionalRecordUnknown",
-     "doc": "optional readonly record of unknown",
+     "description": "optional readonly record of unknown",
      "type": {
       "$id": "243",
       "kind": "dict",
@@ -2379,14 +2379,14 @@
      "kind": "property",
      "name": "modelWithRequiredNullable",
      "serializedName": "modelWithRequiredNullable",
-     "doc": "this is a model with required nullable properties",
+     "description": "this is a model with required nullable properties",
      "type": {
       "$id": "247",
       "kind": "model",
       "name": "ModelWithRequiredNullableProperties",
       "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelWithRequiredNullableProperties",
       "usage": "Input,Output,Json",
-      "doc": "A model with a few required nullable properties",
+      "description": "A model with a few required nullable properties",
       "decorators": [],
       "properties": [
        {
@@ -2394,7 +2394,7 @@
         "kind": "property",
         "name": "requiredNullablePrimitive",
         "serializedName": "requiredNullablePrimitive",
-        "doc": "required nullable primitive type",
+        "description": "required nullable primitive type",
         "type": {
          "$id": "249",
          "kind": "nullable",
@@ -2418,7 +2418,7 @@
         "kind": "property",
         "name": "requiredExtensibleEnum",
         "serializedName": "requiredExtensibleEnum",
-        "doc": "required nullable extensible enum type",
+        "description": "required nullable extensible enum type",
         "type": {
          "$id": "252",
          "kind": "nullable",
@@ -2438,7 +2438,7 @@
         "kind": "property",
         "name": "requiredFixedEnum",
         "serializedName": "requiredFixedEnum",
-        "doc": "required nullable fixed enum type",
+        "description": "required nullable fixed enum type",
         "type": {
          "$id": "254",
          "kind": "nullable",
@@ -2467,7 +2467,7 @@
      "kind": "property",
      "name": "unionList",
      "serializedName": "unionList",
-     "doc": "this is a list of union types",
+     "description": "this is a list of union types",
      "type": {
       "$id": "256",
       "kind": "array",
@@ -2497,7 +2497,7 @@
          "name": "ModelForUnion",
          "crossLanguageDefinitionId": "FirstTestTypeSpec.ModelForUnion",
          "usage": "Input,Output,Json",
-         "doc": "This is a model only used in union types, please do not use it anywhere else.",
+         "description": "This is a model only used in union types, please do not use it anywhere else.",
          "decorators": [],
          "properties": [
           {
@@ -2505,7 +2505,7 @@
            "kind": "property",
            "name": "name",
            "serializedName": "name",
-           "doc": "name of the ModelForUnion",
+           "description": "name of the ModelForUnion",
            "type": {
             "$id": "262",
             "kind": "string",
@@ -2525,7 +2525,7 @@
            "kind": "property",
            "name": "age",
            "serializedName": "age",
-           "doc": "age of the ModelForUnion",
+           "description": "age of the ModelForUnion",
            "type": {
             "$id": "264",
             "kind": "int32",
@@ -2579,7 +2579,7 @@
    "name": "ResourceOperationStatusResourceExportedResourceError",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "None",
-   "doc": "Provides status details for long running operations.",
+   "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
     {
@@ -2587,7 +2587,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "doc": "The unique ID of the operation.",
+     "description": "The unique ID of the operation.",
      "type": {
       "$id": "268",
       "kind": "string",
@@ -2607,7 +2607,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "doc": "The status of the operation",
+     "description": "The status of the operation",
      "type": {
       "$ref": "104"
      },
@@ -2623,14 +2623,14 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "doc": "Error object that describes the error when status is \"Failed\".",
+     "description": "Error object that describes the error when status is \"Failed\".",
      "type": {
       "$id": "271",
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "None",
-      "doc": "The error object.",
+      "description": "The error object.",
       "decorators": [],
       "properties": [
        {
@@ -2638,7 +2638,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "doc": "One of a server-defined set of error codes.",
+        "description": "One of a server-defined set of error codes.",
         "type": {
          "$id": "273",
          "kind": "string",
@@ -2658,7 +2658,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "doc": "A human-readable representation of the error.",
+        "description": "A human-readable representation of the error.",
         "type": {
          "$id": "275",
          "kind": "string",
@@ -2678,7 +2678,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "doc": "The target of the error.",
+        "description": "The target of the error.",
         "type": {
          "$id": "277",
          "kind": "string",
@@ -2698,7 +2698,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "doc": "An array of details about specific errors that led to this reported error.",
+        "description": "An array of details about specific errors that led to this reported error.",
         "type": {
          "$id": "279",
          "kind": "array",
@@ -2721,14 +2721,14 @@
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
-        "doc": "An object containing more specific information than the current object about the error.",
+        "description": "An object containing more specific information than the current object about the error.",
         "type": {
          "$id": "281",
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "None",
-         "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
           {
@@ -2736,7 +2736,7 @@
            "kind": "property",
            "name": "code",
            "serializedName": "code",
-           "doc": "One of a server-defined set of error codes.",
+           "description": "One of a server-defined set of error codes.",
            "type": {
             "$id": "283",
             "kind": "string",
@@ -2756,7 +2756,7 @@
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
-           "doc": "Inner error.",
+           "description": "Inner error.",
            "type": {
             "$ref": "281"
            },
@@ -2790,7 +2790,7 @@
      "kind": "property",
      "name": "result",
      "serializedName": "result",
-     "doc": "The result of the operation.",
+     "description": "The result of the operation.",
      "type": {
       "$id": "286",
       "kind": "model",
@@ -2862,13 +2862,13 @@
   {
    "$id": "291",
    "Name": "FirstTestTypeSpecClient",
-   "Doc": "This is a sample typespec project.",
+   "Description": "This is a sample typespec project.",
    "Operations": [
     {
      "$id": "292",
      "Name": "topAction",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "top level method",
+     "Description": "top level method",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -2959,7 +2959,7 @@
      "$id": "300",
      "Name": "topAction2",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "top level method2",
+     "Description": "top level method2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3021,14 +3021,14 @@
      "$id": "305",
      "Name": "patchAction",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "top level patch",
+     "Description": "top level patch",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "306",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "307",
         "kind": "constant",
@@ -3131,14 +3131,14 @@
      "$id": "314",
      "Name": "anonymousBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "body parameter without body decorator",
+     "Description": "body parameter without body decorator",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "315",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "316",
         "kind": "constant",
@@ -3241,14 +3241,14 @@
      "$id": "323",
      "Name": "friendlyModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "Model can have its friendly name",
+     "Description": "Model can have its friendly name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "324",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "325",
         "kind": "constant",
@@ -3408,7 +3408,7 @@
      "$id": "337",
      "Name": "stringFormat",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "paramete has string format.",
+     "Description": "paramete has string format.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3443,7 +3443,7 @@
        "$id": "341",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "342",
         "kind": "constant",
@@ -3513,14 +3513,14 @@
      "$id": "346",
      "Name": "projectedNameModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "Model can have its projected name",
+     "Description": "Model can have its projected name",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "347",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "348",
         "kind": "constant",
@@ -3623,7 +3623,7 @@
      "$id": "355",
      "Name": "returnsAnonymousModel",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "return anonymous model",
+     "Description": "return anonymous model",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3685,7 +3685,7 @@
      "$id": "360",
      "Name": "headAsBoolean",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "head as boolean.",
+     "Description": "head as boolean.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -3735,14 +3735,14 @@
      "$id": "364",
      "Name": "stringBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "The body parameter type is string.",
+     "Description": "The body parameter type is string.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "365",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "366",
         "kind": "constant",
@@ -3816,14 +3816,14 @@
      "$id": "371",
      "Name": "boolBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "The body parameter type is bool.",
+     "Description": "The body parameter type is bool.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "372",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "373",
         "kind": "constant",
@@ -3897,14 +3897,14 @@
      "$id": "378",
      "Name": "dateTimeBody",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "The body parameter type is datetime.",
+     "Description": "The body parameter type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "379",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "380",
         "kind": "constant",
@@ -3986,7 +3986,7 @@
      "$id": "386",
      "Name": "returnString",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "The return type is datetime.",
+     "Description": "The return type is datetime.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4117,14 +4117,14 @@
      "$id": "398",
      "Name": "recursiveExtension",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test parent reference child",
+     "Description": "test parent reference child",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "399",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "400",
         "kind": "constant",
@@ -4194,14 +4194,14 @@
      "$id": "404",
      "Name": "threeLevelRecursive",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test three level recursive extension",
+     "Description": "test three level recursive extension",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "405",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "406",
         "kind": "constant",
@@ -4271,14 +4271,14 @@
      "$id": "410",
      "Name": "recursiveModels",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test child reference parent",
+     "Description": "test child reference parent",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "411",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "412",
         "kind": "constant",
@@ -4348,14 +4348,14 @@
      "$id": "416",
      "Name": "ContainSelfModels",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test contain self models",
+     "Description": "test contain self models",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "417",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "418",
         "kind": "constant",
@@ -4425,7 +4425,7 @@
      "$id": "422",
      "Name": "enumParameter",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test enum parameter.",
+     "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4471,14 +4471,14 @@
      "$id": "425",
      "Name": "bodyIsModelWithProjectedEnum",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test enum parameter.",
+     "Description": "test enum parameter.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "426",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "427",
         "kind": "constant",
@@ -4548,14 +4548,14 @@
      "$id": "431",
      "Name": "optionalDictionary",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test optional dictionary.",
+     "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "432",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "433",
         "kind": "constant",
@@ -4641,7 +4641,7 @@
      "$id": "440",
      "Name": "azureLocationOp",
      "ResourceName": "FirstTestTypeSpec",
-     "Doc": "test optional dictionary.",
+     "Description": "test optional dictionary.",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4704,7 +4704,7 @@
        "$id": "447",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "448",
         "kind": "constant",
@@ -4833,13 +4833,13 @@
   {
    "$id": "459",
    "Name": "HelloDemo",
-   "Doc": "Hello world service",
+   "Description": "Hello world service",
    "Operations": [
     {
      "$id": "460",
      "Name": "sayHi",
      "ResourceName": "Demo",
-     "Doc": "Return hi",
+     "Description": "Return hi",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -4997,7 +4997,7 @@
      "$id": "475",
      "Name": "helloAgain",
      "ResourceName": "Demo2",
-     "Doc": "Return hi again",
+     "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5148,7 +5148,7 @@
      "$id": "488",
      "Name": "noContentType",
      "ResourceName": "Demo2",
-     "Doc": "Return hi again",
+     "Description": "Return hi again",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5197,7 +5197,7 @@
        "$id": "493",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "494",
         "kind": "constant",
@@ -5300,7 +5300,7 @@
      "$id": "501",
      "Name": "helloDemoAgain",
      "ResourceName": "Demo2",
-     "Doc": "Return hi in demo2",
+     "Description": "Return hi in demo2",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5362,14 +5362,14 @@
      "$id": "506",
      "Name": "createLiteral",
      "ResourceName": "Demo2",
-     "Doc": "Create with literal value",
+     "Description": "Create with literal value",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "507",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "508",
         "kind": "constant",
@@ -5472,7 +5472,7 @@
      "$id": "515",
      "Name": "helloLiteral",
      "ResourceName": "Demo2",
-     "Doc": "Send literal parameters",
+     "Description": "Send literal parameters",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -5648,14 +5648,14 @@
      "$id": "533",
      "Name": "createUnknownValue",
      "ResourceName": "EnumTest",
-     "Doc": "get extensible enum",
+     "Description": "get extensible enum",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "534",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "535",
         "kind": "constant",
@@ -5758,14 +5758,14 @@
      "$id": "543",
      "Name": "internalProtocol",
      "ResourceName": "ProtocolAndConvenient",
-     "Doc": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "544",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "545",
         "kind": "constant",
@@ -5868,7 +5868,7 @@
      "$id": "552",
      "Name": "stillConvenient",
      "ResourceName": "ProtocolAndConvenient",
-     "Doc": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
      "Accessibility": "public",
      "Parameters": [],
      "Responses": [
@@ -5929,7 +5929,7 @@
      "$id": "558",
      "Name": "doSomething",
      "ResourceName": "Entity",
-     "Doc": "doSomething for entity",
+     "Description": "doSomething for entity",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6045,7 +6045,7 @@
      "$id": "569",
      "Name": "doSomething",
      "ResourceName": "Glossary",
-     "Doc": "doSomething for glossary",
+     "Description": "doSomething for glossary",
      "Accessibility": "public",
      "Parameters": [
       {
@@ -6214,14 +6214,14 @@
      "$id": "586",
      "Name": "export",
      "ResourceName": "VersioningOp",
-     "Doc": "Long-running resource action operation template.",
+     "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "587",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "588",
         "kind": "string",
@@ -6334,7 +6334,7 @@
          "$id": "599",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Doc": "The location for monitoring the operation state.",
+         "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "600",
           "kind": "url",
@@ -6386,14 +6386,14 @@
      "$id": "604",
      "Name": "exportW",
      "ResourceName": "VersioningOp",
-     "Doc": "Long-running resource action operation template.",
+     "Description": "Long-running resource action operation template.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "605",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "606",
         "kind": "string",
@@ -6506,7 +6506,7 @@
          "$id": "617",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Doc": "The location for monitoring the operation state.",
+         "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "618",
           "kind": "url",

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Usage.Models
 {
-    /// <summary> Record used both as operation parameter and return type. </summary>
+    /// <summary> The InputOutputRecord. </summary>
     public partial class InputOutputRecord
     {
         /// <summary>

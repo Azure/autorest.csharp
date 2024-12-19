@@ -87,7 +87,7 @@
      "decorators": []
     }
    ],
-   "doc": "The batch detection status.",
+   "description": "The batch detection status.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output,Json",
@@ -121,7 +121,7 @@
      "enumType": {
       "$ref": "12"
      },
-     "doc": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.",
+     "description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.",
      "decorators": []
     },
     {
@@ -139,11 +139,11 @@
      "enumType": {
       "$ref": "12"
      },
-     "doc": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.",
+     "description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.",
      "decorators": []
     }
    ],
-   "doc": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
+   "description": "Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -197,7 +197,7 @@
      "decorators": []
     }
    ],
-   "doc": "The alignment mode.",
+   "description": "The alignment mode.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -302,7 +302,7 @@
      "decorators": []
     }
    ],
-   "doc": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
+   "description": "An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -390,7 +390,7 @@
      "decorators": []
     }
    ],
-   "doc": "the model status.",
+   "description": "the model status.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -563,7 +563,7 @@
      "decorators": []
     }
    ],
-   "doc": "the time granularity of the data points.",
+   "description": "the time granularity of the data points.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Json",
@@ -685,7 +685,7 @@
      "decorators": []
     }
    ],
-   "doc": "The impute mode.",
+   "description": "The impute mode.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Json",
@@ -941,7 +941,7 @@
    "name": "MultivariateDetectionResult",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateDetectionResult",
    "usage": "Output,Json",
-   "doc": "Detection results for the given resultId.",
+   "description": "Detection results for the given resultId.",
    "decorators": [],
    "properties": [
     {
@@ -949,7 +949,7 @@
      "kind": "property",
      "name": "resultId",
      "serializedName": "resultId",
-     "doc": "Result identifier, which is used to fetch the results of an inference call.",
+     "description": "Result identifier, which is used to fetch the results of an inference call.",
      "type": {
       "$id": "110",
       "kind": "string",
@@ -976,14 +976,14 @@
      "kind": "property",
      "name": "summary",
      "serializedName": "summary",
-     "doc": "Multivariate anomaly detection status.",
+     "description": "Multivariate anomaly detection status.",
      "type": {
       "$id": "113",
       "kind": "model",
       "name": "MultivariateBatchDetectionResultSummary",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionResultSummary",
       "usage": "Output,Json",
-      "doc": "Multivariate anomaly detection status.",
+      "description": "Multivariate anomaly detection status.",
       "decorators": [],
       "properties": [
        {
@@ -991,7 +991,7 @@
         "kind": "property",
         "name": "status",
         "serializedName": "status",
-        "doc": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
+        "description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
         "type": {
          "$ref": "2"
         },
@@ -1007,7 +1007,7 @@
         "kind": "property",
         "name": "errors",
         "serializedName": "errors",
-        "doc": "Error message when detection is failed.",
+        "description": "Error message when detection is failed.",
         "type": {
          "$id": "116",
          "kind": "array",
@@ -1018,7 +1018,7 @@
           "name": "ErrorResponse",
           "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ErrorResponse",
           "usage": "Output,Error,Json,Exception",
-          "doc": "ErrorResponse contains code and message that shows the error information.",
+          "description": "ErrorResponse contains code and message that shows the error information.",
           "decorators": [],
           "properties": [
            {
@@ -1026,7 +1026,7 @@
             "kind": "property",
             "name": "code",
             "serializedName": "code",
-            "doc": "The error code.",
+            "description": "The error code.",
             "type": {
              "$id": "119",
              "kind": "string",
@@ -1046,7 +1046,7 @@
             "kind": "property",
             "name": "message",
             "serializedName": "message",
-            "doc": "The message explaining the error reported by the service.",
+            "description": "The message explaining the error reported by the service.",
             "type": {
              "$id": "121",
              "kind": "string",
@@ -1078,7 +1078,7 @@
         "kind": "property",
         "name": "variableStates",
         "serializedName": "variableStates",
-        "doc": "Variable Status.",
+        "description": "Variable Status.",
         "type": {
          "$id": "123",
          "kind": "array",
@@ -1089,7 +1089,7 @@
           "name": "VariableState",
           "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableState",
           "usage": "Input,Output,Json",
-          "doc": "Variable Status.",
+          "description": "Variable Status.",
           "decorators": [],
           "properties": [
            {
@@ -1097,7 +1097,7 @@
             "kind": "property",
             "name": "variable",
             "serializedName": "variable",
-            "doc": "Variable name in variable states.",
+            "description": "Variable name in variable states.",
             "type": {
              "$id": "126",
              "kind": "string",
@@ -1117,7 +1117,7 @@
             "kind": "property",
             "name": "filledNARatio",
             "serializedName": "filledNARatio",
-            "doc": "Proportion of missing values that need to be filled by fillNAMethod.",
+            "description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "type": {
              "$id": "128",
              "kind": "float32",
@@ -1137,7 +1137,7 @@
             "kind": "property",
             "name": "effectiveCount",
             "serializedName": "effectiveCount",
-            "doc": "Number of effective data points before applying fillNAMethod.",
+            "description": "Number of effective data points before applying fillNAMethod.",
             "type": {
              "$id": "130",
              "kind": "int32",
@@ -1157,7 +1157,7 @@
             "kind": "property",
             "name": "firstTimestamp",
             "serializedName": "firstTimestamp",
-            "doc": "First valid timestamp with value of input data.",
+            "description": "First valid timestamp with value of input data.",
             "type": {
              "$id": "132",
              "kind": "utcDateTime",
@@ -1185,7 +1185,7 @@
             "kind": "property",
             "name": "lastTimestamp",
             "serializedName": "lastTimestamp",
-            "doc": "Last valid timestamp with value of input data.",
+            "description": "Last valid timestamp with value of input data.",
             "type": {
              "$id": "135",
              "kind": "utcDateTime",
@@ -1225,14 +1225,14 @@
         "kind": "property",
         "name": "setupInfo",
         "serializedName": "setupInfo",
-        "doc": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
+        "description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "type": {
          "$id": "138",
          "kind": "model",
          "name": "MultivariateBatchDetectionOptions",
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateBatchDetectionOptions",
          "usage": "Input,Output,Json",
-         "doc": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
+         "description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "decorators": [],
          "properties": [
           {
@@ -1240,7 +1240,7 @@
            "kind": "property",
            "name": "dataSource",
            "serializedName": "dataSource",
-           "doc": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
+           "description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "type": {
             "$id": "140",
             "kind": "url",
@@ -1260,7 +1260,7 @@
            "kind": "property",
            "name": "topContributorCount",
            "serializedName": "topContributorCount",
-           "doc": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
+           "description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "type": {
             "$id": "142",
             "kind": "int32",
@@ -1280,7 +1280,7 @@
            "kind": "property",
            "name": "startTime",
            "serializedName": "startTime",
-           "doc": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
+           "description": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "type": {
             "$id": "144",
             "kind": "utcDateTime",
@@ -1308,7 +1308,7 @@
            "kind": "property",
            "name": "endTime",
            "serializedName": "endTime",
-           "doc": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
+           "description": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "type": {
             "$id": "147",
             "kind": "utcDateTime",
@@ -1354,7 +1354,7 @@
      "kind": "property",
      "name": "results",
      "serializedName": "results",
-     "doc": "Detection result for each timestamp.",
+     "description": "Detection result for each timestamp.",
      "type": {
       "$id": "150",
       "kind": "array",
@@ -1365,7 +1365,7 @@
        "name": "AnomalyState",
        "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyState",
        "usage": "Output,Json",
-       "doc": "Anomaly status and information.",
+       "description": "Anomaly status and information.",
        "decorators": [],
        "properties": [
         {
@@ -1373,7 +1373,7 @@
          "kind": "property",
          "name": "timestamp",
          "serializedName": "timestamp",
-         "doc": "The timestamp for this anomaly.",
+         "description": "The timestamp for this anomaly.",
          "type": {
           "$id": "153",
           "kind": "utcDateTime",
@@ -1401,14 +1401,14 @@
          "kind": "property",
          "name": "value",
          "serializedName": "value",
-         "doc": "The detailed value of this anomalous timestamp.",
+         "description": "The detailed value of this anomalous timestamp.",
          "type": {
           "$id": "156",
           "kind": "model",
           "name": "AnomalyValue",
           "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyValue",
           "usage": "Output,Json",
-          "doc": "Detailed information of the anomalous timestamp.",
+          "description": "Detailed information of the anomalous timestamp.",
           "decorators": [],
           "properties": [
            {
@@ -1416,7 +1416,7 @@
             "kind": "property",
             "name": "isAnomaly",
             "serializedName": "isAnomaly",
-            "doc": "True if an anomaly is detected at the current timestamp.",
+            "description": "True if an anomaly is detected at the current timestamp.",
             "type": {
              "$id": "158",
              "kind": "boolean",
@@ -1436,7 +1436,7 @@
             "kind": "property",
             "name": "severity",
             "serializedName": "severity",
-            "doc": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
+            "description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "type": {
              "$id": "160",
              "kind": "float32",
@@ -1456,7 +1456,7 @@
             "kind": "property",
             "name": "score",
             "serializedName": "score",
-            "doc": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
+            "description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "type": {
              "$id": "162",
              "kind": "float32",
@@ -1476,7 +1476,7 @@
             "kind": "property",
             "name": "interpretation",
             "serializedName": "interpretation",
-            "doc": "Interpretation of this anomalous timestamp.",
+            "description": "Interpretation of this anomalous timestamp.",
             "type": {
              "$id": "164",
              "kind": "array",
@@ -1487,7 +1487,7 @@
               "name": "AnomalyInterpretation",
               "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyInterpretation",
               "usage": "Output,Json",
-              "doc": "Interpretation of the anomalous timestamp.",
+              "description": "Interpretation of the anomalous timestamp.",
               "decorators": [],
               "properties": [
                {
@@ -1495,7 +1495,7 @@
                 "kind": "property",
                 "name": "variable",
                 "serializedName": "variable",
-                "doc": "Variable.",
+                "description": "Variable.",
                 "type": {
                  "$id": "167",
                  "kind": "string",
@@ -1515,7 +1515,7 @@
                 "kind": "property",
                 "name": "contributionScore",
                 "serializedName": "contributionScore",
-                "doc": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
+                "description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "type": {
                  "$id": "169",
                  "kind": "float32",
@@ -1535,14 +1535,14 @@
                 "kind": "property",
                 "name": "correlationChanges",
                 "serializedName": "correlationChanges",
-                "doc": "Correlation changes among the anomalous variables",
+                "description": "Correlation changes among the anomalous variables",
                 "type": {
                  "$id": "171",
                  "kind": "model",
                  "name": "CorrelationChanges",
                  "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.CorrelationChanges",
                  "usage": "Output,Json",
-                 "doc": "Correlation changes among the anomalous variables",
+                 "description": "Correlation changes among the anomalous variables",
                  "decorators": [],
                  "properties": [
                   {
@@ -1550,7 +1550,7 @@
                    "kind": "property",
                    "name": "changedVariables",
                    "serializedName": "changedVariables",
-                   "doc": "The correlated variables that have correlation changes under an anomaly.",
+                   "description": "The correlated variables that have correlation changes under an anomaly.",
                    "type": {
                     "$id": "173",
                     "kind": "array",
@@ -1607,7 +1607,7 @@
          "kind": "property",
          "name": "errors",
          "serializedName": "errors",
-         "doc": "Error message for the current timestamp.",
+         "description": "Error message for the current timestamp.",
          "type": {
           "$id": "176",
           "kind": "array",
@@ -1669,7 +1669,7 @@
    "name": "ModelInfo",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelInfo",
    "usage": "Input,Output,Json",
-   "doc": "Training result of a model including its status, errors and diagnostics\ninformation.",
+   "description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "decorators": [],
    "properties": [
     {
@@ -1677,7 +1677,7 @@
      "kind": "property",
      "name": "dataSource",
      "serializedName": "dataSource",
-     "doc": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
+     "description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "type": {
       "$id": "179",
       "kind": "string",
@@ -1697,7 +1697,7 @@
      "kind": "property",
      "name": "dataSchema",
      "serializedName": "dataSchema",
-     "doc": "Data schema of input data source: OneTable or MultiTable. The default\nDataSchema is OneTable.",
+     "description": "Data schema of input data source: OneTable or MultiTable. The default\nDataSchema is OneTable.",
      "type": {
       "$ref": "12"
      },
@@ -1713,7 +1713,7 @@
      "kind": "property",
      "name": "startTime",
      "serializedName": "startTime",
-     "doc": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
+     "description": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
      "type": {
       "$id": "182",
       "kind": "utcDateTime",
@@ -1741,7 +1741,7 @@
      "kind": "property",
      "name": "endTime",
      "serializedName": "endTime",
-     "doc": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
+     "description": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
      "type": {
       "$id": "185",
       "kind": "utcDateTime",
@@ -1769,7 +1769,7 @@
      "kind": "property",
      "name": "displayName",
      "serializedName": "displayName",
-     "doc": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
+     "description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "type": {
       "$id": "188",
       "kind": "string",
@@ -1789,7 +1789,7 @@
      "kind": "property",
      "name": "slidingWindow",
      "serializedName": "slidingWindow",
-     "doc": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
+     "description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "type": {
       "$id": "190",
       "kind": "int32",
@@ -1809,14 +1809,14 @@
      "kind": "property",
      "name": "alignPolicy",
      "serializedName": "alignPolicy",
-     "doc": "An optional field, indicating the manner to align multiple variables.",
+     "description": "An optional field, indicating the manner to align multiple variables.",
      "type": {
       "$id": "192",
       "kind": "model",
       "name": "AlignPolicy",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AlignPolicy",
       "usage": "Input,Output,Json",
-      "doc": "An optional field, indicating the manner to align multiple variables.",
+      "description": "An optional field, indicating the manner to align multiple variables.",
       "decorators": [],
       "properties": [
        {
@@ -1824,7 +1824,7 @@
         "kind": "property",
         "name": "alignMode",
         "serializedName": "alignMode",
-        "doc": "An optional field, indicating how to align different variables to the same\ntime-range. Either Inner or Outer. ",
+        "description": "An optional field, indicating how to align different variables to the same\ntime-range. Either Inner or Outer. ",
         "type": {
          "$ref": "18"
         },
@@ -1840,7 +1840,7 @@
         "kind": "property",
         "name": "fillNAMethod",
         "serializedName": "fillNAMethod",
-        "doc": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed.",
+        "description": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed.",
         "type": {
          "$ref": "24"
         },
@@ -1856,7 +1856,7 @@
         "kind": "property",
         "name": "paddingValue",
         "serializedName": "paddingValue",
-        "doc": "An optional field. Required when fillNAMethod is Fixed.",
+        "description": "An optional field. Required when fillNAMethod is Fixed.",
         "type": {
          "$id": "196",
          "kind": "float32",
@@ -1885,7 +1885,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "doc": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
+     "description": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
      "type": {
       "$ref": "36"
      },
@@ -1901,7 +1901,7 @@
      "kind": "property",
      "name": "errors",
      "serializedName": "errors",
-     "doc": "Error messages when failed to create a model.",
+     "description": "Error messages when failed to create a model.",
      "type": {
       "$id": "199",
       "kind": "array",
@@ -1924,14 +1924,14 @@
      "kind": "property",
      "name": "diagnosticsInfo",
      "serializedName": "diagnosticsInfo",
-     "doc": "Diagnostics information to help inspect the states of model or variable.",
+     "description": "Diagnostics information to help inspect the states of model or variable.",
      "type": {
       "$id": "201",
       "kind": "model",
       "name": "DiagnosticsInfo",
       "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.DiagnosticsInfo",
       "usage": "Input,Output,Json",
-      "doc": "Diagnostics information to help inspect the states of model or variable.",
+      "description": "Diagnostics information to help inspect the states of model or variable.",
       "decorators": [],
       "properties": [
        {
@@ -1939,14 +1939,14 @@
         "kind": "property",
         "name": "modelState",
         "serializedName": "modelState",
-        "doc": "Model status.",
+        "description": "Model status.",
         "type": {
          "$id": "203",
          "kind": "model",
          "name": "ModelState",
          "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelState",
          "usage": "Input,Output,Json",
-         "doc": "Model status.",
+         "description": "Model status.",
          "decorators": [],
          "properties": [
           {
@@ -1954,7 +1954,7 @@
            "kind": "property",
            "name": "epochIds",
            "serializedName": "epochIds",
-           "doc": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
+           "description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "type": {
             "$id": "205",
             "kind": "array",
@@ -1981,7 +1981,7 @@
            "kind": "property",
            "name": "trainLosses",
            "serializedName": "trainLosses",
-           "doc": "List of metrics used to assess how the model fits the training data for each\nepoch.",
+           "description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "type": {
             "$id": "208",
             "kind": "array",
@@ -2008,7 +2008,7 @@
            "kind": "property",
            "name": "validationLosses",
            "serializedName": "validationLosses",
-           "doc": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
+           "description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "type": {
             "$id": "211",
             "kind": "array",
@@ -2035,7 +2035,7 @@
            "kind": "property",
            "name": "latenciesInSeconds",
            "serializedName": "latenciesInSeconds",
-           "doc": "Latency for each epoch. ",
+           "description": "Latency for each epoch. ",
            "type": {
             "$id": "214",
             "kind": "array",
@@ -2071,7 +2071,7 @@
         "kind": "property",
         "name": "variableStates",
         "serializedName": "variableStates",
-        "doc": "Variable Status.",
+        "description": "Variable Status.",
         "type": {
          "$id": "217",
          "kind": "array",
@@ -2115,7 +2115,7 @@
    "name": "AnomalyDetectionModel",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.AnomalyDetectionModel",
    "usage": "Output,Json",
-   "doc": "Response of getting a model.",
+   "description": "Response of getting a model.",
    "decorators": [],
    "properties": [
     {
@@ -2123,7 +2123,7 @@
      "kind": "property",
      "name": "modelId",
      "serializedName": "modelId",
-     "doc": "Model identifier.",
+     "description": "Model identifier.",
      "type": {
       "$id": "220",
       "kind": "string",
@@ -2150,7 +2150,7 @@
      "kind": "property",
      "name": "createdTime",
      "serializedName": "createdTime",
-     "doc": "Date and time (UTC) when the model was created.",
+     "description": "Date and time (UTC) when the model was created.",
      "type": {
       "$id": "223",
       "kind": "utcDateTime",
@@ -2178,7 +2178,7 @@
      "kind": "property",
      "name": "lastUpdatedTime",
      "serializedName": "lastUpdatedTime",
-     "doc": "Date and time (UTC) when the model was last updated.",
+     "description": "Date and time (UTC) when the model was last updated.",
      "type": {
       "$id": "226",
       "kind": "utcDateTime",
@@ -2206,7 +2206,7 @@
      "kind": "property",
      "name": "modelInfo",
      "serializedName": "modelInfo",
-     "doc": "Training result of a model including its status, errors and diagnostics\ninformation.",
+     "description": "Training result of a model including its status, errors and diagnostics\ninformation.",
      "type": {
       "$ref": "177"
      },
@@ -2225,7 +2225,7 @@
    "name": "ModelList",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ModelList",
    "usage": "Output,Json",
-   "doc": "Response of listing models.",
+   "description": "Response of listing models.",
    "decorators": [],
    "properties": [
     {
@@ -2233,7 +2233,7 @@
      "kind": "property",
      "name": "models",
      "serializedName": "models",
-     "doc": "List of models.",
+     "description": "List of models.",
      "type": {
       "$id": "231",
       "kind": "array",
@@ -2256,7 +2256,7 @@
      "kind": "property",
      "name": "currentCount",
      "serializedName": "currentCount",
-     "doc": "Number of trained multivariate models.",
+     "description": "Number of trained multivariate models.",
      "type": {
       "$id": "233",
       "kind": "int32",
@@ -2276,7 +2276,7 @@
      "kind": "property",
      "name": "maxCount",
      "serializedName": "maxCount",
-     "doc": "Maximum number of models that can be trained for this Anomaly Detector resource.",
+     "description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "type": {
       "$id": "235",
       "kind": "int32",
@@ -2296,7 +2296,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "doc": "The link to fetch more models.",
+     "description": "The link to fetch more models.",
      "type": {
       "$id": "237",
       "kind": "string",
@@ -2319,7 +2319,7 @@
    "name": "MultivariateLastDetectionOptions",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionOptions",
    "usage": "Input,Json",
-   "doc": "Request of last detection.",
+   "description": "Request of last detection.",
    "decorators": [],
    "properties": [
     {
@@ -2327,7 +2327,7 @@
      "kind": "property",
      "name": "variables",
      "serializedName": "variables",
-     "doc": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
+     "description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "type": {
       "$id": "240",
       "kind": "array",
@@ -2338,7 +2338,7 @@
        "name": "VariableValues",
        "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.VariableValues",
        "usage": "Input,Json",
-       "doc": "Variable values.",
+       "description": "Variable values.",
        "decorators": [],
        "properties": [
         {
@@ -2346,7 +2346,7 @@
          "kind": "property",
          "name": "variable",
          "serializedName": "variable",
-         "doc": "Variable name of last detection request.",
+         "description": "Variable name of last detection request.",
          "type": {
           "$id": "243",
           "kind": "string",
@@ -2366,7 +2366,7 @@
          "kind": "property",
          "name": "timestamps",
          "serializedName": "timestamps",
-         "doc": "Timestamps of last detection request",
+         "description": "Timestamps of last detection request",
          "type": {
           "$id": "245",
           "kind": "array",
@@ -2393,7 +2393,7 @@
          "kind": "property",
          "name": "values",
          "serializedName": "values",
-         "doc": "Values of variables.",
+         "description": "Values of variables.",
          "type": {
           "$id": "248",
           "kind": "array",
@@ -2432,7 +2432,7 @@
      "kind": "property",
      "name": "topContributorCount",
      "serializedName": "topContributorCount",
-     "doc": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
+     "description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "type": {
       "$id": "251",
       "kind": "int32",
@@ -2458,7 +2458,7 @@
    "name": "MultivariateLastDetectionResult",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.MultivariateLastDetectionResult",
    "usage": "Output,Json",
-   "doc": "Results of last detection.",
+   "description": "Results of last detection.",
    "decorators": [],
    "properties": [
     {
@@ -2466,7 +2466,7 @@
      "kind": "property",
      "name": "variableStates",
      "serializedName": "variableStates",
-     "doc": "Variable Status.",
+     "description": "Variable Status.",
      "type": {
       "$id": "254",
       "kind": "array",
@@ -2489,7 +2489,7 @@
      "kind": "property",
      "name": "results",
      "serializedName": "results",
-     "doc": "Anomaly status and information.",
+     "description": "Anomaly status and information.",
      "type": {
       "$id": "256",
       "kind": "array",
@@ -2515,7 +2515,7 @@
    "name": "UnivariateDetectionOptions",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateDetectionOptions",
    "usage": "Input,Json",
-   "doc": "The request of entire or last anomaly detection.",
+   "description": "The request of entire or last anomaly detection.",
    "decorators": [],
    "properties": [
     {
@@ -2523,7 +2523,7 @@
      "kind": "property",
      "name": "series",
      "serializedName": "series",
-     "doc": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
+     "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "type": {
       "$id": "259",
       "kind": "array",
@@ -2534,7 +2534,7 @@
        "name": "TimeSeriesPoint",
        "crossLanguageDefinitionId": "AnomalyDetector.Univariate.TimeSeriesPoint",
        "usage": "Input,Json",
-       "doc": "The definition of input timeseries points.",
+       "description": "The definition of input timeseries points.",
        "decorators": [],
        "properties": [
         {
@@ -2542,7 +2542,7 @@
          "kind": "property",
          "name": "timestamp",
          "serializedName": "timestamp",
-         "doc": "Optional argument, timestamp of a data point (ISO8601 format).",
+         "description": "Optional argument, timestamp of a data point (ISO8601 format).",
          "type": {
           "$id": "262",
           "kind": "utcDateTime",
@@ -2570,7 +2570,7 @@
          "kind": "property",
          "name": "value",
          "serializedName": "value",
-         "doc": "The measurement of that point, should be float.",
+         "description": "The measurement of that point, should be float.",
          "type": {
           "$id": "265",
           "kind": "float32",
@@ -2602,7 +2602,7 @@
      "kind": "property",
      "name": "granularity",
      "serializedName": "granularity",
-     "doc": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
+     "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
      "type": {
       "$ref": "46"
      },
@@ -2618,7 +2618,7 @@
      "kind": "property",
      "name": "customInterval",
      "serializedName": "customInterval",
-     "doc": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
+     "description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "type": {
       "$id": "268",
       "kind": "int32",
@@ -2638,7 +2638,7 @@
      "kind": "property",
      "name": "period",
      "serializedName": "period",
-     "doc": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
+     "description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "type": {
       "$id": "270",
       "kind": "int32",
@@ -2658,7 +2658,7 @@
      "kind": "property",
      "name": "maxAnomalyRatio",
      "serializedName": "maxAnomalyRatio",
-     "doc": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
+     "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "type": {
       "$id": "272",
       "kind": "float32",
@@ -2678,7 +2678,7 @@
      "kind": "property",
      "name": "sensitivity",
      "serializedName": "sensitivity",
-     "doc": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
+     "description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "type": {
       "$id": "274",
       "kind": "int32",
@@ -2698,7 +2698,7 @@
      "kind": "property",
      "name": "imputeMode",
      "serializedName": "imputeMode",
-     "doc": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
+     "description": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
      "type": {
       "$ref": "66"
      },
@@ -2714,7 +2714,7 @@
      "kind": "property",
      "name": "imputeFixedValue",
      "serializedName": "imputeFixedValue",
-     "doc": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
+     "description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "type": {
       "$id": "277",
       "kind": "float32",
@@ -2740,7 +2740,7 @@
    "name": "UnivariateEntireDetectionResult",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateEntireDetectionResult",
    "usage": "Output,Json",
-   "doc": "The response of entire anomaly detection.",
+   "description": "The response of entire anomaly detection.",
    "decorators": [],
    "properties": [
     {
@@ -2748,7 +2748,7 @@
      "kind": "property",
      "name": "period",
      "serializedName": "period",
-     "doc": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
+     "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "type": {
       "$id": "280",
       "kind": "int32",
@@ -2768,7 +2768,7 @@
      "kind": "property",
      "name": "expectedValues",
      "serializedName": "expectedValues",
-     "doc": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
+     "description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "type": {
       "$id": "282",
       "kind": "array",
@@ -2795,7 +2795,7 @@
      "kind": "property",
      "name": "upperMargins",
      "serializedName": "upperMargins",
-     "doc": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
+     "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
      "type": {
       "$id": "285",
       "kind": "array",
@@ -2822,7 +2822,7 @@
      "kind": "property",
      "name": "lowerMargins",
      "serializedName": "lowerMargins",
-     "doc": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
+     "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
      "type": {
       "$id": "288",
       "kind": "array",
@@ -2849,7 +2849,7 @@
      "kind": "property",
      "name": "isAnomaly",
      "serializedName": "isAnomaly",
-     "doc": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
+     "description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
      "type": {
       "$id": "291",
       "kind": "array",
@@ -2876,7 +2876,7 @@
      "kind": "property",
      "name": "isNegativeAnomaly",
      "serializedName": "isNegativeAnomaly",
-     "doc": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
+     "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
      "type": {
       "$id": "294",
       "kind": "array",
@@ -2903,7 +2903,7 @@
      "kind": "property",
      "name": "isPositiveAnomaly",
      "serializedName": "isPositiveAnomaly",
-     "doc": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
+     "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "type": {
       "$id": "297",
       "kind": "array",
@@ -2930,7 +2930,7 @@
      "kind": "property",
      "name": "severity",
      "serializedName": "severity",
-     "doc": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
+     "description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "type": {
       "$id": "300",
       "kind": "array",
@@ -2960,7 +2960,7 @@
    "name": "AnomalyDetectorError",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.AnomalyDetectorError",
    "usage": "Error,Json,Exception",
-   "doc": "Error information returned by the API.",
+   "description": "Error information returned by the API.",
    "decorators": [],
    "properties": [
     {
@@ -2968,7 +2968,7 @@
      "kind": "property",
      "name": "code",
      "serializedName": "code",
-     "doc": "The error code.",
+     "description": "The error code.",
      "type": {
       "$ref": "80"
      },
@@ -2984,7 +2984,7 @@
      "kind": "property",
      "name": "message",
      "serializedName": "message",
-     "doc": "A message explaining the error reported by the service.",
+     "description": "A message explaining the error reported by the service.",
      "type": {
       "$id": "305",
       "kind": "string",
@@ -3007,7 +3007,7 @@
    "name": "UnivariateLastDetectionResult",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateLastDetectionResult",
    "usage": "Output,Json",
-   "doc": "The response of last anomaly detection.",
+   "description": "The response of last anomaly detection.",
    "decorators": [],
    "properties": [
     {
@@ -3015,7 +3015,7 @@
      "kind": "property",
      "name": "period",
      "serializedName": "period",
-     "doc": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
+     "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "type": {
       "$id": "308",
       "kind": "int32",
@@ -3035,7 +3035,7 @@
      "kind": "property",
      "name": "suggestedWindow",
      "serializedName": "suggestedWindow",
-     "doc": "Suggested input series points needed for detecting the latest point.",
+     "description": "Suggested input series points needed for detecting the latest point.",
      "type": {
       "$id": "310",
       "kind": "int32",
@@ -3055,7 +3055,7 @@
      "kind": "property",
      "name": "expectedValue",
      "serializedName": "expectedValue",
-     "doc": "Expected value of the latest point.",
+     "description": "Expected value of the latest point.",
      "type": {
       "$id": "312",
       "kind": "float32",
@@ -3075,7 +3075,7 @@
      "kind": "property",
      "name": "upperMargin",
      "serializedName": "upperMargin",
-     "doc": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
+     "description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "type": {
       "$id": "314",
       "kind": "float32",
@@ -3095,7 +3095,7 @@
      "kind": "property",
      "name": "lowerMargin",
      "serializedName": "lowerMargin",
-     "doc": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
+     "description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "type": {
       "$id": "316",
       "kind": "float32",
@@ -3115,7 +3115,7 @@
      "kind": "property",
      "name": "isAnomaly",
      "serializedName": "isAnomaly",
-     "doc": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
+     "description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "type": {
       "$id": "318",
       "kind": "boolean",
@@ -3135,7 +3135,7 @@
      "kind": "property",
      "name": "isNegativeAnomaly",
      "serializedName": "isNegativeAnomaly",
-     "doc": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
+     "description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "type": {
       "$id": "320",
       "kind": "boolean",
@@ -3155,7 +3155,7 @@
      "kind": "property",
      "name": "isPositiveAnomaly",
      "serializedName": "isPositiveAnomaly",
-     "doc": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
+     "description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "type": {
       "$id": "322",
       "kind": "boolean",
@@ -3175,7 +3175,7 @@
      "kind": "property",
      "name": "severity",
      "serializedName": "severity",
-     "doc": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
+     "description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "type": {
       "$id": "324",
       "kind": "float32",
@@ -3198,7 +3198,7 @@
    "name": "UnivariateChangePointDetectionOptions",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionOptions",
    "usage": "Input,Json",
-   "doc": "The request of change point detection.",
+   "description": "The request of change point detection.",
    "decorators": [],
    "properties": [
     {
@@ -3206,7 +3206,7 @@
      "kind": "property",
      "name": "series",
      "serializedName": "series",
-     "doc": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
+     "description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
      "type": {
       "$id": "327",
       "kind": "array",
@@ -3229,7 +3229,7 @@
      "kind": "property",
      "name": "granularity",
      "serializedName": "granularity",
-     "doc": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid.",
+     "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid.",
      "type": {
       "$ref": "46"
      },
@@ -3245,7 +3245,7 @@
      "kind": "property",
      "name": "customInterval",
      "serializedName": "customInterval",
-     "doc": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
+     "description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "type": {
       "$id": "330",
       "kind": "int32",
@@ -3265,7 +3265,7 @@
      "kind": "property",
      "name": "period",
      "serializedName": "period",
-     "doc": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
+     "description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "type": {
       "$id": "332",
       "kind": "int32",
@@ -3285,7 +3285,7 @@
      "kind": "property",
      "name": "stableTrendWindow",
      "serializedName": "stableTrendWindow",
-     "doc": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
+     "description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "type": {
       "$id": "334",
       "kind": "int32",
@@ -3305,7 +3305,7 @@
      "kind": "property",
      "name": "threshold",
      "serializedName": "threshold",
-     "doc": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
+     "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "type": {
       "$id": "336",
       "kind": "float32",
@@ -3328,7 +3328,7 @@
    "name": "UnivariateChangePointDetectionResult",
    "crossLanguageDefinitionId": "AnomalyDetector.Univariate.UnivariateChangePointDetectionResult",
    "usage": "Output,Json",
-   "doc": "The response of change point detection.",
+   "description": "The response of change point detection.",
    "decorators": [],
    "properties": [
     {
@@ -3336,7 +3336,7 @@
      "kind": "property",
      "name": "period",
      "serializedName": "period",
-     "doc": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
+     "description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "type": {
       "$id": "339",
       "kind": "int32",
@@ -3356,7 +3356,7 @@
      "kind": "property",
      "name": "isChangePoint",
      "serializedName": "isChangePoint",
-     "doc": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
+     "description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "type": {
       "$id": "341",
       "kind": "array",
@@ -3383,7 +3383,7 @@
      "kind": "property",
      "name": "confidenceScores",
      "serializedName": "confidenceScores",
-     "doc": "the change point confidence of each point",
+     "description": "the change point confidence of each point",
      "type": {
       "$id": "344",
       "kind": "array",
@@ -3413,7 +3413,7 @@
    "name": "ResponseError",
    "crossLanguageDefinitionId": "AnomalyDetector.Multivariate.ResponseError",
    "usage": "Error",
-   "doc": "Error response",
+   "description": "Error response",
    "decorators": [],
    "properties": [
     {
@@ -3421,7 +3421,7 @@
      "kind": "property",
      "name": "code",
      "serializedName": "code",
-     "doc": "The error code.",
+     "description": "The error code.",
      "type": {
       "$id": "348",
       "kind": "string",
@@ -3441,7 +3441,7 @@
      "kind": "property",
      "name": "message",
      "serializedName": "message",
-     "doc": "The message explaining the error reported by the service.",
+     "description": "The message explaining the error reported by the service.",
      "type": {
       "$id": "350",
       "kind": "string",
@@ -3463,7 +3463,7 @@
   {
    "$id": "351",
    "Name": "AnomalyDetectorClient",
-   "Doc": "The Anomaly Detector API detects anomalies automatically in time series data.\nIt supports two kinds of mode, one is for stateless using, another is for\nstateful using. In stateless mode, there are three functionalities. Entire\nDetect is for detecting the whole series with model trained by the time series,\nLast Detect is detecting last point with model trained by points before.\nChangePoint Detect is for detecting trend changes in time series. In stateful\nmode, user can store time series, the stored time series will be used for\ndetection anomalies. Under this mode, user can still use the above three\nfunctionalities by only giving a time range without preparing time series in\nclient side. Besides the above three functionalities, stateful model also\nprovide group based detection and labeling service. By leveraging labeling\nservice user can provide labels for each detection result, these labels will be\nused for retuning or regenerating detection models. Inconsistency detection is\na kind of group based detection, this detection will find inconsistency ones in\na set of time series. By using anomaly detector service, business customers can\ndiscover incidents and establish a logic flow for root cause analysis.",
+   "Description": "The Anomaly Detector API detects anomalies automatically in time series data.\nIt supports two kinds of mode, one is for stateless using, another is for\nstateful using. In stateless mode, there are three functionalities. Entire\nDetect is for detecting the whole series with model trained by the time series,\nLast Detect is detecting last point with model trained by points before.\nChangePoint Detect is for detecting trend changes in time series. In stateful\nmode, user can store time series, the stored time series will be used for\ndetection anomalies. Under this mode, user can still use the above three\nfunctionalities by only giving a time range without preparing time series in\nclient side. Besides the above three functionalities, stateful model also\nprovide group based detection and labeling service. By leveraging labeling\nservice user can provide labels for each detection result, these labels will be\nused for retuning or regenerating detection models. Inconsistency detection is\na kind of group based detection, this detection will find inconsistency ones in\na set of time series. By using anomaly detector service, business customers can\ndiscover incidents and establish a logic flow for root cause analysis.",
    "Operations": [],
    "Protocol": {
     "$id": "352"
@@ -3473,7 +3473,7 @@
      "$id": "353",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
+     "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "354",
       "kind": "url",
@@ -3494,7 +3494,7 @@
      "$id": "355",
      "Name": "ApiVersion",
      "NameInRequest": "ApiVersion",
-     "Doc": "Api Version",
+     "Description": "Api Version",
      "Type": {
       "$ref": "104"
      },
@@ -3530,14 +3530,14 @@
      "Name": "DetectUnivariateEntireSeries",
      "ResourceName": "Univariate",
      "Summary": "Detect anomalies for the entire series in batch.",
-     "Doc": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
+     "Description": "This operation generates a model with an entire series, each point is detected\nwith the same model. With this method, points before and after a certain point\nare used to determine whether it is an anomaly. The entire detection can give\nuser an overall status of the time series.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "360",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "361",
         "kind": "constant",
@@ -3592,7 +3592,7 @@
        "$id": "366",
        "Name": "options",
        "NameInRequest": "options",
-       "Doc": "Method of univariate anomaly detection.",
+       "Description": "Method of univariate anomaly detection.",
        "Type": {
         "$ref": "257"
        },
@@ -7750,14 +7750,14 @@
      "Name": "DetectUnivariateLastPoint",
      "ResourceName": "Univariate",
      "Summary": "Detect anomaly status of the latest point in time series.",
-     "Doc": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
+     "Description": "This operation generates a model using the points that you sent into the API,\nand based on all data to determine whether the last point is anomalous.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "919",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "920",
         "kind": "constant",
@@ -7812,7 +7812,7 @@
        "$id": "925",
        "Name": "options",
        "NameInRequest": "options",
-       "Doc": "Method of univariate anomaly detection.",
+       "Description": "Method of univariate anomaly detection.",
        "Type": {
         "$ref": "257"
        },
@@ -9291,14 +9291,14 @@
      "Name": "DetectUnivariateChangePoint",
      "ResourceName": "Univariate",
      "Summary": "Detect change point for the entire series",
-     "Doc": "Evaluate change point score of every series point",
+     "Description": "Evaluate change point score of every series point",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "1144",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "1145",
         "kind": "constant",
@@ -9353,7 +9353,7 @@
        "$id": "1150",
        "Name": "options",
        "NameInRequest": "options",
-       "Doc": "Method of univariate anomaly detection.",
+       "Description": "Method of univariate anomaly detection.",
        "Type": {
         "$ref": "325"
        },
@@ -20337,7 +20337,7 @@
      "$id": "2713",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
+     "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "2714",
       "kind": "url",
@@ -20358,7 +20358,7 @@
      "$id": "2715",
      "Name": "ApiVersion",
      "NameInRequest": "ApiVersion",
-     "Doc": "Api Version",
+     "Description": "Api Version",
      "Type": {
       "$ref": "104"
      },
@@ -20394,14 +20394,14 @@
      "Name": "GetMultivariateBatchDetectionResult",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Anomaly Detection Result",
-     "Doc": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
+     "Description": "For asynchronous inference, get multivariate anomaly detection result based on\nresultId returned by the BatchDetectAnomaly api.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "2720",
        "Name": "resultId",
        "NameInRequest": "resultId",
-       "Doc": "ID of a batch detection result.",
+       "Description": "ID of a batch detection result.",
        "Type": {
         "$id": "2721",
         "kind": "string",
@@ -21053,14 +21053,14 @@
      "Name": "TrainMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Train a Multivariate Anomaly Detection Model",
-     "Doc": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
+     "Description": "Create and train a multivariate anomaly detection model. The request must\ninclude a source parameter to indicate an externally accessible Azure blob\nstorage URI.There are two types of data input: An URI pointed to an Azure blob\nstorage folder which contains multiple CSV files, and each CSV file contains\ntwo columns, timestamp and variable. Another type of input is an URI pointed to\na CSV file in Azure blob storage, which contains all the variables and a\ntimestamp column.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "2810",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "2811",
         "kind": "constant",
@@ -21115,7 +21115,7 @@
        "$id": "2816",
        "Name": "modelInfo",
        "NameInRequest": "modelInfo",
-       "Doc": "Model information.",
+       "Description": "Model information.",
        "Type": {
         "$ref": "177"
        },
@@ -21145,7 +21145,7 @@
          "$id": "2818",
          "Name": "Location",
          "NameInResponse": "location",
-         "Doc": "Location and ID of the model.",
+         "Description": "Location and ID of the model.",
          "Type": {
           "$id": "2819",
           "kind": "string",
@@ -21453,14 +21453,14 @@
      "Name": "ListMultivariateModels",
      "ResourceName": "Multivariate",
      "Summary": "List Multivariate Models",
-     "Doc": "List models of a resource.",
+     "Description": "List models of a resource.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "2859",
        "Name": "skip",
        "NameInRequest": "skip",
-       "Doc": "Skip indicates how many models will be skipped.",
+       "Description": "Skip indicates how many models will be skipped.",
        "Type": {
         "$id": "2860",
         "kind": "int32",
@@ -21482,7 +21482,7 @@
        "$id": "2861",
        "Name": "top",
        "NameInRequest": "top",
-       "Doc": "Top indicates how many models will be fetched.",
+       "Description": "Top indicates how many models will be fetched.",
        "Type": {
         "$id": "2862",
         "kind": "int32",
@@ -22633,14 +22633,14 @@
      "Name": "DeleteMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Delete Multivariate Model",
-     "Doc": "Delete an existing multivariate model according to the modelId",
+     "Description": "Delete an existing multivariate model according to the modelId",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "3013",
        "Name": "modelId",
        "NameInRequest": "modelId",
-       "Doc": "Model identifier.",
+       "Description": "Model identifier.",
        "Type": {
         "$id": "3014",
         "kind": "string",
@@ -22746,14 +22746,14 @@
      "Name": "GetMultivariateModel",
      "ResourceName": "Multivariate",
      "Summary": "Get Multivariate Model",
-     "Doc": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
+     "Description": "Get detailed information of multivariate model, including the training status\nand variables used in the model.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "3024",
        "Name": "modelId",
        "NameInRequest": "modelId",
-       "Doc": "Model identifier.",
+       "Description": "Model identifier.",
        "Type": {
         "$id": "3025",
         "kind": "string",
@@ -23842,14 +23842,14 @@
      "Name": "DetectMultivariateBatchAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect Multivariate Anomaly",
-     "Doc": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
+     "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, the input schema should be the same with the training\nrequest. The request will complete asynchronously and return a resultId to\nquery the detection result.The request should be a source link to indicate an\nexternally accessible Azure storage Uri, either pointed to an Azure blob\nstorage folder, or pointed to a CSV file in Azure blob storage.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "3167",
        "Name": "modelId",
        "NameInRequest": "modelId",
-       "Doc": "Model identifier.",
+       "Description": "Model identifier.",
        "Type": {
         "$id": "3168",
         "kind": "string",
@@ -23871,7 +23871,7 @@
        "$id": "3169",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "3170",
         "kind": "constant",
@@ -23926,7 +23926,7 @@
        "$id": "3175",
        "Name": "options",
        "NameInRequest": "options",
-       "Doc": "Request of multivariate anomaly detection.",
+       "Description": "Request of multivariate anomaly detection.",
        "Type": {
         "$ref": "138"
        },
@@ -23956,7 +23956,7 @@
          "$id": "3177",
          "Name": "Operation-Id",
          "NameInResponse": "operation-id",
-         "Doc": "Id of the detection result.",
+         "Description": "Id of the detection result.",
          "Type": {
           "$id": "3178",
           "kind": "string",
@@ -23969,7 +23969,7 @@
          "$id": "3179",
          "Name": "Operation-Location",
          "NameInResponse": "operation-location",
-         "Doc": "Location of the detection result.",
+         "Description": "Location of the detection result.",
          "Type": {
           "$id": "3180",
           "kind": "string",
@@ -24193,14 +24193,14 @@
      "Name": "DetectMultivariateLastAnomaly",
      "ResourceName": "Multivariate",
      "Summary": "Detect anomalies in the last point of the request body",
-     "Doc": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
+     "Description": "Submit multivariate anomaly detection task with the modelId of trained model\nand inference data, and the inference data should be put into request body in a\nJSON format. The request will complete synchronously and return the detection\nimmediately in the response body.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "3209",
        "Name": "modelId",
        "NameInRequest": "modelId",
-       "Doc": "Model identifier.",
+       "Description": "Model identifier.",
        "Type": {
         "$id": "3210",
         "kind": "string",
@@ -24222,7 +24222,7 @@
        "$id": "3211",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "3212",
         "kind": "constant",
@@ -24277,7 +24277,7 @@
        "$id": "3217",
        "Name": "options",
        "NameInRequest": "options",
-       "Doc": "Request of last detection.",
+       "Description": "Request of last detection.",
        "Type": {
         "$ref": "238"
        },
@@ -26426,7 +26426,7 @@
      "$id": "3494",
      "Name": "Endpoint",
      "NameInRequest": "Endpoint",
-     "Doc": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
+     "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus2.api.cognitive.microsoft.com).",
      "Type": {
       "$id": "3495",
       "kind": "url",
@@ -26447,7 +26447,7 @@
      "$id": "3496",
      "Name": "ApiVersion",
      "NameInRequest": "ApiVersion",
-     "Doc": "Api Version",
+     "Description": "Api Version",
      "Type": {
       "$ref": "104"
      },

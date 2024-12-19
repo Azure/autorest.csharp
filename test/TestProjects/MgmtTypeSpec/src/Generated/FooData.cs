@@ -14,10 +14,7 @@ using MgmtTypeSpec.Models;
 
 namespace MgmtTypeSpec
 {
-    /// <summary>
-    /// A class representing the Foo data model.
-    /// Concrete tracked resource types can be created by aliasing this type using a specific property type.
-    /// </summary>
+    /// <summary> A class representing the Foo data model. </summary>
     public partial class FooData : TrackedResourceData
     {
         /// <summary>
@@ -65,7 +62,7 @@ namespace MgmtTypeSpec
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <param name="properties"></param>
         /// <param name="extendedLocation"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal FooData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, FooProperties properties, ExtendedLocation extendedLocation, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
@@ -80,7 +77,7 @@ namespace MgmtTypeSpec
         {
         }
 
-        /// <summary> The resource-specific properties for this resource. </summary>
+        /// <summary> Gets or sets the properties. </summary>
         public FooProperties Properties { get; set; }
         /// <summary> Gets or sets the extended location. </summary>
         public ExtendedLocation ExtendedLocation { get; set; }

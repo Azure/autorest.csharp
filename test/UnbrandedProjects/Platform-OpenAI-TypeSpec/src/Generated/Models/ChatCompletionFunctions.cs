@@ -42,17 +42,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
-        /// <param name="name">
-        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
-        /// dashes, with a maximum length of 64.
-        /// </param>
-        /// <param name="parameters">
-        /// The parameters the functions accepts, described as a JSON Schema object. See the
-        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
-        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
-        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
-        /// `{\"type\": \"object\", \"properties\": {}}`.
-        /// </param>
+        /// <param name="name"></param>
+        /// <param name="parameters"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public ChatCompletionFunctions(string name, ChatCompletionFunctionParameters parameters)
         {
@@ -64,21 +55,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
-        /// <param name="name">
-        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
-        /// dashes, with a maximum length of 64.
-        /// </param>
-        /// <param name="description">
-        /// A description of what the function does, used by the model to choose when and how to call the
-        /// function.
-        /// </param>
-        /// <param name="parameters">
-        /// The parameters the functions accepts, described as a JSON Schema object. See the
-        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
-        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
-        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
-        /// `{\"type\": \"object\", \"properties\": {}}`.
-        /// </param>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="parameters"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ChatCompletionFunctions(string name, string description, ChatCompletionFunctionParameters parameters, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -93,23 +72,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary>
-        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
-        /// dashes, with a maximum length of 64.
-        /// </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary>
-        /// A description of what the function does, used by the model to choose when and how to call the
-        /// function.
-        /// </summary>
+        /// <summary> Gets or sets the description. </summary>
         public string Description { get; set; }
-        /// <summary>
-        /// The parameters the functions accepts, described as a JSON Schema object. See the
-        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
-        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
-        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
-        /// `{\"type\": \"object\", \"properties\": {}}`.
-        /// </summary>
+        /// <summary> Gets the parameters. </summary>
         public ChatCompletionFunctionParameters Parameters { get; }
     }
 }

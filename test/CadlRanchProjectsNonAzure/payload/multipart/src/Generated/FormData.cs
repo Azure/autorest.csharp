@@ -30,14 +30,14 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormData. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FormData(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Basic. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> BasicAsync(MultiPartRequest body)
@@ -49,7 +49,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Basic. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Basic(MultiPartRequest body)
@@ -62,7 +62,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Basic.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -91,7 +91,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Basic.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -119,7 +119,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <summary> File array and basic. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> FileArrayAndBasicAsync(ComplexPartsRequest body)
@@ -131,7 +131,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for mixed scenarios. </summary>
+        /// <summary> File array and basic. </summary>
         /// <param name="body"> The <see cref="ComplexPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult FileArrayAndBasic(ComplexPartsRequest body)
@@ -144,7 +144,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// [Protocol Method] File array and basic.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -173,7 +173,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for mixed scenarios
+        /// [Protocol Method] File array and basic.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -201,7 +201,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
+        /// <summary> Json part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> JsonPartAsync(JsonPartRequest body)
@@ -213,7 +213,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains json part and binary part. </summary>
+        /// <summary> Json part. </summary>
         /// <param name="body"> The <see cref="JsonPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult JsonPart(JsonPartRequest body)
@@ -226,7 +226,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
+        /// [Protocol Method] Json part.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -255,7 +255,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains json part and binary part
+        /// [Protocol Method] Json part.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -283,7 +283,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <summary> Binary array parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> BinaryArrayPartsAsync(BinaryArrayPartsRequest body)
@@ -295,7 +295,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <summary> Binary array parts. </summary>
         /// <param name="body"> The <see cref="BinaryArrayPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult BinaryArrayParts(BinaryArrayPartsRequest body)
@@ -308,7 +308,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// [Protocol Method] Binary array parts.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -337,7 +337,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// [Protocol Method] Binary array parts.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -365,7 +365,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <summary> Multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> MultiBinaryPartsAsync(MultiBinaryPartsRequest body)
@@ -377,7 +377,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for scenario contains multi binary parts. </summary>
+        /// <summary> Multi binary parts. </summary>
         /// <param name="body"> The <see cref="MultiBinaryPartsRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult MultiBinaryParts(MultiBinaryPartsRequest body)
@@ -390,7 +390,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// [Protocol Method] Multi binary parts.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -419,7 +419,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for scenario contains multi binary parts
+        /// [Protocol Method] Multi binary parts.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -447,7 +447,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Check file name and content type. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> CheckFileNameAndContentTypeAsync(MultiPartRequest body)
@@ -459,7 +459,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Check file name and content type. </summary>
         /// <param name="body"> The <see cref="MultiPartRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult CheckFileNameAndContentType(MultiPartRequest body)
@@ -472,7 +472,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Check file name and content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -501,7 +501,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Check file name and content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -529,7 +529,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Anonymous model. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
         public virtual async Task<ClientResult> AnonymousModelAsync(Stream profileImage)
@@ -542,7 +542,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Anonymous model. </summary>
         /// <param name="profileImage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="profileImage"/> is null. </exception>
         public virtual ClientResult AnonymousModel(Stream profileImage)
@@ -556,7 +556,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Anonymous model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -585,7 +585,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Anonymous model.
         /// <list type="bullet">
         /// <item>
         /// <description>

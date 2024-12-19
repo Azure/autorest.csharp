@@ -16,7 +16,7 @@ using Client.Naming.Models;
 namespace Client.Naming
 {
     // Data plane generated client.
-    /// <summary> Describe changing names of types in a client with `@clientName`. </summary>
+    /// <summary> The Naming service client. </summary>
     public partial class NamingClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace Client.Naming
         }
 
         /// <summary> Initializes a new instance of NamingClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NamingClient(Uri endpoint, NamingClientOptions options)

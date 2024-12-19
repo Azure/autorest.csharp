@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model spread Record&lt;ModelForRecord&gt; with the different known property type. </summary>
+    /// <summary> The DifferentSpreadModelRecord. </summary>
     public partial class DifferentSpreadModelRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadModelRecord"/>. </summary>

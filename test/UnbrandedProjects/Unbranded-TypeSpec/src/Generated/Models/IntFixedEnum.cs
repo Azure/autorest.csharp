@@ -4,7 +4,7 @@
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> int fixed enum. </summary>
+    /// <summary> The IntFixedEnum. </summary>
     public enum IntFixedEnum
     {
         /// <summary> 1. </summary>

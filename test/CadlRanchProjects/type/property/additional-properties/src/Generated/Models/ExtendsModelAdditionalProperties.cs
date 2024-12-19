@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from Record&lt;ModelForRecord&gt; type. </summary>
+    /// <summary> The ExtendsModelAdditionalProperties. </summary>
     public partial class ExtendsModelAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="ExtendsModelAdditionalProperties"/>. </summary>

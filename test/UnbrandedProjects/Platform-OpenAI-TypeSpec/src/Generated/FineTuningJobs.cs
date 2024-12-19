@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of FineTuningJobs. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FineTuningJobs(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -39,14 +39,7 @@ namespace OpenAI
             _endpoint = endpoint;
         }
 
-        /// <summary>
-        /// Creates a job that fine-tunes a specified model from a given dataset.
-        ///
-        /// Response includes details of the enqueued job including job status and the name of the
-        /// fine-tuned models once complete.
-        ///
-        /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
-        /// </summary>
+        /// <summary> Create. </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual async Task<ClientResult<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job)
@@ -58,14 +51,7 @@ namespace OpenAI
             return ClientResult.FromValue(FineTuningJob.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary>
-        /// Creates a job that fine-tunes a specified model from a given dataset.
-        ///
-        /// Response includes details of the enqueued job including job status and the name of the
-        /// fine-tuned models once complete.
-        ///
-        /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
-        /// </summary>
+        /// <summary> Create. </summary>
         /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual ClientResult<FineTuningJob> Create(CreateFineTuningJobRequest job)
@@ -78,12 +64,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// [Protocol Method] Creates a job that fine-tunes a specified model from a given dataset.
-        ///
-        /// Response includes details of the enqueued job including job status and the name of the
-        /// fine-tuned models once complete.
-        ///
-        /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,12 +92,7 @@ namespace OpenAI
         }
 
         /// <summary>
-        /// [Protocol Method] Creates a job that fine-tunes a specified model from a given dataset.
-        ///
-        /// Response includes details of the enqueued job including job status and the name of the
-        /// fine-tuned models once complete.
-        ///
-        /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
+        /// [Protocol Method] Create.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,8 +120,8 @@ namespace OpenAI
         }
 
         /// <summary> Get paginateds. </summary>
-        /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
-        /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         public virtual async Task<ClientResult<ListPaginatedFineTuningJobsResponse>> GetPaginatedsAsync(string after = null, long? limit = null)
         {
             ClientResult result = await GetPaginatedsAsync(after, limit, null).ConfigureAwait(false);
@@ -153,8 +129,8 @@ namespace OpenAI
         }
 
         /// <summary> Get paginateds. </summary>
-        /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
-        /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         public virtual ClientResult<ListPaginatedFineTuningJobsResponse> GetPaginateds(string after = null, long? limit = null)
         {
             ClientResult result = GetPaginateds(after, limit, null);
@@ -176,8 +152,8 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
-        /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -202,8 +178,8 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="after"> Identifier for the last job from the previous pagination request. </param>
-        /// <param name="limit"> Number of fine-tuning jobs to retrieve. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -310,9 +286,9 @@ namespace OpenAI
         }
 
         /// <summary> Get status updates for a fine-tuning job. </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
-        /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
-        /// <param name="limit"> Number of events to retrieve. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Get events. </remarks>
@@ -325,9 +301,9 @@ namespace OpenAI
         }
 
         /// <summary> Get status updates for a fine-tuning job. </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
-        /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
-        /// <param name="limit"> Number of events to retrieve. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Get events. </remarks>
@@ -354,9 +330,9 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
-        /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
-        /// <param name="limit"> Number of events to retrieve. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -385,9 +361,9 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to get events for. </param>
-        /// <param name="after"> Identifier for the last event from the previous pagination request. </param>
-        /// <param name="limit"> Number of events to retrieve. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
+        /// <param name="after"> The <see cref="string"/> to use. </param>
+        /// <param name="limit"> The <see cref="long"/>? to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -402,7 +378,7 @@ namespace OpenAI
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Cancel. </remarks>
@@ -415,7 +391,7 @@ namespace OpenAI
         }
 
         /// <summary> Immediately cancel a fine-tune job. </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Cancel. </remarks>
@@ -442,7 +418,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -471,7 +447,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The ID of the fine-tuning job to cancel. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>

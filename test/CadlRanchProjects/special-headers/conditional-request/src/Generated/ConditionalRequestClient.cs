@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace SpecialHeaders.ConditionalRequest
 {
     // Data plane generated client.
-    /// <summary> Illustrates conditional request headers. </summary>
+    /// <summary> The ConditionalRequest service client. </summary>
     public partial class ConditionalRequestClient
     {
         private readonly HttpPipeline _pipeline;
@@ -32,7 +32,7 @@ namespace SpecialHeaders.ConditionalRequest
         }
 
         /// <summary> Initializes a new instance of ConditionalRequestClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConditionalRequestClient(Uri endpoint, ConditionalRequestClientOptions options)
@@ -47,7 +47,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Match in header is defined.
+        /// [Protocol Method] Post if match.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -56,7 +56,7 @@ namespace SpecialHeaders.ConditionalRequest
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The request should only proceed if an entity matches this string. </param>
+        /// <param name="ifMatch"> The <see cref="ETag"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -79,7 +79,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Match in header is defined.
+        /// [Protocol Method] Post if match.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -88,7 +88,7 @@ namespace SpecialHeaders.ConditionalRequest
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifMatch"> The request should only proceed if an entity matches this string. </param>
+        /// <param name="ifMatch"> The <see cref="ETag"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -111,7 +111,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-None-Match in header is defined.
+        /// [Protocol Method] Post if none match.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -120,7 +120,7 @@ namespace SpecialHeaders.ConditionalRequest
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifNoneMatch"> The request should only proceed if no entity matches this string. </param>
+        /// <param name="ifNoneMatch"> The <see cref="ETag"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -143,7 +143,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-None-Match in header is defined.
+        /// [Protocol Method] Post if none match.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace SpecialHeaders.ConditionalRequest
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="ifNoneMatch"> The request should only proceed if no entity matches this string. </param>
+        /// <param name="ifNoneMatch"> The <see cref="ETag"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -175,7 +175,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Modified-Since in header is defined.
+        /// [Protocol Method] Head if modified since.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -220,7 +220,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Modified-Since in header is defined.
+        /// [Protocol Method] Head if modified since.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -265,7 +265,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Unmodified-Since in header is defined.
+        /// [Protocol Method] Post if unmodified since.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -310,7 +310,7 @@ namespace SpecialHeaders.ConditionalRequest
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check when only If-Unmodified-Since in header is defined.
+        /// [Protocol Method] Post if unmodified since.
         /// <list type="bullet">
         /// <item>
         /// <description>

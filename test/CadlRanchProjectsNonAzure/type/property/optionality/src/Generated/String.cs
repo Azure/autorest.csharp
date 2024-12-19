@@ -27,21 +27,21 @@ namespace Scm._Type.Property.Optionality
 
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal String(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         public virtual async Task<ClientResult<StringProperty>> GetAllAsync()
         {
             ClientResult result = await GetAllAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(StringProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary> Get all. </summary>
         public virtual ClientResult<StringProperty> GetAll()
         {
             ClientResult result = GetAll(null);
@@ -49,7 +49,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -73,7 +73,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return all properties in the model
+        /// [Protocol Method] Get all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -96,14 +96,14 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary> Get default. </summary>
         public virtual async Task<ClientResult<StringProperty>> GetDefaultAsync()
         {
             ClientResult result = await GetDefaultAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(StringProperty.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary> Get default. </summary>
         public virtual ClientResult<StringProperty> GetDefault()
         {
             ClientResult result = GetDefault(null);
@@ -111,7 +111,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return the default object
+        /// [Protocol Method] Get default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -135,7 +135,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Get models that will return the default object
+        /// [Protocol Method] Get default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -158,7 +158,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="StringProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutAllAsync(StringProperty body)
@@ -170,7 +170,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary> Put all. </summary>
         /// <param name="body"> The <see cref="StringProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutAll(StringProperty body)
@@ -183,7 +183,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +211,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with all properties present.
+        /// [Protocol Method] Put all.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -238,7 +238,7 @@ namespace Scm._Type.Property.Optionality
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary> Put default. </summary>
         /// <param name="body"> The <see cref="StringProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> PutDefaultAsync(StringProperty body)
@@ -250,7 +250,7 @@ namespace Scm._Type.Property.Optionality
             return result;
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary> Put default. </summary>
         /// <param name="body"> The <see cref="StringProperty"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult PutDefault(StringProperty body)
@@ -263,7 +263,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with default properties.
+        /// [Protocol Method] Put default.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -291,7 +291,7 @@ namespace Scm._Type.Property.Optionality
         }
 
         /// <summary>
-        /// [Protocol Method] Put a body with default properties.
+        /// [Protocol Method] Put default.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -7,12 +7,12 @@
 
 namespace Versioning.MadeOptional.Models
 {
-    /// <summary> The version of the API. </summary>
+    /// <summary> The Versions. </summary>
     public enum Versions
     {
-        /// <summary> The version v1. </summary>
+        /// <summary> v1. </summary>
         V1,
-        /// <summary> The version v2. </summary>
+        /// <summary> v2. </summary>
         V2
     }
 }

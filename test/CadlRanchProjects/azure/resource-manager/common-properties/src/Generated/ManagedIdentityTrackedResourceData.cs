@@ -13,10 +13,7 @@ using _Azure.ResourceManager.CommonProperties.Models;
 
 namespace _Azure.ResourceManager.CommonProperties
 {
-    /// <summary>
-    /// A class representing the ManagedIdentityTrackedResource data model.
-    /// Concrete tracked resource types can be created by aliasing this type using a specific property type.
-    /// </summary>
+    /// <summary> A class representing the ManagedIdentityTrackedResource data model. </summary>
     public partial class ManagedIdentityTrackedResourceData : TrackedResourceData
     {
         /// <summary>
@@ -64,8 +61,8 @@ namespace _Azure.ResourceManager.CommonProperties
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="properties"> The resource-specific properties for this resource. </param>
-        /// <param name="identity"> The managed service identities assigned to this resource. </param>
+        /// <param name="properties"></param>
+        /// <param name="identity"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ManagedIdentityTrackedResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ManagedIdentityTrackedResourceProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData, tags, location)
         {
@@ -79,16 +76,16 @@ namespace _Azure.ResourceManager.CommonProperties
         {
         }
 
-        /// <summary> The resource-specific properties for this resource. </summary>
+        /// <summary> Gets or sets the properties. </summary>
         internal ManagedIdentityTrackedResourceProperties Properties { get; set; }
-        /// <summary> The status of the last operation. </summary>
+        /// <summary> Gets or sets the managed identity tracked resource provisioning state. </summary>
         public string ManagedIdentityTrackedResourceProvisioningState
         {
             get => Properties is null ? default : Properties.ProvisioningState;
             set => Properties = new ManagedIdentityTrackedResourceProperties(value);
         }
 
-        /// <summary> The managed service identities assigned to this resource. </summary>
+        /// <summary> Gets or sets the identity. </summary>
         public ManagedServiceIdentity Identity { get; set; }
     }
 }

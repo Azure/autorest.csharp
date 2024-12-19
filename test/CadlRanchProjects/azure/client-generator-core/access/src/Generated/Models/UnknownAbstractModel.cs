@@ -14,7 +14,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     internal partial class UnknownAbstractModel : AbstractModel
     {
         /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/>. </summary>
-        /// <param name="kind"> Discriminator property for AbstractModel. </param>
+        /// <param name="kind"></param>
         /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownAbstractModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, serializedAdditionalRawData)

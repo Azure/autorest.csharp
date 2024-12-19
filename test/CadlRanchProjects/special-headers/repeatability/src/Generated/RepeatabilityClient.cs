@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace SpecialHeaders.Repeatability
 {
     // Data plane generated client.
-    /// <summary> Illustrates OASIS repeatability headers. </summary>
+    /// <summary> The Repeatability service client. </summary>
     public partial class RepeatabilityClient
     {
         private readonly HttpPipeline _pipeline;
@@ -32,7 +32,7 @@ namespace SpecialHeaders.Repeatability
         }
 
         /// <summary> Initializes a new instance of RepeatabilityClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RepeatabilityClient(Uri endpoint, RepeatabilityClientOptions options)
@@ -47,7 +47,7 @@ namespace SpecialHeaders.Repeatability
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
+        /// [Protocol Method] Immediate success.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -78,7 +78,7 @@ namespace SpecialHeaders.Repeatability
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
+        /// [Protocol Method] Immediate success.
         /// <list type="bullet">
         /// <item>
         /// <description>

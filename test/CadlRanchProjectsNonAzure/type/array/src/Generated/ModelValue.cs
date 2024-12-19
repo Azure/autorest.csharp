@@ -13,7 +13,7 @@ using Scm._Type._Array.Models;
 namespace Scm._Type._Array
 {
     // Data plane generated sub-client.
-    /// <summary> Array of model values. </summary>
+    /// <summary> The ModelValue sub-client. </summary>
     public partial class ModelValue
     {
         private readonly ClientPipeline _pipeline;
@@ -29,7 +29,7 @@ namespace Scm._Type._Array
 
         /// <summary> Initializes a new instance of ModelValue. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ModelValue(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

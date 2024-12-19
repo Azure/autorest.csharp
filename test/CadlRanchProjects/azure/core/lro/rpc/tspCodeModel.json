@@ -33,11 +33,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "doc": "The 2022-12-01-preview version.",
+     "description": "The 2022-12-01-preview version.",
      "decorators": []
     }
    ],
-   "doc": "The API version.",
+   "description": "The API version.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -71,7 +71,7 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "The operation has not started.",
+     "description": "The operation has not started.",
      "decorators": []
     },
     {
@@ -89,7 +89,7 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "The operation is in progress.",
+     "description": "The operation is in progress.",
      "decorators": []
     },
     {
@@ -107,7 +107,7 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "The operation has completed successfully.",
+     "description": "The operation has completed successfully.",
      "decorators": []
     },
     {
@@ -125,7 +125,7 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "The operation has failed.",
+     "description": "The operation has failed.",
      "decorators": []
     },
     {
@@ -143,11 +143,11 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "The operation has been canceled by the user.",
+     "description": "The operation has been canceled by the user.",
      "decorators": []
     }
    ],
-   "doc": "Enum describing allowed operation states.",
+   "description": "Enum describing allowed operation states.",
    "isFixed": false,
    "isFlags": false,
    "usage": "Json,LroInitial,LroPolling,LroFinalEnvelope",
@@ -161,7 +161,7 @@
    "name": "GenerationOptions",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationOptions",
    "usage": "Input,Json",
-   "doc": "Options for the generation.",
+   "description": "Options for the generation.",
    "decorators": [],
    "properties": [
     {
@@ -169,7 +169,7 @@
      "kind": "property",
      "name": "prompt",
      "serializedName": "prompt",
-     "doc": "Prompt.",
+     "description": "Prompt.",
      "type": {
       "$id": "20",
       "kind": "string",
@@ -192,7 +192,7 @@
    "name": "GenerationResult",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Lro.Rpc.GenerationResult",
    "usage": "Output,Json,LroInitial,LroPolling,LroFinalEnvelope",
-   "doc": "Result of the generation.",
+   "description": "Result of the generation.",
    "decorators": [],
    "properties": [
     {
@@ -200,7 +200,7 @@
      "kind": "property",
      "name": "data",
      "serializedName": "data",
-     "doc": "The data.",
+     "description": "The data.",
      "type": {
       "$id": "23",
       "kind": "string",
@@ -223,7 +223,7 @@
    "name": "ResourceOperationStatusGenerationResponseGenerationResultError",
    "crossLanguageDefinitionId": "Azure.Core.ResourceOperationStatus",
    "usage": "Json,LroInitial",
-   "doc": "Provides status details for long running operations.",
+   "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
     {
@@ -231,7 +231,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "doc": "The unique ID of the operation.",
+     "description": "The unique ID of the operation.",
      "type": {
       "$id": "26",
       "kind": "string",
@@ -251,7 +251,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "doc": "The status of the operation",
+     "description": "The status of the operation",
      "type": {
       "$ref": "6"
      },
@@ -267,14 +267,14 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "doc": "Error object that describes the error when status is \"Failed\".",
+     "description": "Error object that describes the error when status is \"Failed\".",
      "type": {
       "$id": "29",
       "kind": "model",
       "name": "Error",
       "crossLanguageDefinitionId": "Azure.Core.Foundations.Error",
       "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
-      "doc": "The error object.",
+      "description": "The error object.",
       "decorators": [],
       "properties": [
        {
@@ -282,7 +282,7 @@
         "kind": "property",
         "name": "code",
         "serializedName": "code",
-        "doc": "One of a server-defined set of error codes.",
+        "description": "One of a server-defined set of error codes.",
         "type": {
          "$id": "31",
          "kind": "string",
@@ -302,7 +302,7 @@
         "kind": "property",
         "name": "message",
         "serializedName": "message",
-        "doc": "A human-readable representation of the error.",
+        "description": "A human-readable representation of the error.",
         "type": {
          "$id": "33",
          "kind": "string",
@@ -322,7 +322,7 @@
         "kind": "property",
         "name": "target",
         "serializedName": "target",
-        "doc": "The target of the error.",
+        "description": "The target of the error.",
         "type": {
          "$id": "35",
          "kind": "string",
@@ -342,7 +342,7 @@
         "kind": "property",
         "name": "details",
         "serializedName": "details",
-        "doc": "An array of details about specific errors that led to this reported error.",
+        "description": "An array of details about specific errors that led to this reported error.",
         "type": {
          "$id": "37",
          "kind": "array",
@@ -365,14 +365,14 @@
         "kind": "property",
         "name": "innererror",
         "serializedName": "innererror",
-        "doc": "An object containing more specific information than the current object about the error.",
+        "description": "An object containing more specific information than the current object about the error.",
         "type": {
          "$id": "39",
          "kind": "model",
          "name": "InnerError",
          "crossLanguageDefinitionId": "Azure.Core.Foundations.InnerError",
          "usage": "Json,Exception,LroInitial,LroPolling,LroFinalEnvelope",
-         "doc": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+         "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
          "decorators": [],
          "properties": [
           {
@@ -380,7 +380,7 @@
            "kind": "property",
            "name": "code",
            "serializedName": "code",
-           "doc": "One of a server-defined set of error codes.",
+           "description": "One of a server-defined set of error codes.",
            "type": {
             "$id": "41",
             "kind": "string",
@@ -400,7 +400,7 @@
            "kind": "property",
            "name": "innererror",
            "serializedName": "innererror",
-           "doc": "Inner error.",
+           "description": "Inner error.",
            "type": {
             "$ref": "39"
            },
@@ -434,7 +434,7 @@
      "kind": "property",
      "name": "result",
      "serializedName": "result",
-     "doc": "The result of the operation.",
+     "description": "The result of the operation.",
      "type": {
       "$ref": "21"
      },
@@ -459,7 +459,7 @@
    "name": "OperationStatusGenerationResultError",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.OperationStatus",
    "usage": "LroPolling,LroFinalEnvelope",
-   "doc": "Provides status details for long running operations.",
+   "description": "Provides status details for long running operations.",
    "decorators": [],
    "properties": [
     {
@@ -467,7 +467,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "doc": "The unique ID of the operation.",
+     "description": "The unique ID of the operation.",
      "type": {
       "$id": "46",
       "kind": "string",
@@ -487,7 +487,7 @@
      "kind": "property",
      "name": "status",
      "serializedName": "status",
-     "doc": "The status of the operation",
+     "description": "The status of the operation",
      "type": {
       "$ref": "6"
      },
@@ -503,7 +503,7 @@
      "kind": "property",
      "name": "error",
      "serializedName": "error",
-     "doc": "Error object that describes the error when status is \"Failed\".",
+     "description": "Error object that describes the error when status is \"Failed\".",
      "type": {
       "$ref": "29"
      },
@@ -519,7 +519,7 @@
      "kind": "property",
      "name": "result",
      "serializedName": "result",
-     "doc": "The result of the operation.",
+     "description": "The result of the operation.",
      "type": {
       "$ref": "21"
      },
@@ -537,21 +537,21 @@
   {
    "$id": "50",
    "Name": "RpcClient",
-   "Doc": "Illustrates bodies templated with Azure Core with long-running RPC operation",
+   "Description": "Illustrates bodies templated with Azure Core with long-running RPC operation",
    "Operations": [
     {
      "$id": "51",
      "Name": "longRunningRpc",
      "ResourceName": "Rpc",
      "Summary": "Generate data.",
-     "Doc": "Generate data.",
+     "Description": "Generate data.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "52",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "53",
         "kind": "string",
@@ -583,7 +583,7 @@
        "$id": "56",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "57",
         "kind": "constant",
@@ -638,7 +638,7 @@
        "$id": "62",
        "Name": "body",
        "NameInRequest": "body",
-       "Doc": "The body parameter.",
+       "Description": "The body parameter.",
        "Type": {
         "$ref": "18"
        },
@@ -668,7 +668,7 @@
          "$id": "64",
          "Name": "operationLocation",
          "NameInResponse": "Operation-Location",
-         "Doc": "The location for monitoring the operation state.",
+         "Description": "The location for monitoring the operation state.",
          "Type": {
           "$id": "65",
           "kind": "url",
@@ -728,7 +728,7 @@
      "$id": "70",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "71",
       "kind": "url",

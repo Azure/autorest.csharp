@@ -51,8 +51,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceTypeAliasPathMetadata"/>. </summary>
-        /// <param name="tokenType"> The type of the token that the alias path is referring to. </param>
-        /// <param name="attributes"> The attributes of the token that the alias path is referring to. </param>
+        /// <param name="tokenType"></param>
+        /// <param name="attributes"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ResourceTypeAliasPathMetadata(ResourceTypeAliasPathTokenType? tokenType, ResourceTypeAliasPathAttributes? attributes, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -61,9 +61,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The type of the token that the alias path is referring to. </summary>
+        /// <summary> Gets or sets the token type. </summary>
         public ResourceTypeAliasPathTokenType? TokenType { get; set; }
-        /// <summary> The attributes of the token that the alias path is referring to. </summary>
+        /// <summary> Gets or sets the attributes. </summary>
         public ResourceTypeAliasPathAttributes? Attributes { get; set; }
     }
 }

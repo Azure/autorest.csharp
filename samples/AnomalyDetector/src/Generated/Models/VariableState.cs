@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> Variable Status. </summary>
+    /// <summary> The VariableState. </summary>
     public partial class VariableState
     {
         /// <summary>
@@ -51,11 +51,11 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="VariableState"/>. </summary>
-        /// <param name="variable"> Variable name in variable states. </param>
-        /// <param name="filledNARatio"> Proportion of missing values that need to be filled by fillNAMethod. </param>
-        /// <param name="effectiveCount"> Number of effective data points before applying fillNAMethod. </param>
-        /// <param name="firstTimestamp"> First valid timestamp with value of input data. </param>
-        /// <param name="lastTimestamp"> Last valid timestamp with value of input data. </param>
+        /// <param name="variable"></param>
+        /// <param name="filledNARatio"></param>
+        /// <param name="effectiveCount"></param>
+        /// <param name="firstTimestamp"></param>
+        /// <param name="lastTimestamp"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal VariableState(string variable, float? filledNARatio, int? effectiveCount, DateTimeOffset? firstTimestamp, DateTimeOffset? lastTimestamp, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -67,15 +67,15 @@ namespace AnomalyDetector.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Variable name in variable states. </summary>
+        /// <summary> Gets or sets the variable. </summary>
         public string Variable { get; set; }
-        /// <summary> Proportion of missing values that need to be filled by fillNAMethod. </summary>
+        /// <summary> Gets or sets the filled na ratio. </summary>
         public float? FilledNARatio { get; set; }
-        /// <summary> Number of effective data points before applying fillNAMethod. </summary>
+        /// <summary> Gets or sets the effective count. </summary>
         public int? EffectiveCount { get; set; }
-        /// <summary> First valid timestamp with value of input data. </summary>
+        /// <summary> Gets or sets the first timestamp. </summary>
         public DateTimeOffset? FirstTimestamp { get; set; }
-        /// <summary> Last valid timestamp with value of input data. </summary>
+        /// <summary> Gets or sets the last timestamp. </summary>
         public DateTimeOffset? LastTimestamp { get; set; }
     }
 }

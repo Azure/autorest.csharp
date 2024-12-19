@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    /// <summary> Used in an internal operation, should be generated but not exported. </summary>
+    /// <summary> The InternalDecoratorModelInInternal. </summary>
     internal partial class InternalDecoratorModelInInternal
     {
         /// <summary>

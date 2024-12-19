@@ -33,11 +33,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "doc": "2022-12-01-preview",
+     "description": "2022-12-01-preview",
      "decorators": []
     }
    ],
-   "doc": "Service versions",
+   "description": "Service versions",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -71,7 +71,7 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation.",
+     "description": "If the request was accepted and the server guarantees that the server state reflects a single execution of the operation.",
      "decorators": []
     },
     {
@@ -89,11 +89,11 @@
      "enumType": {
       "$ref": "6"
      },
-     "doc": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server.",
+     "description": "If the request was rejected because the combination of Repeatability-First-Sent and Repeatability-Request-ID were invalid\nor because the Repeatability-First-Sent value was outside the range of values held by the server.",
      "decorators": []
     }
    ],
-   "doc": "Repeatability Result header options",
+   "description": "Repeatability Result header options",
    "isFixed": true,
    "isFlags": false,
    "usage": "Output",
@@ -107,7 +107,7 @@
    "name": "User",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.User",
    "usage": "Output,Json",
-   "doc": "Sample Model",
+   "description": "Sample Model",
    "decorators": [],
    "properties": [
     {
@@ -115,7 +115,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "doc": "The user's id.",
+     "description": "The user's id.",
      "type": {
       "$id": "14",
       "kind": "int32",
@@ -135,7 +135,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "The user's name.",
+     "description": "The user's name.",
      "type": {
       "$id": "16",
       "kind": "string",
@@ -158,7 +158,7 @@
    "name": "UserActionParam",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionParam",
    "usage": "Input,Json",
-   "doc": "User action param",
+   "description": "User action param",
    "decorators": [],
    "properties": [
     {
@@ -166,7 +166,7 @@
      "kind": "property",
      "name": "userActionValue",
      "serializedName": "userActionValue",
-     "doc": "User action value.",
+     "description": "User action value.",
      "type": {
       "$id": "19",
       "kind": "string",
@@ -189,7 +189,7 @@
    "name": "UserActionResponse",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Traits.UserActionResponse",
    "usage": "Output,Json",
-   "doc": "User action response",
+   "description": "User action response",
    "decorators": [],
    "properties": [
     {
@@ -197,7 +197,7 @@
      "kind": "property",
      "name": "userActionResult",
      "serializedName": "userActionResult",
-     "doc": "User action result.",
+     "description": "User action result.",
      "type": {
       "$id": "22",
       "kind": "string",
@@ -219,20 +219,20 @@
   {
    "$id": "23",
    "Name": "TraitsClient",
-   "Doc": "Illustrates Azure Core operation customizations by traits",
+   "Description": "Illustrates Azure Core operation customizations by traits",
    "Operations": [
     {
      "$id": "24",
      "Name": "smokeTest",
      "ResourceName": "User",
-     "Doc": "Get a resource, sending and receiving headers.",
+     "Description": "Get a resource, sending and receiving headers.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "25",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "26",
         "kind": "string",
@@ -264,7 +264,7 @@
        "$id": "29",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "30",
         "kind": "int32",
@@ -286,7 +286,7 @@
        "$id": "31",
        "Name": "foo",
        "NameInRequest": "foo",
-       "Doc": "header in request",
+       "Description": "header in request",
        "Type": {
         "$id": "32",
         "kind": "string",
@@ -308,7 +308,7 @@
        "$id": "33",
        "Name": "ifMatch",
        "NameInRequest": "If-Match",
-       "Doc": "The request should only proceed if an entity matches this string.",
+       "Description": "The request should only proceed if an entity matches this string.",
        "Type": {
         "$id": "34",
         "kind": "string",
@@ -330,7 +330,7 @@
        "$id": "35",
        "Name": "ifNoneMatch",
        "NameInRequest": "If-None-Match",
-       "Doc": "The request should only proceed if no entity matches this string.",
+       "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
         "$id": "36",
         "kind": "string",
@@ -352,7 +352,7 @@
        "$id": "37",
        "Name": "ifUnmodifiedSince",
        "NameInRequest": "If-Unmodified-Since",
-       "Doc": "The request should only proceed if the entity was not modified after this time.",
+       "Description": "The request should only proceed if the entity was not modified after this time.",
        "Type": {
         "$id": "38",
         "kind": "utcDateTime",
@@ -382,7 +382,7 @@
        "$id": "40",
        "Name": "ifModifiedSince",
        "NameInRequest": "If-Modified-Since",
-       "Doc": "The request should only proceed if the entity was modified after this time.",
+       "Description": "The request should only proceed if the entity was modified after this time.",
        "Type": {
         "$id": "41",
         "kind": "utcDateTime",
@@ -412,7 +412,7 @@
        "$id": "43",
        "Name": "clientRequestId",
        "NameInRequest": "x-ms-client-request-id",
-       "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+       "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
         "$id": "44",
         "kind": "string",
@@ -492,7 +492,7 @@
          "$id": "52",
          "Name": "etagHeader",
          "NameInResponse": "ETag",
-         "Doc": "The entity tag for the response.",
+         "Description": "The entity tag for the response.",
          "Type": {
           "$id": "53",
           "kind": "string",
@@ -505,7 +505,7 @@
          "$id": "54",
          "Name": "clientRequestId",
          "NameInResponse": "x-ms-client-request-id",
-         "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+         "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
          "Type": {
           "$id": "55",
           "kind": "string",
@@ -542,14 +542,14 @@
      "$id": "57",
      "Name": "repeatableAction",
      "ResourceName": "Traits",
-     "Doc": "Test for repeatable requests",
+     "Description": "Test for repeatable requests",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "58",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "59",
         "kind": "string",
@@ -581,7 +581,7 @@
        "$id": "62",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "63",
         "kind": "int32",
@@ -603,7 +603,7 @@
        "$id": "64",
        "Name": "repeatabilityRequestId",
        "NameInRequest": "Repeatability-Request-ID",
-       "Doc": "An opaque, globally-unique, client-generated string identifier for the request.",
+       "Description": "An opaque, globally-unique, client-generated string identifier for the request.",
        "Type": {
         "$id": "65",
         "kind": "string",
@@ -625,7 +625,7 @@
        "$id": "66",
        "Name": "repeatabilityFirstSent",
        "NameInRequest": "Repeatability-First-Sent",
-       "Doc": "Specifies the date and time at which the request was first created.",
+       "Description": "Specifies the date and time at which the request was first created.",
        "Type": {
         "$id": "67",
         "kind": "utcDateTime",
@@ -655,7 +655,7 @@
        "$id": "69",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "70",
         "kind": "constant",
@@ -710,7 +710,7 @@
        "$id": "75",
        "Name": "body",
        "NameInRequest": "body",
-       "Doc": "The body parameter.",
+       "Description": "The body parameter.",
        "Type": {
         "$ref": "17"
        },
@@ -740,7 +740,7 @@
          "$id": "77",
          "Name": "repeatabilityResult",
          "NameInResponse": "Repeatability-Result",
-         "Doc": "Indicates whether the repeatable request was accepted or rejected.",
+         "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
           "$ref": "6"
          }
@@ -774,7 +774,7 @@
      "$id": "79",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "80",
       "kind": "url",

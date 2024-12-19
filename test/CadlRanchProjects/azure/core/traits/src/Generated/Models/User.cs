@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Traits.Models
 {
-    /// <summary> Sample Model. </summary>
+    /// <summary> The User. </summary>
     public partial class User
     {
         /// <summary>
@@ -51,8 +51,8 @@ namespace _Specs_.Azure.Core.Traits.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="id"> The user's id. </param>
-        /// <param name="name"> The user's name. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal User(int id, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -61,9 +61,9 @@ namespace _Specs_.Azure.Core.Traits.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The user's id. </summary>
+        /// <summary> Gets the id. </summary>
         public int Id { get; }
-        /// <summary> The user's name. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

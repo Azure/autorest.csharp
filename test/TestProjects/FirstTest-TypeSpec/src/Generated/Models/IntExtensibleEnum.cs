@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> Int based extensible enum. </summary>
+    /// <summary> The IntExtensibleEnum. </summary>
     public readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
     {
         private readonly int _value;

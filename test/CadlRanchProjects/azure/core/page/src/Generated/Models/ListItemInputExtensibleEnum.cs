@@ -7,12 +7,12 @@
 
 namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> An extensible enum input parameter. </summary>
+    /// <summary> The ListItemInputExtensibleEnum. </summary>
     public enum ListItemInputExtensibleEnum
     {
-        /// <summary> The first enum value. </summary>
+        /// <summary> First. </summary>
         First,
-        /// <summary> The second enum value. </summary>
+        /// <summary> Second. </summary>
         Second
     }
 }

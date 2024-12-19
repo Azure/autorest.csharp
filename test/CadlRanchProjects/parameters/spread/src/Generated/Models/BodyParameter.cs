@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Parameters.Spread.Models
 {
-    /// <summary> This is a simple model. </summary>
+    /// <summary> The BodyParameter. </summary>
     public partial class BodyParameter
     {
         /// <summary>

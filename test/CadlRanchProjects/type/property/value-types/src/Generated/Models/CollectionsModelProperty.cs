@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    /// <summary> Model with collection model properties. </summary>
+    /// <summary> The CollectionsModelProperty. </summary>
     public partial class CollectionsModelProperty
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsModelProperty(IEnumerable<InnerModel> property)
         {
@@ -57,7 +57,7 @@ namespace _Type.Property.ValueTypes.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
-        /// <param name="property"> Property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsModelProperty(IList<InnerModel> property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,7 +70,7 @@ namespace _Type.Property.ValueTypes.Models
         {
         }
 
-        /// <summary> Property. </summary>
+        /// <summary> Gets the property. </summary>
         public IList<InnerModel> Property { get; }
     }
 }

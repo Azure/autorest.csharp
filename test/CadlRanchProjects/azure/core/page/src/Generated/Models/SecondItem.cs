@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> Second item. </summary>
+    /// <summary> The SecondItem. </summary>
     public partial class SecondItem
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
-        /// <param name="name"> The name of the item. </param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SecondItem(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +59,7 @@ namespace _Specs_.Azure.Core.Page.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The name of the item. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
     }
 }

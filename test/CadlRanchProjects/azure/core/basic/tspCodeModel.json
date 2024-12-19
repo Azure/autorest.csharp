@@ -33,11 +33,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "doc": "The version 2022-12-01-preview.",
+     "description": "The version 2022-12-01-preview.",
      "decorators": []
     }
    ],
-   "doc": "The version of the API.",
+   "description": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
    "usage": "ApiVersionEnum",
@@ -51,7 +51,7 @@
    "name": "User",
    "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.User",
    "usage": "Input,Output,Json",
-   "doc": "Details about a user.",
+   "description": "Details about a user.",
    "decorators": [],
    "properties": [
     {
@@ -59,7 +59,7 @@
      "kind": "property",
      "name": "id",
      "serializedName": "id",
-     "doc": "The user's id.",
+     "description": "The user's id.",
      "type": {
       "$id": "8",
       "kind": "int32",
@@ -79,7 +79,7 @@
      "kind": "property",
      "name": "name",
      "serializedName": "name",
-     "doc": "The user's name.",
+     "description": "The user's name.",
      "type": {
       "$id": "10",
       "kind": "string",
@@ -99,7 +99,7 @@
      "kind": "property",
      "name": "orders",
      "serializedName": "orders",
-     "doc": "The user's order list",
+     "description": "The user's order list",
      "type": {
       "$id": "12",
       "kind": "array",
@@ -110,7 +110,7 @@
        "name": "UserOrder",
        "crossLanguageDefinitionId": "_Specs_.Azure.Core.Basic.UserOrder",
        "usage": "Input,Output,Json",
-       "doc": "UserOrder for testing list with expand.",
+       "description": "UserOrder for testing list with expand.",
        "decorators": [],
        "properties": [
         {
@@ -118,7 +118,7 @@
          "kind": "property",
          "name": "id",
          "serializedName": "id",
-         "doc": "The user's id.",
+         "description": "The user's id.",
          "type": {
           "$id": "15",
           "kind": "int32",
@@ -138,7 +138,7 @@
          "kind": "property",
          "name": "userId",
          "serializedName": "userId",
-         "doc": "The user's id.",
+         "description": "The user's id.",
          "type": {
           "$id": "17",
           "kind": "int32",
@@ -158,7 +158,7 @@
          "kind": "property",
          "name": "detail",
          "serializedName": "detail",
-         "doc": "The user's order detail",
+         "description": "The user's order detail",
          "type": {
           "$id": "19",
           "kind": "string",
@@ -190,7 +190,7 @@
      "kind": "property",
      "name": "etag",
      "serializedName": "etag",
-     "doc": "The entity tag for this resource.",
+     "description": "The entity tag for this resource.",
      "type": {
       "$id": "21",
       "kind": "string",
@@ -255,7 +255,7 @@
    "name": "PagedUser",
    "crossLanguageDefinitionId": "Azure.Core.Foundations.CustomPage",
    "usage": "Output,Json",
-   "doc": "Paged collection of User items",
+   "description": "Paged collection of User items",
    "decorators": [],
    "properties": [
     {
@@ -263,7 +263,7 @@
      "kind": "property",
      "name": "value",
      "serializedName": "value",
-     "doc": "The User items on this page",
+     "description": "The User items on this page",
      "type": {
       "$id": "28",
       "kind": "array",
@@ -286,7 +286,7 @@
      "kind": "property",
      "name": "nextLink",
      "serializedName": "nextLink",
-     "doc": "The link to the next page of items",
+     "description": "The link to the next page of items",
      "type": {
       "$id": "30",
       "kind": "url",
@@ -315,21 +315,21 @@
   {
    "$id": "32",
    "Name": "BasicClient",
-   "Doc": "Illustrates bodies templated with Azure Core",
+   "Description": "Illustrates bodies templated with Azure Core",
    "Operations": [
     {
      "$id": "33",
      "Name": "createOrUpdate",
      "ResourceName": "User",
      "Summary": "Adds a user or updates a user's fields.",
-     "Doc": "Creates or updates a User",
+     "Description": "Creates or updates a User",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "34",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "35",
         "kind": "string",
@@ -361,7 +361,7 @@
        "$id": "38",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "39",
         "kind": "int32",
@@ -383,7 +383,7 @@
        "$id": "40",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "This request has a JSON Merge Patch body.",
+       "Description": "This request has a JSON Merge Patch body.",
        "Type": {
         "$id": "41",
         "kind": "constant",
@@ -438,7 +438,7 @@
        "$id": "46",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Doc": "The resource instance.",
+       "Description": "The resource instance.",
        "Type": {
         "$ref": "6"
        },
@@ -503,14 +503,14 @@
      "Name": "createOrReplace",
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
-     "Doc": "Creates or replaces a User",
+     "Description": "Creates or replaces a User",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "50",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "51",
         "kind": "string",
@@ -542,7 +542,7 @@
        "$id": "54",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "55",
         "kind": "int32",
@@ -564,7 +564,7 @@
        "$id": "56",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "57",
         "kind": "constant",
@@ -619,7 +619,7 @@
        "$id": "62",
        "Name": "resource",
        "NameInRequest": "resource",
-       "Doc": "The resource instance.",
+       "Description": "The resource instance.",
        "Type": {
         "$ref": "6"
        },
@@ -684,14 +684,14 @@
      "Name": "get",
      "ResourceName": "User",
      "Summary": "Gets a user.",
-     "Doc": "Gets a User",
+     "Description": "Gets a User",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "66",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "67",
         "kind": "string",
@@ -723,7 +723,7 @@
        "$id": "70",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "71",
         "kind": "int32",
@@ -801,14 +801,14 @@
      "Name": "list",
      "ResourceName": "User",
      "Summary": "Lists all users.",
-     "Doc": "Lists all Users",
+     "Description": "Lists all Users",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "77",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "78",
         "kind": "string",
@@ -840,7 +840,7 @@
        "$id": "81",
        "Name": "top",
        "NameInRequest": "top",
-       "Doc": "The number of result items to return.",
+       "Description": "The number of result items to return.",
        "Type": {
         "$id": "82",
         "kind": "int32",
@@ -862,7 +862,7 @@
        "$id": "83",
        "Name": "skip",
        "NameInRequest": "skip",
-       "Doc": "The number of result items to skip.",
+       "Description": "The number of result items to skip.",
        "Type": {
         "$id": "84",
         "kind": "int32",
@@ -884,7 +884,7 @@
        "$id": "85",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
-       "Doc": "The maximum number of result items per page.",
+       "Description": "The maximum number of result items per page.",
        "Type": {
         "$id": "86",
         "kind": "int32",
@@ -906,7 +906,7 @@
        "$id": "87",
        "Name": "orderby",
        "NameInRequest": "orderby",
-       "Doc": "Expressions that specify the order of returned results.",
+       "Description": "Expressions that specify the order of returned results.",
        "Type": {
         "$id": "88",
         "kind": "array",
@@ -935,7 +935,7 @@
        "$id": "90",
        "Name": "filter",
        "NameInRequest": "filter",
-       "Doc": "Filter the result list using the given expression.",
+       "Description": "Filter the result list using the given expression.",
        "Type": {
         "$id": "91",
         "kind": "string",
@@ -957,7 +957,7 @@
        "$id": "92",
        "Name": "select",
        "NameInRequest": "select",
-       "Doc": "Select the specified fields to be included in the response.",
+       "Description": "Select the specified fields to be included in the response.",
        "Type": {
         "$id": "93",
         "kind": "array",
@@ -986,7 +986,7 @@
        "$id": "95",
        "Name": "expand",
        "NameInRequest": "expand",
-       "Doc": "Expand the indicated resources into the response.",
+       "Description": "Expand the indicated resources into the response.",
        "Type": {
         "$id": "96",
         "kind": "array",
@@ -1076,14 +1076,14 @@
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
-     "Doc": "Deletes a User",
+     "Description": "Deletes a User",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "104",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "105",
         "kind": "string",
@@ -1115,7 +1115,7 @@
        "$id": "108",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "109",
         "kind": "int32",
@@ -1187,14 +1187,14 @@
      "Name": "export",
      "ResourceName": "Basic",
      "Summary": "Exports a user.",
-     "Doc": "Exports a User",
+     "Description": "Exports a User",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "115",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "116",
         "kind": "string",
@@ -1226,7 +1226,7 @@
        "$id": "119",
        "Name": "id",
        "NameInRequest": "id",
-       "Doc": "The user's id.",
+       "Description": "The user's id.",
        "Type": {
         "$id": "120",
         "kind": "int32",
@@ -1248,7 +1248,7 @@
        "$id": "121",
        "Name": "format",
        "NameInRequest": "format",
-       "Doc": "The format of the data.",
+       "Description": "The format of the data.",
        "Type": {
         "$id": "122",
         "kind": "string",
@@ -1326,14 +1326,14 @@
      "Name": "exportAllUsers",
      "ResourceName": "Basic",
      "Summary": "Exports all users.",
-     "Doc": "Exports all users",
+     "Description": "Exports all users",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "128",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
-       "Doc": "The API version to use for this operation.",
+       "Description": "The API version to use for this operation.",
        "Type": {
         "$id": "129",
         "kind": "string",
@@ -1365,7 +1365,7 @@
        "$id": "132",
        "Name": "format",
        "NameInRequest": "format",
-       "Doc": "The format of the data.",
+       "Description": "The format of the data.",
        "Type": {
         "$id": "133",
         "kind": "string",
@@ -1447,7 +1447,7 @@
      "$id": "139",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "140",
       "kind": "url",

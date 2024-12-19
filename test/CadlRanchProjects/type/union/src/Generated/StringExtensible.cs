@@ -17,7 +17,7 @@ using _Type.Union.Models;
 namespace _Type.Union
 {
     // Data plane generated sub-client.
-    /// <summary> Describe union of string string | "b" | "c". </summary>
+    /// <summary> The StringExtensible sub-client. </summary>
     public partial class StringExtensible
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Type.Union
         /// <summary> Initializes a new instance of StringExtensible. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal StringExtensible(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model spread Record&lt;WidgetData2 | WidgetData1&gt;. </summary>
+    /// <summary> The SpreadRecordForNonDiscriminatedUnion2. </summary>
     public partial class SpreadRecordForNonDiscriminatedUnion2
     {
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForNonDiscriminatedUnion2"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public SpreadRecordForNonDiscriminatedUnion2(string name)
         {
@@ -22,7 +22,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForNonDiscriminatedUnion2"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal SpreadRecordForNonDiscriminatedUnion2(string name, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -35,7 +35,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary>
         /// Additional Properties

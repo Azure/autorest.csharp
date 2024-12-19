@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    /// <summary> The second level legacy model in polymorphic single level inheritance. </summary>
+    /// <summary> The TRex. </summary>
     public partial class TRex : Dinosaur
     {
         /// <summary> Initializes a new instance of <see cref="TRex"/>. </summary>
@@ -18,7 +18,7 @@ namespace Scm._Type.Model.Inheritance.SingleDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="TRex"/>. </summary>
-        /// <param name="kind"> Discriminator property for Dinosaur. </param>
+        /// <param name="kind"></param>
         /// <param name="size"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal TRex(string kind, int size, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, size, serializedAdditionalRawData)

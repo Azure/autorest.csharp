@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace MgmtTypeSpec.Models
 {
-    /// <summary> Start SAP instance(s) request body. </summary>
+    /// <summary> The StartContent. </summary>
     public partial class StartContent
     {
         /// <summary>
@@ -51,7 +51,7 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="StartContent"/>. </summary>
-        /// <param name="startVm"> The boolean value indicates whether to start the virtual machines before starting the SAP instances. </param>
+        /// <param name="startVm"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal StartContent(bool? startVm, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -59,7 +59,7 @@ namespace MgmtTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The boolean value indicates whether to start the virtual machines before starting the SAP instances. </summary>
+        /// <summary> Gets or sets the start vm. </summary>
         public bool? StartVm { get; set; }
     }
 }

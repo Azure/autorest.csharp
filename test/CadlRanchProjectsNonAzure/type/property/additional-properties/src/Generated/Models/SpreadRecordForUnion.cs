@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model spread Record&lt;string | float32&gt;. </summary>
+    /// <summary> The SpreadRecordForUnion. </summary>
     public partial class SpreadRecordForUnion
     {
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForUnion"/>. </summary>
-        /// <param name="flag"> The name property. </param>
+        /// <param name="flag"></param>
         public SpreadRecordForUnion(bool flag)
         {
             Flag = flag;
@@ -19,7 +19,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForUnion"/>. </summary>
-        /// <param name="flag"> The name property. </param>
+        /// <param name="flag"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal SpreadRecordForUnion(bool flag, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -32,7 +32,7 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the flag. </summary>
         public bool Flag { get; set; }
         /// <summary>
         /// Additional Properties

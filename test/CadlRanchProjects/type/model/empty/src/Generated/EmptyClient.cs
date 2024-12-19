@@ -16,7 +16,7 @@ using _Type.Model.Empty.Models;
 namespace _Type.Model.Empty
 {
     // Data plane generated client.
-    /// <summary> Illustrates usage of empty model used in operation's parameters and responses. </summary>
+    /// <summary> The Empty service client. </summary>
     public partial class EmptyClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace _Type.Model.Empty
         }
 
         /// <summary> Initializes a new instance of EmptyClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public EmptyClient(Uri endpoint, EmptyClientOptions options)

@@ -51,7 +51,7 @@ namespace Azure.NewProject.TypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
@@ -71,7 +71,7 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
@@ -92,7 +92,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -136,7 +136,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -180,7 +180,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -219,7 +219,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -257,7 +257,7 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -272,7 +272,7 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -288,7 +288,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -327,7 +327,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -365,7 +365,7 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
@@ -375,7 +375,7 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/HelloDemo2.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
@@ -386,7 +386,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -421,7 +421,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>

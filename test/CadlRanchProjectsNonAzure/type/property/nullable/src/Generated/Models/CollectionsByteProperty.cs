@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Scm._Type.Property.Nullable.Models
 {
-    /// <summary> Model with collection bytes properties. </summary>
+    /// <summary> The CollectionsByteProperty. </summary>
     public partial class CollectionsByteProperty
     {
         /// <summary>
@@ -44,8 +44,8 @@ namespace Scm._Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         internal CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
         {
@@ -56,8 +56,8 @@ namespace Scm._Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -71,10 +71,10 @@ namespace Scm._Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Required property. </summary>
+        /// <summary> Gets the required property. </summary>
         public string RequiredProperty { get; }
         /// <summary>
-        /// Property
+        /// Gets the nullable property
         /// <para>
         /// To assign a byte[] to the element of this property use <see cref="BinaryData.FromBytes(byte[])"/>.
         /// The byte[] will be serialized to a Base64 encoded string.

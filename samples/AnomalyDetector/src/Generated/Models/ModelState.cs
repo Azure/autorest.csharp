@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> Model status. </summary>
+    /// <summary> The ModelState. </summary>
     public partial class ModelState
     {
         /// <summary>
@@ -55,19 +55,10 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelState"/>. </summary>
-        /// <param name="epochIds">
-        /// This indicates the number of passes of the entire training dataset the
-        /// algorithm has completed.
-        /// </param>
-        /// <param name="trainLosses">
-        /// List of metrics used to assess how the model fits the training data for each
-        /// epoch.
-        /// </param>
-        /// <param name="validationLosses">
-        /// List of metrics used to assess how the model fits the validation set for each
-        /// epoch.
-        /// </param>
-        /// <param name="latenciesInSeconds"> Latency for each epoch. </param>
+        /// <param name="epochIds"></param>
+        /// <param name="trainLosses"></param>
+        /// <param name="validationLosses"></param>
+        /// <param name="latenciesInSeconds"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelState(IList<int> epochIds, IList<float> trainLosses, IList<float> validationLosses, IList<float> latenciesInSeconds, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -78,22 +69,13 @@ namespace AnomalyDetector.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary>
-        /// This indicates the number of passes of the entire training dataset the
-        /// algorithm has completed.
-        /// </summary>
+        /// <summary> Gets the epoch ids. </summary>
         public IList<int> EpochIds { get; }
-        /// <summary>
-        /// List of metrics used to assess how the model fits the training data for each
-        /// epoch.
-        /// </summary>
+        /// <summary> Gets the train losses. </summary>
         public IList<float> TrainLosses { get; }
-        /// <summary>
-        /// List of metrics used to assess how the model fits the validation set for each
-        /// epoch.
-        /// </summary>
+        /// <summary> Gets the validation losses. </summary>
         public IList<float> ValidationLosses { get; }
-        /// <summary> Latency for each epoch. </summary>
+        /// <summary> Gets the latencies in seconds. </summary>
         public IList<float> LatenciesInSeconds { get; }
     }
 }

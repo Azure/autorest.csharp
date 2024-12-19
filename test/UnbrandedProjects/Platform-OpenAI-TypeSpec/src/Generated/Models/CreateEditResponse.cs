@@ -44,8 +44,8 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
-        /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
-        /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
+        /// <param name="created"></param>
+        /// <param name="choices"></param>
         /// <param name="usage"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="choices"/> or <paramref name="usage"/> is null. </exception>
         internal CreateEditResponse(DateTimeOffset created, IEnumerable<CreateEditResponseChoice> choices, CompletionUsage usage)
@@ -59,9 +59,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
-        /// <param name="object"> The object type, which is always `edit`. </param>
-        /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
-        /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
+        /// <param name="object"></param>
+        /// <param name="created"></param>
+        /// <param name="choices"></param>
         /// <param name="usage"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateEditResponse(CreateEditResponseObject @object, DateTimeOffset created, IReadOnlyList<CreateEditResponseChoice> choices, CompletionUsage usage, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -78,12 +78,12 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> The object type, which is always `edit`. </summary>
+        /// <summary> Gets the object. </summary>
         public CreateEditResponseObject Object { get; } = CreateEditResponseObject.Edit;
 
-        /// <summary> The Unix timestamp (in seconds) of when the edit was created. </summary>
+        /// <summary> Gets the created. </summary>
         public DateTimeOffset Created { get; }
-        /// <summary> description: A list of edit choices. Can be more than one if `n` is greater than 1. </summary>
+        /// <summary> Gets the choices. </summary>
         public IReadOnlyList<CreateEditResponseChoice> Choices { get; }
         /// <summary> Gets the usage. </summary>
         public CompletionUsage Usage { get; }

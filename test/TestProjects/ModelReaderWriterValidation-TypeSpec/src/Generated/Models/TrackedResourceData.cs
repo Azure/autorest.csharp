@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The tracked resource data. </summary>
+    /// <summary> The TrackedResourceData. </summary>
     public partial class TrackedResourceData
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TrackedResourceData"/>. </summary>
-        /// <param name="location"> The location property. </param>
+        /// <param name="location"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public TrackedResourceData(string location)
         {
@@ -57,11 +57,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="TrackedResourceData"/>. </summary>
-        /// <param name="id"> The id property. </param>
-        /// <param name="name"> The name property. </param>
-        /// <param name="resourceType"> The resource type. </param>
-        /// <param name="location"> The location property. </param>
-        /// <param name="tags"> The tags property. </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="resourceType"></param>
+        /// <param name="location"></param>
+        /// <param name="tags"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal TrackedResourceData(string id, string name, string resourceType, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -78,15 +78,15 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> The id property. </summary>
+        /// <summary> Gets the id. </summary>
         public string Id { get; }
-        /// <summary> The name property. </summary>
+        /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> The resource type. </summary>
+        /// <summary> Gets the resource type. </summary>
         public string ResourceType { get; }
-        /// <summary> The location property. </summary>
+        /// <summary> Gets or sets the location. </summary>
         public string Location { get; set; }
-        /// <summary> The tags property. </summary>
+        /// <summary> Gets the tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }
 }

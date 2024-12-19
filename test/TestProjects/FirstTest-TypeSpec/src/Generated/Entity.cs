@@ -52,7 +52,7 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> doSomething for entity. </summary>
+        /// <summary> Do something. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
@@ -67,7 +67,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> doSomething for entity. </summary>
+        /// <summary> Do something. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/> is null. </exception>
@@ -83,7 +83,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] doSomething for entity
+        /// [Protocol Method] Do something.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -123,7 +123,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] doSomething for entity
+        /// [Protocol Method] Do something.
         /// <list type="bullet">
         /// <item>
         /// <description>

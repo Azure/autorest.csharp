@@ -17,7 +17,7 @@ using Parameters.BodyOptionality.Models;
 namespace Parameters.BodyOptionality
 {
     // Data plane generated client.
-    /// <summary> Test describing optionality of the request body. </summary>
+    /// <summary> The BodyOptionality service client. </summary>
     public partial class BodyOptionalityClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,7 +35,7 @@ namespace Parameters.BodyOptionality
         }
 
         /// <summary> Initializes a new instance of BodyOptionalityClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BodyOptionalityClient(Uri endpoint, BodyOptionalityClientOptions options)

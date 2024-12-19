@@ -34,16 +34,16 @@ namespace Client.Structure.Service.Multiple.Client
         }
 
         /// <summary> Initializes a new instance of ClientAClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientAClient(Uri endpoint, ClientType client) : this(endpoint, client, new ClientStructureServiceMultipleClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ClientAClient. </summary>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="client"> The <see cref="ClientType"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientAClient(Uri endpoint, ClientType client, ClientStructureServiceMultipleClientOptions options)

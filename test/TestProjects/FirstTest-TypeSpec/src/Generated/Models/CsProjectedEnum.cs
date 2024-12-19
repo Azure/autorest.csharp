@@ -7,7 +7,7 @@
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> enum with projected name. </summary>
+    /// <summary> The CsProjectedEnum. </summary>
     public enum CsProjectedEnum
     {
         /// <summary> 1.1. </summary>

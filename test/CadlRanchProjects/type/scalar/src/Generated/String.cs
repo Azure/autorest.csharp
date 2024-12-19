@@ -35,7 +35,7 @@ namespace _Type.Scalar
         /// <summary> Initializes a new instance of String. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal String(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -43,7 +43,7 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> get string value. </summary>
+        /// <summary> Get string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> GetStringAsync(CancellationToken cancellationToken = default)
@@ -53,7 +53,7 @@ namespace _Type.Scalar
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
-        /// <summary> get string value. </summary>
+        /// <summary> Get string. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetString(CancellationToken)']/*" />
         public virtual Response<string> GetString(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get string value
+        /// [Protocol Method] Get string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -99,7 +99,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] get string value
+        /// [Protocol Method] Get string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -133,8 +133,8 @@ namespace _Type.Scalar
             }
         }
 
-        /// <summary> put string value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -149,8 +149,8 @@ namespace _Type.Scalar
             return response;
         }
 
-        /// <summary> put string value. </summary>
-        /// <param name="body"> _. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -166,7 +166,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put string value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -205,7 +205,7 @@ namespace _Type.Scalar
         }
 
         /// <summary>
-        /// [Protocol Method] put string value
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

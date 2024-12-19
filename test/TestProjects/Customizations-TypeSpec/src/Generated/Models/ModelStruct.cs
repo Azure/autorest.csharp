@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> Model to make to a struct. </summary>
+    /// <summary> The ModelStruct. </summary>
     public readonly partial struct ModelStruct
     {
         /// <summary>
@@ -46,9 +46,9 @@ namespace CustomizationsInTsp.Models
         private readonly IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        /// <param name="optionalInt"> Optional int. </param>
-        /// <param name="optionalString"> Optional string. </param>
+        /// <param name="requiredInt"></param>
+        /// <param name="optionalInt"></param>
+        /// <param name="optionalString"></param>
         public ModelStruct(int requiredInt, int? optionalInt, string optionalString)
         {
             RequiredInt = requiredInt;
@@ -57,9 +57,9 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelStruct"/>. </summary>
-        /// <param name="requiredInt"> Required int. </param>
-        /// <param name="optionalInt"> Optional int. </param>
-        /// <param name="optionalString"> Optional string. </param>
+        /// <param name="requiredInt"></param>
+        /// <param name="optionalInt"></param>
+        /// <param name="optionalString"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelStruct(int requiredInt, int? optionalInt, string optionalString, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,11 +74,11 @@ namespace CustomizationsInTsp.Models
         {
         }
 
-        /// <summary> Required int. </summary>
+        /// <summary> Gets the required int. </summary>
         public int RequiredInt { get; }
-        /// <summary> Optional int. </summary>
+        /// <summary> Gets the optional int. </summary>
         public int? OptionalInt { get; }
-        /// <summary> Optional string. </summary>
+        /// <summary> Gets the optional string. </summary>
         public string OptionalString { get; }
     }
 }

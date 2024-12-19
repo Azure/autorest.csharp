@@ -17,8 +17,8 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="RenamedFromClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
-        /// <param name="version"> Need to be set as 'v1' or 'v2' in client. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="version"> The <see cref="Versions"/> to use. </param>
         public static IAzureClientBuilder<RenamedFromClient, RenamedFromClientOptions> AddRenamedFromClient<TBuilder>(this TBuilder builder, Uri endpoint, Versions version)
         where TBuilder : IAzureClientFactoryBuilder
         {

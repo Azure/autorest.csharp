@@ -42,16 +42,10 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/>. </summary>
-        /// <param name="nEpochs">
-        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
-        /// training dataset.
-        /// </param>
-        /// <param name="batchSize">
-        /// The batch size to use for training. The batch size is the number of training examples used to
-        /// train a single forward and backward pass.
-        /// </param>
-        /// <param name="promptLossWeight"> The weight to use for loss on the prompt tokens. </param>
-        /// <param name="learningRateMultiplier"> The learning rate multiplier to use for training. </param>
+        /// <param name="nEpochs"></param>
+        /// <param name="batchSize"></param>
+        /// <param name="promptLossWeight"></param>
+        /// <param name="learningRateMultiplier"></param>
         internal FineTuneHyperparams(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier)
         {
             NEpochs = nEpochs;
@@ -61,19 +55,13 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/>. </summary>
-        /// <param name="nEpochs">
-        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
-        /// training dataset.
-        /// </param>
-        /// <param name="batchSize">
-        /// The batch size to use for training. The batch size is the number of training examples used to
-        /// train a single forward and backward pass.
-        /// </param>
-        /// <param name="promptLossWeight"> The weight to use for loss on the prompt tokens. </param>
-        /// <param name="learningRateMultiplier"> The learning rate multiplier to use for training. </param>
-        /// <param name="computeClassificationMetrics"> The classification metrics to compute using the validation dataset at the end of every epoch. </param>
-        /// <param name="classificationPositiveClass"> The positive class to use for computing classification metrics. </param>
-        /// <param name="classificationNClasses"> The number of classes to use for computing classification metrics. </param>
+        /// <param name="nEpochs"></param>
+        /// <param name="batchSize"></param>
+        /// <param name="promptLossWeight"></param>
+        /// <param name="learningRateMultiplier"></param>
+        /// <param name="computeClassificationMetrics"></param>
+        /// <param name="classificationPositiveClass"></param>
+        /// <param name="classificationNClasses"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal FineTuneHyperparams(long nEpochs, long batchSize, double promptLossWeight, double learningRateMultiplier, bool? computeClassificationMetrics, string classificationPositiveClass, long? classificationNClasses, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -92,25 +80,19 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary>
-        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
-        /// training dataset.
-        /// </summary>
+        /// <summary> Gets the n epochs. </summary>
         public long NEpochs { get; }
-        /// <summary>
-        /// The batch size to use for training. The batch size is the number of training examples used to
-        /// train a single forward and backward pass.
-        /// </summary>
+        /// <summary> Gets the batch size. </summary>
         public long BatchSize { get; }
-        /// <summary> The weight to use for loss on the prompt tokens. </summary>
+        /// <summary> Gets the prompt loss weight. </summary>
         public double PromptLossWeight { get; }
-        /// <summary> The learning rate multiplier to use for training. </summary>
+        /// <summary> Gets the learning rate multiplier. </summary>
         public double LearningRateMultiplier { get; }
-        /// <summary> The classification metrics to compute using the validation dataset at the end of every epoch. </summary>
+        /// <summary> Gets the compute classification metrics. </summary>
         public bool? ComputeClassificationMetrics { get; }
-        /// <summary> The positive class to use for computing classification metrics. </summary>
+        /// <summary> Gets the classification positive class. </summary>
         public string ClassificationPositiveClass { get; }
-        /// <summary> The number of classes to use for computing classification metrics. </summary>
+        /// <summary> Gets the classification n classes. </summary>
         public long? ClassificationNClasses { get; }
     }
 }

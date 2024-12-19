@@ -46,14 +46,14 @@ namespace Serialization.EncodedName.Json.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="JsonEncodedNameModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
+        /// <param name="defaultName"></param>
         public JsonEncodedNameModel(bool defaultName)
         {
             DefaultName = defaultName;
         }
 
         /// <summary> Initializes a new instance of <see cref="JsonEncodedNameModel"/>. </summary>
-        /// <param name="defaultName"> Pass in true. </param>
+        /// <param name="defaultName"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal JsonEncodedNameModel(bool defaultName, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace Serialization.EncodedName.Json.Models
         {
         }
 
-        /// <summary> Pass in true. </summary>
+        /// <summary> Gets or sets the default name. </summary>
         public bool DefaultName { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Scm._Type.Scalar
 {
     // Data plane generated sub-client.
-    /// <summary> Decimal128 type. </summary>
+    /// <summary> The Decimal128Type sub-client. </summary>
     public partial class Decimal128Type
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm._Type.Scalar
 
         /// <summary> Initializes a new instance of Decimal128Type. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal Decimal128Type(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;

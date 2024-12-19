@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from a type that is Record&lt;unknown&gt; type. </summary>
+    /// <summary> The IsUnknownAdditionalPropertiesDerived. </summary>
     public partial class IsUnknownAdditionalPropertiesDerived : IsUnknownAdditionalProperties
     {
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDerived"/>. </summary>
-        /// <param name="name"> The name property. </param>
-        /// <param name="index"> The index property. </param>
+        /// <param name="name"></param>
+        /// <param name="index"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public IsUnknownAdditionalPropertiesDerived(string name, int index) : base(name)
         {
@@ -22,10 +22,10 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="IsUnknownAdditionalPropertiesDerived"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <param name="index"> The index property. </param>
-        /// <param name="age"> The age property. </param>
+        /// <param name="index"></param>
+        /// <param name="age"></param>
         internal IsUnknownAdditionalPropertiesDerived(string name, IDictionary<string, BinaryData> additionalProperties, int index, float? age) : base(name, additionalProperties)
         {
             Index = index;
@@ -37,9 +37,9 @@ namespace Scm._Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The index property. </summary>
+        /// <summary> Gets or sets the index. </summary>
         public int Index { get; set; }
-        /// <summary> The age property. </summary>
+        /// <summary> Gets or sets the age. </summary>
         public float? Age { get; set; }
     }
 }

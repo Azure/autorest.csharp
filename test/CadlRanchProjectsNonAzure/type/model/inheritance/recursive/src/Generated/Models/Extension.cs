@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Inheritance.Recursive.Models
 {
-    /// <summary> extension. </summary>
+    /// <summary> The Extension. </summary>
     public partial class Extension : Element
     {
         /// <summary> Initializes a new instance of <see cref="Extension"/>. </summary>

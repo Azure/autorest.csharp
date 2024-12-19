@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of ModelsOps. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ModelsOps(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -115,7 +115,7 @@ namespace OpenAI
         /// Retrieves a model instance, providing basic information about the model such as the owner and
         /// permissioning.
         /// </summary>
-        /// <param name="model"> The ID of the model to use for this request. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -131,7 +131,7 @@ namespace OpenAI
         /// Retrieves a model instance, providing basic information about the model such as the owner and
         /// permissioning.
         /// </summary>
-        /// <param name="model"> The ID of the model to use for this request. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -159,7 +159,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model"> The ID of the model to use for this request. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
@@ -189,7 +189,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model"> The ID of the model to use for this request. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
@@ -204,7 +204,7 @@ namespace OpenAI
         }
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
-        /// <param name="model"> The model to delete. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Delete. </remarks>
@@ -217,7 +217,7 @@ namespace OpenAI
         }
 
         /// <summary> Delete a fine-tuned model. You must have the Owner role in your organization to delete a model. </summary>
-        /// <param name="model"> The model to delete. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Delete. </remarks>
@@ -244,7 +244,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model"> The model to delete. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>
@@ -273,7 +273,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model"> The model to delete. </param>
+        /// <param name="model"> The <see cref="string"/> to use. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model"/> is an empty string, and was expected to be non-empty. </exception>

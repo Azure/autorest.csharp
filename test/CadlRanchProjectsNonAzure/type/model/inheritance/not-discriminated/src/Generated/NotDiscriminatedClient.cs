@@ -11,7 +11,7 @@ using Scm._Type.Model.Inheritance.NotDiscriminated.Models;
 namespace Scm._Type.Model.Inheritance.NotDiscriminated
 {
     // Data plane generated client.
-    /// <summary> Illustrates not-discriminated inheritance model. </summary>
+    /// <summary> The NotDiscriminated service client. </summary>
     public partial class NotDiscriminatedClient
     {
         private readonly ClientPipeline _pipeline;
@@ -26,7 +26,7 @@ namespace Scm._Type.Model.Inheritance.NotDiscriminated
         }
 
         /// <summary> Initializes a new instance of NotDiscriminatedClient. </summary>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public NotDiscriminatedClient(Uri endpoint, NotDiscriminatedClientOptions options)

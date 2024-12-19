@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Empty.Models
 {
-    /// <summary> Empty model used in operation parameters. </summary>
+    /// <summary> The EmptyInput. </summary>
     public partial class EmptyInput
     {
         /// <summary>

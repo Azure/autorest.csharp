@@ -15,8 +15,8 @@ namespace _Type.Property.Nullable.Models
     public static partial class TypePropertyNullableModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.CollectionsModelProperty"/> instance for mocking. </returns>
         public static CollectionsModelProperty CollectionsModelProperty(string requiredProperty = null, IEnumerable<InnerModel> nullableProperty = null)
         {
@@ -26,7 +26,7 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
-        /// <param name="property"> Inner model property. </param>
+        /// <param name="property"></param>
         /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>
         public static InnerModel InnerModel(string property = null)
         {
@@ -34,8 +34,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsByteProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.CollectionsByteProperty"/> instance for mocking. </returns>
         public static CollectionsByteProperty CollectionsByteProperty(string requiredProperty = null, IEnumerable<BinaryData> nullableProperty = null)
         {
@@ -45,8 +45,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DurationProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.DurationProperty"/> instance for mocking. </returns>
         public static DurationProperty DurationProperty(string requiredProperty = null, TimeSpan? nullableProperty = null)
         {
@@ -54,8 +54,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DatetimeProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.DatetimeProperty"/> instance for mocking. </returns>
         public static DatetimeProperty DatetimeProperty(string requiredProperty = null, DateTimeOffset? nullableProperty = null)
         {
@@ -63,8 +63,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BytesProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.BytesProperty"/> instance for mocking. </returns>
         public static BytesProperty BytesProperty(string requiredProperty = null, BinaryData nullableProperty = null)
         {
@@ -72,8 +72,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StringProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <returns> A new <see cref="Models.StringProperty"/> instance for mocking. </returns>
         public static StringProperty StringProperty(string requiredProperty = null, string nullableProperty = null)
         {

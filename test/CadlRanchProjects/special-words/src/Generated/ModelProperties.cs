@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 namespace SpecialWords
 {
     // Data plane generated sub-client.
-    /// <summary> Verify model names. </summary>
+    /// <summary> The ModelProperties sub-client. </summary>
     public partial class ModelProperties
     {
         private readonly HttpPipeline _pipeline;
@@ -35,7 +35,7 @@ namespace SpecialWords
         /// <summary> Initializes a new instance of ModelProperties. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ModelProperties(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

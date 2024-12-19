@@ -14,8 +14,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     internal partial class UnknownSnake : Snake
     {
         /// <summary> Initializes a new instance of <see cref="UnknownSnake"/>. </summary>
-        /// <param name="kind"> discriminator property. </param>
-        /// <param name="length"> Length of the snake. </param>
+        /// <param name="kind"></param>
+        /// <param name="length"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal UnknownSnake(SnakeKind kind, int length, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, length, serializedAdditionalRawData)
         {

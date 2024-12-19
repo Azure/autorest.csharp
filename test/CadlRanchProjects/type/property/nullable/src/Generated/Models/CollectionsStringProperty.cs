@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace _Type.Property.Nullable.Models
 {
-    /// <summary> Model with collection string properties. </summary>
+    /// <summary> The CollectionsStringProperty. </summary>
     public partial class CollectionsStringProperty
     {
         /// <summary>
@@ -47,8 +47,8 @@ namespace _Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="CollectionsStringProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
         public CollectionsStringProperty(string requiredProperty, IEnumerable<string> nullableProperty)
         {
@@ -59,8 +59,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CollectionsStringProperty"/>. </summary>
-        /// <param name="requiredProperty"> Required property. </param>
-        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="requiredProperty"></param>
+        /// <param name="nullableProperty"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CollectionsStringProperty(string requiredProperty, IList<string> nullableProperty, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,9 +74,9 @@ namespace _Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Required property. </summary>
+        /// <summary> Gets or sets the required property. </summary>
         public string RequiredProperty { get; set; }
-        /// <summary> Property. </summary>
+        /// <summary> Gets or sets the nullable property. </summary>
         public IList<string> NullableProperty { get; set; }
     }
 }

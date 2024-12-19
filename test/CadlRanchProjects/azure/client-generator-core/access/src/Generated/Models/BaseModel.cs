@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    /// <summary> Used in internal operations, should be generated but not exported. </summary>
+    /// <summary> The BaseModel. </summary>
     internal partial class BaseModel
     {
         /// <summary>

@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace UnbrandedTypeSpec.Models
 {
-    /// <summary> Extensible enum. </summary>
+    /// <summary> The StringExtensibleEnum. </summary>
     public readonly partial struct StringExtensibleEnum : IEquatable<StringExtensibleEnum>
     {
         private readonly string _value;

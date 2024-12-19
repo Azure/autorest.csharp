@@ -10,11 +10,11 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model spread Record&lt;WidgetData&gt;. </summary>
+    /// <summary> The SpreadRecordForDiscriminatedUnion. </summary>
     public partial class SpreadRecordForDiscriminatedUnion
     {
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForDiscriminatedUnion"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public SpreadRecordForDiscriminatedUnion(string name)
         {
@@ -25,7 +25,7 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SpreadRecordForDiscriminatedUnion"/>. </summary>
-        /// <param name="name"> The name property. </param>
+        /// <param name="name"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal SpreadRecordForDiscriminatedUnion(string name, IDictionary<string, BinaryData> additionalProperties)
         {
@@ -38,7 +38,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The name property. </summary>
+        /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary>
         /// Additional Properties

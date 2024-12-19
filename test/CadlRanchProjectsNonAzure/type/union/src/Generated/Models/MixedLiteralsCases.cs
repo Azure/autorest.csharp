@@ -43,10 +43,10 @@ namespace Scm._Type.Union.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MixedLiteralsCases"/>. </summary>
-        /// <param name="stringLiteral"> This should be receive/send the "a" variant. </param>
-        /// <param name="intLiteral"> This should be receive/send the 2 variant. </param>
-        /// <param name="floatLiteral"> This should be receive/send the 3.3 variant. </param>
-        /// <param name="booleanLiteral"> This should be receive/send the true variant. </param>
+        /// <param name="stringLiteral"></param>
+        /// <param name="intLiteral"></param>
+        /// <param name="floatLiteral"></param>
+        /// <param name="booleanLiteral"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringLiteral"/>, <paramref name="intLiteral"/>, <paramref name="floatLiteral"/> or <paramref name="booleanLiteral"/> is null. </exception>
         public MixedLiteralsCases(BinaryData stringLiteral, BinaryData intLiteral, BinaryData floatLiteral, BinaryData booleanLiteral)
         {
@@ -62,10 +62,10 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MixedLiteralsCases"/>. </summary>
-        /// <param name="stringLiteral"> This should be receive/send the "a" variant. </param>
-        /// <param name="intLiteral"> This should be receive/send the 2 variant. </param>
-        /// <param name="floatLiteral"> This should be receive/send the 3.3 variant. </param>
-        /// <param name="booleanLiteral"> This should be receive/send the true variant. </param>
+        /// <param name="stringLiteral"></param>
+        /// <param name="intLiteral"></param>
+        /// <param name="floatLiteral"></param>
+        /// <param name="booleanLiteral"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MixedLiteralsCases(BinaryData stringLiteral, BinaryData intLiteral, BinaryData floatLiteral, BinaryData booleanLiteral, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -82,7 +82,7 @@ namespace Scm._Type.Union.Models
         }
 
         /// <summary>
-        /// This should be receive/send the "a" variant
+        /// Gets or sets the string literal
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -130,7 +130,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData StringLiteral { get; set; }
         /// <summary>
-        /// This should be receive/send the 2 variant
+        /// Gets or sets the int literal
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -178,7 +178,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData IntLiteral { get; set; }
         /// <summary>
-        /// This should be receive/send the 3.3 variant
+        /// Gets or sets the float literal
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -226,7 +226,7 @@ namespace Scm._Type.Union.Models
         /// </summary>
         public BinaryData FloatLiteral { get; set; }
         /// <summary>
-        /// This should be receive/send the true variant
+        /// Gets or sets the boolean literal
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

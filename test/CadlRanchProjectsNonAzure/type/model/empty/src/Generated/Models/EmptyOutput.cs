@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type.Model.Empty.Models
 {
-    /// <summary> Empty model used in operation return type. </summary>
+    /// <summary> The EmptyOutput. </summary>
     public partial class EmptyOutput
     {
         /// <summary>

@@ -27,14 +27,14 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormDataHttpPartsNonString. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FormDataHttpPartsNonString(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Test content-type: multipart/form-data for non string. </summary>
+        /// <summary> Float. </summary>
         /// <param name="body"> The <see cref="FloatRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> FloatAsync(FloatRequest body)
@@ -46,7 +46,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for non string. </summary>
+        /// <summary> Float. </summary>
         /// <param name="body"> The <see cref="FloatRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult Float(FloatRequest body)
@@ -59,7 +59,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for non string
+        /// [Protocol Method] Float.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -88,7 +88,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for non string
+        /// [Protocol Method] Float.
         /// <list type="bullet">
         /// <item>
         /// <description>

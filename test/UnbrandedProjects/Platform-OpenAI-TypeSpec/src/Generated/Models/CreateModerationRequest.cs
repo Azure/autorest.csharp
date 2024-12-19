@@ -42,7 +42,7 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
-        /// <param name="input"> The input text to classify. </param>
+        /// <param name="input"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateModerationRequest(BinaryData input)
         {
@@ -52,14 +52,8 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
-        /// <param name="input"> The input text to classify. </param>
-        /// <param name="model">
-        /// Two content moderations models are available: `text-moderation-stable` and
-        /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
-        /// upgraded over time. This ensures you are always using our most accurate model. If you use
-        /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
-        /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
-        /// </param>
+        /// <param name="input"></param>
+        /// <param name="model"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateModerationRequest(BinaryData input, CreateModerationRequestModel? model, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,7 +68,7 @@ namespace OpenAI.Models
         }
 
         /// <summary>
-        /// The input text to classify
+        /// Gets the input
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -115,13 +109,7 @@ namespace OpenAI.Models
         /// </para>
         /// </summary>
         public BinaryData Input { get; }
-        /// <summary>
-        /// Two content moderations models are available: `text-moderation-stable` and
-        /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
-        /// upgraded over time. This ensures you are always using our most accurate model. If you use
-        /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
-        /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
-        /// </summary>
+        /// <summary> Gets or sets the model. </summary>
         public CreateModerationRequestModel? Model { get; set; }
     }
 }

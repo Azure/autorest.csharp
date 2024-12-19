@@ -10,7 +10,7 @@
    "name": "OuterModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.OuterModel",
    "usage": "Output,Json",
-   "doc": "Used in internal operations, should be generated but not exported.",
+   "description": "Used in internal operations, should be generated but not exported.",
    "decorators": [],
    "baseModel": {
     "$id": "3",
@@ -18,7 +18,7 @@
     "name": "BaseModel",
     "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.BaseModel",
     "usage": "Output,Json",
-    "doc": "Used in internal operations, should be generated but not exported.",
+    "description": "Used in internal operations, should be generated but not exported.",
     "decorators": [],
     "properties": [
      {
@@ -54,7 +54,7 @@
       "name": "InnerModel",
       "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.InnerModel",
       "usage": "Output,Json",
-      "doc": "Used in internal operations, should be generated but not exported.",
+      "description": "Used in internal operations, should be generated but not exported.",
       "decorators": [],
       "properties": [
        {
@@ -99,14 +99,14 @@
    "name": "AbstractModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.AbstractModel",
    "usage": "Output,Json",
-   "doc": "Used in internal operations, should be generated but not exported.",
+   "description": "Used in internal operations, should be generated but not exported.",
    "decorators": [],
    "discriminatorProperty": {
     "$id": "11",
     "kind": "property",
     "name": "kind",
     "serializedName": "kind",
-    "doc": "Discriminator property for AbstractModel.",
+    "description": "Discriminator property for AbstractModel.",
     "type": {
      "$id": "12",
      "kind": "string",
@@ -153,7 +153,7 @@
      "name": "RealModel",
      "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.RelativeModelInOperation.RealModel",
      "usage": "Output,Json",
-     "doc": "Used in internal operations, should be generated but not exported.",
+     "description": "Used in internal operations, should be generated but not exported.",
      "discriminatorValue": "real",
      "decorators": [],
      "baseModel": {
@@ -198,7 +198,7 @@
    "name": "SharedModel",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.SharedModelInOperation.SharedModel",
    "usage": "Output,Json",
-   "doc": "Used by both public and internal operation. It should be generated and exported.",
+   "description": "Used by both public and internal operation. It should be generated and exported.",
    "decorators": [],
    "properties": [
     {
@@ -228,7 +228,7 @@
    "name": "NoDecoratorModelInInternal",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.NoDecoratorModelInInternal",
    "usage": "Output,Json",
-   "doc": "Used in an internal operation, should be generated but not exported.",
+   "description": "Used in an internal operation, should be generated but not exported.",
    "decorators": [],
    "properties": [
     {
@@ -259,7 +259,7 @@
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.InternalDecoratorModelInInternal",
    "access": "internal",
    "usage": "Output,Json",
-   "doc": "Used in an internal operation, should be generated but not exported.",
+   "description": "Used in an internal operation, should be generated but not exported.",
    "decorators": [],
    "properties": [
     {
@@ -290,7 +290,7 @@
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.InternalOperation.PublicDecoratorModelInInternal",
    "access": "public",
    "usage": "Output,Json",
-   "doc": "Used in an internal operation but with public decorator, should be generated and exported.",
+   "description": "Used in an internal operation but with public decorator, should be generated and exported.",
    "decorators": [],
    "properties": [
     {
@@ -320,7 +320,7 @@
    "name": "NoDecoratorModelInPublic",
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.NoDecoratorModelInPublic",
    "usage": "Output,Json",
-   "doc": "Used in a public operation, should be generated and exported.",
+   "description": "Used in a public operation, should be generated and exported.",
    "decorators": [],
    "properties": [
     {
@@ -351,7 +351,7 @@
    "crossLanguageDefinitionId": "_Specs_.Azure.ClientGenerator.Core.Access.PublicOperation.PublicDecoratorModelInPublic",
    "access": "public",
    "usage": "Output,Json",
-   "doc": "Used in a public operation, should be generated and exported.",
+   "description": "Used in a public operation, should be generated and exported.",
    "decorators": [],
    "properties": [
     {
@@ -380,7 +380,7 @@
   {
    "$id": "38",
    "Name": "AccessClient",
-   "Doc": "Test for internal decorator.",
+   "Description": "Test for internal decorator.",
    "Operations": [],
    "Protocol": {
     "$id": "39"
@@ -390,7 +390,7 @@
      "$id": "40",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "41",
       "kind": "url",
@@ -598,7 +598,7 @@
      "$id": "60",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "61",
       "kind": "url",
@@ -888,7 +888,7 @@
      "$id": "87",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "88",
       "kind": "url",
@@ -1096,7 +1096,7 @@
      "$id": "107",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "108",
       "kind": "url",
@@ -1134,7 +1134,7 @@
      "$id": "112",
      "Name": "operation",
      "ResourceName": "RelativeModelInOperation",
-     "Doc": "Expected query parameter: name=\"Madge\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"inner\":\n  {\n    \"name\": \"Madge\"\n  }\n}\n```",
+     "Description": "Expected query parameter: name=\"Madge\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"inner\":\n  {\n    \"name\": \"Madge\"\n  }\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -1217,7 +1217,7 @@
      "$id": "119",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
-     "Doc": "Expected query parameter: kind= \"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
+     "Description": "Expected query parameter: kind= \"real\"\nExpected response body:\n```json\n{\n  \"name\": \"Madge\",\n  \"kind\": \"real\"\n}\n```",
      "Accessibility": "internal",
      "Parameters": [
       {
@@ -1306,7 +1306,7 @@
      "$id": "127",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Service host",
+     "Description": "Service host",
      "Type": {
       "$id": "128",
       "kind": "url",

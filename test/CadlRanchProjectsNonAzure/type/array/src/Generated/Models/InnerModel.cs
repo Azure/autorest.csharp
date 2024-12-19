@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Scm._Type._Array.Models
 {
-    /// <summary> Array inner model. </summary>
+    /// <summary> The InnerModel. </summary>
     public partial class InnerModel
     {
         /// <summary>
@@ -43,7 +43,7 @@ namespace Scm._Type._Array.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Required string property. </param>
+        /// <param name="property"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
         {
@@ -54,7 +54,7 @@ namespace Scm._Type._Array.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Required string property. </param>
+        /// <param name="property"></param>
         /// <param name="children"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal InnerModel(string property, IList<InnerModel> children, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -69,7 +69,7 @@ namespace Scm._Type._Array.Models
         {
         }
 
-        /// <summary> Required string property. </summary>
+        /// <summary> Gets or sets the property. </summary>
         public string Property { get; set; }
         /// <summary> Gets the children. </summary>
         public IList<InnerModel> Children { get; }

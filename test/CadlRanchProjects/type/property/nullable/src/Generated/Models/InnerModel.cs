@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.Nullable.Models
 {
-    /// <summary> Inner model used in collections model property. </summary>
+    /// <summary> The InnerModel. </summary>
     public partial class InnerModel
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.Nullable.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Inner model property. </param>
+        /// <param name="property"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         internal InnerModel(string property)
         {
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
-        /// <param name="property"> Inner model property. </param>
+        /// <param name="property"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal InnerModel(string property, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Type.Property.Nullable.Models
         {
         }
 
-        /// <summary> Inner model property. </summary>
+        /// <summary> Gets the property. </summary>
         public string Property { get; }
     }
 }

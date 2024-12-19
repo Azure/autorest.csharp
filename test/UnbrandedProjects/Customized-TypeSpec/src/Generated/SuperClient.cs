@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace CustomizedTypeSpec.Models
 {
     // Data plane generated client.
-    /// <summary> This is a sample typespec project. </summary>
+    /// <summary> The Super service client. </summary>
     public partial class SuperClient
     {
         private const string AuthorizationHeader = "my-api-key";
@@ -53,7 +53,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi
+        /// [Protocol Method] Say hi.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,7 +79,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi
+        /// [Protocol Method] Say hi.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -104,7 +104,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
@@ -121,7 +121,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(SuperRoundTripModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary> Hello again. </summary>
         /// <param name="p2"> The <see cref="string"/> to use. </param>
         /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="action"> The <see cref="SuperRoundTripModel"/> to use. </param>
@@ -139,7 +139,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -172,7 +172,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] Hello again.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -205,7 +205,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -233,7 +233,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi again
+        /// [Protocol Method] No content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -260,14 +260,14 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> Hello demo 2. </summary>
         public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
             ClientResult result = await HelloDemo2Async(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary> Hello demo 2. </summary>
         public virtual ClientResult<Thing> HelloDemo2()
         {
             ClientResult result = HelloDemo2(null);
@@ -275,7 +275,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi in demo2
+        /// [Protocol Method] Hello demo 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -299,7 +299,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Return hi in demo2
+        /// [Protocol Method] Hello demo 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -322,7 +322,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
@@ -334,7 +334,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary> Create literal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult<Thing> CreateLiteral(Thing body)
@@ -347,7 +347,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -375,7 +375,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Create with literal value
+        /// [Protocol Method] Create literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -402,14 +402,14 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
             ClientResult result = await HelloLiteralAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary> Hello literal. </summary>
         public virtual ClientResult<Thing> HelloLiteral()
         {
             ClientResult result = HelloLiteral(null);
@@ -417,7 +417,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -441,7 +441,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Send literal parameters
+        /// [Protocol Method] Hello literal.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -464,7 +464,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary> Top action. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
@@ -472,7 +472,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary> Top action. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
@@ -481,7 +481,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level method
+        /// [Protocol Method] Top action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -506,7 +506,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level method
+        /// [Protocol Method] Top action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -531,7 +531,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level method2
+        /// [Protocol Method] Top action 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -550,7 +550,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level method2
+        /// [Protocol Method] Top action 2.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -569,7 +569,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level patch
+        /// [Protocol Method] Patch action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -592,7 +592,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] top level patch
+        /// [Protocol Method] Patch action.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -614,20 +614,20 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
-        /// <param name="optionalLiteralString"> optional literal string. </param>
-        /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralFloat"> optional literal float. </param>
-        /// <param name="optionalLiteralBool"> optional literal bool. </param>
-        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <summary> Anonymous body. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="requiredNullableList"></param>
+        /// <param name="requiredLiteralString"></param>
+        /// <param name="requiredLiteralInt"></param>
+        /// <param name="requiredLiteralFloat"></param>
+        /// <param name="requiredLiteralBool"></param>
+        /// <param name="optionalLiteralString"></param>
+        /// <param name="optionalLiteralInt"></param>
+        /// <param name="optionalLiteralFloat"></param>
+        /// <param name="optionalLiteralBool"></param>
+        /// <param name="optionalNullableList"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
@@ -654,20 +654,20 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> body parameter without body decorator. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="requiredUnion"> required Union. </param>
-        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <param name="requiredLiteralString"> required literal string. </param>
-        /// <param name="requiredLiteralInt"> required literal int. </param>
-        /// <param name="requiredLiteralFloat"> required literal float. </param>
-        /// <param name="requiredLiteralBool"> required literal bool. </param>
-        /// <param name="optionalLiteralString"> optional literal string. </param>
-        /// <param name="optionalLiteralInt"> optional literal int. </param>
-        /// <param name="optionalLiteralFloat"> optional literal float. </param>
-        /// <param name="optionalLiteralBool"> optional literal bool. </param>
-        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <summary> Anonymous body. </summary>
+        /// <param name="name"></param>
+        /// <param name="requiredUnion"></param>
+        /// <param name="requiredBadDescription"></param>
+        /// <param name="requiredNullableList"></param>
+        /// <param name="requiredLiteralString"></param>
+        /// <param name="requiredLiteralInt"></param>
+        /// <param name="requiredLiteralFloat"></param>
+        /// <param name="requiredLiteralBool"></param>
+        /// <param name="optionalLiteralString"></param>
+        /// <param name="optionalLiteralInt"></param>
+        /// <param name="optionalLiteralFloat"></param>
+        /// <param name="optionalLiteralBool"></param>
+        /// <param name="optionalNullableList"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, IEnumerable<int> optionalNullableList = null)
         {
@@ -695,7 +695,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] body parameter without body decorator
+        /// [Protocol Method] Anonymous body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -723,7 +723,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] body parameter without body decorator
+        /// [Protocol Method] Anonymous body.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -750,8 +750,8 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Model can have its friendly name. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
+        /// <summary> Friendly model. </summary>
+        /// <param name="name"></param>
         /// <param name="format"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<ClientResult<SuperFriend>> FriendlyModelAsync(string name, ModelWithFormat format = null)
@@ -763,8 +763,8 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(SuperFriend.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Model can have its friendly name. </summary>
-        /// <param name="name"> name of the NotFriend. </param>
+        /// <summary> Friendly model. </summary>
+        /// <param name="name"></param>
         /// <param name="format"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual ClientResult<SuperFriend> FriendlyModel(string name, ModelWithFormat format = null)
@@ -777,7 +777,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Model can have its friendly name
+        /// [Protocol Method] Friendly model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -805,7 +805,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Model can have its friendly name
+        /// [Protocol Method] Friendly model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -870,8 +870,8 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Model can have its projected name. </summary>
-        /// <param name="name"> name of the ModelWithProjectedName. </param>
+        /// <summary> Projected name model. </summary>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(string name)
         {
@@ -882,8 +882,8 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(ProjectedModel.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Model can have its projected name. </summary>
-        /// <param name="name"> name of the ModelWithProjectedName. </param>
+        /// <summary> Projected name model. </summary>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual ClientResult<ProjectedModel> ProjectedNameModel(string name)
         {
@@ -895,7 +895,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Model can have its projected name
+        /// [Protocol Method] Projected name model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -923,7 +923,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] Model can have its projected name
+        /// [Protocol Method] Projected name model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -950,14 +950,14 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> return anonymous model. </summary>
+        /// <summary> Returns anonymous model. </summary>
         public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
             ClientResult result = await ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
             return ClientResult.FromValue(ReturnsAnonymousModelResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> return anonymous model. </summary>
+        /// <summary> Returns anonymous model. </summary>
         public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
             ClientResult result = ReturnsAnonymousModel(null);
@@ -965,7 +965,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] return anonymous model
+        /// [Protocol Method] Returns anonymous model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -989,7 +989,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] return anonymous model
+        /// [Protocol Method] Returns anonymous model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1013,7 +1013,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] Get unknown value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1036,7 +1036,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] get extensible enum
+        /// [Protocol Method] Get unknown value.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1058,7 +1058,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary> Internal protocol. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
@@ -1070,7 +1070,7 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary> Internal protocol. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult<Thing> InternalProtocol(Thing body)
@@ -1083,7 +1083,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] Internal protocol.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1106,7 +1106,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
+        /// [Protocol Method] Internal protocol.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1128,14 +1128,14 @@ namespace CustomizedTypeSpec.Models
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary> Still convenient. </summary>
         public virtual async Task<ClientResult> StillConvenientValueAsync()
         {
             ClientResult result = await StillConvenientAsync(null).ConfigureAwait(false);
             return result;
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary> Still convenient. </summary>
         public virtual ClientResult StillConvenientValue()
         {
             ClientResult result = StillConvenient(null);
@@ -1143,7 +1143,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] Still convenient.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1162,7 +1162,7 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary>
-        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// [Protocol Method] Still convenient.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1182,7 +1182,7 @@ namespace CustomizedTypeSpec.Models
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] Head as boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1208,7 +1208,7 @@ namespace CustomizedTypeSpec.Models
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] head as boolean.
+        /// [Protocol Method] Head as boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>

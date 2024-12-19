@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ModelX in the discriminated set. </summary>
+    /// <summary> The ModelX. </summary>
     public partial class ModelX : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
@@ -22,13 +22,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelX"/>. </summary>
-        /// <param name="kind"> The kind. </param>
-        /// <param name="name"> The name property. </param>
+        /// <param name="kind"></param>
+        /// <param name="name"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="fields"> Optional list. </param>
-        /// <param name="nullProperty"> Nullable integer. </param>
-        /// <param name="keyValuePairs"> Optional dictionary. </param>
-        /// <param name="xProperty"> The XProperty property. </param>
+        /// <param name="fields"></param>
+        /// <param name="nullProperty"></param>
+        /// <param name="keyValuePairs"></param>
+        /// <param name="xProperty"></param>
         internal ModelX(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> fields, int? nullProperty, IDictionary<string, string> keyValuePairs, int xProperty) : base(kind, name, serializedAdditionalRawData)
         {
             Fields = fields;
@@ -37,13 +37,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             XProperty = xProperty;
         }
 
-        /// <summary> Optional list. </summary>
+        /// <summary> Gets the fields. </summary>
         public IList<string> Fields { get; }
-        /// <summary> Nullable integer. </summary>
+        /// <summary> Gets or sets the null property. </summary>
         public int? NullProperty { get; set; }
-        /// <summary> Optional dictionary. </summary>
+        /// <summary> Gets the key value pairs. </summary>
         public IDictionary<string, string> KeyValuePairs { get; }
-        /// <summary> The XProperty property. </summary>
+        /// <summary> Gets the x property. </summary>
         public int XProperty { get; }
     }
 }

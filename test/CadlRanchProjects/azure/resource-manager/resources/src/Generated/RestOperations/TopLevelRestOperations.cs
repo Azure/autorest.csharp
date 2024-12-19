@@ -26,8 +26,8 @@ namespace _Azure.ResourceManager.Resources
         /// <summary> Initializes a new instance of TopLevelRestOperations. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
-        /// <param name="endpoint"> Service host. </param>
-        /// <param name="apiVersion"> The API version to use for this operation. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         public TopLevelRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
@@ -71,10 +71,10 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Get a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <summary> Get. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -102,10 +102,10 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Get a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <summary> Get. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -171,11 +171,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Create a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <summary> Create or replace. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -198,11 +198,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Create a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="data"> Resource create parameters. </param>
+        /// <summary> Create or replace. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -263,11 +263,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Update a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <summary> Update. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -290,11 +290,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Update a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="data"> The resource properties to be updated. </param>
+        /// <summary> Update. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="TopLevelTrackedResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -351,10 +351,10 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> Delete a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <summary> Delete. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -376,10 +376,10 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> Delete a TopLevelTrackedResource. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
+        /// <summary> Delete. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -433,9 +433,9 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <summary> List by resource group. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -460,9 +460,9 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <summary> List by resource group. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -515,8 +515,8 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <summary> List by subscription. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -540,8 +540,8 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <summary> List by subscription. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -605,11 +605,11 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> A synchronous resource action that returns no content. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="details"> The content of the action request. </param>
+        /// <summary> Action sync. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="details"> The <see cref="NotificationDetails"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="details"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -631,11 +631,11 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> A synchronous resource action that returns no content. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="topLevelTrackedResourceName"> arm resource name for path. </param>
-        /// <param name="details"> The content of the action request. </param>
+        /// <summary> Action sync. </summary>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="topLevelTrackedResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="details"> The <see cref="NotificationDetails"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="topLevelTrackedResourceName"/> or <paramref name="details"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="topLevelTrackedResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -679,10 +679,10 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -708,10 +708,10 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by resource group. </summary>
+        /// <summary> List by resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -759,9 +759,9 @@ namespace _Azure.ResourceManager.Resources
             return message;
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -786,9 +786,9 @@ namespace _Azure.ResourceManager.Resources
             }
         }
 
-        /// <summary> List TopLevelTrackedResource resources by subscription ID. </summary>
+        /// <summary> List by subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>

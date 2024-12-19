@@ -36,7 +36,7 @@ namespace _Type.Property.AdditionalProperties
         /// <summary> Initializes a new instance of SpreadDifferentModelArray. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal SpreadDifferentModelArray(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.AdditionalProperties
             _endpoint = endpoint;
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get spread different model array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadDifferentModelArray.xml" path="doc/members/member[@name='GetSpreadDifferentModelArrayAsync(CancellationToken)']/*" />
         public virtual async Task<Response<DifferentSpreadModelArrayRecord>> GetSpreadDifferentModelArrayAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.AdditionalProperties
             return Response.FromValue(DifferentSpreadModelArrayRecord.FromResponse(response), response);
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get spread different model array. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/SpreadDifferentModelArray.xml" path="doc/members/member[@name='GetSpreadDifferentModelArray(CancellationToken)']/*" />
         public virtual Response<DifferentSpreadModelArrayRecord> GetSpreadDifferentModelArray(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get spread different model array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get spread different model array.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type.Property.AdditionalProperties
             }
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="DifferentSpreadModelArrayRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/SpreadDifferentModelArray.xml" path="doc/members/member[@name='PutAsync(DifferentSpreadModelArrayRecord,CancellationToken)']/*" />
@@ -149,8 +149,8 @@ namespace _Type.Property.AdditionalProperties
             return response;
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="DifferentSpreadModelArrayRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/SpreadDifferentModelArray.xml" path="doc/members/member[@name='Put(DifferentSpreadModelArrayRecord,CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Type.Property.AdditionalProperties
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

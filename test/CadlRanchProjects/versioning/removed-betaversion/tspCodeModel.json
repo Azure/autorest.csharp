@@ -123,7 +123,7 @@
      "enumType": {
       "$ref": "12"
      },
-     "doc": "The original version v1.",
+     "description": "The original version v1.",
      "decorators": []
     },
     {
@@ -141,11 +141,11 @@
      "enumType": {
       "$ref": "12"
      },
-     "doc": "The V2 Preview version.",
+     "description": "The V2 Preview version.",
      "decorators": []
     }
    ],
-   "doc": "The version of the API.",
+   "description": "The version of the API.",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,ApiVersionEnum",
@@ -376,20 +376,20 @@
   {
    "$id": "41",
    "Name": "RemovedClient",
-   "Doc": "Test for the `@removed` decorator.",
+   "Description": "Test for the `@removed` decorator.",
    "Operations": [
     {
      "$id": "42",
      "Name": "v1",
      "ResourceName": "Removed",
-     "Doc": "This operation should not be generated with latest version's signature.",
+     "Description": "This operation should not be generated with latest version's signature.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "43",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "44",
         "kind": "constant",
@@ -519,7 +519,7 @@
        "$id": "54",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "55",
         "kind": "constant",
@@ -622,14 +622,14 @@
      "$id": "62",
      "Name": "modelV3",
      "ResourceName": "Removed",
-     "Doc": "This operation will pass different paths and different request bodies based on different versions.",
+     "Description": "This operation will pass different paths and different request bodies based on different versions.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "63",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "64",
         "kind": "constant",
@@ -737,7 +737,7 @@
      "$id": "72",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Need to be set as 'http://localhost:3000' in client.",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "73",
       "kind": "url",
@@ -758,7 +758,7 @@
      "$id": "74",
      "Name": "version",
      "NameInRequest": "version",
-     "Doc": "Need to be set as 'v1', 'v2preview' or 'v2' in client.",
+     "Description": "Need to be set as 'v1', 'v2preview' or 'v2' in client.",
      "Type": {
       "$ref": "12"
      },
@@ -778,7 +778,7 @@
   {
    "$id": "75",
    "Name": "InterfaceV1",
-   "Doc": "This operation group should not be generated with latest version.",
+   "Description": "This operation group should not be generated with latest version.",
    "Operations": [
     {
      "$id": "76",
@@ -790,7 +790,7 @@
        "$id": "77",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Doc": "Body parameter's content type. Known values are application/json",
+       "Description": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "78",
         "kind": "constant",
@@ -899,7 +899,7 @@
      "$id": "86",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Doc": "Need to be set as 'http://localhost:3000' in client.",
+     "Description": "Need to be set as 'http://localhost:3000' in client.",
      "Type": {
       "$id": "87",
       "kind": "url",
@@ -920,7 +920,7 @@
      "$id": "88",
      "Name": "version",
      "NameInRequest": "version",
-     "Doc": "Need to be set as 'v1', 'v2preview' or 'v2' in client.",
+     "Description": "Need to be set as 'v1', 'v2preview' or 'v2' in client.",
      "Type": {
       "$ref": "12"
      },

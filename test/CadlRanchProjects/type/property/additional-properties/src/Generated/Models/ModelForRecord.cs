@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> model for record. </summary>
+    /// <summary> The ModelForRecord. </summary>
     public partial class ModelForRecord
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Type.Property.AdditionalProperties.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelForRecord"/>. </summary>
-        /// <param name="state"> The state property. </param>
+        /// <param name="state"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="state"/> is null. </exception>
         public ModelForRecord(string state)
         {
@@ -56,7 +56,7 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelForRecord"/>. </summary>
-        /// <param name="state"> The state property. </param>
+        /// <param name="state"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelForRecord(string state, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The state property. </summary>
+        /// <summary> Gets or sets the state. </summary>
         public string State { get; set; }
     }
 }

@@ -27,14 +27,14 @@ namespace Payload.MultiPart
 
         /// <summary> Initializes a new instance of FormDataHttpPartsContentType. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal FormDataHttpPartsContentType(ClientPipeline pipeline, Uri endpoint)
         {
             _pipeline = pipeline;
             _endpoint = endpoint;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Image jpeg content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartSpecificContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> ImageJpegContentTypeAsync(FileWithHttpPartSpecificContentTypeRequest body)
@@ -46,7 +46,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Image jpeg content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartSpecificContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult ImageJpegContentType(FileWithHttpPartSpecificContentTypeRequest body)
@@ -59,7 +59,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Image jpeg content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -88,7 +88,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Image jpeg content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,7 +116,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Required content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartRequiredContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> RequiredContentTypeAsync(FileWithHttpPartRequiredContentTypeRequest body)
@@ -128,7 +128,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data. </summary>
+        /// <summary> Required content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartRequiredContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult RequiredContentType(FileWithHttpPartRequiredContentTypeRequest body)
@@ -141,7 +141,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Required content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -170,7 +170,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data
+        /// [Protocol Method] Required content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -198,7 +198,7 @@ namespace Payload.MultiPart
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Test content-type: multipart/form-data for optional content type. </summary>
+        /// <summary> Optional content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartOptionalContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult> OptionalContentTypeAsync(FileWithHttpPartOptionalContentTypeRequest body)
@@ -210,7 +210,7 @@ namespace Payload.MultiPart
             return result;
         }
 
-        /// <summary> Test content-type: multipart/form-data for optional content type. </summary>
+        /// <summary> Optional content type. </summary>
         /// <param name="body"> The <see cref="FileWithHttpPartOptionalContentTypeRequest"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult OptionalContentType(FileWithHttpPartOptionalContentTypeRequest body)
@@ -223,7 +223,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for optional content type
+        /// [Protocol Method] Optional content type.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -252,7 +252,7 @@ namespace Payload.MultiPart
         }
 
         /// <summary>
-        /// [Protocol Method] Test content-type: multipart/form-data for optional content type
+        /// [Protocol Method] Optional content type.
         /// <list type="bullet">
         /// <item>
         /// <description>

@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal CollectionsModel(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,7 @@ namespace _Type.Property.ValueTypes
             _endpoint = endpoint;
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get collections model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='GetCollectionsModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<CollectionsModelProperty>> GetCollectionsModelAsync(CancellationToken cancellationToken = default)
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes
             return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get call. </summary>
+        /// <summary> Get collections model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='GetCollectionsModel(CancellationToken)']/*" />
         public virtual Response<CollectionsModelProperty> GetCollectionsModel(CancellationToken cancellationToken = default)
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get collections model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -100,7 +100,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Get call
+        /// [Protocol Method] Get collections model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,8 +134,8 @@ namespace _Type.Property.ValueTypes
             }
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='PutAsync(CollectionsModelProperty,CancellationToken)']/*" />
@@ -149,8 +149,8 @@ namespace _Type.Property.ValueTypes
             return response;
         }
 
-        /// <summary> Put operation. </summary>
-        /// <param name="body"> body. </param>
+        /// <summary> Put. </summary>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='Put(CollectionsModelProperty,CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary>
-        /// [Protocol Method] Put operation
+        /// [Protocol Method] Put.
         /// <list type="bullet">
         /// <item>
         /// <description>

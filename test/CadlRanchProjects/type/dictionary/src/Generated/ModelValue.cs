@@ -18,7 +18,7 @@ using _Type._Dictionary.Models;
 namespace _Type._Dictionary
 {
     // Data plane generated sub-client.
-    /// <summary> Dictionary of model values. </summary>
+    /// <summary> The ModelValue sub-client. </summary>
     public partial class ModelValue
     {
         private readonly HttpPipeline _pipeline;
@@ -38,7 +38,7 @@ namespace _Type._Dictionary
         /// <summary> Initializes a new instance of ModelValue. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> Service host. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         internal ModelValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;

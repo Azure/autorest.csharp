@@ -52,7 +52,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -72,7 +72,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fooName"> The name of the Foo. </param>
+        /// <param name="fooName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -83,7 +83,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// Get a Foo
+        /// Get.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -103,7 +103,7 @@ namespace MgmtTypeSpec.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fooName"> The name of the Foo. </param>
+        /// <param name="fooName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -114,7 +114,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// list private links on the given resource
+        /// Get all private link resources.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -140,7 +140,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// list private links on the given resource
+        /// Get all private link resources.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -166,7 +166,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// Starts the SAP Application Server Instance.
+        /// Start.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -183,8 +183,8 @@ namespace MgmtTypeSpec.Mocking
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="privateLinkResourcenName"> The name of the private link associated with the Azure resource. </param>
-        /// <param name="content"> SAP Application server instance start request body. </param>
+        /// <param name="privateLinkResourcenName"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The <see cref="StartContent"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateLinkResourcenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateLinkResourcenName"/> is null. </exception>
@@ -210,7 +210,7 @@ namespace MgmtTypeSpec.Mocking
         }
 
         /// <summary>
-        /// Starts the SAP Application Server Instance.
+        /// Start.
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -227,8 +227,8 @@ namespace MgmtTypeSpec.Mocking
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="privateLinkResourcenName"> The name of the private link associated with the Azure resource. </param>
-        /// <param name="content"> SAP Application server instance start request body. </param>
+        /// <param name="privateLinkResourcenName"> The <see cref="string"/> to use. </param>
+        /// <param name="content"> The <see cref="StartContent"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="privateLinkResourcenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="privateLinkResourcenName"/> is null. </exception>

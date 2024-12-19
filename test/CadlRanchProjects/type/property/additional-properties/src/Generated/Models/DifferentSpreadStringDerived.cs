@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace _Type.Property.AdditionalProperties.Models
 {
-    /// <summary> The model extends from a model that spread Record&lt;string&gt; with the different known property type. </summary>
+    /// <summary> The DifferentSpreadStringDerived. </summary>
     public partial class DifferentSpreadStringDerived : DifferentSpreadStringRecord
     {
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadStringDerived"/>. </summary>
-        /// <param name="id"> The name property. </param>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="id"></param>
+        /// <param name="derivedProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="derivedProp"/> is null. </exception>
         public DifferentSpreadStringDerived(float id, string derivedProp) : base(id)
         {
@@ -25,10 +25,10 @@ namespace _Type.Property.AdditionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DifferentSpreadStringDerived"/>. </summary>
-        /// <param name="id"> The name property. </param>
+        /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="derivedProp"> The index property. </param>
+        /// <param name="derivedProp"></param>
         internal DifferentSpreadStringDerived(float id, IDictionary<string, string> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData, string derivedProp) : base(id, additionalProperties, serializedAdditionalRawData)
         {
             DerivedProp = derivedProp;
@@ -39,7 +39,7 @@ namespace _Type.Property.AdditionalProperties.Models
         {
         }
 
-        /// <summary> The index property. </summary>
+        /// <summary> Gets or sets the derived prop. </summary>
         public string DerivedProp { get; set; }
     }
 }

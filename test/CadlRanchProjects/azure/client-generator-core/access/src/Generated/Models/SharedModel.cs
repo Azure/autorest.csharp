@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    /// <summary> Used by both public and internal operation. It should be generated and exported. </summary>
+    /// <summary> The SharedModel. </summary>
     public partial class SharedModel
     {
         /// <summary>
