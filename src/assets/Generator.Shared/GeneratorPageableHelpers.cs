@@ -50,10 +50,10 @@ namespace Autorest.CSharp.Core
             string scopeName,
             string? itemPropertyName,
             string? nextLinkPropertyName,
-            int? defaultPageSize,
+            object defaultPageSize,
             CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
+            return new PageableHelpers.AsyncPageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, (int?)defaultPageSize, cancellationToken, null));
         }
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
@@ -117,10 +117,10 @@ namespace Autorest.CSharp.Core
             string scopeName,
             string? itemPropertyName,
             string? nextLinkPropertyName,
-            int? defaultPageSize,
-    CancellationToken cancellationToken) where T : notnull
+            object defaultPageSize,
+            CancellationToken cancellationToken) where T : notnull
         {
-            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, defaultPageSize, cancellationToken, null));
+            return new PageableHelpers.PageableWrapper<T>(new PageableHelpers.PageableImplementation<T>(null, createFirstPageRequest, createNextPageRequest, valueFactory, pipeline, clientDiagnostics, scopeName, itemPropertyName, nextLinkPropertyName, (int?)defaultPageSize, cancellationToken, null));
         }
         public static Pageable<T> CreatePageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
