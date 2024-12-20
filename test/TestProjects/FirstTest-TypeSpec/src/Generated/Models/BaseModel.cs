@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The BaseModel. </summary>
+    /// <summary> parenetModel. </summary>
     public partial class BaseModel
     {
         /// <summary>

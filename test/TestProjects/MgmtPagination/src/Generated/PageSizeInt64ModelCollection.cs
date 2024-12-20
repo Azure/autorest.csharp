@@ -269,7 +269,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt64ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt64ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt64ModelResource(Client, PageSizeInt64ModelData.DeserializePageSizeInt64ModelData(e)), _pageSizeInt64ModelClientDiagnostics, Pipeline, "PageSizeInt64ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt64ModelResource(Client, PageSizeInt64ModelData.DeserializePageSizeInt64ModelData(e)), _pageSizeInt64ModelClientDiagnostics, Pipeline, "PageSizeInt64ModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeInt64ModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeInt64ModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt64ModelResource(Client, PageSizeInt64ModelData.DeserializePageSizeInt64ModelData(e)), _pageSizeInt64ModelClientDiagnostics, Pipeline, "PageSizeInt64ModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeInt64ModelResource(Client, PageSizeInt64ModelData.DeserializePageSizeInt64ModelData(e)), _pageSizeInt64ModelClientDiagnostics, Pipeline, "PageSizeInt64ModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>

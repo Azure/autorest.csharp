@@ -16,7 +16,7 @@ using _Specs_.Azure.Core.Page.Models;
 namespace _Specs_.Azure.Core.Page
 {
     // Data plane generated client.
-    /// <summary> The Page service client. </summary>
+    /// <summary> Illustrates bodies templated with Azure Core with paging support. </summary>
     public partial class PageClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,7 +35,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary> Initializes a new instance of PageClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PageClient(Uri endpoint, PageClientOptions options)
@@ -49,7 +49,7 @@ namespace _Specs_.Azure.Core.Page
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get with page. </summary>
+        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithPageAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithPageAsync(CancellationToken cancellationToken = default)
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageClient.GetWithPage", "value", "nextLink", context);
         }
 
-        /// <summary> Get with page. </summary>
+        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithPage(CancellationToken)']/*" />
         public virtual Pageable<User> GetWithPage(CancellationToken cancellationToken = default)
@@ -72,7 +72,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with page.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -98,7 +98,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with page.
+        /// [Protocol Method] List with Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -123,9 +123,9 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageClient.GetWithPage", "value", "nextLink", context);
         }
 
-        /// <summary> Get with parameters. </summary>
-        /// <param name="bodyInput"> The <see cref="ListItemInputBody"/> to use. </param>
-        /// <param name="another"> The <see cref="ListItemInputExtensibleEnum"/>? to use. </param>
+        /// <summary> List with extensible enum parameter Azure.Core.Page&lt;&gt;. </summary>
+        /// <param name="bodyInput"> The body of the input. </param>
+        /// <param name="another"> Another query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
@@ -140,9 +140,9 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageClient.GetWithParameters", "value", "nextLink", context);
         }
 
-        /// <summary> Get with parameters. </summary>
-        /// <param name="bodyInput"> The <see cref="ListItemInputBody"/> to use. </param>
-        /// <param name="another"> The <see cref="ListItemInputExtensibleEnum"/>? to use. </param>
+        /// <summary> List with extensible enum parameter Azure.Core.Page&lt;&gt;. </summary>
+        /// <param name="bodyInput"> The body of the input. </param>
+        /// <param name="another"> Another query parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyInput"/> is null. </exception>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)']/*" />
@@ -158,7 +158,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with parameters.
+        /// [Protocol Method] List with extensible enum parameter Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -173,7 +173,7 @@ namespace _Specs_.Azure.Core.Page
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="another"> The <see cref="string"/> to use. Allowed values: "First" | "Second". </param>
+        /// <param name="another"> Another query parameter. Allowed values: "First" | "Second". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -189,7 +189,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with parameters.
+        /// [Protocol Method] List with extensible enum parameter Azure.Core.Page&lt;&gt;.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -204,7 +204,7 @@ namespace _Specs_.Azure.Core.Page
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="another"> The <see cref="string"/> to use. Allowed values: "First" | "Second". </param>
+        /// <param name="another"> Another query parameter. Allowed values: "First" | "Second". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -219,7 +219,7 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageClient.GetWithParameters", "value", "nextLink", context);
         }
 
-        /// <summary> Get with custom page model. </summary>
+        /// <summary> List with custom page model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetWithCustomPageModelAsync(CancellationToken cancellationToken = default)
@@ -230,7 +230,7 @@ namespace _Specs_.Azure.Core.Page
             return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => User.DeserializeUser(e), ClientDiagnostics, _pipeline, "PageClient.GetWithCustomPageModel", "items", "nextLink", context);
         }
 
-        /// <summary> Get with custom page model. </summary>
+        /// <summary> List with custom page model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PageClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(CancellationToken)']/*" />
         public virtual Pageable<User> GetWithCustomPageModel(CancellationToken cancellationToken = default)
@@ -242,7 +242,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -268,7 +268,7 @@ namespace _Specs_.Azure.Core.Page
         }
 
         /// <summary>
-        /// [Protocol Method] Get with custom page model.
+        /// [Protocol Method] List with custom page model.
         /// <list type="bullet">
         /// <item>
         /// <description>

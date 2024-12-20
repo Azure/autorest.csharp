@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ProviderExtendedLocation. </summary>
+    /// <summary> The provider extended location. </summary>
     public partial class ProviderExtendedLocation
     {
         /// <summary>
@@ -52,9 +52,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ProviderExtendedLocation"/>. </summary>
-        /// <param name="location"></param>
-        /// <param name="providerExtendedLocationType"></param>
-        /// <param name="extendedLocations"></param>
+        /// <param name="location"> The azure location. </param>
+        /// <param name="providerExtendedLocationType"> The extended location type. </param>
+        /// <param name="extendedLocations"> The extended locations for the azure location. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ProviderExtendedLocation(string location, string providerExtendedLocationType, IReadOnlyList<string> extendedLocations, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -64,11 +64,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the location. </summary>
+        /// <summary> The azure location. </summary>
         public string Location { get; }
-        /// <summary> Gets the provider extended location type. </summary>
+        /// <summary> The extended location type. </summary>
         public string ProviderExtendedLocationType { get; }
-        /// <summary> Gets the extended locations. </summary>
+        /// <summary> The extended locations for the azure location. </summary>
         public IReadOnlyList<string> ExtendedLocations { get; }
     }
 }

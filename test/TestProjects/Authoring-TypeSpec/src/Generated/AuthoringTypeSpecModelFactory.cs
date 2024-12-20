@@ -16,13 +16,13 @@ namespace AuthoringTypeSpec.Models
     public static partial class AuthoringTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentJob"/>. </summary>
-        /// <param name="jobId"></param>
-        /// <param name="createdDateTime"></param>
-        /// <param name="lastUpdatedDateTime"></param>
-        /// <param name="expirationDateTime"></param>
-        /// <param name="status"></param>
-        /// <param name="warnings"></param>
-        /// <param name="errors"></param>
+        /// <param name="jobId"> The job ID. </param>
+        /// <param name="createdDateTime"> The creation date time of the job. </param>
+        /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
+        /// <param name="expirationDateTime"> The expiration date time of the job. </param>
+        /// <param name="status"> The job status. </param>
+        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
+        /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
         /// <returns> A new <see cref="Models.DeploymentJob"/> instance for mocking. </returns>
         public static DeploymentJob DeploymentJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null)
@@ -42,8 +42,8 @@ namespace AuthoringTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.JobWarning"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The warning code. </param>
+        /// <param name="message"> The warning message. </param>
         /// <returns> A new <see cref="Models.JobWarning"/> instance for mocking. </returns>
         public static JobWarning JobWarning(string code = null, string message = null)
         {
@@ -51,13 +51,13 @@ namespace AuthoringTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SwapDeploymentsJob"/>. </summary>
-        /// <param name="jobId"></param>
-        /// <param name="createdDateTime"></param>
-        /// <param name="lastUpdatedDateTime"></param>
-        /// <param name="expirationDateTime"></param>
-        /// <param name="status"></param>
-        /// <param name="warnings"></param>
-        /// <param name="errors"></param>
+        /// <param name="jobId"> The job ID. </param>
+        /// <param name="createdDateTime"> The creation date time of the job. </param>
+        /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
+        /// <param name="expirationDateTime"> The expiration date time of the job. </param>
+        /// <param name="status"> The job status. </param>
+        /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
+        /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
         /// <returns> A new <see cref="Models.SwapDeploymentsJob"/> instance for mocking. </returns>
         public static SwapDeploymentsJob SwapDeploymentsJob(string jobId = null, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, DateTimeOffset expirationDateTime = default, JobStatus status = default, IEnumerable<JobWarning> warnings = null, ResponseError errors = null, string id = null)

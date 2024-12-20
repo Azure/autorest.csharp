@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
-    /// <summary> The NoDecoratorModelInPublic. </summary>
+    /// <summary> Used in a public operation, should be generated and exported. </summary>
     public partial class NoDecoratorModelInPublic
     {
         /// <summary>

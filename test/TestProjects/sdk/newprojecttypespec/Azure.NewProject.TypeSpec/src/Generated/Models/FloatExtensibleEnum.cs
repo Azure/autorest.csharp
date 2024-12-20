@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    /// <summary> The FloatExtensibleEnum. </summary>
+    /// <summary> Float based extensible enum. </summary>
     public readonly partial struct FloatExtensibleEnum : IEquatable<FloatExtensibleEnum>
     {
         private readonly float _value;

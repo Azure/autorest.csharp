@@ -17,7 +17,7 @@ using _Azure.Lro.Rpc.Models;
 namespace _Azure.Lro.Rpc
 {
     // Data plane generated client.
-    /// <summary> The Rpc service client. </summary>
+    /// <summary> Illustrates bodies templated with Azure Core with long-running RPC operation. </summary>
     public partial class RpcClient
     {
         private readonly HttpPipeline _pipeline;
@@ -36,7 +36,7 @@ namespace _Azure.Lro.Rpc
         }
 
         /// <summary> Initializes a new instance of RpcClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RpcClient(Uri endpoint, RpcClientOptions options)
@@ -52,10 +52,9 @@ namespace _Azure.Lro.Rpc
 
         /// <summary> Generate data. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="body"> The <see cref="GenerationOptions"/> to use. </param>
+        /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Long running rpc. </remarks>
         /// <include file="Docs/RpcClient.xml" path="doc/members/member[@name='LongRunningRpcAsync(WaitUntil,GenerationOptions,CancellationToken)']/*" />
         public virtual async Task<Operation<GenerationResult>> LongRunningRpcAsync(WaitUntil waitUntil, GenerationOptions body, CancellationToken cancellationToken = default)
         {
@@ -69,10 +68,9 @@ namespace _Azure.Lro.Rpc
 
         /// <summary> Generate data. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="body"> The <see cref="GenerationOptions"/> to use. </param>
+        /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <remarks> Long running rpc. </remarks>
         /// <include file="Docs/RpcClient.xml" path="doc/members/member[@name='LongRunningRpc(WaitUntil,GenerationOptions,CancellationToken)']/*" />
         public virtual Operation<GenerationResult> LongRunningRpc(WaitUntil waitUntil, GenerationOptions body, CancellationToken cancellationToken = default)
         {

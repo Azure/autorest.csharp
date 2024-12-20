@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The VariableValues. </summary>
+    /// <summary> Variable values. </summary>
     public partial class VariableValues
     {
         /// <summary>
@@ -47,9 +47,9 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VariableValues"/>. </summary>
-        /// <param name="variable"></param>
-        /// <param name="timestamps"></param>
-        /// <param name="values"></param>
+        /// <param name="variable"> Variable name of last detection request. </param>
+        /// <param name="timestamps"> Timestamps of last detection request. </param>
+        /// <param name="values"> Values of variables. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="variable"/>, <paramref name="timestamps"/> or <paramref name="values"/> is null. </exception>
         public VariableValues(string variable, IEnumerable<string> timestamps, IEnumerable<float> values)
         {
@@ -63,9 +63,9 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="VariableValues"/>. </summary>
-        /// <param name="variable"></param>
-        /// <param name="timestamps"></param>
-        /// <param name="values"></param>
+        /// <param name="variable"> Variable name of last detection request. </param>
+        /// <param name="timestamps"> Timestamps of last detection request. </param>
+        /// <param name="values"> Values of variables. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal VariableValues(string variable, IList<string> timestamps, IList<float> values, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -80,11 +80,11 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets the variable. </summary>
+        /// <summary> Variable name of last detection request. </summary>
         public string Variable { get; }
-        /// <summary> Gets the timestamps. </summary>
+        /// <summary> Timestamps of last detection request. </summary>
         public IList<string> Timestamps { get; }
-        /// <summary> Gets the values. </summary>
+        /// <summary> Values of variables. </summary>
         public IList<float> Values { get; }
     }
 }

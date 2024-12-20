@@ -45,7 +45,13 @@ namespace OpenAI.Models
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>
-        /// <param name="finishReason"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason)
         {
@@ -61,7 +67,13 @@ namespace OpenAI.Models
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>
-        /// <param name="finishReason"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateCompletionResponseChoice(long index, string text, CreateCompletionResponseChoiceLogprobs logprobs, CreateCompletionResponseChoiceFinishReason finishReason, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -83,7 +95,13 @@ namespace OpenAI.Models
         public string Text { get; }
         /// <summary> Gets the logprobs. </summary>
         public CreateCompletionResponseChoiceLogprobs Logprobs { get; }
-        /// <summary> Gets the finish reason. </summary>
+        /// <summary>
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </summary>
         public CreateCompletionResponseChoiceFinishReason FinishReason { get; }
     }
 }

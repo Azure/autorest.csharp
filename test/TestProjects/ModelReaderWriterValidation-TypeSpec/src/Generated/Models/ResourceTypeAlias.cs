@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAlias. </summary>
+    /// <summary> The alias type. </summary>
     public partial class ResourceTypeAlias
     {
         /// <summary>
@@ -52,12 +52,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceTypeAlias"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="paths"></param>
-        /// <param name="aliasType"></param>
-        /// <param name="defaultPath"></param>
-        /// <param name="defaultPattern"></param>
-        /// <param name="defaultMetadata"></param>
+        /// <param name="name"> The alias name. </param>
+        /// <param name="paths"> The paths for an alias. </param>
+        /// <param name="aliasType"> The type of the alias. </param>
+        /// <param name="defaultPath"> The default path for an alias. </param>
+        /// <param name="defaultPattern"> The default pattern for an alias. </param>
+        /// <param name="defaultMetadata"> The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ResourceTypeAlias(string name, IReadOnlyList<ResourceTypeAliasPath> paths, ResourceTypeAliasType? aliasType, string defaultPath, ResourceTypeAliasPattern defaultPattern, ResourceTypeAliasPathMetadata defaultMetadata, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -70,17 +70,17 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> The alias name. </summary>
         public string Name { get; }
-        /// <summary> Gets the paths. </summary>
+        /// <summary> The paths for an alias. </summary>
         public IReadOnlyList<ResourceTypeAliasPath> Paths { get; }
-        /// <summary> Gets the alias type. </summary>
+        /// <summary> The type of the alias. </summary>
         public ResourceTypeAliasType? AliasType { get; }
-        /// <summary> Gets the default path. </summary>
+        /// <summary> The default path for an alias. </summary>
         public string DefaultPath { get; }
-        /// <summary> Gets the default pattern. </summary>
+        /// <summary> The default pattern for an alias. </summary>
         public ResourceTypeAliasPattern DefaultPattern { get; }
-        /// <summary> Gets the default metadata. </summary>
+        /// <summary> The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata. </summary>
         public ResourceTypeAliasPathMetadata DefaultMetadata { get; }
     }
 }

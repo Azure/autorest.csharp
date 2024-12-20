@@ -58,16 +58,16 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ProviderResourceType"/>. </summary>
-        /// <param name="resourceType"></param>
-        /// <param name="locations"></param>
-        /// <param name="locationMappings"></param>
-        /// <param name="aliases"></param>
-        /// <param name="apiVersions"></param>
-        /// <param name="defaultApiVersion"></param>
-        /// <param name="zoneMappings"></param>
-        /// <param name="apiProfiles"></param>
-        /// <param name="capabilities"></param>
-        /// <param name="properties"></param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="locations"> The collection of locations where this resource type can be created. </param>
+        /// <param name="locationMappings"> The location mappings that are supported by this resource type. </param>
+        /// <param name="aliases"> The aliases that are supported by this resource type. </param>
+        /// <param name="apiVersions"> The API version. </param>
+        /// <param name="defaultApiVersion"> The default API version. </param>
+        /// <param name="zoneMappings"> Gets the zone mappings. </param>
+        /// <param name="apiProfiles"> The API profiles for the resource provider. </param>
+        /// <param name="capabilities"> The additional capabilities offered by this resource type. </param>
+        /// <param name="properties"> The properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ProviderResourceType(string resourceType, IReadOnlyList<string> locations, IReadOnlyList<ProviderExtendedLocation> locationMappings, IReadOnlyList<ResourceTypeAlias> aliases, IReadOnlyList<string> apiVersions, string defaultApiVersion, IReadOnlyList<ZoneMapping> zoneMappings, IReadOnlyList<ApiProfile> apiProfiles, string capabilities, IReadOnlyDictionary<string, string> properties, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -84,25 +84,25 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the resource type. </summary>
+        /// <summary> The resource type. </summary>
         public string ResourceType { get; }
-        /// <summary> Gets the locations. </summary>
+        /// <summary> The collection of locations where this resource type can be created. </summary>
         public IReadOnlyList<string> Locations { get; }
-        /// <summary> Gets the location mappings. </summary>
+        /// <summary> The location mappings that are supported by this resource type. </summary>
         public IReadOnlyList<ProviderExtendedLocation> LocationMappings { get; }
-        /// <summary> Gets the aliases. </summary>
+        /// <summary> The aliases that are supported by this resource type. </summary>
         public IReadOnlyList<ResourceTypeAlias> Aliases { get; }
-        /// <summary> Gets the api versions. </summary>
+        /// <summary> The API version. </summary>
         public IReadOnlyList<string> ApiVersions { get; }
-        /// <summary> Gets the default api version. </summary>
+        /// <summary> The default API version. </summary>
         public string DefaultApiVersion { get; }
         /// <summary> Gets the zone mappings. </summary>
         public IReadOnlyList<ZoneMapping> ZoneMappings { get; }
-        /// <summary> Gets the api profiles. </summary>
+        /// <summary> The API profiles for the resource provider. </summary>
         public IReadOnlyList<ApiProfile> ApiProfiles { get; }
-        /// <summary> Gets the capabilities. </summary>
+        /// <summary> The additional capabilities offered by this resource type. </summary>
         public string Capabilities { get; }
-        /// <summary> Gets the properties. </summary>
+        /// <summary> The properties. </summary>
         public IReadOnlyDictionary<string, string> Properties { get; }
     }
 }

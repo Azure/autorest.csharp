@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace Authentication.Union
 {
     // Data plane generated client.
-    /// <summary> The Union service client. </summary>
+    /// <summary> Illustrates clients generated with ApiKey and OAuth2 authentication. </summary>
     public partial class UnionClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -50,7 +50,7 @@ namespace Authentication.Union
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -67,7 +67,7 @@ namespace Authentication.Union
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -85,7 +85,7 @@ namespace Authentication.Union
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid key.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -116,7 +116,7 @@ namespace Authentication.Union
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid key.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -147,7 +147,7 @@ namespace Authentication.Union
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid token.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -178,7 +178,7 @@ namespace Authentication.Union
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid token.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>

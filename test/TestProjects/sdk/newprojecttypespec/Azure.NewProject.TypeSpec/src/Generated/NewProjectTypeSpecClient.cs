@@ -16,7 +16,7 @@ using Azure.NewProject.TypeSpec.Models;
 namespace Azure.NewProject.TypeSpec
 {
     // Data plane generated client.
-    /// <summary> The NewProjectTypeSpec service client. </summary>
+    /// <summary> This is a sample typespec project. </summary>
     public partial class NewProjectTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -87,7 +87,7 @@ namespace Azure.NewProject.TypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Top action. </summary>
+        /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
@@ -98,7 +98,7 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Top action. </summary>
+        /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
@@ -110,7 +110,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action.
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -146,7 +146,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action.
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -182,7 +182,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action 2.
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -212,7 +212,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action 2.
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -242,7 +242,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Patch action.
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -276,7 +276,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Patch action.
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -309,18 +309,18 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Anonymous body. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
@@ -348,18 +348,18 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Anonymous body. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,CancellationToken)']/*" />
@@ -388,7 +388,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous body.
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -427,7 +427,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous body.
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -465,8 +465,8 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Friendly model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its friendly name. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
@@ -480,8 +480,8 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary> Friendly model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its friendly name. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
@@ -496,7 +496,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Friendly model.
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -535,7 +535,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Friendly model.
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>

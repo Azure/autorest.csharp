@@ -11,7 +11,7 @@ using NoTestTypeSpec.Models;
 namespace NoTestTypeSpec
 {
     // Data plane generated client.
-    /// <summary> The NoTestTypeSpec service client. </summary>
+    /// <summary> This is a sample typespec project. </summary>
     public partial class NoTestTypeSpecClient
     {
         private const string AuthorizationHeader = "my-api-key";
@@ -51,7 +51,7 @@ namespace NoTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Say hi. </summary>
+        /// <summary> Return hi. </summary>
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
@@ -65,7 +65,7 @@ namespace NoTestTypeSpec
             return ClientResult.FromValue(Thing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Say hi. </summary>
+        /// <summary> Return hi. </summary>
         /// <param name="headParameter"> The <see cref="string"/> to use. </param>
         /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
@@ -80,7 +80,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -111,7 +111,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -141,7 +141,7 @@ namespace NoTestTypeSpec
             return ClientResult.FromResponse(_pipeline.ProcessMessage(message, options));
         }
 
-        /// <summary> Say hello. </summary>
+        /// <summary> Return hello. </summary>
         /// <param name="body"> The <see cref="DerivedThing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<ClientResult<DerivedThing>> SayHelloAsync(DerivedThing body)
@@ -153,7 +153,7 @@ namespace NoTestTypeSpec
             return ClientResult.FromValue(DerivedThing.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <summary> Say hello. </summary>
+        /// <summary> Return hello. </summary>
         /// <param name="body"> The <see cref="DerivedThing"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual ClientResult<DerivedThing> SayHello(DerivedThing body)
@@ -166,7 +166,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hello.
+        /// [Protocol Method] Return hello
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -194,7 +194,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hello.
+        /// [Protocol Method] Return hello
         /// <list type="bullet">
         /// <item>
         /// <description>

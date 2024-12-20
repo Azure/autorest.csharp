@@ -10,22 +10,22 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The ModelToAddAdditionalSerializableProperty. </summary>
+    /// <summary> Model to add additional serializable property. </summary>
     public partial class ModelToAddAdditionalSerializableProperty : RenamedModel
     {
         /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
-        /// <param name="requiredIntOnBase"></param>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="requiredInt"> Required int. </param>
         public ModelToAddAdditionalSerializableProperty(int requiredIntOnBase, int requiredInt) : base(requiredIntOnBase)
         {
             RequiredInt = requiredInt;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
-        /// <param name="requiredIntOnBase"></param>
-        /// <param name="optionalInt"></param>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"></param>
         /// <param name="additionalNullableSerializableProperty"></param>
         internal ModelToAddAdditionalSerializableProperty(int requiredIntOnBase, int? optionalInt, IDictionary<string, BinaryData> serializedAdditionalRawData, int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty) : base(requiredIntOnBase, optionalInt, serializedAdditionalRawData)

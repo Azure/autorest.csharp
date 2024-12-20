@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The Extendible. </summary>
+    /// <summary> FHIR extendible element. </summary>
     public partial class Extendible
     {
         /// <summary>
@@ -52,7 +52,7 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Extendible"/>. </summary>
-        /// <param name="extension"></param>
+        /// <param name="extension"> Additional Content defined by implementations. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Extendible(IList<ThereLevelExtension> extension, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -60,7 +60,7 @@ namespace FirstTestTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the extension. </summary>
+        /// <summary> Additional Content defined by implementations. </summary>
         public IList<ThereLevelExtension> Extension { get; }
     }
 }

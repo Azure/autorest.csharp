@@ -7,10 +7,10 @@
 
 namespace Versioning.Removed.OldVersion.Models
 {
-    /// <summary> The Versions. </summary>
+    /// <summary> The version of the API. </summary>
     public enum Versions
     {
-        /// <summary> v1. </summary>
+        /// <summary> The original version v1. </summary>
         V1
     }
 }

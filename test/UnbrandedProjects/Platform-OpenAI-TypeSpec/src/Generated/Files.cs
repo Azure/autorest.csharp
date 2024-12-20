@@ -31,7 +31,7 @@ namespace OpenAI
         /// <summary> Initializes a new instance of Files. </summary>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal Files(ClientPipeline pipeline, ApiKeyCredential keyCredential, Uri endpoint)
         {
             _pipeline = pipeline;
@@ -188,7 +188,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns information about a specific file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -201,7 +201,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns information about a specific file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Retrieve. </remarks>
@@ -228,7 +228,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -257,7 +257,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -272,7 +272,7 @@ namespace OpenAI
         }
 
         /// <summary> Delete a file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Delete. </remarks>
@@ -285,7 +285,7 @@ namespace OpenAI
         }
 
         /// <summary> Delete a file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Delete. </remarks>
@@ -312,7 +312,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -341,7 +341,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -356,7 +356,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns the contents of the specified file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Download. </remarks>
@@ -369,7 +369,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns the contents of the specified file. </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks> Download. </remarks>
@@ -396,7 +396,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -425,7 +425,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fileId"> The <see cref="string"/> to use. </param>
+        /// <param name="fileId"> The ID of the file to use for this request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fileId"/> is an empty string, and was expected to be non-empty. </exception>

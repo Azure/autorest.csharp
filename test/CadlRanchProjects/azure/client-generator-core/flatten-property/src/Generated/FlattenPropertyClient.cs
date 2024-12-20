@@ -16,7 +16,7 @@ using _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty
 {
     // Data plane generated client.
-    /// <summary> The FlattenProperty service client. </summary>
+    /// <summary> Illustrates the model flatten cases. </summary>
     public partial class FlattenPropertyClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty
         }
 
         /// <summary> Initializes a new instance of FlattenPropertyClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public FlattenPropertyClient(Uri endpoint, FlattenPropertyClientOptions options)

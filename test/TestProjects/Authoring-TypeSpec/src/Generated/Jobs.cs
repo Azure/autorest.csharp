@@ -38,7 +38,7 @@ namespace AuthoringTypeSpec
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Jobs(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace AuthoringTypeSpec
             _apiVersion = apiVersion;
         }
 
-        /// <summary> Get deployment status. </summary>
+        /// <summary> Gets the status of an existing deployment job. </summary>
         /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="jobId"> The <see cref="string"/> to use. </param>
@@ -76,7 +76,7 @@ namespace AuthoringTypeSpec
             }
         }
 
-        /// <summary> Get deployment status. </summary>
+        /// <summary> Gets the status of an existing deployment job. </summary>
         /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="jobId"> The <see cref="string"/> to use. </param>
@@ -106,7 +106,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployment status.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -150,7 +150,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployment status.
+        /// [Protocol Method] Gets the status of an existing deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -193,7 +193,7 @@ namespace AuthoringTypeSpec
             }
         }
 
-        /// <summary> Get swap deployments status. </summary>
+        /// <summary> Gets the status of an existing swap deployment job. </summary>
         /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="jobId"> The <see cref="string"/> to use. </param>
@@ -222,7 +222,7 @@ namespace AuthoringTypeSpec
             }
         }
 
-        /// <summary> Get swap deployments status. </summary>
+        /// <summary> Gets the status of an existing swap deployment job. </summary>
         /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="jobId"> The <see cref="string"/> to use. </param>
@@ -252,7 +252,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get swap deployments status.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -296,7 +296,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get swap deployments status.
+        /// [Protocol Method] Gets the status of an existing swap deployment job.
         /// <list type="bullet">
         /// <item>
         /// <description>

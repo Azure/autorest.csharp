@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace Authentication.OAuth2
 {
     // Data plane generated client.
-    /// <summary> The OAuth2 service client. </summary>
+    /// <summary> Illustrates clients generated with OAuth2 authentication. </summary>
     public partial class OAuth2Client
     {
         private static readonly string[] AuthorizationScopes = new string[] { "https://security.microsoft.com/.default" };
@@ -41,7 +41,7 @@ namespace Authentication.OAuth2
         }
 
         /// <summary> Initializes a new instance of OAuth2Client. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace Authentication.OAuth2
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace Authentication.OAuth2
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Valid.
+        /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -121,7 +121,7 @@ namespace Authentication.OAuth2
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated. Will return an invalid bearer error.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +152,7 @@ namespace Authentication.OAuth2
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Invalid.
+        /// [Protocol Method] Check whether client is authenticated. Will return an invalid bearer error.
         /// <list type="bullet">
         /// <item>
         /// <description>

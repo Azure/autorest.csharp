@@ -16,7 +16,7 @@ using ConvenienceInCadl.Models;
 namespace ConvenienceInCadl
 {
     // Data plane generated client.
-    /// <summary> The ConvenienceInCadl service client. </summary>
+    /// <summary> Typespec project to test various types of convenience methods. </summary>
     public partial class ConvenienceInCadlClient
     {
         private readonly HttpPipeline _pipeline;
@@ -34,14 +34,14 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConvenienceInCadlClient(Uri endpoint) : this(endpoint, new ConvenienceInCadlClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ConvenienceInCadlClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConvenienceInCadlClient(Uri endpoint, ConvenienceInCadlClientOptions options)
@@ -54,7 +54,7 @@ namespace ConvenienceInCadl
             _endpoint = endpoint;
         }
 
-        /// <summary> Update convenience. </summary>
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Model>> UpdateConvenienceAsync(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Update convenience. </summary>
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(CancellationToken)']/*" />
         public virtual Response<Model> UpdateConvenience(CancellationToken cancellationToken = default)
@@ -75,7 +75,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Update convenience.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -110,7 +110,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Update convenience.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -144,7 +144,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional before required. </summary>
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -160,7 +160,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Convenience optional before required. </summary>
+        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -177,7 +177,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional before required.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +217,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional before required.
+        /// [Protocol Method] No initial operation methods. In the updated version, we add the protocol method and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -257,7 +257,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -287,7 +287,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -317,7 +317,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience required body.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -351,7 +351,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience required body.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -385,7 +385,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience optional body.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -416,7 +416,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] No convenience optional body.
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -446,7 +446,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol. </summary>
+        /// <summary> Initial operation only has protocol method. In the updated version, we add the convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ProtocolValueAsync(CancellationToken cancellationToken = default)
@@ -466,7 +466,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol. </summary>
+        /// <summary> Initial operation only has protocol method. In the updated version, we add the convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolValue(CancellationToken)']/*" />
         public virtual Response<Model> ProtocolValue(CancellationToken cancellationToken = default)
@@ -487,7 +487,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -522,7 +522,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol.
+        /// [Protocol Method] Initial operation only has protocol method. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -556,7 +556,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience with optional. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalValueAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceWithOptionalValueAsync(CancellationToken cancellationToken = default)
@@ -576,7 +576,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience with optional. </summary>
+        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalValue(CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceWithOptionalValue(CancellationToken cancellationToken = default)
@@ -597,7 +597,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience with optional.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -632,7 +632,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience with optional.
+        /// [Protocol Method] Operation has protocol method with optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -666,7 +666,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience with required. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceWithRequiredAsync(CancellationToken cancellationToken = default)
@@ -676,7 +676,7 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Convenience with required. </summary>
+        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceWithRequired(CancellationToken cancellationToken = default)
@@ -687,7 +687,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience with required.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -722,7 +722,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience with required.
+        /// [Protocol Method] Operation has protocol method with required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -758,7 +758,7 @@ namespace ConvenienceInCadl
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Convenience should not generate.
+        /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -789,7 +789,7 @@ namespace ConvenienceInCadl
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Convenience should not generate.
+        /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -820,7 +820,7 @@ namespace ConvenienceInCadl
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Protocol should not generate convenience.
+        /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -851,7 +851,7 @@ namespace ConvenienceInCadl
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Protocol should not generate convenience.
+        /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -880,7 +880,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol optional query. </summary>
+        /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryValueAsync(int?,CancellationToken)']/*" />
@@ -901,7 +901,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol optional query. </summary>
+        /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryValue(int?,CancellationToken)']/*" />
@@ -923,7 +923,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional query.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -959,7 +959,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional query.
+        /// [Protocol Method] Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -994,7 +994,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol required query. </summary>
+        /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryValueAsync(int,CancellationToken)']/*" />
@@ -1015,7 +1015,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol required query. </summary>
+        /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryValue(int,CancellationToken)']/*" />
@@ -1037,7 +1037,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol required query.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1073,7 +1073,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol required query.
+        /// [Protocol Method] Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1108,7 +1108,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol optional model. </summary>
+        /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(Model,CancellationToken)']/*" />
@@ -1120,7 +1120,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Protocol optional model. </summary>
+        /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(Model,CancellationToken)']/*" />
@@ -1133,7 +1133,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional model.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1169,7 +1169,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional model.
+        /// [Protocol Method] Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1204,7 +1204,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol required model. </summary>
+        /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
@@ -1219,7 +1219,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Protocol required model. </summary>
+        /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
@@ -1235,7 +1235,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol required model.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1274,7 +1274,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol required model.
+        /// [Protocol Method] Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1312,7 +1312,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional query with optional. </summary>
+        /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalValueAsync(int?,CancellationToken)']/*" />
@@ -1333,7 +1333,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional query with optional. </summary>
+        /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)']/*" />
@@ -1355,7 +1355,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional query with optional.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1391,7 +1391,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional query with optional.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1426,7 +1426,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience required query with optional. </summary>
+        /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalValueAsync(int,CancellationToken)']/*" />
@@ -1447,7 +1447,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience required query with optional. </summary>
+        /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)']/*" />
@@ -1469,7 +1469,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required query with optional.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1505,7 +1505,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required query with optional.
+        /// [Protocol Method] Operation has protocol method with required query parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1540,7 +1540,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional query with required. </summary>
+        /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(int?,CancellationToken)']/*" />
@@ -1551,7 +1551,7 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Convenience optional query with required. </summary>
+        /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(int?,CancellationToken)']/*" />
@@ -1563,7 +1563,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional query with required.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1599,7 +1599,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional query with required.
+        /// [Protocol Method] Operation has protocol method with optional query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1634,7 +1634,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience required query with required. </summary>
+        /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(int,CancellationToken)']/*" />
@@ -1645,7 +1645,7 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Convenience required query with required. </summary>
+        /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(int,CancellationToken)']/*" />
@@ -1657,7 +1657,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required query with required.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1693,7 +1693,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required query with required.
+        /// [Protocol Method] Operation has protocol method with required query parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1728,7 +1728,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional model with optional. </summary>
+        /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)']/*" />
@@ -1740,7 +1740,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Convenience optional model with optional. </summary>
+        /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(Model,CancellationToken)']/*" />
@@ -1753,7 +1753,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional model with optional.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1789,7 +1789,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional model with optional.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1824,7 +1824,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience required model with optional. </summary>
+        /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
@@ -1839,7 +1839,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Convenience required model with optional. </summary>
+        /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
@@ -1855,7 +1855,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required model with optional.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1894,7 +1894,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience required model with optional.
+        /// [Protocol Method] Operation has protocol method with required body parameter and optional RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1932,7 +1932,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Convenience optional model with required. </summary>
+        /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(Model,CancellationToken)']/*" />
@@ -1944,7 +1944,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Convenience optional model with required. </summary>
+        /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(Model,CancellationToken)']/*" />
@@ -1957,7 +1957,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional model with required.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1993,7 +1993,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Convenience optional model with required.
+        /// [Protocol Method] Operation has protocol method with optional body parameter and required RequestContext and convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2028,7 +2028,7 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Protocol optional before required. </summary>
+        /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2044,7 +2044,7 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Protocol optional before required. </summary>
+        /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -2061,7 +2061,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional before required.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2101,7 +2101,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary>
-        /// [Protocol Method] Protocol optional before required.
+        /// [Protocol Method] Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
         /// <list type="bullet">
         /// <item>
         /// <description>

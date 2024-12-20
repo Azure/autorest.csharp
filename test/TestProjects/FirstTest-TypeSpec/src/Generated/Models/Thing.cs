@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The Thing. </summary>
+    /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
         /// <summary>
@@ -48,11 +48,11 @@ namespace FirstTestTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="requiredNullableList"></param>
-        /// <param name="requiredFloatProperty"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         public Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList, double requiredFloatProperty)
         {
@@ -69,22 +69,22 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="optionalNullableList"></param>
-        /// <param name="requiredNullableList"></param>
-        /// <param name="requiredFloatProperty"></param>
-        /// <param name="optionalFloatProperty"></param>
-        /// <param name="optionalResourceId"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, double requiredFloatProperty, double? optionalFloatProperty, ResourceIdentifier optionalResourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -112,10 +112,10 @@ namespace FirstTestTypeSpec.Models
         {
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the required union
+        /// required Union
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -159,37 +159,37 @@ namespace FirstTestTypeSpec.Models
         /// </para>
         /// </summary>
         public BinaryData RequiredUnion { get; set; }
-        /// <summary> Gets the required literal string. </summary>
+        /// <summary> required literal string. </summary>
         public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
-        /// <summary> Gets the required literal int. </summary>
+        /// <summary> required literal int. </summary>
         public ThingRequiredLiteralInt RequiredLiteralInt { get; } = ThingRequiredLiteralInt._123;
 
-        /// <summary> Gets the required literal float. </summary>
+        /// <summary> required literal float. </summary>
         public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = ThingRequiredLiteralFloat._123;
 
-        /// <summary> Gets the required literal bool. </summary>
+        /// <summary> required literal bool. </summary>
         public bool RequiredLiteralBool { get; } = false;
 
-        /// <summary> Gets or sets the optional literal string. </summary>
+        /// <summary> optional literal string. </summary>
         public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
-        /// <summary> Gets or sets the optional literal int. </summary>
+        /// <summary> optional literal int. </summary>
         public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
-        /// <summary> Gets or sets the optional literal float. </summary>
+        /// <summary> optional literal float. </summary>
         public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
-        /// <summary> Gets or sets the optional literal bool. </summary>
+        /// <summary> optional literal bool. </summary>
         public bool? OptionalLiteralBool { get; set; }
-        /// <summary> Gets or sets the required bad description. </summary>
+        /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }
-        /// <summary> Gets or sets the optional nullable list. </summary>
+        /// <summary> optional nullable collection. </summary>
         public IList<int> OptionalNullableList { get; set; }
-        /// <summary> Gets or sets the required nullable list. </summary>
+        /// <summary> required nullable collection. </summary>
         public IList<int> RequiredNullableList { get; set; }
-        /// <summary> Gets or sets the required float property. </summary>
+        /// <summary> required float property. </summary>
         public double RequiredFloatProperty { get; set; }
-        /// <summary> Gets or sets the optional float property. </summary>
+        /// <summary> optional float property. </summary>
         public double? OptionalFloatProperty { get; set; }
-        /// <summary> Gets or sets the optional resource id. </summary>
+        /// <summary> optional arm id. </summary>
         public ResourceIdentifier OptionalResourceId { get; set; }
     }
 }

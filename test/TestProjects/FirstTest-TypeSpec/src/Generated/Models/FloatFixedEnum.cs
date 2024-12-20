@@ -7,7 +7,7 @@
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The FloatFixedEnum. </summary>
+    /// <summary> float fixed enum. </summary>
     public enum FloatFixedEnum
     {
         /// <summary> 1.1. </summary>

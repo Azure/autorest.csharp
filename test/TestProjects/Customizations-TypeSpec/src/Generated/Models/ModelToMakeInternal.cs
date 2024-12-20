@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The ModelToMakeInternal. </summary>
+    /// <summary> Public model made internal. </summary>
     internal partial class ModelToMakeInternal
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace CustomizationsInTsp.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/>. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         public ModelToMakeInternal(int requiredInt)
         {
             RequiredInt = requiredInt;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/>. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelToMakeInternal(int requiredInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace CustomizationsInTsp.Models
         {
         }
 
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

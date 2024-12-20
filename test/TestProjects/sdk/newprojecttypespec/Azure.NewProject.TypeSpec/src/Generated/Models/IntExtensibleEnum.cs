@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    /// <summary> The IntExtensibleEnum. </summary>
+    /// <summary> Int based extensible enum. </summary>
     public readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
     {
         private readonly int _value;

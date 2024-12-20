@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The ChildModel. </summary>
+    /// <summary> ChildModel. </summary>
     public partial class ChildModel : BaseModel
     {
         /// <summary> Initializes a new instance of <see cref="ChildModel"/>. </summary>

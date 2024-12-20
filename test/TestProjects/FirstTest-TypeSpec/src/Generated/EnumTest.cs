@@ -51,7 +51,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create unknown value.
+        /// [Protocol Method] get extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -85,7 +85,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create unknown value.
+        /// [Protocol Method] get extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>

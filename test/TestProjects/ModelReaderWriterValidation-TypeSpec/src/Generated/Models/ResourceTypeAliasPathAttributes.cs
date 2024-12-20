@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAliasPathAttributes. </summary>
+    /// <summary> The attributes of the token that the alias path is referring to. </summary>
     public readonly partial struct ResourceTypeAliasPathAttributes : IEquatable<ResourceTypeAliasPathAttributes>
     {
         private readonly string _value;
@@ -25,9 +25,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private const string NoneValue = "None";
         private const string ModifiableValue = "Modifiable";
 
-        /// <summary> None. </summary>
+        /// <summary> The token that the alias path is referring to has no attributes. </summary>
         public static ResourceTypeAliasPathAttributes None { get; } = new ResourceTypeAliasPathAttributes(NoneValue);
-        /// <summary> Modifiable. </summary>
+        /// <summary> The token that the alias path is referring to is modifiable by policies with 'modify' effect. </summary>
         public static ResourceTypeAliasPathAttributes Modifiable { get; } = new ResourceTypeAliasPathAttributes(ModifiableValue);
         /// <summary> Determines if two <see cref="ResourceTypeAliasPathAttributes"/> values are the same. </summary>
         public static bool operator ==(ResourceTypeAliasPathAttributes left, ResourceTypeAliasPathAttributes right) => left.Equals(right);

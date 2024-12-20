@@ -12,7 +12,7 @@ using System.Text.Json;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The ModelWithCustomizedProperties. </summary>
+    /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties
     {
         /// <summary>
@@ -48,20 +48,20 @@ namespace CustomizationsInTsp.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
-        /// <param name="propertyToMakeInternal"></param>
-        /// <param name="renamedProperty"></param>
-        /// <param name="propertyToMakeFloat"></param>
-        /// <param name="propertyToMakeInt"></param>
-        /// <param name="propertyToMakeDuration"></param>
-        /// <param name="propertyToMakeString"></param>
-        /// <param name="propertyToMakeJsonElement"></param>
-        /// <param name="propertyToField"></param>
-        /// <param name="goodListName"></param>
-        /// <param name="goodDictionaryName"></param>
-        /// <param name="goodListOfListName"></param>
-        /// <param name="goodListOfDictionaryName"></param>
-        /// <param name="vector"></param>
-        /// <param name="vectorNullable"></param>
+        /// <param name="propertyToMakeInternal"> Public property made internal. </param>
+        /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
+        /// <param name="propertyToMakeFloat"> Property with type changed to float (original type: int). </param>
+        /// <param name="propertyToMakeInt"> Property with type changed to int (original type: float). </param>
+        /// <param name="propertyToMakeDuration"> Property with type changed to duration (original type: string). </param>
+        /// <param name="propertyToMakeString"> Property with type changed to string (original type: duration). </param>
+        /// <param name="propertyToMakeJsonElement"> Property with type changed to JsonElement (original type: string). </param>
+        /// <param name="propertyToField"> Field that replaces property (original name: PropertyToField). </param>
+        /// <param name="goodListName"> Property renamed that is list. </param>
+        /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
+        /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
+        /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
+        /// <param name="vector"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="propertyToMakeString"/>, <paramref name="propertyToField"/>, <paramref name="goodListName"/>, <paramref name="goodDictionaryName"/>, <paramref name="goodListOfListName"/> or <paramref name="goodListOfDictionaryName"/> is null. </exception>
         public ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IEnumerable<string> goodListName, IDictionary<string, string> goodDictionaryName, IEnumerable<IList<string>> goodListOfListName, IEnumerable<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorNullable)
         {
@@ -90,26 +90,26 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
-        /// <param name="propertyToMakeInternal"></param>
-        /// <param name="renamedProperty"></param>
-        /// <param name="propertyToMakeFloat"></param>
-        /// <param name="propertyToMakeInt"></param>
-        /// <param name="propertyToMakeDuration"></param>
-        /// <param name="propertyToMakeString"></param>
-        /// <param name="propertyToMakeJsonElement"></param>
-        /// <param name="propertyToField"></param>
-        /// <param name="goodListName"></param>
-        /// <param name="goodDictionaryName"></param>
-        /// <param name="goodListOfListName"></param>
-        /// <param name="goodListOfDictionaryName"></param>
-        /// <param name="vector"></param>
-        /// <param name="vectorOptional"></param>
-        /// <param name="vectorNullable"></param>
-        /// <param name="vectorOptionalNullable"></param>
-        /// <param name="vectorReadOnly"></param>
-        /// <param name="vectorOptionalReadOnly"></param>
-        /// <param name="vectorNullableReadOnly"></param>
-        /// <param name="vectorOptionalNullableReadOnly"></param>
+        /// <param name="propertyToMakeInternal"> Public property made internal. </param>
+        /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
+        /// <param name="propertyToMakeFloat"> Property with type changed to float (original type: int). </param>
+        /// <param name="propertyToMakeInt"> Property with type changed to int (original type: float). </param>
+        /// <param name="propertyToMakeDuration"> Property with type changed to duration (original type: string). </param>
+        /// <param name="propertyToMakeString"> Property with type changed to string (original type: duration). </param>
+        /// <param name="propertyToMakeJsonElement"> Property with type changed to JsonElement (original type: string). </param>
+        /// <param name="propertyToField"> Field that replaces property (original name: PropertyToField). </param>
+        /// <param name="goodListName"> Property renamed that is list. </param>
+        /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
+        /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
+        /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
+        /// <param name="vector"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorOptional"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorOptionalNullable"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;. </param>
+        /// <param name="vectorOptionalReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
+        /// <param name="vectorOptionalNullableReadOnly"> Property type changed to ReadOnlyMemory&lt;float&gt;?. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, ReadOnlyMemory<float> vector, ReadOnlyMemory<float>? vectorOptional, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorOptionalNullable, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float>? vectorOptionalReadOnly, ReadOnlyMemory<float>? vectorNullableReadOnly, ReadOnlyMemory<float>? vectorOptionalNullableReadOnly, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {

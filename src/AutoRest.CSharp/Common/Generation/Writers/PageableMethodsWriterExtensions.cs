@@ -131,8 +131,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 clientDiagnosticsReference.GetReferenceFormattable(),
                 pipelineReference.GetReferenceFormattable()
             };
-
-            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName);
+            bool isCreateListRequest = firstPageRequest?.GetArguments()[1]?.ToString() == "List";
+            createPageableParameters.AddTrailingPageableParameters(methodParameters, scopeName, itemPropertyName, nextLinkPropertyName, isCreateListRequest);
 
             if (firstPageRequestVariable != null)
             {
@@ -147,14 +147,14 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line($"return {typeof(GeneratorPageableHelpers)}.{(async ? nameof(GeneratorPageableHelpers.CreateAsyncPageable) : nameof(GeneratorPageableHelpers.CreatePageable))}({createPageableParameters.Join(", ")});");
         }
 
-        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName)
+        private static void AddTrailingPageableParameters(this List<FormattableString> createPageableParameters, IReadOnlyCollection<Parameter> methodParameters, string scopeName, string? itemPropertyName, string? nextLinkPropertyName, bool isCreateListReques = false)
         {
             createPageableParameters.Add($"{scopeName:L}");
             createPageableParameters.Add($"{itemPropertyName:L}");
             createPageableParameters.Add($"{nextLinkPropertyName:L}");
             string? maxPageSize = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Name;
             string? maxPageSizeType = methodParameters.Where(s => s.Name == "maxpagesize").FirstOrDefault()?.Type.Name;
-            if (maxPageSize != null && maxPageSizeType != "String")
+            if (maxPageSize != null && maxPageSizeType != "String" && isCreateListReques)
             {
                 createPageableParameters.Add($"{maxPageSize}");
             }

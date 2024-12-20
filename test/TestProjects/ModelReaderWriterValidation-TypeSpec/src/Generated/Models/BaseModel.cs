@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
     /// <summary>
-    /// The BaseModel.
+    /// The BaseModel in the discriminated set
     /// Please note <see cref="BaseModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="ModelX"/> and <see cref="ModelY"/>.
     /// </summary>
@@ -55,8 +55,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
-        /// <param name="kind"></param>
-        /// <param name="name"></param>
+        /// <param name="kind"> The kind. </param>
+        /// <param name="name"> The name property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal BaseModel(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -65,9 +65,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the kind. </summary>
+        /// <summary> The kind. </summary>
         internal string Kind { get; set; }
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> The name property. </summary>
         public string Name { get; set; }
     }
 }

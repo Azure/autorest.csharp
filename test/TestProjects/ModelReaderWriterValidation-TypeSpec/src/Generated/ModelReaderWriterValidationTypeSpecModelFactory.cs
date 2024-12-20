@@ -15,11 +15,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
     public static partial class ModelReaderWriterValidationTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithPersistableOnly"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="fields"></param>
-        /// <param name="nullProperty"></param>
-        /// <param name="keyValuePairs"></param>
-        /// <param name="xProperty"></param>
+        /// <param name="name"> The name. </param>
+        /// <param name="fields"> The fields property. </param>
+        /// <param name="nullProperty"> The nullable property. </param>
+        /// <param name="keyValuePairs"> The key value pairs property. </param>
+        /// <param name="xProperty"> The x property. </param>
         /// <returns> A new <see cref="Models.ModelWithPersistableOnly"/> instance for mocking. </returns>
         public static ModelWithPersistableOnly ModelWithPersistableOnly(string name = null, IEnumerable<string> fields = null, int? nullProperty = null, IDictionary<string, string> keyValuePairs = null, int xProperty = default)
         {
@@ -36,11 +36,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelX"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="fields"></param>
-        /// <param name="nullProperty"></param>
-        /// <param name="keyValuePairs"></param>
-        /// <param name="xProperty"></param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="fields"> Optional list. </param>
+        /// <param name="nullProperty"> Nullable integer. </param>
+        /// <param name="keyValuePairs"> Optional dictionary. </param>
+        /// <param name="xProperty"> The XProperty property. </param>
         /// <returns> A new <see cref="Models.ModelX"/> instance for mocking. </returns>
         public static ModelX ModelX(string name = null, IEnumerable<string> fields = null, int? nullProperty = null, IDictionary<string, string> keyValuePairs = null, int xProperty = default)
         {
@@ -58,8 +58,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelY"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="yProperty"></param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="yProperty"> The YProperty property. </param>
         /// <returns> A new <see cref="Models.ModelY"/> instance for mocking. </returns>
         public static ModelY ModelY(string name = null, string yProperty = null)
         {
@@ -67,13 +67,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AvailabilitySetData"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <param name="location"></param>
-        /// <param name="tags"></param>
-        /// <param name="sku"></param>
-        /// <param name="properties"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
+        /// <param name="sku"> The sku. </param>
+        /// <param name="properties"> The properties property. </param>
         /// <returns> A new <see cref="Models.AvailabilitySetData"/> instance for mocking. </returns>
         public static AvailabilitySetData AvailabilitySetData(string id = null, string name = null, string resourceType = null, string location = null, IDictionary<string, string> tags = null, ComputeSku sku = null, AvailabilitySetProperties properties = null)
         {
@@ -91,11 +91,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceData"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <param name="location"></param>
-        /// <param name="tags"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
         /// <returns> A new <see cref="Models.TrackedResourceData"/> instance for mocking. </returns>
         public static TrackedResourceData TrackedResourceData(string id = null, string name = null, string resourceType = null, string location = null, IDictionary<string, string> tags = null)
         {
@@ -111,12 +111,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceProviderData"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="namespace"></param>
-        /// <param name="registrationState"></param>
-        /// <param name="registrationPolicy"></param>
-        /// <param name="resourceTypes"></param>
-        /// <param name="providerAuthorizationConsentState"></param>
+        /// <param name="id"> The provider ID. </param>
+        /// <param name="namespace"> The namespace of the resource provider. </param>
+        /// <param name="registrationState"> The registration state of the resource provider. </param>
+        /// <param name="registrationPolicy"> The registration policy of the resource provider. </param>
+        /// <param name="resourceTypes"> The collection of provider resource types. </param>
+        /// <param name="providerAuthorizationConsentState"> The provider authorization consent state. </param>
         /// <returns> A new <see cref="Models.ResourceProviderData"/> instance for mocking. </returns>
         public static ResourceProviderData ResourceProviderData(string id = null, string @namespace = null, string registrationState = null, string registrationPolicy = null, IEnumerable<ProviderResourceType> resourceTypes = null, ProviderAuthorizationConsentState? providerAuthorizationConsentState = null)
         {
@@ -133,16 +133,16 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProviderResourceType"/>. </summary>
-        /// <param name="resourceType"></param>
-        /// <param name="locations"></param>
-        /// <param name="locationMappings"></param>
-        /// <param name="aliases"></param>
-        /// <param name="apiVersions"></param>
-        /// <param name="defaultApiVersion"></param>
-        /// <param name="zoneMappings"></param>
-        /// <param name="apiProfiles"></param>
-        /// <param name="capabilities"></param>
-        /// <param name="properties"></param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="locations"> The collection of locations where this resource type can be created. </param>
+        /// <param name="locationMappings"> The location mappings that are supported by this resource type. </param>
+        /// <param name="aliases"> The aliases that are supported by this resource type. </param>
+        /// <param name="apiVersions"> The API version. </param>
+        /// <param name="defaultApiVersion"> The default API version. </param>
+        /// <param name="zoneMappings"> Gets the zone mappings. </param>
+        /// <param name="apiProfiles"> The API profiles for the resource provider. </param>
+        /// <param name="capabilities"> The additional capabilities offered by this resource type. </param>
+        /// <param name="properties"> The properties. </param>
         /// <returns> A new <see cref="Models.ProviderResourceType"/> instance for mocking. </returns>
         public static ProviderResourceType ProviderResourceType(string resourceType = null, IEnumerable<string> locations = null, IEnumerable<ProviderExtendedLocation> locationMappings = null, IEnumerable<ResourceTypeAlias> aliases = null, IEnumerable<string> apiVersions = null, string defaultApiVersion = null, IEnumerable<ZoneMapping> zoneMappings = null, IEnumerable<ApiProfile> apiProfiles = null, string capabilities = null, IReadOnlyDictionary<string, string> properties = null)
         {
@@ -169,9 +169,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProviderExtendedLocation"/>. </summary>
-        /// <param name="location"></param>
-        /// <param name="providerExtendedLocationType"></param>
-        /// <param name="extendedLocations"></param>
+        /// <param name="location"> The azure location. </param>
+        /// <param name="providerExtendedLocationType"> The extended location type. </param>
+        /// <param name="extendedLocations"> The extended locations for the azure location. </param>
         /// <returns> A new <see cref="Models.ProviderExtendedLocation"/> instance for mocking. </returns>
         public static ProviderExtendedLocation ProviderExtendedLocation(string location = null, string providerExtendedLocationType = null, IEnumerable<string> extendedLocations = null)
         {
@@ -181,12 +181,12 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAlias"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="paths"></param>
-        /// <param name="aliasType"></param>
-        /// <param name="defaultPath"></param>
-        /// <param name="defaultPattern"></param>
-        /// <param name="defaultMetadata"></param>
+        /// <param name="name"> The alias name. </param>
+        /// <param name="paths"> The paths for an alias. </param>
+        /// <param name="aliasType"> The type of the alias. </param>
+        /// <param name="defaultPath"> The default path for an alias. </param>
+        /// <param name="defaultPattern"> The default pattern for an alias. </param>
+        /// <param name="defaultMetadata"> The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata. </param>
         /// <returns> A new <see cref="Models.ResourceTypeAlias"/> instance for mocking. </returns>
         public static ResourceTypeAlias ResourceTypeAlias(string name = null, IEnumerable<ResourceTypeAliasPath> paths = null, ResourceTypeAliasType? aliasType = null, string defaultPath = null, ResourceTypeAliasPattern defaultPattern = null, ResourceTypeAliasPathMetadata defaultMetadata = null)
         {
@@ -203,10 +203,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAliasPath"/>. </summary>
-        /// <param name="path"></param>
-        /// <param name="apiVersions"></param>
-        /// <param name="pattern"></param>
-        /// <param name="metadata"></param>
+        /// <param name="path"> The path of an alias. </param>
+        /// <param name="apiVersions"> The API versions. </param>
+        /// <param name="pattern"> The pattern for an alias path. </param>
+        /// <param name="metadata"> The metadata of the alias path. If missing, fall back to the default metadata of the alias. </param>
         /// <returns> A new <see cref="Models.ResourceTypeAliasPath"/> instance for mocking. </returns>
         public static ResourceTypeAliasPath ResourceTypeAliasPath(string path = null, IEnumerable<string> apiVersions = null, ResourceTypeAliasPattern pattern = null, ResourceTypeAliasPathMetadata metadata = null)
         {
@@ -216,9 +216,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceTypeAliasPattern"/>. </summary>
-        /// <param name="phrase"></param>
-        /// <param name="variable"></param>
-        /// <param name="patternType"></param>
+        /// <param name="phrase"> The alias pattern phrase. </param>
+        /// <param name="variable"> The alias pattern variable. </param>
+        /// <param name="patternType"> The type of alias pattern. </param>
         /// <returns> A new <see cref="Models.ResourceTypeAliasPattern"/> instance for mocking. </returns>
         public static ResourceTypeAliasPattern ResourceTypeAliasPattern(string phrase = null, string variable = null, ResourceTypeAliasPatternType? patternType = null)
         {
@@ -226,8 +226,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ZoneMapping"/>. </summary>
-        /// <param name="location"></param>
-        /// <param name="zones"></param>
+        /// <param name="location"> The location of the zone mapping. </param>
+        /// <param name="zones"> The zones. </param>
         /// <returns> A new <see cref="Models.ZoneMapping"/> instance for mocking. </returns>
         public static ZoneMapping ZoneMapping(string location = null, IEnumerable<string> zones = null)
         {
@@ -237,8 +237,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiProfile"/>. </summary>
-        /// <param name="profileVersion"></param>
-        /// <param name="apiVersion"></param>
+        /// <param name="profileVersion"> The profile version. </param>
+        /// <param name="apiVersion"> The API version. </param>
         /// <returns> A new <see cref="Models.ApiProfile"/> instance for mocking. </returns>
         public static ApiProfile ApiProfile(string profileVersion = null, string apiVersion = null)
         {
@@ -246,9 +246,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithStringAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.ModelWithStringAdditionalProperties"/> instance for mocking. </returns>
         public static ModelWithStringAdditionalProperties ModelWithStringAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, string> additionalProperties = null)
@@ -259,9 +259,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithArrayAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.ModelWithArrayAdditionalProperties"/> instance for mocking. </returns>
         public static ModelWithArrayAdditionalProperties ModelWithArrayAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, IList<BinaryData>> additionalProperties = null)
@@ -272,9 +272,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithUnknownAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.ModelWithUnknownAdditionalProperties"/> instance for mocking. </returns>
         public static ModelWithUnknownAdditionalProperties ModelWithUnknownAdditionalProperties(string id = null, string name = null, int? age = null, IDictionary<string, BinaryData> additionalProperties = null)

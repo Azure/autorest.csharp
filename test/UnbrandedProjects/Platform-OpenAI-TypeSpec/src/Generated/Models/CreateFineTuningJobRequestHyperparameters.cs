@@ -47,7 +47,10 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequestHyperparameters"/>. </summary>
-        /// <param name="nEpochs"></param>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateFineTuningJobRequestHyperparameters(BinaryData nEpochs, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -56,7 +59,8 @@ namespace OpenAI.Models
         }
 
         /// <summary>
-        /// Gets or sets the n epochs
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

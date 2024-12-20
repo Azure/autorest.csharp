@@ -7,12 +7,12 @@
 
 namespace Versioning.Removed.BetaVersion.Models
 {
-    /// <summary> The Versions. </summary>
+    /// <summary> The version of the API. </summary>
     public enum Versions
     {
-        /// <summary> v1. </summary>
+        /// <summary> The original version v1. </summary>
         V1,
-        /// <summary> v2preview. </summary>
+        /// <summary> The V2 Preview version. </summary>
         V2preview
     }
 }

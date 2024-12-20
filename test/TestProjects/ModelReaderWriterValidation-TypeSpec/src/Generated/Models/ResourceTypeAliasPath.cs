@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAliasPath. </summary>
+    /// <summary> The type of the paths for alias. </summary>
     public partial class ResourceTypeAliasPath
     {
         /// <summary>
@@ -52,10 +52,10 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceTypeAliasPath"/>. </summary>
-        /// <param name="path"></param>
-        /// <param name="apiVersions"></param>
-        /// <param name="pattern"></param>
-        /// <param name="metadata"></param>
+        /// <param name="path"> The path of an alias. </param>
+        /// <param name="apiVersions"> The API versions. </param>
+        /// <param name="pattern"> The pattern for an alias path. </param>
+        /// <param name="metadata"> The metadata of the alias path. If missing, fall back to the default metadata of the alias. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ResourceTypeAliasPath(string path, IReadOnlyList<string> apiVersions, ResourceTypeAliasPattern pattern, ResourceTypeAliasPathMetadata metadata, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,13 +66,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the path. </summary>
+        /// <summary> The path of an alias. </summary>
         public string Path { get; }
-        /// <summary> Gets the api versions. </summary>
+        /// <summary> The API versions. </summary>
         public IReadOnlyList<string> ApiVersions { get; }
-        /// <summary> Gets the pattern. </summary>
+        /// <summary> The pattern for an alias path. </summary>
         public ResourceTypeAliasPattern Pattern { get; }
-        /// <summary> Gets the metadata. </summary>
+        /// <summary> The metadata of the alias path. If missing, fall back to the default metadata of the alias. </summary>
         public ResourceTypeAliasPathMetadata Metadata { get; }
     }
 }

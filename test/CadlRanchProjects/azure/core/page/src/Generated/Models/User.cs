@@ -11,7 +11,7 @@ using Azure;
 
 namespace _Specs_.Azure.Core.Page.Models
 {
-    /// <summary> The User. </summary>
+    /// <summary> Details about a user. </summary>
     public partial class User
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace _Specs_.Azure.Core.Page.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The user's name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal User(string name)
         {
@@ -58,10 +58,10 @@ namespace _Specs_.Azure.Core.Page.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="orders"></param>
-        /// <param name="etag"></param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="name"> The user's name. </param>
+        /// <param name="orders"> The user's order list. </param>
+        /// <param name="etag"> The entity tag for this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal User(int id, string name, IReadOnlyList<UserOrder> orders, ETag etag, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -77,13 +77,13 @@ namespace _Specs_.Azure.Core.Page.Models
         {
         }
 
-        /// <summary> Gets the id. </summary>
+        /// <summary> The user's id. </summary>
         public int Id { get; }
-        /// <summary> Gets the name. </summary>
+        /// <summary> The user's name. </summary>
         public string Name { get; }
-        /// <summary> Gets the orders. </summary>
+        /// <summary> The user's order list. </summary>
         public IReadOnlyList<UserOrder> Orders { get; }
-        /// <summary> Gets the etag. </summary>
+        /// <summary> The entity tag for this resource. </summary>
         public ETag Etag { get; }
     }
 }

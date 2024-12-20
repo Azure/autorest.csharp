@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The CorrelationChanges. </summary>
+    /// <summary> Correlation changes among the anomalous variables. </summary>
     public partial class CorrelationChanges
     {
         /// <summary>
@@ -52,7 +52,7 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CorrelationChanges"/>. </summary>
-        /// <param name="changedVariables"></param>
+        /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CorrelationChanges(IReadOnlyList<string> changedVariables, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -60,7 +60,7 @@ namespace AnomalyDetector.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the changed variables. </summary>
+        /// <summary> The correlated variables that have correlation changes under an anomaly. </summary>
         public IReadOnlyList<string> ChangedVariables { get; }
     }
 }

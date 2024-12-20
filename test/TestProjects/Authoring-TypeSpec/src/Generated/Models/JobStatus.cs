@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace AuthoringTypeSpec.Models
 {
-    /// <summary> The JobStatus. </summary>
+    /// <summary> Represents the job status values. </summary>
     public readonly partial struct JobStatus : IEquatable<JobStatus>
     {
         private readonly string _value;

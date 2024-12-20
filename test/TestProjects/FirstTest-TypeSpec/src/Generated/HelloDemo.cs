@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 namespace FirstTestTypeSpec
 {
     // Data plane generated sub-client.
-    /// <summary> The HelloDemo sub-client. </summary>
+    /// <summary> Hello world service. </summary>
     public partial class HelloDemo
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -51,7 +51,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -88,7 +88,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>

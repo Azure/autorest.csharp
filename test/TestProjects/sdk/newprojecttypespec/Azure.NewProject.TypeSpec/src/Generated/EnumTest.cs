@@ -50,7 +50,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown value.
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -84,7 +84,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get unknown value.
+        /// [Protocol Method] create extensible enum
         /// <list type="bullet">
         /// <item>
         /// <description>

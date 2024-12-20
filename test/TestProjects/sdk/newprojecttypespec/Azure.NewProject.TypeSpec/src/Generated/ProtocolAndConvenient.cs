@@ -51,7 +51,7 @@ namespace Azure.NewProject.TypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Internal protocol. </summary>
+        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -65,7 +65,7 @@ namespace Azure.NewProject.TypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Internal protocol. </summary>
+        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -80,7 +80,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Internal protocol.
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -113,7 +113,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Internal protocol.
+        /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -145,7 +145,7 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Still convenient. </summary>
+        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
@@ -164,7 +164,7 @@ namespace Azure.NewProject.TypeSpec
             }
         }
 
-        /// <summary> Still convenient. </summary>
+        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
@@ -184,7 +184,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Still convenient.
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -213,7 +213,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Still convenient.
+        /// [Protocol Method] When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
         /// <list type="bullet">
         /// <item>
         /// <description>

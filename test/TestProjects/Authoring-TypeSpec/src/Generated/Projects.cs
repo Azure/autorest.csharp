@@ -37,7 +37,7 @@ namespace AuthoringTypeSpec
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Projects(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -82,7 +82,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get project.
+        /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -117,7 +117,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -138,7 +138,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get projects.
+        /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -159,7 +159,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create or update.
+        /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -197,7 +197,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Create or update.
+        /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -235,7 +235,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Delete.
+        /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -271,7 +271,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Delete.
+        /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -307,7 +307,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Export.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -345,7 +345,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Export.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -383,7 +383,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Importx.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -419,7 +419,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Importx.
+        /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -455,7 +455,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Train.
+        /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -493,7 +493,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Train.
+        /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
         /// <item>
         /// <description>

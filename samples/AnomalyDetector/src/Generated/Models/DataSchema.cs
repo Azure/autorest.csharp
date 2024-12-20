@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The DataSchema. </summary>
+    /// <summary> Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable. </summary>
     public readonly partial struct DataSchema : IEquatable<DataSchema>
     {
         private readonly string _value;
@@ -25,9 +25,9 @@ namespace AnomalyDetector.Models
         private const string OneTableValue = "OneTable";
         private const string MultiTableValue = "MultiTable";
 
-        /// <summary> OneTable. </summary>
+        /// <summary> OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable. </summary>
         public static DataSchema OneTable { get; } = new DataSchema(OneTableValue);
-        /// <summary> MultiTable. </summary>
+        /// <summary> MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable. </summary>
         public static DataSchema MultiTable { get; } = new DataSchema(MultiTableValue);
         /// <summary> Determines if two <see cref="DataSchema"/> values are the same. </summary>
         public static bool operator ==(DataSchema left, DataSchema right) => left.Equals(right);

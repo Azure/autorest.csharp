@@ -42,8 +42,11 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="instruction"></param>
+        /// <param name="model">
+        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
+        /// model with this endpoint.
+        /// </param>
+        /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instruction"/> is null. </exception>
         public CreateEditRequest(CreateEditRequestModel model, string instruction)
         {
@@ -54,12 +57,26 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="input"></param>
-        /// <param name="instruction"></param>
-        /// <param name="n"></param>
-        /// <param name="temperature"></param>
-        /// <param name="topP"></param>
+        /// <param name="model">
+        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
+        /// model with this endpoint.
+        /// </param>
+        /// <param name="input"> The input text to use as a starting point for the edit. </param>
+        /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
+        /// <param name="n"> How many edits to generate for the input and instruction. </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateEditRequest(CreateEditRequestModel model, string input, string instruction, long? n, double? temperature, double? topP, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -77,17 +94,31 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> Gets the model. </summary>
+        /// <summary>
+        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
+        /// model with this endpoint.
+        /// </summary>
         public CreateEditRequestModel Model { get; }
-        /// <summary> Gets or sets the input. </summary>
+        /// <summary> The input text to use as a starting point for the edit. </summary>
         public string Input { get; set; }
-        /// <summary> Gets the instruction. </summary>
+        /// <summary> The instruction that tells the model how to edit the prompt. </summary>
         public string Instruction { get; }
-        /// <summary> Gets or sets the n. </summary>
+        /// <summary> How many edits to generate for the input and instruction. </summary>
         public long? N { get; set; }
-        /// <summary> Gets or sets the temperature. </summary>
+        /// <summary>
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </summary>
         public double? Temperature { get; set; }
-        /// <summary> Gets or sets the top p. </summary>
+        /// <summary>
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </summary>
         public double? TopP { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace MgmtTypeSpec.Models
 {
-    /// <summary> The OperationStatusResult. </summary>
+    /// <summary> The current status of an async operation. </summary>
     public partial class OperationStatusResult
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace MgmtTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="OperationStatusResult"/>. </summary>
-        /// <param name="status"></param>
+        /// <param name="status"> Operation status. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="status"/> is null. </exception>
         internal OperationStatusResult(string status)
         {
@@ -59,15 +59,15 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="OperationStatusResult"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="status"></param>
-        /// <param name="percentComplete"></param>
-        /// <param name="startOn"></param>
-        /// <param name="endOn"></param>
-        /// <param name="operations"></param>
-        /// <param name="error"></param>
-        /// <param name="resourceId"></param>
+        /// <param name="id"> Fully qualified ID for the async operation. </param>
+        /// <param name="name"> Name of the async operation. </param>
+        /// <param name="status"> Operation status. </param>
+        /// <param name="percentComplete"> Percent of the operation that is complete. </param>
+        /// <param name="startOn"> The start time of the operation. </param>
+        /// <param name="endOn"> The end time of the operation. </param>
+        /// <param name="operations"> The operations list. </param>
+        /// <param name="error"> If present, details of the operation error. </param>
+        /// <param name="resourceId"> Fully qualified ID of the resource against which the original async operation was started. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal OperationStatusResult(ResourceIdentifier id, string name, string status, double? percentComplete, DateTimeOffset? startOn, DateTimeOffset? endOn, IReadOnlyList<OperationStatusResult> operations, ResponseError error, string resourceId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -88,23 +88,23 @@ namespace MgmtTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the id. </summary>
+        /// <summary> Fully qualified ID for the async operation. </summary>
         public ResourceIdentifier Id { get; }
-        /// <summary> Gets the name. </summary>
+        /// <summary> Name of the async operation. </summary>
         public string Name { get; }
-        /// <summary> Gets the status. </summary>
+        /// <summary> Operation status. </summary>
         public string Status { get; }
-        /// <summary> Gets the percent complete. </summary>
+        /// <summary> Percent of the operation that is complete. </summary>
         public double? PercentComplete { get; }
-        /// <summary> Gets the start on. </summary>
+        /// <summary> The start time of the operation. </summary>
         public DateTimeOffset? StartOn { get; }
-        /// <summary> Gets the end on. </summary>
+        /// <summary> The end time of the operation. </summary>
         public DateTimeOffset? EndOn { get; }
-        /// <summary> Gets the operations. </summary>
+        /// <summary> The operations list. </summary>
         public IReadOnlyList<OperationStatusResult> Operations { get; }
-        /// <summary> Gets the error. </summary>
+        /// <summary> If present, details of the operation error. </summary>
         public ResponseError Error { get; }
-        /// <summary> Gets the resource id. </summary>
+        /// <summary> Fully qualified ID of the resource against which the original async operation was started. </summary>
         public string ResourceId { get; }
     }
 }

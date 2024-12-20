@@ -36,7 +36,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <summary> Initializes a new instance of ModelInOperation. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal ModelInOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             _endpoint = endpoint;
         }
 
-        /// <summary> Input to input output. </summary>
+        /// <summary>
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -59,7 +66,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             return response;
         }
 
-        /// <summary> Input to input output. </summary>
+        /// <summary>
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -75,7 +89,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Input to input output.
+        /// [Protocol Method] Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -114,7 +133,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Input to input output.
+        /// [Protocol Method] Expected body parameter:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -152,7 +176,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             }
         }
 
-        /// <summary> Output to input output. </summary>
+        /// <summary>
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OutputToInputOutputAsync(CancellationToken)']/*" />
         public virtual async Task<Response<OutputModel>> OutputToInputOutputAsync(CancellationToken cancellationToken = default)
@@ -162,7 +193,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
 
-        /// <summary> Output to input output. </summary>
+        /// <summary>
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelInOperation.xml" path="doc/members/member[@name='OutputToInputOutput(CancellationToken)']/*" />
         public virtual Response<OutputModel> OutputToInputOutput(CancellationToken cancellationToken = default)
@@ -173,7 +211,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Output to input output.
+        /// [Protocol Method] Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -208,7 +251,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Output to input output.
+        /// [Protocol Method] Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -242,7 +290,24 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             }
         }
 
-        /// <summary> Model in read only property. </summary>
+        /// <summary>
+        /// "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        /// }
+        /// ```
+        ///
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "result": {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="body"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -257,7 +322,24 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
-        /// <summary> Model in read only property. </summary>
+        /// <summary>
+        /// "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        /// }
+        /// ```
+        ///
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "result": {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="body"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -273,7 +355,22 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Model in read only property.
+        /// [Protocol Method] "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        /// }
+        /// ```
+        ///
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "result": {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -312,7 +409,22 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         }
 
         /// <summary>
-        /// [Protocol Method] Model in read only property.
+        /// [Protocol Method] "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+        ///
+        /// Expected body parameter:
+        /// ```json
+        /// {
+        /// }
+        /// ```
+        ///
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "result": {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>

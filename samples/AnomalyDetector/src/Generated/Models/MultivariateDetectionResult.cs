@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The MultivariateDetectionResult. </summary>
+    /// <summary> Detection results for the given resultId. </summary>
     public partial class MultivariateDetectionResult
     {
         /// <summary>
@@ -47,8 +47,8 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MultivariateDetectionResult"/>. </summary>
-        /// <param name="summary"></param>
-        /// <param name="results"></param>
+        /// <param name="summary"> Multivariate anomaly detection status. </param>
+        /// <param name="results"> Detection result for each timestamp. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="summary"/> or <paramref name="results"/> is null. </exception>
         internal MultivariateDetectionResult(MultivariateBatchDetectionResultSummary summary, IEnumerable<AnomalyState> results)
         {
@@ -60,9 +60,9 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateDetectionResult"/>. </summary>
-        /// <param name="resultId"></param>
-        /// <param name="summary"></param>
-        /// <param name="results"></param>
+        /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
+        /// <param name="summary"> Multivariate anomaly detection status. </param>
+        /// <param name="results"> Detection result for each timestamp. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MultivariateDetectionResult(Guid resultId, MultivariateBatchDetectionResultSummary summary, IReadOnlyList<AnomalyState> results, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -77,11 +77,11 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets the result id. </summary>
+        /// <summary> Result identifier, which is used to fetch the results of an inference call. </summary>
         public Guid ResultId { get; }
-        /// <summary> Gets the summary. </summary>
+        /// <summary> Multivariate anomaly detection status. </summary>
         public MultivariateBatchDetectionResultSummary Summary { get; }
-        /// <summary> Gets the results. </summary>
+        /// <summary> Detection result for each timestamp. </summary>
         public IReadOnlyList<AnomalyState> Results { get; }
     }
 }

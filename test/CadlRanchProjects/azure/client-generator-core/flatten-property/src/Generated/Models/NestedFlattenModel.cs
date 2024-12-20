@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Specs_.Azure.ClientGenerator.Core.FlattenProperty.Models
 {
-    /// <summary> The NestedFlattenModel. </summary>
+    /// <summary> This is the model with two levels of flattening. </summary>
     public partial class NestedFlattenModel
     {
         /// <summary>

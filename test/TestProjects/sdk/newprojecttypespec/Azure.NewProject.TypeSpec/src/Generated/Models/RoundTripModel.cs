@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    /// <summary> The RoundTripModel. </summary>
+    /// <summary> this is a roundtrip model. </summary>
     public partial class RoundTripModel
     {
         /// <summary>
@@ -47,13 +47,13 @@ namespace Azure.NewProject.TypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="requiredUnknown"></param>
-        /// <param name="requiredRecordUnknown"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredCollection"> Required collection of enums. </param>
+        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredUnknown"> required unknown. </param>
+        /// <param name="requiredRecordUnknown"> required record of unknown. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/> or <paramref name="requiredRecordUnknown"/> is null. </exception>
         public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown)
         {
@@ -81,26 +81,26 @@ namespace Azure.NewProject.TypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="intExtensibleEnum"></param>
-        /// <param name="intExtensibleEnumCollection"></param>
-        /// <param name="floatExtensibleEnum"></param>
-        /// <param name="floatExtensibleEnumCollection"></param>
-        /// <param name="floatFixedEnum"></param>
-        /// <param name="floatFixedEnumCollection"></param>
-        /// <param name="intFixedEnum"></param>
-        /// <param name="intFixedEnumCollection"></param>
-        /// <param name="stringFixedEnum"></param>
-        /// <param name="requiredUnknown"></param>
-        /// <param name="optionalUnknown"></param>
-        /// <param name="requiredRecordUnknown"></param>
-        /// <param name="optionalRecordUnknown"></param>
-        /// <param name="readOnlyRequiredRecordUnknown"></param>
-        /// <param name="readOnlyOptionalRecordUnknown"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredCollection"> Required collection of enums. </param>
+        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="intExtensibleEnum"> this is an int based extensible enum. </param>
+        /// <param name="intExtensibleEnumCollection"> this is a collection of int based extensible enum. </param>
+        /// <param name="floatExtensibleEnum"> this is a float based extensible enum. </param>
+        /// <param name="floatExtensibleEnumCollection"> this is a collection of float based extensible enum. </param>
+        /// <param name="floatFixedEnum"> this is a float based fixed enum. </param>
+        /// <param name="floatFixedEnumCollection"> this is a collection of float based fixed enum. </param>
+        /// <param name="intFixedEnum"> this is a int based fixed enum. </param>
+        /// <param name="intFixedEnumCollection"> this is a collection of int based fixed enum. </param>
+        /// <param name="stringFixedEnum"> this is a string based fixed enum. </param>
+        /// <param name="requiredUnknown"> required unknown. </param>
+        /// <param name="optionalUnknown"> optional unknown. </param>
+        /// <param name="requiredRecordUnknown"> required record of unknown. </param>
+        /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
+        /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
+        /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -132,36 +132,36 @@ namespace Azure.NewProject.TypeSpec.Models
         {
         }
 
-        /// <summary> Gets or sets the required string. </summary>
+        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
-        /// <summary> Gets the required collection. </summary>
+        /// <summary> Required collection of enums. </summary>
         public IList<StringFixedEnum> RequiredCollection { get; }
-        /// <summary> Gets the required dictionary. </summary>
+        /// <summary> Required dictionary of enums. </summary>
         public IDictionary<string, StringExtensibleEnum> RequiredDictionary { get; }
-        /// <summary> Gets or sets the required model. </summary>
+        /// <summary> Required model. </summary>
         public Thing RequiredModel { get; set; }
-        /// <summary> Gets or sets the int extensible enum. </summary>
+        /// <summary> this is an int based extensible enum. </summary>
         public IntExtensibleEnum? IntExtensibleEnum { get; set; }
-        /// <summary> Gets the int extensible enum collection. </summary>
+        /// <summary> this is a collection of int based extensible enum. </summary>
         public IList<IntExtensibleEnum> IntExtensibleEnumCollection { get; }
-        /// <summary> Gets or sets the float extensible enum. </summary>
+        /// <summary> this is a float based extensible enum. </summary>
         public FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
-        /// <summary> Gets the float extensible enum collection. </summary>
+        /// <summary> this is a collection of float based extensible enum. </summary>
         public IList<FloatExtensibleEnum> FloatExtensibleEnumCollection { get; }
-        /// <summary> Gets or sets the float fixed enum. </summary>
+        /// <summary> this is a float based fixed enum. </summary>
         public FloatFixedEnum? FloatFixedEnum { get; set; }
-        /// <summary> Gets the float fixed enum collection. </summary>
+        /// <summary> this is a collection of float based fixed enum. </summary>
         public IList<FloatFixedEnum> FloatFixedEnumCollection { get; }
-        /// <summary> Gets or sets the int fixed enum. </summary>
+        /// <summary> this is a int based fixed enum. </summary>
         public IntFixedEnum? IntFixedEnum { get; set; }
-        /// <summary> Gets the int fixed enum collection. </summary>
+        /// <summary> this is a collection of int based fixed enum. </summary>
         public IList<IntFixedEnum> IntFixedEnumCollection { get; }
-        /// <summary> Gets or sets the string fixed enum. </summary>
+        /// <summary> this is a string based fixed enum. </summary>
         public StringFixedEnum? StringFixedEnum { get; set; }
         /// <summary>
-        /// Gets or sets the required unknown
+        /// required unknown
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -192,7 +192,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// </summary>
         public BinaryData RequiredUnknown { get; set; }
         /// <summary>
-        /// Gets or sets the optional unknown
+        /// optional unknown
         /// <para>
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -223,7 +223,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// </summary>
         public BinaryData OptionalUnknown { get; set; }
         /// <summary>
-        /// Gets the required record unknown
+        /// required record of unknown
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -254,7 +254,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// </summary>
         public IDictionary<string, BinaryData> RequiredRecordUnknown { get; }
         /// <summary>
-        /// Gets the optional record unknown
+        /// optional record of unknown
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -285,7 +285,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// </summary>
         public IDictionary<string, BinaryData> OptionalRecordUnknown { get; }
         /// <summary>
-        /// Gets the read only required record unknown
+        /// required readonly record of unknown
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
@@ -316,7 +316,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// </summary>
         public IReadOnlyDictionary<string, BinaryData> ReadOnlyRequiredRecordUnknown { get; }
         /// <summary>
-        /// Gets the read only optional record unknown
+        /// optional readonly record of unknown
         /// <para>
         /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>

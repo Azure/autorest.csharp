@@ -52,8 +52,8 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ZoneMapping"/>. </summary>
-        /// <param name="location"></param>
-        /// <param name="zones"></param>
+        /// <param name="location"> The location of the zone mapping. </param>
+        /// <param name="zones"> The zones. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ZoneMapping(string location, IReadOnlyList<string> zones, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -62,9 +62,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the location. </summary>
+        /// <summary> The location of the zone mapping. </summary>
         public string Location { get; }
-        /// <summary> Gets the zones. </summary>
+        /// <summary> The zones. </summary>
         public IReadOnlyList<string> Zones { get; }
     }
 }

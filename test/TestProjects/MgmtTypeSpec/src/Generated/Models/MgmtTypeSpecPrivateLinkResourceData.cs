@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtTypeSpec.Models
 {
-    /// <summary> The MgmtTypeSpecPrivateLinkResourceData. </summary>
+    /// <summary> Concrete proxy resource types can be created by aliasing this type using a specific property type. </summary>
     public partial class MgmtTypeSpecPrivateLinkResourceData : ResourceData
     {
         /// <summary>
@@ -57,8 +57,8 @@ namespace MgmtTypeSpec.Models
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
-        /// <param name="properties"></param>
-        /// <param name="identity"></param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <param name="identity"> The managed service identities assigned to this resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MgmtTypeSpecPrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, MgmtTypeSpecPrivateLinkResourceProperties properties, ManagedServiceIdentity identity, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(id, name, resourceType, systemData)
         {
@@ -67,9 +67,9 @@ namespace MgmtTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the properties. </summary>
+        /// <summary> The resource-specific properties for this resource. </summary>
         public MgmtTypeSpecPrivateLinkResourceProperties Properties { get; }
-        /// <summary> Gets the identity. </summary>
+        /// <summary> The managed service identities assigned to this resource. </summary>
         public ManagedServiceIdentity Identity { get; }
     }
 }

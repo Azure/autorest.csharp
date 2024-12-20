@@ -36,7 +36,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         internal RelativeModelInOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -44,7 +44,19 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
-        /// <summary> Operation. </summary>
+        /// <summary>
+        /// Expected query parameter: name="Madge"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "inner":
+        ///   {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -57,7 +69,19 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(OuterModel.FromResponse(response), response);
         }
 
-        /// <summary> Operation. </summary>
+        /// <summary>
+        /// Expected query parameter: name="Madge"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "inner":
+        ///   {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -71,7 +95,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Operation.
+        /// [Protocol Method] Expected query parameter: name="Madge"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "inner":
+        ///   {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +143,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Operation.
+        /// [Protocol Method] Expected query parameter: name="Madge"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "inner":
+        ///   {
+        ///     "name": "Madge"
+        ///   }
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -146,7 +190,16 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary>
+        /// Expected query parameter: kind= "real"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "kind": "real"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
@@ -159,7 +212,16 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(AbstractModel.FromResponse(response), response);
         }
 
-        /// <summary> Discriminator. </summary>
+        /// <summary>
+        /// Expected query parameter: kind= "real"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "kind": "real"
+        /// }
+        /// ```
+        /// </summary>
         /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
@@ -173,7 +235,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Discriminator.
+        /// [Protocol Method] Expected query parameter: kind= "real"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "kind": "real"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -211,7 +280,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary>
-        /// [Protocol Method] Discriminator.
+        /// [Protocol Method] Expected query parameter: kind= "real"
+        /// Expected response body:
+        /// ```json
+        /// {
+        ///   "name": "Madge",
+        ///   "kind": "real"
+        /// }
+        /// ```
         /// <list type="bullet">
         /// <item>
         /// <description>

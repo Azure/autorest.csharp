@@ -10,7 +10,10 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The MultivariateBatchDetectionOptions. </summary>
+    /// <summary>
+    /// Detection request for batch inference. This is an asynchronous inference which
+    /// will need another API to get detection results.
+    /// </summary>
     public partial class MultivariateBatchDetectionOptions
     {
         /// <summary>
@@ -46,10 +49,25 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionOptions"/>. </summary>
-        /// <param name="dataSource"></param>
-        /// <param name="topContributorCount"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
+        /// <param name="dataSource">
+        /// Source link to the input data to indicate an accessible Azure storage Uri,
+        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
+        /// Azure blob storage based on you data schema selection. The data schema should
+        /// be exactly the same with those used in the training phase.
+        /// </param>
+        /// <param name="topContributorCount">
+        /// An optional field, which is used to specify the number of top contributed
+        /// variables for one anomalous timestamp in the response. The default number is
+        /// 10.
+        /// </param>
+        /// <param name="startTime">
+        /// A required field, indicating the start time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="endTime">
+        /// A required field, indicating the end time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="dataSource"/> is null. </exception>
         public MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime)
         {
@@ -62,10 +80,25 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionOptions"/>. </summary>
-        /// <param name="dataSource"></param>
-        /// <param name="topContributorCount"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
+        /// <param name="dataSource">
+        /// Source link to the input data to indicate an accessible Azure storage Uri,
+        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
+        /// Azure blob storage based on you data schema selection. The data schema should
+        /// be exactly the same with those used in the training phase.
+        /// </param>
+        /// <param name="topContributorCount">
+        /// An optional field, which is used to specify the number of top contributed
+        /// variables for one anomalous timestamp in the response. The default number is
+        /// 10.
+        /// </param>
+        /// <param name="startTime">
+        /// A required field, indicating the start time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="endTime">
+        /// A required field, indicating the end time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -81,13 +114,28 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets or sets the data source. </summary>
+        /// <summary>
+        /// Source link to the input data to indicate an accessible Azure storage Uri,
+        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
+        /// Azure blob storage based on you data schema selection. The data schema should
+        /// be exactly the same with those used in the training phase.
+        /// </summary>
         public Uri DataSource { get; set; }
-        /// <summary> Gets or sets the top contributor count. </summary>
+        /// <summary>
+        /// An optional field, which is used to specify the number of top contributed
+        /// variables for one anomalous timestamp in the response. The default number is
+        /// 10.
+        /// </summary>
         public int TopContributorCount { get; set; }
-        /// <summary> Gets or sets the start time. </summary>
+        /// <summary>
+        /// A required field, indicating the start time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </summary>
         public DateTimeOffset StartTime { get; set; }
-        /// <summary> Gets or sets the end time. </summary>
+        /// <summary>
+        /// A required field, indicating the end time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </summary>
         public DateTimeOffset EndTime { get; set; }
     }
 }

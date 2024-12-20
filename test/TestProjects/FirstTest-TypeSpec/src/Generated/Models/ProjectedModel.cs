@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The ProjectedModel. </summary>
+    /// <summary> this is a model with a projected name. </summary>
     public partial class ProjectedModel
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace FirstTestTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ProjectedModel"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal ProjectedModel(string name)
         {
@@ -56,7 +56,7 @@ namespace FirstTestTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ProjectedModel"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ProjectedModel(string name, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace FirstTestTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> name of the ModelWithProjectedName. </summary>
         public string Name { get; }
     }
 }

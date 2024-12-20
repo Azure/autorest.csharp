@@ -37,7 +37,7 @@ namespace AuthoringTypeSpec
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         internal Deployments(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -84,7 +84,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployment.
+        /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -121,7 +121,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -147,7 +147,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Get deployments.
+        /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -173,7 +173,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Deploy project.
+        /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -213,7 +213,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Deploy project.
+        /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -253,7 +253,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Delete deployment.
+        /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -291,7 +291,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Delete deployment.
+        /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -329,7 +329,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Swap deployments.
+        /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -367,7 +367,7 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Swap deployments.
+        /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
         /// <item>
         /// <description>

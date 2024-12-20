@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ProviderAuthorizationConsentState. </summary>
+    /// <summary> The provider authorization consent state. </summary>
     public readonly partial struct ProviderAuthorizationConsentState : IEquatable<ProviderAuthorizationConsentState>
     {
         private readonly string _value;
@@ -27,13 +27,13 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private const string NotRequiredValue = "NotRequired";
         private const string ConsentedValue = "Consented";
 
-        /// <summary> NotSpecified. </summary>
+        /// <summary> The provider authorization consent state is not specified. </summary>
         public static ProviderAuthorizationConsentState NotSpecified { get; } = new ProviderAuthorizationConsentState(NotSpecifiedValue);
-        /// <summary> Required. </summary>
+        /// <summary> The provider authorization consent state is required. </summary>
         public static ProviderAuthorizationConsentState Required { get; } = new ProviderAuthorizationConsentState(RequiredValue);
-        /// <summary> NotRequired. </summary>
+        /// <summary> The provider authorization consent state is not required. </summary>
         public static ProviderAuthorizationConsentState NotRequired { get; } = new ProviderAuthorizationConsentState(NotRequiredValue);
-        /// <summary> Consented. </summary>
+        /// <summary> The provider authorization consent state is consented. </summary>
         public static ProviderAuthorizationConsentState Consented { get; } = new ProviderAuthorizationConsentState(ConsentedValue);
         /// <summary> Determines if two <see cref="ProviderAuthorizationConsentState"/> values are the same. </summary>
         public static bool operator ==(ProviderAuthorizationConsentState left, ProviderAuthorizationConsentState right) => left.Equals(right);

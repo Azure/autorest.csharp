@@ -16,7 +16,7 @@ using ModelReaderWriterValidationTypeSpec.Models;
 namespace ModelReaderWriterValidationTypeSpec
 {
     // Data plane generated client.
-    /// <summary> The ModelReaderWriterValidationTypeSpec service client. </summary>
+    /// <summary> This is a typespec project to validation the model reader writer functionalities. </summary>
     public partial class ModelReaderWriterValidationTypeSpecClient
     {
         private readonly HttpPipeline _pipeline;

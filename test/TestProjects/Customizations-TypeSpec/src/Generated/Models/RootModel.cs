@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The RootModel. </summary>
+    /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
     public partial class RootModel
     {
         /// <summary>
@@ -51,17 +51,17 @@ namespace CustomizationsInTsp.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="RootModel"/>. </summary>
-        /// <param name="propertyExtensibleEnum"></param>
-        /// <param name="propertyModelToMakeInternal"></param>
-        /// <param name="propertyModelToRename"></param>
-        /// <param name="propertyModelToChangeNamespace"></param>
-        /// <param name="propertyModelWithCustomizedProperties"></param>
-        /// <param name="propertyEnumToRename"></param>
-        /// <param name="propertyEnumWithValueToRename"></param>
-        /// <param name="propertyEnumToBeMadeExtensible"></param>
-        /// <param name="propertyModelToAddAdditionalSerializableProperty"></param>
-        /// <param name="propertyToMoveToCustomization"></param>
-        /// <param name="propertyModelStruct"></param>
+        /// <param name="propertyExtensibleEnum"> ExtensibleEnumWithOperator. </param>
+        /// <param name="propertyModelToMakeInternal"> ModelToMakeInternal. </param>
+        /// <param name="propertyModelToRename"> ModelToRename. </param>
+        /// <param name="propertyModelToChangeNamespace"> ModelToChangeNamespace. </param>
+        /// <param name="propertyModelWithCustomizedProperties"> ModelWithCustomizedProperties. </param>
+        /// <param name="propertyEnumToRename"> EnumToRename. </param>
+        /// <param name="propertyEnumWithValueToRename"> EnumWithValueToRename. </param>
+        /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
+        /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
+        /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
+        /// <param name="propertyModelStruct"> ModelStruct. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal RootModel(ExtensibleEnumWithOperator? propertyExtensibleEnum, ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, ModelStruct? propertyModelStruct, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -79,23 +79,23 @@ namespace CustomizationsInTsp.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the property extensible enum. </summary>
+        /// <summary> ExtensibleEnumWithOperator. </summary>
         public ExtensibleEnumWithOperator? PropertyExtensibleEnum { get; set; }
-        /// <summary> Gets or sets the property model to rename. </summary>
+        /// <summary> ModelToRename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }
-        /// <summary> Gets or sets the property model to change namespace. </summary>
+        /// <summary> ModelToChangeNamespace. </summary>
         public ModelToChangeNamespace PropertyModelToChangeNamespace { get; set; }
-        /// <summary> Gets or sets the property model with customized properties. </summary>
+        /// <summary> ModelWithCustomizedProperties. </summary>
         public ModelWithCustomizedProperties PropertyModelWithCustomizedProperties { get; set; }
-        /// <summary> Gets or sets the property enum to rename. </summary>
+        /// <summary> EnumToRename. </summary>
         public RenamedEnum? PropertyEnumToRename { get; set; }
-        /// <summary> Gets or sets the property enum with value to rename. </summary>
+        /// <summary> EnumWithValueToRename. </summary>
         public EnumWithValueToRename? PropertyEnumWithValueToRename { get; set; }
-        /// <summary> Gets or sets the property enum to be made extensible. </summary>
+        /// <summary> EnumToBeMadeExtensible. </summary>
         public EnumToBeMadeExtensible? PropertyEnumToBeMadeExtensible { get; set; }
-        /// <summary> Gets or sets the property model to add additional serializable property. </summary>
+        /// <summary> ModelToAddAdditionalSerializableProperty. </summary>
         public ModelToAddAdditionalSerializableProperty PropertyModelToAddAdditionalSerializableProperty { get; set; }
-        /// <summary> Gets or sets the property model struct. </summary>
+        /// <summary> ModelStruct. </summary>
         public ModelStruct? PropertyModelStruct { get; set; }
     }
 }

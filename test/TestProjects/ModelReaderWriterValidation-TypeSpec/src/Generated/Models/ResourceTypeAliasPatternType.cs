@@ -7,12 +7,12 @@
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAliasPatternType. </summary>
+    /// <summary> The type of alias pattern. </summary>
     public enum ResourceTypeAliasPatternType
     {
-        /// <summary> NotSpecified. </summary>
+        /// <summary> NotSpecified is not allowed. </summary>
         NotSpecified,
-        /// <summary> Extract. </summary>
+        /// <summary> Extract is the only allowed value. </summary>
         Extract
     }
 }

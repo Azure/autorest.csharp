@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The ThereLevelExtension. </summary>
+    /// <summary> extension. </summary>
     public partial class ThereLevelExtension : ThereLevelElement
     {
         /// <summary> Initializes a new instance of <see cref="ThereLevelExtension"/>. </summary>

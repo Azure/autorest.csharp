@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ModelAsStruct. </summary>
+    /// <summary> The model to change to struct. </summary>
     public readonly partial struct ModelAsStruct
     {
         /// <summary>
@@ -46,14 +46,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private readonly IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStruct"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The id property. </param>
         public ModelAsStruct(int id)
         {
             Id = id;
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelAsStruct"/>. </summary>
-        /// <param name="id"></param>
+        /// <param name="id"> The id property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelAsStruct(int id, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -66,7 +66,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the id. </summary>
+        /// <summary> The id property. </summary>
         public int Id { get; }
     }
 }

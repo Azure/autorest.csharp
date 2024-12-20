@@ -18,7 +18,7 @@ using _Specs_.Azure.Core.Basic.Models;
 namespace _Specs_.Azure.Core.Basic
 {
     // Data plane generated client.
-    /// <summary> The Basic service client. </summary>
+    /// <summary> Illustrates bodies templated with Azure Core. </summary>
     public partial class BasicClient
     {
         private readonly HttpPipeline _pipeline;
@@ -37,7 +37,7 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Initializes a new instance of BasicClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public BasicClient(Uri endpoint, BasicClientOptions options)
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -96,7 +96,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -122,11 +122,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Adds a user or replaces a user's fields. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="resource"> The <see cref="User"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <remarks> Create or replace. </remarks>
+        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,User,CancellationToken)']/*" />
         public virtual async Task<Response<User>> CreateOrReplaceAsync(int id, User resource, CancellationToken cancellationToken = default)
         {
@@ -139,11 +139,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Adds a user or replaces a user's fields. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="resource"> The <see cref="User"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <remarks> Create or replace. </remarks>
+        /// <remarks> Creates or replaces a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,User,CancellationToken)']/*" />
         public virtual Response<User> CreateOrReplace(int id, User resource, CancellationToken cancellationToken = default)
         {
@@ -170,7 +170,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -210,7 +210,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -236,9 +236,9 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Gets a user. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get user. </remarks>
+        /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<User>> GetUserAsync(int id, CancellationToken cancellationToken = default)
         {
@@ -248,9 +248,9 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Gets a user. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get user. </remarks>
+        /// <remarks> Gets a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,CancellationToken)']/*" />
         public virtual Response<User> GetUser(int id, CancellationToken cancellationToken = default)
         {
@@ -274,7 +274,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -310,7 +310,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -342,7 +342,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -374,7 +374,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -396,11 +396,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports a user. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <remarks> Export. </remarks>
+        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,CancellationToken)']/*" />
         public virtual async Task<Response<User>> ExportAsync(int id, string format, CancellationToken cancellationToken = default)
         {
@@ -412,11 +412,11 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports a user. </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <remarks> Export. </remarks>
+        /// <remarks> Exports a User. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,CancellationToken)']/*" />
         public virtual Response<User> Export(int id, string format, CancellationToken cancellationToken = default)
         {
@@ -442,8 +442,8 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -482,8 +482,8 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The <see cref="int"/> to use. </param>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="id"> The user's id. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -508,10 +508,10 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports all users. </summary>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <remarks> Export all users. </remarks>
+        /// <remarks> Exports all users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsersAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<UserList>> ExportAllUsersAsync(string format, CancellationToken cancellationToken = default)
         {
@@ -523,10 +523,10 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Exports all users. </summary>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
-        /// <remarks> Export all users. </remarks>
+        /// <remarks> Exports all users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAllUsers(string,CancellationToken)']/*" />
         public virtual Response<UserList> ExportAllUsers(string format, CancellationToken cancellationToken = default)
         {
@@ -552,7 +552,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -591,7 +591,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="format"> The <see cref="string"/> to use. </param>
+        /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -616,15 +616,15 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Lists all users. </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
-        /// <param name="orderby"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="filter"> The <see cref="string"/> to use. </param>
-        /// <param name="select"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="expand"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <param name="maxCount"> The number of result items to return. </param>
+        /// <param name="skip"> The number of result items to skip. </param>
+        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="orderby"> Expressions that specify the order of returned results. </param>
+        /// <param name="filter"> Filter the result list using the given expression. </param>
+        /// <param name="select"> Select the specified fields to be included in the response. </param>
+        /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get users. </remarks>
+        /// <remarks> Lists all Users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual AsyncPageable<User> GetUsersAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
@@ -635,15 +635,15 @@ namespace _Specs_.Azure.Core.Basic
         }
 
         /// <summary> Lists all users. </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
-        /// <param name="orderby"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="filter"> The <see cref="string"/> to use. </param>
-        /// <param name="select"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="expand"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <param name="maxCount"> The number of result items to return. </param>
+        /// <param name="skip"> The number of result items to skip. </param>
+        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="orderby"> Expressions that specify the order of returned results. </param>
+        /// <param name="filter"> Filter the result list using the given expression. </param>
+        /// <param name="select"> Select the specified fields to be included in the response. </param>
+        /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get users. </remarks>
+        /// <remarks> Lists all Users. </remarks>
         /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
         public virtual Pageable<User> GetUsers(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
@@ -668,13 +668,13 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
-        /// <param name="orderby"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="filter"> The <see cref="string"/> to use. </param>
-        /// <param name="select"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="expand"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <param name="maxCount"> The number of result items to return. </param>
+        /// <param name="skip"> The number of result items to skip. </param>
+        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="orderby"> Expressions that specify the order of returned results. </param>
+        /// <param name="filter"> Filter the result list using the given expression. </param>
+        /// <param name="select"> Select the specified fields to be included in the response. </param>
+        /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -701,13 +701,13 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
-        /// <param name="orderby"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="filter"> The <see cref="string"/> to use. </param>
-        /// <param name="select"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
-        /// <param name="expand"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="string"/> to use. </param>
+        /// <param name="maxCount"> The number of result items to return. </param>
+        /// <param name="skip"> The number of result items to skip. </param>
+        /// <param name="maxpagesize"> The maximum number of result items per page. </param>
+        /// <param name="orderby"> Expressions that specify the order of returned results. </param>
+        /// <param name="filter"> Filter the result list using the given expression. </param>
+        /// <param name="select"> Select the specified fields to be included in the response. </param>
+        /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

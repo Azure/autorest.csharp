@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The TimeSeriesPoint. </summary>
+    /// <summary> The definition of input timeseries points. </summary>
     public partial class TimeSeriesPoint
     {
         /// <summary>
@@ -46,15 +46,15 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/>. </summary>
-        /// <param name="value"></param>
+        /// <param name="value"> The measurement of that point, should be float. </param>
         public TimeSeriesPoint(float value)
         {
             Value = value;
         }
 
         /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/>. </summary>
-        /// <param name="timestamp"></param>
-        /// <param name="value"></param>
+        /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
+        /// <param name="value"> The measurement of that point, should be float. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal TimeSeriesPoint(DateTimeOffset? timestamp, float value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -68,9 +68,9 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets or sets the timestamp. </summary>
+        /// <summary> Optional argument, timestamp of a data point (ISO8601 format). </summary>
         public DateTimeOffset? Timestamp { get; set; }
-        /// <summary> Gets the value. </summary>
+        /// <summary> The measurement of that point, should be float. </summary>
         public float Value { get; }
     }
 }

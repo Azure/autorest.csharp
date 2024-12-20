@@ -10,11 +10,11 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The AvailabilitySetData. </summary>
+    /// <summary> The availability set data. </summary>
     public partial class AvailabilitySetData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>
-        /// <param name="location"></param>
+        /// <param name="location"> The location property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public AvailabilitySetData(string location) : base(location)
         {
@@ -22,14 +22,14 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetData"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <param name="location"></param>
-        /// <param name="tags"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="resourceType"> The resource type. </param>
+        /// <param name="location"> The location property. </param>
+        /// <param name="tags"> The tags property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        /// <param name="sku"></param>
-        /// <param name="properties"></param>
+        /// <param name="sku"> The sku. </param>
+        /// <param name="properties"> The properties property. </param>
         internal AvailabilitySetData(string id, string name, string resourceType, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, ComputeSku sku, AvailabilitySetProperties properties) : base(id, name, resourceType, location, tags, serializedAdditionalRawData)
         {
             Sku = sku;
@@ -41,9 +41,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> Gets or sets the sku. </summary>
+        /// <summary> The sku. </summary>
         public ComputeSku Sku { get; set; }
-        /// <summary> Gets or sets the properties. </summary>
+        /// <summary> The properties property. </summary>
         public AvailabilitySetProperties Properties { get; set; }
     }
 }

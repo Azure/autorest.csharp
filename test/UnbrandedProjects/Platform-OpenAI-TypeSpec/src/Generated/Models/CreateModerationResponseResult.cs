@@ -42,9 +42,9 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResult"/>. </summary>
-        /// <param name="flagged"></param>
-        /// <param name="categories"></param>
-        /// <param name="categoryScores"></param>
+        /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
+        /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
+        /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="categories"/> or <paramref name="categoryScores"/> is null. </exception>
         internal CreateModerationResponseResult(bool flagged, CreateModerationResponseResultCategories categories, CreateModerationResponseResultCategoryScores categoryScores)
         {
@@ -57,9 +57,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateModerationResponseResult"/>. </summary>
-        /// <param name="flagged"></param>
-        /// <param name="categories"></param>
-        /// <param name="categoryScores"></param>
+        /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
+        /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
+        /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateModerationResponseResult(bool flagged, CreateModerationResponseResultCategories categories, CreateModerationResponseResultCategoryScores categoryScores, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,11 +74,11 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> Gets the flagged. </summary>
+        /// <summary> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </summary>
         public bool Flagged { get; }
-        /// <summary> Gets the categories. </summary>
+        /// <summary> A list of the categories, and whether they are flagged or not. </summary>
         public CreateModerationResponseResultCategories Categories { get; }
-        /// <summary> Gets the category scores. </summary>
+        /// <summary> A list of the categories along with their scores as predicted by model. </summary>
         public CreateModerationResponseResultCategoryScores CategoryScores { get; }
     }
 }

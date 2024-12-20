@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The AvailabilitySetProperties. </summary>
+    /// <summary> The availability set properties. </summary>
     public partial class AvailabilitySetProperties
     {
         /// <summary>
@@ -52,9 +52,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetProperties"/>. </summary>
-        /// <param name="virtualMachines"></param>
-        /// <param name="platformFaultDomainCount"></param>
-        /// <param name="platformUpdateDomainCount"></param>
+        /// <param name="virtualMachines"> The virtual machines. </param>
+        /// <param name="platformFaultDomainCount"> The platform fault domain count property. </param>
+        /// <param name="platformUpdateDomainCount"> The platform update domain count property. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal AvailabilitySetProperties(IList<WritableSubResource> virtualMachines, int? platformFaultDomainCount, int? platformUpdateDomainCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -64,11 +64,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the virtual machines. </summary>
+        /// <summary> The virtual machines. </summary>
         public IList<WritableSubResource> VirtualMachines { get; }
-        /// <summary> Gets or sets the platform fault domain count. </summary>
+        /// <summary> The platform fault domain count property. </summary>
         public int? PlatformFaultDomainCount { get; set; }
-        /// <summary> Gets or sets the platform update domain count. </summary>
+        /// <summary> The platform update domain count property. </summary>
         public int? PlatformUpdateDomainCount { get; set; }
     }
 }

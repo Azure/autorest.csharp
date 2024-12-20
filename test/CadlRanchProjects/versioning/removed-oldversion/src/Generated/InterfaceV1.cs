@@ -16,7 +16,7 @@ using Versioning.Removed.OldVersion.Models;
 namespace Versioning.Removed.OldVersion
 {
     // Data plane generated sub-client.
-    /// <summary> The InterfaceV1 sub-client. </summary>
+    /// <summary> This operation group should not be generated with latest version. </summary>
     public partial class InterfaceV1
     {
         private readonly HttpPipeline _pipeline;
@@ -37,8 +37,8 @@ namespace Versioning.Removed.OldVersion
         /// <summary> Initializes a new instance of InterfaceV1. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1', 'v2preview' or 'v2' in client. </param>
         internal InterfaceV1(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, Versions version)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -18,7 +18,7 @@ using FirstTestTypeSpec.Models;
 namespace FirstTestTypeSpec
 {
     // Data plane generated client.
-    /// <summary> The FirstTestTypeSpec service client. </summary>
+    /// <summary> This is a sample typespec project. </summary>
     public partial class FirstTestTypeSpecClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -89,7 +89,7 @@ namespace FirstTestTypeSpec
             _endpoint = endpoint;
         }
 
-        /// <summary> Top action. </summary>
+        /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
@@ -100,7 +100,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Top action. </summary>
+        /// <summary> top level method. </summary>
         /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
@@ -112,7 +112,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action.
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -148,7 +148,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action.
+        /// [Protocol Method] top level method
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -184,7 +184,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action 2.
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -214,7 +214,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Top action 2.
+        /// [Protocol Method] top level method2
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -244,7 +244,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Patch action.
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -278,7 +278,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Patch action.
+        /// [Protocol Method] top level patch
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -311,23 +311,23 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Anonymous body. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="requiredNullableList"></param>
-        /// <param name="requiredFloatProperty"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
-        /// <param name="optionalNullableList"></param>
-        /// <param name="optionalFloatProperty"></param>
-        /// <param name="optionalResourceId"></param>
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
@@ -360,23 +360,23 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Anonymous body. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredBadDescription"></param>
-        /// <param name="requiredNullableList"></param>
-        /// <param name="requiredFloatProperty"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
-        /// <param name="optionalNullableList"></param>
-        /// <param name="optionalFloatProperty"></param>
-        /// <param name="optionalResourceId"></param>
+        /// <summary> body parameter without body decorator. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        /// <param name="requiredFloatProperty"> required float property. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="optionalFloatProperty"> optional float property. </param>
+        /// <param name="optionalResourceId"> optional arm id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AnonymousBody(string,BinaryData,string,IEnumerable{int},double,ThingRequiredLiteralString,ThingRequiredLiteralInt,ThingRequiredLiteralFloat,bool,ThingOptionalLiteralString?,ThingOptionalLiteralInt?,ThingOptionalLiteralFloat?,bool?,IEnumerable{int},double?,ResourceIdentifier,CancellationToken)']/*" />
@@ -410,7 +410,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous body.
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -449,7 +449,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Anonymous body.
+        /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -487,8 +487,8 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Friendly model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its friendly name. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(string,CancellationToken)']/*" />
@@ -502,8 +502,8 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary> Friendly model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its friendly name. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(string,CancellationToken)']/*" />
@@ -518,7 +518,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Friendly model.
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -557,7 +557,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Friendly model.
+        /// [Protocol Method] Model can have its friendly name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -655,7 +655,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> String format. </summary>
+        /// <summary> paramete has string format. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -671,7 +671,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> String format. </summary>
+        /// <summary> paramete has string format. </summary>
         /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -688,7 +688,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] String format.
+        /// [Protocol Method] paramete has string format.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -728,7 +728,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] String format.
+        /// [Protocol Method] paramete has string format.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -767,8 +767,8 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Projected name model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its projected name. </summary>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(string,CancellationToken)']/*" />
@@ -782,8 +782,8 @@ namespace FirstTestTypeSpec
             return Response.FromValue(ProjectedModel.FromResponse(response), response);
         }
 
-        /// <summary> Projected name model. </summary>
-        /// <param name="name"></param>
+        /// <summary> Model can have its projected name. </summary>
+        /// <param name="name"> name of the ModelWithProjectedName. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(string,CancellationToken)']/*" />
@@ -798,7 +798,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Projected name model.
+        /// [Protocol Method] Model can have its projected name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -837,7 +837,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Projected name model.
+        /// [Protocol Method] Model can have its projected name
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -875,7 +875,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Returns anonymous model. </summary>
+        /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync(CancellationToken cancellationToken = default)
@@ -885,7 +885,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(ReturnsAnonymousModelResponse.FromResponse(response), response);
         }
 
-        /// <summary> Returns anonymous model. </summary>
+        /// <summary> return anonymous model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnsAnonymousModel(CancellationToken)']/*" />
         public virtual Response<ReturnsAnonymousModelResponse> ReturnsAnonymousModel(CancellationToken cancellationToken = default)
@@ -896,7 +896,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Returns anonymous model.
+        /// [Protocol Method] return anonymous model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -931,7 +931,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Returns anonymous model.
+        /// [Protocol Method] return anonymous model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -967,7 +967,7 @@ namespace FirstTestTypeSpec
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Head as boolean.
+        /// [Protocol Method] head as boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1003,7 +1003,7 @@ namespace FirstTestTypeSpec
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
-        /// [Protocol Method] Head as boolean.
+        /// [Protocol Method] head as boolean.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1037,7 +1037,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> String body. </summary>
+        /// <summary> The body parameter type is string. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1053,7 +1053,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> String body. </summary>
+        /// <summary> The body parameter type is string. </summary>
         /// <param name="body"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -1070,7 +1070,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] String body.
+        /// [Protocol Method] The body parameter type is string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1109,7 +1109,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] String body.
+        /// [Protocol Method] The body parameter type is string.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1147,7 +1147,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Bool body. </summary>
+        /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
@@ -1159,7 +1159,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Bool body. </summary>
+        /// <summary> The body parameter type is bool. </summary>
         /// <param name="body"> The <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
@@ -1172,7 +1172,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Bool body.
+        /// [Protocol Method] The body parameter type is bool.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1211,7 +1211,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Bool body.
+        /// [Protocol Method] The body parameter type is bool.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1249,7 +1249,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Date time body. </summary>
+        /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
@@ -1261,7 +1261,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Date time body. </summary>
+        /// <summary> The body parameter type is datetime. </summary>
         /// <param name="body"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
@@ -1274,7 +1274,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Date time body.
+        /// [Protocol Method] The body parameter type is datetime.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1313,7 +1313,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Date time body.
+        /// [Protocol Method] The body parameter type is datetime.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1351,7 +1351,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Return string. </summary>
+        /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnStringAsync(CancellationToken)']/*" />
         public virtual async Task<Response<string>> ReturnStringAsync(CancellationToken cancellationToken = default)
@@ -1361,7 +1361,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
-        /// <summary> Return string. </summary>
+        /// <summary> The return type is datetime. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ReturnString(CancellationToken)']/*" />
         public virtual Response<string> ReturnString(CancellationToken cancellationToken = default)
@@ -1372,7 +1372,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return string.
+        /// [Protocol Method] The return type is datetime.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1407,7 +1407,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Return string.
+        /// [Protocol Method] The return type is datetime.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1531,7 +1531,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Recursive extension. </summary>
+        /// <summary> test parent reference child. </summary>
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1546,7 +1546,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Recursive extension. </summary>
+        /// <summary> test parent reference child. </summary>
         /// <param name="input"> The <see cref="Extension"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1562,7 +1562,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Recursive extension.
+        /// [Protocol Method] test parent reference child
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1601,7 +1601,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Recursive extension.
+        /// [Protocol Method] test parent reference child
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1639,7 +1639,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Three level recursive. </summary>
+        /// <summary> test three level recursive extension. </summary>
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1654,7 +1654,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Three level recursive. </summary>
+        /// <summary> test three level recursive extension. </summary>
         /// <param name="input"> The <see cref="Extendible"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1670,7 +1670,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Three level recursive.
+        /// [Protocol Method] test three level recursive extension
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1709,7 +1709,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Three level recursive.
+        /// [Protocol Method] test three level recursive extension
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1747,7 +1747,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Recursive models. </summary>
+        /// <summary> test child reference parent. </summary>
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1762,7 +1762,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Recursive models. </summary>
+        /// <summary> test child reference parent. </summary>
         /// <param name="input"> The <see cref="ChildModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1778,7 +1778,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Recursive models.
+        /// [Protocol Method] test child reference parent
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1817,7 +1817,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Recursive models.
+        /// [Protocol Method] test child reference parent
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1855,7 +1855,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Contain self models. </summary>
+        /// <summary> test contain self models. </summary>
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1870,7 +1870,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Contain self models. </summary>
+        /// <summary> test contain self models. </summary>
         /// <param name="input"> The <see cref="ContainSelf"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -1886,7 +1886,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Contain self models.
+        /// [Protocol Method] test contain self models
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1925,7 +1925,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Contain self models.
+        /// [Protocol Method] test contain self models
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1963,7 +1963,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Enum parameter. </summary>
+        /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameterAsync(CsProjectedEnum,CancellationToken)']/*" />
@@ -1974,7 +1974,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Enum parameter. </summary>
+        /// <summary> test enum parameter. </summary>
         /// <param name="p1"> The <see cref="CsProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='EnumParameter(CsProjectedEnum,CancellationToken)']/*" />
@@ -1986,7 +1986,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Enum parameter.
+        /// [Protocol Method] test enum parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2022,7 +2022,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Enum parameter.
+        /// [Protocol Method] test enum parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2057,7 +2057,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Body is model with projected enum. </summary>
+        /// <summary> test enum parameter. </summary>
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2072,7 +2072,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Body is model with projected enum. </summary>
+        /// <summary> test enum parameter. </summary>
         /// <param name="body"> The <see cref="ModelWithProjectedEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -2088,7 +2088,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Body is model with projected enum.
+        /// [Protocol Method] test enum parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2127,7 +2127,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Body is model with projected enum.
+        /// [Protocol Method] test enum parameter.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2165,7 +2165,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Optional dictionary. </summary>
+        /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionaryAsync(IDictionary{string,int},CancellationToken)']/*" />
@@ -2177,7 +2177,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Optional dictionary. </summary>
+        /// <summary> test optional dictionary. </summary>
         /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='OptionalDictionary(IDictionary{string,int},CancellationToken)']/*" />
@@ -2190,7 +2190,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Optional dictionary.
+        /// [Protocol Method] test optional dictionary.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2226,7 +2226,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Optional dictionary.
+        /// [Protocol Method] test optional dictionary.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2261,7 +2261,7 @@ namespace FirstTestTypeSpec
             }
         }
 
-        /// <summary> Azure location op. </summary>
+        /// <summary> test optional dictionary. </summary>
         /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
@@ -2275,7 +2275,7 @@ namespace FirstTestTypeSpec
             return response;
         }
 
-        /// <summary> Azure location op. </summary>
+        /// <summary> test optional dictionary. </summary>
         /// <param name="location"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="regenLocation"> The <see cref="AzureLocation"/> to use. </param>
         /// <param name="body"> The <see cref="AzureLocationModel"/> to use. </param>
@@ -2290,7 +2290,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Azure location op.
+        /// [Protocol Method] test optional dictionary.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2328,7 +2328,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Azure location op.
+        /// [Protocol Method] test optional dictionary.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2409,7 +2409,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of VersioningOp. </summary>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <param name="apiVersion"> The API version to use for this operation. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual VersioningOp GetVersioningOpClient(string apiVersion = "2022-05-15-preview")
         {

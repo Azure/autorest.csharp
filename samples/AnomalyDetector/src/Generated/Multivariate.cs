@@ -41,8 +41,11 @@ namespace AnomalyDetector
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. Allowed values: "v1.1". </param>
+        /// <param name="endpoint">
+        /// Supported Cognitive Services endpoints (protocol and hostname, for example:
+        /// https://westus2.api.cognitive.microsoft.com).
+        /// </param>
+        /// <param name="apiVersion"> Api Version. Allowed values: "v1.1". </param>
         internal Multivariate(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -53,9 +56,12 @@ namespace AnomalyDetector
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get multivariate batch detection result. </remarks>
+        /// <remarks>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateBatchDetectionResultAsync(Guid,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateDetectionResult>> GetMultivariateBatchDetectionResultAsync(Guid resultId, CancellationToken cancellationToken = default)
         {
@@ -65,9 +71,12 @@ namespace AnomalyDetector
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get multivariate batch detection result. </remarks>
+        /// <remarks>
+        /// For asynchronous inference, get multivariate anomaly detection result based on
+        /// resultId returned by the BatchDetectAnomaly api.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateBatchDetectionResult(Guid,CancellationToken)']/*" />
         public virtual Response<MultivariateDetectionResult> GetMultivariateBatchDetectionResult(Guid resultId, CancellationToken cancellationToken = default)
         {
@@ -91,7 +100,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -127,7 +136,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -149,10 +158,18 @@ namespace AnomalyDetector
         }
 
         /// <summary> Train a Multivariate Anomaly Detection Model. </summary>
-        /// <param name="modelInfo"> The <see cref="ModelInfo"/> to use. </param>
+        /// <param name="modelInfo"> Model information. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelInfo"/> is null. </exception>
-        /// <remarks> Train multivariate model. </remarks>
+        /// <remarks>
+        /// Create and train a multivariate anomaly detection model. The request must
+        /// include a source parameter to indicate an externally accessible Azure blob
+        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
+        /// storage folder which contains multiple CSV files, and each CSV file contains
+        /// two columns, timestamp and variable. Another type of input is an URI pointed to
+        /// a CSV file in Azure blob storage, which contains all the variables and a
+        /// timestamp column.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModelAsync(ModelInfo,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> TrainMultivariateModelAsync(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
@@ -165,10 +182,18 @@ namespace AnomalyDetector
         }
 
         /// <summary> Train a Multivariate Anomaly Detection Model. </summary>
-        /// <param name="modelInfo"> The <see cref="ModelInfo"/> to use. </param>
+        /// <param name="modelInfo"> Model information. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelInfo"/> is null. </exception>
-        /// <remarks> Train multivariate model. </remarks>
+        /// <remarks>
+        /// Create and train a multivariate anomaly detection model. The request must
+        /// include a source parameter to indicate an externally accessible Azure blob
+        /// storage URI.There are two types of data input: An URI pointed to an Azure blob
+        /// storage folder which contains multiple CSV files, and each CSV file contains
+        /// two columns, timestamp and variable. Another type of input is an URI pointed to
+        /// a CSV file in Azure blob storage, which contains all the variables and a
+        /// timestamp column.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='TrainMultivariateModel(ModelInfo,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> TrainMultivariateModel(ModelInfo modelInfo, CancellationToken cancellationToken = default)
         {
@@ -269,7 +294,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -305,7 +330,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -331,11 +356,14 @@ namespace AnomalyDetector
         }
 
         /// <summary> Get Multivariate Model. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Get multivariate model. </remarks>
+        /// <remarks>
+        /// Get detailed information of multivariate model, including the training status
+        /// and variables used in the model.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModelAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<AnomalyDetectionModel>> GetMultivariateModelAsync(string modelId, CancellationToken cancellationToken = default)
         {
@@ -347,11 +375,14 @@ namespace AnomalyDetector
         }
 
         /// <summary> Get Multivariate Model. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Get multivariate model. </remarks>
+        /// <remarks>
+        /// Get detailed information of multivariate model, including the training status
+        /// and variables used in the model.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModel(string,CancellationToken)']/*" />
         public virtual Response<AnomalyDetectionModel> GetMultivariateModel(string modelId, CancellationToken cancellationToken = default)
         {
@@ -377,7 +408,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -417,7 +448,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -443,12 +474,19 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect Multivariate Anomaly. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
-        /// <param name="options"> The <see cref="MultivariateBatchDetectionOptions"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="options"> Request of multivariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="options"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Detect multivariate batch anomaly. </remarks>
+        /// <remarks>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, the input schema should be the same with the training
+        /// request. The request will complete asynchronously and return a resultId to
+        /// query the detection result.The request should be a source link to indicate an
+        /// externally accessible Azure storage Uri, either pointed to an Azure blob
+        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateDetectionResult>> DetectMultivariateBatchAnomalyAsync(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -462,12 +500,19 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect Multivariate Anomaly. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
-        /// <param name="options"> The <see cref="MultivariateBatchDetectionOptions"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="options"> Request of multivariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="options"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Detect multivariate batch anomaly. </remarks>
+        /// <remarks>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, the input schema should be the same with the training
+        /// request. The request will complete asynchronously and return a resultId to
+        /// query the detection result.The request should be a source link to indicate an
+        /// externally accessible Azure storage Uri, either pointed to an Azure blob
+        /// storage folder, or pointed to a CSV file in Azure blob storage.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateBatchAnomaly(string,MultivariateBatchDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateDetectionResult> DetectMultivariateBatchAnomaly(string modelId, MultivariateBatchDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -495,7 +540,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="content"/> is null. </exception>
@@ -537,7 +582,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="content"/> is null. </exception>
@@ -565,12 +610,17 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomalies in the last point of the request body. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
-        /// <param name="options"> The <see cref="MultivariateLastDetectionOptions"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="options"> Request of last detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="options"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Detect multivariate last anomaly. </remarks>
+        /// <remarks>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, and the inference data should be put into request body in a
+        /// JSON format. The request will complete synchronously and return the detection
+        /// immediately in the response body.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<MultivariateLastDetectionResult>> DetectMultivariateLastAnomalyAsync(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -584,12 +634,17 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomalies in the last point of the request body. </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
-        /// <param name="options"> The <see cref="MultivariateLastDetectionOptions"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="options"> Request of last detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="options"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <remarks> Detect multivariate last anomaly. </remarks>
+        /// <remarks>
+        /// Submit multivariate anomaly detection task with the modelId of trained model
+        /// and inference data, and the inference data should be put into request body in a
+        /// JSON format. The request will complete synchronously and return the detection
+        /// immediately in the response body.
+        /// </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='DetectMultivariateLastAnomaly(string,MultivariateLastDetectionOptions,CancellationToken)']/*" />
         public virtual Response<MultivariateLastDetectionResult> DetectMultivariateLastAnomaly(string modelId, MultivariateLastDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -617,7 +672,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="content"/> is null. </exception>
@@ -659,7 +714,7 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="modelId"> The <see cref="string"/> to use. </param>
+        /// <param name="modelId"> Model identifier. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="content"/> is null. </exception>
@@ -687,10 +742,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> List Multivariate Models. </summary>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> Skip indicates how many models will be skipped. </param>
+        /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get multivariate models. </remarks>
+        /// <remarks> List models of a resource. </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModelsAsync(int?,int?,CancellationToken)']/*" />
         public virtual AsyncPageable<AnomalyDetectionModel> GetMultivariateModelsAsync(int? skip = null, int? maxCount = null, CancellationToken cancellationToken = default)
         {
@@ -701,10 +756,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> List Multivariate Models. </summary>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> Skip indicates how many models will be skipped. </param>
+        /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <remarks> Get multivariate models. </remarks>
+        /// <remarks> List models of a resource. </remarks>
         /// <include file="Docs/Multivariate.xml" path="doc/members/member[@name='GetMultivariateModels(int?,int?,CancellationToken)']/*" />
         public virtual Pageable<AnomalyDetectionModel> GetMultivariateModels(int? skip = null, int? maxCount = null, CancellationToken cancellationToken = default)
         {
@@ -729,8 +784,8 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> Skip indicates how many models will be skipped. </param>
+        /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -757,8 +812,8 @@ namespace AnomalyDetector
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="skip"> The <see cref="int"/>? to use. </param>
-        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> Skip indicates how many models will be skipped. </param>
+        /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

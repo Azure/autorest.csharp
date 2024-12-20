@@ -13,8 +13,14 @@ namespace OpenAI.Models
     public static partial class OpenAIModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationRequest"/>. </summary>
-        /// <param name="input"></param>
-        /// <param name="model"></param>
+        /// <param name="input"> The input text to classify. </param>
+        /// <param name="model">
+        /// Two content moderations models are available: `text-moderation-stable` and
+        /// `text-moderation-latest`. The default is `text-moderation-latest` which will be automatically
+        /// upgraded over time. This ensures you are always using our most accurate model. If you use
+        /// `text-moderation-stable`, we will provide advanced notice before updating the model. Accuracy
+        /// of `text-moderation-stable` may be slightly lower than for `text-moderation-latest`.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateModerationRequest"/> instance for mocking. </returns>
         public static CreateModerationRequest CreateModerationRequest(BinaryData input = null, CreateModerationRequestModel? model = null)
         {
@@ -22,9 +28,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponse"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="model"></param>
-        /// <param name="results"></param>
+        /// <param name="id"> The unique identifier for the moderation request. </param>
+        /// <param name="model"> The model used to generate the moderation results. </param>
+        /// <param name="results"> A list of moderation objects. </param>
         /// <returns> A new <see cref="Models.CreateModerationResponse"/> instance for mocking. </returns>
         public static CreateModerationResponse CreateModerationResponse(string id = null, string model = null, IEnumerable<CreateModerationResponseResult> results = null)
         {
@@ -34,9 +40,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResult"/>. </summary>
-        /// <param name="flagged"></param>
-        /// <param name="categories"></param>
-        /// <param name="categoryScores"></param>
+        /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
+        /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
+        /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>
         /// <returns> A new <see cref="Models.CreateModerationResponseResult"/> instance for mocking. </returns>
         public static CreateModerationResponseResult CreateModerationResponseResult(bool flagged = default, CreateModerationResponseResultCategories categories = null, CreateModerationResponseResultCategoryScores categoryScores = null)
         {
@@ -44,17 +50,37 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategories"/>. </summary>
-        /// <param name="hate"></param>
-        /// <param name="hateThreatening"></param>
-        /// <param name="harassment"></param>
-        /// <param name="harassmentThreatening"></param>
-        /// <param name="selfHarm"></param>
-        /// <param name="selfHarmIntent"></param>
-        /// <param name="selfHarmInstructive"></param>
-        /// <param name="sexual"></param>
-        /// <param name="sexualMinors"></param>
-        /// <param name="violence"></param>
-        /// <param name="violenceGraphic"></param>
+        /// <param name="hate">
+        /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
+        /// religion, nationality, sexual orientation, disability status, or caste. Hateful content
+        /// aimed at non-protected groups (e.g., chess players) is harrassment.
+        /// </param>
+        /// <param name="hateThreatening">
+        /// Hateful content that also includes violence or serious harm towards the targeted group
+        /// based on race, gender, ethnicity, religion, nationality, sexual orientation, disability
+        /// status, or caste.
+        /// </param>
+        /// <param name="harassment"> Content that expresses, incites, or promotes harassing language towards any target. </param>
+        /// <param name="harassmentThreatening"> Harassment content that also includes violence or serious harm towards any target. </param>
+        /// <param name="selfHarm">
+        /// Content that promotes, encourages, or depicts acts of self-harm, such as suicide, cutting,
+        /// and eating disorders.
+        /// </param>
+        /// <param name="selfHarmIntent">
+        /// Content where the speaker expresses that they are engaging or intend to engage in acts of
+        /// self-harm, such as suicide, cutting, and eating disorders.
+        /// </param>
+        /// <param name="selfHarmInstructive">
+        /// Content that encourages performing acts of self-harm, such as suicide, cutting, and eating
+        /// disorders, or that gives instructions or advice on how to commit such acts.
+        /// </param>
+        /// <param name="sexual">
+        /// Content meant to arouse sexual excitement, such as the description of sexual activity, or
+        /// that promotes sexual services (excluding sex education and wellness).
+        /// </param>
+        /// <param name="sexualMinors"> Sexual content that includes an individual who is under 18 years old. </param>
+        /// <param name="violence"> Content that depicts death, violence, or physical injury. </param>
+        /// <param name="violenceGraphic"> Content that depicts death, violence, or physical injury in graphic detail. </param>
         /// <returns> A new <see cref="Models.CreateModerationResponseResultCategories"/> instance for mocking. </returns>
         public static CreateModerationResponseResultCategories CreateModerationResponseResultCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
         {
@@ -74,17 +100,17 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponseResultCategoryScores"/>. </summary>
-        /// <param name="hate"></param>
-        /// <param name="hateThreatening"></param>
-        /// <param name="harassment"></param>
-        /// <param name="harassmentThreatening"></param>
-        /// <param name="selfHarm"></param>
-        /// <param name="selfHarmIntent"></param>
-        /// <param name="selfHarmInstructive"></param>
-        /// <param name="sexual"></param>
-        /// <param name="sexualMinors"></param>
-        /// <param name="violence"></param>
-        /// <param name="violenceGraphic"></param>
+        /// <param name="hate"> The score for the category 'hate'. </param>
+        /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
+        /// <param name="harassment"> The score for the category 'harassment'. </param>
+        /// <param name="harassmentThreatening"> The score for the category 'harassment/threatening'. </param>
+        /// <param name="selfHarm"> The score for the category 'self-harm'. </param>
+        /// <param name="selfHarmIntent"> The score for the category 'self-harm/intent'. </param>
+        /// <param name="selfHarmInstructive"> The score for the category 'self-harm/instructive'. </param>
+        /// <param name="sexual"> The score for the category 'sexual'. </param>
+        /// <param name="sexualMinors"> The score for the category 'sexual/minors'. </param>
+        /// <param name="violence"> The score for the category 'violence'. </param>
+        /// <param name="violenceGraphic"> The score for the category 'violence/graphic'. </param>
         /// <returns> A new <see cref="Models.CreateModerationResponseResultCategoryScores"/> instance for mocking. </returns>
         public static CreateModerationResponseResultCategoryScores CreateModerationResponseResultCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
         {
@@ -104,10 +130,10 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageRequest"/>. </summary>
-        /// <param name="prompt"></param>
-        /// <param name="n"></param>
-        /// <param name="size"></param>
-        /// <param name="responseFormat"></param>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageRequest"/> instance for mocking. </returns>
         public static CreateImageRequest CreateImageRequest(string prompt = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
@@ -133,8 +159,8 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Image"/>. </summary>
-        /// <param name="url"></param>
-        /// <param name="b64Json"></param>
+        /// <param name="url"> The URL of the generated image, if `response_format` is `url` (default). </param>
+        /// <param name="b64Json"> The base64-encoded JSON of the generated image, if `response_format` is `b64_json`. </param>
         /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
         public static Image Image(Uri url = null, BinaryData b64Json = null)
         {
@@ -142,12 +168,19 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageEditRequest"/>. </summary>
-        /// <param name="prompt"></param>
-        /// <param name="image"></param>
-        /// <param name="mask"></param>
-        /// <param name="n"></param>
-        /// <param name="size"></param>
-        /// <param name="responseFormat"></param>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="image">
+        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
+        /// provided, image must have transparency, which will be used as the mask.
+        /// </param>
+        /// <param name="mask">
+        /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+        /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+        /// as `image`.
+        /// </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
         public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, Stream image = null, Stream mask = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
@@ -164,10 +197,13 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageVariationRequest"/>. </summary>
-        /// <param name="image"></param>
-        /// <param name="n"></param>
-        /// <param name="size"></param>
-        /// <param name="responseFormat"></param>
+        /// <param name="image">
+        /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
+        /// and square.
+        /// </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
         public static CreateImageVariationRequest CreateImageVariationRequest(Stream image = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
@@ -193,10 +229,10 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Model"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="created"></param>
-        /// <param name="ownedBy"></param>
+        /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "model". </param>
+        /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
+        /// <param name="ownedBy"> The organization that owns the model. </param>
         /// <returns> A new <see cref="Models.Model"/> instance for mocking. </returns>
         public static Model Model(string id = null, ModelObject @object = default, DateTimeOffset created = default, string ownedBy = null)
         {
@@ -214,18 +250,101 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuneRequest"/>. </summary>
-        /// <param name="trainingFile"></param>
-        /// <param name="validationFile"></param>
-        /// <param name="model"></param>
-        /// <param name="nEpochs"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="learningRateMultiplier"></param>
-        /// <param name="promptLossRate"></param>
-        /// <param name="computeClassificationMetrics"></param>
-        /// <param name="classificationNClasses"></param>
-        /// <param name="classificationPositiveClass"></param>
-        /// <param name="classificationBetas"></param>
-        /// <param name="suffix"></param>
+        /// <param name="trainingFile">
+        /// The ID of an uploaded file that contains training data.
+        ///
+        /// See [upload file](/docs/api-reference/files/upload) for how to upload a file.
+        ///
+        /// Your dataset must be formatted as a JSONL file, where each training example is a JSON object
+        /// with the keys "prompt" and "completion". Additionally, you must upload your file with the
+        /// purpose `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
+        /// details.
+        /// </param>
+        /// <param name="validationFile">
+        /// The ID of an uploaded file that contains validation data.
+        ///
+        /// If you provide this file, the data is used to generate validation metrics periodically during
+        /// fine-tuning. These metrics can be viewed in the
+        /// [fine-tuning results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
+        /// Your train and validation data should be mutually exclusive.
+        ///
+        /// Your dataset must be formatted as a JSONL file, where each validation example is a JSON object
+        /// with the keys "prompt" and "completion". Additionally, you must upload your file with the
+        /// purpose `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/legacy-fine-tuning/creating-training-data) for more
+        /// details.
+        /// </param>
+        /// <param name="model">
+        /// The name of the base model to fine-tune. You can select one of "ada", "babbage", "curie",
+        /// "davinci", or a fine-tuned model created after 2022-04-21 and before 2023-08-22. To learn more
+        /// about these models, see the [Models](/docs/models) documentation.
+        /// </param>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        /// </param>
+        /// <param name="batchSize">
+        /// The batch size to use for training. The batch size is the number of training examples used to
+        /// train a single forward and backward pass.
+        ///
+        /// By default, the batch size will be dynamically configured to be ~0.2% of the number of examples
+        /// in the training set, capped at 256 - in general, we've found that larger batch sizes tend to
+        /// work better for larger datasets.
+        /// </param>
+        /// <param name="learningRateMultiplier">
+        /// The learning rate multiplier to use for training. The fine-tuning learning rate is the original
+        /// learning rate used for pretraining multiplied by this value.
+        ///
+        /// By default, the learning rate multiplier is the 0.05, 0.1, or 0.2 depending on final
+        /// `batch_size` (larger learning rates tend to perform better with larger batch sizes). We
+        /// recommend experimenting with values in the range 0.02 to 0.2 to see what produces the best
+        /// results.
+        /// </param>
+        /// <param name="promptLossRate">
+        /// The weight to use for loss on the prompt tokens. This controls how much the model tries to
+        /// learn to generate the prompt (as compared to the completion which always has a weight of 1.0),
+        /// and can add a stabilizing effect to training when completions are short.
+        ///
+        /// If prompts are extremely long (relative to completions), it may make sense to reduce this
+        /// weight so as to avoid over-prioritizing learning the prompt.
+        /// </param>
+        /// <param name="computeClassificationMetrics">
+        /// If set, we calculate classification-specific metrics such as accuracy and F-1 score using the
+        /// validation set at the end of every epoch. These metrics can be viewed in the
+        /// [results file](/docs/guides/legacy-fine-tuning/analyzing-your-fine-tuned-model).
+        ///
+        /// In order to compute classification metrics, you must provide a `validation_file`. Additionally,
+        /// you must specify `classification_n_classes` for multiclass classification or
+        /// `classification_positive_class` for binary classification.
+        /// </param>
+        /// <param name="classificationNClasses">
+        /// The number of classes in a classification task.
+        ///
+        /// This parameter is required for multiclass classification.
+        /// </param>
+        /// <param name="classificationPositiveClass">
+        /// The positive class in binary classification.
+        ///
+        /// This parameter is needed to generate precision, recall, and F1 metrics when doing binary
+        /// classification.
+        /// </param>
+        /// <param name="classificationBetas">
+        /// If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score
+        /// is a generalization of F-1 score. This is only used for binary classification.
+        ///
+        /// With a beta of 1 (i.e. the F-1 score), precision and recall are given the same weight. A larger
+        /// beta score puts more weight on recall and less on precision. A smaller beta score puts more
+        /// weight on precision and less on recall.
+        /// </param>
+        /// <param name="suffix">
+        /// A string of up to 18 characters that will be added to your fine-tuned model name.
+        ///
+        /// For example, a `suffix` of "custom-model-name" would produce a model name like
+        /// `ada:ft-your-org:custom-model-name-2022-02-15-04-21-04`.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateFineTuneRequest"/> instance for mocking. </returns>
         public static CreateFineTuneRequest CreateFineTuneRequest(string trainingFile = null, string validationFile = null, CreateFineTuneRequestModel? model = null, long? nEpochs = null, long? batchSize = null, double? learningRateMultiplier = null, double? promptLossRate = null, bool? computeClassificationMetrics = null, long? classificationNClasses = null, string classificationPositiveClass = null, IEnumerable<double> classificationBetas = null, string suffix = null)
         {
@@ -248,19 +367,25 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTune"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="createdAt"></param>
-        /// <param name="updatedAt"></param>
-        /// <param name="model"></param>
-        /// <param name="fineTunedModel"></param>
-        /// <param name="organizationId"></param>
-        /// <param name="status"></param>
-        /// <param name="hyperparams"></param>
-        /// <param name="trainingFiles"></param>
-        /// <param name="validationFiles"></param>
-        /// <param name="resultFiles"></param>
-        /// <param name="events"></param>
+        /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "fine-tune". </param>
+        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
+        /// <param name="updatedAt"> The Unix timestamp (in seconds) for when the fine-tuning job was last updated. </param>
+        /// <param name="model"> The base model that is being fine-tuned. </param>
+        /// <param name="fineTunedModel"> The name of the fine-tuned model that is being created. </param>
+        /// <param name="organizationId"> The organization that owns the fine-tuning job. </param>
+        /// <param name="status">
+        /// The current status of the fine-tuning job, which can be either `created`, `running`,
+        /// `succeeded`, `failed`, or `cancelled`.
+        /// </param>
+        /// <param name="hyperparams">
+        /// The hyperparameters used for the fine-tuning job. See the
+        /// [fine-tuning guide](/docs/guides/legacy-fine-tuning/hyperparameters) for more details.
+        /// </param>
+        /// <param name="trainingFiles"> The list of files used for training. </param>
+        /// <param name="validationFiles"> The list of files used for validation. </param>
+        /// <param name="resultFiles"> The compiled results files for the fine-tuning job. </param>
+        /// <param name="events"> The list of events that have been observed in the lifecycle of the FineTune job. </param>
         /// <returns> A new <see cref="Models.FineTune"/> instance for mocking. </returns>
         public static FineTune FineTune(string id = null, FineTuneObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset updatedAt = default, string model = null, string fineTunedModel = null, string organizationId = null, FineTuneStatus status = default, FineTuneHyperparams hyperparams = null, IEnumerable<OpenAIFile> trainingFiles = null, IEnumerable<OpenAIFile> validationFiles = null, IEnumerable<OpenAIFile> resultFiles = null, IEnumerable<FineTuneEvent> events = null)
         {
@@ -287,13 +412,19 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneHyperparams"/>. </summary>
-        /// <param name="nEpochs"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="promptLossWeight"></param>
-        /// <param name="learningRateMultiplier"></param>
-        /// <param name="computeClassificationMetrics"></param>
-        /// <param name="classificationPositiveClass"></param>
-        /// <param name="classificationNClasses"></param>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        /// </param>
+        /// <param name="batchSize">
+        /// The batch size to use for training. The batch size is the number of training examples used to
+        /// train a single forward and backward pass.
+        /// </param>
+        /// <param name="promptLossWeight"> The weight to use for loss on the prompt tokens. </param>
+        /// <param name="learningRateMultiplier"> The learning rate multiplier to use for training. </param>
+        /// <param name="computeClassificationMetrics"> The classification metrics to compute using the validation dataset at the end of every epoch. </param>
+        /// <param name="classificationPositiveClass"> The positive class to use for computing classification metrics. </param>
+        /// <param name="classificationNClasses"> The number of classes to use for computing classification metrics. </param>
         /// <returns> A new <see cref="Models.FineTuneHyperparams"/> instance for mocking. </returns>
         public static FineTuneHyperparams FineTuneHyperparams(long nEpochs = default, long batchSize = default, double promptLossWeight = default, double learningRateMultiplier = default, bool? computeClassificationMetrics = null, string classificationPositiveClass = null, long? classificationNClasses = null)
         {
@@ -309,14 +440,20 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OpenAIFile"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="bytes"></param>
-        /// <param name="createdAt"></param>
-        /// <param name="filename"></param>
-        /// <param name="purpose"></param>
-        /// <param name="status"></param>
-        /// <param name="statusDetails"></param>
+        /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "file". </param>
+        /// <param name="bytes"> The size of the file in bytes. </param>
+        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
+        /// <param name="filename"> The name of the file. </param>
+        /// <param name="purpose"> The intended purpose of the file. Currently, only "fine-tune" is supported. </param>
+        /// <param name="status">
+        /// The current status of the file, which can be either `uploaded`, `processed`, `pending`,
+        /// `error`, `deleting` or `deleted`.
+        /// </param>
+        /// <param name="statusDetails">
+        /// Additional details about the status of the file. If the file is in the `error` state, this will
+        /// include a message describing the error.
+        /// </param>
         /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
         public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
         {
@@ -387,8 +524,14 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingRequest"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="input"></param>
+        /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
+        /// <param name="input">
+        /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
+        /// single request, pass an array of strings or array of token arrays. Each input must not exceed
+        /// the max input tokens for the model (8191 tokens for `text-embedding-ada-002`) and cannot be an empty string.
+        /// [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+        /// for counting tokens.
+        /// </param>
         /// <param name="user"></param>
         /// <returns> A new <see cref="Models.CreateEmbeddingRequest"/> instance for mocking. </returns>
         public static CreateEmbeddingRequest CreateEmbeddingRequest(CreateEmbeddingRequestModel model = default, BinaryData input = null, string user = null)
@@ -397,10 +540,10 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponse"/>. </summary>
-        /// <param name="object"></param>
-        /// <param name="model"></param>
-        /// <param name="data"></param>
-        /// <param name="usage"></param>
+        /// <param name="object"> The object type, which is always "embedding". </param>
+        /// <param name="model"> The name of the model used to generate the embedding. </param>
+        /// <param name="data"> The list of embeddings generated by the model. </param>
+        /// <param name="usage"> The usage information for the request. </param>
         /// <returns> A new <see cref="Models.CreateEmbeddingResponse"/> instance for mocking. </returns>
         public static CreateEmbeddingResponse CreateEmbeddingResponse(CreateEmbeddingResponseObject @object = default, string model = null, IEnumerable<Embedding> data = null, CreateEmbeddingResponseUsage usage = null)
         {
@@ -410,9 +553,12 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Embedding"/>. </summary>
-        /// <param name="index"></param>
-        /// <param name="object"></param>
-        /// <param name="embeddingProperty"></param>
+        /// <param name="index"> The index of the embedding in the list of embeddings. </param>
+        /// <param name="object"> The object type, which is always "embedding". </param>
+        /// <param name="embeddingProperty">
+        /// The embedding vector, which is a list of floats. The length of vector depends on the model as\
+        /// listed in the [embedding guide](/docs/guides/embeddings).
+        /// </param>
         /// <returns> A new <see cref="Models.Embedding"/> instance for mocking. </returns>
         public static Embedding Embedding(long index = default, EmbeddingObject @object = default, IEnumerable<double> embeddingProperty = null)
         {
@@ -422,8 +568,8 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponseUsage"/>. </summary>
-        /// <param name="promptTokens"></param>
-        /// <param name="totalTokens"></param>
+        /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
+        /// <param name="totalTokens"> The total number of tokens used by the request. </param>
         /// <returns> A new <see cref="Models.CreateEmbeddingResponseUsage"/> instance for mocking. </returns>
         public static CreateEmbeddingResponseUsage CreateEmbeddingResponseUsage(long promptTokens = default, long totalTokens = default)
         {
@@ -431,12 +577,26 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditRequest"/>. </summary>
-        /// <param name="model"></param>
-        /// <param name="input"></param>
-        /// <param name="instruction"></param>
-        /// <param name="n"></param>
-        /// <param name="temperature"></param>
-        /// <param name="topP"></param>
+        /// <param name="model">
+        /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
+        /// model with this endpoint.
+        /// </param>
+        /// <param name="input"> The input text to use as a starting point for the edit. </param>
+        /// <param name="instruction"> The instruction that tells the model how to edit the prompt. </param>
+        /// <param name="n"> How many edits to generate for the input and instruction. </param>
+        /// <param name="temperature">
+        /// What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output
+        /// more random, while lower values like 0.2 will make it more focused and deterministic.
+        ///
+        /// We generally recommend altering this or `top_p` but not both.
+        /// </param>
+        /// <param name="topP">
+        /// An alternative to sampling with temperature, called nucleus sampling, where the model considers
+        /// the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising
+        /// the top 10% probability mass are considered.
+        ///
+        /// We generally recommend altering this or `temperature` but not both.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateEditRequest"/> instance for mocking. </returns>
         public static CreateEditRequest CreateEditRequest(CreateEditRequestModel model = default, string input = null, string instruction = null, long? n = null, double? temperature = null, double? topP = null)
         {
@@ -451,9 +611,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponse"/>. </summary>
-        /// <param name="object"></param>
-        /// <param name="created"></param>
-        /// <param name="choices"></param>
+        /// <param name="object"> The object type, which is always `edit`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
+        /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
         /// <returns> A new <see cref="Models.CreateEditResponse"/> instance for mocking. </returns>
         public static CreateEditResponse CreateEditResponse(CreateEditResponseObject @object = default, DateTimeOffset created = default, IEnumerable<CreateEditResponseChoice> choices = null, CompletionUsage usage = null)
@@ -464,9 +624,13 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponseChoice"/>. </summary>
-        /// <param name="text"></param>
-        /// <param name="index"></param>
-        /// <param name="finishReason"></param>
+        /// <param name="text"> The edited result. </param>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `length` if the maximum number of tokens
+        /// specified in the request was reached.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateEditResponseChoice"/> instance for mocking. </returns>
         public static CreateEditResponseChoice CreateEditResponseChoice(string text = null, long index = default, CreateEditResponseChoiceFinishReason finishReason = default)
         {
@@ -474,9 +638,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CompletionUsage"/>. </summary>
-        /// <param name="promptTokens"></param>
-        /// <param name="completionTokens"></param>
-        /// <param name="totalTokens"></param>
+        /// <param name="promptTokens"> Number of tokens in the prompt. </param>
+        /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
+        /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>
         /// <returns> A new <see cref="Models.CompletionUsage"/> instance for mocking. </returns>
         public static CompletionUsage CompletionUsage(long promptTokens = default, long completionTokens = default, long totalTokens = default)
         {
@@ -484,11 +648,11 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponse"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="created"></param>
-        /// <param name="model"></param>
-        /// <param name="choices"></param>
+        /// <param name="id"> A unique identifier for the completion. </param>
+        /// <param name="object"> The object type, which is always `text_completion`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the completion was created. </param>
+        /// <param name="model"> The model used for the completion. </param>
+        /// <param name="choices"> The list of completion choices the model generated for the input. </param>
         /// <param name="usage"></param>
         /// <returns> A new <see cref="Models.CreateCompletionResponse"/> instance for mocking. </returns>
         public static CreateCompletionResponse CreateCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateCompletionResponseChoice> choices = null, CompletionUsage usage = null)
@@ -509,7 +673,13 @@ namespace OpenAI.Models
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>
-        /// <param name="finishReason"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, or `content_filter` if content was omitted
+        /// due to a flag from our content filters, `length` if the maximum number of tokens specified
+        /// in the request was reached, or `content_filter` if content was omitted due to a flag from our
+        /// content filters.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateCompletionResponseChoice"/> instance for mocking. </returns>
         public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateCompletionResponseChoiceLogprobs logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
         {
@@ -533,11 +703,39 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuningJobRequest"/>. </summary>
-        /// <param name="trainingFile"></param>
-        /// <param name="validationFile"></param>
-        /// <param name="model"></param>
-        /// <param name="hyperparameters"></param>
-        /// <param name="suffix"></param>
+        /// <param name="trainingFile">
+        /// The ID of an uploaded file that contains training data.
+        ///
+        /// See [upload file](/docs/api-reference/files/upload) for how to upload a file.
+        ///
+        /// Your dataset must be formatted as a JSONL file. Additionally, you must upload your file with
+        /// the purpose `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
+        /// <param name="validationFile">
+        /// The ID of an uploaded file that contains validation data.
+        ///
+        /// If you provide this file, the data is used to generate validation metrics periodically during
+        /// fine-tuning. These metrics can be viewed in the fine-tuning results file. The same data should
+        /// not be present in both train and validation files.
+        ///
+        /// Your dataset must be formatted as a JSONL file. You must upload your file with the purpose
+        /// `fine-tune`.
+        ///
+        /// See the [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
+        /// <param name="model">
+        /// The name of the model to fine-tune. You can select one of the
+        /// [supported models](/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
+        /// </param>
+        /// <param name="hyperparameters"> The hyperparameters used for the fine-tuning job. </param>
+        /// <param name="suffix">
+        /// A string of up to 18 characters that will be added to your fine-tuned model name.
+        ///
+        /// For example, a `suffix` of "custom-model-name" would produce a model name like
+        /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateFineTuningJobRequest"/> instance for mocking. </returns>
         public static CreateFineTuningJobRequest CreateFineTuningJobRequest(string trainingFile = null, string validationFile = null, CreateFineTuningJobRequestModel model = default, CreateFineTuningJobRequestHyperparameters hyperparameters = null, string suffix = null)
         {
@@ -551,20 +749,47 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJob"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="createdAt"></param>
-        /// <param name="finishedAt"></param>
-        /// <param name="model"></param>
-        /// <param name="fineTunedModel"></param>
-        /// <param name="organizationId"></param>
-        /// <param name="status"></param>
-        /// <param name="hyperparameters"></param>
-        /// <param name="trainingFile"></param>
-        /// <param name="validationFile"></param>
-        /// <param name="resultFiles"></param>
-        /// <param name="trainedTokens"></param>
-        /// <param name="error"></param>
+        /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
+        /// <param name="object"> The object type, which is always "fine_tuning.job". </param>
+        /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
+        /// <param name="finishedAt">
+        /// The Unix timestamp (in seconds) for when the fine-tuning job was finished. The value will be
+        /// null if the fine-tuning job is still running.
+        /// </param>
+        /// <param name="model"> The base model that is being fine-tuned. </param>
+        /// <param name="fineTunedModel">
+        /// The name of the fine-tuned model that is being created. The value will be null if the
+        /// fine-tuning job is still running.
+        /// </param>
+        /// <param name="organizationId"> The organization that owns the fine-tuning job. </param>
+        /// <param name="status">
+        /// The current status of the fine-tuning job, which can be either `created`, `pending`, `running`,
+        /// `succeeded`, `failed`, or `cancelled`.
+        /// </param>
+        /// <param name="hyperparameters">
+        /// The hyperparameters used for the fine-tuning job. See the
+        /// [fine-tuning guide](/docs/guides/fine-tuning) for more details.
+        /// </param>
+        /// <param name="trainingFile">
+        /// The file ID used for training. You can retrieve the training data with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="validationFile">
+        /// The file ID used for validation. You can retrieve the validation results with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="resultFiles">
+        /// The compiled results file ID(s) for the fine-tuning job. You can retrieve the results with the
+        /// [Files API](/docs/api-reference/files/retrieve-contents).
+        /// </param>
+        /// <param name="trainedTokens">
+        /// The total number of billable tokens processed by this fine tuning job. The value will be null
+        /// if the fine-tuning job is still running.
+        /// </param>
+        /// <param name="error">
+        /// For fine-tuning jobs that have `failed`, this will contain more information on the cause of the
+        /// failure.
+        /// </param>
         /// <returns> A new <see cref="Models.FineTuningJob"/> instance for mocking. </returns>
         public static FineTuningJob FineTuningJob(string id = null, FineTuningJobObject @object = default, DateTimeOffset createdAt = default, DateTimeOffset? finishedAt = null, string model = null, string fineTunedModel = null, string organizationId = null, FineTuningJobStatus status = default, FineTuningJobHyperparameters hyperparameters = null, string trainingFile = null, string validationFile = null, IEnumerable<string> resultFiles = null, long? trainedTokens = null, FineTuningJobError error = null)
         {
@@ -589,7 +814,13 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobHyperparameters"/>. </summary>
-        /// <param name="nEpochs"></param>
+        /// <param name="nEpochs">
+        /// The number of epochs to train the model for. An epoch refers to one full cycle through the
+        /// training dataset.
+        ///
+        /// "Auto" decides the optimal number of epochs based on the size of the dataset. If setting the
+        /// number manually, we support any number between 1 and 50 epochs.
+        /// </param>
         /// <returns> A new <see cref="Models.FineTuningJobHyperparameters"/> instance for mocking. </returns>
         public static FineTuningJobHyperparameters FineTuningJobHyperparameters(BinaryData nEpochs = null)
         {
@@ -597,9 +828,12 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError"/>. </summary>
-        /// <param name="message"></param>
-        /// <param name="code"></param>
-        /// <param name="param"></param>
+        /// <param name="message"> A human-readable error message. </param>
+        /// <param name="code"> A machine-readable error code. </param>
+        /// <param name="param">
+        /// The parameter that was invalid, usually `training_file` or `validation_file`. This field
+        /// will be null if the failure was not parameter-specific.
+        /// </param>
         /// <returns> A new <see cref="Models.FineTuningJobError"/> instance for mocking. </returns>
         public static FineTuningJobError FineTuningJobError(string message = null, string code = null, string param = null)
         {
@@ -648,10 +882,17 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionRequestMessage"/>. </summary>
-        /// <param name="role"></param>
-        /// <param name="content"></param>
-        /// <param name="name"></param>
-        /// <param name="functionCall"></param>
+        /// <param name="role"> The role of the messages author. One of `system`, `user`, `assistant`, or `function`. </param>
+        /// <param name="content">
+        /// The contents of the message. `content` is required for all messages, and may be null for
+        /// assistant messages with function calls.
+        /// </param>
+        /// <param name="name">
+        /// The name of the author of this message. `name` is required if role is `function`, and it
+        /// should be the name of the function whose response is in the `content`. May contain a-z,
+        /// A-Z, 0-9, and underscores, with a maximum length of 64 characters.
+        /// </param>
+        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
         /// <returns> A new <see cref="Models.ChatCompletionRequestMessage"/> instance for mocking. </returns>
         public static ChatCompletionRequestMessage ChatCompletionRequestMessage(ChatCompletionRequestMessageRole role = default, string content = null, string name = null, ChatCompletionRequestMessageFunctionCall functionCall = null)
         {
@@ -659,9 +900,21 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionFunctions"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        /// <param name="parameters"></param>
+        /// <param name="name">
+        /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
+        /// dashes, with a maximum length of 64.
+        /// </param>
+        /// <param name="description">
+        /// A description of what the function does, used by the model to choose when and how to call the
+        /// function.
+        /// </param>
+        /// <param name="parameters">
+        /// The parameters the functions accepts, described as a JSON Schema object. See the
+        /// [guide](/docs/guides/gpt/function-calling) for examples, and the
+        /// [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation
+        /// about the format.\n\nTo describe a function that accepts no parameters, provide the value
+        /// `{\"type\": \"object\", \"properties\": {}}`.
+        /// </param>
         /// <returns> A new <see cref="Models.ChatCompletionFunctions"/> instance for mocking. </returns>
         public static ChatCompletionFunctions ChatCompletionFunctions(string name = null, string description = null, ChatCompletionFunctionParameters parameters = null)
         {
@@ -669,11 +922,11 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponse"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="object"></param>
-        /// <param name="created"></param>
-        /// <param name="model"></param>
-        /// <param name="choices"></param>
+        /// <param name="id"> A unique identifier for the chat completion. </param>
+        /// <param name="object"> The object type, which is always `chat.completion`. </param>
+        /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
+        /// <param name="model"> The model used for the chat completion. </param>
+        /// <param name="choices"> A list of chat completion choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
         /// <returns> A new <see cref="Models.CreateChatCompletionResponse"/> instance for mocking. </returns>
         public static CreateChatCompletionResponse CreateChatCompletionResponse(string id = null, string @object = null, DateTimeOffset created = default, string model = null, IEnumerable<CreateChatCompletionResponseChoice> choices = null, CompletionUsage usage = null)
@@ -691,9 +944,14 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponseChoice"/>. </summary>
-        /// <param name="index"></param>
+        /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="message"></param>
-        /// <param name="finishReason"></param>
+        /// <param name="finishReason">
+        /// The reason the model stopped generating tokens. This will be `stop` if the model hit a
+        /// natural stop point or a provided stop sequence, `length` if the maximum number of tokens
+        /// specified in the request was reached, `content_filter` if the content was omitted due to
+        /// a flag from our content filters, or `function_call` if the model called a function.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateChatCompletionResponseChoice"/> instance for mocking. </returns>
         public static CreateChatCompletionResponseChoice CreateChatCompletionResponseChoice(long index = default, ChatCompletionResponseMessage message = null, CreateChatCompletionResponseChoiceFinishReason finishReason = default)
         {
@@ -701,9 +959,9 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessage"/>. </summary>
-        /// <param name="role"></param>
-        /// <param name="content"></param>
-        /// <param name="functionCall"></param>
+        /// <param name="role"> The role of the author of this message. </param>
+        /// <param name="content"> The contents of the message. </param>
+        /// <param name="functionCall"> The name and arguments of a function that should be called, as generated by the model. </param>
         /// <returns> A new <see cref="Models.ChatCompletionResponseMessage"/> instance for mocking. </returns>
         public static ChatCompletionResponseMessage ChatCompletionResponseMessage(ChatCompletionResponseMessageRole role = default, string content = null, ChatCompletionResponseMessageFunctionCall functionCall = null)
         {
@@ -711,8 +969,12 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessageFunctionCall"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="arguments"></param>
+        /// <param name="name"> The name of the function to call. </param>
+        /// <param name="arguments">
+        /// The arguments to call the function with, as generated by the model in JSON format. Note that
+        /// the model does not always generate valid JSON, and may hallucinate parameters not defined by
+        /// your function schema. Validate the arguments in your code before calling your function.
+        /// </param>
         /// <returns> A new <see cref="Models.ChatCompletionResponseMessageFunctionCall"/> instance for mocking. </returns>
         public static ChatCompletionResponseMessageFunctionCall ChatCompletionResponseMessageFunctionCall(string name = null, string arguments = null)
         {
@@ -720,11 +982,25 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationRequest"/>. </summary>
-        /// <param name="file"></param>
-        /// <param name="model"></param>
-        /// <param name="prompt"></param>
-        /// <param name="responseFormat"></param>
-        /// <param name="temperature"></param>
+        /// <param name="file">
+        /// The audio file object (not file name) to translate, in one of these formats: flac, mp3, mp4,
+        /// mpeg, mpga, m4a, ogg, wav, or webm.
+        /// </param>
+        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
+        /// <param name="prompt">
+        /// An optional text to guide the model's style or continue a previous audio segment. The
+        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+        /// </param>
+        /// <param name="responseFormat">
+        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
+        /// vtt.
+        /// </param>
+        /// <param name="temperature">
+        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
+        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+        /// automatically increase the temperature until certain thresholds are hit.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
         public static CreateTranslationRequest CreateTranslationRequest(Stream file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
         {
@@ -746,12 +1022,30 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionRequest"/>. </summary>
-        /// <param name="file"></param>
-        /// <param name="model"></param>
-        /// <param name="prompt"></param>
-        /// <param name="responseFormat"></param>
-        /// <param name="temperature"></param>
-        /// <param name="language"></param>
+        /// <param name="file">
+        /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
+        /// mpeg, mpga, m4a, ogg, wav, or webm.
+        /// </param>
+        /// <param name="model"> ID of the model to use. Only `whisper-1` is currently available. </param>
+        /// <param name="prompt">
+        /// An optional text to guide the model's style or continue a previous audio segment. The
+        /// [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.
+        /// </param>
+        /// <param name="responseFormat">
+        /// The format of the transcript output, in one of these options: json, text, srt, verbose_json, or
+        /// vtt.
+        /// </param>
+        /// <param name="temperature">
+        /// The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more
+        /// random, while lower values like 0.2 will make it more focused and deterministic. If set to 0,
+        /// the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to
+        /// automatically increase the temperature until certain thresholds are hit.
+        /// </param>
+        /// <param name="language">
+        /// The language of the input audio. Supplying the input language in
+        /// [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy
+        /// and latency.
+        /// </param>
         /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
         public static CreateTranscriptionRequest CreateTranscriptionRequest(Stream file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
         {

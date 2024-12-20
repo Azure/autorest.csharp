@@ -51,11 +51,11 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="FooProperties"/>. </summary>
-        /// <param name="serviceUri"></param>
-        /// <param name="something"></param>
-        /// <param name="boolValue"></param>
-        /// <param name="floatValue"></param>
-        /// <param name="doubleValue"></param>
+        /// <param name="serviceUri"> the service url. </param>
+        /// <param name="something"> something. </param>
+        /// <param name="boolValue"> boolean value. </param>
+        /// <param name="floatValue"> float value. </param>
+        /// <param name="doubleValue"> double value. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal FooProperties(Uri serviceUri, string something, bool? boolValue, float? floatValue, double? doubleValue, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -67,15 +67,15 @@ namespace MgmtTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the service uri. </summary>
+        /// <summary> the service url. </summary>
         public Uri ServiceUri { get; set; }
-        /// <summary> Gets or sets the something. </summary>
+        /// <summary> something. </summary>
         public string Something { get; set; }
-        /// <summary> Gets or sets the bool value. </summary>
+        /// <summary> boolean value. </summary>
         public bool? BoolValue { get; set; }
-        /// <summary> Gets or sets the float value. </summary>
+        /// <summary> float value. </summary>
         public float? FloatValue { get; set; }
-        /// <summary> Gets or sets the double value. </summary>
+        /// <summary> double value. </summary>
         public double? DoubleValue { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAliasPattern. </summary>
+    /// <summary> The type of the pattern for an alias path. </summary>
     public partial class ResourceTypeAliasPattern
     {
         /// <summary>
@@ -51,9 +51,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ResourceTypeAliasPattern"/>. </summary>
-        /// <param name="phrase"></param>
-        /// <param name="variable"></param>
-        /// <param name="patternType"></param>
+        /// <param name="phrase"> The alias pattern phrase. </param>
+        /// <param name="variable"> The alias pattern variable. </param>
+        /// <param name="patternType"> The type of alias pattern. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ResourceTypeAliasPattern(string phrase, string variable, ResourceTypeAliasPatternType? patternType, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,11 +63,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets the phrase. </summary>
+        /// <summary> The alias pattern phrase. </summary>
         public string Phrase { get; }
-        /// <summary> Gets the variable. </summary>
+        /// <summary> The alias pattern variable. </summary>
         public string Variable { get; }
-        /// <summary> Gets the pattern type. </summary>
+        /// <summary> The type of alias pattern. </summary>
         public ResourceTypeAliasPatternType? PatternType { get; }
     }
 }

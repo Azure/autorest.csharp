@@ -40,8 +40,11 @@ namespace AnomalyDetector
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="apiVersion"> The <see cref="string"/> to use. Allowed values: "v1.1". </param>
+        /// <param name="endpoint">
+        /// Supported Cognitive Services endpoints (protocol and hostname, for example:
+        /// https://westus2.api.cognitive.microsoft.com).
+        /// </param>
+        /// <param name="apiVersion"> Api Version. Allowed values: "v1.1". </param>
         internal Univariate(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -52,10 +55,15 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomalies for the entire series in batch. </summary>
-        /// <param name="options"> The <see cref="UnivariateDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate entire series. </remarks>
+        /// <remarks>
+        /// This operation generates a model with an entire series, each point is detected
+        /// with the same model. With this method, points before and after a certain point
+        /// are used to determine whether it is an anomaly. The entire detection can give
+        /// user an overall status of the time series.
+        /// </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateEntireDetectionResult>> DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -68,10 +76,15 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomalies for the entire series in batch. </summary>
-        /// <param name="options"> The <see cref="UnivariateDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate entire series. </remarks>
+        /// <remarks>
+        /// This operation generates a model with an entire series, each point is detected
+        /// with the same model. With this method, points before and after a certain point
+        /// are used to determine whether it is an anomaly. The entire detection can give
+        /// user an overall status of the time series.
+        /// </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateEntireSeries(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateEntireDetectionResult> DetectUnivariateEntireSeries(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -162,10 +175,13 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomaly status of the latest point in time series. </summary>
-        /// <param name="options"> The <see cref="UnivariateDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate last point. </remarks>
+        /// <remarks>
+        /// This operation generates a model using the points that you sent into the API,
+        /// and based on all data to determine whether the last point is anomalous.
+        /// </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateLastDetectionResult>> DetectUnivariateLastPointAsync(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -178,10 +194,13 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect anomaly status of the latest point in time series. </summary>
-        /// <param name="options"> The <see cref="UnivariateDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate last point. </remarks>
+        /// <remarks>
+        /// This operation generates a model using the points that you sent into the API,
+        /// and based on all data to determine whether the last point is anomalous.
+        /// </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateLastPoint(UnivariateDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateLastDetectionResult> DetectUnivariateLastPoint(UnivariateDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -272,10 +291,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect change point for the entire series. </summary>
-        /// <param name="options"> The <see cref="UnivariateChangePointDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate change point. </remarks>
+        /// <remarks> Evaluate change point score of every series point. </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual async Task<Response<UnivariateChangePointDetectionResult>> DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {
@@ -288,10 +307,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> Detect change point for the entire series. </summary>
-        /// <param name="options"> The <see cref="UnivariateChangePointDetectionOptions"/> to use. </param>
+        /// <param name="options"> Method of univariate anomaly detection. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        /// <remarks> Detect univariate change point. </remarks>
+        /// <remarks> Evaluate change point score of every series point. </remarks>
         /// <include file="Docs/Univariate.xml" path="doc/members/member[@name='DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions,CancellationToken)']/*" />
         public virtual Response<UnivariateChangePointDetectionResult> DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions options, CancellationToken cancellationToken = default)
         {

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.Lro.Rpc.Models
 {
-    /// <summary> The GenerationResult. </summary>
+    /// <summary> Result of the generation. </summary>
     public partial class GenerationResult
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Azure.Lro.Rpc.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="GenerationResult"/>. </summary>
-        /// <param name="data"></param>
+        /// <param name="data"> The data. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         internal GenerationResult(string data)
         {
@@ -56,7 +56,7 @@ namespace _Azure.Lro.Rpc.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="GenerationResult"/>. </summary>
-        /// <param name="data"></param>
+        /// <param name="data"> The data. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal GenerationResult(string data, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -69,7 +69,7 @@ namespace _Azure.Lro.Rpc.Models
         {
         }
 
-        /// <summary> Gets the data. </summary>
+        /// <summary> The data. </summary>
         public string Data { get; }
     }
 }

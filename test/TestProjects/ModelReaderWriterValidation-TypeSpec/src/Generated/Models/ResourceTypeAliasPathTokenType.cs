@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace ModelReaderWriterValidationTypeSpec.Models
 {
-    /// <summary> The ResourceTypeAliasPathTokenType. </summary>
+    /// <summary> The type of the token that the alias path is referring to. </summary>
     public readonly partial struct ResourceTypeAliasPathTokenType : IEquatable<ResourceTypeAliasPathTokenType>
     {
         private readonly string _value;
@@ -31,21 +31,21 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private const string NumberValue = "Number";
         private const string BooleanValue = "Boolean";
 
-        /// <summary> NotSpecified. </summary>
+        /// <summary> The token type is not specified. </summary>
         public static ResourceTypeAliasPathTokenType NotSpecified { get; } = new ResourceTypeAliasPathTokenType(NotSpecifiedValue);
-        /// <summary> Any. </summary>
+        /// <summary> The token type can be anything. </summary>
         public static ResourceTypeAliasPathTokenType Any { get; } = new ResourceTypeAliasPathTokenType(AnyValue);
-        /// <summary> String. </summary>
+        /// <summary> The token type is string. </summary>
         public static ResourceTypeAliasPathTokenType String { get; } = new ResourceTypeAliasPathTokenType(StringValue);
-        /// <summary> Object. </summary>
+        /// <summary> The token type is object. </summary>
         public static ResourceTypeAliasPathTokenType Object { get; } = new ResourceTypeAliasPathTokenType(ObjectValue);
-        /// <summary> Array. </summary>
+        /// <summary> The token type is array. </summary>
         public static ResourceTypeAliasPathTokenType Array { get; } = new ResourceTypeAliasPathTokenType(ArrayValue);
-        /// <summary> Integer. </summary>
+        /// <summary> The token type is integer. </summary>
         public static ResourceTypeAliasPathTokenType Integer { get; } = new ResourceTypeAliasPathTokenType(IntegerValue);
-        /// <summary> Number. </summary>
+        /// <summary> The token type is number. </summary>
         public static ResourceTypeAliasPathTokenType Number { get; } = new ResourceTypeAliasPathTokenType(NumberValue);
-        /// <summary> Boolean. </summary>
+        /// <summary> The token type is boolean. </summary>
         public static ResourceTypeAliasPathTokenType Boolean { get; } = new ResourceTypeAliasPathTokenType(BooleanValue);
         /// <summary> Determines if two <see cref="ResourceTypeAliasPathTokenType"/> values are the same. </summary>
         public static bool operator ==(ResourceTypeAliasPathTokenType left, ResourceTypeAliasPathTokenType right) => left.Equals(right);

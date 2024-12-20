@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The ExtensibleEnumWithOperator. </summary>
+    /// <summary> Extensible enum to customize operator. </summary>
     public readonly partial struct ExtensibleEnumWithOperator : IEquatable<ExtensibleEnumWithOperator>
     {
         private readonly string _value;

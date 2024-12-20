@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CustomizedTypeSpec.Models
 {
-    /// <summary> The RoundTripModel. </summary>
+    /// <summary> this is a roundtrip model. </summary>
     public partial class SuperRoundTripModel
     {
         /// <summary>
@@ -43,8 +43,8 @@ namespace CustomizedTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredSuperInt"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
         public SuperRoundTripModel(string requiredString, int requiredSuperInt)
         {
@@ -55,9 +55,9 @@ namespace CustomizedTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="SuperRoundTripModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredSuperInt"></param>
-        /// <param name="requiredReadonlyInt"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredSuperInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredReadonlyInt"> Required readonly int. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SuperRoundTripModel(string requiredString, int requiredSuperInt, int requiredReadonlyInt, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -72,9 +72,9 @@ namespace CustomizedTypeSpec.Models
         {
         }
 
-        /// <summary> Gets or sets the required string. </summary>
+        /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
-        /// <summary> Gets the required readonly int. </summary>
+        /// <summary> Required readonly int. </summary>
         public int RequiredReadonlyInt { get; }
     }
 }

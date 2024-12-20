@@ -31,7 +31,7 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Monday.",
+     "doc": "Monday.",
      "decorators": []
     },
     {
@@ -49,11 +49,11 @@
      "enumType": {
       "$ref": "2"
      },
-     "description": "Tuesday.",
+     "doc": "Tuesday.",
      "decorators": []
     }
    ],
-   "description": "Extensible enum to customize operator",
+   "doc": "Extensible enum to customize operator",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -124,7 +124,7 @@
      "decorators": []
     }
    ],
-   "description": "Renamed enum (original name: EnumToRename)",
+   "doc": "Renamed enum (original name: EnumToRename)",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -195,7 +195,7 @@
      "decorators": []
     }
    ],
-   "description": "Enum with renamed value (original name: ValueToRename)",
+   "doc": "Enum with renamed value (original name: ValueToRename)",
    "isFixed": true,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -266,7 +266,7 @@
      "decorators": []
     }
    ],
-   "description": "Extensible enum",
+   "doc": "Extensible enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -320,7 +320,7 @@
      "decorators": []
     }
    ],
-   "description": "A normal enum",
+   "doc": "A normal enum",
    "isFixed": false,
    "isFlags": false,
    "usage": "Input,Output,Json",
@@ -334,7 +334,7 @@
    "name": "RootModel",
    "crossLanguageDefinitionId": "CustomizationsInTsp.RootModel",
    "usage": "Input,Output,Json",
-   "description": "Root RoundTrip model to reference all other types to ensure generation",
+   "doc": "Root RoundTrip model to reference all other types to ensure generation",
    "decorators": [],
    "properties": [
     {
@@ -342,7 +342,7 @@
      "kind": "property",
      "name": "propertyExtensibleEnum",
      "serializedName": "propertyExtensibleEnum",
-     "description": "ExtensibleEnumWithOperator",
+     "doc": "ExtensibleEnumWithOperator",
      "type": {
       "$ref": "2"
      },
@@ -358,14 +358,14 @@
      "kind": "property",
      "name": "propertyModelToMakeInternal",
      "serializedName": "propertyModelToMakeInternal",
-     "description": "ModelToMakeInternal",
+     "doc": "ModelToMakeInternal",
      "type": {
       "$id": "41",
       "kind": "model",
       "name": "ModelToMakeInternal",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToMakeInternal",
       "usage": "Input,Output,Json",
-      "description": "Public model made internal",
+      "doc": "Public model made internal",
       "decorators": [],
       "properties": [
        {
@@ -373,7 +373,7 @@
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
-        "description": "Required int",
+        "doc": "Required int",
         "type": {
          "$id": "43",
          "kind": "int32",
@@ -402,14 +402,14 @@
      "kind": "property",
      "name": "propertyModelToRename",
      "serializedName": "propertyModelToRename",
-     "description": "ModelToRename",
+     "doc": "ModelToRename",
      "type": {
       "$id": "45",
       "kind": "model",
       "name": "ModelToRename",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToRename",
       "usage": "Input,Output,Spread,Json",
-      "description": "Renamed model (original name: ModelToRename)",
+      "doc": "Renamed model (original name: ModelToRename)",
       "decorators": [],
       "properties": [
        {
@@ -417,7 +417,7 @@
         "kind": "property",
         "name": "requiredIntOnBase",
         "serializedName": "requiredIntOnBase",
-        "description": "Required int",
+        "doc": "Required int",
         "type": {
          "$id": "47",
          "kind": "int32",
@@ -437,7 +437,7 @@
         "kind": "property",
         "name": "optionalInt",
         "serializedName": "optionalInt",
-        "description": "Optional int",
+        "doc": "Optional int",
         "type": {
          "$id": "49",
          "kind": "int32",
@@ -466,14 +466,14 @@
      "kind": "property",
      "name": "propertyModelToChangeNamespace",
      "serializedName": "propertyModelToChangeNamespace",
-     "description": "ModelToChangeNamespace",
+     "doc": "ModelToChangeNamespace",
      "type": {
       "$id": "51",
       "kind": "model",
       "name": "ModelToChangeNamespace",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToChangeNamespace",
       "usage": "Input,Output,Json",
-      "description": "Model moved into custom namespace",
+      "doc": "Model moved into custom namespace",
       "decorators": [],
       "properties": [
        {
@@ -481,7 +481,7 @@
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
-        "description": "Required int",
+        "doc": "Required int",
         "type": {
          "$id": "53",
          "kind": "int32",
@@ -510,14 +510,14 @@
      "kind": "property",
      "name": "propertyModelWithCustomizedProperties",
      "serializedName": "propertyModelWithCustomizedProperties",
-     "description": "ModelWithCustomizedProperties",
+     "doc": "ModelWithCustomizedProperties",
      "type": {
       "$id": "55",
       "kind": "model",
       "name": "ModelWithCustomizedProperties",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelWithCustomizedProperties",
       "usage": "Input,Output,Json",
-      "description": "Model with customized properties",
+      "doc": "Model with customized properties",
       "decorators": [],
       "properties": [
        {
@@ -525,7 +525,7 @@
         "kind": "property",
         "name": "propertyToMakeInternal",
         "serializedName": "propertyToMakeInternal",
-        "description": "Public property made internal",
+        "doc": "Public property made internal",
         "type": {
          "$id": "57",
          "kind": "int32",
@@ -545,7 +545,7 @@
         "kind": "property",
         "name": "propertyToRename",
         "serializedName": "propertyToRename",
-        "description": "Renamed property (original name: PropertyToRename)",
+        "doc": "Renamed property (original name: PropertyToRename)",
         "type": {
          "$id": "59",
          "kind": "int32",
@@ -565,7 +565,7 @@
         "kind": "property",
         "name": "propertyToMakeFloat",
         "serializedName": "propertyToMakeFloat",
-        "description": "Property with type changed to float (original type: int)",
+        "doc": "Property with type changed to float (original type: int)",
         "type": {
          "$id": "61",
          "kind": "int32",
@@ -585,7 +585,7 @@
         "kind": "property",
         "name": "propertyToMakeInt",
         "serializedName": "propertyToMakeInt",
-        "description": "Property with type changed to int (original type: float)",
+        "doc": "Property with type changed to int (original type: float)",
         "type": {
          "$id": "63",
          "kind": "float32",
@@ -605,7 +605,7 @@
         "kind": "property",
         "name": "propertyToMakeDuration",
         "serializedName": "propertyToMakeDuration",
-        "description": "Property with type changed to duration (original type: string)",
+        "doc": "Property with type changed to duration (original type: string)",
         "type": {
          "$id": "65",
          "kind": "string",
@@ -625,7 +625,7 @@
         "kind": "property",
         "name": "propertyToMakeString",
         "serializedName": "propertyToMakeString",
-        "description": "Property with type changed to string (original type: duration)",
+        "doc": "Property with type changed to string (original type: duration)",
         "type": {
          "$id": "67",
          "kind": "duration",
@@ -653,7 +653,7 @@
         "kind": "property",
         "name": "propertyToMakeJsonElement",
         "serializedName": "propertyToMakeJsonElement",
-        "description": "Property with type changed to JsonElement (original type: string)",
+        "doc": "Property with type changed to JsonElement (original type: string)",
         "type": {
          "$id": "70",
          "kind": "string",
@@ -673,7 +673,7 @@
         "kind": "property",
         "name": "propertyToField",
         "serializedName": "propertyToField",
-        "description": "Field that replaces property (original name: PropertyToField)",
+        "doc": "Field that replaces property (original name: PropertyToField)",
         "type": {
          "$id": "72",
          "kind": "string",
@@ -693,7 +693,7 @@
         "kind": "property",
         "name": "badListName",
         "serializedName": "badListName",
-        "description": "Property renamed that is list",
+        "doc": "Property renamed that is list",
         "type": {
          "$id": "74",
          "kind": "array",
@@ -720,7 +720,7 @@
         "kind": "property",
         "name": "badDictionaryName",
         "serializedName": "badDictionaryName",
-        "description": "Property renamed that is dictionary",
+        "doc": "Property renamed that is dictionary",
         "type": {
          "$id": "77",
          "kind": "dict",
@@ -752,7 +752,7 @@
         "kind": "property",
         "name": "badListOfListName",
         "serializedName": "badListOfListName",
-        "description": "Property renamed that is listoflist",
+        "doc": "Property renamed that is listoflist",
         "type": {
          "$id": "81",
          "kind": "array",
@@ -786,7 +786,7 @@
         "kind": "property",
         "name": "badListOfDictionaryName",
         "serializedName": "badListOfDictionaryName",
-        "description": "Property renamed that is listofdictionary",
+        "doc": "Property renamed that is listofdictionary",
         "type": {
          "$id": "85",
          "kind": "array",
@@ -825,7 +825,7 @@
         "kind": "property",
         "name": "vector",
         "serializedName": "vector",
-        "description": "Property type changed to ReadOnlyMemory<float>",
+        "doc": "Property type changed to ReadOnlyMemory<float>",
         "type": {
          "$id": "90",
          "kind": "array",
@@ -852,7 +852,7 @@
         "kind": "property",
         "name": "vectorOptional",
         "serializedName": "vectorOptional",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "93",
          "kind": "array",
@@ -879,7 +879,7 @@
         "kind": "property",
         "name": "vectorNullable",
         "serializedName": "vectorNullable",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "96",
          "kind": "nullable",
@@ -910,7 +910,7 @@
         "kind": "property",
         "name": "vectorOptionalNullable",
         "serializedName": "vectorOptionalNullable",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "100",
          "kind": "nullable",
@@ -941,7 +941,7 @@
         "kind": "property",
         "name": "vectorReadOnly",
         "serializedName": "vectorReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>",
+        "doc": "Property type changed to ReadOnlyMemory<float>",
         "type": {
          "$id": "104",
          "kind": "array",
@@ -968,7 +968,7 @@
         "kind": "property",
         "name": "vectorOptionalReadOnly",
         "serializedName": "vectorOptionalReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "107",
          "kind": "array",
@@ -995,7 +995,7 @@
         "kind": "property",
         "name": "vectorNullableReadOnly",
         "serializedName": "vectorNullableReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "110",
          "kind": "nullable",
@@ -1026,7 +1026,7 @@
         "kind": "property",
         "name": "vectorOptionalNullableReadOnly",
         "serializedName": "vectorOptionalNullableReadOnly",
-        "description": "Property type changed to ReadOnlyMemory<float>?",
+        "doc": "Property type changed to ReadOnlyMemory<float>?",
         "type": {
          "$id": "114",
          "kind": "nullable",
@@ -1066,7 +1066,7 @@
      "kind": "property",
      "name": "propertyEnumToRename",
      "serializedName": "propertyEnumToRename",
-     "description": "EnumToRename",
+     "doc": "EnumToRename",
      "type": {
       "$ref": "8"
      },
@@ -1082,7 +1082,7 @@
      "kind": "property",
      "name": "propertyEnumWithValueToRename",
      "serializedName": "propertyEnumWithValueToRename",
-     "description": "EnumWithValueToRename",
+     "doc": "EnumWithValueToRename",
      "type": {
       "$ref": "16"
      },
@@ -1098,7 +1098,7 @@
      "kind": "property",
      "name": "propertyEnumToBeMadeExtensible",
      "serializedName": "propertyEnumToBeMadeExtensible",
-     "description": "EnumToBeMadeExtensible",
+     "doc": "EnumToBeMadeExtensible",
      "type": {
       "$ref": "24"
      },
@@ -1114,14 +1114,14 @@
      "kind": "property",
      "name": "propertyModelToAddAdditionalSerializableProperty",
      "serializedName": "propertyModelToAddAdditionalSerializableProperty",
-     "description": "ModelToAddAdditionalSerializableProperty",
+     "doc": "ModelToAddAdditionalSerializableProperty",
      "type": {
       "$id": "121",
       "kind": "model",
       "name": "ModelToAddAdditionalSerializableProperty",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelToAddAdditionalSerializableProperty",
       "usage": "Input,Output,Json",
-      "description": "Model to add additional serializable property",
+      "doc": "Model to add additional serializable property",
       "decorators": [],
       "baseModel": {
        "$ref": "45"
@@ -1132,7 +1132,7 @@
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
-        "description": "Required int",
+        "doc": "Required int",
         "type": {
          "$id": "123",
          "kind": "int32",
@@ -1161,7 +1161,7 @@
      "kind": "property",
      "name": "propertyToMoveToCustomization",
      "serializedName": "propertyToMoveToCustomization",
-     "description": "Enum type property to move to customization code",
+     "doc": "Enum type property to move to customization code",
      "type": {
       "$ref": "32"
      },
@@ -1177,14 +1177,14 @@
      "kind": "property",
      "name": "propertyModelStruct",
      "serializedName": "propertyModelStruct",
-     "description": "ModelStruct",
+     "doc": "ModelStruct",
      "type": {
       "$id": "126",
       "kind": "model",
       "name": "ModelStruct",
       "crossLanguageDefinitionId": "CustomizationsInTsp.ModelStruct",
       "usage": "Input,Output,Json",
-      "description": "Model to make to a struct",
+      "doc": "Model to make to a struct",
       "decorators": [],
       "properties": [
        {
@@ -1192,7 +1192,7 @@
         "kind": "property",
         "name": "requiredInt",
         "serializedName": "requiredInt",
-        "description": "Required int",
+        "doc": "Required int",
         "type": {
          "$id": "128",
          "kind": "int32",
@@ -1212,7 +1212,7 @@
         "kind": "property",
         "name": "optionalInt",
         "serializedName": "optionalInt",
-        "description": "Optional int",
+        "doc": "Optional int",
         "type": {
          "$id": "130",
          "kind": "int32",
@@ -1232,7 +1232,7 @@
         "kind": "property",
         "name": "optionalString",
         "serializedName": "optionalString",
-        "description": "Optional string",
+        "doc": "Optional string",
         "type": {
          "$id": "132",
          "kind": "string",
@@ -1281,20 +1281,20 @@
   {
    "$id": "133",
    "Name": "CustomizationsInTspClient",
-   "Description": "CADL project to test various types of models.",
+   "Doc": "CADL project to test various types of models.",
    "Operations": [
     {
      "$id": "134",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInTsp",
-     "Description": "RoundTrip operation to make RootModel round-trip",
+     "Doc": "RoundTrip operation to make RootModel round-trip",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "135",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "136",
         "kind": "constant",
@@ -1397,14 +1397,14 @@
      "$id": "143",
      "Name": "foo",
      "ResourceName": "CustomizationsInTsp",
-     "Description": "Sample operation with request body of a renamed model",
+     "Doc": "Sample operation with request body of a renamed model",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "144",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "145",
         "kind": "constant",
@@ -1507,14 +1507,14 @@
      "$id": "152",
      "Name": "bar",
      "ResourceName": "CustomizationsInTsp",
-     "Description": "Sample operation with request body using a model parameter with a spread operator.",
+     "Doc": "Sample operation with request body using a model parameter with a spread operator.",
      "Accessibility": "public",
      "Parameters": [
       {
        "$id": "153",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Description": "Body parameter's content type. Known values are application/json",
+       "Doc": "Body parameter's content type. Known values are application/json",
        "Type": {
         "$id": "154",
         "kind": "constant",
@@ -1622,7 +1622,7 @@
      "$id": "162",
      "Name": "endpoint",
      "NameInRequest": "endpoint",
-     "Description": "Service host",
+     "Doc": "Service host",
      "Type": {
       "$id": "163",
       "kind": "url",

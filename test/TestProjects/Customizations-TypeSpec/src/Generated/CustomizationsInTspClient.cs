@@ -17,7 +17,7 @@ using CustomizationsInTsp.Models;
 namespace CustomizationsInTsp
 {
     // Data plane generated client.
-    /// <summary> The CustomizationsInTsp service client. </summary>
+    /// <summary> CADL project to test various types of models. </summary>
     public partial class CustomizationsInTspClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,14 +35,14 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint) : this(endpoint, new CustomizationsInTspClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of CustomizationsInTspClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint"> Service host. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CustomizationsInTspClient(Uri endpoint, CustomizationsInTspClientOptions options)
@@ -55,7 +55,7 @@ namespace CustomizationsInTsp
             _endpoint = endpoint;
         }
 
-        /// <summary> Round trip. </summary>
+        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -70,7 +70,7 @@ namespace CustomizationsInTsp
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 
-        /// <summary> Round trip. </summary>
+        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
         /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -86,7 +86,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Round trip.
+        /// [Protocol Method] RoundTrip operation to make RootModel round-trip
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -125,7 +125,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Round trip.
+        /// [Protocol Method] RoundTrip operation to make RootModel round-trip
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -163,7 +163,7 @@ namespace CustomizationsInTsp
             }
         }
 
-        /// <summary> Foo. </summary>
+        /// <summary> Sample operation with request body of a renamed model. </summary>
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -178,7 +178,7 @@ namespace CustomizationsInTsp
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
-        /// <summary> Foo. </summary>
+        /// <summary> Sample operation with request body of a renamed model. </summary>
         /// <param name="input"> The <see cref="RenamedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
@@ -194,7 +194,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Foo.
+        /// [Protocol Method] Sample operation with request body of a renamed model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -233,7 +233,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Foo.
+        /// [Protocol Method] Sample operation with request body of a renamed model
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -271,9 +271,9 @@ namespace CustomizationsInTsp
             }
         }
 
-        /// <summary> Bar. </summary>
-        /// <param name="requiredIntOnBase"></param>
-        /// <param name="optionalInt"></param>
+        /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='BarAsync(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<RenamedModel>> BarAsync(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
@@ -284,9 +284,9 @@ namespace CustomizationsInTsp
             return Response.FromValue(RenamedModel.FromResponse(response), response);
         }
 
-        /// <summary> Bar. </summary>
-        /// <param name="requiredIntOnBase"></param>
-        /// <param name="optionalInt"></param>
+        /// <summary> Sample operation with request body using a model parameter with a spread operator. </summary>
+        /// <param name="requiredIntOnBase"> Required int. </param>
+        /// <param name="optionalInt"> Optional int. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='Bar(int,int?,CancellationToken)']/*" />
         public virtual Response<RenamedModel> Bar(int requiredIntOnBase, int? optionalInt = null, CancellationToken cancellationToken = default)
@@ -298,7 +298,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Bar.
+        /// [Protocol Method] Sample operation with request body using a model parameter with a spread operator.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -337,7 +337,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary>
-        /// [Protocol Method] Bar.
+        /// [Protocol Method] Sample operation with request body using a model parameter with a spread operator.
         /// <list type="bullet">
         /// <item>
         /// <description>

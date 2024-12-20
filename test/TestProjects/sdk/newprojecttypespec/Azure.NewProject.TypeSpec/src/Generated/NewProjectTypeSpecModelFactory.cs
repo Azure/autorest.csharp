@@ -15,17 +15,17 @@ namespace Azure.NewProject.TypeSpec.Models
     public static partial class NewProjectTypeSpecModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Thing"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteralString"></param>
-        /// <param name="requiredLiteralInt"></param>
-        /// <param name="requiredLiteralFloat"></param>
-        /// <param name="requiredLiteralBool"></param>
-        /// <param name="optionalLiteralString"></param>
-        /// <param name="optionalLiteralInt"></param>
-        /// <param name="optionalLiteralFloat"></param>
-        /// <param name="optionalLiteralBool"></param>
-        /// <param name="requiredBadDescription"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredLiteralString"> required literal string. </param>
+        /// <param name="requiredLiteralInt"> required literal int. </param>
+        /// <param name="requiredLiteralFloat"> required literal float. </param>
+        /// <param name="requiredLiteralBool"> required literal bool. </param>
+        /// <param name="optionalLiteralString"> optional literal string. </param>
+        /// <param name="optionalLiteralInt"> optional literal int. </param>
+        /// <param name="optionalLiteralFloat"> optional literal float. </param>
+        /// <param name="optionalLiteralBool"> optional literal bool. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
         public static Thing Thing(string name = null, BinaryData requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null)
         {
@@ -45,7 +45,7 @@ namespace Azure.NewProject.TypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Friend"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <returns> A new <see cref="Models.Friend"/> instance for mocking. </returns>
         public static Friend Friend(string name = null)
         {
@@ -53,26 +53,26 @@ namespace Azure.NewProject.TypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredCollection"></param>
-        /// <param name="requiredDictionary"></param>
-        /// <param name="requiredModel"></param>
-        /// <param name="intExtensibleEnum"></param>
-        /// <param name="intExtensibleEnumCollection"></param>
-        /// <param name="floatExtensibleEnum"></param>
-        /// <param name="floatExtensibleEnumCollection"></param>
-        /// <param name="floatFixedEnum"></param>
-        /// <param name="floatFixedEnumCollection"></param>
-        /// <param name="intFixedEnum"></param>
-        /// <param name="intFixedEnumCollection"></param>
-        /// <param name="stringFixedEnum"></param>
-        /// <param name="requiredUnknown"></param>
-        /// <param name="optionalUnknown"></param>
-        /// <param name="requiredRecordUnknown"></param>
-        /// <param name="optionalRecordUnknown"></param>
-        /// <param name="readOnlyRequiredRecordUnknown"></param>
-        /// <param name="readOnlyOptionalRecordUnknown"></param>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredCollection"> Required collection of enums. </param>
+        /// <param name="requiredDictionary"> Required dictionary of enums. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="intExtensibleEnum"> this is an int based extensible enum. </param>
+        /// <param name="intExtensibleEnumCollection"> this is a collection of int based extensible enum. </param>
+        /// <param name="floatExtensibleEnum"> this is a float based extensible enum. </param>
+        /// <param name="floatExtensibleEnumCollection"> this is a collection of float based extensible enum. </param>
+        /// <param name="floatFixedEnum"> this is a float based fixed enum. </param>
+        /// <param name="floatFixedEnumCollection"> this is a collection of float based fixed enum. </param>
+        /// <param name="intFixedEnum"> this is a int based fixed enum. </param>
+        /// <param name="intFixedEnumCollection"> this is a collection of int based fixed enum. </param>
+        /// <param name="stringFixedEnum"> this is a string based fixed enum. </param>
+        /// <param name="requiredUnknown"> required unknown. </param>
+        /// <param name="optionalUnknown"> optional unknown. </param>
+        /// <param name="requiredRecordUnknown"> required record of unknown. </param>
+        /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
+        /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
+        /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
         public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = null, IDictionary<string, StringExtensibleEnum> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null)
         {

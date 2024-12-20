@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The DiagnosticsInfo. </summary>
+    /// <summary> Diagnostics information to help inspect the states of model or variable. </summary>
     public partial class DiagnosticsInfo
     {
         /// <summary>
@@ -52,8 +52,8 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="DiagnosticsInfo"/>. </summary>
-        /// <param name="modelState"></param>
-        /// <param name="variableStates"></param>
+        /// <param name="modelState"> Model status. </param>
+        /// <param name="variableStates"> Variable Status. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -62,9 +62,9 @@ namespace AnomalyDetector.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the model state. </summary>
+        /// <summary> Model status. </summary>
         public ModelState ModelState { get; set; }
-        /// <summary> Gets the variable states. </summary>
+        /// <summary> Variable Status. </summary>
         public IList<VariableState> VariableStates { get; }
     }
 }

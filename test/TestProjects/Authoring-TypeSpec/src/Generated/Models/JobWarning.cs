@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AuthoringTypeSpec.Models
 {
-    /// <summary> The JobWarning. </summary>
+    /// <summary> Represents a warning that was encountered while executing the request. </summary>
     public partial class JobWarning
     {
         /// <summary>
@@ -46,8 +46,8 @@ namespace AuthoringTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="JobWarning"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The warning code. </param>
+        /// <param name="message"> The warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         internal JobWarning(string code, string message)
         {
@@ -59,8 +59,8 @@ namespace AuthoringTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="JobWarning"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The warning code. </param>
+        /// <param name="message"> The warning message. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal JobWarning(string code, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,9 +74,9 @@ namespace AuthoringTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the code. </summary>
+        /// <summary> The warning code. </summary>
         public string Code { get; }
-        /// <summary> Gets the message. </summary>
+        /// <summary> The warning message. </summary>
         public string Message { get; }
     }
 }

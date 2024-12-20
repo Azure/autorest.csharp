@@ -43,8 +43,11 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
-        /// <param name="prompt"></param>
-        /// <param name="image"></param>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="image">
+        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
+        /// provided, image must have transparency, which will be used as the mask.
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> or <paramref name="image"/> is null. </exception>
         public CreateImageEditRequest(string prompt, Stream image)
         {
@@ -56,12 +59,19 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
-        /// <param name="prompt"></param>
-        /// <param name="image"></param>
-        /// <param name="mask"></param>
-        /// <param name="n"></param>
-        /// <param name="size"></param>
-        /// <param name="responseFormat"></param>
+        /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
+        /// <param name="image">
+        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
+        /// provided, image must have transparency, which will be used as the mask.
+        /// </param>
+        /// <param name="mask">
+        /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+        /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+        /// as `image`.
+        /// </param>
+        /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
+        /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>
+        /// <param name="responseFormat"> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </param>
         /// <param name="user"></param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateImageEditRequest(string prompt, Stream image, Stream mask, long? n, CreateImageRequestSize? size, CreateImageRequestResponseFormat? responseFormat, string user, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -81,17 +91,24 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> Gets the prompt. </summary>
+        /// <summary> A text description of the desired image(s). The maximum length is 1000 characters. </summary>
         public string Prompt { get; }
-        /// <summary> Gets the image. </summary>
+        /// <summary>
+        /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
+        /// provided, image must have transparency, which will be used as the mask.
+        /// </summary>
         public Stream Image { get; }
-        /// <summary> Gets or sets the mask. </summary>
+        /// <summary>
+        /// An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where
+        /// `image` should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions
+        /// as `image`.
+        /// </summary>
         public Stream Mask { get; set; }
-        /// <summary> Gets or sets the n. </summary>
+        /// <summary> The number of images to generate. Must be between 1 and 10. </summary>
         public long? N { get; set; }
-        /// <summary> Gets or sets the size. </summary>
+        /// <summary> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </summary>
         public CreateImageRequestSize? Size { get; set; }
-        /// <summary> Gets or sets the response format. </summary>
+        /// <summary> The format in which the generated images are returned. Must be one of `url` or `b64_json`. </summary>
         public CreateImageRequestResponseFormat? ResponseFormat { get; set; }
         /// <summary> Gets or sets the user. </summary>
         public string User { get; set; }

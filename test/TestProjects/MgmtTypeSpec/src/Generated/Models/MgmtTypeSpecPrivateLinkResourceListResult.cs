@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace MgmtTypeSpec.Models
 {
-    /// <summary> The MgmtTypeSpecPrivateLinkResourceListResult. </summary>
+    /// <summary> The response of a PrivateLinkResource list operation. </summary>
     internal partial class MgmtTypeSpecPrivateLinkResourceListResult
     {
         /// <summary>
@@ -47,7 +47,7 @@ namespace MgmtTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="MgmtTypeSpecPrivateLinkResourceListResult"/>. </summary>
-        /// <param name="value"></param>
+        /// <param name="value"> The PrivateLinkResource items on this page. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal MgmtTypeSpecPrivateLinkResourceListResult(IEnumerable<MgmtTypeSpecPrivateLinkResourceData> value)
         {
@@ -57,8 +57,8 @@ namespace MgmtTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtTypeSpecPrivateLinkResourceListResult"/>. </summary>
-        /// <param name="value"></param>
-        /// <param name="nextLink"></param>
+        /// <param name="value"> The PrivateLinkResource items on this page. </param>
+        /// <param name="nextLink"> The link to the next page of items. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal MgmtTypeSpecPrivateLinkResourceListResult(IReadOnlyList<MgmtTypeSpecPrivateLinkResourceData> value, Uri nextLink, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -72,9 +72,9 @@ namespace MgmtTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the value. </summary>
+        /// <summary> The PrivateLinkResource items on this page. </summary>
         public IReadOnlyList<MgmtTypeSpecPrivateLinkResourceData> Value { get; }
-        /// <summary> Gets the next link. </summary>
+        /// <summary> The link to the next page of items. </summary>
         public Uri NextLink { get; }
     }
 }

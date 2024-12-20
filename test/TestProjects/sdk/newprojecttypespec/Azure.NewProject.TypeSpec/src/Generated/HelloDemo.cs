@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 namespace Azure.NewProject.TypeSpec
 {
     // Data plane generated sub-client.
-    /// <summary> The HelloDemo sub-client. </summary>
+    /// <summary> Hello world service. </summary>
     public partial class HelloDemo
     {
         private const string AuthorizationHeader = "x-ms-api-key";
@@ -50,7 +50,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -87,7 +87,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Say hi.
+        /// [Protocol Method] Return hi
         /// <list type="bullet">
         /// <item>
         /// <description>

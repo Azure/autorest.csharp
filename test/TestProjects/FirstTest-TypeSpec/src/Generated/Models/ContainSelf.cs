@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace FirstTestTypeSpec.Models
 {
-    /// <summary> The ContainSelf. </summary>
+    /// <summary> containself. </summary>
     public partial class ContainSelf
     {
         /// <summary>

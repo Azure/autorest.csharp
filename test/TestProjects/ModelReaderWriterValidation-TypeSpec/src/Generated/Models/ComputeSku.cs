@@ -51,9 +51,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ComputeSku"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="tier"></param>
-        /// <param name="capacity"></param>
+        /// <param name="name"> The sku name. </param>
+        /// <param name="tier"> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </param>
+        /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ComputeSku(string name, string tier, long? capacity, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -63,11 +63,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> The sku name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the tier. </summary>
+        /// <summary> Specifies the tier of virtual machines in a scale set.&lt;br /&gt;&lt;br /&gt; Possible Values:&lt;br /&gt;&lt;br /&gt; **Standard**&lt;br /&gt;&lt;br /&gt; **Basic**. </summary>
         public string Tier { get; set; }
-        /// <summary> Gets or sets the capacity. </summary>
+        /// <summary> Specifies the number of virtual machines in the scale set. </summary>
         public long? Capacity { get; set; }
     }
 }

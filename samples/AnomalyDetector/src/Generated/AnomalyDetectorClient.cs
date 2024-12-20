@@ -14,7 +14,24 @@ using Azure.Core.Pipeline;
 namespace AnomalyDetector
 {
     // Data plane generated client.
-    /// <summary> The AnomalyDetector service client. </summary>
+    /// <summary>
+    /// The Anomaly Detector API detects anomalies automatically in time series data.
+    /// It supports two kinds of mode, one is for stateless using, another is for
+    /// stateful using. In stateless mode, there are three functionalities. Entire
+    /// Detect is for detecting the whole series with model trained by the time series,
+    /// Last Detect is detecting last point with model trained by points before.
+    /// ChangePoint Detect is for detecting trend changes in time series. In stateful
+    /// mode, user can store time series, the stored time series will be used for
+    /// detection anomalies. Under this mode, user can still use the above three
+    /// functionalities by only giving a time range without preparing time series in
+    /// client side. Besides the above three functionalities, stateful model also
+    /// provide group based detection and labeling service. By leveraging labeling
+    /// service user can provide labels for each detection result, these labels will be
+    /// used for retuning or regenerating detection models. Inconsistency detection is
+    /// a kind of group based detection, this detection will find inconsistency ones in
+    /// a set of time series. By using anomaly detector service, business customers can
+    /// discover incidents and establish a logic flow for root cause analysis.
+    /// </summary>
     public partial class AnomalyDetectorClient
     {
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
@@ -35,7 +52,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> Initializes a new instance of AnomalyDetectorClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint">
+        /// Supported Cognitive Services endpoints (protocol and hostname, for example:
+        /// https://westus2.api.cognitive.microsoft.com).
+        /// </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public AnomalyDetectorClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new AnomalyDetectorClientOptions())
@@ -43,7 +63,10 @@ namespace AnomalyDetector
         }
 
         /// <summary> Initializes a new instance of AnomalyDetectorClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
+        /// <param name="endpoint">
+        /// Supported Cognitive Services endpoints (protocol and hostname, for example:
+        /// https://westus2.api.cognitive.microsoft.com).
+        /// </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>

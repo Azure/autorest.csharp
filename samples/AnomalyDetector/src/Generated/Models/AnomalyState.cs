@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The AnomalyState. </summary>
+    /// <summary> Anomaly status and information. </summary>
     public partial class AnomalyState
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="AnomalyState"/>. </summary>
-        /// <param name="timestamp"></param>
+        /// <param name="timestamp"> The timestamp for this anomaly. </param>
         internal AnomalyState(DateTimeOffset timestamp)
         {
             Timestamp = timestamp;
@@ -54,9 +54,9 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="AnomalyState"/>. </summary>
-        /// <param name="timestamp"></param>
-        /// <param name="value"></param>
-        /// <param name="errors"></param>
+        /// <param name="timestamp"> The timestamp for this anomaly. </param>
+        /// <param name="value"> The detailed value of this anomalous timestamp. </param>
+        /// <param name="errors"> Error message for the current timestamp. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal AnomalyState(DateTimeOffset timestamp, AnomalyValue value, IReadOnlyList<ErrorResponse> errors, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -71,11 +71,11 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets the timestamp. </summary>
+        /// <summary> The timestamp for this anomaly. </summary>
         public DateTimeOffset Timestamp { get; }
-        /// <summary> Gets the value. </summary>
+        /// <summary> The detailed value of this anomalous timestamp. </summary>
         public AnomalyValue Value { get; }
-        /// <summary> Gets the errors. </summary>
+        /// <summary> Error message for the current timestamp. </summary>
         public IReadOnlyList<ErrorResponse> Errors { get; }
     }
 }

@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace CustomizationsInTsp.Models
 {
-    /// <summary> The EnumToBeMadeExtensible. </summary>
+    /// <summary> Extensible enum. </summary>
     public readonly partial struct EnumToBeMadeExtensible : IEquatable<EnumToBeMadeExtensible>
     {
         private readonly string _value;

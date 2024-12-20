@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
-    /// <summary> The ErrorResponse. </summary>
+    /// <summary> ErrorResponse contains code and message that shows the error information. </summary>
     public partial class ErrorResponse
     {
         /// <summary>
@@ -46,8 +46,8 @@ namespace AnomalyDetector.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         internal ErrorResponse(string code, string message)
         {
@@ -59,8 +59,8 @@ namespace AnomalyDetector.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ErrorResponse(string code, string message, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -74,9 +74,9 @@ namespace AnomalyDetector.Models
         {
         }
 
-        /// <summary> Gets the code. </summary>
+        /// <summary> The error code. </summary>
         public string Code { get; }
-        /// <summary> Gets the message. </summary>
+        /// <summary> The message explaining the error reported by the service. </summary>
         public string Message { get; }
     }
 }

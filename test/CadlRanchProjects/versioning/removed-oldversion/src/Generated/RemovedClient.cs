@@ -16,7 +16,7 @@ using Versioning.Removed.OldVersion.Models;
 namespace Versioning.Removed.OldVersion
 {
     // Data plane generated client.
-    /// <summary> The Removed service client. </summary>
+    /// <summary> Test for the `@removed` decorator. </summary>
     public partial class RemovedClient
     {
         private readonly HttpPipeline _pipeline;
@@ -35,16 +35,16 @@ namespace Versioning.Removed.OldVersion
         }
 
         /// <summary> Initializes a new instance of RemovedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1', 'v2preview' or 'v2' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RemovedClient(Uri endpoint, Versions version) : this(endpoint, version, new RemovedClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RemovedClient. </summary>
-        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
-        /// <param name="version"> The <see cref="Versions"/> to use. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
+        /// <param name="version"> Need to be set as 'v1', 'v2preview' or 'v2' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RemovedClient(Uri endpoint, Versions version, RemovedClientOptions options)
@@ -58,7 +58,7 @@ namespace Versioning.Removed.OldVersion
             _version = version;
         }
 
-        /// <summary> V 1. </summary>
+        /// <summary> This operation should not be generated with latest version's signature. </summary>
         /// <param name="body"> The <see cref="ModelV1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -73,7 +73,7 @@ namespace Versioning.Removed.OldVersion
             return Response.FromValue(ModelV1.FromResponse(response), response);
         }
 
-        /// <summary> V 1. </summary>
+        /// <summary> This operation should not be generated with latest version's signature. </summary>
         /// <param name="body"> The <see cref="ModelV1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -89,7 +89,7 @@ namespace Versioning.Removed.OldVersion
         }
 
         /// <summary>
-        /// [Protocol Method] V 1.
+        /// [Protocol Method] This operation should not be generated with latest version's signature.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -128,7 +128,7 @@ namespace Versioning.Removed.OldVersion
         }
 
         /// <summary>
-        /// [Protocol Method] V 1.
+        /// [Protocol Method] This operation should not be generated with latest version's signature.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -282,7 +282,7 @@ namespace Versioning.Removed.OldVersion
             }
         }
 
-        /// <summary> Model v 3. </summary>
+        /// <summary> This operation will pass different paths and different request bodies based on different versions. </summary>
         /// <param name="body"> The <see cref="Models.ModelV3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -297,7 +297,7 @@ namespace Versioning.Removed.OldVersion
             return Response.FromValue(Models.ModelV3.FromResponse(response), response);
         }
 
-        /// <summary> Model v 3. </summary>
+        /// <summary> This operation will pass different paths and different request bodies based on different versions. </summary>
         /// <param name="body"> The <see cref="Models.ModelV3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
@@ -313,7 +313,7 @@ namespace Versioning.Removed.OldVersion
         }
 
         /// <summary>
-        /// [Protocol Method] Model v 3.
+        /// [Protocol Method] This operation will pass different paths and different request bodies based on different versions.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -352,7 +352,7 @@ namespace Versioning.Removed.OldVersion
         }
 
         /// <summary>
-        /// [Protocol Method] Model v 3.
+        /// [Protocol Method] This operation will pass different paths and different request bodies based on different versions.
         /// <list type="bullet">
         /// <item>
         /// <description>

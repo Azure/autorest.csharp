@@ -43,8 +43,16 @@ namespace OpenAI.Models
         /// </summary>
         internal IDictionary<string, BinaryData> SerializedAdditionalRawData { get; set; }
         /// <summary> Initializes a new instance of <see cref="CreateFileRequest"/>. </summary>
-        /// <param name="file"></param>
-        /// <param name="purpose"></param>
+        /// <param name="file">
+        /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
+        ///
+        /// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
+        /// </param>
+        /// <param name="purpose">
+        /// The intended purpose of the uploaded documents. Use "fine-tune" for
+        /// [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the
+        /// uploaded file.
+        /// </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> or <paramref name="purpose"/> is null. </exception>
         public CreateFileRequest(Stream file, string purpose)
         {
@@ -56,8 +64,16 @@ namespace OpenAI.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFileRequest"/>. </summary>
-        /// <param name="file"></param>
-        /// <param name="purpose"></param>
+        /// <param name="file">
+        /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
+        ///
+        /// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
+        /// </param>
+        /// <param name="purpose">
+        /// The intended purpose of the uploaded documents. Use "fine-tune" for
+        /// [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the
+        /// uploaded file.
+        /// </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CreateFileRequest(Stream file, string purpose, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -71,9 +87,17 @@ namespace OpenAI.Models
         {
         }
 
-        /// <summary> Gets the file. </summary>
+        /// <summary>
+        /// Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be uploaded.
+        ///
+        /// If the `purpose` is set to "fine-tune", the file will be used for fine-tuning.
+        /// </summary>
         public Stream File { get; }
-        /// <summary> Gets the purpose. </summary>
+        /// <summary>
+        /// The intended purpose of the uploaded documents. Use "fine-tune" for
+        /// [fine-tuning](/docs/api-reference/fine-tuning). This allows us to validate the format of the
+        /// uploaded file.
+        /// </summary>
         public string Purpose { get; }
     }
 }

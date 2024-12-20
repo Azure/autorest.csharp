@@ -46,7 +46,7 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ModelWithArrayAdditionalProperties"/>. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> The name property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelWithArrayAdditionalProperties(string name)
         {
@@ -57,9 +57,9 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="ModelWithArrayAdditionalProperties"/>. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="id"> The id property. </param>
+        /// <param name="name"> The name property. </param>
+        /// <param name="age"> The age property. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal ModelWithArrayAdditionalProperties(string id, string name, int? age, IDictionary<string, IList<BinaryData>> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
@@ -76,11 +76,11 @@ namespace ModelReaderWriterValidationTypeSpec.Models
         {
         }
 
-        /// <summary> Gets the id. </summary>
+        /// <summary> The id property. </summary>
         public string Id { get; }
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> The name property. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the age. </summary>
+        /// <summary> The age property. </summary>
         public int? Age { get; set; }
         /// <summary>
         /// Additional Properties

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace _Azure.Lro.Standard.Models
 {
-    /// <summary> The User. </summary>
+    /// <summary> Details about a user. </summary>
     public partial class User
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace _Azure.Lro.Standard.Models
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="role"></param>
+        /// <param name="role"> The role of user. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="role"/> is null. </exception>
         public User(string role)
         {
@@ -56,8 +56,8 @@ namespace _Azure.Lro.Standard.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
-        /// <param name="name"></param>
-        /// <param name="role"></param>
+        /// <param name="name"> The name of user. </param>
+        /// <param name="role"> The role of user. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal User(string name, string role, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -71,9 +71,9 @@ namespace _Azure.Lro.Standard.Models
         {
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> The name of user. </summary>
         public string Name { get; }
-        /// <summary> Gets or sets the role. </summary>
+        /// <summary> The role of user. </summary>
         public string Role { get; set; }
     }
 }
