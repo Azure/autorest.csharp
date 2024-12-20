@@ -291,6 +291,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/microsoft/typespec/issues/5399")]
         public void RequiredNullableAreNotSettable()
         {
             var requiredStringList = TypeAsserts.HasProperty(typeof(StringProperty), nameof(StringProperty.NullableProperty), BindingFlags.Public | BindingFlags.Instance);
