@@ -269,7 +269,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDecimalModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDecimalModelResource(Client, PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(e)), _pageSizeDecimalModelClientDiagnostics, Pipeline, "PageSizeDecimalModelCollection.GetAll", "value", "nextLink", maxpagesize, cancellationToken);
         }
 
         /// <summary>
